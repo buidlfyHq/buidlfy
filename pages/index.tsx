@@ -1,11 +1,103 @@
-import type { NextPage } from 'next'
+import React, { useEffect } from "react";
+import type { NextPage } from "next";
+import { ethers } from "ethers";
+import { SiweMessage } from "siwe";
+
+declare let window: any;
+const BACKEND_ADDR = "http://localhost:8000/api";
 
 const Home: NextPage = () => {
-  return (
-    <h1 className="text-3xl font-bold underline">
-      Webflow-UI
-    </h1>
-  )
-}
+  let domain, origin, provider, signer;
+  const loadValues = () => {
+    domain = window.location.host;
+    origin = window.location.origin;
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+  };
 
-export default Home
+  useEffect(() => {
+    if (window != undefined) {
+      loadValues();
+    }
+  }, []); // eslint-disable-line
+
+  const connectWallet = () => {
+    provider
+      .send("eth_requestAccounts", [])
+      .catch(() => console.log("user rejected request"));
+  };
+
+  const createSiweMessage = async (address, statement) => {
+    const res = await fetch(`${BACKEND_ADDR}/nonce`, {
+      credentials: "include",
+    });
+    const message = new SiweMessage({
+      domain,
+      address,
+      statement,
+      uri: origin,
+      version: "1",
+      chainId: "1",
+      nonce: await res.text(),
+    });
+    console.log(message);
+
+    return message.prepareMessage();
+  };
+
+  const signInWithEthereum = async () => {
+    const message = await createSiweMessage(
+      await signer.getAddress(),
+      "Sign in with Ethereum to the app."
+    );
+    const signature = await signer.signMessage(message);
+
+    const res = await fetch(`${BACKEND_ADDR}/verify`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message, signature }),
+      credentials: "include",
+    });
+    console.log(await res.text());
+  };
+
+  const getInformation = async () => {
+    const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
+      credentials: "include",
+    });
+    console.log(await res.text());
+  };
+
+  return (
+    <section className="p-4">
+      <div>
+        <button
+          className="my-2 p-2 bg-stone-500 text-white rounded"
+          onClick={connectWallet}
+        >
+          Connect wallet
+        </button>
+      </div>
+      <div>
+        <button
+          className="my-2 p-2 bg-stone-500 text-white rounded"
+          onClick={signInWithEthereum}
+        >
+          Sign-in with Ethereum
+        </button>
+      </div>
+      <div>
+        <button
+          className="my-2 p-2 bg-stone-500 text-white rounded"
+          onClick={getInformation}
+        >
+          Get session information
+        </button>
+      </div>
+    </section>
+  );
+};
+
+export default Home;
