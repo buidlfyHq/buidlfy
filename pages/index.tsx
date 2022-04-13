@@ -1,102 +1,21 @@
-import React, { useEffect } from "react";
+import { useState } from "react";
 import type { NextPage } from "next";
-import { ethers } from "ethers";
-import { SiweMessage } from "siwe";
-
-declare let window: any;
-const BACKEND_ADDR = "http://localhost:8000/api";
+import Navbar from "../components/navbar";
 
 const Home: NextPage = () => {
-  let domain, origin, provider, signer;
-  const loadValues = () => {
-    domain = window.location.host;
-    origin = window.location.origin;
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    signer = provider.getSigner();
-  };
-
-  useEffect(() => {
-    if (window != undefined) {
-      loadValues();
-    }
-  }, []); // eslint-disable-line
-
-  const connectWallet = () => {
-    provider
-      .send("eth_requestAccounts", [])
-      .catch(() => console.log("user rejected request"));
-  };
-
-  const createSiweMessage = async (address, statement) => {
-    const res = await fetch(`${BACKEND_ADDR}/nonce`, {
-      credentials: "include",
-    });
-    const message = new SiweMessage({
-      domain,
-      address,
-      statement,
-      uri: origin,
-      version: "1",
-      chainId: "1",
-      nonce: await res.text(),
-    });
-    console.log(message);
-
-    return message.prepareMessage();
-  };
-
-  const signInWithEthereum = async () => {
-    const message = await createSiweMessage(
-      await signer.getAddress(),
-      "Sign in with Ethereum to the app."
-    );
-    const signature = await signer.signMessage(message);
-
-    const res = await fetch(`${BACKEND_ADDR}/verify`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message, signature }),
-      credentials: "include",
-    });
-    console.log(await res.text());
-  };
-
-  const getInformation = async () => {
-    const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
-      credentials: "include",
-    });
-    console.log(await res.text());
-  };
+  const [info, setInfo] = useState<string>("");
 
   return (
-    <section className="p-4">
-      <div>
-        <button
-          className="my-2 p-2 bg-stone-500 text-white rounded"
-          onClick={connectWallet}
-        >
-          Connect wallet
-        </button>
-      </div>
-      <div>
-        <button
-          className="my-2 p-2 bg-stone-500 text-white rounded"
-          onClick={signInWithEthereum}
-        >
-          Sign-in with Ethereum
-        </button>
-      </div>
-      <div>
-        <button
-          className="my-2 p-2 bg-stone-500 text-white rounded"
-          onClick={getInformation}
-        >
-          Get session information
-        </button>
-      </div>
-    </section>
+    <>
+      {/* @ts-ignore */}
+      <Navbar setInfo={setInfo} /> {/* @ts-ignore-line */}  
+      <section className="h-screen bg-stone-400/10 flex justify-center items-center">
+        <div>
+          <h1 className="text-4xl text-center font-bold">Welcome to Deflow</h1>
+          <p className="mt-2 text-center">{info}</p>
+        </div>
+      </section>
+    </>
   );
 };
 
