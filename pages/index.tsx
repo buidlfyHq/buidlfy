@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <>
       {/* @ts-ignore */}
-      <Navbar setInfo={setInfo} /> {/* @ts-ignore-line */}  
+      <Navbar setInfo={setInfo}
       <section className="h-screen bg-stone-400/10 flex justify-center items-center">
         <div>
           <h1 className="text-4xl text-center font-bold">Welcome to Deflow</h1>
