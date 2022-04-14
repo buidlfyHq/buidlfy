@@ -6,7 +6,7 @@ import { SiweMessage } from "siwe";
 declare let window: any;
 const BACKEND_ADDR = "http://localhost:8000/api";
 
-const Navbar: NextPage = ({ setInfo }: { setInfo?: any }) => {
+const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
   let domain, origin, provider, signer;
   const loadValues = () => {
     domain = window.location.host;
@@ -49,6 +49,7 @@ const Navbar: NextPage = ({ setInfo }: { setInfo?: any }) => {
       await signer.getAddress(),
       "Sign in with Ethereum to the app."
     );
+    const address = await signer.getAddress();
     const signature = await signer.signMessage(message);
 
     const res = await fetch(`${BACKEND_ADDR}/verify`, {
@@ -56,7 +57,7 @@ const Navbar: NextPage = ({ setInfo }: { setInfo?: any }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message, signature }),
+      body: JSON.stringify({ address, message, signature }),
       credentials: "include",
     });
     console.log(await res.text());

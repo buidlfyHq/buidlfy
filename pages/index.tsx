@@ -7,7 +7,6 @@ const Home: NextPage = () => {
 
   return (
     <>
-      {/* @ts-ignore */}
       <Navbar setInfo={setInfo} />
       <section className="h-screen bg-stone-400/10 flex justify-center items-center">
         <div>
