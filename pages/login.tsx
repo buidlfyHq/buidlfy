@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import Navbar from "../components/navbar";
+import Test from "../components/test";
 
 const Login: NextPage = () => {
   const [info, setInfo] = useState<string>(""); // for authentication message
@@ -14,6 +15,8 @@ const Login: NextPage = () => {
         <div>
           <h1 className="text-4xl text-center font-bold">Welcome to Deflow</h1>
           <p className="mt-2 text-center">{info}</p>
+          {/* Test ABI interaction */}
+          <Test />
         </div>
       </section>
     </>
