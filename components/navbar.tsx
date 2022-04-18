@@ -4,10 +4,10 @@ import { ethers } from "ethers";
 import { SiweMessage } from "siwe";
 
 declare let window: any;
-const BACKEND_ADDR = "http://localhost:8000/api";
+const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
-  let domain, origin, provider, signer;
+  let domain, origin, provider, signer; // for sign-in message
   const loadValues = () => {
     domain = window.location.host;
     origin = window.location.origin;
@@ -21,12 +21,14 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
     }
   }, []); // eslint-disable-line
 
+  // Connect Metamask wallet
   const connectWallet = () => {
     provider
       .send("eth_requestAccounts", [])
       .catch(() => console.log("user rejected request"));
   };
 
+  // Create sign-in message
   const createSiweMessage = async (address, statement) => {
     const res = await fetch(`${BACKEND_ADDR}/nonce`, {
       credentials: "include",
@@ -44,6 +46,7 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
     return message.prepareMessage();
   };
 
+  // Authenticate and sign-in
   const signInWithEthereum = async () => {
     const message = await createSiweMessage(
       await signer.getAddress(),
@@ -52,6 +55,7 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
     const address = await signer.getAddress();
     const signature = await signer.signMessage(message);
 
+    // Verify user authentication
     const res = await fetch(`${BACKEND_ADDR}/verify`, {
       method: "POST",
       headers: {
@@ -63,6 +67,7 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
     console.log(await res.text());
   };
 
+  // Tests if user is authenticated
   const getInformation = async () => {
     const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
       credentials: "include",
@@ -74,7 +79,9 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
 
   return (
     <section className="w-full p-4 bg-stone-400/20 absolute flex justify-between items-center shadow-md">
+      {/* LOGO */}
       <h2 className="text-xl font-bold">Deflow</h2>
+      {/* Authentication Buttons */}
       <aside className="flex justify-around">
         <div>
           <button
