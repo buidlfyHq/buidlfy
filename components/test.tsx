@@ -8,7 +8,7 @@ const CONTRACT_ADDRESS: string = "0x7E2Df0465113d5638CD515F00b7bAa4383FA1a4F";
 const Test: NextPage = () => {
   const [abi, setAbi] = useState<string>(""); // for storing abi
 
-  let provider, signer; // for contract creation
+  let provider: any, signer: any; // for contract creation
   const loadValues = () => {
     provider = new ethers.providers.Web3Provider(window.ethereum);
     signer = provider.getSigner();
