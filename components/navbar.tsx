@@ -7,7 +7,7 @@ declare let window: any;
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
-  let domain: any, origin: any, provider: any, signer: any; // for sign-in message
+  let domain:any, origin:any, provider:any, signer:any; // for sign-in message
   const loadValues = () => {
     domain = window.location.host;
     origin = window.location.origin;
