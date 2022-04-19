@@ -29,7 +29,7 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
   };
 
   // Create sign-in message
-  const createSiweMessage = async (address, statement) => {
+  const createSiweMessage = async (address:any, statement:any) => {
     const res = await fetch(`${BACKEND_ADDR}/nonce`, {
       credentials: "include",
     });
