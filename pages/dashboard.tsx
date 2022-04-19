@@ -30,16 +30,14 @@ const Home: NextPage = () => {
     return () => {
       // Remove async from here
       const getInformation = async () => {
-        const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
+        const res = await fetch(`${BACKEND_ADDR}/is_authenticated`, {
           credentials: "include",
         });
         const response = await res.text();
         
-        //FIX: Route Protection
-        // ------------------------------------
-        // if (JSON.parse(response).message) {
-        //   Router.push("/");
-        // }
+        if (JSON.parse(response).error) {
+          Router.push("/");
+        }
       };
       getInformation(); // Call the clear() function
     };
