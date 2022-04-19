@@ -39,14 +39,15 @@ const Test: NextPage = () => {
 
   return (
     <>
-      <h3 className="mt-4 text-xl font-bold">ABI</h3>
+      <h3 className="mt-4 text-lg font-bold">ABI</h3>
       <input
+        className="px-2 bg-white/90 rounded"
         placeholder="Paste your ABI here..."
         value={abi}
         onChange={(e) => setAbi(e.target.value)}
       />
       <button
-        className="px-4 bg-blue-600 rounded text-white"
+        className="px-4 bg-black rounded text-white"
         type="submit"
         onClick={() => createContract(abi)}
       >

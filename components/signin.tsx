@@ -7,7 +7,7 @@ import { SiweMessage } from "siwe";
 declare let window: any;
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
-const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
+const SignIn: NextPage<{ setInfo: any }> = ({ setInfo }) => {
   let domain: any, origin: any, provider: any, signer: any; // for sign-in message
   const loadValues = () => {
     domain = window.location.host;
@@ -19,6 +19,7 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
     } else {
       provider = new ethers.providers.Web3Provider(window.ethereum);
       signer = provider.getSigner();
+      connectWallet();
     }
   };
 
@@ -32,7 +33,7 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
   const connectWallet = () => {
     provider
       .send("eth_requestAccounts", [])
-      .catch(() => console.log("user rejected request"));
+      .catch(() => console.error("User rejected the request!"));
   };
 
   // Create sign-in message
@@ -78,48 +79,36 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
   };
 
   // Tests if user is authenticated
-  const getInformation = async () => {
-    const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
-      credentials: "include",
-    });
-    const response = await res.text();
-    console.log(response);
-    setInfo(response);
-  };
+  // const getInformation = async () => {
+  //   const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
+  //     credentials: "include",
+  //   });
+  //   const response = await res.text();
+  //   console.log(response);
+  //   setInfo(response);
+  // };
 
   return (
-    <section className="w-full p-4 bg-stone-400/20 absolute flex justify-between items-center shadow-md">
-      {/* LOGO */}
-      <h2 className="text-xl font-bold">Deflow</h2>
-      {/* Authentication Buttons */}
-      <aside className="flex justify-around">
-        <div>
+    <main className="h-screen flex justify-center items-center">
+      <section className="w-1/2">
+        <h2 className="text-4xl text-cyan-900 font-bold">
+          Welcome to the future of building dApps
+        </h2>
+        <div className="my-10">
           <button
-            className="m-2 p-2 bg-stone-500 text-white rounded"
-            onClick={connectWallet}
-          >
-            Connect wallet
-          </button>
-        </div>
-        <div>
-          <button
-            className="m-2 p-2 bg-stone-500 text-white rounded"
+            className="w-full p-3 bg-cyan-900 text-white rounded"
             onClick={signInWithEthereum}
           >
             Sign-in with Ethereum
           </button>
         </div>
-        <div>
-          <button
-            className="m-2 p-2 bg-stone-500 text-white rounded"
-            onClick={getInformation}
-          >
-            Get session information
-          </button>
-        </div>
-      </aside>
-    </section>
+        <h5 className="text-gray-500">
+          By clicking continue, you agree to our Terms of Service and Privacy
+          Policy.
+        </h5>
+      </section>
+    </main>
   );
 };
 
-export default Navbar;
+export default SignIn;
