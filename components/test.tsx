@@ -10,8 +10,13 @@ const Test: NextPage = () => {
 
   let provider: any, signer: any; // for contract creation
   const loadValues = () => {
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    signer = provider.getSigner();
+    // Check if Metamask exists
+    if (window.ethereum === undefined) {
+      console.error("Please add Metamask to your browser!");
+    } else {
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      signer = provider.getSigner();
+    }
   };
 
   useEffect(() => {
@@ -25,11 +30,7 @@ const Test: NextPage = () => {
     setAbi(a);
     // Create new contract
     const contractAbi = JSON.parse(a);
-    const contract = new ethers.Contract(
-      CONTRACT_ADDRESS,
-      contractAbi,
-      signer
-    );
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, contractAbi, signer);
 
     // Test contract
     const adder = await contract.myAddress();

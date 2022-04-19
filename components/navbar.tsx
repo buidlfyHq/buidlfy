@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
+import Router from "next/router";
 import { ethers } from "ethers";
 import { SiweMessage } from "siwe";
 
@@ -7,12 +8,18 @@ declare let window: any;
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
-  let domain:any, origin:any, provider:any, signer:any; // for sign-in message
+  let domain: any, origin: any, provider: any, signer: any; // for sign-in message
   const loadValues = () => {
     domain = window.location.host;
     origin = window.location.origin;
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    signer = provider.getSigner();
+
+    // Check if Metamask exists
+    if (window.ethereum === undefined) {
+      console.error("Please add Metamask to your browser!");
+    } else {
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      signer = provider.getSigner();
+    }
   };
 
   useEffect(() => {
@@ -29,7 +36,7 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
   };
 
   // Create sign-in message
-  const createSiweMessage = async (address:any, statement:any) => {
+  const createSiweMessage = async (address: any, statement: any) => {
     const res = await fetch(`${BACKEND_ADDR}/nonce`, {
       credentials: "include",
     });
@@ -64,7 +71,10 @@ const Navbar: NextPage<{ setInfo: any }> = ({ setInfo }) => {
       body: JSON.stringify({ address, message, signature }),
       credentials: "include",
     });
-    console.log(await res.text());
+
+    if (res.ok) {
+      Router.push("/dashboard");
+    }
   };
 
   // Tests if user is authenticated

@@ -1,8 +1,26 @@
+import { useState } from "react";
 import type { NextPage } from "next";
-import Login from "./login";
+import Navbar from "../components/navbar";
+import Test from "../components/test";
 
 const Home: NextPage = () => {
-  return <Login />;
+  const [info, setInfo] = useState<string>(""); // for authentication message
+
+  return (
+    <>
+      {/* Navigation */}
+      <Navbar setInfo={setInfo} />
+      {/* Welcome page */}
+      <section className="h-screen bg-stone-400/10 flex justify-center items-center">
+        <div>
+          <h1 className="text-4xl text-center font-bold">Welcome to Deflow</h1>
+          <p className="mt-2 text-center">{info}</p>
+          {/* Test ABI interaction */}
+          <Test />
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default Home;
