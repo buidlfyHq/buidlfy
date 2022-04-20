@@ -20,6 +20,7 @@ const Test: NextPage = () => {
   };
 
   useEffect(() => {
+    // Waiting for window property to load
     if (window != undefined) {
       loadValues();
     }

@@ -28,18 +28,18 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     return () => {
-      // Remove async from here
+      // Checks if user is authenticated
       const getInformation = async () => {
         const res = await fetch(`${BACKEND_ADDR}/is_authenticated`, {
           credentials: "include",
         });
         const response = await res.text();
-        
+        // If not authenticated redirect to sign-in page
         if (JSON.parse(response).error) {
           Router.push("/");
         }
       };
-      getInformation(); // Call the clear() function
+      getInformation();
     };
   }, []);
 

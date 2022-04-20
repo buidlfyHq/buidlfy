@@ -24,9 +24,25 @@ const SignIn: NextPage<{ setInfo: any }> = ({ setInfo }) => {
   };
 
   useEffect(() => {
-    if (window != undefined) {
-      loadValues();
-    }
+    return () => {
+      // Checks if user is authenticated
+      const getInformation = async () => {
+        const res = await fetch(`${BACKEND_ADDR}/is_authenticated`, {
+          credentials: "include",
+        });
+        const response = await res.text();
+        // If authenticated redirect to dashboard page
+        if (JSON.parse(response).success) {
+          Router.push("/dashboard");
+        }
+      };
+      getInformation();
+
+      // Waiting for window property to load
+      if (window != undefined) {
+        loadValues();
+      }
+    };
   }, []); // eslint-disable-line
 
   // Connect Metamask wallet
@@ -56,37 +72,32 @@ const SignIn: NextPage<{ setInfo: any }> = ({ setInfo }) => {
 
   // Authenticate and sign-in
   const signInWithEthereum = async () => {
-    const message = await createSiweMessage(
-      await signer.getAddress(),
-      "Sign in with Ethereum to the app."
-    );
-    const address = await signer.getAddress();
-    const signature = await signer.signMessage(message);
+    // Checks if any account is connected
+    if (window.ethereum.selectedAddress !== null) {
+      const message = await createSiweMessage(
+        await signer.getAddress(),
+        "Sign in with Ethereum to the app."
+      );
+      const address = await signer.getAddress();
+      const signature = await signer.signMessage(message);
 
-    // Verify user authentication
-    const res = await fetch(`${BACKEND_ADDR}/verify`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ address, message, signature }),
-      credentials: "include",
-    });
+      // Verify user authentication
+      const res = await fetch(`${BACKEND_ADDR}/verify`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ address, message, signature }),
+        credentials: "include",
+      });
 
-    if (res.ok) {
-      Router.push("/dashboard");
+      if (res.ok) {
+        Router.push("/dashboard");
+      }
+    } else {
+      console.error("Refresh your browser and try again!");
     }
   };
-
-  // Tests if user is authenticated
-  // const getInformation = async () => {
-  //   const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
-  //     credentials: "include",
-  //   });
-  //   const response = await res.text();
-  //   console.log(response);
-  //   setInfo(response);
-  // };
 
   return (
     <main className="h-screen flex justify-center items-center">
