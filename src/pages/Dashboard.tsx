@@ -13,6 +13,7 @@ import { MdUndo, MdRedo } from "react-icons/md";
 import AbiComponent from "../components/dashboard/AbiComponent";
 import AbiMethods from "../components/dashboard/AbiMethods";
 import Modal from "../components/dashboard/Modal";
+import Builder from "../components/builder";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
@@ -28,7 +29,6 @@ const Dashboard: FC = () => {
     const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
       credentials: "include",
     });
-
     console.log(res);
   };
 
@@ -137,7 +137,7 @@ const Dashboard: FC = () => {
         <div
           className={
             className === ""
-              ? `fixed left-[250px] h-[60px] top-0 border-b z-1200 flex flex-row justify-between items-center p-3`
+              ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b z-1200 flex flex-row justify-between items-center p-3`
               : `h-[60px] w-full top-0 border-b z-1200 flex flex-row justify-between items-center p-3`
           }
         >
@@ -190,6 +190,7 @@ const Dashboard: FC = () => {
           }
         >
           Welcome to Spheron Typedream
+          <Builder />
           <AbiComponent
             abi={abi}
             showComponent={showComponent}
