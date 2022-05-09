@@ -10,10 +10,9 @@ import {
 import { BiGridSmall, BiChevronDown } from "react-icons/bi";
 import { FaFileContract } from "react-icons/fa";
 import { MdUndo, MdRedo } from "react-icons/md";
-import AbiComponent from "../components/dashboard/AbiComponent";
 import AbiMethods from "../components/dashboard/AbiMethods";
 import Modal from "../components/dashboard/Modal";
-import Builder from "../components/builder";
+import Workspace from "../components/dashboard/Workspace";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
@@ -185,13 +184,11 @@ const Dashboard: FC = () => {
         <div
           className={
             className === ""
-              ? `fixed ml-[250px] mt-[60px] h-full w-full p-4`
-              : `w-full p-4`
+              ? `fixed ml-[250px] mt-[60px] h-full w-[calc(100%-250px)] h-[calc(100%-60px)]`
+              : `w-full`
           }
         >
-          Welcome to Spheron Typedream
-          <Builder />
-          <AbiComponent
+          <Workspace
             abi={abi}
             showComponent={showComponent}
             setShowComponent={setShowComponent}
