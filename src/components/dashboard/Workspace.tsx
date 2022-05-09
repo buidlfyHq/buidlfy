@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import Builder from "../builder";
 import Navbar from "./Navbar";
 import AbiComponent from "./AbiComponent";
+import UserNav from "./userNav";
 
 const Workspace: FC<{
   abi: string;
@@ -10,7 +11,7 @@ const Workspace: FC<{
 }> = ({ abi, showComponent, setShowComponent }) => {
   return (
     <>
-      <Navbar />
+      <UserNav />
       <section className="p-4">
         Welcome to Spheron Typedream
         <Builder />
