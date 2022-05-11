@@ -28,7 +28,8 @@
   position: absolute;
   width: auto;
   top: 100%;
-  margin-top: 2px;
+  left: 0;
+  margin-top: 11px;
   width: 250px;
   z-index: 12; 
   background: white;
