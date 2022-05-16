@@ -24,12 +24,12 @@ const Dashboard: FC = () => {
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
 
   // Tests if user is authenticated
-  const getInformation = async () => {
-    const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
-      credentials: "include",
-    });
-    console.log(res);
-  };
+  // const getInformation = async () => {
+  //   const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
+  //     credentials: "include",
+  //   });
+  //   console.log(res);
+  // };
 
   useEffect(() => {
     // Checks if user is authenticated

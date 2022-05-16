@@ -1,8 +1,6 @@
 import React, { FC } from "react";
-import Builder from "../builder";
+// import AbiComponent from "./AbiComponent";
 import Navbar from "./Navbar";
-import AbiComponent from "./AbiComponent";
-import UserNav from "./userNav";
 
 const Workspace: FC<{
   abi: string;
@@ -11,15 +9,14 @@ const Workspace: FC<{
 }> = ({ abi, showComponent, setShowComponent }) => {
   return (
     <>
-      <UserNav />
+      <Navbar />
       <section className="p-4">
-        Welcome to Spheron Typedream
-        <Builder />
-        <AbiComponent
+        Welcome to DeFlow
+        {/* <AbiComponent
           abi={abi}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
-        />
+        /> */}
       </section>
     </>
   );
