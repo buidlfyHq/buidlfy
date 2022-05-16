@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Popover } from "@headlessui/react";
 import {
   AiOutlineDoubleLeft,
@@ -14,37 +14,37 @@ import AbiMethods from "../components/dashboard/AbiMethods";
 import Modal from "../components/dashboard/Modal";
 import Workspace from "../components/dashboard/Workspace";
 
-// const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
+const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const Dashboard: FC = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [className, setClassName] = useState("");
   const [abi, setAbi] = useState<string>(""); // for storing abi
   const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
 
   // Tests if user is authenticated
-  // const getInformation = async () => {
-  //   const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
-  //     credentials: "include",
-  //   });
-  //   console.log(res);
-  // };
+  const getInformation = async () => {
+    const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
+      credentials: "include",
+    });
+    console.log(res);
+  };
 
-  // useEffect(() => {
-  //   // Checks if user is authenticated
-  //   const getInformation = async () => {
-  //     const res = await fetch(`${BACKEND_ADDR}/is_authenticated`, {
-  //       credentials: "include",
-  //     });
-  //     const response = await res.text();
-  //     // If not authenticated redirect to sign-in page
-  //     if (JSON.parse(response).error) {
-  //       navigate("/");
-  //     }
-  //   };
-  //   getInformation();
-  // }, []); // eslint-disable-line
+  useEffect(() => {
+    // Checks if user is authenticated
+    const getInformation = async () => {
+      const res = await fetch(`${BACKEND_ADDR}/is_authenticated`, {
+        credentials: "include",
+      });
+      const response = await res.text();
+      // If not authenticated redirect to sign-in page
+      if (JSON.parse(response).error) {
+        navigate("/");
+      }
+    };
+    getInformation();
+  }, []); // eslint-disable-line
 
   const hideSidebar = () => {
     setClassName("hidden");
