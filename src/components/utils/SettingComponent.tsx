@@ -69,7 +69,9 @@ export default function SettingComponent({
         {text}
         {open ? (
           <div className="border shadow-sm menu" ref={ref}>
-            <div className="px-3 my-1 text-gray-500">Settings</div>
+            <div className="px-3 my-1 text-xl text-gray-500 font-regular mx-4">
+              Settings
+            </div>
             <div className="flex items-center px-3 mt-1">
               <RiText className="text-[18px] mr-3" />
               <input
@@ -98,11 +100,15 @@ export default function SettingComponent({
               onClick={(e) => deleteMenu(e, Id)}
             >
               <AiOutlineDelete className="text-[18px] mr-3" />
-              <span>Delete</span>
+              <span className="px-1 my-1 text-xl text-gray-500 font-regular">
+                Delete
+              </span>
             </div>
             <div className="flex items-center w-full px-3 py-2 text-gray-600 cursor-pointer hover:bg-slate-100">
               <VscSymbolColor className="text-[18px] mr-3" />
-              <span>Text Color</span>
+              <span className="px-1 my-1 text-xl text-gray-500 font-regular">
+                Text Color
+              </span>
             </div>
           </div>
         ) : null}

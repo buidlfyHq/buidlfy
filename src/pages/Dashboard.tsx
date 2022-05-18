@@ -149,13 +149,13 @@ const Dashboard: FC = () => {
           <div className="p-2">
             <div onClick={() => handleComponent(Container)}>Container</div>
             <div onClick={() => handleComponent(Button)}>Button</div>
-            {/* <div onClick={() => handleComponent(Text)}>Text</div>
+            <div onClick={() => handleComponent(Text)}>Text</div>
             <div onClick={() => handleComponent(Link)}>Link</div>
             <div onClick={() => handleComponent(HeadingOne)}>Heading 1</div>
             <div onClick={() => handleComponent(HeadingTwo)}>Heading 2</div>
             <div onClick={() => handleComponent(HeadingThree)}>Heading 3</div>
             <div onClick={() => handleComponent(Input)}>Input</div>
-            <div onClick={() => handleComponent(Image)}>Image</div> */}
+            <div onClick={() => handleComponent(Image)}>Image</div>
           </div>
         </div>
       </div>
@@ -236,6 +236,8 @@ const Dashboard: FC = () => {
             <HeadingThree />
             <Text />
             <Link />
+            <Input />
+            <Image />
           </>
         </div>
       </div>

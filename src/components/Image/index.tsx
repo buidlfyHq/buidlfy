@@ -1,15 +1,13 @@
 import React, { FC } from "react";
 import "../../styles/Components.css";
-
+import image from "../../assets/image-component.png";
 interface ImageProps {
   heading: string;
 }
 const Image: FC = () => {
   return (
     <>
-      <a href="#0">
-        <h2>Hey</h2>
-      </a>
+      <img className=" h-32 w-32 ml-6" src={image} />
     </>
   );
 };
