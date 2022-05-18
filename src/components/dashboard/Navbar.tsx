@@ -53,7 +53,7 @@ export default function Navbar() {
               <div className="flex items-center justify-end ">
                 {menuArr.map((obj, index) => {
                   return (
-                    <div id={`${index}`}>
+                    <div key={index} id={`${index}`}>
                       <SettingComponent
                         classname={"mx-1"}
                         text={obj.name}
