@@ -13,6 +13,15 @@ import { MdUndo, MdRedo } from "react-icons/md";
 import AbiMethods from "../components/dashboard/AbiMethods";
 import Modal from "../components/dashboard/Modal";
 import Workspace from "../components/dashboard/Workspace";
+import Container from "../components/Container";
+import Button from "../components/Button";
+import HeadingOne from "../components/HeadingOne";
+import Text from "../components/Text";
+import Link from "../components/Link";
+import Image from "../components/Image";
+import Input from "../components/Input";
+import HeadingThree from "../components/HeadingThree";
+import HeadingTwo from "../components/HeadingTwo";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
@@ -22,6 +31,12 @@ const Dashboard: FC = () => {
   const [abi, setAbi] = useState<string>(""); // for storing abi
   const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
+  const [componentArr, setComponentArr] = useState([]);
+  const handleComponent = (container: React.FC<{}>) => {
+    console.log(container, "container");
+    setComponentArr([...componentArr, { component: container }]);
+    console.log(componentArr, "component");
+  };
 
   // Tests if user is authenticated
   // const getInformation = async () => {
@@ -128,6 +143,21 @@ const Dashboard: FC = () => {
             <div>About</div>
           </div>
         </div>
+        {/* Components */}
+        <div className="px-6 py-3 mt-10">
+          <div>Components</div>
+          <div className="p-2">
+            <div onClick={() => handleComponent(Container)}>Container</div>
+            <div onClick={() => handleComponent(Button)}>Button</div>
+            {/* <div onClick={() => handleComponent(Text)}>Text</div>
+            <div onClick={() => handleComponent(Link)}>Link</div>
+            <div onClick={() => handleComponent(HeadingOne)}>Heading 1</div>
+            <div onClick={() => handleComponent(HeadingTwo)}>Heading 2</div>
+            <div onClick={() => handleComponent(HeadingThree)}>Heading 3</div>
+            <div onClick={() => handleComponent(Input)}>Input</div>
+            <div onClick={() => handleComponent(Image)}>Image</div> */}
+          </div>
+        </div>
       </div>
 
       {/* Nav + Main */}
@@ -188,11 +218,25 @@ const Dashboard: FC = () => {
               : `w-full`
           }
         >
-          <Workspace
-            abi={abi}
-            showComponent={showComponent}
-            setShowComponent={setShowComponent}
-          />
+          <>
+            <Workspace
+              abi={abi}
+              showComponent={showComponent}
+              setShowComponent={setShowComponent}
+            />
+            {componentArr.map((index) => {
+              <>
+                <index.component />
+              </>;
+            })}
+            <Container />
+            <Button />
+            <HeadingOne />
+            <HeadingTwo />
+            <HeadingThree />
+            <Text />
+            <Link />
+          </>
         </div>
       </div>
     </div>

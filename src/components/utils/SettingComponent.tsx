@@ -63,7 +63,7 @@ export default function SettingComponent({
   return (
     <>
       <div
-        className={`${classname} rounded-[8px] hover:bg-[#f5efef] py-2 px-4 cursor-pointer relative`}
+        className={`${classname} rounded-[8px] py-2 px-4 cursor-pointer relative`}
         onClick={() => setOpen(true)}
       >
         {text}
