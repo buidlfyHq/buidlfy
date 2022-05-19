@@ -13,14 +13,12 @@ export default function SettingComponent({
   id = null,
   menuArr = null,
 }) {
-  // console.log(typeof id, 2321, id)
   const [open, setOpen] = useState<Boolean>(false);
   const [textVal, setTextVal] = useState<string>(text || "");
   const [linkVal, setLinkVal] = useState<string>(link || "");
   const [newMenuArr, setNewMenuArr] = useState<Object[]>(menuArr);
   const Id: string = id;
   const ref = useRef(null);
-  console.log(newMenuArr);
 
   useEffect(() => {
     let handler = (event: Event) => {

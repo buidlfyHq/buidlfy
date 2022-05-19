@@ -18,7 +18,7 @@ const Workspace: FC<{
           showComponent={showComponent}
           setShowComponent={setShowComponent}
         /> */}
-        <Dnd />
+        {/* <Dnd /> */}
       </section>
     </>
   );

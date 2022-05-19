@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Popover } from "@headlessui/react";
 import {
   AiOutlineDoubleLeft,
@@ -13,15 +14,33 @@ import { MdUndo, MdRedo } from "react-icons/md";
 import AbiMethods from "../components/dashboard/AbiMethods";
 import Modal from "../components/dashboard/Modal";
 import Workspace from "../components/dashboard/Workspace";
+import Container from "../components/Container";
+import Button from "../components/Button";
+import HeadingOne from "../components/HeadingOne";
+import Text from "../components/Text";
+import Link from "../components/Link";
+import Image from "../components/Image";
+import Input from "../components/Input";
+import HeadingThree from "../components/HeadingThree";
+import HeadingTwo from "../components/HeadingTwo";
+import { components } from "../components/dashboard/component";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const Dashboard: FC = () => {
   const navigate = useNavigate();
+  const [items, setItems] = useState([]);
   const [className, setClassName] = useState("");
   const [abi, setAbi] = useState<string>(""); // for storing abi
   const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
+  const [componentArr, setComponentArr] = useState([]);
+
+  const handleComponent = (container: React.FC<{}>) => {
+    console.log(container, "container");
+    setComponentArr([...componentArr, { component: container }]);
+    console.log(componentArr, "component");
+  };
 
   // Tests if user is authenticated
   // const getInformation = async () => {
@@ -52,6 +71,53 @@ const Dashboard: FC = () => {
 
   const showSidebar = () => {
     setClassName("");
+  };
+
+  const onDragEnd = (result) => {
+    if (result.reason === "DROP") {
+      if (!result.destination) {
+        return;
+      }
+      // dispatch({
+      //   type: "MOVE",
+      //   from: result.source.droppableId,
+      //   to: result.destination.droppableId,
+      //   fromIndex: result.source.index,
+      //   toIndex: result.destination.index,
+      // });
+      if (result.destination.droppableId === "builder") {
+        const resultItems = items;
+        const [removed] = resultItems.splice(result.source.index, 1);
+        resultItems.splice(result.destination.index, 0, removed);
+
+        setItems(resultItems);
+      }
+    }
+  };
+
+  const renderItem = (item) => {
+    switch (item.name) {
+      case "Container":
+        return <Container />;
+      case "Button":
+        return <Button />;
+      case "Text":
+        return <Text />;
+      case "Link":
+        return <Link />;
+      case "Heading 1":
+        return <HeadingOne />;
+      case "Heading 2":
+        return <HeadingTwo />;
+      case "Heading 3":
+        return <HeadingThree />;
+      case "Input":
+        return <Input />;
+      case "Image":
+        return <Image />;
+      default:
+        break;
+    }
   };
 
   return (
@@ -128,6 +194,19 @@ const Dashboard: FC = () => {
             <div>About</div>
           </div>
         </div>
+        {/* Components */}
+        <div className="px-6 py-3 mt-10">
+          {components?.map((c, index) => {
+            return (
+              <div
+                className="px-4 py-2 my-2 transition-colors duration-150 ease-in-out bg-white rounded-lg shadow hover:bg-gray-100 cursor-pointer"
+                onClick={() => setItems([...items, c])}
+              >
+                {c.name}
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Nav + Main */}
@@ -188,11 +267,55 @@ const Dashboard: FC = () => {
               : `w-full`
           }
         >
-          <Workspace
-            abi={abi}
-            showComponent={showComponent}
-            setShowComponent={setShowComponent}
-          />
+          <>
+            <Workspace
+              abi={abi}
+              showComponent={showComponent}
+              setShowComponent={setShowComponent}
+            />
+            {componentArr.map((index) => {
+              <>
+                <index.component />
+              </>;
+            })}
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="builder" type="BUILDER">
+                {(provided, snapshot) => {
+                  return (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      className="h-full w-full p-2 min-w-1/4 max-w-1/2"
+                    >
+                      {items?.map((item, index) => {
+                        return (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                          >
+                            {(provided, snapshot) => {
+                              return (
+                                <div
+                                  className="p-2 my-2 transition-colors duration-150 ease-in-out bg-white rounded-lg shadow hover:bg-gray-100"
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                >
+                                  {renderItem(item)}
+                                </div>
+                              );
+                            }}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
+                    </div>
+                  );
+                }}
+              </Droppable>
+            </DragDropContext>
+          </>
         </div>
       </div>
     </div>
