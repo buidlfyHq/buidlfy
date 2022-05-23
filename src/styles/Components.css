@@ -1,21 +1,21 @@
 .btn {
-    background: #FFFFFF;
+    /* background: #FFFFFF; */
 /* Solid Colours/Brand/Primary/Primary-400 */
 
-border: 1px solid #A673EF;
+border-color: #A673EF;
 /* Black Shadows/Black E1 */
 
-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.08);
-border-radius: 3px;
+/* box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.08); */
+/* border-radius: 3px; */
 
 color: #8247E5;
-width: 200px;
+/* width: 200px; */
 }
 
 .input {
-    background: #FFFFFF;
+    /* background: #FFFFFF; */
 /* Solid Colours/Brand/Gray/Gray-400 */
 
-border: 1px solid #E2E4E8;
-border-radius: 3px;
+border-color: #E2E4E8;
+/* border-radius: 3px; */
 }
