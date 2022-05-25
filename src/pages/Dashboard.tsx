@@ -23,6 +23,7 @@ import Image from "../components/Image";
 import Input from "../components/Input";
 import HeadingThree from "../components/HeadingThree";
 import HeadingTwo from "../components/HeadingTwo";
+import Divider from "../components/Divider";
 import { components } from "../components/dashboard/component";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
@@ -114,6 +115,8 @@ const Dashboard: FC = () => {
         return <Input />;
       case "Image":
         return <Image />;
+      case "Divider":
+        return <Divider />;
       default:
         break;
     }
@@ -186,13 +189,13 @@ const Dashboard: FC = () => {
         </div>
 
         {/* Pages */}
-        <div className="px-6 py-3 mt-10">
+        {/* <div className="px-6 py-3 mt-10">
           <div>Pages</div>
           <div className="p-2">
             <div>Home</div>
             <div>About</div>
           </div>
-        </div>
+        </div> */}
         {/* Components */}
         <div className="px-6 py-3 mt-10">
           {components?.map((c, index) => {

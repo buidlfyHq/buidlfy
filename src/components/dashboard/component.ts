@@ -35,4 +35,8 @@ export const components = [
     id: "09",
     name: "Image",
   },
+  {
+    id: "10",
+    name: "Divider"
+  }
 ];
