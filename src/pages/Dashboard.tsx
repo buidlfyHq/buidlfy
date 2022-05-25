@@ -117,6 +117,7 @@ const Dashboard: FC = () => {
         return <Image />;
       case "Divider":
         return <Divider />;
+
       default:
         break;
     }
@@ -201,7 +202,7 @@ const Dashboard: FC = () => {
           {components?.map((c, index) => {
             return (
               <div
-                className="px-4 py-2 my-2 transition-colors duration-150 ease-in-out bg-white rounded-lg shadow hover:bg-gray-100 cursor-pointer"
+                className="px-4 py-2 transition-colors duration-150 ease-in-out bg-white rounded-lg hover:bg-gray-100 cursor-pointer"
                 onClick={() => setItems([...items, c])}
               >
                 {c.name}
@@ -299,7 +300,7 @@ const Dashboard: FC = () => {
                             {(provided, snapshot) => {
                               return (
                                 <div
-                                  className="p-2 my-2 transition-colors duration-150 ease-in-out bg-white rounded-lg shadow hover:bg-gray-100"
+                                  className="transition-colors duration-150 ease-in-out bg-white rounded-lg hover:bg-gray-100"
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
