@@ -35,7 +35,6 @@ const Dashboard: FC = () => {
   const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
   const [componentArr, setComponentArr] = useState([]);
-
   const handleComponent = (container: React.FC<{}>) => {
     console.log(container, "container");
     setComponentArr([...componentArr, { component: container }]);

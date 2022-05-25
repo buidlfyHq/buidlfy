@@ -5,7 +5,6 @@ import SettingComponent from "../utils/SettingComponent";
 interface TextProps {
   heading: string;
 }
-
 const Text: FC = () => {
   const [brandName, setBrandName] = useState<String>("Text");
   return (

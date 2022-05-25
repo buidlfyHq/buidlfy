@@ -5,12 +5,11 @@ import "../../styles/Components.css";
 interface InputProps {
   heading: string;
 }
-
 const Input: FC = () => {
   return (
     <>
       <input
-        className="input shadow appearance-none ml-6 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="input bg-white appearance-none ml-6 border border-solid rounded py-2 px-3 text-gray-700 leading-tight"
         id="input"
         type="text"
         placeholder="Input"

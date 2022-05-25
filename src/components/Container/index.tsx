@@ -18,4 +18,8 @@ const Container: FC = () => {
   );
 };
 
+<<<<<<< HEAD
 export default Container;
+=======
+export default Container;
+>>>>>>> 6066ae04bd451b39c59312d6e597ae4ea6b4e893

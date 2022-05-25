@@ -5,7 +5,6 @@ import SettingComponent from "../utils/SettingComponent";
 interface LinkProps {
   heading: string;
 }
-
 const Link: FC = () => {
   const [brandName, setBrandName] = useState<String>("Link");
   return (
