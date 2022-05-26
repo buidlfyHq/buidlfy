@@ -291,7 +291,7 @@ const Dashboard: FC = () => {
                     <div
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                      className=" min-w-1/4 max-w-1/2"
+                      className="min-w-1/4 max-w-1/2"
                     >
                       {items?.map((item, index) => {
                         console.log(item, "item");
