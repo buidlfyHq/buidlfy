@@ -1,42 +1,45 @@
+import ShortUniqueId from "short-unique-id";
+
+const uid = new ShortUniqueId();
 export const components = [
   {
-    id: "01",
+    id: uid(),
     name: "Container",
   },
   {
-    id: "02",
+    id: uid(),
     name: "Button",
   },
   {
-    id: "03",
+    id: uid(),
     name: "Text",
   },
   {
-    id: "04",
+    id: uid(),
     name: "Link",
   },
   {
-    id: "05",
+    id: uid(),
     name: "Heading 1",
   },
   {
-    id: "06",
+    id: uid(),
     name: "Heading 2",
   },
   {
-    id: "07",
+    id: uid(),
     name: "Heading 3",
   },
   {
-    id: "08",
+    id: uid(),
     name: "Input",
   },
   {
-    id: "09",
+    id: uid(),
     name: "Image",
   },
   {
-    id: "10",
+    id: uid(),
     name: "Divider"
   }
 ];

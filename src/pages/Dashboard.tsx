@@ -24,7 +24,9 @@ import Input from "../components/Input";
 import HeadingThree from "../components/HeadingThree";
 import HeadingTwo from "../components/HeadingTwo";
 import Divider from "../components/Divider";
+import ShortUniqueId from "short-unique-id";
 import { components } from "../components/dashboard/component";
+import { isDeepStrictEqual } from "util";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
@@ -49,6 +51,7 @@ const Dashboard: FC = () => {
   //   });
   //   console.log(res);
   // };
+  const uid = new ShortUniqueId();
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -288,12 +291,14 @@ const Dashboard: FC = () => {
                     <div
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                      className="h-full w-full p-2 min-w-1/4 max-w-1/2"
+                      className=" min-w-1/4 max-w-1/2"
                     >
                       {items?.map((item, index) => {
+                        console.log(item, "item");
+                        // console.log(itemId, "itemId");
                         return (
                           <Draggable
-                            key={item.id}
+                            key={uid()}
                             draggableId={item.id}
                             index={index}
                           >
