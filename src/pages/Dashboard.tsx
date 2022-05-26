@@ -125,7 +125,6 @@ const Dashboard: FC = () => {
         break;
     }
   };
-
   return (
     <div className="flex flex-row w-full min-h-screen">
       {/* Sidebar */}
@@ -206,7 +205,12 @@ const Dashboard: FC = () => {
             return (
               <div
                 className="px-4 py-2 transition-colors duration-150 ease-in-out bg-white rounded-lg hover:bg-gray-100 cursor-pointer"
-                onClick={() => setItems([...items, c])}
+                onClick={() => {
+                  let newC = { ...c };
+                  newC.id = uid();
+                  console.log(newC.id, c.id, "id");
+                  setItems([...items, newC]);
+                }}
               >
                 {c.name}
               </div>
@@ -294,11 +298,12 @@ const Dashboard: FC = () => {
                       className="min-w-1/4 max-w-1/2"
                     >
                       {items?.map((item, index) => {
-                        console.log(item, "item");
+                        // const itemId = uid();
+                        // console.log(item.id, "item");
                         // console.log(itemId, "itemId");
                         return (
                           <Draggable
-                            key={uid()}
+                            key={item.id}
                             draggableId={item.id}
                             index={index}
                           >

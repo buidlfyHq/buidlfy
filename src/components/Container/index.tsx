@@ -11,7 +11,7 @@ const Container: FC = () => {
     <>
       <Popover className="relative bg-white">
         <div className="max-w-9xl mx-auto px-1 sm:px-1">
-          <div className="flex justify-between px-4 items-center border-2 border-gray-100 py-6 md:justify-start md:space-x-10"></div>
+          <div className="flex ml-6 justify-between px-4 items-center border-2 border-gray-100 py-6 md:justify-start md:space-x-10"></div>
         </div>
       </Popover>
     </>
