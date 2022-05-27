@@ -27,6 +27,11 @@ import Divider from "../components/Divider";
 import ShortUniqueId from "short-unique-id";
 import { components } from "../components/dashboard/component";
 import { isDeepStrictEqual } from "util";
+import RGL, { WidthProvider } from "react-grid-layout";
+
+import _ from "lodash";
+
+const ReactGridLayout = WidthProvider(RGL);
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
@@ -43,6 +48,42 @@ const Dashboard: FC = () => {
     setComponentArr([...componentArr, { component: container }]);
     console.log(componentArr, "component");
   };
+
+  const [state, setState] = useState()
+
+  const defaultProps = {
+    className: "layout",
+    items: items.length,
+    rowHeight: 30,
+    onLayoutChange: function() {},
+    cols: 12
+  };
+
+  const generateLayout = () => {
+    const p = items;
+
+    return _.map(new Array(p), function(item, i) {
+      // const y = i + 1;
+      return {
+        x: (i * 2) % 12,
+        // y: Math.floor(i / 6) * y,
+        w: 2,
+        h: 2,
+        i: i.toString(),
+        resizeHandles: ["w", "e", "se"]
+      };
+    });
+  }
+
+
+  // const layout = {
+  //   return items.map((item, index) => {
+
+  //   })
+  // }
+
+  // const layout = generateLayout();
+  // setState(layout)
 
   // Tests if user is authenticated
   // const getInformation = async () => {
@@ -97,6 +138,7 @@ const Dashboard: FC = () => {
       }
     }
   };
+
 
   const renderItem = (item) => {
     switch (item.name) {
@@ -263,7 +305,7 @@ const Dashboard: FC = () => {
                 <div className="truncate">Publishing Current Page Only</div>
                 <hr className="my-2" />
                 <div className="p-2 text-center text-white bg-indigo-800 rounded-md">
-                  Publish
+                  Pubish
                 </div>
               </Popover.Panel>
             </Popover>
@@ -288,46 +330,53 @@ const Dashboard: FC = () => {
                 <index.component />
               </>;
             })}
-            <DragDropContext onDragEnd={onDragEnd}>
+            {/* <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="builder" type="BUILDER">
                 {(provided, snapshot) => {
                   return (
                     <div
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                      className="min-w-1/4 max-w-1/2"
+                      className="min-w-1/4 max-w-1/2 bg-red-500"
+                    > */}
+                    <ReactGridLayout
+                      // layout={layout}
+                      // onLayoutChange={this.onLayoutChange}
+                      // {...this.props}
                     >
-                      {items?.map((item, index) => {
-                        // const itemId = uid();
+                      {items?.map((item) => {
+                        const itemId = uid();
                         // console.log(item.id, "item");
                         // console.log(itemId, "itemId");
                         return (
-                          <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={index}
-                          >
-                            {(provided, snapshot) => {
-                              return (
+                          // <Draggable
+                          //   key={item.id}
+                          //   draggableId={item.id}
+                          //   index={index}
+                          // >
+                          //   {(provided, snapshot) => {
+                          //     return (
                                 <div
-                                  className="transition-colors duration-150 ease-in-out bg-white rounded-lg hover:bg-gray-100"
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
+                                  key={itemId}
+                                  className="transition-colors duration-150 ease-in-out rounded-lg hover:outline-slate-300 hover:outline-dashed"
+                                  // ref={provided.innerRef}
+                                  // {...provided.draggableProps}
+                                  // {...provided.dragHandleProps}
                                 >
                                   {renderItem(item)}
                                 </div>
-                              );
-                            }}
-                          </Draggable>
+                          //     );
+                          //   }}
+                          // </Draggable>
                         );
                       })}
-                      {provided.placeholder}
-                    </div>
+                      </ReactGridLayout>
+                      {/* {provided.placeholder} */}
+                    {/* </div>
                   );
                 }}
               </Droppable>
-            </DragDropContext>
+            </DragDropContext> */}
           </>
         </div>
       </div>
