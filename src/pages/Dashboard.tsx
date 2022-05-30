@@ -27,11 +27,12 @@ import Divider from "../components/Divider";
 import ShortUniqueId from "short-unique-id";
 import { components } from "../components/dashboard/component";
 import { isDeepStrictEqual } from "util";
-import RGL, { WidthProvider } from "react-grid-layout";
+// import RGL, { WidthProvider } from "react-grid-layout";
+// const ReactGridLayout = WidthProvider(RGL);
 
 import _ from "lodash";
-
-const ReactGridLayout = WidthProvider(RGL);
+import { Responsive, WidthProvider } from "react-grid-layout";
+const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
@@ -339,12 +340,21 @@ const Dashboard: FC = () => {
                       {...provided.droppableProps}
                       className="min-w-1/4 max-w-1/2 bg-red-500"
                     > */}
-                    <ReactGridLayout
+                    <ResponsiveGridLayout
+                      layouts={{lg: items}}
+                      breakpoints={{lg:1200, md:996, sm:768, xs:480, xxs:0 }}
+                      cols={{lg:5, md:4, sm:3, xs:2, xxs:1}}
+                      rowHeight={50}
+                      width={window.innerWidth-250}
+                      compactType="horizontal"
+                      // resizeHandles=["e","w"]
+                      // className="flex justify-center"
                       // layout={layout}
                       // onLayoutChange={this.onLayoutChange}
                       // {...this.props}
                     >
                       {items?.map((item) => {
+                        console.log(item)
                         const itemId = uid();
                         // console.log(item.id, "item");
                         // console.log(itemId, "itemId");
@@ -358,7 +368,7 @@ const Dashboard: FC = () => {
                           //     return (
                                 <div
                                   key={itemId}
-                                  className="transition-colors duration-150 ease-in-out rounded-lg hover:outline-slate-300 hover:outline-dashed"
+                                  className="transition-colors duration-150 ease-in-out rounded-lg hover:outline-slate-300 hover:outline-dashed "
                                   // ref={provided.innerRef}
                                   // {...provided.draggableProps}
                                   // {...provided.dragHandleProps}
@@ -370,7 +380,7 @@ const Dashboard: FC = () => {
                           // </Draggable>
                         );
                       })}
-                      </ReactGridLayout>
+                      </ResponsiveGridLayout>
                       {/* {provided.placeholder} */}
                     {/* </div>
                   );
