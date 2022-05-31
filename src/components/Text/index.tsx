@@ -9,7 +9,7 @@ const Text: FC = () => {
   const [brandName, setBrandName] = useState<String>("Text");
   return (
     <>
-      <div className="flex items-center justify-start ">
+      <div className="flex items-center justify-center h-full ">
         <SettingComponent
           classname={"mx-2 font-regular"}
           text={brandName}

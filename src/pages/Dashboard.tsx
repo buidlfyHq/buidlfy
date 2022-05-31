@@ -347,7 +347,7 @@ const Dashboard: FC = () => {
                       rowHeight={50}
                       width={window.innerWidth-250}
                       compactType="horizontal"
-                      // resizeHandles=["e","w"]
+                      resizeHandles={["nw","se"]}
                       // className="flex justify-center"
                       // layout={layout}
                       // onLayoutChange={this.onLayoutChange}
@@ -368,7 +368,7 @@ const Dashboard: FC = () => {
                           //     return (
                                 <div
                                   key={itemId}
-                                  className="transition-colors duration-150 ease-in-out rounded-lg hover:outline-slate-300 hover:outline-dashed "
+                                  className="transition-colors duration-150 ease-in-out rounded-lg hover:outline-slate-300 hover:outline-dashed justify-center"
                                   // ref={provided.innerRef}
                                   // {...provided.draggableProps}
                                   // {...provided.dragHandleProps}

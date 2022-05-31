@@ -10,9 +10,9 @@ const HeadingOne: FC = () => {
 
   return (
     <>
-      <div className="flex items-center justify-start ">
+      <div className="flex items-center justify-center">
         <SettingComponent
-          classname={"text-6xl font-normal leading-normal mx-2 mt-0 mb-2"}
+          classname={"text-6xl font-normal leading-normal mx-2 mt-0 whitespace-nowrap"}
           text={headingOne}
           link={""}
           setBrandName={setHeadingOne}

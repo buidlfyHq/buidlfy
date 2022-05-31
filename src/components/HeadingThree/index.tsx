@@ -10,9 +10,9 @@ const HeadingThree: FC = () => {
 
   return (
     <>
-      <div className="flex items-center justify-start ">
+      <div className="flex items-center justify-center h-full">
         <SettingComponent
-          classname={"mx-2 text-4xl font-normal leading-normal mt-0 mb-2 "}
+          classname={"text-4xl font-normal leading-normal"}
           text={headingThree}
           link={""}
           setBrandName={setHeadingThree}

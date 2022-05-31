@@ -6,9 +6,9 @@ interface ImageProps {
 }
 const Image: FC = () => {
   return (
-    <>
-      <img className=" h-32 w-32 ml-6" src={image} />
-    </>
+    <div className="h-full flex justify-center items-center">
+      <img className="h-32 w-32" src={image} alt="img" />
+    </div>
   );
 };
 
