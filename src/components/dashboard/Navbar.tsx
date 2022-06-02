@@ -29,7 +29,6 @@ export default function Navbar() {
       },
     };
     const jsonData = JSON.stringify(navData, null, 3);
-    console.log(jsonData);
   });
 
   return (

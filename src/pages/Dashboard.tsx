@@ -37,6 +37,14 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const Dashboard: FC = () => {
+  
+  // type State = {
+  //   currentBreakpoint: string,
+  //   compactType: CompactType,
+  //   mounted: boolean,
+  //   layouts: {[string]: Layout}
+  // };
+
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [className, setClassName] = useState("");
@@ -48,16 +56,6 @@ const Dashboard: FC = () => {
     console.log(container, "container");
     setComponentArr([...componentArr, { component: container }]);
     console.log(componentArr, "component");
-  };
-
-  const [state, setState] = useState()
-
-  const defaultProps = {
-    className: "layout",
-    items: items.length,
-    rowHeight: 30,
-    onLayoutChange: function() {},
-    cols: 12
   };
 
   const generateLayout = () => {
@@ -75,6 +73,26 @@ const Dashboard: FC = () => {
       };
     });
   }
+
+  const [state, setState] = useState({
+    currentBreakpoint: "lg",
+    compactType: "vertical",
+    mounted: false,
+    layouts: { lg: generateLayout() }
+  })
+
+  const defaultProps = {
+    className: "layout",
+    items: items.length,
+    rowHeight: 30,
+    onLayoutChange: function() {},
+    // cols: 12
+    cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+  };
+
+  // let state: State = 
+
+ 
 
 
   // const layout = {
@@ -139,6 +157,27 @@ const Dashboard: FC = () => {
       }
     }
   };
+
+  const onLayoutChange = (layout, layouts) => {
+    console.log(layout, layouts)
+    let newItemsArr = layout.map((obj: any) => {
+      let selectedItem = items.filter((item) => item.id === obj.i)[0]
+      const { h, minW, x, y, w, i} = obj
+      return(
+        selectedItem = {
+          name: selectedItem.name,
+          h,
+          minW,
+          x,
+          y,
+          w,
+          id: i
+        }
+      )
+    })
+    newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items)
+    // console.log(layout, layouts)
+  }
 
 
   const renderItem = (item) => {
@@ -247,13 +286,20 @@ const Dashboard: FC = () => {
           {components?.map((c, index) => {
             return (
               <div
-                className="px-4 py-2 transition-colors duration-150 ease-in-out bg-white rounded-lg hover:bg-gray-100 cursor-pointer"
+                key={index}
+                className="px-4 py-2 transition-colors duration-150 ease-in-out bg-white rounded-lg cursor-pointer hover:bg-gray-100"
                 onClick={() => {
-                  let newC = { ...c };
-                  newC.id = uid();
-                  console.log(newC.id, c.id, "id");
+                  let newC = { 
+                    ...c,
+                    id: uid(),
+                    x: 0,
+                    y: index,
+                    w: 12,
+                    minW: 1
+                  };
                   setItems([...items, newC]);
                 }}
+                
               >
                 {c.name}
               </div>
@@ -331,62 +377,37 @@ const Dashboard: FC = () => {
                 <index.component />
               </>;
             })}
-            {/* <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="builder" type="BUILDER">
-                {(provided, snapshot) => {
+              <ResponsiveGridLayout
+                layouts={{lg: items}}
+                breakpoints={{lg:1200, md:996, sm:768, xs:480, xxs:0 }}
+                // cols={{lg:5, md:4, sm:3, xs:2, xxs:1}}
+                cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+                rowHeight={50}
+                // autoSize={true}
+                width={window.innerWidth-250}
+                compactType="horizontal"
+                resizeHandles={["nw","se"]}
+                // isBound={true}
+                // className="flex justify-center"
+                // layout={layout}
+                onLayoutChange={onLayoutChange}
+                // {...this.props}
+              >
+                {items?.map((item, i) => {
+                  const {x, y, w, h, minW, id} = item
+                  console.log('item',item)
+                  // const itemId = item.id;
                   return (
                     <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      className="min-w-1/4 max-w-1/2 bg-red-500"
-                    > */}
-                    <ResponsiveGridLayout
-                      layouts={{lg: items}}
-                      breakpoints={{lg:1200, md:996, sm:768, xs:480, xxs:0 }}
-                      cols={{lg:5, md:4, sm:3, xs:2, xxs:1}}
-                      rowHeight={50}
-                      width={window.innerWidth-250}
-                      compactType="horizontal"
-                      resizeHandles={["nw","se"]}
-                      // className="flex justify-center"
-                      // layout={layout}
-                      // onLayoutChange={this.onLayoutChange}
-                      // {...this.props}
+                      key={id}
+                      data-grid={{ x, y, w, h, minW }}
+                      className="justify-center transition-colors duration-150 ease-in-out rounded-lg hover:outline-slate-300 hover:outline-dashed"
                     >
-                      {items?.map((item) => {
-                        console.log(item)
-                        const itemId = uid();
-                        // console.log(item.id, "item");
-                        // console.log(itemId, "itemId");
-                        return (
-                          // <Draggable
-                          //   key={item.id}
-                          //   draggableId={item.id}
-                          //   index={index}
-                          // >
-                          //   {(provided, snapshot) => {
-                          //     return (
-                                <div
-                                  key={itemId}
-                                  className="transition-colors duration-150 ease-in-out rounded-lg hover:outline-slate-300 hover:outline-dashed justify-center"
-                                  // ref={provided.innerRef}
-                                  // {...provided.draggableProps}
-                                  // {...provided.dragHandleProps}
-                                >
-                                  {renderItem(item)}
-                                </div>
-                          //     );
-                          //   }}
-                          // </Draggable>
-                        );
-                      })}
-                      </ResponsiveGridLayout>
-                      {/* {provided.placeholder} */}
-                    {/* </div>
+                      {renderItem(item)}
+                    </div>
                   );
-                }}
-              </Droppable>
-            </DragDropContext> */}
+                })}
+              </ResponsiveGridLayout>
           </>
         </div>
       </div>
