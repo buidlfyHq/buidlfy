@@ -13,6 +13,8 @@ const Dashboard: FC = () => {
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [abi, setAbi] = useState<string>(""); // for storing abi
   const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
+  const [openSetting, setOpenSetting] = useState<Boolean>(false);
+  const [settingItemId, setSettingItemId] = useState("");
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -55,9 +57,18 @@ const Dashboard: FC = () => {
           items={items}
           setItems={setItems}
           className={className}
+          setOpenSetting={setOpenSetting}
+          setSettingItemId={setSettingItemId}
         />
       </section>
-      <Settings items={items} setItems={setItems} />
+      {openSetting && (
+        <Settings
+          items={items}
+          setItems={setItems}
+          settingItemId={settingItemId}
+          setOpen={setOpenSetting}
+        />
+      )}
     </main>
   );
 };

@@ -1,56 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
 import SettingComponent from "./SettingComponent";
 
-const Settings = ({items, setItems}) => {
-  const [open, setOpen] = useState<Boolean>(false);
-  const [settingItem, setSettingItem] = useState(null);
+const Settings = ({ items, setItems, settingItemId, setOpen }) => {
+  const selectedItem = items.find((item) => item.id === settingItemId);
 
   const setLink = (link: any) => {
-    if (!settingItem) {
+    if (!settingItemId) {
       return;
     }
-    let currentItems = [...items];
-    currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
-        const newO = structuredClone(o);
-        if (link) {
-          newO.link = link;
-        }
-        currentItems[i] = newO;
-        setItems(currentItems);
-        setSettingItem(currentItems[i]);
-        return true; // stop searching
+    const updatedItems = items.map((item) => {
+      if (item.id === settingItemId) {
+        return { ...item, link };
       }
+      return item;
     });
+    setItems(updatedItems);
   };
 
-  const setValue = (value: any) => {
-    if (!settingItem) {
+  const setValue = (value: string) => {
+    if (!settingItemId) {
       return;
     }
-    let currentItems = [...items];
-    currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
-        const newO = structuredClone(o);
-        if (value) {
-          newO.value = value;
-        }
-        currentItems[i] = newO;
-        setItems(currentItems);
-        setSettingItem(currentItems[i]);
-        return true; // stop searching
+    const updatedItems = items.map((item) => {
+      if (item.id === settingItemId) {
+        return { ...item, value };
       }
+      return item;
     });
+    setItems(updatedItems);
   };
 
   const setBold = (fontWeight: boolean) => {
-    if (!settingItem) {
+    if (!settingItemId) {
       return;
     }
 
     let currentItems = [...items];
     currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
+      if (o.id === settingItemId) {
         const newO = structuredClone(o);
         if (fontWeight) {
           newO.style.fontWeight = "bold";
@@ -59,19 +46,18 @@ const Settings = ({items, setItems}) => {
         }
         currentItems[i] = newO;
         setItems(currentItems);
-        setSettingItem(currentItems[i]);
         return true; // stop searching
       }
     });
   };
 
   const setItalic = (fontStyle: boolean) => {
-    if (!settingItem) {
+    if (!settingItemId) {
       return;
     }
     let currentItems = [...items];
     currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
+      if (o.id === settingItemId) {
         const newO = structuredClone(o);
         if (fontStyle) {
           newO.style.fontStyle = "italic";
@@ -80,19 +66,18 @@ const Settings = ({items, setItems}) => {
         }
         currentItems[i] = newO;
         setItems(currentItems);
-        setSettingItem(currentItems[i]);
         return true; // stop searching
       }
     });
   };
 
   const setUnderline = (textDecoration: boolean) => {
-    if (!settingItem) {
+    if (!settingItemId) {
       return;
     }
     let currentItems = [...items];
     currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
+      if (o.id === settingItemId) {
         const newO = structuredClone(o);
         if (textDecoration) {
           newO.style.textDecoration = "underline";
@@ -101,57 +86,54 @@ const Settings = ({items, setItems}) => {
         }
         currentItems[i] = newO;
         setItems(currentItems);
-        setSettingItem(currentItems[i]);
         return true; // stop searching
       }
     });
   };
 
   const setColor = (color: { rgb: any }) => {
-    if (!settingItem) {
+    if (!settingItemId) {
       return;
     }
     let currentItems = [...items];
     currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
+      if (o.id === settingItemId) {
         const newO = structuredClone(o);
         if (color) {
           newO.style.color = color;
         }
         currentItems[i] = newO;
         setItems(currentItems);
-        setSettingItem(currentItems[i]);
         return true; // stop searching
       }
     });
   };
 
   const setDeleteComponent = (deleteComponent: any) => {
-    if (!settingItem) {
+    if (!settingItemId) {
       return;
     }
     let currentItems = [...items];
     currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
+      if (o.id === settingItemId) {
         const newO = structuredClone(o);
         if (deleteComponent) {
           newO.style.deleteComponent = 1;
         }
         currentItems[i] = newO;
         setItems(currentItems);
-        setSettingItem(currentItems[i]);
         return true; // stop searching
       }
     });
   };
 
   const setCenter = (justifyContent: boolean) => {
-    if (!settingItem) {
+    if (!settingItemId) {
       return;
     }
     let currentItems = [...items];
     currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
+      if (o.id === settingItemId) {
         const newO = structuredClone(o);
         if (justifyContent) {
           newO.style.justifyContent = "center";
@@ -160,19 +142,18 @@ const Settings = ({items, setItems}) => {
         }
         currentItems[i] = newO;
         setItems(currentItems);
-        setSettingItem(currentItems[i]);
         return true; // stop searching
       }
     });
   };
 
   const setLeft = (justifyContent: boolean) => {
-    if (!settingItem) {
+    if (!settingItemId) {
       return;
     }
     let currentItems = [...items];
     currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
+      if (o.id === settingItemId) {
         const newO = structuredClone(o);
         if (justifyContent) {
           newO.style.justifyContent = "left";
@@ -181,19 +162,18 @@ const Settings = ({items, setItems}) => {
         }
         currentItems[i] = newO;
         setItems(currentItems);
-        setSettingItem(currentItems[i]);
         return true; // stop searching
       }
     });
   };
 
   const setRight = (justifyContent: boolean) => {
-    if (!settingItem) {
+    if (!settingItemId) {
       return;
     }
     let currentItems = [...items];
     currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
+      if (o.id === settingItemId) {
         const newO = structuredClone(o);
         if (justifyContent) {
           newO.style.justifyContent = "right";
@@ -202,26 +182,24 @@ const Settings = ({items, setItems}) => {
         }
         currentItems[i] = newO;
         setItems(currentItems);
-        setSettingItem(currentItems[i]);
         return true; // stop searching
       }
     });
   };
 
   const setFontSize = (fontSize: any) => {
-    if (!settingItem) {
+    if (!settingItemId) {
       return;
     }
     let currentItems = [...items];
     currentItems.map((o, i) => {
-      if (o.id === settingItem.id) {
+      if (o.id === settingItemId) {
         const newO = structuredClone(o);
         if (fontSize) {
           newO.style.fontSize = fontSize;
         }
         currentItems[i] = newO;
         setItems(currentItems);
-        setSettingItem(currentItems[i]);
         return true; // stop searching
       }
     });
@@ -229,35 +207,30 @@ const Settings = ({items, setItems}) => {
 
   return (
     <>
-      {open ? (
-        <span>
-          {settingItem ? (
-            <SettingComponent
-              open={open}
-              setOpen={setOpen}
-              setLink={setLink}
-              link={settingItem?.link}
-              setValue={setValue}
-              value={settingItem?.value}
-              setBold={setBold}
-              bold={settingItem?.style?.fontWeight}
-              setItalic={setItalic}
-              italic={settingItem?.style?.fontStyle}
-              setUnderline={setUnderline}
-              underline={settingItem?.style?.textDecoration}
-              color={settingItem?.style?.fontStyle}
-              setColor={setColor}
-              setDeleteComponent={setDeleteComponent}
-              deleteComponent={settingItem?.style?.deleteComponent}
-              setCenter={setCenter}
-              setLeft={setLeft}
-              justifyContent={settingItem?.style?.justifyContent}
-              setRight={setRight}
-              fontSize={settingItem?.style?.fontSize}
-              setFontSize={setFontSize}
-            />
-          ) : null}
-        </span>
+      {settingItemId ? (
+        <SettingComponent
+          setOpen={setOpen}
+          setLink={setLink}
+          link={selectedItem?.link}
+          setValue={setValue}
+          value={selectedItem?.value}
+          setBold={setBold}
+          bold={selectedItem?.style?.fontWeight}
+          setItalic={setItalic}
+          italic={selectedItem?.style?.fontStyle}
+          setUnderline={setUnderline}
+          underline={selectedItem?.style?.textDecoration}
+          color={selectedItem?.style?.fontStyle}
+          setColor={setColor}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          setCenter={setCenter}
+          setLeft={setLeft}
+          justifyContent={selectedItem?.style?.justifyContent}
+          setRight={setRight}
+          fontSize={selectedItem?.style?.fontSize}
+          setFontSize={setFontSize}
+        />
       ) : null}
     </>
   );

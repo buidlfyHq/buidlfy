@@ -11,6 +11,7 @@ import HeadingTwo from "../HeadingTwo";
 import Divider from "../Divider";
 
 const RenderItem = ({ item }) => {
+  console.log(item);
   switch (item.name) {
     case "Container":
       return <Container deleteComponent={item.style.deleteComponent} />;

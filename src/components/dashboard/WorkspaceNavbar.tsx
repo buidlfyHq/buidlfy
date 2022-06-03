@@ -4,7 +4,6 @@ import { GrFormAdd } from "react-icons/gr";
 import { useState, useEffect } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import SettingComponent from "../utils/SettingComponent";
 
 export default function WorkspaceNavbar() {
   const [navbar, setNavbar] = useState<Number>(0);
@@ -40,12 +39,12 @@ export default function WorkspaceNavbar() {
             id="originalnav"
           >
             <div className="flex items-center justify-start ">
-              <SettingComponent
-                classname={"mx-2 font-bold"}
+              {/* <SettingComponent
+                className={"mx-2 font-bold"}
                 text={brandName}
                 link={""}
                 setBrandName={setBrandName}
-              />
+              /> */}
               {/* <div className="mx-2 font-bold">{brandName}</div> */}
             </div>
             <div className="flex items-center justify-center w-full">
@@ -53,14 +52,13 @@ export default function WorkspaceNavbar() {
                 {menuArr.map((obj, index) => {
                   return (
                     <div key={index} id={`${index}`}>
-                      <SettingComponent
-                        classname={"mx-1"}
+                      {/* <SettingComponent
                         text={obj.name}
                         link={obj.link}
                         setMenuArr={setMenuArr}
                         menuArr={menuArr}
                         id={`${index}`}
-                      />
+                      /> */}
                     </div>
                   );
                 })}

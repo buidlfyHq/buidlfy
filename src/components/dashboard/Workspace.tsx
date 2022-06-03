@@ -1,7 +1,6 @@
 import React, { FC } from "react";
-import { Responsive, WidthProvider } from "react-grid-layout";
+import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 // import AbiComponent from "./AbiComponent";
-import WorkspaceNavbar from "./WorkspaceNavbar";
 import RenderItem from "./RenderItem";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -13,15 +12,26 @@ const Workspace: FC<{
   items: any;
   setItems: any;
   className: string;
-}> = ({ abi, showComponent, setShowComponent, items, setItems, className }) => {
+  setSettingItemId: (item: string) => void;
+  setOpenSetting: (open: boolean) => void;
+}> = ({
+  abi,
+  showComponent,
+  setShowComponent,
+  items,
+  setItems,
+  className,
+  setOpenSetting,
+  setSettingItemId,
+}) => {
   // on layout change
-  const onLayoutChange = (layout, layouts) => {
+  const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     console.log(layout, layouts);
     let newItemsArr = layout.map((obj: any) => {
       let selectedItem = items.filter((item) => item.id === obj.i)[0];
       const { h, minW, x, y, w, i } = obj;
       return (selectedItem = {
-        name: selectedItem.name,
+        ...selectedItem,
         h,
         minW,
         x,
@@ -42,7 +52,7 @@ const Workspace: FC<{
           : `w-full`
       }
     >
-      <WorkspaceNavbar />
+      {/* <WorkspaceNavbar /> */}
       <section className="p-4">
         Welcome to DeFlow
         {/* <AbiComponent
@@ -67,6 +77,10 @@ const Workspace: FC<{
               <div
                 key={id}
                 data-grid={{ x, y, w, h, minW }}
+                onClick={() => {
+                  setOpenSetting(true);
+                  setSettingItemId(id);
+                }}
                 className="justify-center transition-colors duration-150 ease-in-out rounded-lg hover:outline-slate-300 hover:outline-dashed"
               >
                 <RenderItem item={item} />
