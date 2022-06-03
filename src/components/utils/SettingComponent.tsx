@@ -1,19 +1,44 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../styles/Dashboard.css";
 import { RiText } from "react-icons/ri";
-import { AiOutlineLink, AiOutlineDelete } from "react-icons/ai";
-import { VscSymbolColor } from "react-icons/vsc";
+import { AiOutlineLink } from "react-icons/ai";
+import "../../styles/Components.css";
+import AlignComponent from "./AlignComponent";
+import FontStyleComponent from "./FontStyleComponent";
+import UtilitiesComponent from "./UtilitiesComponent";
+import ColorComponent from "./ColorComponent";
+import FontSizeComponent from "./FontSizeComponent";
 
 export default function SettingComponent({
-  classname,
-  text,
+  text = null,
   link,
-  setBrandName = null,
+  open,
+  setOpen,
+  setValue = null,
   setMenuArr = null,
   id = null,
   menuArr = null,
+  setBold = null,
+  bold = null,
+  italic = null,
+  setItalic = null,
+  underline = null,
+  setUnderline = null,
+  color = { r: 0, g: 0, b: 0, a: 100 },
+  setColor = null,
+  deleteComponent = "0",
+  setDeleteComponent = null,
+  justifyContent = null,
+  setLeft = null,
+  setRight = null,
+  setCenter = null,
+  fontSize = 16,
+  setFontSize = null,
+  item = {},
+  items = [],
+  value = "Text",
+  setLink = null,
 }) {
-  const [open, setOpen] = useState<Boolean>(false);
   const [textVal, setTextVal] = useState<string>(text || "");
   const [linkVal, setLinkVal] = useState<string>(link || "");
   const [newMenuArr, setNewMenuArr] = useState<Object[]>(menuArr);
@@ -34,23 +59,15 @@ export default function SettingComponent({
 
   useEffect(() => {}, [setTextVal]);
 
-  const deleteMenu = (e: any, Id: string) => {
-    console.log(Id);
-
-    // console.log(2)
-    // setOpen(false)
-  };
-
   const handleTextChange = (e: any, Id: string) => {
-    setTextVal(e.target.value);
-    if (Id === null) {
-      setBrandName(e.target.value);
+    if (value) {
+      setTextVal(e.target.value);
+      if (Id === null) {
+        setValue(e.target.value);
+      }
+      let obj = console.log(newMenuArr[parseInt(e.target.name)]);
+      // setMenuArr([
     }
-    console.log(newMenuArr);
-    let obj = console.log(newMenuArr[parseInt(e.target.name)]);
-
-    // setMenuArr([
-
     // ])
   };
 
@@ -61,16 +78,15 @@ export default function SettingComponent({
   return (
     <>
       <div
-        className={`${classname} rounded-[8px] py-2 px-4 cursor-pointer relative`}
+        className="rounded-[8px] py-2 px-4 cursor-pointer relative"
         onClick={() => setOpen(true)}
       >
-        {text}
         {open ? (
-          <div className="border shadow-sm menu" ref={ref}>
-            <div className="px-3 my-1 text-xl text-gray-500 font-regular mx-4">
+          <div className="sidebar border shadow-sm menu" ref={ref}>
+            <div className="px-3 my-1 text-xl text-gray-500 font-regular font-normal not-italic mx-4">
               Settings
             </div>
-            <div className="flex items-center px-3 mt-1">
+            <div className="flex items-center px-3 mt-1 text-black">
               <RiText className="text-[18px] mr-3" />
               <input
                 name={Id}
@@ -81,7 +97,7 @@ export default function SettingComponent({
                 placeholder="Name.."
               />
             </div>
-            <div className="flex items-center px-3 mt-2">
+            <div className="flex items-center px-3 mt-2 text-black">
               <AiOutlineLink className="text-[18px] mr-3" />
               <input
                 name={Id}
@@ -92,22 +108,30 @@ export default function SettingComponent({
                 placeholder="URL..."
               />
             </div>
-            <div className="h-[1px] w-full bg-gray-200 mt-3 mb-1"></div>
-            <div
-              className="flex items-center w-full px-3 py-2 text-gray-600 rounded cursor-pointer hover:bg-slate-100"
-              onClick={(e) => deleteMenu(e, Id)}
-            >
-              <AiOutlineDelete className="text-[18px] mr-3" />
-              <span className="px-1 my-1 text-xl text-gray-500 font-regular">
-                Delete
-              </span>
-            </div>
-            <div className="flex items-center w-full px-3 py-2 text-gray-600 cursor-pointer hover:bg-slate-100">
-              <VscSymbolColor className="text-[18px] mr-3" />
-              <span className="px-1 my-1 text-xl text-gray-500 font-regular">
-                Text Color
-              </span>
-            </div>
+
+            <FontStyleComponent
+              bold={bold}
+              italic={italic}
+              underline={underline}
+              setBold={setBold}
+              setItalic={setItalic}
+              setUnderline={setUnderline}
+            />
+
+            <AlignComponent
+              justifyContent={justifyContent}
+              setLeft={setLeft}
+              setRight={setRight}
+              setCenter={setCenter}
+            />
+
+            <FontSizeComponent fontSize={fontSize} setFontSize={setFontSize} />
+            <ColorComponent color={color} setColor={setColor} />
+
+            <UtilitiesComponent
+              deleteComponent={deleteComponent}
+              setDeleteComponent={setDeleteComponent}
+            />
           </div>
         ) : null}
       </div>

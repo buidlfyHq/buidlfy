@@ -25,20 +25,19 @@
 }
 
 .menu{
-  position: absolute;
+  position: fixed;
+  top: 59px;
+  bottom: 0;
+  right: 0;
   width: auto;
-  top: 100%;
-  left: 0;
-  margin-top: 11px;
   width: 250px;
   z-index: 12; 
   background: white;
   box-shadow: border-box;
-  padding: 10px 0px;
+  padding: 35px 8px;
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: center;
 }
 
 .changeText{

@@ -1,23 +1,47 @@
 import React, { FC, useState } from "react";
 import "../../styles/Components.css";
-import SettingComponent from "../utils/SettingComponent";
 
-// interface HeadingProps {
-//   heading: string;
-// }
-const HeadingOne: FC = () => {
-  const [headingOne, setHeadingOne] = useState<String>("Heading 1");
+interface HeadingOneProps {
+  bold: string;
+  italic: string;
+  underline: string;
+  color: any;
+  justifyContent: string;
+  fontSize: any;
+  deleteComponent: any;
+  value: string;
+  link: string;
+}
 
+const HeadingOne: FC<HeadingOneProps> = ({
+  bold,
+  italic,
+  underline,
+  color,
+  justifyContent,
+  fontSize,
+  deleteComponent,
+  value,
+  link,
+}: HeadingOneProps) => {
   return (
     <>
-      <div className="flex items-center justify-center">
-        <SettingComponent
-          classname={"text-6xl font-normal leading-normal mx-2 mt-0 whitespace-nowrap"}
-          text={headingOne}
-          link={""}
-          setBrandName={setHeadingOne}
-        />
-      </div>
+      {deleteComponent ? null : (
+        <div
+          style={{
+            fontWeight: bold,
+            fontStyle: italic,
+            textDecoration: underline,
+            color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+            display: "flex",
+            justifyContent: justifyContent,
+            fontSize: `${fontSize}px`,
+          }}
+          className="flex items-center justify-center"
+        >
+          {value}
+        </div>
+      )}
     </>
   );
 };

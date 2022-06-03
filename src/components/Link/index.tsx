@@ -3,24 +3,46 @@ import "../../styles/Components.css";
 import SettingComponent from "../utils/SettingComponent";
 
 interface LinkProps {
-  heading: string;
+  bold: string;
+  italic: string;
+  underline: string;
+  color: any;
+  justifyContent: string;
+  fontSize: any;
+  deleteComponent: any;
+  value: string;
+  link: string;
 }
-const Link: FC = () => {
-  const [brandName, setBrandName] = useState<String>("Link");
+
+const Link: FC<LinkProps> = ({
+  bold,
+  italic,
+  underline,
+  color,
+  justifyContent,
+  fontSize,
+  deleteComponent,
+  value,
+  link,
+}: LinkProps) => {
   return (
     <>
-      <div className="flex justify-center items-center h-full">
-        <div>
-          <SettingComponent
-            classname={
-              "mx-2 font-regular underline hover:text-blue-800 visited:text-purple-600"
-            }
-            text={brandName}
-            link={""}
-            setBrandName={setBrandName}
-          />
+      {deleteComponent ? null : (
+        <div
+          style={{
+            fontWeight: bold,
+            fontStyle: italic,
+            textDecoration: underline,
+            color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+            display: "flex",
+            justifyContent: justifyContent,
+            fontSize: `${fontSize}px`,
+          }}
+          className="flex items-center justify-center h-full"
+        >
+          {value}
         </div>
-      </div>
+      )}
     </>
   );
 };

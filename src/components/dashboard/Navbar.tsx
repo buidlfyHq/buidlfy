@@ -1,105 +1,68 @@
-import React from "react";
-import "../../styles/Dashboard.css";
-import { GrFormAdd } from "react-icons/gr";
-import { useState, useEffect } from "react";
-import { AiOutlineDelete } from "react-icons/ai";
-import { IoMdAddCircleOutline } from "react-icons/io";
-import SettingComponent from "../utils/SettingComponent";
+import React, { FC } from "react";
+import { Popover } from "@headlessui/react";
+import { AiOutlineDoubleRight, AiOutlineEye } from "react-icons/ai";
+import { BiChevronDown } from "react-icons/bi";
+import { MdUndo, MdRedo } from "react-icons/md";
 
-export default function Navbar() {
-  const [navbar, setNavbar] = useState<Number>(0);
-  const [brandName, setBrandName] = useState<String>("Spheron");
-  // const NavShowHide = () => {
-  //     if(openNav === 0) setOpenNav(1)
-  //     else setOpenNav(0)
-  // }
-
-  const [menuArr, setMenuArr] = useState([{ name: "Home", link: "" }]);
-
-  const handleAddMenu = () => {
-    setMenuArr([...menuArr, { name: "Menu", link: "" }]);
+const Navbar: FC<{ className: string; setClassName: any }> = ({
+  className,
+  setClassName,
+}) => {
+  const showSidebar = () => {
+    setClassName("");
   };
 
-  useEffect(() => {
-    const navData = {
-      navbar: {
-        logo: `${brandName}`,
-        menus: menuArr,
-        connectWallet: {},
-      },
-    };
-    const jsonData = JSON.stringify(navData, null, 3);
-  });
-
   return (
-    <>
-      {navbar === 0 ? (
-        <div className="relative">
-          <div
-            className={`flex justify-evenly items-center h-[60px] border-b p-4 relative`}
-            id="originalnav"
-          >
-            <div className="flex items-center justify-start ">
-              <SettingComponent
-                classname={"mx-2 font-bold"}
-                text={brandName}
-                link={""}
-                setBrandName={setBrandName}
-              />
-              {/* <div className="mx-2 font-bold">{brandName}</div> */}
-            </div>
-            <div className="flex items-center justify-center w-full">
-              <div className="flex items-center justify-end ">
-                {menuArr.map((obj, index) => {
-                  return (
-                    <div key={index} id={`${index}`}>
-                      <SettingComponent
-                        classname={"mx-1"}
-                        text={obj.name}
-                        link={obj.link}
-                        setMenuArr={setMenuArr}
-                        menuArr={menuArr}
-                        id={`${index}`}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-              <GrFormAdd
-                className="ml-2 rounded-[8px] hover:bg-[#f5efef] text-[40px] p-2 cursor-pointer"
-                onClick={handleAddMenu}
-              />
-            </div>
-            <div className="flex items-center justify-end w-auto">
-              <div className="px-6 py-2 text-white bg-purple-400 cursor-pointer whitespace-nowrap rounded-xl">
-                Connect Wallet
-              </div>
-            </div>
-            {/* sudo */}
-            <div
-              className={`flex justify-start items-center h-[60px] p-4 w-full absolute`}
-              id="nav"
-            >
-              <div
-                className="flex items-center px-3 py-2 bg-white border shadow-md cursor-pointer hover:text-purple-700"
-                onClick={() => setNavbar(1)}
-              >
-                <div>Delete</div>
-                <AiOutlineDelete className="text-[18px] ml-2" />
-              </div>
-            </div>
-          </div>
+    <main
+      className={
+        className === ""
+          ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b z-1200 flex flex-row justify-between items-center p-3`
+          : `h-[60px] w-full top-0 border-b z-1200 flex flex-row justify-between items-center p-3`
+      }
+    >
+      <div
+        onClick={showSidebar}
+        className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"
+      >
+        {className !== "" && <AiOutlineDoubleRight />}
+      </div>
+      <div className="flex flex-row">
+        <div className="flex flex-row items-center mx-2 text-[18px] text-slate-600">
+          <span className="mx-1 p-2 hover:bg-slate-100 hover:rounded-md cursor-pointer">
+            <MdUndo />
+          </span>
+          <span className="mx-1 p-2 hover:bg-slate-100 hover:rounded-md cursor-pointer">
+            <MdRedo />
+          </span>
         </div>
-      ) : (
-        // flex items-center px-3 py-2 bg-white border shadow-md cursor-pointer hover:text-purple-700'
-        <div
-          className="flex justify-evenly items-center h-[50px] border bg-white hover:text-purple-700 shadow-md m-2 py-2 px-3 w-[150px] cursor-pointer"
-          onClick={() => setNavbar(0)}
-        >
-          <div>Add Navbar</div>
-          <IoMdAddCircleOutline className="text-[18px]" />
+        <div className="flex items-center p-2 mx-3 my-3 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md">
+          <span className="mr-1">
+            <AiOutlineEye />
+          </span>
+          Preview
         </div>
-      )}
-    </>
+
+        <Popover className="relative p-3">
+          <Popover.Button>
+            <div className="flex items-center px-4 py-2 bg-white rounded-md shadow-lg cursor-pointer">
+              Publish
+              <span className="ml-1">
+                <BiChevronDown />
+              </span>
+            </div>
+          </Popover.Button>
+
+          <Popover.Panel className="absolute right-0 z-10 p-2 mt-1 bg-white border rounded-md shadow-md">
+            <div className="truncate">Publishing Current Page Only</div>
+            <hr className="my-2" />
+            <div className="p-2 text-center text-white bg-indigo-800 rounded-md">
+              Publish
+            </div>
+          </Popover.Panel>
+        </Popover>
+      </div>
+    </main>
   );
-}
+};
+
+export default Navbar;
