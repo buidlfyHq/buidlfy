@@ -1,3 +1,62 @@
 .nav {
   width: calc(100% - 250px);
 }
+
+.home{
+  background-color: red;
+}
+
+#originalnav{
+  position: relative;
+}
+
+#originalnav #nav {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  margin-top: 110px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#originalnav:hover #nav {
+  visibility: visible;
+  opacity: 1;
+}
+
+.menu{
+  position: fixed;
+  top: 59px;
+  bottom: 0;
+  right: 0;
+  width: auto;
+  width: 250px;
+  z-index: 12; 
+  background: white;
+  box-shadow: border-box;
+  padding: 35px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.changeText{
+  width: 100%;
+  border: 1px solid rgb(233, 226, 226);
+  outline: none;
+  padding: 4px 8px;
+  font-size: 15px;
+}
+.changeText:focus{
+  outline: 1px solid rgb(207, 203, 203);
+}
+.deleteIcon{
+  margin-top: 12px;
+  padding: 3px;
+  cursor: pointer;
+  font-size: 30px;
+}
+.deleteIcon:hover{
+  background-color: rgb(245, 239, 239);
+  border-radius: 8px;
+}

@@ -62,7 +62,7 @@ const SignIn: FC = () => {
       statement,
       uri: origin,
       version: "1",
-      chainId: "1",
+      chainId: 1,
       nonce: await res.text(),
     });
 
