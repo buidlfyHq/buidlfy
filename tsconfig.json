@@ -18,8 +18,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "src"
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*"
