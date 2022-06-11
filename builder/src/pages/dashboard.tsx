@@ -12,7 +12,6 @@ const Dashboard: FC = () => {
   const navigate = useNavigate();
   const [items, setItems] = useState([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
-  const [rightClassName, setRightClassName] = useState<string>(""); // for handling sidebar toggle
   const [abi, setAbi] = useState<string>(""); // for storing abi
   const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
   const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
@@ -64,14 +63,8 @@ const Dashboard: FC = () => {
         />
       </section>
 
-      <RightSidebar
-        rightClassName={rightClassName}
-        setRightClassName={setRightClassName}
-        abi={abi}
-        setAbi={setAbi}
-        showComponent={showComponent}
-        setShowComponent={setShowComponent}
-      />
+      {/* Right sidebar */}
+      <RightSidebar />
 
       {/* Settings */}
       {openSetting && (

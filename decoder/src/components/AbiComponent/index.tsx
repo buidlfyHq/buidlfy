@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import { ethers, Contract } from "ethers";
-import BuilderConfig from "../Navbar/config";
+import BuilderConfig from "../../config";
 
 const AbiComponent: FC<{ account }> = ({ account }) => {
   const config = BuilderConfig;
