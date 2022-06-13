@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import SettingComponent from "./SettingComponent";
 
 const Settings = ({ items, setItems, settingItemId, setOpen }) => {
+  const [abi, setAbi] = useState<string>(""); // for storing abi
+  const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
 
   const setLink = (link: string) => {
@@ -226,6 +228,10 @@ const Settings = ({ items, setItems, settingItemId, setOpen }) => {
           setRight={setRight}
           fontSize={selectedItem?.style?.fontSize}
           setFontSize={setFontSize}
+          abi={abi}
+          setAbi={setAbi}
+          showComponent={showComponent}
+          setShowComponent={setShowComponent}
         />
       ) : null}
     </>

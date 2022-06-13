@@ -23,5 +23,13 @@
     ],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "Main", "type": "uint256" },
+      { "internalType": "uint256", "name": "Secondary", "type": "uint256" }],
+    "name": "newCampaigns",
+    "outputs": [{ "internalType": "address", "name": "Main", "type": "address" }, { "internalType": "address", "name": "Secondary", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
   }
 ]

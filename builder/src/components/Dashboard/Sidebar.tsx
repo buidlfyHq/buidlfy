@@ -95,7 +95,7 @@ const Sidebar: FC<{
           </span>{" "}
           Site Settings
         </div>
-        <button
+        {/* <button
           className="flex flex-row items-center mt-1 cursor-pointer"
           onClick={() => setIsOpen(true)}
         >
@@ -114,7 +114,7 @@ const Sidebar: FC<{
           abi={abi}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
-        />
+        /> */}
       </div>
 
       {/* Components */}

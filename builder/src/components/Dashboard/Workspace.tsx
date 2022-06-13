@@ -3,6 +3,7 @@ import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 // import AbiComponent from "./AbiComponent";
 import RenderItem from "./RenderItem";
 import IItems from "interfaces/items";
+import AbiComponent from "./AbiComponent";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
@@ -52,11 +53,11 @@ const Workspace: FC<{
       }
     >
       <section className="p-4">
-        {/* <AbiComponent
+        <AbiComponent
           abi={abi}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
-        /> */}
+        />
         <ResponsiveGridLayout
           layouts={{ lg: items }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
