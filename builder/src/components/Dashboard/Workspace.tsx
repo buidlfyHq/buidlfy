@@ -15,6 +15,9 @@ const Workspace: FC<{
   className: string;
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
+  selector;
+  setSelector;
+  setElementConfig;
 }> = ({
   abi,
   showComponent,
@@ -24,6 +27,9 @@ const Workspace: FC<{
   className,
   setOpenSetting,
   setSettingItemId,
+  selector,
+  setSelector,
+  setElementConfig
 }) => {
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -51,7 +57,7 @@ const Workspace: FC<{
           : `w-full`
       }
     >
-      <section className="p-4">
+      <section>
         {/* <AbiComponent
           abi={abi}
           showComponent={showComponent}
@@ -77,10 +83,21 @@ const Workspace: FC<{
                   data-grid={{ x, y, w, h, minW }}
                   // open item setting on click
                   onClick={() => {
-                    setOpenSetting(true);
-                    setSettingItemId(i);
+                    // checks if the selector is active
+                    if (selector === false) {
+                      setOpenSetting(true);
+                      setSettingItemId(i);
+                    } else {
+                      // for updating selector with item name and item id
+                      setSelector(false);
+                      setElementConfig({name: item.name, id: i});
+                    }
                   }}
-                  className="justify-center transition-colors duration-150 ease-in-out rounded-lg hover:outline-slate-300 hover:outline-dashed"
+                  className={`justify-center transition-colors duration-150 ease-in-out rounded-lg ${
+                    selector
+                      ? "hover:outline-orange-300 hover:outline"
+                      : "hover:outline-slate-300 hover:outline-dashed"
+                  }`}
                 >
                   <RenderItem item={item} />
                 </div>

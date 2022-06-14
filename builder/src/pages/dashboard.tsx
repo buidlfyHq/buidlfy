@@ -14,8 +14,14 @@ const Dashboard: FC = () => {
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [abi, setAbi] = useState<string>(""); // for storing abi
   const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
-  const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
-  const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
+  const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
+  const [settingItemId, setSettingItemId] = useState<string>(""); // for storing current element id for settings
+  // for selecting an element for contract
+  const [selector, setSelector] = useState(false);
+  const [elementConfig, setElementConfig] = useState({
+    name: 'Select an element',
+    id: 'aaaaa'
+  });
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -44,6 +50,8 @@ const Dashboard: FC = () => {
         setAbi={setAbi}
         showComponent={showComponent}
         setShowComponent={setShowComponent}
+        setSelector={setSelector}
+        elementConfig={elementConfig}
       />
 
       <section className="flex-1">
@@ -60,6 +68,9 @@ const Dashboard: FC = () => {
           className={className}
           setOpenSetting={setOpenSetting}
           setSettingItemId={setSettingItemId}
+          selector={selector}
+          setSelector={setSelector}
+          setElementConfig={setElementConfig}
         />
       </section>
 

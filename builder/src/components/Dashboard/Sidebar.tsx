@@ -18,6 +18,8 @@ const Sidebar: FC<{
   setAbi: (abi: string) => void;
   showComponent: number[];
   setShowComponent: (showComponent: number[]) => void;
+  setSelector;
+  elementConfig;
 }> = ({
   className,
   setClassName,
@@ -27,6 +29,8 @@ const Sidebar: FC<{
   setAbi,
   showComponent,
   setShowComponent,
+  setSelector,
+  elementConfig
 }) => {
   const uid = new ShortUniqueId();
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
@@ -110,6 +114,13 @@ const Sidebar: FC<{
             setIsOpen={setIsOpen}
           />
         </button>
+
+        {/* example contract element */}
+        <div onClick={() => setSelector(true)}>
+          {elementConfig.name}
+          {elementConfig.id}
+        </div>
+
         <AbiMethods
           abi={abi}
           showComponent={showComponent}
