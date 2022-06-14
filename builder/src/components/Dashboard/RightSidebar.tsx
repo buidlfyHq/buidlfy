@@ -8,8 +8,8 @@ const RightSidebar: FC<{
   setRightClassName: (className: string) => void;
   abi: string;
   setAbi: (abi: string) => void;
-  showComponent: number[];
-  setShowComponent: (showComponent: number[]) => void;
+  showComponent: any;
+  setShowComponent: (showComponent: any) => void;
 }> = ({ rightClassName, setRightClassName }) => {
   const [items, setItems] = useState([]); // for storing components
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings

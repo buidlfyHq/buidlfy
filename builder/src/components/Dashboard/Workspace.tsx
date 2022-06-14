@@ -9,8 +9,8 @@ const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid l
 
 const Workspace: FC<{
   abi: string;
-  showComponent: number[];
-  setShowComponent: (showComponent: number[]) => void;
+  showComponent: any;
+  setShowComponent: (showComponent: any) => void;
   items: IItems[];
   setItems: (items: IItems[]) => void;
   className: string;

@@ -3,7 +3,7 @@ import SettingComponent from "./SettingComponent";
 
 const Settings = ({ items, setItems, settingItemId, setOpen }) => {
   const [abi, setAbi] = useState<string>(""); // for storing abi
-  const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
+  const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
 
   const setLink = (link: string) => {

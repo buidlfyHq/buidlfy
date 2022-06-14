@@ -14,7 +14,7 @@ const Dashboard: FC = () => {
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [rightClassName, setRightClassName] = useState<string>(""); // for handling sidebar toggle
   const [abi, setAbi] = useState<string>(""); // for storing abi
-  const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
+  const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
 

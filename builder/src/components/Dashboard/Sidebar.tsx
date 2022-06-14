@@ -16,8 +16,8 @@ const Sidebar: FC<{
   setItems: (items: IItems[]) => void;
   abi: string;
   setAbi: (abi: string) => void;
-  showComponent: number[];
-  setShowComponent: (showComponent: number[]) => void;
+  showComponent: any;
+  setShowComponent: (showComponent: any) => void;
 }> = ({
   className,
   setClassName,
