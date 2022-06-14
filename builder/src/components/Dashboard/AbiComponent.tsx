@@ -6,7 +6,6 @@ const AbiComponent: FC<{
   setShowComponent: any;
 }> = ({ abi, showComponent, setShowComponent }) => {
   // Helper component for inputs of methods in ABI
-  console.log(showComponent, "showComponent");
   const abiInputComponent = (name) => (
     <>
       <input className="my-2 px-2 border rounded" placeholder={name} />
@@ -28,18 +27,19 @@ const AbiComponent: FC<{
 
           {/* Method components based on inputs and outputs */}
           {
-            showComponent && showComponent.inputs[0]
-              ? showComponent.inputs.map((input, i) => (
-                  <div className="mt-3">
-                    <h6>Input - {input.name}</h6>
-                    <div className="mb-2 px-2 border rounded mt-1" key={i}>
-                      Select an Element{" "}
-                    </div>
-
-                    {/* <div key={i}>{abiInputComponent(input.type)}</div> */}
+            showComponent &&
+              showComponent.inputs[0] &&
+              showComponent.inputs.map((input, i) => (
+                <div className="mt-3">
+                  <h6>Input - {input.name}</h6>
+                  <div className="mb-2 px-2 border rounded mt-1" key={i}>
+                    Select an Element{" "}
                   </div>
-                ))
-              : null
+
+                  {/* <div key={i}>{abiInputComponent(input.type)}</div> */}
+                </div>
+              ))
+
             //   (
             //   <button
             //     className="my-2 px-4 bg-black rounded text-white"
