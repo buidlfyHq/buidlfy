@@ -18,6 +18,8 @@ const Sidebar: FC<{
   setAbi: (abi: string) => void;
   showComponent: any;
   setShowComponent: (showComponent: any) => void;
+  setSelector;
+  elementConfig;
 }> = ({
   className,
   setClassName,
@@ -27,6 +29,8 @@ const Sidebar: FC<{
   setAbi,
   showComponent,
   setShowComponent,
+  setSelector,
+  elementConfig,
 }) => {
   const uid = new ShortUniqueId();
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
@@ -39,6 +43,7 @@ const Sidebar: FC<{
   const incrementIndex = () => {
     setIndexValue(indexValue + 1);
   };
+  console.log(setSelector, "Set");
 
   return (
     <main
@@ -116,6 +121,11 @@ const Sidebar: FC<{
           setShowComponent={setShowComponent}
         /> */}
       </div>
+      {/* example contract element */}
+      {/* <div onClick={() => setSelector(true)}>
+        {elementConfig.name}
+        {elementConfig.id}
+      </div> */}
 
       {/* Components */}
       <div className="px-6 py-3 mt-10">

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import SettingComponent from "./SettingComponent";
 
-const Settings = ({ items, setItems, settingItemId, setOpen }) => {
+const Settings = ({
+  items,
+  setItems,
+  settingItemId,
+  setOpen,
+  setSelector,
+  elementConfig,
+}) => {
   const [abi, setAbi] = useState<string>(""); // for storing abi
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
@@ -232,6 +239,8 @@ const Settings = ({ items, setItems, settingItemId, setOpen }) => {
           setAbi={setAbi}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
         />
       ) : null}
     </>

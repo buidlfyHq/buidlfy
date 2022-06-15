@@ -46,6 +46,8 @@ export default function SettingComponent({
   setAbi,
   showComponent,
   setShowComponent,
+  setSelector,
+  elementConfig,
 }) {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
@@ -193,6 +195,10 @@ export default function SettingComponent({
                           setAbi={setAbi}
                           showComponent={showComponent}
                           setShowComponent={setShowComponent}
+                          setSelector={setSelector}
+                          elementConfig={elementConfig}
+                          selector={undefined}
+                          setElementConfig={undefined}
                         />
                       </div>
                     </div>

@@ -1,11 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 const AbiComponent: FC<{
   abi: string;
   showComponent: any;
   setShowComponent: any;
-}> = ({ abi, showComponent, setShowComponent }) => {
+  setSelector;
+  elementConfig;
+}> = ({ abi, showComponent, setShowComponent, setSelector, elementConfig }) => {
   // Helper component for inputs of methods in ABI
+  console.log(setSelector, "selector");
   const abiInputComponent = (name) => (
     <>
       <input className="my-2 px-2 border rounded" placeholder={name} />
@@ -18,10 +21,15 @@ const AbiComponent: FC<{
       </button> */}
     </>
   );
+  const [selectedElement, setSelectedElement] = useState();
   return (
     <>
       {showComponent ? (
         <div>
+          {/* <div onClick={() => setSelector(true)}>
+            {elementConfig.name}
+            {elementConfig.id}
+          </div> */}
           {/* Show components on button click */}
           {/* {showComponent && showComponent.includes(i) && ( */}
 
@@ -32,9 +40,29 @@ const AbiComponent: FC<{
               showComponent.inputs.map((input, i) => (
                 <div className="mt-3">
                   <h6>Input - {input.name}</h6>
-                  <div className="mb-2 px-2 border rounded mt-1" key={i}>
-                    Select an Element{" "}
-                  </div>
+                  {selectedElement == i ? (
+                    <div
+                      onClick={() => {
+                        setSelectedElement(i);
+                        setSelector(true);
+                      }}
+                      className="mb-2 px-2 border rounded mt-1"
+                      key={i}
+                    >
+                      {elementConfig.name} - {elementConfig.id}
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => {
+                        setSelectedElement(i);
+                        setSelector(true);
+                      }}
+                      className="mb-2 px-2 border rounded mt-1"
+                      key={i}
+                    >
+                      Select an Element
+                    </div>
+                  )}
 
                   {/* <div key={i}>{abiInputComponent(input.type)}</div> */}
                 </div>
@@ -55,9 +83,29 @@ const AbiComponent: FC<{
             showComponent.outputs.map((output, i) => (
               <div key={i} className="mt-3">
                 <h6>Output - {output.name}</h6>
-                <div className="mb-2 px-2 border rounded mt-1" key={i}>
-                  Select an Element{" "}
-                </div>
+                {selectedElement == i ? (
+                  <div
+                    onClick={() => {
+                      setSelectedElement(i);
+                      setSelector(true);
+                    }}
+                    className="mb-2 px-2 border rounded mt-1"
+                    key={i}
+                  >
+                    {elementConfig.name} - {elementConfig.id}
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => {
+                      setSelectedElement(i);
+                      setSelector(true);
+                    }}
+                    className="mb-2 px-2 border rounded mt-1"
+                    key={i}
+                  >
+                    Select an Element
+                  </div>
+                )}
                 {/* <input
                         className="mb-2 px-2 border rounded"
                         placeholder={output.type}

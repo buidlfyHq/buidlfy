@@ -17,7 +17,12 @@ const Dashboard: FC = () => {
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
-
+  // for selecting an element for contract
+  const [selector, setSelector] = useState(false);
+  const [elementConfig, setElementConfig] = useState({
+    name: "Select an element",
+    id: "",
+  });
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -45,6 +50,8 @@ const Dashboard: FC = () => {
         setAbi={setAbi}
         showComponent={showComponent}
         setShowComponent={setShowComponent}
+        setSelector={setSelector}
+        elementConfig={elementConfig}
       />
 
       <section className="flex-1">
@@ -61,6 +68,9 @@ const Dashboard: FC = () => {
           className={className}
           setOpenSetting={setOpenSetting}
           setSettingItemId={setSettingItemId}
+          selector={selector}
+          setSelector={setSelector}
+          setElementConfig={setElementConfig}
         />
       </section>
 
@@ -71,6 +81,8 @@ const Dashboard: FC = () => {
         setAbi={setAbi}
         showComponent={showComponent}
         setShowComponent={setShowComponent}
+        setSelector={setSelector}
+        elementConfig={elementConfig}
       />
 
       {/* Settings */}
@@ -80,6 +92,8 @@ const Dashboard: FC = () => {
           setItems={setItems}
           settingItemId={settingItemId}
           setOpen={setOpenSetting}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
         />
       )}
     </main>
