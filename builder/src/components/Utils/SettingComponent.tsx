@@ -39,7 +39,7 @@ export default function SettingComponent({
   fontSize = 16,
   setFontSize = null,
   item = {},
-  items = [],
+  items,
   value,
   setLink = null,
   abi,
@@ -48,6 +48,7 @@ export default function SettingComponent({
   setShowComponent,
   setSelector,
   elementConfig,
+  setElementConfig,
 }) {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
@@ -66,7 +67,6 @@ export default function SettingComponent({
   }, [link]);
 
   const handleTextChange = (e: any, Id: string) => {
-    console.log(e, "e");
     setTextVal(e.target.value);
     if (Id === null) {
       setValue(e.target.value);
@@ -76,7 +76,6 @@ export default function SettingComponent({
   const handleLinkChange = (e: any, Id: string) => {
     setLinkVal(e.target.value);
   };
-
   return (
     <>
       <div className="rounded-[8px] py-2 px-4 cursor-pointer relative">
@@ -136,8 +135,14 @@ export default function SettingComponent({
                         className={openTab === 1 ? "block" : "hidden"}
                         id="link1"
                       >
+                        <h3 className="mb-3 ml-8">
+                          Component -{" "}
+                          <span className="font-bold">{items.name}</span>
+                        </h3>
+
                         <div className="flex items-center px-3 mt-1 text-black">
                           <RiText className="text-[18px] mr-3" />
+
                           <input
                             name={Id}
                             value={textVal}
@@ -158,7 +163,6 @@ export default function SettingComponent({
                             placeholder="URL..."
                           />
                         </div>
-
                         <FontStyleComponent
                           bold={bold}
                           italic={italic}
@@ -198,7 +202,7 @@ export default function SettingComponent({
                           setSelector={setSelector}
                           elementConfig={elementConfig}
                           selector={undefined}
-                          setElementConfig={undefined}
+                          setElementConfig={setElementConfig}
                         />
                       </div>
                     </div>

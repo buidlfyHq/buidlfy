@@ -43,7 +43,6 @@ const Sidebar: FC<{
   const incrementIndex = () => {
     setIndexValue(indexValue + 1);
   };
-  console.log(setSelector, "Set");
 
   return (
     <main

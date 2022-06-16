@@ -12,7 +12,14 @@ const RightSidebar: FC<{
   setShowComponent: (showComponent: any) => void;
   setSelector;
   elementConfig;
-}> = ({ rightClassName, setRightClassName, setSelector, elementConfig }) => {
+  setElementConfig;
+}> = ({
+  rightClassName,
+  setRightClassName,
+  setSelector,
+  elementConfig,
+  setElementConfig,
+}) => {
   const [items, setItems] = useState([]); // for storing components
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
   const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
@@ -47,6 +54,7 @@ const RightSidebar: FC<{
             setOpen={setOpenSetting}
             setSelector={setSelector}
             elementConfig={elementConfig}
+            setElementConfig={setElementConfig}
           />
         )}
       </>

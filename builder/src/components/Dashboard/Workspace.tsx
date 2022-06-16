@@ -92,7 +92,7 @@ const Workspace: FC<{
                     } else {
                       // for updating selector with item name and item id
                       setSelector(false);
-                      setElementConfig({ name: item.name, id: i });
+                      setElementConfig([{ name: item.name, id: i }]);
                     }
                   }}
                   className={`justify-center transition-colors duration-150 ease-in-out rounded-lg ${
