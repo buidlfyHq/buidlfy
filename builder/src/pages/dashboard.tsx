@@ -18,10 +18,9 @@ const Dashboard: FC = () => {
   const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
   // for selecting an element for contract
-  const [selector, setSelector] = useState(false);
-  const [elementConfig, setElementConfig] = useState([
-    { name: "Hover over an element", id: "", show: false },
-  ]);
+  const [selector, setSelector] = useState(null);
+  const [elementConfig, setElementConfig] = useState({});
+
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -69,6 +68,7 @@ const Dashboard: FC = () => {
           setSettingItemId={setSettingItemId}
           selector={selector}
           setSelector={setSelector}
+          elementConfig={elementConfig}
           setElementConfig={setElementConfig}
         />
       </section>

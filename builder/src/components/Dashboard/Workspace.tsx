@@ -18,6 +18,7 @@ const Workspace: FC<{
   setOpenSetting: (open: boolean) => void;
   selector;
   setSelector;
+  elementConfig;
   setElementConfig;
 }> = ({
   abi,
@@ -30,6 +31,7 @@ const Workspace: FC<{
   setSettingItemId,
   selector,
   setSelector,
+  elementConfig,
   setElementConfig,
 }) => {
   // on layout change
@@ -86,13 +88,16 @@ const Workspace: FC<{
                   // open item setting on click
                   onClick={() => {
                     // checks if the selector is active
-                    if (selector === false) {
+                    if (selector === null) {
                       setOpenSetting(true);
                       setSettingItemId(i);
                     } else {
                       // for updating selector with item name and item id
-                      setSelector(false);
-                      setElementConfig([{ name: item.name, id: i }]);
+                      setElementConfig({
+                        ...elementConfig,
+                        [selector]: { name: item.name, id: i },
+                      });
+                      setSelector(null);
                     }
                   }}
                   className={`justify-center transition-colors duration-150 ease-in-out rounded-lg ${
