@@ -11,7 +11,11 @@ import HeadingTwo from "../CustomComponents/HeadingTwo";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
-const RenderItem: FC<{ item: IItems }> = ({ item }) => {
+const RenderItem: FC<{
+  item: IItems;
+  inputValue: object;
+  setInputValue: (inputValue: object) => void;
+}> = ({ item, inputValue, setInputValue }) => {
   switch (item.name) {
     case "Container":
       return <Container />;
@@ -26,6 +30,9 @@ const RenderItem: FC<{ item: IItems }> = ({ item }) => {
           fontSize={item.styles.fontSize}
           value={item.value}
           link={item.link}
+          contractFunction={item.contract}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
         />
       );
     case "Text":
@@ -94,7 +101,13 @@ const RenderItem: FC<{ item: IItems }> = ({ item }) => {
         />
       );
     case "Input":
-      return <Input />;
+      return (
+        <Input
+          contractFunction={item.contract}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+        />
+      );
     case "Divider":
       return <Divider />;
     default:

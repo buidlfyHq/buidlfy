@@ -1,7 +1,11 @@
 import React, { FC } from "react";
 import "styles/Components.css";
 
-const Input: FC = () => {
+const Input: FC<{
+  contractFunction;
+  inputValue: object;
+  setInputValue: (inputValue: object) => void;
+}> = ({ contractFunction, inputValue, setInputValue }) => {
   return (
     <div className="h-full flex justify-center items-center">
       <input
@@ -9,6 +13,17 @@ const Input: FC = () => {
         id="input"
         type="text"
         placeholder="Input"
+        value={
+          Object.entries(inputValue).filter(
+            (m) => m[0] === contractFunction.inputName
+          )[1]
+        }
+        onChange={(e) => {
+          setInputValue({
+            ...inputValue,
+            [contractFunction.inputName]: e.target.value,
+          });
+        }}
       />
     </div>
   );

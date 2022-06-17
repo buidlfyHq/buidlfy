@@ -65,7 +65,7 @@ module.exports = {
       i: "3xSvTp",
       link: "",
       minW: 1,
-      name: "Heading 2",
+      name: "Input",
       styles: {
         color: { r: "0", g: "0", b: "0", a: "100" },
         deleteComponent: 0,
@@ -75,10 +75,11 @@ module.exports = {
         justifyContent: "center",
         textDecoration: "none",
       },
-      value: "Redefining how dapps are built",
+      value: "",
       w: 5,
       x: 5,
       y: 1,
+      contract: { name: "createCampaign", inputName: "input1" },
     },
     {
       h: 1,
@@ -105,7 +106,7 @@ module.exports = {
       i: "BIfwYY",
       link: "",
       minW: 1,
-      name: "Heading 2",
+      name: "Input",
       styles: {
         color: { r: "0", g: "0", b: "0", a: "100" },
         deleteComponent: 0,
@@ -115,10 +116,11 @@ module.exports = {
         justifyContent: "center",
         textDecoration: "none",
       },
-      value: "Introducing",
+      value: "",
       w: 5,
       x: 0,
       y: 1,
+      contract: { name: "createCampaign", inputName: "input0" },
     },
     {
       h: 1,
@@ -139,6 +141,7 @@ module.exports = {
       w: 10,
       x: 0,
       y: 3,
+      contract: { name: "createCampaign", inputs: ["input0", "input1"] },
     },
     {
       h: 1,

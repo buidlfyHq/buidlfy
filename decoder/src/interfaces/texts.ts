@@ -7,4 +7,7 @@ export default interface ITexts {
   fontSize: number;
   value: string;
   link: string;
+  contractFunction?: any;
+  inputValue?: object;
+  setInputValue?: (inputValue: object) => void;
 }
