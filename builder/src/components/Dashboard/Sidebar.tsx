@@ -99,32 +99,7 @@ const Sidebar: FC<{
           </span>{" "}
           Site Settings
         </div>
-        {/* <button
-          className="flex flex-row items-center mt-1 cursor-pointer"
-          onClick={() => setIsOpen(true)}
-        >
-          <span className="mx-2">
-            <FaFileContract />
-          </span>{" "}
-          Connect Contract
-          <Modal
-            abi={abi}
-            setAbi={setAbi}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          />
-        </button>
-        <AbiMethods
-          abi={abi}
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
-        /> */}
       </div>
-      {/* example contract element */}
-      {/* <div onClick={() => setSelector(true)}>
-        {elementConfig.name}
-        {elementConfig.id}
-      </div> */}
 
       {/* Components */}
       <div className="px-6 py-3 mt-10">
