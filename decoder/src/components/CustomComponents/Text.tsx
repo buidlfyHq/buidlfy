@@ -11,6 +11,9 @@ const Text: FC<ITexts> = ({
   fontSize,
   value,
   link,
+  contractFunction,
+  outputValue,
+  setOutputValue,
 }) => {
   return (
     <div
@@ -25,7 +28,23 @@ const Text: FC<ITexts> = ({
       }}
       className="flex items-center justify-center h-full"
     >
-      {value}
+      {contractFunction ? (
+        <>
+          {Object.keys(outputValue)[0] ? (
+            Object.keys(outputValue).map((key, i) => (
+              <div key={i}>
+                {key === contractFunction.outputName && (
+                  <>{outputValue[key][0][0]}</>
+                )}
+              </div>
+            ))
+          ) : (
+            <>{value}</>
+          )}
+        </>
+      ) : (
+        <>{value}</>
+      )}
     </div>
   );
 };

@@ -141,7 +141,11 @@ module.exports = {
       w: 10,
       x: 0,
       y: 3,
-      contract: { name: "createCampaign", inputs: ["input0", "input1"] },
+      contract: {
+        name: "getDeployedCampaigns",
+        inputs: [],
+        outputs: ["output0"],
+      },
     },
     {
       h: 1,
@@ -158,10 +162,11 @@ module.exports = {
         justifyContent: "center",
         textDecoration: "none",
       },
-      value: "Text with Row span 1",
+      value: "Waiting for response...",
       w: 5,
       x: 5,
       y: 4,
+      contract: { name: "createCampaign", outputName: "output0" },
     },
     {
       h: 1,

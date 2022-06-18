@@ -16,6 +16,8 @@ const Button: FC<ITexts> = ({
   contractFunction,
   inputValue,
   setInputValue,
+  outputValue,
+  setOutputValue,
 }) => {
   let provider, signer, contract: Contract;
 
@@ -33,25 +35,37 @@ const Button: FC<ITexts> = ({
     onLoad();
   }, []); // eslint-disable-line
 
+  console.log(outputValue);
+  console.log(contractFunction);
   // call a function in contract
-  const onGet = async (method) => {
-    console.log(inputValue);
+  const onPost = async (method) => {
     onLoad();
-    const args = [];
-    Object.keys(inputValue).map((key) => {
-      contractFunction.inputs.map((input) => {
-        if (key === input) {
-          args.push(inputValue[key]);
-        }
-        return input;
+    if (contractFunction.inputs[0]) {
+      const args = [];
+      Object.keys(inputValue).map((key) => {
+        contractFunction.inputs.map((input) => {
+          if (key === input) {
+            args.push(inputValue[key]);
+          }
+          return input;
+        });
+        return key;
       });
-      return key;
-    });
-    console.log(args);
-    
-
-    // query contract functions --- magic code
-    // await contract.functions[method](...args); // passing an array as a function parameter
+      // query contract functions --- magic code
+      const res = await contract.functions[method](...args); // passing an array as a function parameter
+      console.log(res);
+    }
+    if (contractFunction.outputs[0]) {
+      const res = await contract.functions[method]();
+      contractFunction.outputs.map((output) => {
+        setOutputValue({
+          ...outputValue,
+          [output]: res,
+        });
+        return output;
+      });
+      console.log(outputValue);
+    }
   };
 
   return (
@@ -70,7 +84,7 @@ const Button: FC<ITexts> = ({
         className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
         onClick={() =>
           contractFunction.name
-            ? onGet(contractFunction.name)
+            ? onPost(contractFunction.name)
             : console.log("Clicked")
         }
       >

@@ -8,6 +8,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid l
 
 const Home: FC = () => {
   const [inputValue, setInputValue] = useState<object>({});
+  const [outputValue, setOutputValue] = useState<object>({});
 
   return (
     <section>
@@ -29,6 +30,8 @@ const Home: FC = () => {
                 item={c}
                 inputValue={inputValue}
                 setInputValue={setInputValue}
+                outputValue={outputValue}
+                setOutputValue={setOutputValue}
               />
             </div>
           );

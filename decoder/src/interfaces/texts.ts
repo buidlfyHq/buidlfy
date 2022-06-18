@@ -10,4 +10,6 @@ export default interface ITexts {
   contractFunction?: any;
   inputValue?: object;
   setInputValue?: (inputValue: object) => void;
+  outputValue?: object;
+  setOutputValue?: (outputValue: object) => void;
 }

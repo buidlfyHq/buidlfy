@@ -15,7 +15,9 @@ const RenderItem: FC<{
   item: IItems;
   inputValue: object;
   setInputValue: (inputValue: object) => void;
-}> = ({ item, inputValue, setInputValue }) => {
+  outputValue: object;
+  setOutputValue: (outputValue: object) => void;
+}> = ({ item, inputValue, setInputValue, outputValue, setOutputValue }) => {
   switch (item.name) {
     case "Container":
       return <Container />;
@@ -33,6 +35,8 @@ const RenderItem: FC<{
           contractFunction={item.contract}
           inputValue={inputValue}
           setInputValue={setInputValue}
+          outputValue={outputValue}
+          setOutputValue={setOutputValue}
         />
       );
     case "Text":
@@ -46,6 +50,9 @@ const RenderItem: FC<{
           fontSize={item.styles.fontSize}
           value={item.value}
           link={item.link}
+          contractFunction={item.contract}
+          outputValue={outputValue}
+          setOutputValue={setOutputValue}
         />
       );
     case "Link":
