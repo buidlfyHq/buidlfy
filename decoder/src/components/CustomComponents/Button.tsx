@@ -35,15 +35,14 @@ const Button: FC<ITexts> = ({
     onLoad();
   }, []); // eslint-disable-line
 
-  console.log(outputValue);
-  console.log(contractFunction);
   // call a function in contract
-  const onPost = async (method) => {
+  const onRequest = async (method: string) => {
     onLoad();
+    // contract function with inputs
     if (contractFunction.inputs[0]) {
       const args = [];
       Object.keys(inputValue).map((key) => {
-        contractFunction.inputs.map((input) => {
+        contractFunction.inputs.map((input: string) => {
           if (key === input) {
             args.push(inputValue[key]);
           }
@@ -55,12 +54,13 @@ const Button: FC<ITexts> = ({
       const res = await contract.functions[method](...args); // passing an array as a function parameter
       console.log(res);
     }
+    // contract function without inputs
     if (contractFunction.outputs[0]) {
       const res = await contract.functions[method]();
-      contractFunction.outputs.map((output) => {
+      contractFunction.outputs.map((output, i) => {
         setOutputValue({
           ...outputValue,
-          [output]: res,
+          [output]: res[i],
         });
         return output;
       });
@@ -84,7 +84,7 @@ const Button: FC<ITexts> = ({
         className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
         onClick={() =>
           contractFunction.name
-            ? onPost(contractFunction.name)
+            ? onRequest(contractFunction.name)
             : console.log("Clicked")
         }
       >

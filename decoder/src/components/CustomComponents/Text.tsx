@@ -26,7 +26,7 @@ const Text: FC<ITexts> = ({
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
       }}
-      className="flex items-center justify-center h-full"
+      className="flex items-center justify-center h-full overflow-auto"
     >
       {contractFunction ? (
         <>
@@ -34,7 +34,7 @@ const Text: FC<ITexts> = ({
             Object.keys(outputValue).map((key, i) => (
               <div key={i}>
                 {key === contractFunction.outputName && (
-                  <>{outputValue[key][0][0]}</>
+                  <>{outputValue[key].join(", ")}</>
                 )}
               </div>
             ))
