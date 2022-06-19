@@ -35,11 +35,12 @@ const Button: FC<ITexts> = ({
     onLoad();
   }, []); // eslint-disable-line
 
-  // call a function in contract
+  // execute contract function
   const onRequest = async (method: string) => {
     onLoad();
-    // contract function with inputs
+    // contract functions with inputs
     if (contractFunction.inputs[0]) {
+      // push all the required input values to args
       const args = [];
       Object.keys(inputValue).map((key) => {
         contractFunction.inputs.map((input: string) => {
@@ -50,21 +51,64 @@ const Button: FC<ITexts> = ({
         });
         return key;
       });
-      // query contract functions --- magic code
-      const res = await contract.functions[method](...args); // passing an array as a function parameter
-      console.log(res);
-    }
-    // contract function without inputs
-    if (contractFunction.outputs[0]) {
-      const res = await contract.functions[method]();
-      contractFunction.outputs.map((output, i) => {
+
+
+      let res: object | []; // to store response from contract
+
+      // check state mutability
+      // if non-payable then show transaction hash in popup
+      // if payable then request user to pay the amount and then show transaction hash in popup
+      // if view then display the output directly
+      // NOTE: non-payable and payable cannot have any output
+
+      if (contractFunction.stateMutability === "nonpayable") {
+        // query contract functions --- magic code
+        res = await contract.functions[method](...args); // passing an array as a function parameter
+        console.log(res);
+      } else if (contractFunction.stateMutability === "payable") {
+        // different code ---------------------> FIX
+
+        // var overrideOptions = {
+        //   gasLimit: 250000,
+        //   gasPrice: 9000000000,
+        //   nonce: 0,
+        //   value: ethers.utils.parseEther("1.0"),
+        // };
+
+        // var sendPromise = contract.setValue("Hello World", overrideOptions);
+
+        // ADD: Modal popup with asking user to enter the amount they want to send, and push that value in args
+
+        // query contract functions --- magic code
+        res = await contract.functions[method](...args); // passing an array as a function parameter
+        console.log(res);
+      }
+
+      // contract functions with outputs
+      if (contractFunction.outputs[0]) {
+        contractFunction.outputs.map((output: string, i: number) => {
+          setOutputValue({
+            ...outputValue,
+            [output]: res[i],
+          });
+          return output;
+        });
+      } else {
+        // contract functions without outputs
+        // show popup with transaction hash
+        // res.hash
+      }
+    } else {
+      // contract functions without inputs
+      // state mutability is view always
+      const res: [] = await contract.functions[method]();
+      contractFunction.outputs.map((output: string, i: number) => {
         setOutputValue({
           ...outputValue,
           [output]: res[i],
         });
         return output;
       });
-      console.log(outputValue);
     }
   };
 

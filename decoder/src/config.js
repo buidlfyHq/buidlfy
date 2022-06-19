@@ -143,6 +143,7 @@ module.exports = {
       y: 3,
       contract: {
         name: "getDeployedCampaigns",
+        stateMutability: "view",
         inputs: [],
         outputs: ["output0"],
       },
