@@ -3,11 +3,7 @@ import { ethers, Contract } from "ethers";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
 import config from "config";
-
-interface IOutput {
-  name: string;
-  value: any;
-}
+import { setValue } from "../Utils/SetValue";
 
 const Button: FC<ITexts> = ({
   bold,
@@ -40,24 +36,6 @@ const Button: FC<ITexts> = ({
     onLoad();
   }, []); // eslint-disable-line
 
-  const onSetOutput = (outputName, res) => {
-    const searchExistingOutput = outputValue.filter(
-      (output: IOutput) => output.name === outputName
-    );
-
-    if (!searchExistingOutput.length || !outputValue.length) {
-      return [...outputValue, { name: outputName, value: res }];
-    }
-
-    const updateOutputValue = outputValue.map((output: IOutput) => {
-      if (output.name === outputName) {
-        return { ...output, value: res };
-      }
-      return output;
-    });
-    return updateOutputValue;
-  };
-
   // execute contract function
   const onRequest = async (method: string) => {
     onLoad();
@@ -76,7 +54,7 @@ const Button: FC<ITexts> = ({
         return input;
       });
 
-      let res; // to store response from contract
+      let receipt; // to store response from contract
 
       // check state mutability
       // if non-payable then show transaction hash in popup
@@ -86,8 +64,8 @@ const Button: FC<ITexts> = ({
 
       if (contractFunction.stateMutability === "nonpayable") {
         // query contract functions --- magic code
-        res = await contract.functions[method](...args); // passing an array as a function parameter
-        const receipt = await res.wait();
+        const res = await contract.functions[method](...args); // passing an array as a function parameter
+        receipt = await res.wait();
         console.log(receipt);
       } else if (contractFunction.stateMutability === "payable") {
         // different code ---------------------> FIX
@@ -104,28 +82,33 @@ const Button: FC<ITexts> = ({
         // ADD: Modal popup with asking user to enter the amount they want to send, and push that value in args
 
         // query contract functions --- magic code
-        res = await contract.functions[method](...args); // passing an array as a function parameter
-        const receipt = await res.wait();
+        const res = await contract.functions[method](...args); // passing an array as a function parameter
+        receipt = await res.wait();
+        console.log(receipt);
+      } else if (contractFunction.stateMutability === "view") {
+        const res = await contract.functions[method](...args); // passing an array as a function parameter
+        receipt = await res.wait();
         console.log(receipt);
       }
-
       // contract functions with outputs
-      if (contractFunction.outputs[0]) {
+      if (contractFunction.outputs.length) {
         contractFunction.outputs.map((output: string, i: number) => {
-          setOutputValue(onSetOutput(output, res[i]));
+          setOutputValue(setValue(outputValue, output, receipt[i]));
           return output;
         });
-      } else {
-        // contract functions without outputs
-        // show popup with transaction hash
-        // res.hash
+      }
+
+      if (receipt.transactionHash) {
+        alert('Transaction hash: ' + receipt.transactionHash);
       }
     } else {
       // contract functions without inputs
       // state mutability is view always
-      const res: [] = await contract.functions[method]();
+      const receipt = await contract.functions[method]();
+      console.log(receipt);
+      
       contractFunction.outputs.map((output: string, i: number) => {
-        setOutputValue(onSetOutput(output, res[i]));
+        setOutputValue(setValue(outputValue, output, receipt[i]));
         return output;
       });
     }

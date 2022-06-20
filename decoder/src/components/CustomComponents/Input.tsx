@@ -1,9 +1,10 @@
-import { FC, ChangeEvent } from "react";
+import { FC } from "react";
 import "styles/Components.css";
+import { setValue } from "../Utils/SetValue";
 
 interface IInput {
   name: string;
-  value: string;
+  value: any;
 }
 
 const Input: FC<{
@@ -18,27 +19,6 @@ const Input: FC<{
     return requiredValue ? requiredValue.value : "";
   };
 
-  const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const searchExistingInput = inputValue.filter(
-      (input: IInput) => input.name === contractFunction.inputName
-    );
-
-    if (!searchExistingInput.length || !inputValue.length) {
-      return [
-        ...inputValue,
-        { name: contractFunction.inputName, value: e.target.value },
-      ];
-    }
-
-    const updateInputValue = inputValue.map((input: IInput) => {
-      if (input.name === contractFunction.inputName) {
-        return { ...input, value: e.target.value };
-      }
-      return input;
-    });
-    return updateInputValue;
-  };
-
   return (
     <div className="h-full flex justify-center items-center">
       <input
@@ -47,7 +27,11 @@ const Input: FC<{
         type="text"
         placeholder="Input"
         value={getValue(inputValue)}
-        onChange={(e) => setInputValue(onValueChange(e))}
+        onChange={(e) =>
+          setInputValue(
+            setValue(inputValue, contractFunction.inputName, e.target.value)
+          )
+        }
       />
     </div>
   );

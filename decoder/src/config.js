@@ -142,7 +142,7 @@ module.exports = {
       x: 0,
       y: 3,
       contract: {
-        name: "getDeployedCampaigns",
+        name: "getString",
         stateMutability: "view",
         inputs: [],
         outputs: ["output0"],
@@ -233,32 +233,69 @@ module.exports = {
   contract: {
     abi: [
       {
-        inputs: [{ internalType: "uint256", name: "minimum", type: "uint256" }],
-        name: "createCampaign",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        name: "deployedCampaigns",
-        outputs: [{ internalType: "address", name: "", type: "address" }],
+        inputs: [],
+        name: "getInteger",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
         stateMutability: "view",
         type: "function",
       },
       {
         inputs: [],
-        name: "getDeployedCampaigns",
-        outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
+        name: "getStaticValues",
+        outputs: [
+          { internalType: "uint256", name: "", type: "uint256" },
+          { internalType: "string", name: "", type: "string" },
+        ],
+        stateMutability: "pure",
+        type: "function",
+      },
+      {
+        inputs: [],
+        name: "getStoredValues",
+        outputs: [
+          { internalType: "uint256", name: "", type: "uint256" },
+          { internalType: "string", name: "", type: "string" },
+        ],
         stateMutability: "view",
         type: "function",
       },
+      {
+        inputs: [],
+        name: "getString",
+        outputs: [{ internalType: "string", name: "", type: "string" }],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [
+          { internalType: "uint256", name: "x", type: "uint256" },
+          { internalType: "string", name: "_storedString", type: "string" },
+        ],
+        name: "set",
+        outputs: [
+          { internalType: "uint256", name: "", type: "uint256" },
+          { internalType: "string", name: "", type: "string" },
+        ],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [{ internalType: "uint256", name: "x", type: "uint256" }],
+        name: "setInteger",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [
+          { internalType: "string", name: "_storedString", type: "string" },
+        ],
+        name: "setString",
+        outputs: [{ internalType: "string", name: "", type: "string" }],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
     ],
-    address: "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E",
-    functionName: [
-      "createCampaign",
-      "deployedCampaigns",
-      "getDeployedCampaigns",
-    ],
+    address: "0xF4AfCa97F54d2E5f9Ed7CF153229DD1E211f6e95",
   },
 };
