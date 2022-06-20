@@ -38,7 +38,11 @@ const Text: FC<ITexts> = ({
             outputValue.map((output: IOutput, index: number) => (
               <div key={index}>
                 {output.name === contractFunction.outputName && (
-                  <>{output.value}</>
+                  <>
+                    {typeof output.value === "string"
+                      ? output.value
+                      : output.value.join(", ")}
+                  </>
                 )}
               </div>
             ))
