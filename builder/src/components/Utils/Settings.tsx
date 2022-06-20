@@ -9,6 +9,8 @@ const Settings = ({
   setSelector,
   elementConfig,
   setElementConfig,
+  openTab,
+  setOpenTab,
 }) => {
   const [abi, setAbi] = useState<string>(""); // for storing abi
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
@@ -244,6 +246,8 @@ const Settings = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          openTab={openTab}
+          setOpenTab={setOpenTab}
         />
       ) : null}
     </>

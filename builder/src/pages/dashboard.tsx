@@ -19,6 +19,7 @@ const Dashboard: FC = () => {
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
   // for selecting an element for contract
   const [selector, setSelector] = useState(null);
+  const [openTab, setOpenTab] = React.useState(1);
   const [elementConfig, setElementConfig] = useState({});
 
   useEffect(() => {
@@ -70,6 +71,7 @@ const Dashboard: FC = () => {
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          setOpenTab={setOpenTab}
         />
       </section>
 
@@ -83,6 +85,8 @@ const Dashboard: FC = () => {
         setSelector={setSelector}
         elementConfig={elementConfig}
         setElementConfig={setElementConfig}
+        openTab={openTab}
+        setOpenTab={setOpenTab}
       />
 
       {/* Settings */}
@@ -95,6 +99,8 @@ const Dashboard: FC = () => {
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          openTab={openTab}
+          setOpenTab={setOpenTab}
         />
       )}
     </main>

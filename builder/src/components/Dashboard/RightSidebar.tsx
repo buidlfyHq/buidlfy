@@ -13,12 +13,16 @@ const RightSidebar: FC<{
   setSelector;
   elementConfig;
   setElementConfig;
+  openTab;
+  setOpenTab;
 }> = ({
   rightClassName,
   setRightClassName,
   setSelector,
   elementConfig,
   setElementConfig,
+  openTab,
+  setOpenTab,
 }) => {
   const [items, setItems] = useState([]); // for storing components
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
@@ -55,6 +59,8 @@ const RightSidebar: FC<{
             setSelector={setSelector}
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
+            openTab={openTab}
+            setOpenTab={setOpenTab}
           />
         )}
       </>

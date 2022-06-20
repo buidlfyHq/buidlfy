@@ -20,6 +20,7 @@ const Workspace: FC<{
   setSelector;
   elementConfig;
   setElementConfig;
+  setOpenTab;
 }> = ({
   abi,
   showComponent,
@@ -33,6 +34,7 @@ const Workspace: FC<{
   setSelector,
   elementConfig,
   setElementConfig,
+  setOpenTab,
 }) => {
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -91,6 +93,7 @@ const Workspace: FC<{
                     if (selector === null) {
                       setOpenSetting(true);
                       setSettingItemId(i);
+                      setOpenTab(1);
                     } else {
                       // for updating selector with item name and item id
                       setElementConfig({

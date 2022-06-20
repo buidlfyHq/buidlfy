@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import ShortUniqueId from "short-unique-id";
+import { AiOutlineEdit } from "react-icons/ai";
 
 const AbiComponent: FC<{
   abi: string;
@@ -18,29 +19,77 @@ const AbiComponent: FC<{
   elementConfig,
   setElementConfig,
 }) => {
+  const handleSave = () => {};
   return (
     <>
       <div>
         {showComponent ? (
           <>
-            {showComponent.inputs[0] &&
-              showComponent.inputs.map((input, i) => {
-                // const uid = new ShortUniqueId();
-                // const option = uid();
-                const selectedId = "input" + i;
+            <>
+              {showComponent.inputs[0] &&
+                showComponent.inputs.map((input, i) => {
+                  // const uid = new ShortUniqueId();
+                  // const option = uid();
+                  const selectedId = "input" + i;
+                  const objects = Object.keys(elementConfig);
+                  const filterObjects = objects.filter(
+                    (key) => key === selectedId
+                  );
+                  return (
+                    <div className="mt-3">
+                      <h6>Input - {input.name}</h6>
+                      <div
+                        key={i}
+                        className="mb-2 px-2 border rounded mt-1 h-7"
+                        onClick={() => setSelector(selectedId)}
+                      >
+                        <>
+                          {objects.length == 0 ? (
+                            <span>Select An Element</span>
+                          ) : (
+                            <>
+                              {filterObjects.length == 0 ? (
+                                <span>Select An Element</span>
+                              ) : (
+                                filterObjects.map((key) => (
+                                  <>
+                                    {key === selectedId && (
+                                      <span className="flex">
+                                        <span className="flex-1">
+                                          {elementConfig[key].name} -{" "}
+                                          {elementConfig[key].id}
+                                        </span>
+                                        <AiOutlineEdit className="mt-1.5" />
+                                      </span>
+                                    )}
+                                  </>
+                                ))
+                              )}
+                            </>
+                          )}
+                        </>
+                      </div>
+                    </div>
+                  );
+                })}
+            </>
+
+            {showComponent.outputs[0] &&
+              showComponent.outputs.map((output, i) => {
+                const selectedId = "output" + i;
                 const objects = Object.keys(elementConfig);
                 const filterObjects = objects.filter(
                   (key) => key === selectedId
                 );
                 return (
-                  <div className="mt-3">
-                    <h6>Input - {input.name}</h6>
-                    <div
-                      key={i}
-                      className="mb-2 px-2 border rounded mt-1 h-7"
-                      onClick={() => setSelector(selectedId)}
-                    >
-                      <>
+                  <div key={i} className="mt-3">
+                    <h6>Output - {output.name}</h6>
+                    <>
+                      <div
+                        key={i}
+                        className="mb-2 px-2 border rounded mt-1 h-7"
+                        onClick={() => setSelector(selectedId)}
+                      >
                         {objects.length == 0 ? (
                           <span>Select An Element</span>
                         ) : (
@@ -51,9 +100,12 @@ const AbiComponent: FC<{
                               filterObjects.map((key) => (
                                 <>
                                   {key === selectedId && (
-                                    <span>
-                                      {elementConfig[key].name} -{" "}
-                                      {elementConfig[key].id}
+                                    <span className="flex">
+                                      <span className="flex-1">
+                                        {elementConfig[key].name} -{" "}
+                                        {elementConfig[key].id}
+                                      </span>
+                                      <AiOutlineEdit className="mt-1.5" />
                                     </span>
                                   )}
                                 </>
@@ -61,54 +113,19 @@ const AbiComponent: FC<{
                             )}
                           </>
                         )}
-                      </>
-                    </div>
+                      </div>
+                    </>
                   </div>
                 );
               })}
+            <button
+              onClick={handleSave}
+              className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Save
+            </button>
           </>
         ) : null}
-
-        {showComponent &&
-          showComponent.outputs[0] &&
-          showComponent.outputs.map((output, i) => {
-            const selectedId = "output" + i;
-            const objects = Object.keys(elementConfig);
-            const filterObjects = objects.filter((key) => key === selectedId);
-            return (
-              <div key={i} className="mt-3">
-                <h6>Output - {output.name}</h6>
-                <>
-                  <div
-                    key={i}
-                    className="mb-2 px-2 border rounded mt-1 h-7"
-                    onClick={() => setSelector(selectedId)}
-                  >
-                    {objects.length == 0 ? (
-                      <span>Select An Element</span>
-                    ) : (
-                      <>
-                        {filterObjects.length == 0 ? (
-                          <span>Select An Element</span>
-                        ) : (
-                          filterObjects.map((key) => (
-                            <>
-                              {key === selectedId && (
-                                <span>
-                                  {elementConfig[key].name} -{" "}
-                                  {elementConfig[key].id}
-                                </span>
-                              )}
-                            </>
-                          ))
-                        )}
-                      </>
-                    )}
-                  </div>
-                </>
-              </div>
-            );
-          })}
       </div>
     </>
   );

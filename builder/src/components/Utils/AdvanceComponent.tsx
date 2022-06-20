@@ -69,9 +69,6 @@ export default function AdvanceComponent({
         setElementConfig={setElementConfig}
         selector={selector}
       />
-      <button className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Save
-      </button>
     </>
   );
 }

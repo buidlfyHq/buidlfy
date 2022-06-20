@@ -49,10 +49,12 @@ export default function SettingComponent({
   setSelector,
   elementConfig,
   setElementConfig,
+  openTab,
+  setOpenTab,
 }) {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
-  const [openTab, setOpenTab] = React.useState(1);
+  // const [openTab, setOpenTab] = React.useState(1);
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
 
   const Id: string = id;
@@ -137,7 +139,9 @@ export default function SettingComponent({
                       >
                         <h3 className="mb-3 ml-8">
                           Component -{" "}
-                          <span className="font-bold">{items.name}</span>
+                          {items ? (
+                            <span className="font-bold">{items.name}</span>
+                          ) : null}
                         </h3>
 
                         <div className="flex items-center px-3 mt-1 text-black">
