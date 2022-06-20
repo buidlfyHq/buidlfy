@@ -7,8 +7,8 @@ import RenderItem from "components/Home/RenderItem";
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Home: FC = () => {
-  const [inputValue, setInputValue] = useState<object>({});
-  const [outputValue, setOutputValue] = useState<object>({});
+  const [inputValue, setInputValue] = useState<object[]>([]);
+  const [outputValue, setOutputValue] = useState<object[]>([]);
 
   return (
     <section>

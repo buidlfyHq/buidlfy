@@ -1,6 +1,11 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
+
+interface IOutput {
+  name: string;
+  value: any;
+}
 
 const Text: FC<ITexts> = ({
   bold,
@@ -13,7 +18,6 @@ const Text: FC<ITexts> = ({
   link,
   contractFunction,
   outputValue,
-  setOutputValue,
 }) => {
   return (
     <div
@@ -30,11 +34,11 @@ const Text: FC<ITexts> = ({
     >
       {contractFunction ? (
         <>
-          {Object.keys(outputValue)[0] ? (
-            Object.keys(outputValue).map((key, i) => (
-              <div key={i}>
-                {key === contractFunction.outputName && (
-                  <>{outputValue[key].join(", ")}</>
+          {outputValue.length ? (
+            outputValue.map((output: IOutput, index: number) => (
+              <div key={index}>
+                {output.name === contractFunction.outputName && (
+                  <>{output.value.join(", ")}</>
                 )}
               </div>
             ))

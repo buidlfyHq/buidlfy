@@ -8,8 +8,8 @@ export default interface ITexts {
   value: string;
   link: string;
   contractFunction?: any;
-  inputValue?: object;
-  setInputValue?: (inputValue: object) => void;
-  outputValue?: object;
-  setOutputValue?: (outputValue: object) => void;
+  inputValue?: object[];
+  setInputValue?: (inputValue: object[]) => void;
+  outputValue?: object[];
+  setOutputValue?: (outputValue: object[]) => void;
 }

@@ -13,10 +13,10 @@ import IItems from "interfaces/items";
 
 const RenderItem: FC<{
   item: IItems;
-  inputValue: object;
-  setInputValue: (inputValue: object) => void;
-  outputValue: object;
-  setOutputValue: (outputValue: object) => void;
+  inputValue: object[];
+  setInputValue: (inputValue: object[]) => void;
+  outputValue: object[];
+  setOutputValue: (outputValue: object[]) => void;
 }> = ({ item, inputValue, setInputValue, outputValue, setOutputValue }) => {
   switch (item.name) {
     case "Container":
@@ -52,7 +52,6 @@ const RenderItem: FC<{
           link={item.link}
           contractFunction={item.contract}
           outputValue={outputValue}
-          setOutputValue={setOutputValue}
         />
       );
     case "Link":

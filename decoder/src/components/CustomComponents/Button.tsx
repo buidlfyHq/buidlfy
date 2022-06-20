@@ -4,6 +4,11 @@ import ITexts from "interfaces/texts";
 import "styles/Components.css";
 import config from "config";
 
+interface IOutput {
+  name: string;
+  value: any;
+}
+
 const Button: FC<ITexts> = ({
   bold,
   italic,
@@ -35,25 +40,43 @@ const Button: FC<ITexts> = ({
     onLoad();
   }, []); // eslint-disable-line
 
+  const onSetOutput = (outputName, res) => {
+    const searchExistingOutput = outputValue.filter(
+      (output: IOutput) => output.name === outputName
+    );
+
+    if (!searchExistingOutput.length || !outputValue.length) {
+      return [...outputValue, { name: outputName, value: res }];
+    }
+
+    const updateOutputValue = outputValue.map((output: IOutput) => {
+      if (output.name === outputName) {
+        return { ...output, value: res };
+      }
+      return output;
+    });
+    return updateOutputValue;
+  };
+
   // execute contract function
   const onRequest = async (method: string) => {
     onLoad();
     // contract functions with inputs
-    if (contractFunction.inputs[0]) {
+    if (contractFunction.inputs.length) {
       // push all the required input values to args
       const args = [];
-      Object.keys(inputValue).map((key) => {
-        contractFunction.inputs.map((input: string) => {
-          if (key === input) {
-            args.push(inputValue[key]);
+
+      inputValue.map((input: { name: string; value: string }) => {
+        contractFunction.inputs.map((inputName: string) => {
+          if (input.name === inputName) {
+            args.push(input.value);
           }
-          return input;
+          return inputName;
         });
-        return key;
+        return input;
       });
 
-
-      let res: object | []; // to store response from contract
+      let res; // to store response from contract
 
       // check state mutability
       // if non-payable then show transaction hash in popup
@@ -64,7 +87,8 @@ const Button: FC<ITexts> = ({
       if (contractFunction.stateMutability === "nonpayable") {
         // query contract functions --- magic code
         res = await contract.functions[method](...args); // passing an array as a function parameter
-        console.log(res);
+        const receipt = await res.wait();
+        console.log(receipt);
       } else if (contractFunction.stateMutability === "payable") {
         // different code ---------------------> FIX
 
@@ -81,16 +105,14 @@ const Button: FC<ITexts> = ({
 
         // query contract functions --- magic code
         res = await contract.functions[method](...args); // passing an array as a function parameter
-        console.log(res);
+        const receipt = await res.wait();
+        console.log(receipt);
       }
 
       // contract functions with outputs
       if (contractFunction.outputs[0]) {
         contractFunction.outputs.map((output: string, i: number) => {
-          setOutputValue({
-            ...outputValue,
-            [output]: res[i],
-          });
+          setOutputValue(onSetOutput(output, res[i]));
           return output;
         });
       } else {
@@ -103,10 +125,7 @@ const Button: FC<ITexts> = ({
       // state mutability is view always
       const res: [] = await contract.functions[method]();
       contractFunction.outputs.map((output: string, i: number) => {
-        setOutputValue({
-          ...outputValue,
-          [output]: res[i],
-        });
+        setOutputValue(onSetOutput(output, res[i]));
         return output;
       });
     }
