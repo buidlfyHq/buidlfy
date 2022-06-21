@@ -108,21 +108,6 @@ const Workspace: FC<{
                       });
                       setSelector(null);
                     }
-                    // if (
-                    //   item.name === "Button" &&
-                    //   item.i === selectedElements.id
-                    // ) {
-                    //   let updatedItem = {
-                    //     ...item,
-                    //     contract: {
-                    //       name: selectedElements.name,
-                    //       stateMutability: selectedElements.stateMutability,
-                    //       inputs: selectedElements.inputs,
-                    //       outputs: selectedElements.outputs,
-                    //     },
-                    //   };
-                    //   setItems([...items, updatedItem]);
-                    // }
                   }}
                   className={`justify-center transition-colors duration-150 ease-in-out rounded-lg ${
                     selector
