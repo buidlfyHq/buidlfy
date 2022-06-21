@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import ShortUniqueId from "short-unique-id";
 import { AiOutlineEdit } from "react-icons/ai";
 
@@ -10,6 +10,8 @@ const AbiComponent: FC<{
   selector;
   elementConfig;
   setElementConfig;
+  selectedElements;
+  setSelectedElements;
 }> = ({
   abi,
   showComponent,
@@ -18,23 +20,28 @@ const AbiComponent: FC<{
   setSelector,
   elementConfig,
   setElementConfig,
+  selectedElements,
+  setSelectedElements,
 }) => {
-  const handleSave = () => {};
+  // const handleSave = () => {};
   return (
     <>
       <div>
         {showComponent ? (
           <>
             <>
-              {showComponent.inputs[0] &&
-                showComponent.inputs.map((input, i) => {
-                  // const uid = new ShortUniqueId();
-                  // const option = uid();
-                  const selectedId = "input" + i;
+              {showComponent.value.inputs[0] &&
+                showComponent.value.inputs.map((input, i) => {
+                  const uid = new ShortUniqueId();
+
+                  const option = uid();
+                  // const selectedId = option;
+                  const selectedId = "input" + i + showComponent.id;
                   const objects = Object.keys(elementConfig);
                   const filterObjects = objects.filter(
                     (key) => key === selectedId
                   );
+                  console.log(selectedId, "selected");
                   return (
                     <div className="mt-3">
                       <h6>Input - {input.name}</h6>
@@ -74,8 +81,8 @@ const AbiComponent: FC<{
                 })}
             </>
 
-            {showComponent.outputs[0] &&
-              showComponent.outputs.map((output, i) => {
+            {showComponent.value.outputs[0] &&
+              showComponent.value.outputs.map((output, i) => {
                 const selectedId = "output" + i;
                 const objects = Object.keys(elementConfig);
                 const filterObjects = objects.filter(
@@ -118,10 +125,7 @@ const AbiComponent: FC<{
                   </div>
                 );
               })}
-            <button
-              onClick={handleSave}
-              className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
+            <button className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Save
             </button>
           </>

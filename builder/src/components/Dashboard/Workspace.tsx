@@ -21,6 +21,8 @@ const Workspace: FC<{
   elementConfig;
   setElementConfig;
   setOpenTab;
+  selectedElements;
+  setSelectedElements;
 }> = ({
   abi,
   showComponent,
@@ -35,6 +37,8 @@ const Workspace: FC<{
   elementConfig,
   setElementConfig,
   setOpenTab,
+  selectedElements,
+  setSelectedElements,
 }) => {
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -100,6 +104,14 @@ const Workspace: FC<{
                         ...elementConfig,
                         [selector]: { name: item.name, id: i },
                       });
+                      setSelectedElements([
+                        ...selectedElements,
+                        {
+                          showComponentId: showComponent.id,
+                          selectorId: selector,
+                          elementConfigId: i,
+                        },
+                      ]);
                       setSelector(null);
                     }
                   }}

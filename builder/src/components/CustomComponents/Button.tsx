@@ -13,7 +13,10 @@ const Button: FC<ITexts> = ({
   link,
 }) => {
   return (
-    <div className=" flex px-6 items-center justify-center w-auto h-full">
+    <div
+      style={{ justifyContent: justifyContent }}
+      className="flex px-6 items-center justify-center w-auto h-full"
+    >
       <div
         style={{
           fontWeight: bold,
@@ -22,7 +25,7 @@ const Button: FC<ITexts> = ({
           color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
           borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
           display: "flex",
-          justifyContent: justifyContent,
+          justifyContent: "center",
           fontSize: `${fontSize}px`,
         }}
         className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
