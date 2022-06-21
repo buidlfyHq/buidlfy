@@ -17,6 +17,9 @@ export default function AdvanceComponent({
   elementConfig,
   selectedElements,
   setSelectedElements,
+  selectedItem,
+  items,
+  setItems,
 }) {
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
   //   const [selector, setSelector] = useState(false);
@@ -61,6 +64,11 @@ export default function AdvanceComponent({
         abi={abi}
         showComponent={showComponent}
         setShowComponent={setShowComponent}
+        selectedItem={selectedItem}
+        selectedElements={selectedElements}
+        setSelectedElements={setSelectedElements}
+        items={items}
+        setItems={setItems}
       />
       <AbiComponent
         abi={abi}

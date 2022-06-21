@@ -38,8 +38,9 @@ export default function SettingComponent({
   setCenter = null,
   fontSize = 16,
   setFontSize = null,
-  item = {},
   items,
+  setItems,
+  selectedItem,
   value,
   setLink = null,
   abi,
@@ -84,7 +85,7 @@ export default function SettingComponent({
     <>
       <div className="rounded-[8px] py-2 px-4 cursor-pointer relative">
         <div className="sidebar border shadow-sm menu" ref={ref}>
-          {items?.name == "Button" ? (
+          {selectedItem?.name === "Button" ? (
             <>
               <div className="flex flex-wrap">
                 <div className="w-full">
@@ -142,8 +143,10 @@ export default function SettingComponent({
                         >
                           <h3 className="mb-3 ml-8">
                             Component -{" "}
-                            {items ? (
-                              <span className="font-bold">{items.name}</span>
+                            {selectedItem ? (
+                              <span className="font-bold">
+                                {selectedItem.name}
+                              </span>
                             ) : null}
                           </h3>
 
@@ -212,6 +215,9 @@ export default function SettingComponent({
                             setElementConfig={setElementConfig}
                             selectedElements={selectedElements}
                             setSelectedElements={setSelectedElements}
+                            selectedItem={selectedItem}
+                            items={items}
+                            setItems={setItems}
                           />
                         </div>
                       </div>
@@ -225,7 +231,9 @@ export default function SettingComponent({
               {" "}
               <h3 className="mb-3 ml-8">
                 Component -{" "}
-                {items ? <span className="font-bold">{items.name}</span> : null}
+                {selectedItem ? (
+                  <span className="font-bold">{selectedItem.name}</span>
+                ) : null}
               </h3>
               <div className="flex items-center px-3 mt-1 text-black">
                 <RiText className="text-[18px] mr-3" />

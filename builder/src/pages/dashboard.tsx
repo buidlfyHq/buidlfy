@@ -21,8 +21,8 @@ const Dashboard: FC = () => {
   const [selector, setSelector] = useState(null);
   const [openTab, setOpenTab] = React.useState(1);
   const [elementConfig, setElementConfig] = useState({});
-  const [selectedElements, setSelectedElements] = useState([]);
-  console.log(selectedElements, "selectedElement");
+  const [selectedElements, setSelectedElements] = useState({});
+  // console.log(selectedElements, "selectedElement");
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {

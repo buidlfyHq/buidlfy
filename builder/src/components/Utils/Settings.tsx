@@ -219,7 +219,9 @@ const Settings = ({
     <>
       {settingItemId ? (
         <SettingComponent
-          items={selectedItem}
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
           setOpen={setOpen}
           setLink={setLink}
           link={selectedItem?.link}

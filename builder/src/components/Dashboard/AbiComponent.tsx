@@ -32,16 +32,13 @@ const AbiComponent: FC<{
             <>
               {showComponent.value.inputs[0] &&
                 showComponent.value.inputs.map((input, i) => {
-                  const uid = new ShortUniqueId();
-
-                  const option = uid();
                   // const selectedId = option;
                   const selectedId = "input" + i + showComponent.id;
                   const objects = Object.keys(elementConfig);
                   const filterObjects = objects.filter(
                     (key) => key === selectedId
                   );
-                  console.log(selectedId, "selected");
+                  // console.log(selectedId, "selected");
                   return (
                     <div className="mt-3">
                       <h6>Input - {input.name}</h6>

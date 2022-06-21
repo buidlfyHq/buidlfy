@@ -57,6 +57,8 @@ const Workspace: FC<{
     });
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
+  // console.log(selectedElements, "elements");
+  // console.log(items, "items");
 
   return (
     <main
@@ -104,16 +106,23 @@ const Workspace: FC<{
                         ...elementConfig,
                         [selector]: { name: item.name, id: i },
                       });
-                      // setSelectedElements([
-                      //   ...selectedElements,
-                      //   {
-                      //     showComponentId: showComponent.id,
-                      //     selectorId: selector,
-                      //     elementConfigId: i,
-                      //   },
-                      // ]);
                       setSelector(null);
                     }
+                    // if (
+                    //   item.name === "Button" &&
+                    //   item.i === selectedElements.id
+                    // ) {
+                    //   let updatedItem = {
+                    //     ...item,
+                    //     contract: {
+                    //       name: selectedElements.name,
+                    //       stateMutability: selectedElements.stateMutability,
+                    //       inputs: selectedElements.inputs,
+                    //       outputs: selectedElements.outputs,
+                    //     },
+                    //   };
+                    //   setItems([...items, updatedItem]);
+                    // }
                   }}
                   className={`justify-center transition-colors duration-150 ease-in-out rounded-lg ${
                     selector
