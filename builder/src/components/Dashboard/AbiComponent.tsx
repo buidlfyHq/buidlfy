@@ -45,7 +45,7 @@ const AbiComponent: FC<{
                       <div
                         key={i}
                         className="mb-2 px-2 border rounded mt-1 h-7"
-                        onClick={() => setSelector(selectedId)}
+                        onClick={() => setSelector({methodName: showComponent.value.name, type: 'input', name: selectedId})}
                       >
                         <>
                           {objects.length == 0 ? (
@@ -92,7 +92,7 @@ const AbiComponent: FC<{
                       <div
                         key={i}
                         className="mb-2 px-2 border rounded mt-1 h-7"
-                        onClick={() => setSelector(selectedId)}
+                        onClick={() => setSelector({methodName: showComponent.value.name, type: 'output', name: selectedId})}
                       >
                         {objects.length == 0 ? (
                           <span>Select An Element</span>

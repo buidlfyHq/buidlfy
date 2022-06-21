@@ -40,6 +40,8 @@ const Workspace: FC<{
   selectedElements,
   setSelectedElements,
 }) => {
+  console.log(items);
+
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -86,7 +88,7 @@ const Workspace: FC<{
         >
           {items
             ?.filter((i) => i.style.deleteComponent === 0)
-            .map((item) => {
+            .map((item, index) => {
               const { x, y, w, h, minW, i } = item;
               return (
                 <div
@@ -101,11 +103,45 @@ const Workspace: FC<{
                       setSettingItemId(i);
                       setOpenTab(1);
                     } else {
-                      // for updating selector with item name and item id
-                      setElementConfig({
-                        ...elementConfig,
-                        [selector]: { name: item.name, id: i },
-                      });
+                      if (selector.type === "input" && item.name === "Input") {
+                        // for updating selector with item name and item id
+                        setElementConfig({
+                          ...elementConfig,
+                          [selector.name]: { name: item.name, id: i },
+                        });
+                        let updatedItem = {
+                          ...item,
+                          contract: {
+                            name: selector.methodName,
+                            inputName: selector.name,
+                          },
+                        };
+                        let newArray = [...items];
+                        newArray[index] = updatedItem;
+                        setItems(newArray);
+                      } else if (
+                        selector.type === "output" &&
+                        (item.name === "Text" ||
+                          item.name === "Heading 1" ||
+                          item.name === "Heading 2" ||
+                          item.name === "Heading 3")
+                      ) {
+                        // for updating selector with item name and item id
+                        setElementConfig({
+                          ...elementConfig,
+                          [selector.name]: { name: item.name, id: i },
+                        });
+                        let updatedItem = {
+                          ...item,
+                          contract: {
+                            name: selector.methodName,
+                            outputName: selector.name,
+                          },
+                        };
+                        let newArray = [...items];
+                        newArray[index] = updatedItem;
+                        setItems(newArray);
+                      }
                       setSelector(null);
                     }
                   }}
