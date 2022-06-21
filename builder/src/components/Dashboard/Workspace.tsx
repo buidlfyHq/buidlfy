@@ -103,6 +103,7 @@ const Workspace: FC<{
                       setSettingItemId(i);
                       setOpenTab(1);
                     } else {
+                      // Add validation for selection
                       if (selector.type === "input" && item.name === "Input") {
                         // for updating selector with item name and item id
                         setElementConfig({

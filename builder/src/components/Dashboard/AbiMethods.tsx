@@ -24,6 +24,8 @@ const AbiMethods: FC<{
   // console.log(selectedItem, "items");
   // const uid = new ShortUniqueId();
   // const option = uid();
+  // console.log(abi, "abi");
+
   const abiJson = abi ? JSON.parse(abi) : null;
 
   return (

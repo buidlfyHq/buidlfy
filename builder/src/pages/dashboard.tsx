@@ -56,7 +56,11 @@ const Dashboard: FC = () => {
 
       <section className="flex-1">
         {/* Navbar */}
-        <Navbar className={className} setClassName={setClassName} />
+        <Navbar
+          className={className}
+          setClassName={setClassName}
+          items={items}
+        />
 
         {/* Main section */}
         <Workspace
