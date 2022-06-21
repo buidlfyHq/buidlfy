@@ -83,7 +83,7 @@ const AbiComponent: FC<{
 
             {showComponent.value.outputs[0] &&
               showComponent.value.outputs.map((output, i) => {
-                const selectedId = "output" + i;
+                const selectedId = "output" + i + showComponent.id;
                 const objects = Object.keys(elementConfig);
                 const filterObjects = objects.filter(
                   (key) => key === selectedId

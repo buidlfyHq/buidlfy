@@ -104,14 +104,14 @@ const Workspace: FC<{
                         ...elementConfig,
                         [selector]: { name: item.name, id: i },
                       });
-                      setSelectedElements([
-                        ...selectedElements,
-                        {
-                          showComponentId: showComponent.id,
-                          selectorId: selector,
-                          elementConfigId: i,
-                        },
-                      ]);
+                      // setSelectedElements([
+                      //   ...selectedElements,
+                      //   {
+                      //     showComponentId: showComponent.id,
+                      //     selectorId: selector,
+                      //     elementConfigId: i,
+                      //   },
+                      // ]);
                       setSelector(null);
                     }
                   }}
