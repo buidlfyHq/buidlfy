@@ -58,7 +58,7 @@ const Workspace: FC<{
           : `w-full`
       }
     >
-      <section className="p-4">
+      <section className="pt-2">
         <ResponsiveGridLayout
           layouts={{ lg: items }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
@@ -68,6 +68,7 @@ const Workspace: FC<{
           compactType="horizontal"
           resizeHandles={["nw", "se"]}
           onLayoutChange={onLayoutChange}
+          margin={[0, 0]}
         >
           {items
             ?.filter((i) => i.style.deleteComponent === 0)
@@ -77,6 +78,11 @@ const Workspace: FC<{
                 <div
                   key={i}
                   data-grid={{ x, y, w, h, minW }}
+                  className={`justify-center transition-colors duration-150 ease-in-out ${
+                    selector
+                      ? "hover:outline-orange-300 hover:outline"
+                      : "hover:outline-slate-300 hover:outline-dashed"
+                  }`}
                   // open item setting on click
                   // open item setting on click
                   onClick={() => {
@@ -129,11 +135,6 @@ const Workspace: FC<{
                       setSelector(null);
                     }
                   }}
-                  className={`justify-center transition-colors duration-150 ease-in-out rounded-lg ${
-                    selector
-                      ? "hover:outline-orange-300 hover:outline"
-                      : "hover:outline-slate-300 hover:outline-dashed"
-                  }`}
                 >
                   <RenderItem item={item} />
                 </div>
