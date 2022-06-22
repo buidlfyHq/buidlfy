@@ -1,9 +1,7 @@
-import React, { FC, useState, useEffect } from "react";
-import ShortUniqueId from "short-unique-id";
+import React, { FC } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 
 const AbiComponent: FC<{
-  abi: string;
   showComponent: any;
   setShowComponent: any;
   setSelector;
@@ -13,7 +11,6 @@ const AbiComponent: FC<{
   selectedElements;
   setSelectedElements;
 }> = ({
-  abi,
   showComponent,
   setShowComponent,
   selector,
@@ -45,7 +42,13 @@ const AbiComponent: FC<{
                       <div
                         key={i}
                         className="mb-2 px-2 border rounded mt-1 h-7"
-                        onClick={() => setSelector({methodName: showComponent.value.name, type: 'input', name: selectedId})}
+                        onClick={() =>
+                          setSelector({
+                            methodName: showComponent.value.name,
+                            type: "input",
+                            name: selectedId,
+                          })
+                        }
                       >
                         <>
                           {objects.length == 0 ? (
@@ -92,7 +95,13 @@ const AbiComponent: FC<{
                       <div
                         key={i}
                         className="mb-2 px-2 border rounded mt-1 h-7"
-                        onClick={() => setSelector({methodName: showComponent.value.name, type: 'output', name: selectedId})}
+                        onClick={() =>
+                          setSelector({
+                            methodName: showComponent.value.name,
+                            type: "output",
+                            name: selectedId,
+                          })
+                        }
                       >
                         {objects.length == 0 ? (
                           <span>Select An Element</span>

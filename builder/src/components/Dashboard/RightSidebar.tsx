@@ -6,10 +6,8 @@ import Settings from "components/Utils/Settings";
 const RightSidebar: FC<{
   rightClassName: string;
   setRightClassName: (className: string) => void;
-  abi: string;
-  setAbi: (abi: string) => void;
-  showComponent: any;
-  setShowComponent: (showComponent: any) => void;
+  contractConfig: object;
+  setContractConfig: (contractConfig: object) => void;
   setSelector;
   elementConfig;
   setElementConfig;
@@ -20,6 +18,8 @@ const RightSidebar: FC<{
 }> = ({
   rightClassName,
   setRightClassName,
+  contractConfig,
+  setContractConfig,
   setSelector,
   elementConfig,
   setElementConfig,
@@ -32,9 +32,9 @@ const RightSidebar: FC<{
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
   const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
 
-  const hideRightSidebar = () => {
-    setRightClassName("hidden");
-  };
+  // const hideRightSidebar = () => {
+  //   setRightClassName("hidden");
+  // };
 
   return (
     <main
@@ -59,6 +59,8 @@ const RightSidebar: FC<{
             items={items}
             setItems={setItems}
             settingItemId={settingItemId}
+            contractConfig={contractConfig}
+            setContractConfig={setContractConfig}
             setOpen={setOpenSetting}
             setSelector={setSelector}
             elementConfig={elementConfig}

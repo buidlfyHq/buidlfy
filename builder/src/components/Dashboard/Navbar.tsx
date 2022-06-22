@@ -1,20 +1,26 @@
 import React, { FC, useState } from "react";
-import { Dialog, Popover } from "@headlessui/react";
+import { Dialog } from "@headlessui/react";
 import { AiOutlineDoubleRight, AiOutlineEye } from "react-icons/ai";
-import { BiChevronDown } from "react-icons/bi";
 import { MdUndo, MdRedo } from "react-icons/md";
-import abi from "../abi.json";
 
-const Navbar: FC<{ className: string; setClassName: any; items }> = ({
-  className,
-  setClassName,
-  items,
-}) => {
+const Navbar: FC<{
+  className: string;
+  setClassName: any;
+  items;
+  contractConfig;
+}> = ({ className, setClassName, items, contractConfig }) => {
+  const abiJSON = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [generatedConfig, setGeneratedConfig] = useState<string>("");
+  console.log(abiJSON);
+  console.log(contractConfig);
+  
+  
   const showSidebar = () => {
     setClassName("");
   };
-  const [isOpen, setIsOpen] = useState(false);
-  const [generatedConfig, setGeneratedConfig] = useState<string>("");
+
   return (
     <main
       className={
@@ -52,8 +58,8 @@ const Navbar: FC<{ className: string; setClassName: any; items }> = ({
             let config = {
               builder: items,
               contract: {
-                abi: abi,
-                address: "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E",
+                abi: abiJSON,
+                address: contractConfig.address,
               },
             };
             let stringifiedConfig = JSON.stringify(config);

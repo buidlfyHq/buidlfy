@@ -8,11 +8,7 @@ import FontStyleComponent from "./FontStyleComponent";
 import UtilitiesComponent from "./UtilitiesComponent";
 import ColorComponent from "./ColorComponent";
 import FontSizeComponent from "./FontSizeComponent";
-import { FaFileContract } from "react-icons/fa";
-import Modal from "components/Dashboard/Modal";
-import AbiMethods from "components/Dashboard/AbiMethods";
 import AdvanceComponent from "./AdvanceComponent";
-import AbiComponent from "components/Dashboard/AbiComponent";
 
 export default function SettingComponent({
   text = null,
@@ -43,8 +39,8 @@ export default function SettingComponent({
   selectedItem,
   value,
   setLink = null,
-  abi,
-  setAbi,
+  contractConfig,
+  setContractConfig,
   showComponent,
   setShowComponent,
   setSelector,
@@ -57,8 +53,6 @@ export default function SettingComponent({
 }) {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
-  // const [openTab, setOpenTab] = React.useState(1);
-  const [isOpen, setIsOpen] = useState(false); // for connect contract modal
 
   const Id: string = id;
   const ref = useRef(null);
@@ -205,8 +199,8 @@ export default function SettingComponent({
                           id="link3"
                         >
                           <AdvanceComponent
-                            abi={abi}
-                            setAbi={setAbi}
+                            contractConfig={contractConfig}
+                            setContractConfig={setContractConfig}
                             showComponent={showComponent}
                             setShowComponent={setShowComponent}
                             setSelector={setSelector}

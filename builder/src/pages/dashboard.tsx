@@ -7,14 +7,17 @@ import Workspace from "components/Dashboard/Workspace";
 import Settings from "components/Utils/Settings";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
+// const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
 const Dashboard: FC = () => {
   const navigate = useNavigate();
   const [items, setItems] = useState([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [rightClassName, setRightClassName] = useState<string>(""); // for handling sidebar toggle
-  const [abi, setAbi] = useState<string>(""); // for storing abi
-  const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
+  const [contractConfig, setContractConfig] = useState({
+    abi: "",
+    address: "",
+  }); // for storing contract abi and address
   const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
   // for selecting an element for contract
@@ -46,10 +49,6 @@ const Dashboard: FC = () => {
         setClassName={setClassName}
         items={items}
         setItems={setItems}
-        abi={abi}
-        setAbi={setAbi}
-        showComponent={showComponent}
-        setShowComponent={setShowComponent}
         setSelector={setSelector}
         elementConfig={elementConfig}
       />
@@ -60,13 +59,11 @@ const Dashboard: FC = () => {
           className={className}
           setClassName={setClassName}
           items={items}
+          contractConfig={contractConfig}
         />
 
         {/* Main section */}
         <Workspace
-          abi={abi}
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
           items={items}
           setItems={setItems}
           className={className}
@@ -85,10 +82,8 @@ const Dashboard: FC = () => {
       <RightSidebar
         rightClassName={rightClassName}
         setRightClassName={setRightClassName}
-        abi={abi}
-        setAbi={setAbi}
-        showComponent={showComponent}
-        setShowComponent={setShowComponent}
+        contractConfig={contractConfig}
+        setContractConfig={setContractConfig}
         setSelector={setSelector}
         elementConfig={elementConfig}
         setElementConfig={setElementConfig}
@@ -104,6 +99,8 @@ const Dashboard: FC = () => {
           items={items}
           setItems={setItems}
           settingItemId={settingItemId}
+          contractConfig={contractConfig}
+          setContractConfig={setContractConfig}
           setOpen={setOpenSetting}
           setSelector={setSelector}
           elementConfig={elementConfig}

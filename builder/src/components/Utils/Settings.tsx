@@ -5,6 +5,8 @@ const Settings = ({
   items,
   setItems,
   settingItemId,
+  contractConfig,
+  setContractConfig,
   setOpen,
   setSelector,
   elementConfig,
@@ -14,7 +16,6 @@ const Settings = ({
   selectedElements,
   setSelectedElements,
 }) => {
-  const [abi, setAbi] = useState<string>(""); // for storing abi
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
 
@@ -243,8 +244,8 @@ const Settings = ({
           setRight={setRight}
           fontSize={selectedItem?.style?.fontSize}
           setFontSize={setFontSize}
-          abi={abi}
-          setAbi={setAbi}
+          contractConfig={contractConfig}
+          setContractConfig={setContractConfig}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
           setSelector={setSelector}

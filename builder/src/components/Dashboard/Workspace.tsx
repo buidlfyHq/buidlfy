@@ -8,9 +8,6 @@ import AbiComponent from "./AbiComponent";
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Workspace: FC<{
-  abi: string;
-  showComponent: any;
-  setShowComponent: (showComponent: any) => void;
   items: IItems[];
   setItems: (items: IItems[]) => void;
   className: string;
@@ -24,9 +21,6 @@ const Workspace: FC<{
   selectedElements;
   setSelectedElements;
 }> = ({
-  abi,
-  showComponent,
-  setShowComponent,
   items,
   setItems,
   className,

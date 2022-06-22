@@ -7,8 +7,8 @@ import AbiMethods from "components/Dashboard/AbiMethods";
 import AbiComponent from "components/Dashboard/AbiComponent";
 
 export default function AdvanceComponent({
-  abi,
-  setAbi,
+  contractConfig,
+  setContractConfig,
   showComponent,
   setShowComponent,
   selector,
@@ -22,11 +22,7 @@ export default function AdvanceComponent({
   setItems,
 }) {
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
-  //   const [selector, setSelector] = useState(false);
-  //   const [elementConfig, setElementConfig] = useState({
-  //     name: "Select an element",
-  //     id: "",
-  //   });
+  
   return (
     <>
       <div className="flex justify-center">
@@ -52,8 +48,8 @@ export default function AdvanceComponent({
           </span>{" "}
           Import Contract
           <Modal
-            abi={abi}
-            setAbi={setAbi}
+            contractConfig={contractConfig}
+            setContractConfig={setContractConfig}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
           />
@@ -61,7 +57,7 @@ export default function AdvanceComponent({
       </div>
       <br />
       <AbiMethods
-        abi={abi}
+        contractConfig={contractConfig}
         showComponent={showComponent}
         setShowComponent={setShowComponent}
         selectedItem={selectedItem}
@@ -71,7 +67,6 @@ export default function AdvanceComponent({
         setItems={setItems}
       />
       <AbiComponent
-        abi={abi}
         showComponent={showComponent}
         setShowComponent={setShowComponent}
         setSelector={setSelector}

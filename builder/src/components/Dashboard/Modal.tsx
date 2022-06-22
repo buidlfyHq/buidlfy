@@ -2,11 +2,11 @@ import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
 
 const Modal: FC<{
-  abi: string;
-  setAbi: any;
+  contractConfig;
+  setContractConfig;
   isOpen: boolean;
   setIsOpen: any;
-}> = ({ abi, setAbi, isOpen, setIsOpen }) => {
+}> = ({ contractConfig, setContractConfig, isOpen, setIsOpen }) => {
   return (
     <Dialog
       as="div"
@@ -39,12 +39,21 @@ const Modal: FC<{
             <input
               className="w-full mt-2 py-1 px-2 bg-white/90 rounded border"
               placeholder="Paste ABI here..."
-              value={abi}
-              onChange={(e) => setAbi(e.target.value)}
+              value={contractConfig.abi}
+              onChange={(e) =>
+                setContractConfig({ ...contractConfig, abi: e.target.value })
+              }
             />
             <input
               className="w-full mt-2 py-1 px-2 bg-white/90 rounded border"
               placeholder="Paste address here..."
+              value={contractConfig.address}
+              onChange={(e) =>
+                setContractConfig({
+                  ...contractConfig,
+                  address: e.target.value,
+                })
+              }
             />
           </div>
 

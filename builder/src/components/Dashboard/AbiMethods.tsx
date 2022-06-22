@@ -3,7 +3,7 @@ import { BiTargetLock } from "react-icons/bi";
 import ShortUniqueId from "short-unique-id";
 
 const AbiMethods: FC<{
-  abi: string;
+  contractConfig;
   showComponent: any;
   setShowComponent: any;
   selectedItem;
@@ -12,7 +12,7 @@ const AbiMethods: FC<{
   items;
   setItems;
 }> = ({
-  abi,
+  contractConfig,
   showComponent,
   setShowComponent,
   selectedItem,
@@ -26,11 +26,11 @@ const AbiMethods: FC<{
   // const option = uid();
   // console.log(abi, "abi");
 
-  const abiJson = abi ? JSON.parse(abi) : null;
+  const abiJson = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
 
   return (
     <>
-      {abi ? (
+      {contractConfig.abi ? (
         <>
           <span className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
             Select Method
@@ -80,7 +80,7 @@ const AbiMethods: FC<{
                 className="form-select appearance-none mt-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label="Default select example"
               >
-                {abi &&
+                {contractConfig.abi &&
                   abiJson.map((method, i) => (
                     <>
                       <option value={i} key={i} selected>

@@ -3,10 +3,7 @@ import { Popover } from "@headlessui/react";
 import ShortUniqueId from "short-unique-id";
 import { AiOutlineDoubleLeft, AiOutlineSetting } from "react-icons/ai";
 import { BiGridSmall } from "react-icons/bi";
-import { FaFileContract } from "react-icons/fa";
-import AbiMethods from "./AbiMethods";
 import { components } from "./component";
-import Modal from "./Modal";
 import IItems from "interfaces/items";
 
 const Sidebar: FC<{
@@ -14,10 +11,6 @@ const Sidebar: FC<{
   setClassName: (className: string) => void;
   items: IItems[];
   setItems: (items: IItems[]) => void;
-  abi: string;
-  setAbi: (abi: string) => void;
-  showComponent: any;
-  setShowComponent: (showComponent: any) => void;
   setSelector;
   elementConfig;
 }> = ({
@@ -25,15 +18,10 @@ const Sidebar: FC<{
   setClassName,
   items,
   setItems,
-  abi,
-  setAbi,
-  showComponent,
-  setShowComponent,
   setSelector,
   elementConfig,
 }) => {
   const uid = new ShortUniqueId();
-  const [isOpen, setIsOpen] = useState(false); // for connect contract modal
   const [indexValue, setIndexValue] = useState(2);
 
   const hideSidebar = () => {
