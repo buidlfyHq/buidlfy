@@ -1,9 +1,7 @@
 import React, { FC } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
-// import AbiComponent from "./AbiComponent";
 import RenderItem from "./RenderItem";
 import IItems from "interfaces/items";
-import AbiComponent from "./AbiComponent";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
@@ -34,8 +32,6 @@ const Workspace: FC<{
   selectedElements,
   setSelectedElements,
 }) => {
-  console.log(items);
-
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -53,8 +49,6 @@ const Workspace: FC<{
     });
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
-  // console.log(selectedElements, "elements");
-  // console.log(items, "items");
 
   return (
     <main
@@ -65,11 +59,6 @@ const Workspace: FC<{
       }
     >
       <section className="p-4">
-        {/* <AbiComponent
-          abi={abi}
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
-        /> */}
         <ResponsiveGridLayout
           layouts={{ lg: items }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
