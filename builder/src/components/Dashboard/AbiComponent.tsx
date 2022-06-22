@@ -20,7 +20,6 @@ const AbiComponent: FC<{
   selectedElements,
   setSelectedElements,
 }) => {
-  // const handleSave = () => {};
   return (
     <>
       <div>
@@ -35,7 +34,6 @@ const AbiComponent: FC<{
                   const filterObjects = objects.filter(
                     (key) => key === selectedId
                   );
-                  // console.log(selectedId, "selected");
                   return (
                     <div className="mt-3">
                       <h6>Input - {input.name}</h6>

@@ -105,7 +105,6 @@ const Sidebar: FC<{
                   w: 12,
                   minW: 1,
                 };
-                // console.log("Sidebar -> ", newC);
                 incrementIndex();
                 setItems([...items, newC]);
               }}

@@ -21,11 +21,6 @@ const AbiMethods: FC<{
   items,
   setItems,
 }) => {
-  // console.log(selectedItem, "items");
-  // const uid = new ShortUniqueId();
-  // const option = uid();
-  // console.log(abi, "abi");
-
   const abiJson = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
 
   return (
@@ -39,7 +34,6 @@ const AbiMethods: FC<{
             <div className="mb-3 xl:w-54">
               <select
                 onChange={(e: any) => {
-                  // console.log(abiJson[e.target.value].inputs, "e");
                   // NOTE - try replacing with uuid
                   setShowComponent({
                     id: e.target.value,
@@ -86,18 +80,6 @@ const AbiMethods: FC<{
                       <option value={i} key={i} selected>
                         {method.name}
                       </option>
-                      {/* 
-                  <section key={i}>
-              <div>
-                <button
-                  className="mt-1 px-2 text-cyan-900"
-                  type="submit"
-                  onClick={() => setShowComponent([showComponent, i])}
-                >
-                  {">"} {method.name}
-                </button>
-              </div>
-            </section> */}
                     </>
                   ))}
               </select>
