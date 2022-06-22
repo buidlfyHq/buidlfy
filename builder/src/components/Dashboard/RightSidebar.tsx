@@ -1,6 +1,5 @@
 import React, { FC, useState } from "react";
 import { GiClick } from "react-icons/gi";
-
 import Settings from "components/Utils/Settings";
 
 const RightSidebar: FC<{
