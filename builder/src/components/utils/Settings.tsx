@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import SettingComponent from "./SettingComponent";
 
-const Settings = ({ items, setItems, settingItemId, setOpen }) => {
+const Settings = ({
+  items,
+  setItems,
+  settingItemId,
+  contractConfig,
+  setContractConfig,
+  setOpen,
+  setSelector,
+  elementConfig,
+  setElementConfig,
+  openTab,
+  setOpenTab,
+  selectedElements,
+  setSelectedElements,
+}) => {
+  const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
 
   const setLink = (link: string) => {
@@ -205,6 +220,9 @@ const Settings = ({ items, setItems, settingItemId, setOpen }) => {
     <>
       {settingItemId ? (
         <SettingComponent
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
           setOpen={setOpen}
           setLink={setLink}
           link={selectedItem?.link}
@@ -226,6 +244,17 @@ const Settings = ({ items, setItems, settingItemId, setOpen }) => {
           setRight={setRight}
           fontSize={selectedItem?.style?.fontSize}
           setFontSize={setFontSize}
+          contractConfig={contractConfig}
+          setContractConfig={setContractConfig}
+          showComponent={showComponent}
+          setShowComponent={setShowComponent}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          setElementConfig={setElementConfig}
+          openTab={openTab}
+          setOpenTab={setOpenTab}
+          selectedElements={selectedElements}
+          setSelectedElements={setSelectedElements}
         />
       ) : null}
     </>

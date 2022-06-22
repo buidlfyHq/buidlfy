@@ -1,15 +1,11 @@
 import React, { FC } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
-// import AbiComponent from "./AbiComponent";
 import RenderItem from "./RenderItem";
 import IItems from "interfaces/items";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Workspace: FC<{
-  abi: string;
-  showComponent: number[];
-  setShowComponent: (showComponent: number[]) => void;
   items: IItems[];
   setItems: (items: IItems[]) => void;
   className: string;
@@ -17,11 +13,12 @@ const Workspace: FC<{
   setOpenSetting: (open: boolean) => void;
   selector;
   setSelector;
+  elementConfig;
   setElementConfig;
+  setOpenTab;
+  selectedElements;
+  setSelectedElements;
 }> = ({
-  abi,
-  showComponent,
-  setShowComponent,
   items,
   setItems,
   className,
@@ -29,7 +26,11 @@ const Workspace: FC<{
   setSettingItemId,
   selector,
   setSelector,
-  setElementConfig
+  elementConfig,
+  setElementConfig,
+  setOpenTab,
+  selectedElements,
+  setSelectedElements,
 }) => {
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -57,12 +58,7 @@ const Workspace: FC<{
           : `w-full`
       }
     >
-      <section>
-        {/* <AbiComponent
-          abi={abi}
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
-        /> */}
+      <section className="pt-2">
         <ResponsiveGridLayout
           layouts={{ lg: items }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
@@ -72,32 +68,73 @@ const Workspace: FC<{
           compactType="horizontal"
           resizeHandles={["nw", "se"]}
           onLayoutChange={onLayoutChange}
+          margin={[0, 0]}
         >
           {items
             ?.filter((i) => i.style.deleteComponent === 0)
-            .map((item) => {
+            .map((item, index) => {
               const { x, y, w, h, minW, i } = item;
               return (
                 <div
                   key={i}
                   data-grid={{ x, y, w, h, minW }}
-                  // open item setting on click
-                  onClick={() => {
-                    // checks if the selector is active
-                    if (selector === false) {
-                      setOpenSetting(true);
-                      setSettingItemId(i);
-                    } else {
-                      // for updating selector with item name and item id
-                      setSelector(false);
-                      setElementConfig({name: item.name, id: i});
-                    }
-                  }}
-                  className={`justify-center transition-colors duration-150 ease-in-out rounded-lg ${
+                  className={`justify-center transition-colors duration-150 ease-in-out ${
                     selector
                       ? "hover:outline-orange-300 hover:outline"
                       : "hover:outline-slate-300 hover:outline-dashed"
                   }`}
+                  // open item setting on click
+                  // open item setting on click
+                  onClick={() => {
+                    // checks if the selector is active
+                    if (selector === null) {
+                      setOpenSetting(true);
+                      setSettingItemId(i);
+                      setOpenTab(1);
+                    } else {
+                      // Add validation for selection
+                      if (selector.type === "input" && item.name === "Input") {
+                        // for updating selector with item name and item id
+                        setElementConfig({
+                          ...elementConfig,
+                          [selector.name]: { name: item.name, id: i },
+                        });
+                        let updatedItem = {
+                          ...item,
+                          contract: {
+                            name: selector.methodName,
+                            inputName: selector.name,
+                          },
+                        };
+                        let newArray = [...items];
+                        newArray[index] = updatedItem;
+                        setItems(newArray);
+                      } else if (
+                        selector.type === "output" &&
+                        (item.name === "Text" ||
+                          item.name === "Heading 1" ||
+                          item.name === "Heading 2" ||
+                          item.name === "Heading 3")
+                      ) {
+                        // for updating selector with item name and item id
+                        setElementConfig({
+                          ...elementConfig,
+                          [selector.name]: { name: item.name, id: i },
+                        });
+                        let updatedItem = {
+                          ...item,
+                          contract: {
+                            name: selector.methodName,
+                            outputName: selector.name,
+                          },
+                        };
+                        let newArray = [...items];
+                        newArray[index] = updatedItem;
+                        setItems(newArray);
+                      }
+                      setSelector(null);
+                    }
+                  }}
                 >
                   <RenderItem item={item} />
                 </div>

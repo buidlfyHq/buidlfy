@@ -42,7 +42,7 @@ export default function AlignComponent({
     <>
       <span className=" text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
         Text Align
-        <div className="flex mt-3">
+        <div className="flex mt-3 px-3">
           <span
             onClick={handleLeftChange}
             className="flex items-center justify-center font-bold shadow text-[18px] w-8 h-10 my-2 font-regular"

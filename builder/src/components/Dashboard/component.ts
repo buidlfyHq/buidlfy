@@ -20,6 +20,7 @@ export const components = [
       fontSize: 15,
       deleteComponent: 0,
     },
+    contract: {}
   },
   {
     name: "Text",

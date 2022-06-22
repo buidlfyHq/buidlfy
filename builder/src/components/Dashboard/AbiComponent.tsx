@@ -1,59 +1,140 @@
 import React, { FC } from "react";
+import { AiOutlineEdit } from "react-icons/ai";
 
 const AbiComponent: FC<{
-  abi: string;
-  showComponent: number[];
+  showComponent: any;
   setShowComponent: any;
-}> = ({ abi, showComponent, setShowComponent }) => {
-  // Helper component for inputs of methods in ABI
-  const abiInputComponent = (name) => (
-    <>
-      <input className="my-2 px-2 border rounded" placeholder={name} />
-      <button
-        className="px-4 bg-black rounded text-white"
-        type="submit"
-        onClick={() => {}}
-      >
-        Submit
-      </button>
-    </>
-  );
-
+  setSelector;
+  selector;
+  elementConfig;
+  setElementConfig;
+  selectedElements;
+  setSelectedElements;
+}> = ({
+  showComponent,
+  setShowComponent,
+  selector,
+  setSelector,
+  elementConfig,
+  setElementConfig,
+  selectedElements,
+  setSelectedElements,
+}) => {
   return (
     <>
-      {abi &&
-        JSON.parse(abi).map((method, i) => (
-          <div key={i}>
-            {/* Show components on button click */}
-            {showComponent && showComponent.includes(i) && (
-              <div className="border-b">
-                {/* Method components based on inputs and outputs */}
-                {method.inputs[0] ? (
-                  method.inputs.map((input, i) => (
-                    <div key={i}>{abiInputComponent(input.name)}</div>
-                  ))
-                ) : (
-                  <button
-                    className="my-2 px-4 bg-black rounded text-white"
-                    type="submit"
-                    onClick={() => {}}
-                  >
-                    {method.name}
-                  </button>
-                )}
-                {method.outputs[0] &&
-                  method.outputs.map((output, i) => (
-                    <div key={i}>
-                      <input
-                        className="mb-2 px-2 border rounded"
-                        placeholder={output.type}
-                      />
+      <div>
+        {showComponent ? (
+          <>
+            <>
+              {showComponent.value.inputs[0] &&
+                showComponent.value.inputs.map((input, i) => {
+                  // const selectedId = option;
+                  const selectedId = "input" + i + showComponent.id;
+                  const objects = Object.keys(elementConfig);
+                  const filterObjects = objects.filter(
+                    (key) => key === selectedId
+                  );
+                  return (
+                    <div className="mt-3">
+                      <h6>Input - {input.name}</h6>
+                      <div
+                        key={i}
+                        className="mb-2 px-2 border rounded mt-1 h-7"
+                        onClick={() =>
+                          setSelector({
+                            methodName: showComponent.value.name,
+                            type: "input",
+                            name: selectedId,
+                          })
+                        }
+                      >
+                        <>
+                          {objects.length == 0 ? (
+                            <span>Select An Element</span>
+                          ) : (
+                            <>
+                              {filterObjects.length == 0 ? (
+                                <span>Select An Element</span>
+                              ) : (
+                                filterObjects.map((key) => (
+                                  <>
+                                    {key === selectedId && (
+                                      <span className="flex">
+                                        <span className="flex-1">
+                                          {elementConfig[key].name} -{" "}
+                                          {elementConfig[key].id}
+                                        </span>
+                                        <AiOutlineEdit className="mt-1.5" />
+                                      </span>
+                                    )}
+                                  </>
+                                ))
+                              )}
+                            </>
+                          )}
+                        </>
+                      </div>
                     </div>
-                  ))}
-              </div>
-            )}
-          </div>
-        ))}
+                  );
+                })}
+            </>
+
+            {showComponent.value.outputs[0] &&
+              showComponent.value.outputs.map((output, i) => {
+                const selectedId = "output" + i + showComponent.id;
+                const objects = Object.keys(elementConfig);
+                const filterObjects = objects.filter(
+                  (key) => key === selectedId
+                );
+                return (
+                  <div key={i} className="mt-3">
+                    <h6>Output - {output.name}</h6>
+                    <>
+                      <div
+                        key={i}
+                        className="mb-2 px-2 border rounded mt-1 h-7"
+                        onClick={() =>
+                          setSelector({
+                            methodName: showComponent.value.name,
+                            type: "output",
+                            name: selectedId,
+                          })
+                        }
+                      >
+                        {objects.length == 0 ? (
+                          <span>Select An Element</span>
+                        ) : (
+                          <>
+                            {filterObjects.length == 0 ? (
+                              <span>Select An Element</span>
+                            ) : (
+                              filterObjects.map((key) => (
+                                <>
+                                  {key === selectedId && (
+                                    <span className="flex">
+                                      <span className="flex-1">
+                                        {elementConfig[key].name} -{" "}
+                                        {elementConfig[key].id}
+                                      </span>
+                                      <AiOutlineEdit className="mt-1.5" />
+                                    </span>
+                                  )}
+                                </>
+                              ))
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </>
+                  </div>
+                );
+              })}
+            <button className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Save
+            </button>
+          </>
+        ) : null}
+      </div>
     </>
   );
 };
