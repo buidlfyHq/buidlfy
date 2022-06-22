@@ -1,16 +1,9 @@
-import { FC, useState } from "react";
-import Navbar from "./components/Navbar";
-import AbiComponent from "./components/AbiComponent";
+import { FC } from "react";
+import Home from "./pages/home";
+
 
 const App: FC = () => {
-  const [account, setAccount] = useState();
-
-  return (
-    <div className="App">
-      <Navbar account={account} setAccount={setAccount} />
-      {/* <AbiComponent account={account} /> */}
-    </div>
-  );
+  return <Home />;
 };
 
 export default App;
