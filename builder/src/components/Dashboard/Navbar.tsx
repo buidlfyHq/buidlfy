@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { AiOutlineDoubleRight, AiOutlineEye } from "react-icons/ai";
 import { MdUndo, MdRedo } from "react-icons/md";
-import {encode as base64_encode} from 'base-64';
+import { encode as base64_encode } from "base-64";
 
 const Navbar: FC<{
   className: string;
@@ -13,7 +13,7 @@ const Navbar: FC<{
   const abiJSON = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
   const [isOpen, setIsOpen] = useState(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
-  
+
   const showSidebar = () => {
     setClassName("");
   };
@@ -49,7 +49,7 @@ const Navbar: FC<{
         </div>
 
         <button
-          className="flex items-center px-4 h-10 my-5 bg-white rounded-md shadow-lg cursor-pointer focus-visible:outline-none active:outline-none"
+          className="btn rounded cursor-pointer whitespace-nowrap px-4 h-10 my-5"
           onClick={() => {
             let config = {
               builder: items,
