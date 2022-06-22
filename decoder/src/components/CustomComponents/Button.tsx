@@ -86,7 +86,10 @@ const Button: FC<ITexts> = ({
         const res = await contract.functions[method](...args); // passing an array as a function parameter
         receipt = await res.wait();
         console.log(receipt);
-      } else if (contractFunction.stateMutability === "view") {
+      } else if (
+        contractFunction.stateMutability === "view" ||
+        contractFunction.stateMutability === "pure"
+      ) {
         const res = await contract.functions[method](...args); // passing an array as a function parameter
         receipt = await res.wait();
         console.log(receipt);
