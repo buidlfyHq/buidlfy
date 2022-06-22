@@ -17,7 +17,6 @@ const Navbar: FC<{
   const showSidebar = () => {
     setClassName("");
   };
-
   return (
     <main
       className={
