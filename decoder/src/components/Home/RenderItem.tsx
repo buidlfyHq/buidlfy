@@ -24,12 +24,12 @@ const RenderItem: FC<{
     case "Button":
       return (
         <Button
-          bold={item.styles.fontWeight}
-          italic={item.styles.fontStyle}
-          underline={item.styles.textDecoration}
-          color={item.styles.color}
-          justifyContent={item.styles.justifyContent}
-          fontSize={item.styles.fontSize}
+          bold="normal"
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
           contractFunction={item.contract}
@@ -42,12 +42,12 @@ const RenderItem: FC<{
     case "Text":
       return (
         <Text
-          bold={item.styles.fontWeight}
-          italic={item.styles.fontStyle}
-          underline={item.styles.textDecoration}
-          color={item.styles.color}
-          justifyContent={item.styles.justifyContent}
-          fontSize={item.styles.fontSize}
+          bold={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
           contractFunction={item.contract}
@@ -57,12 +57,12 @@ const RenderItem: FC<{
     case "Link":
       return (
         <Link
-          bold={item.styles.fontWeight}
-          italic={item.styles.fontStyle}
-          underline={item.styles.textDecoration}
-          color={item.styles.color}
-          justifyContent={item.styles.justifyContent}
-          fontSize={item.styles.fontSize}
+          bold={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
         />
@@ -70,40 +70,46 @@ const RenderItem: FC<{
     case "Heading 1":
       return (
         <HeadingOne
-          bold={item.styles.fontWeight}
-          italic={item.styles.fontStyle}
-          underline={item.styles.textDecoration}
-          color={item.styles.color}
-          justifyContent={item.styles.justifyContent}
-          fontSize={item.styles.fontSize}
+          bold={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
+          contractFunction={item.contract}
+          outputValue={outputValue}
         />
       );
     case "Heading 2":
       return (
         <HeadingTwo
-          bold={item.styles.fontWeight}
-          italic={item.styles.fontStyle}
-          underline={item.styles.textDecoration}
-          color={item.styles.color}
-          justifyContent={item.styles.justifyContent}
-          fontSize={item.styles.fontSize}
+          bold={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
+          contractFunction={item.contract}
+          outputValue={outputValue}
         />
       );
     case "Heading 3":
       return (
         <HeadingThree
-          bold={item.styles.fontWeight}
-          italic={item.styles.fontStyle}
-          underline={item.styles.textDecoration}
-          color={item.styles.color}
-          justifyContent={item.styles.justifyContent}
-          fontSize={item.styles.fontSize}
+          bold={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
+          contractFunction={item.contract}
+          outputValue={outputValue}
         />
       );
     case "Input":

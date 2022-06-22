@@ -3,7 +3,7 @@ import { ethers, Contract } from "ethers";
 import BuilderConfig from "../../config";
 
 const AbiComponent: FC = () => {
-  const config = BuilderConfig;
+  const config = JSON.parse(BuilderConfig);
   const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState([]);
   const [outputValue, setOutputValue] = useState({});

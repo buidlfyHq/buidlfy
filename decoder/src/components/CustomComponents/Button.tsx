@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import { ethers, Contract } from "ethers";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
-import config from "config";
+import BuilderConfig from "config";
 import { setValue } from "../Utils/SetValue";
 
 const Button: FC<ITexts> = ({
@@ -20,6 +20,7 @@ const Button: FC<ITexts> = ({
   outputValue,
   setOutputValue,
 }) => {
+  const config = JSON.parse(BuilderConfig);
   let provider, signer, contract: Contract;
 
   const onLoad = () => {
@@ -99,14 +100,14 @@ const Button: FC<ITexts> = ({
       }
 
       if (receipt.transactionHash) {
-        alert('Transaction hash: ' + receipt.transactionHash);
+        alert("Transaction hash: " + receipt.transactionHash);
       }
     } else {
       // contract functions without inputs
       // state mutability is view always
       const receipt = await contract.functions[method]();
       console.log(receipt);
-      
+
       contractFunction.outputs.map((output: string, i: number) => {
         setOutputValue(setValue(outputValue, output, receipt[i]));
         return output;
@@ -115,7 +116,10 @@ const Button: FC<ITexts> = ({
   };
 
   return (
-    <div className=" flex px-6 items-center justify-center w-auto h-full">
+    <div
+      style={{ justifyContent: justifyContent }}
+      className="flex px-6 items-center justify-center w-auto h-full"
+    >
       <div
         style={{
           fontWeight: bold,
@@ -124,7 +128,7 @@ const Button: FC<ITexts> = ({
           color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
           borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
           display: "flex",
-          justifyContent: justifyContent,
+          justifyContent: "center",
           fontSize: `${fontSize}px`,
         }}
         className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"

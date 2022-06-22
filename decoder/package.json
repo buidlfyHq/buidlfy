@@ -10,6 +10,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "@walletconnect/web3-provider": "^1.7.3",
+    "base-64": "^1.0.0",
     "ethers": "^5.6.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -43,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@types/base-64": "^1.0.0",
     "@types/jest": "^27.5.0",
     "@types/node": "^17.0.31",
     "@types/react": "^18.0.8",

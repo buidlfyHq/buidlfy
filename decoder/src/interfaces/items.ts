@@ -13,7 +13,7 @@ export default interface IItems {
   link?: string;
   name: string;
   value?: string;
-  styles: Styles;
+  style: Styles;
   isBounded?: boolean;
   isDraggable?: boolean;
   isResizable?: boolean;
