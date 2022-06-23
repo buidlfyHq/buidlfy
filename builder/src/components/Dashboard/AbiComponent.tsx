@@ -1,24 +1,23 @@
 import React, { FC } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 
-const AbiComponent: FC<{
-  showComponent: any;
-  setShowComponent: any;
-  setSelector;
-  selector;
-  elementConfig;
-  setElementConfig;
-  selectedElements;
-  setSelectedElements;
-}> = ({
+interface IAbiComponent {
+  showComponent: {
+    id: string;
+    value: { name: string; inputs: []; outputs: [] };
+  };
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  elementConfig: object;
+}
+
+const AbiComponent: FC<IAbiComponent> = ({
   showComponent,
-  setShowComponent,
-  selector,
   setSelector,
   elementConfig,
-  setElementConfig,
-  selectedElements,
-  setSelectedElements,
 }) => {
   return (
     <>
@@ -26,8 +25,8 @@ const AbiComponent: FC<{
         {showComponent ? (
           <>
             <>
-              {showComponent.value.inputs[0] &&
-                showComponent.value.inputs.map((input, i) => {
+              {showComponent.value.inputs.length &&
+                showComponent.value.inputs.map((input: { name: string }, i) => {
                   // const selectedId = option;
                   const selectedId = "input" + i + showComponent.id;
                   const objects = Object.keys(elementConfig);
@@ -49,11 +48,11 @@ const AbiComponent: FC<{
                         }
                       >
                         <>
-                          {objects.length == 0 ? (
+                          {!objects.length ? (
                             <span>Select An Element</span>
                           ) : (
                             <>
-                              {filterObjects.length == 0 ? (
+                              {!filterObjects.length ? (
                                 <span>Select An Element</span>
                               ) : (
                                 filterObjects.map((key) => (
@@ -79,8 +78,8 @@ const AbiComponent: FC<{
                 })}
             </>
 
-            {showComponent.value.outputs[0] &&
-              showComponent.value.outputs.map((output, i) => {
+            {showComponent.value.outputs.length &&
+              showComponent.value.outputs.map((output: { name: string }, i) => {
                 const selectedId = "output" + i + showComponent.id;
                 const objects = Object.keys(elementConfig);
                 const filterObjects = objects.filter(
@@ -101,11 +100,11 @@ const AbiComponent: FC<{
                           })
                         }
                       >
-                        {objects.length == 0 ? (
+                        {!objects.length ? (
                           <span>Select An Element</span>
                         ) : (
                           <>
-                            {filterObjects.length == 0 ? (
+                            {!filterObjects.length ? (
                               <span>Select An Element</span>
                             ) : (
                               filterObjects.map((key) => (

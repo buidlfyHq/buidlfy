@@ -58,23 +58,15 @@ export default function AdvanceComponent({
       <br />
       <AbiMethods
         contractConfig={contractConfig}
-        showComponent={showComponent}
         setShowComponent={setShowComponent}
         selectedItem={selectedItem}
-        selectedElements={selectedElements}
-        setSelectedElements={setSelectedElements}
         items={items}
         setItems={setItems}
       />
       <AbiComponent
         showComponent={showComponent}
-        setShowComponent={setShowComponent}
         setSelector={setSelector}
         elementConfig={elementConfig}
-        setElementConfig={setElementConfig}
-        selector={selector}
-        selectedElements={selectedElements}
-        setSelectedElements={setSelectedElements}
       />
     </>
   );

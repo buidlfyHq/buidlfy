@@ -1,26 +1,13 @@
 import React, { FC } from "react";
-import { BiTargetLock } from "react-icons/bi";
-import ShortUniqueId from "short-unique-id";
+import IItems from "interfaces/items";
 
 const AbiMethods: FC<{
-  contractConfig;
-  showComponent: any;
-  setShowComponent: any;
-  selectedItem;
-  selectedElements;
-  setSelectedElements;
-  items;
-  setItems;
-}> = ({
-  contractConfig,
-  showComponent,
-  setShowComponent,
-  selectedItem,
-  selectedElements,
-  setSelectedElements,
-  items,
-  setItems,
-}) => {
+  contractConfig: { abi: string; address: string };
+  setShowComponent: (showComponent: { id: string; value: IItems }) => void;
+  selectedItem: IItems;
+  items: IItems[];
+  setItems: (items: IItems[]) => void;
+}> = ({ contractConfig, setShowComponent, selectedItem, items, setItems }) => {
   const abiJson = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
 
   return (

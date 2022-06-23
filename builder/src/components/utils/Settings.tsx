@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SettingComponent from "./SettingComponent";
+import IItems from "interfaces/items";
 
 const Settings = ({
   items,
@@ -17,7 +18,7 @@ const Settings = ({
   setSelectedElements,
 }) => {
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
-  const selectedItem = items.find((item) => item.i === settingItemId);
+  const selectedItem: IItems = items.find((item) => item.i === settingItemId);
 
   const setLink = (link: string) => {
     if (!settingItemId) {
@@ -234,7 +235,7 @@ const Settings = ({
           italic={selectedItem?.style?.fontStyle}
           setUnderline={setUnderline}
           underline={selectedItem?.style?.textDecoration}
-          color={selectedItem?.style?.fontStyle}
+          color={{ r: 0, g: 0, b: 0, a: 100 }}
           setColor={setColor}
           setDeleteComponent={setDeleteComponent}
           deleteComponent={selectedItem?.style?.deleteComponent}

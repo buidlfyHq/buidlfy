@@ -25,6 +25,7 @@ const Dashboard: FC = () => {
   const [openTab, setOpenTab] = React.useState(1);
   const [elementConfig, setElementConfig] = useState({});
   const [selectedElements, setSelectedElements] = useState({});
+
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -85,7 +86,6 @@ const Dashboard: FC = () => {
         setContractConfig={setContractConfig}
         setSelector={setSelector}
         elementConfig={elementConfig}
-        setElementConfig={setElementConfig}
         openTab={openTab}
         setOpenTab={setOpenTab}
         selectedElements={selectedElements}
