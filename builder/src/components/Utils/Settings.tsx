@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import SettingComponent from "./SettingComponent";
+import IItems from "interfaces/items";
 
-const Settings = ({
+interface ISetting {
+  items: any;
+  setItems: (items: any) => void;
+  contractConfig: { abi: string; address: string };
+  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  elementConfig: object;
+  setElementConfig: (elementConfig: object) => void;
+  openTab: number;
+  setOpenTab: (openTab: number) => void;
+  selectedElements: object;
+  setSelectedElements: (selectedElements: object) => void;
+  settingItemId: string;
+}
+
+const Settings: FC<ISetting> = ({
   items,
   setItems,
   settingItemId,
   contractConfig,
   setContractConfig,
-  setOpen,
   setSelector,
   elementConfig,
   setElementConfig,
@@ -223,7 +242,6 @@ const Settings = ({
           items={items}
           setItems={setItems}
           selectedItem={selectedItem}
-          setOpen={setOpen}
           setLink={setLink}
           link={selectedItem?.link}
           setValue={setValue}

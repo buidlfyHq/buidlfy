@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import "../../styles/Dashboard.css";
 import {
   AiOutlineAlignLeft,
@@ -7,12 +7,19 @@ import {
 } from "react-icons/ai";
 import "../../styles/Components.css";
 
-export default function AlignComponent({
+interface IAlignComponent {
+  setLeft: (justifyContent: string | boolean) => void;
+  setRight: (justifyContent: string | boolean) => void;
+  setCenter: (justifyContent: string | boolean) => void;
+  justifyContent: string;
+}
+
+const AlignComponent: FC<IAlignComponent> = ({
   setLeft,
   setRight,
   setCenter,
   justifyContent,
-}) {
+}) => {
   const handleLeftChange = () => {
     // setLeft(!left);
     if (justifyContent === "left") {
@@ -65,4 +72,5 @@ export default function AlignComponent({
       </span>
     </>
   );
-}
+};
+export default AlignComponent;

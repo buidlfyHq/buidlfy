@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, FC } from "react";
 import "../../styles/Dashboard.css";
 import { RiText } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
@@ -9,15 +9,55 @@ import UtilitiesComponent from "./UtilitiesComponent";
 import ColorComponent from "./ColorComponent";
 import FontSizeComponent from "./FontSizeComponent";
 import AdvanceComponent from "./AdvanceComponent";
+import IItems from "interfaces/items";
 
-export default function SettingComponent({
-  text = null,
+interface ISettingComponent {
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  showComponent: {
+    id: string;
+    value: { name: string; inputs: object[]; outputs: object[] };
+  };
+  setShowComponent: (showComponent: { id: string; value: IItems }) => void;
+  contractConfig: { abi: string; address: string };
+  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
+  selectedItem: IItems;
+  items: IItems[];
+  setItems: (items: IItems[]) => void;
+  elementConfig: object;
+  selectedElements: object;
+  setSelectedElements: (selectedElements: object) => void;
+  setElementConfig: (elementConfig: object) => void;
+  deleteComponent: number;
+  setDeleteComponent: (deleteComponent: number) => void;
+  setLeft: (justifyContent: string | boolean) => void;
+  setRight: (justifyContent: string | boolean) => void;
+  setCenter: (justifyContent: string | boolean) => void;
+  justifyContent: string;
+  color: any;
+  setColor: (color: any) => void;
+  fontSize: number;
+  setFontSize: (fontSize: number) => void;
+  bold: string;
+  italic: string;
+  underline: string;
+  setBold: (bold: string | boolean) => void;
+  setItalic: (italic: string | boolean) => void;
+  setUnderline: (underline: string | boolean) => void;
+  value: string;
+  setValue: (value: string) => void;
+  link: string;
+  setLink: (link: string) => void;
+  openTab: number;
+  setOpenTab: (openTab: number) => void;
+}
+
+const SettingComponent: FC<ISettingComponent> = ({
   link,
-  setOpen,
   setValue = null,
-  setMenuArr = null,
-  id = null,
-  menuArr = null,
   setBold = null,
   bold = null,
   italic = null,
@@ -26,7 +66,7 @@ export default function SettingComponent({
   setUnderline = null,
   color = { r: 0, g: 0, b: 0, a: 100 },
   setColor = null,
-  deleteComponent = "0",
+  deleteComponent = 0,
   setDeleteComponent = null,
   justifyContent = null,
   setLeft = null,
@@ -50,11 +90,10 @@ export default function SettingComponent({
   setOpenTab,
   selectedElements,
   setSelectedElements,
-}) {
+}) => {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
 
-  const Id: string = id;
   const ref = useRef(null);
 
   useEffect(() => {
@@ -65,14 +104,11 @@ export default function SettingComponent({
     setLinkVal(link || "");
   }, [link]);
 
-  const handleTextChange = (e: any, Id: string) => {
-    setTextVal(e.target.value);
-    if (Id === null) {
-      setValue(e.target.value);
-    }
+  const handleTextChange = (e: any) => {
+    setValue(e.target.value);
   };
 
-  const handleLinkChange = (e: any, Id: string) => {
+  const handleLinkChange = (e: any) => {
     setLinkVal(e.target.value);
   };
   return (
@@ -148,9 +184,8 @@ export default function SettingComponent({
                             <RiText className="text-[18px] mr-3" />
 
                             <input
-                              name={Id}
                               value={textVal}
-                              onChange={(e) => handleTextChange(e, Id)}
+                              onChange={(e) => handleTextChange(e)}
                               className="changeText"
                               type="text"
                               placeholder="Name..."
@@ -159,9 +194,8 @@ export default function SettingComponent({
                           <div className="flex items-center px-3 mt-2 text-black">
                             <AiOutlineLink className="text-[18px] mr-3" />
                             <input
-                              name={Id}
                               value={linkVal}
-                              onChange={(e) => handleLinkChange(e, Id)}
+                              onChange={(e) => handleLinkChange(e)}
                               className="changeText"
                               type="text"
                               placeholder="URL..."
@@ -206,12 +240,12 @@ export default function SettingComponent({
                             setSelector={setSelector}
                             elementConfig={elementConfig}
                             selector={undefined}
-                            setElementConfig={setElementConfig}
                             selectedElements={selectedElements}
                             setSelectedElements={setSelectedElements}
                             selectedItem={selectedItem}
                             items={items}
                             setItems={setItems}
+                            setElementConfig={setElementConfig}
                           />
                         </div>
                       </div>
@@ -233,9 +267,8 @@ export default function SettingComponent({
                 <RiText className="text-[18px] mr-3" />
 
                 <input
-                  name={Id}
                   value={textVal}
-                  onChange={(e) => handleTextChange(e, Id)}
+                  onChange={(e) => handleTextChange(e)}
                   className="changeText"
                   type="text"
                   placeholder="Name..."
@@ -244,9 +277,8 @@ export default function SettingComponent({
               <div className="flex items-center px-3 mt-2 text-black">
                 <AiOutlineLink className="text-[18px] mr-3" />
                 <input
-                  name={Id}
                   value={linkVal}
-                  onChange={(e) => handleLinkChange(e, Id)}
+                  onChange={(e) => handleLinkChange(e)}
                   className="changeText"
                   type="text"
                   placeholder="URL..."
@@ -281,4 +313,6 @@ export default function SettingComponent({
       </div>
     </>
   );
-}
+};
+
+export default SettingComponent;

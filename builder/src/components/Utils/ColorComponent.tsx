@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import "../../styles/Dashboard.css";
 import { VscSymbolColor } from "react-icons/vsc";
 import "../../styles/Components.css";
 import { SketchPicker } from "react-color";
 
-export default function ColorComponent({
-  color = { r: 0, g: 0, b: 0, a: 100 },
-  setColor,
-}) {
+interface IColorComponent {
+  color: any;
+  setColor: (color: any) => void;
+}
+
+const ColorComponent: FC<IColorComponent> = ({ color, setColor }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const handleClick = () => {
@@ -50,4 +52,6 @@ export default function ColorComponent({
       ) : null}
     </>
   );
-}
+};
+
+export default ColorComponent;

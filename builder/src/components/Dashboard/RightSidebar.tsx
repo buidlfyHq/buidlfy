@@ -5,11 +5,11 @@ import Settings from "components/Utils/Settings";
 const RightSidebar: FC<{
   rightClassName: string;
   setRightClassName: (className: string) => void;
-  contractConfig: object;
-  setContractConfig: (contractConfig: object) => void;
+  contractConfig: { abi: string; address: string };
+  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
   setSelector;
   elementConfig;
-  
+  setElementConfig;
   openTab;
   setOpenTab;
   selectedElements;
@@ -21,11 +21,11 @@ const RightSidebar: FC<{
   setContractConfig,
   setSelector,
   elementConfig,
-  
   openTab,
   setOpenTab,
   selectedElements,
   setSelectedElements,
+  setElementConfig,
 }) => {
   const [items, setItems] = useState([]); // for storing components
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
@@ -60,14 +60,13 @@ const RightSidebar: FC<{
             settingItemId={settingItemId}
             contractConfig={contractConfig}
             setContractConfig={setContractConfig}
-            setOpen={setOpenSetting}
             setSelector={setSelector}
             elementConfig={elementConfig}
-            
             openTab={openTab}
             setOpenTab={setOpenTab}
             selectedElements={selectedElements}
             setSelectedElements={setSelectedElements}
+            setElementConfig={setElementConfig}
           />
         )}
       </>

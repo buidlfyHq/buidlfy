@@ -1,8 +1,16 @@
-import React from "react";
+import React, { FC } from "react";
 import "../../styles/Dashboard.css";
 import "../../styles/Components.css";
 
-export default function FontSizeComponent({ fontSize, setFontSize = null }) {
+interface IFontSizeComponent {
+  fontSize: number;
+  setFontSize: (fontSize: number) => void;
+}
+
+const FontSizeComponent: FC<IFontSizeComponent> = ({
+  fontSize,
+  setFontSize,
+}) => {
   const incrementCounter = () => {
     setFontSize(fontSize + 1);
   };
@@ -10,7 +18,7 @@ export default function FontSizeComponent({ fontSize, setFontSize = null }) {
   if (fontSize <= 1) {
     decrementCounter = () => setFontSize(1);
   }
-  const handleSizeChange = (e) => {
+  const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (fontSize) {
       setFontSize(+e.target.value);
     }
@@ -61,4 +69,5 @@ export default function FontSizeComponent({ fontSize, setFontSize = null }) {
       </span>
     </div>
   );
-}
+};
+export default FontSizeComponent;
