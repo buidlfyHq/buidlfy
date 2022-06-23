@@ -4,7 +4,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 interface IAbiComponent {
   showComponent: {
     id: string;
-    value: { name: string; inputs: []; outputs: [] };
+    value: { name: string; inputs: object[]; outputs: object[] };
   };
   setSelector: (selector: {
     methodName: string;
@@ -25,7 +25,7 @@ const AbiComponent: FC<IAbiComponent> = ({
         {showComponent ? (
           <>
             <>
-              {showComponent.value.inputs.length &&
+              {showComponent.value.inputs[0] &&
                 showComponent.value.inputs.map((input: { name: string }, i) => {
                   // const selectedId = option;
                   const selectedId = "input" + i + showComponent.id;
@@ -48,11 +48,11 @@ const AbiComponent: FC<IAbiComponent> = ({
                         }
                       >
                         <>
-                          {!objects.length ? (
+                          {objects.length === 0 ? (
                             <span>Select An Element</span>
                           ) : (
                             <>
-                              {!filterObjects.length ? (
+                              {filterObjects.length === 0 ? (
                                 <span>Select An Element</span>
                               ) : (
                                 filterObjects.map((key) => (
@@ -78,7 +78,7 @@ const AbiComponent: FC<IAbiComponent> = ({
                 })}
             </>
 
-            {showComponent.value.outputs.length &&
+            {showComponent.value.outputs[0] &&
               showComponent.value.outputs.map((output: { name: string }, i) => {
                 const selectedId = "output" + i + showComponent.id;
                 const objects = Object.keys(elementConfig);
@@ -100,11 +100,11 @@ const AbiComponent: FC<IAbiComponent> = ({
                           })
                         }
                       >
-                        {!objects.length ? (
+                        {objects.length === 0 ? (
                           <span>Select An Element</span>
                         ) : (
                           <>
-                            {!filterObjects.length ? (
+                            {filterObjects.length === 0 ? (
                               <span>Select An Element</span>
                             ) : (
                               filterObjects.map((key) => (

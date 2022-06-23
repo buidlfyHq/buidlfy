@@ -11,7 +11,7 @@ const Settings = ({
   setOpen,
   setSelector,
   elementConfig,
-  setElementConfig,
+  
   openTab,
   setOpenTab,
   selectedElements,
@@ -251,7 +251,6 @@ const Settings = ({
           setShowComponent={setShowComponent}
           setSelector={setSelector}
           elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
           selectedElements={selectedElements}

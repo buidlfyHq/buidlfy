@@ -9,7 +9,7 @@ const RightSidebar: FC<{
   setContractConfig: (contractConfig: object) => void;
   setSelector;
   elementConfig;
-  setElementConfig;
+  
   openTab;
   setOpenTab;
   selectedElements;
@@ -21,7 +21,7 @@ const RightSidebar: FC<{
   setContractConfig,
   setSelector,
   elementConfig,
-  setElementConfig,
+  
   openTab,
   setOpenTab,
   selectedElements,
@@ -63,7 +63,7 @@ const RightSidebar: FC<{
             setOpen={setOpenSetting}
             setSelector={setSelector}
             elementConfig={elementConfig}
-            setElementConfig={setElementConfig}
+            
             openTab={openTab}
             setOpenTab={setOpenTab}
             selectedElements={selectedElements}
