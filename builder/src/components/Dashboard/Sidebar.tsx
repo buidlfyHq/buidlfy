@@ -6,14 +6,20 @@ import { BiGridSmall } from "react-icons/bi";
 import { components } from "./component";
 import IItems from "interfaces/items";
 
-const Sidebar: FC<{
+interface ISidebar {
   className: string;
   setClassName: (className: string) => void;
   items: IItems[];
   setItems: (items: IItems[]) => void;
-  setSelector;
-  elementConfig;
-}> = ({
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  elementConfig: object;
+}
+
+const Sidebar: FC<ISidebar> = ({
   className,
   setClassName,
   items,

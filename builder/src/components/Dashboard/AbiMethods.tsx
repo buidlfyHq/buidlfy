@@ -1,13 +1,22 @@
 import React, { FC } from "react";
 import IItems from "interfaces/items";
 
-const AbiMethods: FC<{
+interface IAbiMethods {
   contractConfig: { abi: string; address: string };
   setShowComponent: (showComponent: { id: string; value: IItems }) => void;
   selectedItem: IItems;
   items: IItems[];
   setItems: (items: IItems[]) => void;
-}> = ({ contractConfig, setShowComponent, selectedItem, items, setItems }) => {
+}
+
+const AbiMethods: FC<IAbiMethods> = ({ 
+  contractConfig, 
+  setShowComponent, 
+  selectedItem, 
+  items, 
+  setItems 
+}) => {
+
   const abiJson = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
 
   return (
@@ -20,13 +29,15 @@ const AbiMethods: FC<{
           <div className="flex justify-center">
             <div className="mb-3 xl:w-54">
               <select
-                onChange={(e: any) => {
+                // e type? *****************
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                   // NOTE - try replacing with uuid
                   setShowComponent({
                     id: e.target.value,
                     value: abiJson[e.target.value],
                   });
                   const generateArray = (valueArray, valueName) => {
+                    // types above ***************************
                     let requiredArray = [];
                     valueArray.map((value, index) => {
                       let id = valueName + index + e.target.value;
