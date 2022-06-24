@@ -85,11 +85,8 @@ const SettingComponent: FC<ISettingComponent> = ({
   setShowComponent,
   setSelector,
   elementConfig,
-  setElementConfig,
   openTab,
   setOpenTab,
-  selectedElements,
-  setSelectedElements,
 }) => {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
@@ -240,12 +237,9 @@ const SettingComponent: FC<ISettingComponent> = ({
                             setSelector={setSelector}
                             elementConfig={elementConfig}
                             selector={undefined}
-                            selectedElements={selectedElements}
-                            setSelectedElements={setSelectedElements}
                             selectedItem={selectedItem}
                             items={items}
                             setItems={setItems}
-                            setElementConfig={setElementConfig}
                           />
                         </div>
                       </div>

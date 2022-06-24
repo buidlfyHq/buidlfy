@@ -2,19 +2,24 @@ import React, { FC, useState } from "react";
 import { GiClick } from "react-icons/gi";
 import Settings from "components/Utils/Settings";
 
-const RightSidebar: FC<{
+interface IRightSidebar {
   rightClassName: string;
-  setRightClassName: (className: string) => void;
-  contractConfig: { abi: string; address: string };
-  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
-  setSelector;
-  elementConfig;
-  setElementConfig;
-  openTab;
-  setOpenTab;
-  selectedElements;
-  setSelectedElements;
-}> = ({
+  setRightClassName: React.Dispatch<React.SetStateAction<string>>;
+  contractConfig: object;
+  setContractConfig: (contractConfig: object) => void;
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  elementConfig: object;
+  setElementConfig: React.Dispatch<React.SetStateAction<object>> ;
+  openTab: number;
+  setOpenTab: React.Dispatch<React.SetStateAction<number>> ;
+  // not sure about this**************************
+}
+
+const RightSidebar: FC<IRightSidebar> = ({
   rightClassName,
   setRightClassName,
   contractConfig,
@@ -23,9 +28,6 @@ const RightSidebar: FC<{
   elementConfig,
   openTab,
   setOpenTab,
-  selectedElements,
-  setSelectedElements,
-  setElementConfig,
 }) => {
   const [items, setItems] = useState([]); // for storing components
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
@@ -64,9 +66,6 @@ const RightSidebar: FC<{
             elementConfig={elementConfig}
             openTab={openTab}
             setOpenTab={setOpenTab}
-            selectedElements={selectedElements}
-            setSelectedElements={setSelectedElements}
-            setElementConfig={setElementConfig}
           />
         )}
       </>

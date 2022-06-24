@@ -29,11 +29,8 @@ const Settings: FC<ISetting> = ({
   setContractConfig,
   setSelector,
   elementConfig,
-  setElementConfig,
   openTab,
   setOpenTab,
-  selectedElements,
-  setSelectedElements,
 }) => {
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
@@ -268,11 +265,8 @@ const Settings: FC<ISetting> = ({
           setShowComponent={setShowComponent}
           setSelector={setSelector}
           elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
-          selectedElements={selectedElements}
-          setSelectedElements={setSelectedElements}
         />
       ) : null}
     </>

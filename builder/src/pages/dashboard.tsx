@@ -5,26 +5,27 @@ import Sidebar from "components/Dashboard/Sidebar";
 import RightSidebar from "components/Dashboard/RightSidebar";
 import Workspace from "components/Dashboard/Workspace";
 import Settings from "components/Utils/Settings";
+import IItems from "interfaces/items";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
 const Dashboard: FC = () => {
   const navigate = useNavigate();
-  const [items, setItems] = useState([]); // for storing components
+  // types for items ************************
+  const [items, setItems] = useState<IItems[]>([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [rightClassName, setRightClassName] = useState<string>(""); // for handling sidebar toggle
   const [contractConfig, setContractConfig] = useState({
     abi: "",
     address: "",
   }); // for storing contract abi and address
-  const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
+  const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
   // for selecting an element for contract
   const [selector, setSelector] = useState(null);
-  const [openTab, setOpenTab] = React.useState(1);
-  const [elementConfig, setElementConfig] = useState({});
-  const [selectedElements, setSelectedElements] = useState({});
+  const [openTab, setOpenTab] = useState<number>(1);
+  const [elementConfig, setElementConfig] = useState<object>({});
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -40,6 +41,8 @@ const Dashboard: FC = () => {
     };
     getInformation();
   }, []); // eslint-disable-line
+
+  console.log(elementConfig)
 
   return (
     <main className="flex flex-row w-full min-h-screen">
@@ -74,8 +77,6 @@ const Dashboard: FC = () => {
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setOpenTab={setOpenTab}
-          selectedElements={selectedElements}
-          setSelectedElements={setSelectedElements}
         />
       </section>
 
@@ -85,12 +86,10 @@ const Dashboard: FC = () => {
         contractConfig={contractConfig}
         setContractConfig={setContractConfig}
         setSelector={setSelector}
+        setElementConfig={setElementConfig}
         elementConfig={elementConfig}
         openTab={openTab}
         setOpenTab={setOpenTab}
-        selectedElements={selectedElements}
-        setSelectedElements={setSelectedElements}
-        setElementConfig={setElementConfig}
       />
 
       {/* Settings */}
@@ -105,9 +104,6 @@ const Dashboard: FC = () => {
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
-          selectedElements={selectedElements}
-          setSelectedElements={setSelectedElements}
-          setElementConfig={setElementConfig}
         />
       )}
     </main>

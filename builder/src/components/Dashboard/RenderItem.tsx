@@ -11,7 +11,9 @@ import HeadingTwo from "../CustomComponents/HeadingTwo";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
-const RenderItem: FC<{ item: IItems }> = ({ item }) => {
+interface IRenderItem { item: IItems }
+
+const RenderItem: FC<IRenderItem> = ({ item }) => {
   switch (item.name) {
     case "Container":
       return <Container />;

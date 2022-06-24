@@ -31,7 +31,6 @@ interface IAdvanceComponent {
   elementConfig: object;
   selectedElements: object;
   setSelectedElements: (selectedElements: object) => void;
-  setElementConfig: (elementConfig: object) => void;
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({
@@ -42,12 +41,9 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
   selector,
   setSelector,
   elementConfig,
-  selectedElements,
-  setSelectedElements,
   selectedItem,
   items,
   setItems,
-  setElementConfig,
 }) => {
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
 

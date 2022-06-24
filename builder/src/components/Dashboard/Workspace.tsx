@@ -5,20 +5,27 @@ import IItems from "interfaces/items";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
-const Workspace: FC<{
+interface IWorkspace {
   items: IItems[];
   setItems: (items: IItems[]) => void;
   className: string;
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
   selector;
-  setSelector;
-  elementConfig;
-  setElementConfig;
-  setOpenTab;
-  selectedElements;
-  setSelectedElements;
-}> = ({
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  elementConfig: object;
+  setElementConfig: React.Dispatch<React.SetStateAction<object>> ;
+  setOpenTab: React.Dispatch<React.SetStateAction<number>> ;
+  // not sure about this**************************
+  selectedElements: any;
+  setSelectedElements: any;
+}
+
+const Workspace: FC<IWorkspace> = ({
   items,
   setItems,
   className,
@@ -50,6 +57,57 @@ const Workspace: FC<{
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
 
+  const handleFlowControl = (item: IItems, i:string, index:number) => {
+    // checks if the selector is active
+    if (selector === null) {
+      setOpenSetting(true);
+      setSettingItemId(i);
+      setOpenTab(1);
+    } else {
+      // Add validation for selection
+      if (selector.type === "input" && item.name === "Input") {
+        // for updating selector with item name and item id
+        setElementConfig({
+          ...elementConfig,
+          [selector.name]: { name: item.name, id: i },
+        });
+        let updatedItem = {
+          ...item,
+          contract: {
+            name: selector.methodName,
+            inputName: selector.name,
+          },
+        };
+        let newArray = [...items];
+        newArray[index] = updatedItem;
+        setItems(newArray);
+      } else if (
+        selector.type === "output" &&
+        (item.name === "Text" ||
+          item.name === "Heading 1" ||
+          item.name === "Heading 2" ||
+          item.name === "Heading 3")
+      ) {
+        // for updating selector with item name and item id
+        setElementConfig({
+          ...elementConfig,
+          [selector.name]: { name: item.name, id: i },
+        });
+        let updatedItem = {
+          ...item,
+          contract: {
+            name: selector.methodName,
+            outputName: selector.name,
+          },
+        };
+        let newArray = [...items];
+        newArray[index] = updatedItem;
+        setItems(newArray);
+      }
+      setSelector(null);
+    }
+  }
+
   return (
     <main
       className={
@@ -72,7 +130,7 @@ const Workspace: FC<{
         >
           {items
             ?.filter((i) => i.style.deleteComponent === 0)
-            .map((item, index) => {
+            .map((item: IItems, index: number) => {
               const { x, y, w, h, minW, i } = item;
               return (
                 <div
@@ -85,56 +143,7 @@ const Workspace: FC<{
                   }`}
                   // open item setting on click
                   // open item setting on click
-                  onClick={() => {
-                    // checks if the selector is active
-                    if (selector === null) {
-                      setOpenSetting(true);
-                      setSettingItemId(i);
-                      setOpenTab(1);
-                    } else {
-                      // Add validation for selection
-                      if (selector.type === "input" && item.name === "Input") {
-                        // for updating selector with item name and item id
-                        setElementConfig({
-                          ...elementConfig,
-                          [selector.name]: { name: item.name, id: i },
-                        });
-                        let updatedItem = {
-                          ...item,
-                          contract: {
-                            name: selector.methodName,
-                            inputName: selector.name,
-                          },
-                        };
-                        let newArray = [...items];
-                        newArray[index] = updatedItem;
-                        setItems(newArray);
-                      } else if (
-                        selector.type === "output" &&
-                        (item.name === "Text" ||
-                          item.name === "Heading 1" ||
-                          item.name === "Heading 2" ||
-                          item.name === "Heading 3")
-                      ) {
-                        // for updating selector with item name and item id
-                        setElementConfig({
-                          ...elementConfig,
-                          [selector.name]: { name: item.name, id: i },
-                        });
-                        let updatedItem = {
-                          ...item,
-                          contract: {
-                            name: selector.methodName,
-                            outputName: selector.name,
-                          },
-                        };
-                        let newArray = [...items];
-                        newArray[index] = updatedItem;
-                        setItems(newArray);
-                      }
-                      setSelector(null);
-                    }
-                  }}
+                  onClick={() => handleFlowControl(item, i, index)}
                 >
                   <RenderItem item={item} />
                 </div>
