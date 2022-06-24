@@ -20,7 +20,6 @@ interface IWorkspace {
   elementConfig: object;
   setElementConfig: React.Dispatch<React.SetStateAction<object>>;
   setOpenTab: React.Dispatch<React.SetStateAction<number>>;
-  // not sure about this**************************
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -116,7 +115,7 @@ const Workspace: FC<IWorkspace> = ({
         <ResponsiveGridLayout
           layouts={{ lg: items }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+          cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
           rowHeight={50}
           width={window.innerWidth - 250}
           compactType="horizontal"
@@ -137,7 +136,6 @@ const Workspace: FC<IWorkspace> = ({
                       ? "hover:outline-orange-300 hover:outline"
                       : "hover:outline-slate-300 hover:outline-dashed"
                   }`}
-                  // open item setting on click
                   // open item setting on click
                   onClick={() => handleFlowControl(item, i, index)}
                 >
