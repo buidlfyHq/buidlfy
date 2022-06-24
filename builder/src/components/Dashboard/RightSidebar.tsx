@@ -62,7 +62,6 @@ const RightSidebar: FC<IRightSidebar> = ({
             settingItemId={settingItemId}
             contractConfig={contractConfig}
             setContractConfig={setContractConfig}
-            setOpen={setOpenSetting}
             setSelector={setSelector}
             elementConfig={elementConfig}
             openTab={openTab}

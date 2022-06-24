@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, FC } from "react";
 import "../../styles/Dashboard.css";
 import { RiText } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
@@ -9,14 +9,55 @@ import UtilitiesComponent from "./UtilitiesComponent";
 import ColorComponent from "./ColorComponent";
 import FontSizeComponent from "./FontSizeComponent";
 import AdvanceComponent from "./AdvanceComponent";
+import IItems from "interfaces/items";
 
-export default function SettingComponent({
-  text = null,
+interface ISettingComponent {
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  showComponent: {
+    id: string;
+    value: { name: string; inputs: object[]; outputs: object[] };
+  };
+  setShowComponent: (showComponent: { id: string; value: IItems }) => void;
+  contractConfig: { abi: string; address: string };
+  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
+  selectedItem: IItems;
+  items: IItems[];
+  setItems: (items: IItems[]) => void;
+  elementConfig: object;
+  selectedElements: object;
+  setSelectedElements: (selectedElements: object) => void;
+  setElementConfig: (elementConfig: object) => void;
+  deleteComponent: number;
+  setDeleteComponent: (deleteComponent: number) => void;
+  setLeft: (justifyContent: string | boolean) => void;
+  setRight: (justifyContent: string | boolean) => void;
+  setCenter: (justifyContent: string | boolean) => void;
+  justifyContent: string;
+  color: any;
+  setColor: (color: any) => void;
+  fontSize: number;
+  setFontSize: (fontSize: number) => void;
+  bold: string;
+  italic: string;
+  underline: string;
+  setBold: (bold: string | boolean) => void;
+  setItalic: (italic: string | boolean) => void;
+  setUnderline: (underline: string | boolean) => void;
+  value: string;
+  setValue: (value: string) => void;
+  link: string;
+  setLink: (link: string) => void;
+  openTab: number;
+  setOpenTab: (openTab: number) => void;
+}
+
+const SettingComponent: FC<ISettingComponent> = ({
   link,
-  setOpen,
   setValue = null,
-  setMenuArr = null,
-  menuArr = null,
   setBold = null,
   bold = null,
   italic = null,
@@ -25,7 +66,7 @@ export default function SettingComponent({
   setUnderline = null,
   color = { r: 0, g: 0, b: 0, a: 100 },
   setColor = null,
-  deleteComponent = "0",
+  deleteComponent = 0,
   setDeleteComponent = null,
   justifyContent = null,
   setLeft = null,
@@ -46,7 +87,7 @@ export default function SettingComponent({
   elementConfig,
   openTab,
   setOpenTab,
-}) {
+}) => {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
 
@@ -266,4 +307,6 @@ export default function SettingComponent({
       </div>
     </>
   );
-}
+};
+
+export default SettingComponent;

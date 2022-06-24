@@ -77,8 +77,6 @@ const Dashboard: FC = () => {
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setOpenTab={setOpenTab}
-          selectedElements={selectedElements}
-          setSelectedElements={setSelectedElements}
         />
       </section>
 
@@ -102,7 +100,6 @@ const Dashboard: FC = () => {
           settingItemId={settingItemId}
           contractConfig={contractConfig}
           setContractConfig={setContractConfig}
-          setOpen={setOpenSetting}
           setSelector={setSelector}
           elementConfig={elementConfig}
           openTab={openTab}

@@ -1,12 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import "../../styles/Dashboard.css";
 import "../../styles/Components.css";
 import { FaFileContract } from "react-icons/fa";
 import Modal from "components/Dashboard/Modal";
 import AbiMethods from "components/Dashboard/AbiMethods";
 import AbiComponent from "components/Dashboard/AbiComponent";
+import IItems from "interfaces/items";
 
-export default function AdvanceComponent({
+interface IAdvanceComponent {
+  selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  };
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  showComponent: {
+    id: string;
+    value: { name: string; inputs: object[]; outputs: object[] };
+  };
+  setShowComponent: (showComponent: { id: string; value: IItems }) => void;
+  contractConfig: { abi: string; address: string };
+  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
+  selectedItem: IItems;
+  items: IItems[];
+  setItems: (items: IItems[]) => void;
+  elementConfig: object;
+  selectedElements: object;
+  setSelectedElements: (selectedElements: object) => void;
+}
+
+const AdvanceComponent: FC<IAdvanceComponent> = ({
   contractConfig,
   setContractConfig,
   showComponent,
@@ -17,7 +44,7 @@ export default function AdvanceComponent({
   selectedItem,
   items,
   setItems,
-}) {
+}) => {
   const [isOpen, setIsOpen] = useState(false); // for connect contract modal
 
   return (
@@ -67,4 +94,5 @@ export default function AdvanceComponent({
       />
     </>
   );
-}
+};
+export default AdvanceComponent;
