@@ -14,8 +14,6 @@ export default function AdvanceComponent({
   selector,
   setSelector,
   elementConfig,
-  selectedElements,
-  setSelectedElements,
   selectedItem,
   items,
   setItems,

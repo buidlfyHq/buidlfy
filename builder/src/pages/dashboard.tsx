@@ -26,7 +26,6 @@ const Dashboard: FC = () => {
   const [selector, setSelector] = useState(null);
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
-  const [selectedElements, setSelectedElements] = useState({});
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -93,8 +92,6 @@ const Dashboard: FC = () => {
         elementConfig={elementConfig}
         openTab={openTab}
         setOpenTab={setOpenTab}
-        selectedElements={selectedElements}
-        setSelectedElements={setSelectedElements}
       />
 
       {/* Settings */}
@@ -110,8 +107,6 @@ const Dashboard: FC = () => {
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
-          selectedElements={selectedElements}
-          setSelectedElements={setSelectedElements}
         />
       )}
     </main>

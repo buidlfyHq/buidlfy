@@ -17,8 +17,6 @@ interface IRightSidebar {
   openTab: number;
   setOpenTab: React.Dispatch<React.SetStateAction<number>> ;
   // not sure about this**************************
-  selectedElements;
-  setSelectedElements: any ;
 }
 
 const RightSidebar: FC<IRightSidebar> = ({
@@ -28,11 +26,8 @@ const RightSidebar: FC<IRightSidebar> = ({
   setContractConfig,
   setSelector,
   elementConfig,
-  
   openTab,
   setOpenTab,
-  selectedElements,
-  setSelectedElements,
 }) => {
   const [items, setItems] = useState([]); // for storing components
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
@@ -70,11 +65,8 @@ const RightSidebar: FC<IRightSidebar> = ({
             setOpen={setOpenSetting}
             setSelector={setSelector}
             elementConfig={elementConfig}
-            
             openTab={openTab}
             setOpenTab={setOpenTab}
-            selectedElements={selectedElements}
-            setSelectedElements={setSelectedElements}
           />
         )}
       </>

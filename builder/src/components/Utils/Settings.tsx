@@ -10,11 +10,8 @@ const Settings = ({
   setOpen,
   setSelector,
   elementConfig,
-  setElementConfig,
   openTab,
   setOpenTab,
-  selectedElements,
-  setSelectedElements,
 }) => {
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
@@ -250,11 +247,8 @@ const Settings = ({
           setShowComponent={setShowComponent}
           setSelector={setSelector}
           elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
-          selectedElements={selectedElements}
-          setSelectedElements={setSelectedElements}
         />
       ) : null}
     </>

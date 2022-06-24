@@ -44,11 +44,8 @@ export default function SettingComponent({
   setShowComponent,
   setSelector,
   elementConfig,
-  setElementConfig,
   openTab,
   setOpenTab,
-  selectedElements,
-  setSelectedElements,
 }) {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
@@ -199,8 +196,6 @@ export default function SettingComponent({
                             setSelector={setSelector}
                             elementConfig={elementConfig}
                             selector={undefined}
-                            selectedElements={selectedElements}
-                            setSelectedElements={setSelectedElements}
                             selectedItem={selectedItem}
                             items={items}
                             setItems={setItems}
