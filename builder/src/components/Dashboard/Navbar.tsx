@@ -7,9 +7,8 @@ import IItems from "interfaces/items";
 
 interface INavbar {
   className: string;
-  setClassName: React.Dispatch<React.SetStateAction<string>>;
-  // setting up IItems here disturbs flow in dashboard***********
-  items: any;
+  setClassName: React.Dispatch<React.SetStateAction<string>>
+  items: IItems[];
   contractConfig: { abi: string; address: string };
 }
 
@@ -71,7 +70,7 @@ const Navbar: FC<INavbar> = ({
 
         <button
           className="btn rounded cursor-pointer whitespace-nowrap px-4 h-10 my-5"
-          onClick={() => handleClick}
+          onClick={handleClick}
         >
           Publish
         </button>
