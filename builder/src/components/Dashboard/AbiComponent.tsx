@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 
 interface IAbiComponent {
@@ -19,6 +19,8 @@ const AbiComponent: FC<IAbiComponent> = ({
   setSelector,
   elementConfig,
 }) => {
+  const [saveElement, setSaveElement] = useState();
+  const handleSave = () => {};
   return (
     <>
       <div>
@@ -128,7 +130,10 @@ const AbiComponent: FC<IAbiComponent> = ({
                   </div>
                 );
               })}
-            <button className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button
+              onClick={handleSave}
+              className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
               Save
             </button>
           </>

@@ -42,8 +42,6 @@ const Dashboard: FC = () => {
     getInformation();
   }, []); // eslint-disable-line
 
-  console.log(elementConfig);
-
   return (
     <main className="flex flex-row w-full min-h-screen">
       {/* Sidebar */}

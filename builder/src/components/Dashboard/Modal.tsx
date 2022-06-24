@@ -8,11 +8,11 @@ interface IModal {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Modal: FC<IModal> = ({ 
-  contractConfig, 
-  setContractConfig, 
-  isOpen, 
-  setIsOpen 
+const Modal: FC<IModal> = ({
+  contractConfig,
+  setContractConfig,
+  isOpen,
+  setIsOpen,
 }) => {
   return (
     <Dialog

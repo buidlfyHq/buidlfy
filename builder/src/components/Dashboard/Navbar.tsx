@@ -13,7 +13,12 @@ interface INavbar {
   contractConfig: { abi: string; address: string };
 }
 
-const Navbar: FC<INavbar> = ({ className, setClassName, items, contractConfig }) => {
+const Navbar: FC<INavbar> = ({
+  className,
+  setClassName,
+  items,
+  contractConfig,
+}) => {
   const abiJSON = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
@@ -33,8 +38,7 @@ const Navbar: FC<INavbar> = ({ className, setClassName, items, contractConfig })
     let stringifiedConfig = JSON.stringify(config);
     setGeneratedConfig(base64_encode(stringifiedConfig));
     setIsOpen(true);
-  }
-  
+  };
   return (
     <main
       className={
