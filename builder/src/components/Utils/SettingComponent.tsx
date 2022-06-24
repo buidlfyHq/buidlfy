@@ -16,7 +16,6 @@ export default function SettingComponent({
   setOpen,
   setValue = null,
   setMenuArr = null,
-  id = null,
   menuArr = null,
   setBold = null,
   bold = null,
@@ -54,7 +53,6 @@ export default function SettingComponent({
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
 
-  const Id: string = id;
   const ref = useRef(null);
 
   useEffect(() => {
@@ -65,14 +63,11 @@ export default function SettingComponent({
     setLinkVal(link || "");
   }, [link]);
 
-  const handleTextChange = (e: any, Id: string) => {
-    setTextVal(e.target.value);
-    if (Id === null) {
-      setValue(e.target.value);
-    }
+  const handleTextChange = (e: any) => {
+    setValue(e.target.value);
   };
 
-  const handleLinkChange = (e: any, Id: string) => {
+  const handleLinkChange = (e: any) => {
     setLinkVal(e.target.value);
   };
   return (
@@ -148,9 +143,8 @@ export default function SettingComponent({
                             <RiText className="text-[18px] mr-3" />
 
                             <input
-                              name={Id}
                               value={textVal}
-                              onChange={(e) => handleTextChange(e, Id)}
+                              onChange={(e) => handleTextChange(e)}
                               className="changeText"
                               type="text"
                               placeholder="Name..."
@@ -159,9 +153,8 @@ export default function SettingComponent({
                           <div className="flex items-center px-3 mt-2 text-black">
                             <AiOutlineLink className="text-[18px] mr-3" />
                             <input
-                              name={Id}
                               value={linkVal}
-                              onChange={(e) => handleLinkChange(e, Id)}
+                              onChange={(e) => handleLinkChange(e)}
                               className="changeText"
                               type="text"
                               placeholder="URL..."
@@ -206,7 +199,6 @@ export default function SettingComponent({
                             setSelector={setSelector}
                             elementConfig={elementConfig}
                             selector={undefined}
-                            setElementConfig={setElementConfig}
                             selectedElements={selectedElements}
                             setSelectedElements={setSelectedElements}
                             selectedItem={selectedItem}
@@ -233,9 +225,8 @@ export default function SettingComponent({
                 <RiText className="text-[18px] mr-3" />
 
                 <input
-                  name={Id}
                   value={textVal}
-                  onChange={(e) => handleTextChange(e, Id)}
+                  onChange={(e) => handleTextChange(e)}
                   className="changeText"
                   type="text"
                   placeholder="Name..."
@@ -244,9 +235,8 @@ export default function SettingComponent({
               <div className="flex items-center px-3 mt-2 text-black">
                 <AiOutlineLink className="text-[18px] mr-3" />
                 <input
-                  name={Id}
                   value={linkVal}
-                  onChange={(e) => handleLinkChange(e, Id)}
+                  onChange={(e) => handleLinkChange(e)}
                   className="changeText"
                   type="text"
                   placeholder="URL..."

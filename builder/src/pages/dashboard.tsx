@@ -108,7 +108,6 @@ const Dashboard: FC = () => {
           setOpen={setOpenSetting}
           setSelector={setSelector}
           elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
           selectedElements={selectedElements}

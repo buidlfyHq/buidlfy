@@ -3,7 +3,11 @@ interface IValue {
   value: any;
 }
 
-export const setValue = (state, functionName, stateFunctionValue) => {
+export const setValue = (
+  state: object[],
+  functionName: string,
+  stateFunctionValue: any
+) => {
   const searchExistingValue = state.filter(
     (stateObject: IValue) => stateObject.name === functionName
   );

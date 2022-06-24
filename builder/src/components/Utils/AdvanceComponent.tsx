@@ -13,7 +13,6 @@ export default function AdvanceComponent({
   setShowComponent,
   selector,
   setSelector,
-  setElementConfig,
   elementConfig,
   selectedElements,
   setSelectedElements,

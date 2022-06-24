@@ -11,20 +11,28 @@ import HeadingTwo from "../CustomComponents/HeadingTwo";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
-const RenderItem: FC<{
+interface IRenderItem {
   item: IItems;
   inputValue: object[];
   setInputValue: (inputValue: object[]) => void;
   outputValue: object[];
   setOutputValue: (outputValue: object[]) => void;
-}> = ({ item, inputValue, setInputValue, outputValue, setOutputValue }) => {
+}
+
+const RenderItem: FC<IRenderItem> = ({
+  item,
+  inputValue,
+  setInputValue,
+  outputValue,
+  setOutputValue,
+}) => {
   switch (item.name) {
     case "Container":
       return <Container />;
     case "Button":
       return (
         <Button
-          bold="normal"
+          bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
           color={item.style.color}

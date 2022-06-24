@@ -28,7 +28,7 @@ const RightSidebar: FC<IRightSidebar> = ({
   setContractConfig,
   setSelector,
   elementConfig,
-  setElementConfig,
+  
   openTab,
   setOpenTab,
   selectedElements,
@@ -70,7 +70,7 @@ const RightSidebar: FC<IRightSidebar> = ({
             setOpen={setOpenSetting}
             setSelector={setSelector}
             elementConfig={elementConfig}
-            setElementConfig={setElementConfig}
+            
             openTab={openTab}
             setOpenTab={setOpenTab}
             selectedElements={selectedElements}
