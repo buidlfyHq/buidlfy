@@ -1,12 +1,19 @@
 import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
 
-const Modal: FC<{
-  contractConfig;
-  setContractConfig;
+interface IModal {
+  contractConfig: { abi: string; address: string };
+  setContractConfig: (contractConfig: object) => void;
   isOpen: boolean;
-  setIsOpen: any;
-}> = ({ contractConfig, setContractConfig, isOpen, setIsOpen }) => {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Modal: FC<IModal> = ({ 
+  contractConfig, 
+  setContractConfig, 
+  isOpen, 
+  setIsOpen 
+}) => {
   return (
     <Dialog
       as="div"

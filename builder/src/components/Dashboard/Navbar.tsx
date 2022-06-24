@@ -3,20 +3,38 @@ import { Dialog } from "@headlessui/react";
 import { AiOutlineDoubleRight, AiOutlineEye } from "react-icons/ai";
 import { MdUndo, MdRedo } from "react-icons/md";
 import { encode as base64_encode } from "base-64";
+import IItems from "interfaces/items";
 
-const Navbar: FC<{
+interface INavbar {
   className: string;
-  setClassName: any;
-  items;
-  contractConfig;
-}> = ({ className, setClassName, items, contractConfig }) => {
+  setClassName: React.Dispatch<React.SetStateAction<string>>;
+  // setting up IItems here disturbs flow in dashboard***********
+  items: any;
+  contractConfig: { abi: string; address: string };
+}
+
+const Navbar: FC<INavbar> = ({ className, setClassName, items, contractConfig }) => {
   const abiJSON = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
 
   const showSidebar = () => {
     setClassName("");
   };
+
+  const handleClick = () => {
+    let config = {
+      builder: items,
+      contract: {
+        abi: abiJSON,
+        address: contractConfig.address,
+      },
+    };
+    let stringifiedConfig = JSON.stringify(config);
+    setGeneratedConfig(base64_encode(stringifiedConfig));
+    setIsOpen(true);
+  }
+  
   return (
     <main
       className={
@@ -49,18 +67,7 @@ const Navbar: FC<{
 
         <button
           className="btn rounded cursor-pointer whitespace-nowrap px-4 h-10 my-5"
-          onClick={() => {
-            let config = {
-              builder: items,
-              contract: {
-                abi: abiJSON,
-                address: contractConfig.address,
-              },
-            };
-            let stringifiedConfig = JSON.stringify(config);
-            setGeneratedConfig(base64_encode(stringifiedConfig));
-            setIsOpen(true);
-          }}
+          onClick={() => handleClick}
         >
           Publish
         </button>

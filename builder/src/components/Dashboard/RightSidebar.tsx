@@ -2,19 +2,26 @@ import React, { FC, useState } from "react";
 import { GiClick } from "react-icons/gi";
 import Settings from "components/Utils/Settings";
 
-const RightSidebar: FC<{
+interface IRightSidebar {
   rightClassName: string;
-  setRightClassName: (className: string) => void;
+  setRightClassName: React.Dispatch<React.SetStateAction<string>>;
   contractConfig: object;
   setContractConfig: (contractConfig: object) => void;
-  setSelector;
-  elementConfig;
-  
-  openTab;
-  setOpenTab;
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  elementConfig: object;
+  setElementConfig: React.Dispatch<React.SetStateAction<object>> ;
+  openTab: number;
+  setOpenTab: React.Dispatch<React.SetStateAction<number>> ;
+  // not sure about this**************************
   selectedElements;
-  setSelectedElements;
-}> = ({
+  setSelectedElements: any ;
+}
+
+const RightSidebar: FC<IRightSidebar> = ({
   rightClassName,
   setRightClassName,
   contractConfig,
