@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { ethers, Contract } from "ethers";
+import { ethers, providers, Contract, Signer } from "ethers";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
 import BuilderConfig from "config";
@@ -21,7 +21,9 @@ const Button: FC<ITexts> = ({
   setOutputValue,
 }) => {
   const config = JSON.parse(BuilderConfig);
-  let provider, signer, contract: Contract;
+  let provider: providers.Web3Provider,
+    signer: providers.Provider | Signer,
+    contract: Contract;
 
   const onLoad = () => {
     provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -34,7 +36,9 @@ const Button: FC<ITexts> = ({
   };
 
   useEffect(() => {
-    onLoad();
+    if (config.contract.abi !== "" && config.contract.address !== "") {
+      onLoad();
+    }
   }, []); // eslint-disable-line
 
   // execute contract function
