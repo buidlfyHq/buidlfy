@@ -7,6 +7,7 @@ import AlignComponent from "./AlignComponent";
 import FontStyleComponent from "./FontStyleComponent";
 import UtilitiesComponent from "./UtilitiesComponent";
 import ColorComponent from "./ColorComponent";
+import BgColorComponent from "./BgColorComponent";
 import FontSizeComponent from "./FontSizeComponent";
 import AdvanceComponent from "./AdvanceComponent";
 import IItems from "interfaces/items";
@@ -36,6 +37,8 @@ interface ISettingComponent {
   justifyContent: string;
   color: any;
   setColor: (color: any) => void;
+  backgroundColor: any;
+  setBgColor: (backgroundColor: any) => void;
   fontSize: number;
   setFontSize: (fontSize: number) => void;
   bold: string;
@@ -63,6 +66,8 @@ const SettingComponent: FC<ISettingComponent> = ({
   setUnderline = null,
   color = { r: 0, g: 0, b: 0, a: 100 },
   setColor = null,
+  backgroundColor = { r: 0, g: 0, b: 0, a: 100 },
+  setBgColor = null,
   deleteComponent = 0,
   setDeleteComponent = null,
   justifyContent = null,
@@ -217,6 +222,8 @@ const SettingComponent: FC<ISettingComponent> = ({
                           />
                           <ColorComponent color={color} setColor={setColor} />
 
+                          <BgColorComponent backgroundColor={backgroundColor} setBgColor={setBgColor} />
+
                           <UtilitiesComponent
                             deleteComponent={deleteComponent}
                             setDeleteComponent={setDeleteComponent}
@@ -294,6 +301,7 @@ const SettingComponent: FC<ISettingComponent> = ({
                 setFontSize={setFontSize}
               />
               <ColorComponent color={color} setColor={setColor} />
+              <BgColorComponent backgroundColor={backgroundColor} setBgColor={setBgColor} />
               <UtilitiesComponent
                 deleteComponent={deleteComponent}
                 setDeleteComponent={setDeleteComponent}

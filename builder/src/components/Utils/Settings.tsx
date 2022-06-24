@@ -134,6 +134,25 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
+  const setBgColor = (backgroundColor: { rgb: any }) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            backgroundColor: backgroundColor,
+          },
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
   const setDeleteComponent = (deleteComponent: any) => {
     if (!settingItemId) {
       return;
@@ -229,6 +248,8 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
+  console.log(items)
+
   return (
     <>
       {settingItemId ? (
@@ -248,6 +269,8 @@ const Settings: FC<ISetting> = ({
           underline={selectedItem?.style?.textDecoration}
           color={selectedItem?.style?.fontStyle}
           setColor={setColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
+          setBgColor={setBgColor}
           setDeleteComponent={setDeleteComponent}
           deleteComponent={selectedItem?.style?.deleteComponent}
           setCenter={setCenter}

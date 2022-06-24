@@ -10,6 +10,7 @@ const Button: FC<ITexts> = ({
   justifyContent,
   fontSize,
   value,
+  backgroundColor,
   link,
 }) => {
   return (
@@ -27,6 +28,7 @@ const Button: FC<ITexts> = ({
           display: "flex",
           justifyContent: "center",
           fontSize: `${fontSize}px`,
+          backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
         }}
         className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
       >

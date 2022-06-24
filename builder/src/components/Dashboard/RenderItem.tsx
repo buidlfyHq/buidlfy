@@ -27,6 +27,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );
@@ -40,6 +41,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );
@@ -53,6 +55,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );
@@ -66,6 +69,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );
@@ -79,6 +83,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );
@@ -92,6 +97,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );

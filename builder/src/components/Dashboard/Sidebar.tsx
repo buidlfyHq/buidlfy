@@ -98,6 +98,8 @@ const Sidebar: FC<ISidebar> = ({
       {/* Components */}
       <div className="px-6 py-3 mt-10">
         {components?.map((c, index) => {
+
+        {console.log(components)}
           return (
             <div
               key={index}

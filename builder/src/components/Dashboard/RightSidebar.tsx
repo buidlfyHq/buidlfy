@@ -26,6 +26,7 @@ const RightSidebar: FC<IRightSidebar> = ({
   setContractConfig,
   setSelector,
   elementConfig,
+  setElementConfig,
   openTab,
   setOpenTab,
 }) => {
