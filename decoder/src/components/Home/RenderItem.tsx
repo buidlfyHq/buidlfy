@@ -40,6 +40,7 @@ const RenderItem: FC<IRenderItem> = ({
           fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
+          backgroundColor={item.style.backgroundColor}
           contractFunction={item.contract}
           inputValue={inputValue}
           setInputValue={setInputValue}
@@ -58,6 +59,7 @@ const RenderItem: FC<IRenderItem> = ({
           fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
+          backgroundColor={item.style.backgroundColor}
           contractFunction={item.contract}
           outputValue={outputValue}
         />
@@ -73,6 +75,7 @@ const RenderItem: FC<IRenderItem> = ({
           fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
+          backgroundColor={item.style.backgroundColor}
         />
       );
     case "Heading 1":
@@ -86,6 +89,7 @@ const RenderItem: FC<IRenderItem> = ({
           fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
+          backgroundColor={item.style.backgroundColor}
           contractFunction={item.contract}
           outputValue={outputValue}
         />
@@ -101,6 +105,7 @@ const RenderItem: FC<IRenderItem> = ({
           fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
+          backgroundColor={item.style.backgroundColor}
           contractFunction={item.contract}
           outputValue={outputValue}
         />
@@ -116,6 +121,7 @@ const RenderItem: FC<IRenderItem> = ({
           fontSize={item.style.fontSize}
           value={item.value}
           link={item.link}
+          backgroundColor={item.style.backgroundColor}
           contractFunction={item.contract}
           outputValue={outputValue}
         />

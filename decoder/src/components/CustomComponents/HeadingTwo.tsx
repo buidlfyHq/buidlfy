@@ -18,6 +18,7 @@ const HeadingTwo: FC<ITexts> = ({
   link,
   contractFunction,
   outputValue,
+  backgroundColor
 }) => {
   return (
     <div
@@ -29,6 +30,7 @@ const HeadingTwo: FC<ITexts> = ({
         display: "flex",
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
+        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
       className="flex items-center justify-center"
     >
