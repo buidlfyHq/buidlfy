@@ -5,7 +5,7 @@ import Settings from "components/Utils/Settings";
 interface IRightSidebar {
   rightClassName: string;
   setRightClassName: React.Dispatch<React.SetStateAction<string>>;
-  contractConfig: object;
+  contractConfig: { abi: string; address: string };
   setContractConfig: (contractConfig: object) => void;
   setSelector: (selector: {
     methodName: string;
@@ -13,9 +13,9 @@ interface IRightSidebar {
     name: string;
   }) => void;
   elementConfig: object;
-  setElementConfig: React.Dispatch<React.SetStateAction<object>> ;
+  setElementConfig: React.Dispatch<React.SetStateAction<object>>;
   openTab: number;
-  setOpenTab: React.Dispatch<React.SetStateAction<number>> ;
+  setOpenTab: React.Dispatch<React.SetStateAction<number>>;
   // not sure about this**************************
 }
 

@@ -13,11 +13,8 @@ interface ISetting {
     name: string;
   }) => void;
   elementConfig: object;
-  setElementConfig: (elementConfig: object) => void;
   openTab: number;
   setOpenTab: (openTab: number) => void;
-  selectedElements: object;
-  setSelectedElements: (selectedElements: object) => void;
   settingItemId: string;
 }
 

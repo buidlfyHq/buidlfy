@@ -18,11 +18,9 @@ interface IWorkspace {
     name: string;
   }) => void;
   elementConfig: object;
-  setElementConfig: React.Dispatch<React.SetStateAction<object>> ;
-  setOpenTab: React.Dispatch<React.SetStateAction<number>> ;
+  setElementConfig: React.Dispatch<React.SetStateAction<object>>;
+  setOpenTab: React.Dispatch<React.SetStateAction<number>>;
   // not sure about this**************************
-  selectedElements: any;
-  setSelectedElements: any;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -36,8 +34,6 @@ const Workspace: FC<IWorkspace> = ({
   elementConfig,
   setElementConfig,
   setOpenTab,
-  selectedElements,
-  setSelectedElements,
 }) => {
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -57,7 +53,7 @@ const Workspace: FC<IWorkspace> = ({
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
 
-  const handleFlowControl = (item: IItems, i:string, index:number) => {
+  const handleFlowControl = (item: IItems, i: string, index: number) => {
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
@@ -106,7 +102,7 @@ const Workspace: FC<IWorkspace> = ({
       }
       setSelector(null);
     }
-  }
+  };
 
   return (
     <main

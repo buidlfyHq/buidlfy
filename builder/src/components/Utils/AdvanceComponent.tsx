@@ -29,8 +29,6 @@ interface IAdvanceComponent {
   items: IItems[];
   setItems: (items: IItems[]) => void;
   elementConfig: object;
-  selectedElements: object;
-  setSelectedElements: (selectedElements: object) => void;
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({

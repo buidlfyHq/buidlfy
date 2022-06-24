@@ -28,9 +28,6 @@ interface ISettingComponent {
   items: IItems[];
   setItems: (items: IItems[]) => void;
   elementConfig: object;
-  selectedElements: object;
-  setSelectedElements: (selectedElements: object) => void;
-  setElementConfig: (elementConfig: object) => void;
   deleteComponent: number;
   setDeleteComponent: (deleteComponent: number) => void;
   setLeft: (justifyContent: string | boolean) => void;
