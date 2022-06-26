@@ -11,7 +11,11 @@ interface IWorkspace {
   className: string;
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
-  selector;
+  selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  };
   setSelector: (selector: {
     methodName: string;
     type: string;

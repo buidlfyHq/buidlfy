@@ -4,7 +4,7 @@ import IItems from "interfaces/items";
 
 interface ISetting {
   items: IItems[];
-  setItems: (items: any) => void;
+  setItems: (items: IItems[]) => void;
   contractConfig: { abi: string; address: string };
   setContractConfig: (contractConfig: { abi: string; address: string }) => void;
   setSelector: (selector: {
@@ -195,7 +195,7 @@ const Settings: FC<ISetting> = ({
     if (!settingItemId) {
       return;
     }
-    const updatedItems = items.map((item: { [x: string]: any; i: any }) => {
+    const updatedItems = items.map((item) => {
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -248,7 +248,7 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
-  console.log(items)
+  console.log(items);
 
   return (
     <>
@@ -267,22 +267,22 @@ const Settings: FC<ISetting> = ({
           italic={selectedItem?.style?.fontStyle}
           setUnderline={setUnderline}
           underline={selectedItem?.style?.textDecoration}
-          color={selectedItem?.style?.fontStyle}
           setColor={setColor}
-          backgroundColor={selectedItem?.style?.backgroundColor}
+          color={selectedItem?.style?.fontStyle}
           setBgColor={setBgColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
           deleteComponent={selectedItem?.style?.deleteComponent}
-          setCenter={setCenter}
-          setLeft={setLeft}
           justifyContent={selectedItem?.style?.justifyContent}
+          setLeft={setLeft}
+          setCenter={setCenter}
           setRight={setRight}
-          fontSize={selectedItem?.style?.fontSize}
           setFontSize={setFontSize}
-          contractConfig={contractConfig}
+          fontSize={selectedItem?.style?.fontSize}
           setContractConfig={setContractConfig}
-          showComponent={showComponent}
+          contractConfig={contractConfig}
           setShowComponent={setShowComponent}
+          showComponent={showComponent}
           setSelector={setSelector}
           elementConfig={elementConfig}
           openTab={openTab}

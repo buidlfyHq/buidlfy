@@ -13,74 +13,74 @@ import AdvanceComponent from "./AdvanceComponent";
 import IItems from "interfaces/items";
 
 interface ISettingComponent {
+  items: IItems[];
+  setItems: (items: IItems[]) => void;
+  selectedItem: IItems;
+  setLink: (link: string) => void;
+  link: string;
+  setValue: (value: string) => void;
+  value: string;
+  setBold: (bold: string | boolean) => void;
+  bold: string;
+  setItalic: (italic: string | boolean) => void;
+  italic: string;
+  setUnderline: (underline: string | boolean) => void;
+  underline: string;
+  setColor: (color: any) => void;
+  color: any;
+  setBgColor: (backgroundColor: any) => void;
+  backgroundColor: any;
+  setDeleteComponent: (deleteComponent: number) => void;
+  deleteComponent: number;
+  justifyContent: string;
+  setLeft: (justifyContent: string | boolean) => void;
+  setCenter: (justifyContent: string | boolean) => void;
+  setRight: (justifyContent: string | boolean) => void;
+  setFontSize: (fontSize: number) => void;
+  fontSize: number;
+  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
+  contractConfig: { abi: string; address: string };
+  setShowComponent: (showComponent: { id: string; value: IItems }) => void;
+  showComponent: {
+    id: string;
+    value: { name: string; inputs: object[]; outputs: object[] };
+  };
   setSelector: (selector: {
     methodName: string;
     type: string;
     name: string;
   }) => void;
-  showComponent: {
-    id: string;
-    value: { name: string; inputs: object[]; outputs: object[] };
-  };
-  setShowComponent: (showComponent: { id: string; value: IItems }) => void;
-  contractConfig: { abi: string; address: string };
-  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
-  selectedItem: IItems;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
   elementConfig: object;
-  deleteComponent: number;
-  setDeleteComponent: (deleteComponent: number) => void;
-  setLeft: (justifyContent: string | boolean) => void;
-  setRight: (justifyContent: string | boolean) => void;
-  setCenter: (justifyContent: string | boolean) => void;
-  justifyContent: string;
-  color: any;
-  setColor: (color: any) => void;
-  backgroundColor: any;
-  setBgColor: (backgroundColor: any) => void;
-  fontSize: number;
-  setFontSize: (fontSize: number) => void;
-  bold: string;
-  italic: string;
-  underline: string;
-  setBold: (bold: string | boolean) => void;
-  setItalic: (italic: string | boolean) => void;
-  setUnderline: (underline: string | boolean) => void;
-  value: string;
-  setValue: (value: string) => void;
-  link: string;
-  setLink: (link: string) => void;
   openTab: number;
   setOpenTab: (openTab: number) => void;
 }
 
 const SettingComponent: FC<ISettingComponent> = ({
-  link,
-  setValue = null,
-  setBold = null,
-  bold = null,
-  italic = null,
-  setItalic = null,
-  underline = null,
-  setUnderline = null,
-  color = { r: 0, g: 0, b: 0, a: 100 },
-  setColor = null,
-  backgroundColor = { r: 0, g: 0, b: 0, a: 100 },
-  setBgColor = null,
-  deleteComponent = 0,
-  setDeleteComponent = null,
-  justifyContent = null,
-  setLeft = null,
-  setRight = null,
-  setCenter = null,
-  fontSize = 16,
-  setFontSize = null,
   items,
   setItems,
   selectedItem,
+  setLink,
+  link,
+  setValue,
   value,
-  setLink = null,
+  setBold,
+  bold,
+  setItalic,
+  italic,
+  setUnderline,
+  underline,
+  setColor,
+  color,
+  setBgColor,
+  backgroundColor,
+  setDeleteComponent,
+  deleteComponent,
+  justifyContent,
+  setLeft,
+  setCenter,
+  setRight,
+  fontSize,
+  setFontSize,
   contractConfig,
   setContractConfig,
   showComponent,
