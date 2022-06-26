@@ -52,7 +52,7 @@ const Workspace: FC<IWorkspace> = ({
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
 
-  const handleFlowControl = (item: IItems, i: string, index: number) => {
+  const onComponentClick = (item: IItems, i: string, index: number) => {
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
@@ -137,7 +137,7 @@ const Workspace: FC<IWorkspace> = ({
                       : "hover:outline-slate-300 hover:outline-dashed"
                   }`}
                   // open item setting on click
-                  onClick={() => handleFlowControl(item, i, index)}
+                  onClick={() => onComponentClick(item, i, index)}
                 >
                   <RenderItem item={item} />
                 </div>

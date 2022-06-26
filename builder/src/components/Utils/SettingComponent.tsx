@@ -124,12 +124,7 @@ const SettingComponent: FC<ISettingComponent> = ({
                   >
                     <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                       <a
-                        className={
-                          "text-xs font-bold uppercase" +
-                          (openTab === 1
-                            ? "text-black bg-" + "-transparent"
-                            : "text-" + "-black bg-transparent")
-                        }
+                        className="text-xs font-bold uppercase text-black bg-transparent"
                         onClick={(e) => {
                           e.preventDefault();
                           setOpenTab(1);
@@ -144,12 +139,7 @@ const SettingComponent: FC<ISettingComponent> = ({
                     </li>
                     <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                       <a
-                        className={
-                          "text-xs font-bold uppercase" +
-                          (openTab === 2
-                            ? "text-black bg-" + "-transparent"
-                            : "text-" + "-black bg-transparent")
-                        }
+                        className="text-xs font-bold uppercase text-black bg-transparent"
                         onClick={(e) => {
                           e.preventDefault();
                           setOpenTab(2);
@@ -222,7 +212,10 @@ const SettingComponent: FC<ISettingComponent> = ({
                           />
                           <ColorComponent color={color} setColor={setColor} />
 
-                          <BgColorComponent backgroundColor={backgroundColor} setBgColor={setBgColor} />
+                          <BgColorComponent
+                            backgroundColor={backgroundColor}
+                            setBgColor={setBgColor}
+                          />
 
                           <UtilitiesComponent
                             deleteComponent={deleteComponent}
@@ -301,7 +294,10 @@ const SettingComponent: FC<ISettingComponent> = ({
                 setFontSize={setFontSize}
               />
               <ColorComponent color={color} setColor={setColor} />
-              <BgColorComponent backgroundColor={backgroundColor} setBgColor={setBgColor} />
+              <BgColorComponent
+                backgroundColor={backgroundColor}
+                setBgColor={setBgColor}
+              />
               <UtilitiesComponent
                 deleteComponent={deleteComponent}
                 setDeleteComponent={setDeleteComponent}
