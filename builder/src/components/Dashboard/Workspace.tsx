@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, Dispatch, SetStateAction } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "./RenderItem";
 import IItems from "interfaces/items";
@@ -18,8 +18,8 @@ interface IWorkspace {
     name: string;
   }) => void;
   elementConfig: object;
-  setElementConfig: React.Dispatch<React.SetStateAction<object>>;
-  setOpenTab: React.Dispatch<React.SetStateAction<number>>;
+  setElementConfig: Dispatch<SetStateAction<object>>;
+  setOpenTab: Dispatch<SetStateAction<number>>;
 }
 
 const Workspace: FC<IWorkspace> = ({

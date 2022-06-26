@@ -3,7 +3,7 @@ import SettingComponent from "./SettingComponent";
 import IItems from "interfaces/items";
 
 interface ISetting {
-  items: any;
+  items: IItems[];
   setItems: (items: any) => void;
   contractConfig: { abi: string; address: string };
   setContractConfig: (contractConfig: { abi: string; address: string }) => void;
