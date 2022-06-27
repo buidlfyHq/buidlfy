@@ -36,12 +36,6 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
         <VscSymbolColor className="text-[18px] mr-3" />
         <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
           Bg Color{" "}
-          {/* <span
-            style={{
-              color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-            }}
-            className="color-span"
-          ></span> */}
         </span>
       </div>
       {displayColorPicker ? (

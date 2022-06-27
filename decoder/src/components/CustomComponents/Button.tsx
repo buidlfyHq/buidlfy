@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { ethers, providers, Contract, Signer } from "ethers";
+import { useSnackbar } from "react-simple-snackbar";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
 import BuilderConfig from "config";
@@ -23,6 +24,7 @@ const Button: FC<ITexts> = ({
   setOutputValue,
 }) => {
   const config = JSON.parse(BuilderConfig);
+  const [openSnackbar, closeSnackbar] = useSnackbar();
   let provider: providers.Web3Provider,
     signer: providers.Provider | Signer,
     contract: Contract;
@@ -49,6 +51,7 @@ const Button: FC<ITexts> = ({
 
   // execute contract function
   const onRequest = async (method: string) => {
+    openSnackbar("Loading...", 100000);
     onLoad();
     // contract functions with inputs
     if (contractFunction.inputs.length) {
@@ -115,8 +118,8 @@ const Button: FC<ITexts> = ({
       }
 
       if (receipt.transactionHash) {
-        setTransactionStatus("Transaction Complete")
-        // alert("Transaction hash: " + receipt.transactionHash);
+        closeSnackbar();
+        openSnackbar("Transaction hash: " + receipt.transactionHash);
       }
     } else {
       // contract functions without inputs

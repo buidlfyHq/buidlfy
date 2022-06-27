@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "components/Dashboard/Navbar";
 import Sidebar from "components/Dashboard/Sidebar";
-import RightSidebar from "components/Dashboard/RightSidebar";
+import { GiClick } from "react-icons/gi";
 import Workspace from "components/Dashboard/Workspace";
 import Settings from "components/Utils/Settings";
 import IItems from "interfaces/items";
@@ -15,7 +15,6 @@ const Dashboard: FC = () => {
   // types for items ************************
   const [items, setItems] = useState<IItems[]>([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
-  const [rightClassName, setRightClassName] = useState<string>(""); // for handling sidebar toggle
   const [contractConfig, setContractConfig] = useState({
     abi: "",
     address: "",
@@ -78,20 +77,8 @@ const Dashboard: FC = () => {
         />
       </section>
 
-      <RightSidebar
-        rightClassName={rightClassName}
-        setRightClassName={setRightClassName}
-        contractConfig={contractConfig}
-        setContractConfig={setContractConfig}
-        setSelector={setSelector}
-        setElementConfig={setElementConfig}
-        elementConfig={elementConfig}
-        openTab={openTab}
-        setOpenTab={setOpenTab}
-      />
-
-      {/* Settings */}
-      {openSetting && (
+      {/* Right Sidebar Settings */}
+      {openSetting ? (
         <Settings
           items={items}
           setItems={setItems}
@@ -103,6 +90,13 @@ const Dashboard: FC = () => {
           openTab={openTab}
           setOpenTab={setOpenTab}
         />
+      ) : (
+        <main className={`fixed right-0 top-16 z-0 w-[250px] border-l h-full`}>
+          <div className="m-3 border h-24 p-3">
+            <GiClick className="mx-20 my-2" />
+            Please select an element
+          </div>
+        </main>
       )}
     </main>
   );

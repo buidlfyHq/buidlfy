@@ -1,13 +1,10 @@
 import React, { FC } from "react";
 import Container from "../CustomComponents/Container";
 import Button from "../CustomComponents/Button";
-import HeadingOne from "../CustomComponents/HeadingOne";
 import Text from "../CustomComponents/Text";
 import Link from "../CustomComponents/Link";
 import Image from "../CustomComponents/Image";
 import Input from "../CustomComponents/Input";
-import HeadingThree from "../CustomComponents/HeadingThree";
-import HeadingTwo from "../CustomComponents/HeadingTwo";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
@@ -61,7 +58,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
       );
     case "Heading 1":
       return (
-        <HeadingOne
+        <Text
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -75,7 +72,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
       );
     case "Heading 2":
       return (
-        <HeadingTwo
+        <Text
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -89,7 +86,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
       );
     case "Heading 3":
       return (
-        <HeadingThree
+        <Text
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}

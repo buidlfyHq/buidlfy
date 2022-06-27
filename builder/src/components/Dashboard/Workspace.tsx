@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, Dispatch, SetStateAction } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "./RenderItem";
 import IItems from "interfaces/items";
@@ -11,16 +11,19 @@ interface IWorkspace {
   className: string;
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
-  selector;
+  selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  };
   setSelector: (selector: {
     methodName: string;
     type: string;
     name: string;
   }) => void;
   elementConfig: object;
-  setElementConfig: React.Dispatch<React.SetStateAction<object>>;
-  setOpenTab: React.Dispatch<React.SetStateAction<number>>;
-  // not sure about this**************************
+  setElementConfig: Dispatch<SetStateAction<object>>;
+  setOpenTab: Dispatch<SetStateAction<number>>;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -53,7 +56,7 @@ const Workspace: FC<IWorkspace> = ({
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
 
-  const handleFlowControl = (item: IItems, i: string, index: number) => {
+  const onComponentClick = (item: IItems, i: string, index: number) => {
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
@@ -116,7 +119,7 @@ const Workspace: FC<IWorkspace> = ({
         <ResponsiveGridLayout
           layouts={{ lg: items }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+          cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
           rowHeight={50}
           width={window.innerWidth - 250}
           compactType="horizontal"
@@ -140,8 +143,7 @@ const Workspace: FC<IWorkspace> = ({
                       : "hover:outline-slate-300 hover:outline-dashed"
                   }`}
                   // open item setting on click
-                  // open item setting on click
-                  onClick={() => handleFlowControl(item, i, index)}
+                  onClick={() => onComponentClick(item, i, index)}
                 >
                   <RenderItem item={item} />
                 </div>
