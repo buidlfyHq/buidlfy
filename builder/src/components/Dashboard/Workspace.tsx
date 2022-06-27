@@ -24,6 +24,7 @@ interface IWorkspace {
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setOpenTab: Dispatch<SetStateAction<number>>;
+  imgData;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -37,6 +38,7 @@ const Workspace: FC<IWorkspace> = ({
   elementConfig,
   setElementConfig,
   setOpenTab,
+  imgData,
 }) => {
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -143,7 +145,7 @@ const Workspace: FC<IWorkspace> = ({
                   // open item setting on click
                   onClick={() => onComponentClick(item, i, index)}
                 >
-                  <RenderItem item={item} />
+                  <RenderItem item={item} imgData={imgData} />
                 </div>
               );
             })}

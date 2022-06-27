@@ -1,3 +1,4 @@
+import image from "assets/image-component.png";
 export const components = [
   {
     name: "Container",
@@ -115,6 +116,7 @@ export const components = [
     h: 3,
     style: {
       deleteComponent: 0,
+      imgSrc: image,
     },
   },
   {

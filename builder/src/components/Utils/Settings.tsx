@@ -16,6 +16,9 @@ interface ISetting {
   openTab: number;
   setOpenTab: (openTab: number) => void;
   settingItemId: string;
+  setPicture;
+  setImgData;
+  imgData;
 }
 
 const Settings: FC<ISetting> = ({
@@ -28,6 +31,9 @@ const Settings: FC<ISetting> = ({
   elementConfig,
   openTab,
   setOpenTab,
+  setPicture,
+  setImgData,
+  imgData,
 }) => {
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
@@ -248,7 +254,27 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
-  console.log(items);
+  const setImgSrc = (imgSrc) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            imgSrc: imgSrc,
+          },
+        };
+      }
+      // setImgData(imgSrc);
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+  // console.log(items);
 
   return (
     <>
@@ -263,6 +289,8 @@ const Settings: FC<ISetting> = ({
           value={selectedItem?.value}
           setBold={setBold}
           bold={selectedItem?.style?.fontWeight}
+          imgSrc={selectedItem?.style.imgSrc}
+          setImgSrc={setImgSrc}
           setItalic={setItalic}
           italic={selectedItem?.style?.fontStyle}
           setUnderline={setUnderline}
@@ -287,6 +315,9 @@ const Settings: FC<ISetting> = ({
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
+          setPicture={setPicture}
+          setImgData={setImgData}
+          imgData={imgData}
         />
       ) : null}
     </>

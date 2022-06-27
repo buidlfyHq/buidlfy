@@ -12,6 +12,9 @@ const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const Dashboard: FC = () => {
   const navigate = useNavigate();
+  const [picture, setPicture] = useState(null);
+  const [imgData, setImgData] = useState([]);
+
   // types for items ************************
   const [items, setItems] = useState<IItems[]>([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
@@ -74,6 +77,7 @@ const Dashboard: FC = () => {
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setOpenTab={setOpenTab}
+          imgData={imgData}
         />
       </section>
 
@@ -89,6 +93,9 @@ const Dashboard: FC = () => {
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
+          setPicture={setPicture}
+          setImgData={setImgData}
+          imgData={imgData}
         />
       ) : (
         <main className={`fixed right-0 top-16 z-0 w-[250px] border-l h-full`}>
