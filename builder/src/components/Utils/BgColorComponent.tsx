@@ -5,11 +5,11 @@ import "../../styles/Components.css";
 import { SketchPicker } from "react-color";
 
 interface IBgColorComponent {
-  backgroundColor: any;
-  setBgColor: (backgroundColor: any) => void;
+  color: any
+  setBgColor: (color: any) => void;
 }
 
-const BgColorComponent: FC<IBgColorComponent> = ({ backgroundColor, setBgColor }) => {
+const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const handleClick = () => {
@@ -20,11 +20,11 @@ const BgColorComponent: FC<IBgColorComponent> = ({ backgroundColor, setBgColor }
     setDisplayColorPicker(false);
   };
 
-  const handleChange = (backgroundColor: any) => {
-    if (!backgroundColor) {
+  const handleChange = (color: any) => {
+    if (!color) {
       return;
     }
-    setBgColor(backgroundColor.rgb);
+    setBgColor(color.rgb);
   };
 
   return (
@@ -34,11 +34,11 @@ const BgColorComponent: FC<IBgColorComponent> = ({ backgroundColor, setBgColor }
         className="flex items-center w-full px-3 py-2 text-gray-600 cursor-pointer hover:bg-slate-100"
       >
         <VscSymbolColor className="text-[18px] mr-3" />
-        <span className="px-1 flex my-1 text-xl text-gray-500 font-regular font-normal not-italic">
+        <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
           Bg Color{" "}
           {/* <span
             style={{
-              backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+              color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
             }}
             className="color-span"
           ></span> */}
@@ -47,7 +47,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({ backgroundColor, setBgColor }
       {displayColorPicker ? (
         <div>
           <div onClick={handleClose} />
-          <SketchPicker backgroundColor={backgroundColor} onChange={handleChange} />
+          <SketchPicker color={color} onChange={handleChange} />
         </div>
       ) : null}
     </>

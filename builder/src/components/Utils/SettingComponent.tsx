@@ -222,7 +222,7 @@ const SettingComponent: FC<ISettingComponent> = ({
                           />
                           <ColorComponent color={color} setColor={setColor} />
 
-                          <BgColorComponent backgroundColor={backgroundColor} setBgColor={setBgColor} />
+                          <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
 
                           <UtilitiesComponent
                             deleteComponent={deleteComponent}
@@ -301,7 +301,7 @@ const SettingComponent: FC<ISettingComponent> = ({
                 setFontSize={setFontSize}
               />
               <ColorComponent color={color} setColor={setColor} />
-              <BgColorComponent backgroundColor={backgroundColor} setBgColor={setBgColor} />
+              <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
               <UtilitiesComponent
                 deleteComponent={deleteComponent}
                 setDeleteComponent={setDeleteComponent}

@@ -103,7 +103,7 @@ const Sidebar: FC<ISidebar> = ({
           return (
             <div
               key={index}
-              className="px-4 py-2 transition-colors duration-150 ease-in-out bg-white rounded-lg cursor-pointer hover:bg-gray-100"
+              className="px-4 my-1 py-2 hover:bg-slate-100 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer"
               onClick={() => {
                 let newC = {
                   ...c,

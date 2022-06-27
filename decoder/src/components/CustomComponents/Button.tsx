@@ -1,9 +1,10 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ethers, providers, Contract, Signer } from "ethers";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
 import BuilderConfig from "config";
 import { setValue } from "../Utils/SetValue";
+import { Dialog } from '@headlessui/react'
 
 const Button: FC<ITexts> = ({
   bold,
@@ -35,6 +36,10 @@ const Button: FC<ITexts> = ({
       signer
     );
   };
+
+  let [isOpen, setIsOpen] = useState(false)
+
+  const [transactionStatus, setTransactionStatus] = useState<string>('')
 
   useEffect(() => {
     if (config.contract.abi !== "" && config.contract.address !== "") {
@@ -70,7 +75,9 @@ const Button: FC<ITexts> = ({
 
       if (contractFunction.stateMutability === "nonpayable") {
         // query contract functions --- magic code
+        
         const res = await contract.functions[method](...args); // passing an array as a function parameter
+        {setIsOpen(true)}
         receipt = await res.wait();
         console.log(receipt);
       } else if (contractFunction.stateMutability === "payable") {
@@ -108,7 +115,8 @@ const Button: FC<ITexts> = ({
       }
 
       if (receipt.transactionHash) {
-        alert("Transaction hash: " + receipt.transactionHash);
+        setTransactionStatus("Transaction Complete")
+        // alert("Transaction hash: " + receipt.transactionHash);
       }
     } else {
       // contract functions without inputs
@@ -126,8 +134,30 @@ const Button: FC<ITexts> = ({
   return (
     <div
       style={{ justifyContent: justifyContent }}
-      className="flex px-6 items-center justify-center w-auto h-full"
+      className="flex items-center justify-center w-auto h-full px-6"
     >
+      <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="relative z-50"
+      >
+        {/* The backdrop, rendered as a fixed sibling to the panel container */}
+        <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+
+        {/* Full-screen container to center the panel */}
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          {/* The actual dialog panel  */}
+          <Dialog.Panel className="max-w-sm p-4 mx-auto bg-white rounded">
+            <Dialog.Title>
+            {transactionStatus === '' ?
+            (<div className="lds-ring"><div></div><div></div><div></div><div></div></div>) 
+            : (transactionStatus)
+            } 
+            </Dialog.Title>
+          </Dialog.Panel>
+        </div>
+      </Dialog>
+
       <div
         style={{
           fontWeight: bold,
@@ -140,7 +170,7 @@ const Button: FC<ITexts> = ({
           fontSize: `${fontSize}px`,
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
         }}
-        className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
+        className="w-48 px-6 py-2 rounded cursor-pointer btn whitespace-nowrap"
         onClick={() =>
           contractFunction.name
             ? onRequest(contractFunction.name)
