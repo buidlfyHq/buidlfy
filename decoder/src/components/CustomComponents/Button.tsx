@@ -28,9 +28,6 @@ const Button: FC<ITexts> = ({
     signer: providers.Provider | Signer,
     contract: Contract;
 
-  console.log(inputValue);
-  console.log(contractFunction);
-
   const onLoad = () => {
     provider = new ethers.providers.Web3Provider(window.ethereum);
     signer = provider.getSigner();
