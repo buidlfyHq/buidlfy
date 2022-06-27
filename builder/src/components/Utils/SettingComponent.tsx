@@ -43,7 +43,7 @@ interface ISettingComponent {
   setShowComponent: (showComponent: { id: string; value: IItems }) => void;
   showComponent: {
     id: string;
-    value: { name: string; inputs: object[]; outputs: object[] };
+    value: { name: string; inputs: object[]; outputs: object[]; stateMutability: string; };
   };
   setSelector: (selector: {
     methodName: string;

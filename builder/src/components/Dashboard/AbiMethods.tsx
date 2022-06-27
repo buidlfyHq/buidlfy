@@ -31,6 +31,12 @@ const AbiMethods: FC<IAbiMethods> = ({
         requiredArray.push(id);
         return value;
       });
+      if (
+        abiJson[e.target.value].stateMutability === "payable" &&
+        valueName === "input"
+      ) {
+        requiredArray.push(abiJson[e.target.value].name);
+      }
       return requiredArray;
     };
     let updatedItem = {

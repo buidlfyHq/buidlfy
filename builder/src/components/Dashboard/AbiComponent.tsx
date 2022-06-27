@@ -4,7 +4,12 @@ import { AiOutlineEdit } from "react-icons/ai";
 interface IAbiComponent {
   showComponent: {
     id: string;
-    value: { name: string; inputs: object[]; outputs: object[] };
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
   };
   setSelector: (selector: {
     methodName: string;
@@ -43,11 +48,11 @@ const AbiComponent: FC<IAbiComponent> = ({
                     }
                   >
                     <>
-                      {objects.length === 0 ? (
+                      {!objects.length ? (
                         <span>Select An Element</span>
                       ) : (
                         <>
-                          {filterObjects.length === 0 ? (
+                          {!filterObjects.length ? (
                             <span>Select An Element</span>
                           ) : (
                             filterObjects.map((key) => (
@@ -71,6 +76,48 @@ const AbiComponent: FC<IAbiComponent> = ({
                 </section>
               );
             })}
+
+          {showComponent.value.stateMutability === "payable" && (
+            <>
+              <section className="mt-3">
+                <h6>Input - Amount Payable</h6>
+                <div
+                  className="mb-2 px-2 border rounded mt-1 h-7"
+                  onClick={() =>
+                    setSelector({
+                      methodName: showComponent.value.name,
+                      type: "input",
+                      name: showComponent.value.name,
+                    })
+                  }
+                >
+                  {!Object.keys(elementConfig).filter(
+                    (key) => key === showComponent.value.name
+                  ).length ? (
+                    <span>Select An Element</span>
+                  ) : (
+                    <>
+                      {Object.keys(elementConfig)
+                        .filter((key) => key === showComponent.value.name)
+                        .map((key) => (
+                          <>
+                            {key === showComponent.value.name && (
+                              <span className="flex">
+                                <span className="flex-1">
+                                  {elementConfig[key].name} -{" "}
+                                  {elementConfig[key].id}
+                                </span>
+                                <AiOutlineEdit className="mt-1.5" />
+                              </span>
+                            )}
+                          </>
+                        ))}
+                    </>
+                  )}
+                </div>
+              </section>
+            </>
+          )}
 
           {showComponent.value.outputs[0] &&
             showComponent.value.outputs.map((output: { name: string }, i) => {
