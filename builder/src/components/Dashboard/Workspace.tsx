@@ -111,7 +111,7 @@ const Workspace: FC<IWorkspace> = ({
     <main
       className={
         className === ""
-          ? `fixed ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
+          ? `ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
           : `w-full`
       }
     >
