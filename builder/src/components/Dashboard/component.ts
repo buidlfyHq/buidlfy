@@ -13,7 +13,7 @@ export const components = [
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",
@@ -30,7 +30,7 @@ export const components = [
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",
@@ -46,7 +46,7 @@ export const components = [
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",
@@ -62,7 +62,7 @@ export const components = [
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",
@@ -78,7 +78,7 @@ export const components = [
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",
@@ -94,7 +94,7 @@ export const components = [
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",

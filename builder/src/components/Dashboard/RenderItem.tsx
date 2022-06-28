@@ -16,7 +16,16 @@ interface IRenderItem {
 const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
   switch (item.name) {
     case "Container":
-      return <Container />;
+      return (
+        <Container
+          // backgroundColor={item.style.backgroundColor}
+          // borderRadius={item.style.borderRadius}
+          // boxShadow={item.style.boxShadow}
+          // zIndex={item.style.zIndex}
+          // border={item.style.border}
+          // backgroundImg={item.style.backgroundImg}
+        />
+      );
     case "Button":
       return (
         <Button

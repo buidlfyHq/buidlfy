@@ -1,10 +1,10 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { ethers, providers, Contract, Signer } from "ethers";
-import { useSnackbar } from "react-simple-snackbar";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
 import BuilderConfig from "config";
 import { setValue } from "../Utils/SetValue";
+import { Dialog } from '@headlessui/react'
 
 const Button: FC<ITexts> = ({
   bold,
@@ -23,7 +23,6 @@ const Button: FC<ITexts> = ({
   setOutputValue,
 }) => {
   const config = JSON.parse(BuilderConfig);
-  const [openSnackbar, closeSnackbar] = useSnackbar();
   let provider: providers.Web3Provider,
     signer: providers.Provider | Signer,
     contract: Contract;
@@ -38,6 +37,10 @@ const Button: FC<ITexts> = ({
     );
   };
 
+  let [isOpen, setIsOpen] = useState(false)
+
+  const [transactionStatus, setTransactionStatus] = useState<string>('')
+
   useEffect(() => {
     if (config.contract.abi !== "" && config.contract.address !== "") {
       onLoad();
@@ -46,7 +49,7 @@ const Button: FC<ITexts> = ({
 
   // execute contract function
   const onRequest = async (method: string) => {
-    openSnackbar("Loading...", 100000);
+    // openSnackbar("Loading...", 100000);
     onLoad();
     // contract functions with inputs
     if (contractFunction.inputs.length) {
@@ -73,7 +76,9 @@ const Button: FC<ITexts> = ({
 
       if (contractFunction.stateMutability === "nonpayable") {
         // query contract functions --- magic code
+        
         const res = await contract.functions[method](...args); // passing an array as a function parameter
+        {setIsOpen(true)}
         receipt = await res.wait();
         console.log(receipt);
       } else if (contractFunction.stateMutability === "payable") {
@@ -111,8 +116,7 @@ const Button: FC<ITexts> = ({
       }
 
       if (receipt.transactionHash) {
-        closeSnackbar();
-        openSnackbar("Transaction hash: " + receipt.transactionHash);
+        setTransactionStatus(("Transaction hash: " + receipt.transactionHash))
       }
     } else {
       // contract functions without inputs
@@ -130,8 +134,28 @@ const Button: FC<ITexts> = ({
   return (
     <div
       style={{ justifyContent: justifyContent }}
-      className="flex px-6 items-center justify-center w-auto h-full"
+      className="flex items-center justify-center w-auto h-full px-6"
     >
+      <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="relative z-50"
+      >
+        <div className="fixed flex items-center justify-center p-4 top-4 left-4">
+          <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
+            <Dialog.Title>
+            {transactionStatus === '' ?
+            (<div className="flex items-center">
+              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+              <div className="mr-5 text-white">Transaction In Process...</div>
+            </div>) 
+            : (<div className="text-white break-all">{transactionStatus}</div>)
+            } 
+            </Dialog.Title>
+          </Dialog.Panel>
+        </div>
+      </Dialog>
+
       <div
         style={{
           fontWeight: bold,
@@ -144,7 +168,7 @@ const Button: FC<ITexts> = ({
           fontSize: `${fontSize}px`,
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
         }}
-        className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
+        className="w-48 px-6 py-2 rounded cursor-pointer btn whitespace-nowrap"
         onClick={() =>
           contractFunction.name
             ? onRequest(contractFunction.name)
