@@ -1,9 +1,10 @@
-import React, { FC, useEffect } from "react";
-import { ethers, providers, Contract, Signer } from "ethers";
+import { FC, useState, useEffect } from "react";
+import { Contract } from "ethers";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
 import BuilderConfig from "config";
-import { setValue } from "../Utils/SetValue";
+import { onLoad } from "../Utils/OnLoad";
+import { onRequest } from "../Utils/OnRequest";
 
 const Button: FC<ITexts> = ({
   bold,
@@ -22,109 +23,16 @@ const Button: FC<ITexts> = ({
   setOutputValue,
 }) => {
   const config = JSON.parse(BuilderConfig);
-  let provider: providers.Web3Provider,
-    signer: providers.Provider | Signer,
-    contract: Contract;
-
-  const onLoad = () => {
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    signer = provider.getSigner();
-    contract = new ethers.Contract(
-      config.contract.address,
-      config.contract.abi,
-      signer
-    );
-  };
+  const [contract, setContract] = useState<Contract>();
 
   useEffect(() => {
     if (config.contract.abi !== "" && config.contract.address !== "") {
-      onLoad();
+      onLoad(config, setContract);
     }
   }, []); // eslint-disable-line
 
-  // execute contract function
-  const onRequest = async (method: string) => {
-    onLoad();
-    // contract functions with inputs
-    if (contractFunction.inputs.length) {
-      // push all the required input values to args
-      const args = [];
-
-      inputValue.map((input: { name: string; value: string }) => {
-        contractFunction.inputs.map((inputName: string) => {
-          if (input.name === inputName) {
-            args.push(input.value);
-          }
-          return inputName;
-        });
-        return input;
-      });
-
-      let receipt; // to store response from contract
-
-      // check state mutability
-      // if non-payable then show transaction hash in popup
-      // if payable then request user to pay the amount and then show transaction hash in popup
-      // if view then display the output directly
-      // NOTE: non-payable and payable cannot have any output
-
-      if (contractFunction.stateMutability === "nonpayable") {
-        // query contract functions --- magic code
-        const res = await contract.functions[method](...args); // passing an array as a function parameter
-        receipt = await res.wait();
-        console.log(receipt);
-      } else if (contractFunction.stateMutability === "payable") {
-        // different code ---------------------> FIX
-
-        // var overrideOptions = {
-        //   gasLimit: 250000,
-        //   gasPrice: 9000000000,
-        //   nonce: 0,
-        //   value: ethers.utils.parseEther("1.0"),
-        // };
-
-        // var sendPromise = contract.setValue("Hello World", overrideOptions);
-
-        // ADD: Modal popup with asking user to enter the amount they want to send, and push that value in args
-
-        // query contract functions --- magic code
-        const res = await contract.functions[method](...args); // passing an array as a function parameter
-        receipt = await res.wait();
-        console.log(receipt);
-      } else if (
-        contractFunction.stateMutability === "view" ||
-        contractFunction.stateMutability === "pure"
-      ) {
-        const res = await contract.functions[method](...args); // passing an array as a function parameter
-        receipt = await res.wait();
-        console.log(receipt);
-      }
-      // contract functions with outputs
-      if (contractFunction.outputs.length) {
-        contractFunction.outputs.map((output: string, i: number) => {
-          setOutputValue(setValue(outputValue, output, receipt[i]));
-          return output;
-        });
-      }
-
-      if (receipt.transactionHash) {
-        alert("Transaction hash: " + receipt.transactionHash);
-      }
-    } else {
-      // contract functions without inputs
-      // state mutability is view always
-      const receipt = await contract.functions[method]();
-      console.log(receipt);
-
-      contractFunction.outputs.map((output: string, i: number) => {
-        setOutputValue(setValue(outputValue, output, receipt[i]));
-        return output;
-      });
-    }
-  };
-
   return (
-    <div
+    <main
       style={{ justifyContent: justifyContent }}
       className="flex px-6 items-center justify-center w-auto h-full"
     >
@@ -143,13 +51,20 @@ const Button: FC<ITexts> = ({
         className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
         onClick={() =>
           contractFunction.name
-            ? onRequest(contractFunction.name)
+            ? onRequest(
+                contractFunction.name,
+                contractFunction,
+                contract,
+                inputValue,
+                outputValue,
+                setOutputValue
+              )
             : console.log("Clicked")
         }
       >
         {value}
       </div>
-    </div>
+    </main>
   );
 };
 
