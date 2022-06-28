@@ -10,7 +10,7 @@ import IItems from "interfaces/items";
 
 interface IRenderItem {
   item: IItems;
-  imgData;
+  imgData: { id: string; data: string | ArrayBuffer }[];
 }
 
 const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {

@@ -7,10 +7,10 @@ import { Reader } from "@ethersproject/abi/lib/coders/abstract-coder";
 import IItems from "interfaces/items";
 
 interface IUploadComponent {
-  setPicture;
-  setImgData;
-  imgData;
-  selectedItem;
+  setPicture: (picture: string) => void;
+  setImgData: (imgData: { id: string; data: string | ArrayBuffer }[]) => void;
+  imgData: { id: string; data: string | ArrayBuffer }[];
+  selectedItem: IItems;
   items: IItems[];
   setItems: (items: IItems[]) => void;
 }

@@ -16,9 +16,9 @@ interface ISetting {
   openTab: number;
   setOpenTab: (openTab: number) => void;
   settingItemId: string;
-  setPicture;
-  setImgData;
-  imgData;
+  setPicture: (picture: string) => void;
+  setImgData: (imgData: { id: string; data: string | ArrayBuffer }[]) => void;
+  imgData: { id: string; data: string | ArrayBuffer }[];
 }
 
 const Settings: FC<ISetting> = ({

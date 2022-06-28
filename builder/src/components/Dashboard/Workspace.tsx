@@ -24,7 +24,7 @@ interface IWorkspace {
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setOpenTab: Dispatch<SetStateAction<number>>;
-  imgData;
+  imgData: { id: string; data: string | ArrayBuffer }[];
 }
 
 const Workspace: FC<IWorkspace> = ({

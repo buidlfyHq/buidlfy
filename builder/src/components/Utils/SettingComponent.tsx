@@ -54,9 +54,9 @@ interface ISettingComponent {
   elementConfig: object;
   openTab: number;
   setOpenTab: (openTab: number) => void;
-  setPicture;
-  setImgData;
-  imgData;
+  setPicture: (picture: string) => void;
+  setImgData: (imgData: { id: string; data: string | ArrayBuffer }[]) => void;
+  imgData: { id: string; data: string | ArrayBuffer }[];
 }
 
 const SettingComponent: FC<ISettingComponent> = ({
@@ -269,6 +269,10 @@ const SettingComponent: FC<ISettingComponent> = ({
                     selectedItem={selectedItem}
                     items={items}
                     setItems={setItems}
+                  />
+                  <UtilitiesComponent
+                    deleteComponent={deleteComponent}
+                    setDeleteComponent={setDeleteComponent}
                   />
                 </>
               ) : (
