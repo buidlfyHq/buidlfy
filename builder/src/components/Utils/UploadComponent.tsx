@@ -8,8 +8,8 @@ import IItems from "interfaces/items";
 
 interface IUploadComponent {
   setPicture: (picture: string) => void;
-  setImgData: (imgData: { id: string; data: string | ArrayBuffer }[]) => void;
-  imgData: { id: string; data: string | ArrayBuffer }[];
+  setImgData;
+  imgData;
   selectedItem: IItems;
   items: IItems[];
   setItems: (items: IItems[]) => void;
