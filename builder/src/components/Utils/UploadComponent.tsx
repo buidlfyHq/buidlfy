@@ -11,8 +11,6 @@ interface IUploadComponent {
   setImgData;
   imgData;
   selectedItem;
-  imgSrc;
-  setImgSrc;
   items: IItems[];
   setItems: (items: IItems[]) => void;
 }
@@ -22,14 +20,10 @@ const UploadComponent: FC<IUploadComponent> = ({
   setImgData,
   imgData,
   selectedItem,
-  imgSrc,
-  setImgSrc,
   items,
   setItems,
 }) => {
-  //   if (selectedItem) {
   const onChangePicture = (e) => {
-    // console.log(selectedItem, "selected");
     if (e.target.files[0]) {
       setPicture(e.target.files[0]);
       const reader = new FileReader();
@@ -47,16 +41,8 @@ const UploadComponent: FC<IUploadComponent> = ({
         setImgData([{ id: selectedItem.i, data: reader.result }]);
       });
       reader.readAsDataURL(e.target.files[0]);
-
-      //   console.log(imgData, "imgData");
     }
-
-    // };
   };
-  //   console.log(imgSrc, "imgSrc");
-  //   console.log(imgData[0]?.data, "data");
-  console.log(imgData, "imgdata");
-  //   console.log(selectedItem, "selectedItem");
 
   return (
     <div className="items-center w-full px-3 py-2 text-gray-600 rounded">

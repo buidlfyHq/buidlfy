@@ -57,8 +57,6 @@ interface ISettingComponent {
   setPicture;
   setImgData;
   imgData;
-  imgSrc;
-  setImgSrc;
 }
 
 const SettingComponent: FC<ISettingComponent> = ({
@@ -98,8 +96,6 @@ const SettingComponent: FC<ISettingComponent> = ({
   setPicture,
   setImgData,
   imgData,
-  imgSrc,
-  setImgSrc,
 }) => {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
@@ -271,8 +267,6 @@ const SettingComponent: FC<ISettingComponent> = ({
                     setImgData={setImgData}
                     imgData={imgData}
                     selectedItem={selectedItem}
-                    imgSrc={imgSrc}
-                    setImgSrc={setImgSrc}
                     items={items}
                     setItems={setItems}
                   />

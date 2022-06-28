@@ -254,26 +254,6 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
-  const setImgSrc = (imgSrc) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            imgSrc: imgSrc,
-          },
-        };
-      }
-      // setImgData(imgSrc);
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
   // console.log(items);
 
   return (
@@ -289,8 +269,6 @@ const Settings: FC<ISetting> = ({
           value={selectedItem?.value}
           setBold={setBold}
           bold={selectedItem?.style?.fontWeight}
-          imgSrc={selectedItem?.style.imgSrc}
-          setImgSrc={setImgSrc}
           setItalic={setItalic}
           italic={selectedItem?.style?.fontStyle}
           setUnderline={setUnderline}
