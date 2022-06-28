@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
 import { ethers, providers, Contract, Signer } from "ethers";
-import { useSnackbar } from "react-simple-snackbar";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
 import BuilderConfig from "config";
@@ -24,7 +23,6 @@ const Button: FC<ITexts> = ({
   setOutputValue,
 }) => {
   const config = JSON.parse(BuilderConfig);
-  const [openSnackbar, closeSnackbar] = useSnackbar();
   let provider: providers.Web3Provider,
     signer: providers.Provider | Signer,
     contract: Contract;
@@ -51,7 +49,7 @@ const Button: FC<ITexts> = ({
 
   // execute contract function
   const onRequest = async (method: string) => {
-    openSnackbar("Loading...", 100000);
+    // openSnackbar("Loading...", 100000);
     onLoad();
     // contract functions with inputs
     if (contractFunction.inputs.length) {
@@ -118,8 +116,7 @@ const Button: FC<ITexts> = ({
       }
 
       if (receipt.transactionHash) {
-        closeSnackbar();
-        openSnackbar("Transaction hash: " + receipt.transactionHash);
+        setTransactionStatus(("Transaction hash: " + receipt.transactionHash))
       }
     } else {
       // contract functions without inputs
@@ -144,17 +141,15 @@ const Button: FC<ITexts> = ({
         onClose={() => setIsOpen(false)}
         className="relative z-50"
       >
-        {/* The backdrop, rendered as a fixed sibling to the panel container */}
-        <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-
-        {/* Full-screen container to center the panel */}
-        <div className="fixed inset-0 flex items-center justify-center p-4">
-          {/* The actual dialog panel  */}
-          <Dialog.Panel className="max-w-sm p-4 mx-auto bg-white rounded">
+        <div className="fixed flex items-center justify-center p-4 top-4 left-4">
+          <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
             <Dialog.Title>
             {transactionStatus === '' ?
-            (<div className="lds-ring"><div></div><div></div><div></div><div></div></div>) 
-            : (transactionStatus)
+            (<div className="flex items-center">
+              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+              <div className="mr-5 text-white">Transaction In Process...</div>
+            </div>) 
+            : (<div className="text-white break-all">{transactionStatus}</div>)
             } 
             </Dialog.Title>
           </Dialog.Panel>

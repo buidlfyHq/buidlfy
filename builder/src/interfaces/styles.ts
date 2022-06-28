@@ -6,5 +6,11 @@ export default interface IStyles {
   textDecoration?: string;
   justifyContent?: string;
   fontSize?: number;
-  deleteComponent: number;
+  deleteComponent?: number;
 }
+
+// borderRadius?: any;
+// boxShadow?: any;
+// zIndex?: number;
+// border?: any; 
+// backgroundImg?: any;

@@ -3,9 +3,9 @@ import "styles/Components.css";
 
 const Input: FC = () => {
   return (
-    <div className="h-full flex justify-center items-center">
+    <div className="flex items-center justify-center h-full">
       <input
-        className="input bg-white appearance-none ml-6 border border-solid rounded py-2 px-3 text-gray-700 leading-tight"
+        className="w-full px-3 py-2 ml-6 leading-tight text-gray-700 bg-white border border-solid rounded appearance-none input"
         id="input"
         type="text"
         placeholder="Input"
