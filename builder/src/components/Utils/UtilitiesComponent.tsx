@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import "../../styles/Dashboard.css";
 import { AiOutlineDelete } from "react-icons/ai";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
 interface IUtilitiesComponent {
   deleteComponent: number;

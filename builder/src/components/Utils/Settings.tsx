@@ -3,8 +3,8 @@ import SettingComponent from "./SettingComponent";
 import IItems from "interfaces/items";
 
 interface ISetting {
-  items: any;
-  setItems: (items: any) => void;
+  items: IItems[];
+  setItems: (items: IItems[]) => void;
   contractConfig: { abi: string; address: string };
   setContractConfig: (contractConfig: { abi: string; address: string }) => void;
   setSelector: (selector: {
@@ -195,7 +195,7 @@ const Settings: FC<ISetting> = ({
     if (!settingItemId) {
       return;
     }
-    const updatedItems = items.map((item: { [x: string]: any; i: any }) => {
+    const updatedItems = items.map((item) => {
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -248,7 +248,7 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
-  console.log(items)
+  console.log(items);
 
   return (
     <>

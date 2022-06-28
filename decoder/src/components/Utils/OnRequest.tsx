@@ -10,8 +10,7 @@ export const onRequest = async (
   },
   contract: Contract,
   inputValue: object[],
-  outputValue: object[],
-  setOutputValue: (outputValue: object[]) => void
+  outputValue: object[]
 ) => {
   // contract functions with inputs
   if (contractFunction.inputs.length) {
@@ -68,9 +67,10 @@ export const onRequest = async (
       console.log(receipt);
     }
     // contract functions with outputs
+    let returnOutput = [];
     if (contractFunction.outputs.length) {
       contractFunction.outputs.map((output: string, i: number) => {
-        setOutputValue(setValue(outputValue, output, receipt[i]));
+        returnOutput.push(setValue(outputValue, output, receipt[i]));
         return output;
       });
     }
@@ -78,15 +78,19 @@ export const onRequest = async (
     if (receipt.transactionHash) {
       alert("Transaction hash: " + receipt.transactionHash);
     }
+
+    return returnOutput;
   } else {
     // contract functions without inputs
     // state mutability is view always
     const receipt = await contract.functions[method]();
     console.log(receipt);
 
+    let returnOutput = [];
     contractFunction.outputs.map((output: string, i: number) => {
-      setOutputValue(setValue(outputValue, output, receipt[i]));
+      returnOutput.push(setValue(outputValue, output, receipt[i]));
       return output;
     });
+    return returnOutput;
   }
 };

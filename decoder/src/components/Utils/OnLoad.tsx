@@ -1,9 +1,8 @@
 import { ethers, providers, Contract, Signer } from "ethers";
 
-export const onLoad = (
-  config: { contract: { address: string; abi: ethers.ContractInterface } },
-  setContract: (contract: Contract) => void
-) => {
+export const onLoad = (config: {
+  contract: { address: string; abi: ethers.ContractInterface };
+}) => {
   let provider: providers.Web3Provider,
     signer: providers.Provider | Signer,
     contract: Contract;
@@ -16,5 +15,5 @@ export const onLoad = (
     signer
   );
 
-  setContract(contract);
+  return contract;
 };

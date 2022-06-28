@@ -27,9 +27,20 @@ const Button: FC<ITexts> = ({
 
   useEffect(() => {
     if (config.contract.abi !== "" && config.contract.address !== "") {
-      onLoad(config, setContract);
+      setContract(onLoad(config));
     }
   }, []); // eslint-disable-line
+
+  const onResponse = async () => {
+    const res = await onRequest(
+      contractFunction.name,
+      contractFunction,
+      contract,
+      inputValue,
+      outputValue
+    );
+    setOutputValue(res);
+  };
 
   return (
     <main
@@ -50,16 +61,7 @@ const Button: FC<ITexts> = ({
         }}
         className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
         onClick={() =>
-          contractFunction.name
-            ? onRequest(
-                contractFunction.name,
-                contractFunction,
-                contract,
-                inputValue,
-                outputValue,
-                setOutputValue
-              )
-            : console.log("Clicked")
+          contractFunction.name ? onResponse() : console.log("Clicked")
         }
       >
         {value}

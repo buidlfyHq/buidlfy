@@ -11,7 +11,11 @@ interface IWorkspace {
   className: string;
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
-  selector;
+  selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  };
   setSelector: (selector: {
     methodName: string;
     type: string;
@@ -20,7 +24,6 @@ interface IWorkspace {
   elementConfig: object;
   setElementConfig: React.Dispatch<React.SetStateAction<object>>;
   setOpenTab: React.Dispatch<React.SetStateAction<number>>;
-  // not sure about this**************************
 }
 
 const Workspace: FC<IWorkspace> = ({

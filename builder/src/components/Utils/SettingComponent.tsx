@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState, FC } from "react";
-import "../../styles/Dashboard.css";
 import { RiText } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
-import "../../styles/Components.css";
 import AlignComponent from "./AlignComponent";
 import FontStyleComponent from "./FontStyleComponent";
 import UtilitiesComponent from "./UtilitiesComponent";
@@ -11,6 +9,8 @@ import BgColorComponent from "./BgColorComponent";
 import FontSizeComponent from "./FontSizeComponent";
 import AdvanceComponent from "./AdvanceComponent";
 import IItems from "interfaces/items";
+import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
 interface ISettingComponent {
   setSelector: (selector: {

@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import "../../styles/Dashboard.css";
 import {
   AiOutlineAlignLeft,
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
 import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
 interface IAlignComponent {
   setLeft: (justifyContent: string | boolean) => void;
