@@ -20,4 +20,5 @@ export default interface IItems {
   moved?: boolean;
   static?: boolean;
   resizeHandles?: [];
+  imgData?: string | ArrayBuffer;
 }

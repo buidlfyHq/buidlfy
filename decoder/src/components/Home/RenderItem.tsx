@@ -9,6 +9,7 @@ import Input from "../CustomComponents/Input";
 import HeadingThree from "../CustomComponents/HeadingThree";
 import HeadingTwo from "../CustomComponents/HeadingTwo";
 import Divider from "../CustomComponents/Divider";
+import Image from "../CustomComponents/Image";
 import IItems from "interfaces/items";
 
 interface IRenderItem {
@@ -136,6 +137,8 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case "Divider":
       return <Divider />;
+    case "Image":
+      return <Image imgData={item.imgData} />;
     default:
       return <></>;
   }

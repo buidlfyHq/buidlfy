@@ -24,6 +24,7 @@ interface IWorkspace {
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setOpenTab: Dispatch<SetStateAction<number>>;
+  imgData: { id: string; data: string | ArrayBuffer }[];
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -37,6 +38,7 @@ const Workspace: FC<IWorkspace> = ({
   elementConfig,
   setElementConfig,
   setOpenTab,
+  imgData,
 }) => {
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -111,7 +113,7 @@ const Workspace: FC<IWorkspace> = ({
     <main
       className={
         className === ""
-          ? `fixed ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
+          ? `ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
           : `w-full`
       }
     >
@@ -145,7 +147,7 @@ const Workspace: FC<IWorkspace> = ({
                   // open item setting on click
                   onClick={() => onComponentClick(item, i, index)}
                 >
-                  <RenderItem item={item} />
+                  <RenderItem item={item} imgData={imgData} />
                 </div>
               );
             })}
