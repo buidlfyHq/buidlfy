@@ -7,4 +7,5 @@ export default interface IStyles {
   justifyContent?: string;
   fontSize?: number;
   deleteComponent: number;
+  imgSrc?: any;
 }

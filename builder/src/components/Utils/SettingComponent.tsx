@@ -11,6 +11,7 @@ import BgColorComponent from "./BgColorComponent";
 import FontSizeComponent from "./FontSizeComponent";
 import AdvanceComponent from "./AdvanceComponent";
 import IItems from "interfaces/items";
+import UploadComponent from "./UploadComponent";
 
 interface ISettingComponent {
   items: IItems[];
@@ -53,6 +54,9 @@ interface ISettingComponent {
   elementConfig: object;
   openTab: number;
   setOpenTab: (openTab: number) => void;
+  setPicture: (picture: string) => void;
+  setImgData: (imgData: { id: string; data: string | ArrayBuffer }[]) => void;
+  imgData: { id: string; data: string | ArrayBuffer }[];
 }
 
 const SettingComponent: FC<ISettingComponent> = ({
@@ -89,6 +93,9 @@ const SettingComponent: FC<ISettingComponent> = ({
   elementConfig,
   openTab,
   setOpenTab,
+  setPicture,
+  setImgData,
+  imgData,
 }) => {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
@@ -247,61 +254,86 @@ const SettingComponent: FC<ISettingComponent> = ({
             </>
           ) : (
             <>
-              {" "}
-              <h3 className="mb-3 ml-8">
-                Component -{" "}
-                {selectedItem ? (
-                  <span className="font-bold">{selectedItem.name}</span>
-                ) : null}
-              </h3>
-              <div className="flex items-center px-3 mt-1 text-black">
-                <RiText className="text-[18px] mr-3" />
+              {selectedItem?.name === "Image" ? (
+                <>
+                  <h3 className="mb-3 ml-8">
+                    Component -{" "}
+                    {selectedItem ? (
+                      <span className="font-bold">{selectedItem.name}</span>
+                    ) : null}
+                  </h3>
+                  <UploadComponent
+                    setPicture={setPicture}
+                    setImgData={setImgData}
+                    imgData={imgData}
+                    selectedItem={selectedItem}
+                    items={items}
+                    setItems={setItems}
+                  />
+                  <UtilitiesComponent
+                    deleteComponent={deleteComponent}
+                    setDeleteComponent={setDeleteComponent}
+                  />
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <h3 className="mb-3 ml-8">
+                    Component -{" "}
+                    {selectedItem ? (
+                      <span className="font-bold">{selectedItem.name}</span>
+                    ) : null}
+                  </h3>
+                  <div className="flex items-center px-3 mt-1 text-black">
+                    <RiText className="text-[18px] mr-3" />
 
-                <input
-                  value={textVal}
-                  onChange={(e) => handleTextChange(e)}
-                  className="changeText"
-                  type="text"
-                  placeholder="Name..."
-                />
-              </div>
-              <div className="flex items-center px-3 mt-2 text-black">
-                <AiOutlineLink className="text-[18px] mr-3" />
-                <input
-                  value={linkVal}
-                  onChange={(e) => handleLinkChange(e)}
-                  className="changeText"
-                  type="text"
-                  placeholder="URL..."
-                />
-              </div>
-              <FontStyleComponent
-                bold={bold}
-                italic={italic}
-                underline={underline}
-                setBold={setBold}
-                setItalic={setItalic}
-                setUnderline={setUnderline}
-              />
-              <AlignComponent
-                justifyContent={justifyContent}
-                setLeft={setLeft}
-                setRight={setRight}
-                setCenter={setCenter}
-              />
-              <FontSizeComponent
-                fontSize={fontSize}
-                setFontSize={setFontSize}
-              />
-              <ColorComponent color={color} setColor={setColor} />
-              <BgColorComponent
-                backgroundColor={backgroundColor}
-                setBgColor={setBgColor}
-              />
-              <UtilitiesComponent
-                deleteComponent={deleteComponent}
-                setDeleteComponent={setDeleteComponent}
-              />
+                    <input
+                      value={textVal}
+                      onChange={(e) => handleTextChange(e)}
+                      className="changeText"
+                      type="text"
+                      placeholder="Name..."
+                    />
+                  </div>
+                  <div className="flex items-center px-3 mt-2 text-black">
+                    <AiOutlineLink className="text-[18px] mr-3" />
+                    <input
+                      value={linkVal}
+                      onChange={(e) => handleLinkChange(e)}
+                      className="changeText"
+                      type="text"
+                      placeholder="URL..."
+                    />
+                  </div>
+                  <FontStyleComponent
+                    bold={bold}
+                    italic={italic}
+                    underline={underline}
+                    setBold={setBold}
+                    setItalic={setItalic}
+                    setUnderline={setUnderline}
+                  />
+                  <AlignComponent
+                    justifyContent={justifyContent}
+                    setLeft={setLeft}
+                    setRight={setRight}
+                    setCenter={setCenter}
+                  />
+                  <FontSizeComponent
+                    fontSize={fontSize}
+                    setFontSize={setFontSize}
+                  />
+                  <ColorComponent color={color} setColor={setColor} />
+                  <BgColorComponent
+                    backgroundColor={backgroundColor}
+                    setBgColor={setBgColor}
+                  />
+                  <UtilitiesComponent
+                    deleteComponent={deleteComponent}
+                    setDeleteComponent={setDeleteComponent}
+                  />
+                </>
+              )}
             </>
           )}
         </div>

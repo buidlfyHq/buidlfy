@@ -16,6 +16,9 @@ interface ISetting {
   openTab: number;
   setOpenTab: (openTab: number) => void;
   settingItemId: string;
+  setPicture: (picture: string) => void;
+  setImgData: (imgData: { id: string; data: string | ArrayBuffer }[]) => void;
+  imgData: { id: string; data: string | ArrayBuffer }[];
 }
 
 const Settings: FC<ISetting> = ({
@@ -28,6 +31,9 @@ const Settings: FC<ISetting> = ({
   elementConfig,
   openTab,
   setOpenTab,
+  setPicture,
+  setImgData,
+  imgData,
 }) => {
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
@@ -248,7 +254,7 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
-  console.log(items);
+  // console.log(items);
 
   return (
     <>
@@ -287,6 +293,9 @@ const Settings: FC<ISetting> = ({
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
+          setPicture={setPicture}
+          setImgData={setImgData}
+          imgData={imgData}
         />
       ) : null}
     </>

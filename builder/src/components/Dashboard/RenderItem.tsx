@@ -8,9 +8,12 @@ import Input from "../CustomComponents/Input";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
-interface IRenderItem { item: IItems }
+interface IRenderItem {
+  item: IItems;
+  imgData: { id: string; data: string | ArrayBuffer }[];
+}
 
-const RenderItem: FC<IRenderItem> = ({ item }) => {
+const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
   switch (item.name) {
     case "Container":
       return <Container />;
@@ -101,7 +104,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
     case "Input":
       return <Input />;
     case "Image":
-      return <Image />;
+      return <Image imgData={item.imgData} />;
     case "Divider":
       return <Divider />;
     default:
