@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ethers, providers, Contract, Signer } from "ethers";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
