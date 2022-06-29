@@ -61,15 +61,15 @@ const BorderComponent: FC<IBorderComponent> = ({
                 aria-label="Default select example"
               >
                 <option selected>{borderRadius}</option>
-                <option value={8}>2</option>
-                <option value={9}>4</option>
-                <option value={10}>5</option>
-                <option value={11}>7</option>
-                <option value={12}>8</option>
-                <option value={14}>10</option>
-                <option value={18}>15</option>
-                <option value={24}>20</option>
-                <option value={30}>25</option>
+                <option value={2}>2</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+                <option value={7}>7</option>
+                <option value={8}>8</option>
+                <option value={10}>10</option>
+                <option value={15}>15</option>
+                <option value={20}>20</option>
+                <option value={25}>25</option>
               </select>
             </div>
             <span
@@ -100,13 +100,13 @@ const BorderComponent: FC<IBorderComponent> = ({
                 aria-label="Default select example"
               >
                 <option selected>{borderWidth}</option>
-                <option value={8}>1</option>
-                <option value={9}>3</option>
-                <option value={10}>5</option>
-                <option value={11}>7</option>
-                <option value={12}>9</option>
-                <option value={14}>10</option>
-                <option value={18}>12</option>
+                <option value={1}>1</option>
+                <option value={3}>3</option>
+                <option value={5}>5</option>
+                <option value={7}>7</option>
+                <option value={9}>9</option>
+                <option value={10}>10</option>
+                <option value={12}>12</option>
               </select>
             </div>
             <span
