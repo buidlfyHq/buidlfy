@@ -182,7 +182,7 @@ const Button: FC<ITexts> = ({
           boxShadow: shadow,
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
         }}
-        className="w-48 px-6 py-2 rounded cursor-pointer btn whitespace-nowrap"
+        className="w-48 px-6 py-2 cursor-pointer btn whitespace-nowrap"
         onClick={() =>
           contractFunction.name
             ? onRequest(contractFunction.name)

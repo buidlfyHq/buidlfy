@@ -30,7 +30,7 @@ const Input: FC<{
   return (
     <div className="h-full flex justify-center items-center">
       <input
-        className="input bg-white appearance-none ml-6 border border-solid rounded py-2 px-3 text-gray-700 leading-tight"
+        className="input bg-white appearance-none ml-6 border border-solid py-2 px-3 text-gray-700 leading-tight"
         id="input"
         style={{ borderRadius: `${borderRadius}px`, boxShadow: shadow }}
         type="text"
