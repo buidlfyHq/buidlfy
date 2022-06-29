@@ -34,7 +34,7 @@ const Button: FC<ITexts> = ({
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
           boxShadow: shadow,
         }}
-        className="btn px-6 py-2 rounded w-48 h-auto cursor-pointer whitespace-nowrap"
+        className="btn px-6 py-2 w-48 h-auto cursor-pointer whitespace-nowrap"
       >
         <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>{" "}
       </div>

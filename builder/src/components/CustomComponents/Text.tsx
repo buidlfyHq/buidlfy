@@ -13,7 +13,6 @@ const Text: FC<ITexts> = ({
   backgroundColor,
   link,
 }) => {
-  console.log(link, "link");
   return (
     <div
       style={{
