@@ -18,6 +18,8 @@ const Home: FC = () => {
         cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
         rowHeight={50}
         compactType="horizontal"
+        // useCSSTransforms={true}
+        // allowOverlap={true}
         isDraggable={false}
         isResizable={false}
       >

@@ -254,6 +254,44 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
+  const setBorderRadius = (borderRadius: any) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            borderRadius: borderRadius,
+          },
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+  const setBorderWidth = (borderWidth: any) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            borderWidth: borderWidth,
+          },
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
   // console.log(items);
 
   return (
@@ -296,6 +334,10 @@ const Settings: FC<ISetting> = ({
           setPicture={setPicture}
           setImgData={setImgData}
           imgData={imgData}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          setBorderWidth={setBorderWidth}
         />
       ) : null}
     </>

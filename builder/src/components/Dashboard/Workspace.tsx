@@ -56,6 +56,7 @@ const Workspace: FC<IWorkspace> = ({
       });
     });
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
+    console.log(layout, "layout");
   };
 
   const onComponentClick = (item: IItems, i: string, index: number) => {

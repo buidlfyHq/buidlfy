@@ -4,7 +4,6 @@ import Button from "../CustomComponents/Button";
 import HeadingOne from "../CustomComponents/HeadingOne";
 import Text from "../CustomComponents/Text";
 import Link from "../CustomComponents/Link";
-// import Image from "../CustomComponents/Image";
 import Input from "../CustomComponents/Input";
 import HeadingThree from "../CustomComponents/HeadingThree";
 import HeadingTwo from "../CustomComponents/HeadingTwo";
@@ -29,7 +28,7 @@ const RenderItem: FC<IRenderItem> = ({
 }) => {
   switch (item.name) {
     case "Container":
-      return <Container />;
+      return <Container backgroundColor={item.style.backgroundColor} />;
     case "Button":
       return (
         <Button

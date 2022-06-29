@@ -4,6 +4,10 @@ export const components = [
     h: 1.5,
     style: {
       deleteComponent: 0,
+      backgroundColor: { r: "0", g: "0", b: "0" },
+      color: { r: "0", g: "0", b: "0", a: "100"},
+      borderRadius: 1,
+      borderWidth: 1
     },
   },
   {

@@ -18,7 +18,11 @@ const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
     case "Container":
       return (
         <Container
-          // backgroundColor={item.style.backgroundColor}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
           // borderRadius={item.style.borderRadius}
           // boxShadow={item.style.boxShadow}
           // zIndex={item.style.zIndex}
