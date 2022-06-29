@@ -28,7 +28,16 @@ const RenderItem: FC<IRenderItem> = ({
 }) => {
   switch (item.name) {
     case "Container":
-      return <Container backgroundColor={item.style.backgroundColor} />;
+      return (
+        <Container
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+        />
+      );
     case "Button":
       return (
         <Button
@@ -38,6 +47,7 @@ const RenderItem: FC<IRenderItem> = ({
           color={item.style.color}
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
+          borderRadius={item.style.borderRadius}
           value={item.value}
           link={item.link}
           backgroundColor={item.style.backgroundColor}
@@ -46,6 +56,7 @@ const RenderItem: FC<IRenderItem> = ({
           setInputValue={setInputValue}
           outputValue={outputValue}
           setOutputValue={setOutputValue}
+          shadow={item.style.shadow}
         />
       );
     case "Text":
@@ -132,6 +143,8 @@ const RenderItem: FC<IRenderItem> = ({
           contractFunction={item.contract}
           inputValue={inputValue}
           setInputValue={setInputValue}
+          borderRadius={item.style.borderRadius}
+          shadow={item.style.shadow}
         />
       );
     case "Divider":

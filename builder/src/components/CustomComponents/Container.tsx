@@ -9,6 +9,7 @@ const Container: FC<IBgContainer> = ({
   imgData,
   borderRadius,
   borderWidth,
+  shadow,
   // boxShadow,
   // zIndex,
   // border,
@@ -28,6 +29,7 @@ const Container: FC<IBgContainer> = ({
         backgroundImage: `url(${imgData})`,
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
+        boxShadow: shadow,
         // boxShadow,
       }}
       className="flex items-center justify-center h-full"

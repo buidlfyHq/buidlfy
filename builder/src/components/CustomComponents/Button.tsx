@@ -12,6 +12,8 @@ const Button: FC<ITexts> = ({
   value,
   backgroundColor,
   link,
+  borderRadius,
+  shadow,
 }) => {
   return (
     <div
@@ -27,12 +29,14 @@ const Button: FC<ITexts> = ({
           borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
           display: "flex",
           justifyContent: "center",
+          borderRadius: `${borderRadius}px`,
           fontSize: `${fontSize}px`,
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+          boxShadow: shadow,
         }}
-        className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
+        className="btn px-6 py-2 rounded w-48 h-auto cursor-pointer whitespace-nowrap"
       >
-        {value}
+        <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>{" "}
       </div>
     </div>
   );

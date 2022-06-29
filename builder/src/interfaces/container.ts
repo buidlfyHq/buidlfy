@@ -4,6 +4,7 @@ export default interface IBgContainer {
     imgData: any;
     borderRadius: number;
     borderWidth: number;
+    shadow: any;
     // boxShadow: any;
     // zIndex: number;
     // border: any; //border color and type

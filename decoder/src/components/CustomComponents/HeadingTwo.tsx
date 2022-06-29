@@ -18,7 +18,7 @@ const HeadingTwo: FC<ITexts> = ({
   link,
   contractFunction,
   outputValue,
-  backgroundColor
+  backgroundColor,
 }) => {
   return (
     <div
@@ -49,11 +49,11 @@ const HeadingTwo: FC<ITexts> = ({
               </div>
             ))
           ) : (
-            <>{value}</>
+            <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>
           )}
         </>
       ) : (
-        <>{value}</>
+        <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>
       )}
     </div>
   );

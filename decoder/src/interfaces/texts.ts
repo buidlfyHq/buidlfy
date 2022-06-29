@@ -8,6 +8,8 @@ export default interface ITexts {
   value: string;
   link: string;
   backgroundColor?: any;
+  borderRadius?: number;
+  shadow?: any;
   contractFunction?: any;
   inputValue?: object[];
   setInputValue?: (inputValue: object[]) => void;

@@ -49,11 +49,11 @@ const HeadingThree: FC<ITexts> = ({
               </div>
             ))
           ) : (
-            <>{value}</>
+            <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>
           )}
         </>
       ) : (
-        <>{value}</>
+        <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>
       )}
     </div>
   );

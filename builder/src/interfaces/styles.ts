@@ -9,6 +9,7 @@ export default interface IStyles {
   deleteComponent?: number;
   borderRadius?: number;
   borderWidth?: number;
+  shadow?: any;
 }
 
 // borderRadius?: any;

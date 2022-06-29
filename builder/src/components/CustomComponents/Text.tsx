@@ -13,6 +13,7 @@ const Text: FC<ITexts> = ({
   backgroundColor,
   link,
 }) => {
+  console.log(link, "link");
   return (
     <div
       style={{
@@ -27,7 +28,7 @@ const Text: FC<ITexts> = ({
       }}
       className="flex items-center justify-center h-full"
     >
-      {value}
+      {link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}
     </div>
   );
 };

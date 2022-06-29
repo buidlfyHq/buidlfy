@@ -4,7 +4,7 @@ import ITexts from "interfaces/texts";
 import "styles/Components.css";
 import BuilderConfig from "config";
 import { setValue } from "../Utils/SetValue";
-import { Dialog } from '@headlessui/react'
+import { Dialog } from "@headlessui/react";
 
 const Button: FC<ITexts> = ({
   bold,
@@ -21,6 +21,8 @@ const Button: FC<ITexts> = ({
   setInputValue,
   outputValue,
   setOutputValue,
+  borderRadius,
+  shadow,
 }) => {
   const config = JSON.parse(BuilderConfig);
   let provider: providers.Web3Provider,
@@ -37,9 +39,9 @@ const Button: FC<ITexts> = ({
     );
   };
 
-  let [isOpen, setIsOpen] = useState(false)
+  let [isOpen, setIsOpen] = useState(false);
 
-  const [transactionStatus, setTransactionStatus] = useState<string>('')
+  const [transactionStatus, setTransactionStatus] = useState<string>("");
 
   useEffect(() => {
     if (config.contract.abi !== "" && config.contract.address !== "") {
@@ -76,9 +78,11 @@ const Button: FC<ITexts> = ({
 
       if (contractFunction.stateMutability === "nonpayable") {
         // query contract functions --- magic code
-        
+
         const res = await contract.functions[method](...args); // passing an array as a function parameter
-        {setIsOpen(true)}
+        {
+          setIsOpen(true);
+        }
         receipt = await res.wait();
         console.log(receipt);
       } else if (contractFunction.stateMutability === "payable") {
@@ -116,7 +120,7 @@ const Button: FC<ITexts> = ({
       }
 
       if (receipt.transactionHash) {
-        setTransactionStatus(("Transaction hash: " + receipt.transactionHash))
+        setTransactionStatus("Transaction hash: " + receipt.transactionHash);
       }
     } else {
       // contract functions without inputs
@@ -144,13 +148,21 @@ const Button: FC<ITexts> = ({
         <div className="fixed flex items-center justify-center p-4 top-4 left-4">
           <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
             <Dialog.Title>
-            {transactionStatus === '' ?
-            (<div className="flex items-center">
-              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-              <div className="mr-5 text-white">Transaction In Process...</div>
-            </div>) 
-            : (<div className="text-white break-all">{transactionStatus}</div>)
-            } 
+              {transactionStatus === "" ? (
+                <div className="flex items-center">
+                  <div className="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <div className="mr-5 text-white">
+                    Transaction In Process...
+                  </div>
+                </div>
+              ) : (
+                <div className="text-white break-all">{transactionStatus}</div>
+              )}
             </Dialog.Title>
           </Dialog.Panel>
         </div>
@@ -166,6 +178,8 @@ const Button: FC<ITexts> = ({
           display: "flex",
           justifyContent: "center",
           fontSize: `${fontSize}px`,
+          borderRadius: `${borderRadius}px`,
+          boxShadow: shadow,
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
         }}
         className="w-48 px-6 py-2 rounded cursor-pointer btn whitespace-nowrap"
@@ -175,7 +189,7 @@ const Button: FC<ITexts> = ({
             : console.log("Clicked")
         }
       >
-        {value}
+        <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>{" "}
       </div>
     </div>
   );
