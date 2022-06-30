@@ -1,10 +1,10 @@
 import { FC, useState, useEffect } from "react";
 import { Contract } from "ethers";
-import ITexts from "interfaces/texts";
-import "styles/Components.css";
 import BuilderConfig from "config";
 import { onLoad } from "../Utils/OnLoad";
 import { onRequest } from "../Utils/OnRequest";
+import ITexts from "interfaces/texts";
+import "styles/Components.css";
 
 const Button: FC<ITexts> = ({
   bold,
