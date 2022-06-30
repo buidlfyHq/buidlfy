@@ -1,17 +1,43 @@
-import React, { FC } from "react";
-import { Popover } from "@headlessui/react";
+import React, { FC, useState } from "react";
+import { Dialog } from "@headlessui/react";
 import { AiOutlineDoubleRight, AiOutlineEye } from "react-icons/ai";
-import { BiChevronDown } from "react-icons/bi";
 import { MdUndo, MdRedo } from "react-icons/md";
+import { encode as base64_encode } from "base-64";
+import IItems from "interfaces/items";
 
-const Navbar: FC<{ className: string; setClassName: any }> = ({
+interface INavbar {
+  className: string;
+  setClassName: React.Dispatch<React.SetStateAction<string>>
+  items: IItems[];
+  contractConfig: { abi: string; address: string };
+}
+
+const Navbar: FC<INavbar> = ({
   className,
   setClassName,
+  items,
+  contractConfig,
 }) => {
+  const abiJSON = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [generatedConfig, setGeneratedConfig] = useState<string>("");
+
   const showSidebar = () => {
     setClassName("");
   };
 
+  const handleClick = () => {
+    let config = {
+      builder: items,
+      contract: {
+        abi: abiJSON,
+        address: contractConfig.address,
+      },
+    };
+    let stringifiedConfig = JSON.stringify(config);
+    setGeneratedConfig(base64_encode(stringifiedConfig));
+    setIsOpen(true);
+  };
   return (
     <main
       className={
@@ -42,24 +68,58 @@ const Navbar: FC<{ className: string; setClassName: any }> = ({
           Preview
         </div>
 
-        <Popover className="relative p-3">
-          <Popover.Button>
-            <div className="flex items-center px-4 py-2 bg-white rounded-md shadow-lg cursor-pointer">
-              Publish
-              <span className="ml-1">
-                <BiChevronDown />
-              </span>
-            </div>
-          </Popover.Button>
+        <button
+          className="btn rounded cursor-pointer whitespace-nowrap px-4 h-10 my-5"
+          onClick={handleClick}
+        >
+          Publish
+        </button>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-10 overflow-y-auto"
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+        >
+          <div className="min-h-screen px-4 text-center">
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
 
-          <Popover.Panel className="absolute right-0 z-10 p-2 mt-1 bg-white border rounded-md shadow-md">
-            <div className="truncate">Publishing Current Page Only</div>
-            <hr className="my-2" />
-            <div className="p-2 text-center text-white bg-indigo-800 rounded-md">
-              Publish
-            </div>
-          </Popover.Panel>
-        </Popover>
+            {/* Use the overlay to style a dim backdrop for your dialog */}
+            <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+
+            {/* Dialog Content */}
+            <section className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
+              >
+                Generated base64 Config{" "}
+              </Dialog.Title>
+              <div className="mt-2">
+                <p className="text-sm text-gray-500 overflow-auto h-10">
+                  {generatedConfig}
+                </p>
+              </div>
+              <div className="mt-4">
+                <button
+                  type="button"
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                  onClick={() => {
+                    navigator.clipboard.writeText(generatedConfig);
+                    setIsOpen(false);
+                  }}
+                >
+                  Click here to copy Config
+                </button>
+              </div>
+            </section>
+          </div>
+        </Dialog>
       </div>
     </main>
   );

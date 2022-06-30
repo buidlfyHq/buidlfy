@@ -1,6 +1,11 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import ITexts from "interfaces/texts";
 import "styles/Components.css";
+
+interface IOutput {
+  name: string;
+  value: any;
+}
 
 const Text: FC<ITexts> = ({
   bold,
@@ -11,6 +16,9 @@ const Text: FC<ITexts> = ({
   fontSize,
   value,
   link,
+  contractFunction,
+  outputValue,
+  backgroundColor,
 }) => {
   return (
     <div
@@ -22,10 +30,31 @@ const Text: FC<ITexts> = ({
         display: "flex",
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
+        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
-      className="flex items-center justify-center h-full"
+      className="flex items-center justify-center h-full overflow-auto"
     >
-      {value}
+      {contractFunction ? (
+        <>
+          {outputValue.length ? (
+            outputValue.map((output: IOutput, index: number) => (
+              <div key={index}>
+                {output.name === contractFunction.outputName && (
+                  <>
+                    {typeof output.value === "string"
+                      ? output.value
+                      : output.value.join(", ")}
+                  </>
+                )}
+              </div>
+            ))
+          ) : (
+            <>{value}</>
+          )}
+        </>
+      ) : (
+        <>{value}</>
+      )}
     </div>
   );
 };

@@ -1,29 +1,42 @@
 import React, { FC } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
-// import AbiComponent from "./AbiComponent";
 import RenderItem from "./RenderItem";
 import IItems from "interfaces/items";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
-const Workspace: FC<{
-  abi: string;
-  showComponent: number[];
-  setShowComponent: (showComponent: number[]) => void;
+interface IWorkspace {
   items: IItems[];
   setItems: (items: IItems[]) => void;
   className: string;
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
-}> = ({
-  abi,
-  showComponent,
-  setShowComponent,
+  selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  };
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  elementConfig: object;
+  setElementConfig: React.Dispatch<React.SetStateAction<object>>;
+  setOpenTab: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Workspace: FC<IWorkspace> = ({
   items,
   setItems,
   className,
   setOpenSetting,
   setSettingItemId,
+  selector,
+  setSelector,
+  elementConfig,
+  setElementConfig,
+  setOpenTab,
 }) => {
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -43,6 +56,57 @@ const Workspace: FC<{
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
 
+  const handleFlowControl = (item: IItems, i: string, index: number) => {
+    // checks if the selector is active
+    if (selector === null) {
+      setOpenSetting(true);
+      setSettingItemId(i);
+      setOpenTab(1);
+    } else {
+      // Add validation for selection
+      if (selector.type === "input" && item.name === "Input") {
+        // for updating selector with item name and item id
+        setElementConfig({
+          ...elementConfig,
+          [selector.name]: { name: item.name, id: i },
+        });
+        let updatedItem = {
+          ...item,
+          contract: {
+            name: selector.methodName,
+            inputName: selector.name,
+          },
+        };
+        let newArray = [...items];
+        newArray[index] = updatedItem;
+        setItems(newArray);
+      } else if (
+        selector.type === "output" &&
+        (item.name === "Text" ||
+          item.name === "Heading 1" ||
+          item.name === "Heading 2" ||
+          item.name === "Heading 3")
+      ) {
+        // for updating selector with item name and item id
+        setElementConfig({
+          ...elementConfig,
+          [selector.name]: { name: item.name, id: i },
+        });
+        let updatedItem = {
+          ...item,
+          contract: {
+            name: selector.methodName,
+            outputName: selector.name,
+          },
+        };
+        let newArray = [...items];
+        newArray[index] = updatedItem;
+        setItems(newArray);
+      }
+      setSelector(null);
+    }
+  };
+
   return (
     <main
       className={
@@ -51,12 +115,7 @@ const Workspace: FC<{
           : `w-full`
       }
     >
-      <section className="p-4">
-        {/* <AbiComponent
-          abi={abi}
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
-        /> */}
+      <section className="pt-2">
         <ResponsiveGridLayout
           layouts={{ lg: items }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
@@ -66,21 +125,24 @@ const Workspace: FC<{
           compactType="horizontal"
           resizeHandles={["nw", "se"]}
           onLayoutChange={onLayoutChange}
+          margin={[0, 0]}
         >
           {items
             ?.filter((i) => i.style.deleteComponent === 0)
-            .map((item) => {
+            .map((item: IItems, index: number) => {
               const { x, y, w, h, minW, i } = item;
               return (
                 <div
                   key={i}
                   data-grid={{ x, y, w, h, minW }}
+                  className={`justify-center transition-colors duration-150 ease-in-out ${
+                    selector
+                      ? "hover:outline-orange-300 hover:outline"
+                      : "hover:outline-slate-300 hover:outline-dashed"
+                  }`}
                   // open item setting on click
-                  onClick={() => {
-                    setOpenSetting(true);
-                    setSettingItemId(i);
-                  }}
-                  className="justify-center transition-colors duration-150 ease-in-out rounded-lg hover:outline-slate-300 hover:outline-dashed"
+                  // open item setting on click
+                  onClick={() => handleFlowControl(item, i, index)}
                 >
                   <RenderItem item={item} />
                 </div>

@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import "../../styles/Dashboard.css";
+import React, { useState, FC } from "react";
 import { VscSymbolColor } from "react-icons/vsc";
-import "../../styles/Components.css";
 import { SketchPicker } from "react-color";
+import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
-export default function ColorComponent({
-  color = { r: 0, g: 0, b: 0, a: 100 },
-  setColor,
-}) {
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+interface IBgColorComponent {
+  backgroundColor: any;
+  setBgColor: (backgroundColor: any) => void;
+}
+
+const BgColorComponent: FC<IBgColorComponent> = ({ backgroundColor, setBgColor }) => {
+  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
   const handleClick = () => {
     setDisplayColorPicker(!displayColorPicker);
@@ -18,11 +20,11 @@ export default function ColorComponent({
     setDisplayColorPicker(false);
   };
 
-  const handleChange = (color: any) => {
-    if (!color) {
+  const handleChange = (backgroundColor: any) => {
+    if (!backgroundColor) {
       return;
     }
-    setColor(color.rgb);
+    setBgColor(backgroundColor.rgb);
   };
 
   return (
@@ -33,21 +35,23 @@ export default function ColorComponent({
       >
         <VscSymbolColor className="text-[18px] mr-3" />
         <span className="px-1 flex my-1 text-xl text-gray-500 font-regular font-normal not-italic">
-          Text Color{" "}
-          <span
+          Bg Color{" "}
+          {/* <span
             style={{
               backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
             }}
             className="color-span"
-          ></span>
+          ></span> */}
         </span>
       </div>
       {displayColorPicker ? (
         <div>
           <div onClick={handleClose} />
-          <SketchPicker color={color} onChange={handleChange} />
+          <SketchPicker backgroundColor={backgroundColor} onChange={handleChange} />
         </div>
       ) : null}
     </>
   );
-}
+};
+
+export default BgColorComponent;

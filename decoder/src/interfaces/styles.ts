@@ -1,5 +1,6 @@
 export default interface IStyles {
   color?: object;
+  backgroundColor?: object;
   fontWeight?: string;
   fontStyle?: string;
   textDecoration?: string;

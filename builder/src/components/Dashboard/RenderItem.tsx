@@ -11,7 +11,9 @@ import HeadingTwo from "../CustomComponents/HeadingTwo";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
-const RenderItem: FC<{ item: IItems }> = ({ item }) => {
+interface IRenderItem { item: IItems }
+
+const RenderItem: FC<IRenderItem> = ({ item }) => {
   switch (item.name) {
     case "Container":
       return <Container />;
@@ -25,6 +27,7 @@ const RenderItem: FC<{ item: IItems }> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );
@@ -38,6 +41,7 @@ const RenderItem: FC<{ item: IItems }> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );
@@ -51,6 +55,7 @@ const RenderItem: FC<{ item: IItems }> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );
@@ -64,6 +69,7 @@ const RenderItem: FC<{ item: IItems }> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );
@@ -77,6 +83,7 @@ const RenderItem: FC<{ item: IItems }> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );
@@ -90,6 +97,7 @@ const RenderItem: FC<{ item: IItems }> = ({ item }) => {
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
+          backgroundColor={item.style.backgroundColor}
           link={item.link}
         />
       );

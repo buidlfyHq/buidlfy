@@ -1,14 +1,23 @@
-import React from "react";
+import React, { FC } from "react";
 import "../../styles/Dashboard.css";
 
-export default function FontStyleComponent({
+interface IFontStyleComponent {
+  bold: string;
+  italic: string;
+  underline: string;
+  setBold: (bold: string | boolean) => void;
+  setItalic: (italic: string | boolean) => void;
+  setUnderline: (underline: string | boolean) => void;
+}
+
+const FontStyleComponent: FC<IFontStyleComponent> = ({
   setBold,
   bold,
   italic,
   setItalic,
   underline,
   setUnderline,
-}) {
+}) => {
   const handleBoldChange = () => {
     if (bold === "bold") {
       setBold(false);
@@ -53,4 +62,5 @@ export default function FontStyleComponent({
       </span>
     </div>
   );
-}
+};
+export default FontStyleComponent;

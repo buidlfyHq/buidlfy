@@ -11,6 +11,7 @@ const Link: FC<ITexts> = ({
   fontSize,
   value,
   link,
+  backgroundColor
 }) => {
   return (
     <div
@@ -22,6 +23,7 @@ const Link: FC<ITexts> = ({
         display: "flex",
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
+        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
       className="flex items-center justify-center h-full"
     >

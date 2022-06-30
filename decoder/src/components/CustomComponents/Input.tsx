@@ -1,7 +1,24 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import { setValue } from "../Utils/SetValue";
 import "styles/Components.css";
 
-const Input: FC = () => {
+interface IInput {
+  name: string;
+  value: any;
+}
+
+const Input: FC<{
+  contractFunction;
+  inputValue: object[];
+  setInputValue: (inputValue: object[]) => void;
+}> = ({ contractFunction, inputValue, setInputValue }) => {
+  const getValue = (inputArray) => {
+    const requiredValue = inputArray.filter(
+      (input: IInput) => input.name === contractFunction.inputName
+    )[0];
+    return requiredValue ? requiredValue.value : "";
+  };
+
   return (
     <div className="h-full flex justify-center items-center">
       <input
@@ -9,6 +26,12 @@ const Input: FC = () => {
         id="input"
         type="text"
         placeholder="Input"
+        value={getValue(inputValue)}
+        onChange={(e) =>
+          setInputValue(
+            setValue(inputValue, contractFunction.inputName, e.target.value)
+          )
+        }
       />
     </div>
   );

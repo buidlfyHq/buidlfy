@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useState, FC } from "react";
 import SettingComponent from "./SettingComponent";
+import IItems from "interfaces/items";
 
-const Settings = ({ items, setItems, settingItemId, setOpen }) => {
+interface ISetting {
+  items: IItems[];
+  setItems: (items: IItems[]) => void;
+  contractConfig: { abi: string; address: string };
+  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+  }) => void;
+  elementConfig: object;
+  openTab: number;
+  setOpenTab: (openTab: number) => void;
+  settingItemId: string;
+}
+
+const Settings: FC<ISetting> = ({
+  items,
+  setItems,
+  settingItemId,
+  contractConfig,
+  setContractConfig,
+  setSelector,
+  elementConfig,
+  openTab,
+  setOpenTab,
+}) => {
+  const [showComponent, setShowComponent] = useState<object>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
 
   const setLink = (link: string) => {
@@ -106,6 +134,25 @@ const Settings = ({ items, setItems, settingItemId, setOpen }) => {
     setItems(updatedItems);
   };
 
+  const setBgColor = (backgroundColor: { rgb: any }) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            backgroundColor: backgroundColor,
+          },
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
   const setDeleteComponent = (deleteComponent: any) => {
     if (!settingItemId) {
       return;
@@ -148,7 +195,7 @@ const Settings = ({ items, setItems, settingItemId, setOpen }) => {
     if (!settingItemId) {
       return;
     }
-    const updatedItems = items.map((item: { [x: string]: any; i: any }) => {
+    const updatedItems = items.map((item) => {
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -201,11 +248,15 @@ const Settings = ({ items, setItems, settingItemId, setOpen }) => {
     setItems(updatedItems);
   };
 
+  console.log(items);
+
   return (
     <>
       {settingItemId ? (
         <SettingComponent
-          setOpen={setOpen}
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
           setLink={setLink}
           link={selectedItem?.link}
           setValue={setValue}
@@ -218,6 +269,8 @@ const Settings = ({ items, setItems, settingItemId, setOpen }) => {
           underline={selectedItem?.style?.textDecoration}
           color={selectedItem?.style?.fontStyle}
           setColor={setColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
+          setBgColor={setBgColor}
           setDeleteComponent={setDeleteComponent}
           deleteComponent={selectedItem?.style?.deleteComponent}
           setCenter={setCenter}
@@ -226,6 +279,14 @@ const Settings = ({ items, setItems, settingItemId, setOpen }) => {
           setRight={setRight}
           fontSize={selectedItem?.style?.fontSize}
           setFontSize={setFontSize}
+          contractConfig={contractConfig}
+          setContractConfig={setContractConfig}
+          showComponent={showComponent}
+          setShowComponent={setShowComponent}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          openTab={openTab}
+          setOpenTab={setOpenTab}
         />
       ) : null}
     </>

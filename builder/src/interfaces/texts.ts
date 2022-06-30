@@ -7,4 +7,5 @@ export default interface ITexts {
   fontSize: number;
   value: string;
   link: string;
+  backgroundColor: any;
 }

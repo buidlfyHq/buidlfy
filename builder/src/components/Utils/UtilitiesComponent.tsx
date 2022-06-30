@@ -1,13 +1,18 @@
-import React from "react";
-import "../../styles/Dashboard.css";
+import React, { FC } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
-export default function UtilitiesComponent({
+interface IUtilitiesComponent {
+  deleteComponent: number;
+  setDeleteComponent: (deleteComponent: number) => void;
+}
+
+const UtilitiesComponent: FC<IUtilitiesComponent> = ({
   deleteComponent,
   setDeleteComponent,
-}) {
+}) => {
   const handleDelete = () => {
     setDeleteComponent(1);
   };
@@ -30,4 +35,5 @@ export default function UtilitiesComponent({
       </div>
     </div>
   );
-}
+};
+export default UtilitiesComponent;

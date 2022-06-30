@@ -5,17 +5,27 @@ import Sidebar from "components/Dashboard/Sidebar";
 import RightSidebar from "components/Dashboard/RightSidebar";
 import Workspace from "components/Dashboard/Workspace";
 import Settings from "components/Utils/Settings";
+import IItems from "interfaces/items";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
+// const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
 const Dashboard: FC = () => {
   const navigate = useNavigate();
-  const [items, setItems] = useState([]); // for storing components
+  // types for items ************************
+  const [items, setItems] = useState<IItems[]>([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
-  const [abi, setAbi] = useState<string>(""); // for storing abi
-  const [showComponent, setShowComponent] = useState<number[]>([]); // for abi method component
-  const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
+  const [rightClassName, setRightClassName] = useState<string>(""); // for handling sidebar toggle
+  const [contractConfig, setContractConfig] = useState({
+    abi: "",
+    address: "",
+  }); // for storing contract abi and address
+  const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
+  // for selecting an element for contract
+  const [selector, setSelector] = useState(null);
+  const [openTab, setOpenTab] = useState<number>(1);
+  const [elementConfig, setElementConfig] = useState<object>({});
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -40,31 +50,45 @@ const Dashboard: FC = () => {
         setClassName={setClassName}
         items={items}
         setItems={setItems}
-        abi={abi}
-        setAbi={setAbi}
-        showComponent={showComponent}
-        setShowComponent={setShowComponent}
+        setSelector={setSelector}
+        elementConfig={elementConfig}
       />
 
       <section className="flex-1">
         {/* Navbar */}
-        <Navbar className={className} setClassName={setClassName} />
+        <Navbar
+          className={className}
+          setClassName={setClassName}
+          items={items}
+          contractConfig={contractConfig}
+        />
 
         {/* Main section */}
         <Workspace
-          abi={abi}
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
           items={items}
           setItems={setItems}
           className={className}
           setOpenSetting={setOpenSetting}
           setSettingItemId={setSettingItemId}
+          selector={selector}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          setElementConfig={setElementConfig}
+          setOpenTab={setOpenTab}
         />
       </section>
 
-      {/* Right sidebar */}
-      <RightSidebar />
+      <RightSidebar
+        rightClassName={rightClassName}
+        setRightClassName={setRightClassName}
+        contractConfig={contractConfig}
+        setContractConfig={setContractConfig}
+        setSelector={setSelector}
+        setElementConfig={setElementConfig}
+        elementConfig={elementConfig}
+        openTab={openTab}
+        setOpenTab={setOpenTab}
+      />
 
       {/* Settings */}
       {openSetting && (
@@ -72,7 +96,12 @@ const Dashboard: FC = () => {
           items={items}
           setItems={setItems}
           settingItemId={settingItemId}
-          setOpen={setOpenSetting}
+          contractConfig={contractConfig}
+          setContractConfig={setContractConfig}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          openTab={openTab}
+          setOpenTab={setOpenTab}
         />
       )}
     </main>
