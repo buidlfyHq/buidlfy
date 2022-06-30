@@ -5,9 +5,9 @@ export const onRequest = async (
   method: string,
   contractFunction: {
     name: string;
-    inputs: string[];
     stateMutability: string;
-    outputs: string[];
+    inputs: object[];
+    outputs: object[];
   },
   contract: Contract,
   inputValue: object[],
@@ -19,17 +19,22 @@ export const onRequest = async (
     const args = [];
     let amount: string;
 
-    inputValue.map((input: { name: string; value: string }) => {
-      contractFunction.inputs.map((inputName: string) => {
-        if (input.name === inputName) {
-          if (inputName === contractFunction.name) {
-            amount = input.value;
-          } else {
-            args.push(input.value);
+    // mapping: contractFunction: {name, stateMutability, inputs, outputs}
+    // inputs: ['input00', 'input01'] ---> [{id: 'xyz', name: 'input00'}, {id: 'abc', name: 'input01'}]
+    // same goes with output
+    inputValue.map((input: { id: string; name: string; value: string }) => {
+      contractFunction.inputs.map(
+        (contractInput: { id: string; name: string }) => {
+          if (input.id === contractInput.id) {
+            if (contractInput.name === contractFunction.name) {
+              amount = input.value;
+            } else {
+              args.push(input.value);
+            }
           }
+          return contractInput;
         }
-        return inputName;
-      });
+      );
       return input;
     });
 
@@ -45,9 +50,6 @@ export const onRequest = async (
     } else if (contractFunction.stateMutability === "payable") {
       // query contract functions --- magic code
       const res = await contract.functions[method](...args, {
-        gasLimit: 250000,
-        gasPrice: 9000000000,
-        nonce: 0,
         value: ethers.utils.parseEther(amount),
       }); // passing an array as a function parameter
       receipt = await res.wait();
@@ -63,10 +65,14 @@ export const onRequest = async (
     // contract functions with outputs
     let returnOutput = [];
     if (contractFunction.outputs.length) {
-      contractFunction.outputs.map((output: string, i: number) => {
-        returnOutput.push(setValue(outputValue, output, receipt[i]));
-        return output;
-      });
+      contractFunction.outputs.map(
+        (output: { id: string; name: string }, i: number) => {
+          returnOutput.push(
+            setValue(outputValue, output.id, output.name, receipt[i])
+          );
+          return output;
+        }
+      );
     }
 
     if (receipt.transactionHash) {
@@ -81,10 +87,14 @@ export const onRequest = async (
     console.log(receipt);
 
     let returnOutput = [];
-    contractFunction.outputs.map((output: string, i: number) => {
-      returnOutput.push(setValue(outputValue, output, receipt[i]));
-      return output;
-    });
+    contractFunction.outputs.map(
+      (output: { id: string; name: string }, i: number) => {
+        returnOutput.push(
+          setValue(outputValue, output.id, output.name, receipt[i])
+        );
+        return output;
+      }
+    );
     return returnOutput;
   }
 };

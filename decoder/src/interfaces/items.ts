@@ -20,5 +20,5 @@ export default interface IItems {
   moved?: boolean;
   static?: boolean;
   resizeHandles?: [];
-  contract?: object;
+  contract?: any;
 }

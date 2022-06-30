@@ -6,7 +6,7 @@ import RenderItem from "components/Home/RenderItem";
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Home: FC = () => {
-  const config = JSON.parse(BuilderConfig);
+  const config = BuilderConfig;
   const [inputValue, setInputValue] = useState<object[]>([]);
   const [outputValue, setOutputValue] = useState<object[]>([]);
 

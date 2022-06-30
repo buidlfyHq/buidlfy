@@ -3,6 +3,7 @@ import ITexts from "interfaces/texts";
 import "styles/Components.css";
 
 interface IOutput {
+  id: string;
   name: string;
   value: any;
 }
@@ -36,16 +37,18 @@ const Text: FC<ITexts> = ({
     >
       {contractFunction ? (
         <>
-          {outputValue.length ? (
+          {outputValue?.length ? (
             outputValue.map((output: IOutput, index: number) => (
               <div key={index}>
-                {output.name === contractFunction.outputName && (
-                  <>
-                    {typeof output.value === "string"
-                      ? output.value
-                      : output.value.join(", ")}
-                  </>
-                )}
+                <>
+                  {output.id === contractFunction.id && (
+                    <>
+                      {typeof output.value === "string"
+                        ? output.value
+                        : output.value.join(", ")}
+                    </>
+                  )}
+                </>
               </div>
             ))
           ) : (

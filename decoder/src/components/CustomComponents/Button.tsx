@@ -22,11 +22,12 @@ const Button: FC<ITexts> = ({
   outputValue,
   setOutputValue,
 }) => {
-  const config = JSON.parse(BuilderConfig);
+  const config = BuilderConfig;
   const [contract, setContract] = useState<Contract>();
 
   useEffect(() => {
-    if (config.contract.abi !== "" && config.contract.address !== "") {
+    // if (config.contract.abi !== [] && config.contract.address !== "") {
+    if (config.contract.abi[0] && config.contract.address !== "") {
       setContract(onLoad(config));
     }
   }, []); // eslint-disable-line
@@ -39,7 +40,7 @@ const Button: FC<ITexts> = ({
       inputValue,
       outputValue
     );
-    setOutputValue(res);
+    setOutputValue(res[0]);
   };
 
   return (
