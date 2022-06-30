@@ -1,8 +1,8 @@
 import React, { useState, FC } from "react";
-import "../../styles/Dashboard.css";
 import { VscSymbolColor } from "react-icons/vsc";
-import "../../styles/Components.css";
 import { SketchPicker } from "react-color";
+import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
 interface IBgColorComponent {
   backgroundColor: any;
@@ -10,7 +10,7 @@ interface IBgColorComponent {
 }
 
 const BgColorComponent: FC<IBgColorComponent> = ({ backgroundColor, setBgColor }) => {
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
   const handleClick = () => {
     setDisplayColorPicker(!displayColorPicker);

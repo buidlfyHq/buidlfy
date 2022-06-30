@@ -29,7 +29,7 @@ const Settings: FC<ISetting> = ({
   openTab,
   setOpenTab,
 }) => {
-  const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
+  const [showComponent, setShowComponent] = useState<object>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
 
   const setLink = (link: string) => {
