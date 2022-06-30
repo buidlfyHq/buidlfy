@@ -19,7 +19,7 @@ const AbiComponent: FC<IAbiComponent> = ({
   setSelector,
   elementConfig,
 }) => {
-  const [saveElement, setSaveElement] = useState();
+  // const [saveElement, setSaveElement] = useState();
   const handleSave = () => {};
   return (
     <>

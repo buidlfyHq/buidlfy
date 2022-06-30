@@ -10,7 +10,7 @@ interface IBgColorComponent {
 }
 
 const BgColorComponent: FC<IBgColorComponent> = ({ backgroundColor, setBgColor }) => {
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
   const handleClick = () => {
     setDisplayColorPicker(!displayColorPicker);

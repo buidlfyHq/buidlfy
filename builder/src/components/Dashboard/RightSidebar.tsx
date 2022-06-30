@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { GiClick } from "react-icons/gi";
 import Settings from "components/Utils/Settings";
+import IItems from "interfaces/items";
 
 interface IRightSidebar {
   rightClassName: string;
@@ -30,8 +31,8 @@ const RightSidebar: FC<IRightSidebar> = ({
   openTab,
   setOpenTab,
 }) => {
-  const [items, setItems] = useState([]); // for storing components
-  const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
+  const [items, setItems] = useState<IItems[]>([]); // for storing components
+  const [settingItemId, setSettingItemId] = useState<string>(""); // for storing current element id for settings
   const [openSetting, setOpenSetting] = useState<Boolean>(false); // for handling settings toggle
 
   // const hideRightSidebar = () => {
