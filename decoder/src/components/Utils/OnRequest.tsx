@@ -1,9 +1,10 @@
-import { Contract } from "ethers";
+import { ethers, Contract } from "ethers";
 import { setValue } from "./SetValue";
 
 export const onRequest = async (
   method: string,
   contractFunction: {
+    name: string;
     inputs: string[];
     stateMutability: string;
     outputs: string[];
@@ -16,11 +17,16 @@ export const onRequest = async (
   if (contractFunction.inputs.length) {
     // push all the required input values to args
     const args = [];
+    let amount: string;
 
     inputValue.map((input: { name: string; value: string }) => {
       contractFunction.inputs.map((inputName: string) => {
         if (input.name === inputName) {
-          args.push(input.value);
+          if (inputName === contractFunction.name) {
+            amount = input.value;
+          } else {
+            args.push(input.value);
+          }
         }
         return inputName;
       });
@@ -29,33 +35,21 @@ export const onRequest = async (
 
     let receipt; // to store response from contract
 
-    // check state mutability
-    // if non-payable then show transaction hash in popup
-    // if payable then request user to pay the amount and then show transaction hash in popup
-    // if view then display the output directly
-    // NOTE: non-payable and payable cannot have any output
-
+    // show transaction hash for non-payable and payable
+    // show outputs for view and pure
     if (contractFunction.stateMutability === "nonpayable") {
       // query contract functions --- magic code
       const res = await contract.functions[method](...args); // passing an array as a function parameter
       receipt = await res.wait();
       console.log(receipt);
     } else if (contractFunction.stateMutability === "payable") {
-      // different code ---------------------> FIX
-
-      // var overrideOptions = {
-      //   gasLimit: 250000,
-      //   gasPrice: 9000000000,
-      //   nonce: 0,
-      //   value: ethers.utils.parseEther("1.0"),
-      // };
-
-      // var sendPromise = contract.setValue("Hello World", overrideOptions);
-
-      // ADD: Modal popup with asking user to enter the amount they want to send, and push that value in args
-
       // query contract functions --- magic code
-      const res = await contract.functions[method](...args); // passing an array as a function parameter
+      const res = await contract.functions[method](...args, {
+        gasLimit: 250000,
+        gasPrice: 9000000000,
+        nonce: 0,
+        value: ethers.utils.parseEther(amount),
+      }); // passing an array as a function parameter
       receipt = await res.wait();
       console.log(receipt);
     } else if (

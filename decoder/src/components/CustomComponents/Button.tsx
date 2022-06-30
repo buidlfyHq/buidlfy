@@ -30,7 +30,7 @@ const Button: FC<ITexts> = ({
       setContract(onLoad(config));
     }
   }, []); // eslint-disable-line
-
+    
   const onResponse = async () => {
     const res = await onRequest(
       contractFunction.name,

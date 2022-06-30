@@ -24,23 +24,46 @@ const AbiMethods: FC<IAbiMethods> = ({
       id: e.target.value,
       value: abiJson[e.target.value],
     });
-    const generateArray = (valueArray: [], valueName: string) => {
+
+    const generateArray = (
+      valueArray: object[],
+      valueName: string,
+      valueMutability: string
+    ) => {
       let requiredArray = [];
       valueArray.map((value, index: number) => {
         let id = valueName + index + e.target.value;
         requiredArray.push(id);
+        return value;
       });
+      
+      if (
+        valueMutability === "payable" &&
+        valueName === "input"
+      ) {
+        requiredArray.push(abiJson[e.target.value].name);
+      }
       return requiredArray;
     };
+
     let updatedItem = {
       ...selectedItem,
       contract: {
         name: abiJson[e.target.value].name,
         stateMutability: abiJson[e.target.value].stateMutability,
-        inputs: generateArray(abiJson[e.target.value].inputs, "input"),
-        outputs: generateArray(abiJson[e.target.value].outputs, "output"),
+        inputs: generateArray(
+          abiJson[e.target.value].inputs,
+          "input",
+          abiJson[e.target.value].stateMutability
+        ),
+        outputs: generateArray(
+          abiJson[e.target.value].outputs,
+          "output",
+          abiJson[e.target.value].stateMutability
+        ),
       },
     };
+    
     const elementsIndex = items.findIndex((item) => item.i === selectedItem.i);
     let newArray = [...items];
     newArray[elementsIndex] = updatedItem;
