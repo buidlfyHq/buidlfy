@@ -29,6 +29,8 @@ const Dashboard: FC = () => {
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
 
+  const [drag, setDrag] = useState<boolean>(true)
+
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -78,6 +80,8 @@ const Dashboard: FC = () => {
           setElementConfig={setElementConfig}
           setOpenTab={setOpenTab}
           imgData={imgData}
+          drag={drag}
+          setDrag={setDrag}
         />
       </section>
 

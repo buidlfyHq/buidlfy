@@ -54,3 +54,28 @@
   height: 1.5rem;
   margin-left: 2rem;
 }
+
+#container-drag{
+  position: relative;
+}
+
+#drag{
+  border: 1px dashed rgb(214, 204, 204);
+  font-size: 22px;
+  border-radius: 0 0 4px 4px;
+}
+
+#container-drag #drag{
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  /* margin-top: 110px; */
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#container-drag:hover #drag{
+  visibility: visible;
+  opacity: 1;
+}

@@ -141,7 +141,7 @@ const Button: FC<ITexts> = ({
         onClose={() => setIsOpen(false)}
         className="relative z-50"
       >
-        <div className="fixed flex items-center justify-center p-4 top-4 left-4">
+        <div className="fixed flex items-center justify-center p-4 top-4 right-4">
           <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
             <Dialog.Title>
             {transactionStatus === '' ?

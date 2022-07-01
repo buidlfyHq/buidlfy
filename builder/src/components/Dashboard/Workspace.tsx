@@ -25,6 +25,8 @@ interface IWorkspace {
   setElementConfig: Dispatch<SetStateAction<object>>;
   setOpenTab: Dispatch<SetStateAction<number>>;
   imgData: { id: string; data: string | ArrayBuffer }[];
+  drag: boolean;
+  setDrag: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -38,7 +40,9 @@ const Workspace: FC<IWorkspace> = ({
   elementConfig,
   setElementConfig,
   setOpenTab,
-  imgData,
+  imgData, 
+  drag,
+  setDrag
 }) => {
   // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -126,8 +130,9 @@ const Workspace: FC<IWorkspace> = ({
           width={window.innerWidth - 250}
           compactType="horizontal"
           useCSSTransforms={true}
-          allowOverlap={true}
+          // allowOverlap={true}
           resizeHandles={["nw", "se"]}
+          isDraggable={drag}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
         >
@@ -138,8 +143,10 @@ const Workspace: FC<IWorkspace> = ({
               return (
                 <div
                   key={i}
+                  draggable={true}
+                  unselectable="on"
                   data-grid={{ x, y, w, h, minW }}
-                  className={`justify-center transition-colors duration-150 ease-in-out ${
+                  className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
                     selector
                       ? "hover:outline-orange-300 hover:outline"
                       : "hover:outline-slate-300 hover:outline-dashed"
@@ -147,7 +154,11 @@ const Workspace: FC<IWorkspace> = ({
                   // open item setting on click
                   onClick={() => onComponentClick(item, i, index)}
                 >
-                  <RenderItem item={item} imgData={imgData} />
+                  <RenderItem 
+                    item={item} 
+                    imgData={imgData}
+                    setDrag={setDrag}
+                  />
                 </div>
               );
             })}

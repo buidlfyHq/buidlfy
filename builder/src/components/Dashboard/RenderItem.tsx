@@ -8,23 +8,22 @@ import Input from "../CustomComponents/Input";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
+
 interface IRenderItem {
   item: IItems;
   imgData: { id: string; data: string | ArrayBuffer }[];
+  setDrag: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
+const RenderItem: FC<IRenderItem> = ({ 
+  item, 
+  imgData, 
+  setDrag
+}) => {
   switch (item.name) {
     case "Container":
       return (
-        <Container
-          // backgroundColor={item.style.backgroundColor}
-          // borderRadius={item.style.borderRadius}
-          // boxShadow={item.style.boxShadow}
-          // zIndex={item.style.zIndex}
-          // border={item.style.border}
-          // backgroundImg={item.style.backgroundImg}
-        />
+        <Container setDrag={setDrag} />
       );
     case "Button":
       return (
