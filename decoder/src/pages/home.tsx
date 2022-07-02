@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import BuilderConfig from "config";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "components/Home/RenderItem";
+import ConnectWallet from "components/ConnectWallet";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
@@ -9,9 +10,17 @@ const Home: FC = () => {
   const config = JSON.parse(BuilderConfig);
   const [inputValue, setInputValue] = useState<object[]>([]);
   const [outputValue, setOutputValue] = useState<object[]>([]);
-
+  const [account, setAccount] = useState(null);
   return (
     <section>
+      {/* <>
+        <ConnectWallet
+          text={"Connect"}
+          account={account}
+          setAccount={setAccount}
+        />
+      </> */}
+
       <ResponsiveGridLayout
         layouts={config.builder}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}

@@ -28,6 +28,7 @@ export const components = [
       borderRadius: 1,
       shadow: "none"
     },
+    connectWallet: "off",
     contract: {}
   },
   {

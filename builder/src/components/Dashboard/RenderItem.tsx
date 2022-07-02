@@ -45,6 +45,7 @@ const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
           link={item.link}
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
+          connectWallet={item.connectWallet}
         />
       );
     case "Text":

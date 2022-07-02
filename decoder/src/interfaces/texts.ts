@@ -15,4 +15,5 @@ export default interface ITexts {
   setInputValue?: (inputValue: object[]) => void;
   outputValue?: object[];
   setOutputValue?: (outputValue: object[]) => void;
+  connectWallet?: string;
 }

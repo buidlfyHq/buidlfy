@@ -352,6 +352,22 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
+  const setOn = (connectWallet: boolean) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          connectWallet: connectWallet ? "on" : "off",
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
   // console.log(items);
 
   return (
@@ -402,6 +418,8 @@ const Settings: FC<ISetting> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
+          setOn={setOn}
+          connectWallet={selectedItem?.connectWallet}
         />
       ) : null}
     </>

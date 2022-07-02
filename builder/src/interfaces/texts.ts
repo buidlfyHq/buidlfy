@@ -10,5 +10,6 @@ export default interface ITexts {
   borderRadius?: number,
   backgroundColor: any;
   shadow?: any;
+  connectWallet?: string;
 }
 

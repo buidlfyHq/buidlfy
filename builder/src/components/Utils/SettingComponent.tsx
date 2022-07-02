@@ -15,6 +15,7 @@ import UploadComponent from "./UploadComponent";
 import BorderComponent from "./BorderComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
+import ConnectSwitchComponent from "./ConnectSwitchComponent";
 
 interface ISettingComponent {
   items: IItems[];
@@ -68,6 +69,8 @@ interface ISettingComponent {
   setMedium: (shadow: string | boolean) => void;
   setLarge: (shadow: string | boolean) => void;
   shadow: string;
+  setOn: (connectWallet: string | boolean) => void;
+  connectWallet: string;
 }
 
 const SettingComponent: FC<ISettingComponent> = ({
@@ -115,6 +118,8 @@ const SettingComponent: FC<ISettingComponent> = ({
   setMedium,
   setLarge,
   shadow,
+  setOn,
+  connectWallet,
 }) => {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
@@ -216,6 +221,10 @@ const SettingComponent: FC<ISettingComponent> = ({
                               placeholder="URL..."
                             />
                           </div>
+                          <ConnectSwitchComponent
+                            setOn={setOn}
+                            connectWallet={connectWallet}
+                          />
                           <FontStyleComponent
                             bold={bold}
                             italic={italic}

@@ -10,6 +10,7 @@ import HeadingTwo from "../CustomComponents/HeadingTwo";
 import Divider from "../CustomComponents/Divider";
 import Image from "../CustomComponents/Image";
 import IItems from "interfaces/items";
+import ConnectWallet from "components/ConnectWallet";
 
 interface IRenderItem {
   item: IItems;
@@ -57,6 +58,7 @@ const RenderItem: FC<IRenderItem> = ({
           outputValue={outputValue}
           setOutputValue={setOutputValue}
           shadow={item.style.shadow}
+          connectWallet={item.connectWallet}
         />
       );
     case "Text":
