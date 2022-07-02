@@ -12,11 +12,13 @@ interface IAdvanceComponent {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   };
   setSelector: (selector: {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   }) => void;
   showComponent: {
     id: string;
@@ -87,8 +89,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
       />
       <AbiComponent
         showComponent={showComponent}
+        selector={selector}
         setSelector={setSelector}
         elementConfig={elementConfig}
+        selectedItem={selectedItem}
+        items={items}
+        setItems={setItems}
       />
     </>
   );

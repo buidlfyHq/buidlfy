@@ -1,13 +1,11 @@
 interface IValue {
   id: string;
-  name: string;
   value: any;
 }
 
 export const setValue = (
   state: object[],
   stateFunctionId: string,
-  stateFunctionName: string,
   stateFunctionValue: any
 ) => {
   const searchExistingValue = state.filter(
@@ -19,7 +17,6 @@ export const setValue = (
       ...state,
       {
         id: stateFunctionId,
-        name: stateFunctionName,
         value: stateFunctionValue,
       },
     ];

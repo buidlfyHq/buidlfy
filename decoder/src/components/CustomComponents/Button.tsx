@@ -34,7 +34,7 @@ const Button: FC<ITexts> = ({
     
   const onResponse = async () => {
     const res = await onRequest(
-      contractFunction.name,
+      contractFunction.methodName,
       contractFunction,
       contract,
       inputValue,
@@ -62,7 +62,7 @@ const Button: FC<ITexts> = ({
         }}
         className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
         onClick={() =>
-          contractFunction.name ? onResponse() : console.log("Clicked")
+          contractFunction.methodName ? onResponse() : console.log("Clicked")
         }
       >
         {value}

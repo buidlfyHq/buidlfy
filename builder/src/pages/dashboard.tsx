@@ -28,7 +28,6 @@ const Dashboard: FC = () => {
 
   console.log(items);
   
-
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {

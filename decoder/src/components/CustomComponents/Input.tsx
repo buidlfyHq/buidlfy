@@ -4,24 +4,23 @@ import "styles/Components.css";
 
 interface IInput {
   id: string;
-  name: string;
   value: any;
 }
 
 const Input: FC<{
-  contractFunction: { id: string; name: string; inputName: string };
+  id: string;
   inputValue: object[];
   setInputValue: (inputValue: object[]) => void;
-}> = ({ contractFunction, inputValue, setInputValue }) => {
+}> = ({ id, inputValue, setInputValue }) => {
   const getValue = (inputArray) => {
     const requiredValue = inputArray.filter(
-      (input: IInput) => input.id === contractFunction.id
+      (input: IInput) => input.id === id
     )[0];
     return requiredValue ? requiredValue.value : "";
   };
 
-  // mapping: contractFunction: {name: 'createCampaign', inputName: 'input00'}
-  // ---> {id: 'xyz', name: 'createCampaign', inputName: 'input00'}
+  // mapping: contractFunction: {methodName: 'createCampaign'}
+  // ---> {id: 'xyz', methodName: 'createCampaign'}
 
   return (
     <div className="h-full flex justify-center items-center">
@@ -33,7 +32,11 @@ const Input: FC<{
         value={getValue(inputValue)}
         onChange={(e) =>
           setInputValue(
-            setValue(inputValue, contractFunction.id, contractFunction.inputName, e.target.value)
+            setValue(
+              inputValue,
+              id,
+              e.target.value
+            )
           )
         }
       />

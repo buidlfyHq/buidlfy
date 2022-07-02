@@ -1,4 +1,5 @@
 export default interface ITexts {
+  id?: string;
   bold: string;
   italic: string;
   underline: string;

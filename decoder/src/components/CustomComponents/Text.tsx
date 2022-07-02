@@ -9,6 +9,7 @@ interface IOutput {
 }
 
 const Text: FC<ITexts> = ({
+  id,
   bold,
   italic,
   underline,
@@ -17,7 +18,6 @@ const Text: FC<ITexts> = ({
   fontSize,
   value,
   link,
-  contractFunction,
   outputValue,
   backgroundColor,
 }) => {
@@ -35,29 +35,25 @@ const Text: FC<ITexts> = ({
       }}
       className="flex items-center justify-center h-full overflow-auto"
     >
-      {contractFunction ? (
-        <>
-          {outputValue?.length ? (
-            outputValue.map((output: IOutput, index: number) => (
-              <div key={index}>
-                <>
-                  {output.id === contractFunction.id && (
-                    <>
-                      {typeof output.value === "string"
-                        ? output.value
-                        : output.value.join(", ")}
-                    </>
-                  )}
-                </>
-              </div>
-            ))
-          ) : (
-            <>{value}</>
-          )}
-        </>
-      ) : (
-        <>{value}</>
-      )}
+      <>
+        {outputValue?.length ? (
+          outputValue.map((output: IOutput, index: number) => (
+            <div key={index}>
+              <>
+                {output.id === id && (
+                  <>
+                    {typeof output.value === "string"
+                      ? output.value
+                      : output.value.join(", ")}
+                  </>
+                )}
+              </>
+            </div>
+          ))
+        ) : (
+          <>{value}</>
+        )}
+      </>
     </div>
   );
 };

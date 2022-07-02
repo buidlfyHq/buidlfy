@@ -1,5 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
+import IItems from "interfaces/items";
 
 interface IAbiComponent {
   showComponent: {
@@ -11,19 +12,79 @@ interface IAbiComponent {
       stateMutability: string;
     };
   };
+  selector: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  };
   setSelector: (selector: {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   }) => void;
   elementConfig: object;
+  selectedItem: IItems;
+  items: IItems[];
+  setItems: (items: IItems[]) => void;
 }
 
 const AbiComponent: FC<IAbiComponent> = ({
   showComponent,
   setSelector,
   elementConfig,
+  selectedItem,
+  selector,
+  items,
+  setItems,
 }) => {
+  const [currentElement, setCurrentElement] = useState({
+    name: "",
+    type: "",
+  });
+
+  const handleSave = () => {
+    // filter last selected element
+    const filteredObject = elementConfig[currentElement.name].filter(
+      (key: { buttonId: string }) => key.buttonId === selectedItem.i
+    )[0];
+
+    let updatedContract = {};
+
+    if (currentElement.type === "input") {
+      updatedContract = {
+        ...selectedItem.contract,
+        inputs: [
+          ...selectedItem.contract.inputs,
+          { id: filteredObject.id, send: false },
+        ],
+      };
+    } else if (currentElement.type === "send") {
+      updatedContract = {
+        ...selectedItem.contract,
+        inputs: [
+          ...selectedItem.contract.inputs,
+          { id: filteredObject.id, send: true },
+        ],
+      };
+    } else if (currentElement.type === "output") {
+      updatedContract = {
+        ...selectedItem.contract,
+        outputs: [...selectedItem.contract.outputs, { id: filteredObject.id }],
+      };
+    }
+
+    let updatedItem = {
+      ...selectedItem,
+      contract: updatedContract,
+    };
+    const elementsIndex = items.findIndex((item) => item.i === selectedItem.i);
+    let newArray = [...items];
+    newArray[elementsIndex] = updatedItem;
+    setItems(newArray);
+  };
+
   return (
     <main>
       {showComponent ? (
@@ -39,13 +100,15 @@ const AbiComponent: FC<IAbiComponent> = ({
                   <div
                     key={i}
                     className="mb-2 px-2 border rounded mt-1 h-7"
-                    onClick={() =>
+                    onClick={() => {
                       setSelector({
                         methodName: showComponent.value.name,
                         type: "input",
                         name: selectedId,
-                      })
-                    }
+                        buttonId: selectedItem.i,
+                      });
+                      setCurrentElement({ name: selectedId, type: "input" });
+                    }}
                   >
                     <>
                       {!objects.length ? (
@@ -55,19 +118,25 @@ const AbiComponent: FC<IAbiComponent> = ({
                           {!filterObjects.length ? (
                             <span>Select An Element</span>
                           ) : (
-                            filterObjects.map((key) => (
-                              <>
-                                {key === selectedId && (
-                                  <span className="flex">
-                                    <span className="flex-1">
-                                      {elementConfig[key].name} -{" "}
-                                      {elementConfig[key].id}
+                            filterObjects.map((key) => {
+                              let filteredObject = elementConfig[key]?.filter(
+                                (key: { buttonId: string }) =>
+                                  key.buttonId === selectedItem.i
+                              );
+                              return (
+                                <>
+                                  {filteredObject[0] && (
+                                    <span className="flex">
+                                      <span className="flex-1">
+                                        {filteredObject[0].name} -{" "}
+                                        {filteredObject[0].id}
+                                      </span>
+                                      <AiOutlineEdit className="mt-1.5" />
                                     </span>
-                                    <AiOutlineEdit className="mt-1.5" />
-                                  </span>
-                                )}
-                              </>
-                            ))
+                                  )}
+                                </>
+                              );
+                            })
                           )}
                         </>
                       )}
@@ -83,13 +152,18 @@ const AbiComponent: FC<IAbiComponent> = ({
                 <h6>Input - Amount Payable</h6>
                 <div
                   className="mb-2 px-2 border rounded mt-1 h-7"
-                  onClick={() =>
+                  onClick={() => {
                     setSelector({
                       methodName: showComponent.value.name,
                       type: "input",
                       name: showComponent.value.name,
-                    })
-                  }
+                      buttonId: selectedItem.i,
+                    });
+                    setCurrentElement({
+                      name: showComponent.value.name,
+                      type: "send",
+                    });
+                  }}
                 >
                   {!Object.keys(elementConfig).filter(
                     (key) => key === showComponent.value.name
@@ -99,19 +173,29 @@ const AbiComponent: FC<IAbiComponent> = ({
                     <>
                       {Object.keys(elementConfig)
                         .filter((key) => key === showComponent.value.name)
-                        .map((key) => (
-                          <>
-                            {key === showComponent.value.name && (
-                              <span className="flex">
-                                <span className="flex-1">
-                                  {elementConfig[key].name} -{" "}
-                                  {elementConfig[key].id}
-                                </span>
-                                <AiOutlineEdit className="mt-1.5" />
-                              </span>
-                            )}
-                          </>
-                        ))}
+                        .map((key) => {
+                          if (key === showComponent.value.name) {
+                            let filteredObject = elementConfig[key]?.filter(
+                              (key: { buttonId: string }) =>
+                                key.buttonId === selectedItem.i
+                            );
+                            return (
+                              <>
+                                {filteredObject[0] && (
+                                  <span className="flex">
+                                    <span className="flex-1">
+                                      {filteredObject[0].name} -{" "}
+                                      {filteredObject[0].id}
+                                    </span>
+                                    <AiOutlineEdit className="mt-1.5" />
+                                  </span>
+                                )}
+                              </>
+                            );
+                          } else {
+                            return <span>Select An Element</span>;
+                          }
+                        })}
                     </>
                   )}
                 </div>
@@ -131,13 +215,15 @@ const AbiComponent: FC<IAbiComponent> = ({
                   <div
                     key={i}
                     className="mb-2 px-2 border rounded mt-1 h-7"
-                    onClick={() =>
+                    onClick={() => {
                       setSelector({
                         methodName: showComponent.value.name,
                         type: "output",
                         name: selectedId,
-                      })
-                    }
+                        buttonId: selectedItem.i,
+                      });
+                      setCurrentElement({ name: selectedId, type: "output" });
+                    }}
                   >
                     {objects.length === 0 ? (
                       <span>Select An Element</span>
@@ -146,19 +232,25 @@ const AbiComponent: FC<IAbiComponent> = ({
                         {filterObjects.length === 0 ? (
                           <span>Select An Element</span>
                         ) : (
-                          filterObjects.map((key) => (
-                            <>
-                              {key === selectedId && (
-                                <span className="flex">
-                                  <span className="flex-1">
-                                    {elementConfig[key].name} -{" "}
-                                    {elementConfig[key].id}
+                          filterObjects.map((key) => {
+                            let filteredObject = elementConfig[key]?.filter(
+                              (key: { buttonId: string }) =>
+                                key.buttonId === selectedItem.i
+                            );
+                            return (
+                              <>
+                                {filteredObject[0] && (
+                                  <span className="flex">
+                                    <span className="flex-1">
+                                      {filteredObject[0].name} -{" "}
+                                      {filteredObject[0].id}
+                                    </span>
+                                    <AiOutlineEdit className="mt-1.5" />
                                   </span>
-                                  <AiOutlineEdit className="mt-1.5" />
-                                </span>
-                              )}
-                            </>
-                          ))
+                                )}
+                              </>
+                            );
+                          })
                         )}
                       </>
                     )}
@@ -167,7 +259,7 @@ const AbiComponent: FC<IAbiComponent> = ({
               );
             })}
           <button
-            onClick={() => console.log("saved")}
+            onClick={() => handleSave()}
             className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             Save

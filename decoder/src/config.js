@@ -4,9 +4,9 @@ const BuilderConfig = {
   builder: [
     {
       contract: {
+        methodName: "getDeployedCampaigns",
         inputs: [],
-        name: "getDeployedCampaigns",
-        outputs: [{ id: "RLTFQo", name: "output02" }],
+        outputs: [{ id: "RLTFQo" }],
         stateMutability: "view",
       },
       h: 1,
@@ -32,11 +32,6 @@ const BuilderConfig = {
       y: 2,
     },
     {
-      contract: {
-        id: "RLTFQo",
-        name: "getDeployedCampaigns",
-        outputName: "output02",
-      },
       h: 1,
       i: "RLTFQo",
       link: "",
@@ -58,11 +53,6 @@ const BuilderConfig = {
       y: 2,
     },
     {
-      contract: {
-        id: "ogeSfU",
-        name: "createCampaign",
-        inputName: "input00",
-      },
       h: 1,
       i: "ogeSfU",
       minW: 1,
@@ -78,8 +68,8 @@ const BuilderConfig = {
     },
     {
       contract: {
-        inputs: [{ id: "ogeSfU", name: "input00" }],
-        name: "createCampaign",
+        methodName: "createCampaign",
+        inputs: [{ id: "ogeSfU", send: false }],
         outputs: [],
         stateMutability: "nonpayable",
       },
