@@ -7,14 +7,9 @@ export default interface ITexts {
   fontSize: number;
   value: string;
   link: string;
+  borderRadius?: number,
   backgroundColor: any;
+  shadow?: any;
+  connectWallet?: string;
 }
 
-// export default interface IBgContainer {
-//   backgroundColor: any;
-//   borderRadius: any;
-//   boxShadow: any;
-//   zIndex: number;
-//   border: any; //border color and type
-//   backgroundImg: any;
-// }

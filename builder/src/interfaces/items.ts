@@ -21,4 +21,5 @@ export default interface IItems {
   static?: boolean;
   resizeHandles?: [];
   imgData?: string | ArrayBuffer;
+  connectWallet?: string;
 }

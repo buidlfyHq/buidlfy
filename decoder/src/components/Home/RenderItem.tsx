@@ -4,13 +4,13 @@ import Button from "../CustomComponents/Button";
 import HeadingOne from "../CustomComponents/HeadingOne";
 import Text from "../CustomComponents/Text";
 import Link from "../CustomComponents/Link";
-// import Image from "../CustomComponents/Image";
 import Input from "../CustomComponents/Input";
 import HeadingThree from "../CustomComponents/HeadingThree";
 import HeadingTwo from "../CustomComponents/HeadingTwo";
 import Divider from "../CustomComponents/Divider";
 import Image from "../CustomComponents/Image";
 import IItems from "interfaces/items";
+import ConnectWallet from "components/ConnectWallet";
 
 interface IRenderItem {
   item: IItems;
@@ -29,7 +29,16 @@ const RenderItem: FC<IRenderItem> = ({
 }) => {
   switch (item.name) {
     case "Container":
-      return <Container />;
+      return (
+        <Container
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+        />
+      );
     case "Button":
       return (
         <Button
@@ -39,6 +48,7 @@ const RenderItem: FC<IRenderItem> = ({
           color={item.style.color}
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
+          borderRadius={item.style.borderRadius}
           value={item.value}
           link={item.link}
           backgroundColor={item.style.backgroundColor}
@@ -47,6 +57,8 @@ const RenderItem: FC<IRenderItem> = ({
           setInputValue={setInputValue}
           outputValue={outputValue}
           setOutputValue={setOutputValue}
+          shadow={item.style.shadow}
+          connectWallet={item.connectWallet}
         />
       );
     case "Text":
@@ -133,6 +145,8 @@ const RenderItem: FC<IRenderItem> = ({
           contractFunction={item.contract}
           inputValue={inputValue}
           setInputValue={setInputValue}
+          borderRadius={item.style.borderRadius}
+          shadow={item.style.shadow}
         />
       );
     case "Divider":

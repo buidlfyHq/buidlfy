@@ -18,7 +18,12 @@ const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
     case "Container":
       return (
         <Container
-          // backgroundColor={item.style.backgroundColor}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
           // borderRadius={item.style.borderRadius}
           // boxShadow={item.style.boxShadow}
           // zIndex={item.style.zIndex}
@@ -38,6 +43,9 @@ const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          borderRadius={item.style.borderRadius}
+          shadow={item.style.shadow}
+          connectWallet={item.connectWallet}
         />
       );
     case "Text":
@@ -111,7 +119,12 @@ const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
         />
       );
     case "Input":
-      return <Input />;
+      return (
+        <Input
+          borderRadius={item.style.borderRadius}
+          shadow={item.style.shadow}
+        />
+      );
     case "Image":
       return <Image imgData={item.imgData} />;
     case "Divider":

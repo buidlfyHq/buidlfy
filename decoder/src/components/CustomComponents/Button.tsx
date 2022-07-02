@@ -4,7 +4,15 @@ import ITexts from "interfaces/texts";
 import "styles/Components.css";
 import BuilderConfig from "config";
 import { setValue } from "../Utils/SetValue";
-import { Dialog } from '@headlessui/react'
+import { Dialog } from "@headlessui/react";
+import ConnectWallet from "components/ConnectWallet";
+import Web3Modal from "web3modal";
+import { providerOptions } from "../ConnectWallet/providerOptions";
+
+const web3Modal = new Web3Modal({
+  cacheProvider: true, // optional
+  providerOptions, // required
+});
 
 const Button: FC<ITexts> = ({
   bold,
@@ -21,6 +29,9 @@ const Button: FC<ITexts> = ({
   setInputValue,
   outputValue,
   setOutputValue,
+  borderRadius,
+  shadow,
+  connectWallet,
 }) => {
   const config = JSON.parse(BuilderConfig);
   let provider: providers.Web3Provider,
@@ -37,9 +48,10 @@ const Button: FC<ITexts> = ({
     );
   };
 
-  let [isOpen, setIsOpen] = useState(false)
+  let [isOpen, setIsOpen] = useState(false);
 
-  const [transactionStatus, setTransactionStatus] = useState<string>('')
+  const [transactionStatus, setTransactionStatus] = useState<string>("");
+  const [account, setAccount] = useState(null);
 
   useEffect(() => {
     if (config.contract.abi !== "" && config.contract.address !== "") {
@@ -76,9 +88,11 @@ const Button: FC<ITexts> = ({
 
       if (contractFunction.stateMutability === "nonpayable") {
         // query contract functions --- magic code
-        
+
         const res = await contract.functions[method](...args); // passing an array as a function parameter
-        {setIsOpen(true)}
+        {
+          setIsOpen(true);
+        }
         receipt = await res.wait();
         console.log(receipt);
       } else if (contractFunction.stateMutability === "payable") {
@@ -116,7 +130,7 @@ const Button: FC<ITexts> = ({
       }
 
       if (receipt.transactionHash) {
-        setTransactionStatus(("Transaction hash: " + receipt.transactionHash))
+        setTransactionStatus("Transaction hash: " + receipt.transactionHash);
       }
     } else {
       // contract functions without inputs
@@ -130,7 +144,46 @@ const Button: FC<ITexts> = ({
       });
     }
   };
+  console.log(connectWallet, "wallet");
+  const [show, setShow] = useState(false);
+  const [providerWallet, setProviderWallet] = useState();
+  const [library, setLibrary] = useState();
+  const [signature, setSignature] = useState("");
+  const [error, setError] = useState("");
+  const [chainId, setChainId] = useState();
+  const [network, setNetwork] = useState();
+  const [message, setMessage] = useState("");
+  const [signedMessage, setSignedMessage] = useState("");
+  const [verified, setVerified] = useState();
 
+  const connectWalletButton = async () => {
+    try {
+      const providerWallet = await web3Modal.connect();
+      const library: any = new ethers.providers.Web3Provider(providerWallet);
+      const accounts: any = await library.listAccounts();
+      const network: any = await library.getNetwork();
+      setProviderWallet(providerWallet);
+      setLibrary(library);
+      if (accounts) setAccount(accounts[0]);
+      setChainId(network.chainId);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  const refreshState = () => {
+    setAccount(null);
+    setChainId(null);
+    setNetwork(null);
+    setMessage("");
+    setSignature("");
+    setVerified(undefined);
+  };
+
+  const disconnect = async () => {
+    await web3Modal.clearCachedProvider();
+    refreshState();
+  };
   return (
     <div
       style={{ justifyContent: justifyContent }}
@@ -144,39 +197,105 @@ const Button: FC<ITexts> = ({
         <div className="fixed flex items-center justify-center p-4 top-4 left-4">
           <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
             <Dialog.Title>
-            {transactionStatus === '' ?
-            (<div className="flex items-center">
-              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-              <div className="mr-5 text-white">Transaction In Process...</div>
-            </div>) 
-            : (<div className="text-white break-all">{transactionStatus}</div>)
-            } 
+              {transactionStatus === "" ? (
+                <div className="flex items-center">
+                  <div className="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <div className="mr-5 text-white">
+                    Transaction In Process...
+                  </div>
+                </div>
+              ) : (
+                <div className="text-white break-all">{transactionStatus}</div>
+              )}
             </Dialog.Title>
           </Dialog.Panel>
         </div>
       </Dialog>
-
-      <div
-        style={{
-          fontWeight: bold,
-          fontStyle: italic,
-          textDecoration: underline,
-          color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-          borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-          display: "flex",
-          justifyContent: "center",
-          fontSize: `${fontSize}px`,
-          backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        }}
-        className="w-48 px-6 py-2 rounded cursor-pointer btn whitespace-nowrap"
-        onClick={() =>
-          contractFunction.name
-            ? onRequest(contractFunction.name)
-            : console.log("Clicked")
-        }
-      >
-        {value}
-      </div>
+      <>
+        {connectWallet == "on" ? (
+          <>
+            {!account ? (
+              <div
+                style={{
+                  fontWeight: bold,
+                  fontStyle: italic,
+                  textDecoration: underline,
+                  color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+                  borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: `${fontSize}px`,
+                  borderRadius: `${borderRadius}px`,
+                  boxShadow: shadow,
+                  backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                }}
+                className="w-48 px-6 py-2 cursor-pointer btn whitespace-nowrap"
+                onClick={connectWalletButton}
+              >
+                <>
+                  {link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}
+                </>{" "}
+              </div>
+            ) : (
+              <div
+                style={{
+                  fontWeight: bold,
+                  fontStyle: italic,
+                  textDecoration: underline,
+                  color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+                  borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: `${fontSize}px`,
+                  borderRadius: `${borderRadius}px`,
+                  boxShadow: shadow,
+                  backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                }}
+                className="w-48 px-6 py-2 cursor-pointer btn whitespace-nowrap"
+                onClick={disconnect}
+              >
+                <>
+                  {link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}
+                </>{" "}
+              </div>
+            )}
+          </>
+        ) : (
+          // <ConnectWallet
+          //   text={"connect"}
+          //   account={account}
+          //   setAccount={setAccount}
+          // />
+          <div
+            style={{
+              fontWeight: bold,
+              fontStyle: italic,
+              textDecoration: underline,
+              color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+              borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+              display: "flex",
+              justifyContent: "center",
+              fontSize: `${fontSize}px`,
+              borderRadius: `${borderRadius}px`,
+              boxShadow: shadow,
+              backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+            }}
+            className="w-48 px-6 py-2 cursor-pointer btn whitespace-nowrap"
+            onClick={() =>
+              contractFunction.name
+                ? onRequest(contractFunction.name)
+                : console.log("Clicked")
+            }
+          >
+            <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>{" "}
+          </div>
+        )}
+      </>
     </div>
   );
 };

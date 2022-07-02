@@ -235,6 +235,66 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
+  const setSmall = (shadow: boolean) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            shadow: shadow ? "0 1px 2px 0 rgb(0 0 0 / 0.05)" : "none",
+          },
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+  const setMedium = (shadow: boolean) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            shadow: shadow
+              ? "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
+              : "inherit",
+          },
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+  const setLarge = (shadow: boolean) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            shadow: shadow
+              ? "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
+              : "inherit",
+          },
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
   const setFontSize = (fontSize: any) => {
     if (!settingItemId) {
       return;
@@ -247,6 +307,60 @@ const Settings: FC<ISetting> = ({
             ...item["style"],
             fontSize: fontSize,
           },
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+  const setBorderRadius = (borderRadius: any) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            borderRadius: borderRadius,
+          },
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+  const setBorderWidth = (borderWidth: any) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            borderWidth: borderWidth,
+          },
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+  const setOn = (connectWallet: boolean) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          connectWallet: connectWallet ? "on" : "off",
         };
       }
       return item;
@@ -296,6 +410,16 @@ const Settings: FC<ISetting> = ({
           setPicture={setPicture}
           setImgData={setImgData}
           imgData={imgData}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          setBorderWidth={setBorderWidth}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+          setOn={setOn}
+          connectWallet={selectedItem?.connectWallet}
         />
       ) : null}
     </>

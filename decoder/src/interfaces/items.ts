@@ -22,4 +22,5 @@ export default interface IItems {
   resizeHandles?: [];
   contract?: object;
   imgData?: string | ArrayBuffer;
+  connectWallet?: string;
 }

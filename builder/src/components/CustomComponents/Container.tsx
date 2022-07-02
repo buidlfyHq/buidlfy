@@ -1,28 +1,39 @@
 import React, { FC } from "react";
-import IBgContainer from "interfaces/texts";
+import ITexts from "interfaces/texts";
 import "styles/Components.css";
+import IBgContainer from "interfaces/container";
 
-const Container: FC = ({
-  // backgroundColor,
-  // borderRadius,
+const Container: FC<IBgContainer> = ({
+  backgroundColor,
+  color,
+  imgData,
+  borderRadius,
+  borderWidth,
+  shadow,
   // boxShadow,
   // zIndex,
   // border,
   // backgroundImg,
 }) => {
+  console.log(imgData, "img");
   return (
     <div
       style={{
-        // backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        // borderRadius: borderRadius,
+        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+        borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+        border: "solid",
+        borderRadius: `${borderRadius}px`,
+        borderWidth: `${borderWidth}px`,
         // border: border,
         // zIndex,
-        // backgroundImage: backgroundImg,
+        backgroundImage: `url(${imgData})`,
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        boxShadow: shadow,
         // boxShadow,
       }}
-      className="flex items-center justify-center h-full border"
-    >
-    </div>
+      className="flex items-center justify-center h-full"
+    ></div>
   );
 };
 

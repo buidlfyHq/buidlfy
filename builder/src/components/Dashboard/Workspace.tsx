@@ -56,6 +56,7 @@ const Workspace: FC<IWorkspace> = ({
       });
     });
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
+    console.log(layout, "layout");
   };
 
   const onComponentClick = (item: IItems, i: string, index: number) => {
@@ -125,8 +126,8 @@ const Workspace: FC<IWorkspace> = ({
           rowHeight={50}
           width={window.innerWidth - 250}
           compactType="horizontal"
-          useCSSTransforms={true}
-          allowOverlap={true}
+          // useCSSTransforms={true}
+          // allowOverlap={true}
           resizeHandles={["nw", "se"]}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
