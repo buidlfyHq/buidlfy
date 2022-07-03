@@ -97,26 +97,28 @@ const Sidebar: FC<ISidebar> = ({
 
       {/* Components */}
       <div className="px-6 py-3 mt-10">
-        {components?.map((c, index) => (
-          <div
-            key={index}
-            className="px-4 py-2 transition-colors duration-150 ease-in-out bg-white rounded-lg cursor-pointer hover:bg-gray-100"
-            onClick={() => {
-              let newC = {
-                ...c,
-                i: uid(),
-                x: 0,
-                y: indexValue,
-                w: 12,
-                minW: 1,
-              };
-              incrementIndex();
-              setItems([...items, newC]);
-            }}
-          >
-            {c.name}
-          </div>
-        ))}
+        {components?.map((c, index) => {
+          return (
+            <div
+              key={index}
+              className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
+              onClick={() => {
+                let newC = {
+                  ...c,
+                  i: uid(),
+                  x: 0,
+                  y: indexValue,
+                  w: 12,
+                  minW: 1,
+                };
+                incrementIndex();
+                setItems([...items, newC]);
+              }}
+            >
+              {c.name}
+            </div>
+          );
+        })}
       </div>
     </main>
   );

@@ -8,12 +8,29 @@ import Input from "../CustomComponents/Input";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
-interface IRenderItem { item: IItems }
+interface IRenderItem {
+  item: IItems;
+  imgData: { id: string; data: string | ArrayBuffer }[];
+}
 
-const RenderItem: FC<IRenderItem> = ({ item }) => {
+const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
   switch (item.name) {
     case "Container":
-      return <Container />;
+      return (
+        <Container
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          // borderRadius={item.style.borderRadius}
+          // boxShadow={item.style.boxShadow}
+          // zIndex={item.style.zIndex}
+          // border={item.style.border}
+          // backgroundImg={item.style.backgroundImg}
+        />
+      );
     case "Button":
       return (
         <Button
@@ -26,6 +43,9 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          borderRadius={item.style.borderRadius}
+          shadow={item.style.shadow}
+          connectWallet={item.connectWallet}
         />
       );
     case "Text":
@@ -99,9 +119,14 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
         />
       );
     case "Input":
-      return <Input />;
+      return (
+        <Input
+          borderRadius={item.style.borderRadius}
+          shadow={item.style.shadow}
+        />
+      );
     case "Image":
-      return <Image />;
+      return <Image imgData={item.imgData} />;
     case "Divider":
       return <Divider />;
     default:

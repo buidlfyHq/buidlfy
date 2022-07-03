@@ -26,6 +26,7 @@ interface IWorkspace {
   elementConfig;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setOpenTab: Dispatch<SetStateAction<number>>;
+  imgData: { id: string; data: string | ArrayBuffer }[];
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -39,6 +40,7 @@ const Workspace: FC<IWorkspace> = ({
   elementConfig,
   setElementConfig,
   setOpenTab,
+  imgData,
 }) => {
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -55,6 +57,7 @@ const Workspace: FC<IWorkspace> = ({
       });
     });
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
+    console.log(layout, "layout");
   };
 
   const updateElementConfig = (item: IItems, i: string) => {
@@ -123,7 +126,7 @@ const Workspace: FC<IWorkspace> = ({
     <main
       className={
         className === ""
-          ? `fixed ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
+          ? `ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
           : `w-full`
       }
     >
@@ -135,6 +138,8 @@ const Workspace: FC<IWorkspace> = ({
           rowHeight={50}
           width={window.innerWidth - 250}
           compactType="horizontal"
+          // useCSSTransforms={true}
+          // allowOverlap={true}
           resizeHandles={["nw", "se"]}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
@@ -155,7 +160,7 @@ const Workspace: FC<IWorkspace> = ({
                   // open item setting on click
                   onClick={() => onComponentClick(item, i, index)}
                 >
-                  <RenderItem item={item} />
+                  <RenderItem item={item} imgData={imgData} />
                 </div>
               );
             })}

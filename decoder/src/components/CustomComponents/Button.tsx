@@ -21,6 +21,9 @@ const Button: FC<ITexts> = ({
   setInputValue,
   outputValue,
   setOutputValue,
+  borderRadius,
+  shadow,
+  connectWallet,
 }) => {
   const config = BuilderConfig;
   const [contract, setContract] = useState<Contract>();
@@ -31,7 +34,7 @@ const Button: FC<ITexts> = ({
       setContract(onLoad(config));
     }
   }, []); // eslint-disable-line
-    
+
   const onResponse = async () => {
     const res = await onRequest(
       contractFunction.methodName,
@@ -46,7 +49,7 @@ const Button: FC<ITexts> = ({
   return (
     <main
       style={{ justifyContent: justifyContent }}
-      className="flex px-6 items-center justify-center w-auto h-full"
+      className="flex items-center justify-center w-auto h-full px-6"
     >
       <div
         style={{

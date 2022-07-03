@@ -51,7 +51,7 @@ const Text: FC<ITexts> = ({
             </div>
           ))
         ) : (
-          <>{value}</>
+          <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>
         )}
       </>
     </div>
