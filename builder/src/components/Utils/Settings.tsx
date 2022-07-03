@@ -33,7 +33,7 @@ const Settings: FC<ISetting> = ({
   setOpenTab,
   setPicture,
   setImgData,
-  imgData,
+  imgData
 }) => {
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);

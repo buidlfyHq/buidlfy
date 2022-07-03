@@ -1,11 +1,15 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import {ComponentContext} from '../components/Context/ComponentContext'
 import Navbar from "components/Dashboard/Navbar";
 import Sidebar from "components/Dashboard/Sidebar";
 import { GiClick } from "react-icons/gi";
 import Workspace from "components/Dashboard/Workspace";
 import Settings from "components/Utils/Settings";
 import IItems from "interfaces/items";
+import { createContext } from "react";
+
+
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
@@ -31,6 +35,19 @@ const Dashboard: FC = () => {
 
   const [drag, setDrag] = useState<boolean>(true)
 
+
+  const [newComp, setNewComp] = useState<string>("")
+
+  // const ComponentContext = createContext<{
+  //   newComp: string,
+  //   setNewComp: any
+  // }>({
+  //   newComp,
+  //   setNewComp
+  // })
+
+  // const [new, setComp] = useState<string>("")
+
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -47,69 +64,71 @@ const Dashboard: FC = () => {
   }, []); // eslint-disable-line
 
   return (
-    <main className="flex flex-row w-full min-h-screen">
-      {/* Sidebar */}
-      <Sidebar
-        className={className}
-        setClassName={setClassName}
-        items={items}
-        setItems={setItems}
-        setSelector={setSelector}
-        elementConfig={elementConfig}
-      />
-
-      <section className="flex-1">
-        {/* Navbar */}
-        <Navbar
+    <ComponentContext.Provider value={{newComp, setNewComp}}>
+      <main className="flex flex-row w-full min-h-screen">
+        {/* Sidebar */}
+        <Sidebar
           className={className}
           setClassName={setClassName}
           items={items}
-          contractConfig={contractConfig}
-        />
-
-        {/* Main section */}
-        <Workspace
-          items={items}
           setItems={setItems}
-          className={className}
-          setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
-          selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
-          setOpenTab={setOpenTab}
-          imgData={imgData}
-          drag={drag}
-          setDrag={setDrag}
         />
-      </section>
 
-      {/* Right Sidebar Settings */}
-      {openSetting ? (
-        <Settings
-          items={items}
-          setItems={setItems}
-          settingItemId={settingItemId}
-          contractConfig={contractConfig}
-          setContractConfig={setContractConfig}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          openTab={openTab}
-          setOpenTab={setOpenTab}
-          setPicture={setPicture}
-          setImgData={setImgData}
-          imgData={imgData}
-        />
-      ) : (
-        <main className={`fixed right-0 top-16 z-0 w-[250px] border-l h-full`}>
-          <div className="m-3 border h-24 p-3">
-            <GiClick className="mx-20 my-2" />
-            Please select an element
-          </div>
-        </main>
-      )}
-    </main>
+        <section className="flex-1">
+          {/* Navbar */}
+          <Navbar
+            className={className}
+            setClassName={setClassName}
+            items={items}
+            contractConfig={contractConfig}
+          />
+
+          {/* Main section */}
+          <Workspace
+            items={items}
+            setItems={setItems}
+            className={className}
+            setOpenSetting={setOpenSetting}
+            setSettingItemId={setSettingItemId}
+            selector={selector}
+            setSelector={setSelector}
+            elementConfig={elementConfig}
+            setElementConfig={setElementConfig}
+            setOpenTab={setOpenTab}
+            imgData={imgData}
+            drag={drag}
+            setDrag={setDrag}
+          />
+        </section>
+
+        {/* Right Sidebar Settings */}
+        {openSetting ? (
+          <Settings
+            items={items}
+            setItems={setItems}
+            settingItemId={settingItemId}
+            contractConfig={contractConfig}
+            setContractConfig={setContractConfig}
+            setSelector={setSelector}
+            elementConfig={elementConfig}
+            openTab={openTab}
+            setOpenTab={setOpenTab}
+            setPicture={setPicture}
+            setImgData={setImgData}
+            imgData={imgData}
+          />
+        ) : (
+          <main className={`fixed right-0 top-16 z-0 w-[250px] border-l h-full`}>
+            <div className="h-24 p-3 m-3 border">
+              <GiClick className="mx-20 my-2" />
+              Please select an element
+            </div>
+          </main>
+        )}
+      </main>
+    </ComponentContext.Provider>
   );
 };
 

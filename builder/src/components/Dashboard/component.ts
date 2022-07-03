@@ -1,7 +1,7 @@
 export const components = [
   {
     name: "Container",
-    h: 1.5,
+    h: 2,
     style: {
       deleteComponent: 0,
     },

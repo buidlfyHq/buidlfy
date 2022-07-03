@@ -11,7 +11,8 @@ import IItems from "interfaces/items";
 
 interface IRenderItem {
   item: IItems;
-  imgData: { id: string; data: string | ArrayBuffer }[];
+  // made imgdata optional to test container
+  imgData?: { id: string; data: string | ArrayBuffer }[];
   setDrag: React.Dispatch<React.SetStateAction<boolean>>
 }
 

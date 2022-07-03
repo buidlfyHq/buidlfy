@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, FC } from "react";
+import React, { useEffect, useRef, useState, FC, useContext } from "react";
 import "../../styles/Dashboard.css";
 import { RiText } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
@@ -12,6 +12,7 @@ import FontSizeComponent from "./FontSizeComponent";
 import AdvanceComponent from "./AdvanceComponent";
 import IItems from "interfaces/items";
 import UploadComponent from "./UploadComponent";
+import { ComponentContext } from "components/Context/ComponentContext";
 
 interface ISettingComponent {
   items: IItems[];
@@ -97,6 +98,10 @@ const SettingComponent: FC<ISettingComponent> = ({
   setImgData,
   imgData,
 }) => {
+
+  // context
+  const {setNewComp} = useContext(ComponentContext)
+
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
 
@@ -117,6 +122,12 @@ const SettingComponent: FC<ISettingComponent> = ({
   const handleLinkChange = (e: any) => {
     setLinkVal(e.target.value);
   };
+
+  const handleAddComponent = (e: any) => {
+    // console.log(e.target.textContent)
+    setNewComp(e.target.textContent)
+  }
+  
   return (
     <>
       <div className="rounded-[8px] py-2 px-4 cursor-pointer relative">
@@ -276,7 +287,37 @@ const SettingComponent: FC<ISettingComponent> = ({
                   />
                 </>
               ) : (
-                <>
+                selectedItem?.name === "Container" ? (
+                  <> 
+                    <h3 className="mb-3 ml-8">
+                    Component -{" "}
+                    {selectedItem ? (
+                      <span className="font-bold">{selectedItem.name}</span>
+                    ) : null}
+                    </h3>
+                    <h5 className="w-full">
+                      Container Components :
+                      <div className="flex flex-col items-center w-full mt-3">
+                        <div
+                        onClick={handleAddComponent}
+                        className="px-4 py-2 my-1 text-center text-white bg-blue-400 rounded-xl w-50">
+                          Button
+                        </div>
+                        <div
+                        onClick={handleAddComponent}
+                        className="px-4 py-2 my-1 text-center text-white bg-blue-400 rounded-xl w-50">
+                          Image
+                        </div>
+                        <div
+                        onClick={handleAddComponent}
+                        className="px-4 py-2 my-1 text-center text-white bg-blue-400 rounded-xl w-50">
+                          Text
+                        </div>
+                      </div>
+                    </h5>
+                  </>
+                ) : (
+                  <>
                   {" "}
                   <h3 className="mb-3 ml-8">
                     Component -{" "}
@@ -333,6 +374,7 @@ const SettingComponent: FC<ISettingComponent> = ({
                     setDeleteComponent={setDeleteComponent}
                   />
                 </>
+                )
               )}
             </>
           )}

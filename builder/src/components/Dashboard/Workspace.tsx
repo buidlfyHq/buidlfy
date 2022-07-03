@@ -112,7 +112,7 @@ const Workspace: FC<IWorkspace> = ({
       setSelector(null);
     }
   };
-
+  // console.log(items)
   return (
     <main
       className={
@@ -143,7 +143,7 @@ const Workspace: FC<IWorkspace> = ({
               return (
                 <div
                   key={i}
-                  draggable={true}
+                  // draggable={true}
                   unselectable="on"
                   data-grid={{ x, y, w, h, minW }}
                   className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
