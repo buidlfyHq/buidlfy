@@ -29,6 +29,8 @@ const Dashboard: FC = () => {
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
 
+  console.log(items);
+  
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {

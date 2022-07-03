@@ -1,11 +1,11 @@
 import React, { useState, FC } from "react";
-import "../../styles/Dashboard.css";
 import { VscSymbolColor } from "react-icons/vsc";
-import "../../styles/Components.css";
 import { SketchPicker } from "react-color";
+import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
 interface IBgColorComponent {
-  color: any
+  color: any;
   setBgColor: (color: any) => void;
 }
 

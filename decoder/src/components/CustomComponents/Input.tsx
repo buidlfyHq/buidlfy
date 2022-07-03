@@ -1,20 +1,20 @@
 import { FC } from "react";
-import "styles/Components.css";
 import { setValue } from "../Utils/SetValue";
+import "styles/Components.css";
 
 interface IInput {
-  name: string;
+  id: string;
   value: any;
 }
 
 const Input: FC<{
-  contractFunction;
+  id: string;
   inputValue: object[];
   borderRadius: number;
   shadow: any;
   setInputValue: (inputValue: object[]) => void;
 }> = ({
-  contractFunction,
+  id,
   inputValue,
   setInputValue,
   borderRadius,
@@ -22,10 +22,13 @@ const Input: FC<{
 }) => {
   const getValue = (inputArray) => {
     const requiredValue = inputArray.filter(
-      (input: IInput) => input.name === contractFunction.inputName
+      (input: IInput) => input.id === id
     )[0];
     return requiredValue ? requiredValue.value : "";
   };
+
+  // mapping: contractFunction: {methodName: 'createCampaign'}
+  // ---> {id: 'xyz', methodName: 'createCampaign'}
 
   return (
     <div className="h-full flex justify-center items-center">
@@ -37,9 +40,7 @@ const Input: FC<{
         placeholder="Input"
         value={getValue(inputValue)}
         onChange={(e) =>
-          setInputValue(
-            setValue(inputValue, contractFunction.inputName, e.target.value)
-          )
+          setInputValue(setValue(inputValue, id, e.target.value))
         }
       />
     </div>

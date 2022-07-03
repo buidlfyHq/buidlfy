@@ -1,9 +1,9 @@
 import React, { useState, FC } from "react";
-import "../../styles/Dashboard.css";
 import { VscSymbolColor } from "react-icons/vsc";
-import "../../styles/Components.css";
 import { SketchPicker } from "react-color";
 import IItems from "interfaces/items";
+import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
 interface IColorComponent {
   color: any;
@@ -16,7 +16,7 @@ const ColorComponent: FC<IColorComponent> = ({
   setColor,
   selectedItem,
 }) => {
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
   const handleClick = () => {
     setDisplayColorPicker(!displayColorPicker);

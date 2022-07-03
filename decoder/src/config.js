@@ -1,7 +1,158 @@
 import { decode as base64_decode } from "base-64";
 
-const BuilderConfig = base64_decode(
-  "eyJidWlsZGVyIjpbeyJuYW1lIjoiSGVhZGluZyAxIiwiaCI6MSwidmFsdWUiOiJjcnlwdGlwLm1lIiwibGluayI6IiIsInN0eWxlIjp7ImNvbG9yIjp7InIiOiIwIiwiZyI6IjAiLCJiIjoiMCIsImEiOiIxMDAifSwiYmFja2dyb3VuZENvbG9yIjp7InIiOiIwIiwiZyI6IjAiLCJiIjoiMCJ9LCJmb250V2VpZ2h0IjoiYm9sZCIsImZvbnRTdHlsZSI6Im5vcm1hbCIsInRleHREZWNvcmF0aW9uIjoibm9uZSIsImp1c3RpZnlDb250ZW50IjoiY2VudGVyIiwiZm9udFNpemUiOjI1LCJkZWxldGVDb21wb25lbnQiOjB9LCJpIjoiaGlhMk1IIiwieCI6MCwieSI6MSwidyI6MSwibWluVyI6MX0seyJuYW1lIjoiQnV0dG9uIiwiaCI6MSwidmFsdWUiOiJDb25uZWN0IEJ1dHRvbiIsImxpbmsiOiIiLCJzdHlsZSI6eyJjb2xvciI6eyJyIjoyNTUsImciOjI1NSwiYiI6MjU1LCJhIjoxfSwiYmFja2dyb3VuZENvbG9yIjp7InIiOjE0LCJnIjoxMTgsImIiOjI1MywiYSI6MX0sImZvbnRXZWlnaHQiOiJub3JtYWwiLCJmb250U3R5bGUiOiJub3JtYWwiLCJ0ZXh0RGVjb3JhdGlvbiI6Im5vbmUiLCJqdXN0aWZ5Q29udGVudCI6InJpZ2h0IiwiZm9udFNpemUiOjE1LCJkZWxldGVDb21wb25lbnQiOjAsImJvcmRlclJhZGl1cyI6MTEsInNoYWRvdyI6Im5vbmUifSwiY29ubmVjdFdhbGxldCI6Im9uIiwiY29udHJhY3QiOnt9LCJpIjoiV1M2a3dwIiwieCI6MSwieSI6MSwidyI6NSwibWluVyI6MX0seyJuYW1lIjoiSGVhZGluZyAxIiwiaCI6NCwidmFsdWUiOiJUaGUgZnJpZW5kbHkgd2F5IHRvIGFjY2VwdCB0aXBzIGluIEVUSC4iLCJsaW5rIjoiIiwic3R5bGUiOnsiY29sb3IiOnsiciI6MjIxLCJnIjoxMjgsImIiOjEyOCwiYSI6MX0sImJhY2tncm91bmRDb2xvciI6eyJyIjoiMCIsImciOiIwIiwiYiI6IjAifSwiZm9udFdlaWdodCI6Im5vcm1hbCIsImZvbnRTdHlsZSI6Im5vcm1hbCIsInRleHREZWNvcmF0aW9uIjoibm9uZSIsImp1c3RpZnlDb250ZW50IjoiY2VudGVyIiwiZm9udFNpemUiOjM1LCJkZWxldGVDb21wb25lbnQiOjB9LCJpIjoiNjhRcERwIiwieCI6MSwieSI6NiwidyI6MiwibWluVyI6MX0seyJuYW1lIjoiQ29udGFpbmVyIiwiaCI6MSwic3R5bGUiOnsiZGVsZXRlQ29tcG9uZW50IjowLCJiYWNrZ3JvdW5kQ29sb3IiOnsiciI6IjAiLCJnIjoiMCIsImIiOiIwIn0sImNvbG9yIjp7InIiOjI1NSwiZyI6MjU1LCJiIjoyNTUsImEiOjF9LCJib3JkZXJSYWRpdXMiOjEsImJvcmRlcldpZHRoIjoxLCJzaGFkb3ciOiJub25lIn0sImkiOiJtSlRoVVYiLCJ4IjowLCJ5Ijo4LCJ3IjoxLCJtaW5XIjoxfSx7Im5hbWUiOiJCdXR0b24iLCJoIjoxLCJ2YWx1ZSI6IlN0YXJ0IFRvZGF5IiwibGluayI6IiIsInN0eWxlIjp7ImNvbG9yIjp7InIiOjI1NSwiZyI6MjU1LCJiIjoyNTUsImEiOjF9LCJiYWNrZ3JvdW5kQ29sb3IiOnsiciI6MCwiZyI6MCwiYiI6MCwiYSI6MX0sImZvbnRXZWlnaHQiOiJub3JtYWwiLCJmb250U3R5bGUiOiJub3JtYWwiLCJ0ZXh0RGVjb3JhdGlvbiI6Im5vbmUiLCJqdXN0aWZ5Q29udGVudCI6InJpZ2h0IiwiZm9udFNpemUiOjE3LCJkZWxldGVDb21wb25lbnQiOjAsImJvcmRlclJhZGl1cyI6MTgsInNoYWRvdyI6Im5vbmUifSwiY29ubmVjdFdhbGxldCI6Im9mZiIsImNvbnRyYWN0Ijp7fSwiaSI6IlVpOG5rdCIsIngiOjAsInkiOjEwLCJ3IjozLCJtaW5XIjoxfV0sImNvbnRyYWN0Ijp7ImFiaSI6bnVsbCwiYWRkcmVzcyI6IiJ9fQ=="
-);
+const BuilderConfig = {
+  builder: [
+    {
+      contract: {
+        methodName: "getDeployedCampaigns",
+        inputs: [],
+        outputs: [{ id: "RLTFQo" }],
+        stateMutability: "view",
+      },
+      h: 1,
+      i: "a8Fa4V",
+      link: "",
+      minW: 1,
+      name: "Button",
+      style: {
+        backgroundColor: { r: "0", g: "0", b: "0" },
+        borderRadius: 1,
+        color: { r: "0", g: "0", b: "0", a: "100" },
+        deleteComponent: 0,
+        fontSize: 15,
+        fontStyle: "normal",
+        fontWeight: "normal",
+        justifyContent: "center",
+        shadow: "none",
+        textDecoration: "none",
+      },
+      value: "Output",
+      w: 3,
+      x: 0,
+      y: 2,
+    },
+    {
+      h: 1,
+      i: "RLTFQo",
+      link: "",
+      minW: 1,
+      name: "Heading 1",
+      style: {
+        backgroundColor: { r: "0", g: "0", b: "0" },
+        color: { r: 232, g: 75, b: 75, a: 1 },
+        deleteComponent: 0,
+        fontSize: 32,
+        fontStyle: "normal",
+        fontWeight: "normal",
+        justifyContent: "center",
+        textDecoration: "none",
+      },
+      value: "Heading 1",
+      w: 2,
+      x: 3,
+      y: 2,
+    },
+    {
+      h: 1,
+      i: "ogeSfU",
+      minW: 1,
+      name: "Input",
+      style: {
+        borderRadius: 1,
+        deleteComponent: 0,
+        shadow: "none",
+      },
+      w: 2,
+      x: 0,
+      y: 4,
+    },
+    {
+      contract: {
+        methodName: "createCampaign",
+        inputs: [{ id: "ogeSfU", send: false }],
+        outputs: [],
+        stateMutability: "nonpayable",
+      },
+      h: 1,
+      i: "64TzUR",
+      link: "",
+      minW: 1,
+      name: "Button",
+      style: {
+        backgroundColor: { r: 237, g: 222, b: 222, a: 1 },
+        borderRadius: 1,
+        color: { r: 110, g: 119, b: 155, a: 1 },
+        deleteComponent: 0,
+        fontSize: 18,
+        fontStyle: "italic",
+        fontWeight: "bold",
+        justifyContent: "right",
+        shadow:
+          "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+        textDecoration: "underline",
+      },
+      value: "Input",
+      w: 3,
+      x: 2,
+      y: 4,
+    },
+    {
+      h: 1,
+      i: "WwKQfP",
+      minW: 1,
+      name: "Container",
+      style: {
+        backgroundColor: { r: "0", g: "0", b: "0" },
+        borderRadius: 1,
+        borderWidth: 1,
+        color: { r: "0", g: "0", b: "0", a: "100" },
+        deleteComponent: 0,
+        shadow: "none",
+      },
+      w: 4,
+      x: 0,
+      y: 8,
+    },
+  ],
+  contract: {
+    abi: [
+      {
+        inputs: [{ internalType: "uint256", name: "minimum", type: "uint256" }],
+        name: "createCampaign",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        name: "deployedCampaigns",
+        outputs: [{ internalType: "address", name: "", type: "address" }],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [],
+        name: "getDeployedCampaigns",
+        outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [
+          { internalType: "uint256", name: "", type: "uint256" },
+          { internalType: "uint256", name: "Main", type: "uint256" },
+        ],
+        name: "newCampaigns",
+        outputs: [
+          { internalType: "address", name: "Main", type: "address" },
+          { internalType: "address", name: "Secondary", type: "address" },
+        ],
+        stateMutability: "view",
+        type: "function",
+      },
+    ],
+    address: "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E",
+  },
+};
 
 export default BuilderConfig;

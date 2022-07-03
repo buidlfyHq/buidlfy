@@ -1,26 +1,28 @@
 import React, { useState, FC } from "react";
-import "../../styles/Dashboard.css";
-import "../../styles/Components.css";
 import { FaFileContract } from "react-icons/fa";
 import Modal from "components/Dashboard/Modal";
 import AbiMethods from "components/Dashboard/AbiMethods";
 import AbiComponent from "components/Dashboard/AbiComponent";
 import IItems from "interfaces/items";
+import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
 interface IAdvanceComponent {
   selector: {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   };
   setSelector: (selector: {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   }) => void;
   showComponent: {
     id: string;
-    value: { name: string; inputs: object[]; outputs: object[] };
+    value: { name: string; inputs: object[]; outputs: object[]; stateMutability: string; };
   };
   setShowComponent: (showComponent: { id: string; value: IItems }) => void;
   contractConfig: { abi: string; address: string };
@@ -43,7 +45,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
   items,
   setItems,
 }) => {
-  const [isOpen, setIsOpen] = useState(false); // for connect contract modal
+  const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
 
   return (
     <>
@@ -87,8 +89,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
       />
       <AbiComponent
         showComponent={showComponent}
+        selector={selector}
         setSelector={setSelector}
         elementConfig={elementConfig}
+        selectedItem={selectedItem}
+        items={items}
+        setItems={setItems}
       />
     </>
   );

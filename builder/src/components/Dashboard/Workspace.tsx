@@ -15,13 +15,15 @@ interface IWorkspace {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   };
   setSelector: (selector: {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   }) => void;
-  elementConfig: object;
+  elementConfig;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setOpenTab: Dispatch<SetStateAction<number>>;
   imgData: { id: string; data: string | ArrayBuffer }[];
@@ -40,7 +42,6 @@ const Workspace: FC<IWorkspace> = ({
   setOpenTab,
   imgData,
 }) => {
-  // on layout change
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
@@ -59,6 +60,45 @@ const Workspace: FC<IWorkspace> = ({
     console.log(layout, "layout");
   };
 
+  const updateElementConfig = (item: IItems, i: string) => {
+    // for updating selected element config
+    const searchExistingValue = Object.keys(elementConfig).filter(
+      (key) => key === selector.name
+    );
+
+    if (!searchExistingValue.length || !Object.keys(elementConfig).length) {
+      setElementConfig({
+        ...elementConfig,
+        [selector.name]: [
+          {
+            buttonId: selector.buttonId,
+            name: item.name,
+            id: i,
+          },
+        ],
+      });
+    } else {
+      Object.keys(elementConfig).map((key) => {
+        if (key === selector.name) {
+          let elementArray = [
+            ...elementConfig[key],
+            {
+              buttonId: selector.buttonId,
+              name: item.name,
+              id: i,
+            },
+          ];
+
+          setElementConfig({
+            ...elementConfig,
+            [selector.name]: elementArray,
+          });
+        }
+        return key;
+      });
+    }
+  };
+
   const onComponentClick = (item: IItems, i: string, index: number) => {
     // checks if the selector is active
     if (selector === null) {
@@ -68,21 +108,7 @@ const Workspace: FC<IWorkspace> = ({
     } else {
       // Add validation for selection
       if (selector.type === "input" && item.name === "Input") {
-        // for updating selector with item name and item id
-        setElementConfig({
-          ...elementConfig,
-          [selector.name]: { name: item.name, id: i },
-        });
-        let updatedItem = {
-          ...item,
-          contract: {
-            name: selector.methodName,
-            inputName: selector.name,
-          },
-        };
-        let newArray = [...items];
-        newArray[index] = updatedItem;
-        setItems(newArray);
+        updateElementConfig(item, i);
       } else if (
         selector.type === "output" &&
         (item.name === "Text" ||
@@ -90,21 +116,7 @@ const Workspace: FC<IWorkspace> = ({
           item.name === "Heading 2" ||
           item.name === "Heading 3")
       ) {
-        // for updating selector with item name and item id
-        setElementConfig({
-          ...elementConfig,
-          [selector.name]: { name: item.name, id: i },
-        });
-        let updatedItem = {
-          ...item,
-          contract: {
-            name: selector.methodName,
-            outputName: selector.name,
-          },
-        };
-        let newArray = [...items];
-        newArray[index] = updatedItem;
-        setItems(newArray);
+        updateElementConfig(item, i);
       }
       setSelector(null);
     }

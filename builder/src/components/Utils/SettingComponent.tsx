@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState, FC } from "react";
-import "../../styles/Dashboard.css";
 import { RiText } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
-import "../../styles/Components.css";
 import AlignComponent from "./AlignComponent";
 import FontStyleComponent from "./FontStyleComponent";
 import UtilitiesComponent from "./UtilitiesComponent";
@@ -16,6 +14,8 @@ import BorderComponent from "./BorderComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
 import ConnectSwitchComponent from "./ConnectSwitchComponent";
+import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
 interface ISettingComponent {
   items: IItems[];
@@ -48,7 +48,12 @@ interface ISettingComponent {
   setShowComponent: (showComponent: { id: string; value: IItems }) => void;
   showComponent: {
     id: string;
-    value: { name: string; inputs: object[]; outputs: object[] };
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
   };
   setSelector: (selector: {
     methodName: string;

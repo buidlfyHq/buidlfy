@@ -35,7 +35,7 @@ const Settings: FC<ISetting> = ({
   setImgData,
   imgData,
 }) => {
-  const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
+  const [showComponent, setShowComponent] = useState(null); // for abi method component
   const selectedItem = items.find((item) => item.i === settingItemId);
 
   const setLink = (link: string) => {

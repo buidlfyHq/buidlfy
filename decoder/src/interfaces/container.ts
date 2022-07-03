@@ -6,8 +6,8 @@ export default interface IBgContainer {
   borderWidth: number;
   shadow?: any;
   // borderRadius: any;
-    // boxShadow: any;
-    // zIndex: number;
-    // border: any; //border color and type
-    // backgroundImg: any;
-  }
+  // boxShadow: any;
+  // zIndex: number;
+  // border: any; //border color and type
+  // backgroundImg: any;
+}
