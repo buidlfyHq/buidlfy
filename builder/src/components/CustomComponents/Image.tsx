@@ -10,13 +10,17 @@ const Image: FC<IImageComponent> = ({ imgData }) => {
   return (
     <>
       {imgData ? (
-        <div className="flex justify-center items-center">
-          <img className=" h-auto w-full ml-6" src={imgData} alt="" />
-        </div>
+        <img
+          className="flex justify-center items-center h-full w-full"
+          src={imgData}
+          alt=""
+        />
       ) : (
-        <div className="flex justify-center items-center">
-          <img className=" h-auto w-full ml-6" src={image} alt="" />
-        </div>
+        <img
+          className="flex justify-center items-center h-full w-full"
+          src={image}
+          alt=""
+        />
       )}
     </>
   );

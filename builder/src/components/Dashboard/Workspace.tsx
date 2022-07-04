@@ -130,6 +130,7 @@ const Workspace: FC<IWorkspace> = ({
           resizeHandles={["nw", "se"]}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
+          style={{ minWidth: "10px", maxWidth: "1500px" }}
         >
           {items
             ?.filter((i) => i.style.deleteComponent === 0)
