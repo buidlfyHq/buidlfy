@@ -118,6 +118,7 @@ const Container = ({
           backgroundImage: `url(${imgData})`,
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
           boxShadow: shadow,
           // boxShadow,
         }}
@@ -164,53 +165,53 @@ export default Container;
 
 // *********** for later purpose ***********
 
-  // const onComponentClick = (item: IItems, i: string, index: number) => {
-  //   // checks if the selector is active
-  //   if (selector === null) {
-  //     setOpenSetting(true);
-  //     setSettingItemId(i);
-  //     setOpenTab(1);
-  //   } else {
-  //     // Add validation for selection
-  //     if (selector.type === "input" && item.name === "Input") {
-  //       // for updating selector with item name and item id
-  //       setElementConfig({
-  //         ...elementConfig,
-  //         [selector.name]: { name: item.name, id: i },
-  //       });
-  //       let updatedItem = {
-  //         ...item,
-  //         contract: {
-  //           name: selector.methodName,
-  //           inputName: selector.name,
-  //         },
-  //       };
-  //       let newArray = [...templay];
-  //       newArray[index] = updatedItem;
-  //       setTempLay(newArray);
-  //     } else if (
-  //       selector.type === "output" &&
-  //       (item.name === "Text" ||
-  //         item.name === "Heading 1" ||
-  //         item.name === "Heading 2" ||
-  //         item.name === "Heading 3")
-  //     ) {
-  //       // for updating selector with item name and item id
-  //       setElementConfig({
-  //         ...elementConfig,
-  //         [selector.name]: { name: item.name, id: i },
-  //       });
-  //       let updatedItem = {
-  //         ...item,
-  //         contract: {
-  //           name: selector.methodName,
-  //           outputName: selector.name,
-  //         },
-  //       };
-  //       let newArray = [...templay];
-  //       newArray[index] = updatedItem;
-  //       setTempLay(newArray);
-  //     }
-  //     setSelector(null);
-  //   }
-  // };
+// const onComponentClick = (item: IItems, i: string, index: number) => {
+//   // checks if the selector is active
+//   if (selector === null) {
+//     setOpenSetting(true);
+//     setSettingItemId(i);
+//     setOpenTab(1);
+//   } else {
+//     // Add validation for selection
+//     if (selector.type === "input" && item.name === "Input") {
+//       // for updating selector with item name and item id
+//       setElementConfig({
+//         ...elementConfig,
+//         [selector.name]: { name: item.name, id: i },
+//       });
+//       let updatedItem = {
+//         ...item,
+//         contract: {
+//           name: selector.methodName,
+//           inputName: selector.name,
+//         },
+//       };
+//       let newArray = [...templay];
+//       newArray[index] = updatedItem;
+//       setTempLay(newArray);
+//     } else if (
+//       selector.type === "output" &&
+//       (item.name === "Text" ||
+//         item.name === "Heading 1" ||
+//         item.name === "Heading 2" ||
+//         item.name === "Heading 3")
+//     ) {
+//       // for updating selector with item name and item id
+//       setElementConfig({
+//         ...elementConfig,
+//         [selector.name]: { name: item.name, id: i },
+//       });
+//       let updatedItem = {
+//         ...item,
+//         contract: {
+//           name: selector.methodName,
+//           outputName: selector.name,
+//         },
+//       };
+//       let newArray = [...templay];
+//       newArray[index] = updatedItem;
+//       setTempLay(newArray);
+//     }
+//     setSelector(null);
+//   }
+// };

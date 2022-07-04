@@ -29,6 +29,7 @@ const Container: FC<IBgContainer> = ({
         backgroundImage: `url(${imgData})`,
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
         boxShadow: shadow,
         // boxShadow,
       }}
