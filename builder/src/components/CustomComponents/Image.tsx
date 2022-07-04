@@ -18,13 +18,7 @@ const Image: FC<IImageComponent> = ({ imgData }) => {
             backgroundPosition: "center",
             backgroundSize: "contain",
           }}
-        >
-          {/* <img
-            className="flex justify-center items-center h-full w-full"
-            src={imgData}
-            alt=""
-          /> */}
-        </div>
+        ></div>
       ) : (
         <div
           className="flex justify-center items-center h-full w-full"
@@ -34,13 +28,7 @@ const Image: FC<IImageComponent> = ({ imgData }) => {
             backgroundPosition: "center",
             backgroundSize: "contain",
           }}
-        >
-          {/* <img
-            className="flex justify-center items-center h-full w-full"
-            src={image}
-            alt=""
-          /> */}
-        </div>
+        ></div>
       )}
     </>
   );
