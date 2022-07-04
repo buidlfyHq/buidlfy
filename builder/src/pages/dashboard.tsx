@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ComponentContext } from "../components/Context/ComponentContext";
 import Navbar from "components/Dashboard/Navbar";
 import Sidebar from "components/Dashboard/Sidebar";
 import { GiClick } from "react-icons/gi";
@@ -28,9 +29,9 @@ const Dashboard: FC = () => {
   const [selector, setSelector] = useState(null);
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
+  const [drag, setDrag] = useState<boolean>(true);
+  const [newComp, setNewComp] = useState<string>("");
 
-  console.log(items);
-  
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -47,7 +48,7 @@ const Dashboard: FC = () => {
   }, []); // eslint-disable-line
 
   return (
-    <>
+    <ComponentContext.Provider value={{ newComp, setNewComp }}>
       <main className="flex flex-row w-full min-h-screen">
         {/* Sidebar */}
         <Sidebar
@@ -81,6 +82,8 @@ const Dashboard: FC = () => {
             setElementConfig={setElementConfig}
             setOpenTab={setOpenTab}
             imgData={imgData}
+            drag={drag}
+            setDrag={setDrag}
           />
         </section>
 
@@ -104,14 +107,14 @@ const Dashboard: FC = () => {
           <main
             className={`fixed right-0 top-16 z-0 w-[250px] border-l h-full`}
           >
-            <div className="m-3 border h-24 p-3">
+            <div className="h-24 p-3 m-3 border">
               <GiClick className="mx-20 my-2" />
               Please select an element
             </div>
           </main>
         )}
       </main>
-    </>
+    </ComponentContext.Provider>
   );
 };
 

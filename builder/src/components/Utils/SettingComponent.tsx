@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, FC } from "react";
+import React, { useEffect, useRef, useState, FC, useContext } from "react";
 import { RiText } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
 import AlignComponent from "./AlignComponent";
@@ -14,6 +14,7 @@ import BorderComponent from "./BorderComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
 import ConnectSwitchComponent from "./ConnectSwitchComponent";
+import { ComponentContext } from "components/Context/ComponentContext";
 import "../../styles/Components.css";
 import "../../styles/Dashboard.css";
 
@@ -126,6 +127,9 @@ const SettingComponent: FC<ISettingComponent> = ({
   setOn,
   connectWallet,
 }) => {
+  // context
+  const { setNewComp } = useContext(ComponentContext);
+
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
 
@@ -146,6 +150,12 @@ const SettingComponent: FC<ISettingComponent> = ({
   const handleLinkChange = (e: any) => {
     setLink(e.target.value);
   };
+
+  const handleAddComponent = (e: any) => {
+    // console.log(e.target.textContent)
+    setNewComp(e.target.textContent);
+  };
+
   return (
     <>
       <div className="rounded-[8px] py-2 px-4 cursor-pointer relative">
@@ -333,6 +343,29 @@ const SettingComponent: FC<ISettingComponent> = ({
                           <span className="font-bold">{selectedItem.name}</span>
                         ) : null}
                       </h3>
+                      <h5 className="w-full">
+                        Container Components :
+                        <div className="flex flex-col items-center w-full mt-3">
+                          <div
+                            onClick={handleAddComponent}
+                            className="px-4 py-2 my-1 text-center text-white bg-blue-400 rounded-xl w-50"
+                          >
+                            Button
+                          </div>
+                          <div
+                            onClick={handleAddComponent}
+                            className="px-4 py-2 my-1 text-center text-white bg-blue-400 rounded-xl w-50"
+                          >
+                            Image
+                          </div>
+                          <div
+                            onClick={handleAddComponent}
+                            className="px-4 py-2 my-1 text-center text-white bg-blue-400 rounded-xl w-50"
+                          >
+                            Text
+                          </div>
+                        </div>
+                      </h5>
                       <UploadComponent
                         setPicture={setPicture}
                         setImgData={setImgData}

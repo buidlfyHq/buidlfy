@@ -8,12 +8,19 @@ import Input from "../CustomComponents/Input";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
+
 interface IRenderItem {
   item: IItems;
-  imgData: { id: string; data: string | ArrayBuffer }[];
+  // made imgdata optional to test container
+  imgData?: { id: string; data: string | ArrayBuffer }[];
+  setDrag: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
+const RenderItem: FC<IRenderItem> = ({ 
+  item, 
+  imgData, 
+  setDrag
+}) => {
   switch (item.name) {
     case "Container":
       return (
@@ -29,6 +36,7 @@ const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
           // zIndex={item.style.zIndex}
           // border={item.style.border}
           // backgroundImg={item.style.backgroundImg}
+          setDrag={setDrag}
         />
       );
     case "Button":

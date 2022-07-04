@@ -51,6 +51,26 @@ const Button: FC<ITexts> = ({
       style={{ justifyContent: justifyContent }}
       className="flex items-center justify-center w-auto h-full px-6"
     >
+      {/* <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="relative z-50"
+      >
+        <div className="fixed flex items-center justify-center p-4 top-4 right-4">
+          <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
+            <Dialog.Title>
+            {transactionStatus === '' ?
+            (<div className="flex items-center">
+              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+              <div className="mr-5 text-white">Transaction In Process...</div>
+            </div>) 
+            : (<div className="text-white break-all">{transactionStatus}</div>)
+            } 
+            </Dialog.Title>
+          </Dialog.Panel>
+        </div>
+      </Dialog> */}
+
       <div
         style={{
           fontWeight: bold,
