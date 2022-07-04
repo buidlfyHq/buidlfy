@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState, FC } from "react";
-import "../../styles/Dashboard.css";
 import { RiText } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
-import "../../styles/Components.css";
 import AlignComponent from "./AlignComponent";
 import FontStyleComponent from "./FontStyleComponent";
 import UtilitiesComponent from "./UtilitiesComponent";
@@ -12,6 +10,12 @@ import FontSizeComponent from "./FontSizeComponent";
 import AdvanceComponent from "./AdvanceComponent";
 import IItems from "interfaces/items";
 import UploadComponent from "./UploadComponent";
+import BorderComponent from "./BorderComponent";
+import BorderRadiusComponent from "./BorderRadiusComponent";
+import ShadowComponent from "./ShadowComponent";
+import ConnectSwitchComponent from "./ConnectSwitchComponent";
+import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
 interface ISettingComponent {
   items: IItems[];
@@ -44,7 +48,12 @@ interface ISettingComponent {
   setShowComponent: (showComponent: { id: string; value: IItems }) => void;
   showComponent: {
     id: string;
-    value: { name: string; inputs: object[]; outputs: object[] };
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
   };
   setSelector: (selector: {
     methodName: string;
@@ -57,6 +66,16 @@ interface ISettingComponent {
   setPicture: (picture: string) => void;
   setImgData: (imgData: { id: string; data: string | ArrayBuffer }[]) => void;
   imgData: { id: string; data: string | ArrayBuffer }[];
+  borderRadius: number;
+  setBorderRadius: (borderRadius: number) => void;
+  borderWidth: number;
+  setBorderWidth: (borderWidth: number) => void;
+  setSmall: (shadow: string | boolean) => void;
+  setMedium: (shadow: string | boolean) => void;
+  setLarge: (shadow: string | boolean) => void;
+  shadow: string;
+  setOn: (connectWallet: string | boolean) => void;
+  connectWallet: string;
 }
 
 const SettingComponent: FC<ISettingComponent> = ({
@@ -96,6 +115,16 @@ const SettingComponent: FC<ISettingComponent> = ({
   setPicture,
   setImgData,
   imgData,
+  borderRadius,
+  setBorderRadius,
+  borderWidth,
+  setBorderWidth,
+  setSmall,
+  setMedium,
+  setLarge,
+  shadow,
+  setOn,
+  connectWallet,
 }) => {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
@@ -115,7 +144,7 @@ const SettingComponent: FC<ISettingComponent> = ({
   };
 
   const handleLinkChange = (e: any) => {
-    setLinkVal(e.target.value);
+    setLink(e.target.value);
   };
   return (
     <>
@@ -197,6 +226,10 @@ const SettingComponent: FC<ISettingComponent> = ({
                               placeholder="URL..."
                             />
                           </div>
+                          <ConnectSwitchComponent
+                            setOn={setOn}
+                            connectWallet={connectWallet}
+                          />
                           <FontStyleComponent
                             bold={bold}
                             italic={italic}
@@ -217,7 +250,22 @@ const SettingComponent: FC<ISettingComponent> = ({
                             fontSize={fontSize}
                             setFontSize={setFontSize}
                           />
-                          <ColorComponent color={color} setColor={setColor} />
+                          <BorderRadiusComponent
+                            borderRadius={borderRadius}
+                            setBorderRadius={setBorderRadius}
+                          />
+                          <ShadowComponent
+                            setSmall={setSmall}
+                            setMedium={setMedium}
+                            setLarge={setLarge}
+                            shadow={shadow}
+                          />
+
+                          <ColorComponent
+                            color={color}
+                            setColor={setColor}
+                            selectedItem={selectedItem}
+                          />
 
                           <BgColorComponent
                             color={backgroundColor}
@@ -277,61 +325,144 @@ const SettingComponent: FC<ISettingComponent> = ({
                 </>
               ) : (
                 <>
-                  {" "}
-                  <h3 className="mb-3 ml-8">
-                    Component -{" "}
-                    {selectedItem ? (
-                      <span className="font-bold">{selectedItem.name}</span>
-                    ) : null}
-                  </h3>
-                  <div className="flex items-center px-3 mt-1 text-black">
-                    <RiText className="text-[18px] mr-3" />
+                  {selectedItem?.name === "Container" ? (
+                    <>
+                      <h3 className="mb-3 ml-8">
+                        Component -{" "}
+                        {selectedItem ? (
+                          <span className="font-bold">{selectedItem.name}</span>
+                        ) : null}
+                      </h3>
+                      <UploadComponent
+                        setPicture={setPicture}
+                        setImgData={setImgData}
+                        imgData={imgData}
+                        selectedItem={selectedItem}
+                        items={items}
+                        setItems={setItems}
+                      />
+                      <BgColorComponent
+                        color={backgroundColor}
+                        setBgColor={setBgColor}
+                      />
+                      <ColorComponent
+                        color={color}
+                        setColor={setColor}
+                        selectedItem={selectedItem}
+                      />
+                      <BorderRadiusComponent
+                        borderRadius={borderRadius}
+                        setBorderRadius={setBorderRadius}
+                      />
+                      <BorderComponent
+                        borderWidth={borderWidth}
+                        setBorderWidth={setBorderWidth}
+                      />
+                      <ShadowComponent
+                        setSmall={setSmall}
+                        setMedium={setMedium}
+                        setLarge={setLarge}
+                        shadow={shadow}
+                      />
+                      <UtilitiesComponent
+                        deleteComponent={deleteComponent}
+                        setDeleteComponent={setDeleteComponent}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      {selectedItem?.name === "Input" ? (
+                        <>
+                          <h3 className="mb-3 ml-8">
+                            Component -{" "}
+                            {selectedItem ? (
+                              <span className="font-bold">
+                                {selectedItem.name}
+                              </span>
+                            ) : null}
+                          </h3>
+                          <BorderRadiusComponent
+                            borderRadius={borderRadius}
+                            setBorderRadius={setBorderRadius}
+                          />
+                          <ShadowComponent
+                            setSmall={setSmall}
+                            setMedium={setMedium}
+                            setLarge={setLarge}
+                            shadow={shadow}
+                          />
+                          <UtilitiesComponent
+                            deleteComponent={deleteComponent}
+                            setDeleteComponent={setDeleteComponent}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          {" "}
+                          <h3 className="mb-3 ml-8">
+                            Component -{" "}
+                            {selectedItem ? (
+                              <span className="font-bold">
+                                {selectedItem.name}
+                              </span>
+                            ) : null}
+                          </h3>
+                          <div className="flex items-center px-3 mt-1 text-black">
+                            <RiText className="text-[18px] mr-3" />
 
-                    <input
-                      value={textVal}
-                      onChange={(e) => handleTextChange(e)}
-                      className="changeText"
-                      type="text"
-                      placeholder="Name..."
-                    />
-                  </div>
-                  <div className="flex items-center px-3 mt-2 text-black">
-                    <AiOutlineLink className="text-[18px] mr-3" />
-                    <input
-                      value={linkVal}
-                      onChange={(e) => handleLinkChange(e)}
-                      className="changeText"
-                      type="text"
-                      placeholder="URL..."
-                    />
-                  </div>
-                  <FontStyleComponent
-                    bold={bold}
-                    italic={italic}
-                    underline={underline}
-                    setBold={setBold}
-                    setItalic={setItalic}
-                    setUnderline={setUnderline}
-                  />
-                  <AlignComponent
-                    justifyContent={justifyContent}
-                    setLeft={setLeft}
-                    setRight={setRight}
-                    setCenter={setCenter}
-                  />
-                  <FontSizeComponent
-                    fontSize={fontSize}
-                    setFontSize={setFontSize}
-                  />
-                  <ColorComponent color={color} setColor={setColor} />
-                  <BgColorComponent
-                    color={backgroundColor}
-                    setBgColor={setBgColor}
-                  />
-                  <UtilitiesComponent
-                    deleteComponent={deleteComponent}
-                    setDeleteComponent={setDeleteComponent}
-                  />
+                            <input
+                              value={textVal}
+                              onChange={(e) => handleTextChange(e)}
+                              className="changeText"
+                              type="text"
+                              placeholder="Name..."
+                            />
+                          </div>
+                          <div className="flex items-center px-3 mt-2 text-black">
+                            <AiOutlineLink className="text-[18px] mr-3" />
+                            <input
+                              value={linkVal}
+                              onChange={(e) => handleLinkChange(e)}
+                              className="changeText"
+                              type="text"
+                              placeholder="URL..."
+                            />
+                          </div>
+                          <FontStyleComponent
+                            bold={bold}
+                            italic={italic}
+                            underline={underline}
+                            setBold={setBold}
+                            setItalic={setItalic}
+                            setUnderline={setUnderline}
+                          />
+                          <AlignComponent
+                            justifyContent={justifyContent}
+                            setLeft={setLeft}
+                            setRight={setRight}
+                            setCenter={setCenter}
+                          />
+                          <FontSizeComponent
+                            fontSize={fontSize}
+                            setFontSize={setFontSize}
+                          />
+                          <ColorComponent
+                            color={color}
+                            setColor={setColor}
+                            selectedItem={selectedItem}
+                          />
+                          <BgColorComponent
+                            color={backgroundColor}
+                            setBgColor={setBgColor}
+                          />
+                          <UtilitiesComponent
+                            deleteComponent={deleteComponent}
+                            setDeleteComponent={setDeleteComponent}
+                          />
+                        </>
+                      )}
+                    </>
+                  )}
                 </>
               )}
             </>

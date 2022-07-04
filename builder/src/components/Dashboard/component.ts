@@ -4,6 +4,11 @@ export const components = [
     h: 1.5,
     style: {
       deleteComponent: 0,
+      backgroundColor: { r: "0", g: "0", b: "0" },
+      color: { r: "0", g: "0", b: "0", a: "100"},
+      borderRadius: 1,
+      borderWidth: 1,
+      shadow: "none"
     },
   },
   {
@@ -20,7 +25,10 @@ export const components = [
       justifyContent: "center",
       fontSize: 15,
       deleteComponent: 0,
+      borderRadius: 1,
+      shadow: "none"
     },
+    connectWallet: "off",
     contract: {}
   },
   {
@@ -39,22 +47,22 @@ export const components = [
       deleteComponent: 0,
     },
   },
-  {
-    name: "Link",
-    h: 1,
-    value: "Link",
-    link: "",
-    style: {
-      color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0" },
-      fontWeight: "normal",
-      fontStyle: "normal",
-      textDecoration: "none",
-      justifyContent: "center",
-      fontSize: 15,
-      deleteComponent: 0,
-    },
-  },
+  // {
+  //   name: "Link",
+  //   h: 1,
+  //   value: "Link",
+  //   link: "",
+  //   style: {
+  //     color: { r: "0", g: "0", b: "0", a: "100" },
+  //     backgroundColor: { r: "0", g: "0", b: "0" },
+  //     fontWeight: "normal",
+  //     fontStyle: "normal",
+  //     textDecoration: "none",
+  //     justifyContent: "center",
+  //     fontSize: 15,
+  //     deleteComponent: 0,
+  //   },
+  // },
   {
     name: "Heading 1",
     h: 1,
@@ -108,6 +116,8 @@ export const components = [
     h: 1,
     style: {
       deleteComponent: 0,
+      borderRadius: 1,
+      shadow: "none"
     },
   },
   {

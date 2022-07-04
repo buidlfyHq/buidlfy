@@ -14,7 +14,11 @@ const web3Modal = new Web3Modal({
   providerOptions, // required
 });
 
-const ConnectWallet: FC<ButtonProps> = ({ text, account, setAccount }: ButtonProps) => {
+const ConnectWallet: FC<ButtonProps> = ({
+  text,
+  account,
+  setAccount,
+}: ButtonProps) => {
   const [show, setShow] = useState(false);
   const [provider, setProvider] = useState();
   const [library, setLibrary] = useState();

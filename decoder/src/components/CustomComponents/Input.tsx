@@ -1,36 +1,46 @@
 import { FC } from "react";
-import "styles/Components.css";
 import { setValue } from "../Utils/SetValue";
+import "styles/Components.css";
 
 interface IInput {
-  name: string;
+  id: string;
   value: any;
 }
 
 const Input: FC<{
-  contractFunction;
+  id: string;
   inputValue: object[];
+  borderRadius: number;
+  shadow: any;
   setInputValue: (inputValue: object[]) => void;
-}> = ({ contractFunction, inputValue, setInputValue }) => {
+}> = ({
+  id,
+  inputValue,
+  setInputValue,
+  borderRadius,
+  shadow,
+}) => {
   const getValue = (inputArray) => {
     const requiredValue = inputArray.filter(
-      (input: IInput) => input.name === contractFunction.inputName
+      (input: IInput) => input.id === id
     )[0];
     return requiredValue ? requiredValue.value : "";
   };
 
+  // mapping: contractFunction: {methodName: 'createCampaign'}
+  // ---> {id: 'xyz', methodName: 'createCampaign'}
+
   return (
     <div className="h-full flex justify-center items-center">
       <input
-        className="input bg-white appearance-none ml-6 border border-solid rounded py-2 px-3 text-gray-700 leading-tight"
+        className="input bg-white appearance-none ml-6 border border-solid py-2 px-3 text-gray-700 leading-tight"
         id="input"
+        style={{ borderRadius: `${borderRadius}px`, boxShadow: shadow }}
         type="text"
         placeholder="Input"
         value={getValue(inputValue)}
         onChange={(e) =>
-          setInputValue(
-            setValue(inputValue, contractFunction.inputName, e.target.value)
-          )
+          setInputValue(setValue(inputValue, id, e.target.value))
         }
       />
     </div>

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import "../../styles/Dashboard.css";
 import "../../styles/Components.css";
+import "../../styles/Dashboard.css";
 
 interface IFontSizeComponent {
   fontSize: number;

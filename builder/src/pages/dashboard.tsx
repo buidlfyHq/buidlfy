@@ -29,6 +29,8 @@ const Dashboard: FC = () => {
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
 
+  console.log(items);
+  
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -45,67 +47,71 @@ const Dashboard: FC = () => {
   }, []); // eslint-disable-line
 
   return (
-    <main className="flex flex-row w-full min-h-screen">
-      {/* Sidebar */}
-      <Sidebar
-        className={className}
-        setClassName={setClassName}
-        items={items}
-        setItems={setItems}
-        setSelector={setSelector}
-        elementConfig={elementConfig}
-      />
-
-      <section className="flex-1">
-        {/* Navbar */}
-        <Navbar
+    <>
+      <main className="flex flex-row w-full min-h-screen">
+        {/* Sidebar */}
+        <Sidebar
           className={className}
           setClassName={setClassName}
           items={items}
-          contractConfig={contractConfig}
-        />
-
-        {/* Main section */}
-        <Workspace
-          items={items}
           setItems={setItems}
-          className={className}
-          setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
-          selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
-          setOpenTab={setOpenTab}
-          imgData={imgData}
         />
-      </section>
 
-      {/* Right Sidebar Settings */}
-      {openSetting ? (
-        <Settings
-          items={items}
-          setItems={setItems}
-          settingItemId={settingItemId}
-          contractConfig={contractConfig}
-          setContractConfig={setContractConfig}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          openTab={openTab}
-          setOpenTab={setOpenTab}
-          setPicture={setPicture}
-          setImgData={setImgData}
-          imgData={imgData}
-        />
-      ) : (
-        <main className={`fixed right-0 top-16 z-0 w-[250px] border-l h-full`}>
-          <div className="m-3 border h-24 p-3">
-            <GiClick className="mx-20 my-2" />
-            Please select an element
-          </div>
-        </main>
-      )}
-    </main>
+        <section className="flex-1">
+          {/* Navbar */}
+          <Navbar
+            className={className}
+            setClassName={setClassName}
+            items={items}
+            contractConfig={contractConfig}
+          />
+
+          {/* Main section */}
+          <Workspace
+            items={items}
+            setItems={setItems}
+            className={className}
+            setOpenSetting={setOpenSetting}
+            setSettingItemId={setSettingItemId}
+            selector={selector}
+            setSelector={setSelector}
+            elementConfig={elementConfig}
+            setElementConfig={setElementConfig}
+            setOpenTab={setOpenTab}
+            imgData={imgData}
+          />
+        </section>
+
+        {/* Right Sidebar Settings */}
+        {openSetting ? (
+          <Settings
+            items={items}
+            setItems={setItems}
+            settingItemId={settingItemId}
+            contractConfig={contractConfig}
+            setContractConfig={setContractConfig}
+            setSelector={setSelector}
+            elementConfig={elementConfig}
+            openTab={openTab}
+            setOpenTab={setOpenTab}
+            setPicture={setPicture}
+            setImgData={setImgData}
+            imgData={imgData}
+          />
+        ) : (
+          <main
+            className={`fixed right-0 top-16 z-0 w-[250px] border-l h-full`}
+          >
+            <div className="m-3 border h-24 p-3">
+              <GiClick className="mx-20 my-2" />
+              Please select an element
+            </div>
+          </main>
+        )}
+      </main>
+    </>
   );
 };
 

@@ -24,30 +24,21 @@ const AbiMethods: FC<IAbiMethods> = ({
       id: e.target.value,
       value: abiJson[e.target.value],
     });
-    const generateArray = (valueArray: object[], valueName: string) => {
-      let requiredArray = [];
-      valueArray.map((value, index: number) => {
-        let id = valueName + index + e.target.value;
-        requiredArray.push(id);
-        return value;
-      });
-      return requiredArray;
-    };
+
+    // initialize contract
     let updatedItem = {
       ...selectedItem,
       contract: {
-        name: abiJson[e.target.value].name,
+        methodName: abiJson[e.target.value].name,
         stateMutability: abiJson[e.target.value].stateMutability,
-        inputs: generateArray(abiJson[e.target.value].inputs, "input"),
-        outputs: generateArray(abiJson[e.target.value].outputs, "output"),
+        inputs: [],
+        outputs: []
       },
     };
     const elementsIndex = items.findIndex((item) => item.i === selectedItem.i);
     let newArray = [...items];
     newArray[elementsIndex] = updatedItem;
     setItems(newArray);
-    // FIX - show selected method linked to the button
-    // FIX - Disable method from select when it has already been linked to other button
   };
 
   return (
