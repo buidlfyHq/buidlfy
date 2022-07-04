@@ -8,18 +8,23 @@ import Input from "../CustomComponents/Input";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
-
 interface IRenderItem {
   item: IItems;
   // made imgdata optional to test container
   imgData?: { id: string; data: string | ArrayBuffer }[];
-  setDrag: React.Dispatch<React.SetStateAction<boolean>>
+  setDrag: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenSetting?;
+  setSettingItemId?;
+  setOpenTab?;
 }
 
-const RenderItem: FC<IRenderItem> = ({ 
-  item, 
-  imgData, 
-  setDrag
+const RenderItem: FC<IRenderItem> = ({
+  item,
+  imgData,
+  setDrag,
+  setOpenSetting,
+  setSettingItemId,
+  setOpenTab,
 }) => {
   switch (item.name) {
     case "Container":
@@ -36,6 +41,9 @@ const RenderItem: FC<IRenderItem> = ({
           // zIndex={item.style.zIndex}
           // border={item.style.border}
           // backgroundImg={item.style.backgroundImg}
+          setOpenSetting={setOpenSetting}
+          setSettingItemId={setSettingItemId}
+          setOpenTab={setOpenTab}
           setDrag={setDrag}
         />
       );

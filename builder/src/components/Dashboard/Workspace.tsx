@@ -28,7 +28,7 @@ interface IWorkspace {
   setOpenTab: Dispatch<SetStateAction<number>>;
   imgData: { id: string; data: string | ArrayBuffer }[];
   drag: boolean;
-  setDrag: React.Dispatch<React.SetStateAction<boolean>>
+  setDrag: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -42,9 +42,9 @@ const Workspace: FC<IWorkspace> = ({
   elementConfig,
   setElementConfig,
   setOpenTab,
-  imgData, 
+  imgData,
   drag,
-  setDrag
+  setDrag,
 }) => {
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -165,10 +165,13 @@ const Workspace: FC<IWorkspace> = ({
                   // open item setting on click
                   onClick={() => onComponentClick(item, i, index)}
                 >
-                  <RenderItem 
-                    item={item} 
+                  <RenderItem
+                    item={item}
                     imgData={imgData}
                     setDrag={setDrag}
+                    setOpenSetting={setOpenSetting}
+                    setSettingItemId={setSettingItemId}
+                    setOpenTab={setOpenTab}
                   />
                 </div>
               );

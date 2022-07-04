@@ -39,6 +39,9 @@ const Container = ({
   borderWidth,
   shadow,
   setDrag,
+  setOpenSetting,
+  setSettingItemId,
+  setOpenTab,
   // boxShadow,
   // zIndex,
   // border,
@@ -47,7 +50,7 @@ const Container = ({
   // context
   const { newComp, setNewComp } = useContext(ComponentContext);
   const uid = new ShortUniqueId();
-  // layout mein minimum ek element needed hai to perform drop functionality
+  // at least one element is needed in layout to perform drop functionality
   const [templay, setTempLay] = useState<object[]>([]);
 
   // const checkY = (items: IItems[]) => {
@@ -101,27 +104,35 @@ const Container = ({
     newItemsArr.length > 0 ? setTempLay(newItemsArr) : setTempLay(templay);
   };
 
+  const onComponentClick = (item: IItems, i: string, index: number) => {
+    // checks if the selector is active
+    // if (selector === null) {
+    setOpenSetting(true);
+    setSettingItemId(i);
+    setOpenTab(1);
+    // } else {
+    //   // Add validation for selection
+    //   if (selector.type === "input" && item.name === "Input") {
+    //     updateElementConfig(item, i);
+    //   } else if (
+    //     selector.type === "output" &&
+    //     (item.name === "Text" ||
+    //       item.name === "Heading 1" ||
+    //       item.name === "Heading 2" ||
+    //       item.name === "Heading 3")
+    //   ) {
+    //     updateElementConfig(item, i);
+    //   }
+    //   setSelector(null);
+    // }
+  };
+
   return (
     <main>
       <section
         id="container-drag"
         className="relative pt-2 border cursor-pointer"
         // className="flex items-center justify-center h-full"
-        style={{
-          backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-          borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-          border: "solid",
-          borderRadius: `${borderRadius}px`,
-          borderWidth: `${borderWidth}px`,
-          // border: border,
-          // zIndex,
-          backgroundImage: `url(${imgData})`,
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          boxShadow: shadow,
-          // boxShadow,
-        }}
       >
         <ResponsiveGridLayout
           // layouts={{lg: templay}}
@@ -138,17 +149,33 @@ const Container = ({
           compactType="horizontal"
           resizeHandles={["nw", "se"]}
           margin={[0, 0]}
+          style={{
+            backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+            borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+            border: "solid",
+            borderRadius: `${borderRadius}px`,
+            borderWidth: `${borderWidth}px`,
+            // border: border,
+            // zIndex,
+            backgroundImage: `url(${imgData})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            boxShadow: shadow,
+            // boxShadow,
+          }}
         >
           {templay.map((item: IItems, index: number) => {
             const { x, y, w, h, minW, i } = item;
             return (
               <div
                 // draggable={false}
+                className="z-100"
                 key={i}
                 data-grid={{ x, y, w, h, minW }}
                 onMouseOver={() => setDrag(false)}
                 onMouseOut={() => setDrag(true)}
-                // onClick={() => onComponentClick(item, i, index)}
+                onClick={() => console.log(item, i, index)}
               >
                 <RenderItem item={item} setDrag={setDrag} />
               </div>
