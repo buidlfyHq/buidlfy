@@ -130,7 +130,7 @@ const Workspace: FC<IWorkspace> = ({
           : `w-full`
       }
     >
-      <section className="pt-2">
+      <section className="pt-2 mt-16">
         <ResponsiveGridLayout
           layouts={{ lg: items }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}

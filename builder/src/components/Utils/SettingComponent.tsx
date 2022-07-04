@@ -318,6 +318,13 @@ const SettingComponent: FC<ISettingComponent> = ({
                     items={items}
                     setItems={setItems}
                   />
+                  <AlignComponent
+                    justifyContent={justifyContent}
+                    setLeft={setLeft}
+                    setRight={setRight}
+                    setCenter={setCenter}
+                  />
+
                   <UtilitiesComponent
                     deleteComponent={deleteComponent}
                     setDeleteComponent={setDeleteComponent}

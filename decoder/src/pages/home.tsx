@@ -7,20 +7,13 @@ import ConnectWallet from "components/ConnectWallet";
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Home: FC = () => {
-  const config = BuilderConfig;
+  const config = JSON.parse(BuilderConfig);
   const [inputValue, setInputValue] = useState<object[]>([]);
   const [outputValue, setOutputValue] = useState<object[]>([]);
   const [account, setAccount] = useState(null);
+  console.log(outputValue, "output");
   return (
     <section>
-      {/* <>
-        <ConnectWallet
-          text={"Connect"}
-          account={account}
-          setAccount={setAccount}
-        />
-      </> */}
-
       <ResponsiveGridLayout
         layouts={config.builder}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}

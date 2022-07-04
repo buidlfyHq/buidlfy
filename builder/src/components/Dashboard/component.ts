@@ -125,6 +125,7 @@ export const components = [
     h: 3,
     style: {
       deleteComponent: 0,
+      justifyContent: "center",
     },
   },
   {

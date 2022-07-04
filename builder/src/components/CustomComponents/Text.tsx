@@ -27,7 +27,13 @@ const Text: FC<ITexts> = ({
       }}
       className="flex items-center justify-center h-full"
     >
-      {link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}
+      {link.length > 0 ? (
+        <a target="_blank" href={link}>
+          {value}
+        </a>
+      ) : (
+        <> {value}</>
+      )}
     </div>
   );
 };

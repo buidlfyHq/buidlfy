@@ -4,9 +4,10 @@ import "styles/Components.css";
 
 interface IImageComponent {
   imgData;
+  justifyContent: string;
 }
 
-const Image: FC<IImageComponent> = ({ imgData }) => {
+const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => {
   return (
     <>
       {imgData ? (
@@ -15,7 +16,7 @@ const Image: FC<IImageComponent> = ({ imgData }) => {
           style={{
             backgroundImage: `url(${imgData})`,
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
+            backgroundPosition: justifyContent,
             backgroundSize: "contain",
           }}
         ></div>
@@ -25,7 +26,7 @@ const Image: FC<IImageComponent> = ({ imgData }) => {
           style={{
             backgroundImage: `url(${image})`,
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
+            backgroundPosition: justifyContent,
             backgroundSize: "contain",
           }}
         ></div>

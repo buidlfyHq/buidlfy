@@ -25,12 +25,11 @@ const Button: FC<ITexts> = ({
   shadow,
   connectWallet,
 }) => {
-  const config = BuilderConfig;
+  const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
 
   useEffect(() => {
-    // if (config.contract.abi !== [] && config.contract.address !== "") {
-    if (config.contract.abi[0] && config.contract.address !== "") {
+    if (config.contract.abi !== [] && config.contract.address !== "") {
       setContract(onLoad(config));
     }
   }, []); // eslint-disable-line

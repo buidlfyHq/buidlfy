@@ -21,6 +21,7 @@ const Text: FC<ITexts> = ({
   outputValue,
   backgroundColor,
 }) => {
+  console.log(id, "value");
   return (
     <div
       style={{
@@ -40,18 +41,46 @@ const Text: FC<ITexts> = ({
           outputValue.map((output: IOutput, index: number) => (
             <div key={index}>
               <>
-                {output.id === id && (
+                {output.id === id ? (
                   <>
-                    {typeof output.value === "string"
-                      ? output.value
-                      : output.value.join(", ")}
+                    {link?.length > 0 ? (
+                      <a href={link} target="_blank">
+                        {typeof output.value === "string"
+                          ? output.value
+                          : output.value.join(", ")}
+                      </a>
+                    ) : (
+                      <>
+                        {typeof output.value === "string"
+                          ? output.value
+                          : output.value.join(", ")}
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {link?.length > 0 ? (
+                      <a target="_blank" href={link}>
+                        {value}
+                      </a>
+                    ) : (
+                      <>{value}</>
+                    )}
                   </>
                 )}
               </>
             </div>
           ))
         ) : (
-          <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>
+          <>
+            {link.length > 0 ? (
+              <a target="_blank" href={link}>
+                {value}
+              </a>
+            ) : (
+              <>{value}</>
+            )}
+          </>
         )}
       </>
     </div>

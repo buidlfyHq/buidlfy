@@ -126,7 +126,12 @@ const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
         />
       );
     case "Image":
-      return <Image imgData={item.imgData} />;
+      return (
+        <Image
+          imgData={item.imgData}
+          justifyContent={item.style.justifyContent}
+        />
+      );
     case "Divider":
       return <Divider />;
     default:
