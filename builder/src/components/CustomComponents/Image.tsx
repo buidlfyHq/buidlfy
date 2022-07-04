@@ -10,17 +10,37 @@ const Image: FC<IImageComponent> = ({ imgData }) => {
   return (
     <>
       {imgData ? (
-        <img
+        <div
           className="flex justify-center items-center h-full w-full"
-          src={imgData}
-          alt=""
-        />
+          style={{
+            backgroundImage: `url(${imgData})`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "contain",
+          }}
+        >
+          {/* <img
+            className="flex justify-center items-center h-full w-full"
+            src={imgData}
+            alt=""
+          /> */}
+        </div>
       ) : (
-        <img
+        <div
           className="flex justify-center items-center h-full w-full"
-          src={image}
-          alt=""
-        />
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "contain",
+          }}
+        >
+          {/* <img
+            className="flex justify-center items-center h-full w-full"
+            src={image}
+            alt=""
+          /> */}
+        </div>
       )}
     </>
   );
