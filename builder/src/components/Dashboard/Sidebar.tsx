@@ -17,6 +17,8 @@ interface ISidebar {
     name: string;
   }) => void;
   elementConfig: object;
+  addContainer;
+  settingItemId;
 }
 
 const Sidebar: FC<ISidebar> = ({
@@ -26,9 +28,17 @@ const Sidebar: FC<ISidebar> = ({
   setItems,
   setSelector,
   elementConfig,
+  addContainer,
+  settingItemId,
 }) => {
   const uid = new ShortUniqueId();
   const [indexValue, setIndexValue] = useState(2);
+
+  const selectedItem =
+    items?.find((item) => item.i === settingItemId) ||
+    items.map((item) =>
+      item.children?.find((child) => child.i === settingItemId)
+    )[0];
 
   const hideSidebar = () => {
     setClassName("hidden");
@@ -38,10 +48,19 @@ const Sidebar: FC<ISidebar> = ({
     setIndexValue(indexValue + 1);
   };
 
+  const checkY = (items: IItems[]) => {
+    if (items.length === 0) return 1;
+    else {
+      let arr = items.map((item) => item.y);
+      return Math.max(...arr) + 1;
+    }
+  };
+
   return (
     <main
       className={`fixed left-0 top-0 z-0 w-[250px] border-r h-full ${className}`}
     >
+      {/* user name */}
       <section className="flex flex-row justify-between items-center h-[60px]">
         <Popover className="relative p-3 bg-white">
           <Popover.Button>
@@ -97,28 +116,69 @@ const Sidebar: FC<ISidebar> = ({
 
       {/* Components */}
       <div className="px-6 py-3 mt-10">
-        {components?.map((c, index) => {
-          return (
-            <div
-              key={index}
-              className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
-              onClick={() => {
-                let newC = {
-                  ...c,
-                  i: uid(),
-                  x: 0,
-                  y: indexValue,
-                  w: 12,
-                  minW: 1,
-                };
-                incrementIndex();
-                setItems([...items, newC]);
-              }}
-            >
-              {c.name}
-            </div>
-          );
-        })}
+        {addContainer ? (
+          <>
+            {components
+              .filter((c) => c.name !== "Container")
+              ?.map((c, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
+                    onClick={() => {
+                      let newC = {
+                        ...c,
+                        i: uid(),
+                        x: 0,
+                        y: index,
+                        w: 12,
+                        minW: 1,
+                      };
+
+                      let updatedItem = {
+                        ...selectedItem,
+                        children: [...selectedItem.children, newC],
+                      };
+                      const elementsIndex = items.findIndex(
+                        (item) => item.i === selectedItem.i
+                      );
+                      let newArray = [...items];
+                      newArray[elementsIndex] = updatedItem;
+                      setItems(newArray);
+                    }}
+                  >
+                    {c.name}
+                  </div>
+                );
+              })}
+          </>
+        ) : (
+          <>
+            {components?.map((c, index) => {
+              return (
+                <div
+                  key={index}
+                  className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
+                  onClick={() => {
+                    let y = checkY(items);
+                    let newC = {
+                      ...c,
+                      i: uid(),
+                      x: 0,
+                      y: y,
+                      w: 12,
+                      minW: 1,
+                    };
+                    incrementIndex();
+                    setItems([...items, newC]);
+                  }}
+                >
+                  {c.name}
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
     </main>
   );

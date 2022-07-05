@@ -27,6 +27,9 @@ interface IWorkspace {
   setElementConfig: Dispatch<SetStateAction<object>>;
   setOpenTab: Dispatch<SetStateAction<number>>;
   imgData: { id: string; data: string | ArrayBuffer }[];
+  drag: boolean;
+  setDrag: React.Dispatch<React.SetStateAction<boolean>>;
+  setAddContainer;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -41,6 +44,9 @@ const Workspace: FC<IWorkspace> = ({
   setElementConfig,
   setOpenTab,
   imgData,
+  drag,
+  setDrag,
+  setAddContainer
 }) => {
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -99,7 +105,7 @@ const Workspace: FC<IWorkspace> = ({
     }
   };
 
-  const onComponentClick = (item: IItems, i: string, index: number) => {
+  const onComponentClick = (item: IItems, i: string) => {
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
@@ -121,7 +127,7 @@ const Workspace: FC<IWorkspace> = ({
       setSelector(null);
     }
   };
-
+  
   return (
     <main
       className={
@@ -138,9 +144,8 @@ const Workspace: FC<IWorkspace> = ({
           rowHeight={50}
           width={window.innerWidth - 250}
           compactType="horizontal"
-          // useCSSTransforms={true}
-          // allowOverlap={true}
           resizeHandles={["nw", "se"]}
+          isDraggable={drag}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
         >
@@ -151,16 +156,30 @@ const Workspace: FC<IWorkspace> = ({
               return (
                 <div
                   key={i}
+                  // draggable={true}
+                  unselectable="on"
                   data-grid={{ x, y, w, h, minW }}
-                  className={`justify-center transition-colors duration-150 ease-in-out ${
+                  className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
                     selector
                       ? "hover:outline-orange-300 hover:outline"
                       : "hover:outline-slate-300 hover:outline-dashed"
                   }`}
                   // open item setting on click
-                  onClick={() => onComponentClick(item, i, index)}
+                  onClick={() =>
+                    item.name === "Container"
+                      ? console.log("container")
+                      : onComponentClick(item, i)
+                  }
                 >
-                  <RenderItem item={item} imgData={imgData} />
+                  <RenderItem
+                    item={item}
+                    imgData={imgData}
+                    setDrag={setDrag}
+                    setOpenSetting={setOpenSetting}
+                    setSettingItemId={setSettingItemId}
+                    setOpenTab={setOpenTab}
+                    setAddContainer={setAddContainer}
+                  />
                 </div>
               );
             })}

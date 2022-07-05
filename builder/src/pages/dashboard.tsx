@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ComponentContext } from "../components/Context/ComponentContext";
 import Navbar from "components/Dashboard/Navbar";
 import Sidebar from "components/Dashboard/Sidebar";
 import { GiClick } from "react-icons/gi";
@@ -14,8 +15,6 @@ const Dashboard: FC = () => {
   const navigate = useNavigate();
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState([]);
-
-  // types for items ************************
   const [items, setItems] = useState<IItems[]>([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [contractConfig, setContractConfig] = useState({
@@ -28,9 +27,10 @@ const Dashboard: FC = () => {
   const [selector, setSelector] = useState(null);
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
+  const [drag, setDrag] = useState<boolean>(true);
+  const [newComp, setNewComp] = useState<string>("");
+  const [addContainer, setAddContainer] = useState<boolean>(false);
 
-  console.log(items);
-  
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -45,9 +45,9 @@ const Dashboard: FC = () => {
     };
     getInformation();
   }, []); // eslint-disable-line
-
+  
   return (
-    <>
+    <ComponentContext.Provider value={{ newComp, setNewComp }}>
       <main className="flex flex-row w-full min-h-screen">
         {/* Sidebar */}
         <Sidebar
@@ -57,6 +57,8 @@ const Dashboard: FC = () => {
           setItems={setItems}
           setSelector={setSelector}
           elementConfig={elementConfig}
+          addContainer={addContainer}
+          settingItemId={settingItemId}
         />
 
         <section className="flex-1">
@@ -81,6 +83,9 @@ const Dashboard: FC = () => {
             setElementConfig={setElementConfig}
             setOpenTab={setOpenTab}
             imgData={imgData}
+            drag={drag}
+            setDrag={setDrag}
+            setAddContainer={setAddContainer}
           />
         </section>
 
@@ -104,14 +109,14 @@ const Dashboard: FC = () => {
           <main
             className={`fixed right-0 top-16 z-0 w-[250px] border-l h-full`}
           >
-            <div className="m-3 border h-24 p-3">
+            <div className="h-24 p-3 m-3 border">
               <GiClick className="mx-20 my-2" />
               Please select an element
             </div>
           </main>
         )}
       </main>
-    </>
+    </ComponentContext.Provider>
   );
 };
 

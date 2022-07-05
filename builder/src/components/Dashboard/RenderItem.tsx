@@ -10,14 +10,30 @@ import IItems from "interfaces/items";
 
 interface IRenderItem {
   item: IItems;
-  imgData: { id: string; data: string | ArrayBuffer }[];
+  // made imgdata optional to test container
+  imgData?: { id: string; data: string | ArrayBuffer }[];
+  setDrag: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenSetting?;
+  setSettingItemId?;
+  setOpenTab?;
+  setAddContainer?;
 }
 
-const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
+const RenderItem: FC<IRenderItem> = ({
+  item,
+  imgData,
+  setDrag,
+  setOpenSetting,
+  setSettingItemId,
+  setOpenTab,
+  setAddContainer
+}) => {
   switch (item.name) {
     case "Container":
       return (
         <Container
+          item={item}
+          children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
           imgData={item.imgData}
@@ -29,6 +45,11 @@ const RenderItem: FC<IRenderItem> = ({ item, imgData }) => {
           // zIndex={item.style.zIndex}
           // border={item.style.border}
           // backgroundImg={item.style.backgroundImg}
+          setOpenSetting={setOpenSetting}
+          setSettingItemId={setSettingItemId}
+          setOpenTab={setOpenTab}
+          setDrag={setDrag}
+          setAddContainer={setAddContainer}
         />
       );
     case "Button":

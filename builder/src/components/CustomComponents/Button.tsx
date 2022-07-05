@@ -16,7 +16,7 @@ const Button: FC<ITexts> = ({
   shadow,
   connectWallet,
 }) => {
-  console.log(connectWallet, "connect");
+  // console.log(connectWallet, "connect");
   return (
     <>
       {/* {connectWallet == "on" ? (
