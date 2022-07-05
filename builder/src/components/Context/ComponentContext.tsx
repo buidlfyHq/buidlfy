@@ -7,5 +7,5 @@ interface ComponentContext {
 
 export const ComponentContext = createContext<ComponentContext>({
   newComp: "",
-  setNewComp: () => {},
+  setNewComp: () => [],
 });

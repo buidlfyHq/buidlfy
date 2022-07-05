@@ -5,11 +5,12 @@ export const components = [
     style: {
       deleteComponent: 0,
       backgroundColor: { r: "0", g: "0", b: "0" },
-      color: { r: "0", g: "0", b: "0", a: "100"},
+      color: { r: "0", g: "0", b: "0", a: "100" },
       borderRadius: 1,
       borderWidth: 1,
-      shadow: "none"
+      shadow: "none",
     },
+    children: [],
   },
   {
     name: "Button",
@@ -26,10 +27,10 @@ export const components = [
       fontSize: 15,
       deleteComponent: 0,
       borderRadius: 1,
-      shadow: "none"
+      shadow: "none",
     },
     connectWallet: "off",
-    contract: {}
+    contract: {},
   },
   {
     name: "Text",
@@ -47,22 +48,6 @@ export const components = [
       deleteComponent: 0,
     },
   },
-  // {
-  //   name: "Link",
-  //   h: 1,
-  //   value: "Link",
-  //   link: "",
-  //   style: {
-  //     color: { r: "0", g: "0", b: "0", a: "100" },
-  //     backgroundColor: { r: "0", g: "0", b: "0" },
-  //     fontWeight: "normal",
-  //     fontStyle: "normal",
-  //     textDecoration: "none",
-  //     justifyContent: "center",
-  //     fontSize: 15,
-  //     deleteComponent: 0,
-  //   },
-  // },
   {
     name: "Heading 1",
     h: 1,
@@ -95,7 +80,7 @@ export const components = [
       deleteComponent: 0,
     },
   },
-  { 
+  {
     name: "Heading 3",
     h: 1,
     value: "Heading 3",
@@ -117,7 +102,7 @@ export const components = [
     style: {
       deleteComponent: 0,
       borderRadius: 1,
-      shadow: "none"
+      shadow: "none",
     },
   },
   {

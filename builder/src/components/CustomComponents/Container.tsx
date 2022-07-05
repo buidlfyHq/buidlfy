@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useState } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import { BiGridHorizontal } from "react-icons/bi";
 import ShortUniqueId from "short-unique-id";
-import { ComponentContext } from "components/Context/ComponentContext";
+
 import { components } from "components/Dashboard/component";
 import RenderItem from "components/Dashboard/RenderItem";
 import IBgContainer from "interfaces/container";
@@ -32,6 +32,8 @@ const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid l
 // }
 
 const Container = ({
+  item,
+  children,
   backgroundColor,
   color,
   imgData,
@@ -42,16 +44,14 @@ const Container = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
+  setAddContainer
   // boxShadow,
   // zIndex,
   // border,
   // backgroundImg,
 }) => {
-  // context
-  const { newComp, setNewComp } = useContext(ComponentContext);
-  const uid = new ShortUniqueId();
   // at least one element is needed in layout to perform drop functionality
-  const [templay, setTempLay] = useState<object[]>([]);
+  const [templay, setTempLay] = useState<Layout[]>([]);
 
   // const checkY = (items: IItems[]) => {
   //   if(items.length === 0) return 1
@@ -61,35 +61,11 @@ const Container = ({
   //   }
   // }
 
-  useEffect(() => {
-    let c = components.filter((c) => c.name === newComp)[0];
-    // let y = checkY(items)
-    console.log(c);
-    if (c) {
-      console.log(1);
-      let newItem = {
-        ...c,
-        i: uid(),
-        x: 0,
-        y: 0,
-        w: 12,
-        h: 1,
-        minW: 1,
-      };
-
-      console.log(templay, newItem);
-
-      setTempLay([...templay, newItem]);
-
-      setNewComp("");
-    }
-  }, [newComp]);
-
   // on layout change
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
-      let selectedItem = templay.filter((item: IItems) => item.i === obj.i)[0];
+      let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
       const { h, minW, x, y, w, i } = obj;
       return (selectedItem = {
         ...selectedItem,
@@ -104,12 +80,20 @@ const Container = ({
     newItemsArr.length > 0 ? setTempLay(newItemsArr) : setTempLay(templay);
   };
 
-  const onComponentClick = (item: IItems, i: string, index: number) => {
+  const onComponentClick = (item: IItems, i: string) => {
+    if (item.name === "Container") {
+      setAddContainer(true);
+    } else {
+      setAddContainer(false);
+    }
+
     // checks if the selector is active
     // if (selector === null) {
     setOpenSetting(true);
     setSettingItemId(i);
     setOpenTab(1);
+    console.log("clicked");
+
     // } else {
     //   // Add validation for selection
     //   if (selector.type === "input" && item.name === "Input") {
@@ -135,19 +119,18 @@ const Container = ({
         // className="flex items-center justify-center h-full"
       >
         <ResponsiveGridLayout
-          // layouts={{lg: templay}}
-          className="layout"
-          onLayoutChange={onLayoutChange}
+          layouts={{ lg: children }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
           cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
           rowHeight={50}
           width={window.innerWidth - 250}
-          // *********** on drop needed when elements are needed to be dropee
+          // *********** on drop needed when elements are needed to be dropped
           // onDrop={handleDrop}
           // isDroppable={true}
           isBounded={true}
           compactType="horizontal"
           resizeHandles={["nw", "se"]}
+          onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           style={{
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
@@ -155,8 +138,6 @@ const Container = ({
             border: "solid",
             borderRadius: `${borderRadius}px`,
             borderWidth: `${borderWidth}px`,
-            // border: border,
-            // zIndex,
             backgroundImage: `url(${imgData})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
@@ -165,7 +146,7 @@ const Container = ({
             // boxShadow,
           }}
         >
-          {templay.map((item: IItems, index: number) => {
+          {children.map((item: IItems, index: number) => {
             const { x, y, w, h, minW, i } = item;
             return (
               <div
@@ -175,14 +156,17 @@ const Container = ({
                 data-grid={{ x, y, w, h, minW }}
                 onMouseOver={() => setDrag(false)}
                 onMouseOut={() => setDrag(true)}
-                onClick={() => console.log(item, i, index)}
+                onClick={() => onComponentClick(item, i)}
               >
                 <RenderItem item={item} setDrag={setDrag} />
               </div>
             );
           })}
         </ResponsiveGridLayout>
-        <BiGridHorizontal id="drag" />
+        <BiGridHorizontal
+          id="drag"
+          onClick={() => onComponentClick(item, item.i)}
+        />
       </section>
     </main>
   );

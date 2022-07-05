@@ -29,6 +29,7 @@ interface IWorkspace {
   imgData: { id: string; data: string | ArrayBuffer }[];
   drag: boolean;
   setDrag: React.Dispatch<React.SetStateAction<boolean>>;
+  setAddContainer;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -45,6 +46,7 @@ const Workspace: FC<IWorkspace> = ({
   imgData,
   drag,
   setDrag,
+  setAddContainer
 }) => {
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -103,7 +105,7 @@ const Workspace: FC<IWorkspace> = ({
     }
   };
 
-  const onComponentClick = (item: IItems, i: string, index: number) => {
+  const onComponentClick = (item: IItems, i: string) => {
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
@@ -125,7 +127,7 @@ const Workspace: FC<IWorkspace> = ({
       setSelector(null);
     }
   };
-  // console.log(items)
+  
   return (
     <main
       className={
@@ -163,7 +165,11 @@ const Workspace: FC<IWorkspace> = ({
                       : "hover:outline-slate-300 hover:outline-dashed"
                   }`}
                   // open item setting on click
-                  onClick={() => onComponentClick(item, i, index)}
+                  onClick={() =>
+                    item.name === "Container"
+                      ? console.log("container")
+                      : onComponentClick(item, i)
+                  }
                 >
                   <RenderItem
                     item={item}
@@ -172,6 +178,7 @@ const Workspace: FC<IWorkspace> = ({
                     setOpenSetting={setOpenSetting}
                     setSettingItemId={setSettingItemId}
                     setOpenTab={setOpenTab}
+                    setAddContainer={setAddContainer}
                   />
                 </div>
               );

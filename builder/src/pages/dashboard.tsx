@@ -15,8 +15,6 @@ const Dashboard: FC = () => {
   const navigate = useNavigate();
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState([]);
-
-  // types for items ************************
   const [items, setItems] = useState<IItems[]>([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [contractConfig, setContractConfig] = useState({
@@ -31,6 +29,7 @@ const Dashboard: FC = () => {
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
   const [newComp, setNewComp] = useState<string>("");
+  const [addContainer, setAddContainer] = useState<boolean>(false);
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -46,7 +45,7 @@ const Dashboard: FC = () => {
     };
     getInformation();
   }, []); // eslint-disable-line
-
+  
   return (
     <ComponentContext.Provider value={{ newComp, setNewComp }}>
       <main className="flex flex-row w-full min-h-screen">
@@ -58,6 +57,8 @@ const Dashboard: FC = () => {
           setItems={setItems}
           setSelector={setSelector}
           elementConfig={elementConfig}
+          addContainer={addContainer}
+          settingItemId={settingItemId}
         />
 
         <section className="flex-1">
@@ -84,6 +85,7 @@ const Dashboard: FC = () => {
             imgData={imgData}
             drag={drag}
             setDrag={setDrag}
+            setAddContainer={setAddContainer}
           />
         </section>
 

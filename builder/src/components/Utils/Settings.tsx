@@ -33,10 +33,15 @@ const Settings: FC<ISetting> = ({
   setOpenTab,
   setPicture,
   setImgData,
-  imgData
+  imgData,
 }) => {
   const [showComponent, setShowComponent] = useState(null); // for abi method component
-  const selectedItem = items.find((item) => item.i === settingItemId);
+
+  const selectedItem =
+    items?.find((item) => item.i === settingItemId) ||
+    items.map((item) =>
+      item.children?.find((child) => child.i === settingItemId)
+    )[1];
 
   const setLink = (link: string) => {
     if (!settingItemId) {

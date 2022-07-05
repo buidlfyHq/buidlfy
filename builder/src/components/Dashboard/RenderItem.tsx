@@ -16,6 +16,7 @@ interface IRenderItem {
   setOpenSetting?;
   setSettingItemId?;
   setOpenTab?;
+  setAddContainer?;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -25,11 +26,14 @@ const RenderItem: FC<IRenderItem> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
+  setAddContainer
 }) => {
   switch (item.name) {
     case "Container":
       return (
         <Container
+          item={item}
+          children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
           imgData={item.imgData}
@@ -45,6 +49,7 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
+          setAddContainer={setAddContainer}
         />
       );
     case "Button":
