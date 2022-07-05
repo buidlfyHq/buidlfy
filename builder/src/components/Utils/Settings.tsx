@@ -37,11 +37,13 @@ const Settings: FC<ISetting> = ({
 }) => {
   const [showComponent, setShowComponent] = useState(null); // for abi method component
 
+  const selectedChildren = items.map((item) =>
+    item.children?.find((child) => child.i === settingItemId)
+  );
+
   const selectedItem =
     items?.find((item) => item.i === settingItemId) ||
-    items.map((item) =>
-      item.children?.find((child) => child.i === settingItemId)
-    )[1];
+    selectedChildren.filter(Boolean)[0];
 
   const setLink = (link: string) => {
     if (!settingItemId) {
@@ -157,6 +159,28 @@ const Settings: FC<ISetting> = ({
             ...item["style"],
             backgroundColor: backgroundColor,
           },
+        };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            backgroundColor: backgroundColor,
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
         };
       }
       return item;
