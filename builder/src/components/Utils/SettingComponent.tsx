@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState, FC, useContext } from "react";
-import ShortUniqueId from "short-unique-id";
+import React, { useEffect, useRef, useState, FC } from "react";
 import { RiText } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
 import AlignComponent from "./AlignComponent";
@@ -15,8 +14,6 @@ import BorderComponent from "./BorderComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
 import ConnectSwitchComponent from "./ConnectSwitchComponent";
-import { ComponentContext } from "components/Context/ComponentContext";
-import { components } from "../Dashboard/component";
 import "../../styles/Components.css";
 import "../../styles/Dashboard.css";
 

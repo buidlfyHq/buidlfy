@@ -81,18 +81,13 @@ const Container = ({
   };
 
   const onComponentClick = (item: IItems, i: string) => {
-    if (item.name === "Container") {
-      setAddContainer(true);
-    } else {
-      setAddContainer(false);
-    }
+    setAddContainer(true);
 
     // checks if the selector is active
     // if (selector === null) {
     setOpenSetting(true);
     setSettingItemId(i);
     setOpenTab(1);
-    console.log("clicked");
 
     // } else {
     //   // Add validation for selection

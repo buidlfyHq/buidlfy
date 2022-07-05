@@ -106,6 +106,7 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const onComponentClick = (item: IItems, i: string) => {
+    setAddContainer(false);
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
