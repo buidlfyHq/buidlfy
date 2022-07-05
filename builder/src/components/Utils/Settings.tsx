@@ -44,7 +44,7 @@ const Settings: FC<ISetting> = ({
   const selectedItem =
     items?.find((item) => item.i === settingItemId) ||
     selectedChildren.filter(Boolean)[0];
-
+  console.log(settingItemId, "setting");
   const setLink = (link: string) => {
     if (!settingItemId) {
       return;
@@ -114,7 +114,11 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
+        console.log(item, "item");
         return {
           ...item,
           style: {
@@ -122,10 +126,7 @@ const Settings: FC<ISetting> = ({
             fontWeight: fontWeight ? "bold" : "normal",
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -133,7 +134,6 @@ const Settings: FC<ISetting> = ({
             fontWeight: fontWeight ? "bold" : "normal",
           },
         };
-
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
@@ -155,6 +155,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -163,10 +166,7 @@ const Settings: FC<ISetting> = ({
             fontStyle: fontStyle ? "italic" : "normal",
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -196,6 +196,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -204,10 +207,7 @@ const Settings: FC<ISetting> = ({
             textDecoration: textDecoration ? "underline" : "none",
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -237,6 +237,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -245,10 +248,7 @@ const Settings: FC<ISetting> = ({
             color: color,
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -278,6 +278,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -286,10 +289,7 @@ const Settings: FC<ISetting> = ({
             backgroundColor: backgroundColor,
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -319,6 +319,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -327,10 +330,7 @@ const Settings: FC<ISetting> = ({
             deleteComponent: deleteComponent,
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -360,6 +360,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -368,10 +371,7 @@ const Settings: FC<ISetting> = ({
             justifyContent: justifyContent ? "center" : "inherit",
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -401,6 +401,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -409,10 +412,7 @@ const Settings: FC<ISetting> = ({
             justifyContent: justifyContent ? "left" : "inherit",
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -442,6 +442,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -450,10 +453,7 @@ const Settings: FC<ISetting> = ({
             justifyContent: justifyContent ? "right" : "inherit",
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -483,6 +483,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -491,10 +494,7 @@ const Settings: FC<ISetting> = ({
             shadow: shadow ? "0 1px 2px 0 rgb(0 0 0 / 0.05)" : "none",
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -524,6 +524,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -534,10 +537,7 @@ const Settings: FC<ISetting> = ({
               : "inherit",
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -569,6 +569,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -579,10 +582,7 @@ const Settings: FC<ISetting> = ({
               : "inherit",
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -613,6 +613,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -621,7 +624,7 @@ const Settings: FC<ISetting> = ({
             fontSize: fontSize,
           },
         };
-      } else if (item.children) {
+      } else if (selectedChild?.i == settingItemId) {
         let selectedChild = item.children?.find(
           (child) => child.i === settingItemId
         );
@@ -654,6 +657,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -662,10 +668,7 @@ const Settings: FC<ISetting> = ({
             borderRadius: borderRadius,
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -695,6 +698,9 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
@@ -703,10 +709,7 @@ const Settings: FC<ISetting> = ({
             borderWidth: borderWidth,
           },
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -736,15 +739,15 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return {
           ...item,
           connectWallet: connectWallet ? "on" : "off",
         };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           connectWallet: connectWallet ? "on" : "off",

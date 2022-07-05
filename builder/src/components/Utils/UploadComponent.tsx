@@ -29,10 +29,28 @@ const UploadComponent: FC<IUploadComponent> = ({
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         const updatedItems = items.map((item) => {
+          let selectedChild = item.children?.find(
+            (child) => child.i === selectedItem.i
+          );
           if (item.i === selectedItem.i) {
             return {
               ...item,
               imgData: reader.result,
+            };
+          } else if (selectedChild?.i == selectedItem.i) {
+            let child = {
+              ...selectedChild,
+              imgData: reader.result,
+            };
+            const childIndex = item.children?.findIndex(
+              (c) => c.i === selectedItem.i
+            );
+            let newArray = [...item.children];
+            newArray[childIndex] = child;
+
+            return {
+              ...item,
+              children: newArray,
             };
           }
           return item;
