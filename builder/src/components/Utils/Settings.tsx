@@ -44,7 +44,6 @@ const Settings: FC<ISetting> = ({
   const selectedItem =
     items?.find((item) => item.i === settingItemId) ||
     selectedChildren.filter(Boolean)[0];
-  console.log(settingItemId, "setting");
   const setLink = (link: string) => {
     if (!settingItemId) {
       return;
@@ -118,7 +117,6 @@ const Settings: FC<ISetting> = ({
         (child) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
-        console.log(item, "item");
         return {
           ...item,
           style: {
@@ -768,8 +766,6 @@ const Settings: FC<ISetting> = ({
     });
     setItems(updatedItems);
   };
-
-  // console.log(items);
 
   return (
     <>

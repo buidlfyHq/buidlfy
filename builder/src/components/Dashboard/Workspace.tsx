@@ -46,7 +46,7 @@ const Workspace: FC<IWorkspace> = ({
   imgData,
   drag,
   setDrag,
-  setAddContainer
+  setAddContainer,
 }) => {
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -128,7 +128,7 @@ const Workspace: FC<IWorkspace> = ({
       setSelector(null);
     }
   };
-  
+
   return (
     <main
       className={
@@ -151,7 +151,7 @@ const Workspace: FC<IWorkspace> = ({
           margin={[0, 0]}
         >
           {items
-            ?.filter((i) => i.style.deleteComponent === 0)
+            ?.filter((i) => i.style?.deleteComponent === 0)
             .map((item: IItems, index: number) => {
               const { x, y, w, h, minW, i } = item;
               return (
