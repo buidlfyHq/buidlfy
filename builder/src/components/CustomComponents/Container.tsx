@@ -44,7 +44,7 @@ const Container = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  setAddContainer
+  setAddContainer,
   // boxShadow,
   // zIndex,
   // border,
