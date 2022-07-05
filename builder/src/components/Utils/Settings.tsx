@@ -52,6 +52,25 @@ const Settings: FC<ISetting> = ({
     const updatedItems = items.map((item) => {
       if (item.i === settingItemId) {
         return { ...item, link };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          link,
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -65,6 +84,25 @@ const Settings: FC<ISetting> = ({
     const updatedItems = items.map((item) => {
       if (item.i === settingItemId) {
         return { ...item, value };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          value,
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -83,6 +121,28 @@ const Settings: FC<ISetting> = ({
             ...item["style"],
             fontWeight: fontWeight ? "bold" : "normal",
           },
+        };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            fontWeight: fontWeight ? "bold" : "normal",
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
         };
       }
       return item;
@@ -103,6 +163,28 @@ const Settings: FC<ISetting> = ({
             fontStyle: fontStyle ? "italic" : "normal",
           },
         };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            fontStyle: fontStyle ? "italic" : "normal",
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -122,6 +204,28 @@ const Settings: FC<ISetting> = ({
             textDecoration: textDecoration ? "underline" : "none",
           },
         };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            textDecoration: textDecoration ? "underline" : "none",
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -140,6 +244,28 @@ const Settings: FC<ISetting> = ({
             ...item["style"],
             color: color,
           },
+        };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            color: color,
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
         };
       }
       return item;
@@ -201,6 +327,28 @@ const Settings: FC<ISetting> = ({
             deleteComponent: deleteComponent,
           },
         };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            deleteComponent: deleteComponent,
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -219,6 +367,28 @@ const Settings: FC<ISetting> = ({
             ...item["style"],
             justifyContent: justifyContent ? "center" : "inherit",
           },
+        };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            justifyContent: justifyContent ? "center" : "inherit",
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
         };
       }
       return item;
@@ -239,6 +409,28 @@ const Settings: FC<ISetting> = ({
             justifyContent: justifyContent ? "left" : "inherit",
           },
         };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            justifyContent: justifyContent ? "left" : "inherit",
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -258,6 +450,28 @@ const Settings: FC<ISetting> = ({
             justifyContent: justifyContent ? "right" : "inherit",
           },
         };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            justifyContent: justifyContent ? "right" : "inherit",
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -276,6 +490,28 @@ const Settings: FC<ISetting> = ({
             ...item["style"],
             shadow: shadow ? "0 1px 2px 0 rgb(0 0 0 / 0.05)" : "none",
           },
+        };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            shadow: shadow ? "0 1px 2px 0 rgb(0 0 0 / 0.05)" : "none",
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
         };
       }
       return item;
@@ -298,6 +534,30 @@ const Settings: FC<ISetting> = ({
               : "inherit",
           },
         };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            shadow: shadow
+              ? "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
+              : "inherit",
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -319,6 +579,30 @@ const Settings: FC<ISetting> = ({
               : "inherit",
           },
         };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            shadow: shadow
+              ? "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
+              : "inherit",
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -336,6 +620,28 @@ const Settings: FC<ISetting> = ({
             ...item["style"],
             fontSize: fontSize,
           },
+        };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            fontSize: fontSize,
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
         };
       }
       return item;
@@ -356,6 +662,28 @@ const Settings: FC<ISetting> = ({
             borderRadius: borderRadius,
           },
         };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            borderRadius: borderRadius,
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -375,6 +703,28 @@ const Settings: FC<ISetting> = ({
             borderWidth: borderWidth,
           },
         };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            borderWidth: borderWidth,
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
       }
       return item;
     });
@@ -390,6 +740,25 @@ const Settings: FC<ISetting> = ({
         return {
           ...item,
           connectWallet: connectWallet ? "on" : "off",
+        };
+      } else if (item.children) {
+        let selectedChild = item.children?.find(
+          (child) => child.i === settingItemId
+        );
+        let child = {
+          ...selectedChild,
+          connectWallet: connectWallet ? "on" : "off",
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
         };
       }
       return item;
