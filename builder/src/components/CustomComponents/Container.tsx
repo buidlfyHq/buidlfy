@@ -107,10 +107,10 @@ const Container = ({
   };
 
   return (
-    <main>
+    // <main className="bg-blue-200 h-full">
       <section
         id="container-drag"
-        className="relative pt-2 border cursor-pointer"
+        className="relative pt-2 border cursor-pointer h-fit"
         // className="flex items-center justify-center h-full"
       >
         <ResponsiveGridLayout
@@ -127,6 +127,7 @@ const Container = ({
           resizeHandles={["nw", "se"]}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
+          className="h-fit"
           style={{
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
             borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
@@ -141,29 +142,60 @@ const Container = ({
             // boxShadow,
           }}
         >
-          {children.map((item: IItems, index: number) => {
-            const { x, y, w, h, minW, i } = item;
-            return (
-              <div
-                // draggable={false}
-                className="z-100"
-                key={i}
-                data-grid={{ x, y, w, h, minW }}
+          {children.length == 0 ?  
+            <div
+                className="z-100 h-full"
+                key={"Dop"}
+                data-grid={{ x: 0, y: 0, w: 12, h:2, minW: 1 }}
                 onMouseOver={() => setDrag(false)}
                 onMouseOut={() => setDrag(true)}
-                onClick={() => onComponentClick(item, i)}
+                // onClick={() => onComponentClick(item, i)}
               >
-                <RenderItem item={item} setDrag={setDrag} />
+                <RenderItem item={{
+                  i: "Dop",
+                  link: "",
+                  minW: 1,
+                  name: "Text",
+                  style: {
+                    color: { r: "0", g: "0", b: "0", a: "100" },
+                    backgroundColor: { r: "0", g: "0", b: "0" },
+                    fontWeight: "normal",
+                    fontStyle: "normal",
+                    textDecoration: "none",
+                    justifyContent: "center",
+                    fontSize: 16
+                  },
+                  value: "Hover and click on drag to add components in container",
+                  w: 12,
+                  x: 0,
+                  y: 0,
+                  h: 2
+                }} setDrag={setDrag} />
               </div>
-            );
-          })}
+            :
+            children.map((item: IItems, index: number) => {
+              const { x, y, w, h, minW, i, name } = item;
+              return (
+                <div
+                  className="z-100 h-full"
+                  key={i}
+                  data-grid={{ x, y, w, h, minW }}
+                  onMouseOver={() => setDrag(false)}
+                  onMouseOut={() => setDrag(true)}
+                  onClick={() => onComponentClick(item, i)}
+                >
+                  <RenderItem item={item} setDrag={setDrag} />
+                </div>
+            )})
+          }
         </ResponsiveGridLayout>
         <BiGridHorizontal
           id="drag"
+          // commented to test workspace selection and deselection of container
           onClick={() => onComponentClick(item, item.i)}
         />
       </section>
-    </main>
+    // </main>
   );
 };
 

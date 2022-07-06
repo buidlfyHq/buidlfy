@@ -106,7 +106,6 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const onComponentClick = (item: IItems, i: string) => {
-    setAddContainer(false);
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
@@ -129,6 +128,18 @@ const Workspace: FC<IWorkspace> = ({
     }
   };
 
+  const handleCheckIsContainer = (e: any) => {
+    if (
+      e.target.id === "Container" ||
+      e.target.parentNode.parentNode.id === "Container" ||
+      e.target.parentNode.id === "Container" ||
+      e.target.parentNode.parentNode.parentNode.id === "Container" 
+    ) {
+    } else {
+      setAddContainer(false);
+    }
+  }
+
   return (
     <main
       className={
@@ -136,6 +147,7 @@ const Workspace: FC<IWorkspace> = ({
           ? `ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
           : `w-full`
       }
+      onClick={handleCheckIsContainer}
     >
       <section className="pt-2 mt-16">
         <ResponsiveGridLayout
@@ -149,26 +161,28 @@ const Workspace: FC<IWorkspace> = ({
           isDraggable={drag}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
+          className="h-full"
         >
           {items
             ?.filter((i) => i.style?.deleteComponent === 0)
             .map((item: IItems, index: number) => {
-              const { x, y, w, h, minW, i } = item;
+              const { x, y, w, h, minW, i, name } = item;
               return (
                 <div
                   key={i}
+                  id={name}
                   // draggable={true}
                   unselectable="on"
                   data-grid={{ x, y, w, h, minW }}
-                  className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
+                  className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
                     selector
                       ? "hover:outline-orange-300 hover:outline"
                       : "hover:outline-slate-300 hover:outline-dashed"
                   }`}
                   // open item setting on click
-                  onClick={() =>
+                  onClick={(e) =>
                     item.name === "Container"
-                      ? console.log("container")
+                      ? null
                       : onComponentClick(item, i)
                   }
                 >
