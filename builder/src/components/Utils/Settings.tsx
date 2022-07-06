@@ -49,12 +49,12 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return { ...item, link };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           link,
@@ -81,12 +81,12 @@ const Settings: FC<ISetting> = ({
       return;
     }
     const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
       if (item.i === settingItemId) {
         return { ...item, value };
-      } else if (item.children) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
+      } else if (selectedChild?.i == settingItemId) {
         let child = {
           ...selectedChild,
           value,
