@@ -127,7 +127,7 @@ const Container = ({
           resizeHandles={["nw", "se"]}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
-          className="h-fit"
+          className="h-full"
           style={{
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
             borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,

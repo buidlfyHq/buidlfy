@@ -161,7 +161,7 @@ const Workspace: FC<IWorkspace> = ({
           isDraggable={drag}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
-          className="h-full"
+          className="h-fit"
         >
           {items
             ?.filter((i) => i.style?.deleteComponent === 0)
