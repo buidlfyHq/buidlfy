@@ -152,7 +152,7 @@ const Workspace: FC<IWorkspace> = ({
         >
           {items
             ?.filter((i) => i.style?.deleteComponent === 0)
-            .map((item: IItems, index: number) => {
+            .map((item: IItems) => {
               const { x, y, w, h, minW, i } = item;
               return (
                 <div

@@ -141,22 +141,24 @@ const Container = ({
             // boxShadow,
           }}
         >
-          {children.map((item: IItems, index: number) => {
-            const { x, y, w, h, minW, i } = item;
-            return (
-              <div
-                // draggable={false}
-                className="z-100"
-                key={i}
-                data-grid={{ x, y, w, h, minW }}
-                onMouseOver={() => setDrag(false)}
-                onMouseOut={() => setDrag(true)}
-                onClick={() => onComponentClick(item, i)}
-              >
-                <RenderItem item={item} setDrag={setDrag} />
-              </div>
-            );
-          })}
+          {children
+            ?.filter((c) => c.style?.deleteComponent === 0)
+            .map((item: IItems) => {
+              const { x, y, w, h, minW, i } = item;
+              return (
+                <div
+                  // draggable={false}
+                  className="z-100"
+                  key={i}
+                  data-grid={{ x, y, w, h, minW }}
+                  onMouseOver={() => setDrag(false)}
+                  onMouseOut={() => setDrag(true)}
+                  onClick={() => onComponentClick(item, i)}
+                >
+                  <RenderItem item={item} setDrag={setDrag} />
+                </div>
+              );
+            })}
         </ResponsiveGridLayout>
         <BiGridHorizontal
           id="drag"
