@@ -30,6 +30,7 @@ const Dashboard: FC = () => {
   const [drag, setDrag] = useState<boolean>(true);
   const [newComp, setNewComp] = useState<string>("");
   const [addContainer, setAddContainer] = useState<boolean>(false);
+  const [backgroundColor, setBackgroundColor] = useState({ r: "0", g: "0", b: "0" });
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -59,6 +60,8 @@ const Dashboard: FC = () => {
           elementConfig={elementConfig}
           addContainer={addContainer}
           settingItemId={settingItemId}
+          backgroundColor={backgroundColor}
+          setBackgroundColor={setBackgroundColor}
         />
 
         <section className="flex-1">
@@ -86,6 +89,7 @@ const Dashboard: FC = () => {
             drag={drag}
             setDrag={setDrag}
             setAddContainer={setAddContainer}
+            backgroundColor={backgroundColor}
           />
         </section>
 
