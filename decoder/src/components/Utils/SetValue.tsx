@@ -8,11 +8,11 @@ export const setValue = (
   stateFunctionId: string,
   stateFunctionValue: any
 ) => {
-  const searchExistingValue = state.filter(
+  const searchExistingValue = state?.filter(
     (stateObject: IValue) => stateObject.id === stateFunctionId
   );
 
-  if (!searchExistingValue.length || !state.length) {
+  if (!searchExistingValue?.length || !state?.length) {
     return [
       ...state,
       {

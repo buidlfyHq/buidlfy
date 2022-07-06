@@ -107,63 +107,62 @@ const Container = ({
   };
 
   return (
-    <main>
-      <section
-        id="container-drag"
-        className="relative pt-2 border cursor-pointer"
-        // className="flex items-center justify-center h-full"
+    <section
+      id="container-drag"
+      className="relative pt-2 border cursor-pointer h-fit"
+      // className="flex items-center justify-center h-full"
+    >
+      <ResponsiveGridLayout
+        layouts={{ lg: children }}
+        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
+        rowHeight={50}
+        width={window.innerWidth - 250}
+        // *********** on drop needed when elements are needed to be dropped
+        // onDrop={handleDrop}
+        // isDroppable={true}
+        isBounded={true}
+        compactType="horizontal"
+        resizeHandles={["nw", "se"]}
+        onLayoutChange={onLayoutChange}
+        margin={[0, 0]}
+        className="h-full"
+        style={{
+          backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+          borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+          border: "solid",
+          borderRadius: `${borderRadius}px`,
+          borderWidth: `${borderWidth}px`,
+          backgroundImage: `url(${imgData})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          boxShadow: shadow,
+          // boxShadow,
+        }}
       >
-        <ResponsiveGridLayout
-          layouts={{ lg: children }}
-          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-          cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
-          rowHeight={50}
-          width={window.innerWidth - 250}
-          // *********** on drop needed when elements are needed to be dropped
-          // onDrop={handleDrop}
-          // isDroppable={true}
-          isBounded={true}
-          compactType="horizontal"
-          resizeHandles={["nw", "se"]}
-          onLayoutChange={onLayoutChange}
-          margin={[0, 0]}
-          style={{
-            backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-            border: "solid",
-            borderRadius: `${borderRadius}px`,
-            borderWidth: `${borderWidth}px`,
-            backgroundImage: `url(${imgData})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            boxShadow: shadow,
-            // boxShadow,
-          }}
-        >
-          {children.map((item: IItems, index: number) => {
-            const { x, y, w, h, minW, i } = item;
-            return (
-              <div
-                // draggable={false}
-                className="z-100"
-                key={i}
-                data-grid={{ x, y, w, h, minW }}
-                onMouseOver={() => setDrag(false)}
-                onMouseOut={() => setDrag(true)}
-                onClick={() => onComponentClick(item, i)}
-              >
-                <RenderItem item={item} setDrag={setDrag} />
-              </div>
-            );
-          })}
-        </ResponsiveGridLayout>
-        <BiGridHorizontal
-          id="drag"
-          onClick={() => onComponentClick(item, item.i)}
-        />
-      </section>
-    </main>
+        {children.map((item: IItems, index: number) => {
+          const { x, y, w, h, minW, i } = item;
+          return (
+            <div
+              // draggable={false}
+              className="z-100"
+              key={i}
+              data-grid={{ x, y, w, h, minW }}
+              onMouseOver={() => setDrag(false)}
+              onMouseOut={() => setDrag(true)}
+              onClick={() => onComponentClick(item, i)}
+            >
+              <RenderItem item={item} setDrag={setDrag} />
+            </div>
+          );
+        })}
+      </ResponsiveGridLayout>
+      <BiGridHorizontal
+        id="drag"
+        onClick={() => onComponentClick(item, item.i)}
+      />
+    </section>
   );
 };
 
