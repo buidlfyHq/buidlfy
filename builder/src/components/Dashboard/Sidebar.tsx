@@ -5,6 +5,7 @@ import { AiOutlineDoubleLeft, AiOutlineSetting } from "react-icons/ai";
 import { BiGridSmall } from "react-icons/bi";
 import { components } from "./component";
 import IItems from "interfaces/items";
+import BgColorComponent from "../Utils/BgColorComponent"
 
 interface ISidebar {
   className: string;
@@ -19,6 +20,8 @@ interface ISidebar {
   elementConfig: object;
   addContainer;
   settingItemId;
+  backgroundColor;
+  setBackgroundColor;
 }
 
 const Sidebar: FC<ISidebar> = ({
@@ -30,6 +33,8 @@ const Sidebar: FC<ISidebar> = ({
   elementConfig,
   addContainer,
   settingItemId,
+  backgroundColor,
+  setBackgroundColor
 }) => {
   const uid = new ShortUniqueId();
   const [indexValue, setIndexValue] = useState(2);
@@ -54,6 +59,10 @@ const Sidebar: FC<ISidebar> = ({
       let arr = items.map((item) => item.y);
       return Math.max(...arr) + 1;
     }
+  };
+
+  const setBgColor = (bgColor: { rgb: any }) => {
+    setBackgroundColor(bgColor);
   };
 
   return (
@@ -110,7 +119,8 @@ const Sidebar: FC<ISidebar> = ({
           <span className="mx-2">
             <AiOutlineSetting />
           </span>{" "}
-          Site Settings
+          Set Background
+          <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
         </div>
       </div>
 

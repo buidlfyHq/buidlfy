@@ -30,6 +30,7 @@ interface IWorkspace {
   drag: boolean;
   setDrag: React.Dispatch<React.SetStateAction<boolean>>;
   setAddContainer;
+  backgroundColor;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -47,6 +48,7 @@ const Workspace: FC<IWorkspace> = ({
   drag,
   setDrag,
   setAddContainer,
+  backgroundColor
 }) => {
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -136,6 +138,9 @@ const Workspace: FC<IWorkspace> = ({
           ? `ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
           : `w-full`
       }
+      style={{
+        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+      }}
     >
       <section className="pt-2 mt-16">
         <ResponsiveGridLayout
