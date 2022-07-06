@@ -158,7 +158,8 @@ const Button: FC<ITexts> = ({
               onClick={disconnect}
             >
               <>
-                {link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}
+                Disconnect
+                {/* {link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>} */}
               </>{" "}
             </div>
           )}
