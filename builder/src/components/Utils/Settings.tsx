@@ -312,7 +312,7 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
-  const setDeleteComponent = (deleteComponent: any) => {
+  const setDeleteComponent = (deleteComponent: number) => {
     if (!settingItemId) {
       return;
     }
