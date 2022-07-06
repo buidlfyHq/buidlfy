@@ -107,6 +107,7 @@ const Container = ({
   };
 
   return (
+    // <main className="bg-blue-200 h-full">
     <section
       id="container-drag"
       className="relative pt-2 border cursor-pointer h-fit"
@@ -141,7 +142,59 @@ const Container = ({
           // boxShadow,
         }}
       >
-        {children
+        {children.length == 0 ? (
+          <div
+            className="z-100 h-full"
+            key={"Dop"}
+            data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1 }}
+            onMouseOver={() => setDrag(false)}
+            onMouseOut={() => setDrag(true)}
+            // onClick={() => onComponentClick(item, i)}
+          >
+            <RenderItem
+              item={{
+                i: "Dop",
+                link: "",
+                minW: 1,
+                name: "Text",
+                style: {
+                  color: { r: "0", g: "0", b: "0", a: "100" },
+                  backgroundColor: { r: "0", g: "0", b: "0" },
+                  fontWeight: "normal",
+                  fontStyle: "normal",
+                  textDecoration: "none",
+                  justifyContent: "center",
+                  fontSize: 16,
+                },
+                value: "Hover and click on drag to add components in container",
+                w: 12,
+                x: 0,
+                y: 0,
+                h: 2,
+              }}
+              setDrag={setDrag}
+            />
+          </div>
+        ) : (
+          children
+            ?.filter((c) => c.style?.deleteComponent === 0)
+            .map((item: IItems, index: number) => {
+              const { x, y, w, h, minW, i, name } = item;
+              return (
+                <div
+                  className="z-100 h-full"
+                  key={i}
+                  data-grid={{ x, y, w, h, minW }}
+                  onMouseOver={() => setDrag(false)}
+                  onMouseOut={() => setDrag(true)}
+                  onClick={() => onComponentClick(item, i)}
+                >
+                  <RenderItem item={item} setDrag={setDrag} />
+                </div>
+              );
+            })
+        )}
+        {/* {children
           ?.filter((c) => c.style?.deleteComponent === 0)
           .map((item: IItems) => {
             const { x, y, w, h, minW, i } = item;
@@ -158,13 +211,15 @@ const Container = ({
                 <RenderItem item={item} setDrag={setDrag} />
               </div>
             );
-          })}
+          })} */}
       </ResponsiveGridLayout>
       <BiGridHorizontal
         id="drag"
+        // commented to test workspace selection and deselection of container
         onClick={() => onComponentClick(item, item.i)}
       />
     </section>
+    // </main>
   );
 };
 

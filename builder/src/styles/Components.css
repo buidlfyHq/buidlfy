@@ -60,8 +60,8 @@
 }
 
 #drag{
-  border: 1px dashed rgb(214, 204, 204);
-  font-size: 22px;
+  border: 1.2px dotted rgb(214, 204, 204);
+  font-size: 24px;
   border-radius: 0 0 4px 4px;
 }
 
