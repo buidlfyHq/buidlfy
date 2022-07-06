@@ -13,13 +13,7 @@ const Input: FC<{
   borderRadius: number;
   shadow: any;
   setInputValue: (inputValue: object[]) => void;
-}> = ({
-  id,
-  inputValue,
-  setInputValue,
-  borderRadius,
-  shadow,
-}) => {
+}> = ({ id, inputValue, setInputValue, borderRadius, shadow }) => {
   const getValue = (inputArray) => {
     const requiredValue = inputArray.filter(
       (input: IInput) => input.id === id
@@ -33,7 +27,7 @@ const Input: FC<{
   return (
     <div className="h-full flex justify-center items-center">
       <input
-        className="input bg-white appearance-none ml-6 border border-solid py-2 px-3 text-gray-700 leading-tight"
+        className="w-full px-3 py-2 ml-6 mr-6 leading-tight text-gray-700 bg-white border border-solid appearance-none input"
         id="input"
         style={{ borderRadius: `${borderRadius}px`, boxShadow: shadow }}
         type="text"
