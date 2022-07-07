@@ -44,6 +44,7 @@ const Settings: FC<ISetting> = ({
   const selectedItem =
     items?.find((item) => item.i === settingItemId) ||
     selectedChildren.filter(Boolean)[0];
+
   const setLink = (link: string) => {
     if (!settingItemId) {
       return;
@@ -54,7 +55,7 @@ const Settings: FC<ISetting> = ({
       );
       if (item.i === settingItemId) {
         return { ...item, link };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           link,
@@ -86,7 +87,7 @@ const Settings: FC<ISetting> = ({
       );
       if (item.i === settingItemId) {
         return { ...item, value };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           value,
@@ -124,7 +125,7 @@ const Settings: FC<ISetting> = ({
             fontWeight: fontWeight ? "bold" : "normal",
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -164,7 +165,7 @@ const Settings: FC<ISetting> = ({
             fontStyle: fontStyle ? "italic" : "normal",
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -205,7 +206,7 @@ const Settings: FC<ISetting> = ({
             textDecoration: textDecoration ? "underline" : "none",
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -246,7 +247,7 @@ const Settings: FC<ISetting> = ({
             color: color,
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -287,7 +288,7 @@ const Settings: FC<ISetting> = ({
             backgroundColor: backgroundColor,
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -328,7 +329,7 @@ const Settings: FC<ISetting> = ({
             deleteComponent: deleteComponent,
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -369,7 +370,7 @@ const Settings: FC<ISetting> = ({
             justifyContent: justifyContent ? "center" : "inherit",
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -410,7 +411,7 @@ const Settings: FC<ISetting> = ({
             justifyContent: justifyContent ? "left" : "inherit",
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -451,7 +452,7 @@ const Settings: FC<ISetting> = ({
             justifyContent: justifyContent ? "right" : "inherit",
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -492,7 +493,7 @@ const Settings: FC<ISetting> = ({
             shadow: shadow ? "0 1px 2px 0 rgb(0 0 0 / 0.05)" : "none",
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -535,7 +536,7 @@ const Settings: FC<ISetting> = ({
               : "inherit",
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -580,7 +581,7 @@ const Settings: FC<ISetting> = ({
               : "inherit",
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -622,7 +623,7 @@ const Settings: FC<ISetting> = ({
             fontSize: fontSize,
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let selectedChild = item.children?.find(
           (child) => child.i === settingItemId
         );
@@ -666,7 +667,7 @@ const Settings: FC<ISetting> = ({
             borderRadius: borderRadius,
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -707,7 +708,7 @@ const Settings: FC<ISetting> = ({
             borderWidth: borderWidth,
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
@@ -745,7 +746,7 @@ const Settings: FC<ISetting> = ({
           ...item,
           connectWallet: connectWallet ? "on" : "off",
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           connectWallet: connectWallet ? "on" : "off",

@@ -32,13 +32,32 @@ const AbiMethods: FC<IAbiMethods> = ({
         methodName: abiJson[e.target.value].name,
         stateMutability: abiJson[e.target.value].stateMutability,
         inputs: [],
-        outputs: []
+        outputs: [],
       },
     };
+
+    // search id in items
     const elementsIndex = items.findIndex((item) => item.i === selectedItem.i);
-    let newArray = [...items];
-    newArray[elementsIndex] = updatedItem;
-    setItems(newArray);
+
+    if (elementsIndex === -1) {
+      // search id in children
+      const updatedItems = items.map((item) => {
+        const childIndex = item.children?.findIndex(
+          (child) => child.i === selectedItem.i
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = updatedItem;
+        return {
+          ...item,
+          children: newArray,
+        };
+      });
+      setItems(updatedItems);
+    } else {
+      let newArray = [...items];
+      newArray[elementsIndex] = updatedItem;
+      setItems(newArray);
+    }
   };
 
   return (

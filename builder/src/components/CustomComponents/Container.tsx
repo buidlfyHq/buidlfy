@@ -1,12 +1,7 @@
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import { BiGridHorizontal } from "react-icons/bi";
-import ShortUniqueId from "short-unique-id";
-
-import { components } from "components/Dashboard/component";
 import RenderItem from "components/Dashboard/RenderItem";
-import IBgContainer from "interfaces/container";
-import ITexts from "interfaces/texts";
 import IItems from "interfaces/items";
 import "styles/Components.css";
 
@@ -45,6 +40,10 @@ const Container = ({
   setSettingItemId,
   setOpenTab,
   setAddContainer,
+  selector,
+  setSelector,
+  elementConfig,
+  setElementConfig,
   // boxShadow,
   // zIndex,
   // border,
@@ -80,34 +79,71 @@ const Container = ({
     newItemsArr.length > 0 ? setTempLay(newItemsArr) : setTempLay(templay);
   };
 
-  const onComponentClick = (item: IItems, i: string) => {
+  const updateElementConfig = (itemName: string, i: string) => {
+    // for updating selected element config
+    const searchExistingValue = Object.keys(elementConfig).filter(
+      (key) => key === selector.name
+    );
+
+    if (!searchExistingValue.length || !Object.keys(elementConfig).length) {
+      setElementConfig({
+        ...elementConfig,
+        [selector.name]: [
+          {
+            buttonId: selector.buttonId,
+            name: itemName,
+            id: i,
+          },
+        ],
+      });
+    } else {
+      Object.keys(elementConfig).map((key) => {
+        if (key === selector.name) {
+          let elementArray = [
+            ...elementConfig[key],
+            {
+              buttonId: selector.buttonId,
+              name: itemName,
+              id: i,
+            },
+          ];
+
+          setElementConfig({
+            ...elementConfig,
+            [selector.name]: elementArray,
+          });
+        }
+        return key;
+      });
+    }
+  };
+
+  const onComponentClick = (itemName: string, i: string) => {
     setAddContainer(true);
 
     // checks if the selector is active
-    // if (selector === null) {
-    setOpenSetting(true);
-    setSettingItemId(i);
-    setOpenTab(1);
-
-    // } else {
-    //   // Add validation for selection
-    //   if (selector.type === "input" && item.name === "Input") {
-    //     updateElementConfig(item, i);
-    //   } else if (
-    //     selector.type === "output" &&
-    //     (item.name === "Text" ||
-    //       item.name === "Heading 1" ||
-    //       item.name === "Heading 2" ||
-    //       item.name === "Heading 3")
-    //   ) {
-    //     updateElementConfig(item, i);
-    //   }
-    //   setSelector(null);
-    // }
+    if (selector === null) {
+      setOpenSetting(true);
+      setSettingItemId(i);
+      setOpenTab(1);
+    } else {
+      //   // Add validation for selection
+      if (selector.type === "input" && itemName === "Input") {
+        updateElementConfig(itemName, i);
+      } else if (
+        selector.type === "output" &&
+        (itemName === "Text" ||
+          itemName === "Heading 1" ||
+          itemName === "Heading 2" ||
+          itemName === "Heading 3")
+      ) {
+        updateElementConfig(itemName, i);
+      }
+      setSelector(null);
+    }
   };
 
   return (
-    // <main className="bg-blue-200 h-full">
     <section
       id="container-drag"
       className="relative pt-2 border cursor-pointer h-fit"
@@ -119,9 +155,6 @@ const Container = ({
         cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
         rowHeight={50}
         width={window.innerWidth - 250}
-        // *********** on drop needed when elements are needed to be dropped
-        // onDrop={handleDrop}
-        // isDroppable={true}
         isBounded={true}
         compactType="horizontal"
         resizeHandles={["nw", "se"]}
@@ -139,17 +172,15 @@ const Container = ({
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           boxShadow: shadow,
-          // boxShadow,
         }}
       >
-        {children.length == 0 ? (
+        {!children.length ? (
           <div
             className="z-100 h-full"
             key={"Dop"}
             data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1 }}
             onMouseOver={() => setDrag(false)}
             onMouseOut={() => setDrag(true)}
-            // onClick={() => onComponentClick(item, i)}
           >
             <RenderItem
               item={{
@@ -178,102 +209,35 @@ const Container = ({
         ) : (
           children
             ?.filter((c) => c.style?.deleteComponent === 0)
-            .map((item: IItems, index: number) => {
-              const { x, y, w, h, minW, i, name } = item;
+            .map((item: IItems) => {
+              const { x, y, w, h, minW, i } = item;
               return (
                 <div
-                  className="z-100 h-full"
+                  // className="z-100 h-full"
+                  className={`z-100 h-full ${
+                    selector
+                      ? "hover:outline-orange-300 hover:outline"
+                      : "hover:outline-slate-300 hover:outline-dashed"
+                  }`}
                   key={i}
                   data-grid={{ x, y, w, h, minW }}
                   onMouseOver={() => setDrag(false)}
                   onMouseOut={() => setDrag(true)}
-                  onClick={() => onComponentClick(item, i)}
+                  onClick={() => onComponentClick(item.name, i)}
                 >
                   <RenderItem item={item} setDrag={setDrag} />
                 </div>
               );
             })
         )}
-        {/* {children
-          ?.filter((c) => c.style?.deleteComponent === 0)
-          .map((item: IItems) => {
-            const { x, y, w, h, minW, i } = item;
-            return (
-              <div
-                // draggable={false}
-                className="z-100"
-                key={i}
-                data-grid={{ x, y, w, h, minW }}
-                onMouseOver={() => setDrag(false)}
-                onMouseOut={() => setDrag(true)}
-                onClick={() => onComponentClick(item, i)}
-              >
-                <RenderItem item={item} setDrag={setDrag} />
-              </div>
-            );
-          })} */}
       </ResponsiveGridLayout>
       <BiGridHorizontal
         id="drag"
         // commented to test workspace selection and deselection of container
-        onClick={() => onComponentClick(item, item.i)}
+        onClick={() => onComponentClick(item.name, item.i)}
       />
     </section>
-    // </main>
   );
 };
 
 export default Container;
-
-// *********** for later purpose ***********
-
-// const onComponentClick = (item: IItems, i: string, index: number) => {
-//   // checks if the selector is active
-//   if (selector === null) {
-//     setOpenSetting(true);
-//     setSettingItemId(i);
-//     setOpenTab(1);
-//   } else {
-//     // Add validation for selection
-//     if (selector.type === "input" && item.name === "Input") {
-//       // for updating selector with item name and item id
-//       setElementConfig({
-//         ...elementConfig,
-//         [selector.name]: { name: item.name, id: i },
-//       });
-//       let updatedItem = {
-//         ...item,
-//         contract: {
-//           name: selector.methodName,
-//           inputName: selector.name,
-//         },
-//       };
-//       let newArray = [...templay];
-//       newArray[index] = updatedItem;
-//       setTempLay(newArray);
-//     } else if (
-//       selector.type === "output" &&
-//       (item.name === "Text" ||
-//         item.name === "Heading 1" ||
-//         item.name === "Heading 2" ||
-//         item.name === "Heading 3")
-//     ) {
-//       // for updating selector with item name and item id
-//       setElementConfig({
-//         ...elementConfig,
-//         [selector.name]: { name: item.name, id: i },
-//       });
-//       let updatedItem = {
-//         ...item,
-//         contract: {
-//           name: selector.methodName,
-//           outputName: selector.name,
-//         },
-//       };
-//       let newArray = [...templay];
-//       newArray[index] = updatedItem;
-//       setTempLay(newArray);
-//     }
-//     setSelector(null);
-//   }
-// };
