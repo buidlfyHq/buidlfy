@@ -1,6 +1,7 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import IItems from "interfaces/items";
+import { TIMEOUT } from "dns";
 
 interface IAbiComponent {
   showComponent: {
@@ -43,8 +44,16 @@ const AbiComponent: FC<IAbiComponent> = ({
     name: "",
     type: "",
   });
+  const [show, setShow] = useState(true);
+  // const handleShow = () => {
+  //   setShow(true);
+  // };
+  useEffect(() => {
+    setTimeout(() => setShow(false), 1000);
+  }, [show]);
 
   const handleSave = () => {
+    setShow(true);
     // filter last selected element
     const filteredObject = elementConfig[currentElement.name].filter(
       (key: { buttonId: string }) => key.buttonId === selectedItem.i
@@ -258,12 +267,22 @@ const AbiComponent: FC<IAbiComponent> = ({
                 </section>
               );
             })}
-          <button
-            onClick={() => handleSave()}
-            className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Save
-          </button>
+          {show ? (
+            <button className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <span
+                className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
+                role="status"
+              ></span>
+              Save
+            </button>
+          ) : (
+            <button
+              onClick={() => handleSave()}
+              className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Save
+            </button>
+          )}
         </>
       ) : null}
     </main>

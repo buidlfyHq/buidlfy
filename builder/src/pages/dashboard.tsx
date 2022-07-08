@@ -30,7 +30,11 @@ const Dashboard: FC = () => {
   const [drag, setDrag] = useState<boolean>(true);
   const [newComp, setNewComp] = useState<string>("");
   const [addContainer, setAddContainer] = useState<boolean>(false);
-  const [backgroundColor, setBackgroundColor] = useState({ r: "0", g: "0", b: "0" });
+  const [backgroundColor, setBackgroundColor] = useState({
+    r: "0",
+    g: "0",
+    b: "0",
+  });
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -46,7 +50,12 @@ const Dashboard: FC = () => {
     };
     getInformation();
   }, []); // eslint-disable-line
-  
+  // useEffect(() => {
+  //   if (items?.length > 0) {
+  //     localStorage.setItem("items", JSON.stringify(items));
+  //   }
+  // }, [items]);
+
   return (
     <ComponentContext.Provider value={{ newComp, setNewComp }}>
       <main className="flex flex-row w-full min-h-screen">
