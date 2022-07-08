@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useState } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import { BiGridHorizontal } from "react-icons/bi";
 import ShortUniqueId from "short-unique-id";
-
+import GridLayout from "react-grid-layout";
 import { components } from "components/Dashboard/component";
 import RenderItem from "components/Dashboard/RenderItem";
 import IBgContainer from "interfaces/container";
@@ -11,6 +11,13 @@ import IItems from "interfaces/items";
 import "styles/Components.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
+
+interface IWidth {
+  containerWidth: number, 
+  margin: [number, number], 
+  cols: number, 
+  containerPadding: [number, number]
+}
 
 // interface IWorkspace {
 //   setSettingItemId: (item: string) => void;
@@ -50,20 +57,28 @@ const Container = ({
   // border,
   // backgroundImg,
 }) => {
-  // at least one element is needed in layout to perform drop functionality
+  // console.log(item)
   const [templay, setTempLay] = useState<Layout[]>([]);
+  const [prevW, setPrevW] = useState(item || null)
+  console.log(item)
+  // useState(() => {
+  //   item && setPrevW(item.w)
+  // },[])
+  // console.log(item)
 
-  // const checkY = (items: IItems[]) => {
-  //   if(items.length === 0) return 1
-  //   else{
-  //     let arr = items.map(item => item.y)
-  //     return Math.max(...arr)+1
-  //   }
-  // }
+  const calWidth = (item, layout) => {
+    let wI = item.w
+    let lay = layout.map(obj => {
+      // obj.w
+    })
+  }
 
   // on layout change
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
+    // console.log(layout, layouts)
+    // console.log(item, layout) 
+    calWidth(item, layout)
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
       const { h, minW, x, y, w, i } = obj;
@@ -82,52 +97,44 @@ const Container = ({
 
   const onComponentClick = (item: IItems, i: string) => {
     setAddContainer(true);
-
-    // checks if the selector is active
-    // if (selector === null) {
     setOpenSetting(true);
     setSettingItemId(i);
     setOpenTab(1);
-
-    // } else {
-    //   // Add validation for selection
-    //   if (selector.type === "input" && item.name === "Input") {
-    //     updateElementConfig(item, i);
-    //   } else if (
-    //     selector.type === "output" &&
-    //     (item.name === "Text" ||
-    //       item.name === "Heading 1" ||
-    //       item.name === "Heading 2" ||
-    //       item.name === "Heading 3")
-    //   ) {
-    //     updateElementConfig(item, i);
-    //   }
-    //   setSelector(null);
-    // }
   };
 
+  const handleWidthChange = (
+    containerWidth: number, 
+    margin: [number, number], 
+    cols: number, 
+    containerPadding: [number, number]
+  ) => {
+    // console.log(containerWidth, margin, cols, containerPadding)
+  }
+
+  const handleResize = (e) => {
+    // console.log(e)
+  }
+  console.log(item)
   return (
-    // <main className="bg-blue-200 h-full">
     <section
       id="container-drag"
-      className="relative pt-2 border cursor-pointer h-fit"
-      // className="flex items-center justify-center h-full"
+      className="relative w-full pt-2 border cursor-pointer h-fit"
     >
-      <ResponsiveGridLayout
-        layouts={{ lg: children }}
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
+      <GridLayout
+        layout={ children }
+        // breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        // cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
+        cols={6}
         rowHeight={50}
-        width={window.innerWidth - 250}
-        // *********** on drop needed when elements are needed to be dropped
-        // onDrop={handleDrop}
-        // isDroppable={true}
+        // width={window.innerWidth-500}
         isBounded={true}
         compactType="horizontal"
         resizeHandles={["nw", "se"]}
-        onLayoutChange={onLayoutChange}
+        // onLayoutChange={onLayoutChange}
         margin={[0, 0]}
-        className="h-full"
+        // onResize={handleResize}
+        // onWidthChange={handleWidthChange}
+        className="w-full h-full"
         style={{
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
           borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
@@ -142,9 +149,13 @@ const Container = ({
           // boxShadow,
         }}
       >
+        {/* <div className="w-full h-full"
+            key={"Dop"}
+            data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1 }}
+            > */}
         {children.length == 0 ? (
           <div
-            className="z-100 h-full"
+            className="w-full h-full"
             key={"Dop"}
             data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1 }}
             onMouseOver={() => setDrag(false)}
@@ -182,7 +193,7 @@ const Container = ({
               const { x, y, w, h, minW, i, name } = item;
               return (
                 <div
-                  className="z-100 h-full"
+                  className="w-full h-full"
                   key={i}
                   data-grid={{ x, y, w, h, minW }}
                   onMouseOver={() => setDrag(false)}
@@ -194,86 +205,14 @@ const Container = ({
               );
             })
         )}
-        {/* {children
-          ?.filter((c) => c.style?.deleteComponent === 0)
-          .map((item: IItems) => {
-            const { x, y, w, h, minW, i } = item;
-            return (
-              <div
-                // draggable={false}
-                className="z-100"
-                key={i}
-                data-grid={{ x, y, w, h, minW }}
-                onMouseOver={() => setDrag(false)}
-                onMouseOut={() => setDrag(true)}
-                onClick={() => onComponentClick(item, i)}
-              >
-                <RenderItem item={item} setDrag={setDrag} />
-              </div>
-            );
-          })} */}
-      </ResponsiveGridLayout>
+        {/* </div> */}
+      </GridLayout>
       <BiGridHorizontal
         id="drag"
-        // commented to test workspace selection and deselection of container
         onClick={() => onComponentClick(item, item.i)}
       />
     </section>
-    // </main>
   );
 };
 
 export default Container;
-
-// *********** for later purpose ***********
-
-// const onComponentClick = (item: IItems, i: string, index: number) => {
-//   // checks if the selector is active
-//   if (selector === null) {
-//     setOpenSetting(true);
-//     setSettingItemId(i);
-//     setOpenTab(1);
-//   } else {
-//     // Add validation for selection
-//     if (selector.type === "input" && item.name === "Input") {
-//       // for updating selector with item name and item id
-//       setElementConfig({
-//         ...elementConfig,
-//         [selector.name]: { name: item.name, id: i },
-//       });
-//       let updatedItem = {
-//         ...item,
-//         contract: {
-//           name: selector.methodName,
-//           inputName: selector.name,
-//         },
-//       };
-//       let newArray = [...templay];
-//       newArray[index] = updatedItem;
-//       setTempLay(newArray);
-//     } else if (
-//       selector.type === "output" &&
-//       (item.name === "Text" ||
-//         item.name === "Heading 1" ||
-//         item.name === "Heading 2" ||
-//         item.name === "Heading 3")
-//     ) {
-//       // for updating selector with item name and item id
-//       setElementConfig({
-//         ...elementConfig,
-//         [selector.name]: { name: item.name, id: i },
-//       });
-//       let updatedItem = {
-//         ...item,
-//         contract: {
-//           name: selector.methodName,
-//           outputName: selector.name,
-//         },
-//       };
-//       let newArray = [...templay];
-//       newArray[index] = updatedItem;
-//       setTempLay(newArray);
-//     }
-//     setSelector(null);
-//   }
-// };

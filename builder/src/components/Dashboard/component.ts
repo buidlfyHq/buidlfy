@@ -107,7 +107,7 @@ export const components = [
   },
   {
     name: "Image",
-    h: 3,
+    h: 1.2,
     style: {
       deleteComponent: 0,
       justifyContent: "center",

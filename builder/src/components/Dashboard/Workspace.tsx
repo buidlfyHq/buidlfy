@@ -65,7 +65,6 @@ const Workspace: FC<IWorkspace> = ({
       });
     });
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
-    console.log(layout, "layout");
   };
 
   const updateElementConfig = (item: IItems, i: string) => {
@@ -140,6 +139,7 @@ const Workspace: FC<IWorkspace> = ({
     } else {
       setAddContainer(false);
     }
+    if(e.target.id === "") setOpenSetting(false)
   };
 
   return (
@@ -147,16 +147,17 @@ const Workspace: FC<IWorkspace> = ({
       className={
         className === ""
           ? `ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
-          : `w-full`
+          : `w-full mr-[250px] h-full w-[calc(100%-250px)]`
       }
       style={{
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
       onClick={handleCheckIsContainer}
     >
-      <section className="pt-2 mt-16">
+      <section className="mt-[60px] ">
         <ResponsiveGridLayout
           layouts={{ lg: items }}
+          // breakpoints={{ lg: 2000, md: 1400, sm: 992, xs: 480, xxs: 0 }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
           cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
           rowHeight={50}
@@ -176,7 +177,6 @@ const Workspace: FC<IWorkspace> = ({
                 <div
                   key={i}
                   id={name}
-                  // draggable={true}
                   unselectable="on"
                   data-grid={{ x, y, w, h, minW }}
                   className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
@@ -185,7 +185,7 @@ const Workspace: FC<IWorkspace> = ({
                       : "hover:outline-slate-300 hover:outline-dashed"
                   }`}
                   // open item setting on click
-                  onClick={(e) =>
+                  onClick={() =>
                     item.name === "Container" ? null : onComponentClick(item, i)
                   }
                 >

@@ -7,6 +7,7 @@ import { GiClick } from "react-icons/gi";
 import Workspace from "components/Dashboard/Workspace";
 import Settings from "components/Utils/Settings";
 import IItems from "interfaces/items";
+import BgColorComponent from "components/Utils/BgColorComponent";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
@@ -31,6 +32,7 @@ const Dashboard: FC = () => {
   const [newComp, setNewComp] = useState<string>("");
   const [addContainer, setAddContainer] = useState<boolean>(false);
   const [backgroundColor, setBackgroundColor] = useState({ r: "0", g: "0", b: "0" });
+
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -111,11 +113,19 @@ const Dashboard: FC = () => {
           />
         ) : (
           <main
-            className={`fixed right-0 top-16 z-0 w-[250px] border-l h-full`}
+            className={`fixed right-0 top-[60px] z-0 w-[250px] border-l h-full`}
           >
-            <div className="h-24 p-3 m-3 border">
-              <GiClick className="mx-20 my-2" />
-              Please select an element
+            <div className="mx-3 my-2">
+              <h3 className="mb-2 text-xl">
+                Site Settings
+              </h3> 
+              <div className="mb-3">
+                <BgColorComponent 
+                  color={backgroundColor} 
+                  setBgColor={setBackgroundColor} 
+                  siteSetting={true}
+                />
+              </div>
             </div>
           </main>
         )}
