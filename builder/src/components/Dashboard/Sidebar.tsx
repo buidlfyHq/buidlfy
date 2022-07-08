@@ -1,11 +1,11 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { Popover } from "@headlessui/react";
 import ShortUniqueId from "short-unique-id";
 import { AiOutlineDoubleLeft, AiOutlineSetting } from "react-icons/ai";
 import { BiGridSmall } from "react-icons/bi";
 import { components } from "./component";
 import IItems from "interfaces/items";
-import BgColorComponent from "../Utils/BgColorComponent"
+import BgColorComponent from "../Utils/BgColorComponent";
 
 interface ISidebar {
   className: string;
@@ -34,14 +34,14 @@ const Sidebar: FC<ISidebar> = ({
   addContainer,
   settingItemId,
   backgroundColor,
-  setBackgroundColor
+  setBackgroundColor,
 }) => {
   const uid = new ShortUniqueId();
   const [indexValue, setIndexValue] = useState(2);
 
   const selectedItem =
     items?.find((item) => item.i === settingItemId) ||
-    items.map((item) =>
+    items?.map((item) =>
       item.children?.find((child) => child.i === settingItemId)
     )[0];
 
@@ -64,7 +64,21 @@ const Sidebar: FC<ISidebar> = ({
   const setBgColor = (bgColor: { rgb: any }) => {
     setBackgroundColor(bgColor);
   };
-
+  const handleSave = () => {
+    if (items?.length > 0) {
+      localStorage.setItem("items", JSON.stringify(items));
+    }
+  };
+  useEffect(() => {
+    let saveItems = localStorage.getItem("items");
+    if (saveItems) {
+      setItems(JSON.parse(saveItems));
+    }
+  }, []);
+  const handleClear = () => {
+    localStorage.removeItem("items");
+    setItems([]);
+  };
   return (
     <main
       className={`fixed left-0 top-0 z-0 w-[250px] border-r h-full ${className}`}
@@ -109,12 +123,27 @@ const Sidebar: FC<ISidebar> = ({
 
       {/* Site settings */}
       <div className="p-3 mt-16">
-        <div className="flex flex-row items-center cursor-pointer">
+        {/* <div className="flex flex-row items-center cursor-pointer">
           <span className="ml-1 mr-1 text-2xl">
             <BiGridSmall />
           </span>{" "}
           All Sites
+        </div> */}
+        <div className="flex flex-row items-center">
+          <button
+            onClick={() => handleSave()}
+            className="w-fit bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Save
+          </button>
+          <button
+            onClick={() => handleClear()}
+            className="w-fit ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Clear
+          </button>
         </div>
+
         <div className="flex flex-row items-center mt-1 cursor-pointer">
           <span className="mx-2">
             <AiOutlineSetting />
