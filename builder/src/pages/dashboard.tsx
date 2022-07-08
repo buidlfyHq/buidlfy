@@ -50,11 +50,6 @@ const Dashboard: FC = () => {
     };
     getInformation();
   }, []); // eslint-disable-line
-  // useEffect(() => {
-  //   if (items?.length > 0) {
-  //     localStorage.setItem("items", JSON.stringify(items));
-  //   }
-  // }, [items]);
 
   return (
     <ComponentContext.Provider value={{ newComp, setNewComp }}>
