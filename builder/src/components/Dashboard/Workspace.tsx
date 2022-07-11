@@ -68,7 +68,7 @@ const Workspace: FC<IWorkspace> = ({
     console.log(layout, "layout");
   };
 
-  const updateElementConfig = (item: IItems, i: string) => {
+  const updateElementConfig = (itemName: string, i: string) => {
     // for updating selected element config
     const searchExistingValue = Object.keys(elementConfig).filter(
       (key) => key === selector.name
@@ -80,7 +80,7 @@ const Workspace: FC<IWorkspace> = ({
         [selector.name]: [
           {
             buttonId: selector.buttonId,
-            name: item.name,
+            name: itemName,
             id: i,
           },
         ],
@@ -92,7 +92,7 @@ const Workspace: FC<IWorkspace> = ({
             ...elementConfig[key],
             {
               buttonId: selector.buttonId,
-              name: item.name,
+              name: itemName,
               id: i,
             },
           ];
@@ -107,24 +107,26 @@ const Workspace: FC<IWorkspace> = ({
     }
   };
 
-  const onComponentClick = (item: IItems, i: string) => {
+  const onComponentClick = (itemName: string, i: string) => {
+    setAddContainer(true);
+
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
       setSettingItemId(i);
       setOpenTab(1);
     } else {
-      // Add validation for selection
-      if (selector.type === "input" && item.name === "Input") {
-        updateElementConfig(item, i);
+      //   // Add validation for selection
+      if (selector.type === "input" && itemName === "Input") {
+        updateElementConfig(itemName, i);
       } else if (
         selector.type === "output" &&
-        (item.name === "Text" ||
-          item.name === "Heading 1" ||
-          item.name === "Heading 2" ||
-          item.name === "Heading 3")
+        (itemName === "Text" ||
+          itemName === "Heading 1" ||
+          itemName === "Heading 2" ||
+          itemName === "Heading 3")
       ) {
-        updateElementConfig(item, i);
+        updateElementConfig(itemName, i);
       }
       setSelector(null);
     }
@@ -133,8 +135,8 @@ const Workspace: FC<IWorkspace> = ({
   const handleCheckIsContainer = (e: any) => {
     if (
       e.target.id === "Container" ||
-      e.target.parentNode.parentNode.id === "Container" ||
       e.target.parentNode.id === "Container" ||
+      e.target.parentNode.parentNode.id === "Container" ||
       e.target.parentNode.parentNode.parentNode.id === "Container"
     ) {
     } else {
@@ -186,7 +188,7 @@ const Workspace: FC<IWorkspace> = ({
                   }`}
                   // open item setting on click
                   onClick={(e) =>
-                    item.name === "Container" ? null : onComponentClick(item, i)
+                    item.name === "Container" ? null : onComponentClick(item.name, i)
                   }
                 >
                   <RenderItem
@@ -197,6 +199,10 @@ const Workspace: FC<IWorkspace> = ({
                     setSettingItemId={setSettingItemId}
                     setOpenTab={setOpenTab}
                     setAddContainer={setAddContainer}
+                    selector={selector}
+                    setSelector={setSelector}
+                    elementConfig={elementConfig}
+                    setElementConfig={setElementConfig}
                   />
                 </div>
               );

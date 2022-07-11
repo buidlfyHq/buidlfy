@@ -393,6 +393,12 @@ const SettingComponent: FC<ISettingComponent> = ({
                             borderRadius={borderRadius}
                             setBorderRadius={setBorderRadius}
                           />
+
+                          <ColorComponent
+                            color={color}
+                            setColor={setColor}
+                            selectedItem={selectedItem}
+                          />
                           <ShadowComponent
                             setSmall={setSmall}
                             setMedium={setMedium}

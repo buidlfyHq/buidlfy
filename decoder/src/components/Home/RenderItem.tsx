@@ -28,12 +28,17 @@ const RenderItem: FC<IRenderItem> = ({
     case "Container":
       return (
         <Container
+          children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
           imgData={item.imgData}
           borderRadius={item.style.borderRadius}
           borderWidth={item.style.borderWidth}
           shadow={item.style.shadow}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          outputValue={outputValue}
+          setOutputValue={setOutputValue}
         />
       );
     case "Button":
@@ -130,6 +135,7 @@ const RenderItem: FC<IRenderItem> = ({
           setInputValue={setInputValue}
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
+          color={item.style.color}
         />
       );
     case "Divider":

@@ -5,6 +5,7 @@ import "styles/Components.css";
 interface IInput {
   id: string;
   value: any;
+  color: any;
 }
 
 const Input: FC<{
@@ -12,8 +13,9 @@ const Input: FC<{
   inputValue: object[];
   borderRadius: number;
   shadow: any;
+  color: any;
   setInputValue: (inputValue: object[]) => void;
-}> = ({ id, inputValue, setInputValue, borderRadius, shadow }) => {
+}> = ({ id, inputValue, setInputValue, borderRadius, shadow, color }) => {
   const getValue = (inputArray) => {
     const requiredValue = inputArray.filter(
       (input: IInput) => input.id === id
@@ -23,13 +25,19 @@ const Input: FC<{
 
   // mapping: contractFunction: {methodName: 'createCampaign'}
   // ---> {id: 'xyz', methodName: 'createCampaign'}
+  console.log(color, "color");
 
   return (
     <div className="h-full flex justify-center items-center">
       <input
-        className="w-full px-3 py-2 ml-6 mr-6 leading-tight text-gray-700 bg-white border border-solid appearance-none input"
+        style={{
+          borderRadius: `${borderRadius}px`,
+          boxShadow: shadow,
+          borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+          border: "1px solid",
+        }}
+        className="w-full px-3 py-2 ml-6 mr-6 leading-tight text-gray-700 bg-white appearance-none input"
         id="input"
-        style={{ borderRadius: `${borderRadius}px`, boxShadow: shadow }}
         type="text"
         placeholder="Input"
         value={getValue(inputValue)}

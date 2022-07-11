@@ -1,5 +1,5 @@
 export default interface IStyles {
-  color?: object;
+  color?: any;
   backgroundColor?: object;
   fontWeight?: string;
   fontStyle?: string;

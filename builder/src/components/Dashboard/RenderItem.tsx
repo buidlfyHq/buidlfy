@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, Dispatch, SetStateAction } from "react";
 import Container from "../CustomComponents/Container";
 import Button from "../CustomComponents/Button";
 import Text from "../CustomComponents/Text";
@@ -17,6 +17,20 @@ interface IRenderItem {
   setSettingItemId?;
   setOpenTab?;
   setAddContainer?;
+  selector?: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  };
+  setSelector?: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  }) => void;
+  elementConfig?;
+  setElementConfig?: Dispatch<SetStateAction<object>>;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -26,7 +40,11 @@ const RenderItem: FC<IRenderItem> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  setAddContainer
+  setAddContainer,
+  selector,
+  setSelector,
+  elementConfig,
+  setElementConfig,
 }) => {
   switch (item.name) {
     case "Container":
@@ -50,6 +68,10 @@ const RenderItem: FC<IRenderItem> = ({
           setOpenTab={setOpenTab}
           setDrag={setDrag}
           setAddContainer={setAddContainer}
+          selector={selector}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          setElementConfig={setElementConfig}
         />
       );
     case "Button":
@@ -144,6 +166,7 @@ const RenderItem: FC<IRenderItem> = ({
         <Input
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
+          color={item.style.color}
         />
       );
     case "Image":

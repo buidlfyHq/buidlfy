@@ -41,7 +41,8 @@ const ColorComponent: FC<IColorComponent> = ({
       >
         <VscSymbolColor className="text-[18px] mr-3" />
         <>
-          {selectedItem?.name === "Container" ? (
+          {selectedItem?.name === "Container" ||
+          selectedItem?.name === "Input" ? (
             <span className="px-1 flex my-1 text-xl text-gray-500 font-regular font-normal not-italic">
               Border Color
             </span>
