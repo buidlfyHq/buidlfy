@@ -15,7 +15,7 @@ const Input: FC<IInput> = ({ borderRadius, shadow, color }) => {
           borderRadius: `${borderRadius}px`,
           boxShadow: shadow,
           borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-          borderWidth: "1px solid",
+          border: "1px solid",
         }}
         className="w-full px-3 py-2 ml-6 mr-6 leading-tight text-gray-700 bg-white appearance-none input"
         id="input"

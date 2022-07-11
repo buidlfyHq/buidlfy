@@ -10,5 +10,4 @@ export default interface IStyles {
   borderRadius?: number;
   borderWidth?: number;
   shadow?: any;
-
 }
