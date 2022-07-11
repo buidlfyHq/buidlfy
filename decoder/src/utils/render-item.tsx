@@ -1,18 +1,25 @@
 import { FC } from "react";
-import Container from "../CustomComponents/Container";
-import Button from "../CustomComponents/Button";
-import Text from "../CustomComponents/Text";
-// import Image from "../CustomComponents/Image";
-import Input from "../CustomComponents/Input";
-import Divider from "../CustomComponents/Divider";
-import Image from "../CustomComponents/Image";
+import Container from "components/custom-components/container";
+import Button from "components/custom-components/button";
+import Text from "components/custom-components/text";
+import Input from "components/custom-components/input";
+import Divider from "components/custom-components/divider";
+import Image from "components/custom-components/image";
 import IItems from "interfaces/items";
 // import ConnectWallet from "components/ConnectWallet";
 
 interface IRenderItem {
   item: IItems;
-  inputValue: object[];
-  setInputValue: (inputValue: object[]) => void;
+  inputValue: {
+    id: string;
+    value: string;
+  }[];
+  setInputValue: (
+    inputValue: {
+      id: string;
+      value: string;
+    }[]
+  ) => void;
   outputValue: object[];
   setOutputValue: (outputValue: object[]) => void;
 }

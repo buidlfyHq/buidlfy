@@ -1,5 +1,5 @@
 import { ethers, Contract } from "ethers";
-import { setValue } from "./SetValue";
+import { setValue } from "./set-value";
 
 export const onRequest = async (
   method: string,

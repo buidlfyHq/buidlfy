@@ -1,16 +1,22 @@
 import { FC, useState } from "react";
-import BuilderConfig from "config";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import RenderItem from "components/Home/RenderItem";
-import ConnectWallet from "components/ConnectWallet";
+import BuilderConfig from "config";
+import RenderItem from "utils/render-item";
+// import ConnectWallet from "components/ConnectWallet";
+import IItems from "interfaces/items";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Home: FC = () => {
   const config = JSON.parse(BuilderConfig);
-  const [inputValue, setInputValue] = useState<object[]>([]);
+  const [inputValue, setInputValue] = useState<
+    {
+      id: string;
+      value: string;
+    }[]
+  >([]);
   const [outputValue, setOutputValue] = useState<object[]>([]);
-  const [account, setAccount] = useState(null);
+  // const [account, setAccount] = useState(null);
 
   return (
     <ResponsiveGridLayout
@@ -22,9 +28,8 @@ const Home: FC = () => {
       isDraggable={false}
       isResizable={false}
     >
-      {config.builder.map((c) => {
+      {config.builder.map((c: IItems) => {
         const { x, y, w, h, minW, i } = c;
-        console.log(c, "c");
         return (
           <div key={i} data-grid={{ x, y, w, h, minW }}>
             <RenderItem

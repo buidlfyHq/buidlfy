@@ -1,14 +1,13 @@
 import { FC, useState, useEffect } from "react";
-import { ethers, providers, Contract, Signer } from "ethers";
-import BuilderConfig from "config";
-import { onLoad } from "../Utils/OnLoad";
-import { onRequest } from "../Utils/OnRequest";
-import ITexts from "interfaces/texts";
-import { setValue } from "../Utils/SetValue";
-import { Dialog } from "@headlessui/react";
+// import { Dialog } from "@headlessui/react";
+import { ethers, Contract } from "ethers";
 import Web3Modal from "web3modal";
-import { providerOptions } from "../ConnectWallet/providerOptions";
-import "styles/Components.css";
+import BuilderConfig from "config";
+import { onLoad } from "hooks/on-load";
+import { onRequest } from "hooks/on-request";
+import { providerOptions } from "feature/connect-wallet/provider-options";
+import ITexts from "interfaces/texts";
+import "styles/components.css";
 
 const web3Modal = new Web3Modal({
   cacheProvider: true, // optional
@@ -27,16 +26,13 @@ const Button: FC<ITexts> = ({
   backgroundColor,
   contractFunction,
   inputValue,
-  setInputValue,
   outputValue,
   setOutputValue,
-  borderRadius,
-  shadow,
   connectWallet,
 }) => {
   const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
-  const [account, setAccount] = useState(null);
+  const [account, setAccount] = useState<string>(null);
 
   useEffect(() => {
     if (config.contract.abi !== [] && config.contract.address !== "") {
@@ -119,51 +115,24 @@ const Button: FC<ITexts> = ({
           </Dialog.Panel>
         </div>
       </Dialog> */}
-      {connectWallet == "on" ? (
-        <>
-          {!account ? (
-            <div
-              style={{
-                fontWeight: bold,
-                fontStyle: italic,
-                textDecoration: underline,
-                color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-                borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-                display: "flex",
-                justifyContent: "center",
-                fontSize: `${fontSize}px`,
-                backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-              }}
-              className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
-              onClick={connectWalletButton}
-            >
-              <>
-                {link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}
-              </>{" "}
-            </div>
-          ) : (
-            <div
-              style={{
-                fontWeight: bold,
-                fontStyle: italic,
-                textDecoration: underline,
-                color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-                borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-                display: "flex",
-                justifyContent: "center",
-                fontSize: `${fontSize}px`,
-                backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-              }}
-              className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
-              onClick={disconnect}
-            >
-              <>
-                Disconnect
-                {/* {link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>} */}
-              </>{" "}
-            </div>
-          )}
-        </>
+      {connectWallet === "on" ? (
+        <div
+          style={{
+            fontWeight: bold,
+            fontStyle: italic,
+            textDecoration: underline,
+            color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+            borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+            display: "flex",
+            justifyContent: "center",
+            fontSize: `${fontSize}px`,
+            backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+          }}
+          className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
+          onClick={!account ? connectWalletButton : disconnect}
+        >
+          <>{!account ? value : "Disconnect"}</>
+        </div>
       ) : (
         <div
           style={{
@@ -182,7 +151,7 @@ const Button: FC<ITexts> = ({
             contractFunction.methodName ? onResponse() : console.log("Clicked")
           }
         >
-          <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>{" "}
+          <>{link.length > 0 ? <a href={link}>{value}</a> : { value }}</>
         </div>
       )}
     </main>

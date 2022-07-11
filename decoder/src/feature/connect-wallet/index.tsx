@@ -1,7 +1,7 @@
 import { useState, FC } from "react";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-import { providerOptions } from "./providerOptions";
+import { providerOptions } from "./provider-options";
 
 interface ButtonProps {
   text: string;
