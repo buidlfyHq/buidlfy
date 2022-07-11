@@ -131,7 +131,7 @@ const Button: FC<ITexts> = ({
           className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
           onClick={!account ? connectWalletButton : disconnect}
         >
-          <>{!account ? value : "Disconnect"}</>
+          {!account ? value : "Disconnect"}
         </div>
       ) : (
         <div
@@ -151,7 +151,7 @@ const Button: FC<ITexts> = ({
             contractFunction.methodName ? onResponse() : console.log("Clicked")
           }
         >
-          <>{link.length > 0 ? <a href={link}>{value}</a> : { value }}</>
+          {link.length > 0 ? <a href={link}>{value}</a> : <>{ value }</>}
         </div>
       )}
     </main>
