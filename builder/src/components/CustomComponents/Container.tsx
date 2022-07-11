@@ -147,7 +147,6 @@ const Container = ({
     <section
       id="container-drag"
       className="relative pt-2 border cursor-pointer h-fit"
-      // className="flex items-center justify-center h-full"
     >
       <ResponsiveGridLayout
         layouts={{ lg: children }}
