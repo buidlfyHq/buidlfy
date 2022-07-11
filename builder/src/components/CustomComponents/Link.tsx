@@ -15,6 +15,7 @@ const Link: FC<ITexts> = ({
 }) => {
   return (
     <div
+      id="Link"
       style={{
         fontWeight: bold,
         fontStyle: italic,

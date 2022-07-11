@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useRef, useEffect } from "react";
 import { VscSymbolColor } from "react-icons/vsc";
 import { SketchPicker } from "react-color";
 import "../../styles/Components.css";
@@ -7,13 +7,25 @@ import "../../styles/Dashboard.css";
 interface IBgColorComponent {
   color: any;
   setBgColor: (color: any) => void;
+  siteSetting?: boolean;
 }
 
-const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
+const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor, siteSetting }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const ref = useRef<HTMLDivElement>()
+
+  useEffect(() => {
+    function handleOutsideClick(event:any) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setDisplayColorPicker(false)
+      }
+    }
+    document.addEventListener("click", handleOutsideClick);
+    return () => document.removeEventListener("click", handleOutsideClick);
+  }, [ref]);
 
   const handleClick = () => {
-    setDisplayColorPicker(!displayColorPicker);
+    setDisplayColorPicker(true);
   };
 
   const handleClose = () => {
@@ -27,23 +39,27 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
     setBgColor(color.rgb);
   };
 
+
   return (
     <>
       <div
+        ref={ref}
         onClick={handleClick}
-        className="flex items-center w-full px-3 py-2 text-gray-600 cursor-pointer hover:bg-slate-100"
+        className={`flex flex-col justify-center items-start py-2 text-gray-600 cursor-pointer`}
       >
-        <VscSymbolColor className="text-[18px] mr-3" />
-        <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
-          Bg Color{" "}
-        </span>
-      </div>
-      {displayColorPicker ? (
-        <div>
-          <div onClick={handleClose} />
-          <SketchPicker color={color} onChange={handleChange} />
+        <div className="flex items-center w-full px-3 py-2 mb-2 border rounded-lg hover:bg-slate-100">
+          <VscSymbolColor className="text-[18px] mr-3" />
+          <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
+            Bg Color{" "}
+          </span>
         </div>
-      ) : null}
+        {displayColorPicker ? (
+          <>
+            <div onClick={handleClose} />
+            <SketchPicker color={color} onChange={handleChange} />
+          </>
+        ) : null}
+      </div>
     </>
   );
 };

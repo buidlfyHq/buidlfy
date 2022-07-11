@@ -44,7 +44,7 @@ const Navbar: FC<INavbar> = ({
       className={
         className === ""
           ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 bg-white`
-          : `h-[60px] w-full top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 bg-white`
+          : `h-[60px] w-full top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 `
       }
     >
       <div
@@ -53,7 +53,7 @@ const Navbar: FC<INavbar> = ({
       >
         {className !== "" && <AiOutlineDoubleRight />}
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row h-[60px]">
         <div className="flex flex-row items-center mx-2 text-[18px] text-slate-600">
           <span className="mx-1 p-2 hover:bg-slate-100 hover:rounded-md cursor-pointer">
             <MdUndo />
@@ -62,7 +62,7 @@ const Navbar: FC<INavbar> = ({
             <MdRedo />
           </span>
         </div>
-        <div className="flex items-center p-2 mx-3 my-3 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md">
+        <div className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md">
           <span className="mr-1">
             <AiOutlineEye />
           </span>
@@ -70,7 +70,7 @@ const Navbar: FC<INavbar> = ({
         </div>
 
         <button
-          className="btn rounded cursor-pointer whitespace-nowrap px-4 h-10 my-5"
+          className="btn rounded cursor-pointer whitespace-nowrap px-4 h-10 my-2"
           onClick={handleClick}
         >
           Publish

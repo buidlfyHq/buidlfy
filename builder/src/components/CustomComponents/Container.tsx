@@ -1,11 +1,19 @@
 import React, { FC, useState } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import { BiGridHorizontal } from "react-icons/bi";
+import ShortUniqueId from "short-unique-id";
+import GridLayout from "react-grid-layout";
+import { components } from "components/Dashboard/component";
 import RenderItem from "components/Dashboard/RenderItem";
 import IItems from "interfaces/items";
 import "styles/Components.css";
 
-const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
+interface IWidth {
+  containerWidth: number;
+  margin: [number, number];
+  cols: number;
+  containerPadding: [number, number];
+}
 
 // interface IWorkspace {
 //   setSettingItemId: (item: string) => void;
@@ -49,35 +57,27 @@ const Container = ({
   // border,
   // backgroundImg,
 }) => {
-  // at least one element is needed in layout to perform drop functionality
+  // console.log(item)
   const [templay, setTempLay] = useState<Layout[]>([]);
-
-  // const checkY = (items: IItems[]) => {
-  //   if(items.length === 0) return 1
-  //   else{
-  //     let arr = items.map(item => item.y)
-  //     return Math.max(...arr)+1
-  //   }
-  // }
 
   // on layout change
   // to persist layout changes
-  const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-    let newItemsArr = layout.map((obj: IItems) => {
-      let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
-      const { h, minW, x, y, w, i } = obj;
-      return (selectedItem = {
-        ...selectedItem,
-        h,
-        minW,
-        x,
-        y,
-        w,
-        i,
-      });
-    });
-    newItemsArr.length > 0 ? setTempLay(newItemsArr) : setTempLay(templay);
-  };
+  // const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
+  //   let newItemsArr = layout.map((obj: IItems) => {
+  //     let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
+  //     const { h, minW, x, y, w, i } = obj;
+  //     return (selectedItem = {
+  //       ...selectedItem,
+  //       h,
+  //       minW,
+  //       x,
+  //       y,
+  //       w,
+  //       i,
+  //     });
+  //   });
+  //   newItemsArr.length > 0 ? setTempLay(newItemsArr) : setTempLay(templay);
+  // };
 
   const updateElementConfig = (itemName: string, i: string) => {
     // for updating selected element config
@@ -143,22 +143,25 @@ const Container = ({
     }
   };
 
+  let containerW = document
+    .querySelector(`#${item.i}`)
+    ?.getBoundingClientRect().width;
+
   return (
     <section
-      id="container-drag"
-      className="relative pt-2 border cursor-pointer h-fit"
-      // className="flex items-center justify-center h-full"
+      id={item.i}
+      className="container-drag relative w-full pt-2 border cursor-pointer h-fit"
     >
-      <ResponsiveGridLayout
-        layouts={{ lg: children }}
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
+      <GridLayout
+        layout={children}
+        // breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        // cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
+        cols={6}
         rowHeight={50}
-        width={window.innerWidth - 250}
+        width={containerW}
         isBounded={true}
         compactType="horizontal"
         resizeHandles={["nw", "se"]}
-        onLayoutChange={onLayoutChange}
         margin={[0, 0]}
         className="h-full"
         style={{
@@ -176,7 +179,7 @@ const Container = ({
       >
         {!children.length ? (
           <div
-            className="z-100 h-full"
+            className="w-full h-full"
             key={"Dop"}
             data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1 }}
             onMouseOver={() => setDrag(false)}
@@ -213,12 +216,7 @@ const Container = ({
               const { x, y, w, h, minW, i } = item;
               return (
                 <div
-                  // className="z-100 h-full"
-                  className={`z-100 h-full ${
-                    selector
-                      ? "hover:outline-orange-300 hover:outline"
-                      : "hover:outline-slate-300 hover:outline-dashed"
-                  }`}
+                  className="w-full h-full"
                   key={i}
                   data-grid={{ x, y, w, h, minW }}
                   onMouseOver={() => setDrag(false)}
@@ -230,11 +228,10 @@ const Container = ({
               );
             })
         )}
-      </ResponsiveGridLayout>
+      </GridLayout>
       <BiGridHorizontal
         id="drag"
-        // commented to test workspace selection and deselection of container
-        onClick={() => onComponentClick(item.name, item.i)}
+        onClick={() => onComponentClick(item, item.i)}
       />
     </section>
   );
