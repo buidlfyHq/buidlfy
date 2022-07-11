@@ -10,14 +10,18 @@ interface IBgColorComponent {
   siteSetting?: boolean;
 }
 
-const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor, siteSetting }) => {
+const BgColorComponent: FC<IBgColorComponent> = ({
+  color,
+  setBgColor,
+  siteSetting,
+}) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
-  const ref = useRef<HTMLDivElement>()
+  const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    function handleOutsideClick(event:any) {
+    function handleOutsideClick(event: any) {
       if (ref.current && !ref.current.contains(event.target)) {
-        setDisplayColorPicker(false)
+        setDisplayColorPicker(false);
       }
     }
     document.addEventListener("click", handleOutsideClick);
@@ -39,7 +43,6 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor, siteSettin
     setBgColor(color.rgb);
   };
 
-
   return (
     <>
       <div
@@ -47,10 +50,10 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor, siteSettin
         onClick={handleClick}
         className={`flex flex-col justify-center items-start py-2 text-gray-600 cursor-pointer`}
       >
-        <div className="flex items-center w-full px-3 py-2 mb-2 border rounded-lg hover:bg-slate-100">
+        <div className="flex items-center w-full px-3 py-2 mb-2 hover:bg-slate-100">
           <VscSymbolColor className="text-[18px] mr-3" />
           <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
-            Bg Color{" "}
+            Background Color{" "}
           </span>
         </div>
         {displayColorPicker ? (
