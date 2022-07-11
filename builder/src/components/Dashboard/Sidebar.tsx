@@ -37,7 +37,7 @@ const Sidebar: FC<ISidebar> = ({
   setBackgroundColor,
 }) => {
   const uid = new ShortUniqueId();
-  const [indexValue, setIndexValue] = useState(2);
+  const [indexValue, setIndexValue] = useState(0);
 
   const selectedItem =
     items?.find((item) => item.i === settingItemId) ||
@@ -54,9 +54,13 @@ const Sidebar: FC<ISidebar> = ({
   };
 
   const checkY = (items: IItems[]) => {
-    if (items.length === 0) return 1;
+    if (items.length === 0) return 0;
     else {
-      let arr = items.map((item) => item.y);
+      let arr = items.map((item) => {
+        return item.name === "Container"
+          ? Math.max(...item.children.map((obj) => obj.y), item.y)
+          : item.y;
+      });
       return Math.max(...arr) + 1;
     }
   };
@@ -79,6 +83,14 @@ const Sidebar: FC<ISidebar> = ({
     localStorage.removeItem("items");
     setItems([]);
   };
+  const checkContainerY = (selectedItem: IItems) => {
+    if (selectedItem.children.length === 0) return 0;
+    else {
+      let arr = selectedItem.children.map((item) => item.y);
+      return Math.max(...arr) + 1;
+    }
+  };
+
   return (
     <main
       className={`fixed left-0 top-0 z-0 w-[250px] border-r h-full ${className}`}
@@ -143,14 +155,6 @@ const Sidebar: FC<ISidebar> = ({
             Clear
           </button>
         </div>
-
-        <div className="flex flex-row items-center mt-1 cursor-pointer">
-          <span className="mx-2">
-            <AiOutlineSetting />
-          </span>{" "}
-          Set Background
-          <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
-        </div>
       </div>
 
       {/* Components */}
@@ -165,15 +169,18 @@ const Sidebar: FC<ISidebar> = ({
                     key={index}
                     className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
                     onClick={() => {
+                      console.log(selectedItem);
+                      let y = checkContainerY(selectedItem);
                       let newC = {
                         ...c,
                         i: uid(),
                         x: 0,
-                        y: index,
+                        y,
                         w: 12,
                         minW: 1,
                       };
-
+                      // incrementIndex();
+                      // console.log(newC)
                       let updatedItem = {
                         ...selectedItem,
                         children: [...selectedItem.children, newC],
@@ -208,7 +215,7 @@ const Sidebar: FC<ISidebar> = ({
                       w: 12,
                       minW: 1,
                     };
-                    incrementIndex();
+                    // incrementIndex();
                     setItems([...items, newC]);
                   }}
                 >

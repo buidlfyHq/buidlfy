@@ -1,5 +1,5 @@
 export default interface IStyles {
-  color?: object;
+  color?: any;
   backgroundColor?: object;
   fontWeight?: string;
   fontStyle?: string;
@@ -10,5 +10,4 @@ export default interface IStyles {
   borderRadius?: number;
   borderWidth?: number;
   shadow?: any;
-
 }

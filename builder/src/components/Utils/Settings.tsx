@@ -109,7 +109,50 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
+  const utilityFunction = (style,property, value1, value2) => {
+    console.log(property)
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            fontWeight: property ? value1 : value2,
+          },
+        };
+      } else if (selectedChild?.i == settingItemId) {
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            fontWeight: property ? value1 : value2,
+          },
+        };
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+
   const setBold = (fontWeight: boolean) => {
+    // utilityFunction("fontWeight", fontWeight, "bold", "normal")
     if (!settingItemId) {
       return;
     }

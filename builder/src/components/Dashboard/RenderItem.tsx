@@ -70,8 +70,8 @@ const RenderItem: FC<IRenderItem> = ({
           setAddContainer={setAddContainer}
           selector={selector}
           setSelector={setSelector}
-                    elementConfig={elementConfig}
-                    setElementConfig={setElementConfig}
+          elementConfig={elementConfig}
+          setElementConfig={setElementConfig}
         />
       );
     case "Button":
@@ -166,6 +166,7 @@ const RenderItem: FC<IRenderItem> = ({
         <Input
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
+          color={item.style.color}
         />
       );
     case "Image":

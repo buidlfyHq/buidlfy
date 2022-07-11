@@ -127,7 +127,7 @@ const AbiComponent: FC<IAbiComponent> = ({
                   <h6>Input - {input.name}</h6>
                   <div
                     key={i}
-                    className="mb-2 px-2 border rounded mt-1 h-7"
+                    className="grid mb-2 px-2 border rounded mt-1 h-7"
                     onClick={() => {
                       setSelector({
                         methodName: showComponent.value.name,
@@ -140,11 +140,27 @@ const AbiComponent: FC<IAbiComponent> = ({
                   >
                     <>
                       {!objects.length ? (
-                        <span>Select An Element</span>
+                        <>
+                          <span>Select An Element</span>
+                          <button
+                            disabled
+                            className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
+                          >
+                            Save
+                          </button>
+                        </>
                       ) : (
                         <>
                           {!filterObjects.length ? (
-                            <span>Select An Element</span>
+                            <>
+                              <span>Select An Element</span>
+                              <button
+                                disabled
+                                className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
+                              >
+                                Save
+                              </button>
+                            </>
                           ) : (
                             filterObjects.map((key) => {
                               let filteredObject = elementConfig[key]?.filter(
@@ -154,13 +170,31 @@ const AbiComponent: FC<IAbiComponent> = ({
                               return (
                                 <>
                                   {filteredObject[0] && (
-                                    <span className="flex">
-                                      <span className="flex-1">
-                                        {filteredObject[0].name} -{" "}
-                                        {filteredObject[0].id}
+                                    <>
+                                      <span className="flex">
+                                        <span className="flex-1">
+                                          {filteredObject[0].name} -{" "}
+                                          {filteredObject[0].id}
+                                        </span>
+                                        <AiOutlineEdit className="mt-1.5" />
                                       </span>
-                                      <AiOutlineEdit className="mt-1.5" />
-                                    </span>
+                                      {show ? (
+                                        <button className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                          <span
+                                            className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
+                                            role="status"
+                                          ></span>
+                                          Save
+                                        </button>
+                                      ) : (
+                                        <button
+                                          onClick={() => handleSave()}
+                                          className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >
+                                          Save
+                                        </button>
+                                      )}
+                                    </>
                                   )}
                                 </>
                               );
@@ -242,7 +276,7 @@ const AbiComponent: FC<IAbiComponent> = ({
 
                   <div
                     key={i}
-                    className="mb-2 px-2 border rounded mt-1 h-7"
+                    className="grid mb-2 px-2 border rounded mt-1 h-7"
                     onClick={() => {
                       setSelector({
                         methodName: showComponent.value.name,
@@ -254,11 +288,27 @@ const AbiComponent: FC<IAbiComponent> = ({
                     }}
                   >
                     {objects.length === 0 ? (
-                      <span>Select An Element</span>
+                      <>
+                        <span>Select An Element</span>
+                        <button
+                          disabled
+                          className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
+                        >
+                          Save
+                        </button>
+                      </>
                     ) : (
                       <>
                         {filterObjects.length === 0 ? (
-                          <span>Select An Element</span>
+                          <>
+                            <span>Select An Element</span>
+                            <button
+                              disabled
+                              className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
+                            >
+                              Save
+                            </button>
+                          </>
                         ) : (
                           filterObjects.map((key) => {
                             let filteredObject = elementConfig[key]?.filter(
@@ -268,13 +318,31 @@ const AbiComponent: FC<IAbiComponent> = ({
                             return (
                               <>
                                 {filteredObject[0] && (
-                                  <span className="flex">
-                                    <span className="flex-1">
-                                      {filteredObject[0].name} -{" "}
-                                      {filteredObject[0].id}
+                                  <>
+                                    <span className="flex">
+                                      <span className="flex-1">
+                                        {filteredObject[0].name} -{" "}
+                                        {filteredObject[0].id}
+                                      </span>
+                                      <AiOutlineEdit className="mt-1.5" />
                                     </span>
-                                    <AiOutlineEdit className="mt-1.5" />
-                                  </span>
+                                    {show ? (
+                                      <button className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        <span
+                                          className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
+                                          role="status"
+                                        ></span>
+                                        Save
+                                      </button>
+                                    ) : (
+                                      <button
+                                        onClick={() => handleSave()}
+                                        className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                      >
+                                        Save
+                                      </button>
+                                    )}
+                                  </>
                                 )}
                               </>
                             );
@@ -286,22 +354,6 @@ const AbiComponent: FC<IAbiComponent> = ({
                 </section>
               );
             })}
-          {show ? (
-            <button className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              <span
-                className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
-                role="status"
-              ></span>
-              Save
-            </button>
-          ) : (
-            <button
-              onClick={() => handleSave()}
-              className="fixed bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Save
-            </button>
-          )}
         </>
       ) : null}
     </main>

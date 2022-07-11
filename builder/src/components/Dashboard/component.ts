@@ -5,7 +5,7 @@ export const components = [
     style: {
       deleteComponent: 0,
       backgroundColor: { r: "0", g: "0", b: "0" },
-      color: { r: "0", g: "0", b: "0", a: "0" },
+      color: { r: "0", g: "0", b: "0", a: "100" },
       borderRadius: 1,
       borderWidth: 0,
       shadow: "none",
@@ -103,11 +103,12 @@ export const components = [
       deleteComponent: 0,
       borderRadius: 1,
       shadow: "none",
+      color: { r: "0", g: "0", b: "0", a: "100" },
     },
   },
   {
     name: "Image",
-    h: 3,
+    h: 1.2,
     style: {
       deleteComponent: 0,
       justifyContent: "center",

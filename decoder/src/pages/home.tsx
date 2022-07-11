@@ -24,6 +24,7 @@ const Home: FC = () => {
     >
       {config.builder.map((c) => {
         const { x, y, w, h, minW, i } = c;
+        console.log(c, "c");
         return (
           <div key={i} data-grid={{ x, y, w, h, minW }}>
             <RenderItem

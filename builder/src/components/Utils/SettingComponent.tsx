@@ -149,7 +149,7 @@ const SettingComponent: FC<ISettingComponent> = ({
 
   return (
     <>
-      <div className="rounded-[8px] py-2 px-4 cursor-pointer relative">
+      <div className="rounded-[8px] py-2 cursor-pointer relative"> 
         <div className="border shadow-sm sidebar menu" ref={ref}>
           {selectedItem?.name === "Button" ? (
             <>
@@ -392,6 +392,12 @@ const SettingComponent: FC<ISettingComponent> = ({
                           <BorderRadiusComponent
                             borderRadius={borderRadius}
                             setBorderRadius={setBorderRadius}
+                          />
+
+                          <ColorComponent
+                            color={color}
+                            setColor={setColor}
+                            selectedItem={selectedItem}
                           />
                           <ShadowComponent
                             setSmall={setSmall}

@@ -32,7 +32,7 @@ const Container: FC<IBgContainer> = ({
       style={{
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
         borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-        border: "solid",
+        // border: "solid",
         borderRadius: `${borderRadius}px`,
         borderWidth: `${borderWidth}px`,
         backgroundImage: `url(${imgData})`,

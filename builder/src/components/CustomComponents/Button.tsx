@@ -22,7 +22,7 @@ const Button: FC<ITexts> = ({
       {/* {connectWallet == "on" ? (
         <div
           style={{ justifyContent: justifyContent }}
-          className="flex px-6 items-center justify-center w-auto h-full"
+          className="flex items-center justify-center w-auto h-full px-6"
         >
           <div
             style={{
@@ -38,15 +38,15 @@ const Button: FC<ITexts> = ({
               backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
               boxShadow: shadow,
             }}
-            className="btn px-6 py-2 w-48 h-auto cursor-pointer whitespace-nowrap"
+            className="w-48 h-auto px-6 py-2 cursor-pointer btn whitespace-nowrap"
           >
             <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>{" "}
           </div>
         </div>
       ) : ( */}
       <div
-        style={{ justifyContent: justifyContent }}
-        className="flex px-6 items-center justify-center w-auto h-full"
+        style={{ justifyContent: justifyContent }} id="Button"
+        className="flex items-center justify-center w-auto h-full px-6"
       >
         <div
           style={{
@@ -62,7 +62,8 @@ const Button: FC<ITexts> = ({
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
             boxShadow: shadow,
           }}
-          className="btn px-6 py-2 w-48 h-auto cursor-pointer whitespace-nowrap"
+          id="Button"
+          className="w-48 h-auto px-6 py-2 cursor-pointer btn whitespace-nowrap"
         >
           <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>{" "}
         </div>

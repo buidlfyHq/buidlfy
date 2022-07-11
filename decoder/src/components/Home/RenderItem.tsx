@@ -135,6 +135,7 @@ const RenderItem: FC<IRenderItem> = ({
           setInputValue={setInputValue}
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
+          color={item.style.color}
         />
       );
     case "Divider":

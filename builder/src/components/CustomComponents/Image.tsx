@@ -8,11 +8,15 @@ interface IImageComponent {
 }
 
 const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => {
+  const handleChange = (e) => {
+    console.log(1)
+  }
   return (
     <>
       {imgData ? (
         <div
-          className="flex justify-center items-center h-full w-full"
+          id="Image"
+          className="flex items-center justify-center w-full h-full"
           style={{
             backgroundImage: `url(${imgData})`,
             backgroundRepeat: "no-repeat",
@@ -21,15 +25,11 @@ const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => {
           }}
         ></div>
       ) : (
-        <div
-          className="flex justify-center items-center h-full w-full"
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: justifyContent,
-            backgroundSize: "contain",
-          }}
-        ></div>
+        <div id="Image" className="flex items-center justify-center w-full h-full" onClick={handleChange}>
+          <div id="Image" className="px-10 bold py-[10px] rounded-xl bg-indigo-700 text-white">
+            Upload Image
+          </div>
+        </div>
       )}
     </>
   );
