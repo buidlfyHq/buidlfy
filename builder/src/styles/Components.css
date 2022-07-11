@@ -55,7 +55,7 @@
   margin-left: 2rem;
 }
 
-#container-drag{
+.container-drag{
   position: relative;
 }
 
@@ -65,7 +65,7 @@
   border-radius: 0 0 4px 4px;
 }
 
-#container-drag #drag{
+.container-drag #drag{
   visibility: hidden;
   position: absolute;
   z-index: 1;
@@ -75,7 +75,7 @@
   transition: opacity 0.2s;
 }
 
-#container-drag:hover #drag{
+.container-drag:hover #drag{
   visibility: visible;
   opacity: 1;
 }

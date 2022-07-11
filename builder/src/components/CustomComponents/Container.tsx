@@ -10,8 +10,6 @@ import ITexts from "interfaces/texts";
 import IItems from "interfaces/items";
 import "styles/Components.css";
 
-const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
-
 interface IWidth {
   containerWidth: number, 
   margin: [number, number], 
@@ -59,41 +57,25 @@ const Container = ({
 }) => {
   // console.log(item)
   const [templay, setTempLay] = useState<Layout[]>([]);
-  const [prevW, setPrevW] = useState(item || null)
-  console.log(item)
-  // useState(() => {
-  //   item && setPrevW(item.w)
-  // },[])
-  // console.log(item)
-
-  const calWidth = (item, layout) => {
-    let wI = item.w
-    let lay = layout.map(obj => {
-      // obj.w
-    })
-  }
 
   // on layout change
   // to persist layout changes
-  const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-    // console.log(layout, layouts)
-    // console.log(item, layout) 
-    calWidth(item, layout)
-    let newItemsArr = layout.map((obj: IItems) => {
-      let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
-      const { h, minW, x, y, w, i } = obj;
-      return (selectedItem = {
-        ...selectedItem,
-        h,
-        minW,
-        x,
-        y,
-        w,
-        i,
-      });
-    });
-    newItemsArr.length > 0 ? setTempLay(newItemsArr) : setTempLay(templay);
-  };
+  // const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
+  //   let newItemsArr = layout.map((obj: IItems) => {
+  //     let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
+  //     const { h, minW, x, y, w, i } = obj;
+  //     return (selectedItem = {
+  //       ...selectedItem,
+  //       h,
+  //       minW,
+  //       x,
+  //       y,
+  //       w,
+  //       i,
+  //     });
+  //   });
+  //   newItemsArr.length > 0 ? setTempLay(newItemsArr) : setTempLay(templay);
+  // };
 
   const onComponentClick = (item: IItems, i: string) => {
     setAddContainer(true);
@@ -102,23 +84,14 @@ const Container = ({
     setOpenTab(1);
   };
 
-  const handleWidthChange = (
-    containerWidth: number, 
-    margin: [number, number], 
-    cols: number, 
-    containerPadding: [number, number]
-  ) => {
-    // console.log(containerWidth, margin, cols, containerPadding)
-  }
 
-  const handleResize = (e) => {
-    // console.log(e)
-  }
-  console.log(item)
+
+  let containerW = document.querySelector(`#${item.i}`)?.getBoundingClientRect().width
+
   return (
     <section
-      id="container-drag"
-      className="relative w-full pt-2 border cursor-pointer h-fit"
+      id={item.i}
+      className="bg-orange-300 container-drag relative w-full pt-2 border cursor-pointer h-fit"
     >
       <GridLayout
         layout={ children }
@@ -126,15 +99,12 @@ const Container = ({
         // cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
         cols={6}
         rowHeight={50}
-        // width={window.innerWidth-500}
+        width={containerW}
         isBounded={true}
         compactType="horizontal"
         resizeHandles={["nw", "se"]}
-        // onLayoutChange={onLayoutChange}
         margin={[0, 0]}
-        // onResize={handleResize}
-        // onWidthChange={handleWidthChange}
-        className="w-full h-full"
+        className='h-full'
         style={{
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
           borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
@@ -146,13 +116,8 @@ const Container = ({
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           boxShadow: shadow,
-          // boxShadow,
         }}
       >
-        {/* <div className="w-full h-full"
-            key={"Dop"}
-            data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1 }}
-            > */}
         {children.length == 0 ? (
           <div
             className="w-full h-full"
@@ -160,7 +125,6 @@ const Container = ({
             data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1 }}
             onMouseOver={() => setDrag(false)}
             onMouseOut={() => setDrag(true)}
-            // onClick={() => onComponentClick(item, i)}
           >
             <RenderItem
               item={{
@@ -205,7 +169,6 @@ const Container = ({
               );
             })
         )}
-        {/* </div> */}
       </GridLayout>
       <BiGridHorizontal
         id="drag"
