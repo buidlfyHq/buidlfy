@@ -1,5 +1,7 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import IItems from "interfaces/items";
+import Dashboard from "pages/dashboard";
+import Home from "pages/home";
 
 interface IAbiMethods {
   contractConfig: { abi: string; address: string };
@@ -16,10 +18,22 @@ const AbiMethods: FC<IAbiMethods> = ({
   items,
   setItems,
 }) => {
-  const abiJson = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
-
+  // const abiJson = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
+  const [abiJson, setAbiJson] = useState<any>([]);
+  useEffect(() => {
+    if (contractConfig.abi) {
+      try {
+        setAbiJson(JSON.parse(contractConfig.abi));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [contractConfig.abi]);
   const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     // NOTE - try replacing with uuid
+    // if (!abiJson) {
+    //   return;
+    // }
     setShowComponent({
       id: e.target.value,
       value: abiJson[e.target.value],

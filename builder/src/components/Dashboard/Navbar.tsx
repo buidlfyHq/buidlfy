@@ -1,9 +1,11 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { AiOutlineDoubleRight, AiOutlineEye } from "react-icons/ai";
 import { MdUndo, MdRedo } from "react-icons/md";
 import { encode as base64_encode } from "base-64";
 import IItems from "interfaces/items";
+import Dashboard from "pages/dashboard";
+import Home from "pages/home";
 
 interface INavbar {
   className: string;
@@ -18,9 +20,20 @@ const Navbar: FC<INavbar> = ({
   items,
   contractConfig,
 }) => {
-  const abiJSON = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
+  const [abiJSON, setAbiJSON] = useState();
+  // const abiJSON = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
+
+  useEffect(() => {
+    if (contractConfig.abi) {
+      try {
+        setAbiJSON(JSON.parse(contractConfig.abi));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [contractConfig.abi]);
 
   const showSidebar = () => {
     setClassName("");

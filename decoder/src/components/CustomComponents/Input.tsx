@@ -25,7 +25,6 @@ const Input: FC<{
 
   // mapping: contractFunction: {methodName: 'createCampaign'}
   // ---> {id: 'xyz', methodName: 'createCampaign'}
-  console.log(color, "color");
 
   return (
     <div className="h-full flex justify-center items-center">
