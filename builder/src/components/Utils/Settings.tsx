@@ -126,7 +126,7 @@ const Settings: FC<ISetting> = ({
             [styleProp]: property ? value1 : value2,
           },
         };
-      } else if (selectedChild?.i == settingItemId) {
+      } else if (selectedChild?.i === settingItemId) {
         let child = {
           ...selectedChild,
           style: {
