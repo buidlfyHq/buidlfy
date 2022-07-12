@@ -6,8 +6,16 @@ export default interface IBgContainer {
   borderRadius: number;
   borderWidth: number;
   shadow?: any;
-  inputValue: object[];
-  setInputValue: (inputValue: object[]) => void;
+  inputValue: {
+    id: string;
+    value: string;
+  }[];
+  setInputValue: (
+    inputValue: {
+      id: string;
+      value: string;
+    }[]
+  ) => void;
   outputValue: object[];
   setOutputValue: (outputValue: object[]) => void;
   // borderRadius: any;

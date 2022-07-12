@@ -10,8 +10,8 @@ export default interface IItems {
   w: number;
   minW?: number;
   maxW?: number;
-  link?: string;
   name: string;
+  link?: string;
   value?: string;
   style: Styles;
   children?: any;

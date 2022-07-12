@@ -1,11 +1,9 @@
-import React, { FC } from "react";
-import { Responsive, WidthProvider } from "react-grid-layout";
-import RenderItem from "components/Home/RenderItem";
-import ITexts from "interfaces/texts";
+import { FC } from "react";
+import GridLayout from "react-grid-layout";
+import RenderItem from "utils/render-item";
 import IBgContainer from "interfaces/container";
-import "styles/Components.css";
-
-const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
+import IItems from "interfaces/items";
+import "styles/components.css";
 
 const Container: FC<IBgContainer> = ({
   children,
@@ -21,10 +19,9 @@ const Container: FC<IBgContainer> = ({
   setOutputValue,
 }) => {
   return (
-    <ResponsiveGridLayout
-      layouts={children}
-      breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-      cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
+    <GridLayout
+      layout={children}
+      cols={6}
       rowHeight={50}
       compactType="horizontal"
       isDraggable={false}
@@ -32,7 +29,6 @@ const Container: FC<IBgContainer> = ({
       style={{
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
         borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-        // border: "solid",
         borderRadius: `${borderRadius}px`,
         borderWidth: `${borderWidth}px`,
         backgroundImage: `url(${imgData})`,
@@ -43,7 +39,7 @@ const Container: FC<IBgContainer> = ({
       }}
       className="flex items-center justify-center h-full"
     >
-      {children.map((c) => {
+      {children.map((c: IItems) => {
         const { x, y, w, h, minW, i } = c;
         return (
           <div key={i} data-grid={{ x, y, w, h, minW }}>
@@ -57,7 +53,7 @@ const Container: FC<IBgContainer> = ({
           </div>
         );
       })}
-    </ResponsiveGridLayout>
+    </GridLayout>
   );
 };
 
