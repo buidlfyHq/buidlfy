@@ -37,7 +37,7 @@ const UploadComponent: FC<IUploadComponent> = ({
               ...item,
               imgData: reader.result,
             };
-          } else if (selectedChild?.i == selectedItem.i) {
+          } else if (selectedChild?.i === selectedItem.i) {
             let child = {
               ...selectedChild,
               imgData: reader.result,
