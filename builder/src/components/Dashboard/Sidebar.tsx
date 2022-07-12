@@ -68,21 +68,6 @@ const Sidebar: FC<ISidebar> = ({
   const setBgColor = (bgColor: { rgb: any }) => {
     setBackgroundColor(bgColor);
   };
-  const handleSave = () => {
-    if (items?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(items));
-    }
-  };
-  useEffect(() => {
-    let saveItems = localStorage.getItem("items");
-    if (saveItems) {
-      setItems(JSON.parse(saveItems));
-    }
-  }, []);
-  const handleClear = () => {
-    localStorage.removeItem("items");
-    setItems([]);
-  };
   const checkContainerY = (selectedItem: IItems) => {
     if (selectedItem.children.length === 0) return 0;
     else {
@@ -133,30 +118,6 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </section>
 
-      {/* Site settings */}
-      <div className="p-3 mt-16">
-        {/* <div className="flex flex-row items-center cursor-pointer">
-          <span className="ml-1 mr-1 text-2xl">
-            <BiGridSmall />
-          </span>{" "}
-          All Sites
-        </div> */}
-        <div className="flex flex-row items-center">
-          <button
-            onClick={() => handleSave()}
-            className="w-fit bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Save
-          </button>
-          <button
-            onClick={() => handleClear()}
-            className="w-fit ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Clear
-          </button>
-        </div>
-      </div>
-
       {/* Components */}
       <div className="px-6 py-3 mt-10">
         {addContainer ? (
@@ -179,10 +140,9 @@ const Sidebar: FC<ISidebar> = ({
                         w: 12,
                         minW: 1,
                       };
-                      // incrementIndex();
-                      // console.log(newC)
                       let updatedItem = {
                         ...selectedItem,
+                        h: y + c.h,
                         children: [...selectedItem.children, newC],
                       };
                       const elementsIndex = items.findIndex(

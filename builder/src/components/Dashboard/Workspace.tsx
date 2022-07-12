@@ -53,6 +53,13 @@ const Workspace: FC<IWorkspace> = ({
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
+      let height: number;
+      if(selectedItem.children){
+        if(selectedItem.children.length > 0){
+          height = Math.max(...selectedItem.children.map(child => child.y))+1
+          console.log(height, selectedItem)
+        }
+      }
       const { h, minW, x, y, w, i } = obj;
       return (selectedItem = {
         ...selectedItem,
@@ -195,6 +202,8 @@ const Workspace: FC<IWorkspace> = ({
                 >
                   <RenderItem
                     item={item}
+                    items={items}
+                    setItems={setItems}
                     imgData={imgData}
                     setDrag={setDrag}
                     setOpenSetting={setOpenSetting}

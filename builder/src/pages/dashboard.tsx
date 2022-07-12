@@ -50,6 +50,12 @@ const Dashboard: FC = () => {
       }
     };
     getInformation();
+
+    // checks for stored config
+    let saveItems = localStorage.getItem("items");
+    if (saveItems) {
+      setItems(JSON.parse(saveItems));
+    }
   }, []); // eslint-disable-line
 
   function useWindowSize() {
@@ -76,6 +82,17 @@ const Dashboard: FC = () => {
     return windowSize;
   }
   const size = useWindowSize();
+  const handleSave = () => {
+    if (items?.length > 0) {
+      localStorage.setItem("items", JSON.stringify(items));
+    }
+  };
+
+  const handleClear = () => {
+    localStorage.removeItem("items");
+    setItems([]);
+  };
+
   return (
     <div>
       <>
@@ -153,6 +170,22 @@ const Dashboard: FC = () => {
                         setBgColor={setBackgroundColor}
                         siteSetting={true}
                       />
+                    </div>
+                    <div className="p-3 mt-16 bottom-16 absolute">
+                      <div className="flex flex-row items-center">
+                        <button
+                          onClick={() => handleSave()}
+                          className="w-fit bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={() => handleClear()}
+                          className="w-fit ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          Clear
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </main>

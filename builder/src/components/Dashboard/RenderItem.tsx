@@ -10,6 +10,8 @@ import IItems from "interfaces/items";
 
 interface IRenderItem {
   item: IItems;
+  items?: IItems[];
+  setItems?: any;
   // made imgdata optional to test container
   imgData?: { id: string; data: string | ArrayBuffer }[];
   setDrag: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,6 +37,8 @@ interface IRenderItem {
 
 const RenderItem: FC<IRenderItem> = ({
   item,
+  items,
+  setItems,
   imgData,
   setDrag,
   setOpenSetting,
@@ -51,6 +55,8 @@ const RenderItem: FC<IRenderItem> = ({
       return (
         <Container
           item={item}
+          items={items}
+          setItems={setItems}
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
