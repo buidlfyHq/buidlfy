@@ -25,7 +25,7 @@ const AbiMethods: FC<IAbiMethods> = ({
       try {
         setAbiJson(JSON.parse(contractConfig.abi));
       } catch (error) {
-        console.log(error);
+        console.log("error");
       }
     }
   }, [contractConfig.abi]);
