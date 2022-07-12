@@ -1,9 +1,12 @@
 import { FC } from "react";
-import GridLayout from "react-grid-layout";
+// import GridLayout from "react-grid-layout";
+import { Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "utils/render-item";
 import IBgContainer from "interfaces/container";
 import IItems from "interfaces/items";
 import "styles/components.css";
+
+const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Container: FC<IBgContainer> = ({
   children,
@@ -19,9 +22,10 @@ const Container: FC<IBgContainer> = ({
   setOutputValue,
 }) => {
   return (
-    <GridLayout
-      layout={children}
-      cols={6}
+    <ResponsiveGridLayout
+      layouts={{lg: children}}
+      breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+      cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
       rowHeight={50}
       compactType="horizontal"
       isDraggable={false}
@@ -37,7 +41,6 @@ const Container: FC<IBgContainer> = ({
         backgroundPosition: "center",
         boxShadow: shadow,
       }}
-      className="flex items-center justify-center h-full"
     >
       {children.map((c: IItems) => {
         const { x, y, w, h, minW, i } = c;
@@ -53,7 +56,7 @@ const Container: FC<IBgContainer> = ({
           </div>
         );
       })}
-    </GridLayout>
+    </ResponsiveGridLayout>
   );
 };
 
