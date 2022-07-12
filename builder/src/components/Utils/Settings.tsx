@@ -109,7 +109,7 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
-  const utilityFunction = (style,property, value1, value2) => {
+  const utilityFunction = (styleProp, property, value1, value2) => {
     console.log(property)
     if (!settingItemId) {
       return;
@@ -123,7 +123,7 @@ const Settings: FC<ISetting> = ({
           ...item,
           style: {
             ...item["style"],
-            fontWeight: property ? value1 : value2,
+            [styleProp]: property ? value1 : value2,
           },
         };
       } else if (selectedChild?.i == settingItemId) {
@@ -131,7 +131,7 @@ const Settings: FC<ISetting> = ({
           ...selectedChild,
           style: {
             ...selectedChild["style"],
-            fontWeight: property ? value1 : value2,
+            [styleProp]: property ? value1 : value2,
           },
         };
         const childIndex = item.children?.findIndex(
@@ -152,211 +152,26 @@ const Settings: FC<ISetting> = ({
 
 
   const setBold = (fontWeight: boolean) => {
-    // utilityFunction("fontWeight", fontWeight, "bold", "normal")
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            fontWeight: fontWeight ? "bold" : "normal",
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            fontWeight: fontWeight ? "bold" : "normal",
-          },
-        };
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    utilityFunction("fontWeight", fontWeight, "bold", "normal")
   };
 
   const setItalic = (fontStyle: boolean) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            fontStyle: fontStyle ? "italic" : "normal",
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            fontStyle: fontStyle ? "italic" : "normal",
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    utilityFunction("fontStyle", fontStyle, "italic", "normal")
   };
 
   const setUnderline = (textDecoration: boolean) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            textDecoration: textDecoration ? "underline" : "none",
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            textDecoration: textDecoration ? "underline" : "none",
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    utilityFunction("textDecoration", textDecoration, "underline", "none")
   };
 
   const setColor = (color: { rgb: any }) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            color: color,
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            color: color,
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    singleWorkFunction("color", color)
   };
 
   const setBgColor = (backgroundColor: { rgb: any }) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            backgroundColor: backgroundColor,
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            backgroundColor: backgroundColor,
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    singleWorkFunction("backgroundColor", backgroundColor)
   };
 
-  const setDeleteComponent = (deleteComponent: number) => {
+  const singleWorkFunction = (styleProp, property) => {
     if (!settingItemId) {
       return;
     }
@@ -369,7 +184,7 @@ const Settings: FC<ISetting> = ({
           ...item,
           style: {
             ...item["style"],
-            deleteComponent: deleteComponent,
+            [styleProp]: property,
           },
         };
       } else if (selectedChild?.i === settingItemId) {
@@ -377,7 +192,7 @@ const Settings: FC<ISetting> = ({
           ...selectedChild,
           style: {
             ...selectedChild["style"],
-            deleteComponent: deleteComponent,
+            [styleProp]: property,
           },
         };
 
@@ -395,261 +210,36 @@ const Settings: FC<ISetting> = ({
       return item;
     });
     setItems(updatedItems);
+  }
+
+  const setDeleteComponent = (deleteComponent: number) => {
+    singleWorkFunction("deleteComponent", deleteComponent)
   };
 
   const setCenter = (justifyContent: boolean) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            justifyContent: justifyContent ? "center" : "inherit",
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            justifyContent: justifyContent ? "center" : "inherit",
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    utilityFunction("justifyContent", justifyContent, "center", "inherit")
   };
 
   const setLeft = (justifyContent: boolean) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            justifyContent: justifyContent ? "left" : "inherit",
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            justifyContent: justifyContent ? "left" : "inherit",
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    utilityFunction("justifyContent", justifyContent, "left", "inherit")
   };
 
   const setRight = (justifyContent: boolean) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            justifyContent: justifyContent ? "right" : "inherit",
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            justifyContent: justifyContent ? "right" : "inherit",
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    utilityFunction("justifyContent", justifyContent, "right", "inherit")
   };
 
   const setSmall = (shadow: boolean) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            shadow: shadow ? "0 1px 2px 0 rgb(0 0 0 / 0.05)" : "none",
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            shadow: shadow ? "0 1px 2px 0 rgb(0 0 0 / 0.05)" : "none",
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    utilityFunction("shadow", shadow, "0 1px 2px 0 rgb(0 0 0 / 0.05)", "none")
   };
 
   const setMedium = (shadow: boolean) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            shadow: shadow
-              ? "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
-              : "inherit",
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            shadow: shadow
-              ? "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
-              : "inherit",
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    utilityFunction("shadow", shadow, "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)", "inherit")
   };
 
   const setLarge = (shadow: boolean) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            shadow: shadow
-              ? "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
-              : "inherit",
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            shadow: shadow
-              ? "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
-              : "inherit",
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    utilityFunction("shadow", shadow, "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)", "inherit")
   };
+
   const setFontSize = (fontSize: any) => {
     if (!settingItemId) {
       return;
@@ -695,85 +285,11 @@ const Settings: FC<ISetting> = ({
   };
 
   const setBorderRadius = (borderRadius: any) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            borderRadius: borderRadius,
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            borderRadius: borderRadius,
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    singleWorkFunction("borderRadius", borderRadius)
   };
 
   const setBorderWidth = (borderWidth: any) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            borderWidth: borderWidth,
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            borderWidth: borderWidth,
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+    singleWorkFunction("borderWidth", borderWidth)
   };
 
   const setOn = (connectWallet: boolean) => {

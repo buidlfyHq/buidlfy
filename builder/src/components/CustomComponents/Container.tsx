@@ -36,6 +36,8 @@ interface IWidth {
 
 const Container = ({
   item,
+  items,
+  setItems,
   children,
   backgroundColor,
   color,
@@ -62,22 +64,35 @@ const Container = ({
 
   // on layout change
   // to persist layout changes
-  // const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-  //   let newItemsArr = layout.map((obj: IItems) => {
-  //     let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
-  //     const { h, minW, x, y, w, i } = obj;
-  //     return (selectedItem = {
-  //       ...selectedItem,
-  //       h,
-  //       minW,
-  //       x,
-  //       y,
-  //       w,
-  //       i,
-  //     });
-  //   });
-  //   newItemsArr.length > 0 ? setTempLay(newItemsArr) : setTempLay(templay);
-  // };
+  const onLayoutChange = (layout: Layout[]) => {
+    let newItemsArr = layout.map((obj: IItems) => {
+      let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
+      const { h, minW, x, y, w, i } = obj;
+      return (selectedItem = {
+        ...selectedItem,
+        h,
+        minW,
+        x,
+        y,
+        w,
+        i,
+      });
+    });
+
+    if(newItemsArr[0].i !== "Demo"){
+      let newArr = {
+        ...item,
+        children: newItemsArr
+      }
+      let filterItems = items.filter(element => element.i !== item.i)
+      setItems([
+        ...filterItems,
+        newArr
+      ])
+    } else {
+      setItems(items)
+    }
+  };
 
   const updateElementConfig = (itemName: string, i: string) => {
     // for updating selected element config
@@ -146,7 +161,7 @@ const Container = ({
   let containerW = document
     .querySelector(`#${item.i}`)
     ?.getBoundingClientRect().width;
-
+ 
   return (
     <section
       id={item.i}
@@ -154,14 +169,13 @@ const Container = ({
     >
       <GridLayout
         layout={children}
-        // breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        // cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
         cols={6}
         rowHeight={50}
         width={containerW}
         isBounded={true}
+        onLayoutChange={onLayoutChange}
         compactType="horizontal"
-        resizeHandles={["nw", "se"]}
+        resizeHandles={item.children ? ["nw", "se"] : null}
         margin={[0, 0]}
         className="h-full"
         style={{
@@ -180,7 +194,7 @@ const Container = ({
         {!children.length ? (
           <div
             className="w-full h-full"
-            key={"Dop"}
+            key={"Demo"}
             data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1 }}
             onMouseOver={() => setDrag(false)}
             onMouseOut={() => setDrag(true)}
@@ -202,6 +216,7 @@ const Container = ({
                 },
                 value: "Hover and click on drag to add components in container",
                 w: 12,
+                // resizeHandles: [],
                 x: 0,
                 y: 0,
                 h: 2,
