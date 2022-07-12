@@ -37,7 +37,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     setDisplayColorPicker(false);
   };
 
-  const handleChange = (color: any) => {
+  const handleChange = (color) => {
     if (!color) {
       return;
     }
