@@ -1,6 +1,7 @@
 import React, { useState, FC } from "react";
 import SettingComponent from "./SettingComponent";
 import IItems from "interfaces/items";
+import IColor from "interfaces/color";
 
 interface ISetting {
   items: IItems[];
@@ -110,7 +111,6 @@ const Settings: FC<ISetting> = ({
   };
 
   const utilityFunction = (styleProp, property, value1, value2) => {
-    console.log(property);
     if (!settingItemId) {
       return;
     }
@@ -162,11 +162,11 @@ const Settings: FC<ISetting> = ({
     utilityFunction("textDecoration", textDecoration, "underline", "none");
   };
 
-  const setColor = (color: { rgb: any }) => {
+  const setColor = (color: IColor) => {
     singleWorkFunction("color", color);
   };
 
-  const setBgColor = (backgroundColor: { rgb: any }) => {
+  const setBgColor = (backgroundColor: IColor) => {
     singleWorkFunction("backgroundColor", backgroundColor);
   };
 
@@ -249,7 +249,7 @@ const Settings: FC<ISetting> = ({
     );
   };
 
-  const setFontSize = (fontSize: any) => {
+  const setFontSize = (fontSize: number) => {
     if (!settingItemId) {
       return;
     }
@@ -293,11 +293,11 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
-  const setBorderRadius = (borderRadius: any) => {
+  const setBorderRadius = (borderRadius: number) => {
     singleWorkFunction("borderRadius", borderRadius);
   };
 
-  const setBorderWidth = (borderWidth: any) => {
+  const setBorderWidth = (borderWidth: number) => {
     singleWorkFunction("borderWidth", borderWidth);
   };
 

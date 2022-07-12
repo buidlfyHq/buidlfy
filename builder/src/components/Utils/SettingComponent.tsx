@@ -16,6 +16,7 @@ import ShadowComponent from "./ShadowComponent";
 import ConnectSwitchComponent from "./ConnectSwitchComponent";
 import "../../styles/Components.css";
 import "../../styles/Dashboard.css";
+import IColor from "interfaces/color";
 
 interface ISettingComponent {
   items: IItems[];
@@ -31,10 +32,10 @@ interface ISettingComponent {
   italic: string;
   setUnderline: (underline: string | boolean) => void;
   underline: string;
-  setColor: (color: any) => void;
-  color: any;
-  setBgColor: (backgroundColor: any) => void;
-  backgroundColor: any;
+  setColor: (color: IColor) => void;
+  color: IColor;
+  setBgColor: (backgroundColor: IColor) => void;
+  backgroundColor: IColor;
   setDeleteComponent: (deleteComponent: number) => void;
   deleteComponent: number;
   justifyContent: string;
@@ -139,11 +140,11 @@ const SettingComponent: FC<ISettingComponent> = ({
     setLinkVal(link || "");
   }, [link]);
 
-  const handleTextChange = (e: any) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
-  const handleLinkChange = (e: any) => {
+  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLink(e.target.value);
   };
 

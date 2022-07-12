@@ -3,10 +3,11 @@ import { VscSymbolColor } from "react-icons/vsc";
 import { SketchPicker } from "react-color";
 import "../../styles/Components.css";
 import "../../styles/Dashboard.css";
+import IColor from "interfaces/color";
 
 interface IBgColorComponent {
-  color: any;
-  setBgColor: (color: any) => void;
+  color: IColor;
+  setBgColor: (color: IColor) => void;
   siteSetting?: boolean;
 }
 
@@ -19,7 +20,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
   const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    function handleOutsideClick(event: any) {
+    function handleOutsideClick(event) {
       if (ref.current && !ref.current.contains(event.target)) {
         setDisplayColorPicker(false);
       }
@@ -36,7 +37,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     setDisplayColorPicker(false);
   };
 
-  const handleChange = (color: any) => {
+  const handleChange = (color) => {
     if (!color) {
       return;
     }

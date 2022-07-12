@@ -4,10 +4,11 @@ import { SketchPicker } from "react-color";
 import IItems from "interfaces/items";
 import "../../styles/Components.css";
 import "../../styles/Dashboard.css";
+import IColor from "interfaces/color";
 
 interface IColorComponent {
-  color: any;
-  setColor: (color: any) => void;
+  color: IColor;
+  setColor: (color: IColor) => void;
   selectedItem: IItems;
 }
 
@@ -20,7 +21,7 @@ const ColorComponent: FC<IColorComponent> = ({
   const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    function handleOutsideClick(event: any) {
+    function handleOutsideClick(event) {
       if (ref.current && !ref.current.contains(event.target)) {
         setDisplayColorPicker(false);
       }
@@ -37,7 +38,7 @@ const ColorComponent: FC<IColorComponent> = ({
     setDisplayColorPicker(false);
   };
 
-  const handleChange = (color: any) => {
+  const handleChange = (color) => {
     if (!color) {
       return;
     }

@@ -1,11 +1,14 @@
+import IColor from "./color";
+import IItems from "./items";
+
 export default interface IBgContainer {
-  children: any;
-  backgroundColor: any;
-  color: any;
-  imgData: any;
+  children: IItems[];
+  backgroundColor: IColor;
+  color: IColor;
+  imgData: string | ArrayBuffer;
   borderRadius: number;
   borderWidth: number;
-  shadow?: any;
+  shadow?: string;
   inputValue: {
     id: string;
     value: string;
@@ -18,9 +21,4 @@ export default interface IBgContainer {
   ) => void;
   outputValue: object[];
   setOutputValue: (outputValue: object[]) => void;
-  // borderRadius: any;
-  // boxShadow: any;
-  // zIndex: number;
-  // border: any; //border color and type
-  // backgroundImg: any;
 }

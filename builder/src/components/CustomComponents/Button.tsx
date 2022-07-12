@@ -19,7 +19,8 @@ const Button: FC<ITexts> = ({
   return (
     <>
       <div
-        style={{ justifyContent: justifyContent }} id="Button"
+        style={{ justifyContent: justifyContent }}
+        id="Button"
         className="flex items-center justify-center w-auto h-full px-6"
       >
         <div
@@ -42,7 +43,6 @@ const Button: FC<ITexts> = ({
           <>{link.length > 0 ? <a href={link}>{value}</a> : <> {value}</>}</>{" "}
         </div>
       </div>
-      {/* )} */}
     </>
   );
 };

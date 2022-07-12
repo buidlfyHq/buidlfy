@@ -1,8 +1,10 @@
+import IColor from "./color";
+
 export default interface IBgContainer {
-    backgroundColor: any;
-    color: any;
-    imgData: any;
+    backgroundColor: IColor;
+    color: IColor;
+    imgData: string | ArrayBuffer;
     borderRadius: number;
     borderWidth: number;
-    shadow: any;
+    shadow: string;
   }

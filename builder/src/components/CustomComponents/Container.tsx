@@ -54,12 +54,7 @@ const Container = ({
   setSelector,
   elementConfig,
   setElementConfig,
-  // boxShadow,
-  // zIndex,
-  // border,
-  // backgroundImg,
 }) => {
-  // console.log(item)
   const [templay, setTempLay] = useState<Layout[]>([]);
 
   // on layout change
@@ -79,18 +74,15 @@ const Container = ({
       });
     });
 
-    if(newItemsArr[0].i !== "Demo"){
+    if (newItemsArr[0].i !== "Demo") {
       let newArr = {
         ...item,
-        children: newItemsArr
-      }
-      let filterItems = items.filter(element => element.i !== item.i)
-      setItems([
-        ...filterItems,
-        newArr
-      ])
+        children: newItemsArr,
+      };
+      let filterItems = items.filter((element) => element.i !== item.i);
+      setItems([...filterItems, newArr]);
     } else {
-      setItems(items)
+      setItems(items);
     }
   };
 
@@ -161,7 +153,7 @@ const Container = ({
   let containerW = document
     .querySelector(`#${item.i}`)
     ?.getBoundingClientRect().width;
- 
+
   return (
     <section
       id={item.i}
@@ -206,7 +198,7 @@ const Container = ({
                 name: "Text",
                 style: {
                   color: { r: "0", g: "0", b: "0", a: "100" },
-                  backgroundColor: { r: "0", g: "0", b: "0" },
+                  backgroundColor: { r: "0", g: "0", b: "0", a: "" },
                   fontWeight: "normal",
                   fontStyle: "normal",
                   textDecoration: "none",

@@ -1,16 +1,18 @@
+import IColor from "./color";
+
 export default interface ITexts {
   id?: string;
   bold: string;
   italic: string;
   underline: string;
-  color: any;
+  color: IColor;
   justifyContent: string;
   fontSize: number;
   value: string;
   link: string;
-  backgroundColor?: any;
+  backgroundColor?: IColor;
   borderRadius?: number;
-  shadow?: any;
+  shadow?: string;
   contractFunction?: any;
   inputValue?: object[];
   setInputValue?: (inputValue: object[]) => void;

@@ -5,7 +5,7 @@ import Web3Modal from "web3modal";
 import BuilderConfig from "config";
 import { onLoad } from "hooks/on-load";
 import { onRequest } from "hooks/on-request";
-import { providerOptions } from "feature/connect-wallet/provider-options";
+import { providerOptions } from "config/provider-options";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
 
@@ -151,7 +151,7 @@ const Button: FC<ITexts> = ({
             contractFunction.methodName ? onResponse() : console.log("Clicked")
           }
         >
-          {link.length > 0 ? <a href={link}>{value}</a> : <>{ value }</>}
+          {link.length > 0 ? <a href={link}>{value}</a> : <>{value}</>}
         </div>
       )}
     </main>

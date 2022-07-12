@@ -6,7 +6,7 @@ interface IValue {
 export const setValue = (
   state: object[],
   stateFunctionId: string,
-  stateFunctionValue: string
+  stateFunctionValue: any
 ) => {
   const searchExistingValue = state?.filter(
     (stateObject: IValue) => stateObject.id === stateFunctionId
