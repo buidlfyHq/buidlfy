@@ -76,7 +76,6 @@ const Dashboard: FC = () => {
     return windowSize;
   }
   const size = useWindowSize();
-  console.log(size.width, "size");
   return (
     <div>
       <>

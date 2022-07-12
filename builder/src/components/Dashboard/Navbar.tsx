@@ -34,7 +34,6 @@ const Navbar: FC<INavbar> = ({
         address: contractConfig.address,
       },
     };
-    console.log(config, "config");
     let stringifiedConfig = JSON.stringify(config);
     setGeneratedConfig(base64_encode(stringifiedConfig));
     setIsOpen(true);

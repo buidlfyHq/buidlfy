@@ -22,7 +22,12 @@ interface IAdvanceComponent {
   }) => void;
   showComponent: {
     id: string;
-    value: { name: string; inputs: object[]; outputs: object[]; stateMutability: string; };
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
   };
   setShowComponent: (showComponent: { id: string; value: IItems }) => void;
   contractConfig: { abi: string; address: string };

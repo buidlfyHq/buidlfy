@@ -45,6 +45,7 @@ const AbiComponent: FC<IAbiComponent> = ({
     type: "",
   });
   const [show, setShow] = useState(true);
+  const [isSaved, setIsSaved] = useState(false);
   // const handleShow = () => {
   //   setShow(true);
   // };
@@ -54,6 +55,7 @@ const AbiComponent: FC<IAbiComponent> = ({
 
   const handleSave = () => {
     setShow(true);
+    setIsSaved(true);
     // filter last selected element
     const filteredObject = elementConfig[currentElement.name].filter(
       (key: { buttonId: string }) => key.buttonId === selectedItem.i
@@ -177,9 +179,12 @@ const AbiComponent: FC<IAbiComponent> = ({
                                           {filteredObject[0].id}
                                         </span>
                                         <AiOutlineEdit className="mt-1.5" />
-                                      </span>
+                                      </span>{" "}
                                       {show ? (
-                                        <button className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        <button
+                                          // onChange={() => setIsSaved(true)}
+                                          className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >
                                           <span
                                             className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
                                             role="status"
@@ -187,12 +192,23 @@ const AbiComponent: FC<IAbiComponent> = ({
                                           Save
                                         </button>
                                       ) : (
-                                        <button
-                                          onClick={() => handleSave()}
-                                          className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                        >
-                                          Save
-                                        </button>
+                                        <>
+                                          {isSaved ? (
+                                            <button
+                                              disabled
+                                              className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
+                                            >
+                                              Saved
+                                            </button>
+                                          ) : (
+                                            <button
+                                              onClick={() => handleSave()}
+                                              className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            >
+                                              Save
+                                            </button>
+                                          )}
+                                        </>
                                       )}
                                     </>
                                   )}
@@ -327,7 +343,10 @@ const AbiComponent: FC<IAbiComponent> = ({
                                       <AiOutlineEdit className="mt-1.5" />
                                     </span>
                                     {show ? (
-                                      <button className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                      <button
+                                        // onChange={() => setIsSaved(true)}
+                                        className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                      >
                                         <span
                                           className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
                                           role="status"
@@ -335,12 +354,23 @@ const AbiComponent: FC<IAbiComponent> = ({
                                         Save
                                       </button>
                                     ) : (
-                                      <button
-                                        onClick={() => handleSave()}
-                                        className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                      >
-                                        Save
-                                      </button>
+                                      <>
+                                        {isSaved ? (
+                                          <button
+                                            disabled
+                                            className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
+                                          >
+                                            Saved
+                                          </button>
+                                        ) : (
+                                          <button
+                                            onClick={() => handleSave()}
+                                            className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                          >
+                                            Save
+                                          </button>
+                                        )}
+                                      </>
                                     )}
                                   </>
                                 )}

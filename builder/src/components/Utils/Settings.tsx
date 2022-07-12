@@ -109,8 +109,8 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
-  const utilityFunction = (style,property, value1, value2) => {
-    console.log(property)
+  const utilityFunction = (style, property, value1, value2) => {
+    console.log(property);
     if (!settingItemId) {
       return;
     }
@@ -149,7 +149,6 @@ const Settings: FC<ISetting> = ({
     });
     setItems(updatedItems);
   };
-
 
   const setBold = (fontWeight: boolean) => {
     // utilityFunction("fontWeight", fontWeight, "bold", "normal")
