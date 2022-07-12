@@ -151,7 +151,7 @@ const Button: FC<ITexts> = ({
             contractFunction.methodName ? onResponse() : console.log("Clicked")
           }
         >
-          {link.length > 0 ? <a href={link}>{value}</a> : <>{ value }</>}
+          {link.length > 0 ? <a href={link}>{value}</a> : <>{value}</>}
         </div>
       )}
     </main>

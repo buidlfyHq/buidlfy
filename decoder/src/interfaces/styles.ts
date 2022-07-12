@@ -1,6 +1,8 @@
+import IColor from "./color";
+
 export default interface IStyles {
-  color?: any;
-  backgroundColor?: object;
+  color: IColor;
+  backgroundColor?: IColor;
   fontWeight?: string;
   fontStyle?: string;
   textDecoration?: string;
@@ -9,5 +11,5 @@ export default interface IStyles {
   deleteComponent: number;
   borderRadius?: number;
   borderWidth?: number;
-  shadow?: any;
+  shadow?: string;
 }

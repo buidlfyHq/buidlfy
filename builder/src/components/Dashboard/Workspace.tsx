@@ -54,10 +54,10 @@ const Workspace: FC<IWorkspace> = ({
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
-      if(selectedItem.children){
-        if(selectedItem.children.length > 0){
-          height = Math.max(...selectedItem.children.map(child => child.y))+1
-          console.log(height, selectedItem)
+      if (selectedItem.children) {
+        if (selectedItem.children.length > 0) {
+          height =
+            Math.max(...selectedItem.children.map((child) => child.y)) + 1;
         }
       }
       const { h, minW, x, y, w, i } = obj;
@@ -138,7 +138,15 @@ const Workspace: FC<IWorkspace> = ({
     }
   };
 
-  const handleCheckIsContainer = (e: any) => {
+  const handleCheckIsContainer = (e: {
+    target: {
+      id: string;
+      parentNode: {
+        id: string;
+        parentNode: { id: string; parentNode: { id: string } };
+      };
+    };
+  }) => {
     if (
       e.target.id === "Container" ||
       e.target.parentNode.id === "Container" ||
@@ -161,7 +169,7 @@ const Workspace: FC<IWorkspace> = ({
       style={{
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
-      onClick={handleCheckIsContainer}
+      onClick={() => handleCheckIsContainer}
     >
       <section className="mt-[60px] ">
         <ResponsiveGridLayout

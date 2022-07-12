@@ -14,7 +14,7 @@ export default interface IItems {
   name: string;
   value?: string;
   style: Styles;
-  children?: any;
+  children?: IItems[];
   isBounded?: boolean;
   isDraggable?: boolean;
   isResizable?: boolean;

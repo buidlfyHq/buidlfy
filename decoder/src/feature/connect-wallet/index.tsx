@@ -5,8 +5,8 @@ import { providerOptions } from "./provider-options";
 
 interface ButtonProps {
   text: string;
-  account: any;
-  setAccount: any;
+  account: string;
+  setAccount: (account: string) => void;
 }
 
 const web3Modal = new Web3Modal({

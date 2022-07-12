@@ -3,10 +3,11 @@ import { VscSymbolColor } from "react-icons/vsc";
 import { SketchPicker } from "react-color";
 import "../../styles/Components.css";
 import "../../styles/Dashboard.css";
+import IColor from "interfaces/color";
 
 interface IBgColorComponent {
-  color: any;
-  setBgColor: (color: any) => void;
+  color: IColor;
+  setBgColor: (color: IColor) => void;
   siteSetting?: boolean;
 }
 

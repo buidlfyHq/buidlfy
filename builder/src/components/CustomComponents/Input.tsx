@@ -1,9 +1,11 @@
 import React, { FC } from "react";
 import "styles/Components.css";
+import IColor from "interfaces/color";
+
 interface IInput {
   borderRadius: number;
-  shadow: any;
-  color: any;
+  shadow: string;
+  color: IColor;
 }
 const Input: FC<IInput> = ({ borderRadius, shadow, color }) => {
   return (

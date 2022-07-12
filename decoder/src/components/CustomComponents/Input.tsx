@@ -1,39 +1,34 @@
 import { FC } from "react";
-import { setValue } from "hooks/set-value";
-import "styles/components.css";
+import { setValue } from "../../hooks/set-value";
+import "styles/Components.css";
 import IColor from "interfaces/color";
 
 interface IInput {
   id: string;
   value: string;
+  color: IColor;
 }
 
-interface IInputComponent {
+const Input: FC<{
   id: string;
-  inputValue: IInput[];
+  inputValue: object[];
   borderRadius: number;
   shadow: string;
   color: IColor;
   setInputValue: (inputValue: object[]) => void;
-}
-
-const Input: FC<IInputComponent> = ({
-  id,
-  inputValue,
-  setInputValue,
-  borderRadius,
-  shadow,
-  color,
-}) => {
-  const getValue = (inputArray: IInput[]) => {
+}> = ({ id, inputValue, setInputValue, borderRadius, shadow, color }) => {
+  const getValue = (inputArray) => {
     const requiredValue = inputArray.filter(
       (input: IInput) => input.id === id
     )[0];
     return requiredValue ? requiredValue.value : "";
   };
 
+  // mapping: contractFunction: {methodName: 'createCampaign'}
+  // ---> {id: 'xyz', methodName: 'createCampaign'}
+
   return (
-    <section className="h-full flex justify-center items-center">
+    <div className="h-full flex justify-center items-center">
       <input
         style={{
           borderRadius: `${borderRadius}px`,
@@ -50,7 +45,7 @@ const Input: FC<IInputComponent> = ({
           setInputValue(setValue(inputValue, id, e.target.value))
         }
       />
-    </section>
+    </div>
   );
 };
 
