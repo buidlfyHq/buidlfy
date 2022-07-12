@@ -140,11 +140,11 @@ const SettingComponent: FC<ISettingComponent> = ({
     setLinkVal(link || "");
   }, [link]);
 
-  const handleTextChange = (e: any) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
-  const handleLinkChange = (e: any) => {
+  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLink(e.target.value);
   };
 

@@ -20,7 +20,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
   const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    function handleOutsideClick(event: any) {
+    function handleOutsideClick(event) {
       if (ref.current && !ref.current.contains(event.target)) {
         setDisplayColorPicker(false);
       }
