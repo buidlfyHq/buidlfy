@@ -138,15 +138,7 @@ const Workspace: FC<IWorkspace> = ({
     }
   };
 
-  const handleCheckIsContainer = (e: {
-    target: {
-      id: string;
-      parentNode: {
-        id: string;
-        parentNode: { id: string; parentNode: { id: string } };
-      };
-    };
-  }) => {
+  const handleCheckIsContainer = (e: any) => {
     if (
       e.target.id === "Container" ||
       e.target.parentNode.id === "Container" ||
@@ -169,7 +161,7 @@ const Workspace: FC<IWorkspace> = ({
       style={{
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
-      onClick={() => handleCheckIsContainer}
+      onClick={handleCheckIsContainer}
     >
       <section className="mt-[60px] ">
         <ResponsiveGridLayout

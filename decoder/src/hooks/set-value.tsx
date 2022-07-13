@@ -11,10 +11,18 @@ export const setValue = (
   const searchExistingValue = state?.filter(
     (stateObject: IValue) => stateObject.id === stateFunctionId
   );
-
-  if (!searchExistingValue?.length || !state?.length) {
+  if (state) {
+    if (!searchExistingValue?.length || !state?.length) {
+      return [
+        ...state,
+        {
+          id: stateFunctionId,
+          value: stateFunctionValue,
+        },
+      ];
+    }
+  } else {
     return [
-      ...state,
       {
         id: stateFunctionId,
         value: stateFunctionValue,
@@ -22,7 +30,7 @@ export const setValue = (
     ];
   }
 
-  const updateValue = state.map((stateObject: IValue) => {
+  const updateValue = state?.map((stateObject: IValue) => {
     if (stateObject.id === stateFunctionId) {
       return { ...stateObject, value: stateFunctionValue };
     }

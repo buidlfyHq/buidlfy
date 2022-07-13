@@ -74,7 +74,7 @@ const Container = ({
       });
     });
 
-    if (newItemsArr[0].i !== "Demo") {
+    if (newItemsArr[0]?.i !== "Demo") {
       let newArr = {
         ...item,
         children: newItemsArr,
