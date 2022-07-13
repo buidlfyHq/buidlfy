@@ -57,76 +57,16 @@ const Container = ({
 }) => {
   // on layout change
   // to persist layout changes
-  // const onLayoutChange = (layout: Layout[]) => {
-  //   // console.log(layout)
-
-  //   let newItemsArr = layout.map((obj: IItems) => {
-  //     let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
-  //     const { h, minW, x, y, w, i } = obj;
-  //     return (selectedItem = {
-  //       ...selectedItem,
-  //       h,
-  //       minW,
-  //       x,
-  //       y,
-  //       w,
-  //       i,
-  //     });
-  //   });
-
-  //   // if(newItemsArr[0].i !== "Demo"){
-  //   //   const updated = items.map(abcd => {
-  //   //     if(abcd.i === item.i){
-  //   //       let maxY = Math.max(...abcd.children.map(item => item.y))
-  //   //       let el = newItemsArr.filter(item => item.y === maxY)[0]
-  //   //       let newH = el.h + el.y
-  //   //       return {
-  //   //         ...abcd,
-  //   //         h: newH,
-  //   //         children: newItemsArr,
-  //   //       };
-  //   //     } else return abcd
-  //   //   });
-  //   //   console.log(updated)
-  //   //   setItems(updated)
-  //   // } else {
-  //   //   setItems(items);
-  //   // }
-
-  //   // new layout form -> max y -> max y + h -> container = h
-
-  //   // if(newItemsArr[0].i !== "Demo"){
-  //   //   let maxY = Math.max(...newItemsArr.map(item => item.y))
-  //   //   let el = newItemsArr.filter(item => item.y === maxY)[0]
-  //   //   let newH = el.h + el.y
-  //   //   console.log(item)
-  //   //   let modifiedContainer = {
-  //   //     item,
-  //   //     h: newH,
-  //   //     children: newItemsArr
-  //   //   }
-  //   //   console.log(modifiedContainer, items)
-      
-  //   //   let filterItems = items.filter(element => element.i !== item.i)
-  //   //   console.log(filterItems)
-  //   //   setItems([
-  //   //     ...filterItems,
-  //   //     modifiedContainer
-  //   //   ])
-  //   //   console.log(items)
-  //   // } else {
-  //   //   setItems(items)
-  //   // }
-  // };
 
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
-      const { h, minW, x, y, w, i } = obj;
+      const { h, minW, x, y, w, i, minH } = obj;
       return (selectedItem = {
         ...selectedItem,
         h,
         minW,
+        minH,
         x,
         y,
         w,
@@ -134,52 +74,22 @@ const Container = ({
       });
     });
 
-    const updated = newItemsArr.map(e => {
-      if(newItemsArr[0].i !== "Demo"){
-        let maxY = Math.max(...newItemsArr.map(item => item.y))
-        let el = newItemsArr.filter(item => item.y === maxY)[0]
-        let newH = el.h + el.y
-        return {
-          ...item,
-          h: newH,
-          children: newItemsArr,
-        };
-      } else {
-        return item;
-      }
-    });
-
-    setItems(updated);
+    if (newItemsArr[0].i !== "Demo") {
+      let maxY = Math.max(...newItemsArr.map(item => item.y + item.h))
+      let el = newItemsArr?.filter(item => item.y + item.h === maxY)[0]
+      let maxH = el.h + el.y
+      console.log(maxH)
+      let newModifiedContainer = {
+        ...item,
+        h: maxH,
+        children: newItemsArr,
+      };
+      let filterItems = items.filter((element) => element.i !== item.i);
+      setItems([...filterItems, newModifiedContainer]);
+    } else {
+      setItems(items);
+    }
   };
-
- 
-
-  // const onLayoutChange = (layout: Layout[]) => {
-  //   let newItemsArr = layout.map((obj: IItems) => {
-  //     let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
-  //     const { h, minW, x, y, w, i } = obj;
-  //     return (selectedItem = {
-  //       ...selectedItem,
-  //       h,
-  //       minW,
-  //       x,
-  //       y,
-  //       w,
-  //       i,
-  //     });
-  //   });
-
-  //   if (newItemsArr[0].i !== "Demo") {
-  //     let newArr = {
-  //       ...item,
-  //       children: newItemsArr,
-  //     };
-  //     let filterItems = items.filter((element) => element.i !== item.i);
-  //     setItems([...filterItems, newArr]);
-  //   } else {
-  //     setItems(items);
-  //   }
-  // };
 
   const updateElementConfig = (itemName: string, i: string) => {
     // for updating selected element config
@@ -252,7 +162,7 @@ const Container = ({
   return (
     <section
       id={item.i}
-      className="container-drag relative w-full pt-2 border cursor-pointer h-fit"
+      className="relative w-full pt-2 border cursor-pointer container-drag h-fit"
     >
       <GridLayout
         layout={children}
@@ -281,7 +191,7 @@ const Container = ({
           <div
             className="w-full h-full"
             key={"Demo"}
-            data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1, resizeHandles: [] }}
+            data-grid={{ x: 0, y: 0, w: 12, h: 2, minH: 1, minW: 1, resizeHandles: [] }}
             onMouseOver={() => setDrag(false)}
             onMouseOut={() => setDrag(true)}
           >
@@ -339,76 +249,3 @@ const Container = ({
 };
 
 export default Container;
-
-
-// {!children.length ? (
-//   <GridLayout
-//     layout={children}
-//     cols={6}
-//     rowHeight={50}
-//     width={containerW}
-//     isBounded={true}
-//     onLayoutChange={onLayoutChange}
-//     compactType="horizontal"
-//     resizeHandles={item.children ? ["nw", "se"] : null}
-//     margin={[0, 0]}
-//     className="h-full"
-//   >
-//      <div
-//             className="w-full h-full"
-//             key={"Demo"}
-//             data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1 }}
-//             onMouseOver={() => setDrag(false)}
-//             onMouseOut={() => setDrag(true)}
-//           >
-//             <RenderItem
-//               item={{
-//                 i: "Dop",
-//                 link: "",
-//                 minW: 1,
-//                 name: "Text",
-//                 style: {
-//                   color: { r: "0", g: "0", b: "0", a: "100" },
-//                   backgroundColor: { r: "0", g: "0", b: "0" },
-//                   fontWeight: "normal",
-//                   fontStyle: "normal",
-//                   textDecoration: "none",
-//                   justifyContent: "center",
-//                   fontSize: 16,
-//                 },
-//                 value: "Hover and click on drag to add components in container",
-//                 w: 12,
-//                 // resizeHandles: [],
-//                 x: 0,
-//                 y: 0,
-//                 h: 2,
-//               }}
-//               setDrag={setDrag}
-//             />
-//           </div>
-//   </GridLayout>
-// ) : (
-//   <GridLayout
-//         layout={children}
-//         cols={6}
-//         rowHeight={50}
-//         width={containerW}
-//         isBounded={true}
-//         onLayoutChange={onLayoutChange}
-//         compactType="horizontal"
-//         resizeHandles={item.children ? ["nw", "se"] : null}
-//         margin={[0, 0]}
-//         className="h-full"
-//         style={{
-//           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-//           borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-//           borderRadius: `${borderRadius}px`,
-//           borderWidth: `${borderWidth}px`,
-//           backgroundImage: `url(${imgData})`,
-//           backgroundSize: "contain",
-//           backgroundRepeat: "no-repeat",
-//           backgroundPosition: "center",
-//           boxShadow: shadow,
-//         }}
-//       >
-// )}

@@ -171,7 +171,8 @@ const Sidebar: FC<ISidebar> = ({
                       y: y,
                       w: 12,
                       minW: 1,
-                      resizeHandles:  c.name === "Container" ? containerHandles : availableHandles
+                      minH: 1, 
+                      resizeHandles: c.name === "Container" ? containerHandles : availableHandles
                     };
                     setItems([...items, newC]);
                   }}
