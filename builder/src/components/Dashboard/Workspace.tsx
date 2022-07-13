@@ -50,15 +50,49 @@ const Workspace: FC<IWorkspace> = ({
   setAddContainer,
   backgroundColor,
 }) => {
+  // const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
+  //   // console.log(layout)
+  //   let newItemsArr = layout.map((obj: IItems) => {
+  //     let selectedItem = items.filter((item) => item.i === obj.i)[0];
+  //     let height: number;
+  //     const { h, minW, x, y, w, i } = obj;
+  //     if(selectedItem.children){
+  //       if(selectedItem.children.length > 0){
+  //         // let maxY = Math.max(...selectedItem.children.map(item => item.y))
+  //         // let el = newItemsArr.filter(item => item.y === maxY)[0]
+  //         // let height = el.h + el.y
+  //         height = Math.max(...selectedItem.children.map(child => child.y))+1
+  //         // console.log(height, selectedItem)
+  //         return (selectedItem = {
+  //           ...selectedItem,
+  //           h: height + h,
+  //           minW,
+  //           x,
+  //           y,
+  //           w,
+  //           i,
+  //         });
+  //       }
+  //     }
+  //     return (selectedItem = {
+  //       ...selectedItem,
+  //       h,
+  //       minW,
+  //       x,
+  //       y,
+  //       w,
+  //       i,
+  //     });
+  //   });
+  //   newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
+  // };
+
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
-      if(selectedItem.children){
-        if(selectedItem.children.length > 0){
-          height = Math.max(...selectedItem.children.map(child => child.y))+1
-          console.log(height, selectedItem)
-        }
+      if (selectedItem.children) {
+        height = Math.max(...selectedItem.children.map((child) => child.y)) + 1;
       }
       const { h, minW, x, y, w, i } = obj;
       return (selectedItem = {
@@ -172,7 +206,7 @@ const Workspace: FC<IWorkspace> = ({
           rowHeight={50}
           width={window.innerWidth - 250}
           compactType="horizontal"
-          resizeHandles={["nw", "se"]}
+          resizeHandles={["se"]}
           isDraggable={drag}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
@@ -181,13 +215,13 @@ const Workspace: FC<IWorkspace> = ({
           {items
             ?.filter((i) => i.style?.deleteComponent === 0)
             .map((item: IItems, index: number) => {
-              const { x, y, w, h, minW, i, name } = item;
+              const { x, y, w, h, minW, i, name, resizeHandles } = item;
               return (
                 <div
                   key={i}
                   id={name}
                   unselectable="on"
-                  data-grid={{ x, y, w, h, minW }}
+                  data-grid={{ x, y, w, h, minW, resizeHandles }}
                   className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
                     selector
                       ? "hover:outline-orange-300 hover:outline"

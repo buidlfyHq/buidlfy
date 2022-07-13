@@ -6,6 +6,7 @@ import { BiGridSmall } from "react-icons/bi";
 import { components } from "./component";
 import IItems from "interfaces/items";
 import BgColorComponent from "../Utils/BgColorComponent";
+import { ResizeHandles } from "interfaces/handle";
 
 interface ISidebar {
   className: string;
@@ -49,10 +50,6 @@ const Sidebar: FC<ISidebar> = ({
     setClassName("hidden");
   };
 
-  const incrementIndex = () => {
-    setIndexValue(indexValue + 1);
-  };
-
   const checkY = (items: IItems[]) => {
     if (items.length === 0) return 0;
     else {
@@ -65,9 +62,6 @@ const Sidebar: FC<ISidebar> = ({
     }
   };
 
-  const setBgColor = (bgColor: { rgb: any }) => {
-    setBackgroundColor(bgColor);
-  };
   const checkContainerY = (selectedItem: IItems) => {
     if (selectedItem.children.length === 0) return 0;
     else {
@@ -139,6 +133,7 @@ const Sidebar: FC<ISidebar> = ({
                         y,
                         w: 12,
                         minW: 1,
+                        resizeHandles: ["nw", "se"]
                       };
                       let updatedItem = {
                         ...selectedItem,
@@ -161,6 +156,8 @@ const Sidebar: FC<ISidebar> = ({
         ) : (
           <>
             {components?.map((c, index) => {
+              const availableHandles: ResizeHandles = ["nw", "se"];
+              const containerHandles: ResizeHandles = ["w", "e"];
               return (
                 <div
                   key={index}
@@ -174,8 +171,8 @@ const Sidebar: FC<ISidebar> = ({
                       y: y,
                       w: 12,
                       minW: 1,
+                      resizeHandles:  c.name === "Container" ? containerHandles : availableHandles
                     };
-                    // incrementIndex();
                     setItems([...items, newC]);
                   }}
                 >
