@@ -4,10 +4,10 @@ import { setValue } from "./set-value";
 export const onRequest = async (
   method: string,
   contractFunction: {
-    methodName: string;
-    stateMutability: string;
-    inputs: object[];
-    outputs: object[];
+    methodName?: string;
+    stateMutability?: string;
+    inputs?: object[];
+    outputs?: object[];
   },
   contract: Contract,
   inputValue: object[],

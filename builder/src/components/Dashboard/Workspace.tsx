@@ -138,7 +138,7 @@ const Workspace: FC<IWorkspace> = ({
     }
   };
 
-  const handleCheckIsContainer = (e: any) => {
+  const handleCheckIsContainer = (e) => {
     if (
       e.target.id === "Container" ||
       e.target.parentNode.id === "Container" ||
