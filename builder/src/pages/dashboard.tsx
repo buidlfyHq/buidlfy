@@ -94,11 +94,11 @@ const Dashboard: FC = () => {
   };
 
   return (
-    <div>
+    <main>
       <>
         {size.width > 1024 ? (
           <ComponentContext.Provider value={{ newComp, setNewComp }}>
-            <main className="flex flex-row w-full min-h-screen">
+            <div className="flex flex-row w-full min-h-screen">
               {/* Sidebar */}
               <Sidebar
                 className={className}
@@ -190,7 +190,7 @@ const Dashboard: FC = () => {
                   </div>
                 </main>
               )}
-            </main>
+            </div>
           </ComponentContext.Provider>
         ) : (
           <h1 className="items-center text-center justify-center flex h-[100vh]">
@@ -199,7 +199,7 @@ const Dashboard: FC = () => {
           </h1>
         )}
       </>
-    </div>
+    </main>
   );
 };
 

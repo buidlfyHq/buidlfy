@@ -336,6 +336,8 @@ const Settings: FC<ISetting> = ({
     setItems(updatedItems);
   };
 
+  console.log(items);
+
   return (
     <>
       {settingItemId ? (

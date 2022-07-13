@@ -129,7 +129,6 @@ const AbiComponent: FC<IAbiComponent> = ({
 
   console.log(items);
   
-
   return (
     <main>
       {showComponent ? (

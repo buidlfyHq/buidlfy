@@ -1,69 +1,55 @@
-import React, { useState, FC, useRef, useEffect } from "react";
+import React, { useState, FC } from "react";
 import { VscSymbolColor } from "react-icons/vsc";
 import { SketchPicker } from "react-color";
 import "../../styles/Components.css";
 import "../../styles/Dashboard.css";
-import IColor from "interfaces/color";
 
 interface IBgColorComponent {
-  color: IColor;
-  setBgColor: (color: IColor) => void;
-  siteSetting?: boolean;
+  backgroundColor: any;
+  setBgColor: (backgroundColor: any) => void;
 }
 
-const BgColorComponent: FC<IBgColorComponent> = ({
-  color,
-  setBgColor,
-  siteSetting,
-}) => {
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
-  const ref = useRef<HTMLDivElement>();
-
-  useEffect(() => {
-    function handleOutsideClick(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setDisplayColorPicker(false);
-      }
-    }
-    document.addEventListener("click", handleOutsideClick);
-    return () => document.removeEventListener("click", handleOutsideClick);
-  }, [ref]);
+const BgColorComponent: FC<IBgColorComponent> = ({ backgroundColor, setBgColor }) => {
+  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
   const handleClick = () => {
-    setDisplayColorPicker(true);
+    setDisplayColorPicker(!displayColorPicker);
   };
 
   const handleClose = () => {
     setDisplayColorPicker(false);
   };
 
-  const handleChange = (color) => {
-    if (!color) {
+  const handleChange = (backgroundColor: any) => {
+    if (!backgroundColor) {
       return;
     }
-    setBgColor(color.rgb);
+    setBgColor(backgroundColor.rgb);
   };
 
   return (
     <>
       <div
-        ref={ref}
         onClick={handleClick}
-        className={`flex flex-col justify-center items-start py-2 text-gray-600 cursor-pointer`}
+        className="flex items-center w-full px-3 py-2 text-gray-600 cursor-pointer hover:bg-slate-100"
       >
-        <div className="flex items-center w-full px-3 py-2 mb-2 hover:bg-slate-100">
-          <VscSymbolColor className="text-[18px] mr-3" />
-          <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
-            Background Color{" "}
-          </span>
-        </div>
-        {displayColorPicker ? (
-          <>
-            <div onClick={handleClose} />
-            <SketchPicker color={color} onChange={handleChange} />
-          </>
-        ) : null}
+        <VscSymbolColor className="text-[18px] mr-3" />
+        <span className="px-1 flex my-1 text-xl text-gray-500 font-regular font-normal not-italic">
+          Bg Color{" "}
+          {/* <span
+            style={{
+              backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+            }}
+            className="color-span"
+          ></span> */}
+        </span>
       </div>
+      {displayColorPicker ? (
+        <div>
+          <div onClick={handleClose} />
+          <SketchPicker backgroundColor={backgroundColor} onChange={handleChange} />
+        </div>
+      ) : null}
     </>
   );
 };
