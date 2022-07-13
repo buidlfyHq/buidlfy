@@ -110,7 +110,6 @@ const AbiComponent: FC<IAbiComponent> = ({
         const childIndex = item.children?.findIndex(
           (child: IItems) => child.i === selectedItem.i
         );
-        console.log(item, "item");
         let newArray = [...item?.children];
         newArray[childIndex] = updatedItem;
         return {
