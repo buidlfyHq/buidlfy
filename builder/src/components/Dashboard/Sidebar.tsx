@@ -6,7 +6,7 @@ import { BiGridSmall } from "react-icons/bi";
 import { components } from "./component";
 import IItems from "interfaces/items";
 import BgColorComponent from "../Utils/BgColorComponent";
-import IColor from "interfaces/color";
+import { ResizeHandles } from "interfaces/handle";
 
 interface ISidebar {
   className: string;
@@ -21,8 +21,8 @@ interface ISidebar {
   elementConfig: object;
   addContainer;
   settingItemId;
-  backgroundColor: IColor;
-  setBackgroundColor: (backgroundColor: IColor) => void;
+  backgroundColor;
+  setBackgroundColor;
 }
 
 const Sidebar: FC<ISidebar> = ({
@@ -50,10 +50,6 @@ const Sidebar: FC<ISidebar> = ({
     setClassName("hidden");
   };
 
-  const incrementIndex = () => {
-    setIndexValue(indexValue + 1);
-  };
-
   const checkY = (items: IItems[]) => {
     if (items.length === 0) return 0;
     else {
@@ -66,9 +62,6 @@ const Sidebar: FC<ISidebar> = ({
     }
   };
 
-  const setBgColor = (bgColor: IColor) => {
-    setBackgroundColor(bgColor);
-  };
   const checkContainerY = (selectedItem: IItems) => {
     if (selectedItem.children.length === 0) return 0;
     else {
@@ -126,11 +119,13 @@ const Sidebar: FC<ISidebar> = ({
             {components
               .filter((c) => c.name !== "Container")
               ?.map((c, index) => {
+                const availableHandles: ResizeHandles = ["nw", "se"];
                 return (
                   <div
                     key={index}
                     className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
                     onClick={() => {
+                      console.log(selectedItem);
                       let y = checkContainerY(selectedItem);
                       let newC = {
                         ...c,
@@ -139,6 +134,7 @@ const Sidebar: FC<ISidebar> = ({
                         y,
                         w: 12,
                         minW: 1,
+                        resizeHandles: availableHandles,
                       };
                       let updatedItem = {
                         ...selectedItem,
@@ -161,6 +157,8 @@ const Sidebar: FC<ISidebar> = ({
         ) : (
           <>
             {components?.map((c, index) => {
+              const availableHandles: ResizeHandles = ["nw", "se"];
+              const containerHandles: ResizeHandles = ["w", "e"];
               return (
                 <div
                   key={index}
@@ -174,8 +172,12 @@ const Sidebar: FC<ISidebar> = ({
                       y: y,
                       w: 12,
                       minW: 1,
+                      minH: 1,
+                      resizeHandles:
+                        c.name === "Container"
+                          ? containerHandles
+                          : availableHandles,
                     };
-                    // incrementIndex();
                     setItems([...items, newC]);
                   }}
                 >
