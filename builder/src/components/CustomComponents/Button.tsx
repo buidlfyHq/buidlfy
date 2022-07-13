@@ -14,7 +14,6 @@ const Button: FC<ITexts> = ({
   link,
   borderRadius,
   shadow,
-  connectWallet,
 }) => {
   return (
     <>

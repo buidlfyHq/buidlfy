@@ -147,7 +147,6 @@ const SettingComponent: FC<ISettingComponent> = ({
   const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLink(e.target.value);
   };
-
   return (
     <>
       <div className="rounded-[8px] py-2 cursor-pointer relative">

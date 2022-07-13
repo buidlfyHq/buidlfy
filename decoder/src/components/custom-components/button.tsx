@@ -48,7 +48,7 @@ const Button: FC<ITexts> = ({
       inputValue,
       outputValue
     );
-    setOutputValue(res[0]);
+    setOutputValue(res ? res[0] : []);
   };
 
   const [show, setShow] = useState(false);
@@ -65,9 +65,9 @@ const Button: FC<ITexts> = ({
   const connectWalletButton = async () => {
     try {
       const provider = await web3Modal.connect();
-      const library: any = new ethers.providers.Web3Provider(provider);
-      const accounts: any = await library.listAccounts();
-      const network: any = await library.getNetwork();
+      const library: any = new ethers.providers.Web3Provider(provider); // required
+      const accounts: any = await library.listAccounts(); // required
+      const network: any = await library.getNetwork(); // required
       setProvider(provider);
       setLibrary(library);
       if (accounts) setAccount(accounts[0]);

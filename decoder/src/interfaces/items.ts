@@ -21,7 +21,7 @@ export default interface IItems {
   moved?: boolean;
   static?: boolean;
   resizeHandles?: [];
-  contract?: any;
+  contract?: any; // breaking while assigning a type, work in progress 
   imgData?: string | ArrayBuffer;
   connectWallet?: string;
 }

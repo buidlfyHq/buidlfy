@@ -4,10 +4,10 @@ import { setValue } from "./set-value";
 export const onRequest = async (
   method: string,
   contractFunction: {
-    methodName: string;
-    stateMutability: string;
-    inputs: object[];
-    outputs: object[];
+    methodName?: string;
+    stateMutability?: string;
+    inputs?: object[];
+    outputs?: object[];
   },
   contract: Contract,
   inputValue: object[],
@@ -65,10 +65,14 @@ export const onRequest = async (
     // contract functions with outputs
     let returnOutput = [];
     if (contractFunction.outputs.length) {
-      contractFunction.outputs.map((contractOutput: { id: string }, i: number) => {
-        returnOutput.push(setValue(outputValue, contractOutput.id, receipt[i]));
-        return contractOutput;
-      });
+      contractFunction.outputs.map(
+        (contractOutput: { id: string }, i: number) => {
+          returnOutput.push(
+            setValue(outputValue, contractOutput.id, receipt[i])
+          );
+          return contractOutput;
+        }
+      );
     }
 
     if (receipt.transactionHash) {
@@ -83,10 +87,12 @@ export const onRequest = async (
     console.log(receipt);
 
     let returnOutput = [];
-    contractFunction.outputs.map((contractOutput: { id: string }, i: number) => {
-      returnOutput.push(setValue(outputValue, contractOutput.id, receipt[i]));
-      return contractOutput;
-    });
+    contractFunction.outputs.map(
+      (contractOutput: { id: string }, i: number) => {
+        returnOutput.push(setValue(outputValue, contractOutput.id, receipt[i]));
+        return contractOutput;
+      }
+    );
     return returnOutput;
   }
 };

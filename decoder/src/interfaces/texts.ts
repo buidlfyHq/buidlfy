@@ -1,3 +1,4 @@
+import { AnyRecord } from "dns";
 import IColor from "./color";
 
 export default interface ITexts {
@@ -13,7 +14,7 @@ export default interface ITexts {
   backgroundColor?: IColor;
   borderRadius?: number;
   shadow?: string;
-  contractFunction?: any;
+  contractFunction?: any; // breaking while assigning a type, work in progress 
   inputValue?: object[];
   setInputValue?: (inputValue: object[]) => void;
   outputValue?: object[];

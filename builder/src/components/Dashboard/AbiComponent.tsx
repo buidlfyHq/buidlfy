@@ -56,13 +56,13 @@ const AbiComponent: FC<IAbiComponent> = ({
   const handleSave = () => {
     setShow(true);
     // filter last selected element
-    const filteredObject = elementConfig[currentElement.name].filter(
+    const filteredObject = elementConfig[currentElement.name]?.filter(
       (key: { buttonId: string }) => key.buttonId === selectedItem.i
     )[0];
 
     let updatedContract = {};
 
-    let duplicate = selectedItem.contract.inputs.find(
+    let duplicate = selectedItem.contract.inputs?.find(
       (e: { id: string }) => e.id === filteredObject.id
     );
 
@@ -110,8 +110,7 @@ const AbiComponent: FC<IAbiComponent> = ({
         const childIndex = item.children?.findIndex(
           (child: IItems) => child.i === selectedItem.i
         );
-
-        let newArray = [...item.children];
+        let newArray = [...item?.children];
         newArray[childIndex] = updatedItem;
         return {
           ...item,
@@ -127,8 +126,7 @@ const AbiComponent: FC<IAbiComponent> = ({
     }
   };
 
-  console.log(items);
-  
+  console.log(items, "items");
 
   return (
     <main>

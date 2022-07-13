@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 import { SiweMessage } from "siwe";
 
-declare let window: any;
+declare let window: any; //required
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const SignIn: FC = () => {
@@ -16,7 +16,7 @@ const SignIn: FC = () => {
       send: (arg0: string, arg1: any[]) => Promise<any>;
     },
     signer: { getAddress: () => any; signMessage: (arg0: any) => any }; // for sign-in message
-    
+
   const loadValues = () => {
     domain = window.location.host;
     origin = window.location.origin;
