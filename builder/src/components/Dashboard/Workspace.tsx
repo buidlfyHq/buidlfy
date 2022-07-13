@@ -53,13 +53,6 @@ const Workspace: FC<IWorkspace> = ({
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
-      let height: number;
-      if (selectedItem.children) {
-        if (selectedItem.children.length > 0) {
-          height =
-            Math.max(...selectedItem.children.map((child) => child.y)) + 1;
-        }
-      }
       const { h, minW, x, y, w, i } = obj;
       return (selectedItem = {
         ...selectedItem,
@@ -159,6 +152,10 @@ const Workspace: FC<IWorkspace> = ({
     if (e.target.id === "") setOpenSetting(false);
   };
 
+  // child height - done
+  // not less than child - done
+  // not small on height less - done
+
   return (
     <main
       className={
@@ -188,14 +185,18 @@ const Workspace: FC<IWorkspace> = ({
         >
           {items
             ?.filter((i) => i.style?.deleteComponent === 0)
-            .map((item: IItems, index: number) => {
+            .map((item: IItems) => {
               const { x, y, w, h, minW, i, name } = item;
+              // Math.max(...item.children.map((child) => child.y)) + 1;
+              // item.name === "Container" ?  : h;
+              const height: number = name === "Container" ? Math.max(...item.children.map((child) => child.y)) + 1 : h;
+
               return (
                 <div
                   key={i}
                   id={name}
                   unselectable="on"
-                  data-grid={{ x, y, w, h, minW }}
+                  data-grid={{ x, y, w, h: height, minW }}
                   className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
                     selector
                       ? "hover:outline-orange-300 hover:outline"
