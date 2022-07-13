@@ -48,7 +48,7 @@ const Button: FC<ITexts> = ({
       inputValue,
       outputValue
     );
-    setOutputValue(res[0]);
+    setOutputValue(res ? res[0] : []);
   };
 
   const [show, setShow] = useState(false);
