@@ -29,6 +29,7 @@ const Button: FC<ITexts> = ({
   outputValue,
   setOutputValue,
   connectWallet,
+  borderRadius,
 }) => {
   const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
@@ -126,6 +127,7 @@ const Button: FC<ITexts> = ({
             display: "flex",
             justifyContent: "center",
             fontSize: `${fontSize}px`,
+            borderRadius: `${borderRadius}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
           }}
           className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
@@ -143,6 +145,7 @@ const Button: FC<ITexts> = ({
             borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
             display: "flex",
             justifyContent: "center",
+            borderRadius: `${borderRadius}px`,
             fontSize: `${fontSize}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
           }}

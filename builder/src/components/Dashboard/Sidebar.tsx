@@ -75,7 +75,7 @@ const Sidebar: FC<ISidebar> = ({
       className={`fixed left-0 top-0 z-0 w-[250px] border-r h-full ${className}`}
     >
       {/* user name */}
-      <section className="flex flex-row justify-between items-center h-[60px]">
+      {/* <section className="flex flex-row justify-between items-center h-[60px]">
         <Popover className="relative p-3 bg-white">
           <Popover.Button>
             <span className="bg-blue-300 mr-2 rounded-[50%] p-1">
@@ -103,14 +103,13 @@ const Sidebar: FC<ISidebar> = ({
             <div>Logout</div>
           </Popover.Panel>
         </Popover>
-        {/* Toggle button */}
         <div
           onClick={hideSidebar}
           className="m-2 p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"
         >
           <AiOutlineDoubleLeft />
         </div>
-      </section>
+      </section> */}
 
       {/* Components */}
       <div className="px-6 py-3 mt-10">

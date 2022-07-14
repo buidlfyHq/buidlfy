@@ -12,6 +12,8 @@ interface INavbar {
   setClassName: React.Dispatch<React.SetStateAction<string>>;
   items: IItems[];
   contractConfig: { abi: string; address: string };
+  handleSave;
+  handleClear;
 }
 
 const Navbar: FC<INavbar> = ({
@@ -19,6 +21,8 @@ const Navbar: FC<INavbar> = ({
   setClassName,
   items,
   contractConfig,
+  handleSave,
+  handleClear,
 }) => {
   const [abiJSON, setAbiJSON] = useState();
   // const abiJSON = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
@@ -50,9 +54,9 @@ const Navbar: FC<INavbar> = ({
     let stringifiedConfig = JSON.stringify(config);
 
     setGeneratedConfig(base64_encode(stringifiedConfig));
-    console.log(base64_encode(stringifiedConfig), "base");
     setIsOpen(true);
   };
+
   return (
     <main
       className={
@@ -68,7 +72,21 @@ const Navbar: FC<INavbar> = ({
         {className !== "" && <AiOutlineDoubleRight />}
       </div>
       <div className="flex flex-row h-[60px]">
-        <div className="flex flex-row items-center mx-2 text-[18px] text-slate-600">
+        <div className="flex flex-row items-center">
+          <div
+            onClick={() => handleClear()}
+            className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
+          >
+            Clear
+          </div>
+          <div
+            onClick={() => handleSave()}
+            className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
+          >
+            Save
+          </div>
+        </div>
+        {/* <div className="flex flex-row items-center mx-2 text-[18px] text-slate-600">
           <span className="mx-1 p-2 hover:bg-slate-100 hover:rounded-md cursor-pointer">
             <MdUndo />
           </span>
@@ -81,7 +99,7 @@ const Navbar: FC<INavbar> = ({
             <AiOutlineEye />
           </span>
           Preview
-        </div>
+        </div> */}
 
         <button
           className="btn rounded cursor-pointer whitespace-nowrap px-4 h-10 my-2"
