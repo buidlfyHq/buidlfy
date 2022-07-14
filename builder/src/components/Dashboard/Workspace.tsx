@@ -50,43 +50,6 @@ const Workspace: FC<IWorkspace> = ({
   setAddContainer,
   backgroundColor,
 }) => {
-  // const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-  //   // console.log(layout)
-  //   let newItemsArr = layout.map((obj: IItems) => {
-  //     let selectedItem = items.filter((item) => item.i === obj.i)[0];
-  //     let height: number;
-  //     const { h, minW, x, y, w, i } = obj;
-  //     if(selectedItem.children){
-  //       if(selectedItem.children.length > 0){
-  //         // let maxY = Math.max(...selectedItem.children.map(item => item.y))
-  //         // let el = newItemsArr.filter(item => item.y === maxY)[0]
-  //         // let height = el.h + el.y
-  //         height = Math.max(...selectedItem.children.map(child => child.y))+1
-  //         // console.log(height, selectedItem)
-  //         return (selectedItem = {
-  //           ...selectedItem,
-  //           h: height + h,
-  //           minW,
-  //           x,
-  //           y,
-  //           w,
-  //           i,
-  //         });
-  //       }
-  //     }
-  //     return (selectedItem = {
-  //       ...selectedItem,
-  //       h,
-  //       minW,
-  //       x,
-  //       y,
-  //       w,
-  //       i,
-  //     });
-  //   });
-  //   newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
-  // };
-
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     console.log(layout);
     let newItemsArr = layout.map((obj: IItems) => {
@@ -189,10 +152,6 @@ const Workspace: FC<IWorkspace> = ({
     if (e.target.id === "") setOpenSetting(false);
   };
 
-  // child height - done
-  // not less than child - done
-  // not small on height less - done
-
   return (
     <main
       className={
@@ -222,10 +181,8 @@ const Workspace: FC<IWorkspace> = ({
         >
           {items
             ?.filter((i) => i.style?.deleteComponent === 0)
-            .map((item: IItems, index: number) => {
+            .map((item: IItems) => {
               const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
-              // console.log(item)
-
               return (
                 <div
                   key={i}
@@ -233,9 +190,11 @@ const Workspace: FC<IWorkspace> = ({
                   unselectable="on"
                   data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
                   className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
-                    selector
-                      ? "hover:outline-orange-300 hover:outline"
-                      : "hover:outline-slate-300 hover:outline-dashed"
+                    name !== "Container"
+                      ? selector
+                        ? "hover:outline-orange-300 hover:outline"
+                        : "hover:outline-slate-300 hover:outline-dashed"
+                      : null
                   }`}
                   // open item setting on click
                   onClick={(e) =>

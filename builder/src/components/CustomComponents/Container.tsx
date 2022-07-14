@@ -57,7 +57,6 @@ const Container = ({
 }) => {
   // on layout change
   // to persist layout changes
-
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
@@ -172,7 +171,6 @@ const Container = ({
         isBounded={true}
         onLayoutChange={onLayoutChange}
         compactType="horizontal"
-        // resizeHandles={item.children ? ["nw", "se"] : null}
         margin={[0, 0]}
         className="h-full"
         style={{
@@ -235,7 +233,11 @@ const Container = ({
               const { x, y, w, h, minW, i, resizeHandles } = item;
               return (
                 <div
-                  className="w-full h-full"
+                  className={`w-full h-full ${
+                    selector
+                      ? "hover:outline-orange-300 hover:outline"
+                      : "hover:outline-slate-300 hover:outline-dashed"
+                  }`}
                   key={i}
                   data-grid={{ x, y, w, h, minW, resizeHandles }}
                   onMouseOver={() => setDrag(false)}
