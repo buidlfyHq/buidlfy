@@ -156,7 +156,7 @@ const Container = ({
   };
 
   let containerW = document
-    .querySelector(`#${item.i}`)
+    ?.querySelector(`#${item.i}`)
     ?.getBoundingClientRect().width;
 
   return (

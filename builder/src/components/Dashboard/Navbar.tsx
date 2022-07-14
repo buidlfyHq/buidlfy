@@ -48,7 +48,9 @@ const Navbar: FC<INavbar> = ({
       },
     };
     let stringifiedConfig = JSON.stringify(config);
+
     setGeneratedConfig(base64_encode(stringifiedConfig));
+    console.log(base64_encode(stringifiedConfig), "base");
     setIsOpen(true);
   };
   return (

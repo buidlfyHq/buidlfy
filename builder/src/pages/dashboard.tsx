@@ -96,7 +96,7 @@ const Dashboard: FC = () => {
   return (
     <main>
       <>
-        {size.width > 524 ? (
+        {size.width > 1024 ? (
           <ComponentContext.Provider value={{ newComp, setNewComp }}>
             <div className="flex flex-row w-full min-h-screen">
               {/* Sidebar */}
