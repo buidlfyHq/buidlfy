@@ -8,12 +8,12 @@ import RenderItem from "components/Dashboard/RenderItem";
 import IItems from "interfaces/items";
 import "styles/Components.css";
 
-interface IWidth {
-  containerWidth: number;
-  margin: [number, number];
-  cols: number;
-  containerPadding: [number, number];
-}
+// interface IWidth {
+//   containerWidth: number;
+//   margin: [number, number];
+//   cols: number;
+//   containerPadding: [number, number];
+// }
 
 // interface IWorkspace {
 //   setSettingItemId: (item: string) => void;

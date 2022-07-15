@@ -8,14 +8,18 @@ import Workspace from "components/Dashboard/Workspace";
 import Settings from "components/Utils/Settings";
 import IItems from "interfaces/items";
 import BgColorComponent from "components/Utils/BgColorComponent";
-
+import { useWindowSize } from "hooks/useWindowSize";
+import IColor from "interfaces/color";
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
-
+interface IImage {
+  id: string;
+  data: string | ArrayBuffer;
+}
 const Dashboard: FC = () => {
   const navigate = useNavigate();
-  const [picture, setPicture] = useState(null);
-  const [imgData, setImgData] = useState([]);
+  const [picture, setPicture] = useState<string>("");
+  const [imgData, setImgData] = useState<IImage[]>([]);
   const [items, setItems] = useState<IItems[]>([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [contractConfig, setContractConfig] = useState({
@@ -31,7 +35,7 @@ const Dashboard: FC = () => {
   const [drag, setDrag] = useState<boolean>(true);
   const [newComp, setNewComp] = useState<string>("");
   const [addContainer, setAddContainer] = useState<boolean>(false);
-  const [backgroundColor, setBackgroundColor] = useState({
+  const [backgroundColor, setBackgroundColor] = useState<IColor>({
     r: "0",
     g: "0",
     b: "0",
@@ -57,31 +61,8 @@ const Dashboard: FC = () => {
       setItems(JSON.parse(saveItems));
     }
   }, []); // eslint-disable-line
-
-  function useWindowSize() {
-    // Initialize state with undefined width/height so server and client renders match
-    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-    const [windowSize, setWindowSize] = useState({
-      width: undefined,
-    });
-    useEffect(() => {
-      // Handler to call on window resize
-      function handleResize() {
-        // Set window width/height to state
-        setWindowSize({
-          width: window.innerWidth,
-        });
-      }
-      // Add event listener
-      window.addEventListener("resize", handleResize);
-      // Call handler right away so state gets updated with initial window size
-      handleResize();
-      // Remove event listener on cleanup
-      return () => window.removeEventListener("resize", handleResize);
-    }, []); // Empty array ensures that effect is only run on mount
-    return windowSize;
-  }
   const size = useWindowSize();
+
   const handleSave = () => {
     if (items?.length > 0) {
       localStorage.setItem("items", JSON.stringify(items));

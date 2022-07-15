@@ -20,8 +20,7 @@ const Navbar: FC<INavbar> = ({
   items,
   contractConfig,
 }) => {
-  const [abiJSON, setAbiJSON] = useState();
-  // const abiJSON = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
+  const [abiJSON, setAbiJSON] = useState<any>(); // work in progress
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
 
@@ -54,7 +53,7 @@ const Navbar: FC<INavbar> = ({
   return (
     <main
       className={
-        className === ""
+        !className
           ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 bg-white`
           : `h-[60px] w-full top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 `
       }
@@ -63,7 +62,7 @@ const Navbar: FC<INavbar> = ({
         onClick={showSidebar}
         className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"
       >
-        {className !== "" && <AiOutlineDoubleRight />}
+        {className && "" && <AiOutlineDoubleRight />}
       </div>
       <div className="flex flex-row h-[60px]">
         <div className="flex flex-row items-center mx-2 text-[18px] text-slate-600">

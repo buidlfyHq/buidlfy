@@ -38,7 +38,7 @@ const Sidebar: FC<ISidebar> = ({
   setBackgroundColor,
 }) => {
   const uid = new ShortUniqueId();
-  const [indexValue, setIndexValue] = useState(0);
+  const [indexValue, setIndexValue] = useState<number>(0);
 
   const selectedItem =
     items?.find((item) => item.i === settingItemId) ||
@@ -76,7 +76,63 @@ const Sidebar: FC<ISidebar> = ({
       return Math.max(...arr) + 1;
     }
   };
-
+  const filteredComponents = components
+    .filter((c) => c.name !== "Container")
+    ?.map((c, index) => {
+      return (
+        <div
+          key={index}
+          className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
+          onClick={() => {
+            let y = checkContainerY(selectedItem);
+            let newC = {
+              ...c,
+              i: uid(),
+              x: 0,
+              y,
+              w: 12,
+              minW: 1,
+            };
+            let updatedItem = {
+              ...selectedItem,
+              h: y + c.h,
+              children: [...selectedItem.children, newC],
+            };
+            const elementsIndex = items.findIndex(
+              (item) => item.i === selectedItem.i
+            );
+            let newArray = [...items];
+            newArray[elementsIndex] = updatedItem;
+            setItems(newArray);
+          }}
+        >
+          {c.name}
+        </div>
+      );
+    });
+  const MappedComponents = components?.map((c, index) => {
+    return (
+      <div
+        key={index}
+        className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
+        onClick={() => {
+          let y = checkY(items);
+          let newC = {
+            ...c,
+            i: uid(),
+            x: 0,
+            y: y,
+            w: 12,
+            minW: 1,
+          };
+          // incrementIndex();
+          setItems([...items, newC]);
+        }}
+      >
+        {c.name}
+      </div>
+    );
+  });
   return (
     <main
       className={`fixed left-0 top-0 z-0 w-[250px] border-r h-full ${className}`}
@@ -121,70 +177,7 @@ const Sidebar: FC<ISidebar> = ({
 
       {/* Components */}
       <div className="px-6 py-3 mt-10">
-        {addContainer ? (
-          <>
-            {components
-              .filter((c) => c.name !== "Container")
-              ?.map((c, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
-                    onClick={() => {
-                      let y = checkContainerY(selectedItem);
-                      let newC = {
-                        ...c,
-                        i: uid(),
-                        x: 0,
-                        y,
-                        w: 12,
-                        minW: 1,
-                      };
-                      let updatedItem = {
-                        ...selectedItem,
-                        h: y + c.h,
-                        children: [...selectedItem.children, newC],
-                      };
-                      const elementsIndex = items.findIndex(
-                        (item) => item.i === selectedItem.i
-                      );
-                      let newArray = [...items];
-                      newArray[elementsIndex] = updatedItem;
-                      setItems(newArray);
-                    }}
-                  >
-                    {c.name}
-                  </div>
-                );
-              })}
-          </>
-        ) : (
-          <>
-            {components?.map((c, index) => {
-              return (
-                <div
-                  key={index}
-                  className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
-                  onClick={() => {
-                    let y = checkY(items);
-                    let newC = {
-                      ...c,
-                      i: uid(),
-                      x: 0,
-                      y: y,
-                      w: 12,
-                      minW: 1,
-                    };
-                    // incrementIndex();
-                    setItems([...items, newC]);
-                  }}
-                >
-                  {c.name}
-                </div>
-              );
-            })}
-          </>
-        )}
+        {addContainer ? <>{filteredComponents}</> : <>{MappedComponents}</>}
       </div>
     </main>
   );

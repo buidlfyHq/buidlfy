@@ -15,7 +15,7 @@ const Text: FC<ITexts> = ({
 }) => {
   return (
     <div
-      id="Text"
+      id="text-id"
       style={{
         fontWeight: bold,
         fontStyle: italic,
@@ -29,11 +29,11 @@ const Text: FC<ITexts> = ({
       className="flex items-center justify-center w-full h-full"
     >
       {link.length > 0 ? (
-        <a target="_blank" href={link} id="Text">
+        <a target="_blank" href={link} id="text-id">
           {value}
         </a>
       ) : (
-        <div id="Text">{value}</div>
+        <div id="text-id">{value}</div>
       )}
     </div>
   );

@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import BuilderConfig from "config";
 import RenderItem from "utils/render-item";
-// import ConnectWallet from "components/ConnectWallet";
 import IItems from "interfaces/items";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
@@ -16,7 +15,6 @@ const Home: FC = () => {
     }[]
   >([]);
   const [outputValue, setOutputValue] = useState<object[]>([]);
-  // const [account, setAccount] = useState(null);
 
   return (
     <ResponsiveGridLayout

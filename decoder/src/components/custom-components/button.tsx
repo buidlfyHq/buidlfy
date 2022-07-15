@@ -50,17 +50,16 @@ const Button: FC<ITexts> = ({
     );
     setOutputValue(res ? res[0] : []);
   };
-
-  const [show, setShow] = useState(false);
-  const [provider, setProvider] = useState();
-  const [library, setLibrary] = useState();
-  const [signature, setSignature] = useState("");
-  const [error, setError] = useState("");
-  const [chainId, setChainId] = useState();
-  const [network, setNetwork] = useState();
-  const [message, setMessage] = useState("");
-  const [signedMessage, setSignedMessage] = useState("");
-  const [verified, setVerified] = useState();
+  // All are returning any, will have to switch to typescript ether
+  const [show, setShow] = useState<any>(false);
+  const [provider, setProvider] = useState<any>();
+  const [library, setLibrary] = useState<any>();
+  const [signature, setSignature] = useState<any>("");
+  const [error, setError] = useState<any>("");
+  const [chainId, setChainId] = useState<any>();
+  const [network, setNetwork] = useState<any>();
+  const [message, setMessage] = useState<any>("");
+  const [verified, setVerified] = useState<any>();
 
   const connectWalletButton = async () => {
     try {
