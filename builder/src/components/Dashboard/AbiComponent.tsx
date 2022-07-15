@@ -140,7 +140,7 @@ const AbiComponent: FC<IAbiComponent> = ({
       filterObjects,
     };
   };
-  const handleStateSelector = (selectedItem) => {
+  const handleStateSelector = (selectedItem: IItems) => {
     setSelector({
       methodName: showComponent.value.name,
       type: "input",
@@ -151,6 +151,13 @@ const AbiComponent: FC<IAbiComponent> = ({
       name: showComponent.value.name,
       type: "send",
     });
+  };
+  // work in progress
+  const stateObject = (key: any) => {
+    let filteredObject = elementConfig[key]?.filter(
+      (key: { buttonId: string }) => key.buttonId === selectedItem.i
+    );
+    return filteredObject;
   };
   const handleOutputSelector = (selectedId: string) => {
     setSelector({
@@ -259,10 +266,7 @@ const AbiComponent: FC<IAbiComponent> = ({
                       .filter((key) => key === showComponent.value.name)
                       .map((key) => {
                         if (key === showComponent.value.name) {
-                          let filteredObject = elementConfig[key]?.filter(
-                            (key: { buttonId: string }) =>
-                              key.buttonId === selectedItem.i
-                          );
+                          let filteredObject = stateObject(key);
                           return (
                             <>
                               {filteredObject[0] && (
