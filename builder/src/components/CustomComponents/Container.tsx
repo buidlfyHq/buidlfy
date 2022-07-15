@@ -8,6 +8,8 @@ import RenderItem from "components/Dashboard/RenderItem";
 import IItems from "interfaces/items";
 import "styles/Components.css";
 
+// Sorted in the following PR //
+
 // interface IWidth {
 //   containerWidth: number;
 //   margin: [number, number];

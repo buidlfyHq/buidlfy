@@ -78,101 +78,99 @@ const Dashboard: FC = () => {
     <main>
       <>
         {size.width > 1024 ? (
-          <ComponentContext.Provider value={{ newComp, setNewComp }}>
-            <div className="flex flex-row w-full min-h-screen">
-              {/* Sidebar */}
-              <Sidebar
+          <div className="flex flex-row w-full min-h-screen">
+            {/* Sidebar */}
+            <Sidebar
+              className={className}
+              setClassName={setClassName}
+              items={items}
+              setItems={setItems}
+              setSelector={setSelector}
+              elementConfig={elementConfig}
+              addContainer={addContainer}
+              settingItemId={settingItemId}
+              backgroundColor={backgroundColor}
+              setBackgroundColor={setBackgroundColor}
+            />
+
+            <section className="flex-1">
+              {/* Navbar */}
+              <Navbar
                 className={className}
                 setClassName={setClassName}
                 items={items}
-                setItems={setItems}
-                setSelector={setSelector}
-                elementConfig={elementConfig}
-                addContainer={addContainer}
-                settingItemId={settingItemId}
-                backgroundColor={backgroundColor}
-                setBackgroundColor={setBackgroundColor}
+                contractConfig={contractConfig}
               />
 
-              <section className="flex-1">
-                {/* Navbar */}
-                <Navbar
-                  className={className}
-                  setClassName={setClassName}
-                  items={items}
-                  contractConfig={contractConfig}
-                />
+              {/* Main section */}
+              <Workspace
+                items={items}
+                setItems={setItems}
+                className={className}
+                setOpenSetting={setOpenSetting}
+                setSettingItemId={setSettingItemId}
+                selector={selector}
+                setSelector={setSelector}
+                elementConfig={elementConfig}
+                setElementConfig={setElementConfig}
+                setOpenTab={setOpenTab}
+                imgData={imgData}
+                drag={drag}
+                setDrag={setDrag}
+                setAddContainer={setAddContainer}
+                backgroundColor={backgroundColor}
+              />
+            </section>
 
-                {/* Main section */}
-                <Workspace
-                  items={items}
-                  setItems={setItems}
-                  className={className}
-                  setOpenSetting={setOpenSetting}
-                  setSettingItemId={setSettingItemId}
-                  selector={selector}
-                  setSelector={setSelector}
-                  elementConfig={elementConfig}
-                  setElementConfig={setElementConfig}
-                  setOpenTab={setOpenTab}
-                  imgData={imgData}
-                  drag={drag}
-                  setDrag={setDrag}
-                  setAddContainer={setAddContainer}
-                  backgroundColor={backgroundColor}
-                />
-              </section>
-
-              {/* Right Sidebar Settings */}
-              {openSetting ? (
-                <Settings
-                  items={items}
-                  setItems={setItems}
-                  settingItemId={settingItemId}
-                  contractConfig={contractConfig}
-                  setContractConfig={setContractConfig}
-                  setSelector={setSelector}
-                  elementConfig={elementConfig}
-                  openTab={openTab}
-                  setOpenTab={setOpenTab}
-                  setPicture={setPicture}
-                  setImgData={setImgData}
-                  imgData={imgData}
-                />
-              ) : (
-                <main
-                  className={`fixed right-0 top-[60px] z-0 w-[250px] border-l h-full`}
-                >
-                  <div className="mx-3 my-2">
-                    <h3 className="mb-2 text-xl">Site Settings</h3>
-                    <div className="mb-3">
-                      <BgColorComponent
-                        color={backgroundColor}
-                        setBgColor={setBackgroundColor}
-                        siteSetting={true}
-                      />
-                    </div>
-                    <div className="p-3 mt-16 bottom-16 absolute">
-                      <div className="flex flex-row items-center">
-                        <button
-                          onClick={() => handleSave()}
-                          className="w-fit bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        >
-                          Save
-                        </button>
-                        <button
-                          onClick={() => handleClear()}
-                          className="w-fit ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        >
-                          Clear
-                        </button>
-                      </div>
+            {/* Right Sidebar Settings */}
+            {openSetting ? (
+              <Settings
+                items={items}
+                setItems={setItems}
+                settingItemId={settingItemId}
+                contractConfig={contractConfig}
+                setContractConfig={setContractConfig}
+                setSelector={setSelector}
+                elementConfig={elementConfig}
+                openTab={openTab}
+                setOpenTab={setOpenTab}
+                setPicture={setPicture}
+                setImgData={setImgData}
+                imgData={imgData}
+              />
+            ) : (
+              <main
+                className={`fixed right-0 top-[60px] z-0 w-[250px] border-l h-full`}
+              >
+                <div className="mx-3 my-2">
+                  <h3 className="mb-2 text-xl">Site Settings</h3>
+                  <div className="mb-3">
+                    <BgColorComponent
+                      color={backgroundColor}
+                      setBgColor={setBackgroundColor}
+                      siteSetting={true}
+                    />
+                  </div>
+                  <div className="p-3 mt-16 bottom-16 absolute">
+                    <div className="flex flex-row items-center">
+                      <button
+                        onClick={() => handleSave()}
+                        className="w-fit bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => handleClear()}
+                        className="w-fit ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Clear
+                      </button>
                     </div>
                   </div>
-                </main>
-              )}
-            </div>
-          </ComponentContext.Provider>
+                </div>
+              </main>
+            )}
+          </div>
         ) : (
           <h1 className="items-center text-center justify-center flex h-[100vh]">
             Use this on desktop for better experience <br /> Responsive view
