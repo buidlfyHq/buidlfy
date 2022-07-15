@@ -1,56 +1,22 @@
 import React from "react";
-import AlignComponent from "./AlignComponent";
-import FontStyleComponent from "./FontStyleComponent";
 import UtilitiesComponent from "./UtilitiesComponent";
 import ColorComponent from "./ColorComponent";
 import BgColorComponent from "./BgColorComponent";
-import FontSizeComponent from "./FontSizeComponent";
-import AdvanceComponent from "./AdvanceComponent";
-import IItems from "interfaces/items";
 import UploadComponent from "./UploadComponent";
 import BorderComponent from "./BorderComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
-import ConnectSwitchComponent from "./ConnectSwitchComponent";
 
 const ContainerSettings = (
-  textVal,
-  handleTextChange,
-  linkVal,
-  handleLinkChange,
   items,
   setItems,
   selectedItem,
-  setLink,
-  link,
-  setValue,
-  value,
-  setBold,
-  bold,
-  setItalic,
-  italic,
-  setUnderline,
-  underline,
   setColor,
   color,
   setBgColor,
   backgroundColor,
   setDeleteComponent,
   deleteComponent,
-  justifyContent,
-  setLeft,
-  setCenter,
-  setRight,
-  fontSize,
-  setFontSize,
-  contractConfig,
-  setContractConfig,
-  showComponent,
-  setShowComponent,
-  setSelector,
-  elementConfig,
-  openTab,
-  setOpenTab,
   setPicture,
   setImgData,
   imgData,
@@ -62,8 +28,6 @@ const ContainerSettings = (
   setMedium,
   setLarge,
   shadow,
-  setOn,
-  connectWallet,
 ) => {
   return (
     <>

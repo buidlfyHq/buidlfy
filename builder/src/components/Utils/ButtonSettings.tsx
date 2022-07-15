@@ -8,9 +8,6 @@ import ColorComponent from "./ColorComponent";
 import BgColorComponent from "./BgColorComponent";
 import FontSizeComponent from "./FontSizeComponent";
 import AdvanceComponent from "./AdvanceComponent";
-import IItems from "interfaces/items";
-import UploadComponent from "./UploadComponent";
-import BorderComponent from "./BorderComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
 import ConnectSwitchComponent from "./ConnectSwitchComponent";
@@ -24,10 +21,6 @@ const ButtonSettings = (
   items,
   setItems,
   selectedItem,
-  setLink,
-  link,
-  setValue,
-  value,
   setBold,
   bold,
   setItalic,
@@ -54,13 +47,8 @@ const ButtonSettings = (
   elementConfig,
   openTab,
   setOpenTab,
-  setPicture,
-  setImgData,
-  imgData,
   borderRadius,
   setBorderRadius,
-  borderWidth,
-  setBorderWidth,
   setSmall,
   setMedium,
   setLarge,
