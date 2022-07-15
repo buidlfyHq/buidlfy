@@ -1,6 +1,6 @@
 import { ethers, providers, Contract, Signer } from "ethers";
 
-export const onLoad = (config) => {
+export const onLoad = (config: any) => {
   let provider: providers.Web3Provider,
     signer: providers.Provider | Signer,
     contract: Contract;
