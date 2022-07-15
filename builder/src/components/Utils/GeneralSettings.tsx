@@ -15,7 +15,7 @@ import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
 import ConnectSwitchComponent from "./ConnectSwitchComponent";
 
-const GeneralSettings = (
+const GeneralSettings = ({
   textVal,
   handleTextChange,
   linkVal,
@@ -66,7 +66,7 @@ const GeneralSettings = (
   shadow,
   setOn,
   connectWallet,
-) => {
+}) => {
   return (
     <>
       {" "}

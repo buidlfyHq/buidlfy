@@ -3,7 +3,7 @@ import AlignComponent from "./AlignComponent";
 import UtilitiesComponent from "./UtilitiesComponent";
 import UploadComponent from "./UploadComponent";
 
-const ImageSettings = (
+const ImageSettings = ({
   items,
   setItems,
   selectedItem,
@@ -16,7 +16,7 @@ const ImageSettings = (
   setPicture,
   setImgData,
   imgData,
-) => {
+}) => {
   return (
     <>
       <h3 className="mb-3 ml-8">

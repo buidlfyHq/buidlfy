@@ -4,7 +4,7 @@ import ColorComponent from "./ColorComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
 
-const InputSettings = (
+const InputSettings = ({
   selectedItem,
   setColor,
   color,
@@ -16,7 +16,7 @@ const InputSettings = (
   setMedium,
   setLarge,
   shadow
-) => {
+}) => {
   return (
     <>
       <h3 className="mb-3 ml-8">

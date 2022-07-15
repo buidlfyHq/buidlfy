@@ -12,8 +12,7 @@ import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
 import ConnectSwitchComponent from "./ConnectSwitchComponent";
 
-
-const ButtonSettings = (
+const ButtonSettings = ({
   textVal,
   handleTextChange,
   linkVal,
@@ -55,11 +54,11 @@ const ButtonSettings = (
   shadow,
   setOn,
   connectWallet,
-) => {
+}) => {
   const handleToggleTab = (e, num: number) => {
     e.preventDefault();
     setOpenTab(num);
-};
+  };
 
   return (
     <>

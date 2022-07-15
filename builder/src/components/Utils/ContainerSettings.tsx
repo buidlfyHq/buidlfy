@@ -7,7 +7,7 @@ import BorderComponent from "./BorderComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
 
-const ContainerSettings = (
+const ContainerSettings = ({
   items,
   setItems,
   selectedItem,
@@ -28,7 +28,7 @@ const ContainerSettings = (
   setMedium,
   setLarge,
   shadow,
-) => {
+}) => {
   return (
     <>
       <h3 className="mb-3 ml-8">
