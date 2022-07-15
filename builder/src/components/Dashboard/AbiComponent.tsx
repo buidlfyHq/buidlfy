@@ -45,10 +45,6 @@ const AbiComponent: FC<IAbiComponent> = ({
   });
   const [show, setShow] = useState<boolean>(true);
 
-  // const handleShow = () => {
-  //   setShow(true);
-  // };
-
   useEffect(() => {
     setTimeout(() => setShow(false), 1000);
   }, [show]);
@@ -125,9 +121,6 @@ const AbiComponent: FC<IAbiComponent> = ({
       setItems(newArray);
     }
   };
-
-  console.log(items, "items");
-
   return (
     <main>
       {showComponent ? (
