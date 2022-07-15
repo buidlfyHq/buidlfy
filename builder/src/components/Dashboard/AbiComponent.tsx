@@ -130,7 +130,8 @@ const AbiComponent: FC<IAbiComponent> = ({
     });
     setCurrentElement({ name: selectedId, type: "input" });
   };
-  const inputObjects = (i) => {
+  // work in progress
+  const inputObjects = (i: any) => {
     const selectedId = "input" + i + showComponent.id;
     const objects = Object.keys(elementConfig);
     const filterObjects = objects.filter((key) => key === selectedId);
@@ -168,7 +169,8 @@ const AbiComponent: FC<IAbiComponent> = ({
     });
     setCurrentElement({ name: selectedId, type: "output" });
   };
-  const outputObjects = (i) => {
+  // work in progress
+  const outputObjects = (i: any) => {
     const selectedId = "output" + i + showComponent.id;
     const objects = Object.keys(elementConfig);
     const filterObjects = objects.filter((key) => key === selectedId);

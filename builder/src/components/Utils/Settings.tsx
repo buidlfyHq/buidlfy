@@ -22,6 +22,12 @@ interface ISetting {
   imgData: { id: string; data: string | ArrayBuffer }[];
 }
 
+enum fontEnum {
+  BOLD = "bold",
+  ITALIC = "italic",
+  NORMAL = "normal",
+}
+
 const Settings: FC<ISetting> = ({
   items,
   setItems,
@@ -36,8 +42,8 @@ const Settings: FC<ISetting> = ({
   setImgData,
   imgData,
 }) => {
-  const [showComponent, setShowComponent] = useState(null); // for abi method component
-
+  const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
+  // work in progress
   const selectedChildren = items.map((item) =>
     item.children?.find((child) => child.i === settingItemId)
   );
@@ -151,11 +157,11 @@ const Settings: FC<ISetting> = ({
   };
 
   const setBold = (fontWeight: boolean) => {
-    utilityFunction("fontWeight", fontWeight, "bold", "normal");
+    utilityFunction("fontWeight", fontWeight, fontEnum.BOLD, fontEnum.NORMAL);
   };
 
   const setItalic = (fontStyle: boolean) => {
-    utilityFunction("fontStyle", fontStyle, "italic", "normal");
+    utilityFunction("fontStyle", fontStyle, fontEnum.ITALIC, fontEnum.NORMAL);
   };
 
   const setUnderline = (textDecoration: boolean) => {
