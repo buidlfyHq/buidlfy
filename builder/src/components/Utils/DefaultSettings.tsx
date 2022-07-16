@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { RiText } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
 import AlignComponent from "./AlignComponent";
@@ -14,8 +14,9 @@ import BorderComponent from "./BorderComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
 import ConnectSwitchComponent from "./ConnectSwitchComponent";
+import ISettings from "interfaces/settings";
 
-const GeneralSettings = ({
+const DefaultSettings: FC<ISettings> = ({
   textVal,
   handleTextChange,
   linkVal,
@@ -126,4 +127,4 @@ const GeneralSettings = ({
   );
 };
 
-export default GeneralSettings;
+export default DefaultSettings;

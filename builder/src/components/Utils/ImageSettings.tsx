@@ -1,9 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import AlignComponent from "./AlignComponent";
 import UtilitiesComponent from "./UtilitiesComponent";
 import UploadComponent from "./UploadComponent";
+import ISettings from "interfaces/settings";
 
-const ImageSettings = ({
+const ImageSettings: FC<ISettings> = ({
   items,
   setItems,
   selectedItem,

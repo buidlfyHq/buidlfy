@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import UtilitiesComponent from "./UtilitiesComponent";
 import ColorComponent from "./ColorComponent";
 import BgColorComponent from "./BgColorComponent";
@@ -6,8 +6,9 @@ import UploadComponent from "./UploadComponent";
 import BorderComponent from "./BorderComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
+import ISettings from "interfaces/settings";
 
-const ContainerSettings = ({
+const ContainerSettings: FC<ISettings> = ({
   items,
   setItems,
   selectedItem,

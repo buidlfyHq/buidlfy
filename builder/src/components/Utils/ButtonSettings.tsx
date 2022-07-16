@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { RiText } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
 import AlignComponent from "./AlignComponent";
@@ -11,8 +11,9 @@ import AdvanceComponent from "./AdvanceComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
 import ConnectSwitchComponent from "./ConnectSwitchComponent";
+import ISettings from "interfaces/settings";
 
-const ButtonSettings = ({
+const ButtonSettings: FC<ISettings> = ({
   textVal,
   handleTextChange,
   linkVal,

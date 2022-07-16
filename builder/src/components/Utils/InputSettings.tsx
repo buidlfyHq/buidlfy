@@ -1,10 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import UtilitiesComponent from "./UtilitiesComponent";
 import ColorComponent from "./ColorComponent";
 import BorderRadiusComponent from "./BorderRadiusComponent";
 import ShadowComponent from "./ShadowComponent";
+import ISettings from "interfaces/settings";
 
-const InputSettings = ({
+const InputSettings: FC<ISettings> = ({
   selectedItem,
   setColor,
   color,
