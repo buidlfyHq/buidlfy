@@ -29,6 +29,7 @@ const UtilitiesComponent: FC<IUtilitiesComponent> = ({
         >
           <AiOutlineDelete className="text-[18px]" />
         </span>
+        {/* It will be used for the latest code when we will add duplicate function  */}
         {/* <span className="flex items-center justify-center underline shadow text-[18px] w-8 h-10 ml-3 my-2 font-regular text-black">
           <HiOutlineDuplicate className="text-[18px]" />
         </span> */}

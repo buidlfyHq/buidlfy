@@ -86,6 +86,7 @@ const Navbar: FC<INavbar> = ({
             Save
           </div>
         </div>
+        {/* It will be used for the later code and preview */}
         {/* <div className="flex flex-row items-center mx-2 text-[18px] text-slate-600">
           <span className="mx-1 p-2 hover:bg-slate-100 hover:rounded-md cursor-pointer">
             <MdUndo />
@@ -100,7 +101,6 @@ const Navbar: FC<INavbar> = ({
           </span>
           Preview
         </div> */}
-
         <button
           className="btn rounded cursor-pointer whitespace-nowrap px-4 h-10 my-2"
           onClick={handleClick}

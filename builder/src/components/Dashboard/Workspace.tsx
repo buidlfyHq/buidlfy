@@ -2,6 +2,7 @@ import React, { FC, Dispatch, SetStateAction } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "./RenderItem";
 import IItems from "interfaces/items";
+import IColor from "interfaces/color";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
@@ -23,14 +24,14 @@ interface IWorkspace {
     name: string;
     buttonId: string;
   }) => void;
-  elementConfig;
+  elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setOpenTab: Dispatch<SetStateAction<number>>;
   imgData: { id: string; data: string | ArrayBuffer }[];
   drag: boolean;
   setDrag: React.Dispatch<React.SetStateAction<boolean>>;
-  setAddContainer;
-  backgroundColor;
+  setAddContainer: (addContainer: boolean) => void;
+  backgroundColor: IColor;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -51,7 +52,6 @@ const Workspace: FC<IWorkspace> = ({
   backgroundColor,
 }) => {
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-    console.log(layout);
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;

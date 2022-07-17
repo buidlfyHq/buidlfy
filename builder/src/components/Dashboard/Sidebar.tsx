@@ -7,6 +7,7 @@ import { components } from "./component";
 import IItems from "interfaces/items";
 import BgColorComponent from "../Utils/BgColorComponent";
 import { ResizeHandles } from "interfaces/handle";
+import IColor from "interfaces/color";
 
 interface ISidebar {
   className: string;
@@ -19,10 +20,10 @@ interface ISidebar {
     name: string;
   }) => void;
   elementConfig: object;
-  addContainer;
+  addContainer: boolean;
   settingItemId;
-  backgroundColor;
-  setBackgroundColor;
+  backgroundColor: IColor;
+  setBackgroundColor: (backgroundColor: IColor) => void;
 }
 
 const Sidebar: FC<ISidebar> = ({
@@ -124,7 +125,6 @@ const Sidebar: FC<ISidebar> = ({
                     key={index}
                     className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
                     onClick={() => {
-                      console.log(selectedItem);
                       let y = checkContainerY(selectedItem);
                       let newC = {
                         ...c,
