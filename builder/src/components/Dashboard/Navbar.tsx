@@ -12,8 +12,8 @@ interface INavbar {
   setClassName: React.Dispatch<React.SetStateAction<string>>;
   items: IItems[];
   contractConfig: { abi: string; address: string };
-  handleSave;
-  handleClear;
+  handleSave: () => void;
+  handleClear: () => void;
 }
 
 const Navbar: FC<INavbar> = ({
