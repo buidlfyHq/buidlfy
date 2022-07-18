@@ -21,7 +21,7 @@ interface ISidebar {
   }) => void;
   elementConfig: object;
   addContainer: boolean;
-  settingItemId;
+  settingItemId: string;
   backgroundColor: IColor;
   setBackgroundColor: (backgroundColor: IColor) => void;
 }

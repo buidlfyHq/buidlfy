@@ -73,7 +73,8 @@ const Container = ({
       });
     });
 
-    if (newItemsArr[0].i !== "Demo") {
+    // check to see if container array has only default element or children
+    if (newItemsArr[0].i !== "DefaultElement") {
       let maxY = Math.max(...newItemsArr.map((item) => item.y + item.h));
       let el = newItemsArr?.filter((item) => item.y + item.h === maxY)[0];
       let maxH = el.h + el.y;
@@ -188,7 +189,7 @@ const Container = ({
         {!children.length ? (
           <div
             className="w-full h-full"
-            key={"Demo"}
+            key={"DefaultElement"}
             data-grid={{
               x: 0,
               y: 0,
@@ -203,7 +204,7 @@ const Container = ({
           >
             <RenderItem
               item={{
-                i: "Dop",
+                i: "Element",
                 link: "",
                 minW: 1,
                 name: "Text",
