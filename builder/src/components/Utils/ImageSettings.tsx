@@ -21,7 +21,7 @@ const ImageSettings: FC<ISettings> = ({
   return (
     <>
       <h3 className="mb-3 ml-8">
-        Component -{" "}
+        Component -
         {selectedItem ? (
           <span className="font-bold">{selectedItem.name}</span>
         ) : null}

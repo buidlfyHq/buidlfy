@@ -97,7 +97,7 @@ const ButtonSettings: FC<ISettings> = ({
               <div className="tab-content tab-space">
                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                   <h3 className="mb-3 ml-8">
-                    Component -{" "}
+                    Component -
                     {selectedItem ? (
                       <span className="font-bold">{selectedItem.name}</span>
                     ) : null}
