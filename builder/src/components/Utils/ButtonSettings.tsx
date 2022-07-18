@@ -56,7 +56,10 @@ const ButtonSettings: FC<ISettings> = ({
   setOn,
   connectWallet,
 }) => {
-  const handleToggleTab = (e, num: number) => {
+  const handleToggleTab = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    num: number
+  ) => {
     e.preventDefault();
     setOpenTab(num);
   };
