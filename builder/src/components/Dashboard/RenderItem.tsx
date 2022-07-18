@@ -15,10 +15,10 @@ interface IRenderItem {
   // made imgdata optional to test container
   imgData?: { id: string; data: string | ArrayBuffer }[];
   setDrag: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenSetting?;
+  setOpenSetting?: (openSetting: boolean) => void;
   setSettingItemId?;
-  setOpenTab?;
-  setAddContainer?;
+  setOpenTab?: (openTab: number) => void;
+  setAddContainer?: (addContainer: boolean) => void;
   selector?: {
     methodName: string;
     type: string;
@@ -31,7 +31,7 @@ interface IRenderItem {
     name: string;
     buttonId: string;
   }) => void;
-  elementConfig?;
+  elementConfig?: object;
   setElementConfig?: Dispatch<SetStateAction<object>>;
 }
 

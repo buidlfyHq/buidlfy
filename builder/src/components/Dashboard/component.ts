@@ -10,7 +10,7 @@ export const components = [
       borderWidth: 0,
       shadow: "none",
     },
-    children: [],
+    children: []
   },
   {
     name: "Button",

@@ -61,18 +61,17 @@ const Container: FC<IContainter> = ({
   elementConfig,
   setElementConfig,
 }) => {
-  const [templay, setTempLay] = useState<Layout[]>([]);
-
   // on layout change
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
-      const { h, minW, x, y, w, i } = obj;
+      const { h, minW, x, y, w, i, minH } = obj;
       return (selectedItem = {
         ...selectedItem,
         h,
         minW,
+        minH,
         x,
         y,
         w,
@@ -80,13 +79,19 @@ const Container: FC<IContainter> = ({
       });
     });
 
-    if (newItemsArr[0]?.i !== "Demo") {
-      let newArr = {
+    // check to see if container array has only default element or children
+    if (newItemsArr[0].i !== "DefaultElement") {
+      let maxY = Math.max(...newItemsArr.map((item) => item.y + item.h));
+      let el = newItemsArr?.filter((item) => item.y + item.h === maxY)[0];
+      let maxH = el.h + el.y;
+      console.log(maxH);
+      let newModifiedContainer = {
         ...item,
+        h: maxH,
         children: newItemsArr,
       };
       let filterItems = items.filter((element) => element.i !== item.i);
-      setItems([...filterItems, newArr]);
+      setItems([...filterItems, newModifiedContainer]);
     } else {
       setItems(items);
     }
@@ -157,23 +162,22 @@ const Container: FC<IContainter> = ({
   };
 
   let containerW = document
-    .querySelector(`#${item.i}`)
+    ?.querySelector(`#${item.i}`)
     ?.getBoundingClientRect().width;
 
   return (
     <section
       id={item.i}
-      className="container-drag relative w-full pt-2 border cursor-pointer h-fit"
+      className="relative w-full pt-2 border cursor-pointer container-drag h-fit"
     >
       <GridLayout
         layout={children}
         cols={6}
         rowHeight={50}
-        width={containerW}
+        width={containerW || 200}
         isBounded={true}
         onLayoutChange={onLayoutChange}
         compactType="horizontal"
-        resizeHandles={item.children ? ["nw", "se"] : null}
         margin={[0, 0]}
         className="h-full"
         style={{
@@ -191,17 +195,26 @@ const Container: FC<IContainter> = ({
         {!children.length ? (
           <div
             className="w-full h-full"
-            key={"Demo"}
-            data-grid={{ x: 0, y: 0, w: 12, h: 2, minW: 1 }}
+            key={"DefaultElement"}
+            data-grid={{
+              x: 0,
+              y: 0,
+              w: 12,
+              h: 2,
+              minH: 1,
+              minW: 1,
+              resizeHandles: [],
+            }}
             onMouseOver={() => setDrag(false)}
             onMouseOut={() => setDrag(true)}
           >
             <RenderItem
               item={{
-                i: "Dop",
+                i: "Element",
                 link: "",
                 minW: 1,
                 name: "Text",
+                // static: true,
                 style: {
                   color: { r: "0", g: "0", b: "0", a: "100" },
                   backgroundColor: { r: "0", g: "0", b: "0", a: "" },
@@ -213,7 +226,6 @@ const Container: FC<IContainter> = ({
                 },
                 value: "Hover and click on drag to add components in container",
                 w: 12,
-                // resizeHandles: [],
                 x: 0,
                 y: 0,
                 h: 2,
@@ -225,12 +237,16 @@ const Container: FC<IContainter> = ({
           children
             ?.filter((c) => c.style?.deleteComponent === 0)
             .map((item: IItems) => {
-              const { x, y, w, h, minW, i } = item;
+              const { x, y, w, h, minW, i, resizeHandles } = item;
               return (
                 <div
-                  className="w-full h-full"
+                  className={`w-full h-full ${
+                    selector
+                      ? "hover:outline-orange-300 hover:outline"
+                      : "hover:outline-slate-300 hover:outline-dashed"
+                  }`}
                   key={i}
-                  data-grid={{ x, y, w, h, minW }}
+                  data-grid={{ x, y, w, h, minW, resizeHandles }}
                   onMouseOver={() => setDrag(false)}
                   onMouseOut={() => setDrag(true)}
                   onClick={() => onComponentClick(item.name, i)}

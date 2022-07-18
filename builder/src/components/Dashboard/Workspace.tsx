@@ -2,6 +2,7 @@ import React, { FC, Dispatch, SetStateAction } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "./RenderItem";
 import IItems from "interfaces/items";
+import IColor from "interfaces/color";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
@@ -23,14 +24,14 @@ interface IWorkspace {
     name: string;
     buttonId: string;
   }) => void;
-  elementConfig;
+  elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setOpenTab: Dispatch<SetStateAction<number>>;
   imgData: { id: string; data: string | ArrayBuffer }[];
   drag: boolean;
   setDrag: React.Dispatch<React.SetStateAction<boolean>>;
-  setAddContainer;
-  backgroundColor;
+  setAddContainer: (addContainer: boolean) => void;
+  backgroundColor: IColor;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -54,17 +55,17 @@ const Workspace: FC<IWorkspace> = ({
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
-      if (selectedItem.children) {
-        if (selectedItem.children.length > 0) {
-          height =
-            Math.max(...selectedItem.children.map((child) => child.y)) + 1;
-        }
+      const { h, minW, minH, x, y, w, i } = obj;
+      if (selectedItem.name === "Container") {
+        let maxY = Math.max(...selectedItem.children.map((item) => item.y));
+        let el = selectedItem.children?.filter((item) => item.y === maxY)[0];
+        height = el ? el.h + el.y : minH;
       }
-      const { h, minW, x, y, w, i } = obj;
       return (selectedItem = {
         ...selectedItem,
         h,
         minW,
+        minH: height,
         x,
         y,
         w,
@@ -208,7 +209,7 @@ const Workspace: FC<IWorkspace> = ({
           rowHeight={50}
           width={window.innerWidth - 250}
           compactType="horizontal"
-          resizeHandles={["nw", "se"]}
+          resizeHandles={["se"]}
           isDraggable={drag}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
