@@ -1,15 +1,12 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import "../../styles/Dashboard.css";
-import { AiOutlineDelete } from "react-icons/ai";
-import { HiOutlineDuplicate } from "react-icons/hi";
 import "../../styles/Components.css";
-import { Reader } from "@ethersproject/abi/lib/coders/abstract-coder";
 import IItems from "interfaces/items";
 
 interface IUploadComponent {
   setPicture: (picture: string) => void;
-  setImgData;
-  imgData;
+  setImgData: (imgData: { id: string; data: string | ArrayBuffer }[]) => void;
+  imgData: { id: string; data: string | ArrayBuffer }[];
   selectedItem: IItems;
   items: IItems[];
   setItems: (items: IItems[]) => void;
@@ -18,7 +15,6 @@ interface IUploadComponent {
 const UploadComponent: FC<IUploadComponent> = ({
   setPicture,
   setImgData,
-  imgData,
   selectedItem,
   items,
   setItems,

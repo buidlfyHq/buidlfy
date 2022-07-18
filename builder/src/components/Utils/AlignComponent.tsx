@@ -21,7 +21,6 @@ const AlignComponent: FC<IAlignComponent> = ({
   justifyContent,
 }) => {
   const handleLeftChange = () => {
-    // setLeft(!left);
     if (justifyContent === "left") {
       setLeft(false);
     } else {
@@ -29,7 +28,6 @@ const AlignComponent: FC<IAlignComponent> = ({
     }
   };
   const handleCenterChange = () => {
-    // setLeft(!center);
     if (justifyContent === "center") {
       setCenter(false);
     } else {
@@ -37,7 +35,6 @@ const AlignComponent: FC<IAlignComponent> = ({
     }
   };
   const handleRightChange = () => {
-    // setRight(!right);
     if (justifyContent === "right") {
       setRight(false);
     } else {

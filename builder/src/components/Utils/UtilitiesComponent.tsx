@@ -10,7 +10,6 @@ interface IUtilitiesComponent {
 }
 
 const UtilitiesComponent: FC<IUtilitiesComponent> = ({
-  deleteComponent,
   setDeleteComponent,
 }) => {
   const handleDelete = () => {

@@ -7,13 +7,6 @@ import UtilitiesComponent from "./UtilitiesComponent";
 import ColorComponent from "./ColorComponent";
 import BgColorComponent from "./BgColorComponent";
 import FontSizeComponent from "./FontSizeComponent";
-import AdvanceComponent from "./AdvanceComponent";
-import IItems from "interfaces/items";
-import UploadComponent from "./UploadComponent";
-import BorderComponent from "./BorderComponent";
-import BorderRadiusComponent from "./BorderRadiusComponent";
-import ShadowComponent from "./ShadowComponent";
-import ConnectSwitchComponent from "./ConnectSwitchComponent";
 import ISettings from "interfaces/settings";
 
 const DefaultSettings: FC<ISettings> = ({
@@ -21,13 +14,7 @@ const DefaultSettings: FC<ISettings> = ({
   handleTextChange,
   linkVal,
   handleLinkChange,
-  items,
-  setItems,
   selectedItem,
-  setLink,
-  link,
-  setValue,
-  value,
   setBold,
   bold,
   setItalic,
@@ -46,33 +33,11 @@ const DefaultSettings: FC<ISettings> = ({
   setRight,
   fontSize,
   setFontSize,
-  contractConfig,
-  setContractConfig,
-  showComponent,
-  setShowComponent,
-  setSelector,
-  elementConfig,
-  openTab,
-  setOpenTab,
-  setPicture,
-  setImgData,
-  imgData,
-  borderRadius,
-  setBorderRadius,
-  borderWidth,
-  setBorderWidth,
-  setSmall,
-  setMedium,
-  setLarge,
-  shadow,
-  setOn,
-  connectWallet,
 }) => {
   return (
     <>
-      {" "}
       <h3 className="mb-3 ml-8">
-        Component -{" "}
+        Component -
         {selectedItem ? (
           <span className="font-bold">{selectedItem.name}</span>
         ) : null}
