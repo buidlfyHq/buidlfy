@@ -3,6 +3,25 @@ import SettingComponent from "./SettingComponent";
 import IColor from "interfaces/color";
 import ISettings from "interfaces/settings";
 
+enum fontEnum {
+  BOLD = "bold",
+  ITALIC = "italic",
+  NORMAL = "normal",
+}
+
+enum functionEnum {
+  FONTWEIGHT = "fontWeight",
+  FONTSTYLE = "fontStyle",
+  TEXTDECORATION = "textDecoration",
+  COLOR = "color",
+  BACKGROUNDCOLOR = "backgroundColor",
+  DELETECOMPONENT = "deleteComponent",
+  JUSTIFYCONTENT = "justifyContent",
+  SHADOW = "shadow",
+  BORDERRADIUS = "borderRadius",
+  BORDERWIDTH = "borderWidth",
+}
+
 const Settings: FC<ISettings> = ({
   items,
   setItems,
@@ -17,9 +36,10 @@ const Settings: FC<ISettings> = ({
   setImgData,
   imgData,
 }) => {
-  const [showComponent, setShowComponent] = useState(null); // for abi method component
+  const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const ref = useRef(null);
 
+  // work in progress
   const selectedChildren = items.map((item) =>
     item.children?.find((child) => child.i === settingItemId)
   );
@@ -133,23 +153,38 @@ const Settings: FC<ISettings> = ({
   };
 
   const setBold = (fontWeight: boolean) => {
-    utilityFunction("fontWeight", fontWeight, "bold", "normal");
+    utilityFunction(
+      functionEnum.FONTWEIGHT,
+      fontWeight,
+      fontEnum.BOLD,
+      fontEnum.NORMAL
+    );
   };
 
   const setItalic = (fontStyle: boolean) => {
-    utilityFunction("fontStyle", fontStyle, "italic", "normal");
+    utilityFunction(
+      functionEnum.FONTSTYLE,
+      fontStyle,
+      fontEnum.ITALIC,
+      fontEnum.NORMAL
+    );
   };
 
   const setUnderline = (textDecoration: boolean) => {
-    utilityFunction("textDecoration", textDecoration, "underline", "none");
+    utilityFunction(
+      functionEnum.TEXTDECORATION,
+      textDecoration,
+      "underline",
+      "none"
+    );
   };
 
   const setColor = (color: IColor) => {
-    singleWorkFunction("color", color);
+    singleWorkFunction(functionEnum.COLOR, color);
   };
 
   const setBgColor = (backgroundColor: IColor) => {
-    singleWorkFunction("backgroundColor", backgroundColor);
+    singleWorkFunction(functionEnum.BACKGROUNDCOLOR, backgroundColor);
   };
 
   const singleWorkFunction = (styleProp, property) => {
@@ -194,28 +229,48 @@ const Settings: FC<ISettings> = ({
   };
 
   const setDeleteComponent = (deleteComponent: number) => {
-    singleWorkFunction("deleteComponent", deleteComponent);
+    singleWorkFunction(functionEnum.DELETECOMPONENT, deleteComponent);
   };
 
   const setCenter = (justifyContent: boolean) => {
-    utilityFunction("justifyContent", justifyContent, "center", "inherit");
+    utilityFunction(
+      functionEnum.JUSTIFYCONTENT,
+      justifyContent,
+      "center",
+      "inherit"
+    );
   };
 
   const setLeft = (justifyContent: boolean) => {
-    utilityFunction("justifyContent", justifyContent, "left", "inherit");
+    utilityFunction(
+      functionEnum.JUSTIFYCONTENT,
+      justifyContent,
+      "left",
+      "inherit"
+    );
   };
 
   const setRight = (justifyContent: boolean) => {
-    utilityFunction("justifyContent", justifyContent, "right", "inherit");
+    utilityFunction(
+      functionEnum.JUSTIFYCONTENT,
+      justifyContent,
+      "right",
+      "inherit"
+    );
   };
 
   const setSmall = (shadow: boolean) => {
-    utilityFunction("shadow", shadow, "0 1px 2px 0 rgb(0 0 0 / 0.05)", "none");
+    utilityFunction(
+      functionEnum.SHADOW,
+      shadow,
+      "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      "none"
+    );
   };
 
   const setMedium = (shadow: boolean) => {
     utilityFunction(
-      "shadow",
+      functionEnum.SHADOW,
       shadow,
       "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
       "inherit"
@@ -224,7 +279,7 @@ const Settings: FC<ISettings> = ({
 
   const setLarge = (shadow: boolean) => {
     utilityFunction(
-      "shadow",
+      functionEnum.SHADOW,
       shadow,
       "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
       "inherit"
@@ -276,11 +331,11 @@ const Settings: FC<ISettings> = ({
   };
 
   const setBorderRadius = (borderRadius: number) => {
-    singleWorkFunction("borderRadius", borderRadius);
+    singleWorkFunction(functionEnum.BORDERRADIUS, borderRadius);
   };
 
   const setBorderWidth = (borderWidth: number) => {
-    singleWorkFunction("borderWidth", borderWidth);
+    singleWorkFunction(functionEnum.BORDERWIDTH, borderWidth);
   };
 
   const setOn = (connectWallet: boolean) => {
@@ -317,8 +372,6 @@ const Settings: FC<ISettings> = ({
     });
     setItems(updatedItems);
   };
-
-  console.log(items);
 
   return (
     <>

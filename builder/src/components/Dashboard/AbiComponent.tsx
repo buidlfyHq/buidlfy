@@ -121,30 +121,79 @@ const AbiComponent: FC<IAbiComponent> = ({
       setItems(newArray);
     }
   };
+  const handleInputSelector = (selectedId: string) => {
+    setSelector({
+      methodName: showComponent.value.name,
+      type: "input",
+      name: selectedId,
+      buttonId: selectedItem.i,
+    });
+    setCurrentElement({ name: selectedId, type: "input" });
+  };
+  // work in progress
+  const inputObjects = (i: any) => {
+    const selectedId = "input" + i + showComponent.id;
+    const objects = Object.keys(elementConfig);
+    const filterObjects = objects.filter((key) => key === selectedId);
+    return {
+      selectedId,
+      objects,
+      filterObjects,
+    };
+  };
+  const handleStateSelector = (selectedItem: IItems) => {
+    setSelector({
+      methodName: showComponent.value.name,
+      type: "input",
+      name: showComponent.value.name,
+      buttonId: selectedItem.i,
+    });
+    setCurrentElement({
+      name: showComponent.value.name,
+      type: "send",
+    });
+  };
+  // work in progress
+  const stateObject = (key: any) => {
+    let filteredObject = elementConfig[key]?.filter(
+      (key: { buttonId: string }) => key.buttonId === selectedItem.i
+    );
+    return filteredObject;
+  };
+  const handleOutputSelector = (selectedId: string) => {
+    setSelector({
+      methodName: showComponent.value.name,
+      type: "output",
+      name: selectedId,
+      buttonId: selectedItem.i,
+    });
+    setCurrentElement({ name: selectedId, type: "output" });
+  };
+  // work in progress
+  const outputObjects = (i: any) => {
+    const selectedId = "output" + i + showComponent.id;
+    const objects = Object.keys(elementConfig);
+    const filterObjects = objects.filter((key) => key === selectedId);
+    return {
+      selectedId,
+      objects,
+      filterObjects,
+    };
+  };
   return (
     <main>
       {showComponent ? (
         <>
           {showComponent.value.inputs[0] &&
             showComponent.value.inputs.map((input: { name: string }, i) => {
-              const selectedId = "input" + i + showComponent.id;
-              const objects = Object.keys(elementConfig);
-              const filterObjects = objects.filter((key) => key === selectedId);
+              const { selectedId, objects, filterObjects } = inputObjects(i);
               return (
                 <section className="mt-3">
                   <h6>Input - {input.name}</h6>
                   <div
                     key={i}
                     className="grid mb-2 px-2 border rounded mt-1 h-7"
-                    onClick={() => {
-                      setSelector({
-                        methodName: showComponent.value.name,
-                        type: "input",
-                        name: selectedId,
-                        buttonId: selectedItem.i,
-                      });
-                      setCurrentElement({ name: selectedId, type: "input" });
-                    }}
+                    onClick={() => handleInputSelector(selectedId)}
                   >
                     <>
                       {!objects.length ? (
@@ -206,16 +255,7 @@ const AbiComponent: FC<IAbiComponent> = ({
               <div
                 className="mb-2 px-2 border rounded mt-1 h-7"
                 onClick={() => {
-                  setSelector({
-                    methodName: showComponent.value.name,
-                    type: "input",
-                    name: showComponent.value.name,
-                    buttonId: selectedItem.i,
-                  });
-                  setCurrentElement({
-                    name: showComponent.value.name,
-                    type: "send",
-                  });
+                  handleStateSelector(selectedItem);
                 }}
               >
                 {!Object.keys(elementConfig).filter(
@@ -228,10 +268,7 @@ const AbiComponent: FC<IAbiComponent> = ({
                       .filter((key) => key === showComponent.value.name)
                       .map((key) => {
                         if (key === showComponent.value.name) {
-                          let filteredObject = elementConfig[key]?.filter(
-                            (key: { buttonId: string }) =>
-                              key.buttonId === selectedItem.i
-                          );
+                          let filteredObject = stateObject(key);
                           return (
                             <>
                               {filteredObject[0] && (
@@ -257,9 +294,7 @@ const AbiComponent: FC<IAbiComponent> = ({
 
           {showComponent.value.outputs[0] &&
             showComponent.value.outputs.map((output: { name: string }, i) => {
-              const selectedId = "output" + i + showComponent.id;
-              const objects = Object.keys(elementConfig);
-              const filterObjects = objects.filter((key) => key === selectedId);
+              const { selectedId, objects, filterObjects } = outputObjects(i);
               return (
                 <section key={i} className="mt-3">
                   <h6>Output - {output.name}</h6>
@@ -268,13 +303,7 @@ const AbiComponent: FC<IAbiComponent> = ({
                     key={i}
                     className="grid mb-2 px-2 border rounded mt-1 h-7"
                     onClick={() => {
-                      setSelector({
-                        methodName: showComponent.value.name,
-                        type: "output",
-                        name: selectedId,
-                        buttonId: selectedItem.i,
-                      });
-                      setCurrentElement({ name: selectedId, type: "output" });
+                      handleOutputSelector(selectedId);
                     }}
                   >
                     {objects.length === 0 ? (
