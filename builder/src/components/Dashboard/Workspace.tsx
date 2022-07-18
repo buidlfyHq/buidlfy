@@ -151,7 +151,44 @@ const Workspace: FC<IWorkspace> = ({
     }
     if (e.target.id === "") setOpenSetting(false);
   };
-
+  const renderItemFunction = items
+    ?.filter((i) => i.style?.deleteComponent === 0)
+    .map((item: IItems, index: number) => {
+      const { x, y, w, h, minW, i, name } = item;
+      return (
+        <div
+          key={i}
+          id={name}
+          unselectable="on"
+          data-grid={{ x, y, w, h, minW }}
+          className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
+            selector
+              ? "hover:outline-orange-300 hover:outline"
+              : "hover:outline-slate-300 hover:outline-dashed"
+          }`}
+          // open item setting on click
+          onClick={(e) =>
+            item.name === "Container" ? null : onComponentClick(item.name, i)
+          }
+        >
+          <RenderItem
+            item={item}
+            items={items}
+            setItems={setItems}
+            imgData={imgData}
+            setDrag={setDrag}
+            setOpenSetting={setOpenSetting}
+            setSettingItemId={setSettingItemId}
+            setOpenTab={setOpenTab}
+            setAddContainer={setAddContainer}
+            selector={selector}
+            setSelector={setSelector}
+            elementConfig={elementConfig}
+            setElementConfig={setElementConfig}
+          />
+        </div>
+      );
+    });
   return (
     <main
       className={
@@ -167,7 +204,6 @@ const Workspace: FC<IWorkspace> = ({
       <section className="mt-[60px] ">
         <ResponsiveGridLayout
           layouts={{ lg: items }}
-          // breakpoints={{ lg: 2000, md: 1400, sm: 992, xs: 480, xxs: 0 }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
           cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
           rowHeight={50}
@@ -179,48 +215,7 @@ const Workspace: FC<IWorkspace> = ({
           margin={[0, 0]}
           className="h-fit"
         >
-          {items
-            ?.filter((i) => i.style?.deleteComponent === 0)
-            .map((item: IItems) => {
-              const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
-              return (
-                <div
-                  key={i}
-                  id={name}
-                  unselectable="on"
-                  data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
-                  className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
-                    name !== "Container"
-                      ? selector
-                        ? "hover:outline-orange-300 hover:outline"
-                        : "hover:outline-slate-300 hover:outline-dashed"
-                      : null
-                  }`}
-                  // open item setting on click
-                  onClick={(e) =>
-                    item.name === "Container"
-                      ? null
-                      : onComponentClick(item.name, i)
-                  }
-                >
-                  <RenderItem
-                    item={item}
-                    items={items}
-                    setItems={setItems}
-                    imgData={imgData}
-                    setDrag={setDrag}
-                    setOpenSetting={setOpenSetting}
-                    setSettingItemId={setSettingItemId}
-                    setOpenTab={setOpenTab}
-                    setAddContainer={setAddContainer}
-                    selector={selector}
-                    setSelector={setSelector}
-                    elementConfig={elementConfig}
-                    setElementConfig={setElementConfig}
-                  />
-                </div>
-              );
-            })}
+          {renderItemFunction}
         </ResponsiveGridLayout>
       </section>
     </main>

@@ -8,14 +8,18 @@ import Workspace from "components/Dashboard/Workspace";
 import Settings from "components/Utils/Settings";
 import IItems from "interfaces/items";
 import BgColorComponent from "components/Utils/BgColorComponent";
-
+import { useWindowSize } from "hooks/useWindowSize";
+import IColor from "interfaces/color";
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
-
+interface IImage {
+  id: string;
+  data: string | ArrayBuffer;
+}
 const Dashboard: FC = () => {
   const navigate = useNavigate();
-  const [picture, setPicture] = useState(null);
-  const [imgData, setImgData] = useState([]);
+  const [picture, setPicture] = useState<string>("");
+  const [imgData, setImgData] = useState<IImage[]>([]);
   const [items, setItems] = useState<IItems[]>([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [contractConfig, setContractConfig] = useState({
@@ -31,7 +35,7 @@ const Dashboard: FC = () => {
   const [drag, setDrag] = useState<boolean>(true);
   const [newComp, setNewComp] = useState<string>("");
   const [addContainer, setAddContainer] = useState<boolean>(false);
-  const [backgroundColor, setBackgroundColor] = useState({
+  const [backgroundColor, setBackgroundColor] = useState<IColor>({
     r: "0",
     g: "0",
     b: "0",
@@ -57,31 +61,8 @@ const Dashboard: FC = () => {
       setItems(JSON.parse(saveItems));
     }
   }, []); // eslint-disable-line
-
-  function useWindowSize() {
-    // Initialize state with undefined width/height so server and client renders match
-    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-    const [windowSize, setWindowSize] = useState({
-      width: undefined,
-    });
-    useEffect(() => {
-      // Handler to call on window resize
-      function handleResize() {
-        // Set window width/height to state
-        setWindowSize({
-          width: window.innerWidth,
-        });
-      }
-      // Add event listener
-      window.addEventListener("resize", handleResize);
-      // Call handler right away so state gets updated with initial window size
-      handleResize();
-      // Remove event listener on cleanup
-      return () => window.removeEventListener("resize", handleResize);
-    }, []); // Empty array ensures that effect is only run on mount
-    return windowSize;
-  }
   const size = useWindowSize();
+
   const handleSave = () => {
     if (items?.length > 0) {
       localStorage.setItem("items", JSON.stringify(items));
@@ -97,88 +78,85 @@ const Dashboard: FC = () => {
     <main>
       <>
         {size.width > 1024 ? (
-          <ComponentContext.Provider value={{ newComp, setNewComp }}>
-            <div className="flex flex-row w-full min-h-screen">
-              {/* Sidebar */}
-              <Sidebar
+          <div className="flex flex-row w-full min-h-screen">
+            {/* Sidebar */}
+            <Sidebar
+              className={className}
+              setClassName={setClassName}
+              items={items}
+              setItems={setItems}
+              setSelector={setSelector}
+              elementConfig={elementConfig}
+              addContainer={addContainer}
+              settingItemId={settingItemId}
+              backgroundColor={backgroundColor}
+              setBackgroundColor={setBackgroundColor}
+            />
+
+            <section className="flex-1">
+              {/* Navbar */}
+              <Navbar
                 className={className}
                 setClassName={setClassName}
                 items={items}
-                setItems={setItems}
-                setSelector={setSelector}
-                elementConfig={elementConfig}
-                addContainer={addContainer}
-                settingItemId={settingItemId}
-                backgroundColor={backgroundColor}
-                setBackgroundColor={setBackgroundColor}
+                contractConfig={contractConfig}
+                handleSave={handleSave}
+                handleClear={handleClear}
               />
 
-              <section className="flex-1">
-                {/* Navbar */}
-                <Navbar
-                  className={className}
-                  setClassName={setClassName}
-                  items={items}
-                  contractConfig={contractConfig}
-                  handleSave={handleSave}
-                  handleClear={handleClear}
-                />
+              {/* Main section */}
+              <Workspace
+                items={items}
+                setItems={setItems}
+                className={className}
+                setOpenSetting={setOpenSetting}
+                setSettingItemId={setSettingItemId}
+                selector={selector}
+                setSelector={setSelector}
+                elementConfig={elementConfig}
+                setElementConfig={setElementConfig}
+                setOpenTab={setOpenTab}
+                imgData={imgData}
+                drag={drag}
+                setDrag={setDrag}
+                setAddContainer={setAddContainer}
+                backgroundColor={backgroundColor}
+              />
+            </section>
 
-                {/* Main section */}
-                <Workspace
-                  items={items}
-                  setItems={setItems}
-                  className={className}
-                  setOpenSetting={setOpenSetting}
-                  setSettingItemId={setSettingItemId}
-                  selector={selector}
-                  setSelector={setSelector}
-                  elementConfig={elementConfig}
-                  setElementConfig={setElementConfig}
-                  setOpenTab={setOpenTab}
-                  imgData={imgData}
-                  drag={drag}
-                  setDrag={setDrag}
-                  setAddContainer={setAddContainer}
-                  backgroundColor={backgroundColor}
-                />
-              </section>
-
-              {/* Right Sidebar Settings */}
-              {openSetting ? (
-                <Settings
-                  items={items}
-                  setItems={setItems}
-                  settingItemId={settingItemId}
-                  contractConfig={contractConfig}
-                  setContractConfig={setContractConfig}
-                  setSelector={setSelector}
-                  elementConfig={elementConfig}
-                  openTab={openTab}
-                  setOpenTab={setOpenTab}
-                  setPicture={setPicture}
-                  setImgData={setImgData}
-                  imgData={imgData}
-                />
-              ) : (
-                <main
-                  className={`fixed right-0 top-[60px] z-0 w-[250px] border-l h-full`}
-                >
-                  <div className="mx-3 my-2">
-                    <h3 className="mb-2 text-xl">Site Settings</h3>
-                    <div className="mb-3">
-                      <BgColorComponent
-                        color={backgroundColor}
-                        setBgColor={setBackgroundColor}
-                        siteSetting={true}
-                      />
-                    </div>
-                    <div className="p-3 mt-16 bottom-16 absolute"></div>
+            {/* Right Sidebar Settings */}
+            {openSetting ? (
+              <Settings
+                items={items}
+                setItems={setItems}
+                settingItemId={settingItemId}
+                contractConfig={contractConfig}
+                setContractConfig={setContractConfig}
+                setSelector={setSelector}
+                elementConfig={elementConfig}
+                openTab={openTab}
+                setOpenTab={setOpenTab}
+                setPicture={setPicture}
+                setImgData={setImgData}
+                imgData={imgData}
+              />
+            ) : (
+              <main
+                className={`fixed right-0 top-[60px] z-0 w-[250px] border-l h-full`}
+              >
+                <div className="mx-3 my-2">
+                  <h3 className="mb-2 text-xl">Site Settings</h3>
+                  <div className="mb-3">
+                    <BgColorComponent
+                      color={backgroundColor}
+                      setBgColor={setBackgroundColor}
+                      siteSetting={true}
+                    />
                   </div>
-                </main>
-              )}
-            </div>
-          </ComponentContext.Provider>
+                </div>
+              </main>
+            )}
+          </div>
         ) : (
           <h1 className="items-center text-center justify-center flex h-[100vh]">
             Use this on desktop for better experience <br /> Responsive view

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import { BiGridHorizontal } from "react-icons/bi";
 import ShortUniqueId from "short-unique-id";
@@ -7,34 +7,40 @@ import { components } from "components/Dashboard/component";
 import RenderItem from "components/Dashboard/RenderItem";
 import IItems from "interfaces/items";
 import "styles/Components.css";
+import IColor from "interfaces/color";
 
-interface IWidth {
-  containerWidth: number;
-  margin: [number, number];
-  cols: number;
-  containerPadding: [number, number];
+interface IContainter {
+  item;
+  items?: IItems[];
+  setItems?: (items?: IItems[]) => void;
+  children: IItems[];
+  backgroundColor: IColor;
+  color: IColor;
+  imgData;
+  borderRadius: number;
+  borderWidth: number;
+  shadow: string;
+  setDrag: (drag: boolean) => void;
+  setSettingItemId: (item: string) => void;
+  setOpenSetting: (open: boolean) => void;
+  setOpenTab: Dispatch<SetStateAction<number>>;
+  setAddContainer: (addContainer: boolean) => void;
+  selector: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  };
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  }) => void;
+  elementConfig: object;
+  setElementConfig: Dispatch<SetStateAction<object>>;
 }
-
-// interface IWorkspace {
-//   setSettingItemId: (item: string) => void;
-//   setOpenSetting: (open: boolean) => void;
-//   selector: {
-//     methodName: string;
-//     type: string;
-//     name: string;
-//   };
-//   setSelector: (selector: {
-//     methodName: string;
-//     type: string;
-//     name: string;
-//   }) => void;
-//   elementConfig: object;
-//   setElementConfig: any;
-//   setOpenTab: any;
-//   imgData: { id: string; data: string | ArrayBuffer }[];
-// }
-
-const Container = ({
+const Container: FC<IContainter> = ({
   item,
   items,
   setItems,

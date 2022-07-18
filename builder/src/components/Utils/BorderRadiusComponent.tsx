@@ -23,14 +23,16 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
       setBorderRadius(+e.target.value);
     }
   };
-
+  const numbers = [2, 4, 5, 7, 8, 10, 15, 20, 25];
+  const options = numbers.map((number) => (
+    <option value={number}>{number}</option>
+  ));
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">
         <span className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
-          Border Radius{" "}
+          Border Radius
           <div className="flex mt-3">
-            {" "}
             <span
               onClick={decrementCounter}
               className="flex items-center justify-center shadow text-[18px] mr-3 w-8 h-10 font-regular text-black"
@@ -45,15 +47,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
                 aria-label="Default select example"
               >
                 <option selected>{borderRadius}</option>
-                <option value={2}>2</option>
-                <option value={4}>4</option>
-                <option value={5}>5</option>
-                <option value={7}>7</option>
-                <option value={8}>8</option>
-                <option value={10}>10</option>
-                <option value={15}>15</option>
-                <option value={20}>20</option>
-                <option value={25}>25</option>
+                {options}
               </select>
             </div>
             <span

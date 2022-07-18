@@ -23,13 +23,16 @@ const BorderComponent: FC<IBorderComponent> = ({
       setBorderWidth(+e.target.value);
     }
   };
+  const numbers = [1, 3, 5, 7, 9, 10, 12];
+  const options = numbers.map((number) => (
+    <option value={number}>{number}</option>
+  ));
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">
         <span className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
-          Border Width{" "}
+          Border Width
           <div className="flex mt-3">
-            {" "}
             <span
               onClick={decrementWidthCounter}
               className="flex items-center justify-center shadow text-[18px] mr-3 w-8 h-10 font-regular text-black"
@@ -44,13 +47,7 @@ const BorderComponent: FC<IBorderComponent> = ({
                 aria-label="Default select example"
               >
                 <option selected>{borderWidth}</option>
-                <option value={1}>1</option>
-                <option value={3}>3</option>
-                <option value={5}>5</option>
-                <option value={7}>7</option>
-                <option value={9}>9</option>
-                <option value={10}>10</option>
-                <option value={12}>12</option>
+                {options}
               </select>
             </div>
             <span
