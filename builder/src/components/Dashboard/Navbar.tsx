@@ -68,7 +68,7 @@ const Navbar: FC<INavbar> = ({
         onClick={showSidebar}
         className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"
       >
-        {className && "" && <AiOutlineDoubleRight />}
+        {className && <AiOutlineDoubleRight />}
       </div>
       <div className="flex flex-row h-[60px]">
         <div className="flex flex-row items-center">
