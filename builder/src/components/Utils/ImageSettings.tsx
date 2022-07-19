@@ -14,9 +14,6 @@ const ImageSettings: FC<ISettings> = ({
   setLeft,
   setCenter,
   setRight,
-  setPicture,
-  setImgData,
-  imgData,
 }) => {
   return (
     <>
@@ -27,9 +24,6 @@ const ImageSettings: FC<ISettings> = ({
         ) : null}
       </h3>
       <UploadComponent
-        setPicture={setPicture}
-        setImgData={setImgData}
-        imgData={imgData}
         selectedItem={selectedItem}
         items={items}
         setItems={setItems}

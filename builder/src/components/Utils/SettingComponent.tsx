@@ -34,9 +34,6 @@ const SettingComponent: FC<ISettings> = ({
   elementConfig,
   openTab,
   setOpenTab,
-  setPicture,
-  setImgData,
-  imgData,
   setBorderRadius,
   setBorderWidth,
   setSmall,
@@ -123,9 +120,6 @@ const SettingComponent: FC<ISettings> = ({
           setLeft={setLeft}
           setCenter={setCenter}
           setRight={setRight}
-          setPicture={setPicture}
-          setImgData={setImgData}
-          imgData={imgData}
         />
       );
 
@@ -141,9 +135,6 @@ const SettingComponent: FC<ISettings> = ({
           backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
           deleteComponent={selectedItem?.style?.deleteComponent}
-          setPicture={setPicture}
-          setImgData={setImgData}
-          imgData={imgData}
           borderRadius={selectedItem?.style?.borderRadius}
           setBorderRadius={setBorderRadius}
           borderWidth={selectedItem?.style?.borderWidth}
@@ -212,9 +203,6 @@ const SettingComponent: FC<ISettings> = ({
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
-          setPicture={setPicture}
-          setImgData={setImgData}
-          imgData={imgData}
           borderRadius={selectedItem?.style?.borderRadius}
           setBorderRadius={setBorderRadius}
           borderWidth={selectedItem?.style?.borderWidth}

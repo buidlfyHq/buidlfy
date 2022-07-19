@@ -46,14 +46,12 @@ export default interface ISettings {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   }) => void;
   settingItemId?: string;
   elementConfig?: object;
   openTab?: number;
   setOpenTab?: (openTab: number) => void;
-  setPicture?: (picture: string) => void;
-  setImgData?: (imgData: { id: string; data: string | ArrayBuffer }[]) => void;
-  imgData?: { id: string; data: string | ArrayBuffer }[];
   borderRadius?: number;
   setBorderRadius?: (borderRadius: number) => void;
   borderWidth?: number;

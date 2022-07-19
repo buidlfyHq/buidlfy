@@ -32,9 +32,6 @@ const Settings: FC<ISettings> = ({
   elementConfig,
   openTab,
   setOpenTab,
-  setPicture,
-  setImgData,
-  imgData,
 }) => {
   const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
   const ref = useRef(null);
@@ -420,9 +417,6 @@ const Settings: FC<ISettings> = ({
               elementConfig={elementConfig}
               openTab={openTab}
               setOpenTab={setOpenTab}
-              setPicture={setPicture}
-              setImgData={setImgData}
-              imgData={imgData}
               borderRadius={selectedItem?.style?.borderRadius}
               setBorderRadius={setBorderRadius}
               borderWidth={selectedItem?.style?.borderWidth}

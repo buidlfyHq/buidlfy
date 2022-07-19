@@ -4,30 +4,34 @@ import Navbar from "components/Dashboard/Navbar";
 import Sidebar from "components/Dashboard/Sidebar";
 import Workspace from "components/Dashboard/Workspace";
 import Settings from "components/Utils/Settings";
-import IItems from "interfaces/items";
 import BgColorComponent from "components/Utils/BgColorComponent";
 import { useWindowSize } from "hooks/useWindowSize";
+import IItems from "interfaces/items";
 import IColor from "interfaces/color";
+
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
-interface IImage {
-  id: string;
-  data: string | ArrayBuffer;
-}
+
 const Dashboard: FC = () => {
   const navigate = useNavigate();
-  const [picture, setPicture] = useState<string>("");
-  const [imgData, setImgData] = useState<IImage[]>([]);
   const [items, setItems] = useState<IItems[]>([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
-  const [contractConfig, setContractConfig] = useState({
+  const [contractConfig, setContractConfig] = useState<{
+    abi: string;
+    address: string;
+  }>({
     abi: "",
     address: "",
   }); // for storing contract abi and address
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
-  const [settingItemId, setSettingItemId] = useState(""); // for storing current element id for settings
+  const [settingItemId, setSettingItemId] = useState<string>(""); // for storing current element id for settings
   // for selecting an element for contract
-  const [selector, setSelector] = useState(null);
+  const [selector, setSelector] = useState<{
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  }>(null);
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
@@ -58,6 +62,7 @@ const Dashboard: FC = () => {
       setItems(JSON.parse(saveItems));
     }
   }, []); // eslint-disable-line
+
   const size = useWindowSize();
 
   const handleSave = () => {
@@ -113,7 +118,6 @@ const Dashboard: FC = () => {
                 elementConfig={elementConfig}
                 setElementConfig={setElementConfig}
                 setOpenTab={setOpenTab}
-                imgData={imgData}
                 drag={drag}
                 setDrag={setDrag}
                 setAddContainer={setAddContainer}
@@ -133,9 +137,6 @@ const Dashboard: FC = () => {
                 elementConfig={elementConfig}
                 openTab={openTab}
                 setOpenTab={setOpenTab}
-                setPicture={setPicture}
-                setImgData={setImgData}
-                imgData={imgData}
               />
             ) : (
               <main

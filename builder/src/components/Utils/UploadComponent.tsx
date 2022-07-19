@@ -4,25 +4,20 @@ import "../../styles/Components.css";
 import IItems from "interfaces/items";
 
 interface IUploadComponent {
-  setPicture: (picture: string) => void;
-  setImgData: (imgData: { id: string; data: string | ArrayBuffer }[]) => void;
-  imgData: { id: string; data: string | ArrayBuffer }[];
   selectedItem: IItems;
   items: IItems[];
   setItems: (items: IItems[]) => void;
 }
 
 const UploadComponent: FC<IUploadComponent> = ({
-  setPicture,
-  setImgData,
   selectedItem,
   items,
   setItems,
 }) => {
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
-      setPicture(e.target.files[0]);
       const reader = new FileReader();
+      
       reader.addEventListener("load", () => {
         const updatedItems = items.map((item) => {
           let selectedChild = item.children?.find(
@@ -52,7 +47,6 @@ const UploadComponent: FC<IUploadComponent> = ({
           return item;
         });
         setItems(updatedItems);
-        setImgData([{ id: selectedItem.i, data: reader.result }]);
       });
       reader.readAsDataURL(e.target.files[0]);
     }

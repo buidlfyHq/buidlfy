@@ -27,7 +27,6 @@ interface IWorkspace {
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setOpenTab: Dispatch<SetStateAction<number>>;
-  imgData: { id: string; data: string | ArrayBuffer }[];
   drag: boolean;
   setDrag: React.Dispatch<React.SetStateAction<boolean>>;
   setAddContainer: (addContainer: boolean) => void;
@@ -45,7 +44,6 @@ const Workspace: FC<IWorkspace> = ({
   elementConfig,
   setElementConfig,
   setOpenTab,
-  imgData,
   drag,
   setDrag,
   setAddContainer,
@@ -151,6 +149,7 @@ const Workspace: FC<IWorkspace> = ({
     }
     if (e.target.id === "") setOpenSetting(false);
   };
+  
   const renderItemFunction = items
     ?.filter((i) => i.style?.deleteComponent === 0)
     .map((item: IItems, index: number) => {
@@ -175,7 +174,6 @@ const Workspace: FC<IWorkspace> = ({
             item={item}
             items={items}
             setItems={setItems}
-            imgData={imgData}
             setDrag={setDrag}
             setOpenSetting={setOpenSetting}
             setSettingItemId={setSettingItemId}
@@ -189,6 +187,7 @@ const Workspace: FC<IWorkspace> = ({
         </div>
       );
     });
+
   return (
     <main
       className={

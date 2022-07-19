@@ -39,7 +39,10 @@ const AbiComponent: FC<IAbiComponent> = ({
   items,
   setItems,
 }) => {
-  const [currentElement, setCurrentElement] = useState({
+  const [currentElement, setCurrentElement] = useState<{
+    name: string;
+    type: string;
+  }>({
     name: "",
     type: "",
   });

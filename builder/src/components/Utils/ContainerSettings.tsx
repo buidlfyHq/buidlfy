@@ -18,9 +18,6 @@ const ContainerSettings: FC<ISettings> = ({
   backgroundColor,
   setDeleteComponent,
   deleteComponent,
-  setPicture,
-  setImgData,
-  imgData,
   borderRadius,
   setBorderRadius,
   borderWidth,
@@ -39,9 +36,6 @@ const ContainerSettings: FC<ISettings> = ({
         ) : null}
       </h3>
       <UploadComponent
-        setPicture={setPicture}
-        setImgData={setImgData}
-        imgData={imgData}
         selectedItem={selectedItem}
         items={items}
         setItems={setItems}

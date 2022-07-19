@@ -8,13 +8,13 @@ import "styles/Components.css";
 import IColor from "interfaces/color";
 
 interface IContainter {
-  item;
+  item: IItems;
   items?: IItems[];
   setItems?: (items?: IItems[]) => void;
   children: IItems[];
   backgroundColor: IColor;
   color: IColor;
-  imgData;
+  imgData; // updating soon
   borderRadius: number;
   borderWidth: number;
   shadow: string;
@@ -38,6 +38,7 @@ interface IContainter {
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
 }
+
 const Container: FC<IContainter> = ({
   item,
   items,
@@ -257,7 +258,7 @@ const Container: FC<IContainter> = ({
       </GridLayout>
       <BiGridHorizontal
         id="drag"
-        onClick={() => onComponentClick(item, item.i)}
+        onClick={() => onComponentClick(item.name, item.i)}
       />
     </section>
   );

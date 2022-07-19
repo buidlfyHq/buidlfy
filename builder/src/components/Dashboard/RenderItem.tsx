@@ -12,11 +12,9 @@ interface IRenderItem {
   item: IItems;
   items?: IItems[];
   setItems?: (items?: IItems[]) => void;
-  // made imgdata optional to test container
-  imgData?: { id: string; data: string | ArrayBuffer }[];
   setDrag: React.Dispatch<React.SetStateAction<boolean>>;
   setOpenSetting?: (openSetting: boolean) => void;
-  setSettingItemId?;
+  setSettingItemId?: (settingItemId: string) => void;
   setOpenTab?: (openTab: number) => void;
   setAddContainer?: (addContainer: boolean) => void;
   selector?: {
@@ -39,7 +37,6 @@ const RenderItem: FC<IRenderItem> = ({
   item,
   items,
   setItems,
-  imgData,
   setDrag,
   setOpenSetting,
   setSettingItemId,

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import ShortUniqueId from "short-unique-id";
 import { components } from "./component";
 import IItems from "interfaces/items";
@@ -13,6 +13,7 @@ interface ISidebar {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   }) => void;
   elementConfig: object;
   addContainer: boolean;
@@ -34,7 +35,7 @@ const Sidebar: FC<ISidebar> = ({
   setBackgroundColor,
 }) => {
   const uid = new ShortUniqueId();
-  const [indexValue, setIndexValue] = useState<number>(0);
+  // const [indexValue, setIndexValue] = useState<number>(0);
 
   const selectedItem =
     items?.find((item) => item.i === settingItemId) ||
@@ -42,9 +43,9 @@ const Sidebar: FC<ISidebar> = ({
       item.children?.find((child) => child.i === settingItemId)
     )[0];
 
-  const hideSidebar = () => {
-    setClassName("hidden");
-  };
+  // const hideSidebar = () => {
+  //   setClassName("hidden");
+  // };
 
   const checkY = (items: IItems[]) => {
     if (items.length === 0) return 0;
