@@ -1,9 +1,7 @@
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
-import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
+import React, { Dispatch, FC, SetStateAction } from "react";
+import { Layout } from "react-grid-layout";
 import { BiGridHorizontal } from "react-icons/bi";
-import ShortUniqueId from "short-unique-id";
 import GridLayout from "react-grid-layout";
-import { components } from "components/Dashboard/component";
 import RenderItem from "components/Dashboard/RenderItem";
 import IItems from "interfaces/items";
 import "styles/Components.css";

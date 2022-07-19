@@ -1,4 +1,3 @@
-import { AnyRecord } from "dns";
 import IColor from "./color";
 
 export default interface ITexts {

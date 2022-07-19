@@ -1,9 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ComponentContext } from "../components/Context/ComponentContext";
 import Navbar from "components/Dashboard/Navbar";
 import Sidebar from "components/Dashboard/Sidebar";
-import { GiClick } from "react-icons/gi";
 import Workspace from "components/Dashboard/Workspace";
 import Settings from "components/Utils/Settings";
 import IItems from "interfaces/items";
@@ -33,7 +31,6 @@ const Dashboard: FC = () => {
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
-  const [newComp, setNewComp] = useState<string>("");
   const [addContainer, setAddContainer] = useState<boolean>(false);
   const [backgroundColor, setBackgroundColor] = useState<IColor>({
     r: "0",

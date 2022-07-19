@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import { HiOutlineDuplicate } from "react-icons/hi";
 import "../../styles/Components.css";
 import "../../styles/Dashboard.css";
 

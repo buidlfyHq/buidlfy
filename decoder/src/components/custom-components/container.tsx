@@ -1,5 +1,4 @@
 import { FC } from "react";
-// import GridLayout from "react-grid-layout";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "utils/render-item";
 import IBgContainer from "interfaces/container";
@@ -23,7 +22,7 @@ const Container: FC<IBgContainer> = ({
 }) => {
   return (
     <ResponsiveGridLayout
-      layouts={{lg: children}}
+      layouts={{ lg: children }}
       breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
       cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
       rowHeight={50}

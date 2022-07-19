@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import image from "assets/image-component.png";
 import "styles/Components.css";
 
 interface IImageComponent {

@@ -1,12 +1,7 @@
-import React, { FC, useState, useEffect } from "react";
-import { Popover } from "@headlessui/react";
+import React, { FC, useState } from "react";
 import ShortUniqueId from "short-unique-id";
-import { AiOutlineDoubleLeft, AiOutlineSetting } from "react-icons/ai";
-import { BiGridSmall } from "react-icons/bi";
 import { components } from "./component";
 import IItems from "interfaces/items";
-import BgColorComponent from "../Utils/BgColorComponent";
-import { ResizeHandles } from "interfaces/handle";
 import IColor from "interfaces/color";
 
 interface ISidebar {
