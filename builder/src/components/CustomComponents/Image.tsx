@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import "styles/Components.css";
 
 interface IImageComponent {
-  imgData; // updating soon
+  imgData: string;
   justifyContent: string;
 }
 
