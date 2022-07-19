@@ -17,7 +17,7 @@ const Button: FC<ITexts> = ({
 }) => (
   <section
     style={{ justifyContent: justifyContent }}
-    id="Button"
+    id="button-one"
     className="flex items-center justify-center w-auto h-full px-6"
   >
     <div
@@ -34,7 +34,7 @@ const Button: FC<ITexts> = ({
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
         boxShadow: shadow,
       }}
-      id="Button"
+      id="button-two"
       className="w-48 h-auto px-6 py-2 cursor-pointer btn whitespace-nowrap"
     >
       {link.length > 0 ? <a href={link}>{value}</a> : <>{value}</>}

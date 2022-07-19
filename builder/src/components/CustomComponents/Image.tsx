@@ -10,7 +10,7 @@ const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
   <>
     {imgData ? (
       <div
-        id="image-id"
+        id="image-one"
         className="flex items-center justify-center w-full h-full"
         style={{
           backgroundImage: `url(${imgData})`,
@@ -22,7 +22,7 @@ const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
     ) : (
       <div className="flex items-center justify-center w-full h-full">
         <div
-          id="image-id"
+          id="image-two"
           className="px-10 bold py-[10px] rounded-xl bg-indigo-700 text-white"
         >
           Upload Image

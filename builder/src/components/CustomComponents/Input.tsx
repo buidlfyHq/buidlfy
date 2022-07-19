@@ -9,7 +9,10 @@ interface IInput {
 }
 
 const Input: FC<IInput> = ({ borderRadius, shadow, color }) => (
-  <section className="flex items-center justify-center h-full" id="Input">
+  <section
+    className="flex items-center justify-center h-full"
+    id="input-section"
+  >
     <input
       style={{
         borderRadius: `${borderRadius}px`,

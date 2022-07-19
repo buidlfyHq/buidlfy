@@ -115,6 +115,7 @@ const Sidebar: FC<ISidebar> = ({
       className={`fixed left-0 top-0 z-0 w-[250px] border-r h-full ${className}`}
     >
       {/* user name */}
+      {/* It will be used for a later code */}
       {/* <section className="flex flex-row justify-between items-center h-[60px]">
         <Popover className="relative p-3 bg-white">
           <Popover.Button>

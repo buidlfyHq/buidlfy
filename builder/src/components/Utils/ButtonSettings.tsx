@@ -97,7 +97,7 @@ const ButtonSettings: FC<ISettings> = ({
         <div className="relative flex flex-col min-w-0 break-words">
           <div className="flex-auto px-2 py-2">
             <div className="tab-content tab-space">
-              <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+              <div className={openTab === 1 ? "block" : "hidden"} id="link-one">
                 <h3 className="mb-3 ml-8">
                   Component -
                   {selectedItem ? (
@@ -177,7 +177,7 @@ const ButtonSettings: FC<ISettings> = ({
                   setDeleteComponent={setDeleteComponent}
                 />
               </div>
-              <div className={openTab === 2 ? "block" : "hidden"} id="link3">
+              <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
                 <AdvanceComponent
                   contractConfig={contractConfig}
                   setContractConfig={setContractConfig}
