@@ -124,6 +124,7 @@ const AbiComponent: FC<IAbiComponent> = ({
       setItems(newArray);
     }
   };
+
   const handleInputSelector = (selectedId: string) => {
     setSelector({
       methodName: showComponent.value.name,
@@ -133,8 +134,9 @@ const AbiComponent: FC<IAbiComponent> = ({
     });
     setCurrentElement({ name: selectedId, type: "input" });
   };
+
   // work in progress
-  const inputObjects = (i: any) => {
+  const inputObjects = (i: number) => {
     const selectedId = "input" + i + showComponent.id;
     const objects = Object.keys(elementConfig);
     const filterObjects = objects.filter((key) => key === selectedId);
@@ -144,6 +146,7 @@ const AbiComponent: FC<IAbiComponent> = ({
       filterObjects,
     };
   };
+
   const handleStateSelector = (selectedItem: IItems) => {
     setSelector({
       methodName: showComponent.value.name,
@@ -156,13 +159,15 @@ const AbiComponent: FC<IAbiComponent> = ({
       type: "send",
     });
   };
+
   // work in progress
-  const stateObject = (key: any) => {
+  const stateObject = (key: string) => {
     let filteredObject = elementConfig[key]?.filter(
       (key: { buttonId: string }) => key.buttonId === selectedItem.i
     );
     return filteredObject;
   };
+  
   const handleOutputSelector = (selectedId: string) => {
     setSelector({
       methodName: showComponent.value.name,
@@ -172,8 +177,9 @@ const AbiComponent: FC<IAbiComponent> = ({
     });
     setCurrentElement({ name: selectedId, type: "output" });
   };
+
   // work in progress
-  const outputObjects = (i: any) => {
+  const outputObjects = (i: number) => {
     const selectedId = "output" + i + showComponent.id;
     const objects = Object.keys(elementConfig);
     const filterObjects = objects.filter((key) => key === selectedId);
@@ -183,12 +189,13 @@ const AbiComponent: FC<IAbiComponent> = ({
       filterObjects,
     };
   };
+
   return (
     <main>
       {showComponent ? (
         <>
           {showComponent.value.inputs[0] &&
-            showComponent.value.inputs.map((input: { name: string }, i) => {
+            showComponent.value.inputs.map((input: { name: string }, i: number) => {
               const { selectedId, objects, filterObjects } = inputObjects(i);
               return (
                 <section className="mt-3">
@@ -262,14 +269,14 @@ const AbiComponent: FC<IAbiComponent> = ({
                 }}
               >
                 {!Object.keys(elementConfig).filter(
-                  (key) => key === showComponent.value.name
+                  (key: string) => key === showComponent.value.name
                 ).length ? (
                   <span>Select An Element</span>
                 ) : (
                   <>
                     {Object.keys(elementConfig)
-                      .filter((key) => key === showComponent.value.name)
-                      .map((key) => {
+                      .filter((key: string) => key === showComponent.value.name)
+                      .map((key: string) => {
                         if (key === showComponent.value.name) {
                           let filteredObject = stateObject(key);
                           return (
@@ -296,7 +303,7 @@ const AbiComponent: FC<IAbiComponent> = ({
           )}
 
           {showComponent.value.outputs[0] &&
-            showComponent.value.outputs.map((output: { name: string }, i) => {
+            showComponent.value.outputs.map((output: { name: string }, i: number) => {
               const { selectedId, objects, filterObjects } = outputObjects(i);
               return (
                 <section key={i} className="mt-3">

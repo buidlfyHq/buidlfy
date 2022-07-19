@@ -16,7 +16,15 @@ const AbiMethods: FC<IAbiMethods> = ({
   items,
   setItems,
 }) => {
-  const [abiJson, setAbiJson] = useState<any>([]); // work in progress
+  const [abiJson, setAbiJson] = useState<
+    {
+      inputs: { internalType: string; name: string; type: string }[];
+      name: string;
+      outputs: { internalType: string; name: string; type: string }[];
+      stateMutability: string;
+      type: string;
+    }[]
+  >([]); // work in progress
 
   useEffect(() => {
     if (contractConfig.abi) {

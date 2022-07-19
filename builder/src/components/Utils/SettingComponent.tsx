@@ -5,8 +5,8 @@ import ContainerSettings from "./ContainerSettings";
 import InputSettings from "./InputSettings";
 import DefaultSettings from "./DefaultSettings";
 import ISettings from "interfaces/settings";
-import "../../styles/Components.css";
-import "../../styles/Dashboard.css";
+import "styles/Components.css";
+import "styles/Dashboard.css";
 
 const SettingComponent: FC<ISettings> = ({
   items,

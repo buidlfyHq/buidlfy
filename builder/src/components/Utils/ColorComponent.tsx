@@ -2,9 +2,9 @@ import React, { useState, FC, useEffect, useRef } from "react";
 import { VscSymbolColor } from "react-icons/vsc";
 import { SketchPicker } from "react-color";
 import IItems from "interfaces/items";
-import "../../styles/Components.css";
-import "../../styles/Dashboard.css";
 import IColor from "interfaces/color";
+import "styles/Components.css";
+import "styles/Dashboard.css";
 
 interface IColorComponent {
   color: IColor;
@@ -21,7 +21,8 @@ const ColorComponent: FC<IColorComponent> = ({
   const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    function handleOutsideClick(event) {
+    // FIX: find a suitable type for this event
+    const handleOutsideClick = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
         setDisplayColorPicker(false);
       }
@@ -38,7 +39,7 @@ const ColorComponent: FC<IColorComponent> = ({
     setDisplayColorPicker(false);
   };
 
-  const handleChange = (color) => {
+  const handleChange = (color: { rgb: IColor; }) => {
     if (!color) {
       return;
     }

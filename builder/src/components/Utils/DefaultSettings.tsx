@@ -33,62 +33,60 @@ const DefaultSettings: FC<ISettings> = ({
   setRight,
   fontSize,
   setFontSize,
-}) => {
-  return (
-    <>
-      <h3 className="mb-3 ml-8">
-        Component -
-        {selectedItem ? (
-          <span className="font-bold">{selectedItem.name}</span>
-        ) : null}
-      </h3>
-      <div className="flex items-center px-3 mt-1 text-black">
-        <RiText className="text-[18px] mr-3" />
-        <input
-          value={textVal}
-          onChange={(e) => handleTextChange(e)}
-          className="changeText"
-          type="text"
-          placeholder="Name..."
-        />
-      </div>
-      <div className="flex items-center px-3 mt-2 text-black">
-        <AiOutlineLink className="text-[18px] mr-3" />
-        <input
-          value={linkVal}
-          onChange={(e) => handleLinkChange(e)}
-          className="changeText"
-          type="text"
-          placeholder="URL..."
-        />
-      </div>
-      <FontStyleComponent
-        bold={bold}
-        italic={italic}
-        underline={underline}
-        setBold={setBold}
-        setItalic={setItalic}
-        setUnderline={setUnderline}
+}) => (
+  <>
+    <h3 className="mb-3 ml-8">
+      Component -
+      {selectedItem ? (
+        <span className="font-bold">{selectedItem.name}</span>
+      ) : null}
+    </h3>
+    <div className="flex items-center px-3 mt-1 text-black">
+      <RiText className="text-[18px] mr-3" />
+      <input
+        value={textVal}
+        onChange={(e) => handleTextChange(e)}
+        className="changeText"
+        type="text"
+        placeholder="Name..."
       />
-      <AlignComponent
-        justifyContent={justifyContent}
-        setLeft={setLeft}
-        setRight={setRight}
-        setCenter={setCenter}
+    </div>
+    <div className="flex items-center px-3 mt-2 text-black">
+      <AiOutlineLink className="text-[18px] mr-3" />
+      <input
+        value={linkVal}
+        onChange={(e) => handleLinkChange(e)}
+        className="changeText"
+        type="text"
+        placeholder="URL..."
       />
-      <FontSizeComponent fontSize={fontSize} setFontSize={setFontSize} />
-      <ColorComponent
-        color={color}
-        setColor={setColor}
-        selectedItem={selectedItem}
-      />
-      <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
-      <UtilitiesComponent
-        deleteComponent={deleteComponent}
-        setDeleteComponent={setDeleteComponent}
-      />
-    </>
-  );
-};
+    </div>
+    <FontStyleComponent
+      bold={bold}
+      italic={italic}
+      underline={underline}
+      setBold={setBold}
+      setItalic={setItalic}
+      setUnderline={setUnderline}
+    />
+    <AlignComponent
+      justifyContent={justifyContent}
+      setLeft={setLeft}
+      setRight={setRight}
+      setCenter={setCenter}
+    />
+    <FontSizeComponent fontSize={fontSize} setFontSize={setFontSize} />
+    <ColorComponent
+      color={color}
+      setColor={setColor}
+      selectedItem={selectedItem}
+    />
+    <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
+    <UtilitiesComponent
+      deleteComponent={deleteComponent}
+      setDeleteComponent={setDeleteComponent}
+    />
+  </>
+);
 
 export default DefaultSettings;

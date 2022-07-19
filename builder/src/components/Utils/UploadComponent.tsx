@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import "../../styles/Dashboard.css";
-import "../../styles/Components.css";
 import IItems from "interfaces/items";
+import "styles/Dashboard.css";
+import "styles/Components.css";
 
 interface IUploadComponent {
   selectedItem: IItems;
@@ -14,10 +14,10 @@ const UploadComponent: FC<IUploadComponent> = ({
   items,
   setItems,
 }) => {
-  const onChangePicture = (e) => {
+  const onChangeImage = (e) => {
     if (e.target.files[0]) {
       const reader = new FileReader();
-      
+
       reader.addEventListener("load", () => {
         const updatedItems = items.map((item) => {
           let selectedChild = item.children?.find(
@@ -60,7 +60,7 @@ const UploadComponent: FC<IUploadComponent> = ({
       <div className="flex justify-center">
         <div className="mb-3 w-96">
           <input
-            onChange={onChangePicture}
+            onChange={onChangeImage}
             className="block w-full text-sm text-slate-500
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0

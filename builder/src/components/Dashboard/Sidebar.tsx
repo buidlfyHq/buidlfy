@@ -2,24 +2,14 @@ import React, { FC } from "react";
 import ShortUniqueId from "short-unique-id";
 import { components } from "./component";
 import IItems from "interfaces/items";
-import IColor from "interfaces/color";
 
 interface ISidebar {
   className: string;
   setClassName: (className: string) => void;
   items: IItems[];
   setItems: (items: IItems[]) => void;
-  setSelector: (selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  }) => void;
-  elementConfig: object;
   addContainer: boolean;
   settingItemId: string;
-  backgroundColor: IColor;
-  setBackgroundColor: (backgroundColor: IColor) => void;
 }
 
 const Sidebar: FC<ISidebar> = ({
@@ -27,12 +17,8 @@ const Sidebar: FC<ISidebar> = ({
   setClassName,
   items,
   setItems,
-  setSelector,
-  elementConfig,
   addContainer,
   settingItemId,
-  backgroundColor,
-  setBackgroundColor,
 }) => {
   const uid = new ShortUniqueId();
   // const [indexValue, setIndexValue] = useState<number>(0);
@@ -66,40 +52,40 @@ const Sidebar: FC<ISidebar> = ({
       return Math.max(...arr) + 1;
     }
   };
+
   const filteredComponents = components
     .filter((c) => c.name !== "Container")
-    ?.map((c, index) => {
-      return (
-        <div
-          key={index}
-          className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
-          onClick={() => {
-            let y = checkContainerY(selectedItem);
-            let newC = {
-              ...c,
-              i: uid(),
-              x: 0,
-              y,
-              w: 12,
-              minW: 1,
-            };
-            let updatedItem = {
-              ...selectedItem,
-              h: y + c.h,
-              children: [...selectedItem.children, newC],
-            };
-            const elementsIndex = items.findIndex(
-              (item) => item.i === selectedItem.i
-            );
-            let newArray = [...items];
-            newArray[elementsIndex] = updatedItem;
-            setItems(newArray);
-          }}
-        >
-          {c.name}
-        </div>
-      );
-    });
+    ?.map((c, index) => (
+      <div
+        key={index}
+        className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
+        onClick={() => {
+          let y = checkContainerY(selectedItem);
+          let newC = {
+            ...c,
+            i: uid(),
+            x: 0,
+            y,
+            w: 12,
+            minW: 1,
+          };
+          let updatedItem = {
+            ...selectedItem,
+            h: y + c.h,
+            children: [...selectedItem.children, newC],
+          };
+          const elementsIndex = items.findIndex(
+            (item) => item.i === selectedItem.i
+          );
+          let newArray = [...items];
+          newArray[elementsIndex] = updatedItem;
+          setItems(newArray);
+        }}
+      >
+        {c.name}
+      </div>
+    ));
+
   const mappedComponents = components?.map((c, index) => {
     return (
       <div
@@ -123,6 +109,7 @@ const Sidebar: FC<ISidebar> = ({
       </div>
     );
   });
+
   return (
     <main
       className={`fixed left-0 top-0 z-0 w-[250px] border-r h-full ${className}`}

@@ -1,4 +1,4 @@
-import React, { FC, Dispatch, SetStateAction } from "react";
+import React, { FC } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "./RenderItem";
 import IItems from "interfaces/items";
@@ -25,11 +25,11 @@ interface IWorkspace {
     buttonId: string;
   }) => void;
   elementConfig: object;
-  setElementConfig: Dispatch<SetStateAction<object>>;
-  setOpenTab: Dispatch<SetStateAction<number>>;
+  setElementConfig: (elementConfig: object) => void;
+  setOpenTab: (openTab?: number) => void;
   drag: boolean;
-  setDrag: React.Dispatch<React.SetStateAction<boolean>>;
-  setAddContainer: (addContainer: boolean) => void;
+  setDrag: (drag: boolean) => void;
+  setAddContainer: (addContainer?: boolean) => void;
   backgroundColor: IColor;
 }
 
@@ -49,6 +49,7 @@ const Workspace: FC<IWorkspace> = ({
   setAddContainer,
   backgroundColor,
 }) => {
+  // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
@@ -137,6 +138,7 @@ const Workspace: FC<IWorkspace> = ({
     }
   };
 
+  // FIX: find a suitable type for this event
   const handleCheckIsContainer = (e) => {
     if (
       e.target.id === "Container" ||
@@ -149,10 +151,10 @@ const Workspace: FC<IWorkspace> = ({
     }
     if (e.target.id === "") setOpenSetting(false);
   };
-  
+
   const renderItemFunction = items
     ?.filter((i) => i.style?.deleteComponent === 0)
-    .map((item: IItems, index: number) => {
+    .map((item: IItems) => {
       const { x, y, w, h, minW, i, name } = item;
       return (
         <div
@@ -166,7 +168,7 @@ const Workspace: FC<IWorkspace> = ({
               : "hover:outline-slate-300 hover:outline-dashed"
           }`}
           // open item setting on click
-          onClick={(e) =>
+          onClick={() =>
             item.name === "Container" ? null : onComponentClick(item.name, i)
           }
         >

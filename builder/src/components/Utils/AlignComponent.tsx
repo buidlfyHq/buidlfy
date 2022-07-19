@@ -4,8 +4,8 @@ import {
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
-import "../../styles/Components.css";
-import "../../styles/Dashboard.css";
+import "styles/Components.css";
+import "styles/Dashboard.css";
 
 interface IAlignComponent {
   setLeft: (justifyContent: string | boolean) => void;
@@ -27,6 +27,7 @@ const AlignComponent: FC<IAlignComponent> = ({
       setLeft(true);
     }
   };
+
   const handleCenterChange = () => {
     if (justifyContent === "center") {
       setCenter(false);
@@ -34,6 +35,7 @@ const AlignComponent: FC<IAlignComponent> = ({
       setCenter(true);
     }
   };
+
   const handleRightChange = () => {
     if (justifyContent === "right") {
       setRight(false);

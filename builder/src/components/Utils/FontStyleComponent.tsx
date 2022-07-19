@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import "../../styles/Dashboard.css";
+import "styles/Dashboard.css";
 
 interface IFontStyleComponent {
   bold: string;
@@ -11,11 +11,11 @@ interface IFontStyleComponent {
 }
 
 const FontStyleComponent: FC<IFontStyleComponent> = ({
-  setBold,
   bold,
   italic,
-  setItalic,
   underline,
+  setBold,
+  setItalic,
   setUnderline,
 }) => {
   const handleBoldChange = () => {
@@ -25,6 +25,7 @@ const FontStyleComponent: FC<IFontStyleComponent> = ({
       setBold(true);
     }
   };
+
   const handleItalicChange = () => {
     if (italic === "italic") {
       setItalic(false);
@@ -32,6 +33,7 @@ const FontStyleComponent: FC<IFontStyleComponent> = ({
       setItalic(true);
     }
   };
+
   const handleUnderlineChange = () => {
     if (underline === "underline") {
       setUnderline(false);

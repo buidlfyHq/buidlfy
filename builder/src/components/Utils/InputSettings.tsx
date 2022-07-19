@@ -17,37 +17,35 @@ const InputSettings: FC<ISettings> = ({
   setMedium,
   setLarge,
   shadow,
-}) => {
-  return (
-    <>
-      <h3 className="mb-3 ml-8">
-        Component -
-        {selectedItem ? (
-          <span className="font-bold">{selectedItem.name}</span>
-        ) : null}
-      </h3>
-      <BorderRadiusComponent
-        borderRadius={borderRadius}
-        setBorderRadius={setBorderRadius}
-      />
+}) => (
+  <>
+    <h3 className="mb-3 ml-8">
+      Component -
+      {selectedItem ? (
+        <span className="font-bold">{selectedItem.name}</span>
+      ) : null}
+    </h3>
+    <BorderRadiusComponent
+      borderRadius={borderRadius}
+      setBorderRadius={setBorderRadius}
+    />
 
-      <ColorComponent
-        color={color}
-        setColor={setColor}
-        selectedItem={selectedItem}
-      />
-      <ShadowComponent
-        setSmall={setSmall}
-        setMedium={setMedium}
-        setLarge={setLarge}
-        shadow={shadow}
-      />
-      <UtilitiesComponent
-        deleteComponent={deleteComponent}
-        setDeleteComponent={setDeleteComponent}
-      />
-    </>
-  );
-};
+    <ColorComponent
+      color={color}
+      setColor={setColor}
+      selectedItem={selectedItem}
+    />
+    <ShadowComponent
+      setSmall={setSmall}
+      setMedium={setMedium}
+      setLarge={setLarge}
+      shadow={shadow}
+    />
+    <UtilitiesComponent
+      deleteComponent={deleteComponent}
+      setDeleteComponent={setDeleteComponent}
+    />
+  </>
+);
 
 export default InputSettings;

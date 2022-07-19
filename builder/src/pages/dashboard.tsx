@@ -14,6 +14,7 @@ const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const Dashboard: FC = () => {
   const navigate = useNavigate();
+  const size = useWindowSize();
   const [items, setItems] = useState<IItems[]>([]); // for storing components
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [contractConfig, setContractConfig] = useState<{
@@ -63,8 +64,6 @@ const Dashboard: FC = () => {
     }
   }, []); // eslint-disable-line
 
-  const size = useWindowSize();
-
   const handleSave = () => {
     if (items?.length > 0) {
       localStorage.setItem("items", JSON.stringify(items));
@@ -78,90 +77,83 @@ const Dashboard: FC = () => {
 
   return (
     <main>
-      <>
-        {size.width > 1024 ? (
-          <div className="flex flex-row w-full min-h-screen">
-            {/* Sidebar */}
-            <Sidebar
+      {size.width > 1024 ? (
+        <div className="flex flex-row w-full min-h-screen">
+          {/* Sidebar */}
+          <Sidebar
+            className={className}
+            setClassName={setClassName}
+            items={items}
+            setItems={setItems}
+            addContainer={addContainer}
+            settingItemId={settingItemId}
+          />
+
+          <section className="flex-1">
+            {/* Navbar */}
+            <Navbar
               className={className}
               setClassName={setClassName}
               items={items}
-              setItems={setItems}
-              setSelector={setSelector}
-              elementConfig={elementConfig}
-              addContainer={addContainer}
-              settingItemId={settingItemId}
-              backgroundColor={backgroundColor}
-              setBackgroundColor={setBackgroundColor}
+              contractConfig={contractConfig}
+              handleSave={handleSave}
+              handleClear={handleClear}
             />
 
-            <section className="flex-1">
-              {/* Navbar */}
-              <Navbar
-                className={className}
-                setClassName={setClassName}
-                items={items}
-                contractConfig={contractConfig}
-                handleSave={handleSave}
-                handleClear={handleClear}
-              />
+            {/* Main section */}
+            <Workspace
+              items={items}
+              setItems={setItems}
+              className={className}
+              setOpenSetting={setOpenSetting}
+              setSettingItemId={setSettingItemId}
+              selector={selector}
+              setSelector={setSelector}
+              elementConfig={elementConfig}
+              setElementConfig={setElementConfig}
+              setOpenTab={setOpenTab}
+              drag={drag}
+              setDrag={setDrag}
+              setAddContainer={setAddContainer}
+              backgroundColor={backgroundColor}
+            />
+          </section>
 
-              {/* Main section */}
-              <Workspace
-                items={items}
-                setItems={setItems}
-                className={className}
-                setOpenSetting={setOpenSetting}
-                setSettingItemId={setSettingItemId}
-                selector={selector}
-                setSelector={setSelector}
-                elementConfig={elementConfig}
-                setElementConfig={setElementConfig}
-                setOpenTab={setOpenTab}
-                drag={drag}
-                setDrag={setDrag}
-                setAddContainer={setAddContainer}
-                backgroundColor={backgroundColor}
-              />
-            </section>
-
-            {/* Right Sidebar Settings */}
-            {openSetting ? (
-              <Settings
-                items={items}
-                setItems={setItems}
-                settingItemId={settingItemId}
-                contractConfig={contractConfig}
-                setContractConfig={setContractConfig}
-                setSelector={setSelector}
-                elementConfig={elementConfig}
-                openTab={openTab}
-                setOpenTab={setOpenTab}
-              />
-            ) : (
-              <main
-                className={`fixed right-0 top-[60px] z-0 w-[250px] border-l h-full`}
-              >
-                <div className="mx-3 my-2">
-                  <h3 className="mb-2 text-xl">Site Settings</h3>
-                  <div className="mb-3">
-                    <BgColorComponent
-                      color={backgroundColor}
-                      setBgColor={setBackgroundColor}
-                      siteSetting={true}
-                    />
-                  </div>
+          {/* Right Sidebar Settings */}
+          {openSetting ? (
+            <Settings
+              items={items}
+              setItems={setItems}
+              settingItemId={settingItemId}
+              contractConfig={contractConfig}
+              setContractConfig={setContractConfig}
+              setSelector={setSelector}
+              elementConfig={elementConfig}
+              openTab={openTab}
+              setOpenTab={setOpenTab}
+            />
+          ) : (
+            <main
+              className={`fixed right-0 top-[60px] z-0 w-[250px] border-l h-full`}
+            >
+              <div className="mx-3 my-2">
+                <h3 className="mb-2 text-xl">Site Settings</h3>
+                <div className="mb-3">
+                  <BgColorComponent
+                    color={backgroundColor}
+                    setBgColor={setBackgroundColor}
+                  />
                 </div>
-              </main>
-            )}
-          </div>
-        ) : (
-          <h1 className="items-center text-center justify-center flex h-[100vh]">
-            Use this on desktop for better experience <br /> Responsive view
-            coming soon!
-          </h1>
-        )}
-      </>
+              </div>
+            </main>
+          )}
+        </div>
+      ) : (
+        <h1 className="items-center text-center justify-center flex h-[100vh]">
+          Use this on desktop for better experience <br /> Responsive view
+          coming soon!
+        </h1>
+      )}
     </main>
   );
 };

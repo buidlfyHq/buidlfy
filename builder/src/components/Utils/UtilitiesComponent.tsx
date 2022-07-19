@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import "../../styles/Components.css";
-import "../../styles/Dashboard.css";
+import "styles/Components.css";
+import "styles/Dashboard.css";
 
 interface IUtilitiesComponent {
   deleteComponent: number;

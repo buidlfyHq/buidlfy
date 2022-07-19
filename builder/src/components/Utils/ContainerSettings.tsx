@@ -26,46 +26,44 @@ const ContainerSettings: FC<ISettings> = ({
   setMedium,
   setLarge,
   shadow,
-}) => {
-  return (
-    <>
-      <h3 className="mb-3 ml-8">
-        Component -
-        {selectedItem ? (
-          <span className="font-bold">{selectedItem.name}</span>
-        ) : null}
-      </h3>
-      <UploadComponent
-        selectedItem={selectedItem}
-        items={items}
-        setItems={setItems}
-      />
-      <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
-      <ColorComponent
-        color={color}
-        setColor={setColor}
-        selectedItem={selectedItem}
-      />
-      <BorderRadiusComponent
-        borderRadius={borderRadius}
-        setBorderRadius={setBorderRadius}
-      />
-      <BorderComponent
-        borderWidth={borderWidth}
-        setBorderWidth={setBorderWidth}
-      />
-      <ShadowComponent
-        setSmall={setSmall}
-        setMedium={setMedium}
-        setLarge={setLarge}
-        shadow={shadow}
-      />
-      <UtilitiesComponent
-        deleteComponent={deleteComponent}
-        setDeleteComponent={setDeleteComponent}
-      />
-    </>
-  );
-};
+}) => (
+  <>
+    <h3 className="mb-3 ml-8">
+      Component -
+      {selectedItem ? (
+        <span className="font-bold">{selectedItem.name}</span>
+      ) : null}
+    </h3>
+    <UploadComponent
+      selectedItem={selectedItem}
+      items={items}
+      setItems={setItems}
+    />
+    <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
+    <ColorComponent
+      color={color}
+      setColor={setColor}
+      selectedItem={selectedItem}
+    />
+    <BorderRadiusComponent
+      borderRadius={borderRadius}
+      setBorderRadius={setBorderRadius}
+    />
+    <BorderComponent
+      borderWidth={borderWidth}
+      setBorderWidth={setBorderWidth}
+    />
+    <ShadowComponent
+      setSmall={setSmall}
+      setMedium={setMedium}
+      setLarge={setLarge}
+      shadow={shadow}
+    />
+    <UtilitiesComponent
+      deleteComponent={deleteComponent}
+      setDeleteComponent={setDeleteComponent}
+    />
+  </>
+);
 
 export default ContainerSettings;

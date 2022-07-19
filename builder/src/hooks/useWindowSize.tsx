@@ -8,7 +8,7 @@ export function useWindowSize() {
   });
   useEffect(() => {
     // Handler to call on window resize
-    function handleResize() {
+    const handleResize = () => {
       // Set window width/height to state
       setWindowSize({
         width: window.innerWidth,

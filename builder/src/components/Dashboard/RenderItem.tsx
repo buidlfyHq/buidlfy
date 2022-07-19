@@ -1,4 +1,4 @@
-import React, { FC, Dispatch, SetStateAction } from "react";
+import React, { FC } from "react";
 import Container from "../CustomComponents/Container";
 import Button from "../CustomComponents/Button";
 import Text from "../CustomComponents/Text";
@@ -12,7 +12,7 @@ interface IRenderItem {
   item: IItems;
   items?: IItems[];
   setItems?: (items?: IItems[]) => void;
-  setDrag: React.Dispatch<React.SetStateAction<boolean>>;
+  setDrag: (drag?: boolean) => void;
   setOpenSetting?: (openSetting: boolean) => void;
   setSettingItemId?: (settingItemId: string) => void;
   setOpenTab?: (openTab: number) => void;
@@ -30,7 +30,7 @@ interface IRenderItem {
     buttonId: string;
   }) => void;
   elementConfig?: object;
-  setElementConfig?: Dispatch<SetStateAction<object>>;
+  setElementConfig?: (elementConfig: object) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({

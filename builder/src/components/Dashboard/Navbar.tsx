@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
-import { Dialog } from "@headlessui/react";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { encode as base64_encode } from "base-64";
+import { Dialog } from "@headlessui/react";
 import IItems from "interfaces/items";
 
 interface INavbar {

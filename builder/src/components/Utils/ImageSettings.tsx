@@ -14,33 +14,31 @@ const ImageSettings: FC<ISettings> = ({
   setLeft,
   setCenter,
   setRight,
-}) => {
-  return (
-    <>
-      <h3 className="mb-3 ml-8">
-        Component -
-        {selectedItem ? (
-          <span className="font-bold">{selectedItem.name}</span>
-        ) : null}
-      </h3>
-      <UploadComponent
-        selectedItem={selectedItem}
-        items={items}
-        setItems={setItems}
-      />
-      <AlignComponent
-        justifyContent={justifyContent}
-        setLeft={setLeft}
-        setRight={setRight}
-        setCenter={setCenter}
-      />
+}) => (
+  <>
+    <h3 className="mb-3 ml-8">
+      Component -
+      {selectedItem ? (
+        <span className="font-bold">{selectedItem.name}</span>
+      ) : null}
+    </h3>
+    <UploadComponent
+      selectedItem={selectedItem}
+      items={items}
+      setItems={setItems}
+    />
+    <AlignComponent
+      justifyContent={justifyContent}
+      setLeft={setLeft}
+      setRight={setRight}
+      setCenter={setCenter}
+    />
 
-      <UtilitiesComponent
-        deleteComponent={deleteComponent}
-        setDeleteComponent={setDeleteComponent}
-      />
-    </>
-  );
-};
+    <UtilitiesComponent
+      deleteComponent={deleteComponent}
+      setDeleteComponent={setDeleteComponent}
+    />
+  </>
+);
 
 export default ImageSettings;

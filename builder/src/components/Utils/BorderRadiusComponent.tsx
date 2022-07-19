@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import "../../styles/Dashboard.css";
-import "../../styles/Components.css";
+import "styles/Dashboard.css";
+import "styles/Components.css";
 
 interface IBorderRadiusComponent {
   borderRadius: number;
@@ -14,19 +14,25 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
   const incrementCounter = () => {
     setBorderRadius(borderRadius + 1);
   };
-  let decrementCounter = () => setBorderRadius(borderRadius - 1);
-  if (borderRadius <= 1) {
-    decrementCounter = () => setBorderRadius(1);
-  }
+
+  const decrementCounter = () => {
+    if (borderRadius <= 1) {
+      setBorderRadius(1);
+    } else {
+      setBorderRadius(borderRadius - 1);
+    }
+  };
+
   const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (borderRadius) {
       setBorderRadius(+e.target.value);
     }
   };
-  const numbers = [2, 4, 5, 7, 8, 10, 15, 20, 25];
-  const options = numbers.map((number) => (
+
+  const options = [2, 4, 5, 7, 8, 10, 15, 20, 25].map((number) => (
     <option value={number}>{number}</option>
   ));
+
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">

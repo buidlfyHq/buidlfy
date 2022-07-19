@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import "../../styles/Dashboard.css";
-import "../../styles/Components.css";
+import "styles/Dashboard.css";
+import "styles/Components.css";
 
 interface IShadowComponent {
   setSmall: (shadow: string | boolean) => void;
@@ -23,6 +23,7 @@ const ShadowComponent: FC<IShadowComponent> = ({
       setSmall(true);
     }
   };
+
   const handleMediumChange = () => {
     // setLeft(!center);
     if (shadow === "medium") {
@@ -31,6 +32,7 @@ const ShadowComponent: FC<IShadowComponent> = ({
       setMedium(true);
     }
   };
+
   const handleLargeChange = () => {
     // setRight(!right);
     if (shadow === "large") {
@@ -41,31 +43,29 @@ const ShadowComponent: FC<IShadowComponent> = ({
   };
 
   return (
-    <>
-      <span className=" text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
-        Shadow
-        <div className="flex mt-3 px-3">
-          <span
-            onClick={handleSmallChange}
-            className="flex items-center justify-center shadow text-[18px] w-8 h-10 my-2 font-regular"
-          >
-            Sm
-          </span>
-          <span
-            onClick={handleMediumChange}
-            className="flex items-center justify-center shadow text-[18px] w-8 h-10 m-2 font-regular"
-          >
-            Md
-          </span>
-          <span
-            onClick={handleLargeChange}
-            className="flex items-center justify-center shadow text-[18px] w-8 h-10 my-2 font-regular"
-          >
-            Lg
-          </span>
-        </div>
-      </span>
-    </>
+    <span className=" text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
+      Shadow
+      <div className="flex mt-3 px-3">
+        <span
+          onClick={handleSmallChange}
+          className="flex items-center justify-center shadow text-[18px] w-8 h-10 my-2 font-regular"
+        >
+          Sm
+        </span>
+        <span
+          onClick={handleMediumChange}
+          className="flex items-center justify-center shadow text-[18px] w-8 h-10 m-2 font-regular"
+        >
+          Md
+        </span>
+        <span
+          onClick={handleLargeChange}
+          className="flex items-center justify-center shadow text-[18px] w-8 h-10 my-2 font-regular"
+        >
+          Lg
+        </span>
+      </div>
+    </span>
   );
 };
 export default ShadowComponent;

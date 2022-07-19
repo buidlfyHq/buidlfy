@@ -12,31 +12,29 @@ const Text: FC<ITexts> = ({
   value,
   backgroundColor,
   link,
-}) => {
-  return (
-    <div
-      id="text-one"
-      style={{
-        fontWeight: bold,
-        fontStyle: italic,
-        textDecoration: underline,
-        color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-        display: "flex",
-        justifyContent: justifyContent,
-        fontSize: `${fontSize}px`,
-        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-      }}
-      className="flex items-center justify-center w-full h-full"
-    >
-      {link.length > 0 ? (
-        <a rel="noreferrer" target="_blank" href={link} id="text-two">
-          {value}
-        </a>
-      ) : (
-        <div id="text-three">{value}</div>
-      )}
-    </div>
-  );
-};
+}) => (
+  <section
+    id="text-one"
+    style={{
+      fontWeight: bold,
+      fontStyle: italic,
+      textDecoration: underline,
+      color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+      display: "flex",
+      justifyContent: justifyContent,
+      fontSize: `${fontSize}px`,
+      backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+    }}
+    className="flex items-center justify-center w-full h-full"
+  >
+    {link.length > 0 ? (
+      <a rel="noreferrer" target="_blank" href={link} id="text-two">
+        {value}
+      </a>
+    ) : (
+      <div id="text-three">{value}</div>
+    )}
+  </section>
+);
 
 export default Text;

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 import { SiweMessage } from "siwe";
 
-declare let window: any; //required
+declare let window: any; // required
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const SignIn: FC = () => {

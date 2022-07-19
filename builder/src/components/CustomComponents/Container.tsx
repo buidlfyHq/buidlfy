@@ -4,10 +4,10 @@ import { BiGridHorizontal } from "react-icons/bi";
 import GridLayout from "react-grid-layout";
 import RenderItem from "components/Dashboard/RenderItem";
 import IItems from "interfaces/items";
-import "styles/Components.css";
 import IColor from "interfaces/color";
+import "styles/Components.css";
 
-interface IContainter {
+interface IContainer {
   item: IItems;
   items?: IItems[];
   setItems?: (items?: IItems[]) => void;
@@ -39,7 +39,7 @@ interface IContainter {
   setElementConfig: Dispatch<SetStateAction<object>>;
 }
 
-const Container: FC<IContainter> = ({
+const Container: FC<IContainer> = ({
   item,
   items,
   setItems,
@@ -60,7 +60,6 @@ const Container: FC<IContainter> = ({
   elementConfig,
   setElementConfig,
 }) => {
-  // on layout change
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IItems) => {

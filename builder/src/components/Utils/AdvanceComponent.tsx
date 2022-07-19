@@ -4,8 +4,8 @@ import Modal from "components/Dashboard/Modal";
 import AbiMethods from "components/Dashboard/AbiMethods";
 import AbiComponent from "components/Dashboard/AbiComponent";
 import IItems from "interfaces/items";
-import "../../styles/Components.css";
-import "../../styles/Dashboard.css";
+import "styles/Components.css";
+import "styles/Dashboard.css";
 
 interface IAdvanceComponent {
   selector: {
@@ -39,22 +39,22 @@ interface IAdvanceComponent {
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({
-  contractConfig,
-  setContractConfig,
-  showComponent,
-  setShowComponent,
   selector,
   setSelector,
-  elementConfig,
+  showComponent,
+  setShowComponent,
+  contractConfig,
+  setContractConfig,
   selectedItem,
   items,
   setItems,
+  elementConfig,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
 
   return (
     <>
-      <div className="flex justify-center"></div>
+      <div className="flex justify-center" />
       <div className="flex items-center px-3 mt-1 text-black">
         <div
           onClick={() => setIsOpen(true)}
