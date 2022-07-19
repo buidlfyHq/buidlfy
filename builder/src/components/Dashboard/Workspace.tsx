@@ -155,20 +155,22 @@ const Workspace: FC<IWorkspace> = ({
   const renderItemFunction = items
     ?.filter((i) => i.style?.deleteComponent === 0)
     .map((item: IItems) => {
-      const { x, y, w, h, minW, i, name } = item;
+      const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
       return (
         <div
           key={i}
           id={name}
           unselectable="on"
-          data-grid={{ x, y, w, h, minW }}
+          data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
           className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
-            selector
-              ? "hover:outline-orange-300 hover:outline"
-              : "hover:outline-slate-300 hover:outline-dashed"
+            name !== "Container"
+              ? selector
+                ? "hover:outline-orange-300 hover:outline"
+                : "hover:outline-slate-300 hover:outline-dashed"
+              : null
           }`}
           // open item setting on click
-          onClick={() =>
+          onClick={(e) =>
             item.name === "Container" ? null : onComponentClick(item.name, i)
           }
         >
