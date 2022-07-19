@@ -112,7 +112,12 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
 
-  const utilityFunction = (styleProp, property, value1, value2) => {
+  const utilityFunction = (
+    styleProp: functionEnum,
+    property: boolean,
+    valueFirst: string,
+    valueSecond: string
+  ) => {
     if (!settingItemId) {
       return;
     }
@@ -125,7 +130,7 @@ const Settings: FC<ISettings> = ({
           ...item,
           style: {
             ...item["style"],
-            [styleProp]: property ? value1 : value2,
+            [styleProp]: property ? valueFirst : valueSecond,
           },
         };
       } else if (selectedChild?.i === settingItemId) {
@@ -133,7 +138,7 @@ const Settings: FC<ISettings> = ({
           ...selectedChild,
           style: {
             ...selectedChild["style"],
-            [styleProp]: property ? value1 : value2,
+            [styleProp]: property ? valueFirst : valueSecond,
           },
         };
         const childIndex = item.children?.findIndex(
@@ -187,7 +192,10 @@ const Settings: FC<ISettings> = ({
     singleWorkFunction(functionEnum.BACKGROUNDCOLOR, backgroundColor);
   };
 
-  const singleWorkFunction = (styleProp, property) => {
+  const singleWorkFunction = (
+    styleProp: functionEnum,
+    property: number | IColor
+  ) => {
     if (!settingItemId) {
       return;
     }

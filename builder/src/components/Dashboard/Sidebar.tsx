@@ -99,7 +99,7 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       );
     });
-  const MappedComponents = components?.map((c, index) => {
+  const mappedComponents = components?.map((c, index) => {
     return (
       <div
         key={index}
@@ -165,7 +165,7 @@ const Sidebar: FC<ISidebar> = ({
 
       {/* Components */}
       <div className="px-6 py-3 mt-10">
-        {addContainer ? <>{filteredComponents}</> : <>{MappedComponents}</>}
+        {addContainer ? <>{filteredComponents}</> : <>{mappedComponents}</>}
       </div>
     </main>
   );
