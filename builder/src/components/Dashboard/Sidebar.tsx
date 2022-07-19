@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import ShortUniqueId from "short-unique-id";
 import { components } from "./component";
 import IItems from "interfaces/items";
+import { ResizeHandles } from "interfaces/handle";
 
 interface ISidebar {
   className: string;
@@ -55,38 +56,45 @@ const Sidebar: FC<ISidebar> = ({
 
   const filteredComponents = components
     .filter((c) => c.name !== "Container")
-    ?.map((c, index) => (
-      <div
-        key={index}
-        className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
-        onClick={() => {
-          let y = checkContainerY(selectedItem);
-          let newC = {
-            ...c,
-            i: uid(),
-            x: 0,
-            y,
-            w: 12,
-            minW: 1,
-          };
-          let updatedItem = {
-            ...selectedItem,
-            h: y + c.h,
-            children: [...selectedItem.children, newC],
-          };
-          const elementsIndex = items.findIndex(
-            (item) => item.i === selectedItem.i
-          );
-          let newArray = [...items];
-          newArray[elementsIndex] = updatedItem;
-          setItems(newArray);
-        }}
-      >
-        {c.name}
-      </div>
-    ));
+    ?.map((c, index) => {
+      const availableHandles: ResizeHandles = ["nw", "se"];
+      return (
+        <div
+          key={index}
+          className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
+          onClick={() => {
+            console.log(selectedItem);
+            let y = checkContainerY(selectedItem);
+            let newC = {
+              ...c,
+              i: uid(),
+              x: 0,
+              y,
+              w: 12,
+              minW: 1,
+              resizeHandles: availableHandles,
+            };
+            let updatedItem = {
+              ...selectedItem,
+              h: y + c.h,
+              children: [...selectedItem.children, newC],
+            };
+            const elementsIndex = items.findIndex(
+              (item) => item.i === selectedItem.i
+            );
+            let newArray = [...items];
+            newArray[elementsIndex] = updatedItem;
+            setItems(newArray);
+          }}
+        >
+          {c.name}
+        </div>
+      );
+    });
 
   const mappedComponents = components?.map((c, index) => {
+    const availableHandles: ResizeHandles = ["nw", "se"];
+    const containerHandles: ResizeHandles = ["w", "e"];
     return (
       <div
         key={index}
@@ -100,8 +108,10 @@ const Sidebar: FC<ISidebar> = ({
             y: y,
             w: 12,
             minW: 1,
+            minH: 1,
+            resizeHandles:
+              c.name === "Container" ? containerHandles : availableHandles,
           };
-          // incrementIndex();
           setItems([...items, newC]);
         }}
       >
