@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import ITexts from "interfaces/texts";
-import "styles/component.css";
+import "styles/components.css";
 
 const Button: FC<ITexts> = ({
   bold,

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import ITexts from "interfaces/texts";
-import "styles/component.css";
+import "styles/components.css";
 
-const Link: FC<ITexts> = ({
+const Text: FC<ITexts> = ({
   bold,
   italic,
   underline,
@@ -14,7 +14,7 @@ const Link: FC<ITexts> = ({
   link,
 }) => (
   <section
-    id="Link"
+    id="text-one"
     style={{
       fontWeight: bold,
       fontStyle: italic,
@@ -25,10 +25,16 @@ const Link: FC<ITexts> = ({
       fontSize: `${fontSize}px`,
       backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
     }}
-    className="flex items-center justify-center h-full"
+    className="flex items-center justify-center w-full h-full"
   >
-    {value}
+    {link.length > 0 ? (
+      <a rel="noreferrer" target="_blank" href={link} id="text-two">
+        {value}
+      </a>
+    ) : (
+      <div id="text-three">{value}</div>
+    )}
   </section>
 );
 
-export default Link;
+export default Text;

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import "styles/component.css";
+import "styles/components.css";
 
 interface IImageComponent {
   imgData: string | ArrayBuffer;

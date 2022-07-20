@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import "styles/dashboards.css";
+import "styles/dashboard.css";
 
 interface IFontStyleComponent {
   bold: string;

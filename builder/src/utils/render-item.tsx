@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import Container from "components/custom-components/containers";
-import Button from "components/custom-components/buttons";
-import Text from "components/custom-components/texts";
-import Link from "components/custom-components/links";
-import Image from "components/custom-components/images";
-import Input from "components/custom-components/inputs";
-import Divider from "components/custom-components/dividers";
+import Container from "components/custom-components/container";
+import Button from "components/custom-components/button";
+import Text from "components/custom-components/text";
+import Link from "components/custom-components/link";
+import Image from "components/custom-components/image";
+import Input from "components/custom-components/input";
+import Divider from "components/custom-components/divider";
 import IItems from "interfaces/items";
 
 interface IRenderItem {

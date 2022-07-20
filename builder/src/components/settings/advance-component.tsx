@@ -1,11 +1,11 @@
 import React, { useState, FC } from "react";
 import { FaFileContract } from "react-icons/fa";
 import Modal from "feature/dashboard/modals";
-import AbiMethods from "components/dashboards/abi-methods";
-import AbiComponent from "components/dashboards/abi-component";
+import AbiMethods from "components/dashboard/abi-methods";
+import AbiComponents from "components/dashboard/abi-components";
 import IItems from "interfaces/items";
-import "styles/component.css";
-import "styles/dashboards.css";
+import "styles/components.css";
+import "styles/dashboard.css";
 
 interface IAdvanceComponent {
   selector: {
@@ -80,7 +80,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
         items={items}
         setItems={setItems}
       />
-      <AbiComponent
+      <AbiComponents
         showComponent={showComponent}
         selector={selector}
         setSelector={setSelector}

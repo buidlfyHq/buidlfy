@@ -5,7 +5,7 @@ import GridLayout from "react-grid-layout";
 import RenderItem from "utils/render-item";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
-import "styles/component.css";
+import "styles/components.css";
 
 interface IContainer {
   item: IItems;

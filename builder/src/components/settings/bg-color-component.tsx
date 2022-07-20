@@ -2,8 +2,8 @@ import React, { useState, FC, useRef, useEffect } from "react";
 import { VscSymbolColor } from "react-icons/vsc";
 import { SketchPicker } from "react-color";
 import IColor from "interfaces/color";
-import "styles/component.css";
-import "styles/dashboards.css";
+import "styles/components.css";
+import "styles/dashboard.css";
 
 interface IBgColorComponent {
   color: IColor;

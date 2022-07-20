@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import IColor from "interfaces/color";
-import "styles/component.css";
+import "styles/components.css";
 
 interface IInput {
   borderRadius: number;

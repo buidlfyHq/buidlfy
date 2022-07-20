@@ -3,8 +3,8 @@ import { VscSymbolColor } from "react-icons/vsc";
 import { SketchPicker } from "react-color";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
-import "styles/component.css";
-import "styles/dashboards.css";
+import "styles/components.css";
+import "styles/dashboard.css";
 
 interface IColorComponent {
   color: IColor;

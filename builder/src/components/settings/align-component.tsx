@@ -4,8 +4,8 @@ import {
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
-import "styles/component.css";
-import "styles/dashboards.css";
+import "styles/components.css";
+import "styles/dashboard.css";
 
 interface IAlignComponent {
   setLeft: (justifyContent: string | boolean) => void;

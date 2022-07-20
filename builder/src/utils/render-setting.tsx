@@ -1,12 +1,12 @@
 import React, { useEffect, useState, FC } from "react";
-import ButtonSettings from "components/dashboards/button-settings";
-import ImageSettings from "components/dashboards/image-settings";
-import ContainerSettings from "components/dashboards/container-settings";
-import InputSettings from "components/dashboards/input-settings";
-import DefaultSettings from "components/dashboards/default-settings";
+import ButtonSettings from "components/dashboard/button-settings";
+import ImageSettings from "components/dashboard/image-settings";
+import ContainerSettings from "components/dashboard/container-settings";
+import InputSettings from "components/dashboard/input-settings";
+import DefaultSettings from "components/dashboard/default-settings";
 import ISettings from "interfaces/settings";
-import "styles/component.css";
-import "styles/dashboards.css";
+import "styles/components.css";
+import "styles/dashboard.css";
 
 const SettingComponent: FC<ISettings> = ({
   items,

@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import IItems from "interfaces/items";
 
-interface IAbiComponent {
+interface IAbiComponents {
   showComponent: {
     id: string;
     value: {
@@ -30,7 +30,7 @@ interface IAbiComponent {
   setItems: (items: IItems[]) => void;
 }
 
-const AbiComponent: FC<IAbiComponent> = ({
+const AbiComponents: FC<IAbiComponents> = ({
   showComponent,
   setSelector,
   elementConfig,
@@ -393,4 +393,4 @@ const AbiComponent: FC<IAbiComponent> = ({
   );
 };
 
-export default AbiComponent;
+export default AbiComponents;

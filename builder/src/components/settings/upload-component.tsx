@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import IItems from "interfaces/items";
-import "styles/component.css";
-import "styles/dashboards.css";
+import "styles/components.css";
+import "styles/dashboard.css";
 
 interface IUploadComponent {
   selectedItem: IItems;
