@@ -54,7 +54,7 @@ const Sidebar: FC<ISidebar> = ({
     }
   };
 
-  const filteredComponents = components
+  const renderContainerComponents = components
     .filter((c) => c.name !== "Container")
     ?.map((c, index) => {
       const availableHandles: ResizeHandles = ["nw", "se"];
@@ -92,7 +92,7 @@ const Sidebar: FC<ISidebar> = ({
       );
     });
 
-  const mappedComponents = components?.map((c, index) => {
+  const renderComponents = components?.map((c, index) => {
     const availableHandles: ResizeHandles = ["nw", "se"];
     const containerHandles: ResizeHandles = ["w", "e"];
     return (
@@ -164,7 +164,11 @@ const Sidebar: FC<ISidebar> = ({
 
       {/* Components */}
       <div className="px-6 py-3 mt-10">
-        {addContainer ? <>{filteredComponents}</> : <>{mappedComponents}</>}
+        {addContainer ? (
+          <>{renderContainerComponents}</>
+        ) : (
+          <>{renderComponents}</>
+        )}
       </div>
     </main>
   );

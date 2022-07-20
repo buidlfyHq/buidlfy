@@ -25,6 +25,9 @@ const Home: FC = () => {
       compactType="horizontal"
       isDraggable={false}
       isResizable={false}
+      style={{
+        backgroundColor: `rgba(${config.background.r}, ${config.background.g}, ${config.background.b}, ${config.background.a})`,
+      }}
     >
       {config.builder.map((c: IItems) => {
         const { x, y, w, h, minW, i } = c;

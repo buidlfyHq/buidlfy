@@ -199,9 +199,6 @@ const Workspace: FC<IWorkspace> = ({
           ? `ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
           : `w-full mr-[250px] h-full w-[calc(100%-250px)]`
       }
-      style={{
-        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-      }}
       onClick={handleCheckIsContainer}
     >
       <section className="mt-[60px] ">
@@ -217,6 +214,9 @@ const Workspace: FC<IWorkspace> = ({
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           className="h-fit"
+          style={{
+            backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+          }}
         >
           {renderItemFunction}
         </ResponsiveGridLayout>

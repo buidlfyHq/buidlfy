@@ -64,17 +64,6 @@ const Dashboard: FC = () => {
     }
   }, []); // eslint-disable-line
 
-  const handleSave = () => {
-    if (items?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(items));
-    }
-  };
-
-  const handleClear = () => {
-    localStorage.removeItem("items");
-    setItems([]);
-  };
-
   return (
     <main>
       {size.width > 1024 ? (
@@ -95,9 +84,9 @@ const Dashboard: FC = () => {
               className={className}
               setClassName={setClassName}
               items={items}
+              setItems={setItems}
               contractConfig={contractConfig}
-              handleSave={handleSave}
-              handleClear={handleClear}
+              backgroundColor={backgroundColor}
             />
 
             {/* Main section */}

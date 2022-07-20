@@ -3,23 +3,24 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 import { encode as base64_encode } from "base-64";
 import { Dialog } from "@headlessui/react";
 import IItems from "interfaces/items";
+import IColor from "interfaces/color";
 
 interface INavbar {
   className: string;
   setClassName: React.Dispatch<React.SetStateAction<string>>;
   items: IItems[];
+  setItems: (items: IItems[]) => void;
   contractConfig: { abi: string; address: string };
-  handleSave: () => void;
-  handleClear: () => void;
+  backgroundColor: IColor;
 }
 
 const Navbar: FC<INavbar> = ({
   className,
   setClassName,
   items,
+  setItems,
   contractConfig,
-  handleSave,
-  handleClear,
+  backgroundColor
 }) => {
   const [abiJSON, setAbiJSON] = useState<any>(); // work in progress
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -39,8 +40,22 @@ const Navbar: FC<INavbar> = ({
     setClassName("");
   };
 
-  const handleClick = () => {
+  const handleSave = () => {
+    // FIX: save full config to local storage
+    if (items?.length > 0) {
+      localStorage.setItem("items", JSON.stringify(items));
+    }
+  };
+
+  const handleClear = () => {
+    // FIX: remove full config from local storage
+    localStorage.removeItem("items");
+    setItems([]);
+  };
+
+  const handlePublish = () => {
     let config = {
+      background: backgroundColor,
       builder: items,
       contract: {
         abi: abiJSON,
@@ -70,13 +85,13 @@ const Navbar: FC<INavbar> = ({
       <div className="flex flex-row h-[60px]">
         <div className="flex flex-row items-center">
           <div
-            onClick={() => handleClear()}
+            onClick={handleClear}
             className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
           >
             Clear
           </div>
           <div
-            onClick={() => handleSave()}
+            onClick={handleSave}
             className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
           >
             Save
@@ -99,7 +114,7 @@ const Navbar: FC<INavbar> = ({
         </div> */}
         <button
           className="h-10 px-4 my-2 rounded cursor-pointer btn whitespace-nowrap"
-          onClick={handleClick}
+          onClick={handlePublish}
         >
           Publish
         </button>

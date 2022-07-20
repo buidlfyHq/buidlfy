@@ -233,7 +233,6 @@ const Settings: FC<ISettings> = ({
     singleWorkFunction(functionEnum.BACKGROUND_COLOR, backgroundColor);
   };
 
-
   const setDeleteComponent = (deleteComponent: number) => {
     singleWorkFunction(functionEnum.DELETE_COMPONENT, deleteComponent);
   };
