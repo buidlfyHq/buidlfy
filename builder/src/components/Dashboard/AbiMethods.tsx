@@ -3,7 +3,12 @@ import IItems from "interfaces/items";
 
 interface IAbiMethods {
   contractConfig: { abi: string; address: string };
-  setShowComponent: (showComponent: { id: string; value: IItems }) => void;
+  setShowComponent: (showComponent: { id: string; value: {
+    name: string;
+    inputs: object[];
+    outputs: object[];
+    stateMutability: string;
+  }; }) => void;
   selectedItem: IItems;
   items: IItems[];
   setItems: (items: IItems[]) => void;
@@ -87,7 +92,7 @@ const AbiMethods: FC<IAbiMethods> = ({
     <>
       {contractConfig.abi ? (
         <>
-          <span className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
+          <span className="px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
             Select Method
           </span>
           <div className="flex justify-center">

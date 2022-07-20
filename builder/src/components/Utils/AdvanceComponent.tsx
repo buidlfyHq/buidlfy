@@ -29,7 +29,12 @@ interface IAdvanceComponent {
       stateMutability: string;
     };
   };
-  setShowComponent: (showComponent: { id: string; value: IItems }) => void;
+  setShowComponent: (showComponent: { id: string; value: {
+    name: string;
+    inputs: object[];
+    outputs: object[];
+    stateMutability: string;
+  }; }) => void;
   contractConfig: { abi: string; address: string };
   setContractConfig: (contractConfig: { abi: string; address: string }) => void;
   selectedItem: IItems;
@@ -58,9 +63,9 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
       <div className="flex items-center px-3 mt-1 text-black">
         <div
           onClick={() => setIsOpen(true)}
-          className="w-54 border h-11 py-2 px-2 flex w-15"
+          className="flex px-2 py-2 border w-54 h-11 w-15"
         >
-          <span className="mr-3 ml-4 mt-1">
+          <span className="mt-1 ml-4 mr-3">
             <FaFileContract />
           </span>{" "}
           Import Contract

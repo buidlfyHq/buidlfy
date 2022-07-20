@@ -21,7 +21,15 @@ const Navbar: FC<INavbar> = ({
   handleSave,
   handleClear,
 }) => {
-  const [abiJSON, setAbiJSON] = useState<any>(); // work in progress
+  const [abiJSON, setAbiJSON] = useState<
+  {
+    inputs: { internalType: string; name: string; type: string }[];
+    name: string;
+    outputs: { internalType: string; name: string; type: string }[];
+    stateMutability: string;
+    type: string;
+  }[]
+  >([]); // work in progress
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
 

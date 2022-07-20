@@ -32,7 +32,12 @@ export default interface ISettings {
     address: string;
   }) => void;
   contractConfig?: { abi: string; address: string };
-  setShowComponent?: (showComponent: { id: string; value: IItems }) => void;
+  setShowComponent?: (showComponent: { id: string; value: {
+    name: string;
+    inputs: object[];
+    outputs: object[];
+    stateMutability: string;
+  }; }) => void;
   showComponent?: {
     id: string;
     value: {
