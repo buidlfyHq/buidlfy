@@ -1,6 +1,6 @@
 import React, { useState, FC } from "react";
 import { FaFileContract } from "react-icons/fa";
-import Modal from "feature/dashboard/modals";
+import Modal from "feature/dashboard/modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
 import IItems from "interfaces/items";
