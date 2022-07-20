@@ -1,22 +1,77 @@
 import React, { FC } from "react";
 import Container from "../CustomComponents/Container";
 import Button from "../CustomComponents/Button";
-import HeadingOne from "../CustomComponents/HeadingOne";
 import Text from "../CustomComponents/Text";
 import Link from "../CustomComponents/Link";
 import Image from "../CustomComponents/Image";
 import Input from "../CustomComponents/Input";
-import HeadingThree from "../CustomComponents/HeadingThree";
-import HeadingTwo from "../CustomComponents/HeadingTwo";
 import Divider from "../CustomComponents/Divider";
 import IItems from "interfaces/items";
 
-interface IRenderItem { item: IItems }
+interface IRenderItem {
+  item: IItems;
+  items?: IItems[];
+  setItems?: (items?: IItems[]) => void;
+  setDrag: (drag?: boolean) => void;
+  setOpenSetting?: (openSetting: boolean) => void;
+  setSettingItemId?: (settingItemId: string) => void;
+  setOpenTab?: (openTab: number) => void;
+  setAddContainer?: (addContainer: boolean) => void;
+  selector?: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  };
+  setSelector?: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  }) => void;
+  elementConfig?: object;
+  setElementConfig?: (elementConfig: object) => void;
+}
 
-const RenderItem: FC<IRenderItem> = ({ item }) => {
+const RenderItem: FC<IRenderItem> = ({
+  item,
+  items,
+  setItems,
+  setDrag,
+  setOpenSetting,
+  setSettingItemId,
+  setOpenTab,
+  setAddContainer,
+  selector,
+  setSelector,
+  elementConfig,
+  setElementConfig,
+}) => {
   switch (item.name) {
     case "Container":
-      return <Container />;
+      return (
+        <Container
+          item={item}
+          items={items}
+          setItems={setItems}
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          setOpenSetting={setOpenSetting}
+          setSettingItemId={setSettingItemId}
+          setOpenTab={setOpenTab}
+          setDrag={setDrag}
+          setAddContainer={setAddContainer}
+          selector={selector}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          setElementConfig={setElementConfig}
+        />
+      );
     case "Button":
       return (
         <Button
@@ -29,6 +84,9 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          borderRadius={item.style.borderRadius}
+          shadow={item.style.shadow}
+          connectWallet={item.connectWallet}
         />
       );
     case "Text":
@@ -61,7 +119,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
       );
     case "Heading 1":
       return (
-        <HeadingOne
+        <Text
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -75,7 +133,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
       );
     case "Heading 2":
       return (
-        <HeadingTwo
+        <Text
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -89,7 +147,7 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
       );
     case "Heading 3":
       return (
-        <HeadingThree
+        <Text
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -102,9 +160,20 @@ const RenderItem: FC<IRenderItem> = ({ item }) => {
         />
       );
     case "Input":
-      return <Input />;
+      return (
+        <Input
+          borderRadius={item.style.borderRadius}
+          shadow={item.style.shadow}
+          color={item.style.color}
+        />
+      );
     case "Image":
-      return <Image />;
+      return (
+        <Image
+          imgData={item.imgData}
+          justifyContent={item.style.justifyContent}
+        />
+      );
     case "Divider":
       return <Divider />;
     default:

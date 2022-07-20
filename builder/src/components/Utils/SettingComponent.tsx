@@ -1,86 +1,31 @@
-import React, { useEffect, useRef, useState, FC } from "react";
-import { RiText } from "react-icons/ri";
-import { AiOutlineLink } from "react-icons/ai";
-import AlignComponent from "./AlignComponent";
-import FontStyleComponent from "./FontStyleComponent";
-import UtilitiesComponent from "./UtilitiesComponent";
-import ColorComponent from "./ColorComponent";
-import BgColorComponent from "./BgColorComponent";
-import FontSizeComponent from "./FontSizeComponent";
-import AdvanceComponent from "./AdvanceComponent";
-import IItems from "interfaces/items";
-import "../../styles/Components.css";
-import "../../styles/Dashboard.css";
+import React, { useEffect, useState, FC } from "react";
+import ButtonSettings from "./ButtonSettings";
+import ImageSettings from "./ImageSettings";
+import ContainerSettings from "./ContainerSettings";
+import InputSettings from "./InputSettings";
+import DefaultSettings from "./DefaultSettings";
+import ISettings from "interfaces/settings";
+import "styles/Components.css";
+import "styles/Dashboard.css";
 
-interface ISettingComponent {
-  setSelector: (selector: {
-    methodName: string;
-    type: string;
-    name: string;
-  }) => void;
-  showComponent: {
-    id: string;
-    value: { name: string; inputs: object[]; outputs: object[] };
-  };
-  setShowComponent: (showComponent: { id: string; value: IItems }) => void;
-  contractConfig: { abi: string; address: string };
-  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
-  selectedItem: IItems;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
-  elementConfig: object;
-  deleteComponent: number;
-  setDeleteComponent: (deleteComponent: number) => void;
-  setLeft: (justifyContent: string | boolean) => void;
-  setRight: (justifyContent: string | boolean) => void;
-  setCenter: (justifyContent: string | boolean) => void;
-  justifyContent: string;
-  color: any;
-  setColor: (color: any) => void;
-  backgroundColor: any;
-  setBgColor: (backgroundColor: any) => void;
-  fontSize: number;
-  setFontSize: (fontSize: number) => void;
-  bold: string;
-  italic: string;
-  underline: string;
-  setBold: (bold: string | boolean) => void;
-  setItalic: (italic: string | boolean) => void;
-  setUnderline: (underline: string | boolean) => void;
-  value: string;
-  setValue: (value: string) => void;
-  link: string;
-  setLink: (link: string) => void;
-  openTab: number;
-  setOpenTab: (openTab: number) => void;
-}
-
-const SettingComponent: FC<ISettingComponent> = ({
-  link,
-  setValue = null,
-  setBold = null,
-  bold = null,
-  italic = null,
-  setItalic = null,
-  underline = null,
-  setUnderline = null,
-  color = { r: 0, g: 0, b: 0, a: 100 },
-  setColor = null,
-  backgroundColor = { r: 0, g: 0, b: 0, a: 100 },
-  setBgColor = null,
-  deleteComponent = 0,
-  setDeleteComponent = null,
-  justifyContent = null,
-  setLeft = null,
-  setRight = null,
-  setCenter = null,
-  fontSize = 16,
-  setFontSize = null,
+const SettingComponent: FC<ISettings> = ({
   items,
   setItems,
   selectedItem,
+  setLink,
+  link,
+  setValue,
   value,
-  setLink = null,
+  setBold,
+  setItalic,
+  setUnderline,
+  setColor,
+  setBgColor,
+  setDeleteComponent,
+  setLeft,
+  setCenter,
+  setRight,
+  setFontSize,
   contractConfig,
   setContractConfig,
   showComponent,
@@ -89,11 +34,15 @@ const SettingComponent: FC<ISettingComponent> = ({
   elementConfig,
   openTab,
   setOpenTab,
+  setBorderRadius,
+  setBorderWidth,
+  setSmall,
+  setMedium,
+  setLarge,
+  setOn,
 }) => {
   const [textVal, setTextVal] = useState<string>("");
   const [linkVal, setLinkVal] = useState<string>("");
-
-  const ref = useRef(null);
 
   useEffect(() => {
     setTextVal(value || "");
@@ -103,215 +52,170 @@ const SettingComponent: FC<ISettingComponent> = ({
     setLinkVal(link || "");
   }, [link]);
 
-  const handleTextChange = (e: any) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
-  const handleLinkChange = (e: any) => {
-    setLinkVal(e.target.value);
+  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLink(e.target.value);
   };
-  return (
-    <>
-      <div className="rounded-[8px] py-2 px-4 cursor-pointer relative">
-        <div className="sidebar border shadow-sm menu" ref={ref}>
-          {selectedItem?.name === "Button" ? (
-            <>
-              <div className="flex flex-wrap">
-                <div className="w-full">
-                  <ul
-                    className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
-                    role="tablist"
-                  >
-                    <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                      <a
-                        className={
-                          "text-xs font-bold uppercase" +
-                          (openTab === 1
-                            ? "text-black bg-" + "-transparent"
-                            : "text-" + "-black bg-transparent")
-                        }
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setOpenTab(1);
-                        }}
-                        data-toggle="tab"
-                        href="#link1"
-                        role="tablist"
-                      >
-                        <i className="fas fa-space-shuttle text-base mr-1"></i>{" "}
-                        Setting
-                      </a>
-                    </li>
-                    <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                      <a
-                        className={
-                          "text-xs font-bold uppercase" +
-                          (openTab === 2
-                            ? "text-black bg-" + "-transparent"
-                            : "text-" + "-black bg-transparent")
-                        }
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setOpenTab(2);
-                        }}
-                        data-toggle="tab"
-                        href="#link3"
-                        role="tablist"
-                      >
-                        <i className="fas fa-briefcase text-base mr-1"></i>{" "}
-                        Contract
-                      </a>
-                    </li>
-                  </ul>
-                  <div className="relative flex flex-col min-w-0 break-words">
-                    <div className="px-2 py-2 flex-auto">
-                      <div className="tab-content tab-space">
-                        <div
-                          className={openTab === 1 ? "block" : "hidden"}
-                          id="link1"
-                        >
-                          <h3 className="mb-3 ml-8">
-                            Component -{" "}
-                            {selectedItem ? (
-                              <span className="font-bold">
-                                {selectedItem.name}
-                              </span>
-                            ) : null}
-                          </h3>
 
-                          <div className="flex items-center px-3 mt-1 text-black">
-                            <RiText className="text-[18px] mr-3" />
+  switch (selectedItem?.name) {
+    case "Button":
+      return (
+        <ButtonSettings
+          textVal={textVal}
+          handleTextChange={handleTextChange}
+          linkVal={linkVal}
+          handleLinkChange={handleLinkChange}
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
+          setBold={setBold}
+          bold={selectedItem?.style?.fontWeight}
+          setItalic={setItalic}
+          italic={selectedItem?.style?.fontStyle}
+          setUnderline={setUnderline}
+          underline={selectedItem?.style?.textDecoration}
+          color={selectedItem?.style?.color}
+          setColor={setColor}
+          setBgColor={setBgColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          justifyContent={selectedItem?.style?.justifyContent}
+          setLeft={setLeft}
+          setCenter={setCenter}
+          setRight={setRight}
+          setFontSize={setFontSize}
+          fontSize={selectedItem?.style?.fontSize}
+          setContractConfig={setContractConfig}
+          contractConfig={contractConfig}
+          setShowComponent={setShowComponent}
+          showComponent={showComponent}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          openTab={openTab}
+          setOpenTab={setOpenTab}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+          setOn={setOn}
+          connectWallet={selectedItem?.connectWallet}
+        />
+      );
 
-                            <input
-                              value={textVal}
-                              onChange={(e) => handleTextChange(e)}
-                              className="changeText"
-                              type="text"
-                              placeholder="Name..."
-                            />
-                          </div>
-                          <div className="flex items-center px-3 mt-2 text-black">
-                            <AiOutlineLink className="text-[18px] mr-3" />
-                            <input
-                              value={linkVal}
-                              onChange={(e) => handleLinkChange(e)}
-                              className="changeText"
-                              type="text"
-                              placeholder="URL..."
-                            />
-                          </div>
-                          <FontStyleComponent
-                            bold={bold}
-                            italic={italic}
-                            underline={underline}
-                            setBold={setBold}
-                            setItalic={setItalic}
-                            setUnderline={setUnderline}
-                          />
+    case "Image":
+      return (
+        <ImageSettings
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          justifyContent={selectedItem?.style?.justifyContent}
+          setLeft={setLeft}
+          setCenter={setCenter}
+          setRight={setRight}
+        />
+      );
 
-                          <AlignComponent
-                            justifyContent={justifyContent}
-                            setLeft={setLeft}
-                            setRight={setRight}
-                            setCenter={setCenter}
-                          />
+    case "Container":
+      return (
+        <ContainerSettings
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
+          color={selectedItem?.style?.color}
+          setColor={setColor}
+          setBgColor={setBgColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          setBorderWidth={setBorderWidth}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+        />
+      );
 
-                          <FontSizeComponent
-                            fontSize={fontSize}
-                            setFontSize={setFontSize}
-                          />
-                          <ColorComponent color={color} setColor={setColor} />
+    case "Input":
+      return (
+        <InputSettings
+          selectedItem={selectedItem}
+          color={selectedItem?.style?.color}
+          setColor={setColor}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+        />
+      );
 
-                          <BgColorComponent backgroundColor={backgroundColor} setBgColor={setBgColor} />
-
-                          <UtilitiesComponent
-                            deleteComponent={deleteComponent}
-                            setDeleteComponent={setDeleteComponent}
-                          />
-                        </div>
-                        <div
-                          className={openTab === 2 ? "block" : "hidden"}
-                          id="link3"
-                        >
-                          <AdvanceComponent
-                            contractConfig={contractConfig}
-                            setContractConfig={setContractConfig}
-                            showComponent={showComponent}
-                            setShowComponent={setShowComponent}
-                            setSelector={setSelector}
-                            elementConfig={elementConfig}
-                            selector={undefined}
-                            selectedItem={selectedItem}
-                            items={items}
-                            setItems={setItems}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              {" "}
-              <h3 className="mb-3 ml-8">
-                Component -{" "}
-                {selectedItem ? (
-                  <span className="font-bold">{selectedItem.name}</span>
-                ) : null}
-              </h3>
-              <div className="flex items-center px-3 mt-1 text-black">
-                <RiText className="text-[18px] mr-3" />
-
-                <input
-                  value={textVal}
-                  onChange={(e) => handleTextChange(e)}
-                  className="changeText"
-                  type="text"
-                  placeholder="Name..."
-                />
-              </div>
-              <div className="flex items-center px-3 mt-2 text-black">
-                <AiOutlineLink className="text-[18px] mr-3" />
-                <input
-                  value={linkVal}
-                  onChange={(e) => handleLinkChange(e)}
-                  className="changeText"
-                  type="text"
-                  placeholder="URL..."
-                />
-              </div>
-              <FontStyleComponent
-                bold={bold}
-                italic={italic}
-                underline={underline}
-                setBold={setBold}
-                setItalic={setItalic}
-                setUnderline={setUnderline}
-              />
-              <AlignComponent
-                justifyContent={justifyContent}
-                setLeft={setLeft}
-                setRight={setRight}
-                setCenter={setCenter}
-              />
-              <FontSizeComponent
-                fontSize={fontSize}
-                setFontSize={setFontSize}
-              />
-              <ColorComponent color={color} setColor={setColor} />
-              <BgColorComponent backgroundColor={backgroundColor} setBgColor={setBgColor} />
-              <UtilitiesComponent
-                deleteComponent={deleteComponent}
-                setDeleteComponent={setDeleteComponent}
-              />
-            </>
-          )}
-        </div>
-      </div>
-    </>
-  );
+    default:
+      return (
+        <DefaultSettings
+          textVal={textVal}
+          handleTextChange={handleTextChange}
+          linkVal={linkVal}
+          handleLinkChange={handleLinkChange}
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
+          setLink={setLink}
+          link={selectedItem?.link}
+          setValue={setValue}
+          value={selectedItem?.value}
+          setBold={setBold}
+          bold={selectedItem?.style?.fontWeight}
+          setItalic={setItalic}
+          italic={selectedItem?.style?.fontStyle}
+          setUnderline={setUnderline}
+          underline={selectedItem?.style?.textDecoration}
+          color={selectedItem?.style?.color}
+          setColor={setColor}
+          setBgColor={setBgColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          justifyContent={selectedItem?.style?.justifyContent}
+          setLeft={setLeft}
+          setCenter={setCenter}
+          setRight={setRight}
+          setFontSize={setFontSize}
+          fontSize={selectedItem?.style?.fontSize}
+          setContractConfig={setContractConfig}
+          contractConfig={contractConfig}
+          setShowComponent={setShowComponent}
+          showComponent={showComponent}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          openTab={openTab}
+          setOpenTab={setOpenTab}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          setBorderWidth={setBorderWidth}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+          setOn={setOn}
+          connectWallet={selectedItem?.connectWallet}
+        />
+      );
+  }
 };
 
 export default SettingComponent;

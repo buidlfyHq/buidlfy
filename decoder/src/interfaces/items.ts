@@ -10,15 +10,18 @@ export default interface IItems {
   w: number;
   minW?: number;
   maxW?: number;
-  link?: string;
   name: string;
+  link?: string;
   value?: string;
   style: Styles;
+  children?: IItems[];
   isBounded?: boolean;
   isDraggable?: boolean;
   isResizable?: boolean;
   moved?: boolean;
   static?: boolean;
   resizeHandles?: [];
-  contract?: object;
+  contract?: any; // breaking while assigning a type, work in progress 
+  imgData?: string | ArrayBuffer;
+  connectWallet?: string;
 }

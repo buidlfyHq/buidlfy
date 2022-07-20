@@ -4,25 +4,37 @@ import Modal from "components/Dashboard/Modal";
 import AbiMethods from "components/Dashboard/AbiMethods";
 import AbiComponent from "components/Dashboard/AbiComponent";
 import IItems from "interfaces/items";
-import "../../styles/Components.css";
-import "../../styles/Dashboard.css";
+import "styles/Components.css";
+import "styles/Dashboard.css";
 
 interface IAdvanceComponent {
   selector: {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   };
   setSelector: (selector: {
     methodName: string;
     type: string;
     name: string;
+    buttonId: string;
   }) => void;
   showComponent: {
     id: string;
-    value: { name: string; inputs: object[]; outputs: object[] };
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
   };
-  setShowComponent: (showComponent: { id: string; value: IItems }) => void;
+  setShowComponent: (showComponent: { id: string; value: {
+    name: string;
+    inputs: object[];
+    outputs: object[];
+    stateMutability: string;
+  }; }) => void;
   contractConfig: { abi: string; address: string };
   setContractConfig: (contractConfig: { abi: string; address: string }) => void;
   selectedItem: IItems;
@@ -32,40 +44,28 @@ interface IAdvanceComponent {
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({
-  contractConfig,
-  setContractConfig,
-  showComponent,
-  setShowComponent,
   selector,
   setSelector,
-  elementConfig,
+  showComponent,
+  setShowComponent,
+  contractConfig,
+  setContractConfig,
   selectedItem,
   items,
   setItems,
+  elementConfig,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
 
   return (
     <>
-      <div className="flex justify-center">
-        {/* <div className="mb-3 w-56">
-          <select
-            className="form-select appearance-none block w-54 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            aria-label="Default select example"
-          >
-            <option selected>Contract</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div> */}
-      </div>
+      <div className="flex justify-center" />
       <div className="flex items-center px-3 mt-1 text-black">
         <div
           onClick={() => setIsOpen(true)}
-          className="w-54 border h-11 py-2 px-2 flex w-15"
+          className="flex px-2 py-2 border w-54 h-11 w-15"
         >
-          <span className="mr-3 ml-4 mt-1">
+          <span className="mt-1 ml-4 mr-3">
             <FaFileContract />
           </span>{" "}
           Import Contract
@@ -87,8 +87,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
       />
       <AbiComponent
         showComponent={showComponent}
+        selector={selector}
         setSelector={setSelector}
         elementConfig={elementConfig}
+        selectedItem={selectedItem}
+        items={items}
+        setItems={setItems}
       />
     </>
   );

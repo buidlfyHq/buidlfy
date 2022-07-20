@@ -1,15 +1,16 @@
-import React, { FC, useState } from "react";
-import { Dialog } from "@headlessui/react";
-import { AiOutlineDoubleRight, AiOutlineEye } from "react-icons/ai";
-import { MdUndo, MdRedo } from "react-icons/md";
+import React, { FC, useEffect, useState } from "react";
+import { AiOutlineDoubleRight } from "react-icons/ai";
 import { encode as base64_encode } from "base-64";
+import { Dialog } from "@headlessui/react";
 import IItems from "interfaces/items";
 
 interface INavbar {
   className: string;
-  setClassName: React.Dispatch<React.SetStateAction<string>>
+  setClassName: React.Dispatch<React.SetStateAction<string>>;
   items: IItems[];
   contractConfig: { abi: string; address: string };
+  handleSave: () => void;
+  handleClear: () => void;
 }
 
 const Navbar: FC<INavbar> = ({
@@ -17,10 +18,30 @@ const Navbar: FC<INavbar> = ({
   setClassName,
   items,
   contractConfig,
+  handleSave,
+  handleClear,
 }) => {
-  const abiJSON = contractConfig.abi ? JSON.parse(contractConfig.abi) : null;
+  const [abiJSON, setAbiJSON] = useState<
+  {
+    inputs: { internalType: string; name: string; type: string }[];
+    name: string;
+    outputs: { internalType: string; name: string; type: string }[];
+    stateMutability: string;
+    type: string;
+  }[]
+  >([]); // work in progress
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
+
+  useEffect(() => {
+    if (contractConfig.abi) {
+      try {
+        setAbiJSON(JSON.parse(contractConfig.abi));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [contractConfig.abi]);
 
   const showSidebar = () => {
     setClassName("");
@@ -35,41 +56,57 @@ const Navbar: FC<INavbar> = ({
       },
     };
     let stringifiedConfig = JSON.stringify(config);
+
     setGeneratedConfig(base64_encode(stringifiedConfig));
     setIsOpen(true);
   };
+
   return (
     <main
       className={
-        className === ""
-          ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b z-1200 flex flex-row justify-between items-center p-3`
-          : `h-[60px] w-full top-0 border-b z-1200 flex flex-row justify-between items-center p-3`
+        !className
+          ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 bg-white`
+          : `h-[60px] w-full top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 `
       }
     >
       <div
         onClick={showSidebar}
         className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"
       >
-        {className !== "" && <AiOutlineDoubleRight />}
+        {className && <AiOutlineDoubleRight />}
       </div>
-      <div className="flex flex-row">
-        <div className="flex flex-row items-center mx-2 text-[18px] text-slate-600">
-          <span className="mx-1 p-2 hover:bg-slate-100 hover:rounded-md cursor-pointer">
+      <div className="flex flex-row h-[60px]">
+        <div className="flex flex-row items-center">
+          <div
+            onClick={() => handleClear()}
+            className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
+          >
+            Clear
+          </div>
+          <div
+            onClick={() => handleSave()}
+            className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
+          >
+            Save
+          </div>
+        </div>
+        {/* It will be used for the later code for undo, redo and preview of website */}
+        {/* <div className="flex flex-row items-center mx-2 text-[18px] text-slate-600">
+          <span className="p-2 mx-1 cursor-pointer hover:bg-slate-100 hover:rounded-md">
             <MdUndo />
           </span>
-          <span className="mx-1 p-2 hover:bg-slate-100 hover:rounded-md cursor-pointer">
+          <span className="p-2 mx-1 cursor-pointer hover:bg-slate-100 hover:rounded-md">
             <MdRedo />
           </span>
         </div>
-        <div className="flex items-center p-2 mx-3 my-3 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md">
+        <div className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md">
           <span className="mr-1">
             <AiOutlineEye />
           </span>
           Preview
-        </div>
-
+        </div> */}
         <button
-          className="btn rounded cursor-pointer whitespace-nowrap px-4 h-10 my-5"
+          className="h-10 px-4 my-2 rounded cursor-pointer btn whitespace-nowrap"
           onClick={handleClick}
         >
           Publish
@@ -101,7 +138,7 @@ const Navbar: FC<INavbar> = ({
                 Generated base64 Config{" "}
               </Dialog.Title>
               <div className="mt-2">
-                <p className="text-sm text-gray-500 overflow-auto h-10">
+                <p className="h-10 overflow-auto text-sm text-gray-500">
                   {generatedConfig}
                 </p>
               </div>

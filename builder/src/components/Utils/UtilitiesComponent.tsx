@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import { HiOutlineDuplicate } from "react-icons/hi";
-import "../../styles/Components.css";
-import "../../styles/Dashboard.css";
+import "styles/Components.css";
+import "styles/Dashboard.css";
 
 interface IUtilitiesComponent {
   deleteComponent: number;
@@ -10,7 +9,6 @@ interface IUtilitiesComponent {
 }
 
 const UtilitiesComponent: FC<IUtilitiesComponent> = ({
-  deleteComponent,
   setDeleteComponent,
 }) => {
   const handleDelete = () => {
@@ -29,9 +27,10 @@ const UtilitiesComponent: FC<IUtilitiesComponent> = ({
         >
           <AiOutlineDelete className="text-[18px]" />
         </span>
-        <span className="flex items-center justify-center underline shadow text-[18px] w-8 h-10 ml-3 my-2 font-regular text-black">
+        {/* It will be used for the latest code when we will add duplicate function  */}
+        {/* <span className="flex items-center justify-center underline shadow text-[18px] w-8 h-10 ml-3 my-2 font-regular text-black">
           <HiOutlineDuplicate className="text-[18px]" />
-        </span>
+        </span> */}
       </div>
     </div>
   );

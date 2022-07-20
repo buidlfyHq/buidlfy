@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import "../../styles/Components.css";
-import "../../styles/Dashboard.css";
+import "styles/Components.css";
+import "styles/Dashboard.css";
 
 interface IFontSizeComponent {
   fontSize: number;
@@ -14,21 +14,30 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
   const incrementCounter = () => {
     setFontSize(fontSize + 1);
   };
-  let decrementCounter = () => setFontSize(fontSize - 1);
-  if (fontSize <= 1) {
-    decrementCounter = () => setFontSize(1);
-  }
+
+  const decrementCounter = () => {
+    if (fontSize <= 1) {
+      setFontSize(1);
+    } else {
+      setFontSize(fontSize - 1);
+    }
+  };
+
   const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (fontSize) {
       setFontSize(+e.target.value);
     }
   };
+
+  const options = [8, 9, 10, 11, 12, 14, 18, 24, 30, 36, 48, 60, 72, 96].map(
+    (number) => <option value={number}>{number}</option>
+  );
+
   return (
     <div className="flex items-center w-full px-3 py-2 text-gray-600">
       <span className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
         Font Size
         <div className="flex mt-3">
-          {" "}
           <span
             onClick={decrementCounter}
             className="flex items-center justify-center shadow text-[18px] mr-3 w-8 h-10 font-regular text-black"
@@ -43,20 +52,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
               aria-label="Default select example"
             >
               <option selected>{fontSize}</option>
-              <option value={8}>8</option>
-              <option value={9}>9</option>
-              <option value={10}>10</option>
-              <option value={11}>11</option>
-              <option value={12}>12</option>
-              <option value={14}>14</option>
-              <option value={18}>18</option>
-              <option value={24}>24</option>
-              <option value={30}>30</option>
-              <option value={36}>36</option>
-              <option value={48}>48</option>
-              <option value={60}>60</option>
-              <option value={72}>72</option>
-              <option value={96}>96</option>
+              {options}
             </select>
           </div>
           <span

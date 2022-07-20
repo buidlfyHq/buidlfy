@@ -1,4 +1,5 @@
 import Styles from "./styles";
+import { ResizeHandles } from "./handle";
 
 export default interface IItems {
   i: string;
@@ -14,10 +15,14 @@ export default interface IItems {
   name: string;
   value?: string;
   style: Styles;
+  children?: IItems[];
   isBounded?: boolean;
   isDraggable?: boolean;
   isResizable?: boolean;
   moved?: boolean;
   static?: boolean;
-  resizeHandles?: [];
+  resizeHandles?: ResizeHandles | undefined;
+  contract?: any;
+  imgData?: string | ArrayBuffer;
+  connectWallet?: string;
 }

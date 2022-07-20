@@ -1,10 +1,16 @@
 export const components = [
   {
     name: "Container",
-    h: 1.5,
+    h: 2,
     style: {
       deleteComponent: 0,
+      backgroundColor: { r: "0", g: "0", b: "0" },
+      color: { r: "0", g: "0", b: "0", a: "100" },
+      borderRadius: 1,
+      borderWidth: 0,
+      shadow: "none",
     },
+    children: []
   },
   {
     name: "Button",
@@ -13,15 +19,18 @@ export const components = [
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",
       justifyContent: "center",
       fontSize: 15,
       deleteComponent: 0,
+      borderRadius: 1,
+      shadow: "none",
     },
-    contract: {}
+    connectWallet: "off",
+    contract: {},
   },
   {
     name: "Text",
@@ -30,23 +39,7 @@ export const components = [
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
-      fontWeight: "normal",
-      fontStyle: "normal",
-      textDecoration: "none",
-      justifyContent: "center",
-      fontSize: 15,
-      deleteComponent: 0,
-    },
-  },
-  {
-    name: "Link",
-    h: 1,
-    value: "Link",
-    link: "",
-    style: {
-      color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",
@@ -62,7 +55,7 @@ export const components = [
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",
@@ -78,7 +71,7 @@ export const components = [
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",
@@ -87,14 +80,14 @@ export const components = [
       deleteComponent: 0,
     },
   },
-  { 
+  {
     name: "Heading 3",
     h: 1,
     value: "Heading 3",
     link: "",
     style: {
       color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+      backgroundColor: { r: "0", g: "0", b: "0" },
       fontWeight: "normal",
       fontStyle: "normal",
       textDecoration: "none",
@@ -108,13 +101,17 @@ export const components = [
     h: 1,
     style: {
       deleteComponent: 0,
+      borderRadius: 1,
+      shadow: "none",
+      color: { r: "0", g: "0", b: "0", a: "100" },
     },
   },
   {
     name: "Image",
-    h: 3,
+    h: 1.2,
     style: {
       deleteComponent: 0,
+      justifyContent: "center",
     },
   },
   {

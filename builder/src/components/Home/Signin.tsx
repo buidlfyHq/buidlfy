@@ -3,20 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 import { SiweMessage } from "siwe";
 
-declare let window: any;
+declare let window: any; // required
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 
 const SignIn: FC = () => {
   const navigate = useNavigate();
 
-  let domain: any,
-    origin: any,
+  let domain,
+    origin,
     provider: {
       getSigner: () => any;
       send: (arg0: string, arg1: any[]) => Promise<any>;
     },
     signer: { getAddress: () => any; signMessage: (arg0: any) => any }; // for sign-in message
-    
+
   const loadValues = () => {
     domain = window.location.host;
     origin = window.location.origin;
@@ -59,7 +59,7 @@ const SignIn: FC = () => {
   };
 
   // Create sign-in message
-  const createSiweMessage = async (address: any, statement: any) => {
+  const createSiweMessage = async (address: any, statement: string) => {
     const res = await fetch(`${BACKEND_ADDR}/nonce`, {
       credentials: "include",
     });
@@ -106,14 +106,14 @@ const SignIn: FC = () => {
   };
 
   return (
-    <main className="h-screen flex justify-center items-center">
+    <main className="flex items-center justify-center h-screen">
       <section className="w-1/2">
-        <h2 className="text-4xl text-cyan-900 font-bold">
+        <h2 className="text-4xl font-bold text-cyan-900">
           Welcome to the future of building dApps
         </h2>
         <div className="my-10">
           <button
-            className="w-full p-3 bg-cyan-900 text-white rounded"
+            className="w-full p-3 text-white rounded bg-cyan-900"
             onClick={signInWithEthereum}
           >
             Sign-in with Ethereum
