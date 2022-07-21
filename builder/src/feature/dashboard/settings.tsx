@@ -33,7 +33,15 @@ const Settings: FC<ISettings> = ({
   openTab,
   setOpenTab,
 }) => {
-  const [showComponent, setShowComponent] = useState<any>(null); // for abi method component
+  const [showComponent, setShowComponent] = useState<{ 
+    id: string; 
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    }; 
+  }>(null); // for abi method component
   const ref = useRef(null);
 
   // work in progress

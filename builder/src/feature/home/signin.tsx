@@ -59,7 +59,7 @@ const SignIn: FC = () => {
   };
 
   // Create sign-in message
-  const createSiweMessage = async (address: any, statement: any) => {
+  const createSiweMessage = async (address: any, statement: string) => {
     const res = await fetch(`${BACKEND_ADDR}/nonce`, {
       credentials: "include",
     });
@@ -106,14 +106,14 @@ const SignIn: FC = () => {
   };
 
   return (
-    <main className="h-screen flex justify-center items-center">
+    <main className="flex items-center justify-center h-screen">
       <section className="w-1/2">
-        <h2 className="text-4xl text-cyan-900 font-bold">
+        <h2 className="text-4xl font-bold text-cyan-900">
           Welcome to the future of building dApps
         </h2>
         <div className="my-10">
           <button
-            className="w-full p-3 bg-cyan-900 text-white rounded"
+            className="w-full p-3 text-white rounded bg-cyan-900"
             onClick={signInWithEthereum}
           >
             Sign-in with Ethereum
