@@ -18,9 +18,9 @@ const Text: FC<ITexts> = ({
     setValue(e.target.value);
   };
 
-  // const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setValue(e.target.value);
-  // };
+  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
   return (
     <section
