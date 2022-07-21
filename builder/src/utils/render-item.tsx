@@ -31,6 +31,7 @@ interface IRenderItem {
   }) => void;
   elementConfig?: object;
   setElementConfig?: (elementConfig: object) => void;
+  setValue?: (value: string) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -46,6 +47,7 @@ const RenderItem: FC<IRenderItem> = ({
   setSelector,
   elementConfig,
   setElementConfig,
+  setValue,
 }) => {
   switch (item.name) {
     case "Container":
@@ -101,6 +103,7 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          setValue={setValue}
         />
       );
     case "Link":
@@ -129,6 +132,7 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          setValue={setValue}
         />
       );
     case "Heading 2":
@@ -143,6 +147,7 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          setValue={setValue}
         />
       );
     case "Heading 3":
@@ -157,6 +162,7 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          setValue={setValue}
         />
       );
     case "Input":
