@@ -157,7 +157,7 @@ const Dashboard: FC = () => {
             />
           ) : (
             <main
-              className={`fixed right-0 top-[60px] z-0 w-[250px] border-l h-full`}
+              className={`fixed right-0 top-[60px] w-[250px] border-l h-full`}
             >
               <div className="mx-3 my-2">
                 <h3 className="mb-2 text-xl">Site Settings</h3>
