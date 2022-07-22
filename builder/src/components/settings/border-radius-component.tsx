@@ -30,7 +30,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
   };
 
   const options = [2, 4, 5, 7, 8, 10, 15, 20, 25].map((number) => (
-    <option value={number}>{number}</option>
+    <option key={number} value={number}>{number}</option>
   ));
 
   return (

@@ -30,7 +30,7 @@ const BorderComponent: FC<IBorderComponent> = ({
   };
 
   const renderOptions = [1, 3, 5, 7, 9, 10, 12].map((number) => (
-    <option value={number}>{number}</option>
+    <option key={number} value={number}>{number}</option>
   ));
 
   return (

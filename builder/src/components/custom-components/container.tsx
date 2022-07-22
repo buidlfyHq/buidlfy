@@ -166,7 +166,7 @@ const Container: FC<IContainer> = ({
   return (
     <section
       id={item.i}
-      className="relative w-full pt-2 border cursor-pointer container-drag h-fit"
+      className="relative w-full border cursor-pointer container-drag h-fit"
     >
       <GridLayout
         layout={children}

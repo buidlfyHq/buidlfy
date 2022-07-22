@@ -80,8 +80,8 @@ const Navbar: FC<INavbar> = ({
     <main
       className={
         !className
-          ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 bg-white`
-          : `h-[60px] w-full top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 `
+          ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b flex flex-row justify-between items-center p-3 bg-white`
+          : `h-[60px] w-full top-0 border-b flex flex-row justify-between items-center p-3`
       }
     >
       <div
