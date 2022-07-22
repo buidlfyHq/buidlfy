@@ -197,11 +197,9 @@ const Workspace: FC<IWorkspace> = ({
 
   return (
     <main
-      className={
-        className === ""
-          ? `ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
-          : `w-full mr-[250px] h-full w-[calc(100%-250px)]`
-      }
+      className={`w-[calc(100%-500px)] h-[calc(100%-60px)] z-10 ${
+        className === "" ? "mx-[250px]" : "mr-[250px]"
+      }`}
       style={{
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
