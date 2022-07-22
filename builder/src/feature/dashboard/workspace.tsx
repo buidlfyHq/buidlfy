@@ -204,7 +204,7 @@ const Workspace: FC<IWorkspace> = ({
       }}
       onClick={handleCheckIsContainer}
     >
-      <section className="mt-[60px] ">
+      <section className="mt-[60px]">
         <ResponsiveGridLayout
           layouts={{ lg: items }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
