@@ -11,12 +11,11 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
   setOn,
   connectWallet,
 }) => {
-  const [textToggle, textToggleState] = useState(
+  const [connectToggle, setConnectToggle] = useState(
     connectWallet === "on" ? true : false
   );
-  console.log(connectWallet, "connect");
   const handleOnChange = () => {
-    textToggleState(!textToggle);
+    setConnectToggle(!connectToggle);
     if (connectWallet === "on") {
       setOn(false);
     } else {
@@ -24,7 +23,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
     }
   };
   useEffect(() => {
-    textToggleState(connectWallet === "on" ? true : false);
+    setConnectToggle(connectWallet === "on" ? true : false);
   }, [connectWallet]);
   return (
     <span className="flex items-center">
@@ -38,7 +37,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
             type="checkbox"
             role="switch"
             id="flexSwitchCheckDefault"
-            checked={textToggle ? true : false}
+            checked={connectToggle ? true : false}
           />
         </div>
       </div>
