@@ -124,6 +124,7 @@ const Dashboard: FC = () => {
 
             {/* Main section */}
             <aside className="flex">
+              {/* Workspace */}
               <Workspace
                 items={items}
                 setItems={setItems}
