@@ -16,8 +16,8 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
   };
 
   const decrementCounter = () => {
-    if (borderRadius <= 1) {
-      setBorderRadius(1);
+    if (borderRadius <= 0) {
+      setBorderRadius(0);
     } else {
       setBorderRadius(borderRadius - 1);
     }

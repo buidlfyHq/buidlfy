@@ -16,8 +16,8 @@ const BorderComponent: FC<IBorderComponent> = ({
   };
 
   const decrementWidthCounter = () => {
-    if (borderWidth <= 1) {
-      setBorderWidth(1);
+    if (borderWidth <= 0) {
+      setBorderWidth(0);
     } else {
       setBorderWidth(borderWidth - 1);
     }
