@@ -32,17 +32,29 @@ const AbiMethods: FC<IAbiMethods> = ({
       stateMutability: string;
       type: string;
     }[]
-  >([]); // work in progress
+  >([]);
 
   useEffect(() => {
     if (contractConfig.abi) {
       try {
         setAbiJson(JSON.parse(contractConfig.abi));
+        let selectedItemIndex = JSON.parse(contractConfig.abi).findIndex(
+          (method) => method.name === selectedItem.contract.methodName
+        );
+      
+        if (selectedItemIndex !== -1) {
+          setShowComponent({
+            id: selectedItemIndex,
+            value: abiJson[selectedItemIndex],
+          });
+        } else {
+          setShowComponent(null);
+        }
       } catch (error) {
         console.log("error");
       }
     }
-  }, [contractConfig.abi]);
+  }, [contractConfig.abi, selectedItem]);
 
   const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value) {
@@ -108,12 +120,23 @@ const AbiMethods: FC<IAbiMethods> = ({
                   onSelect(e)
                 }
               >
-                <option value="" selected>
+                <option
+                  value=""
+                  selected={selectedItem.contract.methodName ? false : true}
+                >
                   Select a Method
                 </option>
                 {contractConfig.abi &&
                   abiJson.map((method: { name: string }, i: number) => (
-                    <option value={i} key={i}>
+                    <option
+                      value={i}
+                      key={i}
+                      selected={
+                        selectedItem.contract.methodName === method.name
+                          ? true
+                          : false
+                      }
+                    >
                       {method.name}
                     </option>
                   ))}
