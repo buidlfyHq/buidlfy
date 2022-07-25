@@ -1,11 +1,11 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "components/Dashboard/Navbar";
-import Sidebar from "components/Dashboard/Sidebar";
-import Workspace from "components/Dashboard/Workspace";
-import Settings from "components/Utils/Settings";
-import BgColorComponent from "components/Utils/BgColorComponent";
-import { useWindowSize } from "hooks/useWindowSize";
+import Navbar from "features/dashboard/navbar";
+import Sidebar from "features/dashboard/sidebar";
+import Workspace from "features/dashboard/workspace";
+import Settings from "features/dashboard/settings";
+import BgColorComponent from "components/settings/bg-color-component";
+import { useWindowSize } from "hooks/use-window-size";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 
@@ -64,17 +64,6 @@ const Dashboard: FC = () => {
     }
   }, []); // eslint-disable-line
 
-  const handleSave = () => {
-    if (items?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(items));
-    }
-  };
-
-  const handleClear = () => {
-    localStorage.removeItem("items");
-    setItems([]);
-  };
-
   return (
     <main>
       {size.width > 1024 ? (
@@ -95,9 +84,9 @@ const Dashboard: FC = () => {
               className={className}
               setClassName={setClassName}
               items={items}
+              setItems={setItems}
               contractConfig={contractConfig}
-              handleSave={handleSave}
-              handleClear={handleClear}
+              backgroundColor={backgroundColor}
             />
 
             {/* Main section */}
