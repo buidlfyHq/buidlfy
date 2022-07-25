@@ -4,6 +4,7 @@ import ColorComponent from "components/settings/color-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import ISettings from "interfaces/settings";
+import { RiText } from "react-icons/ri";
 
 const InputSettings: FC<ISettings> = ({
   selectedItem,
@@ -17,6 +18,8 @@ const InputSettings: FC<ISettings> = ({
   setMedium,
   setLarge,
   shadow,
+  placeholder,
+  setPlaceholder
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -25,6 +28,18 @@ const InputSettings: FC<ISettings> = ({
         <span className="font-bold">{selectedItem.name}</span>
       ) : null}
     </h3>
+
+    <div className="flex items-center px-3 mt-2 text-black">
+      <RiText className="text-[18px] mr-3" />
+      <input
+        value={placeholder}
+        onChange={(e) => setPlaceholder(e)}
+        className="changeText"
+        type="text"
+        placeholder="placeholder text.."
+      />
+    </div>
+
     <BorderRadiusComponent
       borderRadius={borderRadius}
       setBorderRadius={setBorderRadius}
