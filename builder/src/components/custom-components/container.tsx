@@ -82,7 +82,6 @@ const Container: FC<IContainer> = ({
       let maxY = Math.max(...newItemsArr.map((item) => item.y + item.h));
       let el = newItemsArr?.filter((item) => item.y + item.h === maxY)[0];
       let maxH = el.h + el.y;
-      console.log(maxH);
       let newModifiedContainer = {
         ...item,
         h: maxH,

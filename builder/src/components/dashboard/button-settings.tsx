@@ -43,6 +43,7 @@ const ButtonSettings: FC<ISettings> = ({
   setContractConfig,
   showComponent,
   setShowComponent,
+  selector,
   setSelector,
   elementConfig,
   openTab,
@@ -183,9 +184,9 @@ const ButtonSettings: FC<ISettings> = ({
                   setContractConfig={setContractConfig}
                   showComponent={showComponent}
                   setShowComponent={setShowComponent}
+                  selector={selector}
                   setSelector={setSelector}
                   elementConfig={elementConfig}
-                  selector={undefined}
                   selectedItem={selectedItem}
                   items={items}
                   setItems={setItems}

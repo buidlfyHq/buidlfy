@@ -116,6 +116,7 @@ const Dashboard: FC = () => {
               settingItemId={settingItemId}
               contractConfig={contractConfig}
               setContractConfig={setContractConfig}
+              selector={selector}
               setSelector={setSelector}
               elementConfig={elementConfig}
               openTab={openTab}

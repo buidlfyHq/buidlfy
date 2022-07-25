@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
+import abiJson from 'config/abi.json'; // for testing
 
 interface IModal {
   contractConfig: { abi: string; address: string };
@@ -46,7 +47,7 @@ const Modal: FC<IModal> = ({
             <input
               className="w-full mt-2 py-1 px-2 bg-white/90 rounded border"
               placeholder="Paste ABI here..."
-              value={contractConfig.abi}
+              value={JSON.stringify(abiJson)}
               onChange={(e) =>
                 setContractConfig({ ...contractConfig, abi: e.target.value })
               }

@@ -5,7 +5,6 @@ import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
-
 interface IWorkspace {
   items: IItems[];
   setItems: (items: IItems[]) => void;
@@ -74,8 +73,8 @@ const Workspace: FC<IWorkspace> = ({
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
 
+  // for updating selected element config
   const updateElementConfig = (itemName: string, i: string) => {
-    // for updating selected element config
     const searchExistingValue = Object.keys(elementConfig).filter(
       (key) => key === selector.name
     );
@@ -94,14 +93,29 @@ const Workspace: FC<IWorkspace> = ({
     } else {
       Object.keys(elementConfig).map((key) => {
         if (key === selector.name) {
-          let elementArray = [
-            ...elementConfig[key],
-            {
-              buttonId: selector.buttonId,
-              name: itemName,
-              id: i,
-            },
-          ];
+          let newArray = [];
+          elementConfig[key].map((obj, index: number) => {
+            if (obj.buttonId === selector.buttonId) {
+              let updatedElement = {
+                ...elementConfig[key][index],
+                id: i,
+              };
+              newArray = [...elementConfig[key]];
+              newArray[index] = updatedElement;
+              return newArray;
+            } else {
+              return [
+                ...elementConfig[key],
+                {
+                  buttonId: selector.buttonId,
+                  name: itemName,
+                  id: i,
+                },
+              ];
+            }
+          });
+
+          let elementArray = newArray;
 
           setElementConfig({
             ...elementConfig,

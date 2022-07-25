@@ -63,7 +63,6 @@ const Sidebar: FC<ISidebar> = ({
           key={index}
           className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
           onClick={() => {
-            console.log(selectedItem);
             let y = checkContainerY(selectedItem);
             let newC = {
               ...c,

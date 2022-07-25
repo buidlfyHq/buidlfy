@@ -3,12 +3,15 @@ import IItems from "interfaces/items";
 
 interface IAbiMethods {
   contractConfig: { abi: string; address: string };
-  setShowComponent: (showComponent: { id: string; value: {
-    name: string;
-    inputs: object[];
-    outputs: object[];
-    stateMutability: string;
-  }; }) => void;
+  setShowComponent: (showComponent: {
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }) => void;
   selectedItem: IItems;
   items: IItems[];
   setItems: (items: IItems[]) => void;

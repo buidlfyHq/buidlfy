@@ -30,6 +30,7 @@ const SettingComponent: FC<ISettings> = ({
   setContractConfig,
   showComponent,
   setShowComponent,
+  selector,
   setSelector,
   elementConfig,
   openTab,
@@ -93,6 +94,7 @@ const SettingComponent: FC<ISettings> = ({
           contractConfig={contractConfig}
           setShowComponent={setShowComponent}
           showComponent={showComponent}
+          selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           openTab={openTab}

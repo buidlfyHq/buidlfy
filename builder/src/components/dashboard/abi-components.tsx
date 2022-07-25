@@ -167,7 +167,7 @@ const AbiComponents: FC<IAbiComponents> = ({
     );
     return filteredObject;
   };
-  
+
   const handleOutputSelector = (selectedId: string) => {
     setSelector({
       methodName: showComponent.value.name,
@@ -195,69 +195,79 @@ const AbiComponents: FC<IAbiComponents> = ({
       {showComponent ? (
         <>
           {showComponent.value.inputs[0] &&
-            showComponent.value.inputs.map((input: { name: string }, i: number) => {
-              const { selectedId, objects, filterObjects } = inputObjects(i);
-              return (
-                <section className="mt-3">
-                  <h6>Input - {input.name}</h6>
-                  <div
-                    key={i}
-                    className="grid mb-2 px-2 border rounded mt-1 h-7"
-                    onClick={() => handleInputSelector(selectedId)}
-                  >
-                    <>
-                      {!objects.length ? (
-                        <>
-                          <span>Select An Element</span>
-                          <button
-                            disabled
-                            className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
-                          >
-                            Save
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          {!filterObjects.length ? (
-                            <>
-                              <span>Select An Element</span>
-                              <button
-                                disabled
-                                className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
-                              >
-                                Save
-                              </button>
-                            </>
-                          ) : (
-                            filterObjects.map((key) => {
-                              let filteredObject = elementConfig[key]?.filter(
-                                (key: { buttonId: string }) =>
-                                  key.buttonId === selectedItem.i
-                              );
-                              return (
-                                <>
-                                  {filteredObject[0] && (
-                                    <>
-                                      <span className="flex">
-                                        <span className="flex-1">
-                                          {filteredObject[0].name} -{" "}
-                                          {filteredObject[0].id}
+            showComponent.value.inputs.map(
+              (input: { name: string }, i: number) => {
+                const { selectedId, objects, filterObjects } = inputObjects(i);
+                return (
+                  <section className="mt-3">
+                    <h6>Input - {input.name}</h6>
+                    <div
+                      key={i}
+                      className="grid mb-2 px-2 border rounded mt-1 h-7"
+                      onClick={() => handleInputSelector(selectedId)}
+                    >
+                      <div>
+                        {!objects.length ? (
+                          <>
+                            <span>Select An Element</span>
+                            <button
+                              disabled
+                              className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
+                            >
+                              Save
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            {!filterObjects.length ? (
+                              <>
+                                <span>Select An Element</span>
+                                <button
+                                  disabled
+                                  className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
+                                >
+                                  Save
+                                </button>
+                              </>
+                            ) : (
+                              filterObjects.map((key) => {
+                                let filteredObject = elementConfig[key]?.filter(
+                                  (key: { buttonId: string }) =>
+                                    key.buttonId === selectedItem.i
+                                );
+                                return (
+                                  <>
+                                    {filteredObject[0] && selector === null ? (
+                                      <>
+                                        <span className="flex">
+                                          <span className="flex-1">
+                                            {filteredObject[0].name} -{" "}
+                                            {filteredObject[0].id}
+                                          </span>
+                                          <AiOutlineEdit className="mt-1.5" />
                                         </span>
-                                        <AiOutlineEdit className="mt-1.5" />
-                                      </span>
-                                    </>
-                                  )}
-                                </>
-                              );
-                            })
-                          )}
-                        </>
-                      )}
-                    </>
-                  </div>
-                </section>
-              );
-            })}
+                                      </>
+                                    ) : (
+                                      <>
+                                        <span
+                                          className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
+                                          role="status"
+                                        />
+                                        Selecting
+                                      </>
+                                    )}
+                                  </>
+                                );
+                              })
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </section>
+                );
+              }
+            )}
 
           {showComponent.value.stateMutability === "payable" && (
             <section className="mt-3">
@@ -303,76 +313,75 @@ const AbiComponents: FC<IAbiComponents> = ({
           )}
 
           {showComponent.value.outputs[0] &&
-            showComponent.value.outputs.map((output: { name: string }, i: number) => {
-              const { selectedId, objects, filterObjects } = outputObjects(i);
-              return (
-                <section key={i} className="mt-3">
-                  <h6>Output - {output.name}</h6>
+            showComponent.value.outputs.map(
+              (output: { name: string }, i: number) => {
+                const { selectedId, objects, filterObjects } = outputObjects(i);
+                return (
+                  <section key={i} className="mt-3">
+                    <h6>Output - {output.name}</h6>
 
-                  <div
-                    key={i}
-                    className="grid mb-2 px-2 border rounded mt-1 h-7"
-                    onClick={() => {
-                      handleOutputSelector(selectedId);
-                    }}
-                  >
-                    {objects.length === 0 ? (
-                      <>
-                        <span>Select An Element</span>
-                        <button
-                          disabled
-                          className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
-                        >
-                          Save
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        {filterObjects.length === 0 ? (
-                          <>
-                            <span>Select An Element</span>
-                            <button
-                              disabled
-                              className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
-                            >
-                              Save
-                            </button>
-                          </>
-                        ) : (
-                          filterObjects.map((key) => {
-                            let filteredObject = elementConfig[key]?.filter(
-                              (key: { buttonId: string }) =>
-                                key.buttonId === selectedItem.i
-                            );
-                            return (
-                              <>
-                                {filteredObject[0] && (
-                                  <>
-                                    <span className="flex">
-                                      <span className="flex-1">
-                                        {filteredObject[0].name} -{" "}
-                                        {filteredObject[0].id}
+                    <div
+                      key={i}
+                      className="grid mb-2 px-2 border rounded mt-1 h-7"
+                      onClick={() => {
+                        handleOutputSelector(selectedId);
+                      }}
+                    >
+                      {objects.length === 0 ? (
+                        <>
+                          <span>Select An Element</span>
+                          <button
+                            disabled
+                            className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
+                          >
+                            Save
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          {filterObjects.length === 0 ? (
+                            <>
+                              <span>Select An Element</span>
+                              <button
+                                disabled
+                                className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
+                              >
+                                Save
+                              </button>
+                            </>
+                          ) : (
+                            filterObjects.map((key) => {
+                              let filteredObject = elementConfig[key]?.filter(
+                                (key: { buttonId: string }) =>
+                                  key.buttonId === selectedItem.i
+                              );
+                              return (
+                                <>
+                                  {filteredObject[0] && (
+                                    <>
+                                      <span className="flex">
+                                        <span className="flex-1">
+                                          {filteredObject[0].name} -{" "}
+                                          {filteredObject[0].id}
+                                        </span>
+                                        <AiOutlineEdit className="mt-1.5" />
                                       </span>
-                                      <AiOutlineEdit className="mt-1.5" />
-                                    </span>
-                                  </>
-                                )}
-                              </>
-                            );
-                          })
-                        )}
-                      </>
-                    )}
-                  </div>
-                </section>
-              );
-            })}
+                                    </>
+                                  )}
+                                </>
+                              );
+                            })
+                          )}
+                        </>
+                      )}
+                    </div>
+                  </section>
+                );
+              }
+            )}
 
           {show ? (
-            <button
-              // onChange={() => setIsSaved(true)}
-              className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
+            <button className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               <span
                 className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
                 role="status"
