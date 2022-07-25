@@ -30,7 +30,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
   };
 
   const options = [8, 9, 10, 11, 12, 14, 18, 24, 30, 36, 48, 60, 72, 96].map(
-    (number) => <option value={number}>{number}</option>
+    (number) => <option key={number} value={number}>{number}</option>
   );
 
   return (

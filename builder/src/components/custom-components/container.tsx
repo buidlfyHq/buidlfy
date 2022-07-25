@@ -165,7 +165,7 @@ const Container: FC<IContainer> = ({
   return (
     <section
       id={item.i}
-      className="relative w-full pt-2 border cursor-pointer container-drag h-fit"
+      className="relative w-full border cursor-pointer container-drag h-fit"
     >
       <GridLayout
         layout={children}
@@ -173,8 +173,7 @@ const Container: FC<IContainer> = ({
         rowHeight={50}
         width={containerW || 200}
         isBounded={true}
-        onLayoutChange={onLayoutChange}
-        compactType="horizontal"
+        onLayoutChange={onLayoutChange}        
         margin={[0, 0]}
         className="h-full"
         style={{
@@ -196,7 +195,7 @@ const Container: FC<IContainer> = ({
             data-grid={{
               x: 0,
               y: 0,
-              w: 12,
+              w: 6,
               h: 2,
               minH: 1,
               minW: 1,
@@ -221,8 +220,8 @@ const Container: FC<IContainer> = ({
                   justifyContent: "center",
                   fontSize: 16,
                 },
-                value: "Hover and click on drag to add components in container",
-                w: 12,
+                value: "Hover and click on drag handle to add components in container",
+                w: 6,
                 x: 0,
                 y: 0,
                 h: 2,

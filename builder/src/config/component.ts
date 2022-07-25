@@ -60,7 +60,7 @@ export const components = [
       fontStyle: "normal",
       textDecoration: "none",
       justifyContent: "center",
-      fontSize: 32,
+      fontSize: 30,
       deleteComponent: 0,
     },
   },
