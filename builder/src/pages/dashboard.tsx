@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "feature/dashboard/navbar";
-import Sidebar from "feature/dashboard/sidebar";
-import Workspace from "feature/dashboard/workspace";
-import Settings from "feature/dashboard/settings";
+import Navbar from "features/dashboard/navbar";
+import Sidebar from "features/dashboard/sidebar";
+import Workspace from "features/dashboard/workspace";
+import Settings from "features/dashboard/settings";
 import BgColorComponent from "components/settings/bg-color-component";
 import { useWindowSize } from "hooks/use-window-size";
 import IItems from "interfaces/items";
