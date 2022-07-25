@@ -141,6 +141,7 @@ const Workspace: FC<IWorkspace> = ({
       //   // Add validation for selection
       if (selector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
+        setSelector(null);
       } else if (
         selector.type === "output" &&
         (itemName === "Text" ||
@@ -149,8 +150,8 @@ const Workspace: FC<IWorkspace> = ({
           itemName === "Heading 3")
       ) {
         updateElementConfig(itemName, i);
+        setSelector(null);
       }
-      setSelector(null);
     }
   };
 
@@ -211,7 +212,7 @@ const Workspace: FC<IWorkspace> = ({
 
   return (
     <main
-      className={`w-[calc(100%-500px)] h-[calc(100%-60px)] z-10 ${
+      className={`w-[calc(100%-500px)] h-[calc(100%-60px)] mt-1 z-10 ${
         className === "" ? "mx-[250px]" : "mr-[250px]"
       }`}
       style={{

@@ -18,7 +18,7 @@ const Modal: FC<IModal> = ({
   return (
     <Dialog
       as="div"
-      className="fixed inset-0 z-10 overflow-y-auto"
+      className="fixed inset-0 z-20 overflow-y-auto"
       open={isOpen}
       onClose={() => setIsOpen(false)}
     >
