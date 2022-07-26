@@ -145,7 +145,7 @@ const SettingComponent: FC<ISettings> = ({
       return (
         <InputSettings
           placeholder={placeholder}
-          setPlaceholder={handlePlaceholderChange}
+          handlePlaceholderChange={handlePlaceholderChange}
           selectedItem={selectedItem}
           color={selectedItem?.style?.color}
           setColor={setColor}

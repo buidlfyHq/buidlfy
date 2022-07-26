@@ -19,7 +19,7 @@ const InputSettings: FC<ISettings> = ({
   setLarge,
   shadow,
   placeholder,
-  setPlaceholder
+  handlePlaceholderChange
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -33,7 +33,7 @@ const InputSettings: FC<ISettings> = ({
       <RiText className="text-[18px] mr-3" />
       <input
         value={placeholder}
-        onChange={(e) => setPlaceholder(e)}
+        onChange={(e) => handlePlaceholderChange(e)}
         className="changeText"
         type="text"
         placeholder="placeholder text.."
