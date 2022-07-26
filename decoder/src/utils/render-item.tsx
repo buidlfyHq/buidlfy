@@ -7,8 +7,6 @@ import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
 import IItems from "interfaces/items";
 // import ConnectWallet from "components/ConnectWallet";
-import HorizontalContainer from "components/custom-components/horizontal-container";
-import VerticalContainer from "components/custom-components/vertical-container";
 
 interface IRenderItem {
   item: IItems;
@@ -158,7 +156,7 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case "Horizontal Container":
       return (
-        <HorizontalContainer
+        <Container
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
@@ -174,7 +172,7 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case "Vertical Container":
       return (
-        <VerticalContainer
+        <Container
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}

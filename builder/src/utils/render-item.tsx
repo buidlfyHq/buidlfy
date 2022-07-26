@@ -7,8 +7,6 @@ import Image from "components/custom-components/image";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import IItems from "interfaces/items";
-import HorizontalContainer from "components/custom-components/horizontal-container";
-import VerticalContainer from "components/custom-components/vertical-container";
 
 interface IRenderItem {
   item: IItems;
@@ -180,7 +178,7 @@ const RenderItem: FC<IRenderItem> = ({
       return <Divider />;
     case "Horizontal Container":
       return (
-        <HorizontalContainer
+        <Container
           item={item}
           items={items}
           setItems={setItems}
@@ -204,7 +202,7 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case "Vertical Container":
       return (
-        <VerticalContainer
+        <Container
           item={item}
           items={items}
           setItems={setItems}
