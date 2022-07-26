@@ -217,7 +217,7 @@ const AbiComponents: FC<IAbiComponents> = ({
     <main>
       {showComponent ? (
         <>
-          {showComponent.value.inputs[0] &&
+          {showComponent.value.inputs &&
             showComponent.value.inputs.map(
               (input: { name: string }, i: number) => {
                 const { selectedId, objects, filterObjects } = inputObjects(i);
@@ -321,7 +321,7 @@ const AbiComponents: FC<IAbiComponents> = ({
             </section>
           )}
 
-          {showComponent.value.outputs[0] &&
+          {showComponent.value.outputs &&
             showComponent.value.outputs.map(
               (output: { name: string }, i: number) => {
                 const { selectedId, objects, filterObjects } = outputObjects(i);

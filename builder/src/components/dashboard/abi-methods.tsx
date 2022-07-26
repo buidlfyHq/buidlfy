@@ -39,9 +39,10 @@ const AbiMethods: FC<IAbiMethods> = ({
       try {
         setAbiJson(JSON.parse(contractConfig.abi));
         let selectedItemIndex = JSON.parse(contractConfig.abi).findIndex(
-          (method) => method.name === selectedItem.contract.methodName
+          (method: { name: string }) =>
+            method.name === selectedItem.contract.methodName
         );
-      
+
         if (selectedItemIndex !== -1) {
           setShowComponent({
             id: selectedItemIndex,
@@ -54,7 +55,7 @@ const AbiMethods: FC<IAbiMethods> = ({
         console.log("error");
       }
     }
-  }, [contractConfig.abi, selectedItem]);
+  }, [contractConfig.abi, selectedItem]); // eslint-disable-line
 
   const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value) {
@@ -116,13 +117,12 @@ const AbiMethods: FC<IAbiMethods> = ({
                 id="select"
                 className="form-select appearance-none mt-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label="Default select example"
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                  onSelect(e)
-                }
+                onChange={(e) => onSelect(e)}
               >
                 <option
                   value=""
                   selected={selectedItem.contract.methodName ? false : true}
+                  hidden
                 >
                   Select a Method
                 </option>

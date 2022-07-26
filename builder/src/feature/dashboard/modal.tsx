@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
-import abiJson from 'config/abi.json'; // for testing
 
 interface IModal {
   contractConfig: { abi: string; address: string };
@@ -15,6 +14,14 @@ const Modal: FC<IModal> = ({
   isOpen,
   setIsOpen,
 }) => {
+  const handleSetAbi = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // keep type = function, remove other types
+    const filteredAbi = JSON.parse(e.target.value).filter(
+      (m: { type: string }) => m.type === "function"
+    );
+    setContractConfig({ ...contractConfig, abi: JSON.stringify(filteredAbi) });
+  };
+
   return (
     <Dialog
       as="div"
@@ -47,10 +54,8 @@ const Modal: FC<IModal> = ({
             <input
               className="w-full mt-2 py-1 px-2 bg-white/90 rounded border"
               placeholder="Paste ABI here..."
-              value={JSON.stringify(abiJson)}
-              onChange={(e) =>
-                setContractConfig({ ...contractConfig, abi: e.target.value })
-              }
+              value={contractConfig.abi}
+              onChange={(e) => handleSetAbi(e)}
             />
             <input
               className="w-full mt-2 py-1 px-2 bg-white/90 rounded border"
