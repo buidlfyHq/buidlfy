@@ -26,7 +26,7 @@ const ColorComponent: FC<IColorComponent> = ({
       if (ref.current && !ref.current.contains(event.target)) {
         setDisplayColorPicker(false);
       }
-    }
+    };
     document.addEventListener("click", handleOutsideClick);
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [ref]);
@@ -39,7 +39,7 @@ const ColorComponent: FC<IColorComponent> = ({
     setDisplayColorPicker(false);
   };
 
-  const handleChange = (color: { rgb: IColor; }) => {
+  const handleChange = (color: { rgb: IColor }) => {
     if (!color) {
       return;
     }
@@ -56,7 +56,9 @@ const ColorComponent: FC<IColorComponent> = ({
         <div className="flex items-center w-full px-3 py-2 mb-2 hover:bg-slate-100">
           <VscSymbolColor className="text-[18px] mr-3" />
           <div>
-            {selectedItem?.name === "Container" ? (
+            {selectedItem?.name === "Container" ||
+            selectedItem?.name === "Horizontal Container" ||
+            selectedItem?.name === "Vertical Container" ? (
               <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
                 Border Color
               </span>

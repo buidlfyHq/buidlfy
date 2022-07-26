@@ -123,7 +123,7 @@ const SettingComponent: FC<ISettings> = ({
         />
       );
 
-    case "Container":
+    case "Container" || "Horizontal Container" || "Vertical Container":
       return (
         <ContainerSettings
           items={items}

@@ -7,6 +7,8 @@ import Image from "components/custom-components/image";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import IItems from "interfaces/items";
+import HorizontalContainer from "components/custom-components/horizontal-container";
+import VerticalContainer from "components/custom-components/vertical-container";
 
 interface IRenderItem {
   item: IItems;
@@ -176,6 +178,54 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case "Divider":
       return <Divider />;
+    case "Horizontal Container":
+      return (
+        <HorizontalContainer
+          item={item}
+          items={items}
+          setItems={setItems}
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          setOpenSetting={setOpenSetting}
+          setSettingItemId={setSettingItemId}
+          setOpenTab={setOpenTab}
+          setDrag={setDrag}
+          setAddContainer={setAddContainer}
+          selector={selector}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          setElementConfig={setElementConfig}
+        />
+      );
+    case "Vertical Container":
+      return (
+        <VerticalContainer
+          item={item}
+          items={items}
+          setItems={setItems}
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          setOpenSetting={setOpenSetting}
+          setSettingItemId={setSettingItemId}
+          setOpenTab={setOpenTab}
+          setDrag={setDrag}
+          setAddContainer={setAddContainer}
+          selector={selector}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          setElementConfig={setElementConfig}
+        />
+      );
     default:
       return <></>;
   }

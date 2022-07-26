@@ -7,6 +7,8 @@ import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
 import IItems from "interfaces/items";
 // import ConnectWallet from "components/ConnectWallet";
+import HorizontalContainer from "components/custom-components/horizontal-container";
+import VerticalContainer from "components/custom-components/vertical-container";
 
 interface IRenderItem {
   item: IItems;
@@ -152,6 +154,38 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
+        />
+      );
+    case "Horizontal Container":
+      return (
+        <HorizontalContainer
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          outputValue={outputValue}
+          setOutputValue={setOutputValue}
+        />
+      );
+    case "Vertical Container":
+      return (
+        <VerticalContainer
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          outputValue={outputValue}
+          setOutputValue={setOutputValue}
         />
       );
     default:
