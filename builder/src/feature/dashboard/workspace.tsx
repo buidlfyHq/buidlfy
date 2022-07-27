@@ -75,7 +75,7 @@ const Workspace: FC<IWorkspace> = ({
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
 
-  // for updating selected element config
+  // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {
     const searchExistingValue = Object.keys(elementConfig).filter(
       (key) => key === selector.name
@@ -106,7 +106,7 @@ const Workspace: FC<IWorkspace> = ({
               newArray[index] = updatedElement;
               return newArray;
             } else {
-              return [
+              newArray = [
                 ...elementConfig[key],
                 {
                   buttonId: selector.buttonId,
@@ -114,10 +114,13 @@ const Workspace: FC<IWorkspace> = ({
                   id: i,
                 },
               ];
+              return newArray;
             }
           });
 
           let elementArray = newArray;
+
+          console.log(newArray);
 
           setElementConfig({
             ...elementConfig,
@@ -138,7 +141,7 @@ const Workspace: FC<IWorkspace> = ({
       setSettingItemId(i);
       setOpenTab(1);
     } else {
-      //   // Add validation for selection
+      // checks selector type
       if (selector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
         setSelector(null);

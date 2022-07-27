@@ -65,6 +65,7 @@ const Dashboard: FC = () => {
     }
   }, []); // eslint-disable-line
 
+
   const setValue = (value: string) => {
     if (!settingItemId) {
       return;
@@ -118,6 +119,7 @@ const Dashboard: FC = () => {
               setClassName={setClassName}
               items={items}
               setItems={setItems}
+              setSelector={setSelector}
               contractConfig={contractConfig}
               backgroundColor={backgroundColor}
             />

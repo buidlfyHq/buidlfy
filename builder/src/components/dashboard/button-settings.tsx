@@ -63,6 +63,9 @@ const ButtonSettings: FC<ISettings> = ({
   ) => {
     e.preventDefault();
     setOpenTab(num);
+    if (num === 1) {
+      setSelector(null);
+    }
   };
 
   return (

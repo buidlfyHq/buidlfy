@@ -10,6 +10,12 @@ interface INavbar {
   setClassName: React.Dispatch<React.SetStateAction<string>>;
   items: IItems[];
   setItems: (items: IItems[]) => void;
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  }) => void;
   contractConfig: { abi: string; address: string };
   backgroundColor: IColor;
 }
@@ -19,17 +25,18 @@ const Navbar: FC<INavbar> = ({
   setClassName,
   items,
   setItems,
+  setSelector,
   contractConfig,
-  backgroundColor
+  backgroundColor,
 }) => {
   const [abiJSON, setAbiJSON] = useState<
-  {
-    inputs: { internalType: string; name: string; type: string }[];
-    name: string;
-    outputs: { internalType: string; name: string; type: string }[];
-    stateMutability: string;
-    type: string;
-  }[]
+    {
+      inputs: { internalType: string; name: string; type: string }[];
+      name: string;
+      outputs: { internalType: string; name: string; type: string }[];
+      stateMutability: string;
+      type: string;
+    }[]
   >([]); // work in progress
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
@@ -59,6 +66,7 @@ const Navbar: FC<INavbar> = ({
     // FIX: remove full config from local storage
     localStorage.removeItem("items");
     setItems([]);
+    setSelector(null);
   };
 
   const handlePublish = () => {
