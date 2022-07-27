@@ -48,7 +48,7 @@ const RenderItem: FC<IRenderItem> = ({
   setElementConfig,
 }) => {
   switch (item.name) {
-    case "Container":
+    case "Container" || "Horizontal Container" || "Vertical Container":
       return (
         <Container
           item={item}
@@ -176,54 +176,6 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case "Divider":
       return <Divider />;
-    case "Horizontal Container":
-      return (
-        <Container
-          item={item}
-          items={items}
-          setItems={setItems}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          imgData={item.imgData}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
-          setOpenTab={setOpenTab}
-          setDrag={setDrag}
-          setAddContainer={setAddContainer}
-          selector={selector}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
-        />
-      );
-    case "Vertical Container":
-      return (
-        <Container
-          item={item}
-          items={items}
-          setItems={setItems}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          imgData={item.imgData}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
-          setOpenTab={setOpenTab}
-          setDrag={setDrag}
-          setAddContainer={setAddContainer}
-          selector={selector}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
-        />
-      );
     default:
       return <></>;
   }
