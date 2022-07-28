@@ -121,7 +121,7 @@ const AbiMethods: FC<IAbiMethods> = ({
               >
                 <option
                   value=""
-                  selected={selectedItem.contract.methodName ? false : true}
+                  selected={!selectedItem.contract.methodName}
                   hidden
                 >
                   Select a Method
@@ -133,8 +133,6 @@ const AbiMethods: FC<IAbiMethods> = ({
                       key={i}
                       selected={
                         selectedItem.contract.methodName === method.name
-                          ? true
-                          : false
                       }
                     >
                       {method.name}
