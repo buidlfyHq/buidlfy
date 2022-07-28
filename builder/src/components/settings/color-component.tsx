@@ -5,6 +5,7 @@ import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
+import { containerCheck } from "utils/helpers";
 
 interface IColorComponent {
   color: IColor;
@@ -56,9 +57,7 @@ const ColorComponent: FC<IColorComponent> = ({
         <div className="flex items-center w-full px-3 py-2 mb-2 hover:bg-slate-100">
           <VscSymbolColor className="text-[18px] mr-3" />
           <div>
-            {selectedItem?.name === "Container" ||
-            selectedItem?.name === "Horizontal Container" ||
-            selectedItem?.name === "Vertical Container" ? (
+            {containerCheck(selectedItem) ? (
               <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
                 Border Color
               </span>

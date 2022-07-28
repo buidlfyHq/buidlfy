@@ -123,7 +123,51 @@ const SettingComponent: FC<ISettings> = ({
         />
       );
 
-    case "Container" || "Horizontal Container" || "Vertical Container":
+    case "Container":
+      return (
+        <ContainerSettings
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
+          color={selectedItem?.style?.color}
+          setColor={setColor}
+          setBgColor={setBgColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          setBorderWidth={setBorderWidth}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+        />
+      );
+    case "Horizontal Container":
+      return (
+        <ContainerSettings
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
+          color={selectedItem?.style?.color}
+          setColor={setColor}
+          setBgColor={setBgColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          setBorderWidth={setBorderWidth}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+        />
+      );
+    case "Vertical Container":
       return (
         <ContainerSettings
           items={items}

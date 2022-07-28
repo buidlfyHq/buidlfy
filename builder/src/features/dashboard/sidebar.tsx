@@ -3,6 +3,7 @@ import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
+import { containerCheck } from "utils/helpers";
 
 interface ISidebar {
   className: string;
@@ -38,9 +39,7 @@ const Sidebar: FC<ISidebar> = ({
     if (items.length === 0) return 0;
     else {
       let arr = items.map((item) => {
-        return item.name === "Container" ||
-          item.name === "Horizontal Container" ||
-          item.name === "Vertical Container"
+        return containerCheck(item)
           ? Math.max(...item.children.map((obj) => obj.y), item.y)
           : item.y;
       });
@@ -57,12 +56,7 @@ const Sidebar: FC<ISidebar> = ({
   };
 
   const renderContainerComponents = components
-    .filter(
-      (c) =>
-        c.name !== "Container" &&
-        c.name !== "Horizontal Container" &&
-        c.name !== "Vertical Container"
-    )
+    .filter((c) => !containerCheck(c))
     ?.map((c, index) => {
       const availableHandles: ResizeHandles = ["nw", "se"];
       return (
@@ -115,12 +109,9 @@ const Sidebar: FC<ISidebar> = ({
             w: 12,
             minW: 1,
             minH: 1,
-            resizeHandles:
-              c.name === "Container" ||
-              c.name === "Horizontal Container" ||
-              c.name === "Vertical Container"
-                ? containerHandles
-                : availableHandles,
+            resizeHandles: containerCheck(c)
+              ? containerHandles
+              : availableHandles,
           };
           if (c.name === "Vertical Container") {
             newC.w = 2;
