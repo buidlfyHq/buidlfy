@@ -70,7 +70,7 @@ const Sidebar: FC<ISidebar> = ({
               i: uid(),
               x: 0,
               y,
-              w: 12,
+              w: 6,
               minW: 1,
               resizeHandles: availableHandles,
             };
@@ -106,7 +106,7 @@ const Sidebar: FC<ISidebar> = ({
             i: uid(),
             x: 0,
             y: y,
-            w: 12,
+            w: 6,
             minW: 1,
             minH: 1,
             resizeHandles:
