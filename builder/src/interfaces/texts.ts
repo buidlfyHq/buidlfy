@@ -1,6 +1,10 @@
 import IColor from "./color";
+import IItems from "./items";
 
 export default interface ITexts {
+  item?: IItems;
+  items?: IItems[];
+  setItems?: (items?: IItems[]) => void;
   bold: string;
   italic: string;
   underline: string;

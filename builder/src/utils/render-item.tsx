@@ -94,6 +94,9 @@ const RenderItem: FC<IRenderItem> = ({
     case "Text":
       return (
         <Text
+          item={item}
+          items={items}
+          setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}

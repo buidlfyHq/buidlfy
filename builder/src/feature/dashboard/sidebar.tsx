@@ -3,6 +3,7 @@ import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
+import { Link } from "react-router-dom";
 
 interface ISidebar {
   className: string;
@@ -170,6 +171,12 @@ const Sidebar: FC<ISidebar> = ({
           <>{renderComponents}</>
         )}
       </div>
+
+      <Link to='/templates' className="hover:text-black">
+        <div className="mx-6 px-4 py-3 mt-10 rounded-xl hover:bg-blue-100">
+          Templates
+        </div>
+      </Link>
     </main>
   );
 };

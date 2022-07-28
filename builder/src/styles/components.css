@@ -80,3 +80,9 @@
   visibility: visible;
   opacity: 1;
 }
+
+/* hide scrollbar */
+.example::-webkit-scrollbar {
+  display: none;
+}
+
