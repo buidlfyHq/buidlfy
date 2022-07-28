@@ -212,7 +212,7 @@ const Workspace: FC<IWorkspace> = ({
 
   return (
     <main
-      className={`w-[calc(100%-500px)] h-[calc(100%-60px)] mt-1 z-10 ${
+      className={`w-[calc(100%-500px)] h-full z-10 ${
         className === "" ? "mx-[250px]" : "mr-[250px]"
       }`}
       style={{

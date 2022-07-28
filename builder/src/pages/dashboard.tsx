@@ -92,7 +92,7 @@ const Dashboard: FC = () => {
             />
 
             {/* Main section */}
-            <aside className="flex">
+            <aside className="flex h-full">
               {/* Workspace */}
               <Workspace
                 items={items}
@@ -118,7 +118,6 @@ const Dashboard: FC = () => {
                   settingItemId={settingItemId}
                   contractConfig={contractConfig}
                   setContractConfig={setContractConfig}
-                  selector={selector}
                   setSelector={setSelector}
                   elementConfig={elementConfig}
                   openTab={openTab}
