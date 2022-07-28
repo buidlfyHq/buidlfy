@@ -44,10 +44,6 @@ const Navbar: FC<INavbar> = ({
     }
   }, [contractConfig.abi]);
 
-  // const showSidebar = () => {
-  //   setClassName("");
-  // };
-
   const handleSave = () => {
     // FIX: save full config to local storage
     if (items?.length > 0) {
@@ -85,7 +81,6 @@ const Navbar: FC<INavbar> = ({
       }
     >
       <div
-        // onClick={showSidebar}
         className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"
       >
         {className && <AiOutlineDoubleRight />}
