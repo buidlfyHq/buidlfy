@@ -1,4 +1,4 @@
-// default grid layout element for empty container 
+// default grid layout element for empty container
 // user in custom-components/container
 const defaultItem = {
   i: "DefaultElement",
@@ -15,10 +15,10 @@ const defaultItem = {
     fontSize: 16,
   },
   value: "Hover and click on drag to add components in container",
-  w: 12,
+  w: 6,
   x: 0,
   y: 0,
   h: 2,
-}
+};
 
-export default defaultItem
+export default defaultItem;

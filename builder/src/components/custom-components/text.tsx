@@ -28,12 +28,14 @@ const Text: FC<ITexts> = ({
     className="flex items-center justify-center w-full h-full"
   >
     {link.length > 0 ? (
-      <a 
-        rel="noreferrer" 
-        target="_blank" 
-        href={link} 
+      <a
+        rel="noreferrer"
+        target="_blank"
+        href={link}
         id="text-two"
-        style={{color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`}}
+        style={{
+          color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+        }}
       >
         {value}
       </a>

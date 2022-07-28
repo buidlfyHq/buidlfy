@@ -27,12 +27,13 @@ const Dashboard: FC = () => {
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState<string>(""); // for storing current element id for settings
   // for selecting an element for contract
-  const [selector, setSelector] = useState<{
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  }>(null);
+  const [selector, setSelector] =
+    useState<{
+      methodName: string;
+      type: string;
+      name: string;
+      buttonId: string;
+    }>(null);
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
@@ -67,7 +68,7 @@ const Dashboard: FC = () => {
   return (
     <main>
       {size.width > 1024 ? (
-        <div className="flex flex-row w-full min-h-screen">
+        <section className="flex flex-row w-full min-h-screen">
           {/* Sidebar */}
           <Sidebar
             className={className}
@@ -90,53 +91,55 @@ const Dashboard: FC = () => {
             />
 
             {/* Main section */}
-            <Workspace
-              items={items}
-              setItems={setItems}
-              className={className}
-              setOpenSetting={setOpenSetting}
-              setSettingItemId={setSettingItemId}
-              selector={selector}
-              setSelector={setSelector}
-              elementConfig={elementConfig}
-              setElementConfig={setElementConfig}
-              setOpenTab={setOpenTab}
-              drag={drag}
-              setDrag={setDrag}
-              setAddContainer={setAddContainer}
-              backgroundColor={backgroundColor}
-            />
+            <aside className="flex h-full">
+              {/* Workspace */}
+              <Workspace
+                items={items}
+                setItems={setItems}
+                className={className}
+                setOpenSetting={setOpenSetting}
+                setSettingItemId={setSettingItemId}
+                selector={selector}
+                setSelector={setSelector}
+                elementConfig={elementConfig}
+                setElementConfig={setElementConfig}
+                setOpenTab={setOpenTab}
+                drag={drag}
+                setDrag={setDrag}
+                setAddContainer={setAddContainer}
+                backgroundColor={backgroundColor}
+              />
+              {/* Right Sidebar Settings */}
+              {openSetting ? (
+                <Settings
+                  items={items}
+                  setItems={setItems}
+                  settingItemId={settingItemId}
+                  contractConfig={contractConfig}
+                  setContractConfig={setContractConfig}
+                  setSelector={setSelector}
+                  elementConfig={elementConfig}
+                  openTab={openTab}
+                  setOpenTab={setOpenTab}
+                />
+              ) : (
+                <main
+                  className={`fixed right-0 top-[60px] w-[250px] border-l h-full`}
+                >
+                  <div className="mx-3 my-2">
+                    <h3 className="mb-2 text-xl">Site Settings</h3>
+                    <div className="mb-3">
+                      <BgColorComponent
+                        color={backgroundColor}
+                        setBgColor={setBackgroundColor}
+                      />
+                    </div>
+                  </div>
+                </main>
+              )}
+            </aside>
           </section>
-
-          {/* Right Sidebar Settings */}
-          {openSetting ? (
-            <Settings
-              items={items}
-              setItems={setItems}
-              settingItemId={settingItemId}
-              contractConfig={contractConfig}
-              setContractConfig={setContractConfig}
-              setSelector={setSelector}
-              elementConfig={elementConfig}
-              openTab={openTab}
-              setOpenTab={setOpenTab}
-            />
-          ) : (
-            <main
-              className={`fixed right-0 top-[60px] z-0 w-[250px] border-l h-full`}
-            >
-              <div className="mx-3 my-2">
-                <h3 className="mb-2 text-xl">Site Settings</h3>
-                <div className="mb-3">
-                  <BgColorComponent
-                    color={backgroundColor}
-                    setBgColor={setBackgroundColor}
-                  />
-                </div>
-              </div>
-            </main>
-          )}
-        </div>
+        </section>
       ) : (
         <h1 className="items-center text-center justify-center flex h-[100vh]">
           Use this on desktop for better experience <br /> Responsive view

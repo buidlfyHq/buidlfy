@@ -53,29 +53,28 @@
   margin-left: 2rem;
 }
 
-.container-drag{
+.container-drag {
   position: relative;
 }
 
-#drag{
+#drag {
   border: 1.2px dotted rgb(214, 204, 204);
   font-size: 24px;
   border-radius: 0 0 4px 4px;
 }
 
-.container-drag #drag{
+.container-drag #drag {
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  left: 50%;
-  /* margin-top: 110px; */
+  right: 0;
   opacity: 0;
   transition: opacity 0.2s;
+  background: #8247e5;
+  color: #f9f8ff;
 }
 
-.container-drag:hover #drag{
+.container-drag:hover #drag {
   visibility: visible;
   opacity: 1;
 }
-
-

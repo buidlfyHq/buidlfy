@@ -6,7 +6,7 @@ import RenderItem from "utils/render-item";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
-import defaultItem from "config/default-element-container";
+import defaultItem from "config/default-container";
 
 interface IContainer {
   item: IItems;
@@ -170,7 +170,7 @@ const Container: FC<IContainer> = ({
   return (
     <section
       id={item.i}
-      className="relative w-full pt-2 border cursor-pointer container-drag h-fit"
+      className="relative w-full border cursor-pointer container-drag h-fit"
     >
       <GridLayout
         layout={children}
@@ -178,8 +178,7 @@ const Container: FC<IContainer> = ({
         rowHeight={50}
         width={containerW || 200}
         isBounded={true}
-        onLayoutChange={onLayoutChange}
-        compactType="horizontal"
+        onLayoutChange={onLayoutChange}        
         margin={[0, 0]}
         className="h-full"
         style={{
@@ -201,7 +200,7 @@ const Container: FC<IContainer> = ({
             data-grid={{
               x: 0,
               y: 0,
-              w: 12,
+              w: 6,
               h: 2,
               minH: 1,
               minW: 1,
