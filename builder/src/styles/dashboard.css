@@ -2,11 +2,11 @@
   width: calc(100% - 250px);
 }
 
-.home{
+.home {
   background-color: red;
 }
 
-#originalnav{
+#originalnav {
   position: relative;
 }
 
@@ -24,14 +24,12 @@
   opacity: 1;
 }
 
-.menu{
+.menu {
   position: fixed;
-  top: 59px;
+  top: 60px;
   bottom: 0;
   right: 0;
-  width: auto;
   width: 250px;
-  z-index: 0; 
   background: white;
   box-shadow: border-box;
   padding: 35px 8px;
@@ -41,24 +39,23 @@
   overflow: auto;
 }
 
-.changeText{
+.changeText {
   width: 100%;
   border: 1px solid rgb(233, 226, 226);
   outline: none;
   padding: 4px 8px;
   font-size: 15px;
 }
-.changeText:focus{
+.changeText:focus {
   outline: 1px solid rgb(207, 203, 203);
 }
-.deleteIcon{
+.deleteIcon {
   margin-top: 12px;
   padding: 3px;
   cursor: pointer;
   font-size: 30px;
 }
-.deleteIcon:hover{
+.deleteIcon:hover {
   background-color: rgb(245, 239, 239);
   border-radius: 8px;
 }
-

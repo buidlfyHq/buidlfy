@@ -33,7 +33,7 @@ const ColorComponent: FC<IColorComponent> = ({
   }, [ref]);
 
   const handleClick = () => {
-    setDisplayColorPicker(!displayColorPicker);
+    setDisplayColorPicker(true);
   };
 
   const handleClose = () => {

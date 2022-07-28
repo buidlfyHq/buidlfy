@@ -193,7 +193,7 @@ export const components = [
       fontStyle: "normal",
       textDecoration: "none",
       justifyContent: "center",
-      fontSize: 32,
+      fontSize: 30,
       deleteComponent: 0,
     },
   },
@@ -232,6 +232,7 @@ export const components = [
   {
     name: "Input",
     h: 1,
+    placeholder: 'Placeholder',
     style: {
       deleteComponent: 0,
       borderRadius: 0,

@@ -70,7 +70,7 @@ const Sidebar: FC<ISidebar> = ({
               i: uid(),
               x: 0,
               y,
-              w: 12,
+              w: 6,
               minW: 1,
               resizeHandles: availableHandles,
             };
@@ -106,7 +106,7 @@ const Sidebar: FC<ISidebar> = ({
             i: uid(),
             x: 0,
             y: y,
-            w: 12,
+            w: 6,
             minW: 1,
             minH: 1,
             resizeHandles: containerCheck(c)
@@ -136,7 +136,7 @@ const Sidebar: FC<ISidebar> = ({
 
   return (
     <main
-      className={`fixed left-0 top-0 z-0 w-[250px] border-r h-full ${className}`}
+      className={`fixed w-[250px] border-r h-full ${className}`}
     >
       {/* user name */}
       {/* It will be used for a later code */}

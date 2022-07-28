@@ -162,6 +162,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Input":
       return (
         <Input
+          placeholder={item.placeholder}
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           color={item.style.color}

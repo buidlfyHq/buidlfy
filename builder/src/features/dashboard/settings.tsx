@@ -33,15 +33,16 @@ const Settings: FC<ISettings> = ({
   openTab,
   setOpenTab,
 }) => {
-  const [showComponent, setShowComponent] = useState<{ 
-    id: string; 
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    }; 
-  }>(null); // for abi method component
+  const [showComponent, setShowComponent] =
+    useState<{
+      id: string;
+      value: {
+        name: string;
+        inputs: object[];
+        outputs: object[];
+        stateMutability: string;
+      };
+    }>(null); // for abi method component
   const ref = useRef(null);
 
   // work in progress
@@ -67,6 +68,38 @@ const Settings: FC<ISettings> = ({
         let child = {
           ...selectedChild,
           link,
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+  const setPlaceholder = (placeholder: string) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return { ...item, placeholder };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          placeholder,
         };
 
         const childIndex = item.children?.findIndex(
@@ -188,7 +221,7 @@ const Settings: FC<ISettings> = ({
       "none"
     );
   };
-  
+
   const singleWorkFunction = (
     styleProp: functionEnum,
     property: number | IColor
@@ -435,6 +468,8 @@ const Settings: FC<ISettings> = ({
               shadow={selectedItem?.style?.shadow}
               setOn={setOn}
               connectWallet={selectedItem?.connectWallet}
+              setPlaceholder={setPlaceholder}
+              placeholder={selectedItem?.placeholder}
             />
           </div>
         </div>
