@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "feature/dashboard/navbar";
-import Sidebar from "feature/dashboard/sidebar";
-import Workspace from "feature/dashboard/workspace";
-import Settings from "feature/dashboard/settings";
+import Navbar from "features/dashboard/navbar";
+import Sidebar from "features/dashboard/sidebar";
+import Workspace from "features/dashboard/workspace";
+import Settings from "features/dashboard/settings";
 import BgColorComponent from "components/settings/bg-color-component";
 import { useWindowSize } from "hooks/use-window-size";
 import IItems from "interfaces/items";
@@ -65,39 +65,6 @@ const Dashboard: FC = () => {
     }
   }, []); // eslint-disable-line
 
-
-  const setValue = (value: string) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return { ...item, value };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          value,
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
   return (
     <main>
       {size.width > 1024 ? (
@@ -142,7 +109,6 @@ const Dashboard: FC = () => {
                 setDrag={setDrag}
                 setAddContainer={setAddContainer}
                 backgroundColor={backgroundColor}
-                setValue={setValue}
               />
               {/* Right Sidebar Settings */}
               {openSetting ? (

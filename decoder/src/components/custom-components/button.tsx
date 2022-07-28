@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-// import { Dialog } from "@headlessui/react";
+import { Dialog } from "@headlessui/react";
 import { ethers, Contract } from "ethers";
 import Web3Modal from "web3modal";
 import BuilderConfig from "config";
@@ -34,23 +34,7 @@ const Button: FC<ITexts> = ({
   const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
   const [account, setAccount] = useState<string>(null);
-
-  useEffect(() => {
-    if (config.contract.abi !== [] && config.contract.address !== "") {
-      setContract(onLoad(config));
-    }
-  }, []); // eslint-disable-line
-
-  const onResponse = async () => {
-    const res = await onRequest(
-      contractFunction.methodName,
-      contractFunction,
-      contract,
-      inputValue,
-      outputValue
-    );
-    setOutputValue(res ? res[0] : []);
-  };
+  
   // All are returning any, will have to switch to typescript ether
   const [show, setShow] = useState<any>(false);
   const [provider, setProvider] = useState<any>();
@@ -61,7 +45,28 @@ const Button: FC<ITexts> = ({
   const [network, setNetwork] = useState<any>();
   const [message, setMessage] = useState<any>("");
   const [verified, setVerified] = useState<any>();
-
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [transactionStatus, setTransactionStatus] = useState<string>('')
+  
+  useEffect(() => {
+    if (config.contract.abi !== [] && config.contract.address !== "") {
+      setContract(onLoad(config));
+    }
+  }, []); // eslint-disable-line
+  
+  const onResponse = async () => {
+    const res = await onRequest(
+      contractFunction.methodName,
+      contractFunction,
+      contract,
+      inputValue,
+      outputValue,
+      setIsOpen,
+      setTransactionStatus
+    );
+    setOutputValue(res ? res[0] : []);
+  };
+  
   const connectWalletButton = async () => {
     try {
       const provider = await web3Modal.connect();
@@ -96,7 +101,7 @@ const Button: FC<ITexts> = ({
       style={{ justifyContent: justifyContent }}
       className="flex items-center justify-center w-auto h-full px-6"
     >
-      {/* <Dialog
+      <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
         className="relative z-50"
@@ -114,7 +119,7 @@ const Button: FC<ITexts> = ({
             </Dialog.Title>
           </Dialog.Panel>
         </div>
-      </Dialog> */}
+      </Dialog>
       {connectWallet === "on" ? (
         <div
           style={{

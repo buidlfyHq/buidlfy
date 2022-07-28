@@ -31,7 +31,6 @@ interface IRenderItem {
   }) => void;
   elementConfig?: object;
   setElementConfig?: (elementConfig: object) => void;
-  setValue?: (value: string) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -103,7 +102,6 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          setValue={setValue}
         />
       );
     case "Link":
@@ -132,7 +130,6 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          setValue={setValue}
         />
       );
     case "Heading 2":
@@ -147,7 +144,6 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          setValue={setValue}
         />
       );
     case "Heading 3":
@@ -162,12 +158,12 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          setValue={setValue}
         />
       );
     case "Input":
       return (
         <Input
+          placeholder={item.placeholder}
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           color={item.style.color}

@@ -73,6 +73,9 @@ export default interface ISettings {
   shadow?: string;
   setOn?: (connectWallet: string | boolean) => void;
   connectWallet?: string;
+  placeholder?: string;
+  setPlaceholder?: (placeholder: string) => void;
+  handlePlaceholderChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   textVal?: string;
   handleTextChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   linkVal?: string;

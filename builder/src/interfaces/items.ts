@@ -25,4 +25,5 @@ export default interface IItems {
   contract?: any;
   imgData?: string | ArrayBuffer;
   connectWallet?: string;
+  placeholder?: string
 }

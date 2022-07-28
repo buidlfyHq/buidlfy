@@ -30,7 +30,6 @@ interface IWorkspace {
   setDrag: (drag: boolean) => void;
   setAddContainer: (addContainer?: boolean) => void;
   backgroundColor: IColor;
-  setValue?: (value: string) => void;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -48,7 +47,6 @@ const Workspace: FC<IWorkspace> = ({
   setDrag,
   setAddContainer,
   backgroundColor,
-  setValue,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -207,7 +205,6 @@ const Workspace: FC<IWorkspace> = ({
             setSelector={setSelector}
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
-            setValue={setValue}
           />
         </div>
       );

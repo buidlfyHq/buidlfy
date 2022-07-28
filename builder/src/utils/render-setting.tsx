@@ -41,18 +41,9 @@ const SettingComponent: FC<ISettings> = ({
   setMedium,
   setLarge,
   setOn,
+  placeholder,
+  setPlaceholder
 }) => {
-  const [textVal, setTextVal] = useState<string>("");
-  const [linkVal, setLinkVal] = useState<string>("");
-
-  useEffect(() => {
-    setTextVal(value || "");
-  }, [value]);
-
-  useEffect(() => {
-    setLinkVal(link || "");
-  }, [link]);
-
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
@@ -61,13 +52,17 @@ const SettingComponent: FC<ISettings> = ({
     setLink(e.target.value);
   };
 
+  const handlePlaceholderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPlaceholder(e.target.value);
+  };
+
   switch (selectedItem?.name) {
     case "Button":
       return (
         <ButtonSettings
-          textVal={textVal}
+          textVal={value}
           handleTextChange={handleTextChange}
-          linkVal={linkVal}
+          linkVal={link}
           handleLinkChange={handleLinkChange}
           items={items}
           setItems={setItems}
@@ -151,6 +146,8 @@ const SettingComponent: FC<ISettings> = ({
     case "Input":
       return (
         <InputSettings
+          placeholder={placeholder}
+          handlePlaceholderChange={handlePlaceholderChange}
           selectedItem={selectedItem}
           color={selectedItem?.style?.color}
           setColor={setColor}
@@ -168,9 +165,9 @@ const SettingComponent: FC<ISettings> = ({
     default:
       return (
         <DefaultSettings
-          textVal={textVal}
+          textVal={value}
           handleTextChange={handleTextChange}
-          linkVal={linkVal}
+          linkVal={link}
           handleLinkChange={handleLinkChange}
           items={items}
           setItems={setItems}
