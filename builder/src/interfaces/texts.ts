@@ -13,6 +13,5 @@ export default interface ITexts {
   backgroundColor?: IColor;
   shadow?: string;
   connectWallet?: string;
-  setValue?: (value: string) => void;
 }
 

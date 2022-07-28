@@ -31,7 +31,6 @@ interface IWorkspace {
   setDrag: (drag: boolean) => void;
   setAddContainer: (addContainer?: boolean) => void;
   backgroundColor: IColor;
-  setValue?: (value: string) => void;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -49,7 +48,6 @@ const Workspace: FC<IWorkspace> = ({
   setDrag,
   setAddContainer,
   backgroundColor,
-  setValue,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -189,7 +187,6 @@ const Workspace: FC<IWorkspace> = ({
             setSelector={setSelector}
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
-            setValue={setValue}
           />
         </div>
       );
@@ -197,9 +194,11 @@ const Workspace: FC<IWorkspace> = ({
 
   return (
     <main
-      className={`w-[calc(100%-500px)] h-[calc(100%-60px)] z-10 ${
-        className === "" ? "mx-[250px]" : "mr-[250px]"
-      }`}
+      className={
+        className === ""
+          ? `ml-[250px] mr-[250px] h-full w-[calc(100%-500px)] h-[calc(100%-60px)]`
+          : `w-full mr-[250px] h-full w-[calc(100%-250px)]`
+      }
       style={{
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
@@ -212,6 +211,7 @@ const Workspace: FC<IWorkspace> = ({
           cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
           rowHeight={50}
           width={window.innerWidth - 250}
+          compactType="horizontal"
           resizeHandles={["se"]}
           isDraggable={drag}
           onLayoutChange={onLayoutChange}

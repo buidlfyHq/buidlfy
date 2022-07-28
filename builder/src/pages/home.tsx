@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import SignIn from "feature/home/signin";
+import SignIn from "features/home/signin";
 
 const Home: FC = () => {
   return (

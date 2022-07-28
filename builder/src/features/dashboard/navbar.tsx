@@ -44,9 +44,9 @@ const Navbar: FC<INavbar> = ({
     }
   }, [contractConfig.abi]);
 
-  // const showSidebar = () => {
-  //   setClassName("");
-  // };
+  const showSidebar = () => {
+    setClassName("");
+  };
 
   const handleSave = () => {
     // FIX: save full config to local storage
@@ -80,12 +80,12 @@ const Navbar: FC<INavbar> = ({
     <main
       className={
         !className
-          ? `fixed left-[250px] w-[calc(100%-250px)] h-[57px] top-0 border-b flex flex-row justify-between items-center p-3 bg-white z-20`
-          : `h-[57px] w-full top-0 border-b flex flex-row justify-between items-center p-3 z-20`
+          ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 bg-white`
+          : `h-[60px] w-full top-0 border-b z-1200 flex flex-row justify-between items-center p-3 z-10 `
       }
     >
       <div
-        // onClick={showSidebar}
+        onClick={showSidebar}
         className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"
       >
         {className && <AiOutlineDoubleRight />}

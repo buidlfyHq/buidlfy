@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -14,6 +14,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
   const [connectToggle, setConnectToggle] = useState(
     connectWallet === "on" ? true : false
   );
+  
   const handleOnChange = () => {
     setConnectToggle(!connectToggle);
     if (connectWallet === "on") {
@@ -22,9 +23,11 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
       setOn(true);
     }
   };
+
   useEffect(() => {
     setConnectToggle(connectWallet === "on" ? true : false);
   }, [connectWallet]);
+
   return (
     <span className="flex items-center">
       <span className="text-left px-3 mt-2 mb-0 text-l text-gray-500 font-regular font-normal not-italic">

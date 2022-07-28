@@ -6,9 +6,10 @@ interface IInput {
   borderRadius: number;
   shadow: string;
   color: IColor;
+  placeholder: string;
 }
 
-const Input: FC<IInput> = ({ borderRadius, shadow, color }) => (
+const Input: FC<IInput> = ({ borderRadius, shadow, color,  placeholder }) => (
   <section
     className="flex items-center justify-center h-full"
     id="input-section"
@@ -23,7 +24,7 @@ const Input: FC<IInput> = ({ borderRadius, shadow, color }) => (
       className="w-full px-3 py-2 ml-6 mr-6 leading-tight text-gray-700 bg-white appearance-none input"
       id="input"
       type="text"
-      placeholder="Input"
+      placeholder={placeholder}
     />
   </section>
 );
