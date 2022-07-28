@@ -32,7 +32,7 @@ const RenderItem: FC<IRenderItem> = ({
   setOutputValue,
 }) => {
   switch (item.name) {
-    case "Container":
+    case "Container" || "Horizontal Container" || "Vertical Container":
       return (
         <Container
           children={item.children}
@@ -152,6 +152,38 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
+        />
+      );
+    case "Horizontal Container":
+      return (
+        <Container
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          outputValue={outputValue}
+          setOutputValue={setOutputValue}
+        />
+      );
+    case "Vertical Container":
+      return (
+        <Container
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          outputValue={outputValue}
+          setOutputValue={setOutputValue}
         />
       );
     default:

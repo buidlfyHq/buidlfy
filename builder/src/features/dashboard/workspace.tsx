@@ -3,6 +3,7 @@ import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "utils/render-item";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
+import { containerCheck } from "utils/helpers";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
@@ -55,7 +56,7 @@ const Workspace: FC<IWorkspace> = ({
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
       const { h, minW, minH, x, y, w, i } = obj;
-      if (selectedItem.name === "Container") {
+      if (containerCheck(selectedItem)) {
         let maxY = Math.max(...selectedItem.children.map((item) => item.y));
         let el = selectedItem.children?.filter((item) => item.y === maxY)[0];
         height = el ? el.h + el.y : minH;
@@ -144,7 +145,15 @@ const Workspace: FC<IWorkspace> = ({
       e.target.id === "Container" ||
       e.target.parentNode.id === "Container" ||
       e.target.parentNode.parentNode.id === "Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Container"
+      e.target.parentNode.parentNode.parentNode.id === "Container" ||
+      e.target.id === "Horizontal Container" ||
+      e.target.parentNode.id === "Horizontal Container" ||
+      e.target.parentNode.parentNode.id === "Horizontal Container" ||
+      e.target.parentNode.parentNode.parentNode.id === "Horizontal Container" ||
+      e.target.id === "Vertical Container" ||
+      e.target.parentNode.id === "Vertical Container" ||
+      e.target.parentNode.parentNode.id === "Vertical Container" ||
+      e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
     ) {
     } else {
       setAddContainer(false);
@@ -163,7 +172,7 @@ const Workspace: FC<IWorkspace> = ({
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
           className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
-            name !== "Container"
+            !containerCheck(name)
               ? selector
                 ? "hover:outline-orange-300 hover:outline"
                 : "hover:outline-slate-300 hover:outline-dashed"
@@ -171,7 +180,7 @@ const Workspace: FC<IWorkspace> = ({
           }`}
           // open item setting on click
           onClick={(e) =>
-            item.name === "Container" ? null : onComponentClick(item.name, i)
+            containerCheck(item) ? null : onComponentClick(item.name, i)
           }
         >
           <RenderItem
