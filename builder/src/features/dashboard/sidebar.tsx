@@ -122,7 +122,7 @@ const Sidebar: FC<ISidebar> = ({
 
   return (
     <main
-      className={`fixed left-0 top-0 z-0 w-[250px] border-r h-full ${className}`}
+      className={`fixed w-[250px] border-r h-full ${className}`}
     >
       {/* user name */}
       {/* It will be used for a later code */}
