@@ -99,6 +99,7 @@ export const components = [
   {
     name: "Input",
     h: 1,
+    placeholder: 'Placeholder',
     style: {
       deleteComponent: 0,
       borderRadius: 0,

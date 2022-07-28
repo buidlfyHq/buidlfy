@@ -18,13 +18,11 @@
 }
 
 .btn:hover {
-  background: #f9f8ff;
   /* Solid Colours/Brand/Primary/Primary-400 */
-
   border: 1px solid #a673ef;
   /* Black Shadows/Black E1 */
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.08);
-  color: #8247e5;
+  transition: all 0.3s linear;
 }
 .btn:active {
   background: #ffffff;

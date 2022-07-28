@@ -6,6 +6,7 @@ import RenderItem from "utils/render-item";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
+import defaultItem from "config/default-element-container";
 
 interface IContainer {
   item: IItems;
@@ -60,6 +61,7 @@ const Container: FC<IContainer> = ({
   elementConfig,
   setElementConfig,
 }) => {
+  
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -78,11 +80,10 @@ const Container: FC<IContainer> = ({
     });
 
     // check to see if container array has only default element or children
-    if (newItemsArr[0].i !== "DefaultElement") {
+    if (newItemsArr[0]?.i !== "DefaultElement" && newItemsArr.length) {
       let maxY = Math.max(...newItemsArr.map((item) => item.y + item.h));
       let el = newItemsArr?.filter((item) => item.y + item.h === maxY)[0];
       let maxH = el.h + el.y;
-      console.log(maxH);
       let newModifiedContainer = {
         ...item,
         h: maxH,
@@ -90,6 +91,9 @@ const Container: FC<IContainer> = ({
       };
       let filterItems = items.filter((element) => element.i !== item.i);
       setItems([...filterItems, newModifiedContainer]);
+    } else if(layout.length === 0) {
+      let removeContainerItems = items.filter(element => element.i !== item.i)  
+      setItems(removeContainerItems)
     } else {
       setItems(items);
     }
@@ -160,7 +164,7 @@ const Container: FC<IContainer> = ({
   };
 
   let containerW = document
-    ?.querySelector(`#${item.i}`)
+    ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
 
   return (
@@ -190,7 +194,7 @@ const Container: FC<IContainer> = ({
           boxShadow: shadow,
         }}
       >
-        {!children.length ? (
+        {!children?.length ? (
           <div
             className="w-full h-full"
             key={"DefaultElement"}
@@ -207,27 +211,7 @@ const Container: FC<IContainer> = ({
             onMouseOut={() => setDrag(true)}
           >
             <RenderItem
-              item={{
-                i: "Element",
-                link: "",
-                minW: 1,
-                name: "Text",
-                // static: true,
-                style: {
-                  color: { r: "0", g: "0", b: "0", a: "100" },
-                  backgroundColor: { r: "0", g: "0", b: "0", a: "" },
-                  fontWeight: "normal",
-                  fontStyle: "normal",
-                  textDecoration: "none",
-                  justifyContent: "center",
-                  fontSize: 16,
-                },
-                value: "Hover and click on drag to add components in container",
-                w: 12,
-                x: 0,
-                y: 0,
-                h: 2,
-              }}
+              item={defaultItem}
               setDrag={setDrag}
             />
           </div>
