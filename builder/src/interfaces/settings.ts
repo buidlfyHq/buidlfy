@@ -47,6 +47,12 @@ export default interface ISettings {
       stateMutability: string;
     };
   };
+  selector?: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  },
   setSelector?: (selector: {
     methodName: string;
     type: string;

@@ -6,7 +6,6 @@ import IColor from "interfaces/color";
 import { containerCheck } from "utils/helpers";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
-
 interface IWorkspace {
   items: IItems[];
   setItems: (items: IItems[]) => void;
@@ -75,8 +74,8 @@ const Workspace: FC<IWorkspace> = ({
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
 
+  // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {
-    // for updating selected element config
     const searchExistingValue = Object.keys(elementConfig).filter(
       (key) => key === selector.name
     );
@@ -95,14 +94,32 @@ const Workspace: FC<IWorkspace> = ({
     } else {
       Object.keys(elementConfig).map((key) => {
         if (key === selector.name) {
-          let elementArray = [
-            ...elementConfig[key],
-            {
-              buttonId: selector.buttonId,
-              name: itemName,
-              id: i,
-            },
-          ];
+          let newArray = [];
+          elementConfig[key].map((obj, index: number) => {
+            if (obj.buttonId === selector.buttonId) {
+              let updatedElement = {
+                ...elementConfig[key][index],
+                id: i,
+              };
+              newArray = [...elementConfig[key]];
+              newArray[index] = updatedElement;
+              return newArray;
+            } else {
+              newArray = [
+                ...elementConfig[key],
+                {
+                  buttonId: selector.buttonId,
+                  name: itemName,
+                  id: i,
+                },
+              ];
+              return newArray;
+            }
+          });
+
+          let elementArray = newArray;
+
+          console.log(newArray);
 
           setElementConfig({
             ...elementConfig,
@@ -123,9 +140,10 @@ const Workspace: FC<IWorkspace> = ({
       setSettingItemId(i);
       setOpenTab(1);
     } else {
-      //   // Add validation for selection
+      // checks selector type
       if (selector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
+        setSelector(null);
       } else if (
         selector.type === "output" &&
         (itemName === "Text" ||
@@ -134,8 +152,8 @@ const Workspace: FC<IWorkspace> = ({
           itemName === "Heading 3")
       ) {
         updateElementConfig(itemName, i);
+        setSelector(null);
       }
-      setSelector(null);
     }
   };
 
