@@ -3,7 +3,7 @@ import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "utils/render-item";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
-import { containerCheck } from "utils/helpers";
+import { containerCheck } from "utils/container-check";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 interface IWorkspace {
@@ -190,11 +190,11 @@ const Workspace: FC<IWorkspace> = ({
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
           className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
-            !containerCheck(name)
+            !containerCheck(item)
               ? selector
                 ? "hover:outline-orange-300 hover:outline"
                 : "hover:outline-slate-300 hover:outline-dashed"
-              : null
+              : "z-10"
           }`}
           // open item setting on click
           onClick={(e) =>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from "react";
+import React, { FC } from "react";
 import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";

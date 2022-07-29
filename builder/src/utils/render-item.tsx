@@ -46,7 +46,6 @@ const RenderItem: FC<IRenderItem> = ({
   setSelector,
   elementConfig,
   setElementConfig,
-  setValue,
 }) => {
   switch (item.name) {
     case "Container":
