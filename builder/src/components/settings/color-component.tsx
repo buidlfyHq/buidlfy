@@ -5,7 +5,7 @@ import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { containerCheck } from "utils/helpers";
+import { containerCheck } from "utils/container-check";
 
 interface IColorComponent {
   color: IColor;

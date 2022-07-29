@@ -3,7 +3,7 @@ import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
-import { containerCheck } from "utils/helpers";
+import { containerCheck } from "utils/container-check";
 
 interface ISidebar {
   className: string;
