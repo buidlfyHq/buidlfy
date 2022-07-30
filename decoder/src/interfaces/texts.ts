@@ -13,10 +13,20 @@ export default interface ITexts {
   backgroundColor?: IColor;
   borderRadius?: number;
   shadow?: string;
-  contractFunction?: any; // breaking while assigning a type, work in progress 
+  contractFunction?: any; // breaking while assigning a type, work in progress
   inputValue?: object[];
   setInputValue?: (inputValue: object[]) => void;
-  outputValue?: object[];
-  setOutputValue?: (outputValue: object[]) => void;
+  outputValue?: {
+    id: string;
+    name: string;
+    value: any; // can be string or array
+  }[];
+  setOutputValue?: (
+    outputValue: {
+      id: string;
+      name: string;
+      value: any; // can be string or array
+    }[]
+  ) => void;
   connectWallet?: string;
 }

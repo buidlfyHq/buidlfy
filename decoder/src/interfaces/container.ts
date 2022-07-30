@@ -2,6 +2,7 @@ import IColor from "./color";
 import IItems from "./items";
 
 export default interface IBgContainer {
+  item: IItems;
   children: IItems[];
   backgroundColor: IColor;
   color: IColor;
@@ -19,6 +20,14 @@ export default interface IBgContainer {
       value: string;
     }[]
   ) => void;
-  outputValue: object[];
-  setOutputValue: (outputValue: object[]) => void;
+  outputValue: {
+    id: string;
+    name: string;
+    value: any; // can be string or array
+  }[];
+  setOutputValue: (outputValue: {
+    id: string;
+    name: string;
+    value: any; // can be string or array
+  }[]) => void;
 }

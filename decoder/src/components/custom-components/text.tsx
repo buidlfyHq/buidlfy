@@ -2,12 +2,6 @@ import { FC } from "react";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
 
-interface IOutput {
-  id: string;
-  name: string;
-  value: any; // can be string or array
-}
-
 const Text: FC<ITexts> = ({
   id,
   bold,
@@ -48,21 +42,20 @@ const Text: FC<ITexts> = ({
       className="flex items-center justify-center h-full overflow-auto"
     >
       <>
-        {outputValue?.length
-          ? outputValue.map((output: IOutput, index: number) => (
-              <div key={output.id}>
-                {output.id === id ? (
-                  <>
-                    {typeof output.value === "string"
-                      ? renderValue(link, output.value)
-                      : renderValue(link, output.value.join(", "))}
-                  </>
-                ) : (
-                  renderValue(link, value)
-                )}
-              </div>
-            ))
-          : renderValue(link, value)}
+        {outputValue ? (
+          <>
+            {outputValue.find((output) => output.id === id)
+              ? renderValue(
+                  link,
+                  JSON.stringify(
+                    outputValue.find((output) => output.id === id).value
+                  )
+                )
+              : renderValue(link, value)}
+          </>
+        ) : (
+          renderValue(link, value)
+        )}
       </>
     </section>
   );

@@ -20,8 +20,16 @@ interface IRenderItem {
       value: string;
     }[]
   ) => void;
-  outputValue: object[];
-  setOutputValue: (outputValue: object[]) => void;
+  outputValue: {
+    id: string;
+    name: string;
+    value: any; // can be string or array
+  }[];
+  setOutputValue: (outputValue: {
+    id: string;
+    name: string;
+    value: any; // can be string or array
+  }[]) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -35,6 +43,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Container" || "Horizontal Container" || "Vertical Container":
       return (
         <Container
+          item={item}
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
@@ -157,6 +166,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Horizontal Container":
       return (
         <Container
+          item={item}
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
@@ -173,6 +183,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Vertical Container":
       return (
         <Container
+          item={item}
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
