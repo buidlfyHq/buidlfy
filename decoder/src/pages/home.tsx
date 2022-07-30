@@ -3,24 +3,14 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import BuilderConfig from "config";
 import RenderItem from "utils/render-item";
 import IItems from "interfaces/items";
+import { IInput, IOutput } from "interfaces/value";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Home: FC = () => {
   const config = JSON.parse(BuilderConfig);
-  const [inputValue, setInputValue] = useState<
-    {
-      id: string;
-      value: string;
-    }[]
-  >([]);
-  const [outputValue, setOutputValue] = useState<
-    {
-      id: string;
-      name: string;
-      value: any; // can be string or array
-    }[]
-  >([]);
+  const [inputValue, setInputValue] = useState<IInput[]>([]);
+  const [outputValue, setOutputValue] = useState<IOutput[]>([]);
 
   return (
     <main

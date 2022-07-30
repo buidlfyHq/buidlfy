@@ -1,5 +1,6 @@
 import IColor from "./color";
 import IItems from "./items";
+import { IInput, IOutput } from "./value";
 
 export default interface IBgContainer {
   item: IItems;
@@ -10,24 +11,8 @@ export default interface IBgContainer {
   borderRadius: number;
   borderWidth: number;
   shadow?: string;
-  inputValue: {
-    id: string;
-    value: string;
-  }[];
-  setInputValue: (
-    inputValue: {
-      id: string;
-      value: string;
-    }[]
-  ) => void;
-  outputValue: {
-    id: string;
-    name: string;
-    value: any; // can be string or array
-  }[];
-  setOutputValue: (outputValue: {
-    id: string;
-    name: string;
-    value: any; // can be string or array
-  }[]) => void;
+  inputValue: IInput[];
+  setInputValue: (inputValue: IInput[]) => void;
+  outputValue: IOutput[];
+  setOutputValue: (outputValue: IOutput[]) => void;
 }

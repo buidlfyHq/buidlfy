@@ -1,5 +1,6 @@
 import { ethers, Contract } from "ethers";
-import { setValue } from "./set-value";
+import { setValue } from "hooks/set-value";
+import { IInput, IOutput } from "interfaces/value";
 
 export const onRequest = async (
   method: string,
@@ -10,8 +11,8 @@ export const onRequest = async (
     outputs?: object[];
   },
   contract: Contract,
-  inputValue: object[],
-  outputValue: object[],
+  inputValue: IInput[],
+  outputValue: IOutput[],
   setIsOpen,
   setTransactionStatus
 ) => {

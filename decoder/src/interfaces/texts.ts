@@ -1,4 +1,5 @@
 import IColor from "./color";
+import { IInput, IOutput } from "./value";
 
 export default interface ITexts {
   id?: string;
@@ -14,19 +15,9 @@ export default interface ITexts {
   borderRadius?: number;
   shadow?: string;
   contractFunction?: any; // breaking while assigning a type, work in progress
-  inputValue?: object[];
-  setInputValue?: (inputValue: object[]) => void;
-  outputValue?: {
-    id: string;
-    name: string;
-    value: any; // can be string or array
-  }[];
-  setOutputValue?: (
-    outputValue: {
-      id: string;
-      name: string;
-      value: any; // can be string or array
-    }[]
-  ) => void;
+  inputValue?: IInput[];
+  setInputValue?: (inputValue: IInput[]) => void;
+  outputValue?: IOutput[];
+  setOutputValue?: (outputValue: IOutput[]) => void;
   connectWallet?: string;
 }

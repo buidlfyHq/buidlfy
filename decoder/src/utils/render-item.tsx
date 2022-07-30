@@ -6,30 +6,14 @@ import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
 import IItems from "interfaces/items";
-// import ConnectWallet from "components/ConnectWallet";
+import { IInput, IOutput } from "interfaces/value";
 
 interface IRenderItem {
   item: IItems;
-  inputValue: {
-    id: string;
-    value: string;
-  }[];
-  setInputValue: (
-    inputValue: {
-      id: string;
-      value: string;
-    }[]
-  ) => void;
-  outputValue: {
-    id: string;
-    name: string;
-    value: any; // can be string or array
-  }[];
-  setOutputValue: (outputValue: {
-    id: string;
-    name: string;
-    value: any; // can be string or array
-  }[]) => void;
+  inputValue: IInput[];
+  setInputValue: (inputValue: IInput[]) => void;
+  outputValue: IOutput[];
+  setOutputValue: (outputValue: IOutput[]) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
