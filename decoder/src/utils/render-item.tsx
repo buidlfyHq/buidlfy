@@ -6,22 +6,14 @@ import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
 import IItems from "interfaces/items";
-// import ConnectWallet from "components/ConnectWallet";
+import { IInput, IOutput } from "interfaces/value";
 
 interface IRenderItem {
   item: IItems;
-  inputValue: {
-    id: string;
-    value: string;
-  }[];
-  setInputValue: (
-    inputValue: {
-      id: string;
-      value: string;
-    }[]
-  ) => void;
-  outputValue: object[];
-  setOutputValue: (outputValue: object[]) => void;
+  inputValue: IInput[];
+  setInputValue: (inputValue: IInput[]) => void;
+  outputValue: IOutput[];
+  setOutputValue: (outputValue: IOutput[]) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -35,6 +27,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Container" || "Horizontal Container" || "Vertical Container":
       return (
         <Container
+          item={item}
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
@@ -157,6 +150,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Horizontal Container":
       return (
         <Container
+          item={item}
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
@@ -173,6 +167,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Vertical Container":
       return (
         <Container
+          item={item}
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}

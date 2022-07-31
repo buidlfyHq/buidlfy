@@ -1,20 +1,16 @@
 import { FC } from "react";
 import { setValue } from "hooks/set-value";
-import "styles/components.css";
 import IColor from "interfaces/color";
-
-interface IInput {
-  id: string;
-  value: string;
-}
+import { IInput } from "interfaces/value";
+import "styles/components.css";
 
 interface IInputComponent {
   id: string;
   inputValue: IInput[];
+  setInputValue: (inputValue: object[]) => void;
   borderRadius: number;
   shadow: string;
   color: IColor;
-  setInputValue: (inputValue: object[]) => void;
 }
 
 const Input: FC<IInputComponent> = ({

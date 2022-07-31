@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "utils/render-item";
+import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
-import { containerCheck } from "utils/container-check";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 interface IWorkspace {
