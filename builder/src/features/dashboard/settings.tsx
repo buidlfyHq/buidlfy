@@ -31,7 +31,7 @@ const Settings: FC<ISettings> = ({
   setSelector,
   elementConfig,
   openTab,
-  setOpenTab,
+  setOpenTab
 }) => {
   const [showComponent, setShowComponent] =
     useState<{
@@ -68,6 +68,38 @@ const Settings: FC<ISettings> = ({
         let child = {
           ...selectedChild,
           link,
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+  const setPlaceholder = (placeholder: string) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return { ...item, placeholder };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          placeholder,
         };
 
         const childIndex = item.children?.findIndex(
@@ -390,53 +422,57 @@ const Settings: FC<ISettings> = ({
   return (
     <>
       {settingItemId ? (
-        <main className="cursor-pointer relative border-l menu" ref={ref}>
-          <SettingComponent
-            items={items}
-            setItems={setItems}
-            selectedItem={selectedItem}
-            setLink={setLink}
-            link={selectedItem?.link}
-            setValue={setValue}
-            value={selectedItem?.value}
-            setBold={setBold}
-            bold={selectedItem?.style?.fontWeight}
-            setItalic={setItalic}
-            italic={selectedItem?.style?.fontStyle}
-            setUnderline={setUnderline}
-            underline={selectedItem?.style?.textDecoration}
-            color={selectedItem?.style?.color}
-            setColor={setColor}
-            setBgColor={setBgColor}
-            backgroundColor={selectedItem?.style?.backgroundColor}
-            setDeleteComponent={setDeleteComponent}
-            deleteComponent={selectedItem?.style?.deleteComponent}
-            justifyContent={selectedItem?.style?.justifyContent}
-            setLeft={setLeft}
-            setCenter={setCenter}
-            setRight={setRight}
-            setFontSize={setFontSize}
-            fontSize={selectedItem?.style?.fontSize}
-            setContractConfig={setContractConfig}
-            contractConfig={contractConfig}
-            setShowComponent={setShowComponent}
-            showComponent={showComponent}
-            setSelector={setSelector}
-            elementConfig={elementConfig}
-            openTab={openTab}
-            setOpenTab={setOpenTab}
-            borderRadius={selectedItem?.style?.borderRadius}
-            setBorderRadius={setBorderRadius}
-            borderWidth={selectedItem?.style?.borderWidth}
-            setBorderWidth={setBorderWidth}
-            setSmall={setSmall}
-            setMedium={setMedium}
-            setLarge={setLarge}
-            shadow={selectedItem?.style?.shadow}
-            setOn={setOn}
-            connectWallet={selectedItem?.connectWallet}
-          />
-        </main>
+        <div className="rounded-[8px] py-2 cursor-pointer relative">
+          <div className="border shadow-sm sidebar menu" ref={ref}>
+            <SettingComponent
+              items={items}
+              setItems={setItems}
+              selectedItem={selectedItem}
+              setLink={setLink}
+              link={selectedItem?.link}
+              setValue={setValue}
+              value={selectedItem?.value}
+              setBold={setBold}
+              bold={selectedItem?.style?.fontWeight}
+              setItalic={setItalic}
+              italic={selectedItem?.style?.fontStyle}
+              setUnderline={setUnderline}
+              underline={selectedItem?.style?.textDecoration}
+              color={selectedItem?.style?.color}
+              setColor={setColor}
+              setBgColor={setBgColor}
+              backgroundColor={selectedItem?.style?.backgroundColor}
+              setDeleteComponent={setDeleteComponent}
+              deleteComponent={selectedItem?.style?.deleteComponent}
+              justifyContent={selectedItem?.style?.justifyContent}
+              setLeft={setLeft}
+              setCenter={setCenter}
+              setRight={setRight}
+              setFontSize={setFontSize}
+              fontSize={selectedItem?.style?.fontSize}
+              setContractConfig={setContractConfig}
+              contractConfig={contractConfig}
+              setShowComponent={setShowComponent}
+              showComponent={showComponent}
+              setSelector={setSelector}
+              elementConfig={elementConfig}
+              openTab={openTab}
+              setOpenTab={setOpenTab}
+              borderRadius={selectedItem?.style?.borderRadius}
+              setBorderRadius={setBorderRadius}
+              borderWidth={selectedItem?.style?.borderWidth}
+              setBorderWidth={setBorderWidth}
+              setSmall={setSmall}
+              setMedium={setMedium}
+              setLarge={setLarge}
+              shadow={selectedItem?.style?.shadow}
+              setOn={setOn}
+              connectWallet={selectedItem?.connectWallet}
+              setPlaceholder={setPlaceholder}
+              placeholder={selectedItem?.placeholder}
+            />
+          </div>
+        </div>
       ) : null}
     </>
   );

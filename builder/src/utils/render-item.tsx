@@ -32,6 +32,7 @@ interface IRenderItem {
   elementConfig?: object;
   setElementConfig?: (elementConfig: object) => void;
   setValue?: (value: string) => void;
+  setLink?: (link: string) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -48,6 +49,7 @@ const RenderItem: FC<IRenderItem> = ({
   elementConfig,
   setElementConfig,
   setValue,
+  setLink
 }) => {
   switch (item.name) {
     case "Container":
@@ -72,6 +74,7 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          setValue={setValue}
         />
       );
     case "Button":
@@ -107,6 +110,7 @@ const RenderItem: FC<IRenderItem> = ({
           backgroundColor={item.style.backgroundColor}
           link={item.link}
           setValue={setValue}
+          setLink={setLink}
         />
       );
     case "Link":
@@ -126,6 +130,9 @@ const RenderItem: FC<IRenderItem> = ({
     case "Heading 1":
       return (
         <Text
+          item={item}
+          items={items}
+          setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -141,6 +148,9 @@ const RenderItem: FC<IRenderItem> = ({
     case "Heading 2":
       return (
         <Text
+          item={item}
+          items={items}
+          setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -156,6 +166,9 @@ const RenderItem: FC<IRenderItem> = ({
     case "Heading 3":
       return (
         <Text
+          item={item}
+          items={items}
+          setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -171,6 +184,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Input":
       return (
         <Input
+          placeholder={item.placeholder}
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           color={item.style.color}

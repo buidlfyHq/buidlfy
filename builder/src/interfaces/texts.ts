@@ -18,5 +18,6 @@ export default interface ITexts {
   shadow?: string;
   connectWallet?: string;
   setValue?: (value: string) => void;
+  setLink?: (link: string) => void;
 }
 

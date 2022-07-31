@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "feature/dashboard/navbar";
-import Sidebar from "feature/dashboard/sidebar";
-import Workspace from "feature/dashboard/workspace";
-import Settings from "feature/dashboard/settings";
+import Navbar from "features/dashboard/navbar";
+import Sidebar from "features/dashboard/sidebar";
+import Workspace from "features/dashboard/workspace";
+import Settings from "features/dashboard/settings";
 import BgColorComponent from "components/settings/bg-color-component";
 import { useWindowSize } from "hooks/use-window-size";
 import IItems from "interfaces/items";
@@ -97,9 +97,41 @@ const Dashboard: FC = () => {
     setItems(updatedItems);
   };
 
+  const setLink = (link: string) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return { ...item, link };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          link,
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
   return (
     <main>
-      {size.width > 1024 ? (
+      {size.width > 424 ? (
         <section className="flex flex-row w-full min-h-screen">
           {/* Sidebar */}
           <Sidebar
@@ -123,7 +155,7 @@ const Dashboard: FC = () => {
             />
 
             {/* Main section */}
-            <aside className="flex">
+            <aside className="flex h-full">
               {/* Workspace */}
               <Workspace
                 items={items}
@@ -141,6 +173,7 @@ const Dashboard: FC = () => {
                 setAddContainer={setAddContainer}
                 backgroundColor={backgroundColor}
                 setValue={setValue}
+                setLink={setLink}
               />
               {/* Right Sidebar Settings */}
               {openSetting ? (

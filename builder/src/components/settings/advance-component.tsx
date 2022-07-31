@@ -1,6 +1,6 @@
 import React, { useState, FC } from "react";
 import { FaFileContract } from "react-icons/fa";
-import Modal from "feature/dashboard/modal";
+import Modal from "features/dashboard/modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
 import IItems from "interfaces/items";
@@ -29,12 +29,15 @@ interface IAdvanceComponent {
       stateMutability: string;
     };
   };
-  setShowComponent: (showComponent: { id: string; value: {
-    name: string;
-    inputs: object[];
-    outputs: object[];
-    stateMutability: string;
-  }; }) => void;
+  setShowComponent: (showComponent: {
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }) => void;
   contractConfig: { abi: string; address: string };
   setContractConfig: (contractConfig: { abi: string; address: string }) => void;
   selectedItem: IItems;

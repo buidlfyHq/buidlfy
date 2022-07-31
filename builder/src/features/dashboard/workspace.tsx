@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "utils/render-item";
 import IItems from "interfaces/items";
@@ -32,6 +32,7 @@ interface IWorkspace {
   setAddContainer: (addContainer?: boolean) => void;
   backgroundColor: IColor;
   setValue?: (value: string) => void;
+  setLink?: (link: string) => void;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -50,9 +51,11 @@ const Workspace: FC<IWorkspace> = ({
   setAddContainer,
   backgroundColor,
   setValue,
+  setLink
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
+    if(layout.length === 0) setAddContainer(false) 
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
@@ -75,6 +78,10 @@ const Workspace: FC<IWorkspace> = ({
     });
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
+
+  useEffect(() => {
+    console.log(items)
+  }, [items])
 
   const updateElementConfig = (itemName: string, i: string) => {
     // for updating selected element config
@@ -151,7 +158,10 @@ const Workspace: FC<IWorkspace> = ({
     } else {
       setAddContainer(false);
     }
-    if (e.target.id === "") setOpenSetting(false);
+    if (e.target.id === "") {
+      console.log(e.target.id)
+      setOpenSetting(false);
+    }
   };
 
   const renderItemFunction = items
@@ -190,6 +200,7 @@ const Workspace: FC<IWorkspace> = ({
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
             setValue={setValue}
+            setLink={setLink}
           />
         </div>
       );
@@ -197,7 +208,7 @@ const Workspace: FC<IWorkspace> = ({
 
   return (
     <main
-      className={`w-[calc(100%-500px)] h-[calc(100%-60px)] z-10 ${
+      className={`w-[calc(100%-500px)] h-full z-10 ${
         className === "" ? "mx-[250px]" : "mr-[250px]"
       }`}
       style={{

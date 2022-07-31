@@ -16,30 +16,32 @@ const Text: FC<ITexts> = ({
   backgroundColor,
   link,
   setValue,
+  setLink
 }) => {
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
-  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
+  // const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setLink(e.target.value);
+  // };
   
   let TextH1 = document
     ?.getElementById(`${item.i}`)
 
   useEffect(() => {
-    console.log('inside')
+    console.log(item)
     let height = item.h 
     if(TextH1?.scrollHeight > TextH1?.clientHeight){
-      console.log(1)
+      // console.log(1)
       height+=1
       let newItemsArr = items.filter(ele => ele.i !== item.i)
       item.h = height
-      console.log(item)
+      // console.log(item)
       setItems([...newItemsArr, item])
     } else if(TextH1?.scrollHeight < TextH1?.clientHeight){
-      console.log(2)
+      // console.log(2)
+      // check if scroll height reduces
       height-=1
       let newItemsArr = items.filter(ele => ele.i !== item.i)
       item.h = height
@@ -47,6 +49,8 @@ const Text: FC<ITexts> = ({
       setItems([...newItemsArr, item])
     }
   },[TextH1?.scrollHeight] )
+
+  // console.log(link, link.length, 12121)
 
   return (
     <textarea
@@ -63,6 +67,7 @@ const Text: FC<ITexts> = ({
         justifyContent,
         alignItems: "center",
         fontSize: `${fontSize}px`,
+        resize: 'none',
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
       onChange={handleTextChange}
@@ -71,16 +76,14 @@ const Text: FC<ITexts> = ({
       {/* FIX: use react content editable */}
       {/* <textarea className="text-center h-full w-full" onChange={handleTextChange}> */}
       {/* <textarea className="text-center h-full w-full bg-green-300" > */}
-        {value}  
+        {/* {value}   */}
       {/* </textarea> */}
 
-      {/* {link.length > 0 ? (
+      {link?.length > 0 ? (
         <a rel="noreferrer" target="_blank" href={link} id="text-two">
           {value}
         </a>
-      ) : (
-        <div id="text-three">{value}</div>
-      )} */}
+      ) : value}
     </textarea>
   );
 };
