@@ -14,6 +14,14 @@ const Button: FC<ITexts> = ({
   link,
   borderRadius,
   shadow,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingBottom,
 }) => (
   <section
     style={{ justifyContent: justifyContent }}

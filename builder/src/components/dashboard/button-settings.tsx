@@ -12,6 +12,8 @@ import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import ConnectSwitchComponent from "components/settings/connect-switch-component";
 import ISettings from "interfaces/settings";
+import MarginComponent from "components/settings/margin-component";
+import PaddingComponent from "components/settings/padding-component";
 
 const ButtonSettings: FC<ISettings> = ({
   textVal,
@@ -56,6 +58,22 @@ const ButtonSettings: FC<ISettings> = ({
   shadow,
   setOn,
   connectWallet,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
+  setMarginLeft,
+  setMarginRight,
+  setMarginTop,
+  setMarginBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingBottom,
+  setPaddingLeft,
+  setPaddingRight,
+  setPaddingBottom,
+  setPaddingTop,
 }) => {
   const handleToggleTab = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -153,6 +171,26 @@ const ButtonSettings: FC<ISettings> = ({
                 <FontSizeComponent
                   fontSize={fontSize}
                   setFontSize={setFontSize}
+                />
+                <MarginComponent
+                  setMarginLeft={setMarginLeft}
+                  setMarginRight={setMarginRight}
+                  setMarginTop={setMarginTop}
+                  setMarginBottom={setMarginBottom}
+                  marginLeft={marginLeft}
+                  marginRight={marginRight}
+                  marginTop={marginTop}
+                  marginBottom={marginBottom}
+                />
+                <PaddingComponent
+                  setPaddingLeft={setPaddingLeft}
+                  setPaddingRight={setPaddingRight}
+                  setPaddingTop={setPaddingTop}
+                  setPaddingBottom={setPaddingBottom}
+                  paddingLeft={paddingLeft}
+                  paddingRight={paddingRight}
+                  paddingTop={paddingTop}
+                  paddingBottom={paddingBottom}
                 />
                 <BorderRadiusComponent
                   borderRadius={borderRadius}

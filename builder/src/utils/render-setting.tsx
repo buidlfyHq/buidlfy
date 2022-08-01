@@ -42,7 +42,23 @@ const SettingComponent: FC<ISettings> = ({
   setLarge,
   setOn,
   placeholder,
-  setPlaceholder
+  setPlaceholder,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingBottom,
+  setMarginLeft,
+  setMarginRight,
+  setMarginTop,
+  setMarginBottom,
+  setPaddingLeft,
+  setPaddingRight,
+  setPaddingBottom,
+  setPaddingTop,
 }) => {
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -102,6 +118,14 @@ const SettingComponent: FC<ISettings> = ({
           shadow={selectedItem?.style?.shadow}
           setOn={setOn}
           connectWallet={selectedItem?.connectWallet}
+          setMarginLeft={setMarginLeft}
+          setMarginRight={setMarginRight}
+          setMarginTop={setMarginTop}
+          setMarginBottom={setMarginBottom}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
         />
       );
 
@@ -117,6 +141,14 @@ const SettingComponent: FC<ISettings> = ({
           setLeft={setLeft}
           setCenter={setCenter}
           setRight={setRight}
+          setMarginLeft={setMarginLeft}
+          setMarginRight={setMarginRight}
+          setMarginTop={setMarginTop}
+          setMarginBottom={setMarginBottom}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
         />
       );
 
@@ -140,6 +172,14 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
+          setMarginLeft={setMarginLeft}
+          setMarginRight={setMarginRight}
+          setMarginTop={setMarginTop}
+          setMarginBottom={setMarginBottom}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
         />
       );
     case "Horizontal Container":
@@ -162,6 +202,14 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
+          setMarginLeft={setMarginLeft}
+          setMarginRight={setMarginRight}
+          setMarginTop={setMarginTop}
+          setMarginBottom={setMarginBottom}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
         />
       );
     case "Vertical Container":
@@ -184,6 +232,14 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
+          setMarginLeft={setMarginLeft}
+          setMarginRight={setMarginRight}
+          setMarginTop={setMarginTop}
+          setMarginBottom={setMarginBottom}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
         />
       );
 
@@ -203,6 +259,14 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
+          setMarginLeft={setMarginLeft}
+          setMarginRight={setMarginRight}
+          setMarginTop={setMarginTop}
+          setMarginBottom={setMarginBottom}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
         />
       );
 
@@ -252,6 +316,14 @@ const SettingComponent: FC<ISettings> = ({
           shadow={selectedItem?.style?.shadow}
           setOn={setOn}
           connectWallet={selectedItem?.connectWallet}
+          setMarginLeft={setMarginLeft}
+          setMarginRight={setMarginRight}
+          setMarginTop={setMarginTop}
+          setMarginBottom={setMarginBottom}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
         />
       );
   }

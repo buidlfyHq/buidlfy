@@ -12,6 +12,14 @@ const Link: FC<ITexts> = ({
   value,
   backgroundColor,
   link,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingBottom,
 }) => (
   <section
     id="Link"

@@ -38,6 +38,14 @@ interface IContainer {
   }) => void;
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
+  marginLeft?: number;
+  marginRight?: number;
+  marginTop?: number;
+  marginBottom?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
+  paddingTop?: number;
+  paddingBottom?: number;
 }
 
 const Container: FC<IContainer> = ({
@@ -51,6 +59,14 @@ const Container: FC<IContainer> = ({
   borderRadius,
   borderWidth,
   shadow,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingBottom,
   setDrag,
   setOpenSetting,
   setSettingItemId,
@@ -61,7 +77,6 @@ const Container: FC<IContainer> = ({
   elementConfig,
   setElementConfig,
 }) => {
-  
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -91,9 +106,11 @@ const Container: FC<IContainer> = ({
       };
       let filterItems = items.filter((element) => element.i !== item.i);
       setItems([...filterItems, newModifiedContainer]);
-    } else if(layout.length === 0) {
-      let removeContainerItems = items.filter(element => element.i !== item.i)  
-      setItems(removeContainerItems)
+    } else if (layout.length === 0) {
+      let removeContainerItems = items.filter(
+        (element) => element.i !== item.i
+      );
+      setItems(removeContainerItems);
     } else {
       setItems(items);
     }
@@ -178,7 +195,7 @@ const Container: FC<IContainer> = ({
         rowHeight={50}
         width={containerW || 200}
         isBounded={true}
-        onLayoutChange={onLayoutChange}        
+        onLayoutChange={onLayoutChange}
         margin={[0, 0]}
         className="h-full"
         style={{
@@ -209,10 +226,7 @@ const Container: FC<IContainer> = ({
             onMouseOver={() => setDrag(false)}
             onMouseOut={() => setDrag(true)}
           >
-            <RenderItem
-              item={defaultItem}
-              setDrag={setDrag}
-            />
+            <RenderItem item={defaultItem} setDrag={setDrag} />
           </div>
         ) : (
           children

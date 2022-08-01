@@ -7,9 +7,30 @@ interface IInput {
   shadow: string;
   color: IColor;
   placeholder: string;
+  marginLeft?: number;
+  marginRight?: number;
+  marginTop?: number;
+  marginBottom?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
+  paddingTop?: number;
+  paddingBottom?: number;
 }
 
-const Input: FC<IInput> = ({ borderRadius, shadow, color,  placeholder }) => (
+const Input: FC<IInput> = ({
+  borderRadius,
+  shadow,
+  color,
+  placeholder,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingBottom,
+}) => (
   <section
     className="flex items-center justify-center h-full"
     id="input-section"

@@ -4,9 +4,28 @@ import "styles/components.css";
 interface IImageComponent {
   imgData: string | ArrayBuffer;
   justifyContent: string;
+  marginLeft?: number;
+  marginRight?: number;
+  marginTop?: number;
+  marginBottom?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
+  paddingTop?: number;
+  paddingBottom?: number;
 }
 
-const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
+const Image: FC<IImageComponent> = ({
+  imgData,
+  justifyContent,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingBottom,
+}) => (
   <>
     {imgData ? (
       <div
@@ -20,7 +39,7 @@ const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
         }}
       />
     ) : (
-      <div className="flex items-center justify-center w-full h-full">
+      <div className="flex items-center justify-center w-auto h-full">
         <div
           id="image-two"
           className="px-10 bold py-[10px] rounded-xl bg-indigo-700 text-white"

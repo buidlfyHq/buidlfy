@@ -20,6 +20,14 @@ enum functionEnum {
   SHADOW = "shadow",
   BORDER_RADIUS = "borderRadius",
   BORDER_WIDTH = "borderWidth",
+  MARGIN_LEFT = "marginLeft",
+  MARGIN_RIGHT = "marginRight",
+  MARGIN_TOP = "marginTop",
+  MARGIN_BOTTOM = "marginBottom",
+  PADDING_LEFT = "paddingLeft",
+  PADDING_RIGHT = "paddingRight",
+  PADDING_TOP = "paddinTop",
+  PADDING_BOTTOM = "paddingBottom",
 }
 
 const Settings: FC<ISettings> = ({
@@ -34,16 +42,15 @@ const Settings: FC<ISettings> = ({
   openTab,
   setOpenTab,
 }) => {
-  const [showComponent, setShowComponent] =
-    useState<{
-      id: string;
-      value: {
-        name: string;
-        inputs: object[];
-        outputs: object[];
-        stateMutability: string;
-      };
-    }>(null); // for abi method component
+  const [showComponent, setShowComponent] = useState<{
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }>(null); // for abi method component
   const ref = useRef(null);
 
   // work in progress
@@ -348,7 +355,30 @@ const Settings: FC<ISettings> = ({
   const setBorderRadius = (borderRadius: number) => {
     singleWorkFunction(functionEnum.BORDER_RADIUS, borderRadius);
   };
-
+  const setMarginLeft = (marginLeft: number) => {
+    singleWorkFunction(functionEnum.MARGIN_LEFT, marginLeft);
+  };
+  const setMarginRight = (marginRight: number) => {
+    singleWorkFunction(functionEnum.MARGIN_RIGHT, marginRight);
+  };
+  const setMarginTop = (marginTop: number) => {
+    singleWorkFunction(functionEnum.MARGIN_TOP, marginTop);
+  };
+  const setMarginBottom = (marginBottom: number) => {
+    singleWorkFunction(functionEnum.MARGIN_BOTTOM, marginBottom);
+  };
+  const setPaddingLeft = (paddingLeft: number) => {
+    singleWorkFunction(functionEnum.PADDING_LEFT, paddingLeft);
+  };
+  const setPaddingRight = (paddingRight: number) => {
+    singleWorkFunction(functionEnum.PADDING_RIGHT, paddingRight);
+  };
+  const setPaddingTop = (paddingTop: number) => {
+    singleWorkFunction(functionEnum.PADDING_TOP, paddingTop);
+  };
+  const setPaddingBottom = (paddingBottom: number) => {
+    singleWorkFunction(functionEnum.PADDING_BOTTOM, paddingBottom);
+  };
   const setBorderWidth = (borderWidth: number) => {
     singleWorkFunction(functionEnum.BORDER_WIDTH, borderWidth);
   };
@@ -432,6 +462,22 @@ const Settings: FC<ISettings> = ({
               setBorderRadius={setBorderRadius}
               borderWidth={selectedItem?.style?.borderWidth}
               setBorderWidth={setBorderWidth}
+              setMarginLeft={setMarginLeft}
+              setMarginRight={setMarginRight}
+              setMarginTop={setMarginTop}
+              setMarginBottom={setMarginBottom}
+              setPaddingLeft={setPaddingLeft}
+              setPaddingRight={setPaddingRight}
+              setPaddingTop={setPaddingTop}
+              setPaddingBottom={setPaddingBottom}
+              marginLeft={selectedItem?.style?.marginLeft}
+              marginRight={selectedItem?.style?.marginRight}
+              marginTop={selectedItem?.style?.marginTop}
+              marginBottom={selectedItem?.style?.marginBottom}
+              paddingLeft={selectedItem?.style?.paddingLeft}
+              paddingRight={selectedItem?.style?.paddingRight}
+              paddingTop={selectedItem?.style?.paddingTop}
+              paddingBottom={selectedItem?.style?.paddingBottom}
               setSmall={setSmall}
               setMedium={setMedium}
               setLarge={setLarge}

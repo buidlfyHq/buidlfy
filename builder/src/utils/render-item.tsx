@@ -70,6 +70,14 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Button":
@@ -87,6 +95,14 @@ const RenderItem: FC<IRenderItem> = ({
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           connectWallet={item.connectWallet}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Text":
@@ -101,6 +117,14 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Link":
@@ -115,6 +139,14 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Heading 1":
@@ -129,6 +161,14 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Heading 2":
@@ -143,6 +183,14 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Heading 3":
@@ -157,6 +205,14 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Input":
@@ -166,6 +222,14 @@ const RenderItem: FC<IRenderItem> = ({
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           color={item.style.color}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Image":
@@ -173,6 +237,14 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Divider":
@@ -199,6 +271,14 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Vertical Container":
@@ -223,6 +303,14 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     default:

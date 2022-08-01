@@ -12,37 +12,64 @@ const Text: FC<ITexts> = ({
   value,
   backgroundColor,
   link,
-}) => (
-  <section
-    id="text-one"
-    style={{
-      fontWeight: bold,
-      fontStyle: italic,
-      textDecoration: underline,
-      color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-      display: "flex",
-      justifyContent: justifyContent,
-      fontSize: `${fontSize}px`,
-      backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-    }}
-    className="flex items-center justify-center w-full h-full"
-  >
-    {link.length > 0 ? (
-      <a
-        rel="noreferrer"
-        target="_blank"
-        href={link}
-        id="text-two"
-        style={{
-          color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-        }}
-      >
-        {value}
-      </a>
-    ) : (
-      <div id="text-three">{value}</div>
-    )}
-  </section>
-);
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingBottom,
+}) => {
+  console.log(paddingTop, "paddingTop");
+  console.log(paddingLeft, "paddingLeft");
+  console.log(paddingRight, "paddingRight");
+  console.log(paddingBottom, "paddingBottom");
+  console.log(marginLeft, "marginLeft");
+  console.log(marginBottom, "marginBottom");
+  console.log(marginRight, "marginRight");
+  console.log(marginTop, "marginTop");
+
+  return (
+    <section
+      id="text-one"
+      style={{
+        fontWeight: bold,
+        fontStyle: italic,
+        textDecoration: underline,
+        color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+        display: "flex",
+        justifyContent: justifyContent,
+        fontSize: `${fontSize}px`,
+        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+        paddingLeft: `${paddingLeft}px`,
+        paddingRight: `${paddingRight}px`,
+        paddingTop: `${paddingTop}px`,
+        paddingBottom: `${paddingBottom}px`,
+        marginLeft: `${marginLeft}px`,
+        marginRight: `${marginRight}px`,
+        marginTop: `${marginTop}px`,
+        marginBottom: `${marginBottom}px`,
+      }}
+      className="flex items-center justify-center w-auto h-full"
+    >
+      {link.length > 0 ? (
+        <a
+          rel="noreferrer"
+          target="_blank"
+          href={link}
+          id="text-two"
+          style={{
+            color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+          }}
+        >
+          {value}
+        </a>
+      ) : (
+        <div id="text-three">{value}</div>
+      )}
+    </section>
+  );
+};
 
 export default Text;
