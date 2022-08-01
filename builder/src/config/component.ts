@@ -10,11 +10,11 @@ export const components = [
       borderWidth: 0,
       shadow: "none",
     },
-    children: []
+    children: [],
   },
   {
     name: "Horizontal Container",
-    h: 1,
+    h: 4,
     style: {
       deleteComponent: 0,
       backgroundColor: { r: "0", g: "0", b: "0" },
@@ -56,32 +56,31 @@ export const components = [
           deleteComponent: 0,
         },
       },
-            {
-              name: "Heading 1",
-              h: 2,
-              i: 2,
-              y:0,
-       x: 3,
-       w: 3,
-              value: "Card Title",
-              link: "",
-              style: {
-                color: { r: "0", g: "0", b: "0", a: "100" },
-                backgroundColor: { r: "0", g: "0", b: "0" },
-                fontWeight: "bold",
-                fontStyle: "normal",
-                textDecoration: "none",
-                justifyContent: "center",
-                fontSize: 25,
-                deleteComponent: 0,
-              },
-            }
+      {
+        name: "Heading 1",
+        h: 2,
+        i: 2,
+        y: 2,
+        x: 3,
+        w: 3,
+        value: "Card Title",
+        link: "",
+        style: {
+          color: { r: "0", g: "0", b: "0", a: "100" },
+          backgroundColor: { r: "0", g: "0", b: "0" },
+          fontWeight: "bold",
+          fontStyle: "normal",
+          textDecoration: "none",
+          justifyContent: "center",
+          fontSize: 25,
+          deleteComponent: 0,
+        },
+      },
     ],
   },
   {
     name: "Vertical Container",
-    h: 1,
-    w: 2,
+    h: 5,
     style: {
       deleteComponent: 0,
       backgroundColor: { r: "0", g: "0", b: "0" },
@@ -93,7 +92,7 @@ export const components = [
     children: [
       {
         name: "Image",
-        h: 2.2,
+        h: 2,
         i: 4,
         w: 6,
         x: 0,
@@ -232,7 +231,7 @@ export const components = [
   {
     name: "Input",
     h: 1,
-    placeholder: 'Placeholder',
+    placeholder: "Placeholder",
     style: {
       deleteComponent: 0,
       borderRadius: 0,
@@ -255,5 +254,4 @@ export const components = [
       deleteComponent: 0,
     },
   },
-  
 ];

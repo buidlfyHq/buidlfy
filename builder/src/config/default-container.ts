@@ -1,5 +1,4 @@
 // default grid layout element for empty container
-// user in custom-components/container
 const defaultItem = {
   i: "DefaultElement",
   link: "",
