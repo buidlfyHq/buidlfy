@@ -26,7 +26,7 @@ const Button: FC<ITexts> = ({
   <section
     style={{ justifyContent: justifyContent }}
     id="button-one"
-    className="flex items-center justify-center w-auto h-full px-6"
+    className="flex overflow-hidden items-center justify-center w-auto h-full px-6"
   >
     <div
       style={{
@@ -41,9 +41,17 @@ const Button: FC<ITexts> = ({
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
         boxShadow: shadow,
+        paddingLeft: `${paddingLeft}px`,
+        paddingRight: `${paddingRight}px`,
+        paddingTop: `${paddingTop}px`,
+        paddingBottom: `${paddingBottom}px`,
+        marginLeft: `${marginLeft}px`,
+        marginRight: `${marginRight}px`,
+        marginTop: `${marginTop}px`,
+        marginBottom: `${marginBottom}px`,
       }}
       id="button-two"
-      className="w-48 h-auto px-6 py-2 cursor-pointer btn whitespace-nowrap"
+      className="w-48 h-auto cursor-pointer btn whitespace-nowrap"
     >
       {link.length > 0 ? <a href={link}>{value}</a> : <>{value}</>}
     </div>

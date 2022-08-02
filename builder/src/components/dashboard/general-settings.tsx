@@ -9,7 +9,6 @@ import BgColorComponent from "components/settings/bg-color-component";
 import FontSizeComponent from "components/settings/font-size-component";
 import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
-import PaddingComponent from "components/settings/padding-component";
 
 const DefaultSettings: FC<ISettings> = ({
   textVal,
@@ -43,14 +42,6 @@ const DefaultSettings: FC<ISettings> = ({
   setMarginRight,
   setMarginTop,
   setMarginBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
-  setPaddingLeft,
-  setPaddingRight,
-  setPaddingBottom,
-  setPaddingTop,
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -96,16 +87,6 @@ const DefaultSettings: FC<ISettings> = ({
       marginRight={marginRight}
       marginTop={marginTop}
       marginBottom={marginBottom}
-    />
-    <PaddingComponent
-      setPaddingLeft={setPaddingLeft}
-      setPaddingRight={setPaddingRight}
-      setPaddingTop={setPaddingTop}
-      setPaddingBottom={setPaddingBottom}
-      paddingLeft={paddingLeft}
-      paddingRight={paddingRight}
-      paddingTop={paddingTop}
-      paddingBottom={paddingBottom}
     />
     <AlignComponent
       justifyContent={justifyContent}

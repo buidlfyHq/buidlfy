@@ -428,7 +428,7 @@ const Settings: FC<ISettings> = ({
       {settingItemId ? (
         <div className="rounded-[8px] py-2 cursor-pointer relative">
           <div
-            className="border shadow-sm sidebar menu"
+            className="border shadow-sm pt-1 sidebar menu"
             ref={ref}
             style={{ paddingTop: "2px" }}
           >

@@ -5,6 +5,7 @@ import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import ISettings from "interfaces/settings";
 import { RiText } from "react-icons/ri";
+import MarginComponent from "components/settings/margin-component";
 
 const InputSettings: FC<ISettings> = ({
   selectedItem,
@@ -19,7 +20,15 @@ const InputSettings: FC<ISettings> = ({
   setLarge,
   shadow,
   placeholder,
-  handlePlaceholderChange
+  handlePlaceholderChange,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
+  setMarginLeft,
+  setMarginRight,
+  setMarginTop,
+  setMarginBottom,
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -44,7 +53,16 @@ const InputSettings: FC<ISettings> = ({
       borderRadius={borderRadius}
       setBorderRadius={setBorderRadius}
     />
-
+    <MarginComponent
+      setMarginLeft={setMarginLeft}
+      setMarginRight={setMarginRight}
+      setMarginTop={setMarginTop}
+      setMarginBottom={setMarginBottom}
+      marginLeft={marginLeft}
+      marginRight={marginRight}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
+    />
     <ColorComponent
       color={color}
       setColor={setColor}

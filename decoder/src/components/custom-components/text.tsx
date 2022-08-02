@@ -14,6 +14,10 @@ const Text: FC<ITexts> = ({
   link,
   outputValue,
   backgroundColor,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
 }) => {
   const renderValue = (outputLink: string, outputValue: string) => (
     <>
@@ -39,11 +43,18 @@ const Text: FC<ITexts> = ({
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
-      className="flex items-center justify-center h-full overflow-auto"
+      className="flex overflow-hidden items-center justify-center h-full overflow-auto"
     >
       <>
         {outputValue ? (
-          <>
+          <span
+            style={{
+              marginLeft: `${marginLeft}px`,
+              marginRight: `${marginRight}px`,
+              marginTop: `${marginTop}px`,
+              marginBottom: `${marginBottom}px`,
+            }}
+          >
             {outputValue.find((output) => output.id === id)
               ? renderValue(
                   link,
@@ -52,9 +63,18 @@ const Text: FC<ITexts> = ({
                   )
                 )
               : renderValue(link, value)}
-          </>
+          </span>
         ) : (
-          renderValue(link, value)
+          <span
+            style={{
+              marginLeft: `${marginLeft}px`,
+              marginRight: `${marginRight}px`,
+              marginTop: `${marginTop}px`,
+              marginBottom: `${marginBottom}px`,
+            }}
+          >
+            renderValue(link, value)
+          </span>
         )}
       </>
     </section>

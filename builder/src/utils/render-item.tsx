@@ -70,14 +70,6 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
-          marginLeft={item.style.marginLeft}
-          marginRight={item.style.marginRight}
-          marginTop={item.style.marginTop}
-          marginBottom={item.style.marginBottom}
-          paddingLeft={item.style.paddingLeft}
-          paddingRight={item.style.paddingRight}
-          paddingTop={item.style.paddingTop}
-          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Button":
@@ -237,14 +229,6 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
-          marginLeft={item.style.marginLeft}
-          marginRight={item.style.marginRight}
-          marginTop={item.style.marginTop}
-          marginBottom={item.style.marginBottom}
-          paddingLeft={item.style.paddingLeft}
-          paddingRight={item.style.paddingRight}
-          paddingTop={item.style.paddingTop}
-          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Divider":
@@ -271,14 +255,6 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
-          marginLeft={item.style.marginLeft}
-          marginRight={item.style.marginRight}
-          marginTop={item.style.marginTop}
-          marginBottom={item.style.marginBottom}
-          paddingLeft={item.style.paddingLeft}
-          paddingRight={item.style.paddingRight}
-          paddingTop={item.style.paddingTop}
-          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Vertical Container":
@@ -303,14 +279,6 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
-          marginLeft={item.style.marginLeft}
-          marginRight={item.style.marginRight}
-          marginTop={item.style.marginTop}
-          marginBottom={item.style.marginBottom}
-          paddingLeft={item.style.paddingLeft}
-          paddingRight={item.style.paddingRight}
-          paddingTop={item.style.paddingTop}
-          paddingBottom={item.style.paddingBottom}
         />
       );
     default:

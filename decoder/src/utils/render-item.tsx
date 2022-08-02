@@ -61,6 +61,14 @@ const RenderItem: FC<IRenderItem> = ({
           setOutputValue={setOutputValue}
           shadow={item.style.shadow}
           connectWallet={item.connectWallet}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Text":
@@ -77,6 +85,14 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Heading 1":
@@ -93,6 +109,14 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Heading 2":
@@ -109,6 +133,14 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Heading 3":
@@ -125,6 +157,14 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
+          paddingLeft={item.style.paddingLeft}
+          paddingRight={item.style.paddingRight}
+          paddingTop={item.style.paddingTop}
+          paddingBottom={item.style.paddingBottom}
         />
       );
     case "Input":
@@ -136,6 +176,10 @@ const RenderItem: FC<IRenderItem> = ({
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           color={item.style.color}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
         />
       );
     case "Divider":

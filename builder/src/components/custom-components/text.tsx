@@ -16,20 +16,7 @@ const Text: FC<ITexts> = ({
   marginRight,
   marginTop,
   marginBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
 }) => {
-  // console.log(paddingTop, "paddingTop");
-  // console.log(paddingLeft, "paddingLeft");
-  // console.log(paddingRight, "paddingRight");
-  // console.log(paddingBottom, "paddingBottom");
-  console.log(marginLeft, "marginLeft");
-  // console.log(marginBottom, "marginBottom");
-  // console.log(marginRight, "marginRight");
-  // console.log(marginTop, "marginTop");
-
   return (
     <section
       id="text-one"
@@ -55,15 +42,20 @@ const Text: FC<ITexts> = ({
             color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
           }}
         >
-          {value}
+          <span
+            style={{
+              marginLeft: `${marginLeft}px`,
+              marginRight: `${marginRight}px`,
+              marginTop: `${marginTop}px`,
+              marginBottom: `${marginBottom}px`,
+            }}
+          >
+            {value}
+          </span>
         </a>
       ) : (
-        <div
+        <span
           style={{
-            // paddingLeft: `${paddingLeft}px`,
-            // paddingRight: `${paddingRight}px`,
-            // paddingTop: `${paddingTop}px`,
-            // paddingBottom: `${paddingBottom}px`,
             marginLeft: `${marginLeft}px`,
             marginRight: `${marginRight}px`,
             marginTop: `${marginTop}px`,
@@ -71,7 +63,7 @@ const Text: FC<ITexts> = ({
           }}
         >
           {value}
-        </div>
+        </span>
       )}
     </section>
   );

@@ -4,50 +4,23 @@ import "styles/components.css";
 interface IImageComponent {
   imgData: string | ArrayBuffer;
   justifyContent: string;
-  marginLeft?: number;
-  marginRight?: number;
-  marginTop?: number;
-  marginBottom?: number;
-  paddingLeft?: number;
-  paddingRight?: number;
-  paddingTop?: number;
-  paddingBottom?: number;
 }
 
-const Image: FC<IImageComponent> = ({
-  imgData,
-  justifyContent,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
-}) => (
+const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
   <>
     {imgData ? (
       <div
         id="image-one"
-        className="flex items-center justify-center w-full h-full"
+        className="flex items-center justify-center w-auto h-full"
         style={{
           backgroundImage: `url(${imgData})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: justifyContent,
           backgroundSize: "contain",
-          paddingLeft: `${paddingLeft}px`,
-          paddingRight: `${paddingRight}px`,
-          paddingTop: `${paddingTop}px`,
-          paddingBottom: `${paddingBottom}px`,
-          marginLeft: `${marginLeft}px`,
-          marginRight: `${marginRight}px`,
-          marginTop: `${marginTop}px`,
-          marginBottom: `${marginBottom}px`,
         }}
       />
     ) : (
-      <div className="flex items-center justify-center w-auto h-full">
+      <div className="flex overflow-hidden  items-center justify-center w-auto h-full">
         <div
           id="image-two"
           className="px-10 bold py-[10px] rounded-xl bg-indigo-700 text-white"

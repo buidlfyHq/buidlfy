@@ -26,13 +26,9 @@ const Input: FC<IInput> = ({
   marginRight,
   marginTop,
   marginBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
 }) => (
   <section
-    className="flex items-center justify-center h-full"
+    className="flex items-center justify-center overflow-hidden h-full"
     id="input-section"
   >
     <input
@@ -41,8 +37,12 @@ const Input: FC<IInput> = ({
         boxShadow: shadow,
         borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
         border: "1px solid",
+        marginLeft: `${marginLeft}px`,
+        marginRight: `${marginRight}px`,
+        marginTop: `${marginTop}px`,
+        marginBottom: `${marginBottom}px`,
       }}
-      className="w-full px-3 py-2 ml-6 mr-6 leading-tight text-gray-700 bg-white appearance-none input"
+      className="w-full leading-tight text-gray-700 bg-white appearance-none input"
       id="input"
       type="text"
       placeholder={placeholder}

@@ -37,14 +37,6 @@ interface IContainer {
   }) => void;
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
-  marginLeft?: number;
-  marginRight?: number;
-  marginTop?: number;
-  marginBottom?: number;
-  paddingLeft?: number;
-  paddingRight?: number;
-  paddingTop?: number;
-  paddingBottom?: number;
 }
 
 const Container: FC<IContainer> = ({
@@ -58,14 +50,6 @@ const Container: FC<IContainer> = ({
   borderRadius,
   borderWidth,
   shadow,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
   setDrag,
   setOpenSetting,
   setSettingItemId,
@@ -186,7 +170,7 @@ const Container: FC<IContainer> = ({
   return (
     <section
       id={item.i}
-      className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag"
+      className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
     >
       <GridLayout
         layout={children}
