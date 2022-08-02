@@ -1,12 +1,11 @@
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { Layout } from "react-grid-layout";
-import { BiGridHorizontal } from "react-icons/bi";
 import GridLayout from "react-grid-layout";
 import RenderItem from "utils/render-item";
+import defaultItem from "config/default-container";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
-import defaultItem from "config/default-container";
 
 interface IContainer {
   item: IItems;
@@ -187,7 +186,7 @@ const Container: FC<IContainer> = ({
   return (
     <section
       id={item.i}
-      className="relative w-full border cursor-pointer container-drag h-fit"
+      className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag"
     >
       <GridLayout
         layout={children}
@@ -235,10 +234,10 @@ const Container: FC<IContainer> = ({
               const { x, y, w, h, minW, i, resizeHandles } = item;
               return (
                 <div
-                  className={`w-full h-full ${
+                  className={`w-full h-full hover:border hover:border-2 ${
                     selector
-                      ? "hover:outline-orange-300 hover:outline"
-                      : "hover:outline-slate-300 hover:outline-dashed"
+                      ? "hover:border-orange-300"
+                      : "hover:border-slate-300 hover:border-dashed"
                   }`}
                   key={i}
                   data-grid={{ x, y, w, h, minW, resizeHandles }}
@@ -252,10 +251,7 @@ const Container: FC<IContainer> = ({
             })
         )}
       </GridLayout>
-      <BiGridHorizontal
-        id="drag"
-        onClick={() => onComponentClick(item.name, item.i)}
-      />
+      <span id="drag" onClick={() => onComponentClick(item.name, item.i)} />
     </section>
   );
 };

@@ -33,8 +33,17 @@ const Text: FC<ITexts> = ({
   return (
     <section
       id="text-one"
-      className="flex items-center justify-center w-auto h-full"
-      style={{}}
+      className="flex overflow-hidden items-center justify-center w-auto h-full"
+      style={{
+        fontWeight: bold,
+        fontStyle: italic,
+        textDecoration: underline,
+        color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+        display: "flex",
+        justifyContent: justifyContent,
+        fontSize: `${fontSize}px`,
+        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+      }}
     >
       {link.length > 0 ? (
         <a
@@ -51,22 +60,14 @@ const Text: FC<ITexts> = ({
       ) : (
         <div
           style={{
-            fontWeight: bold,
-            fontStyle: italic,
-            textDecoration: underline,
-            color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-            display: "flex",
-            justifyContent: justifyContent,
-            fontSize: `${fontSize}px`,
-            paddingLeft: `${paddingLeft}px`,
-            paddingRight: `${paddingRight}px`,
-            paddingTop: `${paddingTop}px`,
-            paddingBottom: `${paddingBottom}px`,
+            // paddingLeft: `${paddingLeft}px`,
+            // paddingRight: `${paddingRight}px`,
+            // paddingTop: `${paddingTop}px`,
+            // paddingBottom: `${paddingBottom}px`,
             marginLeft: `${marginLeft}px`,
             marginRight: `${marginRight}px`,
             marginTop: `${marginTop}px`,
             marginBottom: `${marginBottom}px`,
-            backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
           }}
         >
           {value}

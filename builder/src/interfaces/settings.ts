@@ -59,6 +59,7 @@ export default interface ISettings {
     name: string;
     buttonId: string;
   }) => void;
+  setOpenSetting?: (open: boolean) => void;
   settingItemId?: string;
   elementConfig?: object;
   openTab?: number;

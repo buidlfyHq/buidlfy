@@ -32,10 +32,10 @@ interface IAbiComponents {
 
 const AbiComponents: FC<IAbiComponents> = ({
   showComponent,
+  selector,
   setSelector,
   elementConfig,
   selectedItem,
-  selector,
   items,
   setItems,
 }) => {
@@ -201,7 +201,7 @@ const AbiComponents: FC<IAbiComponents> = ({
 
   const renderDefault = (valueName: string) => (
     <>
-      {selector !== null && selector.name === valueName ? (
+      {selector && selector?.name === valueName ? (
         <span className="flex">
           <span className="flex-1">
             <span

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import image from "assets/image-component.png";
+import defaultImage from "assets/default-image.png";
 import "styles/components.css";
 
 interface IImageComponent {
@@ -11,7 +11,7 @@ const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
   <div
     className="flex justify-center items-center h-full w-full"
     style={{
-      backgroundImage: `url(${imgData ? imgData : image})`,
+      backgroundImage: `url(${imgData ? imgData : defaultImage})`,
       backgroundRepeat: "no-repeat",
       backgroundPosition: justifyContent,
       backgroundSize: "contain",

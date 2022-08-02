@@ -3,7 +3,7 @@ import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
-import DefaultSettings from "components/dashboard/default-settings";
+import DefaultSettings from "components/dashboard/general-settings";
 import ISettings from "interfaces/settings";
 import "styles/components.css";
 import "styles/dashboard.css";
