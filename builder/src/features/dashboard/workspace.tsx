@@ -189,7 +189,7 @@ const Workspace: FC<IWorkspace> = ({
           id={name}
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
-          className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 ${
+          className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 ${
             !containerCheck(item)
               ? selector
                 ? "hover:border-orange-300"
@@ -239,6 +239,7 @@ const Workspace: FC<IWorkspace> = ({
           resizeHandles={["se"]}
           isDraggable={drag}
           onLayoutChange={onLayoutChange}
+          compactType={null}
           margin={[0, 0]}
           className="h-fit"
         >

@@ -32,6 +32,7 @@ const Container: FC<IBgContainer> = ({
         width={containerW || 500}
         isDraggable={false}
         isResizable={false}
+        compactType={null}
         margin={[0, 0]}
         className="h-full"
         style={{
