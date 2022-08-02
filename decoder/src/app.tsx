@@ -11,11 +11,11 @@ const App: FC = () => {
     <>
       {/* set head - logo and title */}
       <Helmet>
-        <title>{config.head.title ? config.head.title : "Buidlfy"}</title>
+        <title>{config.head?.title ? config.head.title : "Buidlfy"}</title>
         <link
           rel="icon"
           type="image/png"
-          href={config.head.logo ? config.head.logo : DefaultLogo}
+          href={config.head?.logo ? config.head.logo : DefaultLogo}
           sizes="16x16"
         />
       </Helmet>

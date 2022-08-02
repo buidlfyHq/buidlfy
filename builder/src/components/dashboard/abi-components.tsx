@@ -201,7 +201,7 @@ const AbiComponents: FC<IAbiComponents> = ({
 
   const renderDefault = (valueName: string) => (
     <>
-      {selector !== null && selector?.name === valueName ? (
+      {selector && selector?.name === valueName ? (
         <span className="flex">
           <span className="flex-1">
             <span
