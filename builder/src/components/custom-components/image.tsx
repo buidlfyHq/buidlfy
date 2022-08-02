@@ -36,6 +36,14 @@ const Image: FC<IImageComponent> = ({
           backgroundRepeat: "no-repeat",
           backgroundPosition: justifyContent,
           backgroundSize: "contain",
+          paddingLeft: `${paddingLeft}px`,
+          paddingRight: `${paddingRight}px`,
+          paddingTop: `${paddingTop}px`,
+          paddingBottom: `${paddingBottom}px`,
+          marginLeft: `${marginLeft}px`,
+          marginRight: `${marginRight}px`,
+          marginTop: `${marginTop}px`,
+          marginBottom: `${marginBottom}px`,
         }}
       />
     ) : (

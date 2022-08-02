@@ -31,6 +31,10 @@ interface IWorkspace {
   setDrag: (drag: boolean) => void;
   setAddContainer: (addContainer?: boolean) => void;
   backgroundColor: IColor;
+  marginLeft?: number;
+  marginRight?: number;
+  marginTop?: number;
+  marginBottom?: number;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -48,6 +52,10 @@ const Workspace: FC<IWorkspace> = ({
   setDrag,
   setAddContainer,
   backgroundColor,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -73,6 +81,7 @@ const Workspace: FC<IWorkspace> = ({
     });
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
+  console.log(marginLeft, "marginLeft");
 
   // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {
@@ -241,6 +250,12 @@ const Workspace: FC<IWorkspace> = ({
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           className="h-fit"
+          style={{
+            marginLeft: `${marginLeft}px`,
+            marginRight: `${marginRight}px`,
+            marginTop: `${marginTop}px`,
+            marginBottom: `${marginBottom}px`,
+          }}
         >
           {renderItemFunction}
         </ResponsiveGridLayout>
