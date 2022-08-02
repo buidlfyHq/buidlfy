@@ -18,6 +18,10 @@ interface INavbar {
   }) => void;
   contractConfig: { abi: string; address: string };
   backgroundColor: IColor;
+  head: {
+    title: string;
+    logo: string | ArrayBuffer;
+  };
 }
 
 const Navbar: FC<INavbar> = ({
@@ -28,6 +32,7 @@ const Navbar: FC<INavbar> = ({
   setSelector,
   contractConfig,
   backgroundColor,
+  head,
 }) => {
   const [abiJSON, setAbiJSON] = useState<
     {
@@ -67,6 +72,10 @@ const Navbar: FC<INavbar> = ({
 
   const handlePublish = () => {
     let config = {
+      head: {
+        title: head.title,
+        logo: head.logo,
+      },
       background: backgroundColor,
       builder: items,
       contract: {

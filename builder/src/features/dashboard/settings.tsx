@@ -25,6 +25,7 @@ enum functionEnum {
 const Settings: FC<ISettings> = ({
   items,
   setItems,
+  setOpenSetting,
   settingItemId,
   contractConfig,
   setContractConfig,
@@ -388,11 +389,23 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
 
+  const handleOpenSetting = () => {
+    setOpenSetting(false);
+  };
+
   return (
     <>
       {settingItemId ? (
         <div className="rounded-[8px] py-2 cursor-pointer relative">
-          <div className="border shadow-sm sidebar menu" ref={ref}>
+          <div
+            className="border shadow-sm sidebar menu"
+            ref={ref}
+            style={{ paddingTop: "2px" }}
+          >
+            <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
+              {"<"}
+              <span className="ml-2">Site Settings</span>
+            </div>
             <SettingComponent
               items={items}
               setItems={setItems}
