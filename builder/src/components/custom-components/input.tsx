@@ -39,7 +39,7 @@ const Input: FC<IInput> = ({
         border: "1px solid",
         margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
       }}
-      className="w-full leading-tight px-2 py-3 text-gray-700 bg-white appearance-none input"
+      className="w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
       id="input"
       type="text"
       placeholder={placeholder}
