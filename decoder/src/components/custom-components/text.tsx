@@ -18,6 +18,10 @@ const Text: FC<ITexts> = ({
   marginRight,
   marginTop,
   marginBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingBottom,
 }) => {
   const renderValue = (outputLink: string, outputValue: string) => (
     <>
@@ -42,19 +46,20 @@ const Text: FC<ITexts> = ({
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+        marginLeft: `${marginLeft}px`,
+        marginRight: `${marginRight}px`,
+        marginTop: `${marginTop}px`,
+        marginBottom: `${marginBottom}px`,
+        paddingLeft: `${paddingLeft}px`,
+        paddingRight: `${paddingRight}px`,
+        paddingTop: `${paddingTop}px`,
+        paddingBottom: `${paddingBottom}px`,
       }}
       className="flex overflow-hidden items-center justify-center h-full overflow-auto"
     >
       <>
         {outputValue ? (
-          <span
-            style={{
-              marginLeft: `${marginLeft}px`,
-              marginRight: `${marginRight}px`,
-              marginTop: `${marginTop}px`,
-              marginBottom: `${marginBottom}px`,
-            }}
-          >
+          <>
             {outputValue.find((output) => output.id === id)
               ? renderValue(
                   link,
@@ -63,18 +68,9 @@ const Text: FC<ITexts> = ({
                   )
                 )
               : renderValue(link, value)}
-          </span>
+          </>
         ) : (
-          <span
-            style={{
-              marginLeft: `${marginLeft}px`,
-              marginRight: `${marginRight}px`,
-              marginTop: `${marginTop}px`,
-              marginBottom: `${marginBottom}px`,
-            }}
-          >
-            renderValue(link, value)
-          </span>
+          <>renderValue(link, value)</>
         )}
       </>
     </section>

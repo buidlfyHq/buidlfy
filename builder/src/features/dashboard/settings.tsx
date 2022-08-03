@@ -26,7 +26,7 @@ enum functionEnum {
   MARGIN_BOTTOM = "marginBottom",
   PADDING_LEFT = "paddingLeft",
   PADDING_RIGHT = "paddingRight",
-  PADDING_TOP = "paddinTop",
+  PADDING_TOP = "paddingTop",
   PADDING_BOTTOM = "paddingBottom",
 }
 

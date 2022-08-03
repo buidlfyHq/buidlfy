@@ -249,13 +249,7 @@ const Workspace: FC<IWorkspace> = ({
           isDraggable={drag}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
-          className="h-fit"
-          style={{
-            marginLeft: `${marginLeft}px`,
-            marginRight: `${marginRight}px`,
-            marginTop: `${marginTop}px`,
-            marginBottom: `${marginBottom}px`,
-          }}
+          className="h-fit overflow-hidden"
         >
           {renderItemFunction}
         </ResponsiveGridLayout>

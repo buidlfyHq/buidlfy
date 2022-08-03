@@ -16,6 +16,10 @@ const Text: FC<ITexts> = ({
   marginRight,
   marginTop,
   marginBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingBottom,
 }) => {
   return (
     <section
@@ -30,6 +34,14 @@ const Text: FC<ITexts> = ({
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+        marginLeft: `${marginLeft}px`,
+        marginRight: `${marginRight}px`,
+        marginTop: `${marginTop}px`,
+        marginBottom: `${marginBottom}px`,
+        paddingLeft: `${paddingLeft}px`,
+        paddingRight: `${paddingRight}px`,
+        paddingTop: `${paddingTop}px`,
+        paddingBottom: `${paddingBottom}px`,
       }}
     >
       {link.length > 0 ? (
@@ -42,28 +54,10 @@ const Text: FC<ITexts> = ({
             color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
           }}
         >
-          <span
-            style={{
-              marginLeft: `${marginLeft}px`,
-              marginRight: `${marginRight}px`,
-              marginTop: `${marginTop}px`,
-              marginBottom: `${marginBottom}px`,
-            }}
-          >
-            {value}
-          </span>
+          <span>{value}</span>
         </a>
       ) : (
-        <span
-          style={{
-            marginLeft: `${marginLeft}px`,
-            marginRight: `${marginRight}px`,
-            marginTop: `${marginTop}px`,
-            marginBottom: `${marginBottom}px`,
-          }}
-        >
-          {value}
-        </span>
+        <span>{value}</span>
       )}
     </section>
   );

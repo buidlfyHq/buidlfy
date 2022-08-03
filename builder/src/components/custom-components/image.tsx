@@ -9,16 +9,18 @@ interface IImageComponent {
 const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
   <>
     {imgData ? (
-      <div
-        id="image-one"
-        className="flex items-center justify-center w-auto h-full"
-        style={{
-          backgroundImage: `url(${imgData})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: justifyContent,
-          backgroundSize: "contain",
-        }}
-      />
+      <div className="relative">
+        <div
+          id="image-one"
+          className="absolute items-center justify-center w-auto h-full"
+          style={{
+            backgroundImage: `url(${imgData})`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: justifyContent,
+            backgroundSize: "contain",
+          }}
+        />
+      </div>
     ) : (
       <div className="flex overflow-hidden  items-center justify-center w-auto h-full">
         <div
