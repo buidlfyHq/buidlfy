@@ -148,14 +148,8 @@ const Button: FC<ITexts> = ({
             fontSize: `${fontSize}px`,
             borderRadius: `${borderRadius}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            paddingLeft: `${paddingLeft}px`,
-            paddingRight: `${paddingRight}px`,
-            paddingTop: `${paddingTop}px`,
-            paddingBottom: `${paddingBottom}px`,
-            marginLeft: `${marginLeft}px`,
-            marginRight: `${marginRight}px`,
-            marginTop: `${marginTop}px`,
-            marginBottom: `${marginBottom}px`,
+            margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
+            padding: `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`,
           }}
           className="btn rounded w-48 cursor-pointer whitespace-nowrap"
           onClick={!account ? connectWalletButton : disconnect}
@@ -175,14 +169,8 @@ const Button: FC<ITexts> = ({
             borderRadius: `${borderRadius}px`,
             fontSize: `${fontSize}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            paddingLeft: `${paddingLeft}px`,
-            paddingRight: `${paddingRight}px`,
-            paddingTop: `${paddingTop}px`,
-            paddingBottom: `${paddingBottom}px`,
-            marginLeft: `${marginLeft}px`,
-            marginRight: `${marginRight}px`,
-            marginTop: `${marginTop}px`,
-            marginBottom: `${marginBottom}px`,
+            margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
+            padding: `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`,
           }}
           className="btn rounded w-48 cursor-pointer whitespace-nowrap"
           onClick={() =>

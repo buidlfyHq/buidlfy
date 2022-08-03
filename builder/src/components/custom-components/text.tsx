@@ -34,14 +34,8 @@ const Text: FC<ITexts> = ({
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        marginLeft: `${marginLeft}px`,
-        marginRight: `${marginRight}px`,
-        marginTop: `${marginTop}px`,
-        marginBottom: `${marginBottom}px`,
-        paddingLeft: `${paddingLeft}px`,
-        paddingRight: `${paddingRight}px`,
-        paddingTop: `${paddingTop}px`,
-        paddingBottom: `${paddingBottom}px`,
+        margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
+        padding: `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`,
       }}
     >
       {link.length > 0 ? (
