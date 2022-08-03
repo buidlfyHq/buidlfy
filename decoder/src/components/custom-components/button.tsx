@@ -42,7 +42,6 @@ const Button: FC<ITexts> = ({
   const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
   const [account, setAccount] = useState<string>(null);
-
   // All are returning any, will have to switch to typescript ether
   const [show, setShow] = useState<any>(false);
   const [provider, setProvider] = useState<any>();
@@ -107,7 +106,7 @@ const Button: FC<ITexts> = ({
   return (
     <main
       style={{ justifyContent: justifyContent }}
-      className="flex items-center justify-center w-auto h-full px-6"
+      className="flex items-center justify-center w-auto h-full"
     >
       <Dialog
         open={isOpen}

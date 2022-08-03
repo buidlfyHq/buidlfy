@@ -26,7 +26,7 @@ const Button: FC<ITexts> = ({
   <section
     style={{ justifyContent: justifyContent }}
     id="button-one"
-    className="flex overflow-hidden items-center justify-center w-auto h-full px-6"
+    className="flex overflow-hidden items-center justify-center w-auto h-full"
   >
     <div
       style={{
