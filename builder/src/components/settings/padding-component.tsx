@@ -23,16 +23,16 @@ const PaddingComponent: FC<IPaddingComponent> = ({
   setPaddingBottom,
   setPaddingTop,
 }) => {
-  const handleLeftChange = (e) => {
+  const handleLeftChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaddingLeft(+e.target.value);
   };
-  const handleRightChange = (e) => {
+  const handleRightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaddingRight(+e.target.value);
   };
-  const handleTopChange = (e) => {
+  const handleTopChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaddingTop(+e.target.value);
   };
-  const handleBottomChange = (e) => {
+  const handleBottomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaddingBottom(+e.target.value);
   };
 
@@ -49,7 +49,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               value={paddingLeft}
               placeholder="left"
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleLeftChange(e)}
+              onChange={handleLeftChange}
             />
             <input
               type="number"
@@ -58,7 +58,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               value={paddingRight}
               placeholder="right"
               className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleRightChange(e)}
+              onChange={handleRightChange}
             />
           </div>
           <div className="flex mt-3">
@@ -69,7 +69,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               value={paddingTop}
               placeholder="top"
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleTopChange(e)}
+              onChange={handleTopChange}
             />
             <input
               type="number"
@@ -78,7 +78,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               value={paddingBottom}
               placeholder="bottom"
               className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleBottomChange(e)}
+              onChange={handleBottomChange}
             />
           </div>
         </span>

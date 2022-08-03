@@ -81,7 +81,6 @@ const Workspace: FC<IWorkspace> = ({
     });
     newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
   };
-  console.log(marginLeft, "marginLeft");
 
   // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {

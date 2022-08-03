@@ -23,16 +23,16 @@ const MarginComponent: FC<IMarginComponent> = ({
   setMarginTop,
   setMarginBottom,
 }) => {
-  const handleLeftChange = (e) => {
+  const handleLeftChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMarginLeft(+e.target.value);
   };
-  const handleRightChange = (e) => {
+  const handleRightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMarginRight(+e.target.value);
   };
-  const handleTopChange = (e) => {
+  const handleTopChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMarginTop(+e.target.value);
   };
-  const handleBottomChange = (e) => {
+  const handleBottomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMarginBottom(+e.target.value);
   };
 
@@ -49,7 +49,7 @@ const MarginComponent: FC<IMarginComponent> = ({
               value={marginLeft}
               placeholder="left"
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleLeftChange(e)}
+              onChange={handleLeftChange}
             />
             <input
               type="number"
@@ -58,7 +58,7 @@ const MarginComponent: FC<IMarginComponent> = ({
               value={marginRight}
               placeholder="right"
               className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleRightChange(e)}
+              onChange={handleRightChange}
             />
           </div>
           <div className="flex mt-3">
@@ -69,7 +69,7 @@ const MarginComponent: FC<IMarginComponent> = ({
               value={marginTop}
               placeholder="top"
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleTopChange(e)}
+              onChange={handleTopChange}
             />
             <input
               type="number"
@@ -78,7 +78,7 @@ const MarginComponent: FC<IMarginComponent> = ({
               value={marginBottom}
               placeholder="bottom"
               className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleBottomChange(e)}
+              onChange={handleBottomChange}
             />
           </div>
         </span>
