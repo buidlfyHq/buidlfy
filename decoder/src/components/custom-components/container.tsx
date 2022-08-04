@@ -46,7 +46,7 @@ const Container: FC<IBgContainer> = ({
             borderRadius: `${borderRadius}px`,
             borderWidth: `${borderWidth}px`,
             backgroundImage: `url(${imgData})`,
-            backgroundSize: "auto",
+            backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             boxShadow: shadow,

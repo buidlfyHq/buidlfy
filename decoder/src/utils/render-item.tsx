@@ -156,6 +156,7 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
+          margin={{ ...item.style.margin }}
         />
       );
     case "Horizontal Container":
