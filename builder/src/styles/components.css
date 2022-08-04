@@ -58,12 +58,12 @@
 }
 
 #drag {
-  height: 20px;
-  width: 20px;
+  height: 10px;
+  width: 100px;
   font-size: 12px;
   text-align: center;
-  border: 7px solid #a673ef;
-  border-radius: 0 0 0 4px;
+  background: #a673ef;
+  border-radius: 0 0 5px 5px;
 }
 
 .container-drag #drag {
@@ -71,7 +71,7 @@
   position: absolute;
   z-index: 1;
   top: 0;
-  right: 0;
+  left: 44%;
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -79,13 +79,6 @@
 .container-drag:hover #drag {
   visibility: visible;
   opacity: 1;
-}
-
-.react-grid-item > .react-resizable-handle.react-resizable-handle-w::after {
-  height: 10px;
-  width: 10px;
-  border-right: 2px solid;
-  border-bottom: 2px solid;
 }
 
 .react-grid-item > .react-resizable-handle.react-resizable-handle-e::after {

@@ -49,7 +49,11 @@ const Text: FC<ITexts> = ({
         margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
         padding: `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`,
       }}
+<<<<<<< HEAD
       className="flex overflow-hidden items-center justify-center h-full overflow-auto"
+=======
+      className="flex items-center justify-center h-full overflow-hidden"
+>>>>>>> 8b065d3f8d7b8971a4629760b6af6375834f4f14
     >
       <>
         {outputValue ? (

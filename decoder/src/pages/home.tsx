@@ -26,6 +26,7 @@ const Home: FC = () => {
         rowHeight={50}
         isDraggable={false}
         isResizable={false}
+        compactType={null}
         margin={[0, 0]}
         className="h-fit overflow-hidden"
       >
