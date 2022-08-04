@@ -39,7 +39,7 @@ const Text: FC<ITexts> = ({
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
       }}
-      className="flex items-center justify-center h-full overflow-auto"
+      className="flex items-center justify-center h-full overflow-hidden"
     >
       <>
         {outputValue ? (
