@@ -35,6 +35,7 @@ const Settings: FC<ISettings> = ({
   openTab,
   setOpenTab,
 }) => {
+  const ref = useRef(null);
   const [showComponent, setShowComponent] =
     useState<{
       id: string;
@@ -45,7 +46,6 @@ const Settings: FC<ISettings> = ({
         stateMutability: string;
       };
     }>(null); // for abi method component
-  const ref = useRef(null);
 
   // work in progress
   const selectedChildren = items.map((item) =>

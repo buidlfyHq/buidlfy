@@ -9,7 +9,7 @@ import BgColorComponent from "components/settings/bg-color-component";
 import FontSizeComponent from "components/settings/font-size-component";
 import ISettings from "interfaces/settings";
 
-const DefaultSettings: FC<ISettings> = ({
+const GeneralSettings: FC<ISettings> = ({
   textVal,
   handleTextChange,
   linkVal,
@@ -89,4 +89,4 @@ const DefaultSettings: FC<ISettings> = ({
   </>
 );
 
-export default DefaultSettings;
+export default GeneralSettings;

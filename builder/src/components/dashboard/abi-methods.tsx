@@ -36,9 +36,10 @@ const AbiMethods: FC<IAbiMethods> = ({
 
   useEffect(() => {
     if (contractConfig.abi) {
+      const parsedAbi = JSON.parse(contractConfig.abi);
       try {
-        setAbiJson(JSON.parse(contractConfig.abi));
-        let selectedItemIndex = JSON.parse(contractConfig.abi).findIndex(
+        setAbiJson(parsedAbi);
+        let selectedItemIndex = parsedAbi.findIndex(
           (method: { name: string }) =>
             method.name === selectedItem.contract.methodName
         );
@@ -46,7 +47,7 @@ const AbiMethods: FC<IAbiMethods> = ({
         if (selectedItemIndex !== -1) {
           setShowComponent({
             id: selectedItemIndex,
-            value: abiJson[selectedItemIndex],
+            value: parsedAbi[selectedItemIndex],
           });
         } else {
           setShowComponent(null);
