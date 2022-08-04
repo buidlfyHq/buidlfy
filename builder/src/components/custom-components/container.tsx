@@ -180,6 +180,7 @@ const Container: FC<IContainer> = ({
         isBounded={true}
         onLayoutChange={onLayoutChange}
         margin={[0, 0]}
+        compactType={null}
         className="h-full"
         style={{
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
