@@ -7,14 +7,12 @@ interface IInput {
   shadow: string;
   color: IColor;
   placeholder: string;
-  marginLeft?: number;
-  marginRight?: number;
-  marginTop?: number;
-  marginBottom?: number;
-  paddingLeft?: number;
-  paddingRight?: number;
-  paddingTop?: number;
-  paddingBottom?: number;
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
 }
 
 const Input: FC<IInput> = ({
@@ -22,10 +20,7 @@ const Input: FC<IInput> = ({
   shadow,
   color,
   placeholder,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
+  margin,
 }) => (
   <section
     className="flex items-center justify-center overflow-hidden h-full"
@@ -37,7 +32,7 @@ const Input: FC<IInput> = ({
         boxShadow: shadow,
         borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
         border: "1px solid",
-        margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
+        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
       }}
       className="w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
       id="input"

@@ -242,7 +242,92 @@ const Settings: FC<ISettings> = ({
     });
     setItems(updatedItems);
   };
+  const marginWorkFunction = (
+    styleProp: functionEnum,
+    property: number | IColor
+  ) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            margin: { ...item.style.margin, [styleProp]: property },
+          },
+        };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            margin: { ...selectedChild.style.margin, [styleProp]: property },
+          },
+        };
 
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+  const paddingWorkFunction = (
+    styleProp: functionEnum,
+    property: number | IColor
+  ) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            padding: { ...item.style.padding, [styleProp]: property },
+          },
+        };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            padding: { ...selectedChild.style.padding, [styleProp]: property },
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
   const setColor = (color: IColor) => {
     singleWorkFunction(functionEnum.COLOR, color);
   };
@@ -357,28 +442,28 @@ const Settings: FC<ISettings> = ({
     singleWorkFunction(functionEnum.BORDER_RADIUS, borderRadius);
   };
   const setMarginLeft = (marginLeft: number) => {
-    singleWorkFunction(functionEnum.MARGIN_LEFT, marginLeft);
+    marginWorkFunction(functionEnum.MARGIN_LEFT, marginLeft);
   };
   const setMarginRight = (marginRight: number) => {
-    singleWorkFunction(functionEnum.MARGIN_RIGHT, marginRight);
+    marginWorkFunction(functionEnum.MARGIN_RIGHT, marginRight);
   };
   const setMarginTop = (marginTop: number) => {
-    singleWorkFunction(functionEnum.MARGIN_TOP, marginTop);
+    marginWorkFunction(functionEnum.MARGIN_TOP, marginTop);
   };
   const setMarginBottom = (marginBottom: number) => {
-    singleWorkFunction(functionEnum.MARGIN_BOTTOM, marginBottom);
+    marginWorkFunction(functionEnum.MARGIN_BOTTOM, marginBottom);
   };
   const setPaddingLeft = (paddingLeft: number) => {
-    singleWorkFunction(functionEnum.PADDING_LEFT, paddingLeft);
+    paddingWorkFunction(functionEnum.PADDING_LEFT, paddingLeft);
   };
   const setPaddingRight = (paddingRight: number) => {
-    singleWorkFunction(functionEnum.PADDING_RIGHT, paddingRight);
+    paddingWorkFunction(functionEnum.PADDING_RIGHT, paddingRight);
   };
   const setPaddingTop = (paddingTop: number) => {
-    singleWorkFunction(functionEnum.PADDING_TOP, paddingTop);
+    paddingWorkFunction(functionEnum.PADDING_TOP, paddingTop);
   };
   const setPaddingBottom = (paddingBottom: number) => {
-    singleWorkFunction(functionEnum.PADDING_BOTTOM, paddingBottom);
+    paddingWorkFunction(functionEnum.PADDING_BOTTOM, paddingBottom);
   };
   const setBorderWidth = (borderWidth: number) => {
     singleWorkFunction(functionEnum.BORDER_WIDTH, borderWidth);
@@ -483,14 +568,8 @@ const Settings: FC<ISettings> = ({
               setPaddingRight={setPaddingRight}
               setPaddingTop={setPaddingTop}
               setPaddingBottom={setPaddingBottom}
-              marginLeft={selectedItem?.style?.marginLeft}
-              marginRight={selectedItem?.style?.marginRight}
-              marginTop={selectedItem?.style?.marginTop}
-              marginBottom={selectedItem?.style?.marginBottom}
-              paddingLeft={selectedItem?.style?.paddingLeft}
-              paddingRight={selectedItem?.style?.paddingRight}
-              paddingTop={selectedItem?.style?.paddingTop}
-              paddingBottom={selectedItem?.style?.paddingBottom}
+              margin={{ ...selectedItem?.style?.margin }}
+              padding={{ ...selectedItem?.style?.padding }}
               setSmall={setSmall}
               setMedium={setMedium}
               setLarge={setLarge}

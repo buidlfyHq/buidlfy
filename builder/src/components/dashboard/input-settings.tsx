@@ -21,10 +21,7 @@ const InputSettings: FC<ISettings> = ({
   shadow,
   placeholder,
   handlePlaceholderChange,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
+  margin,
   setMarginLeft,
   setMarginRight,
   setMarginTop,
@@ -58,10 +55,7 @@ const InputSettings: FC<ISettings> = ({
       setMarginRight={setMarginRight}
       setMarginTop={setMarginTop}
       setMarginBottom={setMarginBottom}
-      marginLeft={marginLeft}
-      marginRight={marginRight}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
+      margin={{ ...margin }}
     />
     <ColorComponent
       color={color}

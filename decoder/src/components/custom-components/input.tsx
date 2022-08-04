@@ -11,10 +11,12 @@ interface IInputComponent {
   borderRadius: number;
   shadow: string;
   color: IColor;
-  marginLeft?: number;
-  marginRight?: number;
-  marginTop?: number;
-  marginBottom?: number;
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
 }
 
 const Input: FC<IInputComponent> = ({
@@ -24,10 +26,7 @@ const Input: FC<IInputComponent> = ({
   borderRadius,
   shadow,
   color,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
+  margin,
 }) => {
   const getValue = (inputArray: IInput[]) => {
     const requiredValue = inputArray.filter(
@@ -44,7 +43,7 @@ const Input: FC<IInputComponent> = ({
           boxShadow: shadow,
           border: "1px solid",
           borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-          margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
+          margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
         }}
         className="w-full leading-tight text-gray-700 bg-white appearance-none input"
         id="input"

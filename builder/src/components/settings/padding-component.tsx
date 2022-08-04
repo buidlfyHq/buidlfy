@@ -3,10 +3,12 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IPaddingComponent {
-  paddingLeft?: number;
-  paddingRight?: number;
-  paddingTop?: number;
-  paddingBottom?: number;
+  padding?: {
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
   setPaddingLeft?: (paddingLeft: number) => void;
   setPaddingRight?: (paddingRight: number) => void;
   setPaddingTop?: (paddingTop: number) => void;
@@ -14,10 +16,7 @@ interface IPaddingComponent {
 }
 
 const PaddingComponent: FC<IPaddingComponent> = ({
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
+  padding,
   setPaddingLeft,
   setPaddingRight,
   setPaddingBottom,
@@ -46,7 +45,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               type="number"
               id="padding-left"
               name="paddingLeft"
-              value={paddingLeft}
+              value={padding.paddingLeft}
               placeholder="left"
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleLeftChange}
@@ -55,7 +54,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               type="number"
               id="padding-right"
               name="paddingRight"
-              value={paddingRight}
+              value={padding.paddingRight}
               placeholder="right"
               className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleRightChange}
@@ -66,7 +65,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               type="number"
               id="padding-top"
               name="paddingTop"
-              value={paddingTop}
+              value={padding.paddingTop}
               placeholder="top"
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleTopChange}
@@ -75,7 +74,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               type="number"
               id="padding-bottom"
               name="paddingBottom"
-              value={paddingBottom}
+              value={padding.paddingBottom}
               placeholder="bottom"
               className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleBottomChange}

@@ -14,14 +14,8 @@ const Button: FC<ITexts> = ({
   link,
   borderRadius,
   shadow,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
+  margin,
+  padding,
 }) => (
   <section
     style={{ justifyContent: justifyContent }}
@@ -41,8 +35,8 @@ const Button: FC<ITexts> = ({
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
         boxShadow: shadow,
-        margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
-        padding: `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`,
+        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
       id="button-two"
       className="w-48 h-auto cursor-pointer btn whitespace-nowrap"

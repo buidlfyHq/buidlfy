@@ -12,12 +12,16 @@ export default interface IStyles {
   borderRadius?: number;
   borderWidth?: number;
   shadow?: string;
-  marginLeft?: number;
-  marginRight?: number;
-  marginTop?: number;
-  marginBottom?: number;
-  paddingLeft?: number;
-  paddingRight?: number;
-  paddingTop?: number;
-  paddingBottom?: number;
+  margin?: {
+    marginLeft?: number,
+    marginRight?: number,
+    marginTop?: number,
+    marginBottom?: number,
+  }
+  padding?: {
+    paddingLeft?: number,
+    paddingRight?: number,
+    paddingTop?: number,
+    paddingBottom?: number,
+  }
 }

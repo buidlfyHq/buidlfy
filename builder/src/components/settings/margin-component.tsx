@@ -3,10 +3,12 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IMarginComponent {
-  marginLeft: number;
-  marginRight: number;
-  marginTop: number;
-  marginBottom: number;
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
   setMarginLeft?: (marginLeft: number) => void;
   setMarginRight?: (marginRight: number) => void;
   setMarginTop?: (marginTop: number) => void;
@@ -14,10 +16,7 @@ interface IMarginComponent {
 }
 
 const MarginComponent: FC<IMarginComponent> = ({
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
+  margin,
   setMarginLeft,
   setMarginRight,
   setMarginTop,
@@ -46,7 +45,7 @@ const MarginComponent: FC<IMarginComponent> = ({
               type="number"
               id="margin-left"
               name="marginLeft"
-              value={marginLeft}
+              value={margin.marginLeft}
               placeholder="left"
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleLeftChange}
@@ -55,7 +54,7 @@ const MarginComponent: FC<IMarginComponent> = ({
               type="number"
               id="margin-right"
               name="marginRight"
-              value={marginRight}
+              value={margin.marginRight}
               placeholder="right"
               className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleRightChange}
@@ -66,7 +65,7 @@ const MarginComponent: FC<IMarginComponent> = ({
               type="number"
               id="margin-top"
               name="marginTop"
-              value={marginTop}
+              value={margin.marginTop}
               placeholder="top"
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleTopChange}
@@ -75,7 +74,7 @@ const MarginComponent: FC<IMarginComponent> = ({
               type="number"
               id="margin-bottom"
               name="marginBottom"
-              value={marginBottom}
+              value={margin.marginBottom}
               placeholder="bottom"
               className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleBottomChange}

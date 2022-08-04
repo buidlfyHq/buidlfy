@@ -15,10 +15,7 @@ const ImageSettings: FC<ISettings> = ({
   setLeft,
   setCenter,
   setRight,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
+  margin,
   setMarginLeft,
   setMarginRight,
   setMarginTop,
@@ -47,10 +44,7 @@ const ImageSettings: FC<ISettings> = ({
       setMarginRight={setMarginRight}
       setMarginTop={setMarginTop}
       setMarginBottom={setMarginBottom}
-      marginLeft={marginLeft}
-      marginRight={marginRight}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
+      margin={{ ...margin }}
     />
     <UtilitiesComponent
       deleteComponent={deleteComponent}

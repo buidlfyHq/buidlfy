@@ -30,14 +30,8 @@ const Button: FC<ITexts> = ({
   setOutputValue,
   connectWallet,
   borderRadius,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
+  margin,
+  padding,
 }) => {
   const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
@@ -148,8 +142,8 @@ const Button: FC<ITexts> = ({
             fontSize: `${fontSize}px`,
             borderRadius: `${borderRadius}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
-            padding: `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`,
+            margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+            padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
           className="btn rounded w-48 cursor-pointer whitespace-nowrap"
           onClick={!account ? connectWalletButton : disconnect}
@@ -169,8 +163,8 @@ const Button: FC<ITexts> = ({
             borderRadius: `${borderRadius}px`,
             fontSize: `${fontSize}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
-            padding: `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`,
+            margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+            padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
           className="btn rounded w-48 cursor-pointer whitespace-nowrap"
           onClick={() =>

@@ -12,14 +12,8 @@ const Text: FC<ITexts> = ({
   value,
   backgroundColor,
   link,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
+  margin,
+  padding,
 }) => {
   return (
     <section
@@ -34,8 +28,8 @@ const Text: FC<ITexts> = ({
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
-        padding: `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`,
+        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
     >
       {link.length > 0 ? (

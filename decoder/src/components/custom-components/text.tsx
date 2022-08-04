@@ -14,14 +14,8 @@ const Text: FC<ITexts> = ({
   link,
   outputValue,
   backgroundColor,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
+  margin,
+  padding,
 }) => {
   const renderValue = (outputLink: string, outputValue: string) => (
     <>
@@ -46,10 +40,10 @@ const Text: FC<ITexts> = ({
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
-        padding: `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`,
+        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
-      className="flex overflow-hidden items-center justify-center h-full overflow-auto"
+      className="flex overflow-hidden items-center justify-center h-full"
     >
       <>
         {outputValue ? (

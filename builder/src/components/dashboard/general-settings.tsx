@@ -35,18 +35,12 @@ const DefaultSettings: FC<ISettings> = ({
   setRight,
   fontSize,
   setFontSize,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
+  margin,
   setMarginLeft,
   setMarginRight,
   setMarginTop,
   setMarginBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
+  padding,
   setPaddingLeft,
   setPaddingRight,
   setPaddingBottom,
@@ -92,20 +86,14 @@ const DefaultSettings: FC<ISettings> = ({
       setMarginRight={setMarginRight}
       setMarginTop={setMarginTop}
       setMarginBottom={setMarginBottom}
-      marginLeft={marginLeft}
-      marginRight={marginRight}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
+      margin={{ ...margin }}
     />
     <PaddingComponent
       setPaddingLeft={setPaddingLeft}
       setPaddingRight={setPaddingRight}
       setPaddingTop={setPaddingTop}
       setPaddingBottom={setPaddingBottom}
-      paddingLeft={paddingLeft}
-      paddingRight={paddingRight}
-      paddingTop={paddingTop}
-      paddingBottom={paddingBottom}
+      padding={{ ...padding }}
     />
     <AlignComponent
       justifyContent={justifyContent}
