@@ -54,10 +54,6 @@ export const components = [
           marginRight: 0,
           marginTop: 0,
           marginBottom: 0,
-          paddingLeft: 0,
-          paddingRight: 0,
-          paddingTop: 0,
-          paddingBottom: 0,
         },
       },
       {
@@ -154,10 +150,6 @@ export const components = [
           marginRight: 0,
           marginTop: 0,
           marginBottom: 0,
-          paddingLeft: 0,
-          paddingRight: 0,
-          paddingTop: 0,
-          paddingBottom: 0,
         },
       },
       {
@@ -368,10 +360,6 @@ export const components = [
       marginRight: 0,
       marginTop: 0,
       marginBottom: 0,
-      paddingLeft: 0,
-      paddingRight: 0,
-      paddingTop: 0,
-      paddingBottom: 0,
     },
   },
   {

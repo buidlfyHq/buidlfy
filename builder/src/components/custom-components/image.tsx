@@ -4,9 +4,20 @@ import "styles/components.css";
 interface IImageComponent {
   imgData: string | ArrayBuffer;
   justifyContent: string;
+  marginLeft?: number;
+  marginRight?: number;
+  marginTop?: number;
+  marginBottom?: number;
 }
 
-const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
+const Image: FC<IImageComponent> = ({
+  imgData,
+  justifyContent,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
+}) => (
   <>
     {imgData ? (
       <div
@@ -17,6 +28,7 @@ const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
           backgroundRepeat: "no-repeat",
           backgroundPosition: justifyContent,
           backgroundSize: "contain",
+          margin: `${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`,
         }}
       />
     ) : (

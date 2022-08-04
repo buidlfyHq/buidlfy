@@ -14,7 +14,7 @@ const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
       backgroundImage: `url(${imgData ? imgData : defaultImage})`,
       backgroundRepeat: "no-repeat",
       backgroundPosition: justifyContent,
-      backgroundSize: "contain",
+      backgroundSize: "auto",
     }}
   />
 );

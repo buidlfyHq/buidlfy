@@ -229,6 +229,10 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
+          marginLeft={item.style.marginLeft}
+          marginRight={item.style.marginRight}
+          marginTop={item.style.marginTop}
+          marginBottom={item.style.marginBottom}
         />
       );
     case "Divider":
