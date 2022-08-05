@@ -119,8 +119,6 @@ const Workspace: FC<IWorkspace> = ({
 
           let elementArray = newArray;
 
-          console.log(newArray);
-
           setElementConfig({
             ...elementConfig,
             [selector.name]: elementArray,
