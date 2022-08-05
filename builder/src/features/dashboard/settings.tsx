@@ -43,16 +43,17 @@ const Settings: FC<ISettings> = ({
   openTab,
   setOpenTab,
 }) => {
-  const [showComponent, setShowComponent] = useState<{
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  }>(null); // for abi method component
   const ref = useRef(null);
+  const [showComponent, setShowComponent] =
+    useState<{
+      id: string;
+      value: {
+        name: string;
+        inputs: object[];
+        outputs: object[];
+        stateMutability: string;
+      };
+    }>(null); // for abi method component
 
   // work in progress
   const selectedChildren = items.map((item) =>

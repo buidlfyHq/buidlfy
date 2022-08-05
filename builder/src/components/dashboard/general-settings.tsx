@@ -11,7 +11,7 @@ import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 
-const DefaultSettings: FC<ISettings> = ({
+const GeneralSettings: FC<ISettings> = ({
   textVal,
   handleTextChange,
   linkVal,
@@ -115,4 +115,4 @@ const DefaultSettings: FC<ISettings> = ({
   </>
 );
 
-export default DefaultSettings;
+export default GeneralSettings;

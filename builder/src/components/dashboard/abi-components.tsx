@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
+import Spinner from "components/dashboard/spinner";
 import IItems from "interfaces/items";
 
 interface IAbiComponents {
@@ -204,10 +205,7 @@ const AbiComponents: FC<IAbiComponents> = ({
       {selector && selector?.name === valueName ? (
         <span className="flex">
           <span className="flex-1">
-            <span
-              className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
-              role="status"
-            />
+            <Spinner />
             Selecting
           </span>
           <AiOutlineClose className="mt-1.5" />
@@ -257,10 +255,7 @@ const AbiComponents: FC<IAbiComponents> = ({
                                           selector.name === selectedId ? (
                                             <span className="flex">
                                               <span className="flex-1">
-                                                <span
-                                                  className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
-                                                  role="status"
-                                                />
+                                                <Spinner />
                                                 Selecting
                                               </span>
                                               <AiOutlineClose className="mt-1.5" />
@@ -276,7 +271,7 @@ const AbiComponents: FC<IAbiComponents> = ({
                                           )}
                                         </>
                                       ) : (
-                                        <span>Select An Element</span>
+                                        renderDefault(selectedId)
                                       )}
                                     </div>
                                   );
@@ -318,10 +313,7 @@ const AbiComponents: FC<IAbiComponents> = ({
                                   selector.name === showComponent.value.name ? (
                                     <span className="flex">
                                       <span className="flex-1">
-                                        <span
-                                          className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
-                                          role="status"
-                                        />
+                                        <Spinner />
                                         Selecting
                                       </span>
                                       <AiOutlineClose className="mt-1.5" />
@@ -337,7 +329,7 @@ const AbiComponents: FC<IAbiComponents> = ({
                                   )}
                                 </>
                               ) : (
-                                <span>Select An Element</span>
+                                renderDefault(showComponent.value.name)
                               )}
                             </div>
                           );
@@ -385,10 +377,7 @@ const AbiComponents: FC<IAbiComponents> = ({
                                           selector.name === selectedId ? (
                                             <span className="flex">
                                               <span className="flex-1">
-                                                <span
-                                                  className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
-                                                  role="status"
-                                                />
+                                                <Spinner />
                                                 Selecting
                                               </span>
                                               <AiOutlineClose className="mt-1.5" />
@@ -404,7 +393,7 @@ const AbiComponents: FC<IAbiComponents> = ({
                                           )}
                                         </>
                                       ) : (
-                                        <span>Select An Element</span>
+                                        renderDefault(selectedId)
                                       )}
                                     </div>
                                   );
@@ -420,10 +409,7 @@ const AbiComponents: FC<IAbiComponents> = ({
 
           {show ? (
             <button className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              <span
-                className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
-                role="status"
-              />
+              <Spinner />
               Saving
             </button>
           ) : (
