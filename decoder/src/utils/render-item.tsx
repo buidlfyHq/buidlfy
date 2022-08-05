@@ -6,22 +6,14 @@ import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
 import IItems from "interfaces/items";
-// import ConnectWallet from "components/ConnectWallet";
+import { IInput, IOutput } from "interfaces/value";
 
 interface IRenderItem {
   item: IItems;
-  inputValue: {
-    id: string;
-    value: string;
-  }[];
-  setInputValue: (
-    inputValue: {
-      id: string;
-      value: string;
-    }[]
-  ) => void;
-  outputValue: object[];
-  setOutputValue: (outputValue: object[]) => void;
+  inputValue: IInput[];
+  setInputValue: (inputValue: IInput[]) => void;
+  outputValue: IOutput[];
+  setOutputValue: (outputValue: IOutput[]) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -32,9 +24,10 @@ const RenderItem: FC<IRenderItem> = ({
   setOutputValue,
 }) => {
   switch (item.name) {
-    case "Container":
+    case "Container" || "Horizontal Container" || "Vertical Container":
       return (
         <Container
+          item={item}
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
@@ -152,6 +145,40 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
+        />
+      );
+    case "Horizontal Container":
+      return (
+        <Container
+          item={item}
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          outputValue={outputValue}
+          setOutputValue={setOutputValue}
+        />
+      );
+    case "Vertical Container":
+      return (
+        <Container
+          item={item}
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          outputValue={outputValue}
+          setOutputValue={setOutputValue}
         />
       );
     default:

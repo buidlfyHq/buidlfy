@@ -4,6 +4,9 @@ import IItems from "./items";
 export default interface ITexts {
   item?: IItems;
   items?: IItems[];
+  itemsViaContainer?: IItems[];
+  containerItems?: IItems;
+  setContainerItems?: (items?: IItems) => void;
   setItems?: (items?: IItems[]) => void;
   bold: string;
   italic: string;

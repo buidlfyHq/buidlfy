@@ -3,12 +3,15 @@ import IItems from "interfaces/items";
 
 interface IAbiMethods {
   contractConfig: { abi: string; address: string };
-  setShowComponent: (showComponent: { id: string; value: {
-    name: string;
-    inputs: object[];
-    outputs: object[];
-    stateMutability: string;
-  }; }) => void;
+  setShowComponent: (showComponent: {
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }) => void;
   selectedItem: IItems;
   items: IItems[];
   setItems: (items: IItems[]) => void;
@@ -29,17 +32,30 @@ const AbiMethods: FC<IAbiMethods> = ({
       stateMutability: string;
       type: string;
     }[]
-  >([]); // work in progress
+  >([]);
 
   useEffect(() => {
     if (contractConfig.abi) {
       try {
         setAbiJson(JSON.parse(contractConfig.abi));
+        let selectedItemIndex = JSON.parse(contractConfig.abi).findIndex(
+          (method: { name: string }) =>
+            method.name === selectedItem.contract.methodName
+        );
+
+        if (selectedItemIndex !== -1) {
+          setShowComponent({
+            id: selectedItemIndex,
+            value: abiJson[selectedItemIndex],
+          });
+        } else {
+          setShowComponent(null);
+        }
       } catch (error) {
         console.log("error");
       }
     }
-  }, [contractConfig.abi]);
+  }, [contractConfig.abi, selectedItem]); // eslint-disable-line
 
   const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value) {
@@ -101,16 +117,24 @@ const AbiMethods: FC<IAbiMethods> = ({
                 id="select"
                 className="form-select appearance-none mt-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label="Default select example"
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                  onSelect(e)
-                }
+                onChange={(e) => onSelect(e)}
               >
-                <option value="" selected>
+                <option
+                  value=""
+                  selected={!selectedItem.contract.methodName}
+                  hidden
+                >
                   Select a Method
                 </option>
                 {contractConfig.abi &&
                   abiJson.map((method: { name: string }, i: number) => (
-                    <option value={i} key={i}>
+                    <option
+                      value={i}
+                      key={i}
+                      selected={
+                        selectedItem.contract.methodName === method.name
+                      }
+                    >
                       {method.name}
                     </option>
                   ))}

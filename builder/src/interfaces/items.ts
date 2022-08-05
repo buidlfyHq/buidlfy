@@ -15,7 +15,7 @@ export default interface IItems {
   name: string;
   value?: string;
   style: Styles;
-  children?: IItems[];
+  children?: any; // Fix: Work in progress as it is not compatible new children type
   isBounded?: boolean;
   isDraggable?: boolean;
   isResizable?: boolean;

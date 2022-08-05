@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from "react";
+import React, { FC } from "react";
 import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
@@ -30,6 +30,7 @@ const SettingComponent: FC<ISettings> = ({
   setContractConfig,
   showComponent,
   setShowComponent,
+  selector,
   setSelector,
   elementConfig,
   openTab,
@@ -43,7 +44,7 @@ const SettingComponent: FC<ISettings> = ({
   placeholder,
   setPlaceholder
 }) => {
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
@@ -88,6 +89,7 @@ const SettingComponent: FC<ISettings> = ({
           contractConfig={contractConfig}
           setShowComponent={setShowComponent}
           showComponent={showComponent}
+          selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           openTab={openTab}
@@ -119,6 +121,50 @@ const SettingComponent: FC<ISettings> = ({
       );
 
     case "Container":
+      return (
+        <ContainerSettings
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
+          color={selectedItem?.style?.color}
+          setColor={setColor}
+          setBgColor={setBgColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          setBorderWidth={setBorderWidth}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+        />
+      );
+    case "Horizontal Container":
+      return (
+        <ContainerSettings
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
+          color={selectedItem?.style?.color}
+          setColor={setColor}
+          setBgColor={setBgColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          setBorderWidth={setBorderWidth}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+        />
+      );
+    case "Vertical Container":
       return (
         <ContainerSettings
           items={items}

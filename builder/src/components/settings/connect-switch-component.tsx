@@ -41,6 +41,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
             role="switch"
             id="flexSwitchCheckDefault"
             checked={connectToggle ? true : false}
+            readOnly
           />
         </div>
       </div>

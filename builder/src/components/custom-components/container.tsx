@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useEffect } from "react";
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Layout } from "react-grid-layout";
 import { BiGridHorizontal } from "react-icons/bi";
 import GridLayout from "react-grid-layout";
@@ -6,7 +6,7 @@ import RenderItem from "utils/render-item";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
-import defaultItem from "config/default-element-container";
+import defaultItem from "config/default-container";
 
 interface IContainer {
   item: IItems;
@@ -63,9 +63,11 @@ const Container: FC<IContainer> = ({
   setElementConfig,
   setValue
 }) => {
+  const [containerItems, setContainerItems] = useState<IItems>(item || null)
   
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
+    console.log(layout)
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
       const { h, minW, x, y, w, i, minH } = obj;
@@ -166,8 +168,13 @@ const Container: FC<IContainer> = ({
   };
 
   useEffect(() => {
-    console.log('changed container')
+    setContainerItems(item)
+    // console.log('changed container', items)
   }, [items])
+
+
+  // const filterItems = items.filter(item => item.i !== containerItems.i )
+  // setItems([...filterItems, containerItems])
 
   let containerW = document
     ?.getElementById(`${item.i}`)
@@ -238,7 +245,15 @@ const Container: FC<IContainer> = ({
                   onMouseOut={() => setDrag(true)}
                   onClick={() => onComponentClick(item.name, i)}
                 >
-                  <RenderItem item={item} setDrag={setDrag} setValue={setValue} />
+                  <RenderItem 
+                    item={item} 
+                    itemsViaContainer={items}
+                    setItems={setItems}
+                    containerItems={containerItems}
+                    setDrag={setDrag} 
+                    setValue={setValue} 
+                    setContainerItems={setContainerItems}
+                  />
                 </div>
               );
             })

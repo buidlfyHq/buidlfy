@@ -11,6 +11,9 @@ import IItems from "interfaces/items";
 interface IRenderItem {
   item: IItems;
   items?: IItems[];
+  containerItems?: IItems;
+  itemsViaContainer?: IItems[];
+  setContainerItems?: (items?: IItems) => void;
   setItems?: (items?: IItems[]) => void;
   setDrag: (drag?: boolean) => void;
   setOpenSetting?: (openSetting: boolean) => void;
@@ -38,6 +41,9 @@ interface IRenderItem {
 const RenderItem: FC<IRenderItem> = ({
   item,
   items,
+  containerItems,
+  itemsViaContainer,
+  setContainerItems,
   setItems,
   setDrag,
   setOpenSetting,
@@ -99,6 +105,9 @@ const RenderItem: FC<IRenderItem> = ({
         <Text
           item={item}
           items={items}
+          itemsViaContainer={itemsViaContainer}
+          containerItems={containerItems}
+          setContainerItems={setContainerItems}
           setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
@@ -132,6 +141,9 @@ const RenderItem: FC<IRenderItem> = ({
         <Text
           item={item}
           items={items}
+          containerItems={containerItems}
+          itemsViaContainer={itemsViaContainer}
+          setContainerItems={setContainerItems}
           setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
@@ -150,6 +162,9 @@ const RenderItem: FC<IRenderItem> = ({
         <Text
           item={item}
           items={items}
+          containerItems={containerItems}
+          itemsViaContainer={itemsViaContainer}
+          setContainerItems={setContainerItems}
           setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
@@ -168,6 +183,9 @@ const RenderItem: FC<IRenderItem> = ({
         <Text
           item={item}
           items={items}
+          containerItems={containerItems}
+          itemsViaContainer={itemsViaContainer}
+          setContainerItems={setContainerItems}
           setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
@@ -199,6 +217,54 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case "Divider":
       return <Divider />;
+    case "Horizontal Container":
+      return (
+        <Container
+          item={item}
+          items={items}
+          setItems={setItems}
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          setOpenSetting={setOpenSetting}
+          setSettingItemId={setSettingItemId}
+          setOpenTab={setOpenTab}
+          setDrag={setDrag}
+          setAddContainer={setAddContainer}
+          selector={selector}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          setElementConfig={setElementConfig}
+        />
+      );
+    case "Vertical Container":
+      return (
+        <Container
+          item={item}
+          items={items}
+          setItems={setItems}
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          setOpenSetting={setOpenSetting}
+          setSettingItemId={setSettingItemId}
+          setOpenTab={setOpenTab}
+          setDrag={setDrag}
+          setAddContainer={setAddContainer}
+          selector={selector}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          setElementConfig={setElementConfig}
+        />
+      );
     default:
       return <></>;
   }

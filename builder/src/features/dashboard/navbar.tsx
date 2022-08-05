@@ -10,6 +10,12 @@ interface INavbar {
   setClassName: React.Dispatch<React.SetStateAction<string>>;
   items: IItems[];
   setItems: (items: IItems[]) => void;
+  setSelector: (selector: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  }) => void;
   contractConfig: { abi: string; address: string };
   backgroundColor: IColor;
 }
@@ -19,17 +25,18 @@ const Navbar: FC<INavbar> = ({
   setClassName,
   items,
   setItems,
+  setSelector,
   contractConfig,
-  backgroundColor
+  backgroundColor,
 }) => {
   const [abiJSON, setAbiJSON] = useState<
-  {
-    inputs: { internalType: string; name: string; type: string }[];
-    name: string;
-    outputs: { internalType: string; name: string; type: string }[];
-    stateMutability: string;
-    type: string;
-  }[]
+    {
+      inputs: { internalType: string; name: string; type: string }[];
+      name: string;
+      outputs: { internalType: string; name: string; type: string }[];
+      stateMutability: string;
+      type: string;
+    }[]
   >([]); // work in progress
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
@@ -44,10 +51,6 @@ const Navbar: FC<INavbar> = ({
     }
   }, [contractConfig.abi]);
 
-  // const showSidebar = () => {
-  //   setClassName("");
-  // };
-
   const handleSave = () => {
     // FIX: save full config to local storage
     if (items?.length > 0) {
@@ -59,6 +62,7 @@ const Navbar: FC<INavbar> = ({
     // FIX: remove full config from local storage
     localStorage.removeItem("items");
     setItems([]);
+    setSelector(null);
   };
 
   const handlePublish = () => {
@@ -80,14 +84,11 @@ const Navbar: FC<INavbar> = ({
     <main
       className={
         !className
-          ? `fixed left-[250px] w-[calc(100%-250px)] h-[57px] top-0 border-b flex flex-row justify-between items-center p-3 bg-white z-20`
+          ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b flex flex-row justify-between items-center p-3 bg-white z-20`
           : `h-[57px] w-full top-0 border-b flex flex-row justify-between items-center p-3 z-20`
       }
     >
-      <div
-        // onClick={showSidebar}
-        className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"
-      >
+      <div className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer">
         {className && <AiOutlineDoubleRight />}
       </div>
       <div className="flex flex-row h-[60px]">
@@ -128,7 +129,7 @@ const Navbar: FC<INavbar> = ({
         </button>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto"
+          className="fixed inset-0 z-20 overflow-y-auto"
           open={isOpen}
           onClose={() => setIsOpen(false)}
         >

@@ -1,5 +1,6 @@
 import { ethers, Contract } from "ethers";
-import { setValue } from "./set-value";
+import { setValue } from "hooks/set-value";
+import { IInput, IOutput } from "interfaces/value";
 
 export const onRequest = async (
   method: string,
@@ -10,8 +11,8 @@ export const onRequest = async (
     outputs?: object[];
   },
   contract: Contract,
-  inputValue: object[],
-  outputValue: object[],
+  inputValue: IInput[],
+  outputValue: IOutput[],
   setIsOpen,
   setTransactionStatus
 ) => {
@@ -62,9 +63,10 @@ export const onRequest = async (
       contractFunction.stateMutability === "pure"
     ) {
       const res = await contract.functions[method](...args); // passing an array as a function parameter
-      receipt = await res.wait();
+      receipt = res.wait ? await res.wait() : res;
       console.log(receipt);
     }
+
     // contract functions with outputs
     let returnOutput = [];
     if (contractFunction.outputs.length) {

@@ -14,10 +14,18 @@ const Modal: FC<IModal> = ({
   isOpen,
   setIsOpen,
 }) => {
+  const handleSetAbi = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // keep type = function, remove other types
+    const filteredAbi = JSON.parse(e.target.value).filter(
+      (m: { type: string }) => m.type === "function"
+    );
+    setContractConfig({ ...contractConfig, abi: JSON.stringify(filteredAbi) });
+  };
+
   return (
     <Dialog
       as="div"
-      className="fixed inset-0 z-10 overflow-y-auto"
+      className="fixed inset-0 z-20 overflow-y-auto"
       open={isOpen}
       onClose={() => setIsOpen(false)}
     >
@@ -47,9 +55,7 @@ const Modal: FC<IModal> = ({
               className="w-full mt-2 py-1 px-2 bg-white/90 rounded border"
               placeholder="Paste ABI here..."
               value={contractConfig.abi}
-              onChange={(e) =>
-                setContractConfig({ ...contractConfig, abi: e.target.value })
-              }
+              onChange={(e) => handleSetAbi(e)}
             />
             <input
               className="w-full mt-2 py-1 px-2 bg-white/90 rounded border"

@@ -3,6 +3,7 @@ import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
+import { containerCheck } from "utils/container-check";
 import { Link } from "react-router-dom";
 
 interface ISidebar {
@@ -39,7 +40,7 @@ const Sidebar: FC<ISidebar> = ({
     if (items.length === 0) return 0;
     else {
       let arr = items.map((item) => {
-        return item.name === "Container"
+        return containerCheck(item)
           ? Math.max(...item.children.map((obj) => obj.y), item.y)
           : item.y;
       });
@@ -56,7 +57,7 @@ const Sidebar: FC<ISidebar> = ({
   };
 
   const renderContainerComponents = components
-    .filter((c) => c.name !== "Container")
+    .filter((c) => !containerCheck(c))
     ?.map((c, index) => {
       const availableHandles: ResizeHandles = ["nw", "se"];
       return (
@@ -64,14 +65,13 @@ const Sidebar: FC<ISidebar> = ({
           key={index}
           className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
           onClick={() => {
-            console.log(selectedItem);
             let y = checkContainerY(selectedItem);
             let newC = {
               ...c,
               i: uid(),
               x: 0,
               y,
-              w: 12,
+              w: 6,
               minW: 1,
               resizeHandles: availableHandles,
             };
@@ -109,11 +109,25 @@ const Sidebar: FC<ISidebar> = ({
             y: y,
             w: 6,
             minW: 1,
-            minH: 1,
-            resizeHandles:
-              c.name === "Container" ? containerHandles : availableHandles,
+            resizeHandles: containerCheck(c)
+              ? containerHandles
+              : availableHandles,
           };
+          if (c.name === "Vertical Container") {
+            newC.w = 2;
+          }
+          if (
+            c.name === "Horizontal Container" ||
+            c.name === "Vertical Container"
+          ) {
+            let newChildren = c.children.map((child) => ({
+              ...child,
+              i: uid(),
+            }));
+            newC.children = newChildren;
+          }
           setItems([...items, newC]);
+          console.log(items)
         }}
       >
         {c.name}

@@ -150,6 +150,7 @@ const Dashboard: FC = () => {
               setClassName={setClassName}
               items={items}
               setItems={setItems}
+              setSelector={setSelector}
               contractConfig={contractConfig}
               backgroundColor={backgroundColor}
             />

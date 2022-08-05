@@ -47,6 +47,12 @@ export default interface ISettings {
       stateMutability: string;
     };
   };
+  selector?: {
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  },
   setSelector?: (selector: {
     methodName: string;
     type: string;
@@ -71,7 +77,8 @@ export default interface ISettings {
   setPlaceholder?: (placeholder: string) => void;
   handlePlaceholderChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   textVal?: string;
-  handleTextChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // handleTextChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleTextChange?: (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
   linkVal?: string;
   handleLinkChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
