@@ -31,6 +31,10 @@ interface IWorkspace {
   setDrag: (drag: boolean) => void;
   setAddContainer: (addContainer?: boolean) => void;
   backgroundColor: IColor;
+  marginLeft?: number;
+  marginRight?: number;
+  marginTop?: number;
+  marginBottom?: number;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -48,6 +52,10 @@ const Workspace: FC<IWorkspace> = ({
   setDrag,
   setAddContainer,
   backgroundColor,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -239,7 +247,7 @@ const Workspace: FC<IWorkspace> = ({
           onLayoutChange={onLayoutChange}
           compactType={null}
           margin={[0, 0]}
-          className="h-fit"
+          className="h-fit overflow-hidden"
         >
           {renderItemFunction}
         </ResponsiveGridLayout>

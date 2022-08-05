@@ -14,6 +14,8 @@ const Text: FC<ITexts> = ({
   link,
   outputValue,
   backgroundColor,
+  margin,
+  padding,
 }) => {
   const renderValue = (outputLink: string, outputValue: string) => (
     <>
@@ -38,8 +40,10 @@ const Text: FC<ITexts> = ({
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
-      className="flex items-center justify-center h-full overflow-hidden"
+      className="flex overflow-hidden items-center justify-center h-full"
     >
       <>
         {outputValue ? (
@@ -54,7 +58,7 @@ const Text: FC<ITexts> = ({
               : renderValue(link, value)}
           </>
         ) : (
-          renderValue(link, value)
+          <>renderValue(link, value)</>
         )}
       </>
     </section>

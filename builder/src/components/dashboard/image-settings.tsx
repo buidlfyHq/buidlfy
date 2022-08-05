@@ -3,6 +3,7 @@ import AlignComponent from "components/settings/align-component";
 import UtilitiesComponent from "components/settings/utilities-component";
 import UploadComponent from "components/settings/upload-component";
 import ISettings from "interfaces/settings";
+import MarginComponent from "components/settings/margin-component";
 
 const ImageSettings: FC<ISettings> = ({
   items,
@@ -14,6 +15,11 @@ const ImageSettings: FC<ISettings> = ({
   setLeft,
   setCenter,
   setRight,
+  margin,
+  setMarginLeft,
+  setMarginRight,
+  setMarginTop,
+  setMarginBottom,
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -33,7 +39,13 @@ const ImageSettings: FC<ISettings> = ({
       setRight={setRight}
       setCenter={setCenter}
     />
-
+    <MarginComponent
+      setMarginLeft={setMarginLeft}
+      setMarginRight={setMarginRight}
+      setMarginTop={setMarginTop}
+      setMarginBottom={setMarginBottom}
+      margin={{ ...margin }}
+    />
     <UtilitiesComponent
       deleteComponent={deleteComponent}
       setDeleteComponent={setDeleteComponent}

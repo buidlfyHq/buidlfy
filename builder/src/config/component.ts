@@ -1,14 +1,45 @@
+const defaultMarginStyles = {
+  margin: {
+    marginLeft: 0,
+    marginRight: 0,
+    marginTop: 0,
+    marginBottom: 0
+  }
+}
+const defaultPaddingStyles = {
+  padding: {
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: 0,
+    paddingBottom: 0
+  }
+}
+const defaultColorStyles = {
+  backgroundColor: { r: "0", g: "0", b: "0" },
+  color: { r: "0", g: "0", b: "0", a: "100" },
+}
+const defaultFontStyles = {
+  fontWeight: "normal",
+  fontStyle: "normal",
+  textDecoration: "none",
+  justifyContent: "center",
+}
+const defaultDeleteStyles = {
+  deleteComponent: 0,
+}
+const defaultBorderStyles = {
+  borderRadius: 0,
+  borderWidth: 0,
+  shadow: "none",
+}
 export const components = [
   {
     name: "Container",
     h: 2,
     style: {
-      deleteComponent: 0,
-      backgroundColor: { r: "0", g: "0", b: "0" },
-      color: { r: "0", g: "0", b: "0", a: "100" },
-      borderRadius: 0,
-      borderWidth: 0,
-      shadow: "none",
+      ...defaultDeleteStyles,
+      ...defaultColorStyles,
+      ...defaultBorderStyles,
     },
     children: [],
   },
@@ -16,12 +47,9 @@ export const components = [
     name: "Horizontal Container",
     h: 4,
     style: {
-      deleteComponent: 0,
-      backgroundColor: { r: "0", g: "0", b: "0" },
-      color: { r: "0", g: "0", b: "0", a: "100" },
-      borderRadius: 1,
-      borderWidth: 0,
-      shadow: "none",
+      ...defaultDeleteStyles,
+      ...defaultColorStyles,
+      ...defaultBorderStyles,
     },
     children: [
       {
@@ -32,8 +60,9 @@ export const components = [
         x: 0,
         w: 3,
         style: {
-          deleteComponent: 0,
-          justifyContent: "center",
+          ...defaultDeleteStyles,
+          ...defaultFontStyles,
+          ...defaultMarginStyles
         },
       },
       {
@@ -46,49 +75,44 @@ export const components = [
         value: "Card Paragraph",
         link: "",
         style: {
-          color: { r: "0", g: "0", b: "0", a: "100" },
-          backgroundColor: { r: "0", g: "0", b: "0" },
-          fontWeight: "normal",
-          fontStyle: "normal",
-          textDecoration: "none",
-          justifyContent: "center",
+          ...defaultColorStyles,
+          ...defaultFontStyles,
           fontSize: 15,
-          deleteComponent: 0,
+          ...defaultDeleteStyles,
+          ...defaultMarginStyles,
+          ...defaultPaddingStyles
         },
       },
       {
         name: "Heading 1",
         h: 2,
         i: 2,
-        y: 2,
+        y: 0,
         x: 3,
         w: 3,
         value: "Card Title",
         link: "",
         style: {
-          color: { r: "0", g: "0", b: "0", a: "100" },
-          backgroundColor: { r: "0", g: "0", b: "0" },
-          fontWeight: "bold",
-          fontStyle: "normal",
-          textDecoration: "none",
-          justifyContent: "center",
+          ...defaultColorStyles,
+          ...defaultFontStyles,
           fontSize: 25,
-          deleteComponent: 0,
+          ...defaultDeleteStyles,
+          ...defaultMarginStyles,
+          ...defaultPaddingStyles
         },
       },
+     
     ],
   },
   {
     name: "Vertical Container",
     h: 5,
     style: {
-      deleteComponent: 0,
-      backgroundColor: { r: "0", g: "0", b: "0" },
-      color: { r: "0", g: "0", b: "0", a: "100" },
-      borderRadius: 1,
-      borderWidth: 0,
-      shadow: "none",
+      ...defaultDeleteStyles,
+      ...defaultColorStyles,
+      ...defaultBorderStyles,
     },
+
     children: [
       {
         name: "Image",
@@ -98,8 +122,9 @@ export const components = [
         x: 0,
         y: 0,
         style: {
-          deleteComponent: 0,
-          justifyContent: "center",
+          ...defaultDeleteStyles,
+          ...defaultFontStyles,
+          ...defaultMarginStyles,
         },
       },
       {
@@ -112,14 +137,12 @@ export const components = [
         value: "Card Title",
         link: "",
         style: {
-          color: { r: "0", g: "0", b: "0", a: "100" },
-          backgroundColor: { r: "0", g: "0", b: "0" },
-          fontWeight: "bold",
-          fontStyle: "normal",
-          textDecoration: "none",
-          justifyContent: "center",
+          ...defaultColorStyles,
+          ...defaultFontStyles,
           fontSize: 25,
-          deleteComponent: 0,
+          ...defaultDeleteStyles,
+          ...defaultMarginStyles,
+          ...defaultPaddingStyles
         },
       },
       {
@@ -132,14 +155,12 @@ export const components = [
         value: "Card Paragraph",
         link: "",
         style: {
-          color: { r: "0", g: "0", b: "0", a: "100" },
-          backgroundColor: { r: "0", g: "0", b: "0" },
-          fontWeight: "normal",
-          fontStyle: "normal",
-          textDecoration: "none",
-          justifyContent: "center",
+          ...defaultColorStyles,
+          ...defaultFontStyles,
           fontSize: 15,
-          deleteComponent: 0,
+          ...defaultDeleteStyles,
+          ...defaultMarginStyles,
+          ...defaultPaddingStyles
         },
       },
     ],
@@ -150,16 +171,18 @@ export const components = [
     value: "Add Button",
     link: "",
     style: {
-      color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0" },
-      fontWeight: "normal",
-      fontStyle: "normal",
-      textDecoration: "none",
-      justifyContent: "center",
+      ...defaultColorStyles,
+      ...defaultFontStyles,
       fontSize: 15,
-      deleteComponent: 0,
-      borderRadius: 0,
-      shadow: "none",
+      ...defaultDeleteStyles,
+      ...defaultBorderStyles,
+      ...defaultMarginStyles,
+      padding: {
+        paddingLeft: 24,
+        paddingRight: 24,
+        paddingTop: 8,
+        paddingBottom: 8,
+      }
     },
     connectWallet: "off",
     contract: {},
@@ -170,14 +193,12 @@ export const components = [
     value: "Text",
     link: "",
     style: {
-      color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0" },
-      fontWeight: "normal",
-      fontStyle: "normal",
-      textDecoration: "none",
-      justifyContent: "center",
+      ...defaultColorStyles,
+      ...defaultFontStyles,
       fontSize: 15,
-      deleteComponent: 0,
+      ...defaultDeleteStyles,
+      ...defaultMarginStyles,
+      ...defaultPaddingStyles,
     },
   },
   {
@@ -186,14 +207,12 @@ export const components = [
     value: "Heading 1",
     link: "",
     style: {
-      color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0" },
-      fontWeight: "normal",
-      fontStyle: "normal",
-      textDecoration: "none",
-      justifyContent: "center",
+      ...defaultColorStyles,
+      ...defaultFontStyles,
       fontSize: 30,
-      deleteComponent: 0,
+      ...defaultDeleteStyles,
+      ...defaultMarginStyles,
+      ...defaultPaddingStyles,
     },
   },
   {
@@ -202,14 +221,12 @@ export const components = [
     value: "Heading 2",
     link: "",
     style: {
-      color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0" },
-      fontWeight: "normal",
-      fontStyle: "normal",
-      textDecoration: "none",
-      justifyContent: "center",
+      ...defaultColorStyles,
+      ...defaultFontStyles,
       fontSize: 24,
-      deleteComponent: 0,
+      ...defaultDeleteStyles,
+      ...defaultMarginStyles,
+      ...defaultPaddingStyles,
     },
   },
   {
@@ -218,14 +235,12 @@ export const components = [
     value: "Heading 3",
     link: "",
     style: {
-      color: { r: "0", g: "0", b: "0", a: "100" },
-      backgroundColor: { r: "0", g: "0", b: "0" },
-      fontWeight: "normal",
-      fontStyle: "normal",
-      textDecoration: "none",
-      justifyContent: "center",
+      ...defaultColorStyles,
+      ...defaultFontStyles,
       fontSize: 18.2,
-      deleteComponent: 0,
+      ...defaultDeleteStyles,
+      ...defaultMarginStyles,
+      ...defaultPaddingStyles,
     },
   },
   {
@@ -233,25 +248,31 @@ export const components = [
     h: 1,
     placeholder: "Placeholder",
     style: {
-      deleteComponent: 0,
-      borderRadius: 0,
-      shadow: "none",
-      color: { r: "0", g: "0", b: "0", a: "100" },
+      ...defaultDeleteStyles,
+      ...defaultBorderStyles,
+      ...defaultColorStyles,
+      margin: {
+        marginLeft: 24,
+        marginRight: 24,
+        marginTop: 0,
+        marginBottom: 0,
+      }
     },
   },
   {
     name: "Image",
     h: 1.2,
     style: {
-      deleteComponent: 0,
-      justifyContent: "center",
+      ...defaultDeleteStyles,
+      ...defaultFontStyles,
+      ...defaultMarginStyles,
     },
   },
   {
     name: "Divider",
     h: 1,
     style: {
-      deleteComponent: 0,
+      ...defaultDeleteStyles,
     },
   },
 ];

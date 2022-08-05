@@ -68,6 +68,26 @@ export default interface ISettings {
   setBorderRadius?: (borderRadius: number) => void;
   borderWidth?: number;
   setBorderWidth?: (borderWidth: number) => void;
+  margin?: {
+    marginLeft?: number,
+    marginRight?: number,
+    marginTop?: number,
+    marginBottom?: number,
+  };
+  padding?: {
+    paddingLeft?: number,
+    paddingRight?: number,
+    paddingTop?: number,
+    paddingBottom?: number,
+  }
+  setMarginLeft?: (marginLeft: number) => void;
+  setMarginRight?: (marginRight: number) => void;
+  setMarginTop?: (marginTop: number) => void;
+  setMarginBottom?: (marginBottom: number) => void;
+  setPaddingLeft?: (paddingLeft: number) => void;
+  setPaddingRight?: (paddingRight: number) => void;
+  setPaddingTop?: (paddingTop: number) => void;
+  setPaddingBottom?: (paddingBottom: number) => void;
   setSmall?: (shadow: string | boolean) => void;
   setMedium?: (shadow: string | boolean) => void;
   setLarge?: (shadow: string | boolean) => void;

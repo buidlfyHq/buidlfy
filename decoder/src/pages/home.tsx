@@ -28,7 +28,7 @@ const Home: FC = () => {
         isResizable={false}
         compactType={null}
         margin={[0, 0]}
-        className="h-fit"
+        className="h-fit overflow-hidden"
       >
         {config.builder.map((c: IItems) => {
           const { x, y, w, h, minW, i } = c;

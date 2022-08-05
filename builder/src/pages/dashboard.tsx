@@ -28,13 +28,12 @@ const Dashboard: FC = () => {
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState<string>(""); // for storing current element id for settings
   // for selecting an element for contract
-  const [selector, setSelector] =
-    useState<{
-      methodName: string;
-      type: string;
-      name: string;
-      buttonId: string;
-    }>(null);
+  const [selector, setSelector] = useState<{
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  }>(null);
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);

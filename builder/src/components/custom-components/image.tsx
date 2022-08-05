@@ -4,23 +4,30 @@ import "styles/components.css";
 interface IImageComponent {
   imgData: string | ArrayBuffer;
   justifyContent: string;
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
 }
 
-const Image: FC<IImageComponent> = ({ imgData, justifyContent }) => (
+const Image: FC<IImageComponent> = ({ imgData, justifyContent, margin }) => (
   <>
     {imgData ? (
       <div
         id="image-one"
-        className="flex items-center justify-center w-full h-full"
+        className="items-center justify-center w-auto h-full"
         style={{
           backgroundImage: `url(${imgData})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: justifyContent,
           backgroundSize: "contain",
+          margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
         }}
       />
     ) : (
-      <div className="flex items-center justify-center w-full h-full">
+      <div className="flex overflow-hidden  items-center justify-center w-auto h-full">
         <div
           id="image-two"
           className="px-10 bold py-[10px] rounded-xl bg-indigo-700 text-white"

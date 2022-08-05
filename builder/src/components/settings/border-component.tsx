@@ -50,7 +50,7 @@ const BorderComponent: FC<IBorderComponent> = ({
             <select
               value={borderWidth}
               onChange={(e) => handleWidthChange(e)}
-              className="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="form-select appearance-none block w-8 h-10 px-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               aria-label="select"
             >
               <option selected>{borderWidth}</option>

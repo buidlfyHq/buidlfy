@@ -170,7 +170,7 @@ const Container: FC<IContainer> = ({
   return (
     <section
       id={item.i}
-      className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag"
+      className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
     >
       <GridLayout
         layout={children}

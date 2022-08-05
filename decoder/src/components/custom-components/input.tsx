@@ -11,6 +11,12 @@ interface IInputComponent {
   borderRadius: number;
   shadow: string;
   color: IColor;
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
 }
 
 const Input: FC<IInputComponent> = ({
@@ -20,6 +26,7 @@ const Input: FC<IInputComponent> = ({
   borderRadius,
   shadow,
   color,
+  margin,
 }) => {
   const getValue = (inputArray: IInput[]) => {
     const requiredValue = inputArray.filter(
@@ -29,15 +36,16 @@ const Input: FC<IInputComponent> = ({
   };
 
   return (
-    <section className="h-full flex justify-center items-center">
+    <section className="h-full flex justify-center overflow-hidden items-center">
       <input
         style={{
           borderRadius: `${borderRadius}px`,
           boxShadow: shadow,
           border: "1px solid",
           borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+          margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
         }}
-        className="w-full px-3 py-2 ml-6 mr-6 leading-tight text-gray-700 bg-white appearance-none input"
+        className="w-full leading-tight text-gray-700 bg-white appearance-none input"
         id="input"
         type="text"
         placeholder="Input"
