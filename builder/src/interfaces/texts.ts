@@ -22,5 +22,17 @@ export default interface ITexts {
   connectWallet?: string;
   setValue?: (value: string) => void;
   setLink?: (link: string) => void;
+  margin?: {
+    marginLeft?: number,
+    marginRight?: number,
+    marginTop?: number,
+    marginBottom?: number,
+  }
+  padding?: {
+    paddingLeft?: number,
+    paddingRight?: number,
+    paddingTop?: number,
+    paddingBottom?: number,
+  }
 }
 

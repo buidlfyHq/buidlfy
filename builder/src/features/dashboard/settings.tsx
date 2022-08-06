@@ -20,11 +20,20 @@ enum functionEnum {
   SHADOW = "shadow",
   BORDER_RADIUS = "borderRadius",
   BORDER_WIDTH = "borderWidth",
+  MARGIN_LEFT = "marginLeft",
+  MARGIN_RIGHT = "marginRight",
+  MARGIN_TOP = "marginTop",
+  MARGIN_BOTTOM = "marginBottom",
+  PADDING_LEFT = "paddingLeft",
+  PADDING_RIGHT = "paddingRight",
+  PADDING_TOP = "paddingTop",
+  PADDING_BOTTOM = "paddingBottom",
 }
 
 const Settings: FC<ISettings> = ({
   items,
   setItems,
+  setOpenSetting,
   settingItemId,
   contractConfig,
   setContractConfig,
@@ -34,6 +43,7 @@ const Settings: FC<ISettings> = ({
   openTab,
   setOpenTab
 }) => {
+  const ref = useRef(null);
   const [showComponent, setShowComponent] =
     useState<{
       id: string;
@@ -44,7 +54,6 @@ const Settings: FC<ISettings> = ({
         stateMutability: string;
       };
     }>(null); // for abi method component
-  const ref = useRef(null);
 
   // work in progress
   const selectedChildren = items.map((item) =>
@@ -266,7 +275,92 @@ const Settings: FC<ISettings> = ({
     });
     setItems(updatedItems);
   };
+  const marginWorkFunction = (
+    styleProp: functionEnum,
+    property: number | IColor
+  ) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            margin: { ...item.style.margin, [styleProp]: property },
+          },
+        };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            margin: { ...selectedChild.style.margin, [styleProp]: property },
+          },
+        };
 
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+  const paddingWorkFunction = (
+    styleProp: functionEnum,
+    property: number | IColor
+  ) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            padding: { ...item.style.padding, [styleProp]: property },
+          },
+        };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            padding: { ...selectedChild.style.padding, [styleProp]: property },
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
   const setColor = (color: IColor) => {
     singleWorkFunction(functionEnum.COLOR, color);
   };
@@ -380,7 +474,30 @@ const Settings: FC<ISettings> = ({
   const setBorderRadius = (borderRadius: number) => {
     singleWorkFunction(functionEnum.BORDER_RADIUS, borderRadius);
   };
-
+  const setMarginLeft = (marginLeft: number) => {
+    marginWorkFunction(functionEnum.MARGIN_LEFT, marginLeft);
+  };
+  const setMarginRight = (marginRight: number) => {
+    marginWorkFunction(functionEnum.MARGIN_RIGHT, marginRight);
+  };
+  const setMarginTop = (marginTop: number) => {
+    marginWorkFunction(functionEnum.MARGIN_TOP, marginTop);
+  };
+  const setMarginBottom = (marginBottom: number) => {
+    marginWorkFunction(functionEnum.MARGIN_BOTTOM, marginBottom);
+  };
+  const setPaddingLeft = (paddingLeft: number) => {
+    paddingWorkFunction(functionEnum.PADDING_LEFT, paddingLeft);
+  };
+  const setPaddingRight = (paddingRight: number) => {
+    paddingWorkFunction(functionEnum.PADDING_RIGHT, paddingRight);
+  };
+  const setPaddingTop = (paddingTop: number) => {
+    paddingWorkFunction(functionEnum.PADDING_TOP, paddingTop);
+  };
+  const setPaddingBottom = (paddingBottom: number) => {
+    paddingWorkFunction(functionEnum.PADDING_BOTTOM, paddingBottom);
+  };
   const setBorderWidth = (borderWidth: number) => {
     singleWorkFunction(functionEnum.BORDER_WIDTH, borderWidth);
   };
@@ -420,11 +537,23 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
 
+  const handleOpenSetting = () => {
+    setOpenSetting(false);
+  };
+
   return (
     <>
       {settingItemId ? (
         <div className="rounded-[8px] py-2 cursor-pointer relative">
-          <div className="border shadow-sm sidebar menu" ref={ref}>
+          <div
+            className="border shadow-sm pt-1 sidebar menu"
+            ref={ref}
+            style={{ paddingTop: "2px" }}
+          >
+            <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
+              {"<"}
+              <span className="ml-2">Site Settings</span>
+            </div>
             <SettingComponent
               items={items}
               setItems={setItems}
@@ -464,6 +593,16 @@ const Settings: FC<ISettings> = ({
               setBorderRadius={setBorderRadius}
               borderWidth={selectedItem?.style?.borderWidth}
               setBorderWidth={setBorderWidth}
+              setMarginLeft={setMarginLeft}
+              setMarginRight={setMarginRight}
+              setMarginTop={setMarginTop}
+              setMarginBottom={setMarginBottom}
+              setPaddingLeft={setPaddingLeft}
+              setPaddingRight={setPaddingRight}
+              setPaddingTop={setPaddingTop}
+              setPaddingBottom={setPaddingBottom}
+              margin={{ ...selectedItem?.style?.margin }}
+              padding={{ ...selectedItem?.style?.padding }}
               setSmall={setSmall}
               setMedium={setMedium}
               setLarge={setLarge}

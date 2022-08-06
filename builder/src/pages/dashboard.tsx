@@ -1,10 +1,11 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { RiText } from "react-icons/ri";
 import Navbar from "features/dashboard/navbar";
 import Sidebar from "features/dashboard/sidebar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
-import BgColorComponent from "components/settings/bg-color-component";
+import DefaultSettings from "features/dashboard/default-settings";
 import { useWindowSize } from "hooks/use-window-size";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
@@ -27,13 +28,12 @@ const Dashboard: FC = () => {
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState<string>(""); // for storing current element id for settings
   // for selecting an element for contract
-  const [selector, setSelector] =
-    useState<{
-      methodName: string;
-      type: string;
-      name: string;
-      buttonId: string;
-    }>(null);
+  const [selector, setSelector] = useState<{
+    methodName: string;
+    type: string;
+    name: string;
+    buttonId: string;
+  }>(null);
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
@@ -42,6 +42,13 @@ const Dashboard: FC = () => {
     r: "0",
     g: "0",
     b: "0",
+  });
+  const [head, setHead] = useState<{
+    title: string;
+    logo: string | ArrayBuffer;
+  }>({
+    title: "",
+    logo: "",
   });
 
   useEffect(() => {
@@ -153,6 +160,7 @@ const Dashboard: FC = () => {
               setSelector={setSelector}
               contractConfig={contractConfig}
               backgroundColor={backgroundColor}
+              head={head}
             />
 
             {/* Main section */}
@@ -181,28 +189,23 @@ const Dashboard: FC = () => {
                 <Settings
                   items={items}
                   setItems={setItems}
+                  setOpenSetting={setOpenSetting}
                   settingItemId={settingItemId}
                   contractConfig={contractConfig}
                   setContractConfig={setContractConfig}
+                  selector={selector}
                   setSelector={setSelector}
                   elementConfig={elementConfig}
                   openTab={openTab}
                   setOpenTab={setOpenTab}
                 />
               ) : (
-                <main
-                  className={`fixed right-0 top-[60px] w-[250px] border-l h-full`}
-                >
-                  <div className="mx-3 my-2">
-                    <h3 className="mb-2 text-xl">Site Settings</h3>
-                    <div className="mb-3">
-                      <BgColorComponent
-                        color={backgroundColor}
-                        setBgColor={setBackgroundColor}
-                      />
-                    </div>
-                  </div>
-                </main>
+                <DefaultSettings
+                  backgroundColor={backgroundColor}
+                  setBackgroundColor={setBackgroundColor}
+                  head={head}
+                  setHead={setHead}
+                />
               )}
             </aside>
           </section>

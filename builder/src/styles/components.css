@@ -58,20 +58,22 @@
 }
 
 #drag {
-  border: 1.2px dotted rgb(214, 204, 204);
-  font-size: 24px;
-  border-radius: 0 0 4px 4px;
+  height: 10px;
+  width: 100px;
+  font-size: 12px;
+  text-align: center;
+  background: #a673ef;
+  border-radius: 0 0 5px 5px;
 }
 
 .container-drag #drag {
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  right: 0;
+  top: 0;
+  left: 44%;
   opacity: 0;
   transition: opacity 0.2s;
-  background: #8247e5;
-  color: #f9f8ff;
 }
 
 .container-drag:hover #drag {

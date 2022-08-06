@@ -1,12 +1,11 @@
 import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Layout } from "react-grid-layout";
-import { BiGridHorizontal } from "react-icons/bi";
 import GridLayout from "react-grid-layout";
 import RenderItem from "utils/render-item";
+import defaultItem from "config/default-container";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
-import defaultItem from "config/default-container";
 
 interface IContainer {
   item: IItems;
@@ -95,9 +94,11 @@ const Container: FC<IContainer> = ({
       };
       let filterItems = items.filter((element) => element.i !== item.i);
       setItems([...filterItems, newModifiedContainer]);
-    } else if(layout.length === 0) {
-      let removeContainerItems = items.filter(element => element.i !== item.i)  
-      setItems(removeContainerItems)
+    } else if (layout.length === 0) {
+      let removeContainerItems = items.filter(
+        (element) => element.i !== item.i
+      );
+      setItems(removeContainerItems);
     } else {
       setItems(items);
     }
@@ -173,9 +174,6 @@ const Container: FC<IContainer> = ({
   }, [items])
 
 
-  // const filterItems = items.filter(item => item.i !== containerItems.i )
-  // setItems([...filterItems, containerItems])
-
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
@@ -183,7 +181,7 @@ const Container: FC<IContainer> = ({
   return (
     <section
       id={item.i}
-      className="relative w-full border cursor-pointer container-drag h-fit"
+      className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
     >
       <GridLayout
         layout={children}
@@ -191,8 +189,9 @@ const Container: FC<IContainer> = ({
         rowHeight={50}
         width={containerW || 200}
         isBounded={true}
-        onLayoutChange={onLayoutChange}        
+        onLayoutChange={onLayoutChange}
         margin={[0, 0]}
+        compactType={null}
         className="h-full"
         style={{
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
@@ -222,10 +221,7 @@ const Container: FC<IContainer> = ({
             onMouseOver={() => setDrag(false)}
             onMouseOut={() => setDrag(true)}
           >
-            <RenderItem
-              item={defaultItem}
-              setDrag={setDrag}
-            />
+            <RenderItem item={defaultItem} setDrag={setDrag} />
           </div>
         ) : (
           children
@@ -234,10 +230,10 @@ const Container: FC<IContainer> = ({
               const { x, y, w, h, minW, i, resizeHandles } = item;
               return (
                 <div
-                  className={`w-full h-full ${
+                  className={`w-full h-full hover:border hover:border-2 ${
                     selector
-                      ? "hover:outline-orange-300 hover:outline"
-                      : "hover:outline-slate-300 hover:outline-dashed"
+                      ? "hover:border-orange-300"
+                      : "hover:border-slate-300 hover:border-dashed"
                   }`}
                   key={i}
                   data-grid={{ x, y, w, h, minW, resizeHandles }}
@@ -259,10 +255,7 @@ const Container: FC<IContainer> = ({
             })
         )}
       </GridLayout>
-      <BiGridHorizontal
-        id="drag"
-        onClick={() => onComponentClick(item.name, item.i)}
-      />
+      <span id="drag" onClick={() => onComponentClick(item.name, item.i)} />
     </section>
   );
 };

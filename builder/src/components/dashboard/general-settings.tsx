@@ -8,8 +8,10 @@ import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
 import FontSizeComponent from "components/settings/font-size-component";
 import ISettings from "interfaces/settings";
+import MarginComponent from "components/settings/margin-component";
+import PaddingComponent from "components/settings/padding-component";
 
-const DefaultSettings: FC<ISettings> = ({
+const GeneralSettings: FC<ISettings> = ({
   textVal,
   handleTextChange,
   linkVal,
@@ -33,6 +35,16 @@ const DefaultSettings: FC<ISettings> = ({
   setRight,
   fontSize,
   setFontSize,
+  margin,
+  setMarginLeft,
+  setMarginRight,
+  setMarginTop,
+  setMarginBottom,
+  padding,
+  setPaddingLeft,
+  setPaddingRight,
+  setPaddingBottom,
+  setPaddingTop,
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -74,6 +86,20 @@ const DefaultSettings: FC<ISettings> = ({
       setItalic={setItalic}
       setUnderline={setUnderline}
     />
+    <MarginComponent
+      setMarginLeft={setMarginLeft}
+      setMarginRight={setMarginRight}
+      setMarginTop={setMarginTop}
+      setMarginBottom={setMarginBottom}
+      margin={{ ...margin }}
+    />
+    <PaddingComponent
+      setPaddingLeft={setPaddingLeft}
+      setPaddingRight={setPaddingRight}
+      setPaddingTop={setPaddingTop}
+      setPaddingBottom={setPaddingBottom}
+      padding={{ ...padding }}
+    />
     <AlignComponent
       justifyContent={justifyContent}
       setLeft={setLeft}
@@ -94,4 +120,4 @@ const DefaultSettings: FC<ISettings> = ({
   </>
 );
 
-export default DefaultSettings;
+export default GeneralSettings;

@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
+import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
-import { containerCheck } from "utils/container-check";
 import { Link } from "react-router-dom";
 
 interface ISidebar {
@@ -29,7 +29,7 @@ const Sidebar: FC<ISidebar> = ({
   const selectedItem =
     items?.find((item) => item.i === settingItemId) ||
     items?.map((item) =>
-      item.children?.find((child) => child.i === settingItemId)
+      item.children?.find((child: IItems) => child.i === settingItemId)
     )[0];
 
   // const hideSidebar = () => {
@@ -41,7 +41,7 @@ const Sidebar: FC<ISidebar> = ({
     else {
       let arr = items.map((item) => {
         return containerCheck(item)
-          ? Math.max(...item.children.map((obj) => obj.y), item.y)
+          ? Math.max(...item.children.map((obj: IItems) => obj.y), item.y)
           : item.y;
       });
       return Math.max(...arr) + 1;
@@ -51,7 +51,7 @@ const Sidebar: FC<ISidebar> = ({
   const checkContainerY = (selectedItem: IItems) => {
     if (selectedItem.children.length === 0) return 0;
     else {
-      let arr = selectedItem.children.map((item) => item.y);
+      let arr = selectedItem.children.map((item: IItems) => item.y);
       return Math.max(...arr) + 1;
     }
   };
@@ -59,7 +59,7 @@ const Sidebar: FC<ISidebar> = ({
   const renderContainerComponents = components
     .filter((c) => !containerCheck(c))
     ?.map((c, index) => {
-      const availableHandles: ResizeHandles = ["nw", "se"];
+      const availableHandles: ResizeHandles = ["se"];
       return (
         <div
           key={index}
@@ -94,8 +94,8 @@ const Sidebar: FC<ISidebar> = ({
     });
 
   const renderComponents = components?.map((c, index) => {
-    const availableHandles: ResizeHandles = ["nw", "se"];
-    const containerHandles: ResizeHandles = ["w", "e"];
+    const availableHandles: ResizeHandles = ["se"];
+    const containerHandles: ResizeHandles = ["e"];
     return (
       <div
         key={index}
@@ -136,9 +136,7 @@ const Sidebar: FC<ISidebar> = ({
   });
 
   return (
-    <main
-      className={`fixed w-[250px] border-r h-full ${className}`}
-    >
+    <main className={`fixed w-[250px] border-r h-full ${className}`}>
       {/* user name */}
       {/* It will be used for a later code */}
       {/* <section className="flex flex-row justify-between items-center h-[60px]">

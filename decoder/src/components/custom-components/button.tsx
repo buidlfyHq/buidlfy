@@ -30,11 +30,12 @@ const Button: FC<ITexts> = ({
   setOutputValue,
   connectWallet,
   borderRadius,
+  margin,
+  padding,
 }) => {
   const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
   const [account, setAccount] = useState<string>(null);
-  
   // All are returning any, will have to switch to typescript ether
   const [show, setShow] = useState<any>(false);
   const [provider, setProvider] = useState<any>();
@@ -45,15 +46,15 @@ const Button: FC<ITexts> = ({
   const [network, setNetwork] = useState<any>();
   const [message, setMessage] = useState<any>("");
   const [verified, setVerified] = useState<any>();
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [transactionStatus, setTransactionStatus] = useState<string>('')
-  
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [transactionStatus, setTransactionStatus] = useState<string>("");
+
   useEffect(() => {
     if (config.contract.abi !== [] && config.contract.address !== "") {
       setContract(onLoad(config));
     }
   }, []); // eslint-disable-line
-  
+
   const onResponse = async () => {
     const res = await onRequest(
       contractFunction.methodName,
@@ -66,7 +67,7 @@ const Button: FC<ITexts> = ({
     );
     setOutputValue(res ? res[0] : []);
   };
-  
+
   const connectWalletButton = async () => {
     try {
       const provider = await web3Modal.connect();
@@ -99,7 +100,7 @@ const Button: FC<ITexts> = ({
   return (
     <main
       style={{ justifyContent: justifyContent }}
-      className="flex items-center justify-center w-auto h-full px-6"
+      className="flex items-center justify-center w-auto h-full"
     >
       <Dialog
         open={isOpen}
@@ -109,13 +110,21 @@ const Button: FC<ITexts> = ({
         <div className="fixed flex items-center justify-center p-4 top-4 right-4">
           <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
             <Dialog.Title>
-            {transactionStatus === '' ?
-            (<div className="flex items-center">
-              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-              <div className="mr-5 text-white">Transaction In Process...</div>
-            </div>) 
-            : (<div className="text-white break-all">{transactionStatus}</div>)
-            } 
+              {transactionStatus === "" ? (
+                <div className="flex items-center">
+                  <div className="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <div className="mr-5 text-white">
+                    Transaction In Process...
+                  </div>
+                </div>
+              ) : (
+                <div className="text-white break-all">{transactionStatus}</div>
+              )}
             </Dialog.Title>
           </Dialog.Panel>
         </div>
@@ -133,8 +142,10 @@ const Button: FC<ITexts> = ({
             fontSize: `${fontSize}px`,
             borderRadius: `${borderRadius}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+            margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+            padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
-          className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
+          className="btn rounded w-48 cursor-pointer whitespace-nowrap"
           onClick={!account ? connectWalletButton : disconnect}
         >
           {!account ? value : "Disconnect"}
@@ -152,8 +163,10 @@ const Button: FC<ITexts> = ({
             borderRadius: `${borderRadius}px`,
             fontSize: `${fontSize}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+            margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+            padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
-          className="btn px-6 py-2 rounded w-48 cursor-pointer whitespace-nowrap"
+          className="btn rounded w-48 cursor-pointer whitespace-nowrap"
           onClick={() =>
             contractFunction.methodName ? onResponse() : console.log("Clicked")
           }

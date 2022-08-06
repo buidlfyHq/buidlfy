@@ -16,7 +16,7 @@ const Home: FC = () => {
     <main
       className="min-h-screen"
       style={{
-        backgroundColor: `rgba(${config.background.r}, ${config.background.g}, ${config.background.b}, ${config.background.a})`,
+        backgroundColor: `rgba(${config.background?.r}, ${config.background?.g}, ${config.background?.b}, ${config.background?.a})`,
       }}
     >
       <ResponsiveGridLayout
@@ -26,8 +26,9 @@ const Home: FC = () => {
         rowHeight={50}
         isDraggable={false}
         isResizable={false}
+        compactType={null}
         margin={[0, 0]}
-        className="h-fit"
+        className="h-fit overflow-hidden"
       >
         {config.builder.map((c: IItems) => {
           const { x, y, w, h, minW, i } = c;

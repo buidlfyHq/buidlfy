@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
+import Spinner from "components/dashboard/spinner";
 import IItems from "interfaces/items";
 
 interface IAbiComponents {
@@ -32,10 +33,10 @@ interface IAbiComponents {
 
 const AbiComponents: FC<IAbiComponents> = ({
   showComponent,
+  selector,
   setSelector,
   elementConfig,
   selectedItem,
-  selector,
   items,
   setItems,
 }) => {
@@ -126,16 +127,19 @@ const AbiComponents: FC<IAbiComponents> = ({
   };
 
   const handleInputSelector = (selectedId: string) => {
-    setSelector({
-      methodName: showComponent.value.name,
-      type: "input",
-      name: selectedId,
-      buttonId: selectedItem.i,
-    });
-    setCurrentElement({ name: selectedId, type: "input" });
+    if (selector === null) {
+      setSelector({
+        methodName: showComponent.value.name,
+        type: "input",
+        name: selectedId,
+        buttonId: selectedItem.i,
+      });
+      setCurrentElement({ name: selectedId, type: "input" });
+    } else {
+      setSelector(null);
+    }
   };
 
-  // work in progress
   const inputObjects = (i: number) => {
     const selectedId = "input" + i + showComponent.id;
     const objects = Object.keys(elementConfig);
@@ -148,37 +152,43 @@ const AbiComponents: FC<IAbiComponents> = ({
   };
 
   const handleStateSelector = (selectedItem: IItems) => {
-    setSelector({
-      methodName: showComponent.value.name,
-      type: "input",
-      name: showComponent.value.name,
-      buttonId: selectedItem.i,
-    });
-    setCurrentElement({
-      name: showComponent.value.name,
-      type: "send",
-    });
+    if (selector === null) {
+      setSelector({
+        methodName: showComponent.value.name,
+        type: "input",
+        name: showComponent.value.name,
+        buttonId: selectedItem.i,
+      });
+      setCurrentElement({
+        name: showComponent.value.name,
+        type: "send",
+      });
+    } else {
+      setSelector(null);
+    }
   };
 
-  // work in progress
   const stateObject = (key: string) => {
     let filteredObject = elementConfig[key]?.filter(
       (key: { buttonId: string }) => key.buttonId === selectedItem.i
     );
     return filteredObject;
   };
-  
+
   const handleOutputSelector = (selectedId: string) => {
-    setSelector({
-      methodName: showComponent.value.name,
-      type: "output",
-      name: selectedId,
-      buttonId: selectedItem.i,
-    });
-    setCurrentElement({ name: selectedId, type: "output" });
+    if (selector === null) {
+      setSelector({
+        methodName: showComponent.value.name,
+        type: "output",
+        name: selectedId,
+        buttonId: selectedItem.i,
+      });
+      setCurrentElement({ name: selectedId, type: "output" });
+    } else {
+      setSelector(null);
+    }
   };
 
-  // work in progress
   const outputObjects = (i: number) => {
     const selectedId = "output" + i + showComponent.id;
     const objects = Object.keys(elementConfig);
@@ -190,76 +200,92 @@ const AbiComponents: FC<IAbiComponents> = ({
     };
   };
 
+  const renderDefault = (valueName: string) => (
+    <>
+      {selector && selector?.name === valueName ? (
+        <span className="flex">
+          <span className="flex-1">
+            <Spinner />
+            Selecting
+          </span>
+          <AiOutlineClose className="mt-1.5" />
+        </span>
+      ) : (
+        <>
+          <span>Select An Element</span>
+        </>
+      )}
+    </>
+  );
+
   return (
     <main>
       {showComponent ? (
         <>
-          {showComponent.value.inputs[0] &&
-            showComponent.value.inputs.map((input: { name: string }, i: number) => {
-              const { selectedId, objects, filterObjects } = inputObjects(i);
-              return (
-                <section className="mt-3">
-                  <h6>Input - {input.name}</h6>
-                  <div
-                    key={i}
-                    className="grid mb-2 px-2 border rounded mt-1 h-7"
-                    onClick={() => handleInputSelector(selectedId)}
-                  >
-                    <>
-                      {!objects.length ? (
-                        <>
-                          <span>Select An Element</span>
-                          <button
-                            disabled
-                            className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
-                          >
-                            Save
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          {!filterObjects.length ? (
-                            <>
-                              <span>Select An Element</span>
-                              <button
-                                disabled
-                                className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
-                              >
-                                Save
-                              </button>
-                            </>
-                          ) : (
-                            filterObjects.map((key) => {
-                              let filteredObject = elementConfig[key]?.filter(
-                                (key: { buttonId: string }) =>
-                                  key.buttonId === selectedItem.i
-                              );
-                              return (
-                                <>
-                                  {filteredObject[0] && (
-                                    <>
-                                      <span className="flex">
-                                        <span className="flex-1">
-                                          {filteredObject[0].name} -{" "}
-                                          {filteredObject[0].id}
-                                        </span>
-                                        <AiOutlineEdit className="mt-1.5" />
-                                      </span>
-                                    </>
-                                  )}
-                                </>
-                              );
-                            })
-                          )}
-                        </>
-                      )}
-                    </>
-                  </div>
-                </section>
-              );
-            })}
+          {showComponent.value?.inputs &&
+            showComponent.value?.inputs.map(
+              (input: { name: string }, i: number) => {
+                const { selectedId, objects, filterObjects } = inputObjects(i);
+                return (
+                  <section key={i} className="mt-3">
+                    <h6>Input - {input.name}</h6>
+                    <div
+                      className="grid mb-2 px-2 border rounded mt-1 h-7"
+                      onClick={() => handleInputSelector(selectedId)}
+                    >
+                      <div>
+                        {!objects.length ? (
+                          <div>{renderDefault(selectedId)}</div>
+                        ) : (
+                          <>
+                            {!filterObjects.length
+                              ? renderDefault(selectedId)
+                              : filterObjects.map((key) => {
+                                  let filteredObject = elementConfig[
+                                    key
+                                  ]?.filter(
+                                    (key: { buttonId: string }) =>
+                                      key.buttonId === selectedItem.i
+                                  );
+                                  return (
+                                    <div key={key}>
+                                      {filteredObject[0] ? (
+                                        <>
+                                          {selector !== null &&
+                                          selector.name === selectedId ? (
+                                            <span className="flex">
+                                              <span className="flex-1">
+                                                <Spinner />
+                                                Selecting
+                                              </span>
+                                              <AiOutlineClose className="mt-1.5" />
+                                            </span>
+                                          ) : (
+                                            <span className="flex">
+                                              <span className="flex-1">
+                                                {filteredObject[0].name} -{" "}
+                                                {filteredObject[0].id}
+                                              </span>
+                                              <AiOutlineEdit className="mt-1.5" />
+                                            </span>
+                                          )}
+                                        </>
+                                      ) : (
+                                        renderDefault(selectedId)
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </section>
+                );
+              }
+            )}
 
-          {showComponent.value.stateMutability === "payable" && (
+          {showComponent.value?.stateMutability === "payable" && (
             <section className="mt-3">
               <h6>Input - Amount Payable</h6>
               <div
@@ -271,7 +297,7 @@ const AbiComponents: FC<IAbiComponents> = ({
                 {!Object.keys(elementConfig).filter(
                   (key: string) => key === showComponent.value.name
                 ).length ? (
-                  <span>Select An Element</span>
+                  renderDefault(showComponent.value.name)
                 ) : (
                   <>
                     {Object.keys(elementConfig)
@@ -280,20 +306,35 @@ const AbiComponents: FC<IAbiComponents> = ({
                         if (key === showComponent.value.name) {
                           let filteredObject = stateObject(key);
                           return (
-                            <>
-                              {filteredObject[0] && (
-                                <span className="flex">
-                                  <span className="flex-1">
-                                    {filteredObject[0].name} -{" "}
-                                    {filteredObject[0].id}
-                                  </span>
-                                  <AiOutlineEdit className="mt-1.5" />
-                                </span>
+                            <div key={key}>
+                              {filteredObject[0] ? (
+                                <>
+                                  {selector !== null &&
+                                  selector.name === showComponent.value.name ? (
+                                    <span className="flex">
+                                      <span className="flex-1">
+                                        <Spinner />
+                                        Selecting
+                                      </span>
+                                      <AiOutlineClose className="mt-1.5" />
+                                    </span>
+                                  ) : (
+                                    <span className="flex">
+                                      <span className="flex-1">
+                                        {filteredObject[0].name} -{" "}
+                                        {filteredObject[0].id}
+                                      </span>
+                                      <AiOutlineEdit className="mt-1.5" />
+                                    </span>
+                                  )}
+                                </>
+                              ) : (
+                                renderDefault(showComponent.value.name)
                               )}
-                            </>
+                            </div>
                           );
                         } else {
-                          return <span>Select An Element</span>;
+                          return renderDefault(showComponent.value.name);
                         }
                       })}
                   </>
@@ -302,81 +343,73 @@ const AbiComponents: FC<IAbiComponents> = ({
             </section>
           )}
 
-          {showComponent.value.outputs[0] &&
-            showComponent.value.outputs.map((output: { name: string }, i: number) => {
-              const { selectedId, objects, filterObjects } = outputObjects(i);
-              return (
-                <section key={i} className="mt-3">
-                  <h6>Output - {output.name}</h6>
-
-                  <div
-                    key={i}
-                    className="grid mb-2 px-2 border rounded mt-1 h-7"
-                    onClick={() => {
-                      handleOutputSelector(selectedId);
-                    }}
-                  >
-                    {objects.length === 0 ? (
-                      <>
-                        <span>Select An Element</span>
-                        <button
-                          disabled
-                          className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
-                        >
-                          Save
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        {filterObjects.length === 0 ? (
-                          <>
-                            <span>Select An Element</span>
-                            <button
-                              disabled
-                              className="fixed bottom-5 right-3 w-56 font-bold py-2 px-4 rounded text-gray-400 bg-gray-100 border border-gray-800 "
-                            >
-                              Save
-                            </button>
-                          </>
+          {showComponent.value?.outputs &&
+            showComponent.value?.outputs.map(
+              (output: { name: string }, i: number) => {
+                const { selectedId, objects, filterObjects } = outputObjects(i);
+                return (
+                  <section key={i} className="mt-3">
+                    <h6>Output - {output.name}</h6>
+                    <div
+                      key={i}
+                      className="grid mb-2 px-2 border rounded mt-1 h-7"
+                      onClick={() => handleOutputSelector(selectedId)}
+                    >
+                      <div>
+                        {objects.length === 0 ? (
+                          renderDefault(selectedId)
                         ) : (
-                          filterObjects.map((key) => {
-                            let filteredObject = elementConfig[key]?.filter(
-                              (key: { buttonId: string }) =>
-                                key.buttonId === selectedItem.i
-                            );
-                            return (
-                              <>
-                                {filteredObject[0] && (
-                                  <>
-                                    <span className="flex">
-                                      <span className="flex-1">
-                                        {filteredObject[0].name} -{" "}
-                                        {filteredObject[0].id}
-                                      </span>
-                                      <AiOutlineEdit className="mt-1.5" />
-                                    </span>
-                                  </>
-                                )}
-                              </>
-                            );
-                          })
+                          <>
+                            {filterObjects.length === 0
+                              ? renderDefault(selectedId)
+                              : filterObjects.map((key) => {
+                                  let filteredObject = elementConfig[
+                                    key
+                                  ]?.filter(
+                                    (key: { buttonId: string }) =>
+                                      key.buttonId === selectedItem.i
+                                  );
+                                  return (
+                                    <div key={key}>
+                                      {filteredObject[0] ? (
+                                        <>
+                                          {selector !== null &&
+                                          selector.name === selectedId ? (
+                                            <span className="flex">
+                                              <span className="flex-1">
+                                                <Spinner />
+                                                Selecting
+                                              </span>
+                                              <AiOutlineClose className="mt-1.5" />
+                                            </span>
+                                          ) : (
+                                            <span className="flex">
+                                              <span className="flex-1">
+                                                {filteredObject[0].name} -{" "}
+                                                {filteredObject[0].id}
+                                              </span>
+                                              <AiOutlineEdit className="mt-1.5" />
+                                            </span>
+                                          )}
+                                        </>
+                                      ) : (
+                                        renderDefault(selectedId)
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                          </>
                         )}
-                      </>
-                    )}
-                  </div>
-                </section>
-              );
-            })}
+                      </div>
+                    </div>
+                  </section>
+                );
+              }
+            )}
 
           {show ? (
-            <button
-              // onChange={() => setIsSaved(true)}
-              className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              <span
-                className="spinner-border animate-spin inline-block w-4 h-4 border-2 mr-2 rounded-full"
-                role="status"
-              />
+            <button className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <Spinner />
               Saving
             </button>
           ) : (

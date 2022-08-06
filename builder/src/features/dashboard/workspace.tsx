@@ -33,6 +33,10 @@ interface IWorkspace {
   backgroundColor: IColor;
   setValue?: (value: string) => void;
   setLink?: (link: string) => void;
+  marginLeft?: number;
+  marginRight?: number;
+  marginTop?: number;
+  marginBottom?: number;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -51,7 +55,11 @@ const Workspace: FC<IWorkspace> = ({
   setAddContainer,
   backgroundColor,
   setValue,
-  setLink
+  setLink,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -126,8 +134,6 @@ const Workspace: FC<IWorkspace> = ({
 
           let elementArray = newArray;
 
-          console.log(newArray);
-
           setElementConfig({
             ...elementConfig,
             [selector.name]: elementArray,
@@ -199,12 +205,12 @@ const Workspace: FC<IWorkspace> = ({
           id={name}
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
-          className={`h-fit justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
+          className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 ${
             !containerCheck(item)
               ? selector
-                ? "hover:outline-orange-300 hover:outline"
-                : "hover:outline-slate-300 hover:outline-dashed"
-              : "z-10"
+                ? "hover:border-orange-300"
+                : "hover:border-slate-300 hover:border-dashed"
+              : null
           }`}
           // open item setting on click
           onClick={(e) =>
@@ -251,8 +257,9 @@ const Workspace: FC<IWorkspace> = ({
           resizeHandles={["se"]}
           isDraggable={drag}
           onLayoutChange={onLayoutChange}
+          compactType={null}
           margin={[0, 0]}
-          className="h-fit"
+          className="h-fit overflow-hidden"
         >
           {renderItemFunction}
         </ResponsiveGridLayout>
