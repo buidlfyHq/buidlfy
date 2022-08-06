@@ -36,7 +36,6 @@ export const components = [
   {
     name: "Container",
     h: 2,
-
     minH: 2,
     style: {
       ...defaultDeleteStyles,

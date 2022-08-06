@@ -10,9 +10,6 @@ import IItems from "interfaces/items";
 interface IRenderItem {
   item: IItems;
   items?: IItems[];
-  containerItems?: IItems;
-  itemsViaContainer?: IItems[];
-  setContainerItems?: (items?: IItems) => void;
   setItems?: (items?: IItems[]) => void;
   setDrag: (drag?: boolean) => void;
   setOpenSetting?: (openSetting: boolean) => void;
@@ -33,16 +30,11 @@ interface IRenderItem {
   }) => void;
   elementConfig?: object;
   setElementConfig?: (elementConfig: object) => void;
-  setValue?: (value: string) => void;
-  setLink?: (link: string) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
   item,
   items,
-  containerItems,
-  itemsViaContainer,
-  setContainerItems,
   setItems,
   setDrag,
   setOpenSetting,
@@ -53,8 +45,6 @@ const RenderItem: FC<IRenderItem> = ({
   setSelector,
   elementConfig,
   setElementConfig,
-  setValue,
-  setLink
 }) => {
   switch (item.name) {
     case "Container":
@@ -79,7 +69,6 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
-          setValue={setValue}
         />
       );
     case "Button":
@@ -106,10 +95,6 @@ const RenderItem: FC<IRenderItem> = ({
         <Text
           item={item}
           items={items}
-          itemsViaContainer={itemsViaContainer}
-          containerItems={containerItems}
-          setContainerItems={setContainerItems}
-          setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -119,8 +104,6 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          setLink={setLink}
-          setValue={setValue}
           margin={{ ...item.style.margin }}
           padding={{ ...item.style.padding }}
         />
@@ -130,10 +113,6 @@ const RenderItem: FC<IRenderItem> = ({
         <Text
           item={item}
           items={items}
-          containerItems={containerItems}
-          itemsViaContainer={itemsViaContainer}
-          setContainerItems={setContainerItems}
-          setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -143,7 +122,6 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          setValue={setValue}
           margin={{ ...item.style.margin }}
           padding={{ ...item.style.padding }}
         />
@@ -153,10 +131,6 @@ const RenderItem: FC<IRenderItem> = ({
         <Text
           item={item}
           items={items}
-          containerItems={containerItems}
-          itemsViaContainer={itemsViaContainer}
-          setContainerItems={setContainerItems}
-          setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -166,7 +140,6 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          setValue={setValue}
           margin={{ ...item.style.margin }}
           padding={{ ...item.style.padding }}
         />
@@ -176,10 +149,6 @@ const RenderItem: FC<IRenderItem> = ({
         <Text
           item={item}
           items={items}
-          containerItems={containerItems}
-          itemsViaContainer={itemsViaContainer}
-          setContainerItems={setContainerItems}
-          setItems={setItems}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -189,7 +158,6 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          setValue={setValue}
           margin={{ ...item.style.margin }}
           padding={{ ...item.style.padding }}
         />

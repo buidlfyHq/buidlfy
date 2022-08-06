@@ -17,18 +17,6 @@ const Text: FC<ITexts> = ({
   margin,
   padding,
 }) => {
-  const renderValue = (outputLink: string, outputValue: string) => (
-    <>
-      {outputLink ? (
-        <a href={outputLink} target="_blank" rel="noreferrer">
-          {outputValue}
-        </a>
-      ) : (
-        <>{outputValue}</>
-      )}
-    </>
-  );
-  console.log(outputValue, value)
   return (
     <textarea
     readOnly
@@ -70,22 +58,6 @@ const Text: FC<ITexts> = ({
          value
        ))
        : value}
-      {/* <>
-        {outputValue ? (
-          <>
-            {outputValue.find((output) => output.id === id)
-              ? renderValue(
-                  link,
-                  JSON.stringify(
-                    outputValue.find((output) => output.id === id).value
-                  )
-                )
-              : renderValue(link, value)}
-          </>
-        ) : (
-          <>renderValue(link, value)</>
-        )}
-      </> */}
     </textarea>
   );
 };

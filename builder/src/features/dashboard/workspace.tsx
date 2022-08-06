@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "utils/render-item";
 import { containerCheck } from "utils/container-check";
@@ -31,8 +31,6 @@ interface IWorkspace {
   setDrag: (drag: boolean) => void;
   setAddContainer: (addContainer?: boolean) => void;
   backgroundColor: IColor;
-  setValue?: (value: string) => void;
-  setLink?: (link: string) => void;
   marginLeft?: number;
   marginRight?: number;
   marginTop?: number;
@@ -54,8 +52,6 @@ const Workspace: FC<IWorkspace> = ({
   setDrag,
   setAddContainer,
   backgroundColor,
-  setValue,
-  setLink,
   marginLeft,
   marginRight,
   marginTop,
@@ -63,7 +59,6 @@ const Workspace: FC<IWorkspace> = ({
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-    console.log(layout)
     if(layout.length === 0) setAddContainer(false) 
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
@@ -74,7 +69,6 @@ const Workspace: FC<IWorkspace> = ({
         let el = selectedItem.children?.filter((item) => item.y === maxY)[0];
         height = el ? el.h + el.y : minH;
       }
-      // console.log(height, minH)
       return (selectedItem = {
         ...selectedItem,
         h,
@@ -190,7 +184,6 @@ const Workspace: FC<IWorkspace> = ({
       setAddContainer(false);
     }
     if (e.target.id === "") {
-      console.log(e.target.id)
       setOpenSetting(false);
     }
   };
@@ -230,8 +223,6 @@ const Workspace: FC<IWorkspace> = ({
             setSelector={setSelector}
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
-            setValue={setValue}
-            setLink={setLink}
           />
         </div>
       );

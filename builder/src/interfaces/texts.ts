@@ -4,9 +4,6 @@ import IItems from "./items";
 export default interface ITexts {
   item?: IItems;
   items?: IItems[];
-  itemsViaContainer?: IItems[];
-  containerItems?: IItems;
-  setContainerItems?: (items?: IItems) => void;
   setItems?: (items?: IItems[]) => void;
   bold: string;
   italic: string;
@@ -20,8 +17,6 @@ export default interface ITexts {
   backgroundColor?: IColor;
   shadow?: string;
   connectWallet?: string;
-  setValue?: (value: string) => void;
-  setLink?: (link: string) => void;
   margin?: {
     marginLeft?: number,
     marginRight?: number,

@@ -127,7 +127,6 @@ const Sidebar: FC<ISidebar> = ({
             newC.children = newChildren;
           }
           setItems([...items, newC]);
-          console.log(items)
         }}
       >
         {c.name}

@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, FC, SetStateAction} from "react";
 import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
 import RenderItem from "utils/render-item";
@@ -60,13 +60,10 @@ const Container: FC<IContainer> = ({
   setSelector,
   elementConfig,
   setElementConfig,
-  setValue
 }) => {
-  const [containerItems, setContainerItems] = useState<IItems>(item || null)
   
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
-    console.log(layout)
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = children.filter((item: IItems) => item.i === obj.i)[0];
       const { h, minW, x, y, w, i, minH } = obj;
@@ -168,12 +165,6 @@ const Container: FC<IContainer> = ({
     }
   };
 
-  useEffect(() => {
-    setContainerItems(item)
-    // console.log('changed container', items)
-  }, [items])
-
-
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
@@ -243,12 +234,7 @@ const Container: FC<IContainer> = ({
                 >
                   <RenderItem 
                     item={item} 
-                    itemsViaContainer={items}
-                    setItems={setItems}
-                    containerItems={containerItems}
                     setDrag={setDrag} 
-                    setValue={setValue} 
-                    setContainerItems={setContainerItems}
                   />
                 </div>
               );

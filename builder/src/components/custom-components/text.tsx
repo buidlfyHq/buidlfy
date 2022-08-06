@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
 
