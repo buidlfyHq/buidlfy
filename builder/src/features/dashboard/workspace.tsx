@@ -203,7 +203,7 @@ const Workspace: FC<IWorkspace> = ({
               : null
           }`}
           // open item setting on click
-          onClick={(e) =>
+          onClick={() =>
             containerCheck(item) ? null : onComponentClick(item.name, i)
           }
         >
