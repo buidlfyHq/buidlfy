@@ -36,16 +36,6 @@ const Button: FC<ITexts> = ({
   const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
   const [account, setAccount] = useState<string>(null);
-  // All are returning any, will have to switch to typescript ether
-  const [show, setShow] = useState<any>(false);
-  const [provider, setProvider] = useState<any>();
-  const [library, setLibrary] = useState<any>();
-  const [signature, setSignature] = useState<any>("");
-  const [error, setError] = useState<any>("");
-  const [chainId, setChainId] = useState<any>();
-  const [network, setNetwork] = useState<any>();
-  const [message, setMessage] = useState<any>("");
-  const [verified, setVerified] = useState<any>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [transactionStatus, setTransactionStatus] = useState<string>("");
 
@@ -73,23 +63,14 @@ const Button: FC<ITexts> = ({
       const provider = await web3Modal.connect();
       const library: any = new ethers.providers.Web3Provider(provider); // required
       const accounts: any = await library.listAccounts(); // required
-      const network: any = await library.getNetwork(); // required
-      setProvider(provider);
-      setLibrary(library);
       if (accounts) setAccount(accounts[0]);
-      setChainId(network.chainId);
     } catch (error) {
-      setError(error);
+      console.log(error);
     }
   };
 
   const refreshState = () => {
     setAccount(null);
-    setChainId(null);
-    setNetwork(null);
-    setMessage("");
-    setSignature("");
-    setVerified(undefined);
   };
 
   const disconnect = async () => {
