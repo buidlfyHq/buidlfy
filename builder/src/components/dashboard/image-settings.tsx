@@ -6,20 +6,17 @@ import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 
 const ImageSettings: FC<ISettings> = ({
+  selectedItem,
   items,
   setItems,
-  selectedItem,
   setDeleteComponent,
-  deleteComponent,
-  justifyContent,
   setLeft,
   setCenter,
   setRight,
-  margin,
-  setMarginLeft,
-  setMarginRight,
   setMarginTop,
+  setMarginRight,
   setMarginBottom,
+  setMarginLeft,
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -34,20 +31,20 @@ const ImageSettings: FC<ISettings> = ({
       setItems={setItems}
     />
     <AlignComponent
-      justifyContent={justifyContent}
+      justifyContent={selectedItem?.style?.justifyContent}
       setLeft={setLeft}
       setRight={setRight}
       setCenter={setCenter}
     />
     <MarginComponent
-      setMarginLeft={setMarginLeft}
-      setMarginRight={setMarginRight}
+      margin={selectedItem?.style?.margin}
       setMarginTop={setMarginTop}
+      setMarginRight={setMarginRight}
       setMarginBottom={setMarginBottom}
-      margin={{ ...margin }}
+      setMarginLeft={setMarginLeft}
     />
     <UtilitiesComponent
-      deleteComponent={deleteComponent}
+      deleteComponent={selectedItem?.style?.deleteComponent}
       setDeleteComponent={setDeleteComponent}
     />
   </>

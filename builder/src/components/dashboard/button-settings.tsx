@@ -16,58 +16,46 @@ import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 
 const ButtonSettings: FC<ISettings> = ({
+  selectedItem,
   textVal,
   handleTextChange,
   linkVal,
   handleLinkChange,
   items,
   setItems,
-  selectedItem,
   setBold,
-  bold,
   setItalic,
-  italic,
   setUnderline,
-  underline,
   setColor,
-  color,
   setBgColor,
-  backgroundColor,
   setDeleteComponent,
-  deleteComponent,
-  justifyContent,
   setLeft,
   setCenter,
   setRight,
-  fontSize,
   setFontSize,
-  contractConfig,
   setContractConfig,
-  showComponent,
+  contractConfig,
   setShowComponent,
-  selector,
+  showComponent,
   setSelector,
+  selector,
   elementConfig,
   openTab,
   setOpenTab,
-  borderRadius,
   setBorderRadius,
   setSmall,
   setMedium,
   setLarge,
   shadow,
   setOn,
-  connectWallet,
-  margin,
-  setMarginLeft,
-  setMarginRight,
   setMarginTop,
+  setMarginRight,
   setMarginBottom,
-  padding,
-  setPaddingLeft,
+  setMarginLeft,
+  setPaddingTop,
   setPaddingRight,
   setPaddingBottom,
-  setPaddingTop,
+  setPaddingLeft,
 }) => {
   const handleToggleTab = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -142,48 +130,54 @@ const ButtonSettings: FC<ISettings> = ({
                     placeholder="URL..."
                   />
                 </div>
+
                 <ConnectSwitchComponent
                   setOn={setOn}
-                  connectWallet={connectWallet}
+                  connectWallet={selectedItem?.connectWallet}
                 />
+
                 <FontStyleComponent
-                  bold={bold}
-                  italic={italic}
-                  underline={underline}
+                  bold={selectedItem?.style?.fontWeight}
+                  italic={selectedItem?.style?.fontStyle}
+                  underline={selectedItem?.style?.textDecoration}
                   setBold={setBold}
                   setItalic={setItalic}
                   setUnderline={setUnderline}
                 />
 
                 <AlignComponent
-                  justifyContent={justifyContent}
+                  justifyContent={selectedItem?.style?.justifyContent}
                   setLeft={setLeft}
                   setRight={setRight}
                   setCenter={setCenter}
                 />
 
                 <FontSizeComponent
-                  fontSize={fontSize}
+                  fontSize={selectedItem?.style?.fontSize}
                   setFontSize={setFontSize}
                 />
+
                 <MarginComponent
-                  setMarginLeft={setMarginLeft}
-                  setMarginRight={setMarginRight}
+                  margin={selectedItem?.style?.margin}
                   setMarginTop={setMarginTop}
+                  setMarginRight={setMarginRight}
                   setMarginBottom={setMarginBottom}
-                  margin={{ ...margin }}
+                  setMarginLeft={setMarginLeft}
                 />
+
                 <PaddingComponent
-                  setPaddingLeft={setPaddingLeft}
-                  setPaddingRight={setPaddingRight}
+                  padding={selectedItem?.style?.padding}
                   setPaddingTop={setPaddingTop}
+                  setPaddingRight={setPaddingRight}
                   setPaddingBottom={setPaddingBottom}
-                  padding={{ ...padding }}
+                  setPaddingLeft={setPaddingLeft}
                 />
+
                 <BorderRadiusComponent
-                  borderRadius={borderRadius}
+                  borderRadius={selectedItem?.style?.borderRadius}
                   setBorderRadius={setBorderRadius}
                 />
+
                 <ShadowComponent
                   setSmall={setSmall}
                   setMedium={setMedium}
@@ -192,18 +186,18 @@ const ButtonSettings: FC<ISettings> = ({
                 />
 
                 <ColorComponent
-                  color={color}
+                  color={selectedItem?.style?.color}
                   setColor={setColor}
                   selectedItem={selectedItem}
                 />
 
                 <BgColorComponent
-                  color={backgroundColor}
+                  color={selectedItem?.style?.backgroundColor}
                   setBgColor={setBgColor}
                 />
 
                 <UtilitiesComponent
-                  deleteComponent={deleteComponent}
+                  deleteComponent={selectedItem?.style?.deleteComponent}
                   setDeleteComponent={setDeleteComponent}
                 />
               </div>
