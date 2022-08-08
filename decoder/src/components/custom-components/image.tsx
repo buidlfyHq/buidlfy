@@ -13,17 +13,24 @@ interface IImageComponent {
   };
 }
 
-const Image: FC<IImageComponent> = ({ imgData, justifyContent, margin }) => (
-  <div
-    className="flex justify-center items-center h-full w-full"
-    style={{
-      backgroundImage: `url(${imgData ? imgData : defaultImage})`,
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: justifyContent,
-      backgroundSize: "contain",
-      margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
-    }}
-  />
-);
+const Image: FC<IImageComponent> = ({ imgData, justifyContent, margin }) => {
+  const finalMarginLeft = 2 * margin.marginLeft;
+  const finalMarginRight = 2 * margin.marginRight;
+  const finalMarginTop = 2 * margin.marginTop;
+  const finalMarginBotttom = 2 * margin.marginBottom;
+
+  return (
+    <div
+      className="flex justify-center items-center h-full w-full"
+      style={{
+        backgroundImage: `url(${imgData ? imgData : defaultImage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: justifyContent,
+        backgroundSize: "contain",
+        margin: `${finalMarginTop}px ${finalMarginRight}px ${finalMarginBotttom}px ${finalMarginLeft}px`,
+      }}
+    />
+  );
+};
 
 export default Image;

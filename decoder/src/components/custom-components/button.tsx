@@ -96,6 +96,10 @@ const Button: FC<ITexts> = ({
     await web3Modal.clearCachedProvider();
     refreshState();
   };
+  const finalMarginLeft = 2 * margin.marginLeft;
+  const finalMarginRight = 2 * margin.marginRight;
+  const finalMarginTop = 2 * margin.marginTop;
+  const finalMarginBotttom = 2 * margin.marginBottom;
 
   return (
     <main
@@ -142,7 +146,7 @@ const Button: FC<ITexts> = ({
             fontSize: `${fontSize}px`,
             borderRadius: `${borderRadius}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+            margin: `${finalMarginTop}px ${finalMarginRight}px ${finalMarginBotttom}px ${finalMarginLeft}px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
           className="btn rounded w-48 cursor-pointer whitespace-nowrap"
@@ -163,7 +167,7 @@ const Button: FC<ITexts> = ({
             borderRadius: `${borderRadius}px`,
             fontSize: `${fontSize}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+            margin: `${finalMarginTop}px ${finalMarginRight}px ${finalMarginBotttom}px ${finalMarginLeft}px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
           className="btn rounded w-48 cursor-pointer whitespace-nowrap"

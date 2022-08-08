@@ -28,7 +28,10 @@ const Text: FC<ITexts> = ({
       )}
     </>
   );
-
+  const finalMarginLeft = 2 * margin.marginLeft;
+  const finalMarginRight = 2 * margin.marginRight;
+  const finalMarginTop = 2 * margin.marginTop;
+  const finalMarginBotttom = 2 * margin.marginBottom;
   return (
     <section
       style={{
@@ -40,7 +43,7 @@ const Text: FC<ITexts> = ({
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+        margin: `${finalMarginTop}px ${finalMarginRight}px ${finalMarginBotttom}px ${finalMarginLeft}px`,
         padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
       className="flex overflow-hidden items-center justify-center h-full"
