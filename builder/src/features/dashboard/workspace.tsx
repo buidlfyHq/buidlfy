@@ -52,10 +52,6 @@ const Workspace: FC<IWorkspace> = ({
   setDrag,
   setAddContainer,
   backgroundColor,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
