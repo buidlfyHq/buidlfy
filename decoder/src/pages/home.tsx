@@ -14,22 +14,39 @@ const Home: FC = () => {
   const [testConfig, setTestConfig] = useState(
     JSON.parse(BuilderConfig).builder
   );
+  const [assets, setAssets] = useState([]); // for storing all nfts
+  const [assetNum, setAssetNum] = useState(0); // for rendering nfts one by one
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     setTestConfig(testConfig);
   };
 
-  const handleClick = () => {
-    // testConfig.builder
+  // render nfts from connected wallet using opensea api
+  const renderTokensForOwner = () => {
+    fetch(
+      `https://testnets-api.opensea.io/api/v1/assets?owner=0xd6c72729EbCC987b171eCF074993ce3C4e34b9f0&order_direction=desc&offset=0&limit=20&include_orders=false`,
+      { method: "GET", headers: { Accept: "application/json" } }
+    )
+      .then((response) => response.json())
+      .then(({ assets }) => {
+        // ISSUE: unable to render all nfts using forEach
+        // assets.forEach((attributes) => {
+        // });
+        setAssets(assets);
+      });
+  };
+
+  // create new nft component
+  const renderImage = (attributes) => {
     let newC = {
-      i: "testing",
+      i: attributes.id,
       x: 0,
-      y: 1,
+      y: 1 + assetNum,
       h: 1,
       w: 6,
-      name: "Text",
-      value: "Testing...",
+      name: "Image",
+      imgData: attributes.image_url,
       link: "",
       style: {
         backgroundColor: { r: "0", g: "0", b: "0" },
@@ -71,6 +88,7 @@ const Home: FC = () => {
     });
 
     setTestConfig([...newItemsArr, newC]);
+    setAssetNum(assetNum + 1);
   };
 
   return (
@@ -108,10 +126,16 @@ const Home: FC = () => {
         })}
       </ResponsiveGridLayout>
       <button
-        className="m-4 px-4 py-2 bg-purple-300 rounded-full"
-        onClick={handleClick}
+        className="m-4 px-4 py-2 bg-purple-600 rounded-full shadow-md border border-purple-400"
+        onClick={() => renderImage(assets[assetNum])}
       >
         + Add
+      </button>
+      <button
+        className="m-4 px-4 py-2 bg-green-600 rounded-full shadow-md border border-green-500"
+        onClick={renderTokensForOwner}
+      >
+        Connect Wallet
       </button>
     </main>
   );
