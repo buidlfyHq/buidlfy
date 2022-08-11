@@ -3,6 +3,7 @@ import { setValue } from "hooks/set-value";
 import IColor from "interfaces/color";
 import { IInput } from "interfaces/value";
 import "styles/components.css";
+import { MARGIN_VARIABLE } from "config/constants";
 
 interface IInputComponent {
   id: string;
@@ -34,10 +35,6 @@ const Input: FC<IInputComponent> = ({
     )[0];
     return requiredValue ? requiredValue.value : "";
   };
-  const finalMarginLeft = 2 * margin.marginLeft;
-  const finalMarginRight = 2 * margin.marginRight;
-  const finalMarginTop = 2 * margin.marginTop;
-  const finalMarginBotttom = 2 * margin.marginBottom;
 
   return (
     <section className="h-full flex justify-center overflow-hidden items-center">
@@ -47,7 +44,11 @@ const Input: FC<IInputComponent> = ({
           boxShadow: shadow,
           border: "1px solid",
           borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-          margin: `${finalMarginTop}px ${finalMarginRight}px ${finalMarginBotttom}px ${finalMarginLeft}px`,
+          margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
+            margin.marginRight * MARGIN_VARIABLE
+          }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
+            margin.marginLeft * MARGIN_VARIABLE
+          }px`,
         }}
         className="w-full leading-tight text-gray-700 bg-white appearance-none input"
         id="input"

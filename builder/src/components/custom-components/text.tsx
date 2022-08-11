@@ -20,6 +20,7 @@ const Text: FC<ITexts> = ({
       id="text-one"
       className="flex overflow-hidden items-center justify-center w-auto h-full"
       style={{
+        height: "-webkit-fill-available",
         fontWeight: bold,
         fontStyle: italic,
         textDecoration: underline,

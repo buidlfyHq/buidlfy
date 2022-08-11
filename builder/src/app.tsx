@@ -1,10 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "pages/home";
 import Dashboard from "pages/dashboard";
 import Template from "pages/templates";
+import { Web3Storage } from "web3.storage";
 
 const App: FC = () => {
+  useEffect(() => {
+    // storeFiles(makeFileObjects());
+  }, []);
   return (
     <Router>
       <Routes>

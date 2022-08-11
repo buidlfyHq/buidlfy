@@ -1,6 +1,7 @@
 import { FC } from "react";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
+import { MARGIN_VARIABLE } from "config/constants";
 
 const Text: FC<ITexts> = ({
   id,
@@ -28,13 +29,11 @@ const Text: FC<ITexts> = ({
       )}
     </>
   );
-  const finalMarginLeft = 2 * margin.marginLeft;
-  const finalMarginRight = 2 * margin.marginRight;
-  const finalMarginTop = 2 * margin.marginTop;
-  const finalMarginBotttom = 2 * margin.marginBottom;
+
   return (
     <section
       style={{
+        height: "-webkit-fill-available",
         fontWeight: bold,
         fontStyle: italic,
         textDecoration: underline,
@@ -43,7 +42,11 @@ const Text: FC<ITexts> = ({
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        margin: `${finalMarginTop}px ${finalMarginRight}px ${finalMarginBotttom}px ${finalMarginLeft}px`,
+        margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
+          margin.marginRight * MARGIN_VARIABLE
+        }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
+          margin.marginLeft * MARGIN_VARIABLE
+        }px`,
         padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
       className="flex overflow-hidden items-center justify-center h-full"

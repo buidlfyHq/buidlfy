@@ -1,7 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
+import { uploadFileToWeb3Storage } from "config/web3storage";
 
 interface IUploadComponent {
   selectedItem: IItems;
@@ -14,11 +15,12 @@ const UploadComponent: FC<IUploadComponent> = ({
   items,
   setItems,
 }) => {
-  const onChangeImage = (e) => {
+  const onChangeImage = async (e) => {
     if (e.target.files[0]) {
       const reader = new FileReader();
 
-      reader.addEventListener("load", () => {
+      reader.addEventListener("load", async () => {
+        const cid = await uploadFileToWeb3Storage(reader.result as string);
         const updatedItems = items.map((item) => {
           let selectedChild = item.children?.find(
             (child) => child.i === selectedItem.i
@@ -26,12 +28,12 @@ const UploadComponent: FC<IUploadComponent> = ({
           if (item.i === selectedItem.i) {
             return {
               ...item,
-              imgData: reader.result,
+              imgData: cid,
             };
           } else if (selectedChild?.i === selectedItem.i) {
             let child = {
               ...selectedChild,
-              imgData: reader.result,
+              imgData: cid,
             };
             const childIndex = item.children?.findIndex(
               (c) => c.i === selectedItem.i

@@ -8,6 +8,7 @@ import { onRequest } from "hooks/on-request";
 import { providerOptions } from "config/provider-options";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
+import { MARGIN_VARIABLE } from "config/constants";
 
 const web3Modal = new Web3Modal({
   cacheProvider: true, // optional
@@ -96,10 +97,6 @@ const Button: FC<ITexts> = ({
     await web3Modal.clearCachedProvider();
     refreshState();
   };
-  const finalMarginLeft = 2 * margin.marginLeft;
-  const finalMarginRight = 2 * margin.marginRight;
-  const finalMarginTop = 2 * margin.marginTop;
-  const finalMarginBotttom = 2 * margin.marginBottom;
 
   return (
     <main
@@ -146,7 +143,11 @@ const Button: FC<ITexts> = ({
             fontSize: `${fontSize}px`,
             borderRadius: `${borderRadius}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            margin: `${finalMarginTop}px ${finalMarginRight}px ${finalMarginBotttom}px ${finalMarginLeft}px`,
+            margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
+              margin.marginRight * MARGIN_VARIABLE
+            }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
+              margin.marginLeft * MARGIN_VARIABLE
+            }px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
           className="btn rounded w-48 cursor-pointer whitespace-nowrap"
@@ -167,7 +168,11 @@ const Button: FC<ITexts> = ({
             borderRadius: `${borderRadius}px`,
             fontSize: `${fontSize}px`,
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            margin: `${finalMarginTop}px ${finalMarginRight}px ${finalMarginBotttom}px ${finalMarginLeft}px`,
+            margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
+              margin.marginRight * MARGIN_VARIABLE
+            }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
+              margin.marginLeft * MARGIN_VARIABLE
+            }px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
           className="btn rounded w-48 cursor-pointer whitespace-nowrap"
