@@ -14,16 +14,8 @@ interface IImageComponent {
 }
 
 const Image: FC<IImageComponent> = ({ imgData, justifyContent, margin }) => {
-  const [upload, setUpload] = useState<boolean>(false);
-
   return (
     <>
-      {/* <span className="flex">
-        <span className="flex-1">
-          <Spinner />
-          Please Wait
-        </span>
-      </span> */}
       {imgData ? (
         <div
           id="image-one"
