@@ -15,42 +15,47 @@ const UploadComponent: FC<IUploadComponent> = ({
   items,
   setItems,
 }) => {
+  const [size, setSize] = useState<boolean>(false);
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
-      const reader = new FileReader();
-
-      reader.addEventListener("load", async () => {
-        const cid = await uploadFileToWeb3Storage(reader.result as string);
-        const updatedItems = items.map((item) => {
-          let selectedChild = item.children?.find(
-            (child) => child.i === selectedItem.i
-          );
-          if (item.i === selectedItem.i) {
-            return {
-              ...item,
-              imgData: cid,
-            };
-          } else if (selectedChild?.i === selectedItem.i) {
-            let child = {
-              ...selectedChild,
-              imgData: cid,
-            };
-            const childIndex = item.children?.findIndex(
-              (c) => c.i === selectedItem.i
+      if (e.target.files[0].size > 5242880) {
+        setSize(true);
+      } else {
+        setSize(false);
+        const reader = new FileReader();
+        reader.addEventListener("load", async () => {
+          const cid = await uploadFileToWeb3Storage(reader.result as string);
+          const updatedItems = items.map((item) => {
+            let selectedChild = item.children?.find(
+              (child) => child.i === selectedItem.i
             );
-            let newArray = [...item.children];
-            newArray[childIndex] = child;
+            if (item.i === selectedItem.i) {
+              return {
+                ...item,
+                imgData: cid,
+              };
+            } else if (selectedChild?.i === selectedItem.i) {
+              let child = {
+                ...selectedChild,
+                imgData: cid,
+              };
+              const childIndex = item.children?.findIndex(
+                (c) => c.i === selectedItem.i
+              );
+              let newArray = [...item.children];
+              newArray[childIndex] = child;
 
-            return {
-              ...item,
-              children: newArray,
-            };
-          }
-          return item;
+              return {
+                ...item,
+                children: newArray,
+              };
+            }
+            return item;
+          });
+          setItems(updatedItems);
         });
-        setItems(updatedItems);
-      });
-      reader.readAsDataURL(e.target.files[0]);
+        reader.readAsDataURL(e.target.files[0]);
+      }
     }
   };
 
@@ -67,6 +72,11 @@ const UploadComponent: FC<IUploadComponent> = ({
             type="file"
             id="formFile"
           />
+          {size ? (
+            <h3 className="mt-2 text-red-500 text-sm ml-1">
+              Please upload file below 5 mb
+            </h3>
+          ) : null}
         </div>
       </div>
     </div>
