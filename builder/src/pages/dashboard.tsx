@@ -72,6 +72,9 @@ const Dashboard: FC = () => {
     }
   }, []); // eslint-disable-line
 
+  console.log(items);
+  
+
   return (
     <main>
       {size.width > 1024 ? (

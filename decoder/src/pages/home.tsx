@@ -42,8 +42,8 @@ const Home: FC = () => {
     let newC = {
       i: attributes.id,
       x: 0,
-      y: 1 + assetNum,
-      h: 1,
+      y: 0,
+      h: 6,
       w: 6,
       name: "Image",
       imgData: attributes.image_url,
@@ -54,14 +54,14 @@ const Home: FC = () => {
         fontWeight: "normal",
         fontStyle: "normal",
         textDecoration: "none",
-        justifyContent: "center",
+        justifyContent: "left",
         fontSize: 15,
         deleteComponent: 0,
         margin: {
-          marginTop: 0,
-          marginRight: 0,
-          marginBottom: 0,
-          marginLeft: 0,
+          marginTop: 10,
+          marginRight: 10,
+          marginBottom: 10,
+          marginLeft: 15,
         },
         padding: {
           paddingTop: 0,
@@ -72,12 +72,63 @@ const Home: FC = () => {
       },
     };
 
+    let textC = {
+      i: attributes.id + "text",
+      x: 0,
+      y: 6,
+      h: 1,
+      w: 6,
+      name: "Text",
+      value: attributes.name,
+      link: "",
+      style: {
+        backgroundColor: { r: "44", g: "44", b: "44", a: 1 },
+        color: { r: "228", g: "228", b: "228", a: "1" },
+        fontWeight: "bold",
+        fontStyle: "normal",
+        textDecoration: "none",
+        justifyContent: "left",
+        fontSize: 20,
+        deleteComponent: 0,
+        margin: {
+          marginTop: 0,
+          marginRight: 0,
+          marginBottom: 0,
+          marginLeft: 15,
+        },
+        padding: {
+          paddingTop: 0,
+          paddingRight: 0,
+          paddingBottom: 0,
+          paddingLeft: 10,
+        },
+      },
+    };
+
+    let parentComponent = {
+      children: [newC, textC],
+      i: attributes.id + "container",
+      x: 0,
+      y: 1,
+      h: 7,
+      w: 2,
+      name: "Container",
+      style: {
+        backgroundColor: { r: "44", g: "44", b: "44", a: 1 },
+        borderRadius: 6,
+        borderWidth: 0,
+        color: { r: "0", g: "0", b: "0", a: "100" },
+        deleteComponent: 0,
+        shadow: "none",
+      },
+    };
+
     let newItemsArr = testConfig.map((item) => {
       const { y } = item;
-      if (y >= newC.y) {
+      if (y >= parentComponent.y) {
         return {
           ...item,
-          y: y + newC.h,
+          y: y + parentComponent.h,
         };
       } else {
         return {
@@ -87,7 +138,7 @@ const Home: FC = () => {
       }
     });
 
-    setTestConfig([...newItemsArr, newC]);
+    setTestConfig([...newItemsArr, parentComponent]);
     setAssetNum(assetNum + 1);
   };
 

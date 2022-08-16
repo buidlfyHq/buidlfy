@@ -393,7 +393,7 @@ const Settings: FC<ISettings> = ({
           style: {
             ...selectedChild["style"],
             [styleProp]: {
-              ...selectedChild.style.margin,
+              ...selectedChild.style[styleProp],
               [stylePropChild]: property,
             },
           },
