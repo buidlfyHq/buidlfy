@@ -83,12 +83,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -115,12 +115,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -147,12 +147,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -192,12 +192,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -263,12 +263,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -306,12 +306,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -349,12 +349,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -458,12 +458,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -524,12 +524,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
