@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import BuilderConfig from "config";
 import RenderItem from "utils/render-item";
@@ -17,6 +17,25 @@ const Home: FC = () => {
   const [assets, setAssets] = useState([]); // for storing all nfts
   const [assetNum, setAssetNum] = useState(0); // for rendering nfts one by one
 
+  const [nftCard, setNftCard] = useState<any>({}); // for rendering nfts one by one
+
+  useEffect(() => {
+    let nftY = null;
+    let nftCols = 0;
+    testConfig.map((item) => {
+      if (item.nft && nftY === null) {
+        nftY = item.y;
+        setNftCard(item);
+      }
+      if (item.nft && item.y === nftY) {
+        nftCols++;
+      }
+    });
+    setTestConfig(testConfig.filter((i) => !i.nft));
+  }, []);
+
+  console.log(testConfig);
+
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     setTestConfig(testConfig);
@@ -30,9 +49,6 @@ const Home: FC = () => {
     )
       .then((response) => response.json())
       .then(({ assets }) => {
-        // ISSUE: unable to render all nfts using forEach
-        // assets.forEach((attributes) => {
-        // });
         setAssets(assets);
       });
   };
@@ -62,6 +78,7 @@ const Home: FC = () => {
           marginRight: 10,
           marginBottom: 10,
           marginLeft: 15,
+          fontWeight: "normal",
         },
         padding: {
           paddingTop: 0,
@@ -142,6 +159,43 @@ const Home: FC = () => {
     setAssetNum(assetNum + 1);
   };
 
+  const renderNfts = (attributes) => {
+    let nCard: any = {
+      ...nftCard,
+      i: attributes.id + "container",
+      children: [
+        {
+          ...nftCard.children[0],
+          i: attributes.id,
+          imgData: attributes.image_url,
+        },
+        {
+          ...nftCard.children[1],
+          i: attributes.id + "text",
+          value: attributes.name,
+        },
+      ],
+    };
+
+    let newItemsArr = testConfig.map((item) => {
+      const { y } = item;
+      if (y >= nCard.y) {
+        return {
+          ...item,
+          y: y + nCard.h,
+        };
+      } else {
+        return {
+          ...item,
+          y: y,
+        };
+      }
+    });
+
+    setTestConfig([...newItemsArr, nCard]);
+    setAssetNum(assetNum + 1);
+  };
+
   return (
     <main
       className="min-h-screen"
@@ -178,7 +232,7 @@ const Home: FC = () => {
       </ResponsiveGridLayout>
       <button
         className="m-4 px-4 py-2 bg-purple-600 rounded-full shadow-md border border-purple-400"
-        onClick={() => renderImage(assets[assetNum])}
+        onClick={() => renderNfts(assets[assetNum])}
       >
         + Add
       </button>

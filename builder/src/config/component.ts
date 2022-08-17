@@ -111,7 +111,8 @@ export const components = [
   },
   {
     name: "Vertical Container",
-    h: 5,
+    nft: true,
+    h: 6,
     style: {
       ...defaultDeleteStyles,
       ...defaultColorStyles,
@@ -121,7 +122,7 @@ export const components = [
     children: [
       {
         name: "Image",
-        h: 2,
+        h: 5,
         i: 4,
         w: 6,
         x: 0,
@@ -133,36 +134,18 @@ export const components = [
         },
       },
       {
-        name: "Heading 1",
+        name: "Text",
         h: 1,
         i: 5,
         w: 6,
         x: 0,
-        y: 2,
+        y: 5,
         value: "Card Title",
         link: "",
         style: {
           ...defaultColorStyles,
           ...defaultFontStyles,
           fontSize: 25,
-          ...defaultDeleteStyles,
-          ...defaultMarginStyles,
-          ...defaultPaddingStyles,
-        },
-      },
-      {
-        name: "Text",
-        h: 2,
-        i: 6,
-        w: 6,
-        x: 0,
-        y: 3,
-        value: "Card Paragraph",
-        link: "",
-        style: {
-          ...defaultColorStyles,
-          ...defaultFontStyles,
-          fontSize: 15,
           ...defaultDeleteStyles,
           ...defaultMarginStyles,
           ...defaultPaddingStyles,
