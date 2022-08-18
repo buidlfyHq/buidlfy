@@ -17,24 +17,29 @@ const Home: FC = () => {
   const [assets, setAssets] = useState([]); // for storing all nfts
   const [assetNum, setAssetNum] = useState(0); // for rendering nfts one by one
 
-  const [nftCard, setNftCard] = useState<any>({}); // for rendering nfts one by one
+  const [nftCard, setNftCard] = useState<any>({});
+  const [nftX, setNftX] = useState(0);
+  const [nftY, setNftY] = useState(null);
+  const [nftCols, setNftCols] = useState(0);
 
   useEffect(() => {
-    let nftY = null;
-    let nftCols = 0;
+    let itemY = nftY;
+    let itemCols = nftCols;
     testConfig.map((item) => {
-      if (item.nft && nftY === null) {
-        nftY = item.y;
+      if (item.nft && itemY === null) {
+        itemY = item.y;
         setNftCard(item);
       }
-      if (item.nft && item.y === nftY) {
-        nftCols++;
+      if (item.nft && item.y === itemY) {
+        itemCols++;
       }
     });
+    setNftY(itemY);
+    setNftCols(itemCols);
+
+    // delete default nft containers
     setTestConfig(testConfig.filter((i) => !i.nft));
   }, []);
-
-  console.log(testConfig);
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -53,115 +58,18 @@ const Home: FC = () => {
       });
   };
 
-  // create new nft component
-  const renderImage = (attributes) => {
-    let newC = {
-      i: attributes.id,
-      x: 0,
-      y: 0,
-      h: 6,
-      w: 6,
-      name: "Image",
-      imgData: attributes.image_url,
-      link: "",
-      style: {
-        backgroundColor: { r: "0", g: "0", b: "0" },
-        color: { r: "0", g: "0", b: "0", a: "100" },
-        fontWeight: "normal",
-        fontStyle: "normal",
-        textDecoration: "none",
-        justifyContent: "left",
-        fontSize: 15,
-        deleteComponent: 0,
-        margin: {
-          marginTop: 10,
-          marginRight: 10,
-          marginBottom: 10,
-          marginLeft: 15,
-          fontWeight: "normal",
-        },
-        padding: {
-          paddingTop: 0,
-          paddingRight: 0,
-          paddingBottom: 0,
-          paddingLeft: 0,
-        },
-      },
-    };
-
-    let textC = {
-      i: attributes.id + "text",
-      x: 0,
-      y: 6,
-      h: 1,
-      w: 6,
-      name: "Text",
-      value: attributes.name,
-      link: "",
-      style: {
-        backgroundColor: { r: "44", g: "44", b: "44", a: 1 },
-        color: { r: "228", g: "228", b: "228", a: "1" },
-        fontWeight: "bold",
-        fontStyle: "normal",
-        textDecoration: "none",
-        justifyContent: "left",
-        fontSize: 20,
-        deleteComponent: 0,
-        margin: {
-          marginTop: 0,
-          marginRight: 0,
-          marginBottom: 0,
-          marginLeft: 15,
-        },
-        padding: {
-          paddingTop: 0,
-          paddingRight: 0,
-          paddingBottom: 0,
-          paddingLeft: 10,
-        },
-      },
-    };
-
-    let parentComponent = {
-      children: [newC, textC],
-      i: attributes.id + "container",
-      x: 0,
-      y: 1,
-      h: 7,
-      w: 2,
-      name: "Container",
-      style: {
-        backgroundColor: { r: "44", g: "44", b: "44", a: 1 },
-        borderRadius: 6,
-        borderWidth: 0,
-        color: { r: "0", g: "0", b: "0", a: "100" },
-        deleteComponent: 0,
-        shadow: "none",
-      },
-    };
-
-    let newItemsArr = testConfig.map((item) => {
-      const { y } = item;
-      if (y >= parentComponent.y) {
-        return {
-          ...item,
-          y: y + parentComponent.h,
-        };
-      } else {
-        return {
-          ...item,
-          y: y,
-        };
-      }
-    });
-
-    setTestConfig([...newItemsArr, parentComponent]);
-    setAssetNum(assetNum + 1);
-  };
-
   const renderNfts = (attributes) => {
+    if (nftX / nftCard.w < nftCols - 1) {
+      setNftX(nftX + nftCard.w);
+    } else {
+      setNftX(0);
+      setNftY(nftY + nftCard.h);
+    }
+
     let nCard: any = {
       ...nftCard,
+      x: nftX,
+      y: nftY,
       i: attributes.id + "container",
       children: [
         {
@@ -179,7 +87,7 @@ const Home: FC = () => {
 
     let newItemsArr = testConfig.map((item) => {
       const { y } = item;
-      if (y >= nCard.y) {
+      if (!item.nft && y >= nCard.y) {
         return {
           ...item,
           y: y + nCard.h,
