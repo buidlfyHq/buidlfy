@@ -63,7 +63,7 @@ const ColorComponent: FC<IColorComponent> = ({
               </span>
             ) : (
               <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
-                Text Color
+                Color
               </span>
             )}
           </div>

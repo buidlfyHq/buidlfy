@@ -10,6 +10,7 @@ import FontSizeComponent from "components/settings/font-size-component";
 import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
+import "styles/components.css";
 
 const GeneralSettings: FC<ISettings> = ({
   textVal,
@@ -48,19 +49,18 @@ const GeneralSettings: FC<ISettings> = ({
 }) => (
   <>
     <h3 className="mb-3 ml-8">
-      Component -
       {selectedItem ? (
-        <span className="font-bold">{selectedItem.name}</span>
+        <span className="setting-text font-extrabold">{selectedItem.name}</span>
       ) : null}
     </h3>
-    <div className="flex items-center px-3 mt-1 text-black">
-      <RiText className="text-[18px] mr-3" />
+    <div className="flex items-center px-3 mx-2 mt-1 text-black">
+      {/* <RiText className="text-[18px] mr-3" /> */}
       <input
         value={textVal}
         onChange={(e) => handleTextChange(e)}
-        className="changeText"
+        className="changeText h-[7rem]"
         type="text"
-        placeholder="Name..."
+        placeholder="Please write your text here..."
       />
     </div>
     <div className="flex items-center px-3 mt-2 text-black">

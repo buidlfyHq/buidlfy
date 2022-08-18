@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { RiText } from "react-icons/ri";
 import Navbar from "features/dashboard/navbar";
 import Sidebar from "features/dashboard/sidebar";
+import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
 import DefaultSettings from "features/dashboard/default-settings";
@@ -12,7 +13,15 @@ import IColor from "interfaces/color";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
-
+export enum sidebarEnum {
+  PAGES = "pages",
+  TEMPLATES = "templates",
+  ELEMENTS = "elements",
+  MEDIA = "media",
+  STYLES = "styles",
+  HELP = "help",
+  SETTING = "setting",
+}
 const Dashboard: FC = () => {
   const navigate = useNavigate();
   const size = useWindowSize();
@@ -50,7 +59,7 @@ const Dashboard: FC = () => {
     title: "",
     logo: "",
   });
-
+  const [sideElement, setSideElement] = useState<string>("");
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -71,12 +80,32 @@ const Dashboard: FC = () => {
       setItems(JSON.parse(saveItems));
     }
   }, []); // eslint-disable-line
-
+  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
+  const showSidebar = () => {
+    setIsNavHidden(false);
+  };
+  const hideSidebar = () => {
+    setIsNavHidden(true);
+  };
   return (
     <main>
       {size.width > 1024 ? (
         <section className="flex flex-row w-full min-h-screen">
           {/* Sidebar */}
+          <SideNavbar
+            className={className}
+            setClassName={setClassName}
+            items={items}
+            setItems={setItems}
+            addContainer={addContainer}
+            settingItemId={settingItemId}
+            sideElement={sideElement}
+            setSideElement={setSideElement}
+            isNavHidden={isNavHidden}
+            setIsNavHidden={setIsNavHidden}
+            showSidebar={showSidebar}
+            hideSidebar={hideSidebar}
+          />
           <Sidebar
             className={className}
             setClassName={setClassName}
@@ -84,6 +113,12 @@ const Dashboard: FC = () => {
             setItems={setItems}
             addContainer={addContainer}
             settingItemId={settingItemId}
+            sideElement={sideElement}
+            setSideElement={setSideElement}
+            isNavHidden={isNavHidden}
+            setIsNavHidden={setIsNavHidden}
+            showSidebar={showSidebar}
+            hideSidebar={hideSidebar}
           />
 
           <section className="flex-1">

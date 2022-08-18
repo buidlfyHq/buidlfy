@@ -5,6 +5,7 @@ import { Dialog } from "@headlessui/react";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import ITemplate from "interfaces/template";
+import { uploadFileToWeb3Storage } from "config/web3storage";
 
 interface INavbar {
   className: string;
@@ -58,6 +59,24 @@ const Navbar: FC<INavbar> = ({
       }
     }
   }, [contractConfig.abi]);
+  const [file, setFile] = useState<string>("");
+  const [size, setSize] = useState<boolean>(false);
+
+  function onChangeImage(e) {
+    if (e.target.files[0]) {
+      if (e.target.files[0].size > 5242880) {
+        setSize(true);
+      } else {
+        setSize(false);
+        const reader = new FileReader();
+        reader.addEventListener("load", async () => {
+          const cid = await uploadFileToWeb3Storage(reader.result as string);
+          setFile(cid);
+        });
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    }
+  }
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -81,6 +100,7 @@ const Navbar: FC<INavbar> = ({
       let newTemplate = {
         name: inputValue,
         value: items,
+        image: file,
       };
       newTemplates.push(newTemplate);
       localStorage.setItem("templates", JSON.stringify(newTemplates));
@@ -116,7 +136,7 @@ const Navbar: FC<INavbar> = ({
     <main
       className={
         !className
-          ? `fixed left-[250px] w-[calc(100%-250px)] h-[60px] top-0 border-b flex flex-row justify-between items-center p-3 bg-white z-20`
+          ? `fixed left-[80px] right-0 h-[60px] top-0 border-b flex flex-row justify-between items-center p-3 bg-white z-20`
           : `h-[57px] w-full top-0 border-b flex flex-row justify-between items-center p-3 z-20`
       }
     >
@@ -245,11 +265,12 @@ const Navbar: FC<INavbar> = ({
                   Upload Image
                 </div>
                 <input
-                  // onChange={onChangeImage}
+                  onChange={onChangeImage}
                   className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
                   type="file"
                   id="formFile"
                 />
+                <img src={file} />
               </div>
               <div className="mt-6">
                 <button

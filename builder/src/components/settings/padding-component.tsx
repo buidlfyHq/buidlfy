@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import "styles/components.css";
 import "styles/dashboard.css";
+import "styles/components.css";
 
 interface IPaddingComponent {
   padding?: {
@@ -39,8 +40,9 @@ const PaddingComponent: FC<IPaddingComponent> = ({
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">
         <span className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
-          Padding
+          <span className="margin-text">Padding</span>
           <div className="flex mt-3">
+            <h6 className="margin-text mr-2">L</h6>
             <input
               type="number"
               id="padding-left"
@@ -50,33 +52,36 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleLeftChange}
             />
+            <h6 className="margin-text ml-5 mr-2">R</h6>
             <input
               type="number"
               id="padding-right"
               name="paddingRight"
               value={padding.paddingRight}
               placeholder="right"
-              className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-text form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleRightChange}
             />
           </div>
           <div className="flex mt-3">
+            <h6 className="mr-2">T</h6>
             <input
               type="number"
               id="padding-top"
               name="paddingTop"
               value={padding.paddingTop}
               placeholder="top"
-              className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-text form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleTopChange}
             />
+            <h6 className="ml-5 mr-2">B</h6>
             <input
               type="number"
               id="padding-bottom"
               name="paddingBottom"
               value={padding.paddingBottom}
               placeholder="bottom"
-              className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleBottomChange}
             />
           </div>
