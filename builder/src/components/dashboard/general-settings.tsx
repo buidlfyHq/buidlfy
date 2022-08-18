@@ -53,12 +53,12 @@ const GeneralSettings: FC<ISettings> = ({
         <span className="setting-text font-extrabold">{selectedItem.name}</span>
       ) : null}
     </h3>
-    <div className="flex items-center px-3 mx-2 mt-1 text-black">
-      {/* <RiText className="text-[18px] mr-3" /> */}
+    <div className="flex items-center px-3 mt-1 text-black">
+      <RiText className="text-[18px] mr-3" />
       <input
         value={textVal}
         onChange={(e) => handleTextChange(e)}
-        className="changeText h-[7rem]"
+        className="changeText"
         type="text"
         placeholder="Please write your text here..."
       />

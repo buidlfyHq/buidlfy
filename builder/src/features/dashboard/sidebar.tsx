@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useRef, useEffect } from "react";
 import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
@@ -41,9 +41,23 @@ const Sidebar: FC<ISidebar> = ({
   showSidebar,
 }) => {
   // const [indexValue, setIndexValue] = useState<number>(0);
+  // const ref = useRef<HTMLDivElement>();
+
+  // useEffect(() => {
+  //   // FIX: find a suitable type for this event
+  //   const handleOutsideClick = (event) => {
+  //     if (ref.current && !ref.current.contains(event.target)) {
+  //       setIsNavHidden(false);
+  //     }
+  //   };
+  //   console.log(isNavHidden, "NAV");
+  //   document.addEventListener("click", handleOutsideClick);
+  //   return () => document.removeEventListener("click", handleOutsideClick);
+  // }, [ref]);
 
   return (
     <main
+      // ref={ref}
       className={`sidebar overflow-scroll fixed left-[80px] bottom-0 top-[30px] w-[250px] pb-8 border-r ${
         isNavHidden ? "hidden" : ""
       }`}
@@ -87,7 +101,9 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </div> */}
       {/* </section> */}
-
+      <div onClick={hideSidebar} className="mt-8">
+        Hide
+      </div>
       {/* Components */}
       {sideElement == sidebarEnum.ELEMENTS ? (
         <Elements

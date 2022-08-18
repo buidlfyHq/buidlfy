@@ -92,7 +92,7 @@
   background: linear-gradient(195.4deg, rgba(134, 190, 255, 0.2) 10.8%, rgba(205, 76, 250, 0.2) 163.89%);
 }
 .side-text {
-  font-family: 'Roboto';
+/* font-family: 'Roboto'; */
 font-style: normal;
 font-weight: 400;
 font-size: 12px;
@@ -105,7 +105,7 @@ color: #504F82;
 }
 
 .setting-text {
-  font-family: Roboto;
+  /* font-family: Roboto; */
 font-style: normal;
 font-size: 12px;
 line-height: 14px;
@@ -131,7 +131,7 @@ color: rgba(16, 15, 17, 0.5);
 background: linear-gradient(195.4deg, rgba(134, 190, 255, 0.2) 10.8%, rgba(205, 76, 250, 0.2) 163.89%);
 border: 0.5px solid #E2E2EA;
 border-radius: 28px;
-font-family: 'Roboto';
+/* font-family: 'Roboto'; */
 font-style: normal;
 font-weight: 400;
 font-size: 12px;
@@ -149,7 +149,7 @@ color: #484887;
   border-top: 1px solid #e5e7eb;
 }
 .element-text {
-  font-family: 'Roboto';
+  /* font-family: 'Roboto'; */
 font-style: normal;
 font-weight: 600;
 font-size: 16px;
@@ -189,4 +189,10 @@ border-radius: 5px;
 border-radius: 5px;
 width: 200px;
 height: 100px;
+}
+.image-container {
+  background: #FFFFFF;
+  border-radius: 5px;
+  width: 200px;
+  height: 180px;
 }

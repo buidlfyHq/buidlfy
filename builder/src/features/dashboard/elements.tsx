@@ -308,6 +308,18 @@ const Elements: FC<IElements> = ({
           </div>
         </div>
       </div>
+      <div className="mt-6 ml-6">
+        <span className="element-text">Image Upload</span>
+        <div>
+          <div
+            className="image-container mt-3 py-2.5 pl-3"
+            onClick={() => onClickFunction("Image")}
+          >
+            <h1 className="text-lg">Image Upload</h1>
+            <div></div>
+          </div>
+        </div>
+      </div>
 
       {/* <div className="px-6 py-3 mt-4">
         {addContainer ? (

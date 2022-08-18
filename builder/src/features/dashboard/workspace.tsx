@@ -226,33 +226,37 @@ const Workspace: FC<IWorkspace> = ({
     });
 
   return (
-    <main
-      className={`w-[calc(100%-500px)] h-full z-10 ${
-        className === "" ? "mx-[250px]" : "mr-[250px]"
-      }`}
-      style={{
-        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-      }}
-      onClick={handleCheckIsContainer}
-    >
-      <section className="mt-[60px]">
-        <ResponsiveGridLayout
-          layouts={{ lg: items }}
-          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-          cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
-          rowHeight={50}
-          width={window.innerWidth - 250}
-          resizeHandles={["se"]}
-          isDraggable={drag}
-          onLayoutChange={onLayoutChange}
-          compactType={null}
-          margin={[0, 0]}
-          className="h-fit overflow-hidden"
+    <div className="bg-slate-200 w-[calc(100%-540px)] h-full z-10 ml-[330px] mr-[250px]">
+      <div>
+        <main
+          className={`w-[calc(100%-540px)] h-full z-10 bg-red-500 ${
+            className === "" ? "ml-[330px] mr-[250px]" : "mr-[250px]"
+          }`}
+          style={{
+            backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+          }}
+          onClick={handleCheckIsContainer}
         >
-          {renderItemFunction}
-        </ResponsiveGridLayout>
-      </section>
-    </main>
+          <section className="mt-[60px]">
+            <ResponsiveGridLayout
+              layouts={{ lg: items }}
+              breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+              cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
+              rowHeight={50}
+              width={window.innerWidth - 250}
+              resizeHandles={["se"]}
+              isDraggable={drag}
+              onLayoutChange={onLayoutChange}
+              compactType={null}
+              margin={[0, 0]}
+              className="h-fit overflow-hidden"
+            >
+              {renderItemFunction}
+            </ResponsiveGridLayout>
+          </section>
+        </main>
+      </div>
+    </div>
   );
 };
 
