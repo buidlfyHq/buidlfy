@@ -6,9 +6,6 @@ import Template from "pages/templates";
 import { Web3Storage } from "web3.storage";
 
 const App: FC = () => {
-  useEffect(() => {
-    // storeFiles(makeFileObjects());
-  }, []);
   return (
     <Router>
       <Routes>

@@ -27,7 +27,7 @@ const UploadComponent: FC<IUploadComponent> = ({
           const cid = await uploadFileToWeb3Storage(reader.result as string);
           const updatedItems = items.map((item) => {
             let selectedChild = item.children?.find(
-              (child) => child.i === selectedItem.i
+              (child: { i: string }) => child.i === selectedItem.i
             );
             if (item.i === selectedItem.i) {
               return {
@@ -40,14 +40,14 @@ const UploadComponent: FC<IUploadComponent> = ({
                 imgData: cid,
               };
               const childIndex = item.children?.findIndex(
-                (c) => c.i === selectedItem.i
+                (c: { i: string }) => c.i === selectedItem.i
               );
-              let newArray = [...item.children];
-              newArray[childIndex] = child;
+              let newChildren = [...item.children];
+              newChildren[childIndex] = child;
 
               return {
                 ...item,
-                children: newArray,
+                children: newChildren,
               };
             }
             return item;

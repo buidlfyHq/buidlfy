@@ -22,7 +22,7 @@ const MarginComponent: FC<IMarginComponent> = ({
   setMarginTop,
   setMarginBottom,
 }) => {
-  const handleLeftChange = (e) => {
+  const handleLeftChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMarginLeft(+e.target.value);
   };
   const handleRightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
