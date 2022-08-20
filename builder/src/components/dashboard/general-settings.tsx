@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { RiText } from "react-icons/ri";
-import { AiOutlineLink } from "react-icons/ai";
+import { IoMdLink } from "react-icons/io";
 import AlignComponent from "components/settings/align-component";
 import FontStyleComponent from "components/settings/font-style-component";
 import UtilitiesComponent from "components/settings/utilities-component";
@@ -48,29 +48,30 @@ const GeneralSettings: FC<ISettings> = ({
   setPaddingTop,
 }) => (
   <>
-    <h3 className="mb-3 ml-8">
+    <h3 className="mb-3 ml-4">
       {selectedItem ? (
-        <span className="setting-text font-extrabold">{selectedItem.name}</span>
+        <span className="setting-text ">{selectedItem.name}</span>
       ) : null}
     </h3>
-    <div className="flex items-center px-3 mt-1 text-black">
-      <RiText className="text-[18px] mr-3" />
-      <input
+    <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
+      {/* <RiText className="text-[18px] mr-3" /> */}
+      <textarea
         value={textVal}
         onChange={(e) => handleTextChange(e)}
-        className="changeText"
-        type="text"
+        className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
         placeholder="Please write your text here..."
       />
     </div>
-    <div className="flex items-center px-3 mt-2 text-black">
-      <AiOutlineLink className="text-[18px] mr-3" />
+    <div className="flex items-center mt-4 mx-2  w-[13.5rem] text-black">
+      <div className="link-div px-1 py-1">
+        <IoMdLink className="text-[18px]" />
+      </div>
       <input
         value={linkVal}
         onChange={(e) => handleLinkChange(e)}
-        className="changeText"
+        className="changeText pl-[2.5rem] py-[0.4rem] input-text"
         type="text"
-        placeholder="URL..."
+        placeholder="Link"
       />
     </div>
     <FontStyleComponent
@@ -81,6 +82,20 @@ const GeneralSettings: FC<ISettings> = ({
       setItalic={setItalic}
       setUnderline={setUnderline}
     />
+
+    <AlignComponent
+      justifyContent={justifyContent}
+      setLeft={setLeft}
+      setRight={setRight}
+      setCenter={setCenter}
+    />
+    <FontSizeComponent fontSize={fontSize} setFontSize={setFontSize} />
+    <ColorComponent
+      color={color}
+      setColor={setColor}
+      selectedItem={selectedItem}
+    />
+    <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
     <MarginComponent
       setMarginLeft={setMarginLeft}
       setMarginRight={setMarginRight}
@@ -95,19 +110,6 @@ const GeneralSettings: FC<ISettings> = ({
       setPaddingBottom={setPaddingBottom}
       padding={{ ...padding }}
     />
-    <AlignComponent
-      justifyContent={justifyContent}
-      setLeft={setLeft}
-      setRight={setRight}
-      setCenter={setCenter}
-    />
-    <FontSizeComponent fontSize={fontSize} setFontSize={setFontSize} />
-    <ColorComponent
-      color={color}
-      setColor={setColor}
-      selectedItem={selectedItem}
-    />
-    <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
     <UtilitiesComponent
       deleteComponent={deleteComponent}
       setDeleteComponent={setDeleteComponent}

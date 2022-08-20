@@ -4,6 +4,7 @@ import RenderItem from "utils/render-item";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
+import "styles/components.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 interface IWorkspace {
@@ -226,11 +227,11 @@ const Workspace: FC<IWorkspace> = ({
     });
 
   return (
-    <div className="bg-slate-200 w-[calc(100%-540px)] h-full z-10 ml-[330px] mr-[250px]">
+    <div className="main-div w-full h-full">
       <div>
         <main
-          className={`w-[calc(100%-540px)] h-full z-10 bg-red-500 ${
-            className === "" ? "ml-[330px] mr-[250px]" : "mr-[250px]"
+          className={`w-full h-full z-10 mt-[8rem] ${
+            className === "" ? "mr-[250px]" : "mr-[250px]"
           }`}
           style={{
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,

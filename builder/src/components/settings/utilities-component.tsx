@@ -17,7 +17,7 @@ const UtilitiesComponent: FC<IUtilitiesComponent> = ({
 
   return (
     <div className="items-center w-full px-3 py-2 text-gray-600 rounded">
-      <div className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
+      <div className="margin-text px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
         Utilities
       </div>
       <div className="flex">

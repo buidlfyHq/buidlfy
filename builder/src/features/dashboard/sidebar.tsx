@@ -58,7 +58,7 @@ const Sidebar: FC<ISidebar> = ({
   return (
     <main
       // ref={ref}
-      className={`sidebar overflow-scroll fixed left-[80px] bottom-0 top-[30px] w-[250px] pb-8 border-r ${
+      className={`sidebar overflow-scroll inherit left-[80px] bottom-0 top-[30px] w-[250px] pb-8 border-r ${
         isNavHidden ? "hidden" : ""
       }`}
     >
@@ -101,7 +101,7 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </div> */}
       {/* </section> */}
-      <div onClick={hideSidebar} className="mt-8">
+      <div onClick={hideSidebar} className="mt-8 relative z-[100]">
         Hide
       </div>
       {/* Components */}

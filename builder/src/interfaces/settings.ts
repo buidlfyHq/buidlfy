@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import IColor from "./color";
 import IItems from "./items";
 
@@ -98,7 +99,7 @@ export default interface ISettings {
   setPlaceholder?: (placeholder: string) => void;
   handlePlaceholderChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   textVal?: string;
-  handleTextChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleTextChange?: (e) => void;
   linkVal?: string;
   handleLinkChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

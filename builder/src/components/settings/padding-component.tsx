@@ -42,46 +42,46 @@ const PaddingComponent: FC<IPaddingComponent> = ({
         <span className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
           <span className="margin-text">Padding</span>
           <div className="flex mt-3">
-            <h6 className="margin-text mr-2">L</h6>
+            <h6 className="margin-subtext mr-2">L</h6>
             <input
               type="number"
               id="padding-left"
               name="paddingLeft"
               value={padding.paddingLeft}
-              placeholder="left"
-              className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              placeholder="0"
+              className="margin-form pl-2 form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleLeftChange}
             />
-            <h6 className="margin-text ml-5 mr-2">R</h6>
+            <h6 className="margin-text ml-5 mr-2 margin-subtext">R</h6>
             <input
               type="number"
               id="padding-right"
               name="paddingRight"
               value={padding.paddingRight}
-              placeholder="right"
-              className="margin-text form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              placeholder="0"
+              className="margin-form pl-2 form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleRightChange}
             />
           </div>
           <div className="flex mt-3">
-            <h6 className="mr-2">T</h6>
+            <h6 className="mr-2 margin-subtext">T</h6>
             <input
               type="number"
               id="padding-top"
               name="paddingTop"
               value={padding.paddingTop}
-              placeholder="top"
-              className="margin-text form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              placeholder="0"
+              className="margin-form pl-2 form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleTopChange}
             />
-            <h6 className="ml-5 mr-2">B</h6>
+            <h6 className="ml-5 mr-2 margin-subtext">B</h6>
             <input
               type="number"
               id="padding-bottom"
               name="paddingBottom"
               value={padding.paddingBottom}
-              placeholder="bottom"
-              className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              placeholder="0"
+              className="margin-form pl-2 form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleBottomChange}
             />
           </div>

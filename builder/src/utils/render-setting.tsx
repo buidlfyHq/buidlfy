@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { ChangeEvent, FC } from "react";
 import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
@@ -52,7 +52,7 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingBottom,
   setPaddingTop,
 }) => {
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTextChange = (e) => {
     setValue(e.target.value);
   };
 

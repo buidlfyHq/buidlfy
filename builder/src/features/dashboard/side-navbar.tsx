@@ -49,7 +49,7 @@ const SideNavbar: FC<ISideNavbar> = ({
   };
 
   return (
-    <main className={`w-[80px] fixed  border-r ${className}`}>
+    <main className={`w-[80px] inherit border-r ${className}`}>
       {/* user name */}
       {/* It will be used for a later code */}
       {/* <section className="flex flex-row justify-between items-center h-[60px]">

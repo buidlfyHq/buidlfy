@@ -43,7 +43,6 @@
   width: 100%;
   border: 1px solid rgb(233, 226, 226);
   outline: none;
-  padding: 4px 8px;
   font-size: 15px;
 }
 .changeText:focus {

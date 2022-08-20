@@ -106,17 +106,26 @@ color: #504F82;
 
 .setting-text {
   /* font-family: Roboto; */
-font-style: normal;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  /* identical to box height */
+  
+  
+  color: #100F11;
+  
+}
+
+.margin-text {
+  font-style: normal;
+font-weight: 500;
 font-size: 12px;
 line-height: 14px;
 /* identical to box height */
 
 
 color: #100F11;
-}
-
-.margin-text {
-  
 }
 .sidebar {
   background: rgba(63, 60, 197, 0.04);
@@ -127,6 +136,30 @@ border: 1px solid #DEE0E9;
 color: rgba(16, 15, 17, 0.5);
 }
 
+.margin-form {
+  background: #E9EDFD;
+  box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(17px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-color: transparent;
+  border-radius: 6px;
+}
+.margin-form::placeholder{
+  color: #000000;
+  font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 14px;
+}
+.margin-subtext {
+  font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 15px;
+align-items: center;
+display: flex;
+color: #000000;
+}
 .badge {
 background: linear-gradient(195.4deg, rgba(134, 190, 255, 0.2) 10.8%, rgba(205, 76, 250, 0.2) 163.89%);
 border: 0.5px solid #E2E2EA;
@@ -195,4 +228,41 @@ height: 100px;
   border-radius: 5px;
   width: 200px;
   height: 180px;
+}
+.input-text {
+  border: 1px solid #DADADA;
+border-radius: 6px;
+}
+.input-text::placeholder {
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 16px;
+/* or 123% */
+
+
+color: rgba(19, 27, 66, 0.502378);
+
+}
+.main-div {
+  background: #F9F9FA;
+   /* opacity: 0.2; */
+  /* filter: blur(118.75px); */
+}
+.font-div {
+  background: #E9EDFD;
+box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba(255, 255, 255, 0.03);
+backdrop-filter: blur(17px);
+/* Note: backdrop-filter has minimal browser support */
+border: transparent;
+border-radius: 6px;
+width: 13rem;
+padding-left: 6px;
+}
+.link-div {
+  position: absolute;
+  margin-left: 0.5rem;
+  background: #E9EDFD;
+  border-radius: 4px;
+  
 }

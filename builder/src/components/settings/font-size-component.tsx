@@ -40,31 +40,32 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
   return (
     <div className="flex w-full px-3 text-gray-600">
       <span className="px-1 text-left text-xl text-gray-500 font-regular font-normal not-italic">
-        Font Size
-        <div className="flex mt-3">
-          <span
+        {/* Font Size */}
+        <div className="flex mt-3 ">
+          {/* <span
             onClick={decrementCounter}
             className="flex items-center justify-center shadow text-[18px] mr-3 w-8 h-10 font-regular text-black"
           >
             -
-          </span>
-          <div className="xl:w-15">
+          </span> */}
+
+          <div className="">
             <select
               value={fontSize}
               onChange={(e) => handleSizeChange(e)}
-              className="form-select appearance-none block w-8 h-10 px-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="form-select font-div appearance-none block w-8 h-10 px-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               aria-label="Default select example"
             >
               <option selected>{fontSize}</option>
               {options}
             </select>
           </div>
-          <span
+          {/* <span
             onClick={incrementCounter}
             className="flex ml-3 items-center justify-center shadow text-[18px] w-8 h-10 font-regular text-black"
           >
             +
-          </span>
+          </span> */}
         </div>
       </span>
     </div>
