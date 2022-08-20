@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { Dispatch, FC, SetStateAction} from "react";
 import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
 import RenderItem from "utils/render-item";
@@ -37,6 +37,7 @@ interface IContainer {
   }) => void;
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
+  setValue?: (value: string) => void
 }
 
 const Container: FC<IContainer> = ({
@@ -60,6 +61,7 @@ const Container: FC<IContainer> = ({
   elementConfig,
   setElementConfig,
 }) => {
+  
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -230,7 +232,10 @@ const Container: FC<IContainer> = ({
                   onMouseOut={() => setDrag(true)}
                   onClick={() => onComponentClick(item.name, i)}
                 >
-                  <RenderItem item={item} setDrag={setDrag} />
+                  <RenderItem 
+                    item={item} 
+                    setDrag={setDrag} 
+                  />
                 </div>
               );
             })

@@ -109,7 +109,6 @@ const Sidebar: FC<ISidebar> = ({
             y: y,
             w: 6,
             minW: 1,
-            minH: 1,
             resizeHandles: containerCheck(c)
               ? containerHandles
               : availableHandles,
