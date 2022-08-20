@@ -1,5 +1,5 @@
 import React, { useState, useRef, FC } from "react";
-import SettingComponent from "utils/render-setting";
+import SettingComponent from "components/utils/render-setting";
 import IColor from "interfaces/color";
 import ISettings from "interfaces/settings";
 
@@ -41,19 +41,18 @@ const Settings: FC<ISettings> = ({
   setSelector,
   elementConfig,
   openTab,
-  setOpenTab
+  setOpenTab,
 }) => {
   const ref = useRef(null);
-  const [showComponent, setShowComponent] =
-    useState<{
-      id: string;
-      value: {
-        name: string;
-        inputs: object[];
-        outputs: object[];
-        stateMutability: string;
-      };
-    }>(null); // for abi method component
+  const [showComponent, setShowComponent] = useState<{
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }>(null); // for abi method component
 
   // work in progress
   const selectedChildren = items.map((item) =>
