@@ -1,6 +1,7 @@
 import { FC } from "react";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
+import { MARGIN_VARIABLE } from "config/constants";
 
 const Text: FC<ITexts> = ({
   id,
@@ -19,9 +20,10 @@ const Text: FC<ITexts> = ({
 }) => {
   return (
     <textarea
-    readOnly
-        style={{
-          resize: 'none',
+      readOnly
+      style={{
+        height: "-webkit-fill-available",
+        resize: "none",
         fontWeight: bold,
         fontStyle: italic,
         textDecoration: underline,
@@ -31,35 +33,38 @@ const Text: FC<ITexts> = ({
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+        margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
+          margin.marginRight * MARGIN_VARIABLE
+        }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
+          margin.marginLeft * MARGIN_VARIABLE
+        }px`,
         padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
       className="flex overflow-hidden items-center justify-center h-full"
     >
-      {outputValue ? 
-       (outputValue.find((output) => output.id === id) ? 
-       link ? (
-         <a href={link} target="_blank" rel="noreferrer">
-           {
-             JSON.stringify(
-               outputValue.find((output) => output.id === id).value
-             )
-           }
-         </a>
-       ) : (
-         JSON.stringify(
-           outputValue.find((output) => output.id === id).value
-         )
-       ) : link ? (
-         <a href={link} target="_blank" rel="noreferrer">
-           {value}
-         </a>
-       ) : (
-         value
-       ))
-       : value}
+      {outputValue ? (
+        outputValue.find((output) => output.id === id) ? (
+          link ? (
+            <a href={link} target="_blank" rel="noreferrer">
+              {JSON.stringify(
+                outputValue.find((output) => output.id === id).value
+              )}
+            </a>
+          ) : (
+            JSON.stringify(outputValue.find((output) => output.id === id).value)
+          )
+        ) : link ? (
+          <a href={link} target="_blank" rel="noreferrer">
+            {value}
+          </a>
+        ) : (
+          value
+        )
+      ) : (
+        value
+      )}
     </textarea>
   );
 };
 
-export default Text
+export default Text;

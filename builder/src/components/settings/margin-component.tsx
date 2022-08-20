@@ -43,17 +43,13 @@ const MarginComponent: FC<IMarginComponent> = ({
           <div className="flex mt-3">
             <input
               type="number"
-              id="margin-left"
-              name="marginLeft"
               value={margin.marginLeft}
               placeholder="left"
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={handleLeftChange}
+              onChange={(e) => handleLeftChange(e)}
             />
             <input
               type="number"
-              id="margin-right"
-              name="marginRight"
               value={margin.marginRight}
               placeholder="right"
               className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
@@ -63,8 +59,6 @@ const MarginComponent: FC<IMarginComponent> = ({
           <div className="flex mt-3">
             <input
               type="number"
-              id="margin-top"
-              name="marginTop"
               value={margin.marginTop}
               placeholder="top"
               className="form-select appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
@@ -72,8 +66,6 @@ const MarginComponent: FC<IMarginComponent> = ({
             />
             <input
               type="number"
-              id="margin-bottom"
-              name="marginBottom"
               value={margin.marginBottom}
               placeholder="bottom"
               className="form-select ml-10 appearance-none block w-[70px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
