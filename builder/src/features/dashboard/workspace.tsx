@@ -59,6 +59,7 @@ const Workspace: FC<IWorkspace> = ({
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
+    if(layout.length === 0) setAddContainer(false) 
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
@@ -182,7 +183,9 @@ const Workspace: FC<IWorkspace> = ({
     } else {
       setAddContainer(false);
     }
-    if (e.target.id === "") setOpenSetting(false);
+    if (e.target.id === "") {
+      setOpenSetting(false);
+    }
   };
 
   const renderItemFunction = items

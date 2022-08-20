@@ -17,26 +17,17 @@ const Text: FC<ITexts> = ({
   margin,
   padding,
 }) => {
-  const renderValue = (outputLink: string, outputValue: string) => (
-    <>
-      {outputLink ? (
-        <a href={outputLink} target="_blank" rel="noreferrer">
-          {outputValue}
-        </a>
-      ) : (
-        <>{outputValue}</>
-      )}
-    </>
-  );
-
   return (
-    <section
-      style={{
+    <textarea
+    readOnly
+        style={{
+          resize: 'none',
         fontWeight: bold,
         fontStyle: italic,
         textDecoration: underline,
         color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
         display: "flex",
+        textAlign: "center",
         justifyContent: justifyContent,
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
@@ -45,24 +36,30 @@ const Text: FC<ITexts> = ({
       }}
       className="flex overflow-hidden items-center justify-center h-full"
     >
-      <>
-        {outputValue ? (
-          <>
-            {outputValue.find((output) => output.id === id)
-              ? renderValue(
-                  link,
-                  JSON.stringify(
-                    outputValue.find((output) => output.id === id).value
-                  )
-                )
-              : renderValue(link, value)}
-          </>
-        ) : (
-          <>renderValue(link, value)</>
-        )}
-      </>
-    </section>
+      {outputValue ? 
+       (outputValue.find((output) => output.id === id) ? 
+       link ? (
+         <a href={link} target="_blank" rel="noreferrer">
+           {
+             JSON.stringify(
+               outputValue.find((output) => output.id === id).value
+             )
+           }
+         </a>
+       ) : (
+         JSON.stringify(
+           outputValue.find((output) => output.id === id).value
+         )
+       ) : link ? (
+         <a href={link} target="_blank" rel="noreferrer">
+           {value}
+         </a>
+       ) : (
+         value
+       ))
+       : value}
+    </textarea>
   );
 };
 
-export default Text;
+export default Text

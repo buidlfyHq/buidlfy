@@ -55,12 +55,10 @@ const GeneralSettings: FC<ISettings> = ({
     </h3>
     <div className="flex items-center px-3 mt-1 text-black">
       <RiText className="text-[18px] mr-3" />
-      <input
-        value={textVal}
+      <textarea 
+        value={textVal} 
         onChange={(e) => handleTextChange(e)}
         className="changeText"
-        type="text"
-        placeholder="Name..."
       />
     </div>
     <div className="flex items-center px-3 mt-2 text-black">

@@ -52,7 +52,7 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingBottom,
   setPaddingTop,
 }) => {
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
