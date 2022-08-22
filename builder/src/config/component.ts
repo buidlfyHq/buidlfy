@@ -42,6 +42,7 @@ export const components = [
   {
     name: "Container",
     h: 2,
+    minH: 2,
     style: {
       ...defaultDeleteStyles,
       ...defaultColorStyles,
@@ -173,6 +174,8 @@ export const components = [
   {
     name: "Button",
     h: 1,
+
+    minH: 1,
     value: "Add Button",
     link: "",
     style: {
@@ -195,6 +198,7 @@ export const components = [
   {
     name: "Text",
     h: 1,
+    minH: 1,
     value: "Text",
     link: "",
     style: {
@@ -209,6 +213,7 @@ export const components = [
   {
     name: "Heading 1",
     h: 1,
+    minH: 1,
     value: "Heading 1",
     link: "",
     style: {
@@ -223,6 +228,7 @@ export const components = [
   {
     name: "Heading 2",
     h: 1,
+    minH: 1,
     value: "Heading 2",
     link: "",
     style: {
@@ -237,6 +243,7 @@ export const components = [
   {
     name: "Heading 3",
     h: 1,
+    minH: 1,
     value: "Heading 3",
     link: "",
     style: {
@@ -251,7 +258,8 @@ export const components = [
   {
     name: "Input",
     h: 1,
-    placeholder: "Placeholder",
+    minH: 1,
+    placeholder: 'Placeholder',
     style: {
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
@@ -267,6 +275,7 @@ export const components = [
   {
     name: "Image",
     h: 1.2,
+    minH: 1.2,
     style: {
       ...defaultDeleteStyles,
       ...defaultFontStyles,
@@ -276,6 +285,7 @@ export const components = [
   {
     name: "Divider",
     h: 1,
+    minH: 1,
     style: {
       ...defaultDeleteStyles,
     },

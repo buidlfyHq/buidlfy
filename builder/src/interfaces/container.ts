@@ -7,4 +7,4 @@ export default interface IBgContainer {
     borderRadius: number;
     borderWidth: number;
     shadow: string;
-  }
+}

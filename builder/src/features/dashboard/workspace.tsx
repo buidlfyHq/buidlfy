@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
-import RenderItem from "utils/render-item";
+import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
@@ -55,6 +55,7 @@ const Workspace: FC<IWorkspace> = ({
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
+    if (layout.length === 0) setAddContainer(false);
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
@@ -178,7 +179,9 @@ const Workspace: FC<IWorkspace> = ({
     } else {
       setAddContainer(false);
     }
-    if (e.target.id === "") setOpenSetting(false);
+    if (e.target.id === "") {
+      setOpenSetting(false);
+    }
   };
 
   const renderItemFunction = items

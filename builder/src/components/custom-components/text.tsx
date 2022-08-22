@@ -3,6 +3,7 @@ import ITexts from "interfaces/texts";
 import "styles/components.css";
 
 const Text: FC<ITexts> = ({
+  item,
   bold,
   italic,
   underline,
@@ -11,9 +12,9 @@ const Text: FC<ITexts> = ({
   fontSize,
   value,
   backgroundColor,
-  link,
   margin,
   padding,
+  link,
 }) => {
   return (
     <section className="w-auto h-full overflow-hidden ">
@@ -29,8 +30,8 @@ const Text: FC<ITexts> = ({
           justifyContent: justifyContent,
           fontSize: `${fontSize}px`,
           backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-          margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
-          padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+          margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
+          padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
         }}
       >
         {link.length > 0 ? (
@@ -43,10 +44,44 @@ const Text: FC<ITexts> = ({
               color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
             }}
           >
-            <span>{value}</span>
+            <textarea
+              readOnly
+              id={item.i}
+              value={value}
+              style={{
+                fontWeight: bold,
+                fontStyle: italic,
+                textDecoration: underline,
+                color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+                display: "flex",
+                justifyContent,
+                alignItems: "center",
+                textAlign: `${justifyContent}` as CanvasTextAlign,
+                fontSize: `${fontSize}px`,
+                backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+              }}
+              className={`w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
+            />
           </a>
         ) : (
-          <span>{value}</span>
+          <textarea
+            readOnly
+            id={item.i}
+            value={value}
+            style={{
+              fontWeight: bold,
+              fontStyle: italic,
+              textDecoration: underline,
+              color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+              display: "flex",
+              justifyContent,
+              alignItems: "center",
+              textAlign: `${justifyContent}` as CanvasTextAlign,
+              fontSize: `${fontSize}px`,
+              backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+            }}
+            className={`w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
+          />
         )}
       </div>
     </section>

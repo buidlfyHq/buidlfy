@@ -93,6 +93,8 @@ const RenderItem: FC<IRenderItem> = ({
     case "Text":
       return (
         <Text
+          item={item}
+          items={items}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -109,6 +111,8 @@ const RenderItem: FC<IRenderItem> = ({
     case "Heading 1":
       return (
         <Text
+          item={item}
+          items={items}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -125,6 +129,8 @@ const RenderItem: FC<IRenderItem> = ({
     case "Heading 2":
       return (
         <Text
+          item={item}
+          items={items}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -141,6 +147,8 @@ const RenderItem: FC<IRenderItem> = ({
     case "Heading 3":
       return (
         <Text
+          item={item}
+          items={items}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}

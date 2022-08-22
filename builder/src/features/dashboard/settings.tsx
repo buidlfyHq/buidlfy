@@ -1,5 +1,5 @@
 import React, { useState, useRef, FC } from "react";
-import SettingComponent from "utils/render-setting";
+import SettingComponent from "components/utils/render-setting";
 import IColor from "interfaces/color";
 import ISettings from "interfaces/settings";
 
@@ -46,16 +46,15 @@ const Settings: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const ref = useRef(null);
-  const [showComponent, setShowComponent] =
-    useState<{
-      id: string;
-      value: {
-        name: string;
-        inputs: object[];
-        outputs: object[];
-        stateMutability: string;
-      };
-    }>(null); // for abi method component
+  const [showComponent, setShowComponent] = useState<{
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }>(null); // for abi method component
 
   // work in progress
   const selectedChildren = items.map((item) =>
@@ -85,12 +84,44 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
+  const setPlaceholder = (placeholder: string) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return { ...item, placeholder };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          placeholder,
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
+
+        return {
+          ...item,
+          children: newChildren,
         };
       }
       return item;
@@ -117,12 +148,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -162,12 +193,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -233,12 +264,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -343,12 +374,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -501,12 +532,12 @@ const Settings: FC<ISettings> = ({
         const childIndex = item.children?.findIndex(
           (c) => c.i === settingItemId
         );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
 
         return {
           ...item,
-          children: newArray,
+          children: newChildren,
         };
       }
       return item;
@@ -583,6 +614,9 @@ const Settings: FC<ISettings> = ({
               setPaddingRight={setPaddingRight}
               setPaddingBottom={setPaddingBottom}
               setPaddingLeft={setPaddingLeft}
+              connectWallet={selectedItem?.connectWallet}
+              setPlaceholder={setPlaceholder}
+              placeholder={selectedItem?.placeholder}
             />
           </div>
         </div>

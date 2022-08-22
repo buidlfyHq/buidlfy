@@ -4,6 +4,7 @@ import { encode as base64_encode } from "base-64";
 import { Dialog } from "@headlessui/react";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
+import ITemplate from "interfaces/template";
 
 interface INavbar {
   className: string;
@@ -44,7 +45,9 @@ const Navbar: FC<INavbar> = ({
     }[]
   >([]); // work in progress
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("");
 
   useEffect(() => {
     if (contractConfig.abi) {
@@ -56,13 +59,33 @@ const Navbar: FC<INavbar> = ({
     }
   }, [contractConfig.abi]);
 
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
   const handleSave = () => {
     // FIX: save full config to local storage
     if (items?.length > 0) {
       localStorage.setItem("items", JSON.stringify(items));
     }
   };
+  const handleSaveTemplateButton = () => {
+    setIsModalOpen(true);
+  };
+  const handleSaveTemplate = () => {
+    // FIX: save full config to local storage
 
+    if (items?.length > 0) {
+      localStorage.setItem("items", JSON.stringify(items));
+      const templates = localStorage.getItem("templates");
+      const newTemplates: Array<ITemplate> = JSON.parse(templates);
+      let newTemplate = {
+        name: inputValue,
+        value: items,
+      };
+      newTemplates.push(newTemplate);
+      localStorage.setItem("templates", JSON.stringify(newTemplates));
+    }
+  };
   const handleClear = () => {
     // FIX: remove full config from local storage
     localStorage.removeItem("items");
@@ -113,6 +136,12 @@ const Navbar: FC<INavbar> = ({
             className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
           >
             Save
+          </div>
+          <div
+            onClick={handleSaveTemplateButton}
+            className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
+          >
+            Save As Template
           </div>
         </div>
         {/* It will be used for the later code for undo, redo and preview of website */}
@@ -177,6 +206,62 @@ const Navbar: FC<INavbar> = ({
                   }}
                 >
                   Click here to copy Config
+                </button>
+              </div>
+            </section>
+          </div>
+        </Dialog>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-20 overflow-y-auto"
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        >
+          <div className="min-h-screen px-4 text-center">
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+
+            {/* Use the overlay to style a dim backdrop for your dialog */}
+            <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+
+            {/* Dialog Content */}
+            <section className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="mt-2">
+                <div className="px-1 text-left mt-3 text-gray-500 font-regular font-normal not-italic">
+                  Name
+                </div>
+                <input
+                  className="w-full mt-2 py-1 px-2 bg-white/90 rounded border"
+                  placeholder="Name"
+                  value={inputValue}
+                  onChange={(e) => handleInput(e)}
+                />
+                <div className="px-1 text-left mt-6 text-gray-500 font-regular font-normal not-italic">
+                  Upload Image
+                </div>
+                {/* Input required and function added in next branch */}
+                <input
+                  // onChange={onChangeImage}
+                  className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
+                  type="file"
+                  id="formFile"
+                />
+              </div>
+              <div className="mt-6">
+                <button
+                  type="button"
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                  onClick={() => {
+                    setIsModalOpen(false);
+                    handleSaveTemplate();
+                  }}
+                >
+                  Save As Template
                 </button>
               </div>
             </section>
