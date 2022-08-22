@@ -39,7 +39,6 @@ const Home: FC = () => {
     setTestConfig(testConfig);
   };
 
-  console.log(nftCard)
   // render nfts from connected wallet using opensea api
   const renderTokensForOwner = () => {
     fetch(

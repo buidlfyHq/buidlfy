@@ -41,7 +41,6 @@ const SettingComponent: FC<ISettings> = ({
   setMedium,
   setLarge,
   setOn,
-  placeholder,
   setPlaceholder,
   setMarginTop,
   setMarginRight,
@@ -210,7 +209,7 @@ const SettingComponent: FC<ISettings> = ({
       return (
         <InputSettings
           selectedItem={selectedItem}
-          placeholder={placeholder}
+          placeholder={selectedItem?.placeholder}
           handlePlaceholderChange={handlePlaceholderChange}
           setColor={setColor}
           setDeleteComponent={setDeleteComponent}

@@ -24,7 +24,7 @@ const RenderItem: FC<IRenderItem> = ({
   setOutputValue,
 }) => {
   switch (item.name) {
-    case "Container" || "Horizontal Container" || "Vertical Container" || "NFT Container":
+    case "Container":
       return (
         <Container
           item={item}
@@ -61,8 +61,8 @@ const RenderItem: FC<IRenderItem> = ({
           setOutputValue={setOutputValue}
           shadow={item.style.shadow}
           connectWallet={item.connectWallet}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Text":
@@ -79,8 +79,8 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 1":
@@ -97,8 +97,8 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 2":
@@ -115,8 +115,8 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 3":
@@ -133,8 +133,8 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Input":
@@ -209,6 +209,51 @@ const RenderItem: FC<IRenderItem> = ({
           setInputValue={setInputValue}
           outputValue={outputValue}
           setOutputValue={setOutputValue}
+        />
+      );
+
+    case "NFT Image":
+      return (
+        <Image
+          imgData={item.imgData}
+          justifyContent={item.style.justifyContent}
+          margin={item.style.margin}
+        />
+      );
+    case "NFT Title":
+      return (
+        <Text
+          id={item.i}
+          bold={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          link={item.link}
+          backgroundColor={item.style.backgroundColor}
+          outputValue={outputValue}
+          margin={item.style.margin}
+          padding={item.style.padding}
+        />
+      );
+    case "NFT Price":
+      return (
+        <Text
+          id={item.i}
+          bold={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          link={item.link}
+          backgroundColor={item.style.backgroundColor}
+          outputValue={outputValue}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     default:

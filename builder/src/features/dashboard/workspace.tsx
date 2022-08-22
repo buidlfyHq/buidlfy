@@ -29,7 +29,7 @@ interface IWorkspace {
   setOpenTab: (openTab?: number) => void;
   drag: boolean;
   setDrag: (drag: boolean) => void;
-  setAddContainer: (addContainer?: boolean) => void;
+  setComponentType: (componentType?: string) => void;
   backgroundColor: IColor;
   marginLeft?: number;
   marginRight?: number;
@@ -50,12 +50,12 @@ const Workspace: FC<IWorkspace> = ({
   setOpenTab,
   drag,
   setDrag,
-  setAddContainer,
+  setComponentType,
   backgroundColor,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-    if(layout.length === 0) setAddContainer(false) 
+    if (layout.length === 0) setComponentType("default");
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
@@ -135,7 +135,7 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const onComponentClick = (itemName: string, i: string) => {
-    setAddContainer(true);
+    setComponentType("container");
 
     // checks if the selector is active
     if (selector === null) {
@@ -174,14 +174,14 @@ const Workspace: FC<IWorkspace> = ({
       e.target.id === "Vertical Container" ||
       e.target.parentNode.id === "Vertical Container" ||
       e.target.parentNode.parentNode.id === "Vertical Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Vertical Container"||
+      e.target.parentNode.parentNode.parentNode.id === "Vertical Container" ||
       e.target.id === "NFT Container" ||
       e.target.parentNode.id === "NFT Container" ||
       e.target.parentNode.parentNode.id === "NFT Container" ||
       e.target.parentNode.parentNode.parentNode.id === "NFT Container"
     ) {
     } else {
-      setAddContainer(false);
+      setComponentType("default");
     }
     if (e.target.id === "") {
       setOpenSetting(false);
@@ -218,7 +218,7 @@ const Workspace: FC<IWorkspace> = ({
             setOpenSetting={setOpenSetting}
             setSettingItemId={setSettingItemId}
             setOpenTab={setOpenTab}
-            setAddContainer={setAddContainer}
+            setComponentType={setComponentType}
             selector={selector}
             setSelector={setSelector}
             elementConfig={elementConfig}

@@ -26,4 +26,6 @@ export default interface IItems {
   imgData?: string | ArrayBuffer;
   connectWallet?: string;
   placeholder?: string;
+  nft?: boolean;
+  nftItem?: boolean;
 }

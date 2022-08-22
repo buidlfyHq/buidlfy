@@ -15,7 +15,7 @@ interface IRenderItem {
   setOpenSetting?: (openSetting: boolean) => void;
   setSettingItemId?: (settingItemId: string) => void;
   setOpenTab?: (openTab: number) => void;
-  setAddContainer?: (addContainer: boolean) => void;
+  setComponentType?: (componentType: string) => void;
   selector?: {
     methodName: string;
     type: string;
@@ -40,7 +40,7 @@ const RenderItem: FC<IRenderItem> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  setAddContainer,
+  setComponentType,
   selector,
   setSelector,
   elementConfig,
@@ -64,7 +64,7 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          setComponentType={setComponentType}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
@@ -199,7 +199,7 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          setComponentType={setComponentType}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
@@ -223,7 +223,7 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          setComponentType={setComponentType}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
@@ -247,11 +247,55 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          setComponentType={setComponentType}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+        />
+      );
+    case "NFT Image":
+      return (
+        <Image
+          imgData={item.imgData}
+          justifyContent={item.style.justifyContent}
+          margin={item.style.margin}
+        />
+      );
+    case "NFT Title":
+      return (
+        <Text
+          item={item}
+          items={items}
+          bold={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+        />
+      );
+    case "NFT Price":
+      return (
+        <Text
+          item={item}
+          items={items}
+          bold={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     default:

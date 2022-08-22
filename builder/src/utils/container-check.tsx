@@ -4,6 +4,7 @@ export const containerCheck = (item: any) => {
     item?.name === "Container" ||
     item?.name === "Horizontal Container" ||
     item?.name === "Vertical Container" ||
-    item?.name === "NFT Container"
+    item?.name === "NFT Container" ||
+    item?.nftItem
   );
 };

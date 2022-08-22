@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction} from "react";
+import React, { Dispatch, FC, SetStateAction } from "react";
 import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
 import RenderItem from "utils/render-item";
@@ -22,7 +22,7 @@ interface IContainer {
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
   setOpenTab: Dispatch<SetStateAction<number>>;
-  setAddContainer: (addContainer: boolean) => void;
+  setComponentType: (componentType: string) => void;
   selector: {
     methodName: string;
     type: string;
@@ -37,7 +37,7 @@ interface IContainer {
   }) => void;
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
-  setValue?: (value: string) => void
+  setValue?: (value: string) => void;
 }
 
 const Container: FC<IContainer> = ({
@@ -55,13 +55,12 @@ const Container: FC<IContainer> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  setAddContainer,
+  setComponentType,
   selector,
   setSelector,
   elementConfig,
   setElementConfig,
 }) => {
-  
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -140,8 +139,12 @@ const Container: FC<IContainer> = ({
     }
   };
 
-  const onComponentClick = (itemName: string, i: string) => {
-    setAddContainer(true);
+  const onComponentClick = (itemName: string, i: string, nftItem?: boolean) => {
+    if (nftItem) {
+      setComponentType("nft");
+    } else {
+      setComponentType("container");
+    }
 
     // checks if the selector is active
     if (selector === null) {
@@ -232,16 +235,16 @@ const Container: FC<IContainer> = ({
                   onMouseOut={() => setDrag(true)}
                   onClick={() => onComponentClick(item.name, i)}
                 >
-                  <RenderItem 
-                    item={item} 
-                    setDrag={setDrag} 
-                  />
+                  <RenderItem item={item} setDrag={setDrag} />
                 </div>
               );
             })
         )}
       </GridLayout>
-      <span id="drag" onClick={() => onComponentClick(item.name, item.i)} />
+      <span
+        id="drag"
+        onClick={() => onComponentClick(item.name, item.i, item?.nft)}
+      />
     </section>
   );
 };

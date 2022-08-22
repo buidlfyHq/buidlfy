@@ -34,7 +34,7 @@ const Text: FC<ITexts> = ({
         margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
         padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
-      className="flex overflow-hidden items-center justify-center h-full"
+      className="flex overflow-hidden items-center justify-center h-full w-full"
     >
       {outputValue ? 
        (outputValue.find((output) => output.id === id) ? 

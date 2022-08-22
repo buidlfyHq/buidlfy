@@ -607,6 +607,7 @@ const Settings: FC<ISettings> = ({
               setLarge={setLarge}
               shadow={selectedItem?.style?.shadow}
               setOn={setOn}
+              setPlaceholder={setPlaceholder}
               setMarginTop={setMarginTop}
               setMarginRight={setMarginRight}
               setMarginBottom={setMarginBottom}
@@ -615,9 +616,6 @@ const Settings: FC<ISettings> = ({
               setPaddingRight={setPaddingRight}
               setPaddingBottom={setPaddingBottom}
               setPaddingLeft={setPaddingLeft}
-              connectWallet={selectedItem?.connectWallet}
-              setPlaceholder={setPlaceholder}
-              placeholder={selectedItem?.placeholder}
             />
           </div>
         </div>

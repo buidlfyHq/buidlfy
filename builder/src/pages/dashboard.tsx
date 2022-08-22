@@ -28,16 +28,17 @@ const Dashboard: FC = () => {
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState<string>(""); // for storing current element id for settings
   // for selecting an element for contract
-  const [selector, setSelector] = useState<{
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  }>(null);
+  const [selector, setSelector] =
+    useState<{
+      methodName: string;
+      type: string;
+      name: string;
+      buttonId: string;
+    }>(null);
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
-  const [addContainer, setAddContainer] = useState<boolean>(false);
+  const [componentType, setComponentType] = useState<string>("default");
   const [backgroundColor, setBackgroundColor] = useState<IColor>({
     r: "0",
     g: "0",
@@ -72,9 +73,6 @@ const Dashboard: FC = () => {
     }
   }, []); // eslint-disable-line
 
-  console.log(items);
-  
-
   return (
     <main>
       {size.width > 1024 ? (
@@ -85,7 +83,7 @@ const Dashboard: FC = () => {
             setClassName={setClassName}
             items={items}
             setItems={setItems}
-            addContainer={addContainer}
+            componentType={componentType}
             settingItemId={settingItemId}
           />
 
@@ -118,7 +116,7 @@ const Dashboard: FC = () => {
                 setOpenTab={setOpenTab}
                 drag={drag}
                 setDrag={setDrag}
-                setAddContainer={setAddContainer}
+                setComponentType={setComponentType}
                 backgroundColor={backgroundColor}
               />
               {/* Right Sidebar Settings */}
