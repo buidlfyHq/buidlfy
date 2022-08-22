@@ -106,6 +106,50 @@ export const components = [
     ],
   },
   {
+    name: "NFT Container",
+    nft: true,
+    h: 6,
+    style: {
+      ...defaultDeleteStyles,
+      ...defaultColorStyles,
+      ...defaultBorderStyles,
+    },
+
+    children: [
+      {
+        name: "Image",
+        h: 5,
+        i: 4,
+        w: 6,
+        x: 0,
+        y: 0,
+        style: {
+          ...defaultDeleteStyles,
+          ...defaultFontStyles,
+          ...defaultMarginStyles,
+        },
+      },
+      {
+        name: "Text",
+        h: 1,
+        i: 5,
+        w: 6,
+        x: 0,
+        y: 5,
+        value: "Card Title",
+        link: "",
+        style: {
+          ...defaultColorStyles,
+          ...defaultFontStyles,
+          fontSize: 25,
+          ...defaultDeleteStyles,
+          ...defaultMarginStyles,
+          ...defaultPaddingStyles,
+        },
+      },
+    ],
+  },
+  {
     name: "Vertical Container",
     h: 5,
     style: {

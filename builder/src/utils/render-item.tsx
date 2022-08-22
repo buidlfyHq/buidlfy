@@ -230,6 +230,30 @@ const RenderItem: FC<IRenderItem> = ({
           setElementConfig={setElementConfig}
         />
       );
+    case "NFT Container":
+      return (
+        <Container
+          item={item}
+          items={items}
+          setItems={setItems}
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          setOpenSetting={setOpenSetting}
+          setSettingItemId={setSettingItemId}
+          setOpenTab={setOpenTab}
+          setDrag={setDrag}
+          setAddContainer={setAddContainer}
+          selector={selector}
+          setSelector={setSelector}
+          elementConfig={elementConfig}
+          setElementConfig={setElementConfig}
+        />
+      );
     default:
       return <></>;
   }

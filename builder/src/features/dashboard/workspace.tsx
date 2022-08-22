@@ -178,7 +178,11 @@ const Workspace: FC<IWorkspace> = ({
       e.target.id === "Vertical Container" ||
       e.target.parentNode.id === "Vertical Container" ||
       e.target.parentNode.parentNode.id === "Vertical Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
+      e.target.parentNode.parentNode.parentNode.id === "Vertical Container"||
+      e.target.id === "NFT Container" ||
+      e.target.parentNode.id === "NFT Container" ||
+      e.target.parentNode.parentNode.id === "NFT Container" ||
+      e.target.parentNode.parentNode.parentNode.id === "NFT Container"
     ) {
     } else {
       setAddContainer(false);

@@ -113,12 +113,13 @@ const Sidebar: FC<ISidebar> = ({
               ? containerHandles
               : availableHandles,
           };
-          if (c.name === "Vertical Container") {
+          if (c.name === "Vertical Container" || c.name === "NFT Container" ) {
             newC.w = 2;
           }
           if (
             c.name === "Horizontal Container" ||
-            c.name === "Vertical Container"
+            c.name === "Vertical Container" ||
+            c.name === "NFT Container" 
           ) {
             let newChildren = c.children.map((child) => ({
               ...child,

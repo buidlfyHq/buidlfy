@@ -14,7 +14,7 @@ const Home: FC = () => {
   const [testConfig, setTestConfig] = useState(
     JSON.parse(BuilderConfig).builder
   );
-  const [assets, setAssets] = useState([]); // for storing all nfts
+  // const [assets, setAssets] = useState([]); // for storing all nfts
   const [assetNum, setAssetNum] = useState(0); // for rendering nfts one by one
   const [inputVal, setInputVal] = useState('')
   const [nftCard, setNftCard] = useState<any>({}); // for rendering nfts one by one
@@ -34,13 +34,12 @@ const Home: FC = () => {
     setTestConfig(testConfig.filter((i) => !i.nft));
   }, []);
 
-  console.log(testConfig);
-
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     setTestConfig(testConfig);
   };
 
+  console.log(nftCard)
   // render nfts from connected wallet using opensea api
   const renderTokensForOwner = () => {
     fetch(
@@ -49,10 +48,10 @@ const Home: FC = () => {
     )
       .then((response) => response.json())
       .then(({ assets }) => {
-        setAssets(assets);
+        // setAssets(assets);
         // set no. of cols
-        let cols = 2
-        let colW = 6 / cols 
+        // let cols = 6/colW
+        let colW = nftCard?.w  
         let X = 0
         let nCardsArr = assets.map((asset: any, index: number) => {
 
