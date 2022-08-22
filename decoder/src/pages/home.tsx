@@ -14,30 +14,23 @@ const Home: FC = () => {
   const [testConfig, setTestConfig] = useState(
     JSON.parse(BuilderConfig).builder
   );
-  const [assets, setAssets] = useState([]); // for storing all nfts
+  // const [assets, setAssets] = useState([]); // for storing all nfts
   const [assetNum, setAssetNum] = useState(0); // for rendering nfts one by one
-
-  const [nftCard, setNftCard] = useState<any>({});
-  const [nftX, setNftX] = useState(0);
-  const [nftY, setNftY] = useState(null);
-  const [nftCols, setNftCols] = useState(0);
+  const [inputVal, setInputVal] = useState('')
+  const [nftCard, setNftCard] = useState<any>({}); // for rendering nfts one by one
 
   useEffect(() => {
-    let itemY = nftY;
-    let itemCols = nftCols;
+    let nftY = null;
+    let nftCols = 0;
     testConfig.map((item) => {
-      if (item.nft && itemY === null) {
-        itemY = item.y;
+      if (item.nft && nftY === null) {
+        nftY = item.y;
         setNftCard(item);
       }
-      if (item.nft && item.y === itemY) {
-        itemCols++;
+      if (item.nft && item.y === nftY) {
+        nftCols++;
       }
     });
-    setNftY(itemY);
-    setNftCols(itemCols);
-
-    // delete default nft containers
     setTestConfig(testConfig.filter((i) => !i.nft));
   }, []);
 
@@ -46,6 +39,7 @@ const Home: FC = () => {
     setTestConfig(testConfig);
   };
 
+  console.log(nftCard)
   // render nfts from connected wallet using opensea api
   const renderTokensForOwner = () => {
     fetch(
@@ -54,22 +48,172 @@ const Home: FC = () => {
     )
       .then((response) => response.json())
       .then(({ assets }) => {
-        setAssets(assets);
+        // setAssets(assets);
+        // set no. of cols
+        // let cols = 6/colW
+        let colW = nftCard?.w  
+        let X = 0
+        let nCardsArr = assets.map((asset: any, index: number) => {
+
+          // check config y if any other elements present above it
+          // let minY = Math.min(testConfig.map((item) => item.y))
+          // let el = testConfig.children?.filter((item) => item.y === minY)[0];
+          // let height = el ? el.h + el.y : 0
+
+          let modifiedX = X
+          X = X+colW 
+          X = X+colW <= 6 ? X :  0
+          return {
+            ...nftCard,
+            i: asset.id + "container",
+            x : modifiedX,
+            w: colW,
+            children: [
+              {
+                ...nftCard.children[0],
+                i: asset.id,
+                imgData: asset.image_url,
+              },
+              {
+                ...nftCard.children[1],
+                i: asset.id + "text",
+                value: asset.name,
+              },
+            ],
+          };
+        })
+
+
+        let newItemsArr = testConfig.map((item) => {
+          const { y } = item;
+          if (y >= nCardsArr[0].y) {
+            return {
+              ...item,
+              y: y + nCardsArr.length*nCardsArr[0].h,
+            };
+          } else {
+            return {
+              ...item,
+              y: y,
+            };
+          }
+        });
+        // console.log(photos, photosArr)
+        // setTestConfig([...testConfig, ...newItemsArr]);
+        setTestConfig([...newItemsArr, ...nCardsArr]);
+
       });
   };
 
-  const renderNfts = (attributes) => {
-    if (nftX / nftCard.w < nftCols - 1) {
-      setNftX(nftX + nftCard.w);
-    } else {
-      setNftX(0);
-      setNftY(nftY + nftCard.h);
-    }
+  // create new nft component
+  const renderImage = (attributes) => {
+    let newC = {
+      i: attributes.id,
+      x: 0,
+      y: 0,
+      h: 6,
+      w: 6,
+      name: "Image",
+      imgData: attributes.image_url,
+      link: "",
+      style: {
+        backgroundColor: { r: "0", g: "0", b: "0" },
+        color: { r: "0", g: "0", b: "0", a: "100" },
+        fontWeight: "normal",
+        fontStyle: "normal",
+        textDecoration: "none",
+        justifyContent: "left",
+        fontSize: 15,
+        deleteComponent: 0,
+        margin: {
+          marginTop: 10,
+          marginRight: 10,
+          marginBottom: 10,
+          marginLeft: 15,
+          fontWeight: "normal",
+        },
+        padding: {
+          paddingTop: 0,
+          paddingRight: 0,
+          paddingBottom: 0,
+          paddingLeft: 0,
+        },
+      },
+    };
 
+    let textC = {
+      i: attributes.id + "text",
+      x: 0,
+      y: 6,
+      h: 1,
+      w: 6,
+      name: "Text",
+      value: attributes.name,
+      link: "",
+      style: {
+        backgroundColor: { r: "44", g: "44", b: "44", a: 1 },
+        color: { r: "228", g: "228", b: "228", a: "1" },
+        fontWeight: "bold",
+        fontStyle: "normal",
+        textDecoration: "none",
+        justifyContent: "left",
+        fontSize: 20,
+        deleteComponent: 0,
+        margin: {
+          marginTop: 0,
+          marginRight: 0,
+          marginBottom: 0,
+          marginLeft: 15,
+        },
+        padding: {
+          paddingTop: 0,
+          paddingRight: 0,
+          paddingBottom: 0,
+          paddingLeft: 10,
+        },
+      },
+    };
+
+    let parentComponent = {
+      children: [newC, textC],
+      i: attributes.id + "container",
+      x: 0,
+      y: 1,
+      h: 7,
+      w: 2,
+      name: "Container",
+      style: {
+        backgroundColor: { r: "44", g: "44", b: "44", a: 1 },
+        borderRadius: 6,
+        borderWidth: 0,
+        color: { r: "0", g: "0", b: "0", a: "100" },
+        deleteComponent: 0,
+        shadow: "none",
+      },
+    };
+
+    let newItemsArr = testConfig.map((item) => {
+      const { y } = item;
+      if (y >= parentComponent.y) {
+        return {
+          ...item,
+          y: y + parentComponent.h,
+        };
+      } else {
+        return {
+          ...item,
+          y: y,
+        };
+      }
+    });
+
+    setTestConfig([...newItemsArr, parentComponent]);
+    setAssetNum(assetNum + 1);
+  };
+
+  const renderNfts = (attributes) => {
     let nCard: any = {
       ...nftCard,
-      x: nftX,
-      y: nftY,
       i: attributes.id + "container",
       children: [
         {
@@ -138,7 +282,16 @@ const Home: FC = () => {
           );
         })}
       </ResponsiveGridLayout>
-      <button
+      <div>
+        <input type='text' className="border px-2 py-1 ml-2" value={inputVal} onChange={(e) => setInputVal(e.target.value)}/>
+        <button
+          className="m-4 px-4 py-2 bg-purple-600 text-white rounded-full"
+          onClick={renderTokensForOwner}
+        >
+          Fetch
+        </button>
+      </div>
+      {/* <button
         className="m-4 px-4 py-2 bg-purple-600 rounded-full shadow-md border border-purple-400"
         onClick={() => renderNfts(assets[assetNum])}
       >
@@ -149,7 +302,7 @@ const Home: FC = () => {
         onClick={renderTokensForOwner}
       >
         Connect Wallet
-      </button>
+      </button> */}
     </main>
   );
 };

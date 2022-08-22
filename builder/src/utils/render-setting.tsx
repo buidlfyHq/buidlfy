@@ -52,7 +52,7 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingBottom,
   setPaddingLeft,
 }) => {
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
@@ -174,6 +174,38 @@ const SettingComponent: FC<ISettings> = ({
           setLarge={setLarge}
         />
       );
+
+    case "NFT Container":
+      return (
+        <ContainerSettings
+          items={items}
+          setItems={setItems}
+          selectedItem={selectedItem}
+          color={selectedItem?.style?.color}
+          setColor={setColor}
+          setBgColor={setBgColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
+          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          borderRadius={selectedItem?.style?.borderRadius}
+          setBorderRadius={setBorderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          setBorderWidth={setBorderWidth}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+          setMarginLeft={setMarginLeft}
+          setMarginRight={setMarginRight}
+          setMarginTop={setMarginTop}
+          setMarginBottom={setMarginBottom}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
+        />
+      );
+
     case "Input":
       return (
         <InputSettings

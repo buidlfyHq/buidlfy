@@ -24,7 +24,7 @@ const RenderItem: FC<IRenderItem> = ({
   setOutputValue,
 }) => {
   switch (item.name) {
-    case "Container" || "Horizontal Container" || "Vertical Container":
+    case "Container" || "Horizontal Container" || "Vertical Container" || "NFT Container":
       return (
         <Container
           item={item}
@@ -177,6 +177,24 @@ const RenderItem: FC<IRenderItem> = ({
         />
       );
     case "Vertical Container":
+      return (
+        <Container
+          item={item}
+          children={item.children}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          imgData={item.imgData}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          outputValue={outputValue}
+          setOutputValue={setOutputValue}
+        />
+      );
+
+    case "NFT Container":
       return (
         <Container
           item={item}

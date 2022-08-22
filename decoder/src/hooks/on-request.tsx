@@ -48,7 +48,7 @@ export const onRequest = async (
     if (contractFunction.stateMutability === "nonpayable") {
       // query contract functions --- magic code
       const res = await contract.functions[method](...args); // passing an array as a function parameter
-      setIsOpen(true);
+      setIsOpen(true)
       receipt = await res.wait();
       console.log(receipt);
     } else if (contractFunction.stateMutability === "payable") {
@@ -81,8 +81,8 @@ export const onRequest = async (
     }
 
     if (receipt.transactionHash) {
-      setTransactionStatus("Transaction Complete");
-      setTimeout(() => setIsOpen(false), 3000);
+      setTransactionStatus("Transaction Complete")
+      setTimeout(() => setIsOpen(false), 3000)
     }
 
     return returnOutput;

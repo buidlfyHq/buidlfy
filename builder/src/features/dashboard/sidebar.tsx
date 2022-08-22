@@ -4,6 +4,7 @@ import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
+import { Link } from "react-router-dom";
 
 interface ISidebar {
   className: string;
@@ -108,17 +109,17 @@ const Sidebar: FC<ISidebar> = ({
             y: y,
             w: 6,
             minW: 1,
-            minH: 1,
             resizeHandles: containerCheck(c)
               ? containerHandles
               : availableHandles,
           };
-          if (c.name === "Vertical Container") {
+          if (c.name === "Vertical Container" || c.name === "NFT Container" ) {
             newC.w = 2;
           }
           if (
             c.name === "Horizontal Container" ||
-            c.name === "Vertical Container"
+            c.name === "Vertical Container" ||
+            c.name === "NFT Container" 
           ) {
             let newChildren = c.children.map((child) => ({
               ...child,
@@ -182,6 +183,12 @@ const Sidebar: FC<ISidebar> = ({
           <>{renderComponents}</>
         )}
       </div>
+
+      <Link to='/templates' className="hover:text-black">
+        <div className="mx-6 px-4 py-3 mt-10 rounded-xl hover:bg-blue-100">
+          Templates
+        </div>
+      </Link>
     </main>
   );
 };

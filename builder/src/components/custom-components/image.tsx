@@ -19,6 +19,7 @@ const Image: FC<IImageComponent> = ({ imgData, justifyContent, margin }) => (
         id="image-one"
         className="items-center justify-center w-auto h-full"
         style={{
+          height: "-webkit-fill-available",
           backgroundImage: `url(${imgData})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: justifyContent,

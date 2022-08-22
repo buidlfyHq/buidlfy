@@ -17,6 +17,7 @@ const Image: FC<IImageComponent> = ({ imgData, justifyContent, margin }) => (
   <div
     className="flex justify-center items-center h-full w-full"
     style={{
+      height: "-webkit-fill-available",
       backgroundImage: `url(${imgData ? imgData : defaultImage})`,
       backgroundRepeat: "no-repeat",
       backgroundPosition: justifyContent,
