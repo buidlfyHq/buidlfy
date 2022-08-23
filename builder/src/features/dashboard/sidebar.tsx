@@ -152,8 +152,11 @@ const Sidebar: FC<ISidebar> = ({
                 ? containerHandles
                 : availableHandles,
             };
+            if (c.name === "NFT Card") {
+              newC.w = 2;
+            }
             if (c.name === "Vertical Container" || c.name === "NFT Container") {
-              newC.w = c.columns ? 6/c.columns : 2;
+              newC.w = c.columns ? 6 / c.columns : 2;
             }
             if (
               c.name === "Horizontal Container" ||

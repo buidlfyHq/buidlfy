@@ -24,4 +24,7 @@ export default interface IItems {
   contract?: any; // breaking while assigning a type, work in progress
   imgData?: string | ArrayBuffer;
   connectWallet?: string;
+  image?: any;
+  title?: string;
+  price?: string;
 }

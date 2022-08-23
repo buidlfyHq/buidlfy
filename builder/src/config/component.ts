@@ -118,14 +118,12 @@ export const components = [
   },
   {
     name: "Vertical Container",
-    nft: true,
     h: 6,
     style: {
       ...defaultDeleteStyles,
       ...defaultColorStyles,
       ...defaultBorderStyles,
     },
-
     children: [
       {
         name: "Image",
@@ -248,7 +246,7 @@ export const components = [
     name: "Input",
     h: 1,
     minH: 1,
-    placeholder: 'Placeholder',
+    placeholder: "Placeholder",
     style: {
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
@@ -290,7 +288,6 @@ export const components = [
       ...defaultColorStyles,
       ...defaultBorderStyles,
     },
-
     children: [
       {
         name: "Image",
@@ -366,6 +363,15 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+    },
+  },
+  {
+    name: "NFT Card",
+    nft: true,
+    h: 8,
+    minH: 1,
+    style: {
+      ...defaultDeleteStyles,
     },
   },
 ];
