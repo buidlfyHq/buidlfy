@@ -374,4 +374,13 @@ export const components = [
       ...defaultDeleteStyles,
     },
   },
+  {
+    name: "NFT Layout",
+    nft: true,
+    h: 8,
+    minH: 1,
+    style: {
+      ...defaultDeleteStyles,
+    },
+  },
 ];

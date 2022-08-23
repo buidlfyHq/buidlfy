@@ -152,9 +152,6 @@ const Sidebar: FC<ISidebar> = ({
                 ? containerHandles
                 : availableHandles,
             };
-            if (c.name === "NFT Card") {
-              newC.w = 2;
-            }
             if (c.name === "Vertical Container" || c.name === "NFT Container") {
               newC.w = c.columns ? 6 / c.columns : 2;
             }
@@ -169,13 +166,29 @@ const Sidebar: FC<ISidebar> = ({
               }));
               newC.children = newChildren;
             }
-            setItems([...items, newC]);
+            if (c.name === "NFT Card") {
+              newC.w = 2;
+            }
+            if (c.name === "NFT Layout") {
+              newC.w = 2;
+              let newC1 = { ...newC };
+              let newC2 = { ...newC };
+              newC1.i = uid();
+              newC1.x = 2;
+              newC2.i = uid();
+              newC2.x = 4;
+              setItems([...items, newC, newC1, newC2]);
+            } else {
+              setItems([...items, newC]);
+            }
           }}
         >
           {c.name}
         </div>
       );
     });
+
+  console.log(items);
 
   const renderComponents = (type) => {
     if (type === "container") {

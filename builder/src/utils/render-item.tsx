@@ -303,6 +303,10 @@ const RenderItem: FC<IRenderItem> = ({
       return (
         <NftCard />
       );
+    case "NFT Layout":
+      return (
+        <NftCard />
+      );
     default:
       return <></>;
   }

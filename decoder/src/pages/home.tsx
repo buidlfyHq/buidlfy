@@ -52,7 +52,7 @@ const Home: FC = () => {
         // set no. of cols
         // let cols = 6/colW
         // let colW = 6 / nftCard?.columns;
-        let colW = 1;
+        let colW = 2;
         let X = 0;
         let nCardsArr = assets.map((asset: any, index: number) => {
           // check config y if any other elements present above it
