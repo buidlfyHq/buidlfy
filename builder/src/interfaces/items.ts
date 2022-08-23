@@ -28,4 +28,5 @@ export default interface IItems {
   placeholder?: string;
   nft?: boolean;
   nftItem?: boolean;
+  columns?: number;
 }

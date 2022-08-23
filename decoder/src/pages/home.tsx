@@ -50,7 +50,7 @@ const Home: FC = () => {
         // setAssets(assets);
         // set no. of cols
         // let cols = 6/colW
-        let colW = nftCard?.w  
+        let colW = 6/nftCard?.columns
         let X = 0
         let nCardsArr = assets.map((asset: any, index: number) => {
 
@@ -78,6 +78,11 @@ const Home: FC = () => {
                 i: asset.id + "text",
                 value: asset.name,
               },
+              // {
+              //   ...nftCard.children[1],
+              //   i: asset.id + "text",
+              //   value: asset.traits[0].value,
+              // },
             ],
           };
         })
@@ -264,7 +269,7 @@ const Home: FC = () => {
         onLayoutChange={onLayoutChange}
         compactType={null}
         margin={[0, 0]}
-        className="h-fit overflow-hidden"
+        className="overflow-hidden h-fit"
       >
         {testConfig.map((c: IItems) => {
           const { x, y, w, h, minW, i } = c;
@@ -282,22 +287,22 @@ const Home: FC = () => {
         })}
       </ResponsiveGridLayout>
       <div>
-        <input type='text' className="border px-2 py-1 ml-2" value={inputVal} onChange={(e) => setInputVal(e.target.value)}/>
+        <input type='text' className="px-2 py-1 ml-2 border" value={inputVal} onChange={(e) => setInputVal(e.target.value)}/>
         <button
-          className="m-4 px-4 py-2 bg-purple-600 text-white rounded-full"
+          className="px-4 py-2 m-4 text-white bg-purple-600 rounded-full"
           onClick={renderTokensForOwner}
         >
           Fetch
         </button>
       </div>
       {/* <button
-        className="m-4 px-4 py-2 bg-purple-600 rounded-full shadow-md border border-purple-400"
+        className="px-4 py-2 m-4 bg-purple-600 border border-purple-400 rounded-full shadow-md"
         onClick={() => renderNfts(assets[assetNum])}
       >
         + Add
       </button>
       <button
-        className="m-4 px-4 py-2 bg-green-600 rounded-full shadow-md border border-green-500"
+        className="px-4 py-2 m-4 bg-green-600 border border-green-500 rounded-full shadow-md"
         onClick={renderTokensForOwner}
       >
         Connect Wallet

@@ -396,6 +396,24 @@ const Settings: FC<ISettings> = ({
     singleWorkFunction(functionEnum.BORDER_WIDTH, borderWidth);
   };
 
+  const setColumnNumber = (columns: number) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          w: 6/columns,
+          columns
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+    console.log(items)
+  }
+
   const spacingWorkFunction = (
     styleProp: functionEnum,
     stylePropChild: functionEnum,
@@ -555,11 +573,11 @@ const Settings: FC<ISettings> = ({
       {settingItemId ? (
         <div className="rounded-[8px] py-2 cursor-pointer relative">
           <div
-            className="border shadow-sm pt-1 sidebar menu"
+            className="pt-1 border shadow-sm sidebar menu"
             ref={ref}
             style={{ paddingTop: "2px" }}
           >
-            <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
+            <div className="px-2 py-4 text-sm" onClick={handleOpenSetting}>
               {"<"}
               <span className="ml-2">Site Settings</span>
             </div>
@@ -616,6 +634,8 @@ const Settings: FC<ISettings> = ({
               setPaddingRight={setPaddingRight}
               setPaddingBottom={setPaddingBottom}
               setPaddingLeft={setPaddingLeft}
+              // columns={columns}
+              setColumnNumber={setColumnNumber}
             />
           </div>
         </div>

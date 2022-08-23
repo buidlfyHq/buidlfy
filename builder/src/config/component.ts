@@ -283,6 +283,7 @@ export const components = [
   {
     name: "NFT Container",
     nft: true,
+    columns: 3,
     h: 6,
     style: {
       ...defaultDeleteStyles,

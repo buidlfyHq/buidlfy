@@ -153,7 +153,7 @@ const Sidebar: FC<ISidebar> = ({
                 : availableHandles,
             };
             if (c.name === "Vertical Container" || c.name === "NFT Container") {
-              newC.w = 2;
+              newC.w = c.columns ? 6/c.columns : 2;
             }
             if (
               c.name === "Horizontal Container" ||
@@ -230,7 +230,7 @@ const Sidebar: FC<ISidebar> = ({
       </div>
 
       <Link to="/templates" className="hover:text-black">
-        <div className="mx-6 px-4 py-3 mt-10 rounded-xl hover:bg-blue-100">
+        <div className="px-4 py-3 mx-6 mt-10 rounded-xl hover:bg-blue-100">
           Templates
         </div>
       </Link>

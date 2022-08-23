@@ -50,6 +50,8 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingRight,
   setPaddingBottom,
   setPaddingLeft,
+  columns,
+  setColumnNumber,
 }) => {
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -202,6 +204,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingRight={setPaddingRight}
           setPaddingTop={setPaddingTop}
           setPaddingBottom={setPaddingBottom}
+          columns={selectedItem.columns}
+          setColumnNumber={setColumnNumber}
         />
       );
 

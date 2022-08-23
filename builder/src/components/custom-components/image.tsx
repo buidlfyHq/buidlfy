@@ -28,12 +28,12 @@ const Image: FC<IImageComponent> = ({ imgData, justifyContent, margin }) => (
         }}
       />
     ) : (
-      <div className="flex overflow-hidden  items-center justify-center w-auto h-full">
+      <div className="flex items-center justify-center w-auto h-full overflow-hidden">
         <div
           id="image-two"
           className="px-10 bold py-[10px] rounded-xl bg-indigo-700 text-white"
         >
-          Upload Image
+          Image
         </div>
       </div>
     )}
