@@ -99,7 +99,8 @@ export default interface ISettings {
   setPlaceholder?: (placeholder: string) => void;
   handlePlaceholderChange?: (e) => void;
   textVal?: string;
-  handleTextChange?: (e) => void;
+  // handleTextChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleTextChange?: (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
   linkVal?: string;
   handleLinkChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

@@ -77,7 +77,6 @@ const Navbar: FC<INavbar> = ({
       }
     }
   }
-
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -110,6 +109,7 @@ const Navbar: FC<INavbar> = ({
       };
       console.log(newTemplate, "newTemplate");
       console.log(newTemplates, "newTemplates");
+
       newTemplates.push(newTemplate);
       localStorage.setItem("templates", JSON.stringify(newTemplates));
     }
@@ -272,12 +272,14 @@ const Navbar: FC<INavbar> = ({
                 <div className="px-1 text-left mt-6 text-gray-500 font-regular font-normal not-italic">
                   Upload Image
                 </div>
+                {/* Input required and function added in next branch            */}
                 <input
                   onChange={onChangeImage}
                   className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
                   type="file"
                   id="formFile"
                 />
+
                 <img src={file} />
               </div>
               <div className="mt-6">

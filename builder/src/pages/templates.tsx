@@ -15,6 +15,7 @@ const Template: FC<INew> = ({ setItems }) => {
     const newTemplates = JSON.parse(templates);
     setNewTemp(newTemplates);
   }, []);
+
   const handleClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     value: IItems[]

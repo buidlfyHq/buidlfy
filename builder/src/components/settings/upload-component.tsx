@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { uploadFileToWeb3Storage } from "config/web3storage";
+import { uploadFileToWeb3Storage } from "utils/web3storage";
 
 interface IUploadComponent {
   selectedItem: IItems;
@@ -16,6 +16,7 @@ const UploadComponent: FC<IUploadComponent> = ({
   setItems,
 }) => {
   const [size, setSize] = useState<boolean>(false);
+
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
@@ -42,12 +43,12 @@ const UploadComponent: FC<IUploadComponent> = ({
               const childIndex = item.children?.findIndex(
                 (c) => c.i === selectedItem.i
               );
-              let newArray = [...item.children];
-              newArray[childIndex] = child;
+              let newChildren = [...item.children];
+              newChildren[childIndex] = child;
 
               return {
                 ...item,
-                children: newArray,
+                children: newChildren,
               };
             }
             return item;
