@@ -6,7 +6,6 @@ import Sidebar from "features/dashboard/sidebar";
 import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
-import DefaultSettings from "features/dashboard/default-settings";
 import { useWindowSize } from "hooks/use-window-size";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
@@ -81,11 +80,22 @@ const Dashboard: FC = () => {
     }
   }, []); // eslint-disable-line
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
+  // const [isSettingHidden, setIsSettingHidden] = useState<boolean>(false);
   const showSidebar = () => {
     setIsNavHidden(false);
+    setOpenSetting(true);
   };
   const hideSidebar = () => {
     setIsNavHidden(true);
+    setOpenSetting(true);
+  };
+  const showSettingSidebar = () => {
+    // setIsNavHidden(true);
+    setOpenSetting(true);
+  };
+  const hideSettingSidebar = () => {
+    // setIsNavHidden(false);
+    setOpenSetting(false);
   };
   return (
     <main>
@@ -105,6 +115,7 @@ const Dashboard: FC = () => {
             setIsNavHidden={setIsNavHidden}
             showSidebar={showSidebar}
             hideSidebar={hideSidebar}
+            hideSettingSidebar={hideSettingSidebar}
           />
           <Sidebar
             className={className}
@@ -119,6 +130,11 @@ const Dashboard: FC = () => {
             setIsNavHidden={setIsNavHidden}
             showSidebar={showSidebar}
             hideSidebar={hideSidebar}
+            hideSettingSidebar={hideSettingSidebar}
+            backgroundColor={backgroundColor}
+            setBackgroundColor={setBackgroundColor}
+            head={head}
+            setHead={setHead}
           />
 
           <section className="flex-1">
@@ -152,32 +168,35 @@ const Dashboard: FC = () => {
                 setDrag={setDrag}
                 setAddContainer={setAddContainer}
                 backgroundColor={backgroundColor}
+                hideSidebar={hideSidebar}
+                showSettingSidebar={showSettingSidebar}
+                showSidebar={showSidebar}
+                isNavHidden={isNavHidden}
+                openSetting={openSetting}
+                setIsNavHidden={setIsNavHidden}
               />
               {/* Right Sidebar Settings */}
-              {openSetting ? (
-                <Settings
-                  items={items}
-                  setItems={setItems}
-                  setOpenSetting={setOpenSetting}
-                  settingItemId={settingItemId}
-                  contractConfig={contractConfig}
-                  setContractConfig={setContractConfig}
-                  selector={selector}
-                  setSelector={setSelector}
-                  elementConfig={elementConfig}
-                  openTab={openTab}
-                  setOpenTab={setOpenTab}
-                />
-              ) : (
-                <DefaultSettings
-                  backgroundColor={backgroundColor}
-                  setBackgroundColor={setBackgroundColor}
-                  head={head}
-                  setHead={setHead}
-                />
-              )}
             </aside>
           </section>
+          {/* {isSettingHidden ? (
+            <> */}
+          {openSetting ? (
+            <Settings
+              items={items}
+              setItems={setItems}
+              setOpenSetting={setOpenSetting}
+              settingItemId={settingItemId}
+              contractConfig={contractConfig}
+              setContractConfig={setContractConfig}
+              selector={selector}
+              setSelector={setSelector}
+              elementConfig={elementConfig}
+              openTab={openTab}
+              setOpenTab={setOpenTab}
+            />
+          ) : null}
+          {/* </>
+          ) : null} */}
         </section>
       ) : (
         <h1 className="items-center text-center justify-center flex h-[100vh]">

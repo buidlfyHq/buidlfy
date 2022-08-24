@@ -6,6 +6,7 @@ import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
 import { Link } from "react-router-dom";
 import "styles/components.css";
+import image from "assets/image.png";
 
 interface IElements {
   className: string;
@@ -218,7 +219,7 @@ const Elements: FC<IElements> = ({
     <>
       {/* Components */}
       <form className="flex items-center mb-5">
-        <div className="relative mt-[3.5rem] mx-3 w-full">
+        <div className="relative mt-[6rem] mx-3 w-full">
           <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
             <svg
               aria-hidden="true"
@@ -243,12 +244,12 @@ const Elements: FC<IElements> = ({
           />
         </div>
       </form>
-      <div>
-        <span className="badge ml-6 mt-12 px-2.5 py-2.5">Default</span>
+      <div className="mx-9">
+        <span className="badge mt-12 px-2.5 py-2.5">Default</span>
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
       </div>
-      <div className="mt-6 ml-6">
+      <div className="mt-6 px-4">
         <span className="element-text">Button</span>
         <div className="flex">
           <button
@@ -259,7 +260,7 @@ const Elements: FC<IElements> = ({
           </button>
         </div>
       </div>
-      <div className="mt-6 ml-6">
+      <div className="mt-6 px-4">
         <span className="element-text">Container</span>
         <div className="flex">
           <div
@@ -268,7 +269,7 @@ const Elements: FC<IElements> = ({
           ></div>
         </div>
       </div>
-      <div className="mt-6 ml-6">
+      <div className="mt-6 px-4">
         <span className="element-text">Text</span>
         <div>
           <div
@@ -297,7 +298,7 @@ const Elements: FC<IElements> = ({
           </div>
         </div>
       </div>
-      <div className="mt-6 ml-6">
+      <div className="mt-6 px-4">
         <span className="element-text">Input</span>
         <div>
           <div
@@ -308,17 +309,9 @@ const Elements: FC<IElements> = ({
           </div>
         </div>
       </div>
-      <div className="mt-6 ml-6">
+      <div onClick={() => onClickFunction("Image")} className="mt-6 px-4">
         <span className="element-text">Image Upload</span>
-        <div>
-          <div
-            className="image-container mt-3 py-2.5 pl-3"
-            onClick={() => onClickFunction("Image")}
-          >
-            <h1 className="text-lg">Image Upload</h1>
-            <div></div>
-          </div>
-        </div>
+        <img src={image} />
       </div>
 
       {/* <div className="px-6 py-3 mt-4">

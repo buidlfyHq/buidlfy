@@ -2,8 +2,12 @@ import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IItems from "interfaces/items";
 import ITemplate from "interfaces/template";
+import "styles/components.css";
 
-const Template: FC = () => {
+interface INew {
+  setItems: (items: IItems[]) => void;
+}
+const Template: FC<INew> = ({ setItems }) => {
   const navigate = useNavigate();
   const [newTemp, setNewTemp] = useState<ITemplate[]>([]);
   useEffect(() => {
@@ -11,21 +15,21 @@ const Template: FC = () => {
     const newTemplates = JSON.parse(templates);
     setNewTemp(newTemplates);
   }, []);
-
   const handleClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     value: IItems[]
   ) => {
     localStorage.removeItem("items");
     localStorage.setItem("items", JSON.stringify(value));
-    navigate("/dashboard", { replace: true });
+    setItems(value);
+    // navigate("/dashboard", { replace: true });
   };
 
   return (
     <>
       <form className="flex items-center mb-5">
-        <div className="relative mt-[3.5rem] mx-3 w-full">
-          <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+        <div className="relative mt-[6rem] mx-3 w-full">
+          <div className="flex absolute inset-y-0 w-[3rem] right-[5px] items-center pl-3 pointer-events-none">
             <svg
               aria-hidden="true"
               className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -43,14 +47,14 @@ const Template: FC = () => {
           <input
             type="text"
             id="simple-search"
-            className="search rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 "
+            className="search rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 "
             placeholder="Search"
             required
           />
         </div>
       </form>
-      <div>
-        <span className="badge ml-6 mt-12 px-2.5 py-2.5">Default</span>
+      <div className="mx-9">
+        <span className="badge mt-12 px-2.5 py-2.5">Default</span>
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
       </div>
@@ -63,10 +67,10 @@ const Template: FC = () => {
               return (
                 <div
                   onClick={(e) => handleClick(e, value)}
-                  className="border cursor-pointer shadow-md flex flex-col py-4 px-2 justify-center items-center"
+                  className="cursor-pointer flex flex-col justify-center items-center"
                 >
-                  <img src={image} />
-                  <div className="text-xs">{name}</div>
+                  <img className="rounded-[0.25rem]" src={image} />
+                  <div className="margin-text text-xs">{name}</div>
                 </div>
               );
             })}

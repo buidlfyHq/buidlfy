@@ -43,26 +43,26 @@ const ShadowComponent: FC<IShadowComponent> = ({
   };
 
   return (
-    <span className=" text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
+    <span className="margin-text text-left px-3 mt-6 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
       Shadow
-      <div className="flex mt-3 px-3">
+      <div className="flex mt-3">
         <span
           onClick={handleSmallChange}
-          className="flex items-center justify-center shadow text-[18px] w-8 h-10 my-2 font-regular"
+          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
         >
-          Sm
+          S
         </span>
         <span
           onClick={handleMediumChange}
-          className="flex items-center justify-center shadow text-[18px] w-8 h-10 m-2 font-regular"
+          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 mx-3 font-regular"
         >
-          Md
+          M
         </span>
         <span
           onClick={handleLargeChange}
-          className="flex items-center justify-center shadow text-[18px] w-8 h-10 my-2 font-regular"
+          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
         >
-          Lg
+          L
         </span>
       </div>
     </span>

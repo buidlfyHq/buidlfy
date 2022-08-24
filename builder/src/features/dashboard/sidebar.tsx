@@ -8,8 +8,10 @@ import { Link } from "react-router-dom";
 import Elements from "./elements";
 import Template from "pages/templates";
 import "styles/components.css";
-import { AiOutlineDoubleLeft } from "react-icons/ai";
+import { AiOutlineLeft } from "react-icons/ai";
 import { sidebarEnum } from "pages/dashboard";
+import DefaultSettings from "features/dashboard/default-settings";
+import IColor from "interfaces/color";
 
 interface ISidebar {
   className: string;
@@ -24,6 +26,14 @@ interface ISidebar {
   setIsNavHidden: (isNavHidden: boolean) => void;
   showSidebar;
   hideSidebar;
+  hideSettingSidebar;
+  backgroundColor: IColor;
+  setBackgroundColor: (backgroundColor: IColor) => void;
+  head: {
+    title: string;
+    logo: string | ArrayBuffer;
+  };
+  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
 }
 
 const Sidebar: FC<ISidebar> = ({
@@ -39,6 +49,11 @@ const Sidebar: FC<ISidebar> = ({
   setIsNavHidden,
   hideSidebar,
   showSidebar,
+  hideSettingSidebar,
+  backgroundColor,
+  setBackgroundColor,
+  head,
+  setHead,
 }) => {
   // const [indexValue, setIndexValue] = useState<number>(0);
   // const ref = useRef<HTMLDivElement>();
@@ -54,11 +69,12 @@ const Sidebar: FC<ISidebar> = ({
   //   document.addEventListener("click", handleOutsideClick);
   //   return () => document.removeEventListener("click", handleOutsideClick);
   // }, [ref]);
+  const ref = useRef(null);
 
   return (
     <main
-      // ref={ref}
-      className={`sidebar overflow-scroll inherit left-[80px] bottom-0 top-[30px] w-[250px] pb-8 border-r ${
+      ref={ref}
+      className={`sidebar overflow-scroll inherit left-[80px] bottom-0 top-[30px] w-[280px] pb-8 border-r ${
         isNavHidden ? "hidden" : ""
       }`}
     >
@@ -101,8 +117,16 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </div> */}
       {/* </section> */}
-      <div onClick={hideSidebar} className="mt-8 relative z-[100]">
-        Hide
+      <div className="flex justify-end absolute">
+        <div
+          onClick={() => {
+            hideSidebar();
+            hideSettingSidebar();
+          }}
+          className="mt-[6.25rem] ml-[16.5rem] px-2.5 py-2.5 bg-white rounded-full w-10 shadow-lg relative z-[100]"
+        >
+          <AiOutlineLeft className="text-[18px] mr-3 text-[#8350F0] font-black" />
+        </div>
       </div>
       {/* Components */}
       {sideElement == sidebarEnum.ELEMENTS ? (
@@ -115,7 +139,17 @@ const Sidebar: FC<ISidebar> = ({
           settingItemId={settingItemId}
         />
       ) : null}
-      {sideElement == sidebarEnum.TEMPLATES ? <Template /> : null}
+      {sideElement == sidebarEnum.TEMPLATES ? (
+        <Template setItems={setItems} />
+      ) : null}
+      {sideElement == sidebarEnum.STYLES ? (
+        <DefaultSettings
+          backgroundColor={backgroundColor}
+          setBackgroundColor={setBackgroundColor}
+          head={head}
+          setHead={setHead}
+        />
+      ) : null}
     </main>
   );
 };

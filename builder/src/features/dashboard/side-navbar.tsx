@@ -28,6 +28,7 @@ interface ISideNavbar {
   setIsNavHidden: (isNavHidden: boolean) => void;
   showSidebar;
   hideSidebar;
+  hideSettingSidebar;
 }
 
 const SideNavbar: FC<ISideNavbar> = ({
@@ -43,6 +44,7 @@ const SideNavbar: FC<ISideNavbar> = ({
   setIsNavHidden,
   hideSidebar,
   showSidebar,
+  hideSettingSidebar,
 }) => {
   const handleSidebar = (selectedSidebarElements: string) => {
     setSideElement(selectedSidebarElements);
@@ -94,6 +96,7 @@ const SideNavbar: FC<ISideNavbar> = ({
           onClick={() => {
             showSidebar(true);
             handleSidebar(sidebarEnum.TEMPLATES);
+            hideSettingSidebar();
           }}
           className="cursor-pointer"
         >
@@ -102,17 +105,18 @@ const SideNavbar: FC<ISideNavbar> = ({
           </div>
           <h3 className="side-text mt-1">Templates</h3>
         </div>
-        <div
-          onClick={() => handleSidebar(sidebarEnum.PAGES)}
-          className="mt-8 cursor-pointer"
-        >
+        <div className="mt-8 cursor-pointer">
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={pages} />
           </div>
           <h3 className="side-text mt-1">Pages</h3>
         </div>
         <div
-          onClick={() => handleSidebar(sidebarEnum.ELEMENTS)}
+          onClick={() => {
+            showSidebar(true);
+            handleSidebar(sidebarEnum.ELEMENTS);
+            hideSettingSidebar();
+          }}
           className="mt-8 cursor-pointer"
         >
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
@@ -126,7 +130,14 @@ const SideNavbar: FC<ISideNavbar> = ({
           </div>
           <h3 className="side-text mt-1">Media</h3>
         </div>
-        <div className="mt-8 cursor-pointer">
+        <div
+          onClick={() => {
+            showSidebar(true);
+            handleSidebar(sidebarEnum.STYLES);
+            hideSettingSidebar();
+          }}
+          className="mt-8 cursor-pointer"
+        >
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={styles} />
           </div>

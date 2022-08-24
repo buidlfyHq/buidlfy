@@ -44,16 +44,15 @@ const Settings: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const ref = useRef(null);
-  const [showComponent, setShowComponent] =
-    useState<{
-      id: string;
-      value: {
-        name: string;
-        inputs: object[];
-        outputs: object[];
-        stateMutability: string;
-      };
-    }>(null); // for abi method component
+  const [showComponent, setShowComponent] = useState<{
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }>(null); // for abi method component
 
   // work in progress
   const selectedChildren = items.map((item) =>
@@ -514,14 +513,13 @@ const Settings: FC<ISettings> = ({
       {settingItemId ? (
         <div className="rounded-[8px] py-2 cursor-pointer relative">
           <div
-            className="border shadow-sm pt-1 sidebar menu"
+            className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
             ref={ref}
-            style={{ paddingTop: "2px" }}
           >
-            <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
+            {/* <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
               {"<"}
               <span className="ml-2">Site Settings</span>
-            </div>
+            </div> */}
             <SettingComponent
               items={items}
               setItems={setItems}

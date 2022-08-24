@@ -23,9 +23,9 @@ const UtilitiesComponent: FC<IUtilitiesComponent> = ({
       <div className="flex">
         <span
           onClick={handleDelete}
-          className="flex items-center justify-center underline shadow text-[18px] w-8 h-10 my-2 font-regular text-black"
+          className="shadow-div flex items-center justify-center underline shadow text-[18px] py-3 px-3 my-2 font-regular text-black"
         >
-          <AiOutlineDelete className="text-[18px]" />
+          <AiOutlineDelete className="text-[16px]" />
         </span>
         {/* It will be used for the latest code when we will add duplicate function  */}
         {/* <span className="flex items-center justify-center underline shadow text-[18px] w-8 h-10 ml-3 my-2 font-regular text-black">

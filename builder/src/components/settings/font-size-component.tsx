@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -38,10 +39,10 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
   );
 
   return (
-    <div className="flex w-full px-3 text-gray-600">
-      <span className="px-1 text-left text-xl text-gray-500 font-regular font-normal not-italic">
+    <div className="flex text-gray-600 w-full mt-4 mx-2">
+      <span className="text-left text-xl text-gray-500 font-regular font-normal not-italic">
         {/* Font Size */}
-        <div className="flex mt-3 ">
+        <div className="flex mt-3">
           {/* <span
             onClick={decrementCounter}
             className="flex items-center justify-center shadow text-[18px] mr-3 w-8 h-10 font-regular text-black"
@@ -49,16 +50,28 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
             -
           </span> */}
 
-          <div className="">
+          <div className="flex">
+            {/* <span className="absolute text-base font-normal text-gray-700 z-10 py-1">
+              Font Size:
+            </span> */}
+            <span className="font-text">Font Size:</span>
             <select
               value={fontSize}
               onChange={(e) => handleSizeChange(e)}
-              className="form-select font-div appearance-none block w-8 h-10 px-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="form-select font-div appearance-none block py-1.5 pl-[10.5rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:outline-none focus:shadow-none"
               aria-label="Default select example"
             >
               <option selected>{fontSize}</option>
               {options}
             </select>
+            <AiOutlineCaretUp
+              onClick={incrementCounter}
+              className="text-[10px] absolute right-[1.5rem] text-black mt-[0.3rem]"
+            />
+            <AiOutlineCaretDown
+              onClick={decrementCounter}
+              className="text-[10px] absolute right-[1.5rem] mt-[0.9rem] text-black"
+            />
           </div>
           {/* <span
             onClick={incrementCounter}

@@ -92,16 +92,24 @@ const Navbar: FC<INavbar> = ({
   };
   const handleSaveTemplate = () => {
     // FIX: save full config to local storage
-
+    let newTemplates: Array<ITemplate> = [];
     if (items?.length > 0) {
       localStorage.setItem("items", JSON.stringify(items));
-      const templates = localStorage.getItem("templates");
-      const newTemplates: Array<ITemplate> = JSON.parse(templates);
+      const templates = localStorage.getItem("templates") || "";
+      console.log(templates, "templates");
+      if (templates !== "") {
+        console.log(templates, "templates");
+        newTemplates = JSON.parse(templates);
+      } else {
+        newTemplates = [];
+      }
       let newTemplate = {
         name: inputValue,
         value: items,
         image: file,
       };
+      console.log(newTemplate, "newTemplate");
+      console.log(newTemplates, "newTemplates");
       newTemplates.push(newTemplate);
       localStorage.setItem("templates", JSON.stringify(newTemplates));
     }

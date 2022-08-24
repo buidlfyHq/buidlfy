@@ -61,11 +61,11 @@ const UploadComponent: FC<IUploadComponent> = ({
 
   return (
     <div className="items-center w-full px-3 py-2 text-gray-600 rounded">
-      <div className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
+      <div className="px-1 margin-text text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
         Upload Image
       </div>
       <div className="flex justify-center">
-        <div className="mb-3 w-96">
+        <div className="mb-3 mt-5 w-96">
           <input
             onChange={onChangeImage}
             className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"

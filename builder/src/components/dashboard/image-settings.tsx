@@ -22,10 +22,9 @@ const ImageSettings: FC<ISettings> = ({
   setMarginBottom,
 }) => (
   <>
-    <h3 className="mb-3 ml-8">
-      Component -
+    <h3 className="ml-[1rem]">
       {selectedItem ? (
-        <span className="font-bold">{selectedItem.name}</span>
+        <span className="setting-text">{selectedItem.name}</span>
       ) : null}
     </h3>
     <UploadComponent

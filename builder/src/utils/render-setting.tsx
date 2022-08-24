@@ -60,7 +60,7 @@ const SettingComponent: FC<ISettings> = ({
     setLink(e.target.value);
   };
 
-  const handlePlaceholderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePlaceholderChange = (e) => {
     setPlaceholder(e.target.value);
   };
 

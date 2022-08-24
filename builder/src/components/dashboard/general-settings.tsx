@@ -11,6 +11,7 @@ import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import "styles/components.css";
+import CombinedComponent from "components/settings/combined-setting";
 
 const GeneralSettings: FC<ISettings> = ({
   textVal,
@@ -48,11 +49,23 @@ const GeneralSettings: FC<ISettings> = ({
   setPaddingTop,
 }) => (
   <>
-    <h3 className="mb-3 ml-4">
+    <h3 className="ml-[0.5rem]">
       {selectedItem ? (
-        <span className="setting-text ">{selectedItem.name}</span>
+        <span className="setting-text">{selectedItem.name}</span>
       ) : null}
     </h3>
+    <CombinedComponent
+      bold={bold}
+      italic={italic}
+      underline={underline}
+      setBold={setBold}
+      setItalic={setItalic}
+      setUnderline={setUnderline}
+      justifyContent={justifyContent}
+      setLeft={setLeft}
+      setRight={setRight}
+      setCenter={setCenter}
+    />
     <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
       {/* <RiText className="text-[18px] mr-3" /> */}
       <textarea
@@ -74,21 +87,7 @@ const GeneralSettings: FC<ISettings> = ({
         placeholder="Link"
       />
     </div>
-    <FontStyleComponent
-      bold={bold}
-      italic={italic}
-      underline={underline}
-      setBold={setBold}
-      setItalic={setItalic}
-      setUnderline={setUnderline}
-    />
 
-    <AlignComponent
-      justifyContent={justifyContent}
-      setLeft={setLeft}
-      setRight={setRight}
-      setCenter={setCenter}
-    />
     <FontSizeComponent fontSize={fontSize} setFontSize={setFontSize} />
     <ColorComponent
       color={color}

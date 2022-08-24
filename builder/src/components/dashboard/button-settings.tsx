@@ -14,6 +14,8 @@ import ConnectSwitchComponent from "components/settings/connect-switch-component
 import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
+import CombinedComponent from "components/settings/combined-setting";
+import { IoMdLink } from "react-icons/io";
 
 const ButtonSettings: FC<ISettings> = ({
   textVal,
@@ -114,57 +116,66 @@ const ButtonSettings: FC<ISettings> = ({
           <div className="flex-auto px-2 py-2">
             <div className="tab-content tab-space">
               <div className={openTab === 1 ? "block" : "hidden"} id="link-one">
-                <h3 className="mb-3 ml-8">
-                  Component -
+                <h3 className="ml-[0.5rem]">
                   {selectedItem ? (
-                    <span className="font-bold">{selectedItem.name}</span>
+                    <span className="setting-text ">{selectedItem.name}</span>
                   ) : null}
                 </h3>
-
-                <div className="flex items-center px-3 mt-1 text-black">
-                  <RiText className="text-[18px] mr-3" />
-
-                  <input
-                    value={textVal}
-                    onChange={(e) => handleTextChange(e)}
-                    className="changeText"
-                    type="text"
-                    placeholder="Name..."
-                  />
-                </div>
-                <div className="flex items-center px-3 mt-2 text-black">
-                  <AiOutlineLink className="text-[18px] mr-3" />
-                  <input
-                    value={linkVal}
-                    onChange={(e) => handleLinkChange(e)}
-                    className="changeText"
-                    type="text"
-                    placeholder="URL..."
-                  />
-                </div>
-                <ConnectSwitchComponent
-                  setOn={setOn}
-                  connectWallet={connectWallet}
-                />
-                <FontStyleComponent
+                <CombinedComponent
                   bold={bold}
                   italic={italic}
                   underline={underline}
                   setBold={setBold}
                   setItalic={setItalic}
                   setUnderline={setUnderline}
-                />
-
-                <AlignComponent
                   justifyContent={justifyContent}
                   setLeft={setLeft}
                   setRight={setRight}
                   setCenter={setCenter}
                 />
+                <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
+                  {/* <RiText className="text-[18px] mr-3" /> */}
+                  <textarea
+                    value={textVal}
+                    onChange={(e) => handleTextChange(e)}
+                    className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
+                    placeholder="Please write your text here..."
+                  />
+                </div>
+                <div className="flex items-center mt-4 mx-2  w-[13.5rem] text-black">
+                  <div className="link-div px-1 py-1">
+                    <IoMdLink className="text-[18px]" />
+                  </div>
+                  <input
+                    value={linkVal}
+                    onChange={(e) => handleLinkChange(e)}
+                    className="changeText pl-[2.5rem] py-[0.4rem] input-text"
+                    type="text"
+                    placeholder="Link"
+                  />
+                </div>
+                <ConnectSwitchComponent
+                  setOn={setOn}
+                  connectWallet={connectWallet}
+                />
 
                 <FontSizeComponent
                   fontSize={fontSize}
                   setFontSize={setFontSize}
+                />
+                <BorderRadiusComponent
+                  borderRadius={borderRadius}
+                  setBorderRadius={setBorderRadius}
+                />
+                <ColorComponent
+                  color={color}
+                  setColor={setColor}
+                  selectedItem={selectedItem}
+                />
+
+                <BgColorComponent
+                  color={backgroundColor}
+                  setBgColor={setBgColor}
                 />
                 <MarginComponent
                   setMarginLeft={setMarginLeft}
@@ -180,28 +191,13 @@ const ButtonSettings: FC<ISettings> = ({
                   setPaddingBottom={setPaddingBottom}
                   padding={{ ...padding }}
                 />
-                <BorderRadiusComponent
-                  borderRadius={borderRadius}
-                  setBorderRadius={setBorderRadius}
-                />
+
                 <ShadowComponent
                   setSmall={setSmall}
                   setMedium={setMedium}
                   setLarge={setLarge}
                   shadow={shadow}
                 />
-
-                <ColorComponent
-                  color={color}
-                  setColor={setColor}
-                  selectedItem={selectedItem}
-                />
-
-                <BgColorComponent
-                  color={backgroundColor}
-                  setBgColor={setBgColor}
-                />
-
                 <UtilitiesComponent
                   deleteComponent={deleteComponent}
                   setDeleteComponent={setDeleteComponent}

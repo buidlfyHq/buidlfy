@@ -1,6 +1,6 @@
 export default interface IColor {
-  r: string;
-  g: string;
-  b: string;
-  a?: string;
+  r: string | number;
+  g: string | number;
+  b: string | number;
+  a?: string | number;
 }

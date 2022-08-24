@@ -14,7 +14,7 @@ const App: FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/templates" element={<Template />} />
+        {/* <Route path="/templates" element={<Template />} /> */}
       </Routes>
     </Router>
   );

@@ -6,6 +6,7 @@ import ShadowComponent from "components/settings/shadow-component";
 import ISettings from "interfaces/settings";
 import { RiText } from "react-icons/ri";
 import MarginComponent from "components/settings/margin-component";
+import "styles/components.css";
 
 const InputSettings: FC<ISettings> = ({
   selectedItem,
@@ -28,21 +29,19 @@ const InputSettings: FC<ISettings> = ({
   setMarginBottom,
 }) => (
   <>
-    <h3 className="mb-3 ml-8">
-      Component -
+    <h3 className="ml-[1rem]">
       {selectedItem ? (
-        <span className="font-bold">{selectedItem.name}</span>
+        <span className="setting-text">{selectedItem.name}</span>
       ) : null}
     </h3>
 
-    <div className="flex items-center px-3 mt-2 text-black">
-      <RiText className="text-[18px] mr-3" />
-      <input
+    <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
+      {/* <RiText className="text-[18px] mr-3" /> */}
+      <textarea
         value={placeholder}
         onChange={(e) => handlePlaceholderChange(e)}
-        className="changeText"
-        type="text"
-        placeholder="placeholder text.."
+        className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
+        placeholder="Please write your text here..."
       />
     </div>
 

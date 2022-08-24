@@ -46,24 +46,24 @@ const AlignComponent: FC<IAlignComponent> = ({
 
   return (
     <>
-      <span className=" text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
+      <span className="margin-text text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
         Text Align
         <div className="flex mt-3 px-3">
           <span
             onClick={handleLeftChange}
-            className="flex items-center justify-center font-bold shadow text-[18px] w-8 h-10 my-2 font-regular"
+            className="align-div flex items-center justify-center font-bold shadow text-[18px] p-2 mr-2 my-2 font-regular"
           >
             <AiOutlineAlignLeft className="text-[18px]" />
           </span>
           <span
             onClick={handleCenterChange}
-            className="flex items-center justify-center italic shadow text-[18px] w-8 h-10 m-2 font-regular text-black"
+            className="align-div flex items-center justify-center italic shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
           >
             <AiOutlineAlignCenter className="text-[18px]" />
           </span>
           <span
             onClick={handleRightChange}
-            className="flex items-center justify-center underline shadow text-[18px] w-8 h-10 my-2 font-regular text-black"
+            className="align-div flex items-center justify-center underline shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
           >
             <AiOutlineAlignRight className="text-[18px]" />
           </span>

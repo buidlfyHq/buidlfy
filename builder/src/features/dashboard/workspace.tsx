@@ -1,10 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "utils/render-item";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
+import Spinner from "components/dashboard/spinner";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 interface IWorkspace {
@@ -36,6 +37,12 @@ interface IWorkspace {
   marginRight?: number;
   marginTop?: number;
   marginBottom?: number;
+  hideSidebar;
+  showSidebar;
+  showSettingSidebar;
+  isNavHidden;
+  openSetting;
+  setIsNavHidden;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -57,8 +64,30 @@ const Workspace: FC<IWorkspace> = ({
   marginRight,
   marginTop,
   marginBottom,
+  hideSidebar,
+  showSidebar,
+  showSettingSidebar,
+  isNavHidden,
+  openSetting,
+  setIsNavHidden,
 }) => {
-  // to persist layout changes
+  const [currentSize, setCurrentSize] = useState<number>(6);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log(isNavHidden, "setting");
+    console.log(openSetting, "sidebar");
+    if (isNavHidden && !openSetting) {
+      console.log(isNavHidden, "settingif");
+      console.log(!openSetting, "sidebarif");
+      setCurrentSize(6);
+    } else {
+      console.log(isNavHidden, "settingelse");
+      console.log(!openSetting, "sidebarelse");
+      setCurrentSize(7.5);
+    }
+  }, [isNavHidden, openSetting]);
+  console.log(currentSize, "current");
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
@@ -140,7 +169,7 @@ const Workspace: FC<IWorkspace> = ({
 
   const onComponentClick = (itemName: string, i: string) => {
     setAddContainer(true);
-
+    hideSidebar();
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
@@ -166,6 +195,7 @@ const Workspace: FC<IWorkspace> = ({
 
   // FIX: find a suitable type for this event
   const handleCheckIsContainer = (e) => {
+    hideSidebar();
     if (
       e.target.id === "Container" ||
       e.target.parentNode.id === "Container" ||
@@ -183,7 +213,9 @@ const Workspace: FC<IWorkspace> = ({
     } else {
       setAddContainer(false);
     }
-    if (e.target.id === "") setOpenSetting(false);
+    if (e.target.id === "") {
+      setOpenSetting(false);
+    }
   };
 
   const renderItemFunction = items
@@ -225,38 +257,51 @@ const Workspace: FC<IWorkspace> = ({
         </div>
       );
     });
-
   return (
-    <div className="main-div w-full h-full">
-      <div>
-        <main
-          className={`w-full h-full z-10 mt-[8rem] ${
-            className === "" ? "mr-[250px]" : "mr-[250px]"
-          }`}
+    <div
+      style={{ width: "-webkit-fill-available" }}
+      className="main-div h-full"
+    >
+      <main
+        className={`h-full w-full z-10 ${
+          className === "" ? "mr-[250px]" : "mr-[250px]"
+        }`}
+        style={{}}
+        onClick={handleCheckIsContainer}
+      >
+        <section
           style={{
+            width: "-webkit-fill-available",
             backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
           }}
-          onClick={handleCheckIsContainer}
+          className={`mt-[130px] ml-[15px] mb-[20px] min-h-[87vh] shadow-2xl  ${
+            openSetting ? "mr-[45px]" : "mr-[15px]"
+          }`}
         >
-          <section className="mt-[60px]">
-            <ResponsiveGridLayout
-              layouts={{ lg: items }}
-              breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-              cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
-              rowHeight={50}
-              width={window.innerWidth - 250}
-              resizeHandles={["se"]}
-              isDraggable={drag}
-              onLayoutChange={onLayoutChange}
-              compactType={null}
-              margin={[0, 0]}
-              className="h-fit overflow-hidden"
-            >
-              {renderItemFunction}
-            </ResponsiveGridLayout>
-          </section>
-        </main>
-      </div>
+          <ResponsiveGridLayout
+            layouts={{ lg: items }}
+            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+            cols={{
+              lg: currentSize,
+              md: currentSize,
+              sm: 6,
+              xs: 4,
+              xxs: 2,
+            }}
+            rowHeight={50}
+            // width={window.innerWidth - 250}
+            resizeHandles={["se"]}
+            isDraggable={drag}
+            onLayoutChange={onLayoutChange}
+            compactType={null}
+            margin={[0, 0]}
+            // style={{ width: "-webkit-fill-available" }}
+            className="h-fit overflow-hidden"
+          >
+            {renderItemFunction}
+          </ResponsiveGridLayout>
+        </section>
+      </main>
     </div>
   );
 };
