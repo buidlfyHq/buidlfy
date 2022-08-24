@@ -3,6 +3,7 @@ import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
+import NftCardSettings from "components/dashboard/nft-card-settings";
 import GeneralSettings from "components/dashboard/general-settings";
 import ISettings from "interfaces/settings";
 import "styles/components.css";
@@ -52,8 +53,13 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingLeft,
   columns,
   setColumnNumber,
+  setSlug,
 }) => {
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleTextChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setValue(e.target.value);
   };
 
@@ -175,7 +181,6 @@ const SettingComponent: FC<ISettings> = ({
           setLarge={setLarge}
         />
       );
-
     case "NFT Container":
       return (
         <ContainerSettings
@@ -208,7 +213,6 @@ const SettingComponent: FC<ISettings> = ({
           setColumnNumber={setColumnNumber}
         />
       );
-
     case "Input":
       return (
         <InputSettings
@@ -226,6 +230,10 @@ const SettingComponent: FC<ISettings> = ({
           setMarginBottom={setMarginBottom}
           setMarginLeft={setMarginLeft}
         />
+      );
+    case "NFT Card":
+      return (
+        <NftCardSettings selectedItem={selectedItem} setSlug={setSlug} />
       );
     default:
       return (

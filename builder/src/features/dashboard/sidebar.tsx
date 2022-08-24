@@ -188,8 +188,6 @@ const Sidebar: FC<ISidebar> = ({
       );
     });
 
-  console.log(items);
-
   const renderComponents = (type) => {
     if (type === "container") {
       return <>{renderContainerComponents}</>;

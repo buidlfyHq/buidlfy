@@ -135,8 +135,8 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const onComponentClick = (itemName: string, i: string) => {
-    setComponentType("container");
-
+    setComponentType("container");  
+    
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
@@ -192,6 +192,7 @@ const Workspace: FC<IWorkspace> = ({
     ?.filter((i) => i.style?.deleteComponent === 0)
     .map((item: IItems) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
+      
       return (
         <div
           key={i}

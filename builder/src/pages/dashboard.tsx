@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { RiText } from "react-icons/ri";
 import Navbar from "features/dashboard/navbar";
 import Sidebar from "features/dashboard/sidebar";
 import Workspace from "features/dashboard/workspace";

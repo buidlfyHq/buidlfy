@@ -43,9 +43,10 @@ const Settings: FC<ISettings> = ({
   setSelector,
   elementConfig,
   openTab,
-  setOpenTab
+  setOpenTab,
 }) => {
   const ref = useRef(null);
+  
   const [showComponent, setShowComponent] =
     useState<{
       id: string;
@@ -404,15 +405,15 @@ const Settings: FC<ISettings> = ({
       if (item.i === settingItemId) {
         return {
           ...item,
-          w: 6/columns,
-          columns
+          w: 6 / columns,
+          columns,
         };
       }
       return item;
     });
     setItems(updatedItems);
-    console.log(items)
-  }
+    console.log(items);
+  };
 
   const spacingWorkFunction = (
     styleProp: functionEnum,
@@ -564,6 +565,19 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
 
+  const setSlug = (slug: string) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      if (item.i === settingItemId) {
+        return { ...item, slug };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
   const handleOpenSetting = () => {
     setOpenSetting(false);
   };
@@ -636,6 +650,7 @@ const Settings: FC<ISettings> = ({
               setPaddingLeft={setPaddingLeft}
               // columns={columns}
               setColumnNumber={setColumnNumber}
+              setSlug={setSlug}
             />
           </div>
         </div>

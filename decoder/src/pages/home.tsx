@@ -1,9 +1,17 @@
 import { FC, useEffect, useState } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
+import { ethers } from "ethers";
+import Web3Modal from "web3modal";
 import BuilderConfig from "config";
+import { providerOptions } from "config/provider-options";
 import RenderItem from "utils/render-item";
 import IItems from "interfaces/items";
 import { IInput, IOutput } from "interfaces/value";
+
+const web3Modal = new Web3Modal({
+  cacheProvider: true, // optional
+  providerOptions, // required
+});
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
@@ -14,8 +22,20 @@ const Home: FC = () => {
   const [testConfig, setTestConfig] = useState(
     JSON.parse(BuilderConfig).builder
   );
-  const [inputVal, setInputVal] = useState("");
-  const [nftCard, setNftCard] = useState<any>({}); // for rendering nfts one by one
+  const [nftCard, setNftCard] = useState<any>(null); // for rendering nfts one by one
+  const [account, setAccount] = useState<string>("");
+  const [slug, setSlug] = useState<string>("");
+
+  const connectWalletButton = async () => {
+    try {
+      const provider = await web3Modal.connect();
+      const library: any = new ethers.providers.Web3Provider(provider); // required
+      const accounts: any = await library.listAccounts(); // required
+      if (accounts) setAccount(accounts[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     let nftY = null;
@@ -28,9 +48,38 @@ const Home: FC = () => {
       if (item.nft && item.y === nftY) {
         nftCols++;
       }
+      if (item.nft && item.slug) {
+        if (item.slug === "wallet") {
+          if (!account) connectWalletButton();
+        } else {
+          setSlug(item.slug);
+        }
+      }
+      setTestConfig(testConfig.filter((i) => !i.nft));
     });
-    setTestConfig(testConfig.filter((i) => !i.nft));
   }, []);
+
+  useEffect(() => {
+    if (nftCard && slug) {
+      fetch(
+        `https://testnets-api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=20&collection=${slug}&include_orders=false`,
+        { method: "GET", headers: { Accept: "application/json" } }
+      )
+        .then((response) => response.json())
+        .then(({ assets }) => {
+          renderTokensForOwner(assets);
+        });
+    } else if (nftCard && account) {
+      fetch(
+        `https://testnets-api.opensea.io/api/v1/assets?owner=${account}&order_direction=desc&offset=0&limit=20&include_orders=false`,
+        { method: "GET", headers: { Accept: "application/json" } }
+      )
+        .then((response) => response.json())
+        .then(({ assets }) => {
+          renderTokensForOwner(assets);
+        });
+    }
+  }, [nftCard, account]);
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -38,62 +87,55 @@ const Home: FC = () => {
   };
 
   // render nfts from connected wallet using opensea api
-  const renderTokensForOwner = () => {
-    fetch(
-      `https://testnets-api.opensea.io/api/v1/assets?owner=0xd6c72729EbCC987b171eCF074993ce3C4e34b9f0&order_direction=desc&offset=0&limit=20&include_orders=false`,
-      { method: "GET", headers: { Accept: "application/json" } }
-    )
-      .then((response) => response.json())
-      .then(({ assets }) => {
-        // setAssets(assets);
-        // set no. of cols
-        // let cols = 6/colW
-        // let colW = 6 / nftCard?.columns;
-        let colW = 2;
-        let X = 0;
-        let nCardsArr = assets.map((asset: any, index: number) => {
-          // check config y if any other elements present above it
-          // let minY = Math.min(testConfig.map((item) => item.y))
-          // let el = testConfig.children?.filter((item) => item.y === minY)[0];
-          // let height = el ? el.h + el.y : 0
+  const renderTokensForOwner = (assets) => {
+    // setAssets(assets);
+    // set no. of cols
+    // let cols = 6/colW
+    // let colW = 6 / nftCard?.columns;
+    let colW = 2;
+    let X = 0;
+    let nCardsArr = assets.map((asset: any, index: number) => {
+      // check config y if any other elements present above it
+      // let minY = Math.min(testConfig.map((item) => item.y))
+      // let el = testConfig.children?.filter((item) => item.y === minY)[0];
+      // let height = el ? el.h + el.y : 0
 
-          let modifiedX = X;
-          X = X + colW;
-          X = X + colW <= 6 ? X : 0;
+      let modifiedX = X;
+      X = X + colW;
+      X = X + colW <= 6 ? X : 0;
 
-          return {
-            ...nftCard,
-            i: asset.id,
-            x: modifiedX,
-            w: colW,
-            image: asset.image_url,
-            collection: asset.asset_contract.name,
-            title: asset.name,
-            price: asset.traits.filter(
-              (trait: { trait_type: string }) =>
-                trait.trait_type === "price" || trait.trait_type === "Price"
-            )[0].value,
-            highestBid: asset.top_bid,
-          };
-        });
+      return {
+        ...nftCard,
+        i: asset.id,
+        x: modifiedX,
+        w: colW,
+        image: asset.image_url,
+        collection: asset.asset_contract.name,
+        title: asset.name,
+        price: asset.traits.filter(
+          (trait: { trait_type: string }) =>
+            trait.trait_type === "price" || trait.trait_type === "Price"
+        )[0].value,
+        highestBid: asset.top_bid,
+      };
+    });
 
-        let newItemsArr = testConfig.map((item: IItems) => {
-          const { y } = item;
-          if (y >= nCardsArr[0].y) {
-            return {
-              ...item,
-              y: y + nCardsArr.length * nCardsArr[0].h,
-            };
-          } else {
-            return {
-              ...item,
-              y: y,
-            };
-          }
-        });
+    let newItemsArr = testConfig.map((item: IItems) => {
+      const { y } = item;
+      if (y >= nCardsArr[0].y) {
+        return {
+          ...item,
+          y: y + nCardsArr.length * nCardsArr[0].h,
+        };
+      } else {
+        return {
+          ...item,
+          y: y,
+        };
+      }
+    });
 
-        setTestConfig([...newItemsArr, ...nCardsArr]);
-      });
+    setTestConfig([...newItemsArr, ...nCardsArr]);
   };
 
   return (
@@ -130,32 +172,6 @@ const Home: FC = () => {
           );
         })}
       </ResponsiveGridLayout>
-      <div>
-        <input
-          type="text"
-          className="px-2 py-1 ml-2 border"
-          value={inputVal}
-          onChange={(e) => setInputVal(e.target.value)}
-        />
-        <button
-          className="px-4 py-2 m-4 text-white bg-purple-600 rounded-full"
-          onClick={renderTokensForOwner}
-        >
-          Fetch
-        </button>
-      </div>
-      {/* <button
-        className="px-4 py-2 m-4 bg-purple-600 border border-purple-400 rounded-full shadow-md"
-        onClick={() => renderNfts(assets[assetNum])}
-      >
-        + Add
-      </button>
-      <button
-        className="px-4 py-2 m-4 bg-green-600 border border-green-500 rounded-full shadow-md"
-        onClick={renderTokensForOwner}
-      >
-        Connect Wallet
-      </button> */}
     </main>
   );
 };

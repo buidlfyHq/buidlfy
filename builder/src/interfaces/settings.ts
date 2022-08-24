@@ -104,4 +104,5 @@ export default interface ISettings {
   handleLinkChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   columns?: number;
   setColumnNumber?: (columns: number) => void;
+  setSlug?: (slug: string) => void;
 }
