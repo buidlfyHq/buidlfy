@@ -296,7 +296,6 @@ const Workspace: FC<IWorkspace> = ({
             onLayoutChange={onLayoutChange}
             compactType={null}
             margin={[0, 0]}
-            // style={{ width: "-webkit-fill-available" }}
             className="h-fit overflow-hidden"
           >
             {renderItemFunction}
