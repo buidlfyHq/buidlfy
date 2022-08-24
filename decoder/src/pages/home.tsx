@@ -17,9 +17,6 @@ const Home: FC = () => {
   const [inputVal, setInputVal] = useState("");
   const [nftCard, setNftCard] = useState<any>({}); // for rendering nfts one by one
 
-  console.log(testConfig);
-  
-
   useEffect(() => {
     let nftY = null;
     let nftCols = 0;
@@ -63,18 +60,24 @@ const Home: FC = () => {
           let modifiedX = X;
           X = X + colW;
           X = X + colW <= 6 ? X : 0;
+
           return {
             ...nftCard,
             i: asset.id,
             x: modifiedX,
             w: colW,
             image: asset.image_url,
+            collection: asset.asset_contract.name,
             title: asset.name,
-            price: asset.traits[0].value
+            price: asset.traits.filter(
+              (trait: { trait_type: string }) =>
+                trait.trait_type === "price" || trait.trait_type === "Price"
+            )[0].value,
+            highestBid: asset.top_bid,
           };
         });
 
-        let newItemsArr = testConfig.map((item) => {
+        let newItemsArr = testConfig.map((item: IItems) => {
           const { y } = item;
           if (y >= nCardsArr[0].y) {
             return {

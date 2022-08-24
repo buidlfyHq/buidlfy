@@ -259,7 +259,13 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case "NFT Card":
       return (
-        <NftCard image={item.image} title={item.title} price={item.price} />
+        <NftCard
+          image={item.image}
+          collection={item.collection}
+          title={item.title}
+          price={item.price}
+          highestBid={item.highestBid}
+        />
       );
     default:
       return <></>;

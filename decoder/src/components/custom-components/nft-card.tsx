@@ -1,10 +1,8 @@
-import defaultImage from "assets/default-image.png";
-
-const NftCard = ({ image, title, price }) => {
+const NftCard = ({ image, collection, title, price, highestBid }) => {
   return (
     <div className="flex justify-center items-center h-full p-2">
       <div
-        className="bg-stone-700 w-full h-full p-2 rounded-lg hover:border-4 hover:border-black"
+        className="bg-stone-700 w-full h-full p-2 rounded-lg"
         style={{
           boxShadow: "0px 2px 7px rgba(0, 0, 0, 0.5)",
         }}
@@ -30,7 +28,7 @@ const NftCard = ({ image, title, price }) => {
           />
         </div>
         <div className="text-center p-2 h-[20%]">
-          <div className="text-white/80 text-sm">Crypto Unicorns</div>
+          <div className="text-white/80 text-sm">{collection}</div>
           <div className="text-white font-bold text-xl">{title}</div>
         </div>
         <div
@@ -41,11 +39,11 @@ const NftCard = ({ image, title, price }) => {
         >
           <div>
             <div className="text-white/80 text-sm">Price</div>
-            <div className="text-white font-bold">{price}</div>
+            <div className="text-white font-bold">{price} ETH</div>
           </div>
           <div>
             <div className="text-white/80 text-sm">Highest Bid</div>
-            <div className="text-white font-bold">17 ETH</div>
+            <div className="text-white font-bold">{highestBid ? `${highestBid} ETH` : 'NA'}</div>
           </div>
         </div>
       </div>

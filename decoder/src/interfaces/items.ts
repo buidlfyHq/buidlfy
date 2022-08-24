@@ -25,6 +25,8 @@ export default interface IItems {
   imgData?: string | ArrayBuffer;
   connectWallet?: string;
   image?: any;
+  collection?: string;
   title?: string;
   price?: string;
+  highestBid: string;
 }
