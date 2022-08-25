@@ -74,7 +74,7 @@ const Sidebar: FC<ISidebar> = ({
   return (
     <main
       ref={ref}
-      className={`sidebar overflow-scroll inherit left-[80px] bottom-0 top-[30px] w-[280px] pb-8 border-r ${
+      className={`sidebar overflow-scroll fixed left-[80px] bottom-0 top-[30px] w-[280px] pb-8 border-r ${
         isNavHidden ? "hidden" : ""
       }`}
     >
@@ -123,7 +123,7 @@ const Sidebar: FC<ISidebar> = ({
             hideSidebar();
             hideSettingSidebar();
           }}
-          className="mt-[6.25rem] ml-[16.5rem] px-2.5 py-2.5 bg-white rounded-full w-10 shadow-lg relative z-[100]"
+          className="mt-[4.25rem] ml-[16.5rem] px-2.5 py-2.5 bg-white rounded-full w-10 shadow-lg fixed left-[70px] z-[100]"
         >
           <AiOutlineLeft className="text-[18px] mr-3 text-[#8350F0] font-black" />
         </div>

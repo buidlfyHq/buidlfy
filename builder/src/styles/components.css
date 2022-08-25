@@ -163,6 +163,9 @@
 .sidebar {
   background: rgba(63, 60, 197, 0.04);
 }
+.sidebar::-webkit-scrollbar {
+background-color: transparent;
+}
 .search {
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid #dee0e9;

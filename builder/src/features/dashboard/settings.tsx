@@ -543,7 +543,7 @@ const Settings: FC<ISettings> = ({
   return (
     <>
       {settingItemId ? (
-        <div className="rounded-[8px] py-2 cursor-pointer relative">
+        <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
           <div
             className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
             ref={ref}

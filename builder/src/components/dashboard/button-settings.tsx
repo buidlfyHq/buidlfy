@@ -113,7 +113,7 @@ const ButtonSettings: FC<ISettings> = ({
           </li>
         </ul>
         <div className="relative flex flex-col min-w-0 break-words">
-          <div className="flex-auto px-2 py-2">
+          <div className="flex-auto py-2">
             <div className="tab-content tab-space">
               <div className={openTab === 1 ? "block" : "hidden"} id="link-one">
                 <h3 className="ml-[0.5rem]">

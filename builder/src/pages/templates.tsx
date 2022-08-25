@@ -29,7 +29,7 @@ const Template: FC<INew> = ({ setItems }) => {
   return (
     <>
       <form className="flex items-center mb-5">
-        <div className="relative mt-[6rem] mx-3 w-full">
+        <div className="relative mt-[4rem] mx-3 w-full">
           <div className="flex absolute inset-y-0 w-[3rem] right-[5px] items-center pl-3 pointer-events-none">
             <svg
               aria-hidden="true"

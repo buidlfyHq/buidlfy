@@ -70,7 +70,7 @@ const ColorComponent: FC<IColorComponent> = ({
   return (
     <>
       <div className="flex flex-col mt-2 items-start justify-center py-2 text-gray-600">
-        <div className="items-center w-full px-3 py-2 mb-2">
+        <div className="items-center w-full mx-2 py-2 mb-2">
           {/* <VscSymbolColor className="text-[18px] mr-3" /> */}
           <div className="flex">
             {containerCheck(selectedItem) ? (

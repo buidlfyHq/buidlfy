@@ -58,7 +58,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
       onClick={handleClick}
       className={`flex flex-col justify-center items-start py-2 text-gray-600`}
     >
-      <div className="items-center w-full px-3 py-2">
+      <div className="items-center w-full mx-2 py-2">
         {/* <VscSymbolColor className="text-[18px] mr-3" /> */}
         <div className="flex">
           <span className="margin-text grow px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">

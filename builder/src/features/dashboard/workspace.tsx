@@ -264,43 +264,109 @@ const Workspace: FC<IWorkspace> = ({
       className="main-div h-full"
     >
       <main
-        className={`h-full w-full z-10 ${
-          className === "" ? "mr-[250px]" : "mr-[250px]"
-        }`}
+        className=""
+        // ${
+        //   className === "" ? "mr-[250px]" : "mr-[250px]"
+        // }
+
         style={{}}
         onClick={handleCheckIsContainer}
       >
-        <section
-          style={{
-            width: "-webkit-fill-available",
-            backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-          }}
-          className={`mt-[130px] ml-[15px] mb-[20px] min-h-[87vh] shadow-2xl  ${
-            openSetting ? "mr-[45px]" : "mr-[15px]"
-          }`}
-        >
-          <ResponsiveGridLayout
-            layouts={{ lg: items }}
-            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-            cols={{
-              lg: currentSize,
-              md: currentSize,
-              sm: 6,
-              xs: 4,
-              xxs: 2,
+        {isNavHidden && !openSetting ? (
+          <section
+            style={{
+              width: "-webkit-fill-available",
+              backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
             }}
-            rowHeight={50}
-            // width={window.innerWidth - 250}
-            resizeHandles={["se"]}
-            isDraggable={drag}
-            onLayoutChange={onLayoutChange}
-            compactType={null}
-            margin={[0, 0]}
-            className="h-fit overflow-hidden"
+            className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
           >
-            {renderItemFunction}
-          </ResponsiveGridLayout>
-        </section>
+            <ResponsiveGridLayout
+              layouts={{ lg: items }}
+              breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+              cols={{
+                lg: currentSize,
+                md: currentSize,
+                sm: 6,
+                xs: 4,
+                xxs: 2,
+              }}
+              rowHeight={50}
+              // width={window.innerWidth - 250}
+              resizeHandles={["se"]}
+              isDraggable={drag}
+              onLayoutChange={onLayoutChange}
+              compactType={null}
+              margin={[0, 0]}
+              className="h-fit overflow-hidden"
+            >
+              {renderItemFunction}
+            </ResponsiveGridLayout>
+          </section>
+        ) : (
+          <>
+            {openSetting ? (
+              <section
+                style={{
+                  width: "-webkit-fill-available",
+                  backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                }}
+                className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
+              >
+                <ResponsiveGridLayout
+                  layouts={{ lg: items }}
+                  breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+                  cols={{
+                    lg: currentSize,
+                    md: currentSize,
+                    sm: 6,
+                    xs: 4,
+                    xxs: 2,
+                  }}
+                  rowHeight={50}
+                  // width={window.innerWidth - 250}
+                  resizeHandles={["se"]}
+                  isDraggable={drag}
+                  onLayoutChange={onLayoutChange}
+                  compactType={null}
+                  margin={[0, 0]}
+                  className="h-fit overflow-hidden"
+                >
+                  {renderItemFunction}
+                </ResponsiveGridLayout>
+              </section>
+            ) : (
+              <section
+                style={{
+                  width: "-webkit-fill-available",
+                  backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                }}
+                className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
+              >
+                <ResponsiveGridLayout
+                  layouts={{ lg: items }}
+                  breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+                  cols={{
+                    lg: currentSize,
+                    md: currentSize,
+                    sm: 6,
+                    xs: 4,
+                    xxs: 2,
+                  }}
+                  rowHeight={50}
+                  // width={window.innerWidth - 250}
+                  resizeHandles={["se"]}
+                  isDraggable={drag}
+                  onLayoutChange={onLayoutChange}
+                  compactType={null}
+                  margin={[0, 0]}
+                  className="h-fit overflow-hidden"
+                >
+                  {renderItemFunction}
+                </ResponsiveGridLayout>
+              </section>
+            )}
+          </>
+        )}
       </main>
     </div>
   );

@@ -66,11 +66,11 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
             </select>
             <AiOutlineCaretUp
               onClick={incrementCounter}
-              className="text-[10px] absolute right-[1.5rem] text-black mt-[0.3rem]"
+              className="text-[10px] absolute right-[0.5rem] text-black mt-[0.3rem]"
             />
             <AiOutlineCaretDown
               onClick={decrementCounter}
-              className="text-[10px] absolute right-[1.5rem] mt-[0.9rem] text-black"
+              className="text-[10px] absolute right-[0.5rem] mt-[0.9rem] text-black"
             />
           </div>
           {/* <span

@@ -100,7 +100,7 @@ const Dashboard: FC = () => {
   return (
     <main>
       {size.width > 1024 ? (
-        <section className="flex flex-row w-full min-h-screen">
+        <section className="flex columns-3 flex-row w-full min-h-screen">
           {/* Sidebar */}
           <SideNavbar
             className={className}
