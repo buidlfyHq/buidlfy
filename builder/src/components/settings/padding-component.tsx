@@ -49,7 +49,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               name="paddingLeft"
               value={padding.paddingLeft}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[80px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleLeftChange}
             />
             <h6 className="margin-text ml-5 mr-2 margin-subtext">R</h6>
@@ -59,7 +59,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               name="paddingRight"
               value={padding.paddingRight}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[80px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleRightChange}
             />
           </div>
@@ -71,7 +71,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               name="paddingTop"
               value={padding.paddingTop}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[80px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleTopChange}
             />
             <h6 className="ml-5 mr-2 margin-subtext">B</h6>
@@ -81,7 +81,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               name="paddingBottom"
               value={padding.paddingBottom}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[80px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={handleBottomChange}
             />
           </div>
