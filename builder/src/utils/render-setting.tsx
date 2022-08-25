@@ -181,7 +181,7 @@ const SettingComponent: FC<ISettings> = ({
           setLarge={setLarge}
         />
       );
-    case "NFT Container":
+    case "NFT Layout":
       return (
         <ContainerSettings
           items={items}
@@ -232,9 +232,7 @@ const SettingComponent: FC<ISettings> = ({
         />
       );
     case "NFT Card":
-      return (
-        <NftCardSettings selectedItem={selectedItem} setSlug={setSlug} />
-      );
+      return <NftCardSettings selectedItem={selectedItem} setSlug={setSlug} />;
     default:
       return (
         <GeneralSettings

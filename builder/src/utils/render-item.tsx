@@ -231,7 +231,7 @@ const RenderItem: FC<IRenderItem> = ({
           setElementConfig={setElementConfig}
         />
       );
-    case "NFT Container":
+    case "NFT Layout":
       return (
         <Container
           item={item}
@@ -300,10 +300,6 @@ const RenderItem: FC<IRenderItem> = ({
         />
       );
     case "NFT Card":
-      return (
-        <NftCard />
-      );
-    case "NFT Layout":
       return (
         <NftCard />
       );

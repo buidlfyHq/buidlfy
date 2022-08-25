@@ -1,8 +1,3 @@
-// Required NFT components
-// NFT Image
-// NFT Title
-// NFT Price
-
 const defaultMarginStyles = {
   margin: {
     marginTop: 0,
@@ -279,93 +274,6 @@ export const components = [
   },
   // NFT Components
   {
-    name: "NFT Container",
-    nft: true,
-    columns: 3,
-    h: 6,
-    style: {
-      ...defaultDeleteStyles,
-      ...defaultColorStyles,
-      ...defaultBorderStyles,
-    },
-    children: [
-      {
-        name: "Image",
-        h: 5,
-        i: 4,
-        w: 6,
-        x: 0,
-        y: 0,
-        style: {
-          ...defaultDeleteStyles,
-          ...defaultFontStyles,
-          ...defaultMarginStyles,
-        },
-      },
-      {
-        name: "Text",
-        h: 1,
-        i: 5,
-        w: 6,
-        x: 0,
-        y: 5,
-        value: "Card Title",
-        link: "",
-        style: {
-          ...defaultColorStyles,
-          ...defaultFontStyles,
-          fontSize: 25,
-          ...defaultDeleteStyles,
-          ...defaultMarginStyles,
-          ...defaultPaddingStyles,
-        },
-      },
-    ],
-  },
-  {
-    name: "NFT Image",
-    nftItem: true,
-    h: 1.2,
-    minH: 1.2,
-    style: {
-      ...defaultDeleteStyles,
-      ...defaultFontStyles,
-      ...defaultMarginStyles,
-    },
-  },
-  {
-    name: "NFT Title",
-    nftItem: true,
-    h: 1,
-    minH: 1,
-    value: "NFT Title",
-    link: "",
-    style: {
-      ...defaultColorStyles,
-      ...defaultFontStyles,
-      fontSize: 18.2,
-      ...defaultDeleteStyles,
-      ...defaultMarginStyles,
-      ...defaultPaddingStyles,
-    },
-  },
-  {
-    name: "NFT Price",
-    nftItem: true,
-    h: 1,
-    minH: 1,
-    value: "NFT Price",
-    link: "",
-    style: {
-      ...defaultColorStyles,
-      ...defaultFontStyles,
-      fontSize: 30,
-      ...defaultDeleteStyles,
-      ...defaultMarginStyles,
-      ...defaultPaddingStyles,
-    },
-  },
-  {
     name: "NFT Card",
     nft: true,
     h: 8,
@@ -381,6 +289,49 @@ export const components = [
     minH: 1,
     style: {
       ...defaultDeleteStyles,
+      ...defaultColorStyles,
+      ...defaultBorderStyles,
     },
+    children: [
+      {
+        name: "NFT Card",
+        nft: true,
+        h: 8,
+        i: 11,
+        w: 2,
+        minH: 1,
+        x: 0,
+        y: 0,
+        style: {
+          ...defaultDeleteStyles,
+        },
+      },
+      {
+        name: "NFT Card",
+        nft: true,
+        h: 8,
+        i: 12,
+        w: 2,
+        minH: 1,
+        x: 2,
+        y: 0,
+        style: {
+          ...defaultDeleteStyles,
+        },
+      },
+      {
+        name: "NFT Card",
+        nft: true,
+        h: 8,
+        i: 13,
+        w: 2,
+        minH: 1,
+        x: 4,
+        y: 0,
+        style: {
+          ...defaultDeleteStyles,
+        },
+      },      
+    ],
   },
 ];

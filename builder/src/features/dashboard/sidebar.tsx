@@ -56,43 +56,6 @@ const Sidebar: FC<ISidebar> = ({
     }
   };
 
-  const renderNFTComponents = components
-    ?.filter((c) => c?.nftItem)
-    ?.map((c, index) => {
-      const availableHandles: ResizeHandles = ["se"];
-      return (
-        <div
-          key={index}
-          className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
-          onClick={() => {
-            let y = checkContainerY(selectedItem);
-            let newC = {
-              ...c,
-              i: uid(),
-              x: 0,
-              y,
-              w: 6,
-              minW: 1,
-              resizeHandles: availableHandles,
-            };
-            let updatedItem = {
-              ...selectedItem,
-              h: y + c.h,
-              children: [...selectedItem.children, newC],
-            };
-            const elementsIndex = items.findIndex(
-              (item) => item.i === selectedItem.i
-            );
-            let newArray = [...items];
-            newArray[elementsIndex] = updatedItem;
-            setItems(newArray);
-          }}
-        >
-          {c.name}
-        </div>
-      );
-    });
-
   const renderContainerComponents = components
     .filter((c) => !containerCheck(c))
     ?.map((c, index) => {
@@ -130,69 +93,51 @@ const Sidebar: FC<ISidebar> = ({
       );
     });
 
-  const renderDefaultComponents = components
-    ?.filter((c) => !c?.nftItem)
-    .map((c, index) => {
-      const availableHandles: ResizeHandles = ["se"];
-      const containerHandles: ResizeHandles = ["e"];
-      return (
-        <div
-          key={index}
-          className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
-          onClick={() => {
-            let y = checkY(items);
-            let newC = {
-              ...c,
+  const renderDefaultComponents = components.map((c, index) => {
+    const availableHandles: ResizeHandles = ["se"];
+    const containerHandles: ResizeHandles = ["e"];
+    return (
+      <div
+        key={index}
+        className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
+        onClick={() => {
+          let y = checkY(items);
+          let newC = {
+            ...c,
+            i: uid(),
+            x: 0,
+            y: y,
+            w: 6,
+            minW: 1,
+            resizeHandles: containerCheck(c)
+              ? containerHandles
+              : availableHandles,
+          };
+          if (c.name === "Vertical Container" || c.name === "NFT Card") {
+            newC.w = 2;
+          }
+          if (
+            c.name === "Horizontal Container" ||
+            c.name === "Vertical Container" ||
+            c.name === "NFT Layout"
+          ) {
+            let newChildren = c.children.map((child) => ({
+              ...child,
               i: uid(),
-              x: 0,
-              y: y,
-              w: 6,
-              minW: 1,
-              resizeHandles: containerCheck(c)
-                ? containerHandles
-                : availableHandles,
-            };
-            if (c.name === "Vertical Container" || c.name === "NFT Container") {
-              newC.w = c.columns ? 6 / c.columns : 2;
-            }
-            if (
-              c.name === "Horizontal Container" ||
-              c.name === "Vertical Container" ||
-              c.name === "NFT Container"
-            ) {
-              let newChildren = c.children.map((child) => ({
-                ...child,
-                i: uid(),
-              }));
-              newC.children = newChildren;
-            }
-            if (c.name === "NFT Card") {
-              newC.w = 2;
-            }
-            if (c.name === "NFT Layout") {
-              newC.w = 2;
-              let newC1 = { ...newC };
-              let newC2 = { ...newC };
-              newC1.i = uid();
-              newC1.x = 2;
-              newC2.i = uid();
-              newC2.x = 4;
-              setItems([...items, newC, newC1, newC2]);
-            } else {
-              setItems([...items, newC]);
-            }
-          }}
-        >
-          {c.name}
-        </div>
-      );
-    });
+            }));
+            newC.children = newChildren;
+          }
+          setItems([...items, newC]);
+        }}
+      >
+        {c.name}
+      </div>
+    );
+  });
 
   const renderComponents = (type) => {
     if (type === "container") {
       return <>{renderContainerComponents}</>;
-    } else if (type === "nft") {
-      return <>{renderNFTComponents}</>;
     } else {
       return <>{renderDefaultComponents}</>;
     }

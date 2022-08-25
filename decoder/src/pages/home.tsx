@@ -40,23 +40,33 @@ const Home: FC = () => {
   useEffect(() => {
     let nftY = null;
     let nftCols = 0;
-    testConfig.map((item) => {
-      if (item.nft && nftY === null) {
-        nftY = item.y;
-        setNftCard(item);
-      }
-      if (item.nft && item.y === nftY) {
-        nftCols++;
-      }
-      if (item.nft && item.slug) {
-        if (item.slug === "wallet") {
+    testConfig
+      .filter((i) => i.nft && i.children)
+      .map((i) => {
+        i.children.map((item) => {
+          if (item.nft && nftY === null) {
+            nftY = item.y;
+            setNftCard(item);
+          }
+          if (item.nft && item.y === nftY) {
+            nftCols++;
+          }
+        });
+        setTestConfig(testConfig.filter((i) => !i.nft));
+
+        const hasSlug = i.children.filter(
+          (item: { slug: string }) => item.slug && item.slug !== "wallet"
+        );
+        const hasWallet = i.children.filter(
+          (item: { slug: string }) => item.slug && item.slug === "wallet"
+        );
+
+        if (hasSlug) {
+          setSlug(hasSlug[0]?.slug);
+        } else if (hasWallet) {
           if (!account) connectWalletButton();
-        } else {
-          setSlug(item.slug);
         }
-      }
-      setTestConfig(testConfig.filter((i) => !i.nft));
-    });
+      });
   }, []);
 
   useEffect(() => {
@@ -112,10 +122,7 @@ const Home: FC = () => {
         image: asset.image_url,
         collection: asset.asset_contract.name,
         title: asset.name,
-        price: asset.traits.filter(
-          (trait: { trait_type: string }) =>
-            trait.trait_type === "price" || trait.trait_type === "Price"
-        )[0].value,
+        price: asset.last_sale?.payment_token.eth_price,
         highestBid: asset.top_bid,
       };
     });

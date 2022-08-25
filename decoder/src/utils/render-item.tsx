@@ -267,6 +267,16 @@ const RenderItem: FC<IRenderItem> = ({
           highestBid={item.highestBid}
         />
       );
+    case "NFT Layout":
+      return (
+        <NftCard
+          image={item.image}
+          collection={item.collection}
+          title={item.title}
+          price={item.price}
+          highestBid={item.highestBid}
+        />
+      );
     default:
       return <></>;
   }

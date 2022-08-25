@@ -39,7 +39,7 @@ const NftCard = ({ image, collection, title, price, highestBid }) => {
         >
           <div>
             <div className="text-white/80 text-sm">Price</div>
-            <div className="text-white font-bold">{price} ETH</div>
+            <div className="text-white font-bold">{price ? `${Math.abs(price)} ETH` : 'NA'}</div>
           </div>
           <div>
             <div className="text-white/80 text-sm">Highest Bid</div>
