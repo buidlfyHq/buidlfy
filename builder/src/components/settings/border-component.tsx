@@ -60,11 +60,11 @@ const BorderComponent: FC<IBorderComponent> = ({
             </select>
             <AiOutlineCaretUp
               onClick={incrementWidthCounter}
-              className="text-[10px] absolute right-[1.5rem] text-black mt-[0.3rem]"
+              className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
             />
             <AiOutlineCaretDown
               onClick={decrementWidthCounter}
-              className="text-[10px] absolute right-[1.5rem] mt-[0.9rem] text-black"
+              className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
             />
           </div>
           {/* <span

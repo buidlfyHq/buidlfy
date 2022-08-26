@@ -41,7 +41,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
       <div className="flex text-gray-600 w-full mt-4 mx-2">
         <span className="text-left text-xl text-gray-500 font-regular font-normal not-italic">
           {/* Border Radius */}
-          <div className="flex">
+          <div className="flex mt-3">
             {/* <span
               onClick={decrementCounter}
               className="flex items-center justify-center shadow text-[18px] mr-3 w-8 h-10 font-regular text-black"
@@ -61,11 +61,11 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
               </select>
               <AiOutlineCaretUp
                 onClick={incrementCounter}
-                className="text-[10px] absolute right-[1.5rem] text-black mt-[0.3rem]"
+                className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
               />
               <AiOutlineCaretDown
                 onClick={decrementCounter}
-                className="text-[10px] absolute right-[1.5rem] mt-[0.9rem] text-black"
+                className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
               />
             </div>
             {/* <span

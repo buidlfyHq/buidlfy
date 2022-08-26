@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { BsBrightnessLow } from "react-icons/bs";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -43,9 +44,12 @@ const ShadowComponent: FC<IShadowComponent> = ({
   };
 
   return (
-    <span className="margin-text text-left px-3 mt-6 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
-      Shadow
-      <div className="flex mt-3">
+    <div className="margin-text text-left px-3 mt-6 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
+      <span className="flex px-1">
+        <span> Shadow </span>{" "}
+        <BsBrightnessLow className="text-[18px] ml-2 mt-[-2px]" />
+      </span>
+      <div className="flex mt-3 px-1">
         <span
           onClick={handleSmallChange}
           className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
@@ -65,7 +69,7 @@ const ShadowComponent: FC<IShadowComponent> = ({
           L
         </span>
       </div>
-    </span>
+    </div>
   );
 };
 export default ShadowComponent;

@@ -196,7 +196,6 @@ const Workspace: FC<IWorkspace> = ({
 
   // FIX: find a suitable type for this event
   const handleCheckIsContainer = (e) => {
-    hideSidebar();
     if (
       e.target.id === "Container" ||
       e.target.parentNode.id === "Container" ||
@@ -211,8 +210,10 @@ const Workspace: FC<IWorkspace> = ({
       e.target.parentNode.parentNode.id === "Vertical Container" ||
       e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
     ) {
+      setOpenSetting(false);
     } else {
       setAddContainer(false);
+      hideSidebar();
     }
     if (e.target.id === "") {
       setOpenSetting(false);

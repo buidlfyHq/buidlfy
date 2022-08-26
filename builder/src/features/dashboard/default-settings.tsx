@@ -55,7 +55,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
           <div className="px-1 margin-text text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
             Upload Site Logo
           </div>
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <div className="mb-3 w-96">
               <input
                 onChange={onChangeLogo}
@@ -64,17 +64,35 @@ const DefaultSettings: FC<IDefaultSettings> = ({
                 id="formFile"
               />
             </div>
-          </div>
+          </div> */}
         </aside>
-
+        <div className="flex justify-center">
+          <div className="mb-3 mt-5 upload-img">
+            <label htmlFor="inputTag" className="image-label">
+              Drag and drop a file, or{" "}
+              <span className="purple-label">browse</span>
+              <input
+                onChange={onChangeLogo}
+                className="upload-input"
+                // className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
+                type="file"
+                id="inputTag"
+              />
+            </label>
+          </div>
+          <br />
+        </div>
+        <div className="flex justify-center">
+          <button className="upload-btn mx-2 ">Upload</button>
+        </div>
         <div
           id="logo"
-          className="mx-3 mb-2 h-48 w-48 flex items-center justify-center"
+          className="mx-3 mb-2 h-48 w-48 text-center mx-4 flex items-center justify-center"
           style={{
             backgroundImage: `url(${head.logo})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "left",
-            backgroundSize: "cover",
+            backgroundSize: "contain",
           }}
         />
       </div>

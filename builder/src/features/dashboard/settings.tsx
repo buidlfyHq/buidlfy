@@ -42,6 +42,7 @@ const Settings: FC<ISettings> = ({
   elementConfig,
   openTab,
   setOpenTab,
+  margin,
 }) => {
   const ref = useRef(null);
   const [showComponent, setShowComponent] = useState<{

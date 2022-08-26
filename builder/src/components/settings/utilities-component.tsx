@@ -16,14 +16,14 @@ const UtilitiesComponent: FC<IUtilitiesComponent> = ({
   };
 
   return (
-    <div className="items-center w-full px-3 py-2 text-gray-600 rounded">
+    <div className="items-center w-full px-3 py-2 mt-4 text-gray-600 rounded">
       <div className="margin-text px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
         Utilities
       </div>
       <div className="flex">
         <span
           onClick={handleDelete}
-          className="shadow-div flex items-center justify-center underline shadow text-[18px] py-3 px-3 my-2 font-regular text-black"
+          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-2 mt-2 font-regular"
         >
           <AiOutlineDelete className="text-[16px]" />
         </span>

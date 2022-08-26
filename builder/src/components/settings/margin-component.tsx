@@ -36,34 +36,58 @@ const MarginComponent: FC<IMarginComponent> = ({
   const handleBottomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMarginBottom(+e.target.value);
   };
-  const incrementCounter = () => {
-    if (margin.marginLeft) {
-      setMarginLeft(margin.marginLeft + 1);
-    } else if (margin.marginRight) {
-      setMarginRight(margin.marginRight + 1);
-    } else if (margin.marginTop) {
-      setMarginTop(margin.marginTop + 1);
-    } else {
-      setMarginBottom(margin.marginBottom + 1);
-    }
+  // const incrementCounter = () => {
+  //   if (margin.marginLeft) {
+  //     setMarginLeft(margin.marginLeft + 1);
+  //   } else if (margin.marginRight) {
+  //     setMarginRight(margin.marginRight + 1);
+  //   } else if (margin.marginTop) {
+  //     setMarginTop(margin.marginTop + 1);
+  //   } else {
+  //     setMarginBottom(margin.marginBottom + 1);
+  //   }
+  // };
+  const incrementLeftCounter = () => {
+    setMarginLeft(margin.marginLeft + 1);
   };
-  const decrementCounter = () => {
-    if (margin.marginLeft) {
-      setMarginLeft(margin.marginLeft - 1);
-    } else if (margin.marginRight) {
-      setMarginRight(margin.marginRight - 1);
-    } else if (margin.marginTop) {
-      setMarginTop(margin.marginTop - 1);
-    } else {
-      setMarginBottom(margin.marginBottom - 1);
-    }
+  const incrementRightCounter = () => {
+    setMarginRight(margin.marginRight + 1);
   };
+  const incrementTopCounter = () => {
+    setMarginTop(margin.marginTop + 1);
+  };
+  const incrementBottomCounter = () => {
+    setMarginBottom(margin.marginBottom + 1);
+  };
+  const decrementLeftCounter = () => {
+    setMarginLeft(margin.marginLeft - 1);
+  };
+  const decrementRightCounter = () => {
+    setMarginRight(margin.marginRight - 1);
+  };
+  const decrementTopCounter = () => {
+    setMarginTop(margin.marginTop - 1);
+  };
+  const decrementBottomCounter = () => {
+    setMarginBottom(margin.marginBottom - 1);
+  };
+  // const decrementCounter = () => {
+  //   if (margin.marginLeft) {
+  //     setMarginLeft(margin.marginLeft - 1);
+  //   } else if (margin.marginRight) {
+  //     setMarginRight(margin.marginRight - 1);
+  //   } else if (margin.marginTop) {
+  //     setMarginTop(margin.marginTop - 1);
+  //   } else {
+  //     setMarginBottom(margin.marginBottom - 1);
+  //   }
+  // };
   console.log(margin.marginLeft, "marginleft");
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">
         <span className="px-1 text-left text-xl text-gray-500 font-regular font-normal not-italic">
-          <span className="margin-text"> Margin</span>
+          <span className="margin-text">Margin</span>
           <div className="flex mt-3">
             <h6 className="mr-2 margin-subtext">L</h6>
             <input
@@ -74,11 +98,11 @@ const MarginComponent: FC<IMarginComponent> = ({
               onChange={(e) => handleLeftChange(e)}
             />
             <AiOutlineCaretUp
-              onClick={incrementCounter}
+              onClick={incrementLeftCounter}
               className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
-              onClick={decrementCounter}
+              onClick={decrementLeftCounter}
               className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
             />
             <h6 className="ml-5 mr-2 margin-subtext">R</h6>
@@ -90,12 +114,12 @@ const MarginComponent: FC<IMarginComponent> = ({
               onChange={handleRightChange}
             />
             <AiOutlineCaretUp
-              onClick={incrementCounter}
-              className="text-[10px] z-[100] absolute right-[0.8rem] text-black mt-[0.4rem]"
+              onClick={incrementRightCounter}
+              className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
-              onClick={decrementCounter}
-              className="text-[10px] z-[100] absolute right-[0.8rem] mt-[1rem] text-black"
+              onClick={decrementRightCounter}
+              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
             />
           </div>
           <div className="flex mt-3">
@@ -108,11 +132,11 @@ const MarginComponent: FC<IMarginComponent> = ({
               onChange={handleTopChange}
             />
             <AiOutlineCaretUp
-              onClick={incrementCounter}
+              onClick={incrementTopCounter}
               className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
-              onClick={decrementCounter}
+              onClick={decrementTopCounter}
               className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
             />
             <h6 className="ml-5 mr-2 margin-subtext">B</h6>
@@ -124,12 +148,12 @@ const MarginComponent: FC<IMarginComponent> = ({
               onChange={handleBottomChange}
             />
             <AiOutlineCaretUp
-              onClick={incrementCounter}
-              className="text-[10px] z-[100] absolute right-[0.8rem] text-black mt-[0.4rem]"
+              onClick={incrementBottomCounter}
+              className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
-              onClick={decrementCounter}
-              className="text-[10px] z-[100] absolute right-[0.8rem] mt-[1rem] text-black"
+              onClick={decrementBottomCounter}
+              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
             />
           </div>
         </span>

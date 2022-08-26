@@ -62,7 +62,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
 
   return (
     <>
-      <div className="flex justify-center" />
+      <div className="flex justify-center mt-[3rem]" />
       <div className="flex items-center px-3 mt-1 text-black">
         <div
           onClick={() => setIsOpen(true)}

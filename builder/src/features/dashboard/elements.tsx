@@ -218,6 +218,7 @@ const Elements: FC<IElements> = ({
   return (
     <>
       {/* Components */}
+
       <form className="flex items-center mb-5">
         <div className="relative mt-[4rem] mx-3 w-full">
           <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -249,70 +250,156 @@ const Elements: FC<IElements> = ({
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
       </div>
-      <div className="mt-6 px-4">
-        <span className="element-text">Button</span>
-        <div className="flex">
-          <button
-            onClick={() => onClickFunction("Button")}
-            className="element-btn mt-3 px-4 py-2 rounded-xl"
-          >
-            Button
-          </button>
-        </div>
-      </div>
-      <div className="mt-6 px-4">
-        <span className="element-text">Container</span>
-        <div className="flex">
-          <div
-            className="element-container"
-            onClick={() => onClickFunction("Container")}
-          ></div>
-        </div>
-      </div>
-      <div className="mt-6 px-4">
-        <span className="element-text">Text</span>
-        <div>
-          <div
-            className="heading-container mt-3 py-2 pl-3"
-            onClick={() => onClickFunction("Heading 1")}
-          >
-            <h1 className="text-2xl">Heading 1</h1>
+      {!addContainer ? (
+        <>
+          {" "}
+          <div className="mt-6 px-4">
+            <span className="element-text">Button</span>
+            <div className="flex">
+              <button
+                onClick={() => onClickFunction("Button")}
+                className="element-btn mt-3 px-4 py-2 rounded-xl"
+              >
+                Button
+              </button>
+            </div>
           </div>
-          <div
-            className="heading-container mt-3 py-2.5 pl-3"
-            onClick={() => onClickFunction("Heading 2")}
-          >
-            <h2 className="text-xl">Heading 2</h2>
+          <div className="mt-6 px-4">
+            <span className="element-text">Container</span>
+            <div className="flex">
+              <div
+                className="element-container"
+                onClick={() => onClickFunction("Container")}
+              ></div>
+            </div>
           </div>
-          <div
-            className="heading-container mt-3 py-2 pl-3"
-            onClick={() => onClickFunction("Heading 3")}
-          >
-            <h3 className="text-lg">Heading 3</h3>
+          <div className="mt-6 px-4">
+            <span className="element-text">Text</span>
+            <div>
+              <div
+                className="heading-container mt-3 py-2 pl-3"
+                onClick={() => onClickFunction("Heading 1")}
+              >
+                <h1 className="text-2xl">Heading 1</h1>
+              </div>
+              <div
+                className="heading-container mt-3 py-2.5 pl-3"
+                onClick={() => onClickFunction("Heading 2")}
+              >
+                <h2 className="text-xl">Heading 2</h2>
+              </div>
+              <div
+                className="heading-container mt-3 py-2 pl-3"
+                onClick={() => onClickFunction("Heading 3")}
+              >
+                <h3 className="text-lg">Heading 3</h3>
+              </div>
+              <div
+                className="paragraph-container mt-3 py-3 pl-3"
+                onClick={() => onClickFunction("Text")}
+              >
+                <span className="text-sm">Paragraph</span>
+              </div>
+            </div>
           </div>
-          <div
-            className="paragraph-container mt-3 py-3 pl-3"
-            onClick={() => onClickFunction("Text")}
-          >
-            <span className="text-sm">Paragraph</span>
+          <div className="mt-6 px-4">
+            <span className="element-text">Input</span>
+            <div>
+              <div
+                className="heading-container mt-3 py-2.5 pl-3"
+                onClick={() => onClickFunction("Input")}
+              >
+                <h1 className="text-base">Input</h1>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="mt-6 px-4">
-        <span className="element-text">Input</span>
-        <div>
-          <div
-            className="heading-container mt-3 py-2.5 pl-3"
-            onClick={() => onClickFunction("Input")}
-          >
-            <h1 className="text-base">Input</h1>
+          <div onClick={() => onClickFunction("Image")} className="mt-6 px-4">
+            <span className="element-text">Image Upload</span>
+            <div className="image-container mt-2 pt-2">
+              <div className="upload-img mx-6">
+                <span className="image-label">
+                  Drag and drop a file, or{" "}
+                  <span className="purple-label">browse</span>
+                </span>
+              </div>
+              <div className="flex justify-center">
+                <button className="upload-btn mx-2 mt-4">Upload</button>
+              </div>
+            </div>
+            {/* <img src={image} /> */}
           </div>
-        </div>
-      </div>
-      <div onClick={() => onClickFunction("Image")} className="mt-6 px-4">
-        <span className="element-text">Image Upload</span>
-        <img src={image} />
-      </div>
+        </>
+      ) : (
+        <>
+          {" "}
+          <div className="mt-6 px-4">
+            <span className="element-text">Button</span>
+            <div className="flex">
+              <button
+                onClick={() => onClickFunction("Button")}
+                className="element-btn mt-3 px-4 py-2 rounded-xl"
+              >
+                Button
+              </button>
+            </div>
+          </div>
+          <div className="mt-6 px-4">
+            <span className="element-text">Text</span>
+            <div>
+              <div
+                className="heading-container mt-3 py-2 pl-3"
+                onClick={() => onClickFunction("Heading 1")}
+              >
+                <h1 className="text-2xl">Heading 1</h1>
+              </div>
+              <div
+                className="heading-container mt-3 py-2.5 pl-3"
+                onClick={() => onClickFunction("Heading 2")}
+              >
+                <h2 className="text-xl">Heading 2</h2>
+              </div>
+              <div
+                className="heading-container mt-3 py-2 pl-3"
+                onClick={() => onClickFunction("Heading 3")}
+              >
+                <h3 className="text-lg">Heading 3</h3>
+              </div>
+              <div
+                className="paragraph-container mt-3 py-3 pl-3"
+                onClick={() => onClickFunction("Text")}
+              >
+                <span className="text-sm">Paragraph</span>
+              </div>
+            </div>
+          </div>
+          <div className="mt-6 px-4">
+            <span className="element-text">Input</span>
+            <div>
+              <div
+                className="heading-container mt-3 py-2.5 pl-3"
+                onClick={() => onClickFunction("Input")}
+              >
+                <h1 className="text-base">Input</h1>
+              </div>
+            </div>
+          </div>
+          <div onClick={() => onClickFunction("Image")} className="mt-6 px-4">
+            <span className="element-text">Image Upload</span>
+            <div className="image-container mt-2 pt-2">
+              <div className="upload-img mx-6">
+                <span className="image-label">
+                  Drag and drop a file, or{" "}
+                  <span className="purple-label">browse</span>
+                </span>
+              </div>
+              <div className="flex justify-center">
+                <button className="upload-btn mx-2 mt-4">Upload</button>
+              </div>
+            </div>
+            {/* <img src={image} /> */}
+          </div>
+        </>
+      )}
 
       {/* <div className="px-6 py-3 mt-4">
         {addContainer ? (

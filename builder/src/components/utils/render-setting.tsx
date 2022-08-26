@@ -51,6 +51,8 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingRight,
   setPaddingBottom,
   setPaddingTop,
+  margin,
+  padding,
 }) => {
   const handleTextChange = (
     e:
@@ -122,6 +124,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingRight={setPaddingRight}
           setPaddingTop={setPaddingTop}
           setPaddingBottom={setPaddingBottom}
+          margin={{ ...selectedItem?.style?.margin }}
+          padding={{ ...selectedItem?.style?.padding }}
         />
       );
 
@@ -145,6 +149,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingRight={setPaddingRight}
           setPaddingTop={setPaddingTop}
           setPaddingBottom={setPaddingBottom}
+          margin={{ ...selectedItem?.style?.margin }}
+          padding={{ ...selectedItem?.style?.padding }}
         />
       );
 
@@ -263,6 +269,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingRight={setPaddingRight}
           setPaddingTop={setPaddingTop}
           setPaddingBottom={setPaddingBottom}
+          margin={{ ...selectedItem?.style?.margin }}
+          padding={{ ...selectedItem?.style?.padding }}
         />
       );
 
@@ -320,6 +328,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingRight={setPaddingRight}
           setPaddingTop={setPaddingTop}
           setPaddingBottom={setPaddingBottom}
+          margin={{ ...selectedItem?.style?.margin }}
+          padding={{ ...selectedItem?.style?.padding }}
         />
       );
   }

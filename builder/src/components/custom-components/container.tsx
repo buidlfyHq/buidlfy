@@ -6,6 +6,8 @@ import defaultItem from "config/default-container";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
+import { IoMdAddCircleOutline } from "react-icons/io";
+import { AiTwotoneSetting } from "react-icons/ai";
 
 interface IContainer {
   item: IItems;
@@ -169,76 +171,88 @@ const Container: FC<IContainer> = ({
     ?.getBoundingClientRect().width;
 
   return (
-    <section
-      id={item.i}
-      className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
-    >
-      <GridLayout
-        layout={children}
-        cols={6}
-        rowHeight={50}
-        width={containerW || 200}
-        isBounded={true}
-        onLayoutChange={onLayoutChange}
-        margin={[0, 0]}
-        compactType={null}
-        className="h-full"
-        style={{
-          backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-          borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-          borderRadius: `${borderRadius}px`,
-          borderWidth: `${borderWidth}px`,
-          backgroundImage: `url(${imgData})`,
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          boxShadow: shadow,
-        }}
+    <>
+      <section
+        id={item.i}
+        className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
       >
-        {!children?.length ? (
-          <div
-            className="w-full h-full"
-            key={"DefaultElement"}
-            data-grid={{
-              x: 0,
-              y: 0,
-              w: 6,
-              h: 2,
-              minH: 1,
-              minW: 1,
-              resizeHandles: [],
-            }}
-            onMouseOver={() => setDrag(false)}
-            onMouseOut={() => setDrag(true)}
-          >
-            <RenderItem item={defaultItem} setDrag={setDrag} />
-          </div>
-        ) : (
-          children
-            ?.filter((c) => c.style?.deleteComponent === 0)
-            .map((item: IItems) => {
-              const { x, y, w, h, minW, i, resizeHandles } = item;
-              return (
-                <div
-                  className={`w-full h-full hover:border hover:border-2 ${
-                    selector
-                      ? "hover:border-orange-300"
-                      : "hover:border-slate-300 hover:border-dashed"
-                  }`}
-                  key={i}
-                  data-grid={{ x, y, w, h, minW, resizeHandles }}
-                  onMouseOver={() => setDrag(false)}
-                  onMouseOut={() => setDrag(true)}
-                  onClick={() => onComponentClick(item.name, i)}
-                >
-                  <RenderItem item={item} setDrag={setDrag} />
-                </div>
-              );
-            })
-        )}
-      </GridLayout>
-      <span id="drag" onClick={() => onComponentClick(item.name, item.i)} />
-    </section>
+        <GridLayout
+          layout={children}
+          cols={6}
+          rowHeight={50}
+          width={containerW || 200}
+          isBounded={true}
+          onLayoutChange={onLayoutChange}
+          margin={[0, 0]}
+          compactType={null}
+          className="h-full"
+          style={{
+            backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+            borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+            borderRadius: `${borderRadius}px`,
+            borderWidth: `${borderWidth}px`,
+            backgroundImage: `url(${imgData})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            boxShadow: shadow,
+          }}
+        >
+          {!children?.length ? (
+            <div
+              className="w-full h-full py-10"
+              key={"DefaultElement"}
+              data-grid={{
+                x: 0,
+                y: 0,
+                w: 6,
+                h: 2,
+                minH: 1,
+                minW: 1,
+                resizeHandles: [],
+              }}
+              onMouseOver={() => setDrag(false)}
+              onMouseOut={() => setDrag(true)}
+            >
+              <RenderItem item={defaultItem} setDrag={setDrag} />
+            </div>
+          ) : (
+            children
+              ?.filter((c) => c.style?.deleteComponent === 0)
+              .map((item: IItems) => {
+                const { x, y, w, h, minW, i, resizeHandles } = item;
+                return (
+                  <div
+                    className={`w-full h-full hover:border hover:border-2 ${
+                      selector
+                        ? "hover:border-orange-300"
+                        : "hover:border-slate-300 hover:border-dashed"
+                    }`}
+                    key={i}
+                    data-grid={{ x, y, w, h, minW, resizeHandles }}
+                    onMouseOver={() => setDrag(false)}
+                    onMouseOut={() => setDrag(true)}
+                    onClick={() => onComponentClick(item.name, i)}
+                  >
+                    <RenderItem item={item} setDrag={setDrag} />
+                  </div>
+                );
+              })
+          )}
+        </GridLayout>
+        <div className="flex">
+          <span id="drag" onClick={() => onComponentClick(item.name, item.i)}>
+            {/* <IoMdAddCircleOutline className="text-[16px]" /> */}
+          </span>
+          {/* <span id="drag" onClick={() => onComponentClick(item.name, item.i)}>
+            <AiTwotoneSetting className="text-[16px] " />
+          </span> */}
+        </div>
+        {/* <span id="drag" onClick={() => onComponentClick(item.name, item.i)}>
+          <IoMdAddCircleOutline className="text-[16px]" />
+        </span> */}
+      </section>
+    </>
   );
 };
 

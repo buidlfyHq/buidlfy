@@ -58,7 +58,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
             <select
               value={fontSize}
               onChange={(e) => handleSizeChange(e)}
-              className="form-select font-div appearance-none block py-1.5 pl-[10.5rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:outline-none focus:shadow-none"
+              className="form-select font-div appearance-none block py-1.5 pl-[10.2rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:outline-none focus:shadow-none"
               aria-label="Default select example"
             >
               <option selected>{fontSize}</option>
@@ -66,11 +66,11 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
             </select>
             <AiOutlineCaretUp
               onClick={incrementCounter}
-              className="text-[10px] absolute right-[0.5rem] text-black mt-[0.3rem]"
+              className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
             />
             <AiOutlineCaretDown
               onClick={decrementCounter}
-              className="text-[10px] absolute right-[0.5rem] mt-[0.9rem] text-black"
+              className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
             />
           </div>
           {/* <span
