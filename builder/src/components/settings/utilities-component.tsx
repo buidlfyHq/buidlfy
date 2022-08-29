@@ -4,7 +4,6 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IUtilitiesComponent {
-  deleteComponent: number;
   setDeleteComponent: (deleteComponent: number) => void;
 }
 

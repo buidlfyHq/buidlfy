@@ -45,8 +45,8 @@ const GeneralSettings: FC<ISettings> = ({
     </h3>
     <div className="flex items-center px-3 mt-1 text-black">
       <RiText className="text-[18px] mr-3" />
-      <textarea 
-        value={textVal} 
+      <textarea
+        value={textVal}
         onChange={(e) => handleTextChange(e)}
         className="changeText"
       />
@@ -89,17 +89,20 @@ const GeneralSettings: FC<ISettings> = ({
       setRight={setRight}
       setCenter={setCenter}
     />
-    <FontSizeComponent fontSize={selectedItem?.style?.fontSize} setFontSize={setFontSize} />
+    <FontSizeComponent
+      fontSize={selectedItem?.style?.fontSize}
+      setFontSize={setFontSize}
+    />
     <ColorComponent
       color={selectedItem?.style?.color}
       setColor={setColor}
       selectedItem={selectedItem}
     />
-    <BgColorComponent color={selectedItem?.style?.backgroundColor} setBgColor={setBgColor} />
-    <UtilitiesComponent
-      deleteComponent={selectedItem?.style?.deleteComponent}
-      setDeleteComponent={setDeleteComponent}
+    <BgColorComponent
+      color={selectedItem?.style?.backgroundColor}
+      setBgColor={setBgColor}
     />
+    <UtilitiesComponent setDeleteComponent={setDeleteComponent} />
   </>
 );
 

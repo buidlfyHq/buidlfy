@@ -27,6 +27,4 @@ export default interface IItems {
   connectWallet?: string;
   placeholder?: string;
   nft?: boolean;
-  nftItem?: boolean;
-  columns?: number;
 }

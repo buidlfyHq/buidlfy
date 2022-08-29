@@ -43,7 +43,7 @@ const NftCard = ({ image, collection, title, price, highestBid }) => {
           </div>
           <div>
             <div className="text-white/80 text-sm">Highest Bid</div>
-            <div className="text-white font-bold">{highestBid ? `${highestBid} ETH` : 'NA'}</div>
+            <div className="text-white font-bold">{highestBid ? `${highestBid} ETH` : 'No bids yet'}</div>
           </div>
         </div>
       </div>

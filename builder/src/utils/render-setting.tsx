@@ -6,6 +6,7 @@ import InputSettings from "components/dashboard/input-settings";
 import NftCardSettings from "components/dashboard/nft-card-settings";
 import GeneralSettings from "components/dashboard/general-settings";
 import ISettings from "interfaces/settings";
+import UtilitiesComponent from "components/settings/utilities-component";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -51,8 +52,7 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingRight,
   setPaddingBottom,
   setPaddingLeft,
-  columns,
-  setColumnNumber,
+  setWallet,
   setSlug,
 }) => {
   const handleTextChange = (
@@ -181,38 +181,6 @@ const SettingComponent: FC<ISettings> = ({
           setLarge={setLarge}
         />
       );
-    case "NFT Layout":
-      return (
-        <ContainerSettings
-          items={items}
-          setItems={setItems}
-          selectedItem={selectedItem}
-          color={selectedItem?.style?.color}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          backgroundColor={selectedItem?.style?.backgroundColor}
-          setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          borderRadius={selectedItem?.style?.borderRadius}
-          setBorderRadius={setBorderRadius}
-          borderWidth={selectedItem?.style?.borderWidth}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-          shadow={selectedItem?.style?.shadow}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
-          setMarginTop={setMarginTop}
-          setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
-          columns={selectedItem.columns}
-          setColumnNumber={setColumnNumber}
-        />
-      );
     case "Input":
       return (
         <InputSettings
@@ -232,7 +200,25 @@ const SettingComponent: FC<ISettings> = ({
         />
       );
     case "NFT Card":
-      return <NftCardSettings selectedItem={selectedItem} setSlug={setSlug} />;
+      return (
+        <NftCardSettings
+          selectedItem={selectedItem}
+          setWallet={setWallet}
+          setSlug={setSlug}
+        />
+      );
+    case "NFT Layout":
+      return (
+        <>
+          <h3 className="mb-3 ml-8">
+            Component -
+            {selectedItem ? (
+              <span className="font-bold">{selectedItem.name}</span>
+            ) : null}
+          </h3>
+          <UtilitiesComponent setDeleteComponent={setDeleteComponent} />
+        </>
+      );
     default:
       return (
         <GeneralSettings

@@ -46,7 +46,7 @@ const Settings: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const ref = useRef(null);
-  
+
   const [showComponent, setShowComponent] =
     useState<{
       id: string;
@@ -397,24 +397,6 @@ const Settings: FC<ISettings> = ({
     singleWorkFunction(functionEnum.BORDER_WIDTH, borderWidth);
   };
 
-  const setColumnNumber = (columns: number) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          w: 6 / columns,
-          columns,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-    console.log(items);
-  };
-
   const spacingWorkFunction = (
     styleProp: functionEnum,
     stylePropChild: functionEnum,
@@ -565,6 +547,38 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
 
+  const setWallet = (wallet: string) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return { ...item, wallet };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          wallet,
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c) => c.i === settingItemId
+        );
+        let newArray = [...item.children];
+        newArray[childIndex] = child;
+
+        return {
+          ...item,
+          children: newArray,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
   const setSlug = (slug: string) => {
     if (!settingItemId) {
       return;
@@ -667,8 +681,7 @@ const Settings: FC<ISettings> = ({
               setPaddingRight={setPaddingRight}
               setPaddingBottom={setPaddingBottom}
               setPaddingLeft={setPaddingLeft}
-              // columns={columns}
-              setColumnNumber={setColumnNumber}
+              setWallet={setWallet}
               setSlug={setSlug}
             />
           </div>

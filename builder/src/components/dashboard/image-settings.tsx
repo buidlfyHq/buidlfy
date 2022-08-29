@@ -43,10 +43,7 @@ const ImageSettings: FC<ISettings> = ({
       setMarginBottom={setMarginBottom}
       setMarginLeft={setMarginLeft}
     />
-    <UtilitiesComponent
-      deleteComponent={selectedItem?.style?.deleteComponent}
-      setDeleteComponent={setDeleteComponent}
-    />
+    <UtilitiesComponent setDeleteComponent={setDeleteComponent} />
   </>
 );
 

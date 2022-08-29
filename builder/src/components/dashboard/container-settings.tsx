@@ -7,7 +7,6 @@ import BorderComponent from "components/settings/border-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import ISettings from "interfaces/settings";
-import ColumnNumberComponent from "components/settings/columns-setting";
 
 const ContainerSettings: FC<ISettings> = ({
   selectedItem,
@@ -21,8 +20,6 @@ const ContainerSettings: FC<ISettings> = ({
   setSmall,
   setMedium,
   setLarge,
-  columns,
-  setColumnNumber,
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -31,16 +28,15 @@ const ContainerSettings: FC<ISettings> = ({
         <span className="font-bold">{selectedItem.name}</span>
       ) : null}
     </h3>
-    {columns && <ColumnNumberComponent 
-      columns={columns}
-      setColumnNumber={setColumnNumber}
-    />}
     <UploadComponent
       selectedItem={selectedItem}
       items={items}
       setItems={setItems}
     />
-    <BgColorComponent color={selectedItem?.style?.backgroundColor} setBgColor={setBgColor} />
+    <BgColorComponent
+      color={selectedItem?.style?.backgroundColor}
+      setBgColor={setBgColor}
+    />
     <ColorComponent
       color={selectedItem?.style?.color}
       setColor={setColor}
@@ -60,10 +56,7 @@ const ContainerSettings: FC<ISettings> = ({
       setLarge={setLarge}
       shadow={selectedItem?.style?.shadow}
     />
-    <UtilitiesComponent
-      deleteComponent={selectedItem?.style?.deleteComponent}
-      setDeleteComponent={setDeleteComponent}
-    />
+    <UtilitiesComponent setDeleteComponent={setDeleteComponent} />
   </>
 );
 

@@ -22,7 +22,9 @@ const Home: FC = () => {
   const [testConfig, setTestConfig] = useState(
     JSON.parse(BuilderConfig).builder
   );
-  const [nftCard, setNftCard] = useState<any>(null); // for rendering nfts one by one
+  const [nftPosition, setNftPosition] = useState<number>(3);
+  const [nftColumns, setNftColumns] = useState<number>(3);
+  const [nftCard, setNftCard] = useState<any>(null);
   const [account, setAccount] = useState<string>("");
   const [slug, setSlug] = useState<string>("");
 
@@ -43,6 +45,7 @@ const Home: FC = () => {
     testConfig
       .filter((i) => i.nft && i.children)
       .map((i) => {
+        setNftPosition(i.y);
         i.children.map((item) => {
           if (item.nft && nftY === null) {
             nftY = item.y;
@@ -55,18 +58,23 @@ const Home: FC = () => {
         setTestConfig(testConfig.filter((i) => !i.nft));
 
         const hasSlug = i.children.filter(
-          (item: { slug: string }) => item.slug && item.slug !== "wallet"
+          (item: { slug: string }) => item.slug
         );
         const hasWallet = i.children.filter(
-          (item: { slug: string }) => item.slug && item.slug === "wallet"
+          (item: { wallet: string }) => item.wallet && item.wallet !== "wallet"
         );
 
         if (hasSlug) {
           setSlug(hasSlug[0]?.slug);
-        } else if (hasWallet) {
+        }
+        if (hasWallet) {
+          setAccount(hasWallet[0]?.wallet);
+        } else {
           if (!account) connectWalletButton();
         }
       });
+
+    setNftColumns(nftCols);
   }, []);
 
   useEffect(() => {
@@ -98,18 +106,10 @@ const Home: FC = () => {
 
   // render nfts from connected wallet using opensea api
   const renderTokensForOwner = (assets) => {
-    // setAssets(assets);
-    // set no. of cols
-    // let cols = 6/colW
-    // let colW = 6 / nftCard?.columns;
-    let colW = 2;
+    const colW = Math.ceil(6 / nftColumns);
     let X = 0;
-    let nCardsArr = assets.map((asset: any, index: number) => {
-      // check config y if any other elements present above it
-      // let minY = Math.min(testConfig.map((item) => item.y))
-      // let el = testConfig.children?.filter((item) => item.y === minY)[0];
-      // let height = el ? el.h + el.y : 0
 
+    let nCardsArr = assets.map((asset: any, index: number) => {
       let modifiedX = X;
       X = X + colW;
       X = X + colW <= 6 ? X : 0;
@@ -118,6 +118,7 @@ const Home: FC = () => {
         ...nftCard,
         i: asset.id,
         x: modifiedX,
+        y: nftPosition,
         w: colW,
         image: asset.image_url,
         collection: asset.asset_contract.name,
@@ -130,9 +131,13 @@ const Home: FC = () => {
     let newItemsArr = testConfig.map((item: IItems) => {
       const { y } = item;
       if (y >= nCardsArr[0].y) {
+        const diff = y - nftPosition;
         return {
           ...item,
-          y: y + nCardsArr.length * nCardsArr[0].h,
+          y:
+            y +
+            Math.ceil(nCardsArr.length / nftColumns) * nCardsArr[0].h -
+            diff,
         };
       } else {
         return {

@@ -139,12 +139,8 @@ const Container: FC<IContainer> = ({
     }
   };
 
-  const onComponentClick = (itemName: string, i: string, nftItem?: boolean) => {
-    if (nftItem) {
-      setComponentType("nft");
-    } else {
-      setComponentType("container");
-    }
+  const onComponentClick = (itemName: string, i: string) => {
+    setComponentType("container");
 
     // checks if the selector is active
     if (selector === null) {
@@ -183,6 +179,7 @@ const Container: FC<IContainer> = ({
         rowHeight={50}
         width={containerW || 200}
         isBounded={true}
+        isDraggable={item.name === "NFT Layout" ? false : true}
         onLayoutChange={onLayoutChange}
         margin={[0, 0]}
         compactType={null}
@@ -241,10 +238,7 @@ const Container: FC<IContainer> = ({
             })
         )}
       </GridLayout>
-      <span
-        id="drag"
-        onClick={() => onComponentClick(item.name, item.i, item?.nft)}
-      />
+      <span id="drag" onClick={() => onComponentClick(item.name, item.i)} />
     </section>
   );
 };

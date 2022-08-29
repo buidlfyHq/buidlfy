@@ -102,7 +102,6 @@ export default interface ISettings {
   handleTextChange?: (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
   linkVal?: string;
   handleLinkChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  columns?: number;
-  setColumnNumber?: (columns: number) => void;
+  setWallet?: (wallet: string) => void;
   setSlug?: (slug: string) => void;
 }

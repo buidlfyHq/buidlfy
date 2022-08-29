@@ -196,10 +196,7 @@ const ButtonSettings: FC<ISettings> = ({
                   setBgColor={setBgColor}
                 />
 
-                <UtilitiesComponent
-                  deleteComponent={selectedItem?.style?.deleteComponent}
-                  setDeleteComponent={setDeleteComponent}
-                />
+                <UtilitiesComponent setDeleteComponent={setDeleteComponent} />
               </div>
               <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
                 <AdvanceComponent
