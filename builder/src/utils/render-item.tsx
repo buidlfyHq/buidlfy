@@ -49,30 +49,6 @@ const RenderItem: FC<IRenderItem> = ({
 }) => {
   console.log(item)
   switch (item.name) {
-    case "Container":
-      return (
-        <Container
-          item={item}
-          items={items}
-          setItems={setItems}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          imgData={item.imgData}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
-          setOpenTab={setOpenTab}
-          setDrag={setDrag}
-          setComponentType={setComponentType}
-          selector={selector}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
-        />
-      );
     case "Button":
       return (
         <Button
@@ -93,59 +69,8 @@ const RenderItem: FC<IRenderItem> = ({
         />
       );
     case "Text":
-      return (
-        <Text
-          item={item}
-          items={items}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          margin={item.style.margin}
-          padding={item.style.padding}
-        />
-      );
     case "Heading 1":
-      return (
-        <Text
-          item={item}
-          items={items}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          margin={item.style.margin}
-          padding={item.style.padding}
-        />
-      );
     case "Heading 2":
-      return (
-        <Text
-          item={item}
-          items={items}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          margin={item.style.margin}
-          padding={item.style.padding}
-        />
-      );
     case "Heading 3":
       return (
         <Text
@@ -184,54 +109,9 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case "Divider":
       return <Divider />;
+    case "Container":
     case "Horizontal Container":
-      return (
-        <Container
-          item={item}
-          items={items}
-          setItems={setItems}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          imgData={item.imgData}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
-          setOpenTab={setOpenTab}
-          setDrag={setDrag}
-          setComponentType={setComponentType}
-          selector={selector}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
-        />
-      );
     case "Vertical Container":
-      return (
-        <Container
-          item={item}
-          items={items}
-          setItems={setItems}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          imgData={item.imgData}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
-          setOpenTab={setOpenTab}
-          setDrag={setDrag}
-          setComponentType={setComponentType}
-          selector={selector}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
-        />
-      );
     case "NFT Layout":
       return (
         <Container
@@ -254,50 +134,6 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
-        />
-      );
-    case "NFT Image":
-      return (
-        <Image
-          imgData={item.imgData}
-          justifyContent={item.style.justifyContent}
-          margin={item.style.margin}
-        />
-      );
-    case "NFT Title":
-      return (
-        <Text
-          item={item}
-          items={items}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          margin={item.style.margin}
-          padding={item.style.padding}
-        />
-      );
-    case "NFT Price":
-      return (
-        <Text
-          item={item}
-          items={items}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          margin={item.style.margin}
-          padding={item.style.padding}
         />
       );
     case "NFT Card":

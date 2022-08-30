@@ -6,16 +6,16 @@ export default interface IItems {
   x: number;
   y: number;
   h: number;
+  w: number;
   minH?: number;
   maxH?: number;
-  w: number;
   minW?: number;
   maxW?: number;
   link?: string;
   name: string;
   value?: string;
   style: Styles;
-  children?: any; // Fix: Work in progress as it is not compatible new children type
+  children?: any; // FIX: Work in progress as it is not compatible new children type
   isBounded?: boolean;
   isDraggable?: boolean;
   isResizable?: boolean;
@@ -27,4 +27,6 @@ export default interface IItems {
   connectWallet?: string;
   placeholder?: string;
   nft?: boolean;
+  wallet?: string;
+  slug?: string | number | readonly string[];
 }

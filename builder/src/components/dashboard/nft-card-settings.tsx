@@ -1,4 +1,11 @@
-const NftCardSettings = ({ selectedItem, setWallet, setSlug }) => {
+import { FC } from "react";
+import ISettings from "interfaces/settings";
+
+const NftCardSettings: FC<ISettings> = ({
+  selectedItem,
+  setWallet,
+  setSlug,
+}) => {
   return (
     <>
       <h3 className="mb-3 ml-8">

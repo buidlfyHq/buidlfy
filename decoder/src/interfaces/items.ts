@@ -5,9 +5,9 @@ export default interface IItems {
   x: number;
   y: number;
   h: number;
+  w: number;
   minH?: number;
   maxH?: number;
-  w: number;
   minW?: number;
   maxW?: number;
   name: string;
@@ -24,9 +24,12 @@ export default interface IItems {
   contract?: any; // breaking while assigning a type, work in progress
   imgData?: string | ArrayBuffer;
   connectWallet?: string;
+  nft?: boolean;
+  wallet?: string;
+  slug?: string;
   image?: any;
   collection?: string;
   title?: string;
   price?: string;
-  highestBid: string;
+  highestBid?: string;
 }

@@ -1,4 +1,20 @@
-const NftCard = ({ image, collection, title, price, highestBid }) => {
+import { FC } from "react";
+
+interface INftCard {
+  image: string;
+  collection: string;
+  title: string;
+  price: string;
+  highestBid: string;
+}
+
+const NftCard: FC<INftCard> = ({
+  image,
+  collection,
+  title,
+  price,
+  highestBid,
+}) => {
   return (
     <div className="flex justify-center items-center h-full p-2">
       <div
@@ -39,11 +55,15 @@ const NftCard = ({ image, collection, title, price, highestBid }) => {
         >
           <div>
             <div className="text-white/80 text-sm">Price</div>
-            <div className="text-white font-bold">{price ? `${Math.abs(price)} ETH` : 'NA'}</div>
+            <div className="text-white font-bold">
+              {price ? `${Math.abs(parseInt(price))} ETH` : "NA"}
+            </div>
           </div>
           <div>
             <div className="text-white/80 text-sm">Highest Bid</div>
-            <div className="text-white font-bold">{highestBid ? `${highestBid} ETH` : 'No bids yet'}</div>
+            <div className="text-white font-bold">
+              {highestBid ? `${highestBid} ETH` : "No bids yet"}
+            </div>
           </div>
         </div>
       </div>

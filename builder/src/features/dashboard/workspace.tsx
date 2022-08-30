@@ -61,8 +61,13 @@ const Workspace: FC<IWorkspace> = ({
       let height: number;
       const { h, minW, minH, x, y, w, i } = obj;
       if (containerCheck(selectedItem)) {
-        let maxY = Math.max(...selectedItem.children.map((item) => item.y));
-        let el = selectedItem.children?.filter((item) => item.y === maxY)[0];
+        // to make the height of the container adapt to its children 
+        let maxY = Math.max(
+          ...selectedItem.children.map((item: IItems) => item.y)
+        );
+        let el = selectedItem.children?.filter(
+          (item: IItems) => item.y === maxY
+        )[0];
         height = el ? el.h + el.y : minH;
       }
       return (selectedItem = {
@@ -135,8 +140,8 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const onComponentClick = (itemName: string, i: string) => {
-    setComponentType("container");  
-    
+    setComponentType("container");
+
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
@@ -192,7 +197,7 @@ const Workspace: FC<IWorkspace> = ({
     ?.filter((i) => i.style?.deleteComponent === 0)
     .map((item: IItems) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
-      
+
       return (
         <div
           key={i}
