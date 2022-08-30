@@ -63,10 +63,16 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
   return (
     <>
       <div className="flex justify-center mt-[3rem]" />
-      <div className="flex items-center px-3 mt-1 text-black">
+      <h3 className="ml-[0.5rem]">
+        <span className="setting-text">Import Contract</span>
+      </h3>
+      <p className="contract-text ml-[0.5rem]">
+        Lorem ipsum dolor sit amet, sed do eiusmod
+      </p>
+      <div className="flex items-center px-3 mt-5 text-black">
         <div
           onClick={() => setIsOpen(true)}
-          className="flex px-2 py-2 border w-54 h-11 w-15"
+          className="flex contract-button w-full py-2.5 pl-6 pr-7 ml-2"
         >
           <span className="mt-1 ml-4 mr-3">
             <FaFileContract />

@@ -544,75 +544,80 @@ const Settings: FC<ISettings> = ({
   return (
     <>
       {settingItemId ? (
-        <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
-          <div
-            className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
-            ref={ref}
-          >
-            {/* <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
+        <>
+          <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
+            <div
+              className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
+              ref={ref}
+            >
+              {/* <div className="delete-div py-3 pl-3">
+                <div>Delete</div>
+              </div> */}
+              {/* <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
               {"<"}
               <span className="ml-2">Site Settings</span>
             </div> */}
-            <SettingComponent
-              items={items}
-              setItems={setItems}
-              selectedItem={selectedItem}
-              setLink={setLink}
-              link={selectedItem?.link}
-              setValue={setValue}
-              value={selectedItem?.value}
-              setBold={setBold}
-              bold={selectedItem?.style?.fontWeight}
-              setItalic={setItalic}
-              italic={selectedItem?.style?.fontStyle}
-              setUnderline={setUnderline}
-              underline={selectedItem?.style?.textDecoration}
-              color={selectedItem?.style?.color}
-              setColor={setColor}
-              setBgColor={setBgColor}
-              backgroundColor={selectedItem?.style?.backgroundColor}
-              setDeleteComponent={setDeleteComponent}
-              deleteComponent={selectedItem?.style?.deleteComponent}
-              justifyContent={selectedItem?.style?.justifyContent}
-              setLeft={setLeft}
-              setCenter={setCenter}
-              setRight={setRight}
-              setFontSize={setFontSize}
-              fontSize={selectedItem?.style?.fontSize}
-              setContractConfig={setContractConfig}
-              contractConfig={contractConfig}
-              setShowComponent={setShowComponent}
-              showComponent={showComponent}
-              selector={selector}
-              setSelector={setSelector}
-              elementConfig={elementConfig}
-              openTab={openTab}
-              setOpenTab={setOpenTab}
-              borderRadius={selectedItem?.style?.borderRadius}
-              setBorderRadius={setBorderRadius}
-              borderWidth={selectedItem?.style?.borderWidth}
-              setBorderWidth={setBorderWidth}
-              setMarginLeft={setMarginLeft}
-              setMarginRight={setMarginRight}
-              setMarginTop={setMarginTop}
-              setMarginBottom={setMarginBottom}
-              setPaddingLeft={setPaddingLeft}
-              setPaddingRight={setPaddingRight}
-              setPaddingTop={setPaddingTop}
-              setPaddingBottom={setPaddingBottom}
-              margin={{ ...selectedItem?.style?.margin }}
-              padding={{ ...selectedItem?.style?.padding }}
-              setSmall={setSmall}
-              setMedium={setMedium}
-              setLarge={setLarge}
-              shadow={selectedItem?.style?.shadow}
-              setOn={setOn}
-              connectWallet={selectedItem?.connectWallet}
-              setPlaceholder={setPlaceholder}
-              placeholder={selectedItem?.placeholder}
-            />
+              <SettingComponent
+                items={items}
+                setItems={setItems}
+                selectedItem={selectedItem}
+                setLink={setLink}
+                link={selectedItem?.link}
+                setValue={setValue}
+                value={selectedItem?.value}
+                setBold={setBold}
+                bold={selectedItem?.style?.fontWeight}
+                setItalic={setItalic}
+                italic={selectedItem?.style?.fontStyle}
+                setUnderline={setUnderline}
+                underline={selectedItem?.style?.textDecoration}
+                color={selectedItem?.style?.color}
+                setColor={setColor}
+                setBgColor={setBgColor}
+                backgroundColor={selectedItem?.style?.backgroundColor}
+                setDeleteComponent={setDeleteComponent}
+                deleteComponent={selectedItem?.style?.deleteComponent}
+                justifyContent={selectedItem?.style?.justifyContent}
+                setLeft={setLeft}
+                setCenter={setCenter}
+                setRight={setRight}
+                setFontSize={setFontSize}
+                fontSize={selectedItem?.style?.fontSize}
+                setContractConfig={setContractConfig}
+                contractConfig={contractConfig}
+                setShowComponent={setShowComponent}
+                showComponent={showComponent}
+                selector={selector}
+                setSelector={setSelector}
+                elementConfig={elementConfig}
+                openTab={openTab}
+                setOpenTab={setOpenTab}
+                borderRadius={selectedItem?.style?.borderRadius}
+                setBorderRadius={setBorderRadius}
+                borderWidth={selectedItem?.style?.borderWidth}
+                setBorderWidth={setBorderWidth}
+                setMarginLeft={setMarginLeft}
+                setMarginRight={setMarginRight}
+                setMarginTop={setMarginTop}
+                setMarginBottom={setMarginBottom}
+                setPaddingLeft={setPaddingLeft}
+                setPaddingRight={setPaddingRight}
+                setPaddingTop={setPaddingTop}
+                setPaddingBottom={setPaddingBottom}
+                margin={{ ...selectedItem?.style?.margin }}
+                padding={{ ...selectedItem?.style?.padding }}
+                setSmall={setSmall}
+                setMedium={setMedium}
+                setLarge={setLarge}
+                shadow={selectedItem?.style?.shadow}
+                setOn={setOn}
+                connectWallet={selectedItem?.connectWallet}
+                setPlaceholder={setPlaceholder}
+                placeholder={selectedItem?.placeholder}
+              />
+            </div>
           </div>
-        </div>
+        </>
       ) : null}
     </>
   );

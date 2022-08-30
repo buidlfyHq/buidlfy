@@ -16,7 +16,117 @@
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.08);
   /* width: 200px; */
 }
+.modal-heading {
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
 
+
+color: #100F11;
+text-align: center;
+}
+.modal-subheading {
+font-style: normal;
+font-weight: 300;
+font-size: 12px;
+line-height: 18px;
+/* or 150% */
+
+text-align: center;
+
+color: rgba(16, 15, 17, 0.5);
+text-align: center;
+}
+.modal-label {
+  font-style: normal;
+font-weight: 400;
+font-size: 12px;
+/* identical to box height, or 133% */
+
+
+color: #100F11;
+}
+.modal-upload {
+  height: 250px;
+  width: 300px;
+
+background: #F4F4F4;
+border-radius: 4px;
+
+}
+.modal-img {
+ display: flex; 
+ width: 5rem;
+ height: auto;
+}
+.modal-input {
+  background: #F4F4F4;
+border-radius: 4px;
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 13px;
+/* identical to box height, or 100% */
+width: 300px;
+height: 2rem;
+
+/* Gray/200 */
+
+color: #BAB9BD;
+}
+.upload-modal-input {
+background: #F4F4F4;
+border-radius: 4px;
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 13px;
+/* identical to box height, or 100% */
+height: 250px;
+width: 300px;
+/* Gray/200 */
+color: #BAB9BD;
+}
+.upload-modal-input::placeholder {
+  font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 13px;
+/* identical to box height, or 100% */
+/* Gray/200 */
+
+color: #BAB9BD;
+}
+.modal-text {
+  font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 20px;
+/* identical to box height, or 154% */
+
+text-align: center;
+display: flex;
+justify-content: center;
+/* Color/Dark/Dark 2 */
+
+color: #87898E;
+
+}
+.modal-input::placeholder {
+  font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 13px;
+/* identical to box height, or 100% */
+
+
+/* Gray/200 */
+
+color: #BAB9BD;
+
+}
 .btn:hover {
   /* Solid Colours/Brand/Primary/Primary-400 */
   border: 1px solid #a673ef;
@@ -258,7 +368,28 @@ color: #000000;
 
   color: #484887;
 }
+.delete-div {
+  background: #E9EDFD;
+margin-top: -1rem;
+margin-left: -1rem;
+margin-bottom: 1.5rem;
+width: 250px;
+}
+.contract-button {
+  background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
+border-radius: 44px;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 24px;
+/* identical to box height, or 171% */
 
+
+/* White */
+
+color: #FFFFFF;
+
+}
 .side-border {
   margin-top: 3.65rem;
   border-top: 1px solid #e5e7eb;
@@ -419,7 +550,34 @@ line-height: 24px;
 color: #FFFFFF;
 
 }
+.contract-text {
+  font-style: normal;
+font-weight: 300;
+font-size: 12px;
+line-height: 20px;
+/* or 167% */
 
+
+/* Dark Purple/100 */
+
+color: #130F1C;
+}
+.contract-input {
+  background: #FFFFFF;
+border: 2px solid #CBBEE7;
+border-radius: 5px;
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 24px;
+/* identical to box height, or 171% */
+
+
+/* Dark Purple/100 */
+
+color: #130F1C;
+
+}
 .tab-one {
   font-style: normal;
   font-weight: 400;

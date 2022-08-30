@@ -107,12 +107,12 @@ const SideNavbar: FC<ISideNavbar> = ({
           </div>
           <h3 className="side-text mt-1">Templates</h3>
         </div>
-        <div className="mt-8 cursor-pointer">
+        {/* <div className="mt-8 cursor-pointer">
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={pages} />
           </div>
           <h3 className="side-text mt-1">Pages</h3>
-        </div>
+        </div> */}
         <div
           onClick={() => {
             showSidebar(true);
@@ -126,12 +126,12 @@ const SideNavbar: FC<ISideNavbar> = ({
           </div>
           <h3 className="side-text mt-1">Elements</h3>
         </div>
-        <div className="mt-8 cursor-pointer">
+        {/* <div className="mt-8 cursor-pointer">
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={media} />
           </div>
           <h3 className="side-text mt-1">Media</h3>
-        </div>
+        </div> */}
         <div
           onClick={() => {
             showSidebar(true);
@@ -145,7 +145,7 @@ const SideNavbar: FC<ISideNavbar> = ({
           </div>
           <h3 className="side-text mt-1">Styles</h3>
         </div>
-        <div className="mt-8 cursor-pointer">
+        {/* <div className="mt-8 cursor-pointer">
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={help} />
           </div>
@@ -156,7 +156,7 @@ const SideNavbar: FC<ISideNavbar> = ({
             <img src={setting} />
           </div>
           <h3 className="side-text mt-1">Settings</h3>
-        </div>
+        </div> */}
       </div>
 
       {/* <Link to="/templates" className="hover:text-black">

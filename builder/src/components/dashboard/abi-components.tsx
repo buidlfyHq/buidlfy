@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
 import IItems from "interfaces/items";
+import "styles/components.css";
 
 interface IAbiComponents {
   showComponent: {
@@ -228,9 +229,12 @@ const AbiComponents: FC<IAbiComponents> = ({
                 const { selectedId, objects, filterObjects } = inputObjects(i);
                 return (
                   <section key={i} className="mt-3">
-                    <h6>Input - {input.name}</h6>
+                    <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">
+                      Input
+                      {/* {input.name} */}
+                    </h6>
                     <div
-                      className="grid mb-2 px-2 border rounded mt-1 h-7"
+                      className="grid contract-input mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
                       onClick={() => handleInputSelector(selectedId)}
                     >
                       <div>
@@ -349,10 +353,13 @@ const AbiComponents: FC<IAbiComponents> = ({
                 const { selectedId, objects, filterObjects } = outputObjects(i);
                 return (
                   <section key={i} className="mt-3">
-                    <h6>Output - {output.name}</h6>
+                    <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">
+                      Output
+                      {/* {output.name} */}
+                    </h6>
                     <div
                       key={i}
-                      className="grid mb-2 px-2 border rounded mt-1 h-7"
+                      className="grid contract-input mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
                       onClick={() => handleOutputSelector(selectedId)}
                     >
                       <div>
@@ -408,14 +415,14 @@ const AbiComponents: FC<IAbiComponents> = ({
             )}
 
           {show ? (
-            <button className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button className="fixed right-3 bottom-5 flex contract-button py-3 px-[6rem]">
               <Spinner />
               Saving
             </button>
           ) : (
             <button
               onClick={handleSave}
-              className="fixed right-3 bottom-5 w-56 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="fixed right-3 bottom-5 flex contract-button py-3 px-[6rem]"
             >
               Save
             </button>

@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import IItems from "interfaces/items";
+import { AiOutlineCaretDown } from "react-icons/ai";
 
 interface IAbiMethods {
   contractConfig: { abi: string; address: string };
@@ -109,14 +110,14 @@ const AbiMethods: FC<IAbiMethods> = ({
     <>
       {contractConfig.abi ? (
         <>
-          <span className="px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
+          <span className="setting-text  ml-[0.25rem] px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
             Select Method
           </span>
-          <div className="flex justify-center">
-            <div className="mb-3 xl:w-54">
+          <div className="px-2">
+            <div className="mb-3">
               <select
                 id="select"
-                className="form-select appearance-none mt-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                className="form-select contract-input appearance-none mt-2 block w-full px-3 py-1.5 focus:outline-none focuse:border-none"
                 aria-label="Default select example"
                 onChange={(e) => onSelect(e)}
               >
@@ -129,15 +130,17 @@ const AbiMethods: FC<IAbiMethods> = ({
                 </option>
                 {contractConfig.abi &&
                   abiJson.map((method: { name: string }, i: number) => (
-                    <option
-                      value={i}
-                      key={i}
-                      selected={
-                        selectedItem.contract.methodName === method.name
-                      }
-                    >
-                      {method.name}
-                    </option>
+                    <>
+                      <option
+                        value={i}
+                        key={i}
+                        selected={
+                          selectedItem.contract.methodName === method.name
+                        }
+                      >
+                        {method.name}
+                      </option>
+                    </>
                   ))}
               </select>
             </div>
