@@ -118,13 +118,21 @@ const Sidebar: FC<ISidebar> = ({
           }
           if (
             c.name === "Horizontal Container" ||
-            c.name === "Vertical Container" ||
-            c.name === "NFT Layout"
+            c.name === "Vertical Container"
           ) {
             // FIX: Find a suitable type for child
             let newChildren = c.children.map((child) => ({
               ...child,
               i: uid(),
+            }));
+            newC.children = newChildren;
+          }
+          if (c.name === "NFT Layout") {
+            // FIX: Find a suitable type for child
+            let newChildren = c.children.map((child) => ({
+              ...child,
+              i: uid(),
+              resizeHandles: [],
             }));
             newC.children = newChildren;
           }
