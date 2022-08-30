@@ -22,13 +22,13 @@ const Home: FC = () => {
   const [testConfig, setTestConfig] = useState(
     JSON.parse(BuilderConfig).builder
   );
-  const [nftPosition, setNftPosition] = useState<number>(3);
-  const [nftColumns, setNftColumns] = useState<number>(3);
-  const [nftCard, setNftCard] = useState<any>(null);
-  const [account, setAccount] = useState<string>("");
-  const [slug, setSlug] = useState<string>("");
+  const [nftPosition, setNftPosition] = useState<number>(3); // for storing NFT Layout's starting position
+  const [nftColumns, setNftColumns] = useState<number>(3); // for storing number of columns in NFT Layout
+  const [nftCard, setNftCard] = useState<any>(null); // for creating a copy of NFT Card
+  const [account, setAccount] = useState<string>(""); // for storing wallet address
+  const [slug, setSlug] = useState<string>(""); // for storing collection slug
 
-  const connectWalletButton = async () => {
+  const connectWallet = async () => {
     try {
       const provider = await web3Modal.connect();
       const library: any = new ethers.providers.Web3Provider(provider); // required
@@ -43,8 +43,8 @@ const Home: FC = () => {
     let nftY = null;
     let nftCols = 0;
     testConfig
-      .filter((i) => i.nft && i.children)
-      .map((i) => {
+      .filter((i: IItems) => i.nft && i.children)
+      .map((i: IItems) => {
         setNftPosition(i.y);
         i.children.map((item) => {
           if (item.nft && nftY === null) {
@@ -55,13 +55,12 @@ const Home: FC = () => {
             nftCols++;
           }
         });
-        setTestConfig(testConfig.filter((i) => !i.nft));
+        // remove the original NFT Layout
+        setTestConfig(testConfig.filter((i: IItems) => !i.nft));
 
-        const hasSlug = i.children.filter(
-          (item: { slug: string }) => item.slug
-        );
+        const hasSlug = i.children.filter((item) => item.slug);
         const hasWallet = i.children.filter(
-          (item: { wallet: string }) => item.wallet && item.wallet !== "wallet"
+          (item) => item.wallet && item.wallet !== "wallet"
         );
 
         if (hasSlug) {
@@ -70,7 +69,7 @@ const Home: FC = () => {
         if (hasWallet) {
           setAccount(hasWallet[0]?.wallet);
         } else {
-          if (!account) connectWalletButton();
+          if (!account) connectWallet();
         }
       });
 
@@ -105,11 +104,11 @@ const Home: FC = () => {
   };
 
   // render nfts from connected wallet using opensea api
-  const renderTokensForOwner = (assets) => {
+  const renderTokensForOwner = (assets: any[]) => {
     const colW = Math.ceil(6 / nftColumns);
     let X = 0;
 
-    let nCardsArr = assets.map((asset: any, index: number) => {
+    let nCardsArr = assets.map((asset: any) => {
       let modifiedX = X;
       X = X + colW;
       X = X + colW <= 6 ? X : 0;
@@ -128,6 +127,7 @@ const Home: FC = () => {
       };
     });
 
+    // update position of other components
     let newItemsArr = testConfig.map((item: IItems) => {
       const { y } = item;
       if (y >= nCardsArr[0].y) {

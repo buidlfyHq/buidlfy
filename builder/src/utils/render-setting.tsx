@@ -134,37 +134,7 @@ const SettingComponent: FC<ISettings> = ({
         />
       );
     case "Container":
-      return (
-        <ContainerSettings
-          selectedItem={selectedItem}
-          items={items}
-          setItems={setItems}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setBorderRadius={setBorderRadius}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-        />
-      );
     case "Horizontal Container":
-      return (
-        <ContainerSettings
-          selectedItem={selectedItem}
-          items={items}
-          setItems={setItems}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setBorderRadius={setBorderRadius}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-        />
-      );
     case "Vertical Container":
       return (
         <ContainerSettings

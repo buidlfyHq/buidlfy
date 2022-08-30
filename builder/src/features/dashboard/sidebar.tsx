@@ -121,6 +121,7 @@ const Sidebar: FC<ISidebar> = ({
             c.name === "Vertical Container" ||
             c.name === "NFT Layout"
           ) {
+            // FIX: Find a suitable type for child
             let newChildren = c.children.map((child) => ({
               ...child,
               i: uid(),
@@ -135,7 +136,7 @@ const Sidebar: FC<ISidebar> = ({
     );
   });
 
-  const renderComponents = (type) => {
+  const renderComponents = (type: string) => {
     if (type === "container") {
       return <>{renderContainerComponents}</>;
     } else {
