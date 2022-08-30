@@ -47,6 +47,7 @@ const RenderItem: FC<IRenderItem> = ({
   elementConfig,
   setElementConfig,
 }) => {
+  console.log(item)
   switch (item.name) {
     case "Container":
       return (
@@ -301,7 +302,7 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case "NFT Card":
       return (
-        <NftCard />
+        <NftCard backgroundColor={item.style.backgroundColor} />
       );
     default:
       return <></>;

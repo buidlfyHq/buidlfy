@@ -9,6 +9,7 @@ import ISettings from "interfaces/settings";
 import UtilitiesComponent from "components/settings/utilities-component";
 import "styles/components.css";
 import "styles/dashboard.css";
+import BgColorComponent from "components/settings/bg-color-component";
 
 const SettingComponent: FC<ISettings> = ({
   items,
@@ -23,6 +24,7 @@ const SettingComponent: FC<ISettings> = ({
   setUnderline,
   setColor,
   setBgColor,
+  setNftBg,
   setDeleteComponent,
   setLeft,
   setCenter,
@@ -216,6 +218,10 @@ const SettingComponent: FC<ISettings> = ({
               <span className="font-bold">{selectedItem.name}</span>
             ) : null}
           </h3>
+          <BgColorComponent
+            color={selectedItem?.style?.backgroundColor}
+            setBgColor={setNftBg}
+          />    
           <UtilitiesComponent setDeleteComponent={setDeleteComponent} />
         </>
       );

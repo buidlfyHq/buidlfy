@@ -303,7 +303,9 @@ export const components = [
         x: 0,
         y: 0,
         style: {
+          ...defaultColorStyles,
           ...defaultDeleteStyles,
+          backgroundColor: { r: "68", g: "64", b: "60" }
         },
       },
       {
@@ -316,6 +318,7 @@ export const components = [
         x: 2,
         y: 0,
         style: {
+          ...defaultColorStyles,
           ...defaultDeleteStyles,
         },
       },
@@ -329,6 +332,7 @@ export const components = [
         x: 4,
         y: 0,
         style: {
+          ...defaultColorStyles,
           ...defaultDeleteStyles,
         },
       },      

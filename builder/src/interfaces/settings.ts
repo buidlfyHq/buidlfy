@@ -19,6 +19,8 @@ export default interface ISettings {
   color?: IColor;
   setBgColor?: (backgroundColor: IColor) => void;
   backgroundColor?: IColor;
+  setNftBg?: (backgroundColor: IColor) => void;
+  nftColor?: IColor;
   setDeleteComponent?: (deleteComponent: number) => void;
   deleteComponent?: number;
   justifyContent?: string;

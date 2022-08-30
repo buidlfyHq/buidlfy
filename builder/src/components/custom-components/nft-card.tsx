@@ -1,11 +1,14 @@
 import React from "react";
 
-const NftCard = () => {
+const NftCard = ({
+  backgroundColor
+}) => {
   return (
-    <section className="flex justify-center items-center h-full p-2" id="nft-card">
+    <section className="flex items-center justify-center h-full p-2" id="nft-card">
       <section
-        className="bg-stone-700 w-full h-full p-2 rounded-lg"
+        className="w-full h-full p-2 rounded-lg bg-stone-700"
         style={{
+          backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
           boxShadow: "0px 2px 7px rgba(0, 0, 0, 0.5)",
         }}
         id="nft-card"
@@ -30,23 +33,24 @@ const NftCard = () => {
           Your NFT will appear here
         </div>
         <div className="text-center p-2 h-[20%]" id="nft-card-details">
-          <div className="text-white/80 text-sm" id="nft-card-collection">Collection</div>
-          <div className="text-white font-bold text-xl" id="nft-card-name">Name</div>
+          <div className="text-sm text-white/80" id="nft-card-collection">Collection</div>
+          <div className="text-xl font-bold text-white" id="nft-card-name">Name</div>
         </div>
         <div
-          className="flex justify-around items-center text-center bg-stone-600 p-2 rounded-lg h-[15%]"
+          className="flex justify-around items-center text-center p-2 rounded-lg h-[15%] bg-white/10"
           style={{
+            // backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, 0)`,
             boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.5)",
           }}
           id="nft-card-details"
         >
           <div id="nft-card-price">
-            <div className="text-white/80 text-sm" id="nft-card-price">Price</div>
-            <div className="text-white font-bold" id="nft-card-price-value">-- : --</div>
+            <div className="text-sm text-white/80" id="nft-card-price">Price</div>
+            <div className="font-bold text-white" id="nft-card-price-value">-- : --</div>
           </div>
           <div id="nft-card-price">
-            <div className="text-white/80 text-sm" id="nft-card-bid">Highest Bid</div>
-            <div className="text-white font-bold" id="nft-card-bid-value">-- : --</div>
+            <div className="text-sm text-white/80" id="nft-card-bid">Highest Bid</div>
+            <div className="font-bold text-white" id="nft-card-bid-value">-- : --</div>
           </div>
         </div>
       </section>
