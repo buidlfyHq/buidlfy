@@ -1,6 +1,11 @@
-import React from "react";
+import React, {FC} from "react";
+import IColor from "interfaces/color";
 
-const NftCard = ({
+interface INftCard {
+  backgroundColor: IColor;
+}
+
+const NftCard: FC<INftCard> = ({
   backgroundColor
 }) => {
   return (
