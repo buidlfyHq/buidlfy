@@ -3,13 +3,11 @@ import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
-import NftCardSettings from "components/dashboard/nft-card-settings";
+import NftLayoutSettings from "components/dashboard/nft-layout-settings";
 import GeneralSettings from "components/dashboard/general-settings";
 import ISettings from "interfaces/settings";
-import UtilitiesComponent from "components/settings/utilities-component";
 import "styles/components.css";
 import "styles/dashboard.css";
-import BgColorComponent from "components/settings/bg-color-component";
 
 const SettingComponent: FC<ISettings> = ({
   items,
@@ -173,27 +171,22 @@ const SettingComponent: FC<ISettings> = ({
       );
     case "NFT Card":
       return (
-        <NftCardSettings
-          selectedItem={selectedItem}
-          setWallet={setWallet}
-          setSlug={setSlug}
-        />
+        <h3 className="mb-3 ml-8">
+          Component -
+          {selectedItem ? (
+            <span className="font-bold">{selectedItem.name}</span>
+          ) : null}
+        </h3>
       );
     case "NFT Layout":
       return (
-        <>
-          <h3 className="mb-3 ml-8">
-            Component -
-            {selectedItem ? (
-              <span className="font-bold">{selectedItem.name}</span>
-            ) : null}
-          </h3>
-          <BgColorComponent
-            color={selectedItem?.style?.backgroundColor}
-            setBgColor={setNftBg}
-          />    
-          <UtilitiesComponent setDeleteComponent={setDeleteComponent} />
-        </>
+        <NftLayoutSettings
+          selectedItem={selectedItem}
+          setWallet={setWallet}
+          setSlug={setSlug}
+          setNftBg={setNftBg}
+          setDeleteComponent={setDeleteComponent}
+        />
       );
     default:
       return (

@@ -246,7 +246,7 @@ const Settings: FC<ISettings> = ({
       let selectedChild = item.children?.find(
         (child) => child.i === settingItemId
       );
-     if (item.i === settingItemId) {
+      if (item.i === settingItemId) {
         return {
           ...item,
           style: {
@@ -274,44 +274,39 @@ const Settings: FC<ISettings> = ({
           children: newArray,
         };
       }
-      console.log(item)
+      console.log(item);
       return item;
     });
     setItems(updatedItems);
   };
 
-  const setNftBg = (
-    backgroundColor
-  ) => {
+  const setNftBg = (backgroundColor) => {
     if (!settingItemId) {
       return;
     }
     const updatedItems = items.map((item) => {
-      if(item.i === settingItemId) {
-        let newChildrenArr = item.children.map(child => {
+      if (item.i === settingItemId) {
+        let newChildrenArr = item.children.map((child) => {
           return {
             ...child,
             style: {
               ...child["style"],
-              "backgroundColor": backgroundColor,
+              backgroundColor: backgroundColor,
             },
           };
-        })
-        console.log(newChildrenArr)
+        });
+
         return {
           ...item,
           children: newChildrenArr,
         };
       }
-      console.log(item)
-        return {
-          ...item
-        };
+      return {
+        ...item,
+      };
     });
-    console.log(updatedItems)
     setItems(updatedItems);
   };
-  console.log(items)
 
   const setColor = (color: IColor) => {
     singleWorkFunction(functionEnum.COLOR, color);
@@ -586,26 +581,10 @@ const Settings: FC<ISettings> = ({
       return;
     }
     const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
       if (item.i === settingItemId) {
-        return { ...item, wallet };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          wallet,
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
         return {
           ...item,
-          children: newArray,
+          wallet,
         };
       }
       return item;
@@ -618,26 +597,10 @@ const Settings: FC<ISettings> = ({
       return;
     }
     const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
       if (item.i === settingItemId) {
-        return { ...item, slug };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          slug,
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
         return {
           ...item,
-          children: newArray,
+          slug,
         };
       }
       return item;

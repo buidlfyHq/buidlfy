@@ -57,17 +57,11 @@ const Home: FC = () => {
         });
         // remove the original NFT Layout
         setTestConfig(testConfig.filter((i: IItems) => !i.nft));
-
-        const hasSlug = i.children.filter((item) => item.slug);
-        const hasWallet = i.children.filter(
-          (item) => item.wallet && item.wallet !== "wallet"
-        );
-
-        if (hasSlug) {
-          setSlug(hasSlug[0]?.slug);
-        }
-        if (hasWallet) {
-          setAccount(hasWallet[0]?.wallet);
+        
+        if (i.slug) {
+          setSlug(i.slug);
+        } else if (i.wallet) {
+          setAccount(i.wallet);
         } else {
           if (!account) connectWallet();
         }

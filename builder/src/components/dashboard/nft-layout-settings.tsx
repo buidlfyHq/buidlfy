@@ -1,10 +1,14 @@
-import { FC } from "react";
+import React, { FC } from "react";
+import BgColorComponent from "components/settings/bg-color-component";
+import UtilitiesComponent from "components/settings/utilities-component";
 import ISettings from "interfaces/settings";
 
-const NftCardSettings: FC<ISettings> = ({
+const NftLayoutSettings: FC<ISettings> = ({
   selectedItem,
   setWallet,
   setSlug,
+  setNftBg,
+  setDeleteComponent,
 }) => {
   return (
     <>
@@ -14,6 +18,10 @@ const NftCardSettings: FC<ISettings> = ({
           <span className="font-bold">{selectedItem.name}</span>
         ) : null}
       </h3>
+      <BgColorComponent
+        color={selectedItem?.style?.backgroundColor}
+        setBgColor={setNftBg}
+      />
       <section className="pl-4 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
         Fetch NFTs Using
         <button
@@ -59,8 +67,9 @@ const NftCardSettings: FC<ISettings> = ({
           />
         </div>
       </section>
+      <UtilitiesComponent setDeleteComponent={setDeleteComponent} />
     </>
   );
 };
 
-export default NftCardSettings;
+export default NftLayoutSettings;
