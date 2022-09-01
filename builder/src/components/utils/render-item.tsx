@@ -29,7 +29,15 @@ interface IRenderItem {
     buttonId: string;
   }) => void;
   elementConfig?: object;
+  setSideElement;
   setElementConfig?: (elementConfig: object) => void;
+  addContainerElements?: boolean;
+  setAddContainerElements?: (addContainerElements?: boolean) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  showSidebar?;
+  hideSidebar?;
+  hideSettingSidebar?;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -45,6 +53,14 @@ const RenderItem: FC<IRenderItem> = ({
   setSelector,
   elementConfig,
   setElementConfig,
+  setSideElement,
+  addContainerElements,
+  setAddContainerElements,
+  dragContainer,
+  setDragContainer,
+  showSidebar,
+  hideSidebar,
+  hideSettingSidebar,
 }) => {
   switch (item.name) {
     case "Container":
@@ -69,6 +85,14 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          setSideElement={setSideElement}
+          addContainerElements={addContainerElements}
+          setAddContainerElements={setAddContainerElements}
+          dragContainer={dragContainer}
+          setDragContainer={setDragContainer}
+          showSidebar={showSidebar}
+          hideSidebar={hideSidebar}
+          hideSettingSidebar={hideSettingSidebar}
         />
       );
     case "Button":
@@ -204,6 +228,14 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          setSideElement={setSideElement}
+          addContainerElements={addContainerElements}
+          setAddContainerElements={setAddContainerElements}
+          dragContainer={dragContainer}
+          setDragContainer={setDragContainer}
+          showSidebar={showSidebar}
+          hideSidebar={hideSidebar}
+          hideSettingSidebar={hideSettingSidebar}
         />
       );
     case "Vertical Container":
@@ -228,6 +260,14 @@ const RenderItem: FC<IRenderItem> = ({
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          setSideElement={setSideElement}
+          addContainerElements={addContainerElements}
+          setAddContainerElements={setAddContainerElements}
+          dragContainer={dragContainer}
+          setDragContainer={setDragContainer}
+          showSidebar={showSidebar}
+          hideSidebar={hideSidebar}
+          hideSettingSidebar={hideSettingSidebar}
         />
       );
     default:

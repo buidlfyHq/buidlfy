@@ -51,6 +51,9 @@ const Dashboard: FC = () => {
     g: "0",
     b: "0",
   });
+  const [addContainerElements, setAddContainerElements] =
+    useState<boolean>(true);
+  const [dragContainer, setDragContainer] = useState<boolean>(true);
   const [head, setHead] = useState<{
     title: string;
     logo: string | ArrayBuffer;
@@ -83,7 +86,7 @@ const Dashboard: FC = () => {
   // const [isSettingHidden, setIsSettingHidden] = useState<boolean>(false);
   const showSidebar = () => {
     setIsNavHidden(false);
-    setOpenSetting(true);
+    setOpenSetting(false);
   };
   const hideSidebar = () => {
     setIsNavHidden(true);
@@ -97,6 +100,7 @@ const Dashboard: FC = () => {
     // setIsNavHidden(false);
     setOpenSetting(false);
   };
+
   return (
     <main>
       {size.width > 1024 ? (
@@ -174,6 +178,12 @@ const Dashboard: FC = () => {
                 isNavHidden={isNavHidden}
                 openSetting={openSetting}
                 setIsNavHidden={setIsNavHidden}
+                setSideElement={setSideElement}
+                addContainerElements={addContainerElements}
+                setAddContainerElements={setAddContainerElements}
+                dragContainer={dragContainer}
+                setDragContainer={setDragContainer}
+                hideSettingSidebar={undefined}
               />
               {/* Right Sidebar Settings */}
             </aside>

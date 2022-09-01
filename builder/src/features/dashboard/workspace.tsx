@@ -43,6 +43,12 @@ interface IWorkspace {
   isNavHidden;
   openSetting;
   setIsNavHidden;
+  setSideElement;
+  addContainerElements;
+  setAddContainerElements;
+  dragContainer;
+  setDragContainer;
+  hideSettingSidebar;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -70,9 +76,16 @@ const Workspace: FC<IWorkspace> = ({
   isNavHidden,
   openSetting,
   setIsNavHidden,
+  setSideElement,
+  addContainerElements,
+  setAddContainerElements,
+  dragContainer,
+  setDragContainer,
+  hideSettingSidebar,
 }) => {
   const [currentSize, setCurrentSize] = useState<number>(6);
   const [isLoading, setLoading] = useState(true);
+  console.log(openSetting, "opensetting");
 
   useEffect(() => {
     console.log(isNavHidden, "setting");
@@ -210,7 +223,6 @@ const Workspace: FC<IWorkspace> = ({
       e.target.parentNode.parentNode.id === "Vertical Container" ||
       e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
     ) {
-      setOpenSetting(false);
     } else {
       setAddContainer(false);
       hideSidebar();
@@ -233,7 +245,7 @@ const Workspace: FC<IWorkspace> = ({
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 ${
             !containerCheck(item)
               ? selector
-                ? "hover:border-orange-300"
+                ? "border-hover"
                 : "hover:border-slate-300 hover:border-dashed"
               : null
           }`}
@@ -255,6 +267,14 @@ const Workspace: FC<IWorkspace> = ({
             setSelector={setSelector}
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
+            setSideElement={setSideElement}
+            addContainerElements={addContainerElements}
+            setAddContainerElements={setAddContainerElements}
+            dragContainer={dragContainer}
+            setDragContainer={setDragContainer}
+            showSidebar={showSidebar}
+            hideSidebar={hideSidebar}
+            hideSettingSidebar={hideSettingSidebar}
           />
         </div>
       );

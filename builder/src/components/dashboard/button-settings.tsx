@@ -208,7 +208,11 @@ const ButtonSettings: FC<ISettings> = ({
           setDeleteComponent={setDeleteComponent}
         />
       </span>
-      <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
+      <div
+        style={{ width: "-webkit-fill-available" }}
+        className={openTab === 2 ? "block" : "hidden"}
+        id="link-two"
+      >
         <AdvanceComponent
           contractConfig={contractConfig}
           setContractConfig={setContractConfig}
