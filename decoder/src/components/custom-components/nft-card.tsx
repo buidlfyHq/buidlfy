@@ -1,4 +1,5 @@
 import { FC } from "react";
+import IColor from '../../interfaces/color'
 
 interface INftCard {
   image: string;
@@ -6,6 +7,7 @@ interface INftCard {
   title: string;
   price: string;
   highestBid: string;
+  backgroundColor: IColor;
 }
 
 const NftCard: FC<INftCard> = ({
@@ -14,12 +16,14 @@ const NftCard: FC<INftCard> = ({
   title,
   price,
   highestBid,
+  backgroundColor
 }) => {
   return (
     <div className="flex justify-center items-center h-full p-2">
       <div
         className="bg-stone-700 w-full h-full p-2 rounded-lg"
         style={{
+          backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
           boxShadow: "0px 2px 7px rgba(0, 0, 0, 0.5)",
         }}
       >
@@ -48,7 +52,7 @@ const NftCard: FC<INftCard> = ({
           <div className="text-white font-bold text-xl">{title}</div>
         </div>
         <div
-          className="flex justify-around items-center text-center bg-stone-600 p-1 rounded-lg h-[15%]"
+          className="flex justify-around items-center text-center bg-stone-600 p-1 rounded-lg h-[15%] bg-white/10"
           style={{
             boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.5)",
           }}
