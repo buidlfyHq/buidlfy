@@ -12,39 +12,29 @@ import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 
 const GeneralSettings: FC<ISettings> = ({
+  selectedItem,
   textVal,
   handleTextChange,
   linkVal,
   handleLinkChange,
-  selectedItem,
   setBold,
-  bold,
   setItalic,
-  italic,
   setUnderline,
-  underline,
   setColor,
-  color,
   setBgColor,
-  backgroundColor,
   setDeleteComponent,
-  deleteComponent,
-  justifyContent,
   setLeft,
   setCenter,
   setRight,
-  fontSize,
   setFontSize,
-  margin,
-  setMarginLeft,
-  setMarginRight,
   setMarginTop,
+  setMarginRight,
   setMarginBottom,
-  padding,
-  setPaddingLeft,
+  setMarginLeft,
+  setPaddingTop,
   setPaddingRight,
   setPaddingBottom,
-  setPaddingTop,
+  setPaddingLeft,
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -72,42 +62,42 @@ const GeneralSettings: FC<ISettings> = ({
       />
     </div>
     <FontStyleComponent
-      bold={bold}
-      italic={italic}
-      underline={underline}
+      bold={selectedItem?.style?.fontWeight}
+      italic={selectedItem?.style?.fontStyle}
+      underline={selectedItem?.style?.textDecoration}
       setBold={setBold}
       setItalic={setItalic}
       setUnderline={setUnderline}
     />
     <MarginComponent
-      setMarginLeft={setMarginLeft}
-      setMarginRight={setMarginRight}
+      margin={selectedItem?.style?.margin}
       setMarginTop={setMarginTop}
+      setMarginRight={setMarginRight}
       setMarginBottom={setMarginBottom}
-      margin={{ ...margin }}
+      setMarginLeft={setMarginLeft}
     />
     <PaddingComponent
-      setPaddingLeft={setPaddingLeft}
-      setPaddingRight={setPaddingRight}
+      padding={selectedItem?.style?.padding}
       setPaddingTop={setPaddingTop}
+      setPaddingRight={setPaddingRight}
       setPaddingBottom={setPaddingBottom}
-      padding={{ ...padding }}
+      setPaddingLeft={setPaddingLeft}
     />
     <AlignComponent
-      justifyContent={justifyContent}
+      justifyContent={selectedItem?.style?.justifyContent}
       setLeft={setLeft}
       setRight={setRight}
       setCenter={setCenter}
     />
-    <FontSizeComponent fontSize={fontSize} setFontSize={setFontSize} />
+    <FontSizeComponent fontSize={selectedItem?.style?.fontSize} setFontSize={setFontSize} />
     <ColorComponent
-      color={color}
+      color={selectedItem?.style?.color}
       setColor={setColor}
       selectedItem={selectedItem}
     />
-    <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
+    <BgColorComponent color={selectedItem?.style?.backgroundColor} setBgColor={setBgColor} />
     <UtilitiesComponent
-      deleteComponent={deleteComponent}
+      deleteComponent={selectedItem?.style?.deleteComponent}
       setDeleteComponent={setDeleteComponent}
     />
   </>

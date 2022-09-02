@@ -17,24 +17,23 @@ const Text: FC<ITexts> = ({
   link,
 }) => {
   return (
-    <section
-      id="text-one"
-      style={{
-        fontWeight: bold,
-        fontStyle: italic,
-        textDecoration: underline,
-        color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-        display: "flex",
-        justifyContent,
-        alignItems: "center",
-        fontSize: `${fontSize}px`,
-        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
-        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
-      }}
-      className="flex overflow-hidden items-center justify-center w-auto h-full"
-    >
-      <>
+    <section className="w-auto h-full overflow-hidden ">
+      <div
+        id="text-one"
+        className="flex items-center justify-center w-auto h-full overflow-hidden "
+        style={{
+          fontWeight: bold,
+          fontStyle: italic,
+          textDecoration: underline,
+          color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+          display: "flex",
+          justifyContent: justifyContent,
+          fontSize: `${fontSize}px`,
+          backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+          margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
+          padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
+        }}
+      >
         {link.length > 0 ? (
           <a
             rel="noreferrer"
@@ -84,7 +83,7 @@ const Text: FC<ITexts> = ({
             className={`w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
           />
         )}
-      </>
+      </div>
     </section>
   );
 };

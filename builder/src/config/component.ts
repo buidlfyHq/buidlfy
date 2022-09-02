@@ -1,37 +1,43 @@
 const defaultMarginStyles = {
   margin: {
-    marginLeft: 0,
-    marginRight: 0,
     marginTop: 0,
-    marginBottom: 0
-  }
-}
+    marginRight: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+  },
+};
+
 const defaultPaddingStyles = {
   padding: {
-    paddingLeft: 0,
-    paddingRight: 0,
     paddingTop: 0,
-    paddingBottom: 0
-  }
-}
+    paddingRight: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+  },
+};
+
 const defaultColorStyles = {
   backgroundColor: { r: "0", g: "0", b: "0" },
   color: { r: "0", g: "0", b: "0", a: "100" },
-}
+};
+
 const defaultFontStyles = {
   fontWeight: "normal",
   fontStyle: "normal",
   textDecoration: "none",
   justifyContent: "center",
-}
+};
+
 const defaultDeleteStyles = {
   deleteComponent: 0,
-}
+};
+
 const defaultBorderStyles = {
   borderRadius: 0,
   borderWidth: 0,
   shadow: "none",
-}
+};
+
 export const components = [
   {
     name: "Container",
@@ -63,7 +69,7 @@ export const components = [
         style: {
           ...defaultDeleteStyles,
           ...defaultFontStyles,
-          ...defaultMarginStyles
+          ...defaultMarginStyles,
         },
       },
       {
@@ -81,7 +87,7 @@ export const components = [
           fontSize: 15,
           ...defaultDeleteStyles,
           ...defaultMarginStyles,
-          ...defaultPaddingStyles
+          ...defaultPaddingStyles,
         },
       },
       {
@@ -99,10 +105,9 @@ export const components = [
           fontSize: 25,
           ...defaultDeleteStyles,
           ...defaultMarginStyles,
-          ...defaultPaddingStyles
+          ...defaultPaddingStyles,
         },
       },
-     
     ],
   },
   {
@@ -143,7 +148,7 @@ export const components = [
           fontSize: 25,
           ...defaultDeleteStyles,
           ...defaultMarginStyles,
-          ...defaultPaddingStyles
+          ...defaultPaddingStyles,
         },
       },
       {
@@ -161,7 +166,7 @@ export const components = [
           fontSize: 15,
           ...defaultDeleteStyles,
           ...defaultMarginStyles,
-          ...defaultPaddingStyles
+          ...defaultPaddingStyles,
         },
       },
     ],
@@ -185,7 +190,7 @@ export const components = [
         paddingRight: 24,
         paddingTop: 8,
         paddingBottom: 8,
-      }
+      },
     },
     connectWallet: "off",
     contract: {},
@@ -264,7 +269,7 @@ export const components = [
         marginRight: 24,
         marginTop: 0,
         marginBottom: 0,
-      }
+      },
     },
   },
   {

@@ -52,10 +52,6 @@ const Workspace: FC<IWorkspace> = ({
   setDrag,
   setAddContainer,
   backgroundColor,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -206,7 +202,7 @@ const Workspace: FC<IWorkspace> = ({
               : null
           }`}
           // open item setting on click
-          onClick={(e) =>
+          onClick={() =>
             containerCheck(item) ? null : onComponentClick(item.name, i)
           }
         >

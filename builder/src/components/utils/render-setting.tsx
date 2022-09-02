@@ -43,14 +43,14 @@ const SettingComponent: FC<ISettings> = ({
   setOn,
   placeholder,
   setPlaceholder,
-  setMarginLeft,
-  setMarginRight,
   setMarginTop,
+  setMarginRight,
   setMarginBottom,
-  setPaddingLeft,
+  setMarginLeft,
+  setPaddingTop,
   setPaddingRight,
   setPaddingBottom,
-  setPaddingTop,
+  setPaddingLeft,
 }) => {
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -68,254 +68,156 @@ const SettingComponent: FC<ISettings> = ({
     case "Button":
       return (
         <ButtonSettings
+          selectedItem={selectedItem}
           textVal={value}
           handleTextChange={handleTextChange}
           linkVal={link}
           handleLinkChange={handleLinkChange}
           items={items}
           setItems={setItems}
-          selectedItem={selectedItem}
           setBold={setBold}
-          bold={selectedItem?.style?.fontWeight}
           setItalic={setItalic}
-          italic={selectedItem?.style?.fontStyle}
           setUnderline={setUnderline}
-          underline={selectedItem?.style?.textDecoration}
-          color={selectedItem?.style?.color}
           setColor={setColor}
           setBgColor={setBgColor}
-          backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          justifyContent={selectedItem?.style?.justifyContent}
           setLeft={setLeft}
           setCenter={setCenter}
           setRight={setRight}
           setFontSize={setFontSize}
-          fontSize={selectedItem?.style?.fontSize}
           setContractConfig={setContractConfig}
           contractConfig={contractConfig}
           setShowComponent={setShowComponent}
           showComponent={showComponent}
-          selector={selector}
           setSelector={setSelector}
+          selector={selector}
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
-          borderRadius={selectedItem?.style?.borderRadius}
           setBorderRadius={setBorderRadius}
           setSmall={setSmall}
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
           setOn={setOn}
-          connectWallet={selectedItem?.connectWallet}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
           setMarginTop={setMarginTop}
+          setMarginRight={setMarginRight}
           setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
+          setMarginLeft={setMarginLeft}
           setPaddingTop={setPaddingTop}
+          setPaddingRight={setPaddingRight}
           setPaddingBottom={setPaddingBottom}
+          setPaddingLeft={setPaddingLeft}
         />
       );
-
     case "Image":
       return (
         <ImageSettings
+          selectedItem={selectedItem}
           items={items}
           setItems={setItems}
-          selectedItem={selectedItem}
           setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          justifyContent={selectedItem?.style?.justifyContent}
           setLeft={setLeft}
           setCenter={setCenter}
           setRight={setRight}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
           setMarginTop={setMarginTop}
+          setMarginRight={setMarginRight}
           setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
+          setMarginLeft={setMarginLeft}
         />
       );
-
     case "Container":
       return (
         <ContainerSettings
+          selectedItem={selectedItem}
           items={items}
           setItems={setItems}
-          selectedItem={selectedItem}
-          color={selectedItem?.style?.color}
           setColor={setColor}
           setBgColor={setBgColor}
-          backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          borderRadius={selectedItem?.style?.borderRadius}
           setBorderRadius={setBorderRadius}
-          borderWidth={selectedItem?.style?.borderWidth}
           setBorderWidth={setBorderWidth}
           setSmall={setSmall}
           setMedium={setMedium}
           setLarge={setLarge}
-          shadow={selectedItem?.style?.shadow}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
-          setMarginTop={setMarginTop}
-          setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
         />
       );
     case "Horizontal Container":
       return (
         <ContainerSettings
+          selectedItem={selectedItem}
           items={items}
           setItems={setItems}
-          selectedItem={selectedItem}
-          color={selectedItem?.style?.color}
           setColor={setColor}
           setBgColor={setBgColor}
-          backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          borderRadius={selectedItem?.style?.borderRadius}
           setBorderRadius={setBorderRadius}
-          borderWidth={selectedItem?.style?.borderWidth}
           setBorderWidth={setBorderWidth}
           setSmall={setSmall}
           setMedium={setMedium}
           setLarge={setLarge}
-          shadow={selectedItem?.style?.shadow}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
-          setMarginTop={setMarginTop}
-          setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
         />
       );
     case "Vertical Container":
       return (
         <ContainerSettings
+          selectedItem={selectedItem}
           items={items}
           setItems={setItems}
-          selectedItem={selectedItem}
-          color={selectedItem?.style?.color}
           setColor={setColor}
           setBgColor={setBgColor}
-          backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          borderRadius={selectedItem?.style?.borderRadius}
           setBorderRadius={setBorderRadius}
-          borderWidth={selectedItem?.style?.borderWidth}
           setBorderWidth={setBorderWidth}
           setSmall={setSmall}
           setMedium={setMedium}
           setLarge={setLarge}
-          shadow={selectedItem?.style?.shadow}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
-          setMarginTop={setMarginTop}
-          setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
         />
       );
-
     case "Input":
       return (
         <InputSettings
+          selectedItem={selectedItem}
           placeholder={placeholder}
           handlePlaceholderChange={handlePlaceholderChange}
-          selectedItem={selectedItem}
-          color={selectedItem?.style?.color}
           setColor={setColor}
           setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          borderRadius={selectedItem?.style?.borderRadius}
           setBorderRadius={setBorderRadius}
           setSmall={setSmall}
           setMedium={setMedium}
           setLarge={setLarge}
-          shadow={selectedItem?.style?.shadow}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
           setMarginTop={setMarginTop}
+          setMarginRight={setMarginRight}
           setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
+          setMarginLeft={setMarginLeft}
         />
       );
-
     default:
       return (
         <GeneralSettings
+          selectedItem={selectedItem}
           textVal={value}
           handleTextChange={handleTextChange}
           linkVal={link}
           handleLinkChange={handleLinkChange}
-          items={items}
-          setItems={setItems}
-          selectedItem={selectedItem}
           setBold={setBold}
-          bold={selectedItem?.style?.fontWeight}
           setItalic={setItalic}
-          italic={selectedItem?.style?.fontStyle}
           setUnderline={setUnderline}
-          underline={selectedItem?.style?.textDecoration}
-          color={selectedItem?.style?.color}
           setColor={setColor}
           setBgColor={setBgColor}
-          backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          justifyContent={selectedItem?.style?.justifyContent}
           setLeft={setLeft}
           setCenter={setCenter}
           setRight={setRight}
           setFontSize={setFontSize}
-          fontSize={selectedItem?.style?.fontSize}
-          setContractConfig={setContractConfig}
-          contractConfig={contractConfig}
-          setShowComponent={setShowComponent}
-          showComponent={showComponent}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          openTab={openTab}
-          setOpenTab={setOpenTab}
-          borderRadius={selectedItem?.style?.borderRadius}
-          setBorderRadius={setBorderRadius}
-          borderWidth={selectedItem?.style?.borderWidth}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-          shadow={selectedItem?.style?.shadow}
-          setOn={setOn}
-          connectWallet={selectedItem?.connectWallet}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
           setMarginTop={setMarginTop}
+          setMarginRight={setMarginRight}
           setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
+          setMarginLeft={setMarginLeft}
           setPaddingTop={setPaddingTop}
+          setPaddingRight={setPaddingRight}
           setPaddingBottom={setPaddingBottom}
+          setPaddingLeft={setPaddingLeft}
         />
       );
   }

@@ -9,23 +9,17 @@ import ShadowComponent from "components/settings/shadow-component";
 import ISettings from "interfaces/settings";
 
 const ContainerSettings: FC<ISettings> = ({
+  selectedItem,
   items,
   setItems,
-  selectedItem,
   setColor,
-  color,
   setBgColor,
-  backgroundColor,
   setDeleteComponent,
-  deleteComponent,
-  borderRadius,
   setBorderRadius,
-  borderWidth,
   setBorderWidth,
   setSmall,
   setMedium,
   setLarge,
-  shadow,
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -39,28 +33,28 @@ const ContainerSettings: FC<ISettings> = ({
       items={items}
       setItems={setItems}
     />
-    <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
+    <BgColorComponent color={selectedItem?.style?.backgroundColor} setBgColor={setBgColor} />
     <ColorComponent
-      color={color}
+      color={selectedItem?.style?.color}
       setColor={setColor}
       selectedItem={selectedItem}
     />
     <BorderRadiusComponent
-      borderRadius={borderRadius}
+      borderRadius={selectedItem?.style?.borderRadius}
       setBorderRadius={setBorderRadius}
     />
     <BorderComponent
-      borderWidth={borderWidth}
+      borderWidth={selectedItem?.style?.borderWidth}
       setBorderWidth={setBorderWidth}
     />
     <ShadowComponent
       setSmall={setSmall}
       setMedium={setMedium}
       setLarge={setLarge}
-      shadow={shadow}
+      shadow={selectedItem?.style?.shadow}
     />
     <UtilitiesComponent
-      deleteComponent={deleteComponent}
+      deleteComponent={selectedItem?.style?.deleteComponent}
       setDeleteComponent={setDeleteComponent}
     />
   </>

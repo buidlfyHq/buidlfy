@@ -9,23 +9,18 @@ import MarginComponent from "components/settings/margin-component";
 
 const InputSettings: FC<ISettings> = ({
   selectedItem,
+  placeholder,
+  handlePlaceholderChange,
   setColor,
-  color,
   setDeleteComponent,
-  deleteComponent,
-  borderRadius,
   setBorderRadius,
   setSmall,
   setMedium,
   setLarge,
-  shadow,
-  placeholder,
-  handlePlaceholderChange,
-  margin,
-  setMarginLeft,
-  setMarginRight,
   setMarginTop,
+  setMarginRight,
   setMarginBottom,
+  setMarginLeft,
 }) => (
   <>
     <h3 className="mb-3 ml-8">
@@ -47,18 +42,18 @@ const InputSettings: FC<ISettings> = ({
     </div>
 
     <BorderRadiusComponent
-      borderRadius={borderRadius}
+      borderRadius={selectedItem?.style?.borderRadius}
       setBorderRadius={setBorderRadius}
     />
     <MarginComponent
+      margin={selectedItem?.style?.margin}
       setMarginLeft={setMarginLeft}
       setMarginRight={setMarginRight}
       setMarginTop={setMarginTop}
       setMarginBottom={setMarginBottom}
-      margin={{ ...margin }}
     />
     <ColorComponent
-      color={color}
+      color={selectedItem?.style?.color}
       setColor={setColor}
       selectedItem={selectedItem}
     />
@@ -66,10 +61,10 @@ const InputSettings: FC<ISettings> = ({
       setSmall={setSmall}
       setMedium={setMedium}
       setLarge={setLarge}
-      shadow={shadow}
+      shadow={selectedItem?.style?.shadow}
     />
     <UtilitiesComponent
-      deleteComponent={deleteComponent}
+      deleteComponent={selectedItem?.style?.deleteComponent}
       setDeleteComponent={setDeleteComponent}
     />
   </>
