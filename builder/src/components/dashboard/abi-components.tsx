@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
+import Spinner from "components/utils/spinner";
 import IItems from "interfaces/items";
-import Spinner from "components/dashboard/spinner";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import "styles/components.css";
 

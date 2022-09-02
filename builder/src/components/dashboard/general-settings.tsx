@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { RiText } from "react-icons/ri";
 import { IoMdLink } from "react-icons/io";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
@@ -9,7 +8,7 @@ import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import ISettings from "interfaces/settings";
-import "styles/components.css"; 
+import "styles/components.css";
 
 const GeneralSettings: FC<ISettings> = ({
   textVal,
@@ -98,14 +97,14 @@ const GeneralSettings: FC<ISettings> = ({
       setMarginRight={setMarginRight}
       setMarginTop={setMarginTop}
       setMarginBottom={setMarginBottom}
-      margin={{ ...margin }}
+      margin={margin}
     />
     <PaddingComponent
       setPaddingLeft={setPaddingLeft}
       setPaddingRight={setPaddingRight}
       setPaddingTop={setPaddingTop}
       setPaddingBottom={setPaddingBottom}
-      padding={{ ...padding }}
+      padding={padding}
     />
     <UtilitiesComponent
       deleteComponent={deleteComponent}

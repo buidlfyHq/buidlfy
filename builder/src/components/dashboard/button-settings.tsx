@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { IoMdLink } from "react-icons/io";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
@@ -7,11 +8,10 @@ import AdvanceComponent from "components/settings/advance-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import ConnectSwitchComponent from "components/settings/connect-switch-component";
-import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
-import { IoMdLink } from "react-icons/io";
+import ISettings from "interfaces/settings";
 
 const ButtonSettings: FC<ISettings> = ({
   textVal,

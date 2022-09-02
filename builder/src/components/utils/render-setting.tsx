@@ -51,8 +51,6 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingRight,
   setPaddingBottom,
   setPaddingTop,
-  margin,
-  padding,
 }) => {
   const handleTextChange = (
     e:
@@ -66,8 +64,7 @@ const SettingComponent: FC<ISettings> = ({
     setLink(e.target.value);
   };
 
-  // type of e to be added
-  const handlePlaceholderChange = (e) => {
+  const handlePlaceholderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlaceholder(e.target.value);
   };
 
@@ -125,11 +122,10 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingRight={setPaddingRight}
           setPaddingTop={setPaddingTop}
           setPaddingBottom={setPaddingBottom}
-          margin={{ ...selectedItem?.style?.margin }}
-          padding={{ ...selectedItem?.style?.padding }}
+          margin={selectedItem?.style?.margin}
+          padding={selectedItem?.style?.padding}
         />
       );
-
     case "Image":
       return (
         <ImageSettings
@@ -146,15 +142,9 @@ const SettingComponent: FC<ISettings> = ({
           setMarginRight={setMarginRight}
           setMarginTop={setMarginTop}
           setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
-          margin={{ ...selectedItem?.style?.margin }}
-          padding={{ ...selectedItem?.style?.padding }}
+          margin={selectedItem?.style?.margin}
         />
       );
-
     case "Container":
       return (
         <ContainerSettings
@@ -175,14 +165,6 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
-          setMarginTop={setMarginTop}
-          setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
         />
       );
     case "Horizontal Container":
@@ -205,14 +187,6 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
-          setMarginTop={setMarginTop}
-          setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
         />
       );
     case "Vertical Container":
@@ -235,17 +209,8 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
-          setMarginTop={setMarginTop}
-          setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
         />
       );
-
     case "Input":
       return (
         <InputSettings
@@ -266,15 +231,9 @@ const SettingComponent: FC<ISettings> = ({
           setMarginRight={setMarginRight}
           setMarginTop={setMarginTop}
           setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
-          margin={{ ...selectedItem?.style?.margin }}
-          padding={{ ...selectedItem?.style?.padding }}
+          margin={selectedItem?.style?.margin}
         />
       );
-
     default:
       return (
         <GeneralSettings
@@ -329,8 +288,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingRight={setPaddingRight}
           setPaddingTop={setPaddingTop}
           setPaddingBottom={setPaddingBottom}
-          margin={{ ...selectedItem?.style?.margin }}
-          padding={{ ...selectedItem?.style?.padding }}
+          margin={selectedItem?.style?.margin}
+          padding={selectedItem?.style?.padding}
         />
       );
   }
