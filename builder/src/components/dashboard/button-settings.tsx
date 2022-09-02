@@ -1,8 +1,4 @@
 import React, { FC } from "react";
-import { RiText } from "react-icons/ri";
-import { AiOutlineLink } from "react-icons/ai";
-import AlignComponent from "components/settings/align-component";
-import FontStyleComponent from "components/settings/font-style-component";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
