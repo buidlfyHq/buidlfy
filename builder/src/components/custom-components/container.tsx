@@ -168,6 +168,7 @@ const Container: FC<IContainer> = ({
     showSidebar();
     handleSidebar(sidebarEnum.ELEMENTS);
     setOpenSetting(false);
+    setSettingItemId(i);
   };
   const onComponentClick = (itemName: string, i: string) => {
     if (selector === null) {
@@ -205,13 +206,13 @@ const Container: FC<IContainer> = ({
     <>
       <section
         id={item.i}
-        className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
+        className="h-fit w-full outline px-[20px] outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
       >
         <GridLayout
           layout={children}
           cols={6}
           rowHeight={50}
-          width={containerW || 200}
+          width={containerW - 40 || 200}
           isBounded={true}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}

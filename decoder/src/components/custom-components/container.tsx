@@ -29,13 +29,13 @@ const Container: FC<IBgContainer> = ({
   }, []);
 
   return (
-    <section id={item.i} className="w-full h-fit">
+    <section id={item.i} className="px-[20px] w-full h-fit">
       {containerW && (
         <GridLayout
           layout={children}
           cols={6}
           rowHeight={50}
-          width={containerW || 1000}
+          width={containerW - 40 || 1000}
           isDraggable={false}
           isResizable={false}
           compactType={null}
