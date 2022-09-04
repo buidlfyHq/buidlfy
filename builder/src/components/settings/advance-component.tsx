@@ -46,7 +46,7 @@ interface IAdvanceComponent {
   elementConfig: object;
 }
 interface IContract {
-  name;
+  name: string;
   text;
 }
 const AdvanceComponent: FC<IAdvanceComponent> = ({
@@ -68,7 +68,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
     try {
       const contractList = localStorage.getItem("contractList");
       const newContract = JSON.parse(contractList);
-      console.log(newContract, "newContract");
       setNewContractList(newContract);
     } catch (error) {
       console.log(error, "error");
@@ -76,16 +75,8 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
   }, []);
 
   const handleClick = (abi: string) => {
-    // localStorage.removeItem("contractList");
-    // localStorage.setItem("contractList", JSON.parse(abi));
-    // const filteredAbi = JSON.parse(abi).filter(
-    //   (m: { type: string }) => m.type === "function"
-    // );
     setContractConfig({ ...contractConfig, abi: JSON.parse(abi) });
-    console.log(abi, "abi");
     setMethodOpen(false);
-
-    // navigate("/dashboard", { replace: true });
   };
   return (
     <>
@@ -114,7 +105,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
         </>
       ) : (
         <>
-          {" "}
           <div className="flex justify-center mt-[3rem]" />
           <h3 className="ml-[0.5rem]">
             <span className="setting-text">Import Contract</span>
@@ -147,7 +137,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
           </span>
           <p className="contract-text ml-[0.5rem]">
             You can select the old file to continue{" "}
-          </p>{" "}
+          </p>
           <div className="grid grid-cols-3 gap-2 mt-[1rem]">
             {newContractList &&
               newContractList?.map((contract: IContract) => {
@@ -164,7 +154,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
           </div>
         </>
       )}
-
       <br />
     </>
   );

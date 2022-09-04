@@ -1,8 +1,5 @@
 import React, { FC } from "react";
-import { RiText } from "react-icons/ri";
-import { AiOutlineLink } from "react-icons/ai";
-import AlignComponent from "components/settings/align-component";
-import FontStyleComponent from "components/settings/font-style-component";
+import { IoMdLink } from "react-icons/io";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
@@ -11,11 +8,11 @@ import AdvanceComponent from "components/settings/advance-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import ConnectSwitchComponent from "components/settings/connect-switch-component";
-import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
-import { IoMdLink } from "react-icons/io";
+import ISettings from "interfaces/settings";
+import "styles/dashboard.css";
 
 const ButtonSettings: FC<ISettings> = ({
   textVal,
@@ -98,37 +95,6 @@ const ButtonSettings: FC<ISettings> = ({
           Contract
         </span>
       </span>
-      {/* <ul
-          className="flex flex-row flex-wrap px-[-4px] pb-2 mb-0 list-none border-b-2"
-          role="tablist"
-        >
-          <li className="flex-auto mr-2 -mb-px last:mr-0">
-            <a
-              className="text-xs font-bold text-black uppercase bg-transparent"
-              onClick={(e) => handleToggleTab(e, 1)}
-              data-toggle="tab"
-              href="#link1"
-              role="tablist"
-            >
-              <i className="mr-1 text-base fas fa-space-shuttle"></i>
-              Setting
-            </a>
-          </li>
-          <li className="flex-auto mr-2 -mb-px last:mr-0">
-            <a
-              className="text-xs font-bold text-black uppercase bg-transparent"
-              onClick={(e) => handleToggleTab(e, 2)}
-              data-toggle="tab"
-              href="#link3"
-              role="tablist"
-            >
-              <i className="mr-1 text-base fas fa-briefcase"></i> Contract
-            </a>
-          </li>
-        </ul> */}
-      {/* <span className="relative flex flex-col mt-[2.5rem] break-words">
-        <span className="flex-auto py-2">
-          <span className="tab-content tab-space"> */}
       <span className={openTab === 1 ? "block" : "hidden"} id="link-one">
         <h3 className="ml-[0.5rem] mt-[3rem]">
           {selectedItem ? (
@@ -226,9 +192,6 @@ const ButtonSettings: FC<ISettings> = ({
           setItems={setItems}
         />
       </div>
-      {/* </span>
-        </span>
-      </span> */}
     </>
   );
 };

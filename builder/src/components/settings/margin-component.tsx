@@ -36,17 +36,6 @@ const MarginComponent: FC<IMarginComponent> = ({
   const handleBottomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMarginBottom(+e.target.value);
   };
-  // const incrementCounter = () => {
-  //   if (margin.marginLeft) {
-  //     setMarginLeft(margin.marginLeft + 1);
-  //   } else if (margin.marginRight) {
-  //     setMarginRight(margin.marginRight + 1);
-  //   } else if (margin.marginTop) {
-  //     setMarginTop(margin.marginTop + 1);
-  //   } else {
-  //     setMarginBottom(margin.marginBottom + 1);
-  //   }
-  // };
   const incrementLeftCounter = () => {
     setMarginLeft(margin.marginLeft + 1);
   };
@@ -71,18 +60,6 @@ const MarginComponent: FC<IMarginComponent> = ({
   const decrementBottomCounter = () => {
     setMarginBottom(margin.marginBottom - 1);
   };
-  // const decrementCounter = () => {
-  //   if (margin.marginLeft) {
-  //     setMarginLeft(margin.marginLeft - 1);
-  //   } else if (margin.marginRight) {
-  //     setMarginRight(margin.marginRight - 1);
-  //   } else if (margin.marginTop) {
-  //     setMarginTop(margin.marginTop - 1);
-  //   } else {
-  //     setMarginBottom(margin.marginBottom - 1);
-  //   }
-  // };
-  console.log(margin.marginLeft, "marginleft");
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">

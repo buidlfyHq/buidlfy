@@ -3,9 +3,8 @@ import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
-import ISettings from "interfaces/settings";
-import { RiText } from "react-icons/ri";
 import MarginComponent from "components/settings/margin-component";
+import ISettings from "interfaces/settings";
 import "styles/components.css";
 
 const InputSettings: FC<ISettings> = ({

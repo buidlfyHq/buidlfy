@@ -62,6 +62,7 @@ const Dashboard: FC = () => {
     logo: "",
   });
   const [sideElement, setSideElement] = useState<string>("");
+  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -82,7 +83,6 @@ const Dashboard: FC = () => {
       setItems(JSON.parse(saveItems));
     }
   }, []); // eslint-disable-line
-  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
   // const [isSettingHidden, setIsSettingHidden] = useState<boolean>(false);
   const showSidebar = () => {
     setIsNavHidden(false);

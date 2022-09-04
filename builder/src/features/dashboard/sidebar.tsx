@@ -55,20 +55,6 @@ const Sidebar: FC<ISidebar> = ({
   head,
   setHead,
 }) => {
-  // const [indexValue, setIndexValue] = useState<number>(0);
-  // const ref = useRef<HTMLDivElement>();
-
-  // useEffect(() => {
-  //   // FIX: find a suitable type for this event
-  //   const handleOutsideClick = (event) => {
-  //     if (ref.current && !ref.current.contains(event.target)) {
-  //       setIsNavHidden(false);
-  //     }
-  //   };
-  //   console.log(isNavHidden, "NAV");
-  //   document.addEventListener("click", handleOutsideClick);
-  //   return () => document.removeEventListener("click", handleOutsideClick);
-  // }, [ref]);
   const ref = useRef(null);
 
   return (

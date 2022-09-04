@@ -6,7 +6,7 @@ const defaultItem = {
   name: "Text",
   style: {
     color: { r: "0", g: "0", b: "0", a: "100" },
-    backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
+    backgroundColor: { r: "0", g: "0", b: "0", a: "" },
     fontWeight: "normal",
     fontStyle: "normal",
     textDecoration: "none",

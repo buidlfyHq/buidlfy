@@ -1,19 +1,19 @@
 import React, { FC, useState } from "react";
 import { Dialog } from "@headlessui/react";
-import "styles/components.css";
 import upload from "assets/upload-img.png";
+import "styles/components.css";
 
 interface IModal {
   contractConfig: { abi: string; address: string };
   setContractConfig: (contractConfig: object) => void;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  methodOpen;
-  setMethodOpen;
-  setNewContractList;
+  methodOpen: boolean;
+  setMethodOpen: (methodOpen: boolean) => void;
+  setNewContractList: (newContractList: IContract[]) => void;
 }
 interface IContract {
-  name;
+  name: string;
   text;
 }
 const Modal: FC<IModal> = ({
@@ -35,7 +35,6 @@ const Modal: FC<IModal> = ({
   const handleSaveContract = () => {
     // FIX: save full config to local storage
     let newContractList: Array<IContract> = [];
-    console.log(contractConfig.abi, "contract-abi");
     let newContract: IContract = {
       name: inputValue,
       text: JSON.stringify(contractConfig.abi),

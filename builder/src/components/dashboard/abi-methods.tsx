@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import IItems from "interfaces/items";
-import { AiOutlineCaretDown, AiOutlineLeft } from "react-icons/ai";
+import { AiOutlineLeft } from "react-icons/ai";
+import "styles/dashboard.css";
 
 interface IAbiMethods {
   contractConfig: { abi: string; address: string };
@@ -16,8 +17,8 @@ interface IAbiMethods {
   selectedItem: IItems;
   items: IItems[];
   setItems: (items: IItems[]) => void;
-  methodOpen;
-  setMethodOpen;
+  methodOpen: boolean;
+  setMethodOpen: (methodOpen: boolean) => void;
 }
 
 const AbiMethods: FC<IAbiMethods> = ({
