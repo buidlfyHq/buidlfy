@@ -8,8 +8,8 @@ import IColor from "interfaces/color";
 import add from "assets/add.png";
 import edit from "assets/edit.png";
 import dragImg from "assets/drag.png";
-import "styles/components.css";
 import { sidebarEnum } from "pages/dashboard";
+import "styles/components.css";
 
 interface IContainer {
   item: IItems;
@@ -42,14 +42,14 @@ interface IContainer {
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setValue?: (value: string) => void;
-  setSideElement;
+  setSideElement: (sideElement: string) => void;
   addContainerElements?: boolean;
   setAddContainerElements?: (addContainerElements?: boolean) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
-  showSidebar;
-  hideSidebar;
-  hideSettingSidebar;
+  showSidebar?: () => void;
+  hideSidebar?: () => void;
+  hideSettingSidebar?: () => void;
 }
 
 const Container: FC<IContainer> = ({
@@ -73,13 +73,8 @@ const Container: FC<IContainer> = ({
   elementConfig,
   setElementConfig,
   setSideElement,
-  addContainerElements,
-  setAddContainerElements,
-  dragContainer,
-  setDragContainer,
   showSidebar,
   hideSidebar,
-  hideSettingSidebar,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -242,8 +237,6 @@ const Container: FC<IContainer> = ({
                 minW: 1,
                 resizeHandles: [],
               }}
-              // onMouseOver={() => setDrag(false)}
-              // onMouseOut={() => setDrag(true)}
             >
               <RenderItem
                 setSideElement={setSideElement}
@@ -280,7 +273,6 @@ const Container: FC<IContainer> = ({
           )}
         </GridLayout>
         <div className="flex">
-          {/* {dragContainer ? ( */}
           <span
             id="drag"
             onMouseOut={() => setDrag(false)}

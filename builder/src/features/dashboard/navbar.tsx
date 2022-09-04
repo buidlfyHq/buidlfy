@@ -6,6 +6,7 @@ import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import ITemplate from "interfaces/template";
 import { uploadFileToWeb3Storage } from "config/web3storage";
+import "styles/components.css";
 
 interface INavbar {
   className: string;

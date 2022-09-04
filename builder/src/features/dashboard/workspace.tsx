@@ -36,18 +36,18 @@ interface IWorkspace {
   marginRight?: number;
   marginTop?: number;
   marginBottom?: number;
-  hideSidebar;
-  showSidebar;
-  showSettingSidebar;
-  isNavHidden;
-  openSetting;
-  setIsNavHidden;
-  setSideElement;
-  addContainerElements;
-  setAddContainerElements;
-  dragContainer;
-  setDragContainer;
-  hideSettingSidebar;
+  hideSidebar?: () => void;
+  showSidebar?: () => void;
+  showSettingSidebar?: () => void;
+  isNavHidden?: boolean;
+  openSetting?: boolean;
+  setIsNavHidden?: (isNavHidden?: boolean) => void;
+  setSideElement?: (sideElement?: string) => void;
+  addContainerElements?: boolean;
+  setAddContainerElements?: (addContainerElements?: boolean) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  hideSettingSidebar?: () => void;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -65,16 +65,10 @@ const Workspace: FC<IWorkspace> = ({
   setDrag,
   setAddContainer,
   backgroundColor,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
   hideSidebar,
   showSidebar,
-  showSettingSidebar,
   isNavHidden,
   openSetting,
-  setIsNavHidden,
   setSideElement,
   addContainerElements,
   setAddContainerElements,
@@ -84,22 +78,14 @@ const Workspace: FC<IWorkspace> = ({
 }) => {
   const [currentSize, setCurrentSize] = useState<number>(6);
   const [isLoading, setLoading] = useState(true);
-  console.log(openSetting, "opensetting");
 
   useEffect(() => {
-    console.log(isNavHidden, "setting");
-    console.log(openSetting, "sidebar");
     if (isNavHidden && !openSetting) {
-      console.log(isNavHidden, "settingif");
-      console.log(!openSetting, "sidebarif");
       setCurrentSize(6);
     } else {
-      console.log(isNavHidden, "settingelse");
-      console.log(!openSetting, "sidebarelse");
       setCurrentSize(7.5);
     }
   }, [isNavHidden, openSetting]);
-  console.log(currentSize, "current");
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
     let newItemsArr = layout.map((obj: IItems) => {

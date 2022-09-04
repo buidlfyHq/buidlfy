@@ -29,15 +29,15 @@ interface IRenderItem {
     buttonId: string;
   }) => void;
   elementConfig?: object;
-  setSideElement;
+  setSideElement: (sideElement: string) => void;
   setElementConfig?: (elementConfig: object) => void;
   addContainerElements?: boolean;
   setAddContainerElements?: (addContainerElements?: boolean) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
-  showSidebar?;
-  hideSidebar?;
-  hideSettingSidebar?;
+  showSidebar?: () => void;
+  hideSidebar?: () => void;
+  hideSettingSidebar?: () => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
