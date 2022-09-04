@@ -9,6 +9,7 @@ export default interface ITexts {
   italic: string;
   underline: string;
   color?: IColor;
+  borderColor?: IColor;
   justifyContent: string;
   fontSize: number;
   value: string;

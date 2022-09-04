@@ -15,6 +15,7 @@ enum functionEnum {
   FONT_STYLE = "fontStyle",
   TEXT_DECORATION = "textDecoration",
   COLOR = "color",
+  BORDER_COLOR = "borderColor",
   BACKGROUND_COLOR = "backgroundColor",
   DELETE_COMPONENT = "deleteComponent",
   JUSTIFY_CONTENT = "justifyContent",
@@ -45,16 +46,15 @@ const Settings: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const ref = useRef(null);
-  const [showComponent, setShowComponent] =
-    useState<{
-      id: string;
-      value: {
-        name: string;
-        inputs: object[];
-        outputs: object[];
-        stateMutability: string;
-      };
-    }>(null); // for abi method component
+  const [showComponent, setShowComponent] = useState<{
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }>(null); // for abi method component
 
   // work in progress
   const selectedChildren = items.map((item) =>
@@ -365,6 +365,9 @@ const Settings: FC<ISettings> = ({
   const setColor = (color: IColor) => {
     singleWorkFunction(functionEnum.COLOR, color);
   };
+  const setBorderColor = (borderColor: IColor) => {
+    singleWorkFunction(functionEnum.BORDER_COLOR, borderColor);
+  };
 
   const setBgColor = (backgroundColor: IColor) => {
     singleWorkFunction(functionEnum.BACKGROUND_COLOR, backgroundColor);
@@ -570,6 +573,8 @@ const Settings: FC<ISettings> = ({
                 setUnderline={setUnderline}
                 underline={selectedItem?.style?.textDecoration}
                 color={selectedItem?.style?.color}
+                borderColor={selectedItem?.style?.color}
+                setBorderColor={setBorderColor}
                 setColor={setColor}
                 setBgColor={setBgColor}
                 backgroundColor={selectedItem?.style?.backgroundColor}

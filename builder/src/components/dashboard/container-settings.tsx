@@ -7,6 +7,7 @@ import BorderComponent from "components/settings/border-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import ISettings from "interfaces/settings";
+import PaddingComponent from "components/settings/padding-component";
 
 const ContainerSettings: FC<ISettings> = ({
   items,
@@ -26,6 +27,11 @@ const ContainerSettings: FC<ISettings> = ({
   setMedium,
   setLarge,
   shadow,
+  padding,
+  setPaddingLeft,
+  setPaddingRight,
+  setPaddingBottom,
+  setPaddingTop,
 }) => (
   <>
     <h3 className="ml-[1rem]">
@@ -51,6 +57,13 @@ const ContainerSettings: FC<ISettings> = ({
     <BorderComponent
       borderWidth={borderWidth}
       setBorderWidth={setBorderWidth}
+    />
+    <PaddingComponent
+      setPaddingLeft={setPaddingLeft}
+      setPaddingRight={setPaddingRight}
+      setPaddingTop={setPaddingTop}
+      setPaddingBottom={setPaddingBottom}
+      padding={{ ...padding }}
     />
     <ShadowComponent
       setSmall={setSmall}

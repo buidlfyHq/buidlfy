@@ -51,6 +51,8 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingRight,
   setPaddingBottom,
   setPaddingTop,
+  setBorderColor,
+  borderColor,
 }) => {
   const handleTextChange = (
     e:
@@ -124,6 +126,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingBottom={setPaddingBottom}
           margin={selectedItem?.style?.margin}
           padding={selectedItem?.style?.padding}
+          borderColor={borderColor}
+          setBorderColor={setBorderColor}
         />
       );
     case "Image":
@@ -165,6 +169,11 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
+          padding={selectedItem?.style?.padding}
         />
       );
     case "Horizontal Container":
@@ -187,6 +196,11 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
+          padding={selectedItem?.style?.padding}
         />
       );
     case "Vertical Container":
@@ -209,6 +223,11 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
+          padding={selectedItem?.style?.padding}
         />
       );
     case "Input":

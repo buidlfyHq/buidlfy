@@ -18,6 +18,8 @@ export default interface ISettings {
   underline?: string;
   setColor?: (color: IColor) => void;
   color?: IColor;
+  setBorderColor?: (borderColor: IColor) => void;
+  borderColor?: IColor;
   setBgColor?: (backgroundColor: IColor) => void;
   backgroundColor?: IColor;
   setDeleteComponent?: (deleteComponent: number) => void;

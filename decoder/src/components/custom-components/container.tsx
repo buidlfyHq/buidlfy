@@ -18,6 +18,7 @@ const Container: FC<IBgContainer> = ({
   setInputValue,
   outputValue,
   setOutputValue,
+  padding,
 }) => {
   const [containerW, setContainerW] = useState(null);
 
@@ -27,15 +28,23 @@ const Container: FC<IBgContainer> = ({
       ?.getBoundingClientRect().width;
     if (cw) setContainerW(cw);
   }, []);
+  let finalPadding = padding.paddingLeft + padding.paddingRight;
 
   return (
-    <section id={item.i} className="px-[20px] w-full h-fit">
+    <section
+      id={item.i}
+      style={{
+        paddingLeft: `${padding.paddingLeft}px`,
+        paddingRight: `${padding.paddingRight}px`,
+      }}
+      className="w-full h-fit"
+    >
       {containerW && (
         <GridLayout
           layout={children}
           cols={6}
           rowHeight={50}
-          width={containerW - 40 || 1000}
+          width={containerW - finalPadding || 1000}
           isDraggable={false}
           isResizable={false}
           compactType={null}
