@@ -188,8 +188,6 @@ const Dashboard: FC = () => {
               {/* Right Sidebar Settings */}
             </aside>
           </section>
-          {/* {isSettingHidden ? (
-            <> */}
           {openSetting ? (
             <Settings
               items={items}
@@ -205,8 +203,6 @@ const Dashboard: FC = () => {
               setOpenTab={setOpenTab}
             />
           ) : null}
-          {/* </>
-          ) : null} */}
         </section>
       ) : (
         <h1 className="items-center text-center justify-center flex h-[100vh]">
