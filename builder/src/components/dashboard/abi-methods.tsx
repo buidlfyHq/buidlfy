@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import IItems from "interfaces/items";
-import { AiOutlineCaretDown, AiOutlineLeft } from "react-icons/ai";
+import { AiOutlineLeft } from "react-icons/ai";
 
 interface IAbiMethods {
   contractConfig: { abi: string; address: string };

@@ -5,7 +5,6 @@ import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
-import Spinner from "components/dashboard/spinner";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 interface IWorkspace {

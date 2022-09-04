@@ -1,5 +1,4 @@
-import Spinner from "components/dashboard/spinner";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import "styles/components.css";
 
 interface IImageComponent {

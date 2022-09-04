@@ -1,7 +1,8 @@
 import React, { useState, useRef, FC } from "react";
 import SettingComponent from "components/utils/render-setting";
-import IColor from "interfaces/color";
+import IItems from "interfaces/items";
 import ISettings from "interfaces/settings";
+import IColor from "interfaces/color";
 
 enum fontEnum {
   BOLD = "bold",
@@ -42,22 +43,22 @@ const Settings: FC<ISettings> = ({
   elementConfig,
   openTab,
   setOpenTab,
-  margin,
 }) => {
   const ref = useRef(null);
-  const [showComponent, setShowComponent] = useState<{
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  }>(null); // for abi method component
+  const [showComponent, setShowComponent] =
+    useState<{
+      id: string;
+      value: {
+        name: string;
+        inputs: object[];
+        outputs: object[];
+        stateMutability: string;
+      };
+    }>(null); // for abi method component
 
   // work in progress
   const selectedChildren = items.map((item) =>
-    item.children?.find((child) => child.i === settingItemId)
+    item.children?.find((child: IItems) => child.i === settingItemId)
   );
 
   const selectedItem =
@@ -70,7 +71,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return { ...item, link };
@@ -81,7 +82,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -102,7 +103,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return { ...item, placeholder };
@@ -113,7 +114,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -134,7 +135,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return { ...item, value };
@@ -145,7 +146,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -171,7 +172,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return {
@@ -190,7 +191,7 @@ const Settings: FC<ISettings> = ({
           },
         };
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -241,7 +242,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return {
@@ -261,7 +262,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -284,7 +285,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return {
@@ -304,7 +305,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -327,7 +328,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return {
@@ -347,7 +348,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -433,7 +434,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return {
@@ -444,9 +445,6 @@ const Settings: FC<ISettings> = ({
           },
         };
       } else if (selectedChild?.i === settingItemId) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
         let child = {
           ...selectedChild,
           style: {
@@ -456,7 +454,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -508,7 +506,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return {
@@ -522,7 +520,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -537,9 +535,9 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
 
-  const handleOpenSetting = () => {
-    setOpenSetting(false);
-  };
+  // const handleOpenSetting = () => {
+  //   setOpenSetting(false);
+  // };
 
   return (
     <>
@@ -604,14 +602,11 @@ const Settings: FC<ISettings> = ({
                 setPaddingRight={setPaddingRight}
                 setPaddingTop={setPaddingTop}
                 setPaddingBottom={setPaddingBottom}
-                margin={{ ...selectedItem?.style?.margin }}
-                padding={{ ...selectedItem?.style?.padding }}
                 setSmall={setSmall}
                 setMedium={setMedium}
                 setLarge={setLarge}
                 shadow={selectedItem?.style?.shadow}
                 setOn={setOn}
-                connectWallet={selectedItem?.connectWallet}
                 setPlaceholder={setPlaceholder}
                 placeholder={selectedItem?.placeholder}
               />
