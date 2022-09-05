@@ -3,12 +3,12 @@ import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
+import { sidebarEnum } from "pages/dashboard";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import add from "assets/add.png";
 import edit from "assets/edit.png";
 import dragImg from "assets/drag.png";
-import { sidebarEnum } from "pages/dashboard";
 import "styles/components.css";
 
 interface IContainer {
@@ -153,6 +153,7 @@ const Container: FC<IContainer> = ({
       });
     }
   };
+
   const handleSidebar = (selectedSidebarElements: string) => {
     setSideElement(selectedSidebarElements);
     // handleSidebar(sidebarEnum.ELEMENTS);
@@ -164,6 +165,7 @@ const Container: FC<IContainer> = ({
     handleSidebar(sidebarEnum.ELEMENTS);
     setOpenSetting(false);
   };
+  
   const onComponentClick = (itemName: string, i: string) => {
     if (selector === null) {
       setOpenSetting(true);

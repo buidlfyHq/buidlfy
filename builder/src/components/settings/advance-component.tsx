@@ -1,9 +1,9 @@
 import React, { useState, FC, useEffect } from "react";
-import { FaFileContract } from "react-icons/fa";
 import Modal from "features/dashboard/modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
 import IItems from "interfaces/items";
+import { FaFileContract } from "react-icons/fa";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -47,7 +47,7 @@ interface IAdvanceComponent {
 }
 interface IContract {
   name: string;
-  text;
+  text; // type to be added 
 }
 const AdvanceComponent: FC<IAdvanceComponent> = ({
   selector,
