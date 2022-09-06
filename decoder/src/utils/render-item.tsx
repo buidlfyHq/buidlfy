@@ -14,6 +14,7 @@ interface IRenderItem {
   setInputValue: (inputValue: IInput[]) => void;
   outputValue: IOutput[];
   setOutputValue: (outputValue: IOutput[]) => void;
+  updateBackgroundSize?: boolean;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -22,6 +23,7 @@ const RenderItem: FC<IRenderItem> = ({
   setInputValue,
   outputValue,
   setOutputValue,
+  updateBackgroundSize,
 }) => {
   switch (item.name) {
     case "Container" || "Horizontal Container" || "Vertical Container":
@@ -159,6 +161,10 @@ const RenderItem: FC<IRenderItem> = ({
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
           margin={{ ...item.style.margin }}
+          width={item.style.width}
+          height={item.style.height}
+          backgroundSize={item.style.backgroundSize}
+          updateBackgroundSize={updateBackgroundSize}
         />
       );
     case "Horizontal Container":

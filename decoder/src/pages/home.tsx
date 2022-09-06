@@ -11,7 +11,8 @@ const Home: FC = () => {
   const config = JSON.parse(BuilderConfig);
   const [inputValue, setInputValue] = useState<IInput[]>([]);
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
-
+  const [updateBackgroundSize, setUpdateBackgroundSize] =
+    useState<boolean>(false);
   return (
     <main
       className="min-h-screen"
@@ -40,6 +41,7 @@ const Home: FC = () => {
                 setInputValue={setInputValue}
                 outputValue={outputValue}
                 setOutputValue={setOutputValue}
+                updateBackgroundSize={updateBackgroundSize}
               />
             </div>
           );

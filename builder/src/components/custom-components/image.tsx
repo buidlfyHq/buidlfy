@@ -14,7 +14,6 @@ interface IImageComponent {
   height?: number;
   backgroundSize?: string;
   updateBackgroundSize?: boolean;
-  setUpdateBackgroundSize?: (updateBackgroundSize?: boolean) => void;
 }
 
 const Image: FC<IImageComponent> = ({
@@ -25,7 +24,6 @@ const Image: FC<IImageComponent> = ({
   height,
   backgroundSize,
   updateBackgroundSize,
-  setUpdateBackgroundSize,
 }) => {
   return (
     <>

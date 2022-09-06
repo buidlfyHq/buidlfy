@@ -12,25 +12,40 @@ interface IImageComponent {
     marginTop?: number;
     marginBottom?: number;
   };
+  width?: number;
+  height?: number;
+  backgroundSize?: string;
+  updateBackgroundSize?: boolean;
 }
 
-const Image: FC<IImageComponent> = ({ imgData, justifyContent, margin }) => {
+const Image: FC<IImageComponent> = ({
+  imgData,
+  justifyContent,
+  margin,
+  width,
+  height,
+  backgroundSize,
+  updateBackgroundSize,
+}) => {
   return (
-    <div
-      className="flex justify-center items-center h-full w-full"
-      style={{
-        height: "-webkit-fill-available",
-        backgroundImage: `url(${imgData ? imgData : defaultImage})`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: justifyContent,
-        backgroundSize: "contain",
-        margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
-          margin.marginRight * MARGIN_VARIABLE
-        }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
-          margin.marginLeft * MARGIN_VARIABLE
-        }px`,
-      }}
-    />
+    <div className="flex w-full h-full">
+      <div
+        className="flex h-full w-full"
+        style={{
+          backgroundImage: `url(${imgData ? imgData : defaultImage})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: justifyContent,
+          backgroundSize: `${
+            !updateBackgroundSize ? backgroundSize : `${width}px ${height}px`
+          }`,
+          margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
+            margin.marginRight * MARGIN_VARIABLE
+          }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
+            margin.marginLeft * MARGIN_VARIABLE
+          }px`,
+        }}
+      />
+    </div>
   );
 };
 

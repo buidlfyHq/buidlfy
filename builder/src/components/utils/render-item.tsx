@@ -70,7 +70,6 @@ const RenderItem: FC<IRenderItem> = ({
   setContain,
   setAuto,
   updateBackgroundSize,
-  setUpdateBackgroundSize,
 }) => {
   switch (item.name) {
     case "Container":
@@ -218,7 +217,6 @@ const RenderItem: FC<IRenderItem> = ({
           height={item.style.height}
           backgroundSize={item.style.backgroundSize}
           updateBackgroundSize={updateBackgroundSize}
-          setUpdateBackgroundSize={setUpdateBackgroundSize}
         />
       );
     case "Divider":
