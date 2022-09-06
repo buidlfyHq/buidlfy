@@ -279,6 +279,9 @@ export const components = [
     h: 1.2,
     minH: 1.2,
     style: {
+      width: 80,
+      height: 60,
+      backgroundSize: "contain",
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,

@@ -38,6 +38,11 @@ interface IRenderItem {
   showSidebar?: () => void;
   hideSidebar?: () => void;
   hideSettingSidebar?: () => void;
+  setCover?: (backgroundSize: string | boolean) => void;
+  setContain?: (backgroundSize: string | boolean) => void;
+  setAuto?: (backgroundSize: string | boolean) => void;
+  updateBackgroundSize?: boolean;
+  setUpdateBackgroundSize?: (updateBackgroundSize?: boolean) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -61,6 +66,11 @@ const RenderItem: FC<IRenderItem> = ({
   showSidebar,
   hideSidebar,
   hideSettingSidebar,
+  setCover,
+  setContain,
+  setAuto,
+  updateBackgroundSize,
+  setUpdateBackgroundSize,
 }) => {
   switch (item.name) {
     case "Container":
@@ -204,6 +214,11 @@ const RenderItem: FC<IRenderItem> = ({
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
           margin={{ ...item.style.margin }}
+          width={item.style.width}
+          height={item.style.height}
+          backgroundSize={item.style.backgroundSize}
+          updateBackgroundSize={updateBackgroundSize}
+          setUpdateBackgroundSize={setUpdateBackgroundSize}
         />
       );
     case "Divider":

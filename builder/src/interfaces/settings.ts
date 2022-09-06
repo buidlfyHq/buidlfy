@@ -105,4 +105,14 @@ export default interface ISettings {
   handleTextChange?: (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
   linkVal?: string;
   handleLinkChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  width?: number;
+  height?: number;
+  setHeight?: (height: number) => void;
+  setWidth?: (width: number) => void;
+  setCover?: (backgroundSize: string | boolean) => void;
+  setContain?: (backgroundSize: string | boolean) => void;
+  setAuto?: (backgroundSize: string | boolean) => void;
+  backgroundSize?: string;
+  updateBackgroundSize?: boolean;
+  setUpdateBackgroundSize?: (updateBackgroundSize?: boolean) => void;
 }

@@ -4,6 +4,8 @@ import UtilitiesComponent from "components/settings/utilities-component";
 import UploadComponent from "components/settings/upload-component";
 import MarginComponent from "components/settings/margin-component";
 import ISettings from "interfaces/settings";
+import SizeComponent from "components/settings/image-size-component";
+import BackgroundSizeComponent from "components/settings/background-size-component";
 
 const ImageSettings: FC<ISettings> = ({
   items,
@@ -20,6 +22,14 @@ const ImageSettings: FC<ISettings> = ({
   setMarginRight,
   setMarginTop,
   setMarginBottom,
+  width,
+  height,
+  setWidth,
+  setHeight,
+  setCover,
+  setContain,
+  setAuto,
+  backgroundSize,
 }) => (
   <>
     <h3 className="ml-[1rem]">
@@ -37,6 +47,21 @@ const ImageSettings: FC<ISettings> = ({
       setLeft={setLeft}
       setRight={setRight}
       setCenter={setCenter}
+    />
+    <SizeComponent
+      width={width}
+      height={height}
+      setWidth={setWidth}
+      setHeight={setHeight}
+      setCover={setCover}
+      setContain={setContain}
+      setAuto={setAuto}
+    />
+    <BackgroundSizeComponent
+      setCover={setCover}
+      setContain={setContain}
+      setAuto={setAuto}
+      backgroundSize={backgroundSize}
     />
     <MarginComponent
       setMarginLeft={setMarginLeft}

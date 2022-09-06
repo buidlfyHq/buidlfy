@@ -53,6 +53,14 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingTop,
   setBorderColor,
   borderColor,
+  width,
+  height,
+  setWidth,
+  setHeight,
+  setCover,
+  setContain,
+  setAuto,
+  backgroundSize,
 }) => {
   const handleTextChange = (
     e:
@@ -147,6 +155,14 @@ const SettingComponent: FC<ISettings> = ({
           setMarginTop={setMarginTop}
           setMarginBottom={setMarginBottom}
           margin={selectedItem?.style?.margin}
+          width={width}
+          height={height}
+          setWidth={setWidth}
+          setHeight={setHeight}
+          setCover={setCover}
+          setContain={setContain}
+          setAuto={setAuto}
+          backgroundSize={selectedItem?.style?.backgroundSize}
         />
       );
     case "Container":

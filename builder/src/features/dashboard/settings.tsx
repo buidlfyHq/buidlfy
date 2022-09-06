@@ -19,6 +19,7 @@ enum functionEnum {
   BACKGROUND_COLOR = "backgroundColor",
   DELETE_COMPONENT = "deleteComponent",
   JUSTIFY_CONTENT = "justifyContent",
+  BACKGROUND_SIZE = "backgroundSize",
   SHADOW = "shadow",
   BORDER_RADIUS = "borderRadius",
   BORDER_WIDTH = "borderWidth",
@@ -30,6 +31,8 @@ enum functionEnum {
   PADDING_RIGHT = "paddingRight",
   PADDING_TOP = "paddingTop",
   PADDING_BOTTOM = "paddingBottom",
+  WIDTH = "width",
+  HEIGHT = "height",
 }
 
 const Settings: FC<ISettings> = ({
@@ -44,6 +47,7 @@ const Settings: FC<ISettings> = ({
   elementConfig,
   openTab,
   setOpenTab,
+  setUpdateBackgroundSize,
 }) => {
   const ref = useRef(null);
   const [showComponent, setShowComponent] = useState<{
@@ -385,6 +389,33 @@ const Settings: FC<ISettings> = ({
       "inherit"
     );
   };
+  const setContain = (backgroundSize: boolean) => {
+    utilityFunction(
+      functionEnum.BACKGROUND_SIZE,
+      backgroundSize,
+      "contain",
+      "contain"
+    );
+    setUpdateBackgroundSize(false);
+  };
+  const setCover = (backgroundSize: boolean) => {
+    utilityFunction(
+      functionEnum.BACKGROUND_SIZE,
+      backgroundSize,
+      "cover",
+      "contain"
+    );
+    setUpdateBackgroundSize(false);
+  };
+  const setAuto = (backgroundSize: boolean) => {
+    utilityFunction(
+      functionEnum.BACKGROUND_SIZE,
+      backgroundSize,
+      "auto",
+      "contain"
+    );
+    setUpdateBackgroundSize(false);
+  };
 
   const setLeft = (justifyContent: boolean) => {
     utilityFunction(
@@ -471,7 +502,14 @@ const Settings: FC<ISettings> = ({
     });
     setItems(updatedItems);
   };
-
+  const setWidth = (width: number) => {
+    singleWorkFunction(functionEnum.WIDTH, width);
+    setUpdateBackgroundSize(true);
+  };
+  const setHeight = (height: number) => {
+    singleWorkFunction(functionEnum.HEIGHT, height);
+    setUpdateBackgroundSize(true);
+  };
   const setBorderRadius = (borderRadius: number) => {
     singleWorkFunction(functionEnum.BORDER_RADIUS, borderRadius);
   };
@@ -573,7 +611,11 @@ const Settings: FC<ISettings> = ({
                 setUnderline={setUnderline}
                 underline={selectedItem?.style?.textDecoration}
                 color={selectedItem?.style?.color}
-                borderColor={selectedItem?.style?.color}
+                borderColor={selectedItem?.style?.borderColor}
+                width={selectedItem?.style?.width}
+                height={selectedItem?.style?.height}
+                setWidth={setWidth}
+                setHeight={setHeight}
                 setBorderColor={setBorderColor}
                 setColor={setColor}
                 setBgColor={setBgColor}
@@ -585,6 +627,10 @@ const Settings: FC<ISettings> = ({
                 setCenter={setCenter}
                 setRight={setRight}
                 setFontSize={setFontSize}
+                setCover={setCover}
+                setContain={setContain}
+                setAuto={setAuto}
+                backgroundSize={selectedItem?.style?.backgroundSize}
                 fontSize={selectedItem?.style?.fontSize}
                 setContractConfig={setContractConfig}
                 contractConfig={contractConfig}

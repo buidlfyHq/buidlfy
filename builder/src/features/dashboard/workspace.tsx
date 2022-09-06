@@ -48,6 +48,8 @@ interface IWorkspace {
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   hideSettingSidebar?: () => void;
+  updateBackgroundSize?: boolean;
+  setUpdateBackgroundSize?: (updateBackgroundSize?: boolean) => void;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -75,6 +77,8 @@ const Workspace: FC<IWorkspace> = ({
   dragContainer,
   setDragContainer,
   hideSettingSidebar,
+  updateBackgroundSize,
+  setUpdateBackgroundSize,
 }) => {
   const [currentSize, setCurrentSize] = useState<number>(6);
   const [isLoading, setLoading] = useState(true);
@@ -260,6 +264,8 @@ const Workspace: FC<IWorkspace> = ({
             showSidebar={showSidebar}
             hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
+            updateBackgroundSize={updateBackgroundSize}
+            setUpdateBackgroundSize={setUpdateBackgroundSize}
           />
         </div>
       );

@@ -6,13 +6,13 @@ import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
 
-interface IColorComponent {
+interface IBorderColorComponent {
   borderColor: IColor;
-  setBorderColor: (color: IColor) => void;
+  setBorderColor: (borderColor: IColor) => void;
   selectedItem: IItems;
 }
 
-const BorderColorComponent: FC<IColorComponent> = ({
+const BorderColorComponent: FC<IBorderColorComponent> = ({
   borderColor,
   setBorderColor,
 }) => {
@@ -43,12 +43,12 @@ const BorderColorComponent: FC<IColorComponent> = ({
     setHexColor(e.target.value);
   };
 
-  const handleChange = (color: { rgb: IColor; hex; a }) => {
-    if (!color) {
+  const handleChange = (borderColor: { rgb: IColor; hex; a }) => {
+    if (!borderColor) {
       return;
     }
-    setBorderColor(color.rgb);
-    setHexColor(color.hex);
+    setBorderColor(borderColor.rgb);
+    setHexColor(borderColor.hex);
   };
   const opacity = Number(`${borderColor.a}`);
   let newOpacity = opacity * 100;
@@ -56,7 +56,7 @@ const BorderColorComponent: FC<IColorComponent> = ({
     newOpacity = 100;
   }
   const newColor = { ...borderColor };
-  const handleOpacity = (e) => {
+  const handleOpacity = (e: React.ChangeEvent<HTMLInputElement>) => {
     newColor.a = Number(e.target.value) / 100;
     setBorderColor(newColor);
   };

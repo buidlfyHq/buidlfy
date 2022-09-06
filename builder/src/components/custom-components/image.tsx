@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import "styles/components.css";
 
 interface IImageComponent {
-  imgData: string | ArrayBuffer;
+  imgData: any;
   justifyContent: string;
   margin?: {
     marginLeft?: number;
@@ -10,24 +10,43 @@ interface IImageComponent {
     marginTop?: number;
     marginBottom?: number;
   };
+  width?: number;
+  height?: number;
+  backgroundSize?: string;
+  updateBackgroundSize?: boolean;
+  setUpdateBackgroundSize?: (updateBackgroundSize?: boolean) => void;
 }
 
-const Image: FC<IImageComponent> = ({ imgData, justifyContent, margin }) => {
+const Image: FC<IImageComponent> = ({
+  imgData,
+  justifyContent,
+  margin,
+  width,
+  height,
+  backgroundSize,
+  updateBackgroundSize,
+  setUpdateBackgroundSize,
+}) => {
   return (
     <>
       {imgData ? (
-        <div
-          id="image-one"
-          className="items-center justify-center w-auto h-full"
-          style={{
-            height: "-webkit-fill-available",
-            backgroundImage: `url(${imgData})`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: justifyContent,
-            backgroundSize: "contain",
-            margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
-          }}
-        />
+        <div className="flex w-full h-full">
+          <div
+            id="image-one"
+            className="flex w-full h-full"
+            style={{
+              backgroundImage: `url(${imgData})`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: justifyContent,
+              backgroundSize: `${
+                !updateBackgroundSize
+                  ? backgroundSize
+                  : `${width}px ${height}px`
+              }`,
+              margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+            }}
+          />
+        </div>
       ) : (
         <div className="flex overflow-hidden  items-center justify-center w-auto h-full">
           <div
