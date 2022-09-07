@@ -6,6 +6,7 @@ import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import ITemplate from "interfaces/template";
 import { uploadFileToWeb3Storage } from "config/web3storage";
+import "styles/components.css";
 
 interface INavbar {
   className: string;
@@ -95,9 +96,7 @@ const Navbar: FC<INavbar> = ({
     if (items?.length > 0) {
       localStorage.setItem("items", JSON.stringify(items));
       const templates = localStorage.getItem("templates") || "";
-      console.log(templates, "templates");
       if (templates !== "") {
-        console.log(templates, "templates");
         newTemplates = JSON.parse(templates);
       } else {
         newTemplates = [];
@@ -107,9 +106,6 @@ const Navbar: FC<INavbar> = ({
         value: items,
         image: file,
       };
-      console.log(newTemplate, "newTemplate");
-      console.log(newTemplates, "newTemplates");
-
       newTemplates.push(newTemplate);
       localStorage.setItem("templates", JSON.stringify(newTemplates));
     }

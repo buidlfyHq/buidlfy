@@ -1,28 +1,60 @@
 import React, { FC, useState } from "react";
 import { Dialog } from "@headlessui/react";
-import "styles/components.css";
 import upload from "assets/upload-img.png";
+import "styles/components.css";
 
 interface IModal {
   contractConfig: { abi: string; address: string };
   setContractConfig: (contractConfig: object) => void;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  methodOpen: boolean;
+  setMethodOpen: (methodOpen: boolean) => void;
+  setNewContractList: (newContractList: IContract[]) => void;
 }
-
+interface IContract {
+  name: string;
+  text; // type to be added
+}
 const Modal: FC<IModal> = ({
   contractConfig,
   setContractConfig,
   isOpen,
   setIsOpen,
+  methodOpen,
+  setMethodOpen,
+  setNewContractList,
 }) => {
   // const [showInput, setShowInput] = useState<boolean>(false);
   const [showUpload, setShowUpload] = useState<boolean>(true);
+  const [inputValue, setInputValue] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer>("");
-
-  const handleShow = () => {
-    setShowUpload(false);
+  
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
   };
+
+  const handleSaveContract = () => {
+    // FIX: save full config to local storage
+    let newContractList: Array<IContract> = [];
+    let newContract: IContract = {
+      name: inputValue,
+      text: JSON.stringify(contractConfig.abi),
+    };
+    // localStorage.setItem("items", JSON.stringify(items));
+    const contractList = localStorage.getItem("contractList") || "";
+    if (contractList !== "") {
+      newContractList = JSON.parse(contractList);
+    } else {
+      newContractList = [];
+    }
+    newContractList.push(newContract);
+    localStorage.setItem("contractList", JSON.stringify(newContractList));
+    setNewContractList(newContractList);
+  };
+
+  const handleShow = () => setShowUpload(false);
+
   const handleSetAbi = (abi: string) => {
     // keep type = function, remove other types
     const filteredAbi = JSON.parse(abi).filter(
@@ -30,7 +62,8 @@ const Modal: FC<IModal> = ({
     );
     setContractConfig({ ...contractConfig, abi: JSON.stringify(filteredAbi) });
   };
-  const handleChange = (e) => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileReader = new FileReader();
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = (e) => {
@@ -38,6 +71,7 @@ const Modal: FC<IModal> = ({
       handleSetAbi(e.target.result.toString());
     };
   };
+
   return (
     <Dialog
       as="div"
@@ -55,7 +89,7 @@ const Modal: FC<IModal> = ({
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-10" />
 
         {/* Dialog Content */}
-        <section className="inline-block w-[340px] mr-[12rem] mt-[12rem] max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+        <section className="inline-block w-[340px] mr-[12rem] mt-[10rem] max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
           <Dialog.Title as="h3" className="modal-heading">
             Connect Contract
           </Dialog.Title>
@@ -67,6 +101,8 @@ const Modal: FC<IModal> = ({
             <label className="modal-label">Contract Name</label>
             <br />
             <input
+              value={inputValue}
+              onChange={(e) => handleInput(e)}
               className="modal-input pl-2 mt-1 mb-4"
               placeholder="Please add a name"
             />
@@ -137,7 +173,11 @@ const Modal: FC<IModal> = ({
             <button
               type="button"
               className="contract-button inline-flex flex contract-button py-2 px-[7.5rem]"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false);
+                setMethodOpen(false);
+                handleSaveContract();
+              }}
             >
               Connect
             </button>

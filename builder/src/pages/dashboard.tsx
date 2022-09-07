@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { RiText } from "react-icons/ri";
 import Navbar from "features/dashboard/navbar";
 import Sidebar from "features/dashboard/sidebar";
 import SideNavbar from "features/dashboard/side-navbar";
@@ -51,6 +50,9 @@ const Dashboard: FC = () => {
     g: "0",
     b: "0",
   });
+  const [addContainerElements, setAddContainerElements] =
+    useState<boolean>(true);
+  const [dragContainer, setDragContainer] = useState<boolean>(true);
   const [head, setHead] = useState<{
     title: string;
     logo: string | ArrayBuffer;
@@ -59,6 +61,7 @@ const Dashboard: FC = () => {
     logo: "",
   });
   const [sideElement, setSideElement] = useState<string>("");
+  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -79,11 +82,10 @@ const Dashboard: FC = () => {
       setItems(JSON.parse(saveItems));
     }
   }, []); // eslint-disable-line
-  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
   // const [isSettingHidden, setIsSettingHidden] = useState<boolean>(false);
   const showSidebar = () => {
     setIsNavHidden(false);
-    setOpenSetting(true);
+    setOpenSetting(false);
   };
   const hideSidebar = () => {
     setIsNavHidden(true);
@@ -97,6 +99,7 @@ const Dashboard: FC = () => {
     // setIsNavHidden(false);
     setOpenSetting(false);
   };
+
   return (
     <main>
       {size.width > 1024 ? (
@@ -174,12 +177,16 @@ const Dashboard: FC = () => {
                 isNavHidden={isNavHidden}
                 openSetting={openSetting}
                 setIsNavHidden={setIsNavHidden}
+                setSideElement={setSideElement}
+                addContainerElements={addContainerElements}
+                setAddContainerElements={setAddContainerElements}
+                dragContainer={dragContainer}
+                setDragContainer={setDragContainer}
+                hideSettingSidebar={undefined}
               />
               {/* Right Sidebar Settings */}
             </aside>
           </section>
-          {/* {isSettingHidden ? (
-            <> */}
           {openSetting ? (
             <Settings
               items={items}
@@ -195,8 +202,6 @@ const Dashboard: FC = () => {
               setOpenTab={setOpenTab}
             />
           ) : null}
-          {/* </>
-          ) : null} */}
         </section>
       ) : (
         <h1 className="items-center text-center justify-center flex h-[100vh]">

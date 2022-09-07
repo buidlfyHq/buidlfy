@@ -36,12 +36,18 @@ interface IWorkspace {
   marginRight?: number;
   marginTop?: number;
   marginBottom?: number;
-  hideSidebar;
-  showSidebar;
-  showSettingSidebar;
-  isNavHidden;
-  openSetting;
-  setIsNavHidden;
+  hideSidebar?: () => void;
+  showSidebar?: () => void;
+  showSettingSidebar?: () => void;
+  isNavHidden?: boolean;
+  openSetting?: boolean;
+  setIsNavHidden?: (isNavHidden?: boolean) => void;
+  setSideElement?: (sideElement?: string) => void;
+  addContainerElements?: boolean;
+  setAddContainerElements?: (addContainerElements?: boolean) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  hideSettingSidebar?: () => void;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -59,34 +65,27 @@ const Workspace: FC<IWorkspace> = ({
   setDrag,
   setAddContainer,
   backgroundColor,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
   hideSidebar,
   showSidebar,
-  showSettingSidebar,
   isNavHidden,
   openSetting,
-  setIsNavHidden,
+  setSideElement,
+  addContainerElements,
+  setAddContainerElements,
+  dragContainer,
+  setDragContainer,
+  hideSettingSidebar,
 }) => {
   const [currentSize, setCurrentSize] = useState<number>(6);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(isNavHidden, "setting");
-    console.log(openSetting, "sidebar");
     if (isNavHidden && !openSetting) {
-      console.log(isNavHidden, "settingif");
-      console.log(!openSetting, "sidebarif");
       setCurrentSize(6);
     } else {
-      console.log(isNavHidden, "settingelse");
-      console.log(!openSetting, "sidebarelse");
       setCurrentSize(7.5);
     }
   }, [isNavHidden, openSetting]);
-  console.log(currentSize, "current");
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
     let newItemsArr = layout.map((obj: IItems) => {
@@ -209,7 +208,6 @@ const Workspace: FC<IWorkspace> = ({
       e.target.parentNode.parentNode.id === "Vertical Container" ||
       e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
     ) {
-      setOpenSetting(false);
     } else {
       setAddContainer(false);
       hideSidebar();
@@ -232,7 +230,7 @@ const Workspace: FC<IWorkspace> = ({
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 ${
             !containerCheck(item)
               ? selector
-                ? "hover:border-orange-300"
+                ? "border-hover"
                 : "hover:border-slate-300 hover:border-dashed"
               : null
           }`}
@@ -254,6 +252,14 @@ const Workspace: FC<IWorkspace> = ({
             setSelector={setSelector}
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
+            setSideElement={setSideElement}
+            addContainerElements={addContainerElements}
+            setAddContainerElements={setAddContainerElements}
+            dragContainer={dragContainer}
+            setDragContainer={setDragContainer}
+            showSidebar={showSidebar}
+            hideSidebar={hideSidebar}
+            hideSettingSidebar={hideSettingSidebar}
           />
         </div>
       );

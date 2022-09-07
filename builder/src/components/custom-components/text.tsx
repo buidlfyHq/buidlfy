@@ -26,7 +26,7 @@ const Text: FC<ITexts> = ({
         textDecoration: underline,
         color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
         display: "flex",
-        justifyContent,
+        justifyContent: justifyContent,
         alignItems: "center",
         fontSize: `${fontSize}px`,
         backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,

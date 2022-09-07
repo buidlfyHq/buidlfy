@@ -168,24 +168,72 @@ color: #BAB9BD;
 }
 
 #drag {
-  height: 10px;
-  width: 100px;
-  font-size: 12px;
-  /* display: flex; */
-  /* justify-content: flex-end;
-  float: right;
-  text-align: right; */
-  /* background-color: transparent; */
-  background: #a673ef;
-  border-radius: 0 0 5px 5px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  /* font-size: 12px;
+  background: #a673ef; */
+  background-color: transparent;
+  /* border-radius: 0 0 5px 5px; */
+}
+#add-img {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  /* font-size: 12px;
+  background: #a673ef; */
+  background-color: transparent;
+  /* border-radius: 0 0 5px 5px; */
+}
+#edit-img {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  /* font-size: 12px;
+  background: #a673ef; */
+  background-color: transparent;
+  /* border-radius: 0 0 5px 5px; */
+}
+.container-drag #add-img {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  top: 0.5rem;
+  right: 3rem;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
+.container-drag:hover #add-img {
+  visibility: visible;
+  opacity: 1;
+}
+.container-drag #edit-img {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.container-drag:hover #edit-img {
+  visibility: visible;
+  opacity: 1;
+}
 .container-drag #drag {
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  top: 0;
-  left: 44%;
+  top: 0.5rem;
+  left: 0.5rem;
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -273,6 +321,13 @@ color: #BAB9BD;
   margin-left: 0.5rem;
   margin-top: 0.6rem;
   position: absolute;
+}
+.border-hover:hover {
+  border: 1px solid;
+
+border-image-source: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
+
+border-image-slice: 1;
 }
 .sidebar {
   background: rgba(63, 60, 197, 0.04);
@@ -501,6 +556,23 @@ justify-content: center;
 }
 .upload-input {
   display: none;
+}
+.contract-list {
+width: 69px;
+height: 44px;
+background: linear-gradient(93.43deg, rgba(70, 143, 228, 0.1) 19.42%, rgba(119, 66, 231, 0.1) 63.9%);
+border-radius: 2px;
+}
+.contract-name {
+  font-style: normal;
+font-weight: 400;
+font-size: 11px;
+line-height: 24px;
+/* identical to box height, or 218% */
+
+
+color: #458CDE;
+
 }
 .image-label {
   font-style: normal;

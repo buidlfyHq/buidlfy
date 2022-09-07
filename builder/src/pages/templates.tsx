@@ -64,7 +64,6 @@ const Template: FC<INew> = ({ setItems }) => {
           {newTemp &&
             newTemp?.map((temp: { name: string; value: IItems[]; image }) => {
               const { name, value, image } = temp;
-              console.log(image, "image");
               return (
                 <div
                   onClick={(e) => handleClick(e, value)}

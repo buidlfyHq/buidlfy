@@ -3,11 +3,13 @@ import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
+import { sidebarEnum } from "pages/dashboard";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
+import add from "assets/add.png";
+import edit from "assets/edit.png";
+import dragImg from "assets/drag.png";
 import "styles/components.css";
-import { IoMdAddCircleOutline } from "react-icons/io";
-import { AiTwotoneSetting } from "react-icons/ai";
 
 interface IContainer {
   item: IItems;
@@ -40,6 +42,14 @@ interface IContainer {
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setValue?: (value: string) => void;
+  setSideElement: (sideElement: string) => void;
+  addContainerElements?: boolean;
+  setAddContainerElements?: (addContainerElements?: boolean) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  showSidebar?: () => void;
+  hideSidebar?: () => void;
+  hideSettingSidebar?: () => void;
 }
 
 const Container: FC<IContainer> = ({
@@ -62,6 +72,9 @@ const Container: FC<IContainer> = ({
   setSelector,
   elementConfig,
   setElementConfig,
+  setSideElement,
+  showSidebar,
+  hideSidebar,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -141,16 +154,25 @@ const Container: FC<IContainer> = ({
     }
   };
 
-  const onComponentClick = (itemName: string, i: string) => {
-    setAddContainer(true);
+  const handleSidebar = (selectedSidebarElements: string) => {
+    setSideElement(selectedSidebarElements);
+    // handleSidebar(sidebarEnum.ELEMENTS);
+  };
 
-    // checks if the selector is active
+  const onComponentAddClick = (itemName: string, i: string) => {
+    setAddContainer(true);
+    showSidebar();
+    handleSidebar(sidebarEnum.ELEMENTS);
+    setOpenSetting(false);
+  };
+  
+  const onComponentClick = (itemName: string, i: string) => {
     if (selector === null) {
       setOpenSetting(true);
       setSettingItemId(i);
       setOpenTab(1);
     } else {
-      //   // Add validation for selection
+      // Add validation for selection
       if (selector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
       } else if (
@@ -164,6 +186,12 @@ const Container: FC<IContainer> = ({
       }
       setSelector(null);
     }
+  };
+  const onComponentEditClick = (itemName: string, i: string) => {
+    setAddContainer(false);
+    setOpenSetting(true);
+    hideSidebar();
+    setSettingItemId(i);
   };
 
   let containerW = document
@@ -211,10 +239,12 @@ const Container: FC<IContainer> = ({
                 minW: 1,
                 resizeHandles: [],
               }}
-              onMouseOver={() => setDrag(false)}
-              onMouseOut={() => setDrag(true)}
             >
-              <RenderItem item={defaultItem} setDrag={setDrag} />
+              <RenderItem
+                setSideElement={setSideElement}
+                item={defaultItem}
+                setDrag={setDrag}
+              />
             </div>
           ) : (
             children
@@ -225,7 +255,7 @@ const Container: FC<IContainer> = ({
                   <div
                     className={`w-full h-full hover:border hover:border-2 ${
                       selector
-                        ? "hover:border-orange-300"
+                        ? "border-hover"
                         : "hover:border-slate-300 hover:border-dashed"
                     }`}
                     key={i}
@@ -234,23 +264,41 @@ const Container: FC<IContainer> = ({
                     onMouseOut={() => setDrag(true)}
                     onClick={() => onComponentClick(item.name, i)}
                   >
-                    <RenderItem item={item} setDrag={setDrag} />
+                    <RenderItem
+                      setSideElement={setSideElement}
+                      item={item}
+                      setDrag={setDrag}
+                    />
                   </div>
                 );
               })
           )}
         </GridLayout>
         <div className="flex">
-          <span id="drag" onClick={() => onComponentClick(item.name, item.i)}>
-            {/* <IoMdAddCircleOutline className="text-[16px]" /> */}
+          <span
+            id="drag"
+            onMouseOut={() => setDrag(false)}
+            onMouseOver={() => setDrag(true)}
+          >
+            <img className="" src={dragImg} />
           </span>
-          {/* <span id="drag" onClick={() => onComponentClick(item.name, item.i)}>
-            <AiTwotoneSetting className="text-[16px] " />
-          </span> */}
+          <span
+            id="add-img"
+            onMouseOut={() => setDrag(false)}
+            onMouseOver={() => setDrag(false)}
+            onClick={() => onComponentAddClick(item.name, item.i)}
+          >
+            <img src={add} />
+          </span>
+          <span
+            onMouseOut={() => setDrag(false)}
+            onMouseOver={() => setDrag(false)}
+            id="edit-img"
+            onClick={() => onComponentEditClick(item.name, item.i)}
+          >
+            <img src={edit} />
+          </span>
         </div>
-        {/* <span id="drag" onClick={() => onComponentClick(item.name, item.i)}>
-          <IoMdAddCircleOutline className="text-[16px]" />
-        </span> */}
       </section>
     </>
   );

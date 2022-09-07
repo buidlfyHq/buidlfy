@@ -43,19 +43,14 @@ const ColorComponent: FC<IColorComponent> = ({
 
   const handleHex = (e) => {
     setHexColor(e.target.value);
-    console.log(hexColor, "hex");
   };
 
   const handleChange = (color: { rgb: IColor; hex; a }) => {
-    console.log(color, "color-main");
-
     if (!color) {
       return;
     }
     setColor(color.rgb);
     setHexColor(color.hex);
-    console.log(color.hex, "color.hex");
-    // setColorOpacity(`rgba(${color.a})`);
   };
   const opacity = Number(`${color.a}`);
   let newOpacity = opacity * 100;
