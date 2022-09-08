@@ -1,22 +1,20 @@
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateItems } from "reducers/itemsReducer";
+import { uploadFileToWeb3Storage } from "utils/web3storage";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { uploadFileToWeb3Storage } from "utils/web3storage";
 
 interface IUploadComponent {
   selectedItem: IItems;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
 }
 
-const UploadComponent: FC<IUploadComponent> = ({
-  selectedItem,
-  items,
-  setItems,
-}) => {
+const UploadComponent: FC<IUploadComponent> = ({ selectedItem }) => {
+  const dispatch = useDispatch();
   const [size, setSize] = useState<boolean>(false);
 
+  // search suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
@@ -26,34 +24,14 @@ const UploadComponent: FC<IUploadComponent> = ({
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
-          const updatedItems = items.map((item) => {
-            let selectedChild = item.children?.find(
-              (child) => child.i === selectedItem.i
-            );
-            if (item.i === selectedItem.i) {
-              return {
-                ...item,
-                imgData: cid,
-              };
-            } else if (selectedChild?.i === selectedItem.i) {
-              let child = {
-                ...selectedChild,
-                imgData: cid,
-              };
-              const childIndex = item.children?.findIndex(
-                (c) => c.i === selectedItem.i
-              );
-              let newChildren = [...item.children];
-              newChildren[childIndex] = child;
-
-              return {
-                ...item,
-                children: newChildren,
-              };
-            }
-            return item;
-          });
-          setItems(updatedItems);
+          dispatch(
+            updateItems({
+              level: 0,
+              settingItemId: selectedItem.i,
+              propertyName: "imgData",
+              propertyValue: cid,
+            })
+          );
         });
         reader.readAsDataURL(e.target.files[0]);
       }
