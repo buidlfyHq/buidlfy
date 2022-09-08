@@ -29,6 +29,7 @@ const Input: FC<IInput> = ({
     <input
       style={{
         borderRadius: `${borderRadius}px`,
+        borderWidth: "1pt",
         boxShadow: shadow,
         border: `1px solid ${color}`,
         borderImage: color,

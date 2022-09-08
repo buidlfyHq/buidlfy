@@ -34,7 +34,6 @@ const Input: FC<IInputComponent> = ({
     )[0];
     return requiredValue ? requiredValue.value : "";
   };
-  console.log(color, "c");
   return (
     <section className="h-full flex justify-center overflow-hidden items-center">
       <input

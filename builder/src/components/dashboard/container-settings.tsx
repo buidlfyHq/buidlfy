@@ -44,7 +44,11 @@ const ContainerSettings: FC<ISettings> = ({
       items={items}
       setItems={setItems}
     />
-    <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
+    <BgColorComponent
+      color={backgroundColor}
+      setBgColor={setBgColor}
+      selectedItem={selectedItem}
+    />
     <ColorComponent
       color={color}
       setColor={setColor}

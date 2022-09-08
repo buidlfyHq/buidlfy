@@ -15,7 +15,6 @@ interface IColorComponent {
 const ColorComponent: FC<IColorComponent> = ({ color, setColor }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>();
-  console.log(color, "tryColor");
 
   useEffect(() => {
     // FIX: find a suitable type for this event

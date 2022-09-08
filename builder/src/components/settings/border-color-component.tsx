@@ -28,7 +28,6 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
     document.addEventListener("click", handleOutsideClick);
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [ref]);
-  console.log(borderColor, "borderColor");
   const handleClick = () => {
     setDisplayColorPicker(true);
   };

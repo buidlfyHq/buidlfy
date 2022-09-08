@@ -91,7 +91,11 @@ const GeneralSettings: FC<ISettings> = ({
       setColor={setColor}
       selectedItem={selectedItem}
     />
-    <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
+    <BgColorComponent
+      color={backgroundColor}
+      setBgColor={setBgColor}
+      selectedItem={selectedItem}
+    />
     <MarginComponent
       setMarginLeft={setMarginLeft}
       setMarginRight={setMarginRight}

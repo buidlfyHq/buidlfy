@@ -13,7 +13,6 @@ const Home: FC = () => {
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
   const [updateBackgroundSize, setUpdateBackgroundSize] =
     useState<boolean>(false);
-  console.log(config.background, "bg");
   return (
     <main
       className="min-h-screen"
