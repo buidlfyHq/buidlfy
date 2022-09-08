@@ -1,32 +1,38 @@
 import React, { FC, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateItems } from "reducers/itemsReducer";
+import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IConnectSwitchComponent {
-  setOn: (connectWallet: string | boolean) => void;
-  connectWallet: string;
+  selectedItem: IItems;
 }
 
 const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
-  setOn,
-  connectWallet,
+  selectedItem,
 }) => {
+  const dispatch = useDispatch();
+
   const [connectToggle, setConnectToggle] = useState(
-    connectWallet === "on" ? true : false
+    selectedItem?.connectWallet === "on" ? true : false
   );
 
   const handleOnChange = () => {
     setConnectToggle(!connectToggle);
-    if (connectWallet === "on") {
-      setOn(false);
-    } else {
-      setOn(true);
-    }
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "connectWallet",
+        propertyValue: selectedItem?.connectWallet === "on" ? "off" : "on",
+      })
+    );
   };
 
   useEffect(() => {
-    setConnectToggle(connectWallet === "on" ? true : false);
-  }, [connectWallet]);
+    setConnectToggle(selectedItem?.connectWallet === "on" ? true : false);
+  }, [selectedItem?.connectWallet]);
 
   return (
     <span className="flex mt-5">

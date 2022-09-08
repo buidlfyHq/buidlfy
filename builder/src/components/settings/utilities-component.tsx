@@ -1,18 +1,27 @@
 import React, { FC } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { updateItems } from "reducers/itemsReducer";
+import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IUtilitiesComponent {
-  deleteComponent: number;
-  setDeleteComponent: (deleteComponent: number) => void;
+  selectedItem: IItems;
 }
 
-const UtilitiesComponent: FC<IUtilitiesComponent> = ({
-  setDeleteComponent,
-}) => {
+const UtilitiesComponent: FC<IUtilitiesComponent> = ({ selectedItem }) => {
+  const dispatch = useDispatch();
+
   const handleDelete = () => {
-    setDeleteComponent(1);
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "deleteComponent",
+        propertyValue: 1,
+      })
+    );
   };
 
   return (

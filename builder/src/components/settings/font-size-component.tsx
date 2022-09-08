@@ -1,32 +1,51 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { updateItems } from "reducers/itemsReducer";
+import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IFontSizeComponent {
-  fontSize: number;
-  setFontSize: (fontSize: number) => void;
+  selectedItem: IItems;
 }
 
-const FontSizeComponent: FC<IFontSizeComponent> = ({
-  fontSize,
-  setFontSize,
-}) => {
+const FontSizeComponent: FC<IFontSizeComponent> = ({ selectedItem }) => {
+  const dispatch = useDispatch();
+  const fontSize = selectedItem?.style?.fontSize;
+
   const incrementCounter = () => {
-    setFontSize(fontSize + 1);
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "fontSize",
+        propertyValue: fontSize + 1,
+      })
+    );
   };
 
   const decrementCounter = () => {
-    if (fontSize <= 1) {
-      setFontSize(1);
-    } else {
-      setFontSize(fontSize - 1);
-    }
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "fontSize",
+        propertyValue: fontSize <= 1 ? 1 : fontSize - 1,
+      })
+    );
   };
 
   const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (fontSize) {
-      setFontSize(+e.target.value);
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: selectedItem.i,
+          propertyName: "fontSize",
+          propertyValue: +e.target.value,
+        })
+      );
     }
   };
 

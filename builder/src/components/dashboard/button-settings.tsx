@@ -1,8 +1,6 @@
 import React, { FC } from "react";
-import { RiText } from "react-icons/ri";
-import { AiOutlineLink } from "react-icons/ai";
-import AlignComponent from "components/settings/align-component";
-import FontStyleComponent from "components/settings/font-style-component";
+import { useDispatch } from "react-redux";
+import { updateSelector } from "reducers/selectorReducer";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
@@ -18,59 +16,17 @@ import CombinedComponent from "components/settings/combined-setting";
 import { IoMdLink } from "react-icons/io";
 
 const ButtonSettings: FC<ISettings> = ({
-  textVal,
   handleTextChange,
-  linkVal,
   handleLinkChange,
-  items,
-  setItems,
   selectedItem,
-  setBold,
-  bold,
-  setItalic,
-  italic,
-  setUnderline,
-  underline,
-  setColor,
-  color,
-  setBgColor,
-  backgroundColor,
-  setDeleteComponent,
-  deleteComponent,
-  justifyContent,
-  setLeft,
-  setCenter,
-  setRight,
-  fontSize,
-  setFontSize,
-  contractConfig,
-  setContractConfig,
   showComponent,
   setShowComponent,
-  selector,
-  setSelector,
   elementConfig,
   openTab,
   setOpenTab,
-  borderRadius,
-  setBorderRadius,
-  setSmall,
-  setMedium,
-  setLarge,
-  shadow,
-  setOn,
-  connectWallet,
-  margin,
-  setMarginLeft,
-  setMarginRight,
-  setMarginTop,
-  setMarginBottom,
-  padding,
-  setPaddingLeft,
-  setPaddingRight,
-  setPaddingBottom,
-  setPaddingTop,
 }) => {
+  const dispatch = useDispatch();
+
   const handleToggleTab = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
     num: number
@@ -78,7 +34,7 @@ const ButtonSettings: FC<ISettings> = ({
     e.preventDefault();
     setOpenTab(num);
     if (num === 1) {
-      setSelector(null);
+      dispatch(updateSelector(null));
     }
   };
 
@@ -135,22 +91,11 @@ const ButtonSettings: FC<ISettings> = ({
             <span className="setting-text ">{selectedItem.name}</span>
           ) : null}
         </h3>
-        <CombinedComponent
-          bold={bold}
-          italic={italic}
-          underline={underline}
-          setBold={setBold}
-          setItalic={setItalic}
-          setUnderline={setUnderline}
-          justifyContent={justifyContent}
-          setLeft={setLeft}
-          setRight={setRight}
-          setCenter={setCenter}
-        />
+        <CombinedComponent selectedItem={selectedItem} />
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
           {/* <RiText className="text-[18px] mr-3" /> */}
           <textarea
-            value={textVal}
+            value={selectedItem?.value}
             onChange={(e) => handleTextChange(e)}
             className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
             placeholder="Please write your text here..."
@@ -161,65 +106,29 @@ const ButtonSettings: FC<ISettings> = ({
             <IoMdLink className="text-[18px]" />
           </div>
           <input
-            value={linkVal}
+            value={selectedItem?.link}
             onChange={(e) => handleLinkChange(e)}
             className="changeText pl-[2.5rem] py-[0.4rem] input-text"
             type="text"
             placeholder="Link"
           />
         </div>
-        <ConnectSwitchComponent setOn={setOn} connectWallet={connectWallet} />
-
-        <FontSizeComponent fontSize={fontSize} setFontSize={setFontSize} />
-        <BorderRadiusComponent
-          borderRadius={borderRadius}
-          setBorderRadius={setBorderRadius}
-        />
-        <ColorComponent
-          color={color}
-          setColor={setColor}
-          selectedItem={selectedItem}
-        />
-
-        <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
-        <MarginComponent
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
-          setMarginTop={setMarginTop}
-          setMarginBottom={setMarginBottom}
-          margin={{ ...margin }}
-        />
-        <PaddingComponent
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
-          padding={{ ...padding }}
-        />
-
-        <ShadowComponent
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-          shadow={shadow}
-        />
-        <UtilitiesComponent
-          deleteComponent={deleteComponent}
-          setDeleteComponent={setDeleteComponent}
-        />
+        <ConnectSwitchComponent selectedItem={selectedItem} />
+        <FontSizeComponent selectedItem={selectedItem} />
+        <BorderRadiusComponent selectedItem={selectedItem} />
+        <ColorComponent selectedItem={selectedItem} />
+        <BgColorComponent selectedItem={selectedItem} />
+        <MarginComponent selectedItem={selectedItem} />
+        <PaddingComponent selectedItem={selectedItem} />
+        <ShadowComponent selectedItem={selectedItem} />
+        <UtilitiesComponent selectedItem={selectedItem} />
       </span>
       <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
         <AdvanceComponent
-          contractConfig={contractConfig}
-          setContractConfig={setContractConfig}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
-          selector={selector}
-          setSelector={setSelector}
           elementConfig={elementConfig}
           selectedItem={selectedItem}
-          items={items}
-          setItems={setItems}
         />
       </div>
       {/* </span>

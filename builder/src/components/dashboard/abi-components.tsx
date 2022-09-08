@@ -1,4 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateItemsArray } from "reducers/itemsReducer";
+import { updateSelector } from "reducers/selectorReducer";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
 import IItems from "interfaces/items";
@@ -14,33 +17,19 @@ interface IAbiComponents {
       stateMutability: string;
     };
   };
-  selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  };
-  setSelector: (selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  }) => void;
   elementConfig: object;
   selectedItem: IItems;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
 }
 
 const AbiComponents: FC<IAbiComponents> = ({
   showComponent,
-  selector,
-  setSelector,
   elementConfig,
   selectedItem,
-  items,
-  setItems,
 }) => {
+  const dispatch = useDispatch();
+  const items: IItems[] = useSelector((state: any) => state.items);
+  const selector = useSelector((state: any) => state.selector);
+
   const [currentElement, setCurrentElement] = useState<{
     name: string;
     type: string;
@@ -119,25 +108,27 @@ const AbiComponents: FC<IAbiComponents> = ({
         };
       });
 
-      setItems(updatedItems);
+      dispatch(updateItemsArray(updatedItems));
     } else {
       let newArray = [...items];
       newArray[elementsIndex] = updatedItem;
-      setItems(newArray);
+      dispatch(updateItemsArray(newArray));
     }
   };
 
   const handleInputSelector = (selectedId: string) => {
     if (selector === null) {
-      setSelector({
-        methodName: showComponent.value.name,
-        type: "input",
-        name: selectedId,
-        buttonId: selectedItem.i,
-      });
+      dispatch(
+        updateSelector({
+          methodName: showComponent.value.name,
+          type: "input",
+          name: selectedId,
+          buttonId: selectedItem.i,
+        })
+      );
       setCurrentElement({ name: selectedId, type: "input" });
     } else {
-      setSelector(null);
+      dispatch(updateSelector(null));
     }
   };
 
@@ -154,18 +145,20 @@ const AbiComponents: FC<IAbiComponents> = ({
 
   const handleStateSelector = (selectedItem: IItems) => {
     if (selector === null) {
-      setSelector({
-        methodName: showComponent.value.name,
-        type: "input",
-        name: showComponent.value.name,
-        buttonId: selectedItem.i,
-      });
+      dispatch(
+        updateSelector({
+          methodName: showComponent.value.name,
+          type: "input",
+          name: showComponent.value.name,
+          buttonId: selectedItem.i,
+        })
+      );
       setCurrentElement({
         name: showComponent.value.name,
         type: "send",
       });
     } else {
-      setSelector(null);
+      dispatch(updateSelector(null));
     }
   };
 
@@ -178,15 +171,17 @@ const AbiComponents: FC<IAbiComponents> = ({
 
   const handleOutputSelector = (selectedId: string) => {
     if (selector === null) {
-      setSelector({
-        methodName: showComponent.value.name,
-        type: "output",
-        name: selectedId,
-        buttonId: selectedItem.i,
-      });
+      dispatch(
+        updateSelector({
+          methodName: showComponent.value.name,
+          type: "output",
+          name: selectedId,
+          buttonId: selectedItem.i,
+        })
+      );
       setCurrentElement({ name: selectedId, type: "output" });
     } else {
-      setSelector(null);
+      dispatch(updateSelector(null));
     }
   };
 

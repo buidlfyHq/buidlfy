@@ -8,18 +8,6 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IAdvanceComponent {
-  selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  };
-  setSelector: (selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  }) => void;
   showComponent: {
     id: string;
     value: {
@@ -38,24 +26,14 @@ interface IAdvanceComponent {
       stateMutability: string;
     };
   }) => void;
-  contractConfig: { abi: string; address: string };
-  setContractConfig: (contractConfig: { abi: string; address: string }) => void;
   selectedItem: IItems;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
   elementConfig: object;
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({
-  selector,
-  setSelector,
   showComponent,
   setShowComponent,
-  contractConfig,
-  setContractConfig,
   selectedItem,
-  items,
-  setItems,
   elementConfig,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
@@ -79,8 +57,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
           </span>{" "}
           Import Contract
           <Modal
-            contractConfig={contractConfig}
-            setContractConfig={setContractConfig}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
           />
@@ -88,20 +64,13 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
       </div>
       <br />
       <AbiMethods
-        contractConfig={contractConfig}
         setShowComponent={setShowComponent}
         selectedItem={selectedItem}
-        items={items}
-        setItems={setItems}
       />
       <AbiComponents
         showComponent={showComponent}
-        selector={selector}
-        setSelector={setSelector}
         elementConfig={elementConfig}
         selectedItem={selectedItem}
-        items={items}
-        setItems={setItems}
       />
     </>
   );

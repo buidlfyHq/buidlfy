@@ -1,32 +1,53 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { updateItems } from "reducers/itemsReducer";
+import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 
 interface IBorderRadiusComponent {
-  borderRadius: number;
-  setBorderRadius: (borderRadius: number) => void;
+  selectedItem: IItems;
 }
 
 const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
-  borderRadius,
-  setBorderRadius,
+  selectedItem,
 }) => {
+  const dispatch = useDispatch();
+  const borderRadius = selectedItem?.style?.borderRadius;
+
   const incrementCounter = () => {
-    setBorderRadius(borderRadius + 1);
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "borderRadius",
+        propertyValue: borderRadius + 1,
+      })
+    );
   };
 
   const decrementCounter = () => {
-    if (borderRadius <= 0) {
-      setBorderRadius(0);
-    } else {
-      setBorderRadius(borderRadius - 1);
-    }
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "borderRadius",
+        propertyValue: borderRadius <= 0 ? 0 : borderRadius - 1,
+      })
+    );
   };
 
   const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (borderRadius) {
-      setBorderRadius(+e.target.value);
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: selectedItem.i,
+          propertyName: "borderRadius",
+          propertyValue: +e.target.value,
+        })
+      );
     }
   };
 

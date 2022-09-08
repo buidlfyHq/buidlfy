@@ -1,35 +1,36 @@
 import React, { FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
-import "styles/components.css";
+import { updateContract } from "reducers/contractReducer";
 import upload from "assets/upload-img.png";
+import "styles/components.css";
 
 interface IModal {
-  contractConfig: { abi: string; address: string };
-  setContractConfig: (contractConfig: object) => void;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Modal: FC<IModal> = ({
-  contractConfig,
-  setContractConfig,
-  isOpen,
-  setIsOpen,
-}) => {
-  // const [showInput, setShowInput] = useState<boolean>(false);
+const Modal: FC<IModal> = ({ isOpen, setIsOpen }) => {
+  const dispatch = useDispatch();
+  const contract: { abi: string; address: string } = useSelector(
+    (state: any) => state.contract
+  );
+
   const [showUpload, setShowUpload] = useState<boolean>(true);
   const [files, setFiles] = useState<string | ArrayBuffer>("");
 
   const handleShow = () => {
     setShowUpload(false);
   };
+
   const handleSetAbi = (abi: string) => {
     // keep type = function, remove other types
     const filteredAbi = JSON.parse(abi).filter(
       (m: { type: string }) => m.type === "function"
     );
-    setContractConfig({ ...contractConfig, abi: JSON.stringify(filteredAbi) });
+    dispatch(updateContract({ ...contract, abi: JSON.stringify(filteredAbi) }));
   };
+
   const handleChange = (e) => {
     const fileReader = new FileReader();
     fileReader.readAsText(e.target.files[0], "UTF-8");
@@ -38,6 +39,7 @@ const Modal: FC<IModal> = ({
       handleSetAbi(e.target.result.toString());
     };
   };
+
   return (
     <Dialog
       as="div"
@@ -113,7 +115,7 @@ const Modal: FC<IModal> = ({
               <textarea
                 className="upload-modal-input p-2"
                 placeholder="Paste ABI here..."
-                value={contractConfig.abi}
+                value={contract.abi}
                 onChange={(e) => handleSetAbi(e.target.value)}
               />
             )}
@@ -123,12 +125,11 @@ const Modal: FC<IModal> = ({
             <input
               className="modal-input pl-2 mt-1"
               placeholder="Paste Address here..."
-              value={contractConfig.address}
+              value={contract.address}
               onChange={(e) =>
-                setContractConfig({
-                  ...contractConfig,
-                  address: e.target.value,
-                })
+                dispatch(
+                  updateContract({ ...contract, address: e.target.value })
+                )
               }
             />
           </div>

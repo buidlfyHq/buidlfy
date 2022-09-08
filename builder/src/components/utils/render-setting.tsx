@@ -74,58 +74,14 @@ const SettingComponent: FC<ISettings> = ({
     case "Button":
       return (
         <ButtonSettings
-          textVal={value}
           handleTextChange={handleTextChange}
-          linkVal={link}
           handleLinkChange={handleLinkChange}
-          items={items}
-          setItems={setItems}
           selectedItem={selectedItem}
-          setBold={setBold}
-          bold={selectedItem?.style?.fontWeight}
-          setItalic={setItalic}
-          italic={selectedItem?.style?.fontStyle}
-          setUnderline={setUnderline}
-          underline={selectedItem?.style?.textDecoration}
-          color={selectedItem?.style?.color}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          backgroundColor={selectedItem?.style?.backgroundColor}
-          setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          justifyContent={selectedItem?.style?.justifyContent}
-          setLeft={setLeft}
-          setCenter={setCenter}
-          setRight={setRight}
-          setFontSize={setFontSize}
-          fontSize={selectedItem?.style?.fontSize}
-          setContractConfig={setContractConfig}
-          contractConfig={contractConfig}
-          setShowComponent={setShowComponent}
           showComponent={showComponent}
-          selector={selector}
-          setSelector={setSelector}
+          setShowComponent={setShowComponent}
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
-          borderRadius={selectedItem?.style?.borderRadius}
-          setBorderRadius={setBorderRadius}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-          shadow={selectedItem?.style?.shadow}
-          setOn={setOn}
-          connectWallet={selectedItem?.connectWallet}
-          setMarginLeft={setMarginLeft}
-          setMarginRight={setMarginRight}
-          setMarginTop={setMarginTop}
-          setMarginBottom={setMarginBottom}
-          setPaddingLeft={setPaddingLeft}
-          setPaddingRight={setPaddingRight}
-          setPaddingTop={setPaddingTop}
-          setPaddingBottom={setPaddingBottom}
-          margin={{ ...selectedItem?.style?.margin }}
-          padding={{ ...selectedItem?.style?.padding }}
         />
       );
 

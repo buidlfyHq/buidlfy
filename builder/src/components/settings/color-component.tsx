@@ -1,5 +1,7 @@
 import React, { useState, FC, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { updateItems } from "reducers/itemsReducer";
 import { SketchPicker } from "react-color";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
@@ -8,16 +10,13 @@ import "styles/dashboard.css";
 import { containerCheck } from "utils/container-check";
 
 interface IColorComponent {
-  color: IColor;
-  setColor: (color: IColor) => void;
   selectedItem: IItems;
 }
 
-const ColorComponent: FC<IColorComponent> = ({
-  color,
-  setColor,
-  selectedItem,
-}) => {
+const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
+  const dispatch = useDispatch();
+  const color = selectedItem?.style?.color;
+
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [hexColor, setHexColor] = useState();
   const [colorOpacity, setColorOpacity] = useState();
@@ -43,40 +42,67 @@ const ColorComponent: FC<IColorComponent> = ({
 
   const handleHex = (e) => {
     setHexColor(e.target.value);
-    console.log(hexColor, "hex");
   };
 
   const handleChange = (color: { rgb: IColor; hex; a }) => {
-    console.log(color, "color-main");
-
     if (!color) {
       return;
     }
-    setColor(color.rgb);
+
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "color",
+        propertyValue: color.rgb,
+      })
+    );
     setHexColor(color.hex);
-    console.log(color.hex, "color.hex");
-    // setColorOpacity(`rgba(${color.a})`);
   };
+
   const opacity = Number(`${color.a}`);
   let newOpacity = opacity * 100;
   if (newOpacity == 10000) {
     newOpacity = 100;
   }
+
   const newColor = { ...color };
   const handleOpacity = (e) => {
     newColor.a = Number(e.target.value) / 100;
-    setColor(newColor);
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "color",
+        propertyValue: newColor,
+      })
+    );
   };
+
   const incrementCounter = () => {
     let newIncrement = newOpacity + 1;
     newColor.a = Number(newIncrement) / 100;
-    setColor(newColor);
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "color",
+        propertyValue: newColor,
+      })
+    );
   };
 
   const decrementCounter = () => {
     let newDecrement = newOpacity - 1;
     newColor.a = Number(newDecrement) / 100;
-    setColor(newColor);
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "color",
+        propertyValue: newColor,
+      })
+    );
   };
 
   return (
