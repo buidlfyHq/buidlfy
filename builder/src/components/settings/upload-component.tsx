@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateItems } from "reducers/itemsReducer";
+import { updateItems } from "redux/itemsReducer";
 import { uploadFileToWeb3Storage } from "utils/web3storage";
 import IItems from "interfaces/items";
 import "styles/components.css";

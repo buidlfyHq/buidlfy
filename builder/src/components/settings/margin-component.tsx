@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { updateItems } from "reducers/itemsReducer";
+import { updateItems } from "redux/itemsReducer";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";

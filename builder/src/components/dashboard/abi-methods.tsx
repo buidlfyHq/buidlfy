@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateItemsArray } from "reducers/itemsReducer";
+import { updateItemsArray } from "redux/itemsReducer";
 import IItems from "interfaces/items";
 
 interface IAbiMethods {

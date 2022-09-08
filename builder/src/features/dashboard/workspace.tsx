@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
-import { updateItemsArray } from "reducers/itemsReducer";
-import { updateSelector } from "reducers/selectorReducer";
+import { updateItemsArray } from "redux/itemsReducer";
+import { updateSelector } from "redux/selectorReducer";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";

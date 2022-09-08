@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateItemsArray } from "reducers/itemsReducer";
-import { updateSelector } from "reducers/selectorReducer";
+import { updateItemsArray } from "redux/itemsReducer";
+import { updateSelector } from "redux/selectorReducer";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
 import IItems from "interfaces/items";

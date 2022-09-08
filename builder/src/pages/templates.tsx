@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // import { useNavigate } from "react-router-dom";
-import { updateItemsArray } from "reducers/itemsReducer";
+import { updateItemsArray } from "redux/itemsReducer";
 import IItems from "interfaces/items";
 import ITemplate from "interfaces/template";
 import "styles/components.css";

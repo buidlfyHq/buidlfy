@@ -2,7 +2,7 @@ import React, { useState, FC, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { SketchPicker } from "react-color";
-import { updateItems } from "reducers/itemsReducer";
+import { updateItems } from "redux/itemsReducer";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";

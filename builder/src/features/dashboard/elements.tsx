@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
-import { updateItemsArray } from "reducers/itemsReducer";
+import { updateItemsArray } from "redux/itemsReducer";
 import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
 import "styles/components.css";
