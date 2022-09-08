@@ -1,6 +1,5 @@
 import React, { FC, useRef } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
-import IItems from "interfaces/items";
 import Template from "pages/templates";
 import Elements from "features/dashboard/elements";
 import DefaultSettings from "features/dashboard/default-settings";
@@ -129,20 +128,16 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </div>
       {/* Components */}
-      {sideElement == sidebarEnum.ELEMENTS ? (
+      {sideElement === sidebarEnum.ELEMENTS ? (
         <Elements
           className={className}
           setClassName={setClassName}
-          items={items}
-          setItems={setItems}
           addContainer={addContainer}
           settingItemId={settingItemId}
         />
       ) : null}
-      {sideElement == sidebarEnum.TEMPLATES ? (
-        <Template setItems={setItems} />
-      ) : null}
-      {sideElement == sidebarEnum.STYLES ? (
+      {sideElement === sidebarEnum.TEMPLATES ? <Template /> : null}
+      {sideElement === sidebarEnum.STYLES ? (
         <DefaultSettings
           backgroundColor={backgroundColor}
           setBackgroundColor={setBackgroundColor}
