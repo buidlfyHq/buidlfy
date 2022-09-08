@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { IoMdLink } from "react-icons/io";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
@@ -154,7 +154,11 @@ const ButtonSettings: FC<ISettings> = ({
           setBorderColor={setBorderColor}
           selectedItem={selectedItem}
         />
-        <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
+        <BgColorComponent
+          color={backgroundColor}
+          setBgColor={setBgColor}
+          selectedItem={selectedItem}
+        />
         <MarginComponent
           setMarginLeft={setMarginLeft}
           setMarginRight={setMarginRight}

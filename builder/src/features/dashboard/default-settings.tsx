@@ -5,8 +5,8 @@ import IColor from "interfaces/color";
 import "styles/components.css";
 
 interface IDefaultSettings {
-  backgroundColor: IColor;
-  setBackgroundColor: (backgroundColor: IColor) => void;
+  backgroundColor: string;
+  setBackgroundColor: (backgroundColor: string) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;

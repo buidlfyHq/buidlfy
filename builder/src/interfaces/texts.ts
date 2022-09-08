@@ -8,14 +8,14 @@ export default interface ITexts {
   bold: string;
   italic: string;
   underline: string;
-  color?: IColor;
-  borderColor?: IColor;
+  color?: string;
+  borderColor?: string;
   justifyContent: string;
   fontSize: number;
   value: string;
   link: string;
   borderRadius?: number,
-  backgroundColor?: IColor;
+  backgroundColor?: string;
   shadow?: string;
   connectWallet?: string;
   margin?: {

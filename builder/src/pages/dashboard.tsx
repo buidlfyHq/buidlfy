@@ -48,11 +48,9 @@ const Dashboard: FC = () => {
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
   const [addContainer, setAddContainer] = useState<boolean>(false);
-  const [backgroundColor, setBackgroundColor] = useState<IColor>({
-    r: "0",
-    g: "0",
-    b: "0",
-  });
+  const [backgroundColor, setBackgroundColor] = useState<string>(
+    "rgba(255, 255, 255, 0)"
+  );
   const [addContainerElements, setAddContainerElements] =
     useState<boolean>(true);
   const [dragContainer, setDragContainer] = useState<boolean>(true);

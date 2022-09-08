@@ -21,17 +21,8 @@ const Text: FC<ITexts> = ({
       id="text-one"
       style={{
         height: "-webkit-fill-available",
-        fontWeight: bold,
-        fontStyle: italic,
-        textDecoration: underline,
-        color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-        display: "flex",
-        justifyContent: justifyContent,
-        alignItems: "center",
-        fontSize: `${fontSize}px`,
-        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+        background: backgroundColor,
         margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
-        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
       className="flex overflow-hidden items-center justify-center w-auto h-full"
     >
@@ -42,8 +33,10 @@ const Text: FC<ITexts> = ({
             target="_blank"
             href={link}
             id="text-two"
+            className="text-class"
             style={{
-              color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+              background: color,
+              WebkitTextFillColor: "transparent",
             }}
           >
             <textarea
@@ -54,15 +47,16 @@ const Text: FC<ITexts> = ({
                 fontWeight: bold,
                 fontStyle: italic,
                 textDecoration: underline,
-                color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+                background: color,
+                WebkitTextFillColor: "transparent",
                 display: "flex",
                 justifyContent,
                 alignItems: "center",
                 textAlign: `${justifyContent}` as CanvasTextAlign,
                 fontSize: `${fontSize}px`,
-                backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
               }}
-              className={`w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
+              className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
             />
           </a>
         ) : (
@@ -74,15 +68,16 @@ const Text: FC<ITexts> = ({
               fontWeight: bold,
               fontStyle: italic,
               textDecoration: underline,
-              color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+              background: color,
+              WebkitTextFillColor: "transparent",
               display: "flex",
               justifyContent,
               alignItems: "center",
               textAlign: `${justifyContent}` as CanvasTextAlign,
               fontSize: `${fontSize}px`,
-              backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+              padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
             }}
-            className={`w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
+            className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
           />
         )}
       </>

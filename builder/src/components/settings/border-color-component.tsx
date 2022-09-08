@@ -1,14 +1,14 @@
 import React, { useState, FC, useEffect, useRef } from "react";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { SketchPicker } from "react-color";
+import { AiOutlineCaretDown } from "react-icons/ai";
 import IItems from "interfaces/items";
-import IColor from "interfaces/color";
+import ColorPicker from "react-best-gradient-color-picker";
+import { Dialog } from "@headlessui/react";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBorderColorComponent {
-  borderColor: IColor;
-  setBorderColor: (borderColor: IColor) => void;
+  borderColor: string;
+  setBorderColor: (borderColor: string) => void;
   selectedItem: IItems;
 }
 
@@ -17,8 +17,6 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
   setBorderColor,
 }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
-  const [hexColor, setHexColor] = useState();
-  const [colorOpacity, setBorderColorOpacity] = useState();
   const ref = useRef<HTMLDivElement>();
   useEffect(() => {
     // FIX: find a suitable type for this event
@@ -30,7 +28,7 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
     document.addEventListener("click", handleOutsideClick);
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [ref]);
-
+  console.log(borderColor, "borderColor");
   const handleClick = () => {
     setDisplayColorPicker(true);
   };
@@ -39,48 +37,18 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
     setDisplayColorPicker(false);
   };
 
-  const handleHex = (e) => {
-    setHexColor(e.target.value);
-  };
-
-  const handleChange = (borderColor: { rgb: IColor; hex; a }) => {
-    if (!borderColor) {
-      return;
-    }
-    setBorderColor(borderColor.rgb);
-    setHexColor(borderColor.hex);
-  };
-  const opacity = Number(`${borderColor.a}`);
-  let newOpacity = opacity * 100;
-  if (newOpacity == 10000) {
-    newOpacity = 100;
-  }
-  const newColor = { ...borderColor };
-  const handleOpacity = (e: React.ChangeEvent<HTMLInputElement>) => {
-    newColor.a = Number(e.target.value) / 100;
-    setBorderColor(newColor);
-  };
-  const incrementCounter = () => {
-    let newIncrement = newOpacity + 1;
-    newColor.a = Number(newIncrement) / 100;
-    setBorderColor(newColor);
-  };
-
-  const decrementCounter = () => {
-    let newDecrement = newOpacity - 1;
-    newColor.a = Number(newDecrement) / 100;
-    setBorderColor(newColor);
-  };
-
   return (
     <>
-      <div className="flex flex-col items-start justify-center py-2 text-gray-600">
+      <div
+        className="py-2 text-gray-600"
+        style={{ width: "-webkit-fill-available" }}
+      >
         <div className="items-center mx-2 py-2 mb-2">
           {/* <VscSymbolColor className="text-[18px] mr-3" /> */}
           <div className="flex">
-            <span className="margin-text grow flex px-1 text-xl not-italic font-normal text-gray-500 font-regular">
+            <div className="margin-text grow flex my-1 px-1 text-xl not-italic font-normal text-gray-500 font-regular">
               Border Color
-            </span>
+            </div>
             <div
               ref={ref}
               onClick={handleClick}
@@ -88,44 +56,58 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
             >
               <div
                 style={{
-                  backgroundColor: `rgba(${borderColor.r}, ${borderColor.g}, ${borderColor.b}, ${borderColor.a})`,
+                  background: borderColor,
                 }}
                 className="w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"
               ></div>
-              <AiOutlineCaretDown className="text-[14px] mr-3" />
+              <AiOutlineCaretDown className="text-[14px]" />
             </div>
           </div>
-          <div className="flex mt-5">
-            <input
-              type="text"
-              value={hexColor}
-              placeholder="#000000"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[110px] mr-5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleHex(e)}
-            />
-            <input
-              inputMode="numeric"
-              value={`${newOpacity}%`}
-              placeholder="100%"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[80px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleOpacity(e)}
-            />
-            <AiOutlineCaretUp
-              onClick={incrementCounter}
-              className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
-            />
-            <AiOutlineCaretDown
-              onClick={decrementCounter}
-              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
-            />
-          </div>
         </div>
+
         {displayColorPicker ? (
-          <div>
-            <div onClick={handleClose} />
-            <SketchPicker color={borderColor} onChange={handleChange} />
-          </div>
-        ) : null}
+          <Dialog
+            as="div"
+            className="absolute top-[220px] right-[260px] bottom-[1px] py-[15px] z-100 overflow-none bg-white shadow-lg"
+            open={displayColorPicker}
+            onClose={() => setDisplayColorPicker(false)}
+          >
+            <div className=" px-4 text-right">
+              {/* This element is to trick the browser into centering the modal contents. */}
+              {/* <span
+               className="inline-block h-screen align-middle"
+               aria-hidden="true"
+             >
+               &#8203;
+             </span> */}
+
+              {/* Use the overlay to style a dim backdrop for your dialog */}
+              {/* <Dialog.Overlay className="fixed inset-0 bg-black opacity-10" /> */}
+
+              {/* Dialog Content */}
+
+              <div>
+                <div onClick={handleClose} />
+                {/* <button onClick={setSolid}>Solid</button>
+               <button onClick={setGradient}>Gradient</button> */}
+
+                <ColorPicker
+                  // hideEyeDrop="false"
+                  // hideInputType="false"
+                  // hideColorGuide="false"
+                  // hideAdvancedSliders="false"
+                  value={borderColor}
+                  onChange={setBorderColor}
+                  // setSolid="true"
+                />
+              </div>
+            </div>
+          </Dialog>
+        ) : // <div>
+        //   <div onClick={handleClose} />
+        //   <SketchPicker color={borderColor} onChange={handleChange} />
+        // </div>
+        null}
       </div>
     </>
   );

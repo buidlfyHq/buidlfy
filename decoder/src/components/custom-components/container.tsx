@@ -29,11 +29,11 @@ const Container: FC<IBgContainer> = ({
     if (cw) setContainerW(cw);
   }, []);
   let finalPadding = padding.paddingLeft + padding.paddingRight;
-
   return (
     <section
       id={item.i}
       style={{
+        background: backgroundColor,
         paddingLeft: `${padding.paddingLeft}px`,
         paddingRight: `${padding.paddingRight}px`,
       }}
@@ -49,9 +49,11 @@ const Container: FC<IBgContainer> = ({
           isResizable={false}
           compactType={null}
           margin={[0, 0]}
+          className="btn-border"
           style={{
-            backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+            background: backgroundColor,
+            border: `1px solid ${color}`,
+            borderImage: color,
             borderRadius: `${borderRadius}px`,
             borderWidth: `${borderWidth}px`,
             backgroundImage: `url(${imgData})`,

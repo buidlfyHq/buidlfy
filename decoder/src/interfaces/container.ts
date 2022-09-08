@@ -5,8 +5,8 @@ import { IInput, IOutput } from "./value";
 export default interface IBgContainer {
   item: IItems;
   children: IItems[];
-  backgroundColor: IColor;
-  color: IColor;
+  backgroundColor: string;
+  color: string;
   imgData: string | ArrayBuffer;
   borderRadius: number;
   borderWidth: number;

@@ -27,8 +27,8 @@ interface ISidebar {
   showSidebar;
   hideSidebar;
   hideSettingSidebar;
-  backgroundColor: IColor;
-  setBackgroundColor: (backgroundColor: IColor) => void;
+  backgroundColor: string;
+  setBackgroundColor: (backgroundColor: string) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;

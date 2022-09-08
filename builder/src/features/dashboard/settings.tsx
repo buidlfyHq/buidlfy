@@ -239,7 +239,7 @@ const Settings: FC<ISettings> = ({
 
   const singleWorkFunction = (
     styleProp: functionEnum,
-    property: number | IColor
+    property: number | IColor | string
   ) => {
     if (!settingItemId) {
       return;
@@ -366,14 +366,14 @@ const Settings: FC<ISettings> = ({
     });
     setItems(updatedItems);
   };
-  const setColor = (color: IColor) => {
+  const setColor = (color: string) => {
     singleWorkFunction(functionEnum.COLOR, color);
   };
-  const setBorderColor = (borderColor: IColor) => {
+  const setBorderColor = (borderColor: string) => {
     singleWorkFunction(functionEnum.BORDER_COLOR, borderColor);
   };
 
-  const setBgColor = (backgroundColor: IColor) => {
+  const setBgColor = (backgroundColor: string) => {
     singleWorkFunction(functionEnum.BACKGROUND_COLOR, backgroundColor);
   };
 

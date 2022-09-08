@@ -13,11 +13,12 @@ const Home: FC = () => {
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
   const [updateBackgroundSize, setUpdateBackgroundSize] =
     useState<boolean>(false);
+  console.log(config.background, "bg");
   return (
     <main
       className="min-h-screen"
       style={{
-        backgroundColor: `rgba(${config.background?.r}, ${config.background?.g}, ${config.background?.b}, ${config.background?.a})`,
+        background: config.background,
       }}
     >
       <ResponsiveGridLayout

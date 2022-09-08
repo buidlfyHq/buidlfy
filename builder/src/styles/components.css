@@ -27,6 +27,13 @@ line-height: 24px;
 color: #100F11;
 text-align: center;
 }
+.btn-border {
+  border-image-slice: 1 !important;
+}
+.text-class{
+  background-clip: text;
+  -webkit-background-clip: text !important;
+}
 .modal-subheading {
 font-style: normal;
 font-weight: 300;
@@ -147,15 +154,15 @@ color: #BAB9BD;
   /* background: #FFFFFF; */
   /* Solid Colours/Brand/Gray/Gray-400 */
 
-  border-color: #e2e4e8;
+  /* border-color: #e2e4e8; */
   /* border-radius: 3px; */
 }
-.input:focus-visible {
+
+/* .input:focus-visible {
   border: 1px solid #8247e5 !important;
-  /* State/Primary Focus */
   outline: none;
   box-shadow: 0px 2px 2px -1px rgba(0, 0, 0, 0.12), 0px 0px 0px 1px #dcd4ff;
-}
+} */
 
 .color-span {
   width: 1.5rem;
