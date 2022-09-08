@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { updateItems } from "redux/itemsReducer";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import Navbar from "features/dashboard/navbar";
 import Sidebar from "features/dashboard/sidebar";
 import SideNavbar from "features/dashboard/side-navbar";
@@ -55,7 +55,7 @@ const Dashboard: FC = () => {
     // checks for stored config
     let saveItems = localStorage.getItem("items");
     if (saveItems) {
-      dispatch(updateItems(JSON.parse(saveItems)));
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems)));
     }
   }, []); // eslint-disable-line
 

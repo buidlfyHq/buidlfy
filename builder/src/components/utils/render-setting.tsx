@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { updateItems } from "redux/itemsReducer";
+import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
@@ -26,8 +26,7 @@ const SettingComponent: FC<ISettings> = ({
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     dispatch(
-      updateItems({
-        level: 0,
+      updateWorkspaceElement({
         settingItemId: selectedItem.i,
         propertyName: "value",
         propertyValue: e.target.value,
@@ -37,8 +36,7 @@ const SettingComponent: FC<ISettings> = ({
 
   const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
-      updateItems({
-        level: 0,
+      updateWorkspaceElement({
         settingItemId: selectedItem.i,
         propertyName: "link",
         propertyValue: e.target.value,
@@ -48,8 +46,7 @@ const SettingComponent: FC<ISettings> = ({
 
   const handlePlaceholderChange = (e) => {
     dispatch(
-      updateItems({
-        level: 0,
+      updateWorkspaceElement({
         settingItemId: selectedItem.i,
         propertyName: "placeholder",
         propertyValue: e.target.value,

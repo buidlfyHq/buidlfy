@@ -1,13 +1,13 @@
 import React, { useState, FC, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { updateItems } from "redux/itemsReducer";
 import { SketchPicker } from "react-color";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
+import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { containerCheck } from "utils/container-check";
 
 interface IColorComponent {
   selectedItem: IItems;
@@ -50,8 +50,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     }
 
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "color",
         propertyValue: color.rgb,
@@ -67,11 +66,10 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
   }
 
   const newColor = { ...color };
-  const handleOpacity = (e) => {
+  const handleOpacity = (e: React.ChangeEvent<HTMLInputElement>) => {
     newColor.a = Number(e.target.value) / 100;
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "color",
         propertyValue: newColor,
@@ -83,8 +81,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     let newIncrement = newOpacity + 1;
     newColor.a = Number(newIncrement) / 100;
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "color",
         propertyValue: newColor,
@@ -96,8 +93,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     let newDecrement = newOpacity - 1;
     newColor.a = Number(newDecrement) / 100;
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "color",
         propertyValue: newColor,

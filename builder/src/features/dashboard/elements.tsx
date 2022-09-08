@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
-import { updateItemsArray } from "redux/itemsReducer";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
 import "styles/components.css";
@@ -23,12 +23,14 @@ const Elements: FC<IElements> = ({
 }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
-  const items: IItems[] = useSelector((state: any) => state.items);
+  const workspace: IItems[] = useSelector((state: any) => state.workspace);
+  console.log(workspace);
+  
   // const [indexValue, setIndexValue] = useState<number>(0);
 
   const selectedItem =
-    items?.find((item) => item.i === settingItemId) ||
-    items?.map((item) =>
+    workspace?.find((item) => item.i === settingItemId) ||
+    workspace?.map((item) =>
       item.children?.find((child: IItems) => child.i === settingItemId)
     )[0];
 
@@ -54,16 +56,16 @@ const Elements: FC<IElements> = ({
         h: y + c.h,
         children: [...selectedItem.children, newC],
       };
-      const elementsIndex = items.findIndex(
+      const elementsIndex = workspace.findIndex(
         (item) => item.i === selectedItem.i
       );
-      let newArray = [...items];
+      let newArray = [...workspace];
       newArray[elementsIndex] = updatedItem;
-      dispatch(updateItemsArray(newArray));
+      dispatch(updateWorkspaceElementsArray(newArray));
     } else {
       const availableHandles: ResizeHandles = ["se"];
       const containerHandles: ResizeHandles = ["e"];
-      let y = checkY(items);
+      let y = checkY(workspace);
       let newC = {
         ...c,
         i: uid(),
@@ -87,7 +89,7 @@ const Elements: FC<IElements> = ({
         }));
         newC.children = newChildren;
       }
-      dispatch(updateItemsArray([...items, newC]));
+      dispatch(updateWorkspaceElementsArray([...workspace, newC]));
     }
   };
   const checkY = (items: IItems[]) => {

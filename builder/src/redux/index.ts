@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import itemsReducer from "redux/itemsReducer";
+import workspaceReducer from "redux/workspace/workspace.reducers";
 import contractReducer from "redux/contractReducer";
 import selectorReducer from "redux/selectorReducer";
 
 export const store = configureStore({
   reducer: {
-    items: itemsReducer,
+    workspace: workspaceReducer,
     contract: contractReducer,
     selector: selectorReducer,
   },

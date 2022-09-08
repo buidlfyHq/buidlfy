@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { updateItems } from "redux/itemsReducer";
+import { updateWorkspaceElementSubStyle } from "redux/workspace/workspace.reducers";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -19,8 +19,7 @@ const MarginComponent: FC<IMarginComponent> = ({ selectedItem }) => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     dispatch(
-      updateItems({
-        level: 2,
+      updateWorkspaceElementSubStyle({
         settingItemId: selectedItem.i,
         propertyName: "margin",
         propertyValue: +e.target.value,
@@ -43,8 +42,7 @@ const MarginComponent: FC<IMarginComponent> = ({ selectedItem }) => {
 
   const incrementCounter = (property: string, value: number) => {
     dispatch(
-      updateItems({
-        level: 2,
+      updateWorkspaceElementSubStyle({
         settingItemId: selectedItem.i,
         propertyName: "margin",
         propertyValue: value + 1,
@@ -55,8 +53,7 @@ const MarginComponent: FC<IMarginComponent> = ({ selectedItem }) => {
 
   const decrementCounter = (property: string, value: number) => {
     dispatch(
-      updateItems({
-        level: 2,
+      updateWorkspaceElementSubStyle({
         settingItemId: selectedItem.i,
         propertyName: "margin",
         propertyValue: value - 1,
@@ -64,18 +61,6 @@ const MarginComponent: FC<IMarginComponent> = ({ selectedItem }) => {
       })
     );
   };
-
-  // const decrementCounter = () => {
-  //   if (margin.marginLeft) {
-  //     setMarginLeft(margin.marginLeft - 1);
-  //   } else if (margin.marginRight) {
-  //     setMarginRight(margin.marginRight - 1);
-  //   } else if (margin.marginTop) {
-  //     setMarginTop(margin.marginTop - 1);
-  //   } else {
-  //     setMarginBottom(margin.marginBottom - 1);
-  //   }
-  // };
 
   return (
     <>
