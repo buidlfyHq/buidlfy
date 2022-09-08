@@ -1,15 +1,16 @@
 import React, { FC, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+import { updateItemsArray } from "reducers/itemsReducer";
 import IItems from "interfaces/items";
 import ITemplate from "interfaces/template";
 import "styles/components.css";
 
-interface INew {
-  setItems: (items: IItems[]) => void;
-}
-const Template: FC<INew> = ({ setItems }) => {
-  const navigate = useNavigate();
+const Template: FC = () => {
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const [newTemp, setNewTemp] = useState<ITemplate[]>([]);
+
   useEffect(() => {
     const templates = localStorage.getItem("templates");
     const newTemplates = JSON.parse(templates);
@@ -22,7 +23,7 @@ const Template: FC<INew> = ({ setItems }) => {
   ) => {
     localStorage.removeItem("items");
     localStorage.setItem("items", JSON.stringify(value));
-    setItems(value);
+    dispatch(updateItemsArray(value));
     // navigate("/dashboard", { replace: true });
   };
 

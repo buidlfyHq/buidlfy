@@ -1,23 +1,25 @@
-import React, { FC, useState, useRef, useEffect } from "react";
-import ShortUniqueId from "short-unique-id";
-import { components } from "config/component";
-import { containerCheck } from "utils/container-check";
-import IItems from "interfaces/items";
-import { ResizeHandles } from "interfaces/handle";
-import { Link } from "react-router-dom";
-import Elements from "./elements";
-import Template from "pages/templates";
-import "styles/components.css";
+import React, { FC, useRef } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
-import { sidebarEnum } from "pages/dashboard";
+import IItems from "interfaces/items";
+import Template from "pages/templates";
+import Elements from "features/dashboard/elements";
 import DefaultSettings from "features/dashboard/default-settings";
 import IColor from "interfaces/color";
+import "styles/components.css";
+
+enum sidebarEnum {
+  PAGES = "pages",
+  TEMPLATES = "templates",
+  ELEMENTS = "elements",
+  MEDIA = "media",
+  STYLES = "styles",
+  HELP = "help",
+  SETTING = "setting",
+}
 
 interface ISidebar {
   className: string;
   setClassName: (className: string) => void;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
   addContainer: boolean;
   settingItemId: string;
   sideElement: string;
@@ -39,8 +41,6 @@ interface ISidebar {
 const Sidebar: FC<ISidebar> = ({
   className,
   setClassName,
-  items,
-  setItems,
   addContainer,
   settingItemId,
   sideElement,

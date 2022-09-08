@@ -1,18 +1,16 @@
 import React, { FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
+import { updateItemsArray } from "reducers/itemsReducer";
 import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
-import { Link } from "react-router-dom";
 import "styles/components.css";
-import image from "assets/image.png";
 
 interface IElements {
   className: string;
   setClassName: (className: string) => void;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
   addContainer: boolean;
   settingItemId: string;
 }
@@ -20,12 +18,12 @@ interface IElements {
 const Elements: FC<IElements> = ({
   className,
   setClassName,
-  items,
-  setItems,
   addContainer,
   settingItemId,
 }) => {
   const uid = new ShortUniqueId();
+  const dispatch = useDispatch();
+  const items: IItems[] = useSelector((state: any) => state.items);
   // const [indexValue, setIndexValue] = useState<number>(0);
 
   const selectedItem =
@@ -61,7 +59,7 @@ const Elements: FC<IElements> = ({
       );
       let newArray = [...items];
       newArray[elementsIndex] = updatedItem;
-      setItems(newArray);
+      dispatch(updateItemsArray(newArray));
     } else {
       const availableHandles: ResizeHandles = ["se"];
       const containerHandles: ResizeHandles = ["e"];
@@ -89,7 +87,7 @@ const Elements: FC<IElements> = ({
         }));
         newC.children = newChildren;
       }
-      setItems([...items, newC]);
+      dispatch(updateItemsArray([...items, newC]));
     }
   };
   const checkY = (items: IItems[]) => {
@@ -111,109 +109,6 @@ const Elements: FC<IElements> = ({
       return Math.max(...arr) + 1;
     }
   };
-
-  const onClickContainerFunction = (name) => {
-    const availableHandles: ResizeHandles = ["se"];
-    let y = checkContainerY(selectedItem);
-    let c = components?.find((component) => component.name == name);
-    let newC = {
-      ...c,
-      i: uid(),
-      x: 0,
-      y,
-      w: 6,
-      minW: 1,
-      resizeHandles: availableHandles,
-    };
-    let updatedItem = {
-      ...selectedItem,
-      h: y + c.h,
-      children: [...selectedItem.children, newC],
-    };
-    const elementsIndex = items.findIndex((item) => item.i === selectedItem.i);
-    let newArray = [...items];
-    newArray[elementsIndex] = updatedItem;
-    setItems(newArray);
-  };
-
-  // const renderContainerComponents = components
-  //   .filter((c) => !containerCheck(c))
-  //   ?.map((c, index) => {
-  //     const availableHandles: ResizeHandles = ["se"];
-  //     return (
-  //       <div
-  //         key={index}
-  //         className="px-4 py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
-  //         onClick={() => {
-  //           let y = checkContainerY(selectedItem);
-  //           let newC = {
-  //             ...c,
-  //             i: uid(),
-  //             x: 0,
-  //             y,
-  //             w: 6,
-  //             minW: 1,
-  //             resizeHandles: availableHandles,
-  //           };
-  //           let updatedItem = {
-  //             ...selectedItem,
-  //             h: y + c.h,
-  //             children: [...selectedItem.children, newC],
-  //           };
-  //           const elementsIndex = items.findIndex(
-  //             (item) => item.i === selectedItem.i
-  //           );
-  //           let newArray = [...items];
-  //           newArray[elementsIndex] = updatedItem;
-  //           setItems(newArray);
-  //         }}
-  //       >
-  //         {c.name}
-  //       </div>
-  //     );
-  //   });
-
-  // const renderComponents = components?.map((c, index) => {
-  //   const availableHandles: ResizeHandles = ["se"];
-  //   const containerHandles: ResizeHandles = ["e"];
-  //   return (
-  //     <div
-  //       key={index}
-  //       className="py-2 my-1 transition-colors duration-150 ease-in-out rounded-lg cursor-pointer hover:bg-slate-100"
-  //       onClick={() => {
-  //         let y = checkY(items);
-  //         let newC = {
-  //           ...c,
-  //           i: uid(),
-  //           x: 0,
-  //           y: y,
-  //           w: 6,
-  //           minW: 1,
-  //           minH: 1,
-  //           resizeHandles: containerCheck(c)
-  //             ? containerHandles
-  //             : availableHandles,
-  //         };
-  //         if (c.name === "Vertical Container") {
-  //           newC.w = 2;
-  //         }
-  //         if (
-  //           c.name === "Horizontal Container" ||
-  //           c.name === "Vertical Container"
-  //         ) {
-  //           let newChildren = c.children.map((child) => ({
-  //             ...child,
-  //             i: uid(),
-  //           }));
-  //           newC.children = newChildren;
-  //         }
-  //         setItems([...items, newC]);
-  //       }}
-  //     >
-  //       {c.name}
-  //     </div>
-  //   );
-  // });
 
   return (
     <>

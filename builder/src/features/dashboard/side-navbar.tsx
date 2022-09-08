@@ -1,48 +1,30 @@
 import React, { FC } from "react";
-import ShortUniqueId from "short-unique-id";
-import { components } from "config/component";
-import { containerCheck } from "utils/container-check";
-import IItems from "interfaces/items";
-import { ResizeHandles } from "interfaces/handle";
-import { Link } from "react-router-dom";
 import elements from "assets/elements.png";
-import help from "assets/help.png";
-import media from "assets/media.png";
-import pages from "assets/pages.png";
-import setting from "assets/setting.png";
 import styles from "assets/styles.png";
 import templates from "assets/templates.png";
+import IItems from "interfaces/items";
 import "styles/components.css";
-import { sidebarEnum } from "pages/dashboard";
+
+enum sidebarEnum {
+  PAGES = "pages",
+  TEMPLATES = "templates",
+  ELEMENTS = "elements",
+  MEDIA = "media",
+  STYLES = "styles",
+  HELP = "help",
+  SETTING = "setting",
+}
 
 interface ISideNavbar {
   className: string;
-  setClassName: (className: string) => void;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
-  addContainer: boolean;
-  settingItemId: string;
-  sideElement: string;
   setSideElement: (sideElement: string) => void;
-  isNavHidden: boolean;
-  setIsNavHidden: (isNavHidden: boolean) => void;
   showSidebar;
-  hideSidebar;
   hideSettingSidebar;
 }
 
 const SideNavbar: FC<ISideNavbar> = ({
   className,
-  setClassName,
-  items,
-  setItems,
-  addContainer,
-  settingItemId,
-  sideElement,
   setSideElement,
-  isNavHidden,
-  setIsNavHidden,
-  hideSidebar,
   showSidebar,
   hideSettingSidebar,
 }) => {

@@ -36,8 +36,8 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         <h3 className="mb-2 setting-text mt-4">Site Settings</h3>
         <aside className="mb-1">
           <BgColorComponent
-            color={backgroundColor}
-            setBgColor={setBackgroundColor}
+            backgroundColor={backgroundColor}
+            setBackgroundColor={setBackgroundColor}
           />
         </aside>
 
