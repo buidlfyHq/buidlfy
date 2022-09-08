@@ -1,31 +1,20 @@
 import React, { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
+import { updateItemsArray } from "reducers/itemsReducer";
+import { updateSelector } from "reducers/selectorReducer";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
-import Spinner from "components/dashboard/spinner";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
+
 interface IWorkspace {
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
   className: string;
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
-  selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  };
-  setSelector: (selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  }) => void;
   elementConfig: object;
   setElementConfig: (elementConfig: object) => void;
   setOpenTab: (openTab?: number) => void;
@@ -33,10 +22,6 @@ interface IWorkspace {
   setDrag: (drag: boolean) => void;
   setAddContainer: (addContainer?: boolean) => void;
   backgroundColor: IColor;
-  marginLeft?: number;
-  marginRight?: number;
-  marginTop?: number;
-  marginBottom?: number;
   hideSidebar;
   showSidebar;
   showSettingSidebar;
@@ -46,13 +31,9 @@ interface IWorkspace {
 }
 
 const Workspace: FC<IWorkspace> = ({
-  items,
-  setItems,
   className,
   setOpenSetting,
   setSettingItemId,
-  selector,
-  setSelector,
   elementConfig,
   setElementConfig,
   setOpenTab,
@@ -60,10 +41,6 @@ const Workspace: FC<IWorkspace> = ({
   setDrag,
   setAddContainer,
   backgroundColor,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
   hideSidebar,
   showSidebar,
   showSettingSidebar,
@@ -71,23 +48,21 @@ const Workspace: FC<IWorkspace> = ({
   openSetting,
   setIsNavHidden,
 }) => {
+  const dispatch = useDispatch();
+  const items: IItems[] = useSelector((state: any) => state.items);
+  const selector = useSelector((state: any) => state.selector);
+
   const [currentSize, setCurrentSize] = useState<number>(6);
-  const [isLoading, setLoading] = useState(true);
+  // const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(isNavHidden, "setting");
-    console.log(openSetting, "sidebar");
     if (isNavHidden && !openSetting) {
-      console.log(isNavHidden, "settingif");
-      console.log(!openSetting, "sidebarif");
       setCurrentSize(6);
     } else {
-      console.log(isNavHidden, "settingelse");
-      console.log(!openSetting, "sidebarelse");
       setCurrentSize(7.5);
     }
   }, [isNavHidden, openSetting]);
-  console.log(currentSize, "current");
+
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
     let newItemsArr = layout.map((obj: IItems) => {
@@ -110,7 +85,9 @@ const Workspace: FC<IWorkspace> = ({
         i,
       });
     });
-    newItemsArr.length > 0 ? setItems(newItemsArr) : setItems(items);
+    newItemsArr.length > 0
+      ? dispatch(updateItemsArray(newItemsArr))
+      : dispatch(updateItemsArray(items));
   };
 
   // to update selected element config
@@ -180,7 +157,7 @@ const Workspace: FC<IWorkspace> = ({
       // checks selector type
       if (selector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
-        setSelector(null);
+        dispatch(updateSelector(null));
       } else if (
         selector.type === "output" &&
         (itemName === "Text" ||
@@ -189,7 +166,7 @@ const Workspace: FC<IWorkspace> = ({
           itemName === "Heading 3")
       ) {
         updateElementConfig(itemName, i);
-        setSelector(null);
+        dispatch(updateSelector(null));
       }
     }
   };
@@ -244,21 +221,18 @@ const Workspace: FC<IWorkspace> = ({
         >
           <RenderItem
             item={item}
-            items={items}
-            setItems={setItems}
             setDrag={setDrag}
             setOpenSetting={setOpenSetting}
             setSettingItemId={setSettingItemId}
             setOpenTab={setOpenTab}
             setAddContainer={setAddContainer}
-            selector={selector}
-            setSelector={setSelector}
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
           />
         </div>
       );
     });
+
   return (
     <div
       style={{ width: "-webkit-fill-available" }}
