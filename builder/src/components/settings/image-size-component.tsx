@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import "styles/components.css";
 import "styles/dashboard.css";
 import "styles/components.css";
@@ -12,6 +12,12 @@ interface ISizeComponent {
   setCover: (backgroundSize: string | boolean) => void;
   setContain: (backgroundSize: string | boolean) => void;
   setAuto: (backgroundSize: string | boolean) => void;
+  isAuto?: boolean;
+  setIsAuto?: (isAuto: boolean) => void;
+  dynamicWidth?: number;
+  dynamicHeight?: number;
+  setDynamicWidth?: (dynamicWidth?: number) => void;
+  setDynamicHeight?: (dynamicHeight?: number) => void;
 }
 
 const SizeComponent: FC<ISizeComponent> = ({
@@ -19,21 +25,29 @@ const SizeComponent: FC<ISizeComponent> = ({
   height,
   setWidth,
   setHeight,
-  setCover,
-  setContain,
-  setAuto,
+  setIsAuto,
+  isAuto,
+  dynamicHeight,
+  dynamicWidth,
+  setDynamicHeight,
+  setDynamicWidth,
 }) => {
-  const handleWidthChange = (e) => {
+  useEffect(() => {
+    if (dynamicHeight) {
+      setHeight(dynamicHeight);
+    }
+  }, [dynamicHeight]);
+  useEffect(() => {
+    if (dynamicWidth) {
+      setWidth(dynamicWidth);
+    }
+  }, [dynamicWidth]);
+  useEffect(() => {}, []);
+  const handleWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWidth(+e.target.value);
-    // setCover(false);
-    // setAuto(false);
-    // setContain(false);
   };
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHeight(+e.target.value);
-    // setCover(false);
-    // setAuto(false);
-    // setContain(false);
   };
   const incrementWidthCounter = () => {
     setWidth(width + 1);

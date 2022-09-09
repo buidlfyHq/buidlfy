@@ -12,6 +12,8 @@ interface IBackgroundSizeComponent {
   setContain: (backgroundSize: string | boolean) => void;
   setAuto: (backgroundSize: string | boolean) => void;
   backgroundSize: string;
+  isAuto?: boolean;
+  setIsAuto?: (isAuto: boolean) => void;
 }
 
 const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
@@ -19,6 +21,8 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
   setContain,
   setAuto,
   backgroundSize,
+  setIsAuto,
+  isAuto,
 }) => {
   const handleCoverChange = () => {
     if (backgroundSize === "cover") {
@@ -47,11 +51,11 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
   return (
     <>
       <span className="margin-text text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
-        Background Size{" "}
+        Background Size
         <div className="flex mt-3 px-3">
           <span
             onClick={handleContainChange}
-            className="align-div flex items-center justify-center shadow text-[12px] p-2 mr-2 my-2 font-regular"
+            className="align-div flex items-center justify-center shadow text-[12px] p-2 mr-2 my-2 font-regular text-black"
           >
             Contain
           </span>

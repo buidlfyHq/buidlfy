@@ -30,6 +30,12 @@ const ImageSettings: FC<ISettings> = ({
   setContain,
   setAuto,
   backgroundSize,
+  isAuto,
+  setIsAuto,
+  dynamicHeight,
+  dynamicWidth,
+  setDynamicHeight,
+  setDynamicWidth,
 }) => (
   <>
     <h3 className="ml-[1rem]">
@@ -48,6 +54,7 @@ const ImageSettings: FC<ISettings> = ({
       setRight={setRight}
       setCenter={setCenter}
     />
+
     <SizeComponent
       width={width}
       height={height}
@@ -56,12 +63,20 @@ const ImageSettings: FC<ISettings> = ({
       setCover={setCover}
       setContain={setContain}
       setAuto={setAuto}
+      setIsAuto={setIsAuto}
+      isAuto={isAuto}
+      dynamicWidth={dynamicWidth}
+      dynamicHeight={dynamicHeight}
+      setDynamicWidth={setDynamicWidth}
+      setDynamicHeight={setDynamicHeight}
     />
     <BackgroundSizeComponent
       setCover={setCover}
       setContain={setContain}
       setAuto={setAuto}
       backgroundSize={backgroundSize}
+      setIsAuto={setIsAuto}
+      isAuto={isAuto}
     />
     <MarginComponent
       setMarginLeft={setMarginLeft}
