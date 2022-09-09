@@ -534,6 +534,10 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
 
+  // const handleOpenSetting = () => {
+  //   setOpenSetting(false);
+  // };
+
   return (
     <>
       {settingItemId ? (
@@ -543,7 +547,6 @@ const Settings: FC<ISettings> = ({
               className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
               ref={ref}
             >
-              {/* It will be used in later features */}
               {/* <div className="delete-div py-3 pl-3">
                 <div>Delete</div>
               </div> */}

@@ -110,8 +110,8 @@ const RenderItem: FC<IRenderItem> = ({
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           connectWallet={item.connectWallet}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Text":
@@ -128,8 +128,8 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 1":
@@ -146,8 +146,8 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 2":
@@ -164,8 +164,8 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 3":
@@ -182,8 +182,8 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Input":
@@ -193,7 +193,7 @@ const RenderItem: FC<IRenderItem> = ({
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           color={item.style.color}
-          margin={{ ...item.style.margin }}
+          margin={item.style.margin}
         />
       );
     case "Image":
@@ -201,7 +201,7 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
-          margin={{ ...item.style.margin }}
+          margin={item.style.margin}
         />
       );
     case "Divider":
