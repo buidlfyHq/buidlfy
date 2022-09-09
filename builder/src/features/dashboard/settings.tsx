@@ -2,7 +2,7 @@ import React, { useState, useRef, FC } from "react";
 import { useSelector } from "react-redux";
 import SettingComponent from "components/utils/render-setting";
 import ISettings from "interfaces/settings";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 
 const Settings: FC<ISettings> = ({
   settingItemId,
@@ -11,7 +11,7 @@ const Settings: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const ref = useRef(null);
-  const workspace: IItems[] = useSelector((state: any) => state.workspace);
+  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
 
   const [showComponent, setShowComponent] =
     useState<{

@@ -1,17 +1,17 @@
 import { IPayload } from "redux/workspace/workspace.interfaces";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 
 // to find selected element
-const findSelected = (item: IItems, settingItemId: string) => {
-  return item.children?.find((child: IItems) => child.i === settingItemId);
+const findSelected = (item: IWorkspace, settingItemId: string) => {
+  return item.children?.find((child: IWorkspace) => child.i === settingItemId);
 };
 
 // to find index of an element
-const findIndex = (item: IItems, settingItemId: string) => {
-  return item.children?.findIndex((c: IItems) => c.i === settingItemId);
+const findIndex = (item: IWorkspace, settingItemId: string) => {
+  return item.children?.findIndex((c: IWorkspace) => c.i === settingItemId);
 };
 
-export const mapElementsToWorkspace = (item: IItems, payload: IPayload) => {
+export const mapElementsToWorkspace = (item: IWorkspace, payload: IPayload) => {
   const { settingItemId, propertyName, propertyValue } = payload;
   let selectedChild = findSelected(item, settingItemId);
 
@@ -32,7 +32,7 @@ export const mapElementsToWorkspace = (item: IItems, payload: IPayload) => {
 };
 
 export const mapElementStylesToWorkspace = (
-  item: IItems,
+  item: IWorkspace,
   payload: IPayload
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
@@ -64,7 +64,7 @@ export const mapElementStylesToWorkspace = (
 };
 
 export const mapElementSubStyleToWorkspace = (
-  item: IItems,
+  item: IWorkspace,
   payload: IPayload
 ) => {
   const { settingItemId, propertyName, propertyValue, childPropertyName } =

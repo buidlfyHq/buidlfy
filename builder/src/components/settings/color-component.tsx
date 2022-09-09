@@ -4,13 +4,13 @@ import { SketchPicker } from "react-color";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { containerCheck } from "utils/container-check";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IColorComponent {
-  selectedItem: IItems;
+  selectedItem: IWorkspace;
 }
 
 const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {

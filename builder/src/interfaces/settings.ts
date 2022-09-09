@@ -1,7 +1,7 @@
-import IItems from "./items";
+import IWorkspace from "./workspace";
 
 export default interface ISettings {
-  selectedItem?: IItems;
+  selectedItem?: IWorkspace;
   setShowComponent?: (showComponent: {
     id: string;
     value: {

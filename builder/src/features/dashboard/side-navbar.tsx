@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import elements from "assets/elements.png";
 import styles from "assets/styles.png";
 import templates from "assets/templates.png";
-import IItems from "interfaces/items";
 import "styles/components.css";
 
 enum sidebarEnum {

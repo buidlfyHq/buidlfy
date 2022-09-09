@@ -1,6 +1,6 @@
 import Styles from "./styles";
 
-export default interface IItems {
+export default interface IWorkspace {
   i: string;
   x: number;
   y: number;
@@ -14,14 +14,14 @@ export default interface IItems {
   link?: string;
   value?: string;
   style: Styles;
-  children?: IItems[];
+  children?: IWorkspace[];
   isBounded?: boolean;
   isDraggable?: boolean;
   isResizable?: boolean;
   moved?: boolean;
   static?: boolean;
   resizeHandles?: [];
-  contract?: any; // breaking while assigning a type, work in progress 
+  contract?: any; // breaking while assigning a type, work in progress
   imgData?: string | ArrayBuffer;
   connectWallet?: string;
 }

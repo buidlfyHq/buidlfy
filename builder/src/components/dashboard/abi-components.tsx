@@ -7,7 +7,7 @@ import {
 } from "redux/selector/selector.reducers";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 
 interface IAbiComponents {
@@ -21,7 +21,7 @@ interface IAbiComponents {
     };
   };
   elementConfig: object;
-  selectedItem: IItems;
+  selectedItem: IWorkspace;
 }
 
 const AbiComponents: FC<IAbiComponents> = ({
@@ -30,7 +30,7 @@ const AbiComponents: FC<IAbiComponents> = ({
   selectedItem,
 }) => {
   const dispatch = useDispatch();
-  const workspace: IItems[] = useSelector((state: any) => state.workspace);
+  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
   const selector = useSelector((state: any) => state.selector);
 
   const [currentElement, setCurrentElement] = useState<{
@@ -103,7 +103,7 @@ const AbiComponents: FC<IAbiComponents> = ({
       // search id in children
       const updatedItems = workspace.map((item) => {
         const childIndex = item.children?.findIndex(
-          (child: IItems) => child.i === selectedItem.i
+          (child: IWorkspace) => child.i === selectedItem.i
         );
         let newArray = [...item?.children];
         newArray[childIndex] = updatedItem;
@@ -148,7 +148,7 @@ const AbiComponents: FC<IAbiComponents> = ({
     };
   };
 
-  const handleStateSelector = (selectedItem: IItems) => {
+  const handleStateSelector = (selectedItem: IWorkspace) => {
     if (selector === null) {
       dispatch(
         updateSelector({

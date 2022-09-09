@@ -5,11 +5,11 @@ import Text from "components/custom-components/text";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
 
 interface IRenderItem {
-  item: IItems;
+  item: IWorkspace;
   inputValue: IInput[];
   setInputValue: (inputValue: IInput[]) => void;
   outputValue: IOutput[];

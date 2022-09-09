@@ -1,7 +1,6 @@
-import IItems from "./items";
+import IWorkspace from "./workspace";
 
 export default interface ITemplate {
-    name: string;
-    value: IItems[];
+  name: string;
+  value: IWorkspace[];
 }
-  

@@ -5,13 +5,13 @@ import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import IColor from "interfaces/color";
 import "styles/components.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
-interface IWorkspace {
+interface IWorkspaceComponent {
   className: string;
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
@@ -30,7 +30,7 @@ interface IWorkspace {
   setIsNavHidden;
 }
 
-const Workspace: FC<IWorkspace> = ({
+const Workspace: FC<IWorkspaceComponent> = ({
   className,
   setOpenSetting,
   setSettingItemId,
@@ -49,7 +49,7 @@ const Workspace: FC<IWorkspace> = ({
   setIsNavHidden,
 }) => {
   const dispatch = useDispatch();
-  const workspace: IItems[] = useSelector((state: any) => state.workspace);
+  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
   const selector = useSelector((state: any) => state.selector);
 
   const [currentSize, setCurrentSize] = useState<number>(6);
@@ -65,7 +65,7 @@ const Workspace: FC<IWorkspace> = ({
 
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
-    let newItemsArr = layout.map((obj: IItems) => {
+    let newItemsArr = layout.map((obj: IWorkspace) => {
       let selectedItem = workspace.filter((item) => item.i === obj.i)[0];
       let height: number;
       const { h, minW, minH, x, y, w, i } = obj;
@@ -199,7 +199,7 @@ const Workspace: FC<IWorkspace> = ({
 
   const renderItemFunction = workspace
     ?.filter((i) => i.style?.deleteComponent === 0)
-    .map((item: IItems) => {
+    .map((item: IWorkspace) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
       return (
         <div

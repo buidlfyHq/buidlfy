@@ -5,7 +5,7 @@ import {
   mapElementSubStyleToWorkspace,
 } from "./workspace.utils";
 import { IAction } from "./workspace.interfaces";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 
 const workspaceSlice = createSlice({
   name: "workspace",
@@ -42,7 +42,7 @@ const workspaceSlice = createSlice({
       return updatedElements;
     },
     // to update the elements
-    updateWorkspaceElementsArray(state, action: { payload: IItems[] }) {
+    updateWorkspaceElementsArray(state, action: { payload: IWorkspace[] }) {
       return action.payload;
     },
   },

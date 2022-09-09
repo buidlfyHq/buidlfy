@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { SketchPicker } from "react-color";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBgColorComponent {
-  selectedItem?: IItems;
+  selectedItem?: IWorkspace;
   backgroundColor?: IColor;
   setBackgroundColor?: (backgroundColor: IColor) => void;
 }
