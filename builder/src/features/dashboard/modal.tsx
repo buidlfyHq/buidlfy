@@ -1,7 +1,10 @@
 import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
-import { updateContract } from "redux/contractReducer";
+import {
+  updateContractAbi,
+  updateContractAddress,
+} from "redux/contract/contract.reducers";
 import upload from "assets/upload-img.png";
 import "styles/components.css";
 
@@ -28,7 +31,7 @@ const Modal: FC<IModal> = ({ isOpen, setIsOpen }) => {
     const filteredAbi = JSON.parse(abi).filter(
       (m: { type: string }) => m.type === "function"
     );
-    dispatch(updateContract({ ...contract, abi: JSON.stringify(filteredAbi) }));
+    dispatch(updateContractAbi(JSON.stringify(filteredAbi)));
   };
 
   const handleChange = (e) => {
@@ -126,11 +129,7 @@ const Modal: FC<IModal> = ({ isOpen, setIsOpen }) => {
               className="modal-input pl-2 mt-1"
               placeholder="Paste Address here..."
               value={contract.address}
-              onChange={(e) =>
-                dispatch(
-                  updateContract({ ...contract, address: e.target.value })
-                )
-              }
+              onChange={(e) => dispatch(updateContractAddress(e.target.value))}
             />
           </div>
 

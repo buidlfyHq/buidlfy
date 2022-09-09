@@ -24,7 +24,6 @@ const Elements: FC<IElements> = ({
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
   const workspace: IItems[] = useSelector((state: any) => state.workspace);
-  console.log(workspace);
   
   // const [indexValue, setIndexValue] = useState<number>(0);
 
