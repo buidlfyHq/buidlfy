@@ -4,7 +4,7 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 import { encode as base64_encode } from "base-64";
 import { Dialog } from "@headlessui/react";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { updateSelector } from "redux/selectorReducer";
+import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
@@ -116,7 +116,7 @@ const Navbar: FC<INavbar> = ({
     // FIX: remove full config from local storage
     localStorage.removeItem("items");
     dispatch(updateWorkspaceElementsArray([]));
-    dispatch(updateSelector(null));
+    dispatch(setSelectorToDefault());
   };
 
   const handlePublish = () => {

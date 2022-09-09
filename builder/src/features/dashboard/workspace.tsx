@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { updateSelector } from "redux/selectorReducer";
+import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
@@ -157,7 +157,7 @@ const Workspace: FC<IWorkspace> = ({
       // checks selector type
       if (selector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
-        dispatch(updateSelector(null));
+        dispatch(setSelectorToDefault());
       } else if (
         selector.type === "output" &&
         (itemName === "Text" ||
@@ -166,7 +166,7 @@ const Workspace: FC<IWorkspace> = ({
           itemName === "Heading 3")
       ) {
         updateElementConfig(itemName, i);
-        dispatch(updateSelector(null));
+        dispatch(setSelectorToDefault());
       }
     }
   };

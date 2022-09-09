@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { updateSelector } from "redux/selectorReducer";
+import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
@@ -34,7 +34,7 @@ const ButtonSettings: FC<ISettings> = ({
     e.preventDefault();
     setOpenTab(num);
     if (num === 1) {
-      dispatch(updateSelector(null));
+      dispatch(setSelectorToDefault());
     }
   };
 
