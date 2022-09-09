@@ -72,41 +72,20 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
             onClose={() => setDisplayColorPicker(false)}
           >
             <div className=" px-4 text-right">
-              {/* This element is to trick the browser into centering the modal contents. */}
-              {/* <span
-               className="inline-block h-screen align-middle"
-               aria-hidden="true"
-             >
-               &#8203;
-             </span> */}
-
-              {/* Use the overlay to style a dim backdrop for your dialog */}
-              {/* <Dialog.Overlay className="fixed inset-0 bg-black opacity-10" /> */}
-
-              {/* Dialog Content */}
-
               <div>
                 <div onClick={handleClose} />
-                {/* <button onClick={setSolid}>Solid</button>
-               <button onClick={setGradient}>Gradient</button> */}
-
                 <ColorPicker
-                  // hideEyeDrop="false"
-                  // hideInputType="false"
-                  // hideColorGuide="false"
-                  // hideAdvancedSliders="false"
+                  hideEyeDrop="false"
+                  hideInputType="false"
+                  hideColorGuide="false"
+                  hideAdvancedSliders="false"
                   value={borderColor}
                   onChange={setBorderColor}
-                  // setSolid="true"
                 />
               </div>
             </div>
           </Dialog>
-        ) : // <div>
-        //   <div onClick={handleClose} />
-        //   <SketchPicker color={borderColor} onChange={handleChange} />
-        // </div>
-        null}
+        ) : null}
       </div>
     </>
   );
