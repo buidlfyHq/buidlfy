@@ -41,19 +41,8 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
   return (
     <div className="flex text-gray-600 w-full mt-4 mx-2">
       <span className="text-left text-xl text-gray-500 font-regular font-normal not-italic">
-        {/* Font Size */}
         <div className="flex mt-3">
-          {/* <span
-            onClick={decrementCounter}
-            className="flex items-center justify-center shadow text-[18px] mr-3 w-8 h-10 font-regular text-black"
-          >
-            -
-          </span> */}
-
           <div className="flex">
-            {/* <span className="absolute text-base font-normal text-gray-700 z-10 py-1">
-              Font Size:
-            </span> */}
             <span className="font-text">Font Size:</span>
             <select
               value={fontSize}
@@ -73,12 +62,6 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
               className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
             />
           </div>
-          {/* <span
-            onClick={incrementCounter}
-            className="flex ml-3 items-center justify-center shadow text-[18px] w-8 h-10 font-regular text-black"
-          >
-            +
-          </span> */}
         </div>
       </span>
     </div>

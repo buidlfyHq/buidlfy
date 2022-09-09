@@ -156,7 +156,6 @@ const Container: FC<IContainer> = ({
 
   const handleSidebar = (selectedSidebarElements: string) => {
     setSideElement(selectedSidebarElements);
-    // handleSidebar(sidebarEnum.ELEMENTS);
   };
 
   const onComponentAddClick = (itemName: string, i: string) => {
@@ -165,7 +164,7 @@ const Container: FC<IContainer> = ({
     handleSidebar(sidebarEnum.ELEMENTS);
     setOpenSetting(false);
   };
-  
+
   const onComponentClick = (itemName: string, i: string) => {
     if (selector === null) {
       setOpenSetting(true);

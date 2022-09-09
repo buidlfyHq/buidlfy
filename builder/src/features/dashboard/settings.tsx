@@ -45,16 +45,15 @@ const Settings: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const ref = useRef(null);
-  const [showComponent, setShowComponent] =
-    useState<{
-      id: string;
-      value: {
-        name: string;
-        inputs: object[];
-        outputs: object[];
-        stateMutability: string;
-      };
-    }>(null); // for abi method component
+  const [showComponent, setShowComponent] = useState<{
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }>(null); // for abi method component
 
   // work in progress
   const selectedChildren = items.map((item) =>
@@ -535,10 +534,6 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
 
-  // const handleOpenSetting = () => {
-  //   setOpenSetting(false);
-  // };
-
   return (
     <>
       {settingItemId ? (
@@ -548,6 +543,7 @@ const Settings: FC<ISettings> = ({
               className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
               ref={ref}
             >
+              {/* It will be used in later features */}
               {/* <div className="delete-div py-3 pl-3">
                 <div>Delete</div>
               </div> */}

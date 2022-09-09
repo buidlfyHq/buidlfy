@@ -269,15 +269,7 @@ const Workspace: FC<IWorkspace> = ({
       style={{ width: "-webkit-fill-available" }}
       className="main-div h-full"
     >
-      <main
-        className=""
-        // ${
-        //   className === "" ? "mr-[250px]" : "mr-[250px]"
-        // }
-
-        style={{}}
-        onClick={handleCheckIsContainer}
-      >
+      <main onClick={handleCheckIsContainer}>
         {isNavHidden && !openSetting ? (
           <section
             style={{
