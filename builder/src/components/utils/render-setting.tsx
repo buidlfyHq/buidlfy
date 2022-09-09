@@ -61,6 +61,12 @@ const SettingComponent: FC<ISettings> = ({
   setContain,
   setAuto,
   backgroundSize,
+  setIsAuto,
+  isAuto,
+  dynamicHeight,
+  dynamicWidth,
+  setDynamicHeight,
+  setDynamicWidth,
 }) => {
   const handleTextChange = (
     e:
@@ -163,6 +169,12 @@ const SettingComponent: FC<ISettings> = ({
           setContain={setContain}
           setAuto={setAuto}
           backgroundSize={selectedItem?.style?.backgroundSize}
+          setIsAuto={setIsAuto}
+          isAuto={selectedItem?.style?.isAuto}
+          dynamicWidth={dynamicWidth}
+          dynamicHeight={dynamicHeight}
+          setDynamicWidth={setDynamicWidth}
+          setDynamicHeight={setDynamicHeight}
         />
       );
     case "Container":

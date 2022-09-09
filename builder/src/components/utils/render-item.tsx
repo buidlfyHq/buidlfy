@@ -43,6 +43,10 @@ interface IRenderItem {
   setAuto?: (backgroundSize: string | boolean) => void;
   updateBackgroundSize?: boolean;
   setUpdateBackgroundSize?: (updateBackgroundSize?: boolean) => void;
+  dynamicWidth?: number;
+  dynamicHeight?: number;
+  setDynamicWidth?: (dynamicWidth?: number) => void;
+  setDynamicHeight?: (dynamicHeight?: number) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -70,6 +74,10 @@ const RenderItem: FC<IRenderItem> = ({
   setContain,
   setAuto,
   updateBackgroundSize,
+  dynamicHeight,
+  dynamicWidth,
+  setDynamicHeight,
+  setDynamicWidth,
 }) => {
   switch (item.name) {
     case "Container":
@@ -217,6 +225,12 @@ const RenderItem: FC<IRenderItem> = ({
           height={item.style.height}
           backgroundSize={item.style.backgroundSize}
           updateBackgroundSize={updateBackgroundSize}
+          item={item}
+          isAuto={item.style.isAuto}
+          dynamicWidth={dynamicWidth}
+          dynamicHeight={dynamicHeight}
+          setDynamicWidth={setDynamicWidth}
+          setDynamicHeight={setDynamicHeight}
         />
       );
     case "Divider":

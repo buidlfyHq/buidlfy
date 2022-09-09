@@ -83,6 +83,12 @@ export default interface ISettings {
     paddingTop?: number,
     paddingBottom?: number,
   }
+  isAuto?: boolean;
+  dynamicWidth?: number;
+  dynamicHeight?: number;
+  setDynamicWidth?: (dynamicWidth?: number) => void;
+  setDynamicHeight?: (dynamicHeight?: number) => void;
+  setIsAuto?: (isAuto: boolean) => void;
   setMarginLeft?: (marginLeft: number) => void;
   setMarginRight?: (marginRight: number) => void;
   setMarginTop?: (marginTop: number) => void;

@@ -33,6 +33,7 @@ enum functionEnum {
   PADDING_BOTTOM = "paddingBottom",
   WIDTH = "width",
   HEIGHT = "height",
+  AUTO = "isAuto",
 }
 
 const Settings: FC<ISettings> = ({
@@ -48,6 +49,10 @@ const Settings: FC<ISettings> = ({
   openTab,
   setOpenTab,
   setUpdateBackgroundSize,
+  dynamicHeight,
+  dynamicWidth,
+  setDynamicHeight,
+  setDynamicWidth,
 }) => {
   const ref = useRef(null);
   const [showComponent, setShowComponent] = useState<{
@@ -164,7 +169,97 @@ const Settings: FC<ISettings> = ({
     });
     setItems(updatedItems);
   };
+  const singleImageSizeFunction = (
+    styleProp: functionEnum,
+    property: number | IColor | boolean
+  ) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child: IItems) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            isAuto: false,
+            [styleProp]: property,
+          },
+        };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            isAuto: false,
+            [styleProp]: property,
+          },
+        };
 
+        const childIndex = item.children?.findIndex(
+          (c: IItems) => c.i === settingItemId
+        );
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
+
+        return {
+          ...item,
+          children: newChildren,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+  const backgroundSizeFunction = (
+    styleProp: functionEnum,
+    property: boolean,
+    valueFirst: string,
+    valueSecond: string
+  ) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child: IItems) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            isAuto: true,
+            [styleProp]: property ? valueFirst : valueSecond,
+          },
+        };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            isAuto: true,
+            [styleProp]: property ? valueFirst : valueSecond,
+          },
+        };
+        const childIndex = item.children?.findIndex(
+          (c: IItems) => c.i === settingItemId
+        );
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
+
+        return {
+          ...item,
+          children: newChildren,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
   const utilityFunction = (
     styleProp: functionEnum,
     property: boolean,
@@ -239,7 +334,7 @@ const Settings: FC<ISettings> = ({
 
   const singleWorkFunction = (
     styleProp: functionEnum,
-    property: number | IColor
+    property: number | IColor | boolean
   ) => {
     if (!settingItemId) {
       return;
@@ -366,6 +461,7 @@ const Settings: FC<ISettings> = ({
     });
     setItems(updatedItems);
   };
+
   const setColor = (color: IColor) => {
     singleWorkFunction(functionEnum.COLOR, color);
   };
@@ -389,32 +485,32 @@ const Settings: FC<ISettings> = ({
       "inherit"
     );
   };
+  const setIsAuto = (isAuto: boolean) => {
+    singleWorkFunction(functionEnum.AUTO, isAuto);
+  };
   const setContain = (backgroundSize: boolean) => {
-    utilityFunction(
+    backgroundSizeFunction(
       functionEnum.BACKGROUND_SIZE,
       backgroundSize,
       "contain",
       "contain"
     );
-    setUpdateBackgroundSize(false);
   };
   const setCover = (backgroundSize: boolean) => {
-    utilityFunction(
+    backgroundSizeFunction(
       functionEnum.BACKGROUND_SIZE,
       backgroundSize,
       "cover",
       "contain"
     );
-    setUpdateBackgroundSize(false);
   };
   const setAuto = (backgroundSize: boolean) => {
-    utilityFunction(
+    backgroundSizeFunction(
       functionEnum.BACKGROUND_SIZE,
       backgroundSize,
       "auto",
       "contain"
     );
-    setUpdateBackgroundSize(false);
   };
 
   const setLeft = (justifyContent: boolean) => {
@@ -502,13 +598,12 @@ const Settings: FC<ISettings> = ({
     });
     setItems(updatedItems);
   };
+
   const setWidth = (width: number) => {
-    singleWorkFunction(functionEnum.WIDTH, width);
-    setUpdateBackgroundSize(true);
+    singleImageSizeFunction(functionEnum.WIDTH, width);
   };
   const setHeight = (height: number) => {
-    singleWorkFunction(functionEnum.HEIGHT, height);
-    setUpdateBackgroundSize(true);
+    singleImageSizeFunction(functionEnum.HEIGHT, height);
   };
   const setBorderRadius = (borderRadius: number) => {
     singleWorkFunction(functionEnum.BORDER_RADIUS, borderRadius);
@@ -658,8 +753,14 @@ const Settings: FC<ISettings> = ({
                 setLarge={setLarge}
                 shadow={selectedItem?.style?.shadow}
                 setOn={setOn}
+                setIsAuto={setIsAuto}
+                isAuto={selectedItem?.style?.isAuto}
                 setPlaceholder={setPlaceholder}
                 placeholder={selectedItem?.placeholder}
+                dynamicWidth={dynamicWidth}
+                dynamicHeight={dynamicHeight}
+                setDynamicWidth={setDynamicWidth}
+                setDynamicHeight={setDynamicHeight}
               />
             </div>
           </div>

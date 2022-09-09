@@ -65,6 +65,9 @@ const Dashboard: FC = () => {
   });
   const [sideElement, setSideElement] = useState<string>("");
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
+  const [dynamicWidth, setDynamicWidth] = useState<number>();
+  const [dynamicHeight, setDynamicHeight] = useState<number>();
+
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -188,6 +191,10 @@ const Dashboard: FC = () => {
                 hideSettingSidebar={undefined}
                 updateBackgroundSize={updateBackgroundSize}
                 setUpdateBackgroundSize={setUpdateBackgroundSize}
+                dynamicWidth={dynamicWidth}
+                dynamicHeight={dynamicHeight}
+                setDynamicWidth={setDynamicWidth}
+                setDynamicHeight={setDynamicHeight}
               />
               {/* Right Sidebar Settings */}
             </aside>
@@ -207,6 +214,10 @@ const Dashboard: FC = () => {
               setOpenTab={setOpenTab}
               updateBackgroundSize={updateBackgroundSize}
               setUpdateBackgroundSize={setUpdateBackgroundSize}
+              dynamicWidth={dynamicWidth}
+              dynamicHeight={dynamicHeight}
+              setDynamicWidth={setDynamicWidth}
+              setDynamicHeight={setDynamicHeight}
             />
           ) : null}
         </section>

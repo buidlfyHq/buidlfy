@@ -282,6 +282,7 @@ export const components = [
       width: 80,
       height: 60,
       backgroundSize: "contain",
+      isAuto: true,
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,
