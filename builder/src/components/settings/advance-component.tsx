@@ -27,14 +27,12 @@ interface IAdvanceComponent {
     };
   }) => void;
   selectedItem: IWorkspace;
-  elementConfig: object;
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({
   showComponent,
   setShowComponent,
   selectedItem,
-  elementConfig,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
 
@@ -66,7 +64,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
       />
       <AbiComponents
         showComponent={showComponent}
-        elementConfig={elementConfig}
         selectedItem={selectedItem}
       />
     </>

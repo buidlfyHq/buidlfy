@@ -25,8 +25,6 @@ const RenderItem: FC<IRenderItem> = ({
   setSettingItemId,
   setOpenTab,
   setAddContainer,
-  elementConfig,
-  setElementConfig,
 }) => {
   switch (item.name) {
     case "Button":
@@ -106,8 +104,6 @@ const RenderItem: FC<IRenderItem> = ({
           setOpenTab={setOpenTab}
           setDrag={setDrag}
           setAddContainer={setAddContainer}
-          elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
         />
       );
     default:

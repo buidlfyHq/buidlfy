@@ -8,14 +8,10 @@ const selectorSlice = createSlice({
   initialState,
   reducers: {
     updateSelector(state, action: IAction) {
-      const { methodName, type, name, buttonId } = action.payload;
-      state.methodName = methodName;
-      state.type = type;
-      state.name = name;
-      state.buttonId = buttonId;
+      return action.payload;
     },
     setSelectorToDefault(state) {
-      state = null;
+      return null;
     },
   },
 });

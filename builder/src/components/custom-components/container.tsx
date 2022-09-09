@@ -1,9 +1,14 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
+import {
+  addSelectedElement,
+  createSelectedElement,
+  updateSelectedElement,
+} from "redux/selected/selected.reducers";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
 import IWorkspace from "interfaces/workspace";
@@ -22,10 +27,8 @@ interface IContainer {
   setDrag: (drag: boolean) => void;
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
-  setOpenTab: Dispatch<SetStateAction<number>>;
+  setOpenTab: (openTab: number) => void;
   setAddContainer: (addContainer: boolean) => void;
-  elementConfig: object;
-  setElementConfig: Dispatch<SetStateAction<object>>;
   setValue?: (value: string) => void;
 }
 
@@ -43,12 +46,11 @@ const Container: FC<IContainer> = ({
   setSettingItemId,
   setOpenTab,
   setAddContainer,
-  elementConfig,
-  setElementConfig,
 }) => {
   const dispatch = useDispatch();
   const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
   const selector = useSelector((state: any) => state.selector);
+  const selected = useSelector((state: any) => state.selected);
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -95,36 +97,46 @@ const Container: FC<IContainer> = ({
 
   const updateElementConfig = (itemName: string, i: string) => {
     // for updating selected element config
-    const searchExistingValue = Object.keys(elementConfig).filter(
+    const searchExistingValue = Object.keys(selected).filter(
       (key) => key === selector.name
     );
 
-    if (!searchExistingValue.length || !Object.keys(elementConfig).length) {
-      setElementConfig({
-        ...elementConfig,
-        [selector.name]: [
-          {
+    if (!searchExistingValue.length || !Object.keys(selected).length) {
+      dispatch(
+        createSelectedElement({
+          name: selector.name,
+          element: {
             buttonId: selector.buttonId,
             name: itemName,
             id: i,
           },
-        ],
-      });
+        })
+      );
     } else {
-      Object.keys(elementConfig).map((key) => {
+      Object.keys(selected).map((key) => {
         if (key === selector.name) {
-          let elementArray = [
-            ...elementConfig[key],
-            {
-              buttonId: selector.buttonId,
-              name: itemName,
-              id: i,
-            },
-          ];
-
-          setElementConfig({
-            ...elementConfig,
-            [selector.name]: elementArray,
+          selected[key].map((obj, index: number) => {
+            if (obj.buttonId === selector.buttonId) {
+              dispatch(
+                updateSelectedElement({
+                  name: key,
+                  index,
+                  id: i,
+                })
+              );
+            } else {
+              dispatch(
+                addSelectedElement({
+                  name: selector.name,
+                  element: {
+                    buttonId: selector.buttonId,
+                    name: itemName,
+                    id: i,
+                  },
+                })
+              );
+            }
+            return obj;
           });
         }
         return key;

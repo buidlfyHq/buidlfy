@@ -6,7 +6,6 @@ import IWorkspace from "interfaces/workspace";
 
 const Settings: FC<ISettings> = ({
   settingItemId,
-  elementConfig,
   openTab,
   setOpenTab,
 }) => {
@@ -46,7 +45,6 @@ const Settings: FC<ISettings> = ({
                 selectedItem={selectedItem}
                 setShowComponent={setShowComponent}
                 showComponent={showComponent}
-                elementConfig={elementConfig}
                 openTab={openTab}
                 setOpenTab={setOpenTab}
               />

@@ -22,7 +22,6 @@ export default interface ISettings {
   };
   setOpenSetting?: (open: boolean) => void;
   settingItemId?: string;
-  elementConfig?: object;
   openTab?: number;
   setOpenTab?: (openTab: number) => void;
   handlePlaceholderChange?: (e) => void;

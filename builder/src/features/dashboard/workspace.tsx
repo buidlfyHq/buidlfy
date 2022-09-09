@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
+import {
+  addSelectedElement,
+  createSelectedElement,
+  updateSelectedElement,
+} from "redux/selected/selected.reducers";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import IWorkspace from "interfaces/workspace";
@@ -12,11 +17,8 @@ import "styles/components.css";
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 interface IWorkspaceComponent {
-  className: string;
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
-  elementConfig: object;
-  setElementConfig: (elementConfig: object) => void;
   setOpenTab: (openTab?: number) => void;
   drag: boolean;
   setDrag: (drag: boolean) => void;
@@ -31,11 +33,8 @@ interface IWorkspaceComponent {
 }
 
 const Workspace: FC<IWorkspaceComponent> = ({
-  className,
   setOpenSetting,
   setSettingItemId,
-  elementConfig,
-  setElementConfig,
   setOpenTab,
   drag,
   setDrag,
@@ -51,6 +50,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
   const dispatch = useDispatch();
   const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
   const selector = useSelector((state: any) => state.selector);
+  const selected = useSelector((state: any) => state.selected);
 
   const [currentSize, setCurrentSize] = useState<number>(6);
   // const [isLoading, setLoading] = useState(true);
@@ -92,57 +92,53 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {
-    const searchExistingValue = Object.keys(elementConfig).filter(
+    const searchExistingValue = Object.keys(selected).filter(
       (key) => key === selector.name
     );
 
-    if (!searchExistingValue.length || !Object.keys(elementConfig).length) {
-      setElementConfig({
-        ...elementConfig,
-        [selector.name]: [
-          {
+    if (!searchExistingValue.length || !Object.keys(selected).length) {
+      dispatch(
+        createSelectedElement({
+          name: selector.name,
+          element: {
             buttonId: selector.buttonId,
             name: itemName,
             id: i,
           },
-        ],
-      });
+        })
+      );
     } else {
-      Object.keys(elementConfig).map((key) => {
+      Object.keys(selected).map((key) => {
         if (key === selector.name) {
-          let newArray = [];
-          elementConfig[key].map((obj, index: number) => {
+          selected[key].map((obj, index: number) => {
             if (obj.buttonId === selector.buttonId) {
-              let updatedElement = {
-                ...elementConfig[key][index],
-                id: i,
-              };
-              newArray = [...elementConfig[key]];
-              newArray[index] = updatedElement;
-              return newArray;
-            } else {
-              newArray = [
-                ...elementConfig[key],
-                {
-                  buttonId: selector.buttonId,
-                  name: itemName,
+              dispatch(
+                updateSelectedElement({
+                  name: key,
+                  index,
                   id: i,
-                },
-              ];
-              return newArray;
+                })
+              );
+            } else {
+              dispatch(
+                addSelectedElement({
+                  name: selector.name,
+                  element: {
+                    buttonId: selector.buttonId,
+                    name: itemName,
+                    id: i,
+                  },
+                })
+              );
             }
-          });
-
-          let elementArray = newArray;
-
-          setElementConfig({
-            ...elementConfig,
-            [selector.name]: elementArray,
+            return obj;
           });
         }
         return key;
       });
     }
+
+    dispatch(setSelectorToDefault());
   };
 
   const onComponentClick = (itemName: string, i: string) => {
@@ -157,7 +153,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
       // checks selector type
       if (selector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
-        dispatch(setSelectorToDefault());
       } else if (
         selector.type === "output" &&
         (itemName === "Text" ||
@@ -166,7 +161,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
           itemName === "Heading 3")
       ) {
         updateElementConfig(itemName, i);
-        dispatch(setSelectorToDefault());
       }
     }
   };
@@ -226,8 +220,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
             setSettingItemId={setSettingItemId}
             setOpenTab={setOpenTab}
             setAddContainer={setAddContainer}
-            elementConfig={elementConfig}
-            setElementConfig={setElementConfig}
           />
         </div>
       );

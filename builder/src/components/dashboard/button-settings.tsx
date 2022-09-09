@@ -21,7 +21,6 @@ const ButtonSettings: FC<ISettings> = ({
   selectedItem,
   showComponent,
   setShowComponent,
-  elementConfig,
   openTab,
   setOpenTab,
 }) => {
@@ -127,7 +126,6 @@ const ButtonSettings: FC<ISettings> = ({
         <AdvanceComponent
           showComponent={showComponent}
           setShowComponent={setShowComponent}
-          elementConfig={elementConfig}
           selectedItem={selectedItem}
         />
       </div>

@@ -12,7 +12,6 @@ import ITemplate from "interfaces/template";
 
 interface INavbar {
   className: string;
-  setClassName: React.Dispatch<React.SetStateAction<string>>;
   backgroundColor: IColor;
   head: {
     title: string;
@@ -20,12 +19,7 @@ interface INavbar {
   };
 }
 
-const Navbar: FC<INavbar> = ({
-  className,
-  setClassName,
-  backgroundColor,
-  head,
-}) => {
+const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const dispatch = useDispatch();
   const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
   const contract: { abi: string; address: string } = useSelector(
@@ -59,6 +53,7 @@ const Navbar: FC<INavbar> = ({
     }
   }, [contract.abi]);
 
+  // find suitable type
   const onChangeImage = (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {

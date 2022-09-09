@@ -14,7 +14,6 @@ const SettingComponent: FC<ISettings> = ({
   selectedItem,
   showComponent,
   setShowComponent,
-  elementConfig,
   openTab,
   setOpenTab,
 }) => {
@@ -63,7 +62,6 @@ const SettingComponent: FC<ISettings> = ({
           selectedItem={selectedItem}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
-          elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
         />

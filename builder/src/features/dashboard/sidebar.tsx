@@ -22,7 +22,6 @@ interface ISidebar {
   addContainer: boolean;
   settingItemId: string;
   sideElement: string;
-  setSideElement: (sideElement: string) => void;
   isNavHidden: boolean;
   setIsNavHidden: (isNavHidden: boolean) => void;
   showSidebar;
@@ -43,7 +42,6 @@ const Sidebar: FC<ISidebar> = ({
   addContainer,
   settingItemId,
   sideElement,
-  setSideElement,
   isNavHidden,
   setIsNavHidden,
   hideSidebar,
