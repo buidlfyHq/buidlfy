@@ -41,8 +41,6 @@ interface IRenderItem {
   setCover?: (backgroundSize: string | boolean) => void;
   setContain?: (backgroundSize: string | boolean) => void;
   setAuto?: (backgroundSize: string | boolean) => void;
-  updateBackgroundSize?: boolean;
-  setUpdateBackgroundSize?: (updateBackgroundSize?: boolean) => void;
   dynamicWidth?: number;
   dynamicHeight?: number;
   setDynamicWidth?: (dynamicWidth?: number) => void;
@@ -73,7 +71,6 @@ const RenderItem: FC<IRenderItem> = ({
   setCover,
   setContain,
   setAuto,
-  updateBackgroundSize,
   dynamicHeight,
   dynamicWidth,
   setDynamicHeight,
@@ -224,7 +221,6 @@ const RenderItem: FC<IRenderItem> = ({
           width={item.style.width}
           height={item.style.height}
           backgroundSize={item.style.backgroundSize}
-          updateBackgroundSize={updateBackgroundSize}
           item={item}
           isAuto={item.style.isAuto}
           dynamicWidth={dynamicWidth}

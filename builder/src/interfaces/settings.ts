@@ -119,6 +119,4 @@ export default interface ISettings {
   setContain?: (backgroundSize: string | boolean) => void;
   setAuto?: (backgroundSize: string | boolean) => void;
   backgroundSize?: string;
-  updateBackgroundSize?: boolean;
-  setUpdateBackgroundSize?: (updateBackgroundSize?: boolean) => void;
 }

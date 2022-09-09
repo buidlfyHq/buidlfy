@@ -33,8 +33,6 @@ const Dashboard: FC = () => {
     abi: "",
     address: "",
   }); // for storing contract abi and address
-  const [updateBackgroundSize, setUpdateBackgroundSize] =
-    useState<boolean>(false);
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState<string>(""); // for storing current element id for settings
   // for selecting an element for contract
@@ -189,8 +187,6 @@ const Dashboard: FC = () => {
                 dragContainer={dragContainer}
                 setDragContainer={setDragContainer}
                 hideSettingSidebar={undefined}
-                updateBackgroundSize={updateBackgroundSize}
-                setUpdateBackgroundSize={setUpdateBackgroundSize}
                 dynamicWidth={dynamicWidth}
                 dynamicHeight={dynamicHeight}
                 setDynamicWidth={setDynamicWidth}
@@ -212,8 +208,6 @@ const Dashboard: FC = () => {
               elementConfig={elementConfig}
               openTab={openTab}
               setOpenTab={setOpenTab}
-              updateBackgroundSize={updateBackgroundSize}
-              setUpdateBackgroundSize={setUpdateBackgroundSize}
               dynamicWidth={dynamicWidth}
               dynamicHeight={dynamicHeight}
               setDynamicWidth={setDynamicWidth}

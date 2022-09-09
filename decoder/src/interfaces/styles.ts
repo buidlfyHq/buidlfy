@@ -28,4 +28,5 @@ export default interface IStyles {
   width?: number;
   height?: number;
   backgroundSize?: string;
+  isAuto?: boolean;
 }

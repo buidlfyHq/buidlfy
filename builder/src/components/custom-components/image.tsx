@@ -3,7 +3,7 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import "styles/components.css";
 
 interface IImageComponent {
-  imgData: any;
+  imgData: string | ArrayBuffer;
   justifyContent: string;
   margin?: {
     marginLeft?: number;
@@ -14,7 +14,6 @@ interface IImageComponent {
   width?: number;
   height?: number;
   backgroundSize?: string;
-  updateBackgroundSize?: boolean;
   item?: IItems;
   isAuto?: boolean;
   dynamicWidth?: number;
@@ -30,7 +29,6 @@ const Image: FC<IImageComponent> = ({
   width,
   height,
   backgroundSize,
-  updateBackgroundSize,
   item,
   isAuto,
   dynamicHeight,

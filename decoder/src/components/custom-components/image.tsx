@@ -15,7 +15,7 @@ interface IImageComponent {
   width?: number;
   height?: number;
   backgroundSize?: string;
-  updateBackgroundSize?: boolean;
+  isAuto?: boolean;
 }
 
 const Image: FC<IImageComponent> = ({
@@ -25,7 +25,7 @@ const Image: FC<IImageComponent> = ({
   width,
   height,
   backgroundSize,
-  updateBackgroundSize,
+  isAuto,
 }) => {
   return (
     <div className="flex w-full h-full">
@@ -36,7 +36,7 @@ const Image: FC<IImageComponent> = ({
           backgroundRepeat: "no-repeat",
           backgroundPosition: justifyContent,
           backgroundSize: `${
-            !updateBackgroundSize ? backgroundSize : `${width}px ${height}px`
+            isAuto ? backgroundSize : `${width}px ${height}px`
           }`,
           margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
             margin.marginRight * MARGIN_VARIABLE

@@ -48,7 +48,6 @@ const Settings: FC<ISettings> = ({
   elementConfig,
   openTab,
   setOpenTab,
-  setUpdateBackgroundSize,
   dynamicHeight,
   dynamicWidth,
   setDynamicHeight,
