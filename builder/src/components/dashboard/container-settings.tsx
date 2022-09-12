@@ -15,13 +15,22 @@ const ContainerSettings: FC<ISettings> = ({ selectedItem }) => (
         <span className="setting-text">{selectedItem.name}</span>
       ) : null}
     </h3>
-    <UploadComponent selectedItem={selectedItem} />
-    <BgColorComponent selectedItem={selectedItem} />
+    <UploadComponent i={selectedItem.i} />
+    <BgColorComponent
+      i={selectedItem.i}
+      bgColor={selectedItem.style.backgroundColor}
+    />
     <ColorComponent selectedItem={selectedItem} />
-    <BorderRadiusComponent selectedItem={selectedItem} />
-    <BorderComponent selectedItem={selectedItem} />
-    <ShadowComponent selectedItem={selectedItem} />
-    <UtilitiesComponent selectedItem={selectedItem} />
+    <BorderRadiusComponent
+      i={selectedItem.i}
+      borderRadius={selectedItem.style.borderRadius}
+    />
+    <BorderComponent
+      i={selectedItem.i}
+      borderWidth={selectedItem.style.borderWidth}
+    />
+    <ShadowComponent i={selectedItem.i} shadow={selectedItem.style.shadow} />
+    <UtilitiesComponent i={selectedItem.i} />
   </>
 );
 

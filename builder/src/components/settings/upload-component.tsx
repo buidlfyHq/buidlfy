@@ -7,10 +7,10 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IUploadComponent {
-  selectedItem: IItems;
+  i: string;
 }
 
-const UploadComponent: FC<IUploadComponent> = ({ selectedItem }) => {
+const UploadComponent: FC<IUploadComponent> = ({ i }) => {
   const dispatch = useDispatch();
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
 
@@ -27,7 +27,7 @@ const UploadComponent: FC<IUploadComponent> = ({ selectedItem }) => {
           dispatch(
             updateItems({
               level: 0,
-              settingItemId: selectedItem.i,
+              settingItemId: i,
               propertyName: "imgData",
               propertyValue: cid,
             })
