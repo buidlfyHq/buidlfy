@@ -8,35 +8,25 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IAdvanceComponent {
-  showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  };
-  setShowComponent: (showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  }) => void;
   selectedItem: IItems;
   elementConfig: object;
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({
-  showComponent,
-  setShowComponent,
   selectedItem,
   elementConfig,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
+  const [showComponent, setShowComponent] =
+    useState<{
+      id: string;
+      value: {
+        name: string;
+        inputs: object[];
+        outputs: object[];
+        stateMutability: string;
+      };
+    }>(null); // for abi method component
 
   return (
     <>
@@ -56,10 +46,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
             <FaFileContract />
           </span>{" "}
           Import Contract
-          <Modal
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          />
+          <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
       </div>
       <br />

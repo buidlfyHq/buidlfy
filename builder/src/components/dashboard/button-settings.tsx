@@ -20,8 +20,6 @@ const ButtonSettings: FC<ISettings> = ({
   handleTextChange,
   handleLinkChange,
   selectedItem,
-  showComponent,
-  setShowComponent,
   elementConfig,
   openTab,
   setOpenTab,
@@ -157,8 +155,6 @@ const ButtonSettings: FC<ISettings> = ({
       </span>
       <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
         <AdvanceComponent
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
           elementConfig={elementConfig}
           selectedItem={selectedItem}
         />
