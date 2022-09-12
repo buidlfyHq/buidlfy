@@ -17,11 +17,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
 
   const handleOnChange = () => {
     setConnectToggle(!connectToggle);
-    if (connectWallet === "on") {
-      setOn(false);
-    } else {
-      setOn(true);
-    }
+    setOn(connectWallet !== "on");
   };
 
   useEffect(() => {

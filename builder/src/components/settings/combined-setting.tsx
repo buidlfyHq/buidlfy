@@ -33,57 +33,33 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   justifyContent,
 }) => {
   const handleBoldChange = () => {
-    if (bold === "bold") {
-      setBold(false);
-    } else {
-      setBold(true);
-    }
+    setBold(bold !== "bold");
   };
 
   const handleItalicChange = () => {
-    if (italic === "italic") {
-      setItalic(false);
-    } else {
-      setItalic(true);
-    }
+    setItalic(italic !== "italic");
   };
 
   const handleUnderlineChange = () => {
-    if (underline === "underline") {
-      setUnderline(false);
-    } else {
-      setUnderline(true);
-    }
+    setUnderline(underline !== "underline");
   };
 
   const handleLeftChange = () => {
-    if (justifyContent === "left") {
-      setLeft(false);
-    } else {
-      setLeft(true);
-    }
+    setLeft(justifyContent !== "left");
   };
 
   const handleCenterChange = () => {
-    if (justifyContent === "center") {
-      setCenter(false);
-    } else {
-      setCenter(true);
-    }
+    setCenter(justifyContent !== "center");
   };
 
   const handleRightChange = () => {
-    if (justifyContent === "right") {
-      setRight(false);
-    } else {
-      setRight(true);
-    }
+    setRight(justifyContent !== "right");
   };
   return (
     <div className="flex grey-div w-auto mx-2 mb-3 items-center mt-2 text-black">
       <span
         onClick={handleBoldChange}
-        className="flex items-center mx-[0.75rem] justify-center font-bold text-[16px] py-1 font-regular"
+        className="flex items-center mx-[0.75rem] justify-center font-bold text-[16px] py-1 font-regular text-black"
       >
         B
       </span>

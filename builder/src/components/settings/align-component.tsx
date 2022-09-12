@@ -21,27 +21,15 @@ const AlignComponent: FC<IAlignComponent> = ({
   justifyContent,
 }) => {
   const handleLeftChange = () => {
-    if (justifyContent === "left") {
-      setLeft(false);
-    } else {
-      setLeft(true);
-    }
+    setLeft(justifyContent !== "left");
   };
 
   const handleCenterChange = () => {
-    if (justifyContent === "center") {
-      setCenter(false);
-    } else {
-      setCenter(true);
-    }
+    setCenter(justifyContent !== "center");
   };
 
   const handleRightChange = () => {
-    if (justifyContent === "right") {
-      setRight(false);
-    } else {
-      setRight(true);
-    }
+    setRight(justifyContent !== "right");
   };
 
   return (

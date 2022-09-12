@@ -78,6 +78,11 @@ const SettingComponent: FC<ISettings> = ({
           linkVal={link}
           handleLinkChange={handleLinkChange}
           items={items}
+          bold={selectedItem?.style?.fontWeight}
+          italic={selectedItem?.style?.fontStyle}
+          underline={selectedItem?.style?.textDecoration}
+          color={selectedItem?.style?.color}
+          deleteComponent={selectedItem?.style?.deleteComponent}
           setItems={setItems}
           setBold={setBold}
           setItalic={setItalic}
@@ -120,8 +125,7 @@ const SettingComponent: FC<ISettings> = ({
         <ImageSettings
           selectedItem={selectedItem}
           items={items}
-          setItems={setItems}
-          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
           setLeft={setLeft}
           setCenter={setCenter}
           setRight={setRight}
@@ -136,40 +140,10 @@ const SettingComponent: FC<ISettings> = ({
         <ContainerSettings
           selectedItem={selectedItem}
           items={items}
-          setItems={setItems}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setBorderRadius={setBorderRadius}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-          shadow={selectedItem?.style?.shadow}
-        />
-      );
-    case "Horizontal Container":
-      return (
-        <ContainerSettings
-          selectedItem={selectedItem}
-          items={items}
-          setItems={setItems}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setBorderRadius={setBorderRadius}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-          shadow={selectedItem?.style?.shadow}
-        />
-      );
-    case "Vertical Container":
-      return (
-        <ContainerSettings
-          selectedItem={selectedItem}
-          items={items}
+          color={selectedItem?.style?.color}
+          borderRadius={selectedItem?.style?.borderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          deleteComponent={selectedItem?.style?.deleteComponent}
           setItems={setItems}
           setColor={setColor}
           setBgColor={setBgColor}
@@ -188,6 +162,10 @@ const SettingComponent: FC<ISettings> = ({
           selectedItem={selectedItem}
           placeholder={placeholder}
           handlePlaceholderChange={handlePlaceholderChange}
+          color={selectedItem?.style?.color}
+          shadow={selectedItem?.style?.shadow}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          borderRadius={selectedItem?.style?.borderRadius}
           setColor={setColor}
           setDeleteComponent={setDeleteComponent}
           setBorderRadius={setBorderRadius}
@@ -209,6 +187,11 @@ const SettingComponent: FC<ISettings> = ({
           handleTextChange={handleTextChange}
           linkVal={link}
           handleLinkChange={handleLinkChange}
+          bold={selectedItem?.style?.fontWeight}
+          italic={selectedItem?.style?.fontStyle}
+          underline={selectedItem?.style?.textDecoration}
+          color={selectedItem?.style?.color}
+          deleteComponent={selectedItem?.style?.deleteComponent}
           setBold={setBold}
           setItalic={setItalic}
           setUnderline={setUnderline}

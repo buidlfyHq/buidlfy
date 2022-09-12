@@ -17,30 +17,15 @@ const ShadowComponent: FC<IShadowComponent> = ({
   shadow,
 }) => {
   const handleSmallChange = () => {
-    // setLeft(!left);
-    if (shadow === "small") {
-      setSmall(false);
-    } else {
-      setSmall(true);
-    }
+    setSmall(shadow !== "small");
   };
 
   const handleMediumChange = () => {
-    // setLeft(!center);
-    if (shadow === "medium") {
-      setMedium(false);
-    } else {
-      setMedium(true);
-    }
+    setMedium(shadow !== "medium");
   };
 
   const handleLargeChange = () => {
-    // setRight(!right);
-    if (shadow === "large") {
-      setLarge(false);
-    } else {
-      setLarge(true);
-    }
+    setLarge(shadow !== "large");
   };
 
   return (
