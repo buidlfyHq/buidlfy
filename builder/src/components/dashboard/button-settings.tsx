@@ -9,10 +9,11 @@ import AdvanceComponent from "components/settings/advance-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import ConnectSwitchComponent from "components/settings/connect-switch-component";
-import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
+import { containerCheck } from "utils/container-check";
+import ISettings from "interfaces/settings";
 import { IoMdLink } from "react-icons/io";
 
 const ButtonSettings: FC<ISettings> = ({
@@ -125,7 +126,11 @@ const ButtonSettings: FC<ISettings> = ({
           i={selectedItem.i}
           borderRadius={selectedItem.style.borderRadius}
         />
-        <ColorComponent selectedItem={selectedItem} />
+        <ColorComponent
+          i={selectedItem.i}
+          color={selectedItem.style.color}
+          isContainer={containerCheck(selectedItem)}
+        />
         <BgColorComponent
           i={selectedItem.i}
           bgColor={selectedItem.style.backgroundColor}
