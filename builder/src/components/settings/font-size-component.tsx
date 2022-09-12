@@ -12,7 +12,7 @@ interface IFontSizeComponent {
 
 const FontSizeComponent: FC<IFontSizeComponent> = ({ selectedItem }) => {
   const dispatch = useDispatch();
-  const fontSize = selectedItem?.style?.fontSize;
+  const fontSize = selectedItem.style.fontSize;
 
   const incrementCounter = () => {
     dispatch(

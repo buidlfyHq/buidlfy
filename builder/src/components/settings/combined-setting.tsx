@@ -24,7 +24,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({ selectedItem }) => {
         settingItemId: selectedItem.i,
         propertyName: "fontWeight",
         propertyValue:
-          selectedItem?.style?.fontWeight === "bold" ? "normal" : "bold",
+          selectedItem.style.fontWeight === "bold" ? "normal" : "bold",
       })
     );
   };

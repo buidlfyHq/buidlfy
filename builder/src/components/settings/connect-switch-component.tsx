@@ -15,7 +15,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
   const dispatch = useDispatch();
 
   const [connectToggle, setConnectToggle] = useState(
-    selectedItem?.connectWallet === "on" ? true : false
+    selectedItem.connectWallet === "on" ? true : false
   );
 
   const handleOnChange = () => {
