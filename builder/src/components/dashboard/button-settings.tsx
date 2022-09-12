@@ -92,7 +92,13 @@ const ButtonSettings: FC<ISettings> = ({
             <span className="setting-text ">{selectedItem.name}</span>
           ) : null}
         </h3>
-        <CombinedComponent selectedItem={selectedItem} />
+        <CombinedComponent
+          i={selectedItem.i}
+          fontWeight={selectedItem.style.fontWeight}
+          fontStyle={selectedItem.style.fontStyle}
+          textDecoration={selectedItem.style.textDecoration}
+          justifyContent={selectedItem.style.justifyContent}
+        />
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
           {/* <RiText className="text-[18px] mr-3" /> */}
           <textarea
