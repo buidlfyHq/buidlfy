@@ -35,6 +35,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
   const handleBottomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaddingBottom(+e.target.value);
   };
+
   const incrementLeftCounter = () => {
     setPaddingLeft(padding.paddingLeft + 1);
   };

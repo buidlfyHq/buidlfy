@@ -153,9 +153,9 @@ const Elements: FC<IElements> = ({
           </div>
           <div className="mt-6 px-4">
             <span className="element-text">Container</span>
-            <div className="flex">
+            <div className="flex py-2.5">
               <div
-                className="element-container"
+                className="element-container "
                 onClick={() => onClickFunction("Container")}
               ></div>
             </div>
