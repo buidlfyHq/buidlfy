@@ -4,9 +4,7 @@ import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import { ResizeHandles } from "interfaces/handle";
-import { Link } from "react-router-dom";
 import "styles/components.css";
-import image from "assets/image.png";
 
 interface IElements {
   className: string;
@@ -18,25 +16,17 @@ interface IElements {
 }
 
 const Elements: FC<IElements> = ({
-  className,
-  setClassName,
   items,
   setItems,
   addContainer,
   settingItemId,
 }) => {
   const uid = new ShortUniqueId();
-  // const [indexValue, setIndexValue] = useState<number>(0);
-
   const selectedItem =
     items?.find((item) => item.i === settingItemId) ||
     items?.map((item) =>
       item.children?.find((child: IItems) => child.i === settingItemId)
     )[0];
-
-  // const hideSidebar = () => {
-  //   setClassName("hidden");
-  // };
   const onClickFunction = (name) => {
     let c = components?.find((component) => component.name == name);
     if (addContainer) {
@@ -112,29 +102,7 @@ const Elements: FC<IElements> = ({
     }
   };
 
-  const onClickContainerFunction = (name) => {
-    const availableHandles: ResizeHandles = ["se"];
-    let y = checkContainerY(selectedItem);
-    let c = components?.find((component) => component.name == name);
-    let newC = {
-      ...c,
-      i: uid(),
-      x: 0,
-      y,
-      w: 6,
-      minW: 1,
-      resizeHandles: availableHandles,
-    };
-    let updatedItem = {
-      ...selectedItem,
-      h: y + c.h,
-      children: [...selectedItem.children, newC],
-    };
-    const elementsIndex = items.findIndex((item) => item.i === selectedItem.i);
-    let newArray = [...items];
-    newArray[elementsIndex] = updatedItem;
-    setItems(newArray);
-  };
+  // It is required for future reference, we have used this new method for components but we may need reference from this every now and then
 
   // const renderContainerComponents = components
   //   .filter((c) => !containerCheck(c))
@@ -408,12 +376,6 @@ const Elements: FC<IElements> = ({
           <>{renderComponents}</>
         )}
       </div> */}
-
-      {/* <Link to="/templates" className="hover:text-black">
-        <div className="mx-6 px-4 py-3 mt-10 rounded-xl hover:bg-blue-100">
-          Templates
-        </div>
-      </Link> */}
     </>
   );
 };
