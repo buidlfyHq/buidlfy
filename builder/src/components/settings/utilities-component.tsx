@@ -7,17 +7,17 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IUtilitiesComponent {
-  selectedItem: IItems;
+  i: string;
 }
 
-const UtilitiesComponent: FC<IUtilitiesComponent> = ({ selectedItem }) => {
+const UtilitiesComponent: FC<IUtilitiesComponent> = ({ i }) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "deleteComponent",
         propertyValue: 1,
       })
