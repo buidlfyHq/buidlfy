@@ -7,6 +7,7 @@ import FontSizeComponent from "components/settings/font-size-component";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
+import { containerCheck } from "utils/container-check";
 import ISettings from "interfaces/settings";
 import "styles/components.css";
 
@@ -48,7 +49,11 @@ const GeneralSettings: FC<ISettings> = ({
       i={selectedItem.i}
       fontSize={selectedItem.style.fontSize}
     />
-    <ColorComponent selectedItem={selectedItem} />
+    <ColorComponent
+      i={selectedItem.i}
+      color={selectedItem.style.color}
+      isContainer={containerCheck(selectedItem)}
+    />
     <BgColorComponent
       i={selectedItem.i}
       bgColor={selectedItem.style.backgroundColor}
