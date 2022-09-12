@@ -28,11 +28,14 @@ const InputSettings: FC<ISettings> = ({
       />
     </div>
 
-    <BorderRadiusComponent selectedItem={selectedItem} />
-    <MarginComponent selectedItem={selectedItem} />
+    <BorderRadiusComponent
+      i={selectedItem.i}
+      borderRadius={selectedItem.style.borderRadius}
+    />
+    <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
     <ColorComponent selectedItem={selectedItem} />
-    <ShadowComponent selectedItem={selectedItem} />
-    <UtilitiesComponent selectedItem={selectedItem} />
+    <ShadowComponent i={selectedItem.i} shadow={selectedItem.style.shadow} />
+    <UtilitiesComponent i={selectedItem.i} />
   </>
 );
 

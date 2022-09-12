@@ -44,12 +44,18 @@ const GeneralSettings: FC<ISettings> = ({
       />
     </div>
 
-    <FontSizeComponent selectedItem={selectedItem} />
+    <FontSizeComponent
+      i={selectedItem.i}
+      fontSize={selectedItem.style.fontSize}
+    />
     <ColorComponent selectedItem={selectedItem} />
-    <BgColorComponent selectedItem={selectedItem} />
-    <MarginComponent selectedItem={selectedItem} />
-    <PaddingComponent selectedItem={selectedItem} />
-    <UtilitiesComponent selectedItem={selectedItem} />
+    <BgColorComponent
+      i={selectedItem.i}
+      bgColor={selectedItem.style.backgroundColor}
+    />
+    <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
+    <PaddingComponent i={selectedItem.i} padding={selectedItem.style.padding} />
+    <UtilitiesComponent i={selectedItem.i} />
   </>
 );
 
