@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
+import { IoMdLink } from "react-icons/io";
 import { updateSelector } from "reducers/selectorReducer";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
@@ -14,7 +15,6 @@ import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import { containerCheck } from "utils/container-check";
 import ISettings from "interfaces/settings";
-import { IoMdLink } from "react-icons/io";
 
 const ButtonSettings: FC<ISettings> = ({
   handleTextChange,
