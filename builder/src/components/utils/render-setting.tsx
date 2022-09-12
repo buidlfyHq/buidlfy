@@ -8,6 +8,36 @@ import ISettings from "interfaces/settings";
 import "styles/components.css";
 import "styles/dashboard.css";
 
+export enum replaceValue {
+  INCREMENT = "increment",
+  DECREMENT = "decrement",
+  CHANGE = "change",
+}
+export enum replaceSpacingValue {
+  LEFT = "left",
+  RIGHT = "right",
+  TOP = "top",
+  BOTTOM = "bottom",
+  INCREMENTLEFT = "incrementLeft",
+  INCREMENTRIGHT = "incrementRight",
+  INCREMENTTOP = "incrementTop",
+  INCREMENTBOTTOM = "incrementBottom",
+  DECREMENTLEFT = "decrementLeft",
+  DECREMENTRIGHT = "decrementRight",
+  DECREMENTTOP = "decrementTop",
+  DECREMENTBOTTOM = "decrementBottom",
+}
+export enum replaceStyle {
+  BOLD = "bold",
+  ITALIC = "italic",
+  UNDERLINE = "underline",
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center",
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+}
 const SettingComponent: FC<ISettings> = ({
   items,
   setItems,
@@ -72,12 +102,14 @@ const SettingComponent: FC<ISettings> = ({
     case "Button":
       return (
         <ButtonSettings
+          borderRadius={selectedItem?.style?.borderRadius}
           selectedItem={selectedItem}
           textVal={value}
           handleTextChange={handleTextChange}
           linkVal={link}
           handleLinkChange={handleLinkChange}
           items={items}
+          fontSize={selectedItem?.style?.fontSize}
           bold={selectedItem?.style?.fontWeight}
           italic={selectedItem?.style?.fontStyle}
           underline={selectedItem?.style?.textDecoration}
@@ -118,6 +150,7 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingBottom={setPaddingBottom}
           margin={selectedItem?.style?.margin}
           padding={selectedItem?.style?.padding}
+          setPaddingLeft={setPaddingLeft}
         />
       );
     case "Image":
@@ -184,6 +217,8 @@ const SettingComponent: FC<ISettings> = ({
         <GeneralSettings
           selectedItem={selectedItem}
           textVal={value}
+          fontSize={selectedItem?.style?.fontSize}
+          borderRadius={selectedItem?.style?.borderRadius}
           handleTextChange={handleTextChange}
           linkVal={link}
           handleLinkChange={handleLinkChange}
@@ -209,6 +244,7 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingTop={setPaddingTop}
           setPaddingRight={setPaddingRight}
           setPaddingBottom={setPaddingBottom}
+          setPaddingLeft={setPaddingLeft}
           margin={selectedItem?.style?.margin}
           padding={selectedItem?.style?.padding}
         />

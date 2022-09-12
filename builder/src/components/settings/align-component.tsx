@@ -4,6 +4,7 @@ import {
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
+import { replaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -20,16 +21,14 @@ const AlignComponent: FC<IAlignComponent> = ({
   setCenter,
   justifyContent,
 }) => {
-  const handleLeftChange = () => {
-    setLeft(justifyContent !== "left");
-  };
-
-  const handleCenterChange = () => {
-    setCenter(justifyContent !== "center");
-  };
-
-  const handleRightChange = () => {
-    setRight(justifyContent !== "right");
+  const handleChange = (action: replaceStyle) => {
+    if (action == replaceStyle.LEFT) {
+      setLeft(justifyContent !== "left");
+    } else if (action == replaceStyle.RIGHT) {
+      setRight(justifyContent !== "right");
+    } else if (action == replaceStyle.CENTER) {
+      setCenter(justifyContent !== "center");
+    }
   };
 
   return (
@@ -38,19 +37,19 @@ const AlignComponent: FC<IAlignComponent> = ({
         Text Align
         <div className="flex mt-3 px-3">
           <span
-            onClick={handleLeftChange}
+            onClick={() => handleChange(replaceStyle.LEFT)}
             className="align-div flex items-center justify-center font-bold shadow text-[18px] p-2 mr-2 my-2 font-regular"
           >
             <AiOutlineAlignLeft className="text-[18px]" />
           </span>
           <span
-            onClick={handleCenterChange}
+            onClick={() => handleChange(replaceStyle.CENTER)}
             className="align-div flex items-center justify-center italic shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
           >
             <AiOutlineAlignCenter className="text-[18px]" />
           </span>
           <span
-            onClick={handleRightChange}
+            onClick={() => handleChange(replaceStyle.RIGHT)}
             className="align-div flex items-center justify-center underline shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
           >
             <AiOutlineAlignRight className="text-[18px]" />

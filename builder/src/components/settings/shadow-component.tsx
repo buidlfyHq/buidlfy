@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { BsBrightnessLow } from "react-icons/bs";
+import { replaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -16,16 +17,14 @@ const ShadowComponent: FC<IShadowComponent> = ({
   setLarge,
   shadow,
 }) => {
-  const handleSmallChange = () => {
-    setSmall(shadow !== "small");
-  };
-
-  const handleMediumChange = () => {
-    setMedium(shadow !== "medium");
-  };
-
-  const handleLargeChange = () => {
-    setLarge(shadow !== "large");
+  const handleChange = (action: replaceStyle) => {
+    if (action == replaceStyle.SMALL) {
+      setSmall(shadow !== "small");
+    } else if (action == replaceStyle.MEDIUM) {
+      setMedium(shadow !== "medium");
+    } else if (action == replaceStyle.LARGE) {
+      setLarge(shadow !== "large");
+    }
   };
 
   return (
@@ -36,19 +35,19 @@ const ShadowComponent: FC<IShadowComponent> = ({
       </span>
       <div className="flex mt-3 px-1">
         <span
-          onClick={handleSmallChange}
+          onClick={() => handleChange(replaceStyle.SMALL)}
           className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
         >
           S
         </span>
         <span
-          onClick={handleMediumChange}
+          onClick={() => handleChange(replaceStyle.MEDIUM)}
           className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 mx-3 font-regular"
         >
           M
         </span>
         <span
-          onClick={handleLargeChange}
+          onClick={() => handleChange(replaceStyle.LARGE)}
           className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
         >
           L

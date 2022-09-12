@@ -1,7 +1,8 @@
 import React, { FC } from "react";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { replaceValue } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 
 interface IBorderRadiusComponent {
   borderRadius: number;
@@ -12,20 +13,17 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
   borderRadius,
   setBorderRadius,
 }) => {
-  const incrementCounter = () => {
-    setBorderRadius(borderRadius + 1);
-  };
-
-  const decrementCounter = () => {
-    if (borderRadius <= 0) {
-      setBorderRadius(0);
-    } else {
-      setBorderRadius(borderRadius - 1);
-    }
-  };
-
-  const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (borderRadius) {
+  // Derive best type of e
+  const handleRadius = (e, action: replaceValue) => {
+    if (action == replaceValue.INCREMENT) {
+      setBorderRadius(borderRadius + 1);
+    } else if (action == replaceValue.DECREMENT) {
+      if (borderRadius <= 0) {
+        setBorderRadius(0);
+      } else {
+        setBorderRadius(borderRadius - 1);
+      }
+    } else if (action == replaceValue.CHANGE) {
       setBorderRadius(+e.target.value);
     }
   };
@@ -45,7 +43,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
               <span className="font-text">Border Radius:</span>
               <select
                 value={borderRadius}
-                onChange={(e) => handleSizeChange(e)}
+                onClick={(e) => handleRadius(e, replaceValue.CHANGE)}
                 className="form-select font-div appearance-none block py-1.5 pl-[10.5rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:outline-none focus:shadow-none"
                 aria-label="Default select example"
               >
@@ -53,11 +51,11 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
                 {options}
               </select>
               <AiOutlineCaretUp
-                onClick={incrementCounter}
+                onClick={(e) => handleRadius(e, replaceValue.INCREMENT)}
                 className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
               />
               <AiOutlineCaretDown
-                onClick={decrementCounter}
+                onClick={(e) => handleRadius(e, replaceValue.DECREMENT)}
                 className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
               />
             </div>
