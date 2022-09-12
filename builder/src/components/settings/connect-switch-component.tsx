@@ -1,21 +1,22 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateItems } from "reducers/itemsReducer";
-import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IConnectSwitchComponent {
-  selectedItem: IItems;
+  i: string;
+  connectWallet: string;
 }
 
 const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
-  selectedItem,
+  i,
+  connectWallet,
 }) => {
   const dispatch = useDispatch();
 
   const [connectToggle, setConnectToggle] = useState(
-    selectedItem.connectWallet === "on" ? true : false
+    connectWallet === "on" ? true : false
   );
 
   const handleOnChange = () => {
@@ -23,16 +24,16 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "connectWallet",
-        propertyValue: selectedItem?.connectWallet === "on" ? "off" : "on",
+        propertyValue: connectWallet === "on" ? "off" : "on",
       })
     );
   };
 
   useEffect(() => {
-    setConnectToggle(selectedItem?.connectWallet === "on" ? true : false);
-  }, [selectedItem?.connectWallet]);
+    setConnectToggle(connectWallet === "on" ? true : false);
+  }, [connectWallet]);
 
   return (
     <span className="flex mt-5">

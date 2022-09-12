@@ -113,15 +113,36 @@ const ButtonSettings: FC<ISettings> = ({
             placeholder="Link"
           />
         </div>
-        <ConnectSwitchComponent selectedItem={selectedItem} />
-        <FontSizeComponent selectedItem={selectedItem} />
-        <BorderRadiusComponent selectedItem={selectedItem} />
+        <ConnectSwitchComponent
+          i={selectedItem.i}
+          connectWallet={selectedItem.connectWallet}
+        />
+        <FontSizeComponent
+          i={selectedItem.i}
+          fontSize={selectedItem.style.fontSize}
+        />
+        <BorderRadiusComponent
+          i={selectedItem.i}
+          borderRadius={selectedItem.style.borderRadius}
+        />
         <ColorComponent selectedItem={selectedItem} />
-        <BgColorComponent selectedItem={selectedItem} />
-        <MarginComponent selectedItem={selectedItem} />
-        <PaddingComponent selectedItem={selectedItem} />
-        <ShadowComponent selectedItem={selectedItem} />
-        <UtilitiesComponent selectedItem={selectedItem} />
+        <BgColorComponent
+          i={selectedItem.i}
+          bgColor={selectedItem.style.backgroundColor}
+        />
+        <MarginComponent
+          i={selectedItem.i}
+          margin={selectedItem.style.margin}
+        />
+        <PaddingComponent
+          i={selectedItem.i}
+          padding={selectedItem.style.padding}
+        />
+        <ShadowComponent
+          i={selectedItem.i}
+          shadow={selectedItem.style.shadow}
+        />
+        <UtilitiesComponent i={selectedItem.i} />
       </span>
       <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
         <AdvanceComponent

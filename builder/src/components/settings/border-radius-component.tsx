@@ -2,25 +2,25 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateItems } from "reducers/itemsReducer";
-import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBorderRadiusComponent {
-  selectedItem: IItems;
+  i: string;
+  borderRadius: number;
 }
 
 const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
-  selectedItem,
+  i,
+  borderRadius,
 }) => {
   const dispatch = useDispatch();
-  const borderRadius = selectedItem?.style?.borderRadius;
 
   const incrementCounter = () => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "borderRadius",
         propertyValue: borderRadius + 1,
       })
@@ -31,7 +31,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "borderRadius",
         propertyValue: borderRadius <= 0 ? 0 : borderRadius - 1,
       })
@@ -43,7 +43,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
       dispatch(
         updateItems({
           level: 1,
-          settingItemId: selectedItem.i,
+          settingItemId: i,
           propertyName: "borderRadius",
           propertyValue: +e.target.value,
         })
