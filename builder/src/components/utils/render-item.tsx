@@ -31,8 +31,6 @@ interface IRenderItem {
   elementConfig?: object;
   setSideElement: (sideElement: string) => void;
   setElementConfig?: (elementConfig: object) => void;
-  addContainerElements?: boolean;
-  setAddContainerElements?: (addContainerElements?: boolean) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   showSidebar?: () => void;
@@ -54,8 +52,6 @@ const RenderItem: FC<IRenderItem> = ({
   elementConfig,
   setElementConfig,
   setSideElement,
-  addContainerElements,
-  setAddContainerElements,
   dragContainer,
   setDragContainer,
   showSidebar,
@@ -86,8 +82,6 @@ const RenderItem: FC<IRenderItem> = ({
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setSideElement={setSideElement}
-          addContainerElements={addContainerElements}
-          setAddContainerElements={setAddContainerElements}
           dragContainer={dragContainer}
           setDragContainer={setDragContainer}
           showSidebar={showSidebar}
@@ -229,8 +223,6 @@ const RenderItem: FC<IRenderItem> = ({
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setSideElement={setSideElement}
-          addContainerElements={addContainerElements}
-          setAddContainerElements={setAddContainerElements}
           dragContainer={dragContainer}
           setDragContainer={setDragContainer}
           showSidebar={showSidebar}
@@ -261,8 +253,6 @@ const RenderItem: FC<IRenderItem> = ({
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setSideElement={setSideElement}
-          addContainerElements={addContainerElements}
-          setAddContainerElements={setAddContainerElements}
           dragContainer={dragContainer}
           setDragContainer={setDragContainer}
           showSidebar={showSidebar}

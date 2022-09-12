@@ -43,8 +43,6 @@ interface IContainer {
   setElementConfig: Dispatch<SetStateAction<object>>;
   setValue?: (value: string) => void;
   setSideElement: (sideElement: string) => void;
-  addContainerElements?: boolean;
-  setAddContainerElements?: (addContainerElements?: boolean) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   showSidebar?: () => void;

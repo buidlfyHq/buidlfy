@@ -50,8 +50,6 @@ const Dashboard: FC = () => {
     g: "0",
     b: "0",
   });
-  const [addContainerElements, setAddContainerElements] =
-    useState<boolean>(true);
   const [dragContainer, setDragContainer] = useState<boolean>(true);
   const [head, setHead] = useState<{
     title: string;
@@ -178,8 +176,6 @@ const Dashboard: FC = () => {
                 openSetting={openSetting}
                 setIsNavHidden={setIsNavHidden}
                 setSideElement={setSideElement}
-                addContainerElements={addContainerElements}
-                setAddContainerElements={setAddContainerElements}
                 dragContainer={dragContainer}
                 setDragContainer={setDragContainer}
                 hideSettingSidebar={undefined}

@@ -43,8 +43,6 @@ interface IWorkspace {
   openSetting?: boolean;
   setIsNavHidden?: (isNavHidden?: boolean) => void;
   setSideElement?: (sideElement?: string) => void;
-  addContainerElements?: boolean;
-  setAddContainerElements?: (addContainerElements?: boolean) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   hideSettingSidebar?: () => void;
@@ -70,8 +68,6 @@ const Workspace: FC<IWorkspace> = ({
   isNavHidden,
   openSetting,
   setSideElement,
-  addContainerElements,
-  setAddContainerElements,
   dragContainer,
   setDragContainer,
   hideSettingSidebar,
@@ -253,8 +249,6 @@ const Workspace: FC<IWorkspace> = ({
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
             setSideElement={setSideElement}
-            addContainerElements={addContainerElements}
-            setAddContainerElements={setAddContainerElements}
             dragContainer={dragContainer}
             setDragContainer={setDragContainer}
             showSidebar={showSidebar}
