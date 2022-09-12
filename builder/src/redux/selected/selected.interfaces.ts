@@ -12,7 +12,7 @@ export interface IAction {
   payload: {
     name: string;
     element?: IElement;
-    index?: string;
+    index?: number;
     id?: string;
   };
 }

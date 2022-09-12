@@ -71,7 +71,7 @@ const Template: FC = () => {
                   onClick={(e) => handleClick(e, value)}
                   className="cursor-pointer flex flex-col justify-center items-center"
                 >
-                  <img className="rounded-[0.25rem]" src={image} />
+                  <img className="rounded-[0.25rem]" src={image} alt="Template" />
                   <div className="margin-text text-xs">{name}</div>
                 </div>
               );

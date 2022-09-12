@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import BgColorComponent from "components/settings/bg-color-component";
-import { RiText } from "react-icons/ri";
 import IColor from "interfaces/color";
 import "styles/components.css";
 

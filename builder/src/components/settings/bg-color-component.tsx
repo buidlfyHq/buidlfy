@@ -66,11 +66,11 @@ const BgColorComponent: FC<IBgColorComponent> = ({
   };
   const opacity = Number(`${color.a}`);
   let newOpacity = opacity * 100;
-  if (newOpacity == 10000) {
+  if (newOpacity === 10000) {
     newOpacity = 100;
   }
   const newColor = { ...color };
-  const handleOpacity = (e) => {
+  const handleOpacity = (e: React.ChangeEvent<HTMLInputElement>) => {
     newColor.a = Number(e.target.value) / 100;
     if (backgroundColor) {
       setBackgroundColor(newColor);

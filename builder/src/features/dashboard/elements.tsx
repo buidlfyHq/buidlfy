@@ -37,7 +37,7 @@ const Elements: FC<IElements> = ({
   //   setClassName("hidden");
   // };
   const onClickFunction = (name) => {
-    let c = components?.find((component) => component.name == name);
+    let c = components?.find((component) => component.name === name);
     if (addContainer) {
       const availableHandles: ResizeHandles = ["se"];
       let y = checkContainerY(selectedItem);

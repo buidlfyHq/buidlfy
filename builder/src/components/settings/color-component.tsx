@@ -19,7 +19,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
 
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [hexColor, setHexColor] = useState();
-  const [colorOpacity, setColorOpacity] = useState();
+  // const [colorOpacity, setColorOpacity] = useState();
   const ref = useRef<HTMLDivElement>();
   useEffect(() => {
     // FIX: find a suitable type for this event
@@ -40,6 +40,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     setDisplayColorPicker(false);
   };
 
+  // FIX: Find suitable type
   const handleHex = (e) => {
     setHexColor(e.target.value);
   };
@@ -61,7 +62,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
 
   const opacity = Number(`${color.a}`);
   let newOpacity = opacity * 100;
-  if (newOpacity == 10000) {
+  if (newOpacity === 10000) {
     newOpacity = 100;
   }
 
