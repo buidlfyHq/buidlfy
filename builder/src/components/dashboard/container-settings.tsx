@@ -6,6 +6,7 @@ import UploadComponent from "components/settings/upload-component";
 import BorderComponent from "components/settings/border-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
+import { containerCheck } from "utils/container-check";
 import ISettings from "interfaces/settings";
 
 const ContainerSettings: FC<ISettings> = ({ selectedItem }) => (
@@ -20,7 +21,11 @@ const ContainerSettings: FC<ISettings> = ({ selectedItem }) => (
       i={selectedItem.i}
       bgColor={selectedItem.style.backgroundColor}
     />
-    <ColorComponent selectedItem={selectedItem} />
+    <ColorComponent
+      i={selectedItem.i}
+      color={selectedItem.style.color}
+      isContainer={containerCheck(selectedItem)}
+    />
     <BorderRadiusComponent
       i={selectedItem.i}
       borderRadius={selectedItem.style.borderRadius}
