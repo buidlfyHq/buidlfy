@@ -1,13 +1,13 @@
 import React, { useState, FC, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { updateItems } from "reducers/itemsReducer";
 import { SketchPicker } from "react-color";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { containerCheck } from "utils/container-check";
+import { updateItems } from "reducers/itemsReducer";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { containerCheck } from "utils/container-check";
 
 interface IColorComponent {
   selectedItem: IItems;

@@ -7,12 +7,17 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IMarginComponent {
-  selectedItem: IItems;
+  i: string;
+  margin: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
 }
 
-const MarginComponent: FC<IMarginComponent> = ({ selectedItem }) => {
+const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
   const dispatch = useDispatch();
-  const margin = selectedItem?.style?.margin;
 
   const handleChange = (
     property: string,
@@ -21,7 +26,7 @@ const MarginComponent: FC<IMarginComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 2,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "margin",
         propertyValue: +e.target.value,
         childPropertyName: property,
@@ -29,23 +34,11 @@ const MarginComponent: FC<IMarginComponent> = ({ selectedItem }) => {
     );
   };
 
-  // const incrementCounter = () => {
-  //   if (margin.marginLeft) {
-  //     setMarginLeft(margin.marginLeft + 1);
-  //   } else if (margin.marginRight) {
-  //     setMarginRight(margin.marginRight + 1);
-  //   } else if (margin.marginTop) {
-  //     setMarginTop(margin.marginTop + 1);
-  //   } else {
-  //     setMarginBottom(margin.marginBottom + 1);
-  //   }
-  // };
-
   const incrementCounter = (property: string, value: number) => {
     dispatch(
       updateItems({
         level: 2,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "margin",
         propertyValue: value + 1,
         childPropertyName: property,
@@ -57,25 +50,13 @@ const MarginComponent: FC<IMarginComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 2,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "margin",
         propertyValue: value - 1,
         childPropertyName: property,
       })
     );
   };
-
-  // const decrementCounter = () => {
-  //   if (margin.marginLeft) {
-  //     setMarginLeft(margin.marginLeft - 1);
-  //   } else if (margin.marginRight) {
-  //     setMarginRight(margin.marginRight - 1);
-  //   } else if (margin.marginTop) {
-  //     setMarginTop(margin.marginTop - 1);
-  //   } else {
-  //     setMarginBottom(margin.marginBottom - 1);
-  //   }
-  // };
 
   return (
     <>
