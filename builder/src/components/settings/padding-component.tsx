@@ -1,8 +1,7 @@
 import React, { FC } from "react";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import "styles/components.css";
 import "styles/dashboard.css";
-import "styles/components.css";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 
 interface IPaddingComponent {
   padding?: {
@@ -36,29 +35,6 @@ const PaddingComponent: FC<IPaddingComponent> = ({
   const handleBottomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaddingBottom(+e.target.value);
   };
-  // const incrementCounter = () => {
-  //   if (padding.paddingLeft) {
-  //     setPaddingLeft(padding.paddingLeft + 1);
-  //   } else if (padding.paddingRight) {
-  //     setPaddingRight(padding.paddingRight + 1);
-  //   } else if (padding.paddingTop) {
-  //     setPaddingTop(padding.paddingTop + 1);
-  //   } else {
-  //     setPaddingBottom(padding.paddingBottom + 1);
-  //   }
-  // };
-  // const decrementCounter = () => {
-  //   if (padding.paddingLeft) {
-  //     setPaddingLeft(padding.paddingLeft - 1);
-  //   } else if (padding.paddingRight) {
-  //     setPaddingRight(padding.paddingRight - 1);
-  //   } else if (padding.paddingTop) {
-  //     setPaddingTop(padding.paddingTop - 1);
-  //   } else {
-  //     setPaddingBottom(padding.paddingBottom - 1);
-  //   }
-  // };
-
   const incrementLeftCounter = () => {
     setPaddingLeft(padding.paddingLeft + 1);
   };
