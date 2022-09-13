@@ -39,6 +39,15 @@ export enum ReplaceStyle {
   LARGE = "large",
   TRUE = "true",
   FALSE = "false",
+  COVER = "cover",
+  CONTAIN = "contain",
+  AUTO = "auto",
+  WIDTH = "width",
+  HEIGHT = "height",
+  INCREMENTWIDTH = "incrementWidth",
+  INCREMENTHEIGHT = "incrementHeight",
+  DECREMENTWIDTH = "decrementWidth",
+  DECREMENTHEIGHT = "decrementHeight",
 }
 const SettingComponent: FC<ISettings> = ({
   items,
@@ -178,6 +187,7 @@ const SettingComponent: FC<ISettings> = ({
         <ImageSettings
           selectedItem={selectedItem}
           items={items}
+          setItems={setItems}
           deleteComponent={selectedItem?.style?.deleteComponent}
           setLeft={setLeft}
           setCenter={setCenter}
@@ -207,6 +217,7 @@ const SettingComponent: FC<ISettings> = ({
         <ContainerSettings
           selectedItem={selectedItem}
           color={selectedItem?.style?.color}
+          setItems={setItems}
           setColor={setColor}
           setBgColor={setBgColor}
           backgroundColor={selectedItem?.style?.backgroundColor}
@@ -231,6 +242,7 @@ const SettingComponent: FC<ISettings> = ({
       return (
         <ContainerSettings
           items={items}
+          setItems={setItems}
           color={selectedItem?.style?.color}
           borderRadius={selectedItem?.style?.borderRadius}
           borderWidth={selectedItem?.style?.borderWidth}

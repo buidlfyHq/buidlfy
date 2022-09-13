@@ -3,6 +3,7 @@ import "styles/components.css";
 import "styles/dashboard.css";
 import "styles/components.css";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { ReplaceStyle } from "components/utils/render-setting";
 
 interface ISizeComponent {
   width: number;
@@ -43,23 +44,21 @@ const SizeComponent: FC<ISizeComponent> = ({
     }
   }, [dynamicHeight]);
 
-  const handleWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWidth(+e.target.value);
-  };
-  const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setHeight(+e.target.value);
-  };
-  const incrementWidthCounter = () => {
-    setWidth(width + 1);
-  };
-  const incrementHeightCounter = () => {
-    setHeight(height + 1);
-  };
-  const decrementWidthCounter = () => {
-    setWidth(width - 1);
-  };
-  const decrementHeightCounter = () => {
-    setHeight(height - 1);
+  // Derive best type of e
+  const handleChange = (e, action: ReplaceStyle) => {
+    if (action == ReplaceStyle.WIDTH) {
+      setWidth(+e.target.value);
+    } else if (action == ReplaceStyle.HEIGHT) {
+      setHeight(+e.target.value);
+    } else if (action == ReplaceStyle.INCREMENTWIDTH) {
+      setWidth(width + 1);
+    } else if (action == ReplaceStyle.INCREMENTHEIGHT) {
+      setHeight(height + 1);
+    } else if (action == ReplaceStyle.DECREMENTWIDTH) {
+      setWidth(width - 1);
+    } else if (action == ReplaceStyle.DECREMENTHEIGHT) {
+      setHeight(height - 1);
+    }
   };
   return (
     <>
@@ -73,14 +72,14 @@ const SizeComponent: FC<ISizeComponent> = ({
               value={width}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleWidthChange(e)}
+              onChange={(e) => handleChange(e, ReplaceStyle.WIDTH)}
             />
             <AiOutlineCaretUp
-              onClick={incrementWidthCounter}
+              onClick={(e) => handleChange(e, ReplaceStyle.INCREMENTWIDTH)}
               className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
-              onClick={decrementWidthCounter}
+              onClick={(e) => handleChange(e, ReplaceStyle.DECREMENTWIDTH)}
               className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
             />
             <h6 className="ml-5 mr-2 margin-subtext">H</h6>
@@ -89,14 +88,14 @@ const SizeComponent: FC<ISizeComponent> = ({
               value={height}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={handleHeightChange}
+              onChange={(e) => handleChange(e, ReplaceStyle.HEIGHT)}
             />
             <AiOutlineCaretUp
-              onClick={incrementHeightCounter}
+              onClick={(e) => handleChange(e, ReplaceStyle.INCREMENTHEIGHT)}
               className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
-              onClick={decrementHeightCounter}
+              onClick={(e) => handleChange(e, ReplaceStyle.DECREMENTHEIGHT)}
               className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
             />
           </div>
