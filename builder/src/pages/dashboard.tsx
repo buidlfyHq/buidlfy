@@ -44,7 +44,7 @@ const Dashboard: FC = () => {
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
-  const [isContainerSelected, SetIsContainerSelected] =
+  const [isContainerSelected, setIsContainerSelected] =
     useState<boolean>(false);
   const [backgroundColor, setBackgroundColor] = useState<IColor>({
     r: "0",
@@ -168,7 +168,7 @@ const Dashboard: FC = () => {
                 setOpenTab={setOpenTab}
                 drag={drag}
                 setDrag={setDrag}
-                SetIsContainerSelected={SetIsContainerSelected}
+                setIsContainerSelected={setIsContainerSelected}
                 backgroundColor={backgroundColor}
                 hideSidebar={hideSidebar}
                 showSettingSidebar={showSettingSidebar}
