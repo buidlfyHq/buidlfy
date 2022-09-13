@@ -25,11 +25,10 @@ export default interface ISettings {
   elementConfig?: object;
   openTab?: number;
   setOpenTab?: (openTab: number) => void;
-  handlePlaceholderChange?: (e) => void;
-  handleTextChange?: (
+  handleChange?: (
     e:
       | React.ChangeEvent<HTMLTextAreaElement>
-      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLInputElement>,
+    propertyName: string
   ) => void;
-  handleLinkChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

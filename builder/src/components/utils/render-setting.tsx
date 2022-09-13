@@ -20,49 +20,27 @@ const SettingComponent: FC<ISettings> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const handleTextChange = (
+  const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+    propertyName: string
   ) => {
     dispatch(
       updateItems({
         level: 0,
         settingItemId: selectedItem.i,
-        propertyName: "value",
+        propertyName,
         propertyValue: e.target.value,
       })
     );
   };
 
-  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(
-      updateItems({
-        level: 0,
-        settingItemId: selectedItem.i,
-        propertyName: "link",
-        propertyValue: e.target.value,
-      })
-    );
-  };
-
-  const handlePlaceholderChange = (e) => {
-    dispatch(
-      updateItems({
-        level: 0,
-        settingItemId: selectedItem.i,
-        propertyName: "placeholder",
-        propertyValue: e.target.value,
-      })
-    );
-  };
-
-  switch (selectedItem?.name) {
+  switch (selectedItem.name) {
     case "Button":
       return (
         <ButtonSettings
-          handleTextChange={handleTextChange}
-          handleLinkChange={handleLinkChange}
+          handleChange={handleChange}
           selectedItem={selectedItem}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
@@ -83,7 +61,7 @@ const SettingComponent: FC<ISettings> = ({
     case "Input":
       return (
         <InputSettings
-          handlePlaceholderChange={handlePlaceholderChange}
+          handleChange={handleChange}
           selectedItem={selectedItem}
         />
       );
@@ -91,8 +69,7 @@ const SettingComponent: FC<ISettings> = ({
     default:
       return (
         <GeneralSettings
-          handleTextChange={handleTextChange}
-          handleLinkChange={handleLinkChange}
+          handleChange={handleChange}
           selectedItem={selectedItem}
         />
       );
