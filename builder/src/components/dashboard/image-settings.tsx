@@ -8,19 +8,15 @@ import SizeComponent from "components/settings/image-size-component";
 import BackgroundSizeComponent from "components/settings/background-size-component";
 
 const ImageSettings: FC<ISettings> = ({
+  selectedItem,
   items,
   setItems,
-  selectedItem,
   setDeleteComponent,
-  deleteComponent,
-  justifyContent,
   setLeft,
   setCenter,
   setRight,
-  margin,
-  setMarginLeft,
-  setMarginRight,
   setMarginTop,
+  setMarginRight,
   setMarginBottom,
   width,
   height,
@@ -36,6 +32,7 @@ const ImageSettings: FC<ISettings> = ({
   dynamicWidth,
   setDynamicHeight,
   setDynamicWidth,
+  setMarginLeft,
 }) => (
   <>
     <h3 className="ml-[1rem]">
@@ -49,7 +46,7 @@ const ImageSettings: FC<ISettings> = ({
       setItems={setItems}
     />
     <AlignComponent
-      justifyContent={justifyContent}
+      justifyContent={selectedItem?.style?.justifyContent}
       setLeft={setLeft}
       setRight={setRight}
       setCenter={setCenter}
@@ -79,14 +76,14 @@ const ImageSettings: FC<ISettings> = ({
       isAuto={isAuto}
     />
     <MarginComponent
-      setMarginLeft={setMarginLeft}
-      setMarginRight={setMarginRight}
+      margin={selectedItem?.style?.margin}
       setMarginTop={setMarginTop}
+      setMarginRight={setMarginRight}
       setMarginBottom={setMarginBottom}
-      margin={{ ...margin }}
+      setMarginLeft={setMarginLeft}
     />
     <UtilitiesComponent
-      deleteComponent={deleteComponent}
+      deleteComponent={selectedItem?.style?.deleteComponent}
       setDeleteComponent={setDeleteComponent}
     />
   </>
