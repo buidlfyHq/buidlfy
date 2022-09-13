@@ -11,7 +11,6 @@ interface IRenderItem {
   item: IWorkspace;
   setDrag: (drag?: boolean) => void;
   setOpenSetting?: (openSetting: boolean) => void;
-  setSettingItemId?: (settingItemId: string) => void;
   setOpenTab?: (openTab: number) => void;
   setAddContainer?: (addContainer: boolean) => void;
   elementConfig?: object;
@@ -22,7 +21,6 @@ const RenderItem: FC<IRenderItem> = ({
   item,
   setDrag,
   setOpenSetting,
-  setSettingItemId,
   setOpenTab,
   setAddContainer,
 }) => {
@@ -100,7 +98,6 @@ const RenderItem: FC<IRenderItem> = ({
           borderWidth={item.style.borderWidth}
           shadow={item.style.shadow}
           setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
           setAddContainer={setAddContainer}

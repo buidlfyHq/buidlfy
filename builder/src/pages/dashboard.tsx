@@ -19,7 +19,6 @@ const Dashboard: FC = () => {
   const size = useWindowSize();
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
-  const [settingItemId, setSettingItemId] = useState<string>(""); // for storing current element id for settings
   const [openTab, setOpenTab] = useState<number>(1);
   const [drag, setDrag] = useState<boolean>(true);
   const [addContainer, setAddContainer] = useState<boolean>(false);
@@ -93,7 +92,6 @@ const Dashboard: FC = () => {
             className={className}
             setClassName={setClassName}
             addContainer={addContainer}
-            settingItemId={settingItemId}
             sideElement={sideElement}
             isNavHidden={isNavHidden}
             setIsNavHidden={setIsNavHidden}
@@ -119,7 +117,6 @@ const Dashboard: FC = () => {
               {/* Workspace */}
               <Workspace
                 setOpenSetting={setOpenSetting}
-                setSettingItemId={setSettingItemId}
                 setOpenTab={setOpenTab}
                 drag={drag}
                 setDrag={setDrag}

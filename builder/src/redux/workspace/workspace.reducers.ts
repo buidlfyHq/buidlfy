@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  fetchSelectedElement,
   mapElementsToWorkspace,
   mapElementStylesToWorkspace,
   mapElementSubStyleToWorkspace,
 } from "./workspace.utils";
-import { IAction } from "./workspace.interfaces";
+import { IAction, IWorkspaceState } from "./workspace.interfaces";
 import IWorkspace from "interfaces/workspace";
 
-const initialState: IWorkspace[] = [];
+const initialState: IWorkspaceState = {
+  workspaceElements: [],
+  selectedElement: null,
+};
 
 const workspaceSlice = createSlice({
   name: "workspace",
@@ -17,35 +21,47 @@ const workspaceSlice = createSlice({
     updateWorkspaceElement(state, action: IAction) {
       if (!action.payload.settingItemId) return;
 
-      const updatedElements = state.map((element: IWorkspace) =>
-        mapElementsToWorkspace(element, action.payload)
+      const updatedElements = state.workspaceElements.map(
+        (element: IWorkspace) => mapElementsToWorkspace(element, action.payload)
       );
 
-      return updatedElements;
+      return { ...state, workspaceElements: updatedElements };
     },
 
     // to update the style of an element in workspace
     updateWorkspaceElementStyle(state, action: IAction) {
       if (!action.payload.settingItemId) return;
 
-      const updatedElements = state.map((element: IWorkspace) =>
-        mapElementStylesToWorkspace(element, action.payload)
+      const updatedElements = state.workspaceElements.map(
+        (element: IWorkspace) =>
+          mapElementStylesToWorkspace(element, action.payload)
       );
-      return updatedElements;
+      return { ...state, workspaceElements: updatedElements };
     },
 
     // to update the sub style of an element in workspace
     updateWorkspaceElementSubStyle(state, action: IAction) {
       if (!action.payload.settingItemId) return;
 
-      const updatedElements = state.map((element: IWorkspace) =>
-        mapElementSubStyleToWorkspace(element, action.payload)
+      const updatedElements = state.workspaceElements.map(
+        (element: IWorkspace) =>
+          mapElementSubStyleToWorkspace(element, action.payload)
       );
-      return updatedElements;
+      return { ...state, workspaceElements: updatedElements };
     },
     // to update the elements
     updateWorkspaceElementsArray(state, action: { payload: IWorkspace[] }) {
-      return action.payload;
+      return { ...state, workspaceElements: action.payload };
+    },
+    // to set current selected element
+    setSelectedElement(state: IWorkspaceState, action: { payload: string }) {
+      return {
+        ...state,
+        selectedElement: fetchSelectedElement(
+          state.workspaceElements,
+          action.payload
+        ),
+      };
     },
   },
 });
@@ -55,5 +71,6 @@ export const {
   updateWorkspaceElementStyle,
   updateWorkspaceElementSubStyle,
   updateWorkspaceElementsArray,
+  setSelectedElement,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;

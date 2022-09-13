@@ -12,30 +12,18 @@ interface IElements {
   className: string;
   setClassName: (className: string) => void;
   addContainer: boolean;
-  settingItemId: string;
 }
 
-const Elements: FC<IElements> = ({
-  className,
-  setClassName,
-  addContainer,
-  settingItemId,
-}) => {
+const Elements: FC<IElements> = ({ className, setClassName, addContainer }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
-  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
+  const workspaceElements: IWorkspace[] = useSelector(
+    (state: any) => state.workspace.workspaceElements
+  );
+  const selectedItem: IWorkspace = useSelector(
+    (state: any) => state.workspace.selectedElement
+  );
 
-  // const [indexValue, setIndexValue] = useState<number>(0);
-
-  const selectedItem =
-    workspace?.find((item) => item.i === settingItemId) ||
-    workspace?.map((item) =>
-      item.children?.find((child: IWorkspace) => child.i === settingItemId)
-    )[0];
-
-  // const hideSidebar = () => {
-  //   setClassName("hidden");
-  // };
   const onClickFunction = (name) => {
     let c = components?.find((component) => component.name === name);
     if (addContainer) {
@@ -55,16 +43,16 @@ const Elements: FC<IElements> = ({
         h: y + c.h,
         children: [...selectedItem.children, newC],
       };
-      const elementsIndex = workspace.findIndex(
+      const elementsIndex = workspaceElements.findIndex(
         (item) => item.i === selectedItem.i
       );
-      let newArray = [...workspace];
+      let newArray = [...workspaceElements];
       newArray[elementsIndex] = updatedItem;
       dispatch(updateWorkspaceElementsArray(newArray));
     } else {
       const availableHandles: ResizeHandles = ["se"];
       const containerHandles: ResizeHandles = ["e"];
-      let y = checkY(workspace);
+      let y = checkY(workspaceElements);
       let newC = {
         ...c,
         i: uid(),
@@ -88,7 +76,7 @@ const Elements: FC<IElements> = ({
         }));
         newC.children = newChildren;
       }
-      dispatch(updateWorkspaceElementsArray([...workspace, newC]));
+      dispatch(updateWorkspaceElementsArray([...workspaceElements, newC]));
     }
   };
   const checkY = (items: IWorkspace[]) => {
