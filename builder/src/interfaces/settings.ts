@@ -1,7 +1,7 @@
-import IWorkspace from "./workspace";
+import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 
 export default interface ISettings {
-  selectedItem?: IWorkspace;
+  selectedItem?: IWorkspaceElements;
   setShowComponent?: (showComponent: {
     id: string;
     value: {

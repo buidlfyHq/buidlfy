@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import BgColorComponent from "components/settings/bg-color-component";
-import IColor from "interfaces/color";
+import { IColor } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IDefaultSettings {

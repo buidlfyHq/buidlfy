@@ -5,10 +5,10 @@ import Text from "components/custom-components/text";
 import Image from "components/custom-components/image";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
-import IWorkspace from "interfaces/workspace";
+import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 
 interface IRenderItem {
-  item: IWorkspace;
+  item: IWorkspaceElements;
   setDrag: (drag?: boolean) => void;
   setOpenSetting?: (openSetting: boolean) => void;
   setOpenTab?: (openTab: number) => void;

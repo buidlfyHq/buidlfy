@@ -13,8 +13,7 @@ import {
 } from "redux/selected/selected.reducers";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
-import IWorkspace from "interfaces/workspace";
-import IColor from "interfaces/color";
+import { IColor, IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
@@ -49,7 +48,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
   setIsNavHidden,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspace[] = useSelector((state: any) => state.workspace.workspaceElements);
+  const workspaceElements: IWorkspaceElements[] = useSelector((state: any) => state.workspace.workspaceElements);
   const selector = useSelector((state: any) => state.selector);
   const selected = useSelector((state: any) => state.selected);
 
@@ -66,7 +65,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
-    let newItemsArr = layout.map((obj: IWorkspace) => {
+    let newItemsArr = layout.map((obj: IWorkspaceElements) => {
       let selectedItem = workspaceElements.filter((item) => item.i === obj.i)[0];
       let height: number;
       const { h, minW, minH, x, y, w, i } = obj;
@@ -194,7 +193,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const renderItemFunction = workspaceElements
     ?.filter((i) => i.style?.deleteComponent === 0)
-    .map((item: IWorkspace) => {
+    .map((item: IWorkspaceElements) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
       return (
         <div

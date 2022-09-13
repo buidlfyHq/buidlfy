@@ -14,13 +14,15 @@ import {
 } from "redux/selected/selected.reducers";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
-import IWorkspace from "interfaces/workspace";
-import IColor from "interfaces/color";
+import {
+  IColor,
+  IWorkspaceElements,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IContainer {
-  item: IWorkspace;
-  children: IWorkspace[];
+  item: IWorkspaceElements;
+  children: IWorkspaceElements[];
   backgroundColor: IColor;
   color: IColor;
   imgData; // updating soon
@@ -49,7 +51,7 @@ const Container: FC<IContainer> = ({
   setAddContainer,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspace[] = useSelector(
+  const workspaceElements: IWorkspaceElements[] = useSelector(
     (state: any) => state.workspace.workspaceElements
   );
   const selector = useSelector((state: any) => state.selector);
@@ -57,9 +59,9 @@ const Container: FC<IContainer> = ({
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
-    let newItemsArr = layout.map((obj: IWorkspace) => {
+    let newItemsArr = layout.map((obj: IWorkspaceElements) => {
       let selectedItem = children.filter(
-        (item: IWorkspace) => item.i === obj.i
+        (item: IWorkspaceElements) => item.i === obj.i
       )[0];
       const { h, minW, x, y, w, i, minH } = obj;
       return (selectedItem = {
@@ -227,7 +229,7 @@ const Container: FC<IContainer> = ({
           ) : (
             children
               ?.filter((c) => c.style?.deleteComponent === 0)
-              .map((item: IWorkspace) => {
+              .map((item: IWorkspaceElements) => {
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (
                   <div

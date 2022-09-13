@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { SketchPicker } from "react-color";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import IColor from "interfaces/color";
+import { IColor } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
 

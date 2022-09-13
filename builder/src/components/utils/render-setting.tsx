@@ -6,8 +6,8 @@ import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
 import GeneralSettings from "components/dashboard/general-settings";
+import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 import ISettings from "interfaces/settings";
-import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -18,7 +18,7 @@ const SettingComponent: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const dispatch = useDispatch();
-  const selectedItem: IWorkspace = useSelector(
+  const selectedItem: IWorkspaceElements = useSelector(
     (state: any) => state.workspace.selectedElement
   );
 

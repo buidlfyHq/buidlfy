@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import IColor from "interfaces/color";
+import { IColor } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IInput {
