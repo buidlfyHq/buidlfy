@@ -33,16 +33,20 @@ const SizeComponent: FC<ISizeComponent> = ({
   setDynamicHeight,
   setDynamicWidth,
 }) => {
-  useEffect(() => {
-    if (dynamicWidth) {
-      setWidth(dynamicWidth);
-    }
-  }, [dynamicWidth]);
-  useEffect(() => {
-    if (dynamicHeight) {
-      setHeight(dynamicHeight);
-    }
-  }, [dynamicHeight]);
+  // useEffect(() => {
+  //   if (dynamicWidth && dynamicHeight) {
+  //     setHeight(dynamicHeight);
+  //     setWidth(dynamicWidth);
+  //   }
+  // }, [dynamicHeight, dynamicWidth]);
+
+  // useEffect(() => {
+  //   if (dynamicHeight) {
+  //     console.log(dynamicHeight, "dh");
+  //     setHeight(dynamicHeight);
+  //   }
+  // }, [dynamicHeight]);
+  console.log(width, height, "height");
 
   // Derive best type of e
   const handleChange = (e, action: ReplaceStyle) => {
