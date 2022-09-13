@@ -20,7 +20,6 @@ interface ISidebar {
   className: string;
   setClassName: (className: string) => void;
   addContainer: boolean;
-  settingItemId: string;
   sideElement: string;
   isNavHidden: boolean;
   setIsNavHidden: (isNavHidden: boolean) => void;
@@ -40,7 +39,6 @@ const Sidebar: FC<ISidebar> = ({
   className,
   setClassName,
   addContainer,
-  settingItemId,
   sideElement,
   isNavHidden,
   setIsNavHidden,
@@ -131,7 +129,6 @@ const Sidebar: FC<ISidebar> = ({
           className={className}
           setClassName={setClassName}
           addContainer={addContainer}
-          settingItemId={settingItemId}
         />
       ) : null}
       {sideElement === sidebarEnum.TEMPLATES ? <Template /> : null}

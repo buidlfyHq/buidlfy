@@ -137,7 +137,6 @@ const Dashboard: FC = () => {
           {openSetting ? (
             <Settings
               setOpenSetting={setOpenSetting}
-              settingItemId={settingItemId}
               openTab={openTab}
               setOpenTab={setOpenTab}
             />
