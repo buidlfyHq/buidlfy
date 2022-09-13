@@ -45,9 +45,7 @@ const Navbar: FC<INavbar> = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
-
   const [file, setFile] = useState<string>("");
-  // const [size, setSize] = useState<boolean>(false);
 
   useEffect(() => {
     if (contract.abi) {
@@ -59,12 +57,11 @@ const Navbar: FC<INavbar> = ({
     }
   }, [contract.abi]);
 
-  const onChangeImage = (e) => {
+  const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
-        // setSize(true);
+        // DO SOMETHING
       } else {
-        // setSize(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
