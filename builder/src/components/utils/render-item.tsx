@@ -15,7 +15,7 @@ interface IRenderItem {
   setOpenSetting?: (openSetting: boolean) => void;
   setSettingItemId?: (settingItemId: string) => void;
   setOpenTab?: (openTab: number) => void;
-  setAddContainer?: (addContainer: boolean) => void;
+  SetIsContainerSelected?: (isContainerSelected: boolean) => void;
   selector?: {
     methodName: string;
     type: string;
@@ -31,8 +31,6 @@ interface IRenderItem {
   elementConfig?: object;
   setSideElement: (sideElement: string) => void;
   setElementConfig?: (elementConfig: object) => void;
-  addContainerElements?: boolean;
-  setAddContainerElements?: (addContainerElements?: boolean) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   showSidebar?: () => void;
@@ -48,14 +46,12 @@ const RenderItem: FC<IRenderItem> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  setAddContainer,
+  SetIsContainerSelected,
   selector,
   setSelector,
   elementConfig,
   setElementConfig,
   setSideElement,
-  addContainerElements,
-  setAddContainerElements,
   dragContainer,
   setDragContainer,
   showSidebar,
@@ -80,14 +76,12 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          SetIsContainerSelected={SetIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setSideElement={setSideElement}
-          addContainerElements={addContainerElements}
-          setAddContainerElements={setAddContainerElements}
           dragContainer={dragContainer}
           setDragContainer={setDragContainer}
           showSidebar={showSidebar}
@@ -225,14 +219,12 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          SetIsContainerSelected={SetIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setSideElement={setSideElement}
-          addContainerElements={addContainerElements}
-          setAddContainerElements={setAddContainerElements}
           dragContainer={dragContainer}
           setDragContainer={setDragContainer}
           showSidebar={showSidebar}
@@ -258,14 +250,12 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          SetIsContainerSelected={SetIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setSideElement={setSideElement}
-          addContainerElements={addContainerElements}
-          setAddContainerElements={setAddContainerElements}
           dragContainer={dragContainer}
           setDragContainer={setDragContainer}
           showSidebar={showSidebar}

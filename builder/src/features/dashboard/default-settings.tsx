@@ -55,6 +55,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
           <div className="px-1 margin-text text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
             Upload Site Logo
           </div>
+          {/* It will be used in later features */}
           {/* <div className="flex justify-center">
             <div className="mb-3 w-96">
               <input

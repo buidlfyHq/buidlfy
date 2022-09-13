@@ -109,9 +109,9 @@ const AbiMethods: FC<IAbiMethods> = ({
       setShowComponent(null);
     }
   };
-  const handleBack = () => {
-    setMethodOpen(true);
-  };
+
+  const handleBack = () => setMethodOpen(true);
+  
   return (
     <>
       {contractConfig.abi ? (

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -73,6 +73,7 @@ const UploadComponent: FC<IUploadComponent> = ({
             <input
               onChange={onChangeImage}
               className="upload-input"
+              // It is important in next branch
               // className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
               type="file"
               id="inputTag"

@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { IoMdLink } from "react-icons/io";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
@@ -12,6 +11,7 @@ import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import ISettings from "interfaces/settings";
+import { IoMdLink } from "react-icons/io";
 import "styles/dashboard.css";
 import BorderColorComponent from "components/settings/border-color-component";
 
@@ -117,7 +117,6 @@ const ButtonSettings: FC<ISettings> = ({
           setCenter={setCenter}
         />
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
-          {/* <RiText className="text-[18px] mr-3" /> */}
           <textarea
             value={textVal}
             onChange={(e) => handleTextChange(e)}
@@ -160,14 +159,14 @@ const ButtonSettings: FC<ISettings> = ({
           setMarginRight={setMarginRight}
           setMarginTop={setMarginTop}
           setMarginBottom={setMarginBottom}
-          margin={{ ...margin }}
+          margin={margin}
         />
         <PaddingComponent
           setPaddingLeft={setPaddingLeft}
           setPaddingRight={setPaddingRight}
           setPaddingTop={setPaddingTop}
           setPaddingBottom={setPaddingBottom}
-          padding={{ ...padding }}
+          padding={padding}
         />
 
         <ShadowComponent

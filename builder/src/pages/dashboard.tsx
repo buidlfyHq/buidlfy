@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { RiText } from "react-icons/ri";
 import Navbar from "features/dashboard/navbar";
 import Sidebar from "features/dashboard/sidebar";
 import SideNavbar from "features/dashboard/side-navbar";
@@ -12,7 +11,7 @@ import IColor from "interfaces/color";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
-export enum sidebarEnum {
+export enum SidebarEnum {
   PAGES = "pages",
   TEMPLATES = "templates",
   ELEMENTS = "elements",
@@ -45,14 +44,13 @@ const Dashboard: FC = () => {
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
-  const [addContainer, setAddContainer] = useState<boolean>(false);
+  const [isContainerSelected, SetIsContainerSelected] =
+    useState<boolean>(false);
   const [backgroundColor, setBackgroundColor] = useState<IColor>({
     r: "0",
     g: "0",
     b: "0",
   });
-  const [addContainerElements, setAddContainerElements] =
-    useState<boolean>(true);
   const [dragContainer, setDragContainer] = useState<boolean>(true);
   const [head, setHead] = useState<{
     title: string;
@@ -111,7 +109,7 @@ const Dashboard: FC = () => {
             setClassName={setClassName}
             items={items}
             setItems={setItems}
-            addContainer={addContainer}
+            isContainerSelected={isContainerSelected}
             settingItemId={settingItemId}
             sideElement={sideElement}
             setSideElement={setSideElement}
@@ -126,7 +124,7 @@ const Dashboard: FC = () => {
             setClassName={setClassName}
             items={items}
             setItems={setItems}
-            addContainer={addContainer}
+            isContainerSelected={isContainerSelected}
             settingItemId={settingItemId}
             sideElement={sideElement}
             setSideElement={setSideElement}
@@ -170,7 +168,7 @@ const Dashboard: FC = () => {
                 setOpenTab={setOpenTab}
                 drag={drag}
                 setDrag={setDrag}
-                setAddContainer={setAddContainer}
+                SetIsContainerSelected={SetIsContainerSelected}
                 backgroundColor={backgroundColor}
                 hideSidebar={hideSidebar}
                 showSettingSidebar={showSettingSidebar}
@@ -179,8 +177,6 @@ const Dashboard: FC = () => {
                 openSetting={openSetting}
                 setIsNavHidden={setIsNavHidden}
                 setSideElement={setSideElement}
-                addContainerElements={addContainerElements}
-                setAddContainerElements={setAddContainerElements}
                 dragContainer={dragContainer}
                 setDragContainer={setDragContainer}
                 hideSettingSidebar={undefined}
