@@ -39,7 +39,7 @@ const RenderItem: FC<IRenderItem> = ({
           setInputValue={setInputValue}
           outputValue={outputValue}
           setOutputValue={setOutputValue}
-          padding={{ ...item.style.padding }}
+          padding={item.style.padding}
         />
       );
     case "Button":
@@ -63,8 +63,8 @@ const RenderItem: FC<IRenderItem> = ({
           setOutputValue={setOutputValue}
           shadow={item.style.shadow}
           connectWallet={item.connectWallet}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Text":
@@ -81,8 +81,8 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 1":
@@ -99,8 +99,8 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 2":
@@ -117,8 +117,8 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 3":
@@ -135,8 +135,8 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           outputValue={outputValue}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Input":
@@ -148,7 +148,7 @@ const RenderItem: FC<IRenderItem> = ({
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           color={item.style.color}
-          margin={{ ...item.style.margin }}
+          margin={item.style.margin}
         />
       );
     case "Divider":
@@ -158,7 +158,7 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
-          margin={{ ...item.style.margin }}
+          margin={item.style.margin}
         />
       );
     case "Horizontal Container":
@@ -176,7 +176,7 @@ const RenderItem: FC<IRenderItem> = ({
           setInputValue={setInputValue}
           outputValue={outputValue}
           setOutputValue={setOutputValue}
-          padding={{ ...item.style.padding }}
+          padding={item.style.padding}
         />
       );
     case "Vertical Container":
@@ -194,7 +194,7 @@ const RenderItem: FC<IRenderItem> = ({
           setInputValue={setInputValue}
           outputValue={outputValue}
           setOutputValue={setOutputValue}
-          padding={{ ...item.style.padding }}
+          padding={item.style.padding}
         />
       );
     default:
