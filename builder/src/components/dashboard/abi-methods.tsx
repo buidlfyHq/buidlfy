@@ -18,7 +18,7 @@ interface IAbiMethods {
 
 const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
   const dispatch = useDispatch();
-  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
+  const workspaceElements: IWorkspace[] = useSelector((state: any) => state.workspace.workspaceElements);
   const contract: { abi: string; address: string } = useSelector(
     (state: any) => state.contract
   );
@@ -76,13 +76,13 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
       };
 
       // search id in items
-      const elementsIndex = workspace.findIndex(
+      const elementsIndex = workspaceElements.findIndex(
         (item) => item.i === selectedItem.i
       );
 
       if (elementsIndex === -1) {
         // search id in children
-        const updatedItems = workspace.map((item) => {
+        const updatedItems = workspaceElements.map((item) => {
           const childIndex = item.children?.findIndex(
             (child) => child.i === selectedItem.i
           );
@@ -95,7 +95,7 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
         });
         dispatch(updateWorkspaceElementsArray(updatedItems));
       } else {
-        let newArray = [...workspace];
+        let newArray = [...workspaceElements];
         newArray[elementsIndex] = updatedItem;
         dispatch(updateWorkspaceElementsArray(newArray));
       }

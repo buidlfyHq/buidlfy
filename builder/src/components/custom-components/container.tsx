@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
 import {
-  setSelectedElementId,
+  setSelectedElement,
   updateWorkspaceElementsArray,
 } from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
@@ -49,7 +49,9 @@ const Container: FC<IContainer> = ({
   setAddContainer,
 }) => {
   const dispatch = useDispatch();
-  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
+  const workspaceElements: IWorkspace[] = useSelector(
+    (state: any) => state.workspace.workspaceElements
+  );
   const selector = useSelector((state: any) => state.selector);
   const selected = useSelector((state: any) => state.selected);
 
@@ -82,17 +84,19 @@ const Container: FC<IContainer> = ({
         h: maxH,
         children: newItemsArr,
       };
-      let filterItems = workspace.filter((element) => element.i !== item.i);
+      let filterItems = workspaceElements.filter(
+        (element) => element.i !== item.i
+      );
       dispatch(
         updateWorkspaceElementsArray([...filterItems, newModifiedContainer])
       );
     } else if (layout.length === 0) {
-      let removeContainerItems = workspace.filter(
+      let removeContainerItems = workspaceElements.filter(
         (element) => element.i !== item.i
       );
       dispatch(updateWorkspaceElementsArray(removeContainerItems));
     } else {
-      dispatch(updateWorkspaceElementsArray(workspace));
+      dispatch(updateWorkspaceElementsArray(workspaceElements));
     }
   };
 
@@ -151,7 +155,7 @@ const Container: FC<IContainer> = ({
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
-      dispatch(setSelectedElementId(i));
+      dispatch(setSelectedElement(i));
       setOpenTab(1);
     } else {
       //   // Add validation for selection

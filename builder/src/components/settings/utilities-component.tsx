@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 import "styles/dashboard.css";
 
