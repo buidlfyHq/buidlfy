@@ -63,7 +63,7 @@ const ContainerSettings: FC<ISettings> = ({
       setPaddingRight={setPaddingRight}
       setPaddingTop={setPaddingTop}
       setPaddingBottom={setPaddingBottom}
-      padding={{ ...padding }}
+      padding={padding}
     />
     <ShadowComponent
       setSmall={setSmall}
