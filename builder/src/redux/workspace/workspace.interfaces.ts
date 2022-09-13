@@ -67,15 +67,15 @@ export type ResizeHandles = Array<
   "s" | "w" | "e" | "n" | "sw" | "nw" | "se" | "ne"
 >;
 
-export interface IPayload {
+export interface IAction {
+  payload: IElementDetails;
+}
+
+export interface IElementDetails {
   settingItemId: string;
   propertyName: string;
   propertyValue: string | number | IColor;
   childPropertyName?: string;
-}
-
-export interface IAction {
-  payload: IPayload;
 }
 
 export enum sidebarEnum {
