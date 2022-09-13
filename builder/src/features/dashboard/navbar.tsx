@@ -81,7 +81,7 @@ const Navbar: FC<INavbar> = ({
 
   const handleSave = () => {
     // FIX: save full config to local storage
-    if (workspace?.length > 0) {
+    if (workspace.length > 0) {
       localStorage.setItem("items", JSON.stringify(workspace));
     }
   };
@@ -93,7 +93,7 @@ const Navbar: FC<INavbar> = ({
   const handleSaveTemplate = () => {
     // FIX: save full config to local storage
     let newTemplates: Array<ITemplate> = [];
-    if (workspace?.length > 0) {
+    if (workspace.length > 0) {
       localStorage.setItem("items", JSON.stringify(workspace));
       const templates = localStorage.getItem("templates") || "";
       if (templates !== "") {
