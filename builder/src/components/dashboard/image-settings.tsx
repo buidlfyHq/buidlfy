@@ -12,10 +12,13 @@ const ImageSettings: FC<ISettings> = ({ selectedItem }) => (
         <span className="setting-text">{selectedItem.name}</span>
       ) : null}
     </h3>
-    <UploadComponent selectedItem={selectedItem} />
-    <AlignComponent selectedItem={selectedItem} />
-    <MarginComponent selectedItem={selectedItem} />
-    <UtilitiesComponent selectedItem={selectedItem} />
+    <UploadComponent i={selectedItem.i} />
+    <AlignComponent
+      i={selectedItem.i}
+      justifyContent={selectedItem.style.justifyContent}
+    />
+    <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
+    <UtilitiesComponent i={selectedItem.i} />
   </>
 );
 

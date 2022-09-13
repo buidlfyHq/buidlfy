@@ -7,18 +7,18 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBorderComponent {
-  selectedItem: IItems;
+  i: string;
+  borderWidth: number;
 }
 
-const BorderComponent: FC<IBorderComponent> = ({ selectedItem }) => {
+const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
   const dispatch = useDispatch();
-  const borderWidth = selectedItem?.style?.borderWidth;
 
   const incrementWidthCounter = () => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "borderWidth",
         propertyValue: borderWidth + 1,
       })
@@ -29,7 +29,7 @@ const BorderComponent: FC<IBorderComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "borderWidth",
         propertyValue: borderWidth <= 0 ? 0 : borderWidth - 1,
       })
@@ -41,7 +41,7 @@ const BorderComponent: FC<IBorderComponent> = ({ selectedItem }) => {
       dispatch(
         updateItems({
           level: 1,
-          settingItemId: selectedItem.i,
+          settingItemId: i,
           propertyName: "borderWidth",
           propertyValue: +e.target.value,
         })

@@ -2,17 +2,21 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateItems } from "reducers/itemsReducer";
-import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IPaddingComponent {
-  selectedItem: IItems;
+  i: string;
+  padding: {
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
 }
 
-const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
+const PaddingComponent: FC<IPaddingComponent> = ({ i, padding }) => {
   const dispatch = useDispatch();
-  const padding = selectedItem?.style?.padding;
 
   const handleChange = (
     property: string,
@@ -21,7 +25,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 2,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "padding",
         propertyValue: +e.target.value,
         childPropertyName: property,
@@ -33,7 +37,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 2,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "padding",
         propertyValue: value + 1,
         childPropertyName: property,
@@ -45,7 +49,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 2,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "padding",
         propertyValue: value - 1,
         childPropertyName: property,

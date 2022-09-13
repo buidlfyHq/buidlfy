@@ -2,15 +2,15 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { BsBrightnessLow } from "react-icons/bs";
 import { updateItems } from "reducers/itemsReducer";
-import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IShadowComponent {
-  selectedItem: IItems;
+  i: string;
+  shadow: string;
 }
 
-const ShadowComponent: FC<IShadowComponent> = ({ selectedItem }) => {
+const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
   const dispatch = useDispatch();
 
   const handleSmallChange = () => {
@@ -18,12 +18,10 @@ const ShadowComponent: FC<IShadowComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "shadow",
         propertyValue:
-          selectedItem?.style?.shadow === "small"
-            ? "none"
-            : "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          shadow === "small" ? "none" : "0 1px 2px 0 rgb(0 0 0 / 0.05)",
       })
     );
   };
@@ -33,10 +31,10 @@ const ShadowComponent: FC<IShadowComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "shadow",
         propertyValue:
-          selectedItem?.style?.shadow === "medium"
+          shadow === "medium"
             ? "inherit"
             : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
       })
@@ -48,10 +46,10 @@ const ShadowComponent: FC<IShadowComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "shadow",
         propertyValue:
-          selectedItem?.style?.shadow === "large"
+          shadow === "large"
             ? "inherit"
             : "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
       })

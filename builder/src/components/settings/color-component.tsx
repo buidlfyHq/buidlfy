@@ -1,21 +1,20 @@
 import React, { useState, FC, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { SketchPicker } from "react-color";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateItems } from "reducers/itemsReducer";
-import { SketchPicker } from "react-color";
-import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { containerCheck } from "utils/container-check";
 
 interface IColorComponent {
-  selectedItem: IItems;
+  i: string;
+  color: IColor;
+  isContainer: boolean;
 }
 
-const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
+const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
   const dispatch = useDispatch();
-  const color = selectedItem?.style?.color;
 
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [hexColor, setHexColor] = useState();
@@ -52,7 +51,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "color",
         propertyValue: color.rgb,
       })
@@ -72,7 +71,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "color",
         propertyValue: newColor,
       })
@@ -85,7 +84,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "color",
         propertyValue: newColor,
       })
@@ -98,7 +97,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "color",
         propertyValue: newColor,
       })
@@ -111,7 +110,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
         <div className="items-center mx-2 py-2 mb-2">
           {/* <VscSymbolColor className="text-[18px] mr-3" /> */}
           <div className="flex">
-            {containerCheck(selectedItem) ? (
+            {isContainer ? (
               <span className="margin-text grow flex px-1 mt-2 text-xl not-italic font-normal text-gray-500 font-regular">
                 Border Color
               </span>

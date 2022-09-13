@@ -7,6 +7,7 @@ import FontSizeComponent from "components/settings/font-size-component";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
+import { containerCheck } from "utils/container-check";
 import ISettings from "interfaces/settings";
 import "styles/components.css";
 
@@ -21,7 +22,7 @@ const GeneralSettings: FC<ISettings> = ({ handleChange, selectedItem }) => (
     <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
       {/* <RiText className="text-[18px] mr-3" /> */}
       <textarea
-        value={selectedItem?.value}
+        value={selectedItem.value}
         onChange={(e) => handleChange(e, "value")}
         className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
         placeholder="Please write your text here..."
@@ -32,7 +33,7 @@ const GeneralSettings: FC<ISettings> = ({ handleChange, selectedItem }) => (
         <IoMdLink className="text-[18px]" />
       </div>
       <input
-        value={selectedItem?.link}
+        value={selectedItem.link}
         onChange={(e) => handleChange(e, "link")}
         className="changeText pl-[2.5rem] py-[0.4rem] input-text"
         type="text"
@@ -40,12 +41,22 @@ const GeneralSettings: FC<ISettings> = ({ handleChange, selectedItem }) => (
       />
     </div>
 
-    <FontSizeComponent selectedItem={selectedItem} />
-    <ColorComponent selectedItem={selectedItem} />
-    <BgColorComponent selectedItem={selectedItem} />
-    <MarginComponent selectedItem={selectedItem} />
-    <PaddingComponent selectedItem={selectedItem} />
-    <UtilitiesComponent selectedItem={selectedItem} />
+    <FontSizeComponent
+      i={selectedItem.i}
+      fontSize={selectedItem.style.fontSize}
+    />
+    <ColorComponent
+      i={selectedItem.i}
+      color={selectedItem.style.color}
+      isContainer={containerCheck(selectedItem)}
+    />
+    <BgColorComponent
+      i={selectedItem.i}
+      bgColor={selectedItem.style.backgroundColor}
+    />
+    <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
+    <PaddingComponent i={selectedItem.i} padding={selectedItem.style.padding} />
+    <UtilitiesComponent i={selectedItem.i} />
   </>
 );
 

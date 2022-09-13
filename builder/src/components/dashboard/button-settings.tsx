@@ -9,10 +9,11 @@ import AdvanceComponent from "components/settings/advance-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import ConnectSwitchComponent from "components/settings/connect-switch-component";
-import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
+import { containerCheck } from "utils/container-check";
+import ISettings from "interfaces/settings";
 import { IoMdLink } from "react-icons/io";
 
 const ButtonSettings: FC<ISettings> = ({
@@ -112,15 +113,40 @@ const ButtonSettings: FC<ISettings> = ({
             placeholder="Link"
           />
         </div>
-        <ConnectSwitchComponent selectedItem={selectedItem} />
-        <FontSizeComponent selectedItem={selectedItem} />
-        <BorderRadiusComponent selectedItem={selectedItem} />
-        <ColorComponent selectedItem={selectedItem} />
-        <BgColorComponent selectedItem={selectedItem} />
-        <MarginComponent selectedItem={selectedItem} />
-        <PaddingComponent selectedItem={selectedItem} />
-        <ShadowComponent selectedItem={selectedItem} />
-        <UtilitiesComponent selectedItem={selectedItem} />
+        <ConnectSwitchComponent
+          i={selectedItem.i}
+          connectWallet={selectedItem.connectWallet}
+        />
+        <FontSizeComponent
+          i={selectedItem.i}
+          fontSize={selectedItem.style.fontSize}
+        />
+        <BorderRadiusComponent
+          i={selectedItem.i}
+          borderRadius={selectedItem.style.borderRadius}
+        />
+        <ColorComponent
+          i={selectedItem.i}
+          color={selectedItem.style.color}
+          isContainer={containerCheck(selectedItem)}
+        />
+        <BgColorComponent
+          i={selectedItem.i}
+          bgColor={selectedItem.style.backgroundColor}
+        />
+        <MarginComponent
+          i={selectedItem.i}
+          margin={selectedItem.style.margin}
+        />
+        <PaddingComponent
+          i={selectedItem.i}
+          padding={selectedItem.style.padding}
+        />
+        <ShadowComponent
+          i={selectedItem.i}
+          shadow={selectedItem.style.shadow}
+        />
+        <UtilitiesComponent i={selectedItem.i} />
       </span>
       <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
         <AdvanceComponent

@@ -7,27 +7,27 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IUploadComponent {
-  selectedItem: IItems;
+  i: string;
 }
 
-const UploadComponent: FC<IUploadComponent> = ({ selectedItem }) => {
+const UploadComponent: FC<IUploadComponent> = ({ i }) => {
   const dispatch = useDispatch();
-  const [size, setSize] = useState<boolean>(false);
+  const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
 
   // search suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
-        setSize(true);
+        setSizeExceeded(true);
       } else {
-        setSize(false);
+        setSizeExceeded(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
           dispatch(
             updateItems({
               level: 0,
-              settingItemId: selectedItem.i,
+              settingItemId: i,
               propertyName: "imgData",
               propertyValue: cid,
             })
@@ -56,7 +56,7 @@ const UploadComponent: FC<IUploadComponent> = ({ selectedItem }) => {
               id="inputTag"
             />
           </label>
-          {size ? (
+          {sizeExceeded ? (
             <h3 className="mt-2 text-red-500 text-sm ml-1">
               Please upload file below 5 mb
             </h3>
