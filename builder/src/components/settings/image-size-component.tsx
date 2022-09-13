@@ -33,16 +33,16 @@ const SizeComponent: FC<ISizeComponent> = ({
   setDynamicWidth,
 }) => {
   useEffect(() => {
-    if (dynamicHeight) {
-      setHeight(dynamicHeight);
-    }
-  }, [dynamicHeight]);
-  useEffect(() => {
     if (dynamicWidth) {
       setWidth(dynamicWidth);
     }
   }, [dynamicWidth]);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (dynamicHeight) {
+      setHeight(dynamicHeight);
+    }
+  }, [dynamicHeight]);
+
   const handleWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWidth(+e.target.value);
   };
