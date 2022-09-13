@@ -3,7 +3,7 @@ import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
-import { sidebarEnum } from "pages/dashboard";
+import { SidebarEnum } from "pages/dashboard";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import add from "assets/add.png";
@@ -26,7 +26,7 @@ interface IContainer {
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
   setOpenTab: Dispatch<SetStateAction<number>>;
-  setAddContainer: (addContainer: boolean) => void;
+  SetIsContainerSelected: (isContainerSelected: boolean) => void;
   selector: {
     methodName: string;
     type: string;
@@ -65,7 +65,7 @@ const Container: FC<IContainer> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  setAddContainer,
+  SetIsContainerSelected,
   selector,
   setSelector,
   elementConfig,
@@ -157,9 +157,10 @@ const Container: FC<IContainer> = ({
   };
 
   const onComponentAddClick = (itemName: string, i: string) => {
-    setAddContainer(true);
+    SetIsContainerSelected(true);
     showSidebar();
-    handleSidebar(sidebarEnum.ELEMENTS);
+    handleSidebar(SidebarEnum.ELEMENTS);
+    setSettingItemId(i);
     setOpenSetting(false);
   };
 
@@ -185,7 +186,7 @@ const Container: FC<IContainer> = ({
     }
   };
   const onComponentEditClick = (itemName: string, i: string) => {
-    setAddContainer(false);
+    SetIsContainerSelected(false);
     setOpenSetting(true);
     hideSidebar();
     setSettingItemId(i);

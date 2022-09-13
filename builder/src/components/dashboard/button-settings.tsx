@@ -152,14 +152,14 @@ const ButtonSettings: FC<ISettings> = ({
           setMarginRight={setMarginRight}
           setMarginTop={setMarginTop}
           setMarginBottom={setMarginBottom}
-          margin={{ ...margin }}
+          margin={margin}
         />
         <PaddingComponent
           setPaddingLeft={setPaddingLeft}
           setPaddingRight={setPaddingRight}
           setPaddingTop={setPaddingTop}
           setPaddingBottom={setPaddingBottom}
-          padding={{ ...padding }}
+          padding={padding}
         />
 
         <ShadowComponent

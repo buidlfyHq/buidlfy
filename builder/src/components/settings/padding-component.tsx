@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { replaceSpacingValue } from "components/utils/render-setting";
+import { ReplaceSpacingValue } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -25,30 +25,30 @@ const PaddingComponent: FC<IPaddingComponent> = ({
   setPaddingTop,
 }) => {
   // Derive best type of e
-  const handlePaddingChange = (e, action: replaceSpacingValue) => {
-    if (action == replaceSpacingValue.LEFT) {
+  const handlePaddingChange = (e, action: ReplaceSpacingValue) => {
+    if (action == ReplaceSpacingValue.LEFT) {
       setPaddingLeft(+e.target.value);
-    } else if (action == replaceSpacingValue.RIGHT) {
+    } else if (action == ReplaceSpacingValue.RIGHT) {
       setPaddingRight(+e.target.value);
-    } else if (action == replaceSpacingValue.TOP) {
+    } else if (action == ReplaceSpacingValue.TOP) {
       setPaddingTop(+e.target.value);
-    } else if (action == replaceSpacingValue.BOTTOM) {
+    } else if (action == ReplaceSpacingValue.BOTTOM) {
       setPaddingBottom(+e.target.value);
-    } else if (action == replaceSpacingValue.INCREMENTLEFT) {
+    } else if (action == ReplaceSpacingValue.INCREMENTLEFT) {
       setPaddingLeft(padding.paddingLeft + 1);
-    } else if (action == replaceSpacingValue.INCREMENTRIGHT) {
+    } else if (action == ReplaceSpacingValue.INCREMENTRIGHT) {
       setPaddingRight(padding.paddingRight + 1);
-    } else if (action == replaceSpacingValue.INCREMENTTOP) {
+    } else if (action == ReplaceSpacingValue.INCREMENTTOP) {
       setPaddingTop(padding.paddingTop + 1);
-    } else if (action == replaceSpacingValue.INCREMENTBOTTOM) {
+    } else if (action == ReplaceSpacingValue.INCREMENTBOTTOM) {
       setPaddingBottom(padding.paddingBottom + 1);
-    } else if (action == replaceSpacingValue.DECREMENTLEFT) {
+    } else if (action == ReplaceSpacingValue.DECREMENTLEFT) {
       setPaddingLeft(padding.paddingLeft - 1);
-    } else if (action == replaceSpacingValue.DECREMENTRIGHT) {
+    } else if (action == ReplaceSpacingValue.DECREMENTRIGHT) {
       setPaddingRight(padding.paddingRight - 1);
-    } else if (action == replaceSpacingValue.DECREMENTTOP) {
+    } else if (action == ReplaceSpacingValue.DECREMENTTOP) {
       setPaddingTop(padding.paddingTop - 1);
-    } else if (action == replaceSpacingValue.DECREMENTBOTTOM) {
+    } else if (action == ReplaceSpacingValue.DECREMENTBOTTOM) {
       setPaddingBottom(padding.paddingBottom - 1);
     }
   };
@@ -67,17 +67,17 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               value={padding.paddingLeft}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handlePaddingChange(e, replaceSpacingValue.LEFT)}
+              onChange={(e) => handlePaddingChange(e, ReplaceSpacingValue.LEFT)}
             />
             <AiOutlineCaretUp
               onClick={(e) =>
-                handlePaddingChange(e, replaceSpacingValue.INCREMENTLEFT)
+                handlePaddingChange(e, ReplaceSpacingValue.INCREMENTLEFT)
               }
               className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
               onClick={(e) =>
-                handlePaddingChange(e, replaceSpacingValue.DECREMENTLEFT)
+                handlePaddingChange(e, ReplaceSpacingValue.DECREMENTLEFT)
               }
               className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
             />
@@ -90,18 +90,18 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={(e) =>
-                handlePaddingChange(e, replaceSpacingValue.RIGHT)
+                handlePaddingChange(e, ReplaceSpacingValue.RIGHT)
               }
             />
             <AiOutlineCaretUp
               onClick={(e) =>
-                handlePaddingChange(e, replaceSpacingValue.INCREMENTRIGHT)
+                handlePaddingChange(e, ReplaceSpacingValue.INCREMENTRIGHT)
               }
               className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
               onClick={(e) =>
-                handlePaddingChange(e, replaceSpacingValue.INCREMENTRIGHT)
+                handlePaddingChange(e, ReplaceSpacingValue.INCREMENTRIGHT)
               }
               className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
             />
@@ -115,17 +115,17 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               value={padding.paddingTop}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handlePaddingChange(e, replaceSpacingValue.TOP)}
+              onChange={(e) => handlePaddingChange(e, ReplaceSpacingValue.TOP)}
             />
             <AiOutlineCaretUp
               onClick={(e) =>
-                handlePaddingChange(e, replaceSpacingValue.INCREMENTTOP)
+                handlePaddingChange(e, ReplaceSpacingValue.INCREMENTTOP)
               }
               className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
               onClick={(e) =>
-                handlePaddingChange(e, replaceSpacingValue.DECREMENTTOP)
+                handlePaddingChange(e, ReplaceSpacingValue.DECREMENTTOP)
               }
               className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
             />
@@ -138,18 +138,18 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={(e) =>
-                handlePaddingChange(e, replaceSpacingValue.BOTTOM)
+                handlePaddingChange(e, ReplaceSpacingValue.BOTTOM)
               }
             />
             <AiOutlineCaretUp
               onClick={(e) =>
-                handlePaddingChange(e, replaceSpacingValue.INCREMENTBOTTOM)
+                handlePaddingChange(e, ReplaceSpacingValue.INCREMENTBOTTOM)
               }
               className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
               onClick={(e) =>
-                handlePaddingChange(e, replaceSpacingValue.DECREMENTBOTTOM)
+                handlePaddingChange(e, ReplaceSpacingValue.DECREMENTBOTTOM)
               }
               className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
             />

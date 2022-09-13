@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { replaceValue } from "components/utils/render-setting";
+import { ReplaceValue } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -14,16 +14,16 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
   setFontSize,
 }) => {
   // Derive best type of e
-  const handleFontSize = (e, action: replaceValue) => {
-    if (action == replaceValue.INCREMENT) {
+  const handleFontSize = (e, action: ReplaceValue) => {
+    if (action == ReplaceValue.INCREMENT) {
       setFontSize(fontSize + 1);
-    } else if (action == replaceValue.DECREMENT) {
+    } else if (action == ReplaceValue.DECREMENT) {
       if (fontSize <= 1) {
         setFontSize(1);
       } else {
         setFontSize(fontSize - 1);
       }
-    } else if (action == replaceValue.CHANGE) {
+    } else if (action == ReplaceValue.CHANGE) {
       setFontSize(+e.target.value);
     }
   };
@@ -44,7 +44,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
             <span className="font-text">Font Size:</span>
             <select
               value={fontSize}
-              onClick={(e) => handleFontSize(e, replaceValue.CHANGE)}
+              onClick={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
               className="form-select font-div appearance-none block py-1.5 pl-[10.2rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:outline-none focus:shadow-none"
               aria-label="Default select example"
             >
@@ -52,11 +52,11 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({
               {options}
             </select>
             <AiOutlineCaretUp
-              onClick={(e) => handleFontSize(e, replaceValue.INCREMENT)}
+              onClick={(e) => handleFontSize(e, ReplaceValue.INCREMENT)}
               className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
             />
             <AiOutlineCaretDown
-              onClick={(e) => handleFontSize(e, replaceValue.DECREMENT)}
+              onClick={(e) => handleFontSize(e, ReplaceValue.DECREMENT)}
               className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
             />
           </div>

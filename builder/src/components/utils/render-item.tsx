@@ -15,7 +15,7 @@ interface IRenderItem {
   setOpenSetting?: (openSetting: boolean) => void;
   setSettingItemId?: (settingItemId: string) => void;
   setOpenTab?: (openTab: number) => void;
-  setAddContainer?: (addContainer: boolean) => void;
+  SetIsContainerSelected?: (isContainerSelected: boolean) => void;
   selector?: {
     methodName: string;
     type: string;
@@ -46,7 +46,7 @@ const RenderItem: FC<IRenderItem> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  setAddContainer,
+  SetIsContainerSelected,
   selector,
   setSelector,
   elementConfig,
@@ -76,7 +76,7 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          SetIsContainerSelected={SetIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
@@ -217,7 +217,7 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          SetIsContainerSelected={SetIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
@@ -247,7 +247,7 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          SetIsContainerSelected={SetIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}

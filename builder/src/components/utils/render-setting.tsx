@@ -8,12 +8,12 @@ import ISettings from "interfaces/settings";
 import "styles/components.css";
 import "styles/dashboard.css";
 
-export enum replaceValue {
+export enum ReplaceValue {
   INCREMENT = "increment",
   DECREMENT = "decrement",
   CHANGE = "change",
 }
-export enum replaceSpacingValue {
+export enum ReplaceSpacingValue {
   LEFT = "left",
   RIGHT = "right",
   TOP = "top",
@@ -27,7 +27,7 @@ export enum replaceSpacingValue {
   DECREMENTTOP = "decrementTop",
   DECREMENTBOTTOM = "decrementBottom",
 }
-export enum replaceStyle {
+export enum ReplaceStyle {
   BOLD = "bold",
   ITALIC = "italic",
   UNDERLINE = "underline",

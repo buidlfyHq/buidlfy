@@ -4,7 +4,7 @@ import {
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
-import { replaceStyle } from "components/utils/render-setting";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -21,12 +21,12 @@ const AlignComponent: FC<IAlignComponent> = ({
   setCenter,
   justifyContent,
 }) => {
-  const handleChange = (action: replaceStyle) => {
-    if (action == replaceStyle.LEFT) {
+  const handleChange = (action: ReplaceStyle) => {
+    if (action == ReplaceStyle.LEFT) {
       setLeft(justifyContent !== "left");
-    } else if (action == replaceStyle.RIGHT) {
+    } else if (action == ReplaceStyle.RIGHT) {
       setRight(justifyContent !== "right");
-    } else if (action == replaceStyle.CENTER) {
+    } else if (action == ReplaceStyle.CENTER) {
       setCenter(justifyContent !== "center");
     }
   };
@@ -37,19 +37,19 @@ const AlignComponent: FC<IAlignComponent> = ({
         Text Align
         <div className="flex mt-3 px-3">
           <span
-            onClick={() => handleChange(replaceStyle.LEFT)}
+            onClick={() => handleChange(ReplaceStyle.LEFT)}
             className="align-div flex items-center justify-center font-bold shadow text-[18px] p-2 mr-2 my-2 font-regular"
           >
             <AiOutlineAlignLeft className="text-[18px]" />
           </span>
           <span
-            onClick={() => handleChange(replaceStyle.CENTER)}
+            onClick={() => handleChange(ReplaceStyle.CENTER)}
             className="align-div flex items-center justify-center italic shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
           >
             <AiOutlineAlignCenter className="text-[18px]" />
           </span>
           <span
-            onClick={() => handleChange(replaceStyle.RIGHT)}
+            onClick={() => handleChange(ReplaceStyle.RIGHT)}
             className="align-div flex items-center justify-center underline shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
           >
             <AiOutlineAlignRight className="text-[18px]" />

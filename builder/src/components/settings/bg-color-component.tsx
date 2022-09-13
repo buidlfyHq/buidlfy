@@ -56,14 +56,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
             onClick={handleClick}
             className="flex items-center cursor-pointer"
           >
-            <div
-              style={
-                {
-                  // backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-                }
-              }
-              className="flex w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"
-            ></div>
+            <div className="flex w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"></div>
             <AiOutlineCaretDown className="text-[14px] mr-3" />
           </div>
         </div>

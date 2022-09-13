@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { replaceValue } from "components/utils/render-setting";
+import { ReplaceValue } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -14,16 +14,16 @@ const BorderComponent: FC<IBorderComponent> = ({
   setBorderWidth,
 }) => {
   // Derive best type of e
-  const handleWidth = (e, action: replaceValue) => {
-    if (action == replaceValue.INCREMENT) {
+  const handleWidth = (e, action: ReplaceValue) => {
+    if (action == ReplaceValue.INCREMENT) {
       setBorderWidth(borderWidth + 1);
-    } else if (action == replaceValue.DECREMENT) {
+    } else if (action == ReplaceValue.DECREMENT) {
       if (borderWidth <= 0) {
         setBorderWidth(0);
       } else {
         setBorderWidth(borderWidth - 1);
       }
-    } else if (action == replaceValue.CHANGE) {
+    } else if (action == ReplaceValue.CHANGE) {
       setBorderWidth(+e.target.value);
     }
   };
@@ -41,7 +41,7 @@ const BorderComponent: FC<IBorderComponent> = ({
             <span className="font-text">Border Width:</span>
             <select
               value={borderWidth}
-              onClick={(e) => handleWidth(e, replaceValue.CHANGE)}
+              onClick={(e) => handleWidth(e, ReplaceValue.CHANGE)}
               className="form-select font-div appearance-none block py-1.5 pl-[10.5rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:outline-none focus:shadow-none"
               aria-label="select"
             >
@@ -49,11 +49,11 @@ const BorderComponent: FC<IBorderComponent> = ({
               {renderOptions}
             </select>
             <AiOutlineCaretUp
-              onClick={(e) => handleWidth(e, replaceValue.INCREMENT)}
+              onClick={(e) => handleWidth(e, ReplaceValue.INCREMENT)}
               className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
             />
             <AiOutlineCaretDown
-              onClick={(e) => handleWidth(e, replaceValue.DECREMENT)}
+              onClick={(e) => handleWidth(e, ReplaceValue.DECREMENT)}
               className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
             />
           </div>

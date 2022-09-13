@@ -11,14 +11,14 @@ interface IElements {
   setClassName: (className: string) => void;
   items: IItems[];
   setItems: (items: IItems[]) => void;
-  addContainer: boolean;
+  isContainerSelected: boolean;
   settingItemId: string;
 }
 
 const Elements: FC<IElements> = ({
   items,
   setItems,
-  addContainer,
+  isContainerSelected,
   settingItemId,
 }) => {
   const uid = new ShortUniqueId();
@@ -29,7 +29,7 @@ const Elements: FC<IElements> = ({
     )[0];
   const onClickFunction = (name) => {
     let c = components?.find((component) => component.name == name);
-    if (addContainer) {
+    if (isContainerSelected) {
       const availableHandles: ResizeHandles = ["se"];
       let y = checkContainerY(selectedItem);
       let newC = {
@@ -87,7 +87,7 @@ const Elements: FC<IElements> = ({
     else {
       let arr = items.map((item) => {
         return containerCheck(item)
-          ? Math.max(...item.children.map((obj: IItems) => obj.y), item.y)
+          ? Math.max(...item?.children.map((obj: IItems) => obj.y), item.y)
           : item.y;
       });
       return Math.max(...arr) + 1;
@@ -95,9 +95,9 @@ const Elements: FC<IElements> = ({
   };
 
   const checkContainerY = (selectedItem: IItems) => {
-    if (selectedItem.children.length === 0) return 0;
+    if (selectedItem?.children?.length === 0) return 0;
     else {
-      let arr = selectedItem.children.map((item: IItems) => item.y);
+      let arr = selectedItem?.children.map((item: IItems) => item.y);
       return Math.max(...arr) + 1;
     }
   };
@@ -137,7 +137,7 @@ const Elements: FC<IElements> = ({
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
       </div>
-      {!addContainer ? (
+      {!isContainerSelected ? (
         <>
           {" "}
           <div className="mt-6 px-4">
@@ -289,7 +289,7 @@ const Elements: FC<IElements> = ({
       )}
 
       {/* <div className="px-6 py-3 mt-4">
-        {addContainer ? (
+        {isContainerSelected ? (
           <>{renderContainerComponents}</>
         ) : (
           <>{renderComponents}</>
