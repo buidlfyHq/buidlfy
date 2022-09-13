@@ -16,3 +16,13 @@ export interface IPayload {
 export interface IAction {
   payload: IPayload;
 }
+
+export enum sidebarEnum {
+  PAGES = "pages",
+  TEMPLATES = "templates",
+  ELEMENTS = "elements",
+  MEDIA = "media",
+  STYLES = "styles",
+  HELP = "help",
+  SETTING = "setting",
+}

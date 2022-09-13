@@ -1,20 +1,11 @@
 import React, { FC, useRef } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import Template from "pages/templates";
+import { sidebarEnum } from "redux/workspace/workspace.interfaces";
 import Elements from "features/dashboard/elements";
 import DefaultSettings from "features/dashboard/default-settings";
 import IColor from "interfaces/color";
 import "styles/components.css";
-
-enum sidebarEnum {
-  PAGES = "pages",
-  TEMPLATES = "templates",
-  ELEMENTS = "elements",
-  MEDIA = "media",
-  STYLES = "styles",
-  HELP = "help",
-  SETTING = "setting",
-}
 
 interface ISidebar {
   className: string;

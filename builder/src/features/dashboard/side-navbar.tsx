@@ -1,18 +1,9 @@
 import React, { FC } from "react";
+import { sidebarEnum } from "redux/workspace/workspace.interfaces";
 import elements from "assets/elements.png";
 import styles from "assets/styles.png";
 import templates from "assets/templates.png";
 import "styles/components.css";
-
-enum sidebarEnum {
-  PAGES = "pages",
-  TEMPLATES = "templates",
-  ELEMENTS = "elements",
-  MEDIA = "media",
-  STYLES = "styles",
-  HELP = "help",
-  SETTING = "setting",
-}
 
 interface ISideNavbar {
   className: string;
