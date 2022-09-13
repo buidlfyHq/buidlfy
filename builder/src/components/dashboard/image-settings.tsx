@@ -85,10 +85,10 @@ const ImageSettings: FC<ISettings> = ({
       setMarginBottom={setMarginBottom}
       margin={{ ...margin }}
     />
-    <UtilitiesComponent
+    {/* <UtilitiesComponent
       deleteComponent={deleteComponent}
       setDeleteComponent={setDeleteComponent}
-    />
+    /> */}
   </>
 );
 

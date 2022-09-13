@@ -110,10 +110,10 @@ const GeneralSettings: FC<ISettings> = ({
       setPaddingBottom={setPaddingBottom}
       padding={padding}
     />
-    <UtilitiesComponent
+    {/* <UtilitiesComponent
       deleteComponent={deleteComponent}
       setDeleteComponent={setDeleteComponent}
-    />
+    /> */}
   </>
 );
 

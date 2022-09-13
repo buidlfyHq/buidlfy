@@ -3,6 +3,9 @@ import SettingComponent from "components/utils/render-setting";
 import IItems from "interfaces/items";
 import ISettings from "interfaces/settings";
 import IColor from "interfaces/color";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { GrPowerReset } from "react-icons/gr";
+import "styles/components.css";
 
 enum fontEnum {
   BOLD = "bold",
@@ -672,6 +675,9 @@ const Settings: FC<ISettings> = ({
   // const handleOpenSetting = () => {
   //   setOpenSetting(false);
   // };
+  const handleDelete = () => {
+    setDeleteComponent(1);
+  };
 
   return (
     <>
@@ -682,84 +688,100 @@ const Settings: FC<ISettings> = ({
               className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
               ref={ref}
             >
-              {/* <div className="delete-div py-3 pl-3">
-                <div>Delete</div>
-              </div> */}
+              <div className="delete-div flex py-2 pl-3">
+                <div
+                  onClick={handleDelete}
+                  className="flex delete-btn px-2 py-[0.1rem]"
+                >
+                  <span className="flex text-[12px]">
+                    Remove
+                    <MdOutlineDeleteOutline className="text-[12px]  mt-1 ml-1" />
+                  </span>
+                </div>
+                <div className="flex delete-btn px-2 py-[0.1rem] ml-2">
+                  <span className="flex text-[12px]">
+                    Reset
+                    <GrPowerReset className="text-[12px] mt-1 ml-1" />
+                  </span>
+                </div>
+              </div>
               {/* <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
               {"<"}
               <span className="ml-2">Site Settings</span>
             </div> */}
-              <SettingComponent
-                items={items}
-                setItems={setItems}
-                selectedItem={selectedItem}
-                setLink={setLink}
-                link={selectedItem?.link}
-                setValue={setValue}
-                value={selectedItem?.value}
-                setBold={setBold}
-                bold={selectedItem?.style?.fontWeight}
-                setItalic={setItalic}
-                italic={selectedItem?.style?.fontStyle}
-                setUnderline={setUnderline}
-                underline={selectedItem?.style?.textDecoration}
-                color={selectedItem?.style?.color}
-                borderColor={selectedItem?.style?.borderColor}
-                width={selectedItem?.style?.width}
-                height={selectedItem?.style?.height}
-                setWidth={setWidth}
-                setHeight={setHeight}
-                setBorderColor={setBorderColor}
-                setColor={setColor}
-                setBgColor={setBgColor}
-                backgroundColor={selectedItem?.style?.backgroundColor}
-                setDeleteComponent={setDeleteComponent}
-                deleteComponent={selectedItem?.style?.deleteComponent}
-                justifyContent={selectedItem?.style?.justifyContent}
-                setLeft={setLeft}
-                setCenter={setCenter}
-                setRight={setRight}
-                setFontSize={setFontSize}
-                setCover={setCover}
-                setContain={setContain}
-                setAuto={setAuto}
-                backgroundSize={selectedItem?.style?.backgroundSize}
-                fontSize={selectedItem?.style?.fontSize}
-                setContractConfig={setContractConfig}
-                contractConfig={contractConfig}
-                setShowComponent={setShowComponent}
-                showComponent={showComponent}
-                selector={selector}
-                setSelector={setSelector}
-                elementConfig={elementConfig}
-                openTab={openTab}
-                setOpenTab={setOpenTab}
-                borderRadius={selectedItem?.style?.borderRadius}
-                setBorderRadius={setBorderRadius}
-                borderWidth={selectedItem?.style?.borderWidth}
-                setBorderWidth={setBorderWidth}
-                setMarginLeft={setMarginLeft}
-                setMarginRight={setMarginRight}
-                setMarginTop={setMarginTop}
-                setMarginBottom={setMarginBottom}
-                setPaddingLeft={setPaddingLeft}
-                setPaddingRight={setPaddingRight}
-                setPaddingTop={setPaddingTop}
-                setPaddingBottom={setPaddingBottom}
-                setSmall={setSmall}
-                setMedium={setMedium}
-                setLarge={setLarge}
-                shadow={selectedItem?.style?.shadow}
-                setOn={setOn}
-                setIsAuto={setIsAuto}
-                isAuto={selectedItem?.style?.isAuto}
-                setPlaceholder={setPlaceholder}
-                placeholder={selectedItem?.placeholder}
-                dynamicWidth={dynamicWidth}
-                dynamicHeight={dynamicHeight}
-                setDynamicWidth={setDynamicWidth}
-                setDynamicHeight={setDynamicHeight}
-              />
+              <div style={{ marginTop: "3rem" }}>
+                <SettingComponent
+                  items={items}
+                  setItems={setItems}
+                  selectedItem={selectedItem}
+                  setLink={setLink}
+                  link={selectedItem?.link}
+                  setValue={setValue}
+                  value={selectedItem?.value}
+                  setBold={setBold}
+                  bold={selectedItem?.style?.fontWeight}
+                  setItalic={setItalic}
+                  italic={selectedItem?.style?.fontStyle}
+                  setUnderline={setUnderline}
+                  underline={selectedItem?.style?.textDecoration}
+                  color={selectedItem?.style?.color}
+                  borderColor={selectedItem?.style?.borderColor}
+                  width={selectedItem?.style?.width}
+                  height={selectedItem?.style?.height}
+                  setWidth={setWidth}
+                  setHeight={setHeight}
+                  setBorderColor={setBorderColor}
+                  setColor={setColor}
+                  setBgColor={setBgColor}
+                  backgroundColor={selectedItem?.style?.backgroundColor}
+                  setDeleteComponent={setDeleteComponent}
+                  deleteComponent={selectedItem?.style?.deleteComponent}
+                  justifyContent={selectedItem?.style?.justifyContent}
+                  setLeft={setLeft}
+                  setCenter={setCenter}
+                  setRight={setRight}
+                  setFontSize={setFontSize}
+                  setCover={setCover}
+                  setContain={setContain}
+                  setAuto={setAuto}
+                  backgroundSize={selectedItem?.style?.backgroundSize}
+                  fontSize={selectedItem?.style?.fontSize}
+                  setContractConfig={setContractConfig}
+                  contractConfig={contractConfig}
+                  setShowComponent={setShowComponent}
+                  showComponent={showComponent}
+                  selector={selector}
+                  setSelector={setSelector}
+                  elementConfig={elementConfig}
+                  openTab={openTab}
+                  setOpenTab={setOpenTab}
+                  borderRadius={selectedItem?.style?.borderRadius}
+                  setBorderRadius={setBorderRadius}
+                  borderWidth={selectedItem?.style?.borderWidth}
+                  setBorderWidth={setBorderWidth}
+                  setMarginLeft={setMarginLeft}
+                  setMarginRight={setMarginRight}
+                  setMarginTop={setMarginTop}
+                  setMarginBottom={setMarginBottom}
+                  setPaddingLeft={setPaddingLeft}
+                  setPaddingRight={setPaddingRight}
+                  setPaddingTop={setPaddingTop}
+                  setPaddingBottom={setPaddingBottom}
+                  setSmall={setSmall}
+                  setMedium={setMedium}
+                  setLarge={setLarge}
+                  shadow={selectedItem?.style?.shadow}
+                  setOn={setOn}
+                  setIsAuto={setIsAuto}
+                  isAuto={selectedItem?.style?.isAuto}
+                  setPlaceholder={setPlaceholder}
+                  placeholder={selectedItem?.placeholder}
+                  dynamicWidth={dynamicWidth}
+                  dynamicHeight={dynamicHeight}
+                  setDynamicWidth={setDynamicWidth}
+                  setDynamicHeight={setDynamicHeight}
+                />
+              </div>
             </div>
           </div>
         </>

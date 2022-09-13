@@ -12,8 +12,8 @@ import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import ISettings from "interfaces/settings";
-import "styles/dashboard.css";
 import BorderColorComponent from "components/settings/border-color-component";
+import "styles/dashboard.css";
 
 const ButtonSettings: FC<ISettings> = ({
   textVal,
@@ -180,10 +180,10 @@ const ButtonSettings: FC<ISettings> = ({
           setLarge={setLarge}
           shadow={shadow}
         />
-        <UtilitiesComponent
+        {/* <UtilitiesComponent
           deleteComponent={deleteComponent}
           setDeleteComponent={setDeleteComponent}
-        />
+        /> */}
       </span>
       <div
         style={{ width: "-webkit-fill-available" }}

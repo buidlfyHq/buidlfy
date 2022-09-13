@@ -66,10 +66,10 @@ const InputSettings: FC<ISettings> = ({
       setLarge={setLarge}
       shadow={shadow}
     />
-    <UtilitiesComponent
+    {/* <UtilitiesComponent
       deleteComponent={deleteComponent}
       setDeleteComponent={setDeleteComponent}
-    />
+    /> */}
   </>
 );
 
