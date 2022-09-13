@@ -7,17 +7,17 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IFontSizeComponent {
-  selectedItem: IWorkspace;
+  i: string;
+  fontSize: number;
 }
 
-const FontSizeComponent: FC<IFontSizeComponent> = ({ selectedItem }) => {
+const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
   const dispatch = useDispatch();
-  const fontSize = selectedItem?.style?.fontSize;
 
   const incrementCounter = () => {
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "fontSize",
         propertyValue: fontSize + 1,
       })
@@ -27,7 +27,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ selectedItem }) => {
   const decrementCounter = () => {
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "fontSize",
         propertyValue: fontSize <= 1 ? 1 : fontSize - 1,
       })
@@ -38,7 +38,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ selectedItem }) => {
     if (fontSize) {
       dispatch(
         updateWorkspaceElementStyle({
-          settingItemId: selectedItem.i,
+          settingItemId: i,
           propertyName: "fontSize",
           propertyValue: +e.target.value,
         })

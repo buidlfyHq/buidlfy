@@ -7,22 +7,21 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IShadowComponent {
-  selectedItem: IWorkspace;
+  i: string;
+  shadow: string;
 }
 
-const ShadowComponent: FC<IShadowComponent> = ({ selectedItem }) => {
+const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
   const dispatch = useDispatch();
 
   const handleSmallChange = () => {
     // setLeft(!left);
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "shadow",
         propertyValue:
-          selectedItem?.style?.shadow === "small"
-            ? "none"
-            : "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          shadow === "small" ? "none" : "0 1px 2px 0 rgb(0 0 0 / 0.05)",
       })
     );
   };
@@ -31,10 +30,10 @@ const ShadowComponent: FC<IShadowComponent> = ({ selectedItem }) => {
     // setLeft(!center);
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "shadow",
         propertyValue:
-          selectedItem?.style?.shadow === "medium"
+          shadow === "medium"
             ? "inherit"
             : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
       })
@@ -45,10 +44,10 @@ const ShadowComponent: FC<IShadowComponent> = ({ selectedItem }) => {
     // setRight(!right);
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "shadow",
         propertyValue:
-          selectedItem?.style?.shadow === "large"
+          shadow === "large"
             ? "inherit"
             : "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
       })

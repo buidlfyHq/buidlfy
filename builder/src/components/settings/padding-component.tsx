@@ -7,12 +7,17 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IPaddingComponent {
-  selectedItem: IWorkspace;
+  i: string;
+  padding: {
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
 }
 
-const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
+const PaddingComponent: FC<IPaddingComponent> = ({ i, padding }) => {
   const dispatch = useDispatch();
-  const padding = selectedItem?.style?.padding;
 
   const handleChange = (
     property: string,
@@ -20,7 +25,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
   ) => {
     dispatch(
       updateWorkspaceElementSubStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "padding",
         propertyValue: +e.target.value,
         childPropertyName: property,
@@ -31,7 +36,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
   const incrementCounter = (property: string, value: number) => {
     dispatch(
       updateWorkspaceElementSubStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "padding",
         propertyValue: value + 1,
         childPropertyName: property,
@@ -42,7 +47,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
   const decrementCounter = (property: string, value: number) => {
     dispatch(
       updateWorkspaceElementSubStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "padding",
         propertyValue: value - 1,
         childPropertyName: property,

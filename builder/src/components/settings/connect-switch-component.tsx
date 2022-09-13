@@ -6,32 +6,34 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IConnectSwitchComponent {
-  selectedItem: IWorkspace;
+  i: string;
+  connectWallet: string;
 }
 
 const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
-  selectedItem,
+  i,
+  connectWallet,
 }) => {
   const dispatch = useDispatch();
 
   const [connectToggle, setConnectToggle] = useState(
-    selectedItem?.connectWallet === "on" ? true : false
+    connectWallet === "on" ? true : false
   );
 
   const handleOnChange = () => {
     setConnectToggle(!connectToggle);
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "connectWallet",
-        propertyValue: selectedItem?.connectWallet === "on" ? "off" : "on",
+        propertyValue: connectWallet === "on" ? "off" : "on",
       })
     );
   };
 
   useEffect(() => {
-    setConnectToggle(selectedItem?.connectWallet === "on" ? true : false);
-  }, [selectedItem?.connectWallet]);
+    setConnectToggle(connectWallet === "on" ? true : false);
+  }, [connectWallet]);
 
   return (
     <span className="flex mt-5">

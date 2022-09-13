@@ -6,24 +6,23 @@ import {
   AiOutlineAlignCenter,
 } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IAlignComponent {
-  selectedItem: IWorkspace;
+  i: string;
+  justifyContent: string;
 }
 
-const AlignComponent: FC<IAlignComponent> = ({ selectedItem }) => {
+const AlignComponent: FC<IAlignComponent> = ({ i, justifyContent }) => {
   const dispatch = useDispatch();
 
   const handleAlignChange = (type: string) => {
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "justifyContent",
-        propertyValue:
-          selectedItem?.style?.justifyContent === type ? "inherit" : type,
+        propertyValue: justifyContent === type ? "inherit" : type,
       })
     );
   };
