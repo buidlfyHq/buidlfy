@@ -19,7 +19,7 @@ const ContainerSettings: FC<ISettings> = ({ selectedItem }) => (
     <UploadComponent i={selectedItem.i} />
     <BgColorComponent
       i={selectedItem.i}
-      bgColor={selectedItem.style.backgroundColor}
+      elementBackgroundColor={selectedItem.style.backgroundColor}
     />
     <ColorComponent
       i={selectedItem.i}
