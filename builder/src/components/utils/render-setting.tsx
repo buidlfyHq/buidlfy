@@ -6,6 +6,7 @@ import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
 import GeneralSettings from "components/dashboard/general-settings";
+import { IRootState } from "redux/root-state.interface";
 import { ISettings, IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -18,7 +19,7 @@ const SettingComponent: FC<ISettings> = ({
 }) => {
   const dispatch = useDispatch();
   const selectedItem: IWorkspaceElements = useSelector(
-    (state: any) => state.workspace.selectedElement
+    (state: IRootState) => state.workspace.selectedElement
   );
 
   const handleChange = (

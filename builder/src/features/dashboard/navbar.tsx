@@ -6,6 +6,7 @@ import { Dialog } from "@headlessui/react";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
+import { IRootState } from "redux/root-state.interface";
 import {
   IColor,
   ITemplate,
@@ -25,10 +26,10 @@ interface INavbar {
 const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElements[] = useSelector(
-    (state: any) => state.workspace.workspaceElements
+    (state: IRootState) => state.workspace.workspaceElements
   );
   const contractDetails: IContractDetails = useSelector(
-    (state: any) => state.contract.contractDetails
+    (state: IRootState) => state.contract.contractDetails
   );
 
   const [abiJSON, setAbiJSON] = useState<

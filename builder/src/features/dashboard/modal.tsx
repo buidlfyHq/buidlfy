@@ -6,6 +6,8 @@ import {
   updateContractAddress,
 } from "redux/contract/contract.reducers";
 import upload from "assets/upload-img.png";
+import { IRootState } from "redux/root-state.interface";
+import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 interface IModal {
@@ -15,8 +17,8 @@ interface IModal {
 
 const Modal: FC<IModal> = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch();
-  const contract: { abi: string; address: string } = useSelector(
-    (state: any) => state.contract
+  const contractDetails: IContractDetails = useSelector(
+    (state: IRootState) => state.contract.contractDetails
   );
 
   const [showUpload, setShowUpload] = useState<boolean>(true);
@@ -119,7 +121,7 @@ const Modal: FC<IModal> = ({ isOpen, setIsOpen }) => {
               <textarea
                 className="upload-modal-input p-2"
                 placeholder="Paste ABI here..."
-                value={contract.abi}
+                value={contractDetails.abi}
                 onChange={(e) => handleSetAbi(e.target.value)}
               />
             )}
@@ -129,7 +131,7 @@ const Modal: FC<IModal> = ({ isOpen, setIsOpen }) => {
             <input
               className="modal-input pl-2 mt-1"
               placeholder="Paste Address here..."
-              value={contract.address}
+              value={contractDetails.address}
               onChange={(e) => dispatch(updateContractAddress(e.target.value))}
             />
           </div>

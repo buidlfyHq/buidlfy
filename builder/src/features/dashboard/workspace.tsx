@@ -13,6 +13,7 @@ import {
 } from "redux/contract/contract.reducers";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
+import { IRootState } from "redux/root-state.interface";
 import {
   IColor,
   IWorkspaceElements,
@@ -56,13 +57,13 @@ const Workspace: FC<IWorkspaceComponent> = ({
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElements[] = useSelector(
-    (state: any) => state.workspace.workspaceElements
+    (state: IRootState) => state.workspace.workspaceElements
   );
   const contractElementSelector: IContractElementSelector = useSelector(
-    (state: any) => state.contract.contractElementSelector
+    (state: IRootState) => state.contract.contractElementSelector
   );
   const contractElementSelected: IContractElementSelected = useSelector(
-    (state: any) => state.contract.contractElementSelected
+    (state: IRootState) => state.contract.contractElementSelected
   );
 
   const [currentSize, setCurrentSize] = useState<number>(6);
@@ -111,7 +112,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
       (key) => key === contractElementSelector.name
     );
 
-    if (!searchExistingValue.length || !Object.keys(contractElementSelected).length) {
+    if (
+      !searchExistingValue.length ||
+      !Object.keys(contractElementSelected).length
+    ) {
       dispatch(
         createSelectedElement({
           name: contractElementSelector.name,

@@ -14,6 +14,7 @@ import {
 } from "redux/contract/contract.reducers";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
+import { IRootState } from "redux/root-state.interface";
 import {
   IColor,
   IWorkspaceElements,
@@ -56,13 +57,13 @@ const Container: FC<IContainer> = ({
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElements[] = useSelector(
-    (state: any) => state.workspace.workspaceElements
+    (state: IRootState) => state.workspace.workspaceElements
   );
   const contractElementSelector: IContractElementSelector = useSelector(
-    (state: any) => state.contract.contractElementSelector
+    (state: IRootState) => state.contract.contractElementSelector
   );
   const contractElementSelected: IContractElementSelected = useSelector(
-    (state: any) => state.contract.contractElementSelected
+    (state: IRootState) => state.contract.contractElementSelected
   );
 
   // to persist layout changes

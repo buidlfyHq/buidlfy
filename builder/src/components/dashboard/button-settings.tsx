@@ -14,6 +14,7 @@ import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import { containerCheck } from "utils/container-check";
+import { IRootState } from "redux/root-state.interface";
 import {
   ISettings,
   IWorkspaceElements,
@@ -28,7 +29,7 @@ const ButtonSettings: FC<ISettings> = ({
 }) => {
   const dispatch = useDispatch();
   const selectedItem: IWorkspaceElements = useSelector(
-    (state: any) => state.workspace.selectedElement
+    (state: IRootState) => state.workspace.selectedElement
   );
 
   const handleToggleTab = (

@@ -7,6 +7,7 @@ import {
 } from "redux/contract/contract.reducers";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
+import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
@@ -30,13 +31,13 @@ interface IAbiComponents {
 const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElements[] = useSelector(
-    (state: any) => state.workspace
+    (state: IRootState) => state.workspace
   ).workspaceElements;
   const contractElementSelector: IContractElementSelector = useSelector(
-    (state: any) => state.contract.contractElementSelector
+    (state: IRootState) => state.contract.contractElementSelector
   );
   const contractElementSelected: IContractElementSelected = useSelector(
-    (state: any) => state.contract.contractElementSelected
+    (state: IRootState) => state.contract.contractElementSelected
   );
 
   const [currentElement, setCurrentElement] = useState<{
