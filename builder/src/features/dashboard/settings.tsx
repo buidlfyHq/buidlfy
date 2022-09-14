@@ -4,13 +4,13 @@ import IItems from "interfaces/items";
 import ISettings from "interfaces/settings";
 import IColor from "interfaces/color";
 
-enum fontEnum {
+enum FontEnum {
   BOLD = "bold",
   ITALIC = "italic",
   NORMAL = "normal",
 }
 
-enum functionEnum {
+enum FunctionEnum {
   FONT_WEIGHT = "fontWeight",
   FONT_STYLE = "fontStyle",
   TEXT_DECORATION = "textDecoration",
@@ -34,6 +34,14 @@ enum functionEnum {
   WIDTH = "width",
   HEIGHT = "height",
   AUTO = "isAuto",
+}
+
+enum BackgroundFunction {
+  CONTAIN = "setContain",
+  COVER = "setCover",
+  AUTO = "setAuto",
+  WIDTH = "setWidth",
+  HEIGHT = "setHeight",
 }
 
 const Settings: FC<ISettings> = ({
@@ -169,7 +177,7 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
   const singleImageSizeFunction = (
-    styleProp: functionEnum,
+    styleProp: FunctionEnum,
     property: number | IColor | boolean
   ) => {
     if (!settingItemId) {
@@ -214,7 +222,7 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
   const backgroundSizeFunction = (
-    styleProp: functionEnum,
+    styleProp: FunctionEnum,
     property: boolean,
     valueFirst: string,
     valueSecond: string
@@ -260,7 +268,7 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
   const utilityFunction = (
-    styleProp: functionEnum,
+    styleProp: FunctionEnum,
     property: boolean,
     valueFirst: string,
     valueSecond: string
@@ -306,25 +314,25 @@ const Settings: FC<ISettings> = ({
 
   const setBold = (fontWeight: boolean) => {
     utilityFunction(
-      functionEnum.FONT_WEIGHT,
+      FunctionEnum.FONT_WEIGHT,
       fontWeight,
-      fontEnum.BOLD,
-      fontEnum.NORMAL
+      FontEnum.BOLD,
+      FontEnum.NORMAL
     );
   };
 
   const setItalic = (fontStyle: boolean) => {
     utilityFunction(
-      functionEnum.FONT_STYLE,
+      FunctionEnum.FONT_STYLE,
       fontStyle,
-      fontEnum.ITALIC,
-      fontEnum.NORMAL
+      FontEnum.ITALIC,
+      FontEnum.NORMAL
     );
   };
 
   const setUnderline = (textDecoration: boolean) => {
     utilityFunction(
-      functionEnum.TEXT_DECORATION,
+      FunctionEnum.TEXT_DECORATION,
       textDecoration,
       "underline",
       "none"
@@ -332,7 +340,7 @@ const Settings: FC<ISettings> = ({
   };
 
   const singleWorkFunction = (
-    styleProp: functionEnum,
+    styleProp: FunctionEnum,
     property: number | IColor | boolean | string
   ) => {
     if (!settingItemId) {
@@ -375,7 +383,7 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
   const marginWorkFunction = (
-    styleProp: functionEnum,
+    styleProp: FunctionEnum,
     property: number | IColor
   ) => {
     if (!settingItemId) {
@@ -418,7 +426,7 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
   const paddingWorkFunction = (
-    styleProp: functionEnum,
+    styleProp: FunctionEnum,
     property: number | IColor
   ) => {
     if (!settingItemId) {
@@ -461,59 +469,68 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
   const setColor = (color: string) => {
-    singleWorkFunction(functionEnum.COLOR, color);
+    singleWorkFunction(FunctionEnum.COLOR, color);
   };
   const setBorderColor = (borderColor: string) => {
-    singleWorkFunction(functionEnum.BORDER_COLOR, borderColor);
+    singleWorkFunction(FunctionEnum.BORDER_COLOR, borderColor);
   };
 
   const setBackgroundColor = (backgroundColor: string) => {
-    singleWorkFunction(functionEnum.BACKGROUND_COLOR, backgroundColor);
+    singleWorkFunction(FunctionEnum.BACKGROUND_COLOR, backgroundColor);
   };
 
   const setDeleteComponent = (deleteComponent: number) => {
-    singleWorkFunction(functionEnum.DELETE_COMPONENT, deleteComponent);
+    singleWorkFunction(FunctionEnum.DELETE_COMPONENT, deleteComponent);
   };
 
   const setCenter = (justifyContent: boolean) => {
     utilityFunction(
-      functionEnum.JUSTIFY_CONTENT,
+      FunctionEnum.JUSTIFY_CONTENT,
       justifyContent,
       "center",
       "inherit"
     );
   };
   const setIsAuto = (isAuto: boolean) => {
-    singleWorkFunction(functionEnum.AUTO, isAuto);
+    singleWorkFunction(FunctionEnum.AUTO, isAuto);
   };
-  const setContain = (backgroundSize: boolean) => {
-    backgroundSizeFunction(
-      functionEnum.BACKGROUND_SIZE,
-      backgroundSize,
-      "contain",
-      "contain"
-    );
-  };
-  const setCover = (backgroundSize: boolean) => {
-    backgroundSizeFunction(
-      functionEnum.BACKGROUND_SIZE,
-      backgroundSize,
-      "cover",
-      "contain"
-    );
-  };
-  const setAuto = (backgroundSize: boolean) => {
-    backgroundSizeFunction(
-      functionEnum.BACKGROUND_SIZE,
-      backgroundSize,
-      "auto",
-      "contain"
-    );
+  const handleBackground = (
+    action: BackgroundFunction,
+    width?: number,
+    height?: number,
+    backgroundSize?: boolean
+  ) => {
+    if (action == BackgroundFunction.CONTAIN) {
+      backgroundSizeFunction(
+        FunctionEnum.BACKGROUND_SIZE,
+        backgroundSize,
+        "contain",
+        "contain"
+      );
+    } else if (action == BackgroundFunction.COVER) {
+      backgroundSizeFunction(
+        FunctionEnum.BACKGROUND_SIZE,
+        backgroundSize,
+        "cover",
+        "contain"
+      );
+    } else if (action == BackgroundFunction.AUTO) {
+      backgroundSizeFunction(
+        FunctionEnum.BACKGROUND_SIZE,
+        backgroundSize,
+        "auto",
+        "contain"
+      );
+    } else if (action == BackgroundFunction.WIDTH) {
+      singleImageSizeFunction(FunctionEnum.WIDTH, width);
+    } else if (action == BackgroundFunction.HEIGHT) {
+      singleImageSizeFunction(FunctionEnum.HEIGHT, height);
+    }
   };
 
   const setLeft = (justifyContent: boolean) => {
     utilityFunction(
-      functionEnum.JUSTIFY_CONTENT,
+      FunctionEnum.JUSTIFY_CONTENT,
       justifyContent,
       "left",
       "inherit"
@@ -522,7 +539,7 @@ const Settings: FC<ISettings> = ({
 
   const setRight = (justifyContent: boolean) => {
     utilityFunction(
-      functionEnum.JUSTIFY_CONTENT,
+      FunctionEnum.JUSTIFY_CONTENT,
       justifyContent,
       "right",
       "inherit"
@@ -531,7 +548,7 @@ const Settings: FC<ISettings> = ({
 
   const setSmall = (shadow: boolean) => {
     utilityFunction(
-      functionEnum.SHADOW,
+      FunctionEnum.SHADOW,
       shadow,
       "0 1px 2px 0 rgb(0 0 0 / 0.05)",
       "none"
@@ -540,7 +557,7 @@ const Settings: FC<ISettings> = ({
 
   const setMedium = (shadow: boolean) => {
     utilityFunction(
-      functionEnum.SHADOW,
+      FunctionEnum.SHADOW,
       shadow,
       "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
       "inherit"
@@ -549,7 +566,7 @@ const Settings: FC<ISettings> = ({
 
   const setLarge = (shadow: boolean) => {
     utilityFunction(
-      functionEnum.SHADOW,
+      FunctionEnum.SHADOW,
       shadow,
       "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
       "inherit"
@@ -597,41 +614,35 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
 
-  const setWidth = (width: number) => {
-    singleImageSizeFunction(functionEnum.WIDTH, width);
-  };
-  const setHeight = (height: number) => {
-    singleImageSizeFunction(functionEnum.HEIGHT, height);
-  };
   const setBorderRadius = (borderRadius: number) => {
-    singleWorkFunction(functionEnum.BORDER_RADIUS, borderRadius);
+    singleWorkFunction(FunctionEnum.BORDER_RADIUS, borderRadius);
   };
   const setMarginLeft = (marginLeft: number) => {
-    marginWorkFunction(functionEnum.MARGIN_LEFT, marginLeft);
+    marginWorkFunction(FunctionEnum.MARGIN_LEFT, marginLeft);
   };
   const setMarginRight = (marginRight: number) => {
-    marginWorkFunction(functionEnum.MARGIN_RIGHT, marginRight);
+    marginWorkFunction(FunctionEnum.MARGIN_RIGHT, marginRight);
   };
   const setMarginTop = (marginTop: number) => {
-    marginWorkFunction(functionEnum.MARGIN_TOP, marginTop);
+    marginWorkFunction(FunctionEnum.MARGIN_TOP, marginTop);
   };
   const setMarginBottom = (marginBottom: number) => {
-    marginWorkFunction(functionEnum.MARGIN_BOTTOM, marginBottom);
+    marginWorkFunction(FunctionEnum.MARGIN_BOTTOM, marginBottom);
   };
   const setPaddingLeft = (paddingLeft: number) => {
-    paddingWorkFunction(functionEnum.PADDING_LEFT, paddingLeft);
+    paddingWorkFunction(FunctionEnum.PADDING_LEFT, paddingLeft);
   };
   const setPaddingRight = (paddingRight: number) => {
-    paddingWorkFunction(functionEnum.PADDING_RIGHT, paddingRight);
+    paddingWorkFunction(FunctionEnum.PADDING_RIGHT, paddingRight);
   };
   const setPaddingTop = (paddingTop: number) => {
-    paddingWorkFunction(functionEnum.PADDING_TOP, paddingTop);
+    paddingWorkFunction(FunctionEnum.PADDING_TOP, paddingTop);
   };
   const setPaddingBottom = (paddingBottom: number) => {
-    paddingWorkFunction(functionEnum.PADDING_BOTTOM, paddingBottom);
+    paddingWorkFunction(FunctionEnum.PADDING_BOTTOM, paddingBottom);
   };
   const setBorderWidth = (borderWidth: number) => {
-    singleWorkFunction(functionEnum.BORDER_WIDTH, borderWidth);
+    singleWorkFunction(FunctionEnum.BORDER_WIDTH, borderWidth);
   };
 
   const setOn = (connectWallet: boolean) => {
@@ -707,8 +718,12 @@ const Settings: FC<ISettings> = ({
                 borderColor={selectedItem?.style?.borderColor}
                 width={selectedItem?.style?.width}
                 height={selectedItem?.style?.height}
-                setWidth={setWidth}
-                setHeight={setHeight}
+                setWidth={(width) =>
+                  handleBackground(BackgroundFunction.WIDTH, width)
+                }
+                setHeight={(height) =>
+                  handleBackground(BackgroundFunction.HEIGHT, undefined, height)
+                }
                 setBorderColor={setBorderColor}
                 setColor={setColor}
                 setBackgroundColor={setBackgroundColor}
@@ -720,9 +735,30 @@ const Settings: FC<ISettings> = ({
                 setCenter={setCenter}
                 setRight={setRight}
                 setFontSize={setFontSize}
-                setCover={setCover}
-                setContain={setContain}
-                setAuto={setAuto}
+                setCover={(backgroundSize: boolean) =>
+                  handleBackground(
+                    BackgroundFunction.COVER,
+                    undefined,
+                    undefined,
+                    backgroundSize
+                  )
+                }
+                setContain={(backgroundSize: boolean) =>
+                  handleBackground(
+                    BackgroundFunction.CONTAIN,
+                    undefined,
+                    undefined,
+                    backgroundSize
+                  )
+                }
+                setAuto={(backgroundSize: boolean) =>
+                  handleBackground(
+                    BackgroundFunction.AUTO,
+                    undefined,
+                    undefined,
+                    backgroundSize
+                  )
+                }
                 backgroundSize={selectedItem?.style?.backgroundSize}
                 fontSize={selectedItem?.style?.fontSize}
                 setContractConfig={setContractConfig}
