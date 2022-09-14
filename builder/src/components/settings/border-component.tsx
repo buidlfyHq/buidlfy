@@ -1,32 +1,51 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { updateItems } from "reducers/itemsReducer";
+import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 
 interface IBorderComponent {
+  i: string;
   borderWidth: number;
-  setBorderWidth: (borderWidth: number) => void;
 }
 
-const BorderComponent: FC<IBorderComponent> = ({
-  borderWidth,
-  setBorderWidth,
-}) => {
+const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
+  const dispatch = useDispatch();
+
   const incrementWidthCounter = () => {
-    setBorderWidth(borderWidth + 1);
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: i,
+        propertyName: "borderWidth",
+        propertyValue: borderWidth + 1,
+      })
+    );
   };
 
   const decrementWidthCounter = () => {
-    if (borderWidth <= 0) {
-      setBorderWidth(0);
-    } else {
-      setBorderWidth(borderWidth - 1);
-    }
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: i,
+        propertyName: "borderWidth",
+        propertyValue: borderWidth <= 0 ? 0 : borderWidth - 1,
+      })
+    );
   };
 
   const handleWidthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (borderWidth) {
-      setBorderWidth(+e.target.value);
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: i,
+          propertyName: "borderWidth",
+          propertyValue: +e.target.value,
+        })
+      );
     }
   };
 
