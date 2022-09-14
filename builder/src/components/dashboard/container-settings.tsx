@@ -10,18 +10,13 @@ import ISettings from "interfaces/settings";
 import PaddingComponent from "components/settings/padding-component";
 
 const ContainerSettings: FC<ISettings> = ({
+  selectedItem,
   items,
   setItems,
-  selectedItem,
   setColor,
-  color,
-  setBgColor,
-  backgroundColor,
+  setBackgroundColor,
   setDeleteComponent,
-  deleteComponent,
-  borderRadius,
   setBorderRadius,
-  borderWidth,
   setBorderWidth,
   setSmall,
   setMedium,
@@ -45,21 +40,21 @@ const ContainerSettings: FC<ISettings> = ({
       setItems={setItems}
     />
     <BgColorComponent
-      color={backgroundColor}
-      setBgColor={setBgColor}
+      backgroundColor={selectedItem?.style?.backgroundColor}
+      setBackgroundColor={setBackgroundColor}
       selectedItem={selectedItem}
     />
     <ColorComponent
-      color={color}
+      color={selectedItem?.style?.color}
       setColor={setColor}
       selectedItem={selectedItem}
     />
     <BorderRadiusComponent
-      borderRadius={borderRadius}
+      borderRadius={selectedItem?.style?.borderRadius}
       setBorderRadius={setBorderRadius}
     />
     <BorderComponent
-      borderWidth={borderWidth}
+      borderWidth={selectedItem?.style?.borderWidth}
       setBorderWidth={setBorderWidth}
     />
     <PaddingComponent
@@ -67,13 +62,13 @@ const ContainerSettings: FC<ISettings> = ({
       setPaddingRight={setPaddingRight}
       setPaddingTop={setPaddingTop}
       setPaddingBottom={setPaddingBottom}
-      padding={{ ...padding }}
+      padding={padding}
     />
     <ShadowComponent
       setSmall={setSmall}
       setMedium={setMedium}
       setLarge={setLarge}
-      shadow={shadow}
+      shadow={selectedItem?.style?.shadow}
     />
     {/* <UtilitiesComponent
       deleteComponent={deleteComponent}

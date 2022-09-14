@@ -4,6 +4,7 @@ import {
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -32,88 +33,57 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   setCenter,
   justifyContent,
 }) => {
-  const handleBoldChange = () => {
-    if (bold === "bold") {
-      setBold(false);
-    } else {
-      setBold(true);
+  const handleChange = (action: ReplaceStyle) => {
+    if (action == ReplaceStyle.BOLD) {
+      setBold(bold !== "bold");
+    } else if (action == ReplaceStyle.ITALIC) {
+      setItalic(italic !== "italic");
+    } else if (action == ReplaceStyle.UNDERLINE) {
+      setUnderline(underline !== "underline");
+    } else if (action == ReplaceStyle.LEFT) {
+      setLeft(justifyContent !== "left");
+    } else if (action == ReplaceStyle.RIGHT) {
+      setRight(justifyContent !== "right");
+    } else if (action == ReplaceStyle.CENTER) {
+      setCenter(justifyContent !== "center");
     }
   };
 
-  const handleItalicChange = () => {
-    if (italic === "italic") {
-      setItalic(false);
-    } else {
-      setItalic(true);
-    }
-  };
-
-  const handleUnderlineChange = () => {
-    if (underline === "underline") {
-      setUnderline(false);
-    } else {
-      setUnderline(true);
-    }
-  };
-
-  const handleLeftChange = () => {
-    if (justifyContent === "left") {
-      setLeft(false);
-    } else {
-      setLeft(true);
-    }
-  };
-
-  const handleCenterChange = () => {
-    if (justifyContent === "center") {
-      setCenter(false);
-    } else {
-      setCenter(true);
-    }
-  };
-
-  const handleRightChange = () => {
-    if (justifyContent === "right") {
-      setRight(false);
-    } else {
-      setRight(true);
-    }
-  };
   return (
     <div className="flex grey-div w-auto mx-2 mb-3 items-center mt-2 text-black">
       <span
-        onClick={handleBoldChange}
-        className="flex items-center mx-[0.75rem] justify-center font-bold text-[16px] py-1 font-regular"
+        onClick={() => handleChange(ReplaceStyle.BOLD)}
+        className="flex items-center mx-[0.75rem] justify-center font-bold text-[16px] py-1 font-regular text-black"
       >
         B
       </span>
       <span
-        onClick={handleItalicChange}
+        onClick={() => handleChange(ReplaceStyle.ITALIC)}
         className="flex items-center mx-[0.75rem] justify-center italic text-[16px] py-1 font-regular text-black"
       >
         i
       </span>
       <span
-        onClick={handleUnderlineChange}
+        onClick={() => handleChange(ReplaceStyle.UNDERLINE)}
         className="flex items-center mx-[0.75rem] justify-center underline text-[16px] py-1 font-regular text-black"
       >
         U
       </span>
       <div className="flex">
         <span
-          onClick={handleLeftChange}
+          onClick={() => handleChange(ReplaceStyle.LEFT)}
           className="flex items-center mx-[0.75rem] justify-center text-[16px] py-1 font-regular"
         >
           <AiOutlineAlignLeft className="text-[16px]" />
         </span>
         <span
-          onClick={handleCenterChange}
+          onClick={() => handleChange(ReplaceStyle.CENTER)}
           className="flex items-center mx-[0.75rem] justify-center text-[16px] py-1 font-regular text-black"
         >
           <AiOutlineAlignCenter className="text-[16px]" />
         </span>
         <span
-          onClick={handleRightChange}
+          onClick={() => handleChange(ReplaceStyle.RIGHT)}
           className="flex items-center mx-[0.75rem] justify-center text-[16px] py-1 font-regular text-black"
         >
           <AiOutlineAlignRight className="text-[16px]" />

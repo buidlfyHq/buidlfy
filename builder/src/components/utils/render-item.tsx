@@ -15,7 +15,7 @@ interface IRenderItem {
   setOpenSetting?: (openSetting: boolean) => void;
   setSettingItemId?: (settingItemId: string) => void;
   setOpenTab?: (openTab: number) => void;
-  setAddContainer?: (addContainer: boolean) => void;
+  SetIsContainerSelected?: (isContainerSelected: boolean) => void;
   selector?: {
     methodName: string;
     type: string;
@@ -31,8 +31,6 @@ interface IRenderItem {
   elementConfig?: object;
   setSideElement: (sideElement: string) => void;
   setElementConfig?: (elementConfig: object) => void;
-  addContainerElements?: boolean;
-  setAddContainerElements?: (addContainerElements?: boolean) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   showSidebar?: () => void;
@@ -55,14 +53,12 @@ const RenderItem: FC<IRenderItem> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  setAddContainer,
+  SetIsContainerSelected,
   selector,
   setSelector,
   elementConfig,
   setElementConfig,
   setSideElement,
-  addContainerElements,
-  setAddContainerElements,
   dragContainer,
   setDragContainer,
   showSidebar,
@@ -94,20 +90,18 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          SetIsContainerSelected={SetIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setSideElement={setSideElement}
-          addContainerElements={addContainerElements}
-          setAddContainerElements={setAddContainerElements}
           dragContainer={dragContainer}
           setDragContainer={setDragContainer}
           showSidebar={showSidebar}
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
-          padding={{ ...item.style.padding }}
+          padding={item.style.padding}
         />
       );
     case "Button":
@@ -126,8 +120,8 @@ const RenderItem: FC<IRenderItem> = ({
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           connectWallet={item.connectWallet}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Text":
@@ -144,8 +138,8 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 1":
@@ -162,8 +156,8 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 2":
@@ -180,8 +174,8 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Heading 3":
@@ -198,8 +192,8 @@ const RenderItem: FC<IRenderItem> = ({
           value={item.value}
           backgroundColor={item.style.backgroundColor}
           link={item.link}
-          margin={{ ...item.style.margin }}
-          padding={{ ...item.style.padding }}
+          margin={item.style.margin}
+          padding={item.style.padding}
         />
       );
     case "Input":
@@ -209,7 +203,7 @@ const RenderItem: FC<IRenderItem> = ({
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           color={item.style.color}
-          margin={{ ...item.style.margin }}
+          margin={item.style.margin}
         />
       );
     case "Image":
@@ -217,7 +211,6 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
-          margin={{ ...item.style.margin }}
           width={item.style.width}
           height={item.style.height}
           backgroundSize={item.style.backgroundSize}
@@ -227,6 +220,7 @@ const RenderItem: FC<IRenderItem> = ({
           dynamicHeight={dynamicHeight}
           setDynamicWidth={setDynamicWidth}
           setDynamicHeight={setDynamicHeight}
+          margin={item.style.margin}
         />
       );
     case "Divider":
@@ -248,20 +242,18 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          SetIsContainerSelected={SetIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setSideElement={setSideElement}
-          addContainerElements={addContainerElements}
-          setAddContainerElements={setAddContainerElements}
           dragContainer={dragContainer}
           setDragContainer={setDragContainer}
           showSidebar={showSidebar}
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
-          padding={{ ...item.style.padding }}
+          padding={item.style.padding}
         />
       );
     case "Vertical Container":
@@ -281,20 +273,18 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          SetIsContainerSelected={SetIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
           setSideElement={setSideElement}
-          addContainerElements={addContainerElements}
-          setAddContainerElements={setAddContainerElements}
           dragContainer={dragContainer}
           setDragContainer={setDragContainer}
           showSidebar={showSidebar}
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
-          padding={{ ...item.style.padding }}
+          padding={item.style.padding}
         />
       );
     default:

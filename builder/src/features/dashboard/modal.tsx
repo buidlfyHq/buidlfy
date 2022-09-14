@@ -14,7 +14,7 @@ interface IModal {
 }
 interface IContract {
   name: string;
-  text;
+  text; // type to be added
 }
 const Modal: FC<IModal> = ({
   contractConfig,
@@ -29,9 +29,11 @@ const Modal: FC<IModal> = ({
   const [showUpload, setShowUpload] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer>("");
+  
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
+
   const handleSaveContract = () => {
     // FIX: save full config to local storage
     let newContractList: Array<IContract> = [];
@@ -50,9 +52,9 @@ const Modal: FC<IModal> = ({
     localStorage.setItem("contractList", JSON.stringify(newContractList));
     setNewContractList(newContractList);
   };
-  const handleShow = () => {
-    setShowUpload(false);
-  };
+
+  const handleShow = () => setShowUpload(false);
+
   const handleSetAbi = (abi: string) => {
     // keep type = function, remove other types
     const filteredAbi = JSON.parse(abi).filter(
@@ -60,7 +62,8 @@ const Modal: FC<IModal> = ({
     );
     setContractConfig({ ...contractConfig, abi: JSON.stringify(filteredAbi) });
   };
-  const handleChange = (e) => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileReader = new FileReader();
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = (e) => {

@@ -36,24 +36,30 @@ const Image: FC<IImageComponent> = ({
   setDynamicHeight,
   setDynamicWidth,
 }) => {
-  const ref = useRef<HTMLDivElement>();
-  useEffect(() => {
-    if (ref?.current?.clientWidth) {
-      setDynamicWidth(ref.current.clientWidth);
-    }
-  }, [ref?.current?.clientWidth]);
-  useEffect(() => {
-    if (ref?.current?.clientHeight) {
-      setDynamicHeight(ref.current.clientHeight);
-    }
-  }, [ref?.current?.clientHeight]);
+  // Add ClientWidth and ClientHeight of Image when it changes its position
+  // const ref = useRef<HTMLDivElement>();
 
+  // useEffect(() => {
+  //   if (ref?.current?.clientWidth) {
+  //     console.log(ref.current.clientWidth, "cw");
+  //     setDynamicWidth(ref.current.clientWidth);
+  //   }
+  //   if (ref?.current?.clientHeight) {
+  //     setDynamicHeight(ref.current.clientHeight);
+  //   }
+  // }, [ref?.current?.clientWidth, ref?.current?.clientHeight]);
+  // useEffect(() => {
+  //   if (ref?.current?.clientHeight) {
+  //     console.log(ref.current.clientHeight, "ch");
+  //     setDynamicHeight(ref.current.clientHeight);
+  //   }
+  // }, [ref?.current?.clientHeight]);
   return (
     <>
       {imgData ? (
         <div className="flex w-full h-full">
           <div
-            ref={ref}
+            // ref={ref}
             id={item.i}
             className="flex w-full h-full"
             style={{

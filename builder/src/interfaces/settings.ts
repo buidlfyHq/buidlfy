@@ -20,7 +20,7 @@ export default interface ISettings {
   color?: string;
   setBorderColor?: (borderColor: string) => void;
   borderColor?: string;
-  setBgColor?: (backgroundColor: string) => void;
+  setBackgroundColor?: (backgroundColor: string) => void;
   backgroundColor?: string;
   setDeleteComponent?: (deleteComponent: number) => void;
   deleteComponent?: number;

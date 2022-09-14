@@ -470,7 +470,7 @@ const Settings: FC<ISettings> = ({
     singleWorkFunction(functionEnum.BORDER_COLOR, borderColor);
   };
 
-  const setBgColor = (backgroundColor: string) => {
+  const setBackgroundColor = (backgroundColor: string) => {
     singleWorkFunction(functionEnum.BACKGROUND_COLOR, backgroundColor);
   };
 
@@ -730,7 +730,7 @@ const Settings: FC<ISettings> = ({
                   setHeight={setHeight}
                   setBorderColor={setBorderColor}
                   setColor={setColor}
-                  setBgColor={setBgColor}
+                  setBackgroundColor={setBackgroundColor}
                   backgroundColor={selectedItem?.style?.backgroundColor}
                   setDeleteComponent={setDeleteComponent}
                   deleteComponent={selectedItem?.style?.deleteComponent}
