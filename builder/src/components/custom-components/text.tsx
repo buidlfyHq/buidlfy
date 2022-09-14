@@ -22,7 +22,7 @@ const Text: FC<ITexts> = ({
       style={{
         height: "-webkit-fill-available",
         background: backgroundColor,
-        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+        margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}
       className="flex overflow-hidden items-center justify-center w-auto h-full"
     >
@@ -54,7 +54,7 @@ const Text: FC<ITexts> = ({
                 alignItems: "center",
                 textAlign: `${justifyContent}` as CanvasTextAlign,
                 fontSize: `${fontSize}px`,
-                padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+                padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
               }}
               className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
             />
@@ -75,7 +75,7 @@ const Text: FC<ITexts> = ({
               alignItems: "center",
               textAlign: `${justifyContent}` as CanvasTextAlign,
               fontSize: `${fontSize}px`,
-              padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+              padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
             }}
             className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
           />
