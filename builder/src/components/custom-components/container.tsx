@@ -6,18 +6,22 @@ import {
   setSelectedElement,
   updateWorkspaceElementsArray,
 } from "redux/workspace/workspace.reducers";
-import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import {
+  setSelectorToDefault,
   addSelectedElement,
   createSelectedElement,
   updateSelectedElement,
-} from "redux/selected/selected.reducers";
+} from "redux/contract/contract.reducers";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
 import {
   IColor,
   IWorkspaceElements,
 } from "redux/workspace/workspace.interfaces";
+import {
+  IContractElementSelected,
+  IContractElementSelector,
+} from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 interface IContainer {
@@ -54,8 +58,12 @@ const Container: FC<IContainer> = ({
   const workspaceElements: IWorkspaceElements[] = useSelector(
     (state: any) => state.workspace.workspaceElements
   );
-  const selector = useSelector((state: any) => state.selector);
-  const selected = useSelector((state: any) => state.selected);
+  const contractElementSelector: IContractElementSelector = useSelector(
+    (state: any) => state.contract.contractElementSelector
+  );
+  const contractElementSelected: IContractElementSelected = useSelector(
+    (state: any) => state.contract.contractElementSelected
+  );
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -104,26 +112,29 @@ const Container: FC<IContainer> = ({
 
   const updateElementConfig = (itemName: string, i: string) => {
     // for updating selected element config
-    const searchExistingValue = Object.keys(selected).filter(
-      (key) => key === selector.name
+    const searchExistingValue = Object.keys(contractElementSelected).filter(
+      (key) => key === contractElementSelector.name
     );
 
-    if (!searchExistingValue.length || !Object.keys(selected).length) {
+    if (
+      !searchExistingValue.length ||
+      !Object.keys(contractElementSelected).length
+    ) {
       dispatch(
         createSelectedElement({
-          name: selector.name,
+          name: contractElementSelector.name,
           element: {
-            buttonId: selector.buttonId,
+            buttonId: contractElementSelector.buttonId,
             name: itemName,
             id: i,
           },
         })
       );
     } else {
-      Object.keys(selected).map((key) => {
-        if (key === selector.name) {
-          selected[key].map((obj, index: number) => {
-            if (obj.buttonId === selector.buttonId) {
+      Object.keys(contractElementSelected).map((key) => {
+        if (key === contractElementSelector.name) {
+          contractElementSelected[key].map((obj, index: number) => {
+            if (obj.buttonId === contractElementSelector.buttonId) {
               dispatch(
                 updateSelectedElement({
                   name: key,
@@ -134,9 +145,9 @@ const Container: FC<IContainer> = ({
             } else {
               dispatch(
                 addSelectedElement({
-                  name: selector.name,
+                  name: contractElementSelector.name,
                   element: {
-                    buttonId: selector.buttonId,
+                    buttonId: contractElementSelector.buttonId,
                     name: itemName,
                     id: i,
                   },
@@ -155,16 +166,16 @@ const Container: FC<IContainer> = ({
     setAddContainer(true);
 
     // checks if the selector is active
-    if (selector === null) {
+    if (contractElementSelector === null) {
       setOpenSetting(true);
       dispatch(setSelectedElement(i));
       setOpenTab(1);
     } else {
       //   // Add validation for selection
-      if (selector.type === "input" && itemName === "Input") {
+      if (contractElementSelector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
       } else if (
-        selector.type === "output" &&
+        contractElementSelector.type === "output" &&
         (itemName === "Text" ||
           itemName === "Heading 1" ||
           itemName === "Heading 2" ||
@@ -234,7 +245,7 @@ const Container: FC<IContainer> = ({
                 return (
                   <div
                     className={`w-full h-full hover:border hover:border-2 ${
-                      selector
+                      contractElementSelector
                         ? "hover:border-orange-300"
                         : "hover:border-slate-300 hover:border-dashed"
                     }`}

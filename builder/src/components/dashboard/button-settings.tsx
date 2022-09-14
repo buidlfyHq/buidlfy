@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdLink } from "react-icons/io";
-import { setSelectorToDefault } from "redux/selector/selector.reducers";
+import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
