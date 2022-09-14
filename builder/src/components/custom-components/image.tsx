@@ -69,7 +69,7 @@ const Image: FC<IImageComponent> = ({
               backgroundSize: `${
                 isAuto ? backgroundSize : `${width}px ${height}px`
               }`,
-              margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+              margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
             }}
           />
         </div>

@@ -33,7 +33,7 @@ const Input: FC<IInput> = ({
         boxShadow: shadow,
         border: `1px solid ${color}`,
         borderImage: color,
-        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+        margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}
       className="btn-border w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
       id="input"
