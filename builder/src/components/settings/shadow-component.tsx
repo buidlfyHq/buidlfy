@@ -1,46 +1,59 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { BsBrightnessLow } from "react-icons/bs";
+import { updateItems } from "reducers/itemsReducer";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IShadowComponent {
-  setSmall: (shadow: string | boolean) => void;
-  setMedium: (shadow: string | boolean) => void;
-  setLarge: (shadow: string | boolean) => void;
+  i: string;
   shadow: string;
 }
 
-const ShadowComponent: FC<IShadowComponent> = ({
-  setSmall,
-  setMedium,
-  setLarge,
-  shadow,
-}) => {
+const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
+  const dispatch = useDispatch();
+
   const handleSmallChange = () => {
     // setLeft(!left);
-    if (shadow === "small") {
-      setSmall(false);
-    } else {
-      setSmall(true);
-    }
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: i,
+        propertyName: "shadow",
+        propertyValue:
+          shadow === "small" ? "none" : "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      })
+    );
   };
 
   const handleMediumChange = () => {
     // setLeft(!center);
-    if (shadow === "medium") {
-      setMedium(false);
-    } else {
-      setMedium(true);
-    }
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: i,
+        propertyName: "shadow",
+        propertyValue:
+          shadow === "medium"
+            ? "inherit"
+            : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+      })
+    );
   };
 
   const handleLargeChange = () => {
     // setRight(!right);
-    if (shadow === "large") {
-      setLarge(false);
-    } else {
-      setLarge(true);
-    }
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: i,
+        propertyName: "shadow",
+        propertyValue:
+          shadow === "large"
+            ? "inherit"
+            : "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+      })
+    );
   };
 
   return (

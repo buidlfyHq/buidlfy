@@ -1,18 +1,30 @@
 import React, { useState, FC, useRef, useEffect } from "react";
-import { VscSymbolColor } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { SketchPicker } from "react-color";
+import { updateItems } from "reducers/itemsReducer";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
-import IItems from "interfaces/items";
 
 interface IBgColorComponent {
-  color: IColor;
-  setBgColor: (color: IColor) => void;
+  i?: string;
+  elementBackgroundColor?: IColor;
+  workspaceBackgroundColor?: IColor;
+  setWorkspaceBackgroundColor?: (workspaceBackgroundColor: IColor) => void;
 }
 
-const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
+const BgColorComponent: FC<IBgColorComponent> = ({
+  i,
+  elementBackgroundColor,
+  workspaceBackgroundColor,
+  setWorkspaceBackgroundColor,
+}) => {
+  const dispatch = useDispatch();
+  const color = workspaceBackgroundColor
+    ? workspaceBackgroundColor
+    : elementBackgroundColor;
+
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [hexColor, setHexColor] = useState();
   const ref = useRef<HTMLDivElement>();
@@ -40,7 +52,18 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
     if (!color) {
       return;
     }
-    setBgColor(color.rgb);
+    if (workspaceBackgroundColor) {
+      setWorkspaceBackgroundColor(color.rgb);
+    } else {
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: i,
+          propertyName: "backgroundColor",
+          propertyValue: color.rgb,
+        })
+      );
+    }
     setHexColor(color.hex);
   };
   const opacity = Number(`${color.a}`);
@@ -51,20 +74,54 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
   const newColor = { ...color };
   const handleOpacity = (e) => {
     newColor.a = Number(e.target.value) / 100;
-    setBgColor(newColor);
+    if (workspaceBackgroundColor) {
+      setWorkspaceBackgroundColor(newColor);
+    } else {
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: i,
+          propertyName: "backgroundColor",
+          propertyValue: newColor,
+        })
+      );
+    }
   };
 
   const incrementCounter = () => {
     let newIncrement = newOpacity + 1;
     newColor.a = Number(newIncrement) / 100;
-    setBgColor(newColor);
+    if (workspaceBackgroundColor) {
+      setWorkspaceBackgroundColor(newColor);
+    } else {
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: i,
+          propertyName: "backgroundColor",
+          propertyValue: newColor,
+        })
+      );
+    }
   };
 
   const decrementCounter = () => {
     let newDecrement = newOpacity - 1;
     newColor.a = Number(newDecrement) / 100;
-    setBgColor(newColor);
+    if (workspaceBackgroundColor) {
+      setWorkspaceBackgroundColor(newColor);
+    } else {
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: i,
+          propertyName: "backgroundColor",
+          propertyValue: newColor,
+        })
+      );
+    }
   };
+
   return (
     <div
       ref={ref}

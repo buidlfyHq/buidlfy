@@ -1,27 +1,34 @@
 import React, { FC, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateItems } from "reducers/itemsReducer";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IConnectSwitchComponent {
-  setOn: (connectWallet: string | boolean) => void;
+  i: string;
   connectWallet: string;
 }
 
 const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
-  setOn,
+  i,
   connectWallet,
 }) => {
+  const dispatch = useDispatch();
+
   const [connectToggle, setConnectToggle] = useState(
     connectWallet === "on" ? true : false
   );
 
   const handleOnChange = () => {
     setConnectToggle(!connectToggle);
-    if (connectWallet === "on") {
-      setOn(false);
-    } else {
-      setOn(true);
-    }
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: i,
+        propertyName: "connectWallet",
+        propertyValue: connectWallet === "on" ? "off" : "on",
+      })
+    );
   };
 
   useEffect(() => {

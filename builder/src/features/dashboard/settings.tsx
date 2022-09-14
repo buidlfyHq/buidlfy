@@ -1,5 +1,6 @@
-import React, { useState, useRef, FC } from "react";
+import React, { useRef, FC } from "react";
 import SettingComponent from "components/utils/render-setting";
+import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import ISettings from "interfaces/settings";
 
@@ -45,19 +46,8 @@ const Settings: FC<ISettings> = ({
   margin,
 }) => {
   const ref = useRef(null);
-  const [showComponent, setShowComponent] = useState<{
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  }>(null); // for abi method component
-
-  // work in progress
   const selectedChildren = items.map((item) =>
-    item.children?.find((child) => child.i === settingItemId)
+    item.children?.find((child: IItems) => child.i === settingItemId)
   );
 
   const selectedItem =
@@ -585,8 +575,6 @@ const Settings: FC<ISettings> = ({
                 fontSize={selectedItem?.style?.fontSize}
                 setContractConfig={setContractConfig}
                 contractConfig={contractConfig}
-                setShowComponent={setShowComponent}
-                showComponent={showComponent}
                 selector={selector}
                 setSelector={setSelector}
                 elementConfig={elementConfig}

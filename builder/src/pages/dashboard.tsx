@@ -46,7 +46,7 @@ const Dashboard: FC = () => {
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
   const [addContainer, setAddContainer] = useState<boolean>(false);
-  const [backgroundColor, setBackgroundColor] = useState<IColor>({
+  const [workspaceBackgroundColor, setWorkspaceBackgroundColor] = useState<IColor>({
     r: "0",
     g: "0",
     b: "0",
@@ -131,8 +131,8 @@ const Dashboard: FC = () => {
             showSidebar={showSidebar}
             hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
-            backgroundColor={backgroundColor}
-            setBackgroundColor={setBackgroundColor}
+            workspaceBackgroundColor={workspaceBackgroundColor}
+            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
             head={head}
             setHead={setHead}
           />
@@ -146,7 +146,7 @@ const Dashboard: FC = () => {
               setItems={setItems}
               setSelector={setSelector}
               contractConfig={contractConfig}
-              backgroundColor={backgroundColor}
+              workspaceBackgroundColor={workspaceBackgroundColor}
               head={head}
             />
 
@@ -167,7 +167,7 @@ const Dashboard: FC = () => {
                 drag={drag}
                 setDrag={setDrag}
                 setAddContainer={setAddContainer}
-                backgroundColor={backgroundColor}
+                workspaceBackgroundColor={workspaceBackgroundColor}
                 hideSidebar={hideSidebar}
                 showSettingSidebar={showSettingSidebar}
                 showSidebar={showSidebar}

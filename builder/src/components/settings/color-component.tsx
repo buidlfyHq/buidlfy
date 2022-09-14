@@ -1,23 +1,21 @@
 import React, { useState, FC, useEffect, useRef } from "react";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { SketchPicker } from "react-color";
-import IItems from "interfaces/items";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { updateItems } from "reducers/itemsReducer";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { containerCheck } from "utils/container-check";
 
 interface IColorComponent {
+  i: string;
   color: IColor;
-  setColor: (color: IColor) => void;
-  selectedItem: IItems;
+  isContainer: boolean;
 }
 
-const ColorComponent: FC<IColorComponent> = ({
-  color,
-  setColor,
-  selectedItem,
-}) => {
+const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
+  const dispatch = useDispatch();
+
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [hexColor, setHexColor] = useState();
   const [colorOpacity, setColorOpacity] = useState();
@@ -43,40 +41,67 @@ const ColorComponent: FC<IColorComponent> = ({
 
   const handleHex = (e) => {
     setHexColor(e.target.value);
-    console.log(hexColor, "hex");
   };
 
   const handleChange = (color: { rgb: IColor; hex; a }) => {
-    console.log(color, "color-main");
-
     if (!color) {
       return;
     }
-    setColor(color.rgb);
+
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: i,
+        propertyName: "color",
+        propertyValue: color.rgb,
+      })
+    );
     setHexColor(color.hex);
-    console.log(color.hex, "color.hex");
-    // setColorOpacity(`rgba(${color.a})`);
   };
+
   const opacity = Number(`${color.a}`);
   let newOpacity = opacity * 100;
   if (newOpacity == 10000) {
     newOpacity = 100;
   }
+
   const newColor = { ...color };
   const handleOpacity = (e) => {
     newColor.a = Number(e.target.value) / 100;
-    setColor(newColor);
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: i,
+        propertyName: "color",
+        propertyValue: newColor,
+      })
+    );
   };
+
   const incrementCounter = () => {
     let newIncrement = newOpacity + 1;
     newColor.a = Number(newIncrement) / 100;
-    setColor(newColor);
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: i,
+        propertyName: "color",
+        propertyValue: newColor,
+      })
+    );
   };
 
   const decrementCounter = () => {
     let newDecrement = newOpacity - 1;
     newColor.a = Number(newDecrement) / 100;
-    setColor(newColor);
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: i,
+        propertyName: "color",
+        propertyValue: newColor,
+      })
+    );
   };
 
   return (
@@ -85,7 +110,7 @@ const ColorComponent: FC<IColorComponent> = ({
         <div className="items-center mx-2 py-2 mb-2">
           {/* <VscSymbolColor className="text-[18px] mr-3" /> */}
           <div className="flex">
-            {containerCheck(selectedItem) ? (
+            {isContainer ? (
               <span className="margin-text grow flex px-1 mt-2 text-xl not-italic font-normal text-gray-500 font-regular">
                 Border Color
               </span>
