@@ -87,3 +87,79 @@ export enum sidebarEnum {
   HELP = "help",
   SETTING = "setting",
 }
+
+export interface IBgContainer {
+  backgroundColor: IColor;
+  color: IColor;
+  imgData: string | ArrayBuffer;
+  borderRadius: number;
+  borderWidth: number;
+  shadow: string;
+}
+
+export interface ISettings {
+  selectedItem?: IWorkspaceElements;
+  setShowComponent?: (showComponent: {
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }) => void;
+  showComponent?: {
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  };
+  setOpenSetting?: (open: boolean) => void;
+  settingItemId?: string;
+  openTab?: number;
+  setOpenTab?: (openTab: number) => void;
+  handleChange?: (
+    e:
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLInputElement>,
+    propertyName: string
+  ) => void;
+}
+
+export interface ITemplate {
+  name: string;
+  value: IWorkspaceElements[];
+}
+
+export interface ITexts {
+  item?: IWorkspaceElements;
+  items?: IWorkspaceElements[];
+  setItems?: (items?: IWorkspaceElements[]) => void;
+  bold: string;
+  italic: string;
+  underline: string;
+  color?: IColor;
+  justifyContent: string;
+  fontSize: number;
+  value: string;
+  link: string;
+  borderRadius?: number;
+  backgroundColor?: IColor;
+  shadow?: string;
+  connectWallet?: string;
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
+  padding?: {
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
+}

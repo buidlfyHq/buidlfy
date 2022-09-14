@@ -6,8 +6,7 @@ import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
 import GeneralSettings from "components/dashboard/general-settings";
-import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
-import ISettings from "interfaces/settings";
+import { ISettings, IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -22,35 +21,16 @@ const SettingComponent: FC<ISettings> = ({
     (state: any) => state.workspace.selectedElement
   );
 
-  const handleTextChange = (
+  const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+    propertyName: string
   ) => {
     dispatch(
       updateWorkspaceElement({
         settingItemId: selectedItem.i,
-        propertyName: "value",
-        propertyValue: e.target.value,
-      })
-    );
-  };
-
-  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(
-      updateWorkspaceElement({
-        settingItemId: selectedItem.i,
-        propertyName: "link",
-        propertyValue: e.target.value,
-      })
-    );
-  };
-
-  const handlePlaceholderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(
-      updateWorkspaceElement({
-        settingItemId: selectedItem.i,
-        propertyName: "placeholder",
+        propertyName,
         propertyValue: e.target.value,
       })
     );
@@ -60,8 +40,7 @@ const SettingComponent: FC<ISettings> = ({
     case "Button":
       return (
         <ButtonSettings
-          handleTextChange={handleTextChange}
-          handleLinkChange={handleLinkChange}
+          handleChange={handleChange}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
           openTab={openTab}
@@ -79,14 +58,13 @@ const SettingComponent: FC<ISettings> = ({
 
     case "Input":
       return (
-        <InputSettings handlePlaceholderChange={handlePlaceholderChange} />
+        <InputSettings handleChange={handleChange} />
       );
 
     default:
       return (
         <GeneralSettings
-          handleTextChange={handleTextChange}
-          handleLinkChange={handleLinkChange}
+          handleChange={handleChange}
         />
       );
   }

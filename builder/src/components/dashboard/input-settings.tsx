@@ -6,11 +6,13 @@ import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import MarginComponent from "components/settings/margin-component";
 import { containerCheck } from "utils/container-check";
-import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
-import ISettings from "interfaces/settings";
+import {
+  ISettings,
+  IWorkspaceElements,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
-const InputSettings: FC<ISettings> = ({ handlePlaceholderChange }) => {
+const InputSettings: FC<ISettings> = ({ handleChange }) => {
   const selectedItem: IWorkspaceElements = useSelector(
     (state: any) => state.workspace.selectedElement
   );
@@ -27,7 +29,7 @@ const InputSettings: FC<ISettings> = ({ handlePlaceholderChange }) => {
         {/* <RiText className="text-[18px] mr-3" /> */}
         <textarea
           value={selectedItem.placeholder}
-          onChange={(e) => handlePlaceholderChange(e)}
+          onChange={(e) => handleChange(e, "placeholder")}
           className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
           placeholder="Please write your text here..."
         />

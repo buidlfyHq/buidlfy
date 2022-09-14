@@ -8,10 +8,10 @@ import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
 import {
   IColor,
+  ITemplate,
   IWorkspaceElements,
 } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
-import ITemplate from "interfaces/template";
 
 interface INavbar {
   className: string;
@@ -92,7 +92,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
 
   const handleSaveTemplate = () => {
     // FIX: save full config to local storage
-    let newTemplates: Array<ITemplate> = [];
+    let newTemplates: ITemplate[] = [];
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(workspaceElements));
       const templates = localStorage.getItem("templates") || "";
