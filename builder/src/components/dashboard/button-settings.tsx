@@ -137,7 +137,7 @@ const ButtonSettings: FC<ISettings> = ({
         />
         <BgColorComponent
           i={selectedItem.i}
-          bgColor={selectedItem.style.backgroundColor}
+          elementBackgroundColor={selectedItem.style.backgroundColor}
         />
         <MarginComponent
           i={selectedItem.i}
