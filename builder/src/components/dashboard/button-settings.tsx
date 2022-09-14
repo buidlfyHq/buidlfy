@@ -179,10 +179,6 @@ const ButtonSettings: FC<ISettings> = ({
           setLarge={setLarge}
           shadow={shadow}
         />
-        {/* <UtilitiesComponent
-          deleteComponent={deleteComponent}
-          setDeleteComponent={setDeleteComponent}
-        /> */}
       </span>
       <div
         style={{ width: "-webkit-fill-available" }}
