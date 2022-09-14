@@ -22,7 +22,13 @@ const GeneralSettings: FC<ISettings> = ({
         <span className="setting-text">{selectedItem.name}</span>
       ) : null}
     </h3>
-    <CombinedComponent selectedItem={selectedItem} />
+    <CombinedComponent
+      i={selectedItem.i}
+      fontWeight={selectedItem.style.fontWeight}
+      fontStyle={selectedItem.style.fontStyle}
+      textDecoration={selectedItem.style.textDecoration}
+      justifyContent={selectedItem.style.justifyContent}
+    />
     <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
       {/* <RiText className="text-[18px] mr-3" /> */}
       <textarea
@@ -56,7 +62,7 @@ const GeneralSettings: FC<ISettings> = ({
     />
     <BgColorComponent
       i={selectedItem.i}
-      bgColor={selectedItem.style.backgroundColor}
+      elementBackgroundColor={selectedItem.style.backgroundColor}
     />
     <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
     <PaddingComponent i={selectedItem.i} padding={selectedItem.style.padding} />
