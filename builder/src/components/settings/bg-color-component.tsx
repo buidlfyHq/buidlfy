@@ -9,19 +9,21 @@ import "styles/dashboard.css";
 
 interface IBgColorComponent {
   i?: string;
-  bgColor?: IColor;
-  backgroundColor?: IColor;
-  setBackgroundColor?: (backgroundColor: IColor) => void;
+  elementBackgroundColor?: IColor;
+  workspaceBackgroundColor?: IColor;
+  setWorkspaceBackgroundColor?: (workspaceBackgroundColor: IColor) => void;
 }
 
 const BgColorComponent: FC<IBgColorComponent> = ({
   i,
-  bgColor,
-  backgroundColor,
-  setBackgroundColor,
+  elementBackgroundColor,
+  workspaceBackgroundColor,
+  setWorkspaceBackgroundColor,
 }) => {
   const dispatch = useDispatch();
-  const color = backgroundColor ? backgroundColor : bgColor;
+  const color = workspaceBackgroundColor
+    ? workspaceBackgroundColor
+    : elementBackgroundColor;
 
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [hexColor, setHexColor] = useState();
@@ -50,8 +52,8 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     if (!color) {
       return;
     }
-    if (backgroundColor) {
-      setBackgroundColor(color.rgb);
+    if (workspaceBackgroundColor) {
+      setWorkspaceBackgroundColor(color.rgb);
     } else {
       dispatch(
         updateItems({
@@ -72,8 +74,8 @@ const BgColorComponent: FC<IBgColorComponent> = ({
   const newColor = { ...color };
   const handleOpacity = (e) => {
     newColor.a = Number(e.target.value) / 100;
-    if (backgroundColor) {
-      setBackgroundColor(newColor);
+    if (workspaceBackgroundColor) {
+      setWorkspaceBackgroundColor(newColor);
     } else {
       dispatch(
         updateItems({
@@ -89,8 +91,8 @@ const BgColorComponent: FC<IBgColorComponent> = ({
   const incrementCounter = () => {
     let newIncrement = newOpacity + 1;
     newColor.a = Number(newIncrement) / 100;
-    if (backgroundColor) {
-      setBackgroundColor(newColor);
+    if (workspaceBackgroundColor) {
+      setWorkspaceBackgroundColor(newColor);
     } else {
       dispatch(
         updateItems({
@@ -106,8 +108,8 @@ const BgColorComponent: FC<IBgColorComponent> = ({
   const decrementCounter = () => {
     let newDecrement = newOpacity - 1;
     newColor.a = Number(newDecrement) / 100;
-    if (backgroundColor) {
-      setBackgroundColor(newColor);
+    if (workspaceBackgroundColor) {
+      setWorkspaceBackgroundColor(newColor);
     } else {
       dispatch(
         updateItems({

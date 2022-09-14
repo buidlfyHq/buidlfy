@@ -28,8 +28,6 @@ const SettingComponent: FC<ISettings> = ({
   setFontSize,
   contractConfig,
   setContractConfig,
-  showComponent,
-  setShowComponent,
   selector,
   setSelector,
   elementConfig,
@@ -77,8 +75,6 @@ const SettingComponent: FC<ISettings> = ({
           handleTextChange={handleTextChange}
           handleLinkChange={handleLinkChange}
           selectedItem={selectedItem}
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
@@ -260,8 +256,6 @@ const SettingComponent: FC<ISettings> = ({
           fontSize={selectedItem?.style?.fontSize}
           setContractConfig={setContractConfig}
           contractConfig={contractConfig}
-          setShowComponent={setShowComponent}
-          showComponent={showComponent}
           setSelector={setSelector}
           elementConfig={elementConfig}
           openTab={openTab}

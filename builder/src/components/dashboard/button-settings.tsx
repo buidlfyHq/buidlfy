@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
+import { IoMdLink } from "react-icons/io";
 import { updateSelector } from "reducers/selectorReducer";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
@@ -14,14 +15,11 @@ import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import { containerCheck } from "utils/container-check";
 import ISettings from "interfaces/settings";
-import { IoMdLink } from "react-icons/io";
 
 const ButtonSettings: FC<ISettings> = ({
   handleTextChange,
   handleLinkChange,
   selectedItem,
-  showComponent,
-  setShowComponent,
   elementConfig,
   openTab,
   setOpenTab,
@@ -139,7 +137,7 @@ const ButtonSettings: FC<ISettings> = ({
         />
         <BgColorComponent
           i={selectedItem.i}
-          bgColor={selectedItem.style.backgroundColor}
+          elementBackgroundColor={selectedItem.style.backgroundColor}
         />
         <MarginComponent
           i={selectedItem.i}
@@ -157,8 +155,6 @@ const ButtonSettings: FC<ISettings> = ({
       </span>
       <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
         <AdvanceComponent
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
           elementConfig={elementConfig}
           selectedItem={selectedItem}
         />

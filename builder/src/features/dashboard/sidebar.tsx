@@ -27,8 +27,8 @@ interface ISidebar {
   showSidebar;
   hideSidebar;
   hideSettingSidebar;
-  backgroundColor: IColor;
-  setBackgroundColor: (backgroundColor: IColor) => void;
+  workspaceBackgroundColor: IColor;
+  setWorkspaceBackgroundColor: (workspaceBackgroundColor: IColor) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;
@@ -50,8 +50,8 @@ const Sidebar: FC<ISidebar> = ({
   hideSidebar,
   showSidebar,
   hideSettingSidebar,
-  backgroundColor,
-  setBackgroundColor,
+  workspaceBackgroundColor,
+  setWorkspaceBackgroundColor,
   head,
   setHead,
 }) => {
@@ -144,8 +144,8 @@ const Sidebar: FC<ISidebar> = ({
       ) : null}
       {sideElement == sidebarEnum.STYLES ? (
         <DefaultSettings
-          backgroundColor={backgroundColor}
-          setBackgroundColor={setBackgroundColor}
+          workspaceBackgroundColor={workspaceBackgroundColor}
+          setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           head={head}
           setHead={setHead}
         />
