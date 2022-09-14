@@ -1,21 +1,21 @@
 import React, { useState, FC, useRef, useEffect } from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
-import ColorPicker from "react-best-gradient-color-picker";
 import IItems from "interfaces/items";
+import ColorPicker from "react-best-gradient-color-picker";
 import { Dialog } from "@headlessui/react";
 import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBgColorComponent {
-  color: string;
-  setBgColor: (color: string) => void;
+  backgroundColor: string;
+  setBackgroundColor: (backgroundColor: string) => void;
   selectedItem?: IItems;
 }
 
 const BgColorComponent: FC<IBgColorComponent> = ({
-  color,
-  setBgColor,
+  backgroundColor,
+  setBackgroundColor,
   selectedItem,
 }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
@@ -44,25 +44,26 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       className={`py-2 text-gray-600`}
       style={{ width: "-webkit-fill-available" }}
     >
-      <div className="flex mx-2 py-2">
-        <div className="flex margin-text grow my-1 text-xl not-italic font-normal text-gray-500 font-regular">
-          Background Color
-        </div>
-        <div
-          ref={ref}
-          onClick={() => handleClick(ReplaceStyle.TRUE)}
-          className="flex cursor-pointer"
-        >
+      <div className="mx-2 py-2 mb-2">
+        <div className="flex">
+          <div className="margin-text grow flex my-1 px-1 text-xl not-italic font-normal text-gray-500 font-regular">
+            Background Color
+          </div>
           <div
-            style={{
-              background: color,
-            }}
-            className="flex w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"
-          ></div>
-          <AiOutlineCaretDown className="text-[14px]" />
+            ref={ref}
+            onClick={() => handleClick(ReplaceStyle.TRUE)}
+            className="flex items-center cursor-pointer"
+          >
+            <div
+              style={{
+                background: backgroundColor,
+              }}
+              className="w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"
+            ></div>
+            <AiOutlineCaretDown className="text-[14px]" />
+          </div>
         </div>
       </div>
-
       {displayColorPicker ? (
         <>
           {selectedItem ? (
@@ -80,8 +81,8 @@ const BgColorComponent: FC<IBgColorComponent> = ({
                     hideInputType="false"
                     hideColorGuide="false"
                     hideAdvancedSliders="false"
-                    value={color}
-                    onChange={setBgColor}
+                    value={backgroundColor}
+                    onChange={setBackgroundColor}
                   />
                 </div>
               </div>
@@ -101,8 +102,8 @@ const BgColorComponent: FC<IBgColorComponent> = ({
                     hideInputType="false"
                     hideColorGuide="false"
                     hideAdvancedSliders="false"
-                    value={color}
-                    onChange={setBgColor}
+                    value={backgroundColor}
+                    onChange={setBackgroundColor}
                   />
                 </div>
               </div>

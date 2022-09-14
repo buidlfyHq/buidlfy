@@ -61,7 +61,7 @@ const SettingComponent: FC<ISettings> = ({
   setItalic,
   setUnderline,
   setColor,
-  setBgColor,
+  setBackgroundColor,
   setDeleteComponent,
   setLeft,
   setCenter,
@@ -147,7 +147,7 @@ const SettingComponent: FC<ISettings> = ({
           setItalic={setItalic}
           setUnderline={setUnderline}
           setColor={setColor}
-          setBgColor={setBgColor}
+          setBackgroundColor={setBackgroundColor}
           setDeleteComponent={setDeleteComponent}
           setLeft={setLeft}
           setCenter={setCenter}
@@ -219,7 +219,7 @@ const SettingComponent: FC<ISettings> = ({
           color={selectedItem?.style?.color}
           setItems={setItems}
           setColor={setColor}
-          setBgColor={setBgColor}
+          setBackgroundColor={setBackgroundColor}
           backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
           deleteComponent={selectedItem?.style?.deleteComponent}
@@ -265,7 +265,7 @@ const SettingComponent: FC<ISettings> = ({
           deleteComponent={selectedItem?.style?.deleteComponent}
           setItems={setItems}
           setColor={setColor}
-          setBgColor={setBgColor}
+          setBackgroundColor={setBackgroundColor}
           setDeleteComponent={setDeleteComponent}
           setBorderRadius={setBorderRadius}
           setBorderWidth={setBorderWidth}
@@ -322,7 +322,7 @@ const SettingComponent: FC<ISettings> = ({
           setItalic={setItalic}
           setUnderline={setUnderline}
           setColor={setColor}
-          setBgColor={setBgColor}
+          setBackgroundColor={setBackgroundColor}
           setDeleteComponent={setDeleteComponent}
           setLeft={setLeft}
           setCenter={setCenter}
