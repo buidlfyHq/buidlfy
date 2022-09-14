@@ -36,8 +36,8 @@ const Button: FC<ITexts> = ({
         fontSize: `${fontSize}px`,
         background: backgroundColor,
         boxShadow: shadow,
-        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
-        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+        margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
+        padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
       }}
       id="button-two"
       className="btn-border border-[1px] border-solid w-48 h-auto cursor-pointer btn whitespace-nowrap"

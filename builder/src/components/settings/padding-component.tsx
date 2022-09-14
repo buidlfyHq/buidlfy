@@ -64,7 +64,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               inputMode="numeric"
               id="padding-left"
               name="paddingLeft"
-              value={padding.paddingLeft}
+              value={padding?.paddingLeft}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={(e) => handlePaddingChange(e, ReplaceSpacingValue.LEFT)}
@@ -86,7 +86,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               inputMode="numeric"
               id="padding-right"
               name="paddingRight"
-              value={padding.paddingRight}
+              value={padding?.paddingRight}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={(e) =>
@@ -112,7 +112,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               inputMode="numeric"
               id="padding-top"
               name="paddingTop"
-              value={padding.paddingTop}
+              value={padding?.paddingTop}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={(e) => handlePaddingChange(e, ReplaceSpacingValue.TOP)}
@@ -134,7 +134,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
               inputMode="numeric"
               id="padding-bottom"
               name="paddingBottom"
-              value={padding.paddingBottom}
+              value={padding?.paddingBottom}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={(e) =>
