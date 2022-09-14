@@ -117,7 +117,6 @@ export interface ISettings {
       stateMutability: string;
     };
   };
-  setOpenSetting?: (open: boolean) => void;
   settingItemId?: string;
   openTab?: number;
   setOpenTab?: (openTab: number) => void;
