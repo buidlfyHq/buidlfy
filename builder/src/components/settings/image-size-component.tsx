@@ -33,12 +33,15 @@ const SizeComponent: FC<ISizeComponent> = ({
   setDynamicHeight,
   setDynamicWidth,
 }) => {
+  // Add ClientWidth and ClientHeight of Image when it changes its position
   // useEffect(() => {
-  //   if (dynamicWidth && dynamicHeight) {
-  //     setHeight(dynamicHeight);
+  //   if (dynamicWidth) {
   //     setWidth(dynamicWidth);
   //   }
-  // }, [dynamicHeight, dynamicWidth]);
+  //   if (dynamicHeight) {
+  //     setHeight(dynamicHeight);
+  //   }
+  // }, [dynamicWidth, dynamicHeight]);
 
   // useEffect(() => {
   //   if (dynamicHeight) {
@@ -46,7 +49,6 @@ const SizeComponent: FC<ISizeComponent> = ({
   //     setHeight(dynamicHeight);
   //   }
   // }, [dynamicHeight]);
-  console.log(width, height, "height");
 
   // Derive best type of e
   const handleChange = (e, action: ReplaceStyle) => {
