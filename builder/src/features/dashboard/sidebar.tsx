@@ -9,7 +9,7 @@ import Elements from "./elements";
 import Template from "pages/templates";
 import "styles/components.css";
 import { AiOutlineLeft } from "react-icons/ai";
-import { sidebarEnum } from "pages/dashboard";
+import { SidebarEnum } from "pages/dashboard";
 import DefaultSettings from "features/dashboard/default-settings";
 import IColor from "interfaces/color";
 
@@ -18,7 +18,7 @@ interface ISidebar {
   setClassName: (className: string) => void;
   items: IItems[];
   setItems: (items: IItems[]) => void;
-  addContainer: boolean;
+  isContainerSelected: boolean;
   settingItemId: string;
   sideElement: string;
   setSideElement: (sideElement: string) => void;
@@ -41,7 +41,7 @@ const Sidebar: FC<ISidebar> = ({
   setClassName,
   items,
   setItems,
-  addContainer,
+  isContainerSelected,
   settingItemId,
   sideElement,
   setSideElement,
@@ -115,20 +115,20 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </div>
       {/* Components */}
-      {sideElement == sidebarEnum.ELEMENTS ? (
+      {sideElement == SidebarEnum.ELEMENTS ? (
         <Elements
           className={className}
           setClassName={setClassName}
           items={items}
           setItems={setItems}
-          addContainer={addContainer}
+          isContainerSelected={isContainerSelected}
           settingItemId={settingItemId}
         />
       ) : null}
-      {sideElement == sidebarEnum.TEMPLATES ? (
+      {sideElement == SidebarEnum.TEMPLATES ? (
         <Template setItems={setItems} />
       ) : null}
-      {sideElement == sidebarEnum.STYLES ? (
+      {sideElement == SidebarEnum.STYLES ? (
         <DefaultSettings
           backgroundColor={backgroundColor}
           setBackgroundColor={setBackgroundColor}

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { BsBrightnessLow } from "react-icons/bs";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -16,30 +17,13 @@ const ShadowComponent: FC<IShadowComponent> = ({
   setLarge,
   shadow,
 }) => {
-  const handleSmallChange = () => {
-    // setLeft(!left);
-    if (shadow === "small") {
-      setSmall(false);
-    } else {
-      setSmall(true);
-    }
-  };
-
-  const handleMediumChange = () => {
-    // setLeft(!center);
-    if (shadow === "medium") {
-      setMedium(false);
-    } else {
-      setMedium(true);
-    }
-  };
-
-  const handleLargeChange = () => {
-    // setRight(!right);
-    if (shadow === "large") {
-      setLarge(false);
-    } else {
-      setLarge(true);
+  const handleChange = (action: ReplaceStyle) => {
+    if (action == ReplaceStyle.SMALL) {
+      setSmall(shadow !== "small");
+    } else if (action == ReplaceStyle.MEDIUM) {
+      setMedium(shadow !== "medium");
+    } else if (action == ReplaceStyle.LARGE) {
+      setLarge(shadow !== "large");
     }
   };
 
@@ -51,19 +35,19 @@ const ShadowComponent: FC<IShadowComponent> = ({
       </span>
       <div className="flex mt-3 px-1">
         <span
-          onClick={handleSmallChange}
+          onClick={() => handleChange(ReplaceStyle.SMALL)}
           className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
         >
           S
         </span>
         <span
-          onClick={handleMediumChange}
+          onClick={() => handleChange(ReplaceStyle.MEDIUM)}
           className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 mx-3 font-regular"
         >
           M
         </span>
         <span
-          onClick={handleLargeChange}
+          onClick={() => handleChange(ReplaceStyle.LARGE)}
           className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
         >
           L

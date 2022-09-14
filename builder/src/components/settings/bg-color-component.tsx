@@ -3,6 +3,7 @@ import { AiOutlineCaretDown } from "react-icons/ai";
 import ColorPicker from "react-best-gradient-color-picker";
 import IItems from "interfaces/items";
 import { Dialog } from "@headlessui/react";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -30,12 +31,12 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [ref]);
 
-  const handleClick = () => {
-    setDisplayColorPicker(true);
-  };
-
-  const handleClose = () => {
-    setDisplayColorPicker(false);
+  const handleClick = (action: ReplaceStyle) => {
+    if (action == ReplaceStyle.TRUE) {
+      setDisplayColorPicker(true);
+    } else if (action == ReplaceStyle.FALSE) {
+      setDisplayColorPicker(false);
+    }
   };
 
   return (
@@ -47,7 +48,11 @@ const BgColorComponent: FC<IBgColorComponent> = ({
         <div className="flex margin-text grow my-1 text-xl not-italic font-normal text-gray-500 font-regular">
           Background Color
         </div>
-        <div ref={ref} onClick={handleClick} className="flex cursor-pointer">
+        <div
+          ref={ref}
+          onClick={() => handleClick(ReplaceStyle.TRUE)}
+          className="flex cursor-pointer"
+        >
           <div
             style={{
               background: color,
@@ -69,7 +74,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
             >
               <div className=" px-4 text-right">
                 <div>
-                  <div onClick={handleClose} />
+                  <div onClick={() => handleClick(ReplaceStyle.FALSE)} />
                   <ColorPicker
                     hideEyeDrop="false"
                     hideInputType="false"
@@ -90,7 +95,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
             >
               <div className=" px-4 text-right">
                 <div>
-                  <div onClick={handleClose} />
+                  <div onClick={() => handleClick(ReplaceStyle.FALSE)} />
                   <ColorPicker
                     hideEyeDrop="false"
                     hideInputType="false"

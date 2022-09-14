@@ -3,6 +3,7 @@ import { AiOutlineCaretDown } from "react-icons/ai";
 import IItems from "interfaces/items";
 import ColorPicker from "react-best-gradient-color-picker";
 import { Dialog } from "@headlessui/react";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -27,12 +28,12 @@ const ColorComponent: FC<IColorComponent> = ({ color, setColor }) => {
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [ref]);
 
-  const handleClick = () => {
-    setDisplayColorPicker(true);
-  };
-
-  const handleClose = () => {
-    setDisplayColorPicker(false);
+  const handleClick = (action: ReplaceStyle) => {
+    if (action == ReplaceStyle.TRUE) {
+      setDisplayColorPicker(true);
+    } else if (action == ReplaceStyle.FALSE) {
+      setDisplayColorPicker(false);
+    }
   };
 
   return (
@@ -50,7 +51,7 @@ const ColorComponent: FC<IColorComponent> = ({ color, setColor }) => {
 
             <div
               ref={ref}
-              onClick={handleClick}
+              onClick={() => handleClick(ReplaceStyle.TRUE)}
               className="flex items-center cursor-pointer"
             >
               <div
@@ -72,7 +73,7 @@ const ColorComponent: FC<IColorComponent> = ({ color, setColor }) => {
           >
             <div className=" px-4 text-right">
               <div>
-                <div onClick={handleClose} />
+                <div onClick={() => handleClick(ReplaceStyle.FALSE)} />
                 <ColorPicker
                   hideEyeDrop="false"
                   hideInputType="false"

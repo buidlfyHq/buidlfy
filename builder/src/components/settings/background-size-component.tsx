@@ -1,9 +1,5 @@
 import React, { FC } from "react";
-import {
-  AiOutlineAlignLeft,
-  AiOutlineAlignRight,
-  AiOutlineAlignCenter,
-} from "react-icons/ai";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -24,49 +20,34 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
   setIsAuto,
   isAuto,
 }) => {
-  const handleCoverChange = () => {
-    if (backgroundSize === "cover") {
-      setCover(false);
-    } else {
-      setCover(true);
+  const handleChange = (action: ReplaceStyle) => {
+    if (action == ReplaceStyle.COVER) {
+      setCover(backgroundSize !== "cover");
+    } else if (action == ReplaceStyle.CONTAIN) {
+      setContain(backgroundSize !== "contain");
+    } else if (action == ReplaceStyle.AUTO) {
+      setAuto(backgroundSize !== "auto");
     }
   };
-
-  const handleAutoChange = () => {
-    if (backgroundSize === "auto") {
-      setAuto(false);
-    } else {
-      setAuto(true);
-    }
-  };
-
-  const handleContainChange = () => {
-    if (backgroundSize === "contain") {
-      setContain(false);
-    } else {
-      setContain(true);
-    }
-  };
-
   return (
     <>
       <span className="margin-text text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
         Background Size
         <div className="flex mt-3 px-3">
           <span
-            onClick={handleContainChange}
+            onClick={() => handleChange(ReplaceStyle.CONTAIN)}
             className="align-div flex items-center justify-center shadow text-[12px] p-2 mr-2 my-2 font-regular text-black"
           >
             Contain
           </span>
           <span
-            onClick={handleCoverChange}
+            onClick={() => handleChange(ReplaceStyle.COVER)}
             className="align-div flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black"
           >
             Cover
           </span>
           <span
-            onClick={handleAutoChange}
+            onClick={() => handleChange(ReplaceStyle.AUTO)}
             className="align-div flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black"
           >
             Auto
