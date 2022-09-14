@@ -698,17 +698,15 @@ const Settings: FC<ISettings> = ({
                     <MdOutlineDeleteOutline className="text-[12px]  mt-1 ml-1" />
                   </span>
                 </div>
-                <div className="flex delete-btn px-2 py-[0.1rem] ml-2">
+                {/* It will be used in next update */}
+                {/* <div className="flex delete-btn px-2 py-[0.1rem] ml-2">
                   <span className="flex text-[12px]">
                     Reset
                     <GrPowerReset className="text-[12px] mt-1 ml-1" />
                   </span>
-                </div>
+                </div> */}
               </div>
-              {/* <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
-              {"<"}
-              <span className="ml-2">Site Settings</span>
-            </div> */}
+
               <div style={{ marginTop: "3rem" }}>
                 <SettingComponent
                   items={items}
