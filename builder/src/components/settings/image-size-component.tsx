@@ -35,12 +35,11 @@ const SizeComponent: FC<ISizeComponent> = ({
 }) => {
   // Add ClientWidth and ClientHeight of Image when it changes its position
   // useEffect(() => {
-  //   if (dynamicWidth) {
+  //   if (dynamicWidth && dynamicHeight) {
   //     setWidth(dynamicWidth);
-  //   }
-  //   if (dynamicHeight) {
   //     setHeight(dynamicHeight);
   //   }
+
   // }, [dynamicWidth, dynamicHeight]);
 
   // useEffect(() => {
