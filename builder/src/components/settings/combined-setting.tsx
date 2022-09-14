@@ -11,20 +11,29 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface ICombinedComponent {
-  selectedItem: IItems;
+  i: string;
+  fontWeight: string;
+  fontStyle: string;
+  textDecoration: string;
+  justifyContent: string;
 }
 
-const CombinedComponent: FC<ICombinedComponent> = ({ selectedItem }) => {
+const CombinedComponent: FC<ICombinedComponent> = ({
+  i,
+  fontWeight,
+  fontStyle,
+  textDecoration,
+  justifyContent,
+}) => {
   const dispatch = useDispatch();
 
   const handleBoldChange = () => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "fontWeight",
-        propertyValue:
-          selectedItem.style.fontWeight === "bold" ? "normal" : "bold",
+        propertyValue: fontWeight === "bold" ? "normal" : "bold",
       })
     );
   };
@@ -33,10 +42,9 @@ const CombinedComponent: FC<ICombinedComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "fontStyle",
-        propertyValue:
-          selectedItem?.style?.fontStyle === "italic" ? "normal" : "italic",
+        propertyValue: fontStyle === "italic" ? "normal" : "italic",
       })
     );
   };
@@ -45,12 +53,9 @@ const CombinedComponent: FC<ICombinedComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "textDecoration",
-        propertyValue:
-          selectedItem?.style?.textDecoration === "underline"
-            ? "none"
-            : "underline",
+        propertyValue: textDecoration === "underline" ? "none" : "underline",
       })
     );
   };
@@ -59,10 +64,9 @@ const CombinedComponent: FC<ICombinedComponent> = ({ selectedItem }) => {
     dispatch(
       updateItems({
         level: 1,
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "justifyContent",
-        propertyValue:
-          selectedItem?.style?.justifyContent === type ? "inherit" : type,
+        propertyValue: justifyContent === type ? "inherit" : type,
       })
     );
   };

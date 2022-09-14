@@ -5,8 +5,8 @@ import IColor from "interfaces/color";
 import "styles/components.css";
 
 interface IDefaultSettings {
-  backgroundColor: IColor;
-  setBackgroundColor: (backgroundColor: IColor) => void;
+  workspaceBackgroundColor: IColor;
+  setWorkspaceBackgroundColor: (workspaceBackgroundColor: IColor) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;
@@ -15,8 +15,8 @@ interface IDefaultSettings {
 }
 
 const DefaultSettings: FC<IDefaultSettings> = ({
-  backgroundColor,
-  setBackgroundColor,
+  workspaceBackgroundColor,
+  setWorkspaceBackgroundColor,
   head,
   setHead,
 }) => {
@@ -36,8 +36,8 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         <h3 className="mb-2 setting-text mt-4">Site Settings</h3>
         <aside className="mb-1">
           <BgColorComponent
-            color={backgroundColor}
-            setBgColor={setBackgroundColor}
+            workspaceBackgroundColor={workspaceBackgroundColor}
+            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           />
         </aside>
 

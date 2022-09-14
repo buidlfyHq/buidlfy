@@ -8,8 +8,9 @@ interface INew {
   setItems: (items: IItems[]) => void;
 }
 const Template: FC<INew> = ({ setItems }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [newTemp, setNewTemp] = useState<ITemplate[]>([]);
+
   useEffect(() => {
     const templates = localStorage.getItem("templates");
     const newTemplates = JSON.parse(templates);
