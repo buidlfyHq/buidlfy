@@ -87,10 +87,7 @@ const RenderItem: FC<IRenderItem> = ({
           showSidebar={showSidebar}
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
-<<<<<<< HEAD
           padding={item.style.padding}
-=======
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
         />
       );
     case "Button":
@@ -233,10 +230,7 @@ const RenderItem: FC<IRenderItem> = ({
           showSidebar={showSidebar}
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
-<<<<<<< HEAD
           padding={item.style.padding}
-=======
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
         />
       );
     case "Vertical Container":
@@ -267,10 +261,7 @@ const RenderItem: FC<IRenderItem> = ({
           showSidebar={showSidebar}
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
-<<<<<<< HEAD
           padding={item.style.padding}
-=======
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
         />
       );
     default:

@@ -48,15 +48,12 @@ interface IContainer {
   showSidebar?: () => void;
   hideSidebar?: () => void;
   hideSettingSidebar?: () => void;
-<<<<<<< HEAD
   padding?: {
     paddingLeft?: number;
     paddingRight?: number;
     paddingTop?: number;
     paddingBottom?: number;
   };
-=======
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
 }
 
 const Container: FC<IContainer> = ({
@@ -82,10 +79,7 @@ const Container: FC<IContainer> = ({
   setSideElement,
   showSidebar,
   hideSidebar,
-<<<<<<< HEAD
   padding,
-=======
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -175,10 +169,7 @@ const Container: FC<IContainer> = ({
     handleSidebar(SidebarEnum.ELEMENTS);
     setSettingItemId(i);
     setOpenSetting(false);
-<<<<<<< HEAD
     setSettingItemId(i);
-=======
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
   };
 
   const onComponentClick = (itemName: string, i: string) => {
@@ -217,24 +208,17 @@ const Container: FC<IContainer> = ({
     <>
       <section
         id={item.i}
-<<<<<<< HEAD
         style={{
           paddingLeft: `${padding.paddingLeft}px`,
           paddingRight: `${padding.paddingRight}px`,
         }}
-=======
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
         className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
       >
         <GridLayout
           layout={children}
           cols={6}
           rowHeight={50}
-<<<<<<< HEAD
           width={containerW - finalPadding || 200}
-=======
-          width={containerW || 200}
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
           isBounded={true}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}

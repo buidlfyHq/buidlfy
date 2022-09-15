@@ -37,11 +37,8 @@ export enum ReplaceStyle {
   SMALL = "small",
   MEDIUM = "medium",
   LARGE = "large",
-<<<<<<< HEAD
   TRUE = "true",
   FALSE = "false",
-=======
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
 }
 const SettingComponent: FC<ISettings> = ({
   items,
@@ -157,11 +154,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingBottom={setPaddingBottom}
           margin={selectedItem?.style?.margin}
           padding={selectedItem?.style?.padding}
-<<<<<<< HEAD
           borderColor={borderColor}
           setBorderColor={setBorderColor}
-=======
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
           setPaddingLeft={setPaddingLeft}
         />
       );
@@ -184,30 +178,22 @@ const SettingComponent: FC<ISettings> = ({
       return (
         <ContainerSettings
           selectedItem={selectedItem}
-<<<<<<< HEAD
-          color={selectedItem?.style?.color}
-=======
           items={items}
           color={selectedItem?.style?.color}
           borderRadius={selectedItem?.style?.borderRadius}
           borderWidth={selectedItem?.style?.borderWidth}
           deleteComponent={selectedItem?.style?.deleteComponent}
           setItems={setItems}
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
           setColor={setColor}
           setBgColor={setBgColor}
           backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          borderRadius={selectedItem?.style?.borderRadius}
           setBorderRadius={setBorderRadius}
-          borderWidth={selectedItem?.style?.borderWidth}
           setBorderWidth={setBorderWidth}
           setSmall={setSmall}
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
-<<<<<<< HEAD
           setPaddingLeft={setPaddingLeft}
           setPaddingRight={setPaddingRight}
           setPaddingTop={setPaddingTop}
@@ -254,8 +240,6 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingTop={setPaddingTop}
           setPaddingBottom={setPaddingBottom}
           padding={selectedItem?.style?.padding}
-=======
->>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
         />
       );
     case "Input":
