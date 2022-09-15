@@ -48,6 +48,12 @@ interface IContainer {
   showSidebar?: () => void;
   hideSidebar?: () => void;
   hideSettingSidebar?: () => void;
+  padding?: {
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
 }
 
 const Container: FC<IContainer> = ({
@@ -73,6 +79,7 @@ const Container: FC<IContainer> = ({
   setSideElement,
   showSidebar,
   hideSidebar,
+  padding,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -162,6 +169,7 @@ const Container: FC<IContainer> = ({
     handleSidebar(SidebarEnum.ELEMENTS);
     setSettingItemId(i);
     setOpenSetting(false);
+    setSettingItemId(i);
   };
 
   const onComponentClick = (itemName: string, i: string) => {
@@ -195,18 +203,22 @@ const Container: FC<IContainer> = ({
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
-
+  let finalPadding = padding.paddingLeft + padding.paddingRight;
   return (
     <>
       <section
         id={item.i}
+        style={{
+          paddingLeft: `${padding.paddingLeft}px`,
+          paddingRight: `${padding.paddingRight}px`,
+        }}
         className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
       >
         <GridLayout
           layout={children}
           cols={6}
           rowHeight={50}
-          width={containerW || 200}
+          width={containerW - finalPadding || 200}
           isBounded={true}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}

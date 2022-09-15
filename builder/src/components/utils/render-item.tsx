@@ -87,6 +87,7 @@ const RenderItem: FC<IRenderItem> = ({
           showSidebar={showSidebar}
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
+          padding={item.style.padding}
         />
       );
     case "Button":
@@ -96,6 +97,7 @@ const RenderItem: FC<IRenderItem> = ({
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
           color={item.style.color}
+          borderColor={item.style.borderColor}
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
@@ -228,6 +230,7 @@ const RenderItem: FC<IRenderItem> = ({
           showSidebar={showSidebar}
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
+          padding={item.style.padding}
         />
       );
     case "Vertical Container":
@@ -258,6 +261,7 @@ const RenderItem: FC<IRenderItem> = ({
           showSidebar={showSidebar}
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
+          padding={item.style.padding}
         />
       );
     default:

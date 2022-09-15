@@ -4,6 +4,7 @@ import { SketchPicker } from "react-color";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
+import { ReplaceStyle } from "components/utils/render-setting";
 
 interface IBgColorComponent {
   color: IColor;
@@ -25,12 +26,12 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [ref]);
 
-  const handleClick = () => {
-    setDisplayColorPicker(true);
-  };
-
-  const handleClose = () => {
-    setDisplayColorPicker(false);
+  const handleClick = (action: ReplaceStyle) => {
+    if (action == ReplaceStyle.TRUE) {
+      setDisplayColorPicker(true);
+    } else if (action == ReplaceStyle.FALSE) {
+      setDisplayColorPicker(false);
+    }
   };
 
   const handleChange = (color: { rgb: IColor }) => {
@@ -43,8 +44,8 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
   return (
     <div
       ref={ref}
-      onClick={handleClick}
-      className={`flex flex-col justify-center items-start py-2 text-gray-600`}
+      onClick={() => handleClick(ReplaceStyle.TRUE)}
+      className="flex flex-col justify-center items-start py-2 text-gray-600"
     >
       <div className="items-center mx-2 py-2">
         <div className="flex">
@@ -53,7 +54,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
           </span>
           <div
             ref={ref}
-            onClick={handleClick}
+            onClick={() => handleClick(ReplaceStyle.TRUE)}
             className="flex items-center cursor-pointer"
           >
             <div className="flex w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"></div>
@@ -63,7 +64,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
       </div>
       {displayColorPicker ? (
         <>
-          <div onClick={handleClose} />
+          <div onClick={() => handleClick(ReplaceStyle.FALSE)} />
           <SketchPicker color={color} onChange={handleChange} />
         </>
       ) : null}

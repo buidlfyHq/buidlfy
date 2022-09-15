@@ -37,6 +37,8 @@ export enum ReplaceStyle {
   SMALL = "small",
   MEDIUM = "medium",
   LARGE = "large",
+  TRUE = "true",
+  FALSE = "false",
 }
 const SettingComponent: FC<ISettings> = ({
   items,
@@ -77,9 +79,11 @@ const SettingComponent: FC<ISettings> = ({
   setMarginRight,
   setMarginBottom,
   setMarginLeft,
-  setPaddingTop,
   setPaddingRight,
   setPaddingBottom,
+  setPaddingTop,
+  setBorderColor,
+  borderColor,
   setPaddingLeft,
 }) => {
   const handleTextChange = (
@@ -150,6 +154,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingBottom={setPaddingBottom}
           margin={selectedItem?.style?.margin}
           padding={selectedItem?.style?.padding}
+          borderColor={borderColor}
+          setBorderColor={setBorderColor}
           setPaddingLeft={setPaddingLeft}
         />
       );
@@ -180,6 +186,7 @@ const SettingComponent: FC<ISettings> = ({
           setItems={setItems}
           setColor={setColor}
           setBgColor={setBgColor}
+          backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
           setBorderRadius={setBorderRadius}
           setBorderWidth={setBorderWidth}
@@ -187,6 +194,52 @@ const SettingComponent: FC<ISettings> = ({
           setMedium={setMedium}
           setLarge={setLarge}
           shadow={selectedItem?.style?.shadow}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
+          padding={selectedItem?.style?.padding}
+        />
+      );
+    case "Horizontal Container":
+      return (
+        <ContainerSettings
+          items={items}
+          color={selectedItem?.style?.color}
+          borderRadius={selectedItem?.style?.borderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          setBorderWidth={setBorderWidth}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
+          padding={selectedItem?.style?.padding}
+        />
+      );
+    case "Vertical Container":
+      return (
+        <ContainerSettings
+          items={items}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          setItems={setItems}
+          setColor={setColor}
+          setBgColor={setBgColor}
+          setDeleteComponent={setDeleteComponent}
+          setBorderRadius={setBorderRadius}
+          setBorderWidth={setBorderWidth}
+          setSmall={setSmall}
+          setMedium={setMedium}
+          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
+          setPaddingLeft={setPaddingLeft}
+          setPaddingRight={setPaddingRight}
+          setPaddingTop={setPaddingTop}
+          setPaddingBottom={setPaddingBottom}
+          padding={selectedItem?.style?.padding}
         />
       );
     case "Input":

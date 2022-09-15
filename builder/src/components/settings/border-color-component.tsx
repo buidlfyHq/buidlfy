@@ -1,26 +1,23 @@
 import React, { useState, FC, useEffect, useRef } from "react";
-import { AiOutlineCaretDown } from "react-icons/ai";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { SketchPicker } from "react-color";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
-import { containerCheck } from "utils/container-check";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { ReplaceStyle } from "components/utils/render-setting";
 
 interface IColorComponent {
-  color: IColor;
-  setColor: (color: IColor) => void;
+  borderColor: IColor;
+  setBorderColor: (color: IColor) => void;
   selectedItem: IItems;
 }
 
-const ColorComponent: FC<IColorComponent> = ({
-  color,
-  setColor,
-  selectedItem,
+const BorderColorComponent: FC<IColorComponent> = ({
+  borderColor,
+  setBorderColor,
 }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
-
   const ref = useRef<HTMLDivElement>();
   useEffect(() => {
     // FIX: find a suitable type for this event
@@ -45,7 +42,7 @@ const ColorComponent: FC<IColorComponent> = ({
     if (!color) {
       return;
     }
-    setColor(color.rgb);
+    setBorderColor(color.rgb);
   };
 
   return (
@@ -53,19 +50,13 @@ const ColorComponent: FC<IColorComponent> = ({
       <div
         ref={ref}
         onClick={() => handleClick(ReplaceStyle.TRUE)}
-        className="flex flex-col mt-2 items-start justify-center py-2 text-gray-600"
+        className="flex flex-col items-start justify-center py-2 text-gray-600"
       >
         <div className="items-center mx-2 py-2 mb-2">
           <div className="flex">
-            {containerCheck(selectedItem) ? (
-              <span className="margin-text grow flex px-1 mt-2 text-xl not-italic font-normal text-gray-500 font-regular">
-                Border Color
-              </span>
-            ) : (
-              <span className="margin-text grow flex px-1 my-1 mt-2 text-xl not-italic font-normal text-gray-500 font-regular">
-                Text Color
-              </span>
-            )}
+            <span className="margin-text grow flex px-1 text-xl not-italic font-normal text-gray-500 font-regular">
+              Border Color
+            </span>
             <div
               ref={ref}
               onClick={() => handleClick(ReplaceStyle.TRUE)}
@@ -79,7 +70,7 @@ const ColorComponent: FC<IColorComponent> = ({
         {displayColorPicker ? (
           <div>
             <div onClick={() => handleClick(ReplaceStyle.FALSE)} />
-            <SketchPicker color={color} onChange={handleChange} />
+            <SketchPicker color={borderColor} onChange={handleChange} />
           </div>
         ) : null}
       </div>
@@ -87,4 +78,4 @@ const ColorComponent: FC<IColorComponent> = ({
   );
 };
 
-export default ColorComponent;
+export default BorderColorComponent;

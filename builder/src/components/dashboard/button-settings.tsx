@@ -13,6 +13,7 @@ import CombinedComponent from "components/settings/combined-setting";
 import ISettings from "interfaces/settings";
 import { IoMdLink } from "react-icons/io";
 import "styles/dashboard.css";
+import BorderColorComponent from "components/settings/border-color-component";
 
 const ButtonSettings: FC<ISettings> = ({
   textVal,
@@ -67,6 +68,8 @@ const ButtonSettings: FC<ISettings> = ({
   setPaddingRight,
   setPaddingBottom,
   setPaddingTop,
+  setBorderColor,
+  borderColor,
 }) => {
   const handleToggleTab = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
@@ -145,7 +148,11 @@ const ButtonSettings: FC<ISettings> = ({
           setColor={setColor}
           selectedItem={selectedItem}
         />
-
+        <BorderColorComponent
+          borderColor={borderColor}
+          setBorderColor={setBorderColor}
+          selectedItem={selectedItem}
+        />
         <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
         <MarginComponent
           setMarginLeft={setMarginLeft}

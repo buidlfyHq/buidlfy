@@ -44,6 +44,12 @@ export const components = [
     h: 2,
     minH: 2,
     style: {
+      padding: {
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        paddingBottom: 0
+      },
       ...defaultDeleteStyles,
       ...defaultColorStyles,
       ...defaultBorderStyles,
@@ -183,6 +189,7 @@ export const components = [
       ...defaultColorStyles,
       ...defaultFontStyles,
       fontSize: 15,
+      borderColor: { r: "0", g: "0", b: "0", a: "100" }, 
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
       ...defaultMarginStyles,
