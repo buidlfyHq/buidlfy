@@ -16,29 +16,28 @@ const Text: FC<ITexts> = ({
   padding,
   link,
 }) => {
-  const textAreaContent = () => {
-    return (
-      <textarea
-        readOnly
-        id={item.i}
-        value={value}
-        style={{
-          fontWeight: bold,
-          fontStyle: italic,
-          textDecoration: underline,
-          background: color,
-          WebkitTextFillColor: "transparent",
-          display: "flex",
-          justifyContent,
-          alignItems: "center",
-          textAlign: `${justifyContent}` as CanvasTextAlign,
-          fontSize: `${fontSize}px`,
-          padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
-        }}
-        className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
-      />
-    );
-  };
+  const textAreaContent = (
+    <textarea
+      readOnly
+      id={item.i}
+      value={value}
+      style={{
+        fontWeight: bold,
+        fontStyle: italic,
+        textDecoration: underline,
+        background: color,
+        WebkitTextFillColor: "transparent",
+        display: "flex",
+        justifyContent,
+        alignItems: "center",
+        textAlign: `${justifyContent}` as CanvasTextAlign,
+        fontSize: `${fontSize}px`,
+        padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
+      }}
+      className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
+    />
+  );
+
   return (
     <section
       id="text-one"
@@ -62,10 +61,10 @@ const Text: FC<ITexts> = ({
               WebkitTextFillColor: "transparent",
             }}
           >
-            {textAreaContent()}
+            {textAreaContent}
           </a>
         ) : (
-          textAreaContent()
+          textAreaContent
         )}
       </>
     </section>

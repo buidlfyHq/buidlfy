@@ -38,23 +38,22 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       setDisplayColorPicker(false);
     }
   };
-  const backgroundDialogContent = () => {
-    return (
-      <div className=" px-4 text-right">
-        <div>
-          <div onClick={() => handleClick(ReplaceStyle.FALSE)} />
-          <ColorPicker
-            hideEyeDrop="false"
-            hideInputType="false"
-            hideColorGuide="false"
-            hideAdvancedSliders="false"
-            value={backgroundColor}
-            onChange={setBackgroundColor}
-          />
-        </div>
+  const backgroundDialogContent = (
+    <div className=" px-4 text-right">
+      <div>
+        <div onClick={() => handleClick(ReplaceStyle.FALSE)} />
+        <ColorPicker
+          hideEyeDrop="false"
+          hideInputType="false"
+          hideColorGuide="false"
+          hideAdvancedSliders="false"
+          value={backgroundColor}
+          onChange={setBackgroundColor}
+        />
       </div>
-    );
-  };
+    </div>
+  );
+
   return (
     <div
       className={`py-2 text-gray-600`}

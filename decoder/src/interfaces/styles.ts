@@ -1,15 +1,9 @@
 import IColor from "./color";
 
 export default interface IStyles {
-<<<<<<< HEAD
   color: string;
   borderColor?: string;
   backgroundColor?: string;
-=======
-  color: IColor;
-  borderColor?: IColor;
-  backgroundColor?: IColor;
->>>>>>> 027dc40838fd7ce5f82ee7952be9ddbed3e5ac7c
   fontWeight?: string;
   fontStyle?: string;
   textDecoration?: string;
