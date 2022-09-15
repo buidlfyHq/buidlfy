@@ -88,7 +88,7 @@ export enum sidebarEnum {
   SETTING = "setting",
 }
 
-export interface IBgContainer {
+export interface IBackgroundContainer {
   backgroundColor: IColor;
   color: IColor;
   imgData: string | ArrayBuffer;
@@ -99,28 +99,12 @@ export interface IBgContainer {
 
 export interface ISettings {
   selectedItem?: IWorkspaceElement;
-  setShowComponent?: (showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  }) => void;
-  showComponent?: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  };
+  setShowComponent?: (showComponent: IShowComponent) => void;
+  showComponent?: IShowComponent;
   settingItemId?: string;
   openTab?: number;
   setOpenTab?: (openTab: number) => void;
-  handleChange?: (
+  handleSettingChange?: (
     e:
       | React.ChangeEvent<HTMLTextAreaElement>
       | React.ChangeEvent<HTMLInputElement>,
@@ -128,12 +112,22 @@ export interface ISettings {
   ) => void;
 }
 
+export interface IShowComponent {
+  id: string;
+  value: {
+    name: string;
+    inputs: object[];
+    outputs: object[];
+    stateMutability: string;
+  };
+}
+
 export interface ITemplate {
   name: string;
   value: IWorkspaceElement[];
 }
 
-export interface ITexts {
+export interface IText {
   item?: IWorkspaceElement;
   items?: IWorkspaceElement[];
   setItems?: (items?: IWorkspaceElement[]) => void;

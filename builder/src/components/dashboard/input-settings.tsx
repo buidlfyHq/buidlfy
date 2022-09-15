@@ -13,7 +13,7 @@ import {
 } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
-const InputSettings: FC<ISettings> = ({ handleChange }) => {
+const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedItem: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
@@ -30,7 +30,7 @@ const InputSettings: FC<ISettings> = ({ handleChange }) => {
         {/* <RiText className="text-[18px] mr-3" /> */}
         <textarea
           value={selectedItem.placeholder}
-          onChange={(e) => handleChange(e, "placeholder")}
+          onChange={(e) => handleSettingChange(e, "placeholder")}
           className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
           placeholder="Please write your text here..."
         />

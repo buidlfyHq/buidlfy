@@ -2,19 +2,11 @@ import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { IShowComponent, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 
 interface IAbiMethods {
-  setShowComponent: (showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  }) => void;
+  setShowComponent: (showComponent: IShowComponent) => void;
   selectedItem: IWorkspaceElement;
 }
 

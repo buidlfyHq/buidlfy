@@ -21,7 +21,7 @@ import {
 } from "redux/workspace/workspace.interfaces";
 
 const ButtonSettings: FC<ISettings> = ({
-  handleChange,
+  handleSettingChange,
   showComponent,
   setShowComponent,
   openTab,
@@ -107,7 +107,7 @@ const ButtonSettings: FC<ISettings> = ({
           {/* <RiText className="text-[18px] mr-3" /> */}
           <textarea
             value={selectedItem.value}
-            onChange={(e) => handleChange(e, "value")}
+            onChange={(e) => handleSettingChange(e, "value")}
             className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
             placeholder="Please write your text here..."
           />
@@ -118,7 +118,7 @@ const ButtonSettings: FC<ISettings> = ({
           </div>
           <input
             value={selectedItem.link}
-            onChange={(e) => handleChange(e, "link")}
+            onChange={(e) => handleSettingChange(e, "link")}
             className="changeText pl-[2.5rem] py-[0.4rem] input-text"
             type="text"
             placeholder="Link"

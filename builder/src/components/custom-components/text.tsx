@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { ITexts } from "redux/workspace/workspace.interfaces";
+import { IText } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
-const Text: FC<ITexts> = ({
+const Text: FC<IText> = ({
   item,
   bold,
   italic,

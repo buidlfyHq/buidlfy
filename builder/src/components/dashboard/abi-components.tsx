@@ -8,7 +8,7 @@ import {
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
 import { IRootState } from "redux/root-state.interface";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { IShowComponent, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
   IContractElementSelector,
@@ -16,15 +16,7 @@ import {
 import "styles/components.css";
 
 interface IAbiComponents {
-  showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  };
+  showComponent: IShowComponent;
   selectedItem: IWorkspaceElement;
 }
 

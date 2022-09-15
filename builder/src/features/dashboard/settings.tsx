@@ -2,7 +2,7 @@ import React, { useState, useRef, FC } from "react";
 import { useSelector } from "react-redux";
 import SettingComponent from "components/utils/render-setting";
 import { IRootState } from "redux/root-state.interface";
-import { ISettings, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { ISettings, IShowComponent, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const ref = useRef(null);
@@ -11,15 +11,7 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
   );
 
   const [showComponent, setShowComponent] =
-    useState<{
-      id: string;
-      value: {
-        name: string;
-        inputs: object[];
-        outputs: object[];
-        stateMutability: string;
-      };
-    }>(null); // for abi method component
+    useState<IShowComponent>(null); // for abi method component
 
   return (
     <>
