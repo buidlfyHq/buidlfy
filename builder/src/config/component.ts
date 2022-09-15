@@ -17,7 +17,7 @@ const defaultPaddingStyles = {
 };
 
 const defaultColorStyles = {
-  backgroundColor: { r: "0", g: "0", b: "0" },
+  backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
   color: { r: "0", g: "0", b: "0", a: "100" },
 };
 
@@ -50,127 +50,128 @@ export const components = [
     },
     children: [],
   },
-  {
-    name: "Horizontal Container",
-    h: 4,
-    style: {
-      ...defaultDeleteStyles,
-      ...defaultColorStyles,
-      ...defaultBorderStyles,
-    },
-    children: [
-      {
-        name: "Image",
-        h: 4,
-        i: 1,
-        y: 0,
-        x: 0,
-        w: 3,
-        style: {
-          ...defaultDeleteStyles,
-          ...defaultFontStyles,
-          ...defaultMarginStyles,
-        },
-      },
-      {
-        name: "Text",
-        h: 2,
-        i: 3,
-        y: 0,
-        x: 3,
-        w: 3,
-        value: "Card Paragraph",
-        link: "",
-        style: {
-          ...defaultColorStyles,
-          ...defaultFontStyles,
-          fontSize: 15,
-          ...defaultDeleteStyles,
-          ...defaultMarginStyles,
-          ...defaultPaddingStyles,
-        },
-      },
-      {
-        name: "Heading 1",
-        h: 2,
-        i: 2,
-        y: 0,
-        x: 3,
-        w: 3,
-        value: "Card Title",
-        link: "",
-        style: {
-          ...defaultColorStyles,
-          ...defaultFontStyles,
-          fontSize: 25,
-          ...defaultDeleteStyles,
-          ...defaultMarginStyles,
-          ...defaultPaddingStyles,
-        },
-      },
-    ],
-  },
-  {
-    name: "Vertical Container",
-    h: 5,
-    style: {
-      ...defaultDeleteStyles,
-      ...defaultColorStyles,
-      ...defaultBorderStyles,
-    },
+  // {
+  //   name: "Horizontal Container",
+  //   h: 4,
+  //   style: {
+  //     ...defaultDeleteStyles,
+  //     ...defaultColorStyles,
+  //     ...defaultBorderStyles,
+  //   },
+  //   children: [
+  //     {
+  //       name: "Image",
+  //       h: 4,
+  //       i: 1,
+  //       y: 0,
+  //       x: 0,
+  //       w: 3,
+  //       style: {
+  //         ...defaultDeleteStyles,
+  //         ...defaultFontStyles,
+  //         ...defaultMarginStyles
+  //       },
+  //     },
+  //     {
+  //       name: "Text",
+  //       h: 2,
+  //       i: 3,
+  //       y: 0,
+  //       x: 3,
+  //       w: 3,
+  //       value: "Card Paragraph",
+  //       link: "",
+  //       style: {
+  //         ...defaultColorStyles,
+  //         ...defaultFontStyles,
+  //         fontSize: 15,
+  //         ...defaultDeleteStyles,
+  //         ...defaultMarginStyles,
+  //         ...defaultPaddingStyles
+  //       },
+  //     },
+  //     {
+  //       name: "Heading 1",
+  //       h: 2,
+  //       i: 2,
+  //       y: 0,
+  //       x: 3,
+  //       w: 3,
+  //       value: "Card Title",
+  //       link: "",
+  //       style: {
+  //         ...defaultColorStyles,
+  //         ...defaultFontStyles,
+  //         fontSize: 25,
+  //         ...defaultDeleteStyles,
+  //         ...defaultMarginStyles,
+  //         ...defaultPaddingStyles
+  //       },
+  //     },
+     
+  //   ],
+  // },
+  // {
+  //   name: "Vertical Container",
+  //   h: 5,
+  //   style: {
+  //     ...defaultDeleteStyles,
+  //     ...defaultColorStyles,
+  //     ...defaultBorderStyles,
+  //   },
 
-    children: [
-      {
-        name: "Image",
-        h: 2,
-        i: 4,
-        w: 6,
-        x: 0,
-        y: 0,
-        style: {
-          ...defaultDeleteStyles,
-          ...defaultFontStyles,
-          ...defaultMarginStyles,
-        },
-      },
-      {
-        name: "Heading 1",
-        h: 1,
-        i: 5,
-        w: 6,
-        x: 0,
-        y: 2,
-        value: "Card Title",
-        link: "",
-        style: {
-          ...defaultColorStyles,
-          ...defaultFontStyles,
-          fontSize: 25,
-          ...defaultDeleteStyles,
-          ...defaultMarginStyles,
-          ...defaultPaddingStyles,
-        },
-      },
-      {
-        name: "Text",
-        h: 2,
-        i: 6,
-        w: 6,
-        x: 0,
-        y: 3,
-        value: "Card Paragraph",
-        link: "",
-        style: {
-          ...defaultColorStyles,
-          ...defaultFontStyles,
-          fontSize: 15,
-          ...defaultDeleteStyles,
-          ...defaultMarginStyles,
-          ...defaultPaddingStyles,
-        },
-      },
-    ],
-  },
+  //   children: [
+  //     {
+  //       name: "Image",
+  //       h: 2,
+  //       i: 4,
+  //       w: 6,
+  //       x: 0,
+  //       y: 0,
+  //       style: {
+  //         ...defaultDeleteStyles,
+  //         ...defaultFontStyles,
+  //         ...defaultMarginStyles,
+  //       },
+  //     },
+  //     {
+  //       name: "Heading 1",
+  //       h: 1,
+  //       i: 5,
+  //       w: 6,
+  //       x: 0,
+  //       y: 2,
+  //       value: "Card Title",
+  //       link: "",
+  //       style: {
+  //         ...defaultColorStyles,
+  //         ...defaultFontStyles,
+  //         fontSize: 25,
+  //         ...defaultDeleteStyles,
+  //         ...defaultMarginStyles,
+  //         ...defaultPaddingStyles
+  //       },
+  //     },
+  //     {
+  //       name: "Text",
+  //       h: 2,
+  //       i: 6,
+  //       w: 6,
+  //       x: 0,
+  //       y: 3,
+  //       value: "Card Paragraph",
+  //       link: "",
+  //       style: {
+  //         ...defaultColorStyles,
+  //         ...defaultFontStyles,
+  //         fontSize: 15,
+  //         ...defaultDeleteStyles,
+  //         ...defaultMarginStyles,
+  //         ...defaultPaddingStyles
+  //       },
+  //     },
+  //   ],
+  // },
   {
     name: "Button",
     h: 1,
@@ -282,12 +283,12 @@ export const components = [
       ...defaultMarginStyles,
     },
   },
-  {
-    name: "Divider",
-    h: 1,
-    minH: 1,
-    style: {
-      ...defaultDeleteStyles,
-    },
-  },
+  // {
+  //   name: "Divider",
+  //   h: 1,
+  //   style: {
+  //     ...defaultDeleteStyles,
+  //   },
+  // },
+
 ];

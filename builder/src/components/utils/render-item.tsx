@@ -15,7 +15,7 @@ interface IRenderItem {
   setOpenSetting?: (openSetting: boolean) => void;
   setSettingItemId?: (settingItemId: string) => void;
   setOpenTab?: (openTab: number) => void;
-  setAddContainer?: (addContainer: boolean) => void;
+  setIsContainerSelected?: (isContainerSelected: boolean) => void;
   selector?: {
     methodName: string;
     type: string;
@@ -29,7 +29,13 @@ interface IRenderItem {
     buttonId: string;
   }) => void;
   elementConfig?: object;
+  setSideElement: (sideElement: string) => void;
   setElementConfig?: (elementConfig: object) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  showSidebar?: () => void;
+  hideSidebar?: () => void;
+  hideSettingSidebar?: () => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -40,11 +46,17 @@ const RenderItem: FC<IRenderItem> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  setAddContainer,
+  setIsContainerSelected,
   selector,
   setSelector,
   elementConfig,
   setElementConfig,
+  setSideElement,
+  dragContainer,
+  setDragContainer,
+  showSidebar,
+  hideSidebar,
+  hideSettingSidebar,
 }) => {
   switch (item.name) {
     case "Container":
@@ -64,11 +76,17 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          setIsContainerSelected={setIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          setSideElement={setSideElement}
+          dragContainer={dragContainer}
+          setDragContainer={setDragContainer}
+          showSidebar={showSidebar}
+          hideSidebar={hideSidebar}
+          hideSettingSidebar={hideSettingSidebar}
         />
       );
     case "Button":
@@ -199,11 +217,17 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          setIsContainerSelected={setIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          setSideElement={setSideElement}
+          dragContainer={dragContainer}
+          setDragContainer={setDragContainer}
+          showSidebar={showSidebar}
+          hideSidebar={hideSidebar}
+          hideSettingSidebar={hideSettingSidebar}
         />
       );
     case "Vertical Container":
@@ -223,11 +247,17 @@ const RenderItem: FC<IRenderItem> = ({
           setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          setIsContainerSelected={setIsContainerSelected}
           selector={selector}
           setSelector={setSelector}
           elementConfig={elementConfig}
           setElementConfig={setElementConfig}
+          setSideElement={setSideElement}
+          dragContainer={dragContainer}
+          setDragContainer={setDragContainer}
+          showSidebar={showSidebar}
+          hideSidebar={hideSidebar}
+          hideSettingSidebar={hideSettingSidebar}
         />
       );
     default:

@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import IColor from "./color";
 import IItems from "./items";
 
@@ -96,7 +97,7 @@ export default interface ISettings {
   connectWallet?: string;
   placeholder?: string;
   setPlaceholder?: (placeholder: string) => void;
-  handlePlaceholderChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePlaceholderChange?: (e) => void;
   textVal?: string;
   // handleTextChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleTextChange?: (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;

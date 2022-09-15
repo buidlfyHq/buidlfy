@@ -16,16 +16,16 @@ const UtilitiesComponent: FC<IUtilitiesComponent> = ({
   };
 
   return (
-    <div className="items-center w-full px-3 py-2 text-gray-600 rounded">
-      <div className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
+    <div className="items-center w-full px-3 py-2 mt-4 text-gray-600 rounded">
+      <div className="margin-text px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
         Utilities
       </div>
       <div className="flex">
         <span
           onClick={handleDelete}
-          className="flex items-center justify-center underline shadow text-[18px] w-8 h-10 my-2 font-regular text-black"
+          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-2 mt-2 font-regular"
         >
-          <AiOutlineDelete className="text-[18px]" />
+          <AiOutlineDelete className="text-[16px]" />
         </span>
         {/* It will be used for the latest code when we will add duplicate function  */}
         {/* <span className="flex items-center justify-center underline shadow text-[18px] w-8 h-10 ml-3 my-2 font-regular text-black">

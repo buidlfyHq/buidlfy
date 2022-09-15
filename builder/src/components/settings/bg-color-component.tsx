@@ -1,5 +1,5 @@
 import React, { useState, FC, useRef, useEffect } from "react";
-import { VscSymbolColor } from "react-icons/vsc";
+import { AiOutlineCaretDown } from "react-icons/ai";
 import { SketchPicker } from "react-color";
 import IColor from "interfaces/color";
 import "styles/components.css";
@@ -11,7 +11,7 @@ interface IBgColorComponent {
 }
 
 const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -44,13 +44,22 @@ const BgColorComponent: FC<IBgColorComponent> = ({ color, setBgColor }) => {
     <div
       ref={ref}
       onClick={handleClick}
-      className={`flex flex-col justify-center items-start py-2 text-gray-600 cursor-pointer`}
+      className={`flex flex-col justify-center items-start py-2 text-gray-600`}
     >
-      <div className="flex items-center w-full px-3 py-2 mb-2 hover:bg-slate-100">
-        <VscSymbolColor className="text-[18px] mr-3" />
-        <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
-          Background Color
-        </span>
+      <div className="items-center mx-2 py-2">
+        <div className="flex">
+          <span className="margin-text grow px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
+            Background Color
+          </span>
+          <div
+            ref={ref}
+            onClick={handleClick}
+            className="flex items-center cursor-pointer"
+          >
+            <div className="flex w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"></div>
+            <AiOutlineCaretDown className="text-[14px] mr-3" />
+          </div>
+        </div>
       </div>
       {displayColorPicker ? (
         <>

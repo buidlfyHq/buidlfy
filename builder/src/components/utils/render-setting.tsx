@@ -8,6 +8,36 @@ import ISettings from "interfaces/settings";
 import "styles/components.css";
 import "styles/dashboard.css";
 
+export enum ReplaceValue {
+  INCREMENT = "increment",
+  DECREMENT = "decrement",
+  CHANGE = "change",
+}
+export enum ReplaceSpacingValue {
+  LEFT = "left",
+  RIGHT = "right",
+  TOP = "top",
+  BOTTOM = "bottom",
+  INCREMENTLEFT = "incrementLeft",
+  INCREMENTRIGHT = "incrementRight",
+  INCREMENTTOP = "incrementTop",
+  INCREMENTBOTTOM = "incrementBottom",
+  DECREMENTLEFT = "decrementLeft",
+  DECREMENTRIGHT = "decrementRight",
+  DECREMENTTOP = "decrementTop",
+  DECREMENTBOTTOM = "decrementBottom",
+}
+export enum ReplaceStyle {
+  BOLD = "bold",
+  ITALIC = "italic",
+  UNDERLINE = "underline",
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center",
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+}
 const SettingComponent: FC<ISettings> = ({
   items,
   setItems,
@@ -52,7 +82,11 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingBottom,
   setPaddingLeft,
 }) => {
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleTextChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setValue(e.target.value);
   };
 
@@ -68,12 +102,19 @@ const SettingComponent: FC<ISettings> = ({
     case "Button":
       return (
         <ButtonSettings
+          borderRadius={selectedItem?.style?.borderRadius}
           selectedItem={selectedItem}
           textVal={value}
           handleTextChange={handleTextChange}
           linkVal={link}
           handleLinkChange={handleLinkChange}
           items={items}
+          fontSize={selectedItem?.style?.fontSize}
+          bold={selectedItem?.style?.fontWeight}
+          italic={selectedItem?.style?.fontStyle}
+          underline={selectedItem?.style?.textDecoration}
+          color={selectedItem?.style?.color}
+          deleteComponent={selectedItem?.style?.deleteComponent}
           setItems={setItems}
           setBold={setBold}
           setItalic={setItalic}
@@ -107,6 +148,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingTop={setPaddingTop}
           setPaddingRight={setPaddingRight}
           setPaddingBottom={setPaddingBottom}
+          margin={selectedItem?.style?.margin}
+          padding={selectedItem?.style?.padding}
           setPaddingLeft={setPaddingLeft}
         />
       );
@@ -115,15 +158,14 @@ const SettingComponent: FC<ISettings> = ({
         <ImageSettings
           selectedItem={selectedItem}
           items={items}
-          setItems={setItems}
-          setDeleteComponent={setDeleteComponent}
+          deleteComponent={selectedItem?.style?.deleteComponent}
           setLeft={setLeft}
           setCenter={setCenter}
           setRight={setRight}
           setMarginTop={setMarginTop}
           setMarginRight={setMarginRight}
           setMarginBottom={setMarginBottom}
-          setMarginLeft={setMarginLeft}
+          margin={selectedItem?.style?.margin}
         />
       );
     case "Container":
@@ -131,6 +173,10 @@ const SettingComponent: FC<ISettings> = ({
         <ContainerSettings
           selectedItem={selectedItem}
           items={items}
+          color={selectedItem?.style?.color}
+          borderRadius={selectedItem?.style?.borderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          deleteComponent={selectedItem?.style?.deleteComponent}
           setItems={setItems}
           setColor={setColor}
           setBgColor={setBgColor}
@@ -140,38 +186,7 @@ const SettingComponent: FC<ISettings> = ({
           setSmall={setSmall}
           setMedium={setMedium}
           setLarge={setLarge}
-        />
-      );
-    case "Horizontal Container":
-      return (
-        <ContainerSettings
-          selectedItem={selectedItem}
-          items={items}
-          setItems={setItems}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setBorderRadius={setBorderRadius}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-        />
-      );
-    case "Vertical Container":
-      return (
-        <ContainerSettings
-          selectedItem={selectedItem}
-          items={items}
-          setItems={setItems}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setBorderRadius={setBorderRadius}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
+          shadow={selectedItem?.style?.shadow}
         />
       );
     case "Input":
@@ -180,6 +195,10 @@ const SettingComponent: FC<ISettings> = ({
           selectedItem={selectedItem}
           placeholder={placeholder}
           handlePlaceholderChange={handlePlaceholderChange}
+          color={selectedItem?.style?.color}
+          shadow={selectedItem?.style?.shadow}
+          deleteComponent={selectedItem?.style?.deleteComponent}
+          borderRadius={selectedItem?.style?.borderRadius}
           setColor={setColor}
           setDeleteComponent={setDeleteComponent}
           setBorderRadius={setBorderRadius}
@@ -189,6 +208,7 @@ const SettingComponent: FC<ISettings> = ({
           setMarginTop={setMarginTop}
           setMarginRight={setMarginRight}
           setMarginBottom={setMarginBottom}
+          margin={selectedItem?.style?.margin}
           setMarginLeft={setMarginLeft}
         />
       );
@@ -197,9 +217,16 @@ const SettingComponent: FC<ISettings> = ({
         <GeneralSettings
           selectedItem={selectedItem}
           textVal={value}
+          fontSize={selectedItem?.style?.fontSize}
+          borderRadius={selectedItem?.style?.borderRadius}
           handleTextChange={handleTextChange}
           linkVal={link}
           handleLinkChange={handleLinkChange}
+          bold={selectedItem?.style?.fontWeight}
+          italic={selectedItem?.style?.fontStyle}
+          underline={selectedItem?.style?.textDecoration}
+          color={selectedItem?.style?.color}
+          deleteComponent={selectedItem?.style?.deleteComponent}
           setBold={setBold}
           setItalic={setItalic}
           setUnderline={setUnderline}
@@ -218,6 +245,8 @@ const SettingComponent: FC<ISettings> = ({
           setPaddingRight={setPaddingRight}
           setPaddingBottom={setPaddingBottom}
           setPaddingLeft={setPaddingLeft}
+          margin={selectedItem?.style?.margin}
+          padding={selectedItem?.style?.padding}
         />
       );
   }

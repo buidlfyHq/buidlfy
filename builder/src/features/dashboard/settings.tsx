@@ -1,7 +1,8 @@
 import React, { useState, useRef, FC } from "react";
 import SettingComponent from "components/utils/render-setting";
-import IColor from "interfaces/color";
+import IItems from "interfaces/items";
 import ISettings from "interfaces/settings";
+import IColor from "interfaces/color";
 
 enum fontEnum {
   BOLD = "bold",
@@ -20,12 +21,10 @@ enum functionEnum {
   SHADOW = "shadow",
   BORDER_RADIUS = "borderRadius",
   BORDER_WIDTH = "borderWidth",
-  MARGIN = "margin",
   MARGIN_LEFT = "marginLeft",
   MARGIN_RIGHT = "marginRight",
   MARGIN_TOP = "marginTop",
   MARGIN_BOTTOM = "marginBottom",
-  PADDING = "padding",
   PADDING_LEFT = "paddingLeft",
   PADDING_RIGHT = "paddingRight",
   PADDING_TOP = "paddingTop",
@@ -58,7 +57,7 @@ const Settings: FC<ISettings> = ({
 
   // work in progress
   const selectedChildren = items.map((item) =>
-    item.children?.find((child) => child.i === settingItemId)
+    item.children?.find((child: IItems) => child.i === settingItemId)
   );
 
   const selectedItem =
@@ -71,7 +70,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return { ...item, link };
@@ -82,7 +81,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -103,7 +102,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return { ...item, placeholder };
@@ -114,7 +113,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -135,7 +134,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return { ...item, value };
@@ -146,7 +145,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -172,7 +171,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return {
@@ -191,7 +190,7 @@ const Settings: FC<ISettings> = ({
           },
         };
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -242,7 +241,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return {
@@ -262,7 +261,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -276,7 +275,92 @@ const Settings: FC<ISettings> = ({
     });
     setItems(updatedItems);
   };
+  const marginWorkFunction = (
+    styleProp: functionEnum,
+    property: number | IColor
+  ) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child: IItems) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            margin: { ...item.style.margin, [styleProp]: property },
+          },
+        };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            margin: { ...selectedChild.style.margin, [styleProp]: property },
+          },
+        };
 
+        const childIndex = item.children?.findIndex(
+          (c: IItems) => c.i === settingItemId
+        );
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
+
+        return {
+          ...item,
+          children: newChildren,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+  const paddingWorkFunction = (
+    styleProp: functionEnum,
+    property: number | IColor
+  ) => {
+    if (!settingItemId) {
+      return;
+    }
+    const updatedItems = items.map((item) => {
+      let selectedChild = item.children?.find(
+        (child: IItems) => child.i === settingItemId
+      );
+      if (item.i === settingItemId) {
+        return {
+          ...item,
+          style: {
+            ...item["style"],
+            padding: { ...item.style.padding, [styleProp]: property },
+          },
+        };
+      } else if (selectedChild?.i === settingItemId) {
+        let child = {
+          ...selectedChild,
+          style: {
+            ...selectedChild["style"],
+            padding: { ...selectedChild.style.padding, [styleProp]: property },
+          },
+        };
+
+        const childIndex = item.children?.findIndex(
+          (c: IItems) => c.i === settingItemId
+        );
+        let newChildren = [...item.children];
+        newChildren[childIndex] = child;
+
+        return {
+          ...item,
+          children: newChildren,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
   const setColor = (color: IColor) => {
     singleWorkFunction(functionEnum.COLOR, color);
   };
@@ -349,7 +433,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return {
@@ -360,9 +444,6 @@ const Settings: FC<ISettings> = ({
           },
         };
       } else if (selectedChild?.i === settingItemId) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
         let child = {
           ...selectedChild,
           style: {
@@ -372,7 +453,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -390,124 +471,32 @@ const Settings: FC<ISettings> = ({
   const setBorderRadius = (borderRadius: number) => {
     singleWorkFunction(functionEnum.BORDER_RADIUS, borderRadius);
   };
-
+  const setMarginLeft = (marginLeft: number) => {
+    marginWorkFunction(functionEnum.MARGIN_LEFT, marginLeft);
+  };
+  const setMarginRight = (marginRight: number) => {
+    marginWorkFunction(functionEnum.MARGIN_RIGHT, marginRight);
+  };
+  const setMarginTop = (marginTop: number) => {
+    marginWorkFunction(functionEnum.MARGIN_TOP, marginTop);
+  };
+  const setMarginBottom = (marginBottom: number) => {
+    marginWorkFunction(functionEnum.MARGIN_BOTTOM, marginBottom);
+  };
+  const setPaddingLeft = (paddingLeft: number) => {
+    paddingWorkFunction(functionEnum.PADDING_LEFT, paddingLeft);
+  };
+  const setPaddingRight = (paddingRight: number) => {
+    paddingWorkFunction(functionEnum.PADDING_RIGHT, paddingRight);
+  };
+  const setPaddingTop = (paddingTop: number) => {
+    paddingWorkFunction(functionEnum.PADDING_TOP, paddingTop);
+  };
+  const setPaddingBottom = (paddingBottom: number) => {
+    paddingWorkFunction(functionEnum.PADDING_BOTTOM, paddingBottom);
+  };
   const setBorderWidth = (borderWidth: number) => {
     singleWorkFunction(functionEnum.BORDER_WIDTH, borderWidth);
-  };
-
-  const spacingWorkFunction = (
-    styleProp: functionEnum,
-    stylePropChild: functionEnum,
-    property: number
-  ) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            [styleProp]: {
-              ...item.style[styleProp],
-              [stylePropChild]: property,
-            },
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            [styleProp]: {
-              ...selectedChild.style.margin,
-              [stylePropChild]: property,
-            },
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newArray = [...item.children];
-        newArray[childIndex] = child;
-
-        return {
-          ...item,
-          children: newArray,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
-  const setMarginTop = (marginTop: number) => {
-    spacingWorkFunction(
-      functionEnum.MARGIN,
-      functionEnum.MARGIN_TOP,
-      marginTop
-    );
-  };
-
-  const setMarginRight = (marginRight: number) => {
-    spacingWorkFunction(
-      functionEnum.MARGIN,
-      functionEnum.MARGIN_RIGHT,
-      marginRight
-    );
-  };
-
-  const setMarginBottom = (marginBottom: number) => {
-    spacingWorkFunction(
-      functionEnum.MARGIN,
-      functionEnum.MARGIN_BOTTOM,
-      marginBottom
-    );
-  };
-
-  const setMarginLeft = (marginLeft: number) => {
-    spacingWorkFunction(
-      functionEnum.MARGIN,
-      functionEnum.MARGIN_LEFT,
-      marginLeft
-    );
-  };
-
-  const setPaddingTop = (paddingTop: number) => {
-    spacingWorkFunction(
-      functionEnum.PADDING,
-      functionEnum.PADDING_TOP,
-      paddingTop
-    );
-  };
-
-  const setPaddingRight = (paddingRight: number) => {
-    spacingWorkFunction(
-      functionEnum.PADDING,
-      functionEnum.PADDING_RIGHT,
-      paddingRight
-    );
-  };
-
-  const setPaddingBottom = (paddingBottom: number) => {
-    spacingWorkFunction(
-      functionEnum.PADDING,
-      functionEnum.PADDING_BOTTOM,
-      paddingBottom
-    );
-  };
-
-  const setPaddingLeft = (paddingLeft: number) => {
-    spacingWorkFunction(
-      functionEnum.PADDING,
-      functionEnum.PADDING_LEFT,
-      paddingLeft
-    );
   };
 
   const setOn = (connectWallet: boolean) => {
@@ -516,7 +505,7 @@ const Settings: FC<ISettings> = ({
     }
     const updatedItems = items.map((item) => {
       let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
+        (child: IItems) => child.i === settingItemId
       );
       if (item.i === settingItemId) {
         return {
@@ -530,7 +519,7 @@ const Settings: FC<ISettings> = ({
         };
 
         const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
+          (c: IItems) => c.i === settingItemId
         );
         let newChildren = [...item.children];
         newChildren[childIndex] = child;
@@ -545,81 +534,84 @@ const Settings: FC<ISettings> = ({
     setItems(updatedItems);
   };
 
-  const handleOpenSetting = () => {
-    setOpenSetting(false);
-  };
+  // const handleOpenSetting = () => {
+  //   setOpenSetting(false);
+  // };
 
   return (
     <>
       {settingItemId ? (
-        <div className="rounded-[8px] py-2 cursor-pointer relative">
-          <div
-            className="border shadow-sm pt-1 sidebar menu"
-            ref={ref}
-            style={{ paddingTop: "2px" }}
-          >
-            <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
+        <>
+          <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
+            <div
+              className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
+              ref={ref}
+            >
+              {/* <div className="delete-div py-3 pl-3">
+                <div>Delete</div>
+              </div> */}
+              {/* <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
               {"<"}
               <span className="ml-2">Site Settings</span>
+            </div> */}
+              <SettingComponent
+                items={items}
+                setItems={setItems}
+                selectedItem={selectedItem}
+                setLink={setLink}
+                link={selectedItem?.link}
+                setValue={setValue}
+                value={selectedItem?.value}
+                setBold={setBold}
+                bold={selectedItem?.style?.fontWeight}
+                setItalic={setItalic}
+                italic={selectedItem?.style?.fontStyle}
+                setUnderline={setUnderline}
+                underline={selectedItem?.style?.textDecoration}
+                color={selectedItem?.style?.color}
+                setColor={setColor}
+                setBgColor={setBgColor}
+                backgroundColor={selectedItem?.style?.backgroundColor}
+                setDeleteComponent={setDeleteComponent}
+                deleteComponent={selectedItem?.style?.deleteComponent}
+                justifyContent={selectedItem?.style?.justifyContent}
+                setLeft={setLeft}
+                setCenter={setCenter}
+                setRight={setRight}
+                setFontSize={setFontSize}
+                fontSize={selectedItem?.style?.fontSize}
+                setContractConfig={setContractConfig}
+                contractConfig={contractConfig}
+                setShowComponent={setShowComponent}
+                showComponent={showComponent}
+                selector={selector}
+                setSelector={setSelector}
+                elementConfig={elementConfig}
+                openTab={openTab}
+                setOpenTab={setOpenTab}
+                borderRadius={selectedItem?.style?.borderRadius}
+                setBorderRadius={setBorderRadius}
+                borderWidth={selectedItem?.style?.borderWidth}
+                setBorderWidth={setBorderWidth}
+                setMarginLeft={setMarginLeft}
+                setMarginRight={setMarginRight}
+                setMarginTop={setMarginTop}
+                setMarginBottom={setMarginBottom}
+                setPaddingLeft={setPaddingLeft}
+                setPaddingRight={setPaddingRight}
+                setPaddingTop={setPaddingTop}
+                setPaddingBottom={setPaddingBottom}
+                setSmall={setSmall}
+                setMedium={setMedium}
+                setLarge={setLarge}
+                shadow={selectedItem?.style?.shadow}
+                setOn={setOn}
+                setPlaceholder={setPlaceholder}
+                placeholder={selectedItem?.placeholder}
+              />
             </div>
-            <SettingComponent
-              items={items}
-              setItems={setItems}
-              selectedItem={selectedItem}
-              setLink={setLink}
-              link={selectedItem?.link}
-              setValue={setValue}
-              value={selectedItem?.value}
-              setBold={setBold}
-              bold={selectedItem?.style?.fontWeight}
-              setItalic={setItalic}
-              italic={selectedItem?.style?.fontStyle}
-              setUnderline={setUnderline}
-              underline={selectedItem?.style?.textDecoration}
-              color={selectedItem?.style?.color}
-              setColor={setColor}
-              setBgColor={setBgColor}
-              backgroundColor={selectedItem?.style?.backgroundColor}
-              setDeleteComponent={setDeleteComponent}
-              deleteComponent={selectedItem?.style?.deleteComponent}
-              justifyContent={selectedItem?.style?.justifyContent}
-              setLeft={setLeft}
-              setCenter={setCenter}
-              setRight={setRight}
-              setFontSize={setFontSize}
-              fontSize={selectedItem?.style?.fontSize}
-              setContractConfig={setContractConfig}
-              contractConfig={contractConfig}
-              setShowComponent={setShowComponent}
-              showComponent={showComponent}
-              selector={selector}
-              setSelector={setSelector}
-              elementConfig={elementConfig}
-              openTab={openTab}
-              setOpenTab={setOpenTab}
-              borderRadius={selectedItem?.style?.borderRadius}
-              setBorderRadius={setBorderRadius}
-              borderWidth={selectedItem?.style?.borderWidth}
-              setBorderWidth={setBorderWidth}
-              setSmall={setSmall}
-              setMedium={setMedium}
-              setLarge={setLarge}
-              shadow={selectedItem?.style?.shadow}
-              setOn={setOn}
-              setMarginTop={setMarginTop}
-              setMarginRight={setMarginRight}
-              setMarginBottom={setMarginBottom}
-              setMarginLeft={setMarginLeft}
-              setPaddingTop={setPaddingTop}
-              setPaddingRight={setPaddingRight}
-              setPaddingBottom={setPaddingBottom}
-              setPaddingLeft={setPaddingLeft}
-              connectWallet={selectedItem?.connectWallet}
-              setPlaceholder={setPlaceholder}
-              placeholder={selectedItem?.placeholder}
-            />
           </div>
-        </div>
+        </>
       ) : null}
     </>
   );

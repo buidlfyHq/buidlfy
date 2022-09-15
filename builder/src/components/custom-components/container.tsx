@@ -3,8 +3,12 @@ import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
+import { SidebarEnum } from "pages/dashboard";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
+import add from "assets/add.png";
+import edit from "assets/edit.png";
+import dragImg from "assets/drag.png";
 import "styles/components.css";
 
 interface IContainer {
@@ -22,7 +26,7 @@ interface IContainer {
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
   setOpenTab: Dispatch<SetStateAction<number>>;
-  setAddContainer: (addContainer: boolean) => void;
+  setIsContainerSelected: (isContainerSelected: boolean) => void;
   selector: {
     methodName: string;
     type: string;
@@ -38,6 +42,12 @@ interface IContainer {
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setValue?: (value: string) => void;
+  setSideElement: (sideElement: string) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  showSidebar?: () => void;
+  hideSidebar?: () => void;
+  hideSettingSidebar?: () => void;
 }
 
 const Container: FC<IContainer> = ({
@@ -55,11 +65,14 @@ const Container: FC<IContainer> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  setAddContainer,
+  setIsContainerSelected,
   selector,
   setSelector,
   elementConfig,
   setElementConfig,
+  setSideElement,
+  showSidebar,
+  hideSidebar,
 }) => {
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -139,16 +152,25 @@ const Container: FC<IContainer> = ({
     }
   };
 
-  const onComponentClick = (itemName: string, i: string) => {
-    setAddContainer(true);
+  const handleSidebar = (selectedSidebarElements: string) => {
+    setSideElement(selectedSidebarElements);
+  };
 
-    // checks if the selector is active
+  const onComponentAddClick = (itemName: string, i: string) => {
+    setIsContainerSelected(true);
+    showSidebar();
+    handleSidebar(SidebarEnum.ELEMENTS);
+    setSettingItemId(i);
+    setOpenSetting(false);
+  };
+
+  const onComponentClick = (itemName: string, i: string) => {
     if (selector === null) {
       setOpenSetting(true);
       setSettingItemId(i);
       setOpenTab(1);
     } else {
-      //   // Add validation for selection
+      // Add validation for selection
       if (selector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
       } else if (
@@ -163,82 +185,120 @@ const Container: FC<IContainer> = ({
       setSelector(null);
     }
   };
+  const onComponentEditClick = (itemName: string, i: string) => {
+    setIsContainerSelected(false);
+    setOpenSetting(true);
+    hideSidebar();
+    setSettingItemId(i);
+  };
 
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
 
   return (
-    <section
-      id={item.i}
-      className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
-    >
-      <GridLayout
-        layout={children}
-        cols={6}
-        rowHeight={50}
-        width={containerW || 200}
-        isBounded={true}
-        onLayoutChange={onLayoutChange}
-        margin={[0, 0]}
-        compactType={null}
-        className="h-full"
-        style={{
-          backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-          borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-          borderRadius: `${borderRadius}px`,
-          borderWidth: `${borderWidth}px`,
-          backgroundImage: `url(${imgData})`,
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          boxShadow: shadow,
-        }}
+    <>
+      <section
+        id={item.i}
+        className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
       >
-        {!children?.length ? (
-          <div
-            className="w-full h-full"
-            key={"DefaultElement"}
-            data-grid={{
-              x: 0,
-              y: 0,
-              w: 6,
-              h: 2,
-              minH: 1,
-              minW: 1,
-              resizeHandles: [],
-            }}
-            onMouseOver={() => setDrag(false)}
-            onMouseOut={() => setDrag(true)}
+        <GridLayout
+          layout={children}
+          cols={6}
+          rowHeight={50}
+          width={containerW || 200}
+          isBounded={true}
+          onLayoutChange={onLayoutChange}
+          margin={[0, 0]}
+          compactType={null}
+          className="h-full"
+          style={{
+            backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+            borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+            borderRadius: `${borderRadius}px`,
+            borderWidth: `${borderWidth}px`,
+            backgroundImage: `url(${imgData})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            boxShadow: shadow,
+          }}
+        >
+          {!children?.length ? (
+            <div
+              className="w-full h-full py-10"
+              key={"DefaultElement"}
+              data-grid={{
+                x: 0,
+                y: 0,
+                w: 6,
+                h: 2,
+                minH: 1,
+                minW: 1,
+                resizeHandles: [],
+              }}
+            >
+              <RenderItem
+                setSideElement={setSideElement}
+                item={defaultItem}
+                setDrag={setDrag}
+              />
+            </div>
+          ) : (
+            children
+              ?.filter((c) => c.style?.deleteComponent === 0)
+              .map((item: IItems) => {
+                const { x, y, w, h, minW, i, resizeHandles } = item;
+                return (
+                  <div
+                    className={`w-full h-full hover:border hover:border-2 ${
+                      selector
+                        ? "border-hover"
+                        : "hover:border-slate-300 hover:border-dashed"
+                    }`}
+                    key={i}
+                    data-grid={{ x, y, w, h, minW, resizeHandles }}
+                    onMouseOver={() => setDrag(false)}
+                    onMouseOut={() => setDrag(true)}
+                    onClick={() => onComponentClick(item.name, i)}
+                  >
+                    <RenderItem
+                      setSideElement={setSideElement}
+                      item={item}
+                      setDrag={setDrag}
+                    />
+                  </div>
+                );
+              })
+          )}
+        </GridLayout>
+        <div className="flex">
+          <span
+            id="drag"
+            onMouseOut={() => setDrag(false)}
+            onMouseOver={() => setDrag(true)}
           >
-            <RenderItem item={defaultItem} setDrag={setDrag} />
-          </div>
-        ) : (
-          children
-            ?.filter((c) => c.style?.deleteComponent === 0)
-            .map((item: IItems) => {
-              const { x, y, w, h, minW, i, resizeHandles } = item;
-              return (
-                <div
-                  className={`w-full h-full hover:border hover:border-2 ${
-                    selector
-                      ? "hover:border-orange-300"
-                      : "hover:border-slate-300 hover:border-dashed"
-                  }`}
-                  key={i}
-                  data-grid={{ x, y, w, h, minW, resizeHandles }}
-                  onMouseOver={() => setDrag(false)}
-                  onMouseOut={() => setDrag(true)}
-                  onClick={() => onComponentClick(item.name, i)}
-                >
-                  <RenderItem item={item} setDrag={setDrag} />
-                </div>
-              );
-            })
-        )}
-      </GridLayout>
-      <span id="drag" onClick={() => onComponentClick(item.name, item.i)} />
-    </section>
+            <img className="" src={dragImg} />
+          </span>
+          <span
+            id="add-img"
+            onMouseOut={() => setDrag(false)}
+            onMouseOver={() => setDrag(false)}
+            onClick={() => onComponentAddClick(item.name, item.i)}
+          >
+            <img src={add} />
+          </span>
+          <span
+            onMouseOut={() => setDrag(false)}
+            onMouseOver={() => setDrag(false)}
+            id="edit-img"
+            onClick={() => onComponentEditClick(item.name, item.i)}
+          >
+            <img src={edit} />
+          </span>
+        </div>
+      </section>
+    </>
   );
 };
 

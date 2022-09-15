@@ -1,9 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
+import "styles/components.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 interface IWorkspace {
@@ -29,12 +30,22 @@ interface IWorkspace {
   setOpenTab: (openTab?: number) => void;
   drag: boolean;
   setDrag: (drag: boolean) => void;
-  setAddContainer: (addContainer?: boolean) => void;
+  setIsContainerSelected: (isContainerSelected?: boolean) => void;
   backgroundColor: IColor;
   marginLeft?: number;
   marginRight?: number;
   marginTop?: number;
   marginBottom?: number;
+  hideSidebar?: () => void;
+  showSidebar?: () => void;
+  showSettingSidebar?: () => void;
+  isNavHidden?: boolean;
+  openSetting?: boolean;
+  setIsNavHidden?: (isNavHidden?: boolean) => void;
+  setSideElement?: (sideElement?: string) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  hideSettingSidebar?: () => void;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -50,12 +61,29 @@ const Workspace: FC<IWorkspace> = ({
   setOpenTab,
   drag,
   setDrag,
-  setAddContainer,
+  setIsContainerSelected,
   backgroundColor,
+  hideSidebar,
+  showSidebar,
+  isNavHidden,
+  openSetting,
+  setSideElement,
+  dragContainer,
+  setDragContainer,
+  hideSettingSidebar,
 }) => {
-  // to persist layout changes
+  const [currentSize, setCurrentSize] = useState<number>(6);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (isNavHidden && !openSetting) {
+      setCurrentSize(6);
+    } else {
+      setCurrentSize(7.5);
+    }
+  }, [isNavHidden, openSetting]);
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-    if (layout.length === 0) setAddContainer(false);
+    if (layout.length === 0) setIsContainerSelected(false);
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
@@ -135,8 +163,8 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const onComponentClick = (itemName: string, i: string) => {
-    setAddContainer(true);
-
+    setIsContainerSelected(true);
+    hideSidebar();
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
@@ -177,7 +205,8 @@ const Workspace: FC<IWorkspace> = ({
       e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
     ) {
     } else {
-      setAddContainer(false);
+      setIsContainerSelected(false);
+      hideSidebar();
     }
     if (e.target.id === "") {
       setOpenSetting(false);
@@ -197,7 +226,7 @@ const Workspace: FC<IWorkspace> = ({
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 ${
             !containerCheck(item)
               ? selector
-                ? "hover:border-orange-300"
+                ? "border-hover"
                 : "hover:border-slate-300 hover:border-dashed"
               : null
           }`}
@@ -214,44 +243,124 @@ const Workspace: FC<IWorkspace> = ({
             setOpenSetting={setOpenSetting}
             setSettingItemId={setSettingItemId}
             setOpenTab={setOpenTab}
-            setAddContainer={setAddContainer}
+            setIsContainerSelected={setIsContainerSelected}
             selector={selector}
             setSelector={setSelector}
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
+            setSideElement={setSideElement}
+            dragContainer={dragContainer}
+            setDragContainer={setDragContainer}
+            showSidebar={showSidebar}
+            hideSidebar={hideSidebar}
+            hideSettingSidebar={hideSettingSidebar}
           />
         </div>
       );
     });
-
   return (
-    <main
-      className={`w-[calc(100%-500px)] h-full z-10 ${
-        className === "" ? "mx-[250px]" : "mr-[250px]"
-      }`}
-      style={{
-        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-      }}
-      onClick={handleCheckIsContainer}
+    <div
+      style={{ width: "-webkit-fill-available" }}
+      className="main-div h-full"
     >
-      <section className="mt-[60px]">
-        <ResponsiveGridLayout
-          layouts={{ lg: items }}
-          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-          cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
-          rowHeight={50}
-          width={window.innerWidth - 250}
-          resizeHandles={["se"]}
-          isDraggable={drag}
-          onLayoutChange={onLayoutChange}
-          compactType={null}
-          margin={[0, 0]}
-          className="h-fit overflow-hidden"
-        >
-          {renderItemFunction}
-        </ResponsiveGridLayout>
-      </section>
-    </main>
+      <main onClick={handleCheckIsContainer}>
+        {isNavHidden && !openSetting ? (
+          <section
+            style={{
+              width: "-webkit-fill-available",
+              backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+            }}
+            className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
+          >
+            <ResponsiveGridLayout
+              layouts={{ lg: items }}
+              breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+              cols={{
+                lg: currentSize,
+                md: currentSize,
+                sm: 6,
+                xs: 4,
+                xxs: 2,
+              }}
+              rowHeight={50}
+              // width={window.innerWidth - 250}
+              resizeHandles={["se"]}
+              isDraggable={drag}
+              onLayoutChange={onLayoutChange}
+              compactType={null}
+              margin={[0, 0]}
+              className="h-fit overflow-hidden"
+            >
+              {renderItemFunction}
+            </ResponsiveGridLayout>
+          </section>
+        ) : (
+          <>
+            {openSetting ? (
+              <section
+                style={{
+                  width: "-webkit-fill-available",
+                  backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                }}
+                className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
+              >
+                <ResponsiveGridLayout
+                  layouts={{ lg: items }}
+                  breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+                  cols={{
+                    lg: currentSize,
+                    md: currentSize,
+                    sm: 6,
+                    xs: 4,
+                    xxs: 2,
+                  }}
+                  rowHeight={50}
+                  // width={window.innerWidth - 250}
+                  resizeHandles={["se"]}
+                  isDraggable={drag}
+                  onLayoutChange={onLayoutChange}
+                  compactType={null}
+                  margin={[0, 0]}
+                  className="h-fit overflow-hidden"
+                >
+                  {renderItemFunction}
+                </ResponsiveGridLayout>
+              </section>
+            ) : (
+              <section
+                style={{
+                  width: "-webkit-fill-available",
+                  backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                }}
+                className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
+              >
+                <ResponsiveGridLayout
+                  layouts={{ lg: items }}
+                  breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+                  cols={{
+                    lg: currentSize,
+                    md: currentSize,
+                    sm: 6,
+                    xs: 4,
+                    xxs: 2,
+                  }}
+                  rowHeight={50}
+                  // width={window.innerWidth - 250}
+                  resizeHandles={["se"]}
+                  isDraggable={drag}
+                  onLayoutChange={onLayoutChange}
+                  compactType={null}
+                  margin={[0, 0]}
+                  className="h-fit overflow-hidden"
+                >
+                  {renderItemFunction}
+                </ResponsiveGridLayout>
+              </section>
+            )}
+          </>
+        )}
+      </main>
+    </div>
   );
 };
 
