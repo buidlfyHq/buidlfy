@@ -482,7 +482,7 @@ const Settings: FC<ISettings> = ({
     singleWorkFunction(FunctionEnum.BACKGROUND_COLOR, backgroundColor);
   };
 
-  const setDeleteComponent = (deleteComponent: number) => {
+  const setDeleteComponent = (deleteComponent: boolean) => {
     singleWorkFunction(FunctionEnum.DELETE_COMPONENT, deleteComponent);
   };
 
@@ -687,7 +687,7 @@ const Settings: FC<ISettings> = ({
   //   setOpenSetting(false);
   // };
   const handleDelete = () => {
-    setDeleteComponent(1);
+    setDeleteComponent(true);
   };
 
   return (

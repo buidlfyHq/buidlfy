@@ -22,8 +22,8 @@ export default interface ISettings {
   borderColor?: string;
   setBackgroundColor?: (backgroundColor: string) => void;
   backgroundColor?: string;
-  setDeleteComponent?: (deleteComponent: number) => void;
-  deleteComponent?: number;
+  setDeleteComponent?: (deleteComponent: boolean) => void;
+  deleteComponent?: boolean;
   justifyContent?: string;
   setLeft?: (justifyContent: string | boolean) => void;
   setCenter?: (justifyContent: string | boolean) => void;

@@ -9,7 +9,7 @@ export default interface IStyles {
   textDecoration?: string;
   justifyContent?: string;
   fontSize?: number;
-  deleteComponent: number;
+  deleteComponent: boolean;
   borderRadius?: number;
   borderWidth?: number;
   shadow?: string;
