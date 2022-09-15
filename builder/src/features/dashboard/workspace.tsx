@@ -32,7 +32,7 @@ interface IWorkspace {
   drag: boolean;
   setDrag: (drag: boolean) => void;
   setAddContainer: (addContainer?: boolean) => void;
-  backgroundColor: IColor;
+  workspaceBackgroundColor: IColor;
   marginLeft?: number;
   marginRight?: number;
   marginTop?: number;
@@ -59,7 +59,7 @@ const Workspace: FC<IWorkspace> = ({
   drag,
   setDrag,
   setAddContainer,
-  backgroundColor,
+  workspaceBackgroundColor,
   marginLeft,
   marginRight,
   marginTop,
@@ -277,7 +277,7 @@ const Workspace: FC<IWorkspace> = ({
           <section
             style={{
               width: "-webkit-fill-available",
-              backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+              backgroundColor: `rgba(${workspaceBackgroundColor.r}, ${workspaceBackgroundColor.g}, ${workspaceBackgroundColor.b}, ${workspaceBackgroundColor.a})`,
             }}
             className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
           >
@@ -309,7 +309,7 @@ const Workspace: FC<IWorkspace> = ({
               <section
                 style={{
                   width: "-webkit-fill-available",
-                  backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                  backgroundColor: `rgba(${workspaceBackgroundColor.r}, ${workspaceBackgroundColor.g}, ${workspaceBackgroundColor.b}, ${workspaceBackgroundColor.a})`,
                 }}
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
@@ -339,7 +339,7 @@ const Workspace: FC<IWorkspace> = ({
               <section
                 style={{
                   width: "-webkit-fill-available",
-                  backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                  backgroundColor: `rgba(${workspaceBackgroundColor.r}, ${workspaceBackgroundColor.g}, ${workspaceBackgroundColor.b}, ${workspaceBackgroundColor.a})`,
                 }}
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
               >

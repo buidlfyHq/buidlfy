@@ -1,8 +1,8 @@
-import React, { useState, useRef, FC } from "react";
+import React, { useRef, FC } from "react";
 import { useSelector } from "react-redux";
 import SettingComponent from "components/utils/render-setting";
-import ISettings from "interfaces/settings";
 import IItems from "interfaces/items";
+import ISettings from "interfaces/settings";
 
 const Settings: FC<ISettings> = ({
   settingItemId,
@@ -13,20 +13,8 @@ const Settings: FC<ISettings> = ({
   const ref = useRef(null);
   const items: IItems[] = useSelector((state: any) => state.items);
 
-  const [showComponent, setShowComponent] =
-    useState<{
-      id: string;
-      value: {
-        name: string;
-        inputs: object[];
-        outputs: object[];
-        stateMutability: string;
-      };
-    }>(null); // for abi method component
-
-  // work in progress
   const selectedChildren = items.map((item) =>
-    item.children?.find((child) => child.i === settingItemId)
+    item.children?.find((child: IItems) => child.i === settingItemId)
   );
 
   const selectedItem =
@@ -44,8 +32,6 @@ const Settings: FC<ISettings> = ({
             >
               <SettingComponent
                 selectedItem={selectedItem}
-                setShowComponent={setShowComponent}
-                showComponent={showComponent}
                 elementConfig={elementConfig}
                 openTab={openTab}
                 setOpenTab={setOpenTab}

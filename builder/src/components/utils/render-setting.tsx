@@ -12,8 +12,6 @@ import "styles/dashboard.css";
 
 const SettingComponent: FC<ISettings> = ({
   selectedItem,
-  showComponent,
-  setShowComponent,
   elementConfig,
   openTab,
   setOpenTab,
@@ -42,8 +40,6 @@ const SettingComponent: FC<ISettings> = ({
         <ButtonSettings
           handleChange={handleChange}
           selectedItem={selectedItem}
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}

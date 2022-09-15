@@ -40,13 +40,13 @@ const AlignComponent: FC<IAlignComponent> = ({ i, justifyContent }) => {
             <AiOutlineAlignLeft className="text-[18px]" />
           </span>
           <span
-            onClick={() => handleAlignChange("left")}
+            onClick={() => handleAlignChange("center")}
             className="align-div flex items-center justify-center italic shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
           >
             <AiOutlineAlignCenter className="text-[18px]" />
           </span>
           <span
-            onClick={() => handleAlignChange("left")}
+            onClick={() => handleAlignChange("right")}
             className="align-div flex items-center justify-center underline shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
           >
             <AiOutlineAlignRight className="text-[18px]" />

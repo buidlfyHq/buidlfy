@@ -19,7 +19,7 @@ const InputSettings: FC<ISettings> = ({ selectedItem, handleChange }) => (
     <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
       {/* <RiText className="text-[18px] mr-3" /> */}
       <textarea
-        value={selectedItem?.placeholder}
+        value={selectedItem.placeholder}
         onChange={(e) => handleChange(e, "placeholder")}
         className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
         placeholder="Please write your text here..."

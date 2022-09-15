@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
+import { IoMdLink } from "react-icons/io";
 import { updateSelector } from "reducers/selectorReducer";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
@@ -14,13 +15,10 @@ import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import { containerCheck } from "utils/container-check";
 import ISettings from "interfaces/settings";
-import { IoMdLink } from "react-icons/io";
 
 const ButtonSettings: FC<ISettings> = ({
   handleChange,
   selectedItem,
-  showComponent,
-  setShowComponent,
   elementConfig,
   openTab,
   setOpenTab,
@@ -91,11 +89,17 @@ const ButtonSettings: FC<ISettings> = ({
             <span className="setting-text ">{selectedItem.name}</span>
           ) : null}
         </h3>
-        <CombinedComponent selectedItem={selectedItem} />
+        <CombinedComponent
+          i={selectedItem.i}
+          fontWeight={selectedItem.style.fontWeight}
+          fontStyle={selectedItem.style.fontStyle}
+          textDecoration={selectedItem.style.textDecoration}
+          justifyContent={selectedItem.style.justifyContent}
+        />
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
           {/* <RiText className="text-[18px] mr-3" /> */}
           <textarea
-            value={selectedItem?.value}
+            value={selectedItem.value}
             onChange={(e) => handleChange(e, "value")}
             className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
             placeholder="Please write your text here..."
@@ -106,7 +110,7 @@ const ButtonSettings: FC<ISettings> = ({
             <IoMdLink className="text-[18px]" />
           </div>
           <input
-            value={selectedItem?.link}
+            value={selectedItem.link}
             onChange={(e) => handleChange(e, "link")}
             className="changeText pl-[2.5rem] py-[0.4rem] input-text"
             type="text"
@@ -132,7 +136,7 @@ const ButtonSettings: FC<ISettings> = ({
         />
         <BgColorComponent
           i={selectedItem.i}
-          bgColor={selectedItem.style.backgroundColor}
+          elementBackgroundColor={selectedItem.style.backgroundColor}
         />
         <MarginComponent
           i={selectedItem.i}
@@ -150,8 +154,6 @@ const ButtonSettings: FC<ISettings> = ({
       </span>
       <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
         <AdvanceComponent
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
           elementConfig={elementConfig}
           selectedItem={selectedItem}
         />
