@@ -433,9 +433,12 @@ color: #000000;
 .delete-div {
   background: #E9EDFD;
 margin-top: -1rem;
-margin-left: -1rem;
+margin-left: -0.5rem;
 margin-bottom: 1.5rem;
 width: 250px;
+position: inherit;
+z-index: 88888!important;
+backdrop-filter: saturate(180%) blur(15px);
 }
 .contract-button {
   background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
@@ -451,6 +454,10 @@ line-height: 24px;
 
 color: #FFFFFF;
 
+}
+.delete-btn {
+  background: rgba(104, 146, 255, 0.29);
+border-radius: 22px;
 }
 .side-border {
   margin-top: 3.65rem;

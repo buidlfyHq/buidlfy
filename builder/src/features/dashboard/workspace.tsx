@@ -222,7 +222,7 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const renderItemFunction = items
-    ?.filter((i) => i.style?.deleteComponent === 0)
+    ?.filter((i) => i.style?.deleteComponent === false)
     .map((item: IItems) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
       return (

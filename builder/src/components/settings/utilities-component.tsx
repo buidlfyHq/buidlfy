@@ -4,15 +4,15 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IUtilitiesComponent {
-  deleteComponent: number;
-  setDeleteComponent: (deleteComponent: number) => void;
+  deleteComponent: boolean;
+  setDeleteComponent: (deleteComponent: boolean) => void;
 }
 
 const UtilitiesComponent: FC<IUtilitiesComponent> = ({
   setDeleteComponent,
 }) => {
   const handleDelete = () => {
-    setDeleteComponent(1);
+    setDeleteComponent(true);
   };
 
   return (

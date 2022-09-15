@@ -29,7 +29,7 @@ const defaultFontStyles = {
 };
 
 const defaultDeleteStyles = {
-  deleteComponent: 0,
+  deleteComponent: false,
 };
 
 const defaultBorderStyles = {

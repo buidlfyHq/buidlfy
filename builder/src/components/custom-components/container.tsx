@@ -259,7 +259,7 @@ const Container: FC<IContainer> = ({
             </div>
           ) : (
             children
-              ?.filter((c) => c.style?.deleteComponent === 0)
+              ?.filter((c) => c.style?.deleteComponent === false)
               .map((item: IItems) => {
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (

@@ -70,10 +70,6 @@ const ContainerSettings: FC<ISettings> = ({
       setLarge={setLarge}
       shadow={selectedItem?.style?.shadow}
     />
-    <UtilitiesComponent
-      deleteComponent={selectedItem?.style?.deleteComponent}
-      setDeleteComponent={setDeleteComponent}
-    />
   </>
 );
 
