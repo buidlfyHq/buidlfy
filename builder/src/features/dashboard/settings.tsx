@@ -573,8 +573,11 @@ const Settings: FC<ISettings> = ({
                 setUnderline={setUnderline}
                 underline={selectedItem?.style?.textDecoration}
                 color={selectedItem?.style?.color}
+<<<<<<< HEAD
                 borderColor={selectedItem?.style?.color}
                 setBorderColor={setBorderColor}
+=======
+>>>>>>> 7341f483b87a76ebaecd27c5e87f6fcf81c89c11
                 setColor={setColor}
                 setBgColor={setBgColor}
                 backgroundColor={selectedItem?.style?.backgroundColor}
