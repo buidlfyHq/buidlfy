@@ -26,7 +26,7 @@ interface IContainer {
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
   setOpenTab: Dispatch<SetStateAction<number>>;
-  SetIsContainerSelected: (isContainerSelected: boolean) => void;
+  setIsContainerSelected: (isContainerSelected: boolean) => void;
   selector: {
     methodName: string;
     type: string;
@@ -71,7 +71,7 @@ const Container: FC<IContainer> = ({
   setOpenSetting,
   setSettingItemId,
   setOpenTab,
-  SetIsContainerSelected,
+  setIsContainerSelected,
   selector,
   setSelector,
   elementConfig,
@@ -164,7 +164,7 @@ const Container: FC<IContainer> = ({
   };
 
   const onComponentAddClick = (itemName: string, i: string) => {
-    SetIsContainerSelected(true);
+    setIsContainerSelected(true);
     showSidebar();
     handleSidebar(SidebarEnum.ELEMENTS);
     setSettingItemId(i);
@@ -194,7 +194,7 @@ const Container: FC<IContainer> = ({
     }
   };
   const onComponentEditClick = (itemName: string, i: string) => {
-    SetIsContainerSelected(false);
+    setIsContainerSelected(false);
     setOpenSetting(true);
     hideSidebar();
     setSettingItemId(i);

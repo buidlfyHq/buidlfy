@@ -8,7 +8,11 @@ export default interface ITexts {
   underline: string;
   color: string;
   justifyContent: string;
+<<<<<<< HEAD
   borderColor?: string;
+=======
+  borderColor?: IColor;
+>>>>>>> 027dc40838fd7ce5f82ee7952be9ddbed3e5ac7c
   fontSize: number;
   value: string;
   link: string;
