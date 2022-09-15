@@ -7,13 +7,13 @@ import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
-interface IColorComponent {
+interface IBorderColorComponent {
   borderColor: IColor;
-  setBorderColor: (color: IColor) => void;
+  setBorderColor: (borderColor: IColor) => void;
   selectedItem: IItems;
 }
 
-const BorderColorComponent: FC<IColorComponent> = ({
+const BorderColorComponent: FC<IBorderColorComponent> = ({
   borderColor,
   setBorderColor,
 }) => {
@@ -37,7 +37,6 @@ const BorderColorComponent: FC<IColorComponent> = ({
       setDisplayColorPicker(false);
     }
   };
-
   const handleChange = (color: { rgb: IColor }) => {
     if (!color) {
       return;

@@ -13,6 +13,7 @@ export default interface IStyles {
   borderRadius?: number;
   borderWidth?: number;
   shadow?: string;
+  isAuto?: boolean;
   margin?: {
     marginLeft?: number,
     marginRight?: number,
@@ -25,4 +26,7 @@ export default interface IStyles {
     paddingTop?: number,
     paddingBottom?: number,
   }
+  width?: number;
+  height?: number;
+  backgroundSize?: string;
 }

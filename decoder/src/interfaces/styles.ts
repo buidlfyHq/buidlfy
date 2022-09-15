@@ -25,4 +25,8 @@ export default interface IStyles {
     paddingTop?: number,
     paddingBottom?: number,
   }
+  width?: number;
+  height?: number;
+  backgroundSize?: string;
+  isAuto?: boolean;
 }

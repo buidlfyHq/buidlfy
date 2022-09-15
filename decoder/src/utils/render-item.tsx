@@ -158,6 +158,10 @@ const RenderItem: FC<IRenderItem> = ({
         <Image
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
+          width={item.style.width}
+          height={item.style.height}
+          backgroundSize={item.style.backgroundSize}
+          isAuto={item.style.isAuto}
           margin={item.style.margin}
         />
       );

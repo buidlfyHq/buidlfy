@@ -83,6 +83,12 @@ export default interface ISettings {
     paddingTop?: number,
     paddingBottom?: number,
   }
+  isAuto?: boolean;
+  dynamicWidth?: number;
+  dynamicHeight?: number;
+  setDynamicWidth?: (dynamicWidth?: number) => void;
+  setDynamicHeight?: (dynamicHeight?: number) => void;
+  setIsAuto?: (isAuto: boolean) => void;
   setMarginLeft?: (marginLeft: number) => void;
   setMarginRight?: (marginRight: number) => void;
   setMarginTop?: (marginTop: number) => void;
@@ -105,4 +111,12 @@ export default interface ISettings {
   handleTextChange?: (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
   linkVal?: string;
   handleLinkChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  width?: number;
+  height?: number;
+  setHeight?: (height: number) => void;
+  setWidth?: (width: number) => void;
+  setCover?: (backgroundSize: string | boolean) => void;
+  setContain?: (backgroundSize: string | boolean) => void;
+  setAuto?: (backgroundSize: string | boolean) => void;
+  backgroundSize?: string;
 }

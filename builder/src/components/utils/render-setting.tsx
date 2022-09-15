@@ -39,6 +39,15 @@ export enum ReplaceStyle {
   LARGE = "large",
   TRUE = "true",
   FALSE = "false",
+  COVER = "cover",
+  CONTAIN = "contain",
+  AUTO = "auto",
+  WIDTH = "width",
+  HEIGHT = "height",
+  INCREMENTWIDTH = "incrementWidth",
+  INCREMENTHEIGHT = "incrementHeight",
+  DECREMENTWIDTH = "decrementWidth",
+  DECREMENTHEIGHT = "decrementHeight",
 }
 const SettingComponent: FC<ISettings> = ({
   items,
@@ -84,6 +93,20 @@ const SettingComponent: FC<ISettings> = ({
   setPaddingTop,
   setBorderColor,
   borderColor,
+  width,
+  height,
+  setWidth,
+  setHeight,
+  setCover,
+  setContain,
+  setAuto,
+  backgroundSize,
+  setIsAuto,
+  isAuto,
+  dynamicHeight,
+  dynamicWidth,
+  setDynamicHeight,
+  setDynamicWidth,
   setPaddingLeft,
 }) => {
   const handleTextChange = (
@@ -164,6 +187,7 @@ const SettingComponent: FC<ISettings> = ({
         <ImageSettings
           selectedItem={selectedItem}
           items={items}
+          setItems={setItems}
           deleteComponent={selectedItem?.style?.deleteComponent}
           setLeft={setLeft}
           setCenter={setCenter}
@@ -172,6 +196,20 @@ const SettingComponent: FC<ISettings> = ({
           setMarginRight={setMarginRight}
           setMarginBottom={setMarginBottom}
           margin={selectedItem?.style?.margin}
+          width={width}
+          height={height}
+          setWidth={setWidth}
+          setHeight={setHeight}
+          setCover={setCover}
+          setContain={setContain}
+          setAuto={setAuto}
+          backgroundSize={selectedItem?.style?.backgroundSize}
+          setIsAuto={setIsAuto}
+          isAuto={selectedItem?.style?.isAuto}
+          dynamicWidth={dynamicWidth}
+          dynamicHeight={dynamicHeight}
+          setDynamicWidth={setDynamicWidth}
+          setDynamicHeight={setDynamicHeight}
         />
       );
     case "Container":
@@ -205,6 +243,7 @@ const SettingComponent: FC<ISettings> = ({
       return (
         <ContainerSettings
           items={items}
+          setItems={setItems}
           color={selectedItem?.style?.color}
           borderRadius={selectedItem?.style?.borderRadius}
           borderWidth={selectedItem?.style?.borderWidth}
