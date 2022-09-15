@@ -1,9 +1,9 @@
 export interface IWorkspaceState {
-  workspaceElements: IWorkspaceElements[];
-  selectedElement: IWorkspaceElements;
+  workspaceElements: IWorkspaceElement[];
+  selectedElement: IWorkspaceElement;
 }
 
-export interface IWorkspaceElements {
+export interface IWorkspaceElement {
   i: string;
   x: number;
   y: number;
@@ -98,7 +98,7 @@ export interface IBgContainer {
 }
 
 export interface ISettings {
-  selectedItem?: IWorkspaceElements;
+  selectedItem?: IWorkspaceElement;
   setShowComponent?: (showComponent: {
     id: string;
     value: {
@@ -130,13 +130,13 @@ export interface ISettings {
 
 export interface ITemplate {
   name: string;
-  value: IWorkspaceElements[];
+  value: IWorkspaceElement[];
 }
 
 export interface ITexts {
-  item?: IWorkspaceElements;
-  items?: IWorkspaceElements[];
-  setItems?: (items?: IWorkspaceElements[]) => void;
+  item?: IWorkspaceElement;
+  items?: IWorkspaceElement[];
+  setItems?: (items?: IWorkspaceElement[]) => void;
   bold: string;
   italic: string;
   underline: string;

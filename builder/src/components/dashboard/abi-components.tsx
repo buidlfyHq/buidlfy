@@ -8,7 +8,7 @@ import {
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
 import { IRootState } from "redux/root-state.interface";
-import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
   IContractElementSelector,
@@ -25,12 +25,12 @@ interface IAbiComponents {
       stateMutability: string;
     };
   };
-  selectedItem: IWorkspaceElements;
+  selectedItem: IWorkspaceElement;
 }
 
 const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector(
+  const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace
   ).workspaceElements;
   const contractElementSelector: IContractElementSelector = useSelector(
@@ -110,7 +110,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
       // search id in children
       const updatedItems = workspaceElements.map((item) => {
         const childIndex = item.children?.findIndex(
-          (child: IWorkspaceElements) => child.i === selectedItem.i
+          (child: IWorkspaceElement) => child.i === selectedItem.i
         );
         let newArray = [...item?.children];
         newArray[childIndex] = updatedItem;
@@ -155,7 +155,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
     };
   };
 
-  const handleStateSelector = (selectedItem: IWorkspaceElements) => {
+  const handleStateSelector = (selectedItem: IWorkspaceElement) => {
     if (contractElementSelector === null) {
       dispatch(
         updateSelector({

@@ -16,7 +16,7 @@ import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
 import {
   IColor,
-  IWorkspaceElements,
+  IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
@@ -56,7 +56,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
   setIsNavHidden,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector(
+  const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
   const contractElementSelector: IContractElementSelector = useSelector(
@@ -79,7 +79,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
-    let newItemsArr = layout.map((obj: IWorkspaceElements) => {
+    let newItemsArr = layout.map((obj: IWorkspaceElement) => {
       let selectedItem = workspaceElements.filter(
         (item) => item.i === obj.i
       )[0];
@@ -212,7 +212,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const renderItemFunction = workspaceElements
     ?.filter((i) => i.style?.deleteComponent === 0)
-    .map((item: IWorkspaceElements) => {
+    .map((item: IWorkspaceElement) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
       return (
         <div

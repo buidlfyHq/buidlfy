@@ -3,7 +3,7 @@ import { FaFileContract } from "react-icons/fa";
 import Modal from "features/dashboard/modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
-import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -26,7 +26,7 @@ interface IAdvanceComponent {
       stateMutability: string;
     };
   }) => void;
-  selectedItem: IWorkspaceElements;
+  selectedItem: IWorkspaceElement;
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({

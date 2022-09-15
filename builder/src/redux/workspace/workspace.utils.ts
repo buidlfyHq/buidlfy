@@ -1,24 +1,24 @@
 import {
   IElementDetails,
-  IWorkspaceElements,
+  IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 
 // to find selected element
-const findSelected = (element: IWorkspaceElements, settingItemId: string) => {
+const findSelected = (element: IWorkspaceElement, settingItemId: string) => {
   return element.children?.find(
-    (child: IWorkspaceElements) => child.i === settingItemId
+    (child: IWorkspaceElement) => child.i === settingItemId
   );
 };
 
 // to find index of an element
-const findIndex = (element: IWorkspaceElements, settingItemId: string) => {
+const findIndex = (element: IWorkspaceElement, settingItemId: string) => {
   return element.children?.findIndex(
-    (c: IWorkspaceElements) => c.i === settingItemId
+    (c: IWorkspaceElement) => c.i === settingItemId
   );
 };
 
 export const mapElementsToWorkspace = (
-  element: IWorkspaceElements,
+  element: IWorkspaceElement,
   payload: IElementDetails
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
@@ -41,7 +41,7 @@ export const mapElementsToWorkspace = (
 };
 
 export const mapElementStylesToWorkspace = (
-  element: IWorkspaceElements,
+  element: IWorkspaceElement,
   payload: IElementDetails
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
@@ -73,7 +73,7 @@ export const mapElementStylesToWorkspace = (
 };
 
 export const mapElementSubStyleToWorkspace = (
-  element: IWorkspaceElements,
+  element: IWorkspaceElement,
   payload: IElementDetails
 ) => {
   const { settingItemId, propertyName, propertyValue, childPropertyName } =
@@ -112,13 +112,13 @@ export const mapElementSubStyleToWorkspace = (
 };
 
 export const fetchSelectedElement = (
-  workspaceElements: IWorkspaceElements[],
+  workspaceElements: IWorkspaceElement[],
   payload: string
 ) => {
   return (
     workspaceElements?.find((element) => element.i === payload) ||
     workspaceElements?.map((element) =>
-      element.children?.find((child: IWorkspaceElements) => child.i === payload)
+      element.children?.find((child: IWorkspaceElement) => child.i === payload)
     )[0]
   );
 };

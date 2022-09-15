@@ -17,7 +17,7 @@ import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
 import {
   ISettings,
-  IWorkspaceElements,
+  IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 
 const ButtonSettings: FC<ISettings> = ({
@@ -28,7 +28,7 @@ const ButtonSettings: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const dispatch = useDispatch();
-  const selectedItem: IWorkspaceElements = useSelector(
+  const selectedItem: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 

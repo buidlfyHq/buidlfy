@@ -7,7 +7,7 @@ import {
 } from "./workspace.utils";
 import {
   IAction,
-  IWorkspaceElements,
+  IWorkspaceElement,
   IWorkspaceState,
 } from "./workspace.interfaces";
 
@@ -25,7 +25,7 @@ const workspaceSlice = createSlice({
       if (!action.payload.settingItemId) return;
 
       const updatedElements = state.workspaceElements.map(
-        (element: IWorkspaceElements) =>
+        (element: IWorkspaceElement) =>
           mapElementsToWorkspace(element, action.payload)
       );
 
@@ -36,7 +36,7 @@ const workspaceSlice = createSlice({
       if (!action.payload.settingItemId) return;
 
       const updatedElements = state.workspaceElements.map(
-        (element: IWorkspaceElements) =>
+        (element: IWorkspaceElement) =>
           mapElementStylesToWorkspace(element, action.payload)
       );
       return { ...state, workspaceElements: updatedElements };
@@ -46,7 +46,7 @@ const workspaceSlice = createSlice({
       if (!action.payload.settingItemId) return;
 
       const updatedElements = state.workspaceElements.map(
-        (element: IWorkspaceElements) =>
+        (element: IWorkspaceElement) =>
           mapElementSubStyleToWorkspace(element, action.payload)
       );
       return { ...state, workspaceElements: updatedElements };
@@ -55,7 +55,7 @@ const workspaceSlice = createSlice({
     // to update the elements
     updateWorkspaceElementsArray(
       state,
-      action: { payload: IWorkspaceElements[] }
+      action: { payload: IWorkspaceElement[] }
     ) {
       return { ...state, workspaceElements: action.payload };
     },

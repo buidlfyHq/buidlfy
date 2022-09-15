@@ -10,7 +10,7 @@ import { IRootState } from "redux/root-state.interface";
 import {
   IColor,
   ITemplate,
-  IWorkspaceElements,
+  IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 
@@ -25,7 +25,7 @@ interface INavbar {
 
 const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector(
+  const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
   const contractDetails: IContractDetails = useSelector(

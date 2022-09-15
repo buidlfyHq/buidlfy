@@ -12,12 +12,12 @@ import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
 import {
   ISettings,
-  IWorkspaceElements,
+  IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 const GeneralSettings: FC<ISettings> = ({ handleChange }) => {
-  const selectedItem: IWorkspaceElements = useSelector(
+  const selectedItem: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
