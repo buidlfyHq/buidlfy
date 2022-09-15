@@ -19,51 +19,57 @@ const Text: FC<ITexts> = ({
   padding,
 }) => {
   return (
-    <textarea
-      readOnly
+    <section
+      id="text-one"
       style={{
         height: "-webkit-fill-available",
-        resize: "none",
-        fontWeight: bold,
-        fontStyle: italic,
-        textDecoration: underline,
-        color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-        display: "flex",
-        textAlign: "center",
-        justifyContent: justifyContent,
-        fontSize: `${fontSize}px`,
-        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
-          margin.marginRight * MARGIN_VARIABLE
-        }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
-          margin.marginLeft * MARGIN_VARIABLE
-        }px`,
-        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+        background: backgroundColor,
+        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
       }}
-      className="flex overflow-hidden items-center justify-center h-full w-full"
+      className="flex overflow-hidden items-center justify-center w-auto h-full"
     >
-      {outputValue ? (
-        outputValue.find((output) => output.id === id) ? (
-          link ? (
-            <a href={link} target="_blank" rel="noreferrer">
-              {JSON.stringify(
+      <textarea
+        readOnly
+        style={{
+          fontWeight: bold,
+          fontStyle: italic,
+          textDecoration: underline,
+          background: color,
+          WebkitTextFillColor: "transparent",
+          display: "flex",
+          justifyContent,
+          alignItems: "center",
+          textAlign: `${justifyContent}` as CanvasTextAlign,
+          fontSize: `${fontSize}px`,
+          padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+        }}
+        className="flex text-class overflow-hidden items-center justify-center h-full w-full"
+      >
+        {outputValue ? (
+          outputValue.find((output) => output.id === id) ? (
+            link ? (
+              <a href={link} target="_blank" rel="noreferrer">
+                {JSON.stringify(
+                  outputValue.find((output) => output.id === id).value
+                )}
+              </a>
+            ) : (
+              JSON.stringify(
                 outputValue.find((output) => output.id === id).value
-              )}
+              )
+            )
+          ) : link ? (
+            <a href={link} target="_blank" rel="noreferrer">
+              {value}
             </a>
           ) : (
-            JSON.stringify(outputValue.find((output) => output.id === id).value)
+            value
           )
-        ) : link ? (
-          <a href={link} target="_blank" rel="noreferrer">
-            {value}
-          </a>
         ) : (
           value
-        )
-      ) : (
-        value
-      )}
-    </textarea>
+        )}
+      </textarea>
+    </section>
   );
 };
 

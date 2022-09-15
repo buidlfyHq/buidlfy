@@ -15,7 +15,7 @@ const Home: FC = () => {
     <main
       className="min-h-screen"
       style={{
-        backgroundColor: `rgba(${config.background?.r}, ${config.background?.g}, ${config.background?.b}, ${config.background?.a})`,
+        background: config.background,
       }}
     >
       <ResponsiveGridLayout

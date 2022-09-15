@@ -1,15 +1,15 @@
 import React, { useState, FC, useEffect, useRef } from "react";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { SketchPicker } from "react-color";
+import { AiOutlineCaretDown } from "react-icons/ai";
 import IItems from "interfaces/items";
-import IColor from "interfaces/color";
+import ColorPicker from "react-best-gradient-color-picker";
+import { Dialog } from "@headlessui/react";
 import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBorderColorComponent {
-  borderColor: IColor;
-  setBorderColor: (borderColor: IColor) => void;
+  borderColor: string;
+  setBorderColor: (borderColor: string) => void;
   selectedItem: IItems;
 }
 
@@ -29,7 +29,6 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
     document.addEventListener("click", handleOutsideClick);
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [ref]);
-
   const handleClick = (action: ReplaceStyle) => {
     if (action == ReplaceStyle.TRUE) {
       setDisplayColorPicker(true);
@@ -37,40 +36,56 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
       setDisplayColorPicker(false);
     }
   };
-  const handleChange = (color: { rgb: IColor }) => {
-    if (!color) {
-      return;
-    }
-    setBorderColor(color.rgb);
-  };
 
   return (
     <>
       <div
-        ref={ref}
-        onClick={() => handleClick(ReplaceStyle.TRUE)}
-        className="flex flex-col items-start justify-center py-2 text-gray-600"
+        className="py-2 text-gray-600"
+        style={{ width: "-webkit-fill-available" }}
       >
         <div className="items-center mx-2 py-2 mb-2">
+          {/* <VscSymbolColor className="text-[18px] mr-3" /> */}
           <div className="flex">
-            <span className="margin-text grow flex px-1 text-xl not-italic font-normal text-gray-500 font-regular">
+            <div className="margin-text grow flex my-1 px-1 text-xl not-italic font-normal text-gray-500 font-regular">
               Border Color
-            </span>
+            </div>
             <div
               ref={ref}
               onClick={() => handleClick(ReplaceStyle.TRUE)}
               className="flex items-center cursor-pointer"
             >
-              <div className="w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"></div>
-              <AiOutlineCaretDown className="text-[14px] mr-3" />
+              <div
+                style={{
+                  background: borderColor,
+                }}
+                className="w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"
+              ></div>
+              <AiOutlineCaretDown className="text-[14px]" />
             </div>
           </div>
         </div>
+
         {displayColorPicker ? (
-          <div>
-            <div onClick={() => handleClick(ReplaceStyle.FALSE)} />
-            <SketchPicker color={borderColor} onChange={handleChange} />
-          </div>
+          <Dialog
+            as="div"
+            className="absolute top-[220px] right-[260px] bottom-[1px] py-[15px] z-100 overflow-none bg-white shadow-lg"
+            open={displayColorPicker}
+            onClose={() => setDisplayColorPicker(false)}
+          >
+            <div className=" px-4 text-right">
+              <div>
+                <div onClick={() => handleClick(ReplaceStyle.FALSE)} />
+                <ColorPicker
+                  hideEyeDrop="false"
+                  hideInputType="false"
+                  hideColorGuide="false"
+                  hideAdvancedSliders="false"
+                  value={borderColor}
+                  onChange={setBorderColor}
+                />
+              </div>
+            </div>
+          </Dialog>
         ) : null}
       </div>
     </>

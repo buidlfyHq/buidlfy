@@ -24,7 +24,7 @@ const GeneralSettings: FC<ISettings> = ({
   underline,
   setColor,
   color,
-  setBgColor,
+  setBackgroundColor,
   backgroundColor,
   setDeleteComponent,
   deleteComponent,
@@ -91,7 +91,11 @@ const GeneralSettings: FC<ISettings> = ({
       setColor={setColor}
       selectedItem={selectedItem}
     />
-    <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
+    <BgColorComponent
+      backgroundColor={selectedItem?.style?.backgroundColor}
+      setBackgroundColor={setBackgroundColor}
+      selectedItem={selectedItem}
+    />
     <MarginComponent
       setMarginLeft={setMarginLeft}
       setMarginRight={setMarginRight}

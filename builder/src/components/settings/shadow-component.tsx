@@ -28,7 +28,7 @@ const ShadowComponent: FC<IShadowComponent> = ({
   };
 
   return (
-    <div className="margin-text text-left px-3 mt-6 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
+    <div className="margin-text text-left px-3 py-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
       <span className="flex px-1">
         <span> Shadow </span>{" "}
         <BsBrightnessLow className="text-[18px] ml-2 mt-[-2px]" />

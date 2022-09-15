@@ -16,12 +16,12 @@ export default interface ISettings {
   italic?: string;
   setUnderline?: (underline: string | boolean) => void;
   underline?: string;
-  setColor?: (color: IColor) => void;
-  color?: IColor;
-  setBorderColor?: (borderColor: IColor) => void;
-  borderColor?: IColor;
-  setBgColor?: (backgroundColor: IColor) => void;
-  backgroundColor?: IColor;
+  setColor?: (color: string) => void;
+  color?: string;
+  setBorderColor?: (borderColor: string) => void;
+  borderColor?: string;
+  setBackgroundColor?: (backgroundColor: string) => void;
+  backgroundColor?: string;
   setDeleteComponent?: (deleteComponent: number) => void;
   deleteComponent?: number;
   justifyContent?: string;

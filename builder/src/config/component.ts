@@ -17,9 +17,9 @@ const defaultPaddingStyles = {
 };
 
 const defaultColorStyles = {
-  backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
-  color: { r: "0", g: "0", b: "0", a: "100" },
-};
+  backgroundColor: "rgba(0, 0, 0, 0)",
+  color: "rgba(0, 0, 0, 100)",
+}
 
 const defaultFontStyles = {
   fontWeight: "normal",
@@ -189,7 +189,7 @@ export const components = [
       ...defaultColorStyles,
       ...defaultFontStyles,
       fontSize: 15,
-      borderColor: { r: "0", g: "0", b: "0", a: "100" }, 
+      borderColor: "rgba(0, 0, 0, 100)",
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
       ...defaultMarginStyles,

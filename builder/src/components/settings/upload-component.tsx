@@ -90,9 +90,6 @@ const UploadComponent: FC<IUploadComponent> = ({
           Please upload file below 5 mb
         </h3>
       ) : null}
-      <div className="flex justify-center">
-        <button className="upload-btn mx-2 ">Upload</button>
-      </div>
     </div>
   );
 };

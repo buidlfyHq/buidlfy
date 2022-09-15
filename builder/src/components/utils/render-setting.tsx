@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
@@ -61,7 +61,7 @@ const SettingComponent: FC<ISettings> = ({
   setItalic,
   setUnderline,
   setColor,
-  setBgColor,
+  setBackgroundColor,
   setDeleteComponent,
   setLeft,
   setCenter,
@@ -147,7 +147,7 @@ const SettingComponent: FC<ISettings> = ({
           setItalic={setItalic}
           setUnderline={setUnderline}
           setColor={setColor}
-          setBgColor={setBgColor}
+          setBackgroundColor={setBackgroundColor}
           setDeleteComponent={setDeleteComponent}
           setLeft={setLeft}
           setCenter={setCenter}
@@ -216,14 +216,14 @@ const SettingComponent: FC<ISettings> = ({
       return (
         <ContainerSettings
           selectedItem={selectedItem}
-          items={items}
           color={selectedItem?.style?.color}
+          setItems={setItems}
+          setColor={setColor}
+          setBackgroundColor={setBackgroundColor}
+          items={items}
           borderRadius={selectedItem?.style?.borderRadius}
           borderWidth={selectedItem?.style?.borderWidth}
           deleteComponent={selectedItem?.style?.deleteComponent}
-          setItems={setItems}
-          setColor={setColor}
-          setBgColor={setBgColor}
           backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
           setBorderRadius={setBorderRadius}
@@ -266,7 +266,7 @@ const SettingComponent: FC<ISettings> = ({
           deleteComponent={selectedItem?.style?.deleteComponent}
           setItems={setItems}
           setColor={setColor}
-          setBgColor={setBgColor}
+          setBackgroundColor={setBackgroundColor}
           setDeleteComponent={setDeleteComponent}
           setBorderRadius={setBorderRadius}
           setBorderWidth={setBorderWidth}
@@ -323,7 +323,7 @@ const SettingComponent: FC<ISettings> = ({
           setItalic={setItalic}
           setUnderline={setUnderline}
           setColor={setColor}
-          setBgColor={setBgColor}
+          setBackgroundColor={setBackgroundColor}
           setDeleteComponent={setDeleteComponent}
           setLeft={setLeft}
           setCenter={setCenter}

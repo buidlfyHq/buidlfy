@@ -341,7 +341,7 @@ const Settings: FC<ISettings> = ({
 
   const singleWorkFunction = (
     styleProp: FunctionEnum,
-    property: number | IColor | boolean
+    property: number | IColor | boolean | string
   ) => {
     if (!settingItemId) {
       return;
@@ -468,15 +468,14 @@ const Settings: FC<ISettings> = ({
     });
     setItems(updatedItems);
   };
-
-  const setColor = (color: IColor) => {
+  const setColor = (color: string) => {
     singleWorkFunction(FunctionEnum.COLOR, color);
   };
-  const setBorderColor = (borderColor: IColor) => {
+  const setBorderColor = (borderColor: string) => {
     singleWorkFunction(FunctionEnum.BORDER_COLOR, borderColor);
   };
 
-  const setBgColor = (backgroundColor: IColor) => {
+  const setBackgroundColor = (backgroundColor: string) => {
     singleWorkFunction(FunctionEnum.BACKGROUND_COLOR, backgroundColor);
   };
 
@@ -727,7 +726,7 @@ const Settings: FC<ISettings> = ({
                 }
                 setBorderColor={setBorderColor}
                 setColor={setColor}
-                setBgColor={setBgColor}
+                setBackgroundColor={setBackgroundColor}
                 backgroundColor={selectedItem?.style?.backgroundColor}
                 setDeleteComponent={setDeleteComponent}
                 deleteComponent={selectedItem?.style?.deleteComponent}

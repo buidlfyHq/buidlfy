@@ -20,7 +20,7 @@ interface INavbar {
     buttonId: string;
   }) => void;
   contractConfig: { abi: string; address: string };
-  backgroundColor: IColor;
+  backgroundColor: string;
   head: {
     title: string;
     logo: string | ArrayBuffer;

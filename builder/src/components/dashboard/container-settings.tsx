@@ -14,7 +14,7 @@ const ContainerSettings: FC<ISettings> = ({
   items,
   setItems,
   setColor,
-  setBgColor,
+  setBackgroundColor,
   setDeleteComponent,
   setBorderRadius,
   setBorderWidth,
@@ -40,8 +40,9 @@ const ContainerSettings: FC<ISettings> = ({
       setItems={setItems}
     />
     <BgColorComponent
-      color={selectedItem?.style?.backgroundColor}
-      setBgColor={setBgColor}
+      backgroundColor={selectedItem?.style?.backgroundColor}
+      setBackgroundColor={setBackgroundColor}
+      selectedItem={selectedItem}
     />
     <ColorComponent
       color={selectedItem?.style?.color}
