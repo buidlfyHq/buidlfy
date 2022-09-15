@@ -1,5 +1,5 @@
 import {
-  IElementDetails,
+  IElementDetail,
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 
@@ -19,7 +19,7 @@ const findIndex = (element: IWorkspaceElement, settingItemId: string) => {
 
 export const mapElementsToWorkspace = (
   element: IWorkspaceElement,
-  payload: IElementDetails
+  payload: IElementDetail
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
   let selectedChild = findSelected(element, settingItemId);
@@ -42,7 +42,7 @@ export const mapElementsToWorkspace = (
 
 export const mapElementStylesToWorkspace = (
   element: IWorkspaceElement,
-  payload: IElementDetails
+  payload: IElementDetail
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
   let selectedChild = findSelected(element, settingItemId);
@@ -74,7 +74,7 @@ export const mapElementStylesToWorkspace = (
 
 export const mapElementSubStyleToWorkspace = (
   element: IWorkspaceElement,
-  payload: IElementDetails
+  payload: IElementDetail
 ) => {
   const { settingItemId, propertyName, propertyValue, childPropertyName } =
     payload;

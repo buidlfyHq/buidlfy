@@ -16,7 +16,7 @@ export interface IWorkspaceElement {
   link?: string;
   name: string;
   value?: string;
-  style: IStyles;
+  style: IStyle;
   children?: any; // Fix: Work in progress as it is not compatible new children type
   isBounded?: boolean;
   isDraggable?: boolean;
@@ -30,7 +30,7 @@ export interface IWorkspaceElement {
   placeholder?: string;
 }
 
-export interface IStyles {
+export interface IStyle {
   color?: IColor;
   backgroundColor?: IColor;
   fontWeight?: string;
@@ -68,10 +68,10 @@ export type ResizeHandles = Array<
 >;
 
 export interface IAction {
-  payload: IElementDetails;
+  payload: IElementDetail;
 }
 
-export interface IElementDetails {
+export interface IElementDetail {
   settingItemId: string;
   propertyName: string;
   propertyValue: string | number | IColor;
