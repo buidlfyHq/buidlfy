@@ -17,8 +17,7 @@ import { containerCheck } from "utils/container-check";
 import ISettings from "interfaces/settings";
 
 const ButtonSettings: FC<ISettings> = ({
-  handleTextChange,
-  handleLinkChange,
+  handleChange,
   selectedItem,
   elementConfig,
   openTab,
@@ -100,8 +99,8 @@ const ButtonSettings: FC<ISettings> = ({
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
           {/* <RiText className="text-[18px] mr-3" /> */}
           <textarea
-            value={selectedItem?.value}
-            onChange={(e) => handleTextChange(e)}
+            value={selectedItem.value}
+            onChange={(e) => handleChange(e, "value")}
             className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
             placeholder="Please write your text here..."
           />
@@ -111,8 +110,8 @@ const ButtonSettings: FC<ISettings> = ({
             <IoMdLink className="text-[18px]" />
           </div>
           <input
-            value={selectedItem?.link}
-            onChange={(e) => handleLinkChange(e)}
+            value={selectedItem.link}
+            onChange={(e) => handleChange(e, "link")}
             className="changeText pl-[2.5rem] py-[0.4rem] input-text"
             type="text"
             placeholder="Link"

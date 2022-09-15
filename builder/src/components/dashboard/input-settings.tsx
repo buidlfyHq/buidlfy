@@ -8,10 +8,7 @@ import { containerCheck } from "utils/container-check";
 import ISettings from "interfaces/settings";
 import "styles/components.css";
 
-const InputSettings: FC<ISettings> = ({
-  selectedItem,
-  handlePlaceholderChange,
-}) => (
+const InputSettings: FC<ISettings> = ({ selectedItem, handleChange }) => (
   <>
     <h3 className="ml-[1rem]">
       {selectedItem ? (
@@ -23,7 +20,7 @@ const InputSettings: FC<ISettings> = ({
       {/* <RiText className="text-[18px] mr-3" /> */}
       <textarea
         value={selectedItem.placeholder}
-        onChange={(e) => handlePlaceholderChange(e)}
+        onChange={(e) => handleChange(e, "placeholder")}
         className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
         placeholder="Please write your text here..."
       />

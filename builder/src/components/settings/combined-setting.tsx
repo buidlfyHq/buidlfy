@@ -6,7 +6,6 @@ import {
   AiOutlineAlignCenter,
 } from "react-icons/ai";
 import { updateItems } from "reducers/itemsReducer";
-import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
 
