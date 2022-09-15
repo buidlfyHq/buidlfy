@@ -5,50 +5,20 @@ import UploadComponent from "components/settings/upload-component";
 import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 
-const ImageSettings: FC<ISettings> = ({
-  items,
-  setItems,
-  selectedItem,
-  setDeleteComponent,
-  deleteComponent,
-  justifyContent,
-  setLeft,
-  setCenter,
-  setRight,
-  margin,
-  setMarginLeft,
-  setMarginRight,
-  setMarginTop,
-  setMarginBottom,
-}) => (
+const ImageSettings: FC<ISettings> = ({ selectedItem }) => (
   <>
     <h3 className="ml-[1rem]">
       {selectedItem ? (
         <span className="setting-text">{selectedItem.name}</span>
       ) : null}
     </h3>
-    <UploadComponent
-      selectedItem={selectedItem}
-      items={items}
-      setItems={setItems}
-    />
+    <UploadComponent i={selectedItem.i} />
     <AlignComponent
-      justifyContent={justifyContent}
-      setLeft={setLeft}
-      setRight={setRight}
-      setCenter={setCenter}
+      i={selectedItem.i}
+      justifyContent={selectedItem.style.justifyContent}
     />
-    <MarginComponent
-      setMarginLeft={setMarginLeft}
-      setMarginRight={setMarginRight}
-      setMarginTop={setMarginTop}
-      setMarginBottom={setMarginBottom}
-      margin={{ ...margin }}
-    />
-    <UtilitiesComponent
-      deleteComponent={deleteComponent}
-      setDeleteComponent={setDeleteComponent}
-    />
+    <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
+    <UtilitiesComponent i={selectedItem.i} />
   </>
 );
 

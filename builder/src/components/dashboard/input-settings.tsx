@@ -3,30 +3,14 @@ import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
-import ISettings from "interfaces/settings";
-import { RiText } from "react-icons/ri";
 import MarginComponent from "components/settings/margin-component";
+import { containerCheck } from "utils/container-check";
+import ISettings from "interfaces/settings";
 import "styles/components.css";
 
 const InputSettings: FC<ISettings> = ({
   selectedItem,
-  setColor,
-  color,
-  setDeleteComponent,
-  deleteComponent,
-  borderRadius,
-  setBorderRadius,
-  setSmall,
-  setMedium,
-  setLarge,
-  shadow,
-  placeholder,
   handlePlaceholderChange,
-  margin,
-  setMarginLeft,
-  setMarginRight,
-  setMarginTop,
-  setMarginBottom,
 }) => (
   <>
     <h3 className="ml-[1rem]">
@@ -38,7 +22,7 @@ const InputSettings: FC<ISettings> = ({
     <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
       {/* <RiText className="text-[18px] mr-3" /> */}
       <textarea
-        value={placeholder}
+        value={selectedItem.placeholder}
         onChange={(e) => handlePlaceholderChange(e)}
         className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
         placeholder="Please write your text here..."
@@ -46,31 +30,17 @@ const InputSettings: FC<ISettings> = ({
     </div>
 
     <BorderRadiusComponent
-      borderRadius={borderRadius}
-      setBorderRadius={setBorderRadius}
+      i={selectedItem.i}
+      borderRadius={selectedItem.style.borderRadius}
     />
-    <MarginComponent
-      setMarginLeft={setMarginLeft}
-      setMarginRight={setMarginRight}
-      setMarginTop={setMarginTop}
-      setMarginBottom={setMarginBottom}
-      margin={{ ...margin }}
-    />
+    <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
     <ColorComponent
-      color={color}
-      setColor={setColor}
-      selectedItem={selectedItem}
+      i={selectedItem.i}
+      color={selectedItem.style.color}
+      isContainer={containerCheck(selectedItem)}
     />
-    <ShadowComponent
-      setSmall={setSmall}
-      setMedium={setMedium}
-      setLarge={setLarge}
-      shadow={shadow}
-    />
-    <UtilitiesComponent
-      deleteComponent={deleteComponent}
-      setDeleteComponent={setDeleteComponent}
-    />
+    <ShadowComponent i={selectedItem.i} shadow={selectedItem.style.shadow} />
+    <UtilitiesComponent i={selectedItem.i} />
   </>
 );
 

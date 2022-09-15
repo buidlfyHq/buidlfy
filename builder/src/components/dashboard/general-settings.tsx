@@ -1,52 +1,20 @@
 import React, { FC } from "react";
-import { RiText } from "react-icons/ri";
 import { IoMdLink } from "react-icons/io";
-import AlignComponent from "components/settings/align-component";
-import FontStyleComponent from "components/settings/font-style-component";
 import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
 import FontSizeComponent from "components/settings/font-size-component";
-import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
-import "styles/components.css";
 import CombinedComponent from "components/settings/combined-setting";
+import { containerCheck } from "utils/container-check";
+import ISettings from "interfaces/settings";
+import "styles/components.css";
 
 const GeneralSettings: FC<ISettings> = ({
-  textVal,
   handleTextChange,
-  linkVal,
   handleLinkChange,
   selectedItem,
-  setBold,
-  bold,
-  setItalic,
-  italic,
-  setUnderline,
-  underline,
-  setColor,
-  color,
-  setBgColor,
-  backgroundColor,
-  setDeleteComponent,
-  deleteComponent,
-  justifyContent,
-  setLeft,
-  setCenter,
-  setRight,
-  fontSize,
-  setFontSize,
-  margin,
-  setMarginLeft,
-  setMarginRight,
-  setMarginTop,
-  setMarginBottom,
-  padding,
-  setPaddingLeft,
-  setPaddingRight,
-  setPaddingBottom,
-  setPaddingTop,
 }) => (
   <>
     <h3 className="ml-[0.5rem]">
@@ -55,21 +23,16 @@ const GeneralSettings: FC<ISettings> = ({
       ) : null}
     </h3>
     <CombinedComponent
-      bold={bold}
-      italic={italic}
-      underline={underline}
-      setBold={setBold}
-      setItalic={setItalic}
-      setUnderline={setUnderline}
-      justifyContent={justifyContent}
-      setLeft={setLeft}
-      setRight={setRight}
-      setCenter={setCenter}
+      i={selectedItem.i}
+      fontWeight={selectedItem.style.fontWeight}
+      fontStyle={selectedItem.style.fontStyle}
+      textDecoration={selectedItem.style.textDecoration}
+      justifyContent={selectedItem.style.justifyContent}
     />
     <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
       {/* <RiText className="text-[18px] mr-3" /> */}
       <textarea
-        value={textVal}
+        value={selectedItem.value}
         onChange={(e) => handleTextChange(e)}
         className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
         placeholder="Please write your text here..."
@@ -80,7 +43,7 @@ const GeneralSettings: FC<ISettings> = ({
         <IoMdLink className="text-[18px]" />
       </div>
       <input
-        value={linkVal}
+        value={selectedItem.link}
         onChange={(e) => handleLinkChange(e)}
         className="changeText pl-[2.5rem] py-[0.4rem] input-text"
         type="text"
@@ -88,31 +51,22 @@ const GeneralSettings: FC<ISettings> = ({
       />
     </div>
 
-    <FontSizeComponent fontSize={fontSize} setFontSize={setFontSize} />
+    <FontSizeComponent
+      i={selectedItem.i}
+      fontSize={selectedItem.style.fontSize}
+    />
     <ColorComponent
-      color={color}
-      setColor={setColor}
-      selectedItem={selectedItem}
+      i={selectedItem.i}
+      color={selectedItem.style.color}
+      isContainer={containerCheck(selectedItem)}
     />
-    <BgColorComponent color={backgroundColor} setBgColor={setBgColor} />
-    <MarginComponent
-      setMarginLeft={setMarginLeft}
-      setMarginRight={setMarginRight}
-      setMarginTop={setMarginTop}
-      setMarginBottom={setMarginBottom}
-      margin={{ ...margin }}
+    <BgColorComponent
+      i={selectedItem.i}
+      elementBackgroundColor={selectedItem.style.backgroundColor}
     />
-    <PaddingComponent
-      setPaddingLeft={setPaddingLeft}
-      setPaddingRight={setPaddingRight}
-      setPaddingTop={setPaddingTop}
-      setPaddingBottom={setPaddingBottom}
-      padding={{ ...padding }}
-    />
-    <UtilitiesComponent
-      deleteComponent={deleteComponent}
-      setDeleteComponent={setDeleteComponent}
-    />
+    <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
+    <PaddingComponent i={selectedItem.i} padding={selectedItem.style.padding} />
+    <UtilitiesComponent i={selectedItem.i} />
   </>
 );
 
