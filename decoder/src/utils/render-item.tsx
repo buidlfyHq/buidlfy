@@ -162,6 +162,7 @@ const RenderItem: FC<IRenderItem> = ({
           height={item.style.height}
           backgroundSize={item.style.backgroundSize}
           isAuto={item.style.isAuto}
+          margin={item.style.margin}
         />
       );
     case "Horizontal Container":

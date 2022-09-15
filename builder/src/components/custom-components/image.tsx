@@ -1,5 +1,5 @@
+import React, { FC } from "react";
 import IItems from "interfaces/items";
-import React, { FC, useEffect, useRef, useState } from "react";
 import "styles/components.css";
 
 interface IImageComponent {
