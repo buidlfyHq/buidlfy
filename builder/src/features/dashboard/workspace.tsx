@@ -30,7 +30,7 @@ interface IWorkspace {
   setOpenTab: (openTab?: number) => void;
   drag: boolean;
   setDrag: (drag: boolean) => void;
-  SetIsContainerSelected: (isContainerSelected?: boolean) => void;
+  setIsContainerSelected: (isContainerSelected?: boolean) => void;
   backgroundColor: IColor;
   marginLeft?: number;
   marginRight?: number;
@@ -65,7 +65,7 @@ const Workspace: FC<IWorkspace> = ({
   setOpenTab,
   drag,
   setDrag,
-  SetIsContainerSelected,
+  setIsContainerSelected,
   backgroundColor,
   hideSidebar,
   showSidebar,
@@ -91,7 +91,7 @@ const Workspace: FC<IWorkspace> = ({
     }
   }, [isNavHidden, openSetting]);
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-    if (layout.length === 0) SetIsContainerSelected(false);
+    if (layout.length === 0) setIsContainerSelected(false);
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
@@ -171,7 +171,7 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const onComponentClick = (itemName: string, i: string) => {
-    SetIsContainerSelected(true);
+    setIsContainerSelected(true);
     hideSidebar();
     // checks if the selector is active
     if (selector === null) {
@@ -213,7 +213,7 @@ const Workspace: FC<IWorkspace> = ({
       e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
     ) {
     } else {
-      SetIsContainerSelected(false);
+      setIsContainerSelected(false);
       hideSidebar();
     }
     if (e.target.id === "") {
@@ -251,7 +251,7 @@ const Workspace: FC<IWorkspace> = ({
             setOpenSetting={setOpenSetting}
             setSettingItemId={setSettingItemId}
             setOpenTab={setOpenTab}
-            SetIsContainerSelected={SetIsContainerSelected}
+            setIsContainerSelected={setIsContainerSelected}
             selector={selector}
             setSelector={setSelector}
             elementConfig={elementConfig}

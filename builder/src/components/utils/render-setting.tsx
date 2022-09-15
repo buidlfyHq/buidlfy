@@ -216,16 +216,17 @@ const SettingComponent: FC<ISettings> = ({
       return (
         <ContainerSettings
           selectedItem={selectedItem}
+          items={items}
           color={selectedItem?.style?.color}
+          borderRadius={selectedItem?.style?.borderRadius}
+          borderWidth={selectedItem?.style?.borderWidth}
+          deleteComponent={selectedItem?.style?.deleteComponent}
           setItems={setItems}
           setColor={setColor}
           setBgColor={setBgColor}
           backgroundColor={selectedItem?.style?.backgroundColor}
           setDeleteComponent={setDeleteComponent}
-          deleteComponent={selectedItem?.style?.deleteComponent}
-          borderRadius={selectedItem?.style?.borderRadius}
           setBorderRadius={setBorderRadius}
-          borderWidth={selectedItem?.style?.borderWidth}
           setBorderWidth={setBorderWidth}
           setSmall={setSmall}
           setMedium={setMedium}

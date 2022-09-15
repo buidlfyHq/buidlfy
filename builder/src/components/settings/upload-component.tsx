@@ -80,6 +80,10 @@ const UploadComponent: FC<IUploadComponent> = ({
             />
           </label>
         </div>
+        <br />
+      </div>
+      <div className="flex justify-center">
+        <button className="upload-btn mx-2 ">Upload</button>
       </div>
       {size ? (
         <h3 className="text-red-500 text-sm ml-5 mb-2">
