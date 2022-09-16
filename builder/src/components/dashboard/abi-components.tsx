@@ -1,7 +1,10 @@
 import React, { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { updateSelector } from "redux/selectorReducer";
+import {
+  setSelectorToDefault,
+  updateSelector,
+} from "redux/selector/selector.reducers";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
 import IItems from "interfaces/items";
@@ -130,7 +133,7 @@ const AbiComponents: FC<IAbiComponents> = ({
       );
       setCurrentElement({ name: selectedId, type: "input" });
     } else {
-      dispatch(updateSelector(null));
+      dispatch(setSelectorToDefault());
     }
   };
 
@@ -160,7 +163,7 @@ const AbiComponents: FC<IAbiComponents> = ({
         type: "send",
       });
     } else {
-      dispatch(updateSelector(null));
+      dispatch(setSelectorToDefault());
     }
   };
 
@@ -183,7 +186,7 @@ const AbiComponents: FC<IAbiComponents> = ({
       );
       setCurrentElement({ name: selectedId, type: "output" });
     } else {
-      dispatch(updateSelector(null));
+      dispatch(setSelectorToDefault());
     }
   };
 

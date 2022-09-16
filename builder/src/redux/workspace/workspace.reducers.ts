@@ -3,8 +3,8 @@ import {
   mapElementsToWorkspace,
   mapElementStylesToWorkspace,
   mapElementSubStyleToWorkspace,
-} from "redux/workspace/workspace.utils";
-import { IAction } from "redux/workspace/workspace.interfaces";
+} from "./workspace.utils";
+import { IAction } from "./workspace.interfaces";
 import IItems from "interfaces/items";
 
 const workspaceSlice = createSlice({

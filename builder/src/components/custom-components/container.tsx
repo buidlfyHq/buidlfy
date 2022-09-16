@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { updateSelector } from "redux/selectorReducer";
+import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
 import IItems from "interfaces/items";
@@ -151,7 +151,7 @@ const Container: FC<IContainer> = ({
       ) {
         updateElementConfig(itemName, i);
       }
-      dispatch(updateSelector(null));
+      dispatch(setSelectorToDefault());
     }
   };
 
@@ -207,7 +207,7 @@ const Container: FC<IContainer> = ({
             </div>
           ) : (
             children
-              ?.filter((c) => c.style?.deleteComponent === false)
+              ?.filter((c) => c.style?.deleteComponent === 0)
               .map((item: IItems) => {
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (
