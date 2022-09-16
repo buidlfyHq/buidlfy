@@ -6,12 +6,12 @@ import {
   AiOutlineAlignCenter,
 } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IAlignComponent {
-  selectedItem: IItems;
+  selectedItem: IWorkspace;
 }
 
 const AlignComponent: FC<IAlignComponent> = ({ selectedItem }) => {

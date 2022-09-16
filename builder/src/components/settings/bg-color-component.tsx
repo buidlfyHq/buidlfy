@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { SketchPicker } from "react-color";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBgColorComponent {
-  selectedItem?: IItems;
+  selectedItem?: IWorkspace;
   backgroundColor?: IColor;
   setBackgroundColor?: (backgroundColor: IColor) => void;
 }
@@ -66,11 +66,11 @@ const BgColorComponent: FC<IBgColorComponent> = ({
   };
   const opacity = Number(`${color.a}`);
   let newOpacity = opacity * 100;
-  if (newOpacity == 10000) {
+  if (newOpacity === 10000) {
     newOpacity = 100;
   }
   const newColor = { ...color };
-  const handleOpacity = (e) => {
+  const handleOpacity = (e: React.ChangeEvent<HTMLInputElement>) => {
     newColor.a = Number(e.target.value) / 100;
     if (backgroundColor) {
       setBackgroundColor(newColor);

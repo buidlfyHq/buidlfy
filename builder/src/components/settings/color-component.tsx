@@ -4,13 +4,13 @@ import { SketchPicker } from "react-color";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { containerCheck } from "utils/container-check";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IColorComponent {
-  selectedItem: IItems;
+  selectedItem: IWorkspace;
 }
 
 const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
@@ -19,7 +19,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
 
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [hexColor, setHexColor] = useState();
-  const [colorOpacity, setColorOpacity] = useState();
+  // const [colorOpacity, setColorOpacity] = useState();
   const ref = useRef<HTMLDivElement>();
   useEffect(() => {
     // FIX: find a suitable type for this event
@@ -40,6 +40,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     setDisplayColorPicker(false);
   };
 
+  // FIX: Find suitable type
   const handleHex = (e) => {
     setHexColor(e.target.value);
   };
@@ -61,7 +62,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
 
   const opacity = Number(`${color.a}`);
   let newOpacity = opacity * 100;
-  if (newOpacity == 10000) {
+  if (newOpacity === 10000) {
     newOpacity = 100;
   }
 

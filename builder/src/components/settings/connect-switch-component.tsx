@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IConnectSwitchComponent {
-  selectedItem: IItems;
+  selectedItem: IWorkspace;
 }
 
 const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({

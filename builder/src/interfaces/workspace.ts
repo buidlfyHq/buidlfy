@@ -1,7 +1,7 @@
 import Styles from "./styles";
 import { ResizeHandles } from "./handle";
 
-export default interface IItems {
+export default interface IWorkspace {
   i: string;
   x: number;
   y: number;

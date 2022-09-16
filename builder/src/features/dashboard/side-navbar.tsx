@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import elements from "assets/elements.png";
 import styles from "assets/styles.png";
 import templates from "assets/templates.png";
-import IItems from "interfaces/items";
 import "styles/components.css";
 
 enum sidebarEnum {
@@ -85,7 +84,7 @@ const SideNavbar: FC<ISideNavbar> = ({
           className="cursor-pointer"
         >
           <div className="side-icon px-3.5 py-4 rounded-full mt-3">
-            <img src={templates} />
+            <img src={templates} alt="Templates" />
           </div>
           <h3 className="side-text mt-1">Templates</h3>
         </div>
@@ -104,7 +103,7 @@ const SideNavbar: FC<ISideNavbar> = ({
           className="mt-8 cursor-pointer"
         >
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
-            <img src={elements} />
+            <img src={elements} alt="Elements" />
           </div>
           <h3 className="side-text mt-1">Elements</h3>
         </div>
@@ -123,7 +122,7 @@ const SideNavbar: FC<ISideNavbar> = ({
           className="mt-8 cursor-pointer"
         >
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
-            <img src={styles} />
+            <img src={styles} alt="Styles" />
           </div>
           <h3 className="side-text mt-1">Styles</h3>
         </div>

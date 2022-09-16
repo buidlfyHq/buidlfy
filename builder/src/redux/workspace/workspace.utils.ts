@@ -1,48 +1,53 @@
 import { IPayload } from "redux/workspace/workspace.interfaces";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 
 // to find selected element
-const findSelected = (item: IItems, settingItemId: string) => {
-  return item.children?.find((child: IItems) => child.i === settingItemId);
+const findSelected = (element: IWorkspace, settingItemId: string) => {
+  return element.children?.find(
+    (child: IWorkspace) => child.i === settingItemId
+  );
 };
 
 // to find index of an element
-const findIndex = (item: IItems, settingItemId: string) => {
-  return item.children?.findIndex((c: IItems) => c.i === settingItemId);
+const findIndex = (element: IWorkspace, settingItemId: string) => {
+  return element.children?.findIndex((c: IWorkspace) => c.i === settingItemId);
 };
 
-export const mapElementsToWorkspace = (item: IItems, payload: IPayload) => {
+export const mapElementsToWorkspace = (
+  element: IWorkspace,
+  payload: IPayload
+) => {
   const { settingItemId, propertyName, propertyValue } = payload;
-  let selectedChild = findSelected(item, settingItemId);
+  let selectedChild = findSelected(element, settingItemId);
 
-  if (item.i === settingItemId) {
-    return { ...item, [propertyName]: propertyValue };
+  if (element.i === settingItemId) {
+    return { ...element, [propertyName]: propertyValue };
   } else if (selectedChild?.i === settingItemId) {
     let child = {
       ...selectedChild,
       [propertyName]: propertyValue,
     };
 
-    const childIndex = findIndex(item, settingItemId);
-    let newChildren = [...item.children];
+    const childIndex = findIndex(element, settingItemId);
+    let newChildren = [...element.children];
     newChildren[childIndex] = child;
-    return { ...item, children: newChildren };
+    return { ...element, children: newChildren };
   }
-  return item;
+  return element;
 };
 
 export const mapElementStylesToWorkspace = (
-  item: IItems,
+  element: IWorkspace,
   payload: IPayload
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
-  let selectedChild = findSelected(item, settingItemId);
+  let selectedChild = findSelected(element, settingItemId);
 
-  if (item.i === settingItemId) {
+  if (element.i === settingItemId) {
     return {
-      ...item,
+      ...element,
       style: {
-        ...item["style"],
+        ...element["style"],
         [propertyName]: propertyValue,
       },
     };
@@ -55,29 +60,29 @@ export const mapElementStylesToWorkspace = (
       },
     };
 
-    const childIndex = findIndex(item, settingItemId);
-    let newChildren = [...item.children];
+    const childIndex = findIndex(element, settingItemId);
+    let newChildren = [...element.children];
     newChildren[childIndex] = child;
-    return { ...item, children: newChildren };
+    return { ...element, children: newChildren };
   }
-  return item;
+  return element;
 };
 
 export const mapElementSubStyleToWorkspace = (
-  item: IItems,
+  element: IWorkspace,
   payload: IPayload
 ) => {
   const { settingItemId, propertyName, propertyValue, childPropertyName } =
     payload;
-  let selectedChild = findSelected(item, settingItemId);
+  let selectedChild = findSelected(element, settingItemId);
 
-  if (item.i === settingItemId) {
+  if (element.i === settingItemId) {
     return {
-      ...item,
+      ...element,
       style: {
-        ...item["style"],
+        ...element["style"],
         [propertyName]: {
-          ...item.style[propertyName],
+          ...element.style[propertyName],
           [childPropertyName]: propertyValue,
         },
       },
@@ -88,16 +93,16 @@ export const mapElementSubStyleToWorkspace = (
       style: {
         ...selectedChild["style"],
         [propertyName]: {
-          ...item.style[propertyName],
+          ...element.style[propertyName],
           [childPropertyName]: propertyValue,
         },
       },
     };
 
-    const childIndex = findIndex(item, settingItemId);
-    let newChildren = [...item.children];
+    const childIndex = findIndex(element, settingItemId);
+    let newChildren = [...element.children];
     newChildren[childIndex] = child;
-    return { ...item, children: newChildren };
+    return { ...element, children: newChildren };
   }
-  return item;
+  return element;
 };

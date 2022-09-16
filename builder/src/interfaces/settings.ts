@@ -1,7 +1,7 @@
-import IItems from "./items";
+import IWorkspace from "./workspace";
 
 export default interface ISettings {
-  selectedItem?: IItems;
+  selectedItem?: IWorkspace;
   setShowComponent?: (showComponent: {
     id: string;
     value: {
@@ -22,7 +22,6 @@ export default interface ISettings {
   };
   setOpenSetting?: (open: boolean) => void;
   settingItemId?: string;
-  elementConfig?: object;
   openTab?: number;
   setOpenTab?: (openTab: number) => void;
   handlePlaceholderChange?: (e) => void;

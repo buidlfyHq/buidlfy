@@ -3,7 +3,7 @@ import { FaFileContract } from "react-icons/fa";
 import Modal from "features/dashboard/modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -26,15 +26,13 @@ interface IAdvanceComponent {
       stateMutability: string;
     };
   }) => void;
-  selectedItem: IItems;
-  elementConfig: object;
+  selectedItem: IWorkspace;
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({
   showComponent,
   setShowComponent,
   selectedItem,
-  elementConfig,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
 
@@ -56,10 +54,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
             <FaFileContract />
           </span>{" "}
           Import Contract
-          <Modal
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          />
+          <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
       </div>
       <br />
@@ -69,7 +64,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
       />
       <AbiComponents
         showComponent={showComponent}
-        elementConfig={elementConfig}
         selectedItem={selectedItem}
       />
     </>

@@ -6,13 +6,12 @@ import { Dialog } from "@headlessui/react";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import IColor from "interfaces/color";
 import ITemplate from "interfaces/template";
 
 interface INavbar {
   className: string;
-  setClassName: React.Dispatch<React.SetStateAction<string>>;
   backgroundColor: IColor;
   head: {
     title: string;
@@ -20,14 +19,9 @@ interface INavbar {
   };
 }
 
-const Navbar: FC<INavbar> = ({
-  className,
-  setClassName,
-  backgroundColor,
-  head,
-}) => {
+const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const dispatch = useDispatch();
-  const workspace: IItems[] = useSelector((state: any) => state.workspace);
+  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
   const contract: { abi: string; address: string } = useSelector(
     (state: any) => state.contract
   );
@@ -57,6 +51,7 @@ const Navbar: FC<INavbar> = ({
     }
   }, [contract.abi]);
 
+  // find suitable type
   const onChangeImage = (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {

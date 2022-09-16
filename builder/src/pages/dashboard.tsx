@@ -2,12 +2,12 @@ import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { useWindowSize } from "hooks/use-window-size";
 import Navbar from "features/dashboard/navbar";
 import Sidebar from "features/dashboard/sidebar";
 import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
-import { useWindowSize } from "hooks/use-window-size";
 import IColor from "interfaces/color";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
@@ -21,7 +21,6 @@ const Dashboard: FC = () => {
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [settingItemId, setSettingItemId] = useState<string>(""); // for storing current element id for settings
   const [openTab, setOpenTab] = useState<number>(1);
-  const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
   const [addContainer, setAddContainer] = useState<boolean>(false);
   const [backgroundColor, setBackgroundColor] = useState<IColor>({
@@ -78,6 +77,7 @@ const Dashboard: FC = () => {
     // setIsNavHidden(false);
     setOpenSetting(false);
   };
+  
   return (
     <main>
       {size.width > 1024 ? (
@@ -95,7 +95,6 @@ const Dashboard: FC = () => {
             addContainer={addContainer}
             settingItemId={settingItemId}
             sideElement={sideElement}
-            setSideElement={setSideElement}
             isNavHidden={isNavHidden}
             setIsNavHidden={setIsNavHidden}
             showSidebar={showSidebar}
@@ -111,7 +110,6 @@ const Dashboard: FC = () => {
             {/* Navbar */}
             <Navbar
               className={className}
-              setClassName={setClassName}
               backgroundColor={backgroundColor}
               head={head}
             />
@@ -120,11 +118,8 @@ const Dashboard: FC = () => {
             <aside className="flex h-full">
               {/* Workspace */}
               <Workspace
-                className={className}
                 setOpenSetting={setOpenSetting}
                 setSettingItemId={setSettingItemId}
-                elementConfig={elementConfig}
-                setElementConfig={setElementConfig}
                 setOpenTab={setOpenTab}
                 drag={drag}
                 setDrag={setDrag}
@@ -146,7 +141,6 @@ const Dashboard: FC = () => {
             <Settings
               setOpenSetting={setOpenSetting}
               settingItemId={settingItemId}
-              elementConfig={elementConfig}
               openTab={openTab}
               setOpenTab={setOpenTab}
             />

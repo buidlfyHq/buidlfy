@@ -5,10 +5,10 @@ import Text from "components/custom-components/text";
 import Image from "components/custom-components/image";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 
 interface IRenderItem {
-  item: IItems;
+  item: IWorkspace;
   setDrag: (drag?: boolean) => void;
   setOpenSetting?: (openSetting: boolean) => void;
   setSettingItemId?: (settingItemId: string) => void;
@@ -25,8 +25,6 @@ const RenderItem: FC<IRenderItem> = ({
   setSettingItemId,
   setOpenTab,
   setAddContainer,
-  elementConfig,
-  setElementConfig,
 }) => {
   switch (item.name) {
     case "Button":
@@ -106,8 +104,6 @@ const RenderItem: FC<IRenderItem> = ({
           setOpenTab={setOpenTab}
           setDrag={setDrag}
           setAddContainer={setAddContainer}
-          elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
         />
       );
     default:

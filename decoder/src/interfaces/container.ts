@@ -1,10 +1,10 @@
 import IColor from "./color";
-import IItems from "./items";
+import IWorkspace from "./workspace";
 import { IInput, IOutput } from "./value";
 
 export default interface IBgContainer {
-  item: IItems;
-  children: IItems[];
+  item: IWorkspace;
+  children: IWorkspace[];
   backgroundColor: IColor;
   color: IColor;
   imgData: string | ArrayBuffer;

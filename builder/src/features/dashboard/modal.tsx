@@ -84,6 +84,7 @@ const Modal: FC<IModal> = ({ isOpen, setIsOpen }) => {
                     <img
                       className="modal-img align-middle mt-[2rem]"
                       src={upload}
+                      alt="Upload"
                     />
                   </div>
                   <span className="modal-text mt-[1.5rem]">

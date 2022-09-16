@@ -7,7 +7,7 @@ import {
 } from "redux/selector/selector.reducers";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 
 interface IAbiComponents {
@@ -20,18 +20,14 @@ interface IAbiComponents {
       stateMutability: string;
     };
   };
-  elementConfig: object;
-  selectedItem: IItems;
+  selectedItem: IWorkspace;
 }
 
-const AbiComponents: FC<IAbiComponents> = ({
-  showComponent,
-  elementConfig,
-  selectedItem,
-}) => {
+const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   const dispatch = useDispatch();
-  const workspace: IItems[] = useSelector((state: any) => state.workspace);
+  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
   const selector = useSelector((state: any) => state.selector);
+  const selected = useSelector((state: any) => state.selected);
 
   const [currentElement, setCurrentElement] = useState<{
     name: string;
@@ -49,7 +45,7 @@ const AbiComponents: FC<IAbiComponents> = ({
   const handleSave = () => {
     setShow(true);
     // filter last selected element
-    const filteredObject = elementConfig[currentElement.name]?.filter(
+    const filteredObject = selected[currentElement.name]?.filter(
       (key: { buttonId: string }) => key.buttonId === selectedItem.i
     )[0];
 
@@ -103,7 +99,7 @@ const AbiComponents: FC<IAbiComponents> = ({
       // search id in children
       const updatedItems = workspace.map((item) => {
         const childIndex = item.children?.findIndex(
-          (child: IItems) => child.i === selectedItem.i
+          (child: IWorkspace) => child.i === selectedItem.i
         );
         let newArray = [...item?.children];
         newArray[childIndex] = updatedItem;
@@ -139,7 +135,7 @@ const AbiComponents: FC<IAbiComponents> = ({
 
   const inputObjects = (i: number) => {
     const selectedId = "input" + i + showComponent.id;
-    const objects = Object.keys(elementConfig);
+    const objects = Object.keys(selected);
     const filterObjects = objects.filter((key) => key === selectedId);
     return {
       selectedId,
@@ -148,7 +144,7 @@ const AbiComponents: FC<IAbiComponents> = ({
     };
   };
 
-  const handleStateSelector = (selectedItem: IItems) => {
+  const handleStateSelector = (selectedItem: IWorkspace) => {
     if (selector === null) {
       dispatch(
         updateSelector({
@@ -168,7 +164,7 @@ const AbiComponents: FC<IAbiComponents> = ({
   };
 
   const stateObject = (key: string) => {
-    let filteredObject = elementConfig[key]?.filter(
+    let filteredObject = selected[key]?.filter(
       (key: { buttonId: string }) => key.buttonId === selectedItem.i
     );
     return filteredObject;
@@ -192,7 +188,7 @@ const AbiComponents: FC<IAbiComponents> = ({
 
   const outputObjects = (i: number) => {
     const selectedId = "output" + i + showComponent.id;
-    const objects = Object.keys(elementConfig);
+    const objects = Object.keys(selected);
     const filterObjects = objects.filter((key) => key === selectedId);
     return {
       selectedId,
@@ -245,9 +241,7 @@ const AbiComponents: FC<IAbiComponents> = ({
                             {!filterObjects.length
                               ? renderDefault(selectedId)
                               : filterObjects.map((key) => {
-                                  let filteredObject = elementConfig[
-                                    key
-                                  ]?.filter(
+                                  let filteredObject = selected[key]?.filter(
                                     (key: { buttonId: string }) =>
                                       key.buttonId === selectedItem.i
                                   );
@@ -298,13 +292,13 @@ const AbiComponents: FC<IAbiComponents> = ({
                   handleStateSelector(selectedItem);
                 }}
               >
-                {!Object.keys(elementConfig).filter(
+                {!Object.keys(selected).filter(
                   (key: string) => key === showComponent.value.name
                 ).length ? (
                   renderDefault(showComponent.value.name)
                 ) : (
                   <>
-                    {Object.keys(elementConfig)
+                    {Object.keys(selected)
                       .filter((key: string) => key === showComponent.value.name)
                       .map((key: string) => {
                         if (key === showComponent.value.name) {
@@ -370,9 +364,7 @@ const AbiComponents: FC<IAbiComponents> = ({
                             {filterObjects.length === 0
                               ? renderDefault(selectedId)
                               : filterObjects.map((key) => {
-                                  let filteredObject = elementConfig[
-                                    key
-                                  ]?.filter(
+                                  let filteredObject = selected[key]?.filter(
                                     (key: { buttonId: string }) =>
                                       key.buttonId === selectedItem.i
                                   );

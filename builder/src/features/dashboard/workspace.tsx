@@ -3,20 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
+import {
+  addSelectedElement,
+  createSelectedElement,
+  updateSelectedElement,
+} from "redux/selected/selected.reducers";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import IColor from "interfaces/color";
 import "styles/components.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
-interface IWorkspace {
-  className: string;
+interface IWorkspaceComponent {
   setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
-  elementConfig: object;
-  setElementConfig: (elementConfig: object) => void;
   setOpenTab: (openTab?: number) => void;
   drag: boolean;
   setDrag: (drag: boolean) => void;
@@ -30,12 +32,9 @@ interface IWorkspace {
   setIsNavHidden;
 }
 
-const Workspace: FC<IWorkspace> = ({
-  className,
+const Workspace: FC<IWorkspaceComponent> = ({
   setOpenSetting,
   setSettingItemId,
-  elementConfig,
-  setElementConfig,
   setOpenTab,
   drag,
   setDrag,
@@ -49,8 +48,9 @@ const Workspace: FC<IWorkspace> = ({
   setIsNavHidden,
 }) => {
   const dispatch = useDispatch();
-  const workspace: IItems[] = useSelector((state: any) => state.workspace);
+  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
   const selector = useSelector((state: any) => state.selector);
+  const selected = useSelector((state: any) => state.selected);
 
   const [currentSize, setCurrentSize] = useState<number>(6);
   // const [isLoading, setLoading] = useState(true);
@@ -65,7 +65,7 @@ const Workspace: FC<IWorkspace> = ({
 
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
-    let newItemsArr = layout.map((obj: IItems) => {
+    let newItemsArr = layout.map((obj: IWorkspace) => {
       let selectedItem = workspace.filter((item) => item.i === obj.i)[0];
       let height: number;
       const { h, minW, minH, x, y, w, i } = obj;
@@ -92,57 +92,53 @@ const Workspace: FC<IWorkspace> = ({
 
   // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {
-    const searchExistingValue = Object.keys(elementConfig).filter(
+    const searchExistingValue = Object.keys(selected).filter(
       (key) => key === selector.name
     );
 
-    if (!searchExistingValue.length || !Object.keys(elementConfig).length) {
-      setElementConfig({
-        ...elementConfig,
-        [selector.name]: [
-          {
+    if (!searchExistingValue.length || !Object.keys(selected).length) {
+      dispatch(
+        createSelectedElement({
+          name: selector.name,
+          element: {
             buttonId: selector.buttonId,
             name: itemName,
             id: i,
           },
-        ],
-      });
+        })
+      );
     } else {
-      Object.keys(elementConfig).map((key) => {
+      Object.keys(selected).map((key) => {
         if (key === selector.name) {
-          let newArray = [];
-          elementConfig[key].map((obj, index: number) => {
+          selected[key].map((obj, index: number) => {
             if (obj.buttonId === selector.buttonId) {
-              let updatedElement = {
-                ...elementConfig[key][index],
-                id: i,
-              };
-              newArray = [...elementConfig[key]];
-              newArray[index] = updatedElement;
-              return newArray;
-            } else {
-              newArray = [
-                ...elementConfig[key],
-                {
-                  buttonId: selector.buttonId,
-                  name: itemName,
+              dispatch(
+                updateSelectedElement({
+                  name: key,
+                  index,
                   id: i,
-                },
-              ];
-              return newArray;
+                })
+              );
+            } else {
+              dispatch(
+                addSelectedElement({
+                  name: selector.name,
+                  element: {
+                    buttonId: selector.buttonId,
+                    name: itemName,
+                    id: i,
+                  },
+                })
+              );
             }
-          });
-
-          let elementArray = newArray;
-
-          setElementConfig({
-            ...elementConfig,
-            [selector.name]: elementArray,
+            return obj;
           });
         }
         return key;
       });
     }
+
+    dispatch(setSelectorToDefault());
   };
 
   const onComponentClick = (itemName: string, i: string) => {
@@ -198,8 +194,8 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const renderItemFunction = workspace
-    .filter((i) => i.style?.deleteComponent === false)
-    .map((item: IItems) => {
+    ?.filter((i) => i.style?.deleteComponent === 0)
+    .map((item: IWorkspace) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
       return (
         <div
@@ -226,8 +222,6 @@ const Workspace: FC<IWorkspace> = ({
             setSettingItemId={setSettingItemId}
             setOpenTab={setOpenTab}
             setAddContainer={setAddContainer}
-            elementConfig={elementConfig}
-            setElementConfig={setElementConfig}
           />
         </div>
       );
