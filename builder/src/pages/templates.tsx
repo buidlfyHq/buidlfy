@@ -19,11 +19,11 @@ const Template: FC = () => {
 
   const handleClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+<<<<<<< HEAD
     value: IWorkspaceElement[]
+=======
+    value: IWorkspaceElements[]
   ) => {
-    localStorage.removeItem("items");
-    localStorage.setItem("items", JSON.stringify(value));
-    dispatch(updateWorkspaceElementsArray(value));
   };
 
   return (
@@ -63,7 +63,11 @@ const Template: FC = () => {
         <div className="grid grid-cols-2 gap-4">
           {newTemp &&
             newTemp?.map(
+<<<<<<< HEAD
               (temp: { name: string; value: IWorkspaceElement[]; image }) => {
+=======
+              (temp: { name: string; value: IWorkspaceElements[]; image }) => {
+>>>>>>> feat/redux-refactor-dashboard
                 const { name, value, image } = temp;
                 console.log(image, "image");
                 return (
