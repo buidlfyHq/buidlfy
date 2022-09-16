@@ -2,7 +2,6 @@ import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import { uploadFileToWeb3Storage } from "utils/web3storage";
-import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 import "styles/dashboard.css";
 

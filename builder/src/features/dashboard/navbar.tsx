@@ -7,12 +7,12 @@ import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
 import IWorkspace from "interfaces/workspace";
-import IColor from "interfaces/color";
 import ITemplate from "interfaces/template";
+import IColor from "interfaces/color";
 
 interface INavbar {
   className: string;
-  backgroundColor: IColor;
+  backgroundColor: string;
   head: {
     title: string;
     logo: string | ArrayBuffer;
@@ -21,7 +21,9 @@ interface INavbar {
 
 const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const dispatch = useDispatch();
-  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
+  const workspaceElements: IWorkspace[] = useSelector(
+    (state: any) => state.workspace.workspaceElements
+  );
   const contract: { abi: string; address: string } = useSelector(
     (state: any) => state.contract
   );
@@ -40,7 +42,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [file, setFile] = useState<string>("");
-  
+
   useEffect(() => {
     if (contract.abi) {
       try {
@@ -74,8 +76,8 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
 
   const handleSave = () => {
     // FIX: save full config to local storage
-    if (workspace.length > 0) {
-      localStorage.setItem("items", JSON.stringify(workspace));
+    if (workspaceElements.length > 0) {
+      localStorage.setItem("items", JSON.stringify(workspaceElements));
     }
   };
 
@@ -86,8 +88,8 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const handleSaveTemplate = () => {
     // FIX: save full config to local storage
     let newTemplates: Array<ITemplate> = [];
-    if (workspace.length > 0) {
-      localStorage.setItem("items", JSON.stringify(workspace));
+    if (workspaceElements.length > 0) {
+      localStorage.setItem("items", JSON.stringify(workspaceElements));
       const templates = localStorage.getItem("templates") || "";
       if (templates !== "") {
         newTemplates = JSON.parse(templates);
@@ -96,7 +98,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
       }
       let newTemplate = {
         name: inputValue,
-        value: workspace,
+        value: workspaceElements,
         image: file,
       };
 
@@ -119,7 +121,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
         logo: head.logo,
       },
       background: backgroundColor,
-      builder: workspace,
+      builder: workspaceElements,
       contract: {
         abi: abiJSON,
         address: contract.address,

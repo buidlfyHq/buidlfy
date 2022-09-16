@@ -25,7 +25,7 @@ interface IAbiComponents {
 
 const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   const dispatch = useDispatch();
-  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
+  const workspaceElements: IWorkspace[] = useSelector((state: any) => state.workspace).workspaceElements;
   const selector = useSelector((state: any) => state.selector);
   const selected = useSelector((state: any) => state.selected);
 
@@ -91,13 +91,13 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
     };
 
     // search id in items
-    const elementsIndex = workspace.findIndex(
+    const elementsIndex = workspaceElements.findIndex(
       (item) => item.i === selectedItem.i
     );
 
     if (elementsIndex === -1) {
       // search id in children
-      const updatedItems = workspace.map((item) => {
+      const updatedItems = workspaceElements.map((item) => {
         const childIndex = item.children?.findIndex(
           (child: IWorkspace) => child.i === selectedItem.i
         );
@@ -111,7 +111,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
 
       dispatch(updateWorkspaceElementsArray(updatedItems));
     } else {
-      let newArray = [...workspace];
+      let newArray = [...workspaceElements];
       newArray[elementsIndex] = updatedItem;
       dispatch(updateWorkspaceElementsArray(newArray));
     }

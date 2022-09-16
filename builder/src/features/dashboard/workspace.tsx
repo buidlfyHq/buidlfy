@@ -49,7 +49,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
   setIsNavHidden,
 }) => {
   const dispatch = useDispatch();
-  const workspace: IWorkspace[] = useSelector((state: any) => state.workspace);
+  const workspaceElements: IWorkspace[] = useSelector((state: any) => state.workspace.workspaceElements);
   const selector = useSelector((state: any) => state.selector);
   const selected = useSelector((state: any) => state.selected);
 
@@ -67,7 +67,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
     let newItemsArr = layout.map((obj: IWorkspace) => {
-      let selectedItem = workspace.filter((item) => item.i === obj.i)[0];
+      let selectedItem = workspaceElements.filter((item) => item.i === obj.i)[0];
       let height: number;
       const { h, minW, minH, x, y, w, i } = obj;
       if (containerCheck(selectedItem)) {
@@ -88,7 +88,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
     });
     newItemsArr.length > 0
       ? dispatch(updateWorkspaceElementsArray(newItemsArr))
-      : dispatch(updateWorkspaceElementsArray(workspace));
+      : dispatch(updateWorkspaceElementsArray(workspaceElements));
   };
 
   // to update selected element config
@@ -194,7 +194,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
     }
   };
 
-  const renderItemFunction = workspace
+  const renderItemFunction = workspaceElements
     ?.filter((i) => i.style?.deleteComponent === 0)
     .map((item: IWorkspace) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
@@ -250,7 +250,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
             className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
           >
             <ResponsiveGridLayout
-              layouts={{ lg: workspace }}
+              layouts={{ lg: workspaceElements }}
               breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
               cols={{
                 lg: currentSize,
@@ -282,7 +282,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
                 <ResponsiveGridLayout
-                  layouts={{ lg: workspace }}
+                  layouts={{ lg: workspaceElements }}
                   breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                   cols={{
                     lg: currentSize,
@@ -312,7 +312,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
                 <ResponsiveGridLayout
-                  layouts={{ lg: workspace }}
+                  layouts={{ lg: workspaceElements }}
                   breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                   cols={{
                     lg: currentSize,
