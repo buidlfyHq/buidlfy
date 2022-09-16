@@ -3,26 +3,24 @@ import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { SketchPicker } from "react-color";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import IWorkspace from "interfaces/workspace";
-import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBgColorComponent {
-  selectedItem?: IWorkspace;
-  backgroundColor?: IColor;
-  setBackgroundColor?: (backgroundColor: IColor) => void;
+  i?: string;
+  bgColor?: string;
+  backgroundColor?: string;
+  setBackgroundColor?: (backgroundColor: string) => void;
 }
 
 const BgColorComponent: FC<IBgColorComponent> = ({
-  selectedItem,
+  i,
+  bgColor,
   backgroundColor,
   setBackgroundColor,
 }) => {
   const dispatch = useDispatch();
-  const color = backgroundColor
-    ? backgroundColor
-    : selectedItem?.style?.backgroundColor;
+  const color = backgroundColor ? backgroundColor : bgColor;
 
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [hexColor, setHexColor] = useState();
@@ -47,7 +45,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     setDisplayColorPicker(false);
   };
 
-  const handleChange = (color: { rgb: IColor; hex }) => {
+  const handleChange = (color: { rgb; hex }) => {
     if (!color) {
       return;
     }
@@ -56,7 +54,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     } else {
       dispatch(
         updateWorkspaceElementStyle({
-          settingItemId: selectedItem.i,
+          settingItemId: i,
           propertyName: "backgroundColor",
           propertyValue: color.rgb,
         })
@@ -77,7 +75,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     } else {
       dispatch(
         updateWorkspaceElementStyle({
-          settingItemId: selectedItem.i,
+          settingItemId: i,
           propertyName: "backgroundColor",
           propertyValue: newColor,
         })
@@ -93,7 +91,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     } else {
       dispatch(
         updateWorkspaceElementStyle({
-          settingItemId: selectedItem.i,
+          settingItemId: i,
           propertyName: "backgroundColor",
           propertyValue: newColor,
         })
@@ -109,7 +107,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     } else {
       dispatch(
         updateWorkspaceElementStyle({
-          settingItemId: selectedItem.i,
+          settingItemId: i,
           propertyName: "backgroundColor",
           propertyValue: newColor,
         })

@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import {
-  setSelectedElementId,
+  setSelectedElement,
   updateWorkspaceElementsArray,
 } from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
@@ -148,7 +148,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
-      dispatch(setSelectedElementId(i));
+      dispatch(setSelectedElement(i));
       setOpenTab(1);
     } else {
       // checks selector type

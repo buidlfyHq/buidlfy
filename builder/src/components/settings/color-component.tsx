@@ -3,19 +3,17 @@ import { useDispatch } from "react-redux";
 import { SketchPicker } from "react-color";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import { containerCheck } from "utils/container-check";
-import IWorkspace from "interfaces/workspace";
-import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IColorComponent {
-  selectedItem: IWorkspace;
+  i: string;
+  color: string;
+  isContainer: boolean;
 }
 
-const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
+const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
   const dispatch = useDispatch();
-  const color = selectedItem?.style?.color;
 
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [hexColor, setHexColor] = useState();
@@ -45,14 +43,14 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     setHexColor(e.target.value);
   };
 
-  const handleChange = (color: { rgb: IColor; hex; a }) => {
+  const handleChange = (color: { rgb; hex; a }) => {
     if (!color) {
       return;
     }
 
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "color",
         propertyValue: color.rgb,
       })
@@ -71,7 +69,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     newColor.a = Number(e.target.value) / 100;
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "color",
         propertyValue: newColor,
       })
@@ -83,7 +81,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     newColor.a = Number(newIncrement) / 100;
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "color",
         propertyValue: newColor,
       })
@@ -95,7 +93,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
     newColor.a = Number(newDecrement) / 100;
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: i,
         propertyName: "color",
         propertyValue: newColor,
       })
@@ -108,7 +106,7 @@ const ColorComponent: FC<IColorComponent> = ({ selectedItem }) => {
         <div className="items-center mx-2 py-2 mb-2">
           {/* <VscSymbolColor className="text-[18px] mr-3" /> */}
           <div className="flex">
-            {containerCheck(selectedItem) ? (
+            {isContainer ? (
               <span className="margin-text grow flex px-1 mt-2 text-xl not-italic font-normal text-gray-500 font-regular">
                 Border Color
               </span>

@@ -54,7 +54,7 @@ const workspaceSlice = createSlice({
       return { ...state, workspaceElements: action.payload };
     },
     // to set current selected element
-    setSelectedElementId(state: IWorkspaceState, action: { payload: string }) {
+    setSelectedElement(state: IWorkspaceState, action: { payload: string }) {
       return {
         ...state,
         selectedElement: fetchSelectedElement(
@@ -71,6 +71,6 @@ export const {
   updateWorkspaceElementStyle,
   updateWorkspaceElementSubStyle,
   updateWorkspaceElementsArray,
-  setSelectedElementId,
+  setSelectedElement,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;
