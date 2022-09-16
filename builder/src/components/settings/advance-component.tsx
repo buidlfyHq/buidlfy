@@ -51,7 +51,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
       />
       <AbiComponents
         showComponent={showComponent}
-        selectedItem={selectedItem}
+        elementId={selectedItem.i}
       />
     </>
   );

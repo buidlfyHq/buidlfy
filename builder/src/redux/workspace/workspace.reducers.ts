@@ -4,6 +4,7 @@ import {
   mapElementsToWorkspace,
   mapElementStylesToWorkspace,
   mapElementSubStyleToWorkspace,
+  updateContractInElement,
 } from "./workspace.utils";
 import {
   IAction,
@@ -51,7 +52,6 @@ const workspaceSlice = createSlice({
       );
       return { ...state, workspaceElements: updatedElements };
     },
-    
     // to update the elements
     updateWorkspaceElementsArray(
       state,
@@ -70,6 +70,17 @@ const workspaceSlice = createSlice({
         ),
       };
     },
+
+    saveContractConfig(state: IWorkspaceState, action: { payload }) {
+      return {
+        ...state,
+        workspaceElements: updateContractInElement(
+          state.workspaceElements,
+          state.selectedElement,
+          action.payload
+        ),
+      };
+    },
   },
 });
 
@@ -79,5 +90,6 @@ export const {
   updateWorkspaceElementSubStyle,
   updateWorkspaceElementsArray,
   setSelectedElement,
+  saveContractConfig,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;
