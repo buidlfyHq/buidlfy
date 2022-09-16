@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementSubStyle } from "redux/workspace/workspace.reducers";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -19,8 +19,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     dispatch(
-      updateItems({
-        level: 2,
+      updateWorkspaceElementSubStyle({
         settingItemId: selectedItem.i,
         propertyName: "padding",
         propertyValue: +e.target.value,
@@ -31,8 +30,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
 
   const incrementCounter = (property: string, value: number) => {
     dispatch(
-      updateItems({
-        level: 2,
+      updateWorkspaceElementSubStyle({
         settingItemId: selectedItem.i,
         propertyName: "padding",
         propertyValue: value + 1,
@@ -43,8 +41,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ selectedItem }) => {
 
   const decrementCounter = (property: string, value: number) => {
     dispatch(
-      updateItems({
-        level: 2,
+      updateWorkspaceElementSubStyle({
         settingItemId: selectedItem.i,
         propertyName: "padding",
         propertyValue: value - 1,

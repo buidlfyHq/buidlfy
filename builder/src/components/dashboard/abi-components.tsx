@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateItemsArray } from "reducers/itemsReducer";
-import { updateSelector } from "reducers/selectorReducer";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { updateSelector } from "redux/selectorReducer";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
 import IItems from "interfaces/items";
@@ -27,7 +27,7 @@ const AbiComponents: FC<IAbiComponents> = ({
   selectedItem,
 }) => {
   const dispatch = useDispatch();
-  const items: IItems[] = useSelector((state: any) => state.items);
+  const workspace: IItems[] = useSelector((state: any) => state.workspace);
   const selector = useSelector((state: any) => state.selector);
 
   const [currentElement, setCurrentElement] = useState<{
@@ -92,11 +92,13 @@ const AbiComponents: FC<IAbiComponents> = ({
     };
 
     // search id in items
-    const elementsIndex = items.findIndex((item) => item.i === selectedItem.i);
+    const elementsIndex = workspace.findIndex(
+      (item) => item.i === selectedItem.i
+    );
 
     if (elementsIndex === -1) {
       // search id in children
-      const updatedItems = items.map((item) => {
+      const updatedItems = workspace.map((item) => {
         const childIndex = item.children?.findIndex(
           (child: IItems) => child.i === selectedItem.i
         );
@@ -108,11 +110,11 @@ const AbiComponents: FC<IAbiComponents> = ({
         };
       });
 
-      dispatch(updateItemsArray(updatedItems));
+      dispatch(updateWorkspaceElementsArray(updatedItems));
     } else {
-      let newArray = [...items];
+      let newArray = [...workspace];
       newArray[elementsIndex] = updatedItem;
-      dispatch(updateItemsArray(newArray));
+      dispatch(updateWorkspaceElementsArray(newArray));
     }
   };
 

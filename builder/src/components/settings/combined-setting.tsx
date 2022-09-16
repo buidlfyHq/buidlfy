@@ -5,7 +5,7 @@ import {
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -19,8 +19,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({ selectedItem }) => {
 
   const handleBoldChange = () => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "fontWeight",
         propertyValue:
@@ -31,8 +30,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({ selectedItem }) => {
 
   const handleItalicChange = () => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "fontStyle",
         propertyValue:
@@ -43,8 +41,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({ selectedItem }) => {
 
   const handleUnderlineChange = () => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "textDecoration",
         propertyValue:
@@ -57,8 +54,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({ selectedItem }) => {
 
   const handleAlignChange = (type: string) => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "justifyContent",
         propertyValue:

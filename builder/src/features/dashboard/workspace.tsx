@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
-import { updateItemsArray } from "reducers/itemsReducer";
-import { updateSelector } from "reducers/selectorReducer";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { updateSelector } from "redux/selectorReducer";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
@@ -49,7 +49,7 @@ const Workspace: FC<IWorkspace> = ({
   setIsNavHidden,
 }) => {
   const dispatch = useDispatch();
-  const items: IItems[] = useSelector((state: any) => state.items);
+  const workspace: IItems[] = useSelector((state: any) => state.workspace);
   const selector = useSelector((state: any) => state.selector);
 
   const [currentSize, setCurrentSize] = useState<number>(6);
@@ -66,7 +66,7 @@ const Workspace: FC<IWorkspace> = ({
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
     let newItemsArr = layout.map((obj: IItems) => {
-      let selectedItem = items.filter((item) => item.i === obj.i)[0];
+      let selectedItem = workspace.filter((item) => item.i === obj.i)[0];
       let height: number;
       const { h, minW, minH, x, y, w, i } = obj;
       if (containerCheck(selectedItem)) {
@@ -86,8 +86,8 @@ const Workspace: FC<IWorkspace> = ({
       });
     });
     newItemsArr.length > 0
-      ? dispatch(updateItemsArray(newItemsArr))
-      : dispatch(updateItemsArray(items));
+      ? dispatch(updateWorkspaceElementsArray(newItemsArr))
+      : dispatch(updateWorkspaceElementsArray(workspace));
   };
 
   // to update selected element config
@@ -197,8 +197,8 @@ const Workspace: FC<IWorkspace> = ({
     }
   };
 
-  const renderItemFunction = items
-    ?.filter((i) => i.style?.deleteComponent === 0)
+  const renderItemFunction = workspace
+    .filter((i) => i.style?.deleteComponent === false)
     .map((item: IItems) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
       return (
@@ -256,7 +256,7 @@ const Workspace: FC<IWorkspace> = ({
             className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
           >
             <ResponsiveGridLayout
-              layouts={{ lg: items }}
+              layouts={{ lg: workspace }}
               breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
               cols={{
                 lg: currentSize,
@@ -288,7 +288,7 @@ const Workspace: FC<IWorkspace> = ({
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
                 <ResponsiveGridLayout
-                  layouts={{ lg: items }}
+                  layouts={{ lg: workspace }}
                   breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                   cols={{
                     lg: currentSize,
@@ -318,7 +318,7 @@ const Workspace: FC<IWorkspace> = ({
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
                 <ResponsiveGridLayout
-                  layouts={{ lg: items }}
+                  layouts={{ lg: workspace }}
                   breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                   cols={{
                     lg: currentSize,

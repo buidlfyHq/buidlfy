@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
-import { updateContract } from "reducers/contractReducer";
+import { updateContract } from "redux/contractReducer";
 import upload from "assets/upload-img.png";
 import "styles/components.css";
 

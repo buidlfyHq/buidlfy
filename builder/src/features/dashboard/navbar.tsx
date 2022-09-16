@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { encode as base64_encode } from "base-64";
 import { Dialog } from "@headlessui/react";
-import { updateItemsArray } from "reducers/itemsReducer";
-import { updateSelector } from "reducers/selectorReducer";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { updateSelector } from "redux/selectorReducer";
 import { uploadFileToWeb3Storage } from "config/web3storage";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
@@ -27,7 +27,7 @@ const Navbar: FC<INavbar> = ({
   head,
 }) => {
   const dispatch = useDispatch();
-  const items: IItems[] = useSelector((state: any) => state.items);
+  const workspace: IItems[] = useSelector((state: any) => state.workspace);
   const contract: { abi: string; address: string } = useSelector(
     (state: any) => state.contract
   );
@@ -57,11 +57,12 @@ const Navbar: FC<INavbar> = ({
     }
   }, [contract.abi]);
 
-  const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeImage = (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
-        // DO SOMETHING
+        // setSize(true);
       } else {
+        // setSize(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
@@ -78,8 +79,8 @@ const Navbar: FC<INavbar> = ({
 
   const handleSave = () => {
     // FIX: save full config to local storage
-    if (items?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(items));
+    if (workspace.length > 0) {
+      localStorage.setItem("items", JSON.stringify(workspace));
     }
   };
 
@@ -90,8 +91,8 @@ const Navbar: FC<INavbar> = ({
   const handleSaveTemplate = () => {
     // FIX: save full config to local storage
     let newTemplates: Array<ITemplate> = [];
-    if (items?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(items));
+    if (workspace.length > 0) {
+      localStorage.setItem("items", JSON.stringify(workspace));
       const templates = localStorage.getItem("templates") || "";
       if (templates !== "") {
         newTemplates = JSON.parse(templates);
@@ -100,7 +101,7 @@ const Navbar: FC<INavbar> = ({
       }
       let newTemplate = {
         name: inputValue,
-        value: items,
+        value: workspace,
         image: file,
       };
 
@@ -112,7 +113,7 @@ const Navbar: FC<INavbar> = ({
   const handleClear = () => {
     // FIX: remove full config from local storage
     localStorage.removeItem("items");
-    dispatch(updateItemsArray([]));
+    dispatch(updateWorkspaceElementsArray([]));
     dispatch(updateSelector(null));
   };
 
@@ -123,7 +124,7 @@ const Navbar: FC<INavbar> = ({
         logo: head.logo,
       },
       background: backgroundColor,
-      builder: items,
+      builder: workspace,
       contract: {
         abi: abiJSON,
         address: contract.address,

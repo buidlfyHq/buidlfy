@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import { uploadFileToWeb3Storage } from "utils/web3storage";
 import IItems from "interfaces/items";
 import "styles/components.css";
@@ -25,8 +25,7 @@ const UploadComponent: FC<IUploadComponent> = ({ selectedItem }) => {
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
           dispatch(
-            updateItems({
-              level: 0,
+            updateWorkspaceElement({
               settingItemId: selectedItem.i,
               propertyName: "imgData",
               propertyValue: cid,

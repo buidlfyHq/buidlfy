@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -16,8 +16,7 @@ const BorderComponent: FC<IBorderComponent> = ({ selectedItem }) => {
 
   const incrementWidthCounter = () => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "borderWidth",
         propertyValue: borderWidth + 1,
@@ -27,8 +26,7 @@ const BorderComponent: FC<IBorderComponent> = ({ selectedItem }) => {
 
   const decrementWidthCounter = () => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "borderWidth",
         propertyValue: borderWidth <= 0 ? 0 : borderWidth - 1,
@@ -39,8 +37,7 @@ const BorderComponent: FC<IBorderComponent> = ({ selectedItem }) => {
   const handleWidthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (borderWidth) {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: selectedItem.i,
           propertyName: "borderWidth",
           propertyValue: +e.target.value,

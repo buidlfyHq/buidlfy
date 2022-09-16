@@ -2,8 +2,8 @@ import React, { Dispatch, FC, SetStateAction } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
-import { updateItemsArray } from "reducers/itemsReducer";
-import { updateSelector } from "reducers/selectorReducer";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { updateSelector } from "redux/selectorReducer";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
 import IItems from "interfaces/items";
@@ -47,7 +47,7 @@ const Container: FC<IContainer> = ({
   setElementConfig,
 }) => {
   const dispatch = useDispatch();
-  const items: IItems[] = useSelector((state: any) => state.items);
+  const workspace: IItems[] = useSelector((state: any) => state.workspace);
   const selector = useSelector((state: any) => state.selector);
 
   // to persist layout changes
@@ -77,15 +77,17 @@ const Container: FC<IContainer> = ({
         h: maxH,
         children: newItemsArr,
       };
-      let filterItems = items.filter((element) => element.i !== item.i);
-      dispatch(updateItemsArray([...filterItems, newModifiedContainer]));
+      let filterItems = workspace.filter((element) => element.i !== item.i);
+      dispatch(
+        updateWorkspaceElementsArray([...filterItems, newModifiedContainer])
+      );
     } else if (layout.length === 0) {
-      let removeContainerItems = items.filter(
+      let removeContainerItems = workspace.filter(
         (element) => element.i !== item.i
       );
-      dispatch(updateItemsArray(removeContainerItems));
+      dispatch(updateWorkspaceElementsArray(removeContainerItems));
     } else {
-      dispatch(updateItemsArray(items));
+      dispatch(updateWorkspaceElementsArray(workspace));
     }
   };
 
@@ -205,7 +207,7 @@ const Container: FC<IContainer> = ({
             </div>
           ) : (
             children
-              ?.filter((c) => c.style?.deleteComponent === 0)
+              ?.filter((c) => c.style?.deleteComponent === false)
               .map((item: IItems) => {
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (

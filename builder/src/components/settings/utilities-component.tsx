@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -15,8 +15,7 @@ const UtilitiesComponent: FC<IUtilitiesComponent> = ({ selectedItem }) => {
 
   const handleDelete = () => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "deleteComponent",
         propertyValue: 1,

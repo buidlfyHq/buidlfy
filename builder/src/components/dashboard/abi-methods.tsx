@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateItemsArray } from "reducers/itemsReducer";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import IItems from "interfaces/items";
 
 interface IAbiMethods {
@@ -18,7 +18,7 @@ interface IAbiMethods {
 
 const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
   const dispatch = useDispatch();
-  const items: IItems[] = useSelector((state: any) => state.items);
+  const workspace: IItems[] = useSelector((state: any) => state.workspace);
   const contract: { abi: string; address: string } = useSelector(
     (state: any) => state.contract
   );
@@ -76,13 +76,13 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
       };
 
       // search id in items
-      const elementsIndex = items.findIndex(
+      const elementsIndex = workspace.findIndex(
         (item) => item.i === selectedItem.i
       );
 
       if (elementsIndex === -1) {
         // search id in children
-        const updatedItems = items.map((item) => {
+        const updatedItems = workspace.map((item) => {
           const childIndex = item.children?.findIndex(
             (child) => child.i === selectedItem.i
           );
@@ -93,11 +93,11 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
             children: newArray,
           };
         });
-        dispatch(updateItemsArray(updatedItems));
+        dispatch(updateWorkspaceElementsArray(updatedItems));
       } else {
-        let newArray = [...items];
+        let newArray = [...workspace];
         newArray[elementsIndex] = updatedItem;
-        dispatch(updateItemsArray(newArray));
+        dispatch(updateWorkspaceElementsArray(newArray));
       }
     } else {
       setShowComponent(null);

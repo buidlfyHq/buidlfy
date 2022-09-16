@@ -2,7 +2,7 @@ import React, { useState, FC, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { SketchPicker } from "react-color";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
@@ -55,8 +55,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       setBackgroundColor(color.rgb);
     } else {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: selectedItem.i,
           propertyName: "backgroundColor",
           propertyValue: color.rgb,
@@ -77,8 +76,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       setBackgroundColor(newColor);
     } else {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: selectedItem.i,
           propertyName: "backgroundColor",
           propertyValue: newColor,
@@ -94,8 +92,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       setBackgroundColor(newColor);
     } else {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: selectedItem.i,
           propertyName: "backgroundColor",
           propertyValue: newColor,
@@ -111,8 +108,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       setBackgroundColor(newColor);
     } else {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: selectedItem.i,
           propertyName: "backgroundColor",
           propertyValue: newColor,

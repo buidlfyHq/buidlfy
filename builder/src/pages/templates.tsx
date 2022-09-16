@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateItemsArray } from "reducers/itemsReducer";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import IItems from "interfaces/items";
 import ITemplate from "interfaces/template";
 import "styles/components.css";
@@ -21,7 +21,7 @@ const Template: FC = () => {
   ) => {
     localStorage.removeItem("items");
     localStorage.setItem("items", JSON.stringify(value));
-    dispatch(updateItemsArray(value));
+    dispatch(updateWorkspaceElementsArray(value));
   };
 
   return (

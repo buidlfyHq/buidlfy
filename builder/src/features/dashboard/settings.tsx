@@ -11,7 +11,7 @@ const Settings: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const ref = useRef(null);
-  const items: IItems[] = useSelector((state: any) => state.items);
+  const workspace: IItems[] = useSelector((state: any) => state.workspace);
 
   const [showComponent, setShowComponent] =
     useState<{
@@ -25,12 +25,12 @@ const Settings: FC<ISettings> = ({
     }>(null); // for abi method component
 
   // work in progress
-  const selectedChildren = items.map((item) =>
+  const selectedChildren = workspace.map((item) =>
     item.children?.find((child) => child.i === settingItemId)
   );
 
   const selectedItem =
-    items?.find((item) => item.i === settingItemId) ||
+    workspace.find((item) => item.i === settingItemId) ||
     selectedChildren.filter(Boolean)[0];
 
   return (

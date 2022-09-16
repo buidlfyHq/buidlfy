@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -16,8 +16,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ selectedItem }) => {
 
   const incrementCounter = () => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "fontSize",
         propertyValue: fontSize + 1,
@@ -27,8 +26,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ selectedItem }) => {
 
   const decrementCounter = () => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: selectedItem.i,
         propertyName: "fontSize",
         propertyValue: fontSize <= 1 ? 1 : fontSize - 1,
@@ -39,8 +37,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ selectedItem }) => {
   const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (fontSize) {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: selectedItem.i,
           propertyName: "fontSize",
           propertyValue: +e.target.value,
