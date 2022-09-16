@@ -24,18 +24,13 @@ const Elements: FC<IElements> = ({
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
   const workspace: IItems[] = useSelector((state: any) => state.workspace);
-  
-  // const [indexValue, setIndexValue] = useState<number>(0);
 
   const selectedItem =
-    workspace?.find((item) => item.i === settingItemId) ||
-    workspace?.map((item) =>
+    workspace.find((item) => item.i === settingItemId) ||
+    workspace.map((item) =>
       item.children?.find((child: IItems) => child.i === settingItemId)
     )[0];
 
-  // const hideSidebar = () => {
-  //   setClassName("hidden");
-  // };
   const onClickFunction = (name) => {
     let c = components?.find((component) => component.name == name);
     if (addContainer) {

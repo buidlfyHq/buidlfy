@@ -30,7 +30,7 @@ const Settings: FC<ISettings> = ({
   );
 
   const selectedItem =
-    workspace?.find((item) => item.i === settingItemId) ||
+    workspace.find((item) => item.i === settingItemId) ||
     selectedChildren.filter(Boolean)[0];
 
   return (
