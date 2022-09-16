@@ -4,11 +4,14 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 import { encode as base64_encode } from "base-64";
 import { Dialog } from "@headlessui/react";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { setSelectorToDefault } from "redux/selector/selector.reducers";
+import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
-import { IColor, IWorkspaceElements } from "redux/workspace/workspace.interfaces";
-import ITemplate from "interfaces/template";
-
+import {
+  IColor,
+  ITemplate,
+  IWorkspaceElements,
+} from "redux/workspace/workspace.interfaces";
+import { IContractDetails } from "redux/contract/contract.interfaces";
 
 interface INavbar {
   className: string;
@@ -21,9 +24,11 @@ interface INavbar {
 
 const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector((state: any) => state.workspace.workspaceElements);
-  const contract: { abi: string; address: string } = useSelector(
-    (state: any) => state.contract
+  const workspaceElements: IWorkspaceElements[] = useSelector(
+    (state: any) => state.workspace.workspaceElements
+  );
+  const contractDetails: IContractDetails = useSelector(
+    (state: any) => state.contract.contractDetails
   );
 
   const [abiJSON, setAbiJSON] = useState<
@@ -42,14 +47,14 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const [file, setFile] = useState<string>("");
 
   useEffect(() => {
-    if (contract.abi) {
+    if (contractDetails.abi) {
       try {
-        setAbiJSON(JSON.parse(contract.abi));
+        setAbiJSON(JSON.parse(contractDetails.abi));
       } catch (error) {
         console.log(error);
       }
     }
-  }, [contract.abi]);
+  }, [contractDetails.abi]);
 
   // find suitable type
   const onChangeImage = (e) => {
@@ -122,7 +127,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
       builder: workspaceElements,
       contract: {
         abi: abiJSON,
-        address: contract.address,
+        address: contractDetails.address,
       },
     };
     let stringifiedConfig = JSON.stringify(config);

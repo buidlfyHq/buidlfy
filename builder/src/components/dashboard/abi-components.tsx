@@ -4,10 +4,14 @@ import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers
 import {
   setSelectorToDefault,
   updateSelector,
-} from "redux/selector/selector.reducers";
+} from "redux/contract/contract.reducers";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
 import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
+import {
+  IContractElementSelected,
+  IContractElementSelector,
+} from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 interface IAbiComponents {
@@ -28,8 +32,12 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   const workspaceElements: IWorkspaceElements[] = useSelector(
     (state: any) => state.workspace
   ).workspaceElements;
-  const selector = useSelector((state: any) => state.selector);
-  const selected = useSelector((state: any) => state.selected);
+  const contractElementSelector: IContractElementSelector = useSelector(
+    (state: any) => state.contract.contractElementSelector
+  );
+  const contractElementSelected: IContractElementSelected = useSelector(
+    (state: any) => state.contract.contractElementSelected
+  );
 
   const [currentElement, setCurrentElement] = useState<{
     name: string;
@@ -47,7 +55,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   const handleSave = () => {
     setShow(true);
     // filter last selected element
-    const filteredObject = selected[currentElement.name]?.filter(
+    const filteredObject = contractElementSelected[currentElement.name]?.filter(
       (key: { buttonId: string }) => key.buttonId === selectedItem.i
     )[0];
 
@@ -120,7 +128,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   };
 
   const handleInputSelector = (selectedId: string) => {
-    if (selector === null) {
+    if (contractElementSelector === null) {
       dispatch(
         updateSelector({
           methodName: showComponent.value.name,
@@ -137,7 +145,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
 
   const inputObjects = (i: number) => {
     const selectedId = "input" + i + showComponent.id;
-    const objects = Object.keys(selected);
+    const objects = Object.keys(contractElementSelected);
     const filterObjects = objects.filter((key) => key === selectedId);
     return {
       selectedId,
@@ -147,7 +155,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   };
 
   const handleStateSelector = (selectedItem: IWorkspaceElements) => {
-    if (selector === null) {
+    if (contractElementSelector === null) {
       dispatch(
         updateSelector({
           methodName: showComponent.value.name,
@@ -166,14 +174,14 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   };
 
   const stateObject = (key: string) => {
-    let filteredObject = selected[key]?.filter(
+    let filteredObject = contractElementSelected[key]?.filter(
       (key: { buttonId: string }) => key.buttonId === selectedItem.i
     );
     return filteredObject;
   };
 
   const handleOutputSelector = (selectedId: string) => {
-    if (selector === null) {
+    if (contractElementSelector === null) {
       dispatch(
         updateSelector({
           methodName: showComponent.value.name,
@@ -190,7 +198,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
 
   const outputObjects = (i: number) => {
     const selectedId = "output" + i + showComponent.id;
-    const objects = Object.keys(selected);
+    const objects = Object.keys(contractElementSelected);
     const filterObjects = objects.filter((key) => key === selectedId);
     return {
       selectedId,
@@ -201,7 +209,8 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
 
   const renderDefault = (valueName: string) => (
     <>
-      {selector && selector?.name === valueName ? (
+      {contractElementSelector &&
+      contractElementSelector?.name === valueName ? (
         <span className="flex">
           <span className="flex-1">
             <Spinner />
@@ -243,7 +252,9 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
                             {!filterObjects.length
                               ? renderDefault(selectedId)
                               : filterObjects.map((key) => {
-                                  let filteredObject = selected[key]?.filter(
+                                  let filteredObject = contractElementSelected[
+                                    key
+                                  ]?.filter(
                                     (key: { buttonId: string }) =>
                                       key.buttonId === selectedItem.i
                                   );
@@ -251,8 +262,9 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
                                     <div key={key}>
                                       {filteredObject[0] ? (
                                         <>
-                                          {selector !== null &&
-                                          selector.name === selectedId ? (
+                                          {contractElementSelector !== null &&
+                                          contractElementSelector.name ===
+                                            selectedId ? (
                                             <span className="flex">
                                               <span className="flex-1">
                                                 <Spinner />
@@ -294,13 +306,13 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
                   handleStateSelector(selectedItem);
                 }}
               >
-                {!Object.keys(selected).filter(
+                {!Object.keys(contractElementSelected).filter(
                   (key: string) => key === showComponent.value.name
                 ).length ? (
                   renderDefault(showComponent.value.name)
                 ) : (
                   <>
-                    {Object.keys(selected)
+                    {Object.keys(contractElementSelected)
                       .filter((key: string) => key === showComponent.value.name)
                       .map((key: string) => {
                         if (key === showComponent.value.name) {
@@ -309,8 +321,9 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
                             <div key={key}>
                               {filteredObject[0] ? (
                                 <>
-                                  {selector !== null &&
-                                  selector.name === showComponent.value.name ? (
+                                  {contractElementSelector !== null &&
+                                  contractElementSelector.name ===
+                                    showComponent.value.name ? (
                                     <span className="flex">
                                       <span className="flex-1">
                                         <Spinner />
@@ -366,7 +379,9 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
                             {filterObjects.length === 0
                               ? renderDefault(selectedId)
                               : filterObjects.map((key) => {
-                                  let filteredObject = selected[key]?.filter(
+                                  let filteredObject = contractElementSelected[
+                                    key
+                                  ]?.filter(
                                     (key: { buttonId: string }) =>
                                       key.buttonId === selectedItem.i
                                   );
@@ -374,8 +389,9 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
                                     <div key={key}>
                                       {filteredObject[0] ? (
                                         <>
-                                          {selector !== null &&
-                                          selector.name === selectedId ? (
+                                          {contractElementSelector !== null &&
+                                          contractElementSelector.name ===
+                                            selectedId ? (
                                             <span className="flex">
                                               <span className="flex-1">
                                                 <Spinner />

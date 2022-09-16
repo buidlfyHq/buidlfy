@@ -1,8 +1,10 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
-import ITemplate from "interfaces/template";
+import {
+  ITemplate,
+  IWorkspaceElements,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 const Template: FC = () => {

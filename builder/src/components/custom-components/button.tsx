@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import ITexts from "interfaces/texts";
+import { ITexts } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 const Button: FC<ITexts> = ({

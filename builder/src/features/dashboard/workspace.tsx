@@ -5,15 +5,22 @@ import {
   setSelectedElement,
   updateWorkspaceElementsArray,
 } from "redux/workspace/workspace.reducers";
-import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import {
+  setSelectorToDefault,
   addSelectedElement,
   createSelectedElement,
   updateSelectedElement,
-} from "redux/selected/selected.reducers";
+} from "redux/contract/contract.reducers";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
-import { IColor, IWorkspaceElements } from "redux/workspace/workspace.interfaces";
+import {
+  IColor,
+  IWorkspaceElements,
+} from "redux/workspace/workspace.interfaces";
+import {
+  IContractElementSelected,
+  IContractElementSelector,
+} from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
@@ -48,9 +55,15 @@ const Workspace: FC<IWorkspaceComponent> = ({
   setIsNavHidden,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector((state: any) => state.workspace.workspaceElements);
-  const selector = useSelector((state: any) => state.selector);
-  const selected = useSelector((state: any) => state.selected);
+  const workspaceElements: IWorkspaceElements[] = useSelector(
+    (state: any) => state.workspace.workspaceElements
+  );
+  const contractElementSelector: IContractElementSelector = useSelector(
+    (state: any) => state.contract.contractElementSelector
+  );
+  const contractElementSelected: IContractElementSelected = useSelector(
+    (state: any) => state.contract.contractElementSelected
+  );
 
   const [currentSize, setCurrentSize] = useState<number>(6);
   // const [isLoading, setLoading] = useState(true);
@@ -66,7 +79,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
     let newItemsArr = layout.map((obj: IWorkspaceElements) => {
-      let selectedItem = workspaceElements.filter((item) => item.i === obj.i)[0];
+      let selectedItem = workspaceElements.filter(
+        (item) => item.i === obj.i
+      )[0];
       let height: number;
       const { h, minW, minH, x, y, w, i } = obj;
       if (containerCheck(selectedItem)) {
@@ -92,26 +107,26 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {
-    const searchExistingValue = Object.keys(selected).filter(
-      (key) => key === selector.name
+    const searchExistingValue = Object.keys(contractElementSelected).filter(
+      (key) => key === contractElementSelector.name
     );
 
-    if (!searchExistingValue.length || !Object.keys(selected).length) {
+    if (!searchExistingValue.length || !Object.keys(contractElementSelected).length) {
       dispatch(
         createSelectedElement({
-          name: selector.name,
+          name: contractElementSelector.name,
           element: {
-            buttonId: selector.buttonId,
+            buttonId: contractElementSelector.buttonId,
             name: itemName,
             id: i,
           },
         })
       );
     } else {
-      Object.keys(selected).map((key) => {
-        if (key === selector.name) {
-          selected[key].map((obj, index: number) => {
-            if (obj.buttonId === selector.buttonId) {
+      Object.keys(contractElementSelected).map((key) => {
+        if (key === contractElementSelector.name) {
+          contractElementSelected[key].map((obj, index: number) => {
+            if (obj.buttonId === contractElementSelector.buttonId) {
               dispatch(
                 updateSelectedElement({
                   name: key,
@@ -122,9 +137,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
             } else {
               dispatch(
                 addSelectedElement({
-                  name: selector.name,
+                  name: contractElementSelector.name,
                   element: {
-                    buttonId: selector.buttonId,
+                    buttonId: contractElementSelector.buttonId,
                     name: itemName,
                     id: i,
                   },
@@ -145,17 +160,17 @@ const Workspace: FC<IWorkspaceComponent> = ({
     setAddContainer(true);
     hideSidebar();
     // checks if the selector is active
-    if (selector === null) {
+    if (contractElementSelector === null) {
       setOpenSetting(true);
       dispatch(setSelectedElement(i));
       setOpenTab(1);
     } else {
       // checks selector type
-      if (selector.type === "input" && itemName === "Input") {
+      if (contractElementSelector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
         dispatch(setSelectorToDefault());
       } else if (
-        selector.type === "output" &&
+        contractElementSelector.type === "output" &&
         (itemName === "Text" ||
           itemName === "Heading 1" ||
           itemName === "Heading 2" ||
@@ -205,7 +220,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 ${
             !containerCheck(item)
-              ? selector
+              ? contractElementSelector
                 ? "hover:border-orange-300"
                 : "hover:border-slate-300 hover:border-dashed"
               : null
