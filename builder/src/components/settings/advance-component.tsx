@@ -3,30 +3,17 @@ import { FaFileContract } from "react-icons/fa";
 import Modal from "features/dashboard/modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
-import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
+import {
+  IShowComponent,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IAdvanceComponent {
-  showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  };
-  setShowComponent: (showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  }) => void;
-  selectedItem: IWorkspaceElements;
+  showComponent: IShowComponent;
+  setShowComponent: (showComponent: IShowComponent) => void;
+  selectedItem: IWorkspaceElement;
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({

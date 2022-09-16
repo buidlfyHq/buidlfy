@@ -8,12 +8,12 @@ import BorderComponent from "components/settings/border-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import { containerCheck } from "utils/container-check";
-import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
-
+import { IRootState } from "redux/root-state.interface";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 const ContainerSettings: FC = () => {
-  const selectedItem: IWorkspaceElements = useSelector(
-    (state: any) => state.workspace.selectedElement
+  const selectedItem: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
   );
 
   return (

@@ -4,11 +4,12 @@ import AlignComponent from "components/settings/align-component";
 import UtilitiesComponent from "components/settings/utilities-component";
 import UploadComponent from "components/settings/upload-component";
 import MarginComponent from "components/settings/margin-component";
-import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
+import { IRootState } from "redux/root-state.interface";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 const ImageSettings: FC = () => {
-  const selectedItem: IWorkspaceElements = useSelector(
-    (state: any) => state.workspace.selectedElement
+  const selectedItem: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
   );
 
   return (

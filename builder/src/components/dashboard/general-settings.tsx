@@ -9,15 +9,16 @@ import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import { containerCheck } from "utils/container-check";
+import { IRootState } from "redux/root-state.interface";
 import {
   ISettings,
-  IWorkspaceElements,
+  IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
-const GeneralSettings: FC<ISettings> = ({ handleChange }) => {
-  const selectedItem: IWorkspaceElements = useSelector(
-    (state: any) => state.workspace.selectedElement
+const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
+  const selectedItem: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
   );
 
   return (
@@ -38,7 +39,7 @@ const GeneralSettings: FC<ISettings> = ({ handleChange }) => {
         {/* <RiText className="text-[18px] mr-3" /> */}
         <textarea
           value={selectedItem.value}
-          onChange={(e) => handleChange(e, "value")}
+          onChange={(e) => handleSettingChange(e, "value")}
           className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
           placeholder="Please write your text here..."
         />
@@ -49,7 +50,7 @@ const GeneralSettings: FC<ISettings> = ({ handleChange }) => {
         </div>
         <input
           value={selectedItem.link}
-          onChange={(e) => handleChange(e, "link")}
+          onChange={(e) => handleSettingChange(e, "link")}
           className="changeText pl-[2.5rem] py-[0.4rem] input-text"
           type="text"
           placeholder="Link"

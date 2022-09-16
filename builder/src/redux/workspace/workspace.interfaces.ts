@@ -1,9 +1,9 @@
 export interface IWorkspaceState {
-  workspaceElements: IWorkspaceElements[];
-  selectedElement: IWorkspaceElements;
+  workspaceElements: IWorkspaceElement[];
+  selectedElement: IWorkspaceElement;
 }
 
-export interface IWorkspaceElements {
+export interface IWorkspaceElement {
   i: string;
   x: number;
   y: number;
@@ -16,7 +16,7 @@ export interface IWorkspaceElements {
   link?: string;
   name: string;
   value?: string;
-  style: IStyles;
+  style: IStyle;
   children?: any; // Fix: Work in progress as it is not compatible new children type
   isBounded?: boolean;
   isDraggable?: boolean;
@@ -30,7 +30,7 @@ export interface IWorkspaceElements {
   placeholder?: string;
 }
 
-export interface IStyles {
+export interface IStyle {
   color?: IColor;
   backgroundColor?: IColor;
   fontWeight?: string;
@@ -68,10 +68,10 @@ export type ResizeHandles = Array<
 >;
 
 export interface IAction {
-  payload: IElementDetails;
+  payload: IElementDetail;
 }
 
-export interface IElementDetails {
+export interface IElementDetail {
   settingItemId: string;
   propertyName: string;
   propertyValue: string | number | IColor;
@@ -88,7 +88,7 @@ export enum sidebarEnum {
   SETTING = "setting",
 }
 
-export interface IBgContainer {
+export interface IBackgroundContainer {
   backgroundColor: IColor;
   color: IColor;
   imgData: string | ArrayBuffer;
@@ -98,29 +98,13 @@ export interface IBgContainer {
 }
 
 export interface ISettings {
-  selectedItem?: IWorkspaceElements;
-  setShowComponent?: (showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  }) => void;
-  showComponent?: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  };
+  selectedItem?: IWorkspaceElement;
+  setShowComponent?: (showComponent: IShowComponent) => void;
+  showComponent?: IShowComponent;
   settingItemId?: string;
   openTab?: number;
   setOpenTab?: (openTab: number) => void;
-  handleChange?: (
+  handleSettingChange?: (
     e:
       | React.ChangeEvent<HTMLTextAreaElement>
       | React.ChangeEvent<HTMLInputElement>,
@@ -128,15 +112,25 @@ export interface ISettings {
   ) => void;
 }
 
-export interface ITemplate {
-  name: string;
-  value: IWorkspaceElements[];
+export interface IShowComponent {
+  id: string;
+  value: {
+    name: string;
+    inputs: object[];
+    outputs: object[];
+    stateMutability: string;
+  };
 }
 
-export interface ITexts {
-  item?: IWorkspaceElements;
-  items?: IWorkspaceElements[];
-  setItems?: (items?: IWorkspaceElements[]) => void;
+export interface ITemplate {
+  name: string;
+  value: IWorkspaceElement[];
+}
+
+export interface IText {
+  item?: IWorkspaceElement;
+  items?: IWorkspaceElement[];
+  setItems?: (items?: IWorkspaceElement[]) => void;
   bold: string;
   italic: string;
   underline: string;

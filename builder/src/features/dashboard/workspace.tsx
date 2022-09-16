@@ -13,9 +13,10 @@ import {
 } from "redux/contract/contract.reducers";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
+import { IRootState } from "redux/root-state.interface";
 import {
   IColor,
-  IWorkspaceElements,
+  IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
@@ -55,14 +56,14 @@ const Workspace: FC<IWorkspaceComponent> = ({
   setIsNavHidden,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector(
-    (state: any) => state.workspace.workspaceElements
+  const workspaceElements: IWorkspaceElement[] = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
   );
   const contractElementSelector: IContractElementSelector = useSelector(
-    (state: any) => state.contract.contractElementSelector
+    (state: IRootState) => state.contract.contractElementSelector
   );
   const contractElementSelected: IContractElementSelected = useSelector(
-    (state: any) => state.contract.contractElementSelected
+    (state: IRootState) => state.contract.contractElementSelected
   );
 
   const [currentSize, setCurrentSize] = useState<number>(6);
@@ -78,7 +79,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setAddContainer(false);
-    let newItemsArr = layout.map((obj: IWorkspaceElements) => {
+    let newItemsArr = layout.map((obj: IWorkspaceElement) => {
       let selectedItem = workspaceElements.filter(
         (item) => item.i === obj.i
       )[0];
@@ -111,7 +112,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
       (key) => key === contractElementSelector.name
     );
 
-    if (!searchExistingValue.length || !Object.keys(contractElementSelected).length) {
+    if (
+      !searchExistingValue.length ||
+      !Object.keys(contractElementSelected).length
+    ) {
       dispatch(
         createSelectedElement({
           name: contractElementSelector.name,
@@ -210,7 +214,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const renderItemFunction = workspaceElements
     ?.filter((i) => i.style?.deleteComponent === 0)
-    .map((item: IWorkspaceElements) => {
+    .map((item: IWorkspaceElement) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
       return (
         <div

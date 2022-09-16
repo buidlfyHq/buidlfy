@@ -1,27 +1,22 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
-
+import { IRootState } from "redux/root-state.interface";
+import { IShowComponent, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { IContractDetails } from "redux/contract/contract.interfaces";
 
 interface IAbiMethods {
-  setShowComponent: (showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  }) => void;
-  selectedItem: IWorkspaceElements;
+  setShowComponent: (showComponent: IShowComponent) => void;
+  selectedItem: IWorkspaceElement;
 }
 
 const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector((state: any) => state.workspace.workspaceElements);
-  const contract: { abi: string; address: string } = useSelector(
-    (state: any) => state.contract
+  const workspaceElements: IWorkspaceElement[] = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
+  );
+  const contractDetails: IContractDetails = useSelector(
+    (state: IRootState) => state.contract.contractDetails
   );
 
   const [abiJson, setAbiJson] = useState<
@@ -35,8 +30,8 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
   >([]);
 
   useEffect(() => {
-    if (contract.abi) {
-      const parsedAbi = JSON.parse(contract.abi);
+    if (contractDetails.abi) {
+      const parsedAbi = JSON.parse(contractDetails.abi);
       try {
         setAbiJson(parsedAbi);
         let selectedItemIndex = parsedAbi.findIndex(
@@ -56,7 +51,7 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
         console.log("error");
       }
     }
-  }, [contract.abi, selectedItem]); // eslint-disable-line
+  }, [contractDetails.abi, selectedItem]); // eslint-disable-line
 
   const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value) {
@@ -107,7 +102,7 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
 
   return (
     <>
-      {contract.abi ? (
+      {contractDetails.abi ? (
         <>
           <span className="setting-text  ml-[0.25rem] px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
             Select Method
@@ -127,7 +122,7 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
                 >
                   Select a Method
                 </option>
-                {contract.abi &&
+                {contractDetails.abi &&
                   abiJson.map((method: { name: string }, i: number) => (
                     <>
                       <option

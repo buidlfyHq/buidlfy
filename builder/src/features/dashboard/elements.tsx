@@ -4,7 +4,11 @@ import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { IWorkspaceElements, ResizeHandles } from "redux/workspace/workspace.interfaces";
+import { IRootState } from "redux/root-state.interface";
+import {
+  IWorkspaceElement,
+  ResizeHandles,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IElements {
@@ -16,11 +20,11 @@ interface IElements {
 const Elements: FC<IElements> = ({ className, setClassName, addContainer }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector(
-    (state: any) => state.workspace.workspaceElements
+  const workspaceElements: IWorkspaceElement[] = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
   );
-  const selectedItem: IWorkspaceElements = useSelector(
-    (state: any) => state.workspace.selectedElement
+  const selectedItem: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
   );
 
   const onClickFunction = (name) => {
@@ -78,22 +82,25 @@ const Elements: FC<IElements> = ({ className, setClassName, addContainer }) => {
       dispatch(updateWorkspaceElementsArray([...workspaceElements, newC]));
     }
   };
-  const checkY = (items: IWorkspaceElements[]) => {
+  const checkY = (items: IWorkspaceElement[]) => {
     if (items.length === 0) return 0;
     else {
       let arr = items.map((item) => {
         return containerCheck(item)
-          ? Math.max(...item.children.map((obj: IWorkspaceElements) => obj.y), item.y)
+          ? Math.max(
+              ...item.children.map((obj: IWorkspaceElement) => obj.y),
+              item.y
+            )
           : item.y;
       });
       return Math.max(...arr) + 1;
     }
   };
 
-  const checkContainerY = (selectedItem: IWorkspaceElements) => {
+  const checkContainerY = (selectedItem: IWorkspaceElement) => {
     if (selectedItem.children.length === 0) return 0;
     else {
-      let arr = selectedItem.children.map((item: IWorkspaceElements) => item.y);
+      let arr = selectedItem.children.map((item: IWorkspaceElement) => item.y);
       return Math.max(...arr) + 1;
     }
   };

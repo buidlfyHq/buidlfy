@@ -6,10 +6,11 @@ import { Dialog } from "@headlessui/react";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
+import { IRootState } from "redux/root-state.interface";
 import {
   IColor,
   ITemplate,
-  IWorkspaceElements,
+  IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 
@@ -24,11 +25,11 @@ interface INavbar {
 
 const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector(
-    (state: any) => state.workspace.workspaceElements
+  const workspaceElements: IWorkspaceElement[] = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
   );
   const contractDetails: IContractDetails = useSelector(
-    (state: any) => state.contract.contractDetails
+    (state: IRootState) => state.contract.contractDetails
   );
 
   const [abiJSON, setAbiJSON] = useState<
@@ -79,7 +80,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
 
   const handleSave = () => {
     // FIX: save full config to local storage
-    if (workspaceElements.length > 0) {
+    if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(workspaceElements));
     }
   };
@@ -90,8 +91,8 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
 
   const handleSaveTemplate = () => {
     // FIX: save full config to local storage
-    let newTemplates: Array<ITemplate> = [];
-    if (workspaceElements.length > 0) {
+    let newTemplates: ITemplate[] = [];
+    if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(workspaceElements));
       const templates = localStorage.getItem("templates") || "";
       if (templates !== "") {

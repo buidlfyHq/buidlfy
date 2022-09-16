@@ -6,7 +6,11 @@ import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
 import GeneralSettings from "components/dashboard/general-settings";
-import { ISettings, IWorkspaceElements } from "redux/workspace/workspace.interfaces";
+import { IRootState } from "redux/root-state.interface";
+import {
+  ISettings,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -17,11 +21,11 @@ const SettingComponent: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const dispatch = useDispatch();
-  const selectedItem: IWorkspaceElements = useSelector(
-    (state: any) => state.workspace.selectedElement
+  const selectedItem: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
   );
 
-  const handleChange = (
+  const handleSettingChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
@@ -40,7 +44,7 @@ const SettingComponent: FC<ISettings> = ({
     case "Button":
       return (
         <ButtonSettings
-          handleChange={handleChange}
+          handleSettingChange={handleSettingChange}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
           openTab={openTab}
@@ -57,16 +61,10 @@ const SettingComponent: FC<ISettings> = ({
       return <ContainerSettings />;
 
     case "Input":
-      return (
-        <InputSettings handleChange={handleChange} />
-      );
+      return <InputSettings handleSettingChange={handleSettingChange} />;
 
     default:
-      return (
-        <GeneralSettings
-          handleChange={handleChange}
-        />
-      );
+      return <GeneralSettings handleSettingChange={handleSettingChange} />;
   }
 };
 

@@ -14,9 +14,10 @@ import {
 } from "redux/contract/contract.reducers";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
+import { IRootState } from "redux/root-state.interface";
 import {
   IColor,
-  IWorkspaceElements,
+  IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
@@ -25,8 +26,8 @@ import {
 import "styles/components.css";
 
 interface IContainer {
-  item: IWorkspaceElements;
-  children: IWorkspaceElements[];
+  item: IWorkspaceElement;
+  children: IWorkspaceElement[];
   backgroundColor: IColor;
   color: IColor;
   imgData; // updating soon
@@ -55,21 +56,21 @@ const Container: FC<IContainer> = ({
   setAddContainer,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector(
-    (state: any) => state.workspace.workspaceElements
+  const workspaceElements: IWorkspaceElement[] = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
   );
   const contractElementSelector: IContractElementSelector = useSelector(
-    (state: any) => state.contract.contractElementSelector
+    (state: IRootState) => state.contract.contractElementSelector
   );
   const contractElementSelected: IContractElementSelected = useSelector(
-    (state: any) => state.contract.contractElementSelected
+    (state: IRootState) => state.contract.contractElementSelected
   );
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
-    let newItemsArr = layout.map((obj: IWorkspaceElements) => {
+    let newItemsArr = layout.map((obj: IWorkspaceElement) => {
       let selectedItem = children.filter(
-        (item: IWorkspaceElements) => item.i === obj.i
+        (item: IWorkspaceElement) => item.i === obj.i
       )[0];
       const { h, minW, x, y, w, i, minH } = obj;
       return (selectedItem = {
@@ -240,7 +241,7 @@ const Container: FC<IContainer> = ({
           ) : (
             children
               ?.filter((c) => c.style?.deleteComponent === 0)
-              .map((item: IWorkspaceElements) => {
+              .map((item: IWorkspaceElement) => {
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (
                   <div

@@ -7,7 +7,8 @@ import {
 } from "redux/contract/contract.reducers";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
-import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
+import { IRootState } from "redux/root-state.interface";
+import { IShowComponent, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
   IContractElementSelector,
@@ -15,28 +16,20 @@ import {
 import "styles/components.css";
 
 interface IAbiComponents {
-  showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  };
-  selectedItem: IWorkspaceElements;
+  showComponent: IShowComponent;
+  selectedItem: IWorkspaceElement;
 }
 
 const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElements[] = useSelector(
-    (state: any) => state.workspace
+  const workspaceElements: IWorkspaceElement[] = useSelector(
+    (state: IRootState) => state.workspace
   ).workspaceElements;
   const contractElementSelector: IContractElementSelector = useSelector(
-    (state: any) => state.contract.contractElementSelector
+    (state: IRootState) => state.contract.contractElementSelector
   );
   const contractElementSelected: IContractElementSelected = useSelector(
-    (state: any) => state.contract.contractElementSelected
+    (state: IRootState) => state.contract.contractElementSelected
   );
 
   const [currentElement, setCurrentElement] = useState<{
@@ -109,7 +102,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
       // search id in children
       const updatedItems = workspaceElements.map((item) => {
         const childIndex = item.children?.findIndex(
-          (child: IWorkspaceElements) => child.i === selectedItem.i
+          (child: IWorkspaceElement) => child.i === selectedItem.i
         );
         let newArray = [...item?.children];
         newArray[childIndex] = updatedItem;
@@ -154,7 +147,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
     };
   };
 
-  const handleStateSelector = (selectedItem: IWorkspaceElements) => {
+  const handleStateSelector = (selectedItem: IWorkspaceElement) => {
     if (contractElementSelector === null) {
       dispatch(
         updateSelector({
