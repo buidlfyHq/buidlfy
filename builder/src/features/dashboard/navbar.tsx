@@ -1,24 +1,18 @@
 import React, { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { encode as base64_encode } from "base-64";
 import { Dialog } from "@headlessui/react";
+import { updateItemsArray } from "reducers/itemsReducer";
+import { updateSelector } from "reducers/selectorReducer";
+import { uploadFileToWeb3Storage } from "config/web3storage";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import ITemplate from "interfaces/template";
-import { uploadFileToWeb3Storage } from "config/web3storage";
 
 interface INavbar {
   className: string;
   setClassName: React.Dispatch<React.SetStateAction<string>>;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
-  setSelector: (selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  }) => void;
-  contractConfig: { abi: string; address: string };
   backgroundColor: IColor;
   head: {
     title: string;
@@ -29,13 +23,15 @@ interface INavbar {
 const Navbar: FC<INavbar> = ({
   className,
   setClassName,
-  items,
-  setItems,
-  setSelector,
-  contractConfig,
   backgroundColor,
   head,
 }) => {
+  const dispatch = useDispatch();
+  const items: IItems[] = useSelector((state: any) => state.items);
+  const contract: { abi: string; address: string } = useSelector(
+    (state: any) => state.contract
+  );
+
   const [abiJSON, setAbiJSON] = useState<
     {
       inputs: { internalType: string; name: string; type: string }[];
@@ -49,25 +45,23 @@ const Navbar: FC<INavbar> = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
+  const [file, setFile] = useState<string>("");
 
   useEffect(() => {
-    if (contractConfig.abi) {
+    if (contract.abi) {
       try {
-        setAbiJSON(JSON.parse(contractConfig.abi));
+        setAbiJSON(JSON.parse(contract.abi));
       } catch (error) {
         console.log(error);
       }
     }
-  }, [contractConfig.abi]);
-  const [file, setFile] = useState<string>("");
-  const [size, setSize] = useState<boolean>(false);
+  }, [contract.abi]);
 
-  function onChangeImage(e) {
+  const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
-        setSize(true);
+        // DO SOMETHING
       } else {
-        setSize(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
@@ -76,28 +70,30 @@ const Navbar: FC<INavbar> = ({
         reader.readAsDataURL(e.target.files[0]);
       }
     }
-  }
+  };
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
+
   const handleSave = () => {
     // FIX: save full config to local storage
     if (items?.length > 0) {
       localStorage.setItem("items", JSON.stringify(items));
     }
   };
+
   const handleSaveTemplateButton = () => {
     setIsModalOpen(true);
   };
+
   const handleSaveTemplate = () => {
     // FIX: save full config to local storage
     let newTemplates: Array<ITemplate> = [];
     if (items?.length > 0) {
       localStorage.setItem("items", JSON.stringify(items));
       const templates = localStorage.getItem("templates") || "";
-      console.log(templates, "templates");
       if (templates !== "") {
-        console.log(templates, "templates");
         newTemplates = JSON.parse(templates);
       } else {
         newTemplates = [];
@@ -107,18 +103,17 @@ const Navbar: FC<INavbar> = ({
         value: items,
         image: file,
       };
-      console.log(newTemplate, "newTemplate");
-      console.log(newTemplates, "newTemplates");
 
       newTemplates.push(newTemplate);
       localStorage.setItem("templates", JSON.stringify(newTemplates));
     }
   };
+
   const handleClear = () => {
     // FIX: remove full config from local storage
     localStorage.removeItem("items");
-    setItems([]);
-    setSelector(null);
+    dispatch(updateItemsArray([]));
+    dispatch(updateSelector(null));
   };
 
   const handlePublish = () => {
@@ -131,7 +126,7 @@ const Navbar: FC<INavbar> = ({
       builder: items,
       contract: {
         abi: abiJSON,
-        address: contractConfig.address,
+        address: contract.address,
       },
     };
     let stringifiedConfig = JSON.stringify(config);
@@ -280,7 +275,7 @@ const Navbar: FC<INavbar> = ({
                   id="formFile"
                 />
 
-                <img src={file} />
+                <img src={file} alt="Template" />
               </div>
               <div className="mt-6">
                 <button

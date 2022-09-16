@@ -1,18 +1,17 @@
 import React, { Dispatch, FC, SetStateAction } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
+import { updateItemsArray } from "reducers/itemsReducer";
+import { updateSelector } from "reducers/selectorReducer";
 import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
 import IItems from "interfaces/items";
 import IColor from "interfaces/color";
 import "styles/components.css";
-import { IoMdAddCircleOutline } from "react-icons/io";
-import { AiTwotoneSetting } from "react-icons/ai";
 
 interface IContainer {
   item: IItems;
-  items?: IItems[];
-  setItems?: (items?: IItems[]) => void;
   children: IItems[];
   backgroundColor: IColor;
   color: IColor;
@@ -25,18 +24,6 @@ interface IContainer {
   setOpenSetting: (open: boolean) => void;
   setOpenTab: Dispatch<SetStateAction<number>>;
   setAddContainer: (addContainer: boolean) => void;
-  selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  };
-  setSelector: (selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  }) => void;
   elementConfig: object;
   setElementConfig: Dispatch<SetStateAction<object>>;
   setValue?: (value: string) => void;
@@ -44,8 +31,6 @@ interface IContainer {
 
 const Container: FC<IContainer> = ({
   item,
-  items,
-  setItems,
   children,
   backgroundColor,
   color,
@@ -58,11 +43,13 @@ const Container: FC<IContainer> = ({
   setSettingItemId,
   setOpenTab,
   setAddContainer,
-  selector,
-  setSelector,
   elementConfig,
   setElementConfig,
 }) => {
+  const dispatch = useDispatch();
+  const items: IItems[] = useSelector((state: any) => state.items);
+  const selector = useSelector((state: any) => state.selector);
+
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IItems) => {
@@ -91,14 +78,14 @@ const Container: FC<IContainer> = ({
         children: newItemsArr,
       };
       let filterItems = items.filter((element) => element.i !== item.i);
-      setItems([...filterItems, newModifiedContainer]);
+      dispatch(updateItemsArray([...filterItems, newModifiedContainer]));
     } else if (layout.length === 0) {
       let removeContainerItems = items.filter(
         (element) => element.i !== item.i
       );
-      setItems(removeContainerItems);
+      dispatch(updateItemsArray(removeContainerItems));
     } else {
-      setItems(items);
+      dispatch(updateItemsArray(items));
     }
   };
 
@@ -162,7 +149,7 @@ const Container: FC<IContainer> = ({
       ) {
         updateElementConfig(itemName, i);
       }
-      setSelector(null);
+      dispatch(updateSelector(null));
     }
   };
 
