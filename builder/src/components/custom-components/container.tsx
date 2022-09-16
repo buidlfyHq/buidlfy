@@ -2,7 +2,10 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "react-grid-layout";
 import GridLayout from "react-grid-layout";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import {
+  setSelectedElementId,
+  updateWorkspaceElementsArray,
+} from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import {
   addSelectedElement,
@@ -25,7 +28,6 @@ interface IContainer {
   borderWidth: number;
   shadow: string;
   setDrag: (drag: boolean) => void;
-  setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
   setOpenTab: (openTab: number) => void;
   setAddContainer: (addContainer: boolean) => void;
@@ -43,7 +45,6 @@ const Container: FC<IContainer> = ({
   shadow,
   setDrag,
   setOpenSetting,
-  setSettingItemId,
   setOpenTab,
   setAddContainer,
 }) => {
@@ -150,7 +151,7 @@ const Container: FC<IContainer> = ({
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
-      setSettingItemId(i);
+      dispatch(setSelectedElementId(i));
       setOpenTab(1);
     } else {
       //   // Add validation for selection

@@ -106,3 +106,15 @@ export const mapElementSubStyleToWorkspace = (
   }
   return element;
 };
+
+export const fetchSelectedElement = (
+  workspaceElements: IWorkspace[],
+  payload: string
+) => {
+  return (
+    workspaceElements?.find((element) => element.i === payload) ||
+    workspaceElements?.map((element) =>
+      element.children?.find((child: IWorkspace) => child.i === payload)
+    )[0]
+  );
+};

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
@@ -7,17 +7,20 @@ import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
 import GeneralSettings from "components/dashboard/general-settings";
 import ISettings from "interfaces/settings";
+import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 const SettingComponent: FC<ISettings> = ({
-  selectedItem,
   showComponent,
   setShowComponent,
   openTab,
   setOpenTab,
 }) => {
   const dispatch = useDispatch();
+  const selectedItem: IWorkspace = useSelector(
+    (state: any) => state.workspace.selectedElement
+  );
 
   const handleTextChange = (
     e:
@@ -43,7 +46,7 @@ const SettingComponent: FC<ISettings> = ({
     );
   };
 
-  const handlePlaceholderChange = (e) => {
+  const handlePlaceholderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
       updateWorkspaceElement({
         settingItemId: selectedItem.i,
@@ -53,13 +56,12 @@ const SettingComponent: FC<ISettings> = ({
     );
   };
 
-  switch (selectedItem?.name) {
+  switch (selectedItem.name) {
     case "Button":
       return (
         <ButtonSettings
           handleTextChange={handleTextChange}
           handleLinkChange={handleLinkChange}
-          selectedItem={selectedItem}
           showComponent={showComponent}
           setShowComponent={setShowComponent}
           openTab={openTab}
@@ -68,19 +70,16 @@ const SettingComponent: FC<ISettings> = ({
       );
 
     case "Image":
-      return <ImageSettings selectedItem={selectedItem} />;
+      return <ImageSettings />;
 
     case "Container":
     case "Horizontal Container":
     case "Vertical Container":
-      return <ContainerSettings selectedItem={selectedItem} />;
+      return <ContainerSettings />;
 
     case "Input":
       return (
-        <InputSettings
-          handlePlaceholderChange={handlePlaceholderChange}
-          selectedItem={selectedItem}
-        />
+        <InputSettings handlePlaceholderChange={handlePlaceholderChange} />
       );
 
     default:
@@ -88,7 +87,6 @@ const SettingComponent: FC<ISettings> = ({
         <GeneralSettings
           handleTextChange={handleTextChange}
           handleLinkChange={handleLinkChange}
-          selectedItem={selectedItem}
         />
       );
   }

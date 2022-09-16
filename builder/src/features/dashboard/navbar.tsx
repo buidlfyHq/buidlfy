@@ -40,7 +40,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [file, setFile] = useState<string>("");
-
+  
   useEffect(() => {
     if (contract.abi) {
       try {

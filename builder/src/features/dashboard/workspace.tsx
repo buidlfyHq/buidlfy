@@ -1,7 +1,10 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import {
+  setSelectedElementId,
+  updateWorkspaceElementsArray,
+} from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import {
   addSelectedElement,
@@ -17,7 +20,6 @@ import "styles/components.css";
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 interface IWorkspaceComponent {
-  setSettingItemId: (item: string) => void;
   setOpenSetting: (open: boolean) => void;
   setOpenTab: (openTab?: number) => void;
   drag: boolean;
@@ -34,7 +36,6 @@ interface IWorkspaceComponent {
 
 const Workspace: FC<IWorkspaceComponent> = ({
   setOpenSetting,
-  setSettingItemId,
   setOpenTab,
   drag,
   setDrag,
@@ -147,7 +148,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
     // checks if the selector is active
     if (selector === null) {
       setOpenSetting(true);
-      setSettingItemId(i);
+      dispatch(setSelectedElementId(i));
       setOpenTab(1);
     } else {
       // checks selector type
@@ -219,7 +220,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
             item={item}
             setDrag={setDrag}
             setOpenSetting={setOpenSetting}
-            setSettingItemId={setSettingItemId}
             setOpenTab={setOpenTab}
             setAddContainer={setAddContainer}
           />
