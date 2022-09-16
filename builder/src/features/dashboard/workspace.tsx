@@ -153,6 +153,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       // checks selector type
       if (selector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
+        dispatch(setSelectorToDefault());
       } else if (
         selector.type === "output" &&
         (itemName === "Text" ||
@@ -161,6 +162,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
           itemName === "Heading 3")
       ) {
         updateElementConfig(itemName, i);
+        dispatch(setSelectorToDefault());
       }
     }
   };
