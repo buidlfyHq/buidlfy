@@ -72,65 +72,66 @@ const workspaceSlice = createSlice({
     },
 
     saveContractConfig(state: IWorkspaceState, action: { payload }) {
-      const {contractElementSelected} = action.payload;
+      const { contractElementSelected, currentElement } = action.payload;
+      const { workspaceElements, selectedElement } = state;
       // filter last selected element
       const filteredObject = contractElementSelected[
         currentElement.name
       ]?.filter(
-        (key: { buttonId: string }) => key.buttonId === selectedItem.i
+        (key: { buttonId: string }) => key.buttonId === selectedElement.i
       )[0];
 
       let updatedContract = {};
 
-      let duplicate = selectedItem.contract.inputs?.find(
+      let duplicate = selectedElement.contract.inputs?.find(
         (e: { id: string }) => e.id === filteredObject.id
       );
 
       if (!duplicate) {
         if (currentElement.type === "input") {
           updatedContract = {
-            ...selectedItem.contract,
+            ...selectedElement.contract,
             inputs: [
-              ...selectedItem.contract.inputs,
+              ...selectedElement.contract.inputs,
               { id: filteredObject.id, send: false },
             ],
           };
         } else if (currentElement.type === "send") {
           updatedContract = {
-            ...selectedItem.contract,
+            ...selectedElement.contract,
             inputs: [
-              ...selectedItem.contract.inputs,
+              ...selectedElement.contract.inputs,
               { id: filteredObject.id, send: true },
             ],
           };
         } else if (currentElement.type === "output") {
           updatedContract = {
-            ...selectedItem.contract,
+            ...selectedElement.contract,
             outputs: [
-              ...selectedItem.contract.outputs,
+              ...selectedElement.contract.outputs,
               { id: filteredObject.id },
             ],
           };
         }
       } else {
-        updatedContract = { ...selectedItem.contract };
+        updatedContract = { ...selectedElement.contract };
       }
 
       let updatedItem = {
-        ...selectedItem,
+        ...selectedElement,
         contract: updatedContract,
       };
 
       // search id in items
       const elementsIndex = workspaceElements.findIndex(
-        (item) => item.i === selectedItem.i
+        (item) => item.i === selectedElement.i
       );
 
       if (elementsIndex === -1) {
         // search id in children
         const updatedItems = workspaceElements.map((item) => {
           const childIndex = item.children?.findIndex(
-            (child: IWorkspaceElement) => child.i === selectedItem.i
+            (child: IWorkspaceElement) => child.i === selectedElement.i
           );
           let newArray = [...item?.children];
           newArray[childIndex] = updatedItem;
@@ -140,11 +141,11 @@ const workspaceSlice = createSlice({
           };
         });
 
-        dispatch(updateWorkspaceElementsArray(updatedItems));
+        return { ...state, workspaceElements: updatedItems };
       } else {
         let newArray = [...workspaceElements];
         newArray[elementsIndex] = updatedItem;
-        dispatch(updateWorkspaceElementsArray(newArray));
+        return { ...state, workspaceElements: newArray };
       }
     },
   },
@@ -156,5 +157,6 @@ export const {
   updateWorkspaceElementSubStyle,
   updateWorkspaceElementsArray,
   setSelectedElement,
+  saveContractConfig,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;

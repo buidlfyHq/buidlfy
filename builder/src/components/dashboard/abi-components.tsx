@@ -1,6 +1,8 @@
 import React, { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import {
+  saveContractConfig,
+} from "redux/workspace/workspace.reducers";
 import {
   setSelectorToDefault,
   updateSelector,
@@ -8,7 +10,10 @@ import {
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
 import { IRootState } from "redux/root-state.interface";
-import { IShowComponent, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import {
+  IShowComponent,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
   IContractElementSelector,
@@ -22,9 +27,6 @@ interface IAbiComponents {
 
 const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
-    (state: IRootState) => state.workspace
-  ).workspaceElements;
   const contractElementSelector: IContractElementSelector = useSelector(
     (state: IRootState) => state.contract.contractElementSelector
   );
@@ -47,77 +49,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
 
   const handleSave = () => {
     setShow(true);
-    // filter last selected element
-    const filteredObject = contractElementSelected[currentElement.name]?.filter(
-      (key: { buttonId: string }) => key.buttonId === selectedItem.i
-    )[0];
-
-    let updatedContract = {};
-
-    let duplicate = selectedItem.contract.inputs?.find(
-      (e: { id: string }) => e.id === filteredObject.id
-    );
-
-    if (!duplicate) {
-      if (currentElement.type === "input") {
-        updatedContract = {
-          ...selectedItem.contract,
-          inputs: [
-            ...selectedItem.contract.inputs,
-            { id: filteredObject.id, send: false },
-          ],
-        };
-      } else if (currentElement.type === "send") {
-        updatedContract = {
-          ...selectedItem.contract,
-          inputs: [
-            ...selectedItem.contract.inputs,
-            { id: filteredObject.id, send: true },
-          ],
-        };
-      } else if (currentElement.type === "output") {
-        updatedContract = {
-          ...selectedItem.contract,
-          outputs: [
-            ...selectedItem.contract.outputs,
-            { id: filteredObject.id },
-          ],
-        };
-      }
-    } else {
-      updatedContract = { ...selectedItem.contract };
-    }
-
-    let updatedItem = {
-      ...selectedItem,
-      contract: updatedContract,
-    };
-
-    // search id in items
-    const elementsIndex = workspaceElements.findIndex(
-      (item) => item.i === selectedItem.i
-    );
-
-    if (elementsIndex === -1) {
-      // search id in children
-      const updatedItems = workspaceElements.map((item) => {
-        const childIndex = item.children?.findIndex(
-          (child: IWorkspaceElement) => child.i === selectedItem.i
-        );
-        let newArray = [...item?.children];
-        newArray[childIndex] = updatedItem;
-        return {
-          ...item,
-          children: newArray,
-        };
-      });
-
-      dispatch(updateWorkspaceElementsArray(updatedItems));
-    } else {
-      let newArray = [...workspaceElements];
-      newArray[elementsIndex] = updatedItem;
-      dispatch(updateWorkspaceElementsArray(newArray));
-    }
+    dispatch(saveContractConfig({ contractElementSelected, currentElement }));
   };
 
   const handleInputSelector = (selectedId: string) => {
