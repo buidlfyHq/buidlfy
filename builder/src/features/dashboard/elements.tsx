@@ -33,9 +33,6 @@ const Elements: FC<IElements> = ({
       item.children?.find((child: IWorkspace) => child.i === settingItemId)
     )[0];
 
-  // const hideSidebar = () => {
-  //   setClassName("hidden");
-  // };
   const onClickFunction = (name) => {
     let c = components?.find((component) => component.name === name);
     if (addContainer) {
