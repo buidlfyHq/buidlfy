@@ -7,11 +7,7 @@ import {
 } from "redux/selector/selector.reducers";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import Spinner from "components/dashboard/spinner";
-<<<<<<< HEAD
 import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
-=======
-import IWorkspace from "interfaces/workspace";
->>>>>>> feat/redux-refactor-dashboard
 import "styles/components.css";
 
 interface IAbiComponents {
@@ -24,22 +20,14 @@ interface IAbiComponents {
       stateMutability: string;
     };
   };
-<<<<<<< HEAD
   selectedItem: IWorkspaceElements;
-=======
-  selectedItem: IWorkspace;
->>>>>>> feat/redux-refactor-dashboard
 }
 
 const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   const dispatch = useDispatch();
-<<<<<<< HEAD
   const workspaceElements: IWorkspaceElements[] = useSelector(
     (state: any) => state.workspace
   ).workspaceElements;
-=======
-  const workspaceElements: IWorkspace[] = useSelector((state: any) => state.workspace).workspaceElements;
->>>>>>> feat/redux-refactor-dashboard
   const selector = useSelector((state: any) => state.selector);
   const selected = useSelector((state: any) => state.selected);
 
@@ -113,11 +101,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
       // search id in children
       const updatedItems = workspaceElements.map((item) => {
         const childIndex = item.children?.findIndex(
-<<<<<<< HEAD
           (child: IWorkspaceElements) => child.i === selectedItem.i
-=======
-          (child: IWorkspace) => child.i === selectedItem.i
->>>>>>> feat/redux-refactor-dashboard
         );
         let newArray = [...item?.children];
         newArray[childIndex] = updatedItem;
@@ -162,11 +146,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
     };
   };
 
-<<<<<<< HEAD
   const handleStateSelector = (selectedItem: IWorkspaceElements) => {
-=======
-  const handleStateSelector = (selectedItem: IWorkspace) => {
->>>>>>> feat/redux-refactor-dashboard
     if (selector === null) {
       dispatch(
         updateSelector({
