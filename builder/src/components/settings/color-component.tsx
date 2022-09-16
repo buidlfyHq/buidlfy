@@ -3,13 +3,12 @@ import { useDispatch } from "react-redux";
 import { SketchPicker } from "react-color";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IColorComponent {
   i: string;
-  color: IColor;
+  color: string;
   isContainer: boolean;
 }
 
@@ -44,7 +43,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
     setHexColor(e.target.value);
   };
 
-  const handleChange = (color: { rgb: IColor; hex; a }) => {
+  const handleChange = (color: { rgb; hex; a }) => {
     if (!color) {
       return;
     }

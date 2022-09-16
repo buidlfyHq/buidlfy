@@ -39,10 +39,8 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
-
   const [file, setFile] = useState<string>("");
-  // const [size, setSize] = useState<boolean>(false);
-
+  
   useEffect(() => {
     if (contract.abi) {
       try {
@@ -76,7 +74,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
 
   const handleSave = () => {
     // FIX: save full config to local storage
-    if (workspace?.length > 0) {
+    if (workspace.length > 0) {
       localStorage.setItem("items", JSON.stringify(workspace));
     }
   };
@@ -88,7 +86,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const handleSaveTemplate = () => {
     // FIX: save full config to local storage
     let newTemplates: Array<ITemplate> = [];
-    if (workspace?.length > 0) {
+    if (workspace.length > 0) {
       localStorage.setItem("items", JSON.stringify(workspace));
       const templates = localStorage.getItem("templates") || "";
       if (templates !== "") {
