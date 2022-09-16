@@ -2,11 +2,11 @@ import React, { useState, useRef, FC } from "react";
 import { useSelector } from "react-redux";
 import SettingComponent from "components/utils/render-setting";
 import ISettings from "interfaces/settings";
-import IWorkspace from "interfaces/workspace";
+import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 
 const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const ref = useRef(null);
-  const selectedItem: IWorkspace = useSelector(
+  const selectedItem: IWorkspaceElements = useSelector(
     (state: any) => state.workspace.selectedElement
   );
 

@@ -6,13 +6,13 @@ import { Dialog } from "@headlessui/react";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/selector/selector.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
-import IWorkspace from "interfaces/workspace";
+import { IColor, IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 import ITemplate from "interfaces/template";
-import IColor from "interfaces/color";
+
 
 interface INavbar {
   className: string;
-  backgroundColor: string;
+  backgroundColor: IColor;
   head: {
     title: string;
     logo: string | ArrayBuffer;
@@ -21,9 +21,7 @@ interface INavbar {
 
 const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspace[] = useSelector(
-    (state: any) => state.workspace.workspaceElements
-  );
+  const workspaceElements: IWorkspaceElements[] = useSelector((state: any) => state.workspace.workspaceElements);
   const contract: { abi: string; address: string } = useSelector(
     (state: any) => state.contract
   );

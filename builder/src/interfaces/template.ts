@@ -1,6 +1,6 @@
-import IWorkspace from "./workspace";
+import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 
 export default interface ITemplate {
   name: string;
-  value: IWorkspace[];
+  value: IWorkspaceElements[];
 }

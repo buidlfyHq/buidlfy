@@ -1,4 +1,4 @@
-import IColor from "./color";
+import { IColor } from "redux/workspace/workspace.interfaces";
 
 export default interface IBgContainer {
     backgroundColor: IColor;

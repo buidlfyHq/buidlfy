@@ -9,15 +9,15 @@ import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import { containerCheck } from "utils/container-check";
+import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 import ISettings from "interfaces/settings";
-import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 
 const GeneralSettings: FC<ISettings> = ({
   handleTextChange,
   handleLinkChange,
 }) => {
-  const selectedItem: IWorkspace = useSelector(
+  const selectedItem: IWorkspaceElements = useSelector(
     (state: any) => state.workspace.selectedElement
   );
 

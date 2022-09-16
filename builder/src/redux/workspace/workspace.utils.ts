@@ -1,21 +1,25 @@
-import { IPayload } from "redux/workspace/workspace.interfaces";
-import IWorkspace from "interfaces/workspace";
+import {
+  IElementDetails,
+  IWorkspaceElements,
+} from "redux/workspace/workspace.interfaces";
 
 // to find selected element
-const findSelected = (element: IWorkspace, settingItemId: string) => {
+const findSelected = (element: IWorkspaceElements, settingItemId: string) => {
   return element.children?.find(
-    (child: IWorkspace) => child.i === settingItemId
+    (child: IWorkspaceElements) => child.i === settingItemId
   );
 };
 
 // to find index of an element
-const findIndex = (element: IWorkspace, settingItemId: string) => {
-  return element.children?.findIndex((c: IWorkspace) => c.i === settingItemId);
+const findIndex = (element: IWorkspaceElements, settingItemId: string) => {
+  return element.children?.findIndex(
+    (c: IWorkspaceElements) => c.i === settingItemId
+  );
 };
 
 export const mapElementsToWorkspace = (
-  element: IWorkspace,
-  payload: IPayload
+  element: IWorkspaceElements,
+  payload: IElementDetails
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
   let selectedChild = findSelected(element, settingItemId);
@@ -37,8 +41,8 @@ export const mapElementsToWorkspace = (
 };
 
 export const mapElementStylesToWorkspace = (
-  element: IWorkspace,
-  payload: IPayload
+  element: IWorkspaceElements,
+  payload: IElementDetails
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
   let selectedChild = findSelected(element, settingItemId);
@@ -69,8 +73,8 @@ export const mapElementStylesToWorkspace = (
 };
 
 export const mapElementSubStyleToWorkspace = (
-  element: IWorkspace,
-  payload: IPayload
+  element: IWorkspaceElements,
+  payload: IElementDetails
 ) => {
   const { settingItemId, propertyName, propertyValue, childPropertyName } =
     payload;
@@ -108,13 +112,13 @@ export const mapElementSubStyleToWorkspace = (
 };
 
 export const fetchSelectedElement = (
-  workspaceElements: IWorkspace[],
+  workspaceElements: IWorkspaceElements[],
   payload: string
 ) => {
   return (
     workspaceElements?.find((element) => element.i === payload) ||
     workspaceElements?.map((element) =>
-      element.children?.find((child: IWorkspace) => child.i === payload)
+      element.children?.find((child: IWorkspaceElements) => child.i === payload)
     )[0]
   );
 };

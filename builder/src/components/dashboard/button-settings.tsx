@@ -14,7 +14,7 @@ import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import { containerCheck } from "utils/container-check";
-import IWorkspace from "interfaces/workspace";
+import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 import ISettings from "interfaces/settings";
 
 const ButtonSettings: FC<ISettings> = ({
@@ -26,7 +26,7 @@ const ButtonSettings: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const dispatch = useDispatch();
-  const selectedItem: IWorkspace = useSelector(
+  const selectedItem: IWorkspaceElements = useSelector(
     (state: any) => state.workspace.selectedElement
   );
 

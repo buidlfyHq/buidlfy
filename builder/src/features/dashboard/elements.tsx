@@ -4,8 +4,7 @@ import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import IWorkspace from "interfaces/workspace";
-import { ResizeHandles } from "interfaces/handle";
+import { IWorkspaceElements, ResizeHandles } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IElements {
@@ -17,10 +16,10 @@ interface IElements {
 const Elements: FC<IElements> = ({ className, setClassName, addContainer }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspace[] = useSelector(
+  const workspaceElements: IWorkspaceElements[] = useSelector(
     (state: any) => state.workspace.workspaceElements
   );
-  const selectedItem: IWorkspace = useSelector(
+  const selectedItem: IWorkspaceElements = useSelector(
     (state: any) => state.workspace.selectedElement
   );
 
@@ -79,22 +78,22 @@ const Elements: FC<IElements> = ({ className, setClassName, addContainer }) => {
       dispatch(updateWorkspaceElementsArray([...workspaceElements, newC]));
     }
   };
-  const checkY = (items: IWorkspace[]) => {
+  const checkY = (items: IWorkspaceElements[]) => {
     if (items.length === 0) return 0;
     else {
       let arr = items.map((item) => {
         return containerCheck(item)
-          ? Math.max(...item.children.map((obj: IWorkspace) => obj.y), item.y)
+          ? Math.max(...item.children.map((obj: IWorkspaceElements) => obj.y), item.y)
           : item.y;
       });
       return Math.max(...arr) + 1;
     }
   };
 
-  const checkContainerY = (selectedItem: IWorkspace) => {
+  const checkContainerY = (selectedItem: IWorkspaceElements) => {
     if (selectedItem.children.length === 0) return 0;
     else {
-      let arr = selectedItem.children.map((item: IWorkspace) => item.y);
+      let arr = selectedItem.children.map((item: IWorkspaceElements) => item.y);
       return Math.max(...arr) + 1;
     }
   };

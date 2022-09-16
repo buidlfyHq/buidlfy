@@ -1,10 +1,9 @@
-import IColor from "./color";
-import IWorkspace from "./workspace";
+import { IColor, IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 
 export default interface ITexts {
-  item?: IWorkspace;
-  items?: IWorkspace[];
-  setItems?: (items?: IWorkspace[]) => void;
+  item?: IWorkspaceElements;
+  items?: IWorkspaceElements[];
+  setItems?: (items?: IWorkspaceElements[]) => void;
   bold: string;
   italic: string;
   underline: string;

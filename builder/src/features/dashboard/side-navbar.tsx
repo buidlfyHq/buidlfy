@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { sidebarEnum } from "redux/workspace/workspace.interfaces";
 import elements from "assets/elements.png";
 import styles from "assets/styles.png";
 import templates from "assets/templates.png";
+import { sidebarEnum } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface ISideNavbar {

@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import IWorkspace from "interfaces/workspace";
+import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
+
 
 interface IAbiMethods {
   setShowComponent: (showComponent: {
@@ -13,12 +14,12 @@ interface IAbiMethods {
       stateMutability: string;
     };
   }) => void;
-  selectedItem: IWorkspace;
+  selectedItem: IWorkspaceElements;
 }
 
 const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspace[] = useSelector((state: any) => state.workspace.workspaceElements);
+  const workspaceElements: IWorkspaceElements[] = useSelector((state: any) => state.workspace.workspaceElements);
   const contract: { abi: string; address: string } = useSelector(
     (state: any) => state.contract
   );

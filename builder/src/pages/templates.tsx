@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import IWorkspace from "interfaces/workspace";
+import { IWorkspaceElements } from "redux/workspace/workspace.interfaces";
 import ITemplate from "interfaces/template";
 import "styles/components.css";
 
@@ -17,7 +17,7 @@ const Template: FC = () => {
 
   const handleClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    value: IWorkspace[]
+    value: IWorkspaceElements[]
   ) => {
     localStorage.removeItem("items");
     localStorage.setItem("items", JSON.stringify(value));
@@ -60,19 +60,25 @@ const Template: FC = () => {
       <div className="min-h-screen px-1 py-10 mt-2">
         <div className="grid grid-cols-2 gap-4">
           {newTemp &&
-            newTemp?.map((temp: { name: string; value: IWorkspace[]; image }) => {
-              const { name, value, image } = temp;
-              console.log(image, "image");
-              return (
-                <div
-                  onClick={(e) => handleClick(e, value)}
-                  className="cursor-pointer flex flex-col justify-center items-center"
-                >
-                  <img className="rounded-[0.25rem]" src={image} alt="Template" />
-                  <div className="margin-text text-xs">{name}</div>
-                </div>
-              );
-            })}
+            newTemp?.map(
+              (temp: { name: string; value: IWorkspaceElements[]; image }) => {
+                const { name, value, image } = temp;
+                console.log(image, "image");
+                return (
+                  <div
+                    onClick={(e) => handleClick(e, value)}
+                    className="cursor-pointer flex flex-col justify-center items-center"
+                  >
+                    <img
+                      className="rounded-[0.25rem]"
+                      src={image}
+                      alt="Template"
+                    />
+                    <div className="margin-text text-xs">{name}</div>
+                  </div>
+                );
+              }
+            )}
         </div>
       </div>
     </>
