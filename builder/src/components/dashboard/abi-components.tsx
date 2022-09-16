@@ -25,9 +25,6 @@ interface IAbiComponents {
 
 const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
-    (state: IRootState) => state.workspace
-  ).workspaceElements;
   const contractElementSelector: IContractElementSelector = useSelector(
     (state: IRootState) => state.contract.contractElementSelector
   );

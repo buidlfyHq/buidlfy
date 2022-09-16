@@ -47,6 +47,9 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [file, setFile] = useState<string>("");
 
+  const [file, setFile] = useState<string>("");
+  // const [size, setSize] = useState<boolean>(false);
+
   useEffect(() => {
     if (contractDetails.abi) {
       try {
