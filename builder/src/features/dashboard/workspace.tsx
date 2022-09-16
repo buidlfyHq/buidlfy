@@ -172,6 +172,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       // checks selector type
       if (contractElementSelector.type === "input" && itemName === "Input") {
         updateElementConfig(itemName, i);
+        dispatch(setSelectorToDefault());
       } else if (
         contractElementSelector.type === "output" &&
         (itemName === "Text" ||
@@ -180,6 +181,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
           itemName === "Heading 3")
       ) {
         updateElementConfig(itemName, i);
+        dispatch(setSelectorToDefault());
       }
     }
   };

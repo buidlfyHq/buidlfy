@@ -1,6 +1,7 @@
 import React, { FC, useRef } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import Template from "pages/templates";
+import { sidebarEnum } from "redux/workspace/workspace.interfaces";
 import Elements from "features/dashboard/elements";
 import DefaultSettings from "features/dashboard/default-settings";
 import { IColor, sidebarEnum } from "redux/workspace/workspace.interfaces";

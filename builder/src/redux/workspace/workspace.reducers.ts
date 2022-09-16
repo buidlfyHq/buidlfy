@@ -52,7 +52,6 @@ const workspaceSlice = createSlice({
       );
       return { ...state, workspaceElements: updatedElements };
     },
-
     // to update the elements
     updateWorkspaceElementsArray(
       state,

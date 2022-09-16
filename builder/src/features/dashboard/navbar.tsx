@@ -45,6 +45,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
+  const [file, setFile] = useState<string>("");
 
   const [file, setFile] = useState<string>("");
   // const [size, setSize] = useState<boolean>(false);
