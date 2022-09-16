@@ -7,10 +7,7 @@ import { containerCheck } from "utils/container-check";
 import ISettings from "interfaces/settings";
 import "styles/components.css";
 
-const InputSettings: FC<ISettings> = ({
-  selectedItem,
-  handleChange,
-}) => (
+const InputSettings: FC<ISettings> = ({ selectedItem, handleChange }) => (
   <>
     <h3 className="ml-[1rem]">
       {selectedItem ? (

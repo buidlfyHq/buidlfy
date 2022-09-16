@@ -75,12 +75,13 @@ const SettingComponent: FC<ISettings> = ({
       })
     );
   };
-  switch (selectedItem?.name) {
+
+  switch (selectedItem.name) {
     case "Button":
       return (
         <ButtonSettings
-          selectedItem={selectedItem}
           handleChange={handleChange}
+          selectedItem={selectedItem}
           elementConfig={elementConfig}
           openTab={openTab}
           setOpenTab={setOpenTab}
@@ -92,18 +93,19 @@ const SettingComponent: FC<ISettings> = ({
     case "Horizontal Container":
     case "Vertical Container":
       return <ContainerSettings selectedItem={selectedItem} />;
+
     case "Input":
       return (
         <InputSettings
-          selectedItem={selectedItem}
           handleChange={handleChange}
+          selectedItem={selectedItem}
         />
       );
     default:
       return (
         <GeneralSettings
-          selectedItem={selectedItem}
           handleChange={handleChange}
+          selectedItem={selectedItem}
         />
       );
   }
