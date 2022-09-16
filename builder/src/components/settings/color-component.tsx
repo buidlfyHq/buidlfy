@@ -44,7 +44,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
     setHexColor(e.target.value);
   };
 
-  const handleChange = (color: { rgb: IColor; hex; a }) => {
+  const handleChange = (color: { rgb; hex; a }) => {
     if (!color) {
       return;
     }
