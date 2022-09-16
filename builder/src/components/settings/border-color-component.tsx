@@ -1,19 +1,23 @@
 import React, { useState, FC, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { AiOutlineCaretDown } from "react-icons/ai";
 import { Dialog } from "@headlessui/react";
+import { AiOutlineCaretDown } from "react-icons/ai";
 import ColorPicker from "react-best-gradient-color-picker";
 import { updateItems } from "reducers/itemsReducer";
+import { ReplaceStyle } from "components/utils/render-setting";
+import IItems from "interfaces/items";
 import "styles/components.css";
 import "styles/dashboard.css";
 
-interface IColorComponent {
+interface IBorderColorComponent {
   i: string;
-  color: string;
-  isContainer: boolean;
+  borderColor: string;
 }
 
-const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
+const BorderColorComponent: FC<IBorderColorComponent> = ({
+  i,
+  borderColor,
+}) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
@@ -34,7 +38,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
       updateItems({
         level: 1,
         settingItemId: i,
-        propertyName: "color",
+        propertyName: "borderColor",
         propertyValue: e,
       })
     );
@@ -46,12 +50,12 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
         className="py-2 text-gray-600"
         style={{ width: "-webkit-fill-available" }}
       >
-        <div className="mx-2 py-2 mb-2">
+        <div className="items-center mx-2 py-2 mb-2">
+          {/* <VscSymbolColor className="text-[18px] mr-3" /> */}
           <div className="flex">
             <div className="margin-text grow flex my-1 px-1 text-xl not-italic font-normal text-gray-500 font-regular">
-              Color
+              Border Color
             </div>
-
             <div
               ref={ref}
               onClick={() => setDisplayColorPicker(true)}
@@ -59,7 +63,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
             >
               <div
                 style={{
-                  background: color,
+                  background: borderColor,
                 }}
                 className="w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"
               ></div>
@@ -67,6 +71,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
             </div>
           </div>
         </div>
+
         {displayColorPicker ? (
           <Dialog
             as="div"
@@ -82,7 +87,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
                   hideInputType="false"
                   hideColorGuide="false"
                   hideAdvancedSliders="false"
-                  value={color}
+                  value={borderColor}
                   onChange={handleChange}
                 />
               </div>
@@ -94,4 +99,4 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
   );
 };
 
-export default ColorComponent;
+export default BorderColorComponent;

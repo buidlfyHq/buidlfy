@@ -1,24 +1,13 @@
-import React, { FC, useState, useRef, useEffect } from "react";
-import ShortUniqueId from "short-unique-id";
-import { components } from "config/component";
-import { containerCheck } from "utils/container-check";
-import IItems from "interfaces/items";
-import { ResizeHandles } from "interfaces/handle";
-import { Link } from "react-router-dom";
+import React, { FC, useRef } from "react";
 import Elements from "./elements";
 import Template from "pages/templates";
 import "styles/components.css";
 import { AiOutlineLeft } from "react-icons/ai";
-import { sidebarEnum } from "pages/dashboard";
+import { SidebarEnum } from "pages/dashboard";
 import DefaultSettings from "features/dashboard/default-settings";
-import IColor from "interfaces/color";
 
 interface ISidebar {
-  className: string;
-  setClassName: (className: string) => void;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
-  addContainer: boolean;
+  isContainerSelected: boolean;
   settingItemId: string;
   sideElement: string;
   setSideElement: (sideElement: string) => void;
@@ -27,8 +16,8 @@ interface ISidebar {
   showSidebar;
   hideSidebar;
   hideSettingSidebar;
-  workspaceBackgroundColor: IColor;
-  setWorkspaceBackgroundColor: (workspaceBackgroundColor: IColor) => void;
+  workspaceBackgroundColor: string;
+  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;
@@ -37,11 +26,7 @@ interface ISidebar {
 }
 
 const Sidebar: FC<ISidebar> = ({
-  className,
-  setClassName,
-  items,
-  setItems,
-  addContainer,
+  isContainerSelected,
   settingItemId,
   sideElement,
   setSideElement,
@@ -55,20 +40,6 @@ const Sidebar: FC<ISidebar> = ({
   head,
   setHead,
 }) => {
-  // const [indexValue, setIndexValue] = useState<number>(0);
-  // const ref = useRef<HTMLDivElement>();
-
-  // useEffect(() => {
-  //   // FIX: find a suitable type for this event
-  //   const handleOutsideClick = (event) => {
-  //     if (ref.current && !ref.current.contains(event.target)) {
-  //       setIsNavHidden(false);
-  //     }
-  //   };
-  //   console.log(isNavHidden, "NAV");
-  //   document.addEventListener("click", handleOutsideClick);
-  //   return () => document.removeEventListener("click", handleOutsideClick);
-  // }, [ref]);
   const ref = useRef(null);
 
   return (
@@ -129,20 +100,14 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </div>
       {/* Components */}
-      {sideElement == sidebarEnum.ELEMENTS ? (
+      {sideElement == SidebarEnum.ELEMENTS ? (
         <Elements
-          className={className}
-          setClassName={setClassName}
-          items={items}
-          setItems={setItems}
-          addContainer={addContainer}
+          isContainerSelected={isContainerSelected}
           settingItemId={settingItemId}
         />
       ) : null}
-      {sideElement == sidebarEnum.TEMPLATES ? (
-        <Template setItems={setItems} />
-      ) : null}
-      {sideElement == sidebarEnum.STYLES ? (
+      {sideElement == SidebarEnum.TEMPLATES ? <Template /> : null}
+      {sideElement == SidebarEnum.STYLES ? (
         <DefaultSettings
           workspaceBackgroundColor={workspaceBackgroundColor}
           setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}

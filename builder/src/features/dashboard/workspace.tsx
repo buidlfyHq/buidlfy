@@ -3,9 +3,7 @@ import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import IItems from "interfaces/items";
-import IColor from "interfaces/color";
 import "styles/components.css";
-import Spinner from "components/dashboard/spinner";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 interface IWorkspace {
@@ -31,18 +29,22 @@ interface IWorkspace {
   setOpenTab: (openTab?: number) => void;
   drag: boolean;
   setDrag: (drag: boolean) => void;
-  setAddContainer: (addContainer?: boolean) => void;
-  workspaceBackgroundColor: IColor;
-  marginLeft?: number;
-  marginRight?: number;
-  marginTop?: number;
-  marginBottom?: number;
-  hideSidebar;
-  showSidebar;
-  showSettingSidebar;
-  isNavHidden;
-  openSetting;
-  setIsNavHidden;
+  setIsContainerSelected: (isContainerSelected?: boolean) => void;
+  workspaceBackgroundColor: string;
+  hideSidebar?: () => void;
+  showSidebar?: () => void;
+  showSettingSidebar?: () => void;
+  isNavHidden?: boolean;
+  openSetting?: boolean;
+  setIsNavHidden?: (isNavHidden?: boolean) => void;
+  setSideElement?: (sideElement?: string) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  hideSettingSidebar?: () => void;
+  dynamicWidth?: number;
+  dynamicHeight?: number;
+  setDynamicWidth?: (dynamicWidth?: number) => void;
+  setDynamicHeight?: (dynamicHeight?: number) => void;
 }
 
 const Workspace: FC<IWorkspace> = ({
@@ -58,38 +60,33 @@ const Workspace: FC<IWorkspace> = ({
   setOpenTab,
   drag,
   setDrag,
-  setAddContainer,
+  setIsContainerSelected,
   workspaceBackgroundColor,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
   hideSidebar,
   showSidebar,
-  showSettingSidebar,
   isNavHidden,
   openSetting,
-  setIsNavHidden,
+  setSideElement,
+  dragContainer,
+  setDragContainer,
+  hideSettingSidebar,
+  dynamicHeight,
+  dynamicWidth,
+  setDynamicHeight,
+  setDynamicWidth,
 }) => {
   const [currentSize, setCurrentSize] = useState<number>(6);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(isNavHidden, "setting");
-    console.log(openSetting, "sidebar");
     if (isNavHidden && !openSetting) {
-      console.log(isNavHidden, "settingif");
-      console.log(!openSetting, "sidebarif");
       setCurrentSize(6);
     } else {
-      console.log(isNavHidden, "settingelse");
-      console.log(!openSetting, "sidebarelse");
       setCurrentSize(7.5);
     }
   }, [isNavHidden, openSetting]);
-  console.log(currentSize, "current");
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-    if (layout.length === 0) setAddContainer(false);
+    if (layout.length === 0) setIsContainerSelected(false);
     let newItemsArr = layout.map((obj: IItems) => {
       let selectedItem = items.filter((item) => item.i === obj.i)[0];
       let height: number;
@@ -169,7 +166,7 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const onComponentClick = (itemName: string, i: string) => {
-    setAddContainer(true);
+    setIsContainerSelected(true);
     hideSidebar();
     // checks if the selector is active
     if (selector === null) {
@@ -212,7 +209,7 @@ const Workspace: FC<IWorkspace> = ({
     ) {
       setOpenSetting(false);
     } else {
-      setAddContainer(false);
+      setIsContainerSelected(false);
       hideSidebar();
     }
     if (e.target.id === "") {
@@ -221,7 +218,7 @@ const Workspace: FC<IWorkspace> = ({
   };
 
   const renderItemFunction = items
-    ?.filter((i) => i.style?.deleteComponent === 0)
+    ?.filter((i) => i.style?.deleteComponent === false)
     .map((item: IItems) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
       return (
@@ -233,12 +230,12 @@ const Workspace: FC<IWorkspace> = ({
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 ${
             !containerCheck(item)
               ? selector
-                ? "hover:border-orange-300"
+                ? "border-hover"
                 : "hover:border-slate-300 hover:border-dashed"
               : null
           }`}
           // open item setting on click
-          onClick={(e) =>
+          onClick={() =>
             containerCheck(item) ? null : onComponentClick(item.name, i)
           }
         >
@@ -250,11 +247,21 @@ const Workspace: FC<IWorkspace> = ({
             setOpenSetting={setOpenSetting}
             setSettingItemId={setSettingItemId}
             setOpenTab={setOpenTab}
-            setAddContainer={setAddContainer}
+            setIsContainerSelected={setIsContainerSelected}
             selector={selector}
             setSelector={setSelector}
             elementConfig={elementConfig}
             setElementConfig={setElementConfig}
+            setSideElement={setSideElement}
+            dragContainer={dragContainer}
+            setDragContainer={setDragContainer}
+            showSidebar={showSidebar}
+            hideSidebar={hideSidebar}
+            hideSettingSidebar={hideSettingSidebar}
+            dynamicWidth={dynamicWidth}
+            dynamicHeight={dynamicHeight}
+            setDynamicWidth={setDynamicWidth}
+            setDynamicHeight={setDynamicHeight}
           />
         </div>
       );
@@ -264,20 +271,12 @@ const Workspace: FC<IWorkspace> = ({
       style={{ width: "-webkit-fill-available" }}
       className="main-div h-full"
     >
-      <main
-        className=""
-        // ${
-        //   className === "" ? "mr-[250px]" : "mr-[250px]"
-        // }
-
-        style={{}}
-        onClick={handleCheckIsContainer}
-      >
+      <main onClick={handleCheckIsContainer}>
         {isNavHidden && !openSetting ? (
           <section
             style={{
               width: "-webkit-fill-available",
-              backgroundColor: `rgba(${workspaceBackgroundColor.r}, ${workspaceBackgroundColor.g}, ${workspaceBackgroundColor.b}, ${workspaceBackgroundColor.a})`,
+              background: workspaceBackgroundColor,
             }}
             className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
           >
@@ -309,7 +308,7 @@ const Workspace: FC<IWorkspace> = ({
               <section
                 style={{
                   width: "-webkit-fill-available",
-                  backgroundColor: `rgba(${workspaceBackgroundColor.r}, ${workspaceBackgroundColor.g}, ${workspaceBackgroundColor.b}, ${workspaceBackgroundColor.a})`,
+                  background: workspaceBackgroundColor,
                 }}
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
@@ -339,7 +338,7 @@ const Workspace: FC<IWorkspace> = ({
               <section
                 style={{
                   width: "-webkit-fill-available",
-                  backgroundColor: `rgba(${workspaceBackgroundColor.r}, ${workspaceBackgroundColor.g}, ${workspaceBackgroundColor.b}, ${workspaceBackgroundColor.a})`,
+                  background: workspaceBackgroundColor,
                 }}
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
               >

@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateItems } from "reducers/itemsReducer";
+import { ReplaceValue } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -16,30 +17,27 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const incrementCounter = () => {
-    dispatch(
-      updateItems({
-        level: 1,
-        settingItemId: i,
-        propertyName: "borderRadius",
-        propertyValue: borderRadius + 1,
-      })
-    );
-  };
-
-  const decrementCounter = () => {
-    dispatch(
-      updateItems({
-        level: 1,
-        settingItemId: i,
-        propertyName: "borderRadius",
-        propertyValue: borderRadius <= 0 ? 0 : borderRadius - 1,
-      })
-    );
-  };
-
-  const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (borderRadius) {
+  // FIX: find suitable type
+  const handleRadius = (e, action: ReplaceValue) => {
+    if (action == ReplaceValue.INCREMENT) {
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: i,
+          propertyName: "borderRadius",
+          propertyValue: borderRadius + 1,
+        })
+      );
+    } else if (action == ReplaceValue.DECREMENT) {
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: i,
+          propertyName: "borderRadius",
+          propertyValue: borderRadius <= 0 ? 0 : borderRadius - 1,
+        })
+      );
+    } else if (action == ReplaceValue.CHANGE) {
       dispatch(
         updateItems({
           level: 1,
@@ -61,19 +59,12 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
     <>
       <div className="flex text-gray-600 w-full mt-4 mx-2">
         <span className="text-left text-xl text-gray-500 font-regular font-normal not-italic">
-          {/* Border Radius */}
           <div className="flex mt-3">
-            {/* <span
-              onClick={decrementCounter}
-              className="flex items-center justify-center shadow text-[18px] mr-3 w-8 h-10 font-regular text-black"
-            >
-              -
-            </span> */}
             <div className="flex">
               <span className="font-text">Border Radius:</span>
               <select
                 value={borderRadius}
-                onChange={(e) => handleSizeChange(e)}
+                onClick={(e) => handleRadius(e, ReplaceValue.CHANGE)}
                 className="form-select font-div appearance-none block py-1.5 pl-[10.5rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:outline-none focus:shadow-none"
                 aria-label="Default select example"
               >
@@ -81,20 +72,14 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
                 {options}
               </select>
               <AiOutlineCaretUp
-                onClick={incrementCounter}
+                onClick={(e) => handleRadius(e, ReplaceValue.INCREMENT)}
                 className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
               />
               <AiOutlineCaretDown
-                onClick={decrementCounter}
+                onClick={(e) => handleRadius(e, ReplaceValue.DECREMENT)}
                 className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
               />
             </div>
-            {/* <span
-              onClick={incrementCounter}
-              className="flex ml-3 items-center justify-center shadow text-[18px] w-8 h-10 font-regular text-black"
-            >
-              +
-            </span> */}
           </div>
         </span>
       </div>

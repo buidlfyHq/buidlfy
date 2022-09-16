@@ -1,51 +1,22 @@
 import React, { useRef, FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { updateItems } from "reducers/itemsReducer";
 import SettingComponent from "components/utils/render-setting";
 import IItems from "interfaces/items";
-import IColor from "interfaces/color";
 import ISettings from "interfaces/settings";
-
-enum fontEnum {
-  BOLD = "bold",
-  ITALIC = "italic",
-  NORMAL = "normal",
-}
-
-enum functionEnum {
-  FONT_WEIGHT = "fontWeight",
-  FONT_STYLE = "fontStyle",
-  TEXT_DECORATION = "textDecoration",
-  COLOR = "color",
-  BACKGROUND_COLOR = "backgroundColor",
-  DELETE_COMPONENT = "deleteComponent",
-  JUSTIFY_CONTENT = "justifyContent",
-  SHADOW = "shadow",
-  BORDER_RADIUS = "borderRadius",
-  BORDER_WIDTH = "borderWidth",
-  MARGIN_LEFT = "marginLeft",
-  MARGIN_RIGHT = "marginRight",
-  MARGIN_TOP = "marginTop",
-  MARGIN_BOTTOM = "marginBottom",
-  PADDING_LEFT = "paddingLeft",
-  PADDING_RIGHT = "paddingRight",
-  PADDING_TOP = "paddingTop",
-  PADDING_BOTTOM = "paddingBottom",
-}
+import "styles/components.css";
 
 const Settings: FC<ISettings> = ({
-  items,
-  setItems,
-  setOpenSetting,
   settingItemId,
-  contractConfig,
-  setContractConfig,
-  selector,
-  setSelector,
   elementConfig,
   openTab,
   setOpenTab,
-  margin,
 }) => {
   const ref = useRef(null);
+  const dispatch = useDispatch();
+  const items: IItems[] = useSelector((state: any) => state.items);
+
   const selectedChildren = items.map((item) =>
     item.children?.find((child: IItems) => child.i === settingItemId)
   );
@@ -54,481 +25,15 @@ const Settings: FC<ISettings> = ({
     items?.find((item) => item.i === settingItemId) ||
     selectedChildren.filter(Boolean)[0];
 
-  const setLink = (link: string) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return { ...item, link };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          link,
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newChildren = [...item.children];
-        newChildren[childIndex] = child;
-
-        return {
-          ...item,
-          children: newChildren,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
-  const setPlaceholder = (placeholder: string) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return { ...item, placeholder };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          placeholder,
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newChildren = [...item.children];
-        newChildren[childIndex] = child;
-
-        return {
-          ...item,
-          children: newChildren,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
-  const setValue = (value: string) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return { ...item, value };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          value,
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newChildren = [...item.children];
-        newChildren[childIndex] = child;
-
-        return {
-          ...item,
-          children: newChildren,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
-  const utilityFunction = (
-    styleProp: functionEnum,
-    property: boolean,
-    valueFirst: string,
-    valueSecond: string
-  ) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            [styleProp]: property ? valueFirst : valueSecond,
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            [styleProp]: property ? valueFirst : valueSecond,
-          },
-        };
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newChildren = [...item.children];
-        newChildren[childIndex] = child;
-
-        return {
-          ...item,
-          children: newChildren,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
-  const setBold = (fontWeight: boolean) => {
-    utilityFunction(
-      functionEnum.FONT_WEIGHT,
-      fontWeight,
-      fontEnum.BOLD,
-      fontEnum.NORMAL
+  const handleDelete = () => {
+    dispatch(
+      updateItems({
+        level: 1,
+        settingItemId: selectedItem.i,
+        propertyName: "deleteComponent",
+        propertyValue: true,
+      })
     );
-  };
-
-  const setItalic = (fontStyle: boolean) => {
-    utilityFunction(
-      functionEnum.FONT_STYLE,
-      fontStyle,
-      fontEnum.ITALIC,
-      fontEnum.NORMAL
-    );
-  };
-
-  const setUnderline = (textDecoration: boolean) => {
-    utilityFunction(
-      functionEnum.TEXT_DECORATION,
-      textDecoration,
-      "underline",
-      "none"
-    );
-  };
-
-  const singleWorkFunction = (
-    styleProp: functionEnum,
-    property: number | IColor
-  ) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            [styleProp]: property,
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            [styleProp]: property,
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newChildren = [...item.children];
-        newChildren[childIndex] = child;
-
-        return {
-          ...item,
-          children: newChildren,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-  const marginWorkFunction = (
-    styleProp: functionEnum,
-    property: number | IColor
-  ) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            margin: { ...item.style.margin, [styleProp]: property },
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            margin: { ...selectedChild.style.margin, [styleProp]: property },
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newChildren = [...item.children];
-        newChildren[childIndex] = child;
-
-        return {
-          ...item,
-          children: newChildren,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-  const paddingWorkFunction = (
-    styleProp: functionEnum,
-    property: number | IColor
-  ) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            padding: { ...item.style.padding, [styleProp]: property },
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            padding: { ...selectedChild.style.padding, [styleProp]: property },
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newChildren = [...item.children];
-        newChildren[childIndex] = child;
-
-        return {
-          ...item,
-          children: newChildren,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-  const setColor = (color: IColor) => {
-    singleWorkFunction(functionEnum.COLOR, color);
-  };
-
-  const setBgColor = (backgroundColor: IColor) => {
-    singleWorkFunction(functionEnum.BACKGROUND_COLOR, backgroundColor);
-  };
-
-  const setDeleteComponent = (deleteComponent: number) => {
-    singleWorkFunction(functionEnum.DELETE_COMPONENT, deleteComponent);
-  };
-
-  const setCenter = (justifyContent: boolean) => {
-    utilityFunction(
-      functionEnum.JUSTIFY_CONTENT,
-      justifyContent,
-      "center",
-      "inherit"
-    );
-  };
-
-  const setLeft = (justifyContent: boolean) => {
-    utilityFunction(
-      functionEnum.JUSTIFY_CONTENT,
-      justifyContent,
-      "left",
-      "inherit"
-    );
-  };
-
-  const setRight = (justifyContent: boolean) => {
-    utilityFunction(
-      functionEnum.JUSTIFY_CONTENT,
-      justifyContent,
-      "right",
-      "inherit"
-    );
-  };
-
-  const setSmall = (shadow: boolean) => {
-    utilityFunction(
-      functionEnum.SHADOW,
-      shadow,
-      "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-      "none"
-    );
-  };
-
-  const setMedium = (shadow: boolean) => {
-    utilityFunction(
-      functionEnum.SHADOW,
-      shadow,
-      "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-      "inherit"
-    );
-  };
-
-  const setLarge = (shadow: boolean) => {
-    utilityFunction(
-      functionEnum.SHADOW,
-      shadow,
-      "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
-      "inherit"
-    );
-  };
-
-  const setFontSize = (fontSize: number) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          style: {
-            ...item["style"],
-            fontSize: fontSize,
-          },
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let selectedChild = item.children?.find(
-          (child) => child.i === settingItemId
-        );
-        let child = {
-          ...selectedChild,
-          style: {
-            ...selectedChild["style"],
-            fontSize: fontSize,
-          },
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newChildren = [...item.children];
-        newChildren[childIndex] = child;
-
-        return {
-          ...item,
-          children: newChildren,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
-  const setBorderRadius = (borderRadius: number) => {
-    singleWorkFunction(functionEnum.BORDER_RADIUS, borderRadius);
-  };
-  const setMarginLeft = (marginLeft: number) => {
-    marginWorkFunction(functionEnum.MARGIN_LEFT, marginLeft);
-  };
-  const setMarginRight = (marginRight: number) => {
-    marginWorkFunction(functionEnum.MARGIN_RIGHT, marginRight);
-  };
-  const setMarginTop = (marginTop: number) => {
-    marginWorkFunction(functionEnum.MARGIN_TOP, marginTop);
-  };
-  const setMarginBottom = (marginBottom: number) => {
-    marginWorkFunction(functionEnum.MARGIN_BOTTOM, marginBottom);
-  };
-  const setPaddingLeft = (paddingLeft: number) => {
-    paddingWorkFunction(functionEnum.PADDING_LEFT, paddingLeft);
-  };
-  const setPaddingRight = (paddingRight: number) => {
-    paddingWorkFunction(functionEnum.PADDING_RIGHT, paddingRight);
-  };
-  const setPaddingTop = (paddingTop: number) => {
-    paddingWorkFunction(functionEnum.PADDING_TOP, paddingTop);
-  };
-  const setPaddingBottom = (paddingBottom: number) => {
-    paddingWorkFunction(functionEnum.PADDING_BOTTOM, paddingBottom);
-  };
-  const setBorderWidth = (borderWidth: number) => {
-    singleWorkFunction(functionEnum.BORDER_WIDTH, borderWidth);
-  };
-
-  const setOn = (connectWallet: boolean) => {
-    if (!settingItemId) {
-      return;
-    }
-    const updatedItems = items.map((item) => {
-      let selectedChild = item.children?.find(
-        (child) => child.i === settingItemId
-      );
-      if (item.i === settingItemId) {
-        return {
-          ...item,
-          connectWallet: connectWallet ? "on" : "off",
-        };
-      } else if (selectedChild?.i === settingItemId) {
-        let child = {
-          ...selectedChild,
-          connectWallet: connectWallet ? "on" : "off",
-        };
-
-        const childIndex = item.children?.findIndex(
-          (c) => c.i === settingItemId
-        );
-        let newChildren = [...item.children];
-        newChildren[childIndex] = child;
-
-        return {
-          ...item,
-          children: newChildren,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
-  const handleOpenSetting = () => {
-    setOpenSetting(false);
   };
 
   return (
@@ -540,69 +45,33 @@ const Settings: FC<ISettings> = ({
               className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
               ref={ref}
             >
-              {/* <div className="delete-div py-3 pl-3">
-                <div>Delete</div>
-              </div> */}
-              {/* <div className="py-4 px-2 text-sm" onClick={handleOpenSetting}>
-              {"<"}
-              <span className="ml-2">Site Settings</span>
-            </div> */}
-              <SettingComponent
-                items={items}
-                setItems={setItems}
-                selectedItem={selectedItem}
-                setLink={setLink}
-                link={selectedItem?.link}
-                setValue={setValue}
-                value={selectedItem?.value}
-                setBold={setBold}
-                bold={selectedItem?.style?.fontWeight}
-                setItalic={setItalic}
-                italic={selectedItem?.style?.fontStyle}
-                setUnderline={setUnderline}
-                underline={selectedItem?.style?.textDecoration}
-                color={selectedItem?.style?.color}
-                setColor={setColor}
-                setBgColor={setBgColor}
-                backgroundColor={selectedItem?.style?.backgroundColor}
-                setDeleteComponent={setDeleteComponent}
-                deleteComponent={selectedItem?.style?.deleteComponent}
-                justifyContent={selectedItem?.style?.justifyContent}
-                setLeft={setLeft}
-                setCenter={setCenter}
-                setRight={setRight}
-                setFontSize={setFontSize}
-                fontSize={selectedItem?.style?.fontSize}
-                setContractConfig={setContractConfig}
-                contractConfig={contractConfig}
-                selector={selector}
-                setSelector={setSelector}
-                elementConfig={elementConfig}
-                openTab={openTab}
-                setOpenTab={setOpenTab}
-                borderRadius={selectedItem?.style?.borderRadius}
-                setBorderRadius={setBorderRadius}
-                borderWidth={selectedItem?.style?.borderWidth}
-                setBorderWidth={setBorderWidth}
-                setMarginLeft={setMarginLeft}
-                setMarginRight={setMarginRight}
-                setMarginTop={setMarginTop}
-                setMarginBottom={setMarginBottom}
-                setPaddingLeft={setPaddingLeft}
-                setPaddingRight={setPaddingRight}
-                setPaddingTop={setPaddingTop}
-                setPaddingBottom={setPaddingBottom}
-                margin={{ ...selectedItem?.style?.margin }}
-                padding={{ ...selectedItem?.style?.padding }}
-                setSmall={setSmall}
-                setMedium={setMedium}
-                setLarge={setLarge}
-                shadow={selectedItem?.style?.shadow}
-                setOn={setOn}
-                connectWallet={selectedItem?.connectWallet}
-                setPlaceholder={setPlaceholder}
-                placeholder={selectedItem?.placeholder}
-              />
+              <div className="delete-div flex py-2 pl-3">
+                <div
+                  onClick={handleDelete}
+                  className="flex delete-btn px-2 py-[0.1rem]"
+                >
+                  <span className="flex text-[12px]">
+                    Remove
+                    <MdOutlineDeleteOutline className="text-[12px]  mt-1 ml-1" />
+                  </span>
+                </div>
+                {/* It will be used in next update */}
+                {/* <div className="flex delete-btn px-2 py-[0.1rem] ml-2">
+                  <span className="flex text-[12px]">
+                    Reset
+                    <GrPowerReset className="text-[12px] mt-1 ml-1" />
+                  </span>
+                </div> */}
+              </div>
+
+              <div style={{ marginTop: "3rem" }}>
+                <SettingComponent
+                  selectedItem={selectedItem}
+                  elementConfig={elementConfig}
+                  openTab={openTab}
+                  setOpenTab={setOpenTab}
+                />
+              </div>
             </div>
           </div>
         </>

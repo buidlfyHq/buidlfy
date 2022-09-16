@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { RiText } from "react-icons/ri";
 import Navbar from "features/dashboard/navbar";
 import Sidebar from "features/dashboard/sidebar";
 import SideNavbar from "features/dashboard/side-navbar";
@@ -8,11 +7,11 @@ import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
 import { useWindowSize } from "hooks/use-window-size";
 import IItems from "interfaces/items";
-import IColor from "interfaces/color";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
-export enum sidebarEnum {
+
+export enum SidebarEnum {
   PAGES = "pages",
   TEMPLATES = "templates",
   ELEMENTS = "elements",
@@ -21,6 +20,7 @@ export enum sidebarEnum {
   HELP = "help",
   SETTING = "setting",
 }
+
 const Dashboard: FC = () => {
   const navigate = useNavigate();
   const size = useWindowSize();
@@ -45,12 +45,11 @@ const Dashboard: FC = () => {
   const [openTab, setOpenTab] = useState<number>(1);
   const [elementConfig, setElementConfig] = useState<object>({});
   const [drag, setDrag] = useState<boolean>(true);
-  const [addContainer, setAddContainer] = useState<boolean>(false);
-  const [workspaceBackgroundColor, setWorkspaceBackgroundColor] = useState<IColor>({
-    r: "0",
-    g: "0",
-    b: "0",
-  });
+  const [isContainerSelected, setIsContainerSelected] =
+    useState<boolean>(false);
+  const [workspaceBackgroundColor, setWorkspaceBackgroundColor] = useState<string>(
+    "rgba(255, 255, 255, 0)"
+  );
   const [head, setHead] = useState<{
     title: string;
     logo: string | ArrayBuffer;
@@ -59,6 +58,10 @@ const Dashboard: FC = () => {
     logo: "",
   });
   const [sideElement, setSideElement] = useState<string>("");
+  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
+  const [dynamicWidth, setDynamicWidth] = useState<number>();
+  const [dynamicHeight, setDynamicHeight] = useState<number>();
+
   useEffect(() => {
     // Checks if user is authenticated
     const getInformation = async () => {
@@ -79,11 +82,10 @@ const Dashboard: FC = () => {
       setItems(JSON.parse(saveItems));
     }
   }, []); // eslint-disable-line
-  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
-  // const [isSettingHidden, setIsSettingHidden] = useState<boolean>(false);
+
   const showSidebar = () => {
     setIsNavHidden(false);
-    setOpenSetting(true);
+    setOpenSetting(false);
   };
   const hideSidebar = () => {
     setIsNavHidden(true);
@@ -97,6 +99,7 @@ const Dashboard: FC = () => {
     // setIsNavHidden(false);
     setOpenSetting(false);
   };
+  
   return (
     <main>
       {size.width > 1024 ? (
@@ -107,7 +110,7 @@ const Dashboard: FC = () => {
             setClassName={setClassName}
             items={items}
             setItems={setItems}
-            addContainer={addContainer}
+            isContainerSelected={isContainerSelected}
             settingItemId={settingItemId}
             sideElement={sideElement}
             setSideElement={setSideElement}
@@ -118,11 +121,7 @@ const Dashboard: FC = () => {
             hideSettingSidebar={hideSettingSidebar}
           />
           <Sidebar
-            className={className}
-            setClassName={setClassName}
-            items={items}
-            setItems={setItems}
-            addContainer={addContainer}
+            isContainerSelected={isContainerSelected}
             settingItemId={settingItemId}
             sideElement={sideElement}
             setSideElement={setSideElement}
@@ -166,37 +165,32 @@ const Dashboard: FC = () => {
                 setOpenTab={setOpenTab}
                 drag={drag}
                 setDrag={setDrag}
-                setAddContainer={setAddContainer}
                 workspaceBackgroundColor={workspaceBackgroundColor}
+                setIsContainerSelected={setIsContainerSelected}
                 hideSidebar={hideSidebar}
                 showSettingSidebar={showSettingSidebar}
                 showSidebar={showSidebar}
                 isNavHidden={isNavHidden}
                 openSetting={openSetting}
                 setIsNavHidden={setIsNavHidden}
+                setSideElement={setSideElement}
+                hideSettingSidebar={undefined}
+                dynamicWidth={dynamicWidth}
+                dynamicHeight={dynamicHeight}
+                setDynamicWidth={setDynamicWidth}
+                setDynamicHeight={setDynamicHeight}
               />
               {/* Right Sidebar Settings */}
             </aside>
           </section>
-          {/* {isSettingHidden ? (
-            <> */}
           {openSetting ? (
             <Settings
-              items={items}
-              setItems={setItems}
-              setOpenSetting={setOpenSetting}
               settingItemId={settingItemId}
-              contractConfig={contractConfig}
-              setContractConfig={setContractConfig}
-              selector={selector}
-              setSelector={setSelector}
               elementConfig={elementConfig}
               openTab={openTab}
               setOpenTab={setOpenTab}
             />
           ) : null}
-          {/* </>
-          ) : null} */}
         </section>
       ) : (
         <h1 className="items-center text-center justify-center flex h-[100vh]">

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
 
@@ -16,6 +16,7 @@ const Button: FC<ITexts> = ({
   shadow,
   margin,
   padding,
+  borderColor,
 }) => (
   <section
     style={{ justifyContent: justifyContent }}
@@ -27,21 +28,29 @@ const Button: FC<ITexts> = ({
         fontWeight: bold,
         fontStyle: italic,
         textDecoration: underline,
-        color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-        borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+        border: `1px solid ${borderColor}`,
+        borderImage: borderColor,
         display: "flex",
         justifyContent: "center",
         borderRadius: `${borderRadius}px`,
         fontSize: `${fontSize}px`,
-        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+        background: backgroundColor,
         boxShadow: shadow,
-        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
-        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+        margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
+        padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
       }}
       id="button-two"
-      className="w-48 h-auto cursor-pointer btn whitespace-nowrap"
+      className="btn-border border-[1px] border-solid w-48 h-auto cursor-pointer btn whitespace-nowrap"
     >
-      {link.length > 0 ? <a href={link}>{value}</a> : <>{value}</>}
+      <span
+        style={{
+          background: color,
+          WebkitTextFillColor: "transparent",
+        }}
+        className="text-class"
+      >
+        {link.length > 0 ? <a href={link}>{value}</a> : <>{value}</>}
+      </span>
     </div>
   </section>
 );

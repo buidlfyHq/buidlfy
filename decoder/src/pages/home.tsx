@@ -11,12 +11,11 @@ const Home: FC = () => {
   const config = JSON.parse(BuilderConfig);
   const [inputValue, setInputValue] = useState<IInput[]>([]);
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
-
   return (
     <main
       className="min-h-screen"
       style={{
-        backgroundColor: `rgba(${config.background?.r}, ${config.background?.g}, ${config.background?.b}, ${config.background?.a})`,
+        background: config.background,
       }}
     >
       <ResponsiveGridLayout

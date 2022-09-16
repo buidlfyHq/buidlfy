@@ -7,8 +7,8 @@ import "styles/components.css";
 interface INew {
   setItems: (items: IItems[]) => void;
 }
+
 const Template: FC<INew> = ({ setItems }) => {
-  // const navigate = useNavigate();
   const [newTemp, setNewTemp] = useState<ITemplate[]>([]);
 
   useEffect(() => {
@@ -24,7 +24,6 @@ const Template: FC<INew> = ({ setItems }) => {
     localStorage.removeItem("items");
     localStorage.setItem("items", JSON.stringify(value));
     setItems(value);
-    // navigate("/dashboard", { replace: true });
   };
 
   return (
@@ -65,7 +64,6 @@ const Template: FC<INew> = ({ setItems }) => {
           {newTemp &&
             newTemp?.map((temp: { name: string; value: IItems[]; image }) => {
               const { name, value, image } = temp;
-              console.log(image, "image");
               return (
                 <div
                   onClick={(e) => handleClick(e, value)}

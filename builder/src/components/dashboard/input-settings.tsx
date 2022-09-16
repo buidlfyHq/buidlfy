@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
@@ -10,7 +9,7 @@ import "styles/components.css";
 
 const InputSettings: FC<ISettings> = ({
   selectedItem,
-  handlePlaceholderChange,
+  handleChange,
 }) => (
   <>
     <h3 className="ml-[1rem]">
@@ -23,7 +22,7 @@ const InputSettings: FC<ISettings> = ({
       {/* <RiText className="text-[18px] mr-3" /> */}
       <textarea
         value={selectedItem.placeholder}
-        onChange={(e) => handlePlaceholderChange(e)}
+        onChange={(e) => handleChange(e, "placeholder")}
         className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
         placeholder="Please write your text here..."
       />
@@ -40,7 +39,6 @@ const InputSettings: FC<ISettings> = ({
       isContainer={containerCheck(selectedItem)}
     />
     <ShadowComponent i={selectedItem.i} shadow={selectedItem.style.shadow} />
-    <UtilitiesComponent i={selectedItem.i} />
   </>
 );
 

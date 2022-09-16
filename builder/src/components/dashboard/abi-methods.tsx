@@ -1,7 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AiOutlineLeft } from "react-icons/ai";
 import { updateItemsArray } from "reducers/itemsReducer";
 import IItems from "interfaces/items";
+import "styles/dashboard.css";
 
 interface IAbiMethods {
   setShowComponent: (showComponent: {
@@ -14,9 +16,16 @@ interface IAbiMethods {
     };
   }) => void;
   selectedItem: IItems;
+  methodOpen: boolean;
+  setMethodOpen: (methodOpen: boolean) => void;
 }
 
-const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
+const AbiMethods: FC<IAbiMethods> = ({
+  setShowComponent,
+  selectedItem,
+  methodOpen,
+  setMethodOpen,
+}) => {
   const dispatch = useDispatch();
   const items: IItems[] = useSelector((state: any) => state.items);
   const contract: { abi: string; address: string } = useSelector(
@@ -32,7 +41,6 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
       type: string;
     }[]
   >([]);
-
   useEffect(() => {
     if (contract.abi) {
       const parsedAbi = JSON.parse(contract.abi);
@@ -104,46 +112,54 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedItem }) => {
     }
   };
 
+  const handleBack = () => setMethodOpen(true);
+
   return (
     <>
       {contract.abi ? (
-        <>
-          <span className="setting-text  ml-[0.25rem] px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
-            Select Method
+        <div>
+          <span className="contract-text flex" onClick={() => handleBack()}>
+            <AiOutlineLeft className="text-[10px] mr-2" />{" "}
+            <span className="mt-[-5px]">Back</span>
           </span>
-          <div className="px-2">
-            <div className="mb-3">
-              <select
-                id="select"
-                className="form-select contract-input appearance-none mt-2 block w-full px-3 py-1.5 focus:outline-none focuse:border-none"
-                aria-label="Default select example"
-                onChange={(e) => onSelect(e)}
-              >
-                <option
-                  value=""
-                  selected={!selectedItem.contract.methodName}
-                  hidden
+          <div className="mt-[2rem]">
+            <div className="setting-text ml-[0.25rem] px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
+              Select Method
+            </div>
+            <div className="px-2">
+              <div className="mb-3">
+                <select
+                  id="select"
+                  className="form-select contract-input mt-2 block w-full px-3 py-1.5 focus:outline-none focuse:border-none"
+                  aria-label="Default select example"
+                  onChange={(e) => onSelect(e)}
                 >
-                  Select a Method
-                </option>
-                {contract.abi &&
-                  abiJson.map((method: { name: string }, i: number) => (
-                    <>
-                      <option
-                        value={i}
-                        key={i}
-                        selected={
-                          selectedItem.contract.methodName === method.name
-                        }
-                      >
-                        {method.name}
-                      </option>
-                    </>
-                  ))}
-              </select>
+                  <option
+                    value=""
+                    selected={!selectedItem.contract.methodName}
+                    hidden
+                  >
+                    Select a Method{" "}
+                  </option>
+                  {contract.abi &&
+                    abiJson.map((method: { name: string }, i: number) => (
+                      <>
+                        <option
+                          value={i}
+                          key={i}
+                          selected={
+                            selectedItem.contract.methodName === method.name
+                          }
+                        >
+                          {method.name}
+                        </option>
+                      </>
+                    ))}
+                </select>
+              </div>
             </div>
           </div>
-        </>
+        </div>
       ) : null}
     </>
   );

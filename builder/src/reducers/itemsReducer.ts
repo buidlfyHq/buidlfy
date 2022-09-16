@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import IColor from "interfaces/color";
 import IItems from "interfaces/items";
 
 interface IAction {
@@ -7,8 +6,9 @@ interface IAction {
     level: number;
     settingItemId: string;
     propertyName: string;
-    propertyValue: string | number | IColor;
+    propertyValue: string | number | boolean;
     childPropertyName?: string;
+    imageSizeProperty?: boolean;
   };
 }
 
@@ -23,6 +23,7 @@ const itemsSlice = createSlice({
         propertyName,
         propertyValue,
         childPropertyName,
+        imageSizeProperty,
       } = action.payload;
 
       if (!settingItemId) {
@@ -56,6 +57,15 @@ const itemsSlice = createSlice({
                   },
                 },
               };
+            case 3:
+              return {
+                ...item,
+                style: {
+                  ...item["style"],
+                  isAuto: imageSizeProperty,
+                  [propertyName]: propertyValue,
+                },
+              };
             default:
               return item;
           }
@@ -86,6 +96,16 @@ const itemsSlice = createSlice({
                     ...item.style[propertyName],
                     [childPropertyName]: propertyValue,
                   },
+                },
+              };
+              break;
+            case 3:
+              child = {
+                ...selectedChild,
+                style: {
+                  ...selectedChild["style"],
+                  isAuto: imageSizeProperty,
+                  [propertyName]: propertyValue,
                 },
               };
               break;

@@ -12,15 +12,15 @@ import pages from "assets/pages.png";
 import setting from "assets/setting.png";
 import styles from "assets/styles.png";
 import templates from "assets/templates.png";
+import { SidebarEnum } from "pages/dashboard";
 import "styles/components.css";
-import { sidebarEnum } from "pages/dashboard";
 
 interface ISideNavbar {
   className: string;
   setClassName: (className: string) => void;
   items: IItems[];
   setItems: (items: IItems[]) => void;
-  addContainer: boolean;
+  isContainerSelected: boolean;
   settingItemId: string;
   sideElement: string;
   setSideElement: (sideElement: string) => void;
@@ -36,7 +36,7 @@ const SideNavbar: FC<ISideNavbar> = ({
   setClassName,
   items,
   setItems,
-  addContainer,
+  isContainerSelected,
   settingItemId,
   sideElement,
   setSideElement,
@@ -97,7 +97,7 @@ const SideNavbar: FC<ISideNavbar> = ({
         <div
           onClick={() => {
             showSidebar(true);
-            handleSidebar(sidebarEnum.TEMPLATES);
+            handleSidebar(SidebarEnum.TEMPLATES);
             hideSettingSidebar();
           }}
           className="cursor-pointer"
@@ -116,7 +116,7 @@ const SideNavbar: FC<ISideNavbar> = ({
         <div
           onClick={() => {
             showSidebar(true);
-            handleSidebar(sidebarEnum.ELEMENTS);
+            handleSidebar(SidebarEnum.ELEMENTS);
             hideSettingSidebar();
           }}
           className="mt-8 cursor-pointer"
@@ -135,7 +135,7 @@ const SideNavbar: FC<ISideNavbar> = ({
         <div
           onClick={() => {
             showSidebar(true);
-            handleSidebar(sidebarEnum.STYLES);
+            handleSidebar(SidebarEnum.STYLES);
             hideSettingSidebar();
           }}
           className="mt-8 cursor-pointer"

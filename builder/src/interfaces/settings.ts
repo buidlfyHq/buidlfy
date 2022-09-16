@@ -2,16 +2,14 @@ import IItems from "./items";
 
 export default interface ISettings {
   selectedItem?: IItems;
-  setOpenSetting?: (open: boolean) => void;
   settingItemId?: string;
   elementConfig?: object;
   openTab?: number;
   setOpenTab?: (openTab: number) => void;
-  handlePlaceholderChange?: (e) => void;
-  handleTextChange?: (
+  handleChange?: (
     e:
       | React.ChangeEvent<HTMLTextAreaElement>
-      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLInputElement>,
+    propertyName: string
   ) => void;
-  handleLinkChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { BsBrightnessLow } from "react-icons/bs";
 import { updateItems } from "reducers/itemsReducer";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -13,47 +14,44 @@ interface IShadowComponent {
 const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
   const dispatch = useDispatch();
 
-  const handleSmallChange = () => {
-    // setLeft(!left);
-    dispatch(
-      updateItems({
-        level: 1,
-        settingItemId: i,
-        propertyName: "shadow",
-        propertyValue:
-          shadow === "small" ? "none" : "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-      })
-    );
-  };
-
-  const handleMediumChange = () => {
-    // setLeft(!center);
-    dispatch(
-      updateItems({
-        level: 1,
-        settingItemId: i,
-        propertyName: "shadow",
-        propertyValue:
-          shadow === "medium"
-            ? "inherit"
-            : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-      })
-    );
-  };
-
-  const handleLargeChange = () => {
-    // setRight(!right);
-    dispatch(
-      updateItems({
-        level: 1,
-        settingItemId: i,
-        propertyName: "shadow",
-        propertyValue:
-          shadow === "large"
-            ? "inherit"
-            : "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
-      })
-    );
+  const handleChange = (action: ReplaceStyle) => {
+    if (action == ReplaceStyle.SMALL) {
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: i,
+          propertyName: "shadow",
+          propertyValue:
+            shadow === ReplaceStyle.SMALL
+              ? "none"
+              : "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        })
+      );
+    } else if (action == ReplaceStyle.MEDIUM) {
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: i,
+          propertyName: "shadow",
+          propertyValue:
+            shadow === ReplaceStyle.MEDIUM
+              ? "inherit"
+              : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+        })
+      );
+    } else if (action == ReplaceStyle.LARGE) {
+      dispatch(
+        updateItems({
+          level: 1,
+          settingItemId: i,
+          propertyName: "shadow",
+          propertyValue:
+            shadow === ReplaceStyle.LARGE
+              ? "inherit"
+              : "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+        })
+      );
+    }
   };
 
   return (
@@ -64,19 +62,19 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
       </span>
       <div className="flex mt-3 px-1">
         <span
-          onClick={handleSmallChange}
+          onClick={() => handleChange(ReplaceStyle.SMALL)}
           className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
         >
           S
         </span>
         <span
-          onClick={handleMediumChange}
+          onClick={() => handleChange(ReplaceStyle.MEDIUM)}
           className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 mx-3 font-regular"
         >
           M
         </span>
         <span
-          onClick={handleLargeChange}
+          onClick={() => handleChange(ReplaceStyle.LARGE)}
           className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
         >
           L
@@ -85,4 +83,5 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
     </div>
   );
 };
+
 export default ShadowComponent;
