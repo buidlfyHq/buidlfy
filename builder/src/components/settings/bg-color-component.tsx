@@ -3,15 +3,14 @@ import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { SketchPicker } from "react-color";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import IColor from "interfaces/color";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBgColorComponent {
   i?: string;
-  bgColor?: IColor;
-  backgroundColor?: IColor;
-  setBackgroundColor?: (backgroundColor: IColor) => void;
+  bgColor?: string;
+  backgroundColor?: string;
+  setBackgroundColor?: (backgroundColor: string) => void;
 }
 
 const BgColorComponent: FC<IBgColorComponent> = ({
@@ -46,7 +45,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     setDisplayColorPicker(false);
   };
 
-  const handleChange = (color: { rgb: IColor; hex }) => {
+  const handleChange = (color: { rgb; hex }) => {
     if (!color) {
       return;
     }

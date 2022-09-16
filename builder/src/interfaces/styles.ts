@@ -1,8 +1,6 @@
-import IColor from "./color";
-
 export default interface IStyles {
-  color?: IColor;
-  backgroundColor?: IColor;
+  color?: string;
+  backgroundColor?: string;
   fontWeight?: string;
   fontStyle?: string;
   textDecoration?: string;

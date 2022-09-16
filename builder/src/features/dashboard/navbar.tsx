@@ -12,7 +12,7 @@ import IColor from "interfaces/color";
 
 interface INavbar {
   className: string;
-  backgroundColor: IColor;
+  backgroundColor: string;
   head: {
     title: string;
     logo: string | ArrayBuffer;
@@ -21,7 +21,9 @@ interface INavbar {
 
 const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspace[] = useSelector((state: any) => state.workspace.workspaceElements);
+  const workspaceElements: IWorkspace[] = useSelector(
+    (state: any) => state.workspace.workspaceElements
+  );
   const contract: { abi: string; address: string } = useSelector(
     (state: any) => state.contract
   );
@@ -39,9 +41,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
-
   const [file, setFile] = useState<string>("");
-  // const [size, setSize] = useState<boolean>(false);
 
   useEffect(() => {
     if (contract.abi) {
@@ -76,7 +76,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
 
   const handleSave = () => {
     // FIX: save full config to local storage
-    if (workspaceElements?.length > 0) {
+    if (workspaceElements.length > 0) {
       localStorage.setItem("items", JSON.stringify(workspaceElements));
     }
   };
@@ -88,7 +88,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
   const handleSaveTemplate = () => {
     // FIX: save full config to local storage
     let newTemplates: Array<ITemplate> = [];
-    if (workspaceElements?.length > 0) {
+    if (workspaceElements.length > 0) {
       localStorage.setItem("items", JSON.stringify(workspaceElements));
       const templates = localStorage.getItem("templates") || "";
       if (templates !== "") {
