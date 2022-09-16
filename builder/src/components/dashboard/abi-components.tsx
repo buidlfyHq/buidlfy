@@ -1,14 +1,17 @@
 import React, { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
+import { saveContractConfig } from "redux/workspace/workspace.reducers";
 import {
   setSelectorToDefault,
   updateSelector,
 } from "redux/contract/contract.reducers";
-import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
-import Spinner from "components/dashboard/spinner";
+import Spinner from "components/utils/spinner";
 import { IRootState } from "redux/root-state.interface";
-import { IShowComponent, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import {
+  IShowComponent,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
   IContractElementSelector,
@@ -17,10 +20,10 @@ import "styles/components.css";
 
 interface IAbiComponents {
   showComponent: IShowComponent;
-  selectedItem: IWorkspaceElement;
+  elementId: string;
 }
 
-const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
+const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace
@@ -48,76 +51,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
   const handleSave = () => {
     setShow(true);
     // filter last selected element
-    const filteredObject = contractElementSelected[currentElement.name]?.filter(
-      (key: { buttonId: string }) => key.buttonId === selectedItem.i
-    )[0];
-
-    let updatedContract = {};
-
-    let duplicate = selectedItem.contract.inputs?.find(
-      (e: { id: string }) => e.id === filteredObject.id
-    );
-
-    if (!duplicate) {
-      if (currentElement.type === "input") {
-        updatedContract = {
-          ...selectedItem.contract,
-          inputs: [
-            ...selectedItem.contract.inputs,
-            { id: filteredObject.id, send: false },
-          ],
-        };
-      } else if (currentElement.type === "send") {
-        updatedContract = {
-          ...selectedItem.contract,
-          inputs: [
-            ...selectedItem.contract.inputs,
-            { id: filteredObject.id, send: true },
-          ],
-        };
-      } else if (currentElement.type === "output") {
-        updatedContract = {
-          ...selectedItem.contract,
-          outputs: [
-            ...selectedItem.contract.outputs,
-            { id: filteredObject.id },
-          ],
-        };
-      }
-    } else {
-      updatedContract = { ...selectedItem.contract };
-    }
-
-    let updatedItem = {
-      ...selectedItem,
-      contract: updatedContract,
-    };
-
-    // search id in items
-    const elementsIndex = workspaceElements.findIndex(
-      (item) => item.i === selectedItem.i
-    );
-
-    if (elementsIndex === -1) {
-      // search id in children
-      const updatedItems = workspaceElements.map((item) => {
-        const childIndex = item.children?.findIndex(
-          (child: IWorkspaceElement) => child.i === selectedItem.i
-        );
-        let newArray = [...item?.children];
-        newArray[childIndex] = updatedItem;
-        return {
-          ...item,
-          children: newArray,
-        };
-      });
-
-      dispatch(updateWorkspaceElementsArray(updatedItems));
-    } else {
-      let newArray = [...workspaceElements];
-      newArray[elementsIndex] = updatedItem;
-      dispatch(updateWorkspaceElementsArray(newArray));
-    }
+    dispatch(saveContractConfig({ contractElementSelected, currentElement }));
   };
 
   const handleInputSelector = (selectedId: string) => {
@@ -127,7 +61,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
           methodName: showComponent.value.name,
           type: "input",
           name: selectedId,
-          buttonId: selectedItem.i,
+          buttonId: elementId,
         })
       );
       setCurrentElement({ name: selectedId, type: "input" });
@@ -147,14 +81,14 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
     };
   };
 
-  const handleStateSelector = (selectedItem: IWorkspaceElement) => {
+  const handleStateSelector = (id: string) => {
     if (contractElementSelector === null) {
       dispatch(
         updateSelector({
           methodName: showComponent.value.name,
           type: "input",
           name: showComponent.value.name,
-          buttonId: selectedItem.i,
+          buttonId: id,
         })
       );
       setCurrentElement({
@@ -168,7 +102,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
 
   const stateObject = (key: string) => {
     let filteredObject = contractElementSelected[key]?.filter(
-      (key: { buttonId: string }) => key.buttonId === selectedItem.i
+      (key: { buttonId: string }) => key.buttonId === elementId
     );
     return filteredObject;
   };
@@ -180,7 +114,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
           methodName: showComponent.value.name,
           type: "output",
           name: selectedId,
-          buttonId: selectedItem.i,
+          buttonId: elementId,
         })
       );
       setCurrentElement({ name: selectedId, type: "output" });
@@ -249,7 +183,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
                                     key
                                   ]?.filter(
                                     (key: { buttonId: string }) =>
-                                      key.buttonId === selectedItem.i
+                                      key.buttonId === elementId
                                   );
                                   return (
                                     <div key={key}>
@@ -296,7 +230,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
               <div
                 className="mb-2 px-2 border rounded mt-1 h-7"
                 onClick={() => {
-                  handleStateSelector(selectedItem);
+                  handleStateSelector(elementId);
                 }}
               >
                 {!Object.keys(contractElementSelected).filter(
@@ -376,7 +310,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, selectedItem }) => {
                                     key
                                   ]?.filter(
                                     (key: { buttonId: string }) =>
-                                      key.buttonId === selectedItem.i
+                                      key.buttonId === elementId
                                   );
                                   return (
                                     <div key={key}>

@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import AlignComponent from "components/settings/align-component";
-import UtilitiesComponent from "components/settings/utilities-component";
 import UploadComponent from "components/settings/upload-component";
 import MarginComponent from "components/settings/margin-component";
+import SizeComponent from "components/settings/image-size-component";
+import BackgroundSizeComponent from "components/settings/background-size-component";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
@@ -24,8 +25,16 @@ const ImageSettings: FC = () => {
         i={selectedItem.i}
         justifyContent={selectedItem.style.justifyContent}
       />
+      <SizeComponent
+        i={selectedItem.i}
+        width={selectedItem.style?.width}
+        height={selectedItem.style?.height}
+      />
+      <BackgroundSizeComponent
+        i={selectedItem.i}
+        backgroundSize={selectedItem.style?.backgroundSize}
+      />
       <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
-      <UtilitiesComponent i={selectedItem.i} />
     </>
   );
 };

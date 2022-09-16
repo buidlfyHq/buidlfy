@@ -1,14 +1,15 @@
 import IColor from "./color";
 
 export default interface IStyles {
-  color: IColor;
-  backgroundColor?: IColor;
+  color: string;
+  borderColor?: string;
+  backgroundColor?: string;
   fontWeight?: string;
   fontStyle?: string;
   textDecoration?: string;
   justifyContent?: string;
   fontSize?: number;
-  deleteComponent: number;
+  deleteComponent: boolean;
   borderRadius?: number;
   borderWidth?: number;
   shadow?: string;
@@ -24,4 +25,8 @@ export default interface IStyles {
     paddingTop?: number,
     paddingBottom?: number,
   }
+  width?: number;
+  height?: number;
+  backgroundSize?: string;
+  isAuto?: boolean;
 }

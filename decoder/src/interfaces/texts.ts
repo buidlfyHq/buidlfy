@@ -6,12 +6,13 @@ export default interface ITexts {
   bold: string;
   italic: string;
   underline: string;
-  color: IColor;
+  color: string;
   justifyContent: string;
+  borderColor?: string;
   fontSize: number;
   value: string;
   link: string;
-  backgroundColor?: IColor;
+  backgroundColor?: string;
   borderRadius?: number;
   shadow?: string;
   contractFunction?: any; // breaking while assigning a type, work in progress

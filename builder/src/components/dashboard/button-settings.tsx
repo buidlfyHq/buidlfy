@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdLink } from "react-icons/io";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
-import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
+import BorderColorComponent from "components/settings/border-color-component";
 import BgColorComponent from "components/settings/bg-color-component";
 import FontSizeComponent from "components/settings/font-size-component";
 import AdvanceComponent from "components/settings/advance-component";
@@ -13,17 +13,15 @@ import ConnectSwitchComponent from "components/settings/connect-switch-component
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
-import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
 import {
   ISettings,
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
+import "styles/dashboard.css";
 
 const ButtonSettings: FC<ISettings> = ({
   handleSettingChange,
-  showComponent,
-  setShowComponent,
   openTab,
   setOpenTab,
 }) => {
@@ -59,37 +57,6 @@ const ButtonSettings: FC<ISettings> = ({
           Contract
         </span>
       </span>
-      {/* <ul
-          className="flex flex-row flex-wrap px-[-4px] pb-2 mb-0 list-none border-b-2"
-          role="tablist"
-        >
-          <li className="flex-auto mr-2 -mb-px last:mr-0">
-            <a
-              className="text-xs font-bold text-black uppercase bg-transparent"
-              onClick={(e) => handleToggleTab(e, 1)}
-              data-toggle="tab"
-              href="#link1"
-              role="tablist"
-            >
-              <i className="mr-1 text-base fas fa-space-shuttle"></i>
-              Setting
-            </a>
-          </li>
-          <li className="flex-auto mr-2 -mb-px last:mr-0">
-            <a
-              className="text-xs font-bold text-black uppercase bg-transparent"
-              onClick={(e) => handleToggleTab(e, 2)}
-              data-toggle="tab"
-              href="#link3"
-              role="tablist"
-            >
-              <i className="mr-1 text-base fas fa-briefcase"></i> Contract
-            </a>
-          </li>
-        </ul> */}
-      {/* <span className="relative flex flex-col mt-[2.5rem] break-words">
-        <span className="flex-auto py-2">
-          <span className="tab-content tab-space"> */}
       <span className={openTab === 1 ? "block" : "hidden"} id="link-one">
         <h3 className="ml-[0.5rem] mt-[3rem]">
           {selectedItem ? (
@@ -136,14 +103,14 @@ const ButtonSettings: FC<ISettings> = ({
           i={selectedItem.i}
           borderRadius={selectedItem.style.borderRadius}
         />
-        <ColorComponent
+        <ColorComponent i={selectedItem.i} color={selectedItem.style.color} />
+        <BorderColorComponent
           i={selectedItem.i}
-          color={selectedItem.style.color}
-          isContainer={containerCheck(selectedItem)}
+          borderColor={selectedItem.style.borderColor}
         />
         <BgColorComponent
           i={selectedItem.i}
-          bgColor={selectedItem.style.backgroundColor}
+          elementBackgroundColor={selectedItem.style.backgroundColor}
         />
         <MarginComponent
           i={selectedItem.i}
@@ -157,18 +124,10 @@ const ButtonSettings: FC<ISettings> = ({
           i={selectedItem.i}
           shadow={selectedItem.style.shadow}
         />
-        <UtilitiesComponent i={selectedItem.i} />
       </span>
       <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
-        <AdvanceComponent
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
-          selectedItem={selectedItem}
-        />
+        <AdvanceComponent selectedItem={selectedItem} />
       </div>
-      {/* </span>
-        </span>
-      </span> */}
     </>
   );
 };

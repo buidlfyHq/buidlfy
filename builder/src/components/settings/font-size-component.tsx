@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
+import { ReplaceValue } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -13,28 +14,25 @@ interface IFontSizeComponent {
 const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
   const dispatch = useDispatch();
 
-  const incrementCounter = () => {
-    dispatch(
-      updateWorkspaceElementStyle({
-        settingItemId: i,
-        propertyName: "fontSize",
-        propertyValue: fontSize + 1,
-      })
-    );
-  };
-
-  const decrementCounter = () => {
-    dispatch(
-      updateWorkspaceElementStyle({
-        settingItemId: i,
-        propertyName: "fontSize",
-        propertyValue: fontSize <= 1 ? 1 : fontSize - 1,
-      })
-    );
-  };
-
-  const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (fontSize) {
+  // FIX: find suitable type
+  const handleFontSize = (e, action: ReplaceValue) => {
+    if (action == ReplaceValue.INCREMENT) {
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "fontSize",
+          propertyValue: fontSize + 1,
+        })
+      );
+    } else if (action == ReplaceValue.DECREMENT) {
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "fontSize",
+          propertyValue: fontSize <= 1 ? 1 : fontSize - 1,
+        })
+      );
+    } else if (action == ReplaceValue.CHANGE) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -56,23 +54,12 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
   return (
     <div className="flex text-gray-600 w-full mt-4 mx-2">
       <span className="text-left text-xl text-gray-500 font-regular font-normal not-italic">
-        {/* Font Size */}
         <div className="flex mt-3">
-          {/* <span
-            onClick={decrementCounter}
-            className="flex items-center justify-center shadow text-[18px] mr-3 w-8 h-10 font-regular text-black"
-          >
-            -
-          </span> */}
-
           <div className="flex">
-            {/* <span className="absolute text-base font-normal text-gray-700 z-10 py-1">
-              Font Size:
-            </span> */}
             <span className="font-text">Font Size:</span>
             <select
               value={fontSize}
-              onChange={(e) => handleSizeChange(e)}
+              onClick={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
               className="form-select font-div appearance-none block py-1.5 pl-[10.2rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:outline-none focus:shadow-none"
               aria-label="Default select example"
             >
@@ -80,20 +67,14 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
               {options}
             </select>
             <AiOutlineCaretUp
-              onClick={incrementCounter}
+              onClick={(e) => handleFontSize(e, ReplaceValue.INCREMENT)}
               className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
             />
             <AiOutlineCaretDown
-              onClick={decrementCounter}
+              onClick={(e) => handleFontSize(e, ReplaceValue.DECREMENT)}
               className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
             />
           </div>
-          {/* <span
-            onClick={incrementCounter}
-            className="flex ml-3 items-center justify-center shadow text-[18px] w-8 h-10 font-regular text-black"
-          >
-            +
-          </span> */}
         </div>
       </span>
     </div>

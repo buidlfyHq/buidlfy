@@ -1,24 +1,21 @@
 import React, { FC, useRef } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import Template from "pages/templates";
-import { sidebarEnum } from "redux/workspace/workspace.interfaces";
 import Elements from "features/dashboard/elements";
 import DefaultSettings from "features/dashboard/default-settings";
-import { IColor, sidebarEnum } from "redux/workspace/workspace.interfaces";
+import { sidebarEnum } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface ISidebar {
-  className: string;
-  setClassName: (className: string) => void;
-  addContainer: boolean;
+  isContainerSelected: boolean;
   sideElement: string;
   isNavHidden: boolean;
   setIsNavHidden: (isNavHidden: boolean) => void;
   showSidebar;
   hideSidebar;
   hideSettingSidebar;
-  backgroundColor: IColor;
-  setBackgroundColor: (backgroundColor: IColor) => void;
+  workspaceBackgroundColor: string;
+  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;
@@ -27,34 +24,18 @@ interface ISidebar {
 }
 
 const Sidebar: FC<ISidebar> = ({
-  className,
-  setClassName,
-  addContainer,
+  isContainerSelected,
   sideElement,
   isNavHidden,
   setIsNavHidden,
   hideSidebar,
   showSidebar,
   hideSettingSidebar,
-  backgroundColor,
-  setBackgroundColor,
+  workspaceBackgroundColor,
+  setWorkspaceBackgroundColor,
   head,
   setHead,
 }) => {
-  // const [indexValue, setIndexValue] = useState<number>(0);
-  // const ref = useRef<HTMLDivElement>();
-
-  // useEffect(() => {
-  //   // FIX: find a suitable type for this event
-  //   const handleOutsideClick = (event) => {
-  //     if (ref.current && !ref.current.contains(event.target)) {
-  //       setIsNavHidden(false);
-  //     }
-  //   };
-  //   console.log(isNavHidden, "NAV");
-  //   document.addEventListener("click", handleOutsideClick);
-  //   return () => document.removeEventListener("click", handleOutsideClick);
-  // }, [ref]);
   const ref = useRef(null);
 
   return (
@@ -115,18 +96,16 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </div>
       {/* Components */}
-      {sideElement === sidebarEnum.ELEMENTS ? (
+      {sideElement == sidebarEnum.ELEMENTS ? (
         <Elements
-          className={className}
-          setClassName={setClassName}
-          addContainer={addContainer}
+          isContainerSelected={isContainerSelected}
         />
       ) : null}
-      {sideElement === sidebarEnum.TEMPLATES ? <Template /> : null}
-      {sideElement === sidebarEnum.STYLES ? (
+      {sideElement == sidebarEnum.TEMPLATES ? <Template /> : null}
+      {sideElement == sidebarEnum.STYLES ? (
         <DefaultSettings
-          backgroundColor={backgroundColor}
-          setBackgroundColor={setBackgroundColor}
+          workspaceBackgroundColor={workspaceBackgroundColor}
+          setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           head={head}
           setHead={setHead}
         />

@@ -8,7 +8,6 @@ import Sidebar from "features/dashboard/sidebar";
 import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
-import { IColor } from "redux/workspace/workspace.interfaces";
 
 const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
@@ -21,12 +20,11 @@ const Dashboard: FC = () => {
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [openTab, setOpenTab] = useState<number>(1);
   const [drag, setDrag] = useState<boolean>(true);
-  const [addContainer, setAddContainer] = useState<boolean>(false);
-  const [backgroundColor, setBackgroundColor] = useState<IColor>({
-    r: "0",
-    g: "0",
-    b: "0",
-  });
+  const [isContainerSelected, setIsContainerSelected] =
+    useState<boolean>(false);
+  const [workspaceBackgroundColor, setWorkspaceBackgroundColor] = useState<string>(
+    "rgba(255, 255, 255, 0)"
+  );
   const [head, setHead] = useState<{
     title: string;
     logo: string | ArrayBuffer;
@@ -35,6 +33,7 @@ const Dashboard: FC = () => {
     logo: "",
   });
   const [sideElement, setSideElement] = useState<string>("");
+  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
 
   useEffect(() => {
     // Checks if user is authenticated
@@ -57,12 +56,9 @@ const Dashboard: FC = () => {
     }
   }, []); // eslint-disable-line
 
-  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
-  // const [isSettingHidden, setIsSettingHidden] = useState<boolean>(false);
-
   const showSidebar = () => {
     setIsNavHidden(false);
-    setOpenSetting(true);
+    setOpenSetting(false);
   };
   const hideSidebar = () => {
     setIsNavHidden(true);
@@ -89,17 +85,15 @@ const Dashboard: FC = () => {
             hideSettingSidebar={hideSettingSidebar}
           />
           <Sidebar
-            className={className}
-            setClassName={setClassName}
-            addContainer={addContainer}
+            isContainerSelected={isContainerSelected}
             sideElement={sideElement}
             isNavHidden={isNavHidden}
             setIsNavHidden={setIsNavHidden}
             showSidebar={showSidebar}
             hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
-            backgroundColor={backgroundColor}
-            setBackgroundColor={setBackgroundColor}
+            workspaceBackgroundColor={workspaceBackgroundColor}
+            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
             head={head}
             setHead={setHead}
           />
@@ -108,7 +102,7 @@ const Dashboard: FC = () => {
             {/* Navbar */}
             <Navbar
               className={className}
-              backgroundColor={backgroundColor}
+              workspaceBackgroundColor={workspaceBackgroundColor}
               head={head}
             />
 
@@ -120,28 +114,26 @@ const Dashboard: FC = () => {
                 setOpenTab={setOpenTab}
                 drag={drag}
                 setDrag={setDrag}
-                setAddContainer={setAddContainer}
-                backgroundColor={backgroundColor}
+                workspaceBackgroundColor={workspaceBackgroundColor}
+                setIsContainerSelected={setIsContainerSelected}
                 hideSidebar={hideSidebar}
                 showSettingSidebar={showSettingSidebar}
                 showSidebar={showSidebar}
                 isNavHidden={isNavHidden}
                 openSetting={openSetting}
                 setIsNavHidden={setIsNavHidden}
+                setSideElement={setSideElement}
+                hideSettingSidebar={undefined}
               />
               {/* Right Sidebar Settings */}
             </aside>
           </section>
-          {/* {isSettingHidden ? (
-            <> */}
           {openSetting ? (
             <Settings
               openTab={openTab}
               setOpenTab={setOpenTab}
             />
           ) : null}
-          {/* </>
-          ) : null} */}
         </section>
       ) : (
         <h1 className="items-center text-center justify-center flex h-[100vh]">

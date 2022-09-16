@@ -12,9 +12,13 @@ interface IRenderItem {
   setDrag: (drag?: boolean) => void;
   setOpenSetting?: (openSetting: boolean) => void;
   setOpenTab?: (openTab: number) => void;
-  setAddContainer?: (addContainer: boolean) => void;
-  elementConfig?: object;
-  setElementConfig?: (elementConfig: object) => void;
+  setIsContainerSelected?: (isContainerSelected: boolean) => void;
+  setSideElement: (sideElement: string) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  showSidebar?: () => void;
+  hideSidebar?: () => void;
+  hideSettingSidebar?: () => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -22,7 +26,13 @@ const RenderItem: FC<IRenderItem> = ({
   setDrag,
   setOpenSetting,
   setOpenTab,
-  setAddContainer,
+  setIsContainerSelected,
+  setSideElement,
+  dragContainer,
+  setDragContainer,
+  showSidebar,
+  hideSidebar,
+  hideSettingSidebar,
 }) => {
   switch (item.name) {
     case "Button":
@@ -32,6 +42,7 @@ const RenderItem: FC<IRenderItem> = ({
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
           color={item.style.color}
+          borderColor={item.style.borderColor}
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
@@ -77,8 +88,13 @@ const RenderItem: FC<IRenderItem> = ({
     case "Image":
       return (
         <Image
+          i={item.i}
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
+          width={item.style.width}
+          height={item.style.height}
+          backgroundSize={item.style.backgroundSize}
+          isAuto={item.style.isAuto}
           margin={item.style.margin}
         />
       );
@@ -100,7 +116,14 @@ const RenderItem: FC<IRenderItem> = ({
           setOpenSetting={setOpenSetting}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
+          setIsContainerSelected={setIsContainerSelected}
+          setSideElement={setSideElement}
+          dragContainer={dragContainer}
+          setDragContainer={setDragContainer}
+          showSidebar={showSidebar}
+          hideSidebar={hideSidebar}
+          hideSettingSidebar={hideSettingSidebar}
+          padding={item.style.padding}
         />
       );
     default:

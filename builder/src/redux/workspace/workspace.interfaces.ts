@@ -31,17 +31,19 @@ export interface IWorkspaceElement {
 }
 
 export interface IStyle {
-  color?: IColor;
-  backgroundColor?: IColor;
+  color?: string;
+  borderColor?: string;
+  backgroundColor?: string;
   fontWeight?: string;
   fontStyle?: string;
   textDecoration?: string;
   justifyContent?: string;
   fontSize?: number;
-  deleteComponent?: number;
+  deleteComponent?: boolean;
   borderRadius?: number;
   borderWidth?: number;
   shadow?: string;
+  isAuto?: boolean;
   margin?: {
     marginLeft?: number;
     marginRight?: number;
@@ -54,13 +56,9 @@ export interface IStyle {
     paddingTop?: number;
     paddingBottom?: number;
   };
-}
-
-export interface IColor {
-  r: string | number;
-  g: string | number;
-  b: string | number;
-  a?: string | number;
+  width?: number;
+  height?: number;
+  backgroundSize?: string;
 }
 
 export type ResizeHandles = Array<
@@ -74,8 +72,9 @@ export interface IAction {
 export interface IElementDetail {
   settingItemId: string;
   propertyName: string;
-  propertyValue: string | number | IColor;
+  propertyValue: string | number | boolean;
   childPropertyName?: string;
+  imageSizeProperty?: boolean;
 }
 
 export enum sidebarEnum {
@@ -89,8 +88,8 @@ export enum sidebarEnum {
 }
 
 export interface IBackgroundContainer {
-  backgroundColor: IColor;
-  color: IColor;
+  backgroundColor: string;
+  color: string;
   imgData: string | ArrayBuffer;
   borderRadius: number;
   borderWidth: number;
@@ -134,13 +133,14 @@ export interface IText {
   bold: string;
   italic: string;
   underline: string;
-  color?: IColor;
+  color?: string;
+  borderColor?: string;
   justifyContent: string;
   fontSize: number;
   value: string;
   link: string;
   borderRadius?: number;
-  backgroundColor?: IColor;
+  backgroundColor?: string;
   shadow?: string;
   connectWallet?: string;
   margin?: {

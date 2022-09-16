@@ -8,22 +8,22 @@ import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
 import { IRootState } from "redux/root-state.interface";
 import {
-  IColor,
   ITemplate,
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
+import "styles/components.css";
 
 interface INavbar {
   className: string;
-  backgroundColor: IColor;
+  workspaceBackgroundColor: string;
   head: {
     title: string;
     logo: string | ArrayBuffer;
   };
 }
 
-const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
+const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
@@ -124,7 +124,7 @@ const Navbar: FC<INavbar> = ({ className, backgroundColor, head }) => {
         title: head.title,
         logo: head.logo,
       },
-      background: backgroundColor,
+      background: workspaceBackgroundColor,
       builder: workspaceElements,
       contract: {
         abi: abiJSON,

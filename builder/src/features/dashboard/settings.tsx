@@ -1,17 +1,31 @@
-import React, { useState, useRef, FC } from "react";
-import { useSelector } from "react-redux";
+import React, { useRef, FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import SettingComponent from "components/utils/render-setting";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
-import { ISettings, IShowComponent, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import {
+  ISettings,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
+import "styles/components.css";
 
 const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const ref = useRef(null);
+  const dispatch = useDispatch();
   const selectedItem: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
-  const [showComponent, setShowComponent] =
-    useState<IShowComponent>(null); // for abi method component
+  const handleDelete = () => {
+    dispatch(
+      updateWorkspaceElementStyle({
+        settingItemId: selectedItem.i,
+        propertyName: "deleteComponent",
+        propertyValue: true,
+      })
+    );
+  };
 
   return (
     <>
@@ -22,12 +36,28 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
               className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
               ref={ref}
             >
-              <SettingComponent
-                setShowComponent={setShowComponent}
-                showComponent={showComponent}
-                openTab={openTab}
-                setOpenTab={setOpenTab}
-              />
+              <div className="delete-div flex py-2 pl-3">
+                <div
+                  onClick={handleDelete}
+                  className="flex delete-btn px-2 py-[0.1rem]"
+                >
+                  <span className="flex text-[12px]">
+                    Remove
+                    <MdOutlineDeleteOutline className="text-[12px]  mt-1 ml-1" />
+                  </span>
+                </div>
+                {/* It will be used in next update */}
+                {/* <div className="flex delete-btn px-2 py-[0.1rem] ml-2">
+                  <span className="flex text-[12px]">
+                    Reset
+                    <GrPowerReset className="text-[12px] mt-1 ml-1" />
+                  </span>
+                </div> */}
+              </div>
+
+              <div style={{ marginTop: "3rem" }}>
+                <SettingComponent openTab={openTab} setOpenTab={setOpenTab} />
+              </div>
             </div>
           </div>
         </>

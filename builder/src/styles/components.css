@@ -27,6 +27,13 @@ line-height: 24px;
 color: #100F11;
 text-align: center;
 }
+.btn-border {
+  border-image-slice: 1 !important;
+}
+.text-class{
+  background-clip: text;
+  -webkit-background-clip: text !important;
+}
 .modal-subheading {
 font-style: normal;
 font-weight: 300;
@@ -143,19 +150,19 @@ color: #BAB9BD;
 
   box-shadow: 0px 2px 2px -1px rgba(0, 0, 0, 0.12), 0px 0px 0px 3px #dcd4ff;
 }
-.input {
-  /* background: #FFFFFF; */
-  /* Solid Colours/Brand/Gray/Gray-400 */
+/* .input {
+  background: #FFFFFF;
+  Solid Colours/Brand/Gray/Gray-400
 
   border-color: #e2e4e8;
-  /* border-radius: 3px; */
-}
-.input:focus-visible {
+  border-radius: 3px;
+} */
+
+/* .input:focus-visible {
   border: 1px solid #8247e5 !important;
-  /* State/Primary Focus */
   outline: none;
   box-shadow: 0px 2px 2px -1px rgba(0, 0, 0, 0.12), 0px 0px 0px 1px #dcd4ff;
-}
+} */
 
 .color-span {
   width: 1.5rem;
@@ -168,24 +175,72 @@ color: #BAB9BD;
 }
 
 #drag {
-  height: 10px;
-  width: 100px;
-  font-size: 12px;
-  /* display: flex; */
-  /* justify-content: flex-end;
-  float: right;
-  text-align: right; */
-  /* background-color: transparent; */
-  background: #a673ef;
-  border-radius: 0 0 5px 5px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  /* font-size: 12px;
+  background: #a673ef; */
+  background-color: transparent;
+  /* border-radius: 0 0 5px 5px; */
+}
+#add-img {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  /* font-size: 12px;
+  background: #a673ef; */
+  background-color: transparent;
+  /* border-radius: 0 0 5px 5px; */
+}
+#edit-img {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  /* font-size: 12px;
+  background: #a673ef; */
+  background-color: transparent;
+  /* border-radius: 0 0 5px 5px; */
+}
+.container-drag #add-img {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  top: 0.5rem;
+  right: 3rem;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
+.container-drag:hover #add-img {
+  visibility: visible;
+  opacity: 1;
+}
+.container-drag #edit-img {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.container-drag:hover #edit-img {
+  visibility: visible;
+  opacity: 1;
+}
 .container-drag #drag {
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  top: 0;
-  left: 44%;
+  top: 0.5rem;
+  left: 0.5rem;
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -273,6 +328,13 @@ color: #BAB9BD;
   margin-left: 0.5rem;
   margin-top: 0.6rem;
   position: absolute;
+}
+.border-hover:hover {
+  border: 1px solid;
+
+border-image-source: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
+
+border-image-slice: 1;
 }
 .sidebar {
   background: rgba(63, 60, 197, 0.04);
@@ -371,9 +433,12 @@ color: #000000;
 .delete-div {
   background: #E9EDFD;
 margin-top: -1rem;
-margin-left: -1rem;
+margin-left: -0.5rem;
 margin-bottom: 1.5rem;
 width: 250px;
+position: inherit;
+z-index: 88888!important;
+backdrop-filter: saturate(180%) blur(15px);
 }
 .contract-button {
   background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
@@ -389,6 +454,10 @@ line-height: 24px;
 
 color: #FFFFFF;
 
+}
+.delete-btn {
+  background: rgba(104, 146, 255, 0.29);
+border-radius: 22px;
 }
 .side-border {
   margin-top: 3.65rem;
@@ -502,6 +571,23 @@ justify-content: center;
 .upload-input {
   display: none;
 }
+.contract-list {
+width: 69px;
+height: 44px;
+background: linear-gradient(93.43deg, rgba(70, 143, 228, 0.1) 19.42%, rgba(119, 66, 231, 0.1) 63.9%);
+border-radius: 2px;
+}
+.contract-name {
+  font-style: normal;
+font-weight: 400;
+font-size: 11px;
+line-height: 24px;
+/* identical to box height, or 218% */
+
+
+color: #458CDE;
+
+}
 .image-label {
   font-style: normal;
   font-weight: 400;
@@ -517,7 +603,7 @@ justify-content: center;
   
 }
 .purple-label {
-  ont-style: normal;
+  font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 20px;

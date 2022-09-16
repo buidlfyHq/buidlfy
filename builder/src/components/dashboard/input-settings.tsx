@@ -1,11 +1,9 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
-import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import MarginComponent from "components/settings/margin-component";
-import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
 import {
   ISettings,
@@ -44,10 +42,8 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <ColorComponent
         i={selectedItem.i}
         color={selectedItem.style.color}
-        isContainer={containerCheck(selectedItem)}
       />
       <ShadowComponent i={selectedItem.i} shadow={selectedItem.style.shadow} />
-      <UtilitiesComponent i={selectedItem.i} />
     </>
   );
 };

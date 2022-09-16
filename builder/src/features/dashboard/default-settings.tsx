@@ -1,11 +1,10 @@
 import React, { FC } from "react";
 import BgColorComponent from "components/settings/bg-color-component";
-import { IColor } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IDefaultSettings {
-  backgroundColor: IColor;
-  setBackgroundColor: (backgroundColor: IColor) => void;
+  workspaceBackgroundColor: string;
+  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;
@@ -14,8 +13,8 @@ interface IDefaultSettings {
 }
 
 const DefaultSettings: FC<IDefaultSettings> = ({
-  backgroundColor,
-  setBackgroundColor,
+  workspaceBackgroundColor,
+  setWorkspaceBackgroundColor,
   head,
   setHead,
 }) => {
@@ -35,8 +34,8 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         <h3 className="mb-2 setting-text mt-4">Site Settings</h3>
         <aside className="mb-1">
           <BgColorComponent
-            backgroundColor={backgroundColor}
-            setBackgroundColor={setBackgroundColor}
+            workspaceBackgroundColor={workspaceBackgroundColor}
+            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           />
         </aside>
 
@@ -54,6 +53,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
           <div className="px-1 margin-text text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
             Upload Site Logo
           </div>
+          {/* It will be used in later features */}
           {/* <div className="flex justify-center">
             <div className="mb-3 w-96">
               <input

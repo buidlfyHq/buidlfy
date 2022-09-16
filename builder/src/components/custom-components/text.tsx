@@ -16,22 +16,36 @@ const Text: FC<IText> = ({
   padding,
   link,
 }) => {
-  return (
-    <section
-      id="text-one"
+  const textAreaContent = (
+    <textarea
+      readOnly
+      id={item.i}
+      value={value}
       style={{
         height: "-webkit-fill-available",
         fontWeight: bold,
         fontStyle: italic,
         textDecoration: underline,
-        color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+        background: color,
+        WebkitTextFillColor: "transparent",
         display: "flex",
         justifyContent,
         alignItems: "center",
+        textAlign: `${justifyContent}` as CanvasTextAlign,
         fontSize: `${fontSize}px`,
-        backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
-        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+        padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
+      }}
+      className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
+    />
+  );
+
+  return (
+    <section
+      id="text-one"
+      style={{
+        height: "-webkit-fill-available",
+        background: backgroundColor,
+        margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}
       className="flex overflow-hidden items-center justify-center w-auto h-full"
     >
@@ -42,48 +56,16 @@ const Text: FC<IText> = ({
             target="_blank"
             href={link}
             id="text-two"
+            className="text-class"
             style={{
-              color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+              background: color,
+              WebkitTextFillColor: "transparent",
             }}
           >
-            <textarea
-              readOnly
-              id={item.i}
-              value={value}
-              style={{
-                fontWeight: bold,
-                fontStyle: italic,
-                textDecoration: underline,
-                color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-                display: "flex",
-                justifyContent,
-                alignItems: "center",
-                textAlign: `${justifyContent}` as CanvasTextAlign,
-                fontSize: `${fontSize}px`,
-                backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-              }}
-              className={`w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
-            />
+            {textAreaContent}
           </a>
         ) : (
-          <textarea
-            readOnly
-            id={item.i}
-            value={value}
-            style={{
-              fontWeight: bold,
-              fontStyle: italic,
-              textDecoration: underline,
-              color: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-              display: "flex",
-              justifyContent,
-              alignItems: "center",
-              textAlign: `${justifyContent}` as CanvasTextAlign,
-              fontSize: `${fontSize}px`,
-              backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
-            }}
-            className={`w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
-          />
+          textAreaContent
         )}
       </>
     </section>

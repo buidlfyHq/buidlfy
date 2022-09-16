@@ -4,6 +4,8 @@ import {
   mapElementsToWorkspace,
   mapElementStylesToWorkspace,
   mapElementSubStyleToWorkspace,
+  mapImageElementStylesToWorkspace,
+  updateContractInElement,
 } from "./workspace.utils";
 import {
   IAction,
@@ -51,7 +53,17 @@ const workspaceSlice = createSlice({
       );
       return { ...state, workspaceElements: updatedElements };
     },
-    
+    // to update the style of an image element in workspace
+    updateWorkspaceImageElementStyle(state, action: IAction) {
+      if (!action.payload.settingItemId) return;
+
+      const updatedElements = state.workspaceElements.map(
+        (element: IWorkspaceElement) =>
+          mapImageElementStylesToWorkspace(element, action.payload)
+      );
+      return { ...state, workspaceElements: updatedElements };
+    },
+
     // to update the elements
     updateWorkspaceElementsArray(
       state,
@@ -70,6 +82,18 @@ const workspaceSlice = createSlice({
         ),
       };
     },
+
+    // to save contract config
+    saveContractConfig(state: IWorkspaceState, action: { payload }) {
+      return {
+        ...state,
+        workspaceElements: updateContractInElement(
+          state.workspaceElements,
+          state.selectedElement,
+          action.payload
+        ),
+      };
+    },
   },
 });
 
@@ -77,7 +101,9 @@ export const {
   updateWorkspaceElement,
   updateWorkspaceElementStyle,
   updateWorkspaceElementSubStyle,
+  updateWorkspaceImageElementStyle,
   updateWorkspaceElementsArray,
   setSelectedElement,
+  saveContractConfig,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;

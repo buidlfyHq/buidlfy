@@ -13,7 +13,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
   const dispatch = useDispatch();
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
 
-  // search suitable types for e
+  // FIX: find suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
@@ -49,22 +49,23 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
             <input
               onChange={onChangeImage}
               className="upload-input"
+              // It is important in next branch
               // className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
               type="file"
               id="inputTag"
             />
           </label>
-          {sizeExceeded ? (
-            <h3 className="mt-2 text-red-500 text-sm ml-1">
-              Please upload file below 5 mb
-            </h3>
-          ) : null}
         </div>
         <br />
       </div>
       <div className="flex justify-center">
         <button className="upload-btn mx-2 ">Upload</button>
       </div>
+      {sizeExceeded ? (
+        <h3 className="text-red-500 text-sm ml-5 mb-2">
+          Please upload file below 5 mb
+        </h3>
+      ) : null}
     </div>
   );
 };

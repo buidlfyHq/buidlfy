@@ -65,7 +65,6 @@ const Template: FC = () => {
             newTemp?.map(
               (temp: { name: string; value: IWorkspaceElement[]; image }) => {
                 const { name, value, image } = temp;
-                console.log(image, "image");
                 return (
                   <div
                     onClick={(e) => handleClick(e, value)}

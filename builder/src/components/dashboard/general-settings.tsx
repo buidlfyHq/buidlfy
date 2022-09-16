@@ -1,14 +1,12 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { IoMdLink } from "react-icons/io";
-import UtilitiesComponent from "components/settings/utilities-component";
 import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
 import FontSizeComponent from "components/settings/font-size-component";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
-import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
 import {
   ISettings,
@@ -61,21 +59,16 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
         i={selectedItem.i}
         fontSize={selectedItem.style.fontSize}
       />
-      <ColorComponent
-        i={selectedItem.i}
-        color={selectedItem.style.color}
-        isContainer={containerCheck(selectedItem)}
-      />
+      <ColorComponent i={selectedItem.i} color={selectedItem.style.color} />
       <BgColorComponent
         i={selectedItem.i}
-        bgColor={selectedItem.style.backgroundColor}
+        elementBackgroundColor={selectedItem.style.backgroundColor}
       />
       <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
       <PaddingComponent
         i={selectedItem.i}
         padding={selectedItem.style.padding}
       />
-      <UtilitiesComponent i={selectedItem.i} />
     </>
   );
 };

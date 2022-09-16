@@ -12,12 +12,10 @@ import {
 import "styles/components.css";
 
 interface IElements {
-  className: string;
-  setClassName: (className: string) => void;
-  addContainer: boolean;
+  isContainerSelected: boolean;
 }
 
-const Elements: FC<IElements> = ({ className, setClassName, addContainer }) => {
+const Elements: FC<IElements> = ({ isContainerSelected }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -29,7 +27,7 @@ const Elements: FC<IElements> = ({ className, setClassName, addContainer }) => {
 
   const onClickFunction = (name) => {
     let c = components?.find((component) => component.name === name);
-    if (addContainer) {
+    if (isContainerSelected) {
       const availableHandles: ResizeHandles = ["se"];
       let y = checkContainerY(selectedItem);
       let newC = {
@@ -140,7 +138,8 @@ const Elements: FC<IElements> = ({ className, setClassName, addContainer }) => {
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
       </div>
-      {!addContainer ? (
+
+      {!isContainerSelected ? (
         <>
           {" "}
           <div className="mt-6 px-4">
@@ -156,9 +155,9 @@ const Elements: FC<IElements> = ({ className, setClassName, addContainer }) => {
           </div>
           <div className="mt-6 px-4">
             <span className="element-text">Container</span>
-            <div className="flex">
+            <div className="flex py-2.5">
               <div
-                className="element-container"
+                className="element-container "
                 onClick={() => onClickFunction("Container")}
               ></div>
             </div>
@@ -292,18 +291,12 @@ const Elements: FC<IElements> = ({ className, setClassName, addContainer }) => {
       )}
 
       {/* <div className="px-6 py-3 mt-4">
-        {addContainer ? (
+        {isContainerSelected ? (
           <>{renderContainerComponents}</>
         ) : (
           <>{renderComponents}</>
         )}
       </div> */}
-
-      {/* <Link to="/templates" className="hover:text-black">
-        <div className="mx-6 px-4 py-3 mt-10 rounded-xl hover:bg-blue-100">
-          Templates
-        </div>
-      </Link> */}
     </>
   );
 };

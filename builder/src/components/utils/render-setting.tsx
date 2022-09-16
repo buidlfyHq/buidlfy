@@ -14,12 +14,49 @@ import {
 import "styles/components.css";
 import "styles/dashboard.css";
 
-const SettingComponent: FC<ISettings> = ({
-  showComponent,
-  setShowComponent,
-  openTab,
-  setOpenTab,
-}) => {
+export enum ReplaceValue {
+  INCREMENT = "increment",
+  DECREMENT = "decrement",
+  CHANGE = "change",
+}
+export enum ReplaceSpacingValue {
+  LEFT = "left",
+  RIGHT = "right",
+  TOP = "top",
+  BOTTOM = "bottom",
+  INCREMENTLEFT = "incrementLeft",
+  INCREMENTRIGHT = "incrementRight",
+  INCREMENTTOP = "incrementTop",
+  INCREMENTBOTTOM = "incrementBottom",
+  DECREMENTLEFT = "decrementLeft",
+  DECREMENTRIGHT = "decrementRight",
+  DECREMENTTOP = "decrementTop",
+  DECREMENTBOTTOM = "decrementBottom",
+}
+export enum ReplaceStyle {
+  BOLD = "bold",
+  ITALIC = "italic",
+  UNDERLINE = "underline",
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center",
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+  TRUE = "true",
+  FALSE = "false",
+  COVER = "cover",
+  CONTAIN = "contain",
+  AUTO = "auto",
+  WIDTH = "width",
+  HEIGHT = "height",
+  INCREMENTWIDTH = "incrementWidth",
+  INCREMENTHEIGHT = "incrementHeight",
+  DECREMENTWIDTH = "decrementWidth",
+  DECREMENTHEIGHT = "decrementHeight",
+}
+
+const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const dispatch = useDispatch();
   const selectedItem: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
@@ -45,13 +82,10 @@ const SettingComponent: FC<ISettings> = ({
       return (
         <ButtonSettings
           handleSettingChange={handleSettingChange}
-          showComponent={showComponent}
-          setShowComponent={setShowComponent}
           openTab={openTab}
           setOpenTab={setOpenTab}
         />
       );
-
     case "Image":
       return <ImageSettings />;
 

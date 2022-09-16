@@ -15,7 +15,6 @@ import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
 import {
-  IColor,
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import {
@@ -31,14 +30,22 @@ interface IWorkspaceComponent {
   setOpenTab: (openTab?: number) => void;
   drag: boolean;
   setDrag: (drag: boolean) => void;
-  setAddContainer: (addContainer?: boolean) => void;
-  backgroundColor: IColor;
-  hideSidebar;
-  showSidebar;
-  showSettingSidebar;
-  isNavHidden;
-  openSetting;
-  setIsNavHidden;
+  setIsContainerSelected: (isContainerSelected?: boolean) => void;
+  workspaceBackgroundColor: string;
+  hideSidebar?: () => void;
+  showSidebar?: () => void;
+  showSettingSidebar?: () => void;
+  isNavHidden?: boolean;
+  openSetting?: boolean;
+  setIsNavHidden?: (isNavHidden?: boolean) => void;
+  setSideElement?: (sideElement?: string) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  hideSettingSidebar?: () => void;
+  dynamicWidth?: number;
+  dynamicHeight?: number;
+  setDynamicWidth?: (dynamicWidth?: number) => void;
+  setDynamicHeight?: (dynamicHeight?: number) => void;
 }
 
 const Workspace: FC<IWorkspaceComponent> = ({
@@ -46,14 +53,20 @@ const Workspace: FC<IWorkspaceComponent> = ({
   setOpenTab,
   drag,
   setDrag,
-  setAddContainer,
-  backgroundColor,
+  setIsContainerSelected,
+  workspaceBackgroundColor,
   hideSidebar,
   showSidebar,
-  showSettingSidebar,
   isNavHidden,
   openSetting,
-  setIsNavHidden,
+  setSideElement,
+  dragContainer,
+  setDragContainer,
+  hideSettingSidebar,
+  dynamicHeight,
+  dynamicWidth,
+  setDynamicHeight,
+  setDynamicWidth,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -78,7 +91,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
   }, [isNavHidden, openSetting]);
 
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-    if (layout.length === 0) setAddContainer(false);
+    if (layout.length === 0) setIsContainerSelected(false);
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
       let selectedItem = workspaceElements.filter(
         (item) => item.i === obj.i
@@ -161,7 +174,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
   };
 
   const onComponentClick = (itemName: string, i: string) => {
-    setAddContainer(true);
+    setIsContainerSelected(true);
     hideSidebar();
     // checks if the selector is active
     if (contractElementSelector === null) {
@@ -204,7 +217,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
     ) {
       setOpenSetting(false);
     } else {
-      setAddContainer(false);
+      setIsContainerSelected(false);
       hideSidebar();
     }
     if (e.target.id === "") {
@@ -213,7 +226,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
   };
 
   const renderItemFunction = workspaceElements
-    ?.filter((i) => i.style?.deleteComponent === 0)
+    ?.filter((i) => i.style?.deleteComponent === false)
     .map((item: IWorkspaceElement) => {
       const { x, y, w, h, minW, minH, i, name, resizeHandles } = item;
       return (
@@ -225,12 +238,12 @@ const Workspace: FC<IWorkspaceComponent> = ({
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 ${
             !containerCheck(item)
               ? contractElementSelector
-                ? "hover:border-orange-300"
+                ? "border-hover"
                 : "hover:border-slate-300 hover:border-dashed"
               : null
           }`}
           // open item setting on click
-          onClick={(e) =>
+          onClick={() =>
             containerCheck(item) ? null : onComponentClick(item.name, i)
           }
         >
@@ -239,7 +252,13 @@ const Workspace: FC<IWorkspaceComponent> = ({
             setDrag={setDrag}
             setOpenSetting={setOpenSetting}
             setOpenTab={setOpenTab}
-            setAddContainer={setAddContainer}
+            setIsContainerSelected={setIsContainerSelected}
+            setSideElement={setSideElement}
+            dragContainer={dragContainer}
+            setDragContainer={setDragContainer}
+            showSidebar={showSidebar}
+            hideSidebar={hideSidebar}
+            hideSettingSidebar={hideSettingSidebar}
           />
         </div>
       );
@@ -250,20 +269,12 @@ const Workspace: FC<IWorkspaceComponent> = ({
       style={{ width: "-webkit-fill-available" }}
       className="main-div h-full"
     >
-      <main
-        className=""
-        // ${
-        //   className === "" ? "mr-[250px]" : "mr-[250px]"
-        // }
-
-        style={{}}
-        onClick={handleCheckIsContainer}
-      >
+      <main onClick={handleCheckIsContainer}>
         {isNavHidden && !openSetting ? (
           <section
             style={{
               width: "-webkit-fill-available",
-              backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+              background: workspaceBackgroundColor,
             }}
             className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
           >
@@ -295,7 +306,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
               <section
                 style={{
                   width: "-webkit-fill-available",
-                  backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                  background: workspaceBackgroundColor,
                 }}
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
@@ -325,7 +336,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
               <section
                 style={{
                   width: "-webkit-fill-available",
-                  backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+                  background: workspaceBackgroundColor,
                 }}
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
               >

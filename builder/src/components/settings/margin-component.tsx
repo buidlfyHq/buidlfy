@@ -63,7 +63,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
             <h6 className="mr-2 margin-subtext">L</h6>
             <input
               inputMode="numeric"
-              value={margin.marginLeft}
+              value={margin?.marginLeft}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={(e) => handleChange("marginLeft", e)}
@@ -79,7 +79,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
             <h6 className="ml-5 mr-2 margin-subtext">R</h6>
             <input
               inputMode="numeric"
-              value={margin.marginRight}
+              value={margin?.marginRight}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={(e) => handleChange("marginRight", e)}
@@ -101,7 +101,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
             <h6 className="mr-2 margin-subtext">T</h6>
             <input
               inputMode="numeric"
-              value={margin.marginTop}
+              value={margin?.marginTop}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={(e) => handleChange("marginTop", e)}
@@ -117,7 +117,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
             <h6 className="ml-5 mr-2 margin-subtext">B</h6>
             <input
               inputMode="numeric"
-              value={margin.marginBottom}
+              value={margin?.marginBottom}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
               onChange={(e) => handleChange("marginBottom", e)}

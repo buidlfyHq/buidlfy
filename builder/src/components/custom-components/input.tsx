@@ -1,11 +1,10 @@
 import React, { FC } from "react";
-import { IColor } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IInput {
   borderRadius: number;
   shadow: string;
-  color: IColor;
+  color: string;
   placeholder: string;
   margin?: {
     marginLeft?: number;
@@ -29,12 +28,13 @@ const Input: FC<IInput> = ({
     <input
       style={{
         borderRadius: `${borderRadius}px`,
+        borderWidth: "1pt",
         boxShadow: shadow,
-        borderColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-        border: "1px solid",
-        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+        border: `1px solid ${color}`,
+        borderImage: color,
+        margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}
-      className="w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
+      className="btn-border w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
       id="input"
       type="text"
       placeholder={placeholder}

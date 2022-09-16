@@ -1,3 +1,4 @@
+import { IContractElementSelected } from "redux/contract/contract.interfaces";
 import {
   IElementDetail,
   IWorkspaceElement,
@@ -111,6 +112,41 @@ export const mapElementSubStyleToWorkspace = (
   return element;
 };
 
+export const mapImageElementStylesToWorkspace = (
+  element: IWorkspaceElement,
+  payload: IElementDetail
+) => {
+  const { settingItemId, propertyName, propertyValue, imageSizeProperty } =
+    payload;
+  let selectedChild = findSelected(element, settingItemId);
+
+  if (element.i === settingItemId) {
+    return {
+      ...element,
+      style: {
+        ...element["style"],
+        isAuto: imageSizeProperty,
+        [propertyName]: propertyValue,
+      },
+    };
+  } else if (selectedChild?.i === settingItemId) {
+    let child = {
+      ...selectedChild,
+      style: {
+        ...selectedChild["style"],
+        isAuto: imageSizeProperty,
+        [propertyName]: propertyValue,
+      },
+    };
+
+    const childIndex = findIndex(element, settingItemId);
+    let newChildren = [...element.children];
+    newChildren[childIndex] = child;
+    return { ...element, children: newChildren };
+  }
+  return element;
+};
+
 export const fetchSelectedElement = (
   workspaceElements: IWorkspaceElement[],
   payload: string
@@ -121,4 +157,90 @@ export const fetchSelectedElement = (
       element.children?.find((child: IWorkspaceElement) => child.i === payload)
     )[0]
   );
+};
+
+export const updateContractInElement = (
+  workspaceElements: IWorkspaceElement[],
+  selectedElement: IWorkspaceElement,
+  payload: {
+    contractElementSelected: IContractElementSelected;
+    currentElement: {
+      name: string;
+      type: string;
+    };
+  }
+) => {
+  const { contractElementSelected, currentElement } = payload;
+
+  // filter last selected element
+  const filteredObject = contractElementSelected[currentElement.name]?.filter(
+    (key: { buttonId: string }) => key.buttonId === selectedElement.i
+  )[0];
+
+  let updatedContract = {};
+
+  let duplicate = selectedElement.contract.inputs?.find(
+    (e: { id: string }) => e.id === filteredObject.id
+  );
+
+  if (!duplicate) {
+    if (currentElement.type === "input") {
+      updatedContract = {
+        ...selectedElement.contract,
+        inputs: [
+          ...selectedElement.contract.inputs,
+          { id: filteredObject.id, send: false },
+        ],
+      };
+    } else if (currentElement.type === "send") {
+      updatedContract = {
+        ...selectedElement.contract,
+        inputs: [
+          ...selectedElement.contract.inputs,
+          { id: filteredObject.id, send: true },
+        ],
+      };
+    } else if (currentElement.type === "output") {
+      updatedContract = {
+        ...selectedElement.contract,
+        outputs: [
+          ...selectedElement.contract.outputs,
+          { id: filteredObject.id },
+        ],
+      };
+    }
+  } else {
+    updatedContract = { ...selectedElement.contract };
+  }
+
+  let updatedItem = {
+    ...selectedElement,
+    contract: updatedContract,
+  };
+
+  // search id in items
+  const elementsIndex = workspaceElements.findIndex(
+    (item) => item.i === selectedElement.i
+  );
+
+  if (elementsIndex === -1) {
+    // search id in children
+    const updatedItems = workspaceElements.map((item) => {
+      const childIndex = item.children?.findIndex(
+        (child: IWorkspaceElement) => child.i === selectedElement.i
+      );
+      let newArray = [...item?.children];
+      newArray[childIndex] = updatedItem;
+      return {
+        ...item,
+        children: newArray,
+      };
+    });
+
+    return updatedItems;
+  } else {
+    let newArray = [...workspaceElements];
+    newArray[elementsIndex] = updatedItem;
+    return newArray;
+  }
 };

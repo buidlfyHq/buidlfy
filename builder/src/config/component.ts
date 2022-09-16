@@ -1,43 +1,55 @@
 const defaultMarginStyles = {
   margin: {
-    marginLeft: 0,
-    marginRight: 0,
     marginTop: 0,
-    marginBottom: 0
-  }
-}
+    marginRight: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+  },
+};
+
 const defaultPaddingStyles = {
   padding: {
-    paddingLeft: 0,
-    paddingRight: 0,
     paddingTop: 0,
-    paddingBottom: 0
-  }
-}
+    paddingRight: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+  },
+};
+
 const defaultColorStyles = {
-  backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
-  color: { r: "0", g: "0", b: "0", a: "100" },
+  backgroundColor: "rgba(0, 0, 0, 0)",
+  color: "rgba(0, 0, 0, 100)",
 }
+
 const defaultFontStyles = {
   fontWeight: "normal",
   fontStyle: "normal",
   textDecoration: "none",
   justifyContent: "center",
-}
+};
+
 const defaultDeleteStyles = {
-  deleteComponent: 0,
-}
+  deleteComponent: false,
+};
+
 const defaultBorderStyles = {
   borderRadius: 0,
   borderWidth: 0,
   shadow: "none",
-}
+};
+
 export const components = [
   {
     name: "Container",
     h: 2,
     minH: 2,
     style: {
+      padding: {
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        paddingBottom: 0
+      },
       ...defaultDeleteStyles,
       ...defaultColorStyles,
       ...defaultBorderStyles,
@@ -177,6 +189,7 @@ export const components = [
       ...defaultColorStyles,
       ...defaultFontStyles,
       fontSize: 15,
+      borderColor: "rgba(0, 0, 0, 100)",
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
       ...defaultMarginStyles,
@@ -185,7 +198,7 @@ export const components = [
         paddingRight: 24,
         paddingTop: 8,
         paddingBottom: 8,
-      }
+      },
     },
     connectWallet: "off",
     contract: {},
@@ -264,7 +277,7 @@ export const components = [
         marginRight: 24,
         marginTop: 0,
         marginBottom: 0,
-      }
+      },
     },
   },
   {
@@ -272,6 +285,10 @@ export const components = [
     h: 1.2,
     minH: 1.2,
     style: {
+      width: 80,
+      height: 60,
+      backgroundSize: "contain",
+      isAuto: true,
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,
