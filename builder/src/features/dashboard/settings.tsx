@@ -1,35 +1,26 @@
 import React, { useRef, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import { updateItems } from "reducers/itemsReducer";
 import SettingComponent from "components/utils/render-setting";
-import IItems from "interfaces/items";
-import ISettings from "interfaces/settings";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
+import { IRootState } from "redux/root-state.interface";
+import {
+  ISettings,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
-const Settings: FC<ISettings> = ({
-  settingItemId,
-  elementConfig,
-  openTab,
-  setOpenTab,
-}) => {
+const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const ref = useRef(null);
   const dispatch = useDispatch();
-  const items: IItems[] = useSelector((state: any) => state.items);
-
-  const selectedChildren = items.map((item) =>
-    item.children?.find((child: IItems) => child.i === settingItemId)
+  const selectedElement: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
   );
-
-  const selectedItem =
-    items?.find((item) => item.i === settingItemId) ||
-    selectedChildren.filter(Boolean)[0];
 
   const handleDelete = () => {
     dispatch(
-      updateItems({
-        level: 1,
-        settingItemId: selectedItem.i,
+      updateWorkspaceElementStyle({
+        settingItemId: selectedElement.i,
         propertyName: "deleteComponent",
         propertyValue: true,
       })
@@ -38,7 +29,7 @@ const Settings: FC<ISettings> = ({
 
   return (
     <>
-      {settingItemId ? (
+      {selectedElement.i ? (
         <>
           <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
             <div
@@ -65,12 +56,7 @@ const Settings: FC<ISettings> = ({
               </div>
 
               <div style={{ marginTop: "3rem" }}>
-                <SettingComponent
-                  selectedItem={selectedItem}
-                  elementConfig={elementConfig}
-                  openTab={openTab}
-                  setOpenTab={setOpenTab}
-                />
+                <SettingComponent openTab={openTab} setOpenTab={setOpenTab} />
               </div>
             </div>
           </div>

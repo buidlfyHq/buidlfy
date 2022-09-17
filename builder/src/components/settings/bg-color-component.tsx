@@ -1,9 +1,9 @@
 import React, { useState, FC, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { AiOutlineCaretDown } from "react-icons/ai";
 import { Dialog } from "@headlessui/react";
 import ColorPicker from "react-best-gradient-color-picker";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -44,8 +44,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       setWorkspaceBackgroundColor(e);
     } else {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: "backgroundColor",
           propertyValue: e,

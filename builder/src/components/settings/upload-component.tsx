@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import { uploadFileToWeb3Storage } from "utils/web3storage";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -13,7 +13,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
   const dispatch = useDispatch();
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
 
-  // search suitable types for e
+  // FIX: find suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
@@ -24,8 +24,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
           dispatch(
-            updateItems({
-              level: 0,
+            updateWorkspaceElement({
               settingItemId: i,
               propertyName: "imgData",
               propertyValue: cid,

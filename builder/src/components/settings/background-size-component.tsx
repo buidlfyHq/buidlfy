@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { updateItems } from "reducers/itemsReducer";
-import { ReplaceStyle } from "components/utils/render-setting";
+import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -18,8 +17,7 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
 
   const handleChange = (action: string) => {
     dispatch(
-      updateItems({
-        level: 3,
+      updateWorkspaceImageElementStyle({
         settingItemId: i,
         propertyName: "backgroundSize",
         propertyValue: backgroundSize === action ? action : "contain",

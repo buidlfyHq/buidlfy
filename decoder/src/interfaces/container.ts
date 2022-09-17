@@ -1,5 +1,5 @@
 import IColor from "./color";
-import IItems from "./items";
+import IWorkspace from "./workspace";
 import { IInput, IOutput } from "./value";
 
 export default interface IBgContainer {

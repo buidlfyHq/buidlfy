@@ -1,8 +1,13 @@
 import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
-import { updateContract } from "reducers/contractReducer";
+import {
+  updateContractAbi,
+  updateContractAddress,
+} from "redux/contract/contract.reducers";
 import upload from "assets/upload-img.png";
+import { IRootState } from "redux/root-state.interface";
+import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 interface IModal {
@@ -16,16 +21,13 @@ interface IContract {
   name: string;
   text: any; // type to be added
 }
-const Modal: FC<IModal> = ({
-  isOpen,
-  setIsOpen,
-  methodOpen,
+
+const Modal: FC<IModal> = ({ isOpen, setIsOpen, methodOpen,
   setMethodOpen,
-  setNewContractList,
-}) => {
+  setNewContractList, }) => {
   const dispatch = useDispatch();
-  const contract: { abi: string; address: string } = useSelector(
-    (state: any) => state.contract
+  const contractDetails: IContractDetails = useSelector(
+    (state: IRootState) => state.contract.contractDetails
   );
 
   const [showUpload, setShowUpload] = useState<boolean>(true);
@@ -41,7 +43,7 @@ const Modal: FC<IModal> = ({
     let newContractList: Array<IContract> = [];
     let newContract: IContract = {
       name: inputValue,
-      text: JSON.stringify(contract.abi),
+      text: JSON.stringify(contractDetails.abi),
     };
     // localStorage.setItem("items", JSON.stringify(items));
     const contractList = localStorage.getItem("contractList") || "";
@@ -62,7 +64,7 @@ const Modal: FC<IModal> = ({
     const filteredAbi = JSON.parse(abi).filter(
       (m: { type: string }) => m.type === "function"
     );
-    dispatch(updateContract({ ...contract, abi: JSON.stringify(filteredAbi) }));
+    dispatch(updateContractAbi(JSON.stringify(filteredAbi)));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,6 +119,7 @@ const Modal: FC<IModal> = ({
                     <img
                       className="modal-img align-middle mt-[2rem]"
                       src={upload}
+                      alt="Upload"
                     />
                   </div>
                   <span className="modal-text mt-[1.5rem]">
@@ -151,7 +154,7 @@ const Modal: FC<IModal> = ({
               <textarea
                 className="upload-modal-input p-2"
                 placeholder="Paste ABI here..."
-                value={contract.abi}
+                value={contractDetails.abi}
                 onChange={(e) => handleSetAbi(e.target.value)}
               />
             )}
@@ -161,12 +164,8 @@ const Modal: FC<IModal> = ({
             <input
               className="modal-input pl-2 mt-1"
               placeholder="Paste Address here..."
-              value={contract.address}
-              onChange={(e) =>
-                dispatch(
-                  updateContract({ ...contract, address: e.target.value })
-                )
-              }
+              value={contractDetails.address}
+              onChange={(e) => dispatch(updateContractAddress(e.target.value))}
             />
           </div>
 

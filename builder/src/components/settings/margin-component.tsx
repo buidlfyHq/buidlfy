@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { updateItems } from "reducers/itemsReducer";
-import "styles/dashboard.css";
+import { updateWorkspaceElementSubStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
+import "styles/dashboard.css";
+
 interface IMarginComponent {
   i: string;
   margin: {
@@ -22,8 +23,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     dispatch(
-      updateItems({
-        level: 2,
+      updateWorkspaceElementSubStyle({
         settingItemId: i,
         propertyName: "margin",
         propertyValue: +e.target.value,
@@ -34,8 +34,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
 
   const incrementCounter = (property: string, value: number) => {
     dispatch(
-      updateItems({
-        level: 2,
+      updateWorkspaceElementSubStyle({
         settingItemId: i,
         propertyName: "margin",
         propertyValue: value + 1,
@@ -46,8 +45,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
 
   const decrementCounter = (property: string, value: number) => {
     dispatch(
-      updateItems({
-        level: 2,
+      updateWorkspaceElementSubStyle({
         settingItemId: i,
         propertyName: "margin",
         propertyValue: value - 1,

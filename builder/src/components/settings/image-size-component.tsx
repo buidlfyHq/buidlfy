@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/dashboard.css";
 import "styles/components.css";
@@ -12,19 +12,14 @@ interface ISizeComponent {
   height: number;
 }
 
-const SizeComponent: FC<ISizeComponent> = ({
-  i,
-  width,
-  height,
-}) => {
+const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
   const dispatch = useDispatch();
 
   // Derive best type of e
   const handleChange = (e, action: ReplaceStyle) => {
     if (action == ReplaceStyle.WIDTH) {
       dispatch(
-        updateItems({
-          level: 3,
+        updateWorkspaceImageElementStyle({
           settingItemId: i,
           propertyName: "width",
           propertyValue: +e.target.value,
@@ -33,8 +28,7 @@ const SizeComponent: FC<ISizeComponent> = ({
       );
     } else if (action == ReplaceStyle.HEIGHT) {
       dispatch(
-        updateItems({
-          level: 3,
+        updateWorkspaceImageElementStyle({
           settingItemId: i,
           propertyName: "height",
           propertyValue: +e.target.value,
@@ -43,8 +37,7 @@ const SizeComponent: FC<ISizeComponent> = ({
       );
     } else if (action == ReplaceStyle.INCREMENTWIDTH) {
       dispatch(
-        updateItems({
-          level: 3,
+        updateWorkspaceImageElementStyle({
           settingItemId: i,
           propertyName: "width",
           propertyValue: width + 1,
@@ -53,8 +46,7 @@ const SizeComponent: FC<ISizeComponent> = ({
       );
     } else if (action == ReplaceStyle.INCREMENTHEIGHT) {
       dispatch(
-        updateItems({
-          level: 3,
+        updateWorkspaceImageElementStyle({
           settingItemId: i,
           propertyName: "height",
           propertyValue: height + 1,
@@ -63,8 +55,7 @@ const SizeComponent: FC<ISizeComponent> = ({
       );
     } else if (action == ReplaceStyle.DECREMENTWIDTH) {
       dispatch(
-        updateItems({
-          level: 3,
+        updateWorkspaceImageElementStyle({
           settingItemId: i,
           propertyName: "width",
           propertyValue: width - 1,
@@ -73,8 +64,7 @@ const SizeComponent: FC<ISizeComponent> = ({
       );
     } else if (action == ReplaceStyle.DECREMENTHEIGHT) {
       dispatch(
-        updateItems({
-          level: 3,
+        updateWorkspaceImageElementStyle({
           settingItemId: i,
           propertyName: "height",
           propertyValue: height - 1,
@@ -83,7 +73,7 @@ const SizeComponent: FC<ISizeComponent> = ({
       );
     }
   };
-  
+
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">

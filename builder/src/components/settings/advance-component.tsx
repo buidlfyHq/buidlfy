@@ -4,23 +4,24 @@ import { FaFileContract } from "react-icons/fa";
 import Modal from "features/dashboard/modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
-import { updateContract } from "reducers/contractReducer";
-import IItems from "interfaces/items";
+import { updateContractAbi } from "redux/contract/contract.reducers";
+import {
+  IShowComponent,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IAdvanceComponent {
-  selectedItem: IItems;
-  elementConfig: object;
+  selectedElement: IWorkspaceElement;
 }
+
 interface IContract {
   name: string;
   text; // type to be added
 }
-const AdvanceComponent: FC<IAdvanceComponent> = ({
-  selectedItem,
-  elementConfig,
-}) => {
+
+const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const dispatch = useDispatch();
   const contract: { abi: string; address: string } = useSelector(
     (state: any) => state.contract
@@ -51,9 +52,10 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
   }, []);
 
   const handleClick = (abi: string) => {
-    dispatch(updateContract({ ...contract, abi: JSON.parse(abi) }));
+    dispatch(updateContractAbi(JSON.parse(abi)));
     setMethodOpen(false);
   };
+
   return (
     <>
       {!methodOpen ? (
@@ -61,14 +63,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({
           <div className="flex justify-center mt-[3rem]" />
           <AbiMethods
             setShowComponent={setShowComponent}
-            selectedItem={selectedItem}
-            methodOpen={methodOpen}
+            selectedElement={selectedElement}
             setMethodOpen={setMethodOpen}
           />
           <AbiComponents
             showComponent={showComponent}
-            elementConfig={elementConfig}
-            selectedItem={selectedItem}
+            elementId={selectedElement.i}
           />
           ]
         </>

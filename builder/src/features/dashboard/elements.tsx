@@ -3,32 +3,33 @@ import { useDispatch, useSelector } from "react-redux";
 import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
-import { updateItemsArray } from "reducers/itemsReducer";
-import IItems from "interfaces/items";
-import { ResizeHandles } from "interfaces/handle";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { IRootState } from "redux/root-state.interface";
+import {
+  IWorkspaceElement,
+  ResizeHandles,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IElements {
   isContainerSelected: boolean;
-  settingItemId: string;
 }
 
-const Elements: FC<IElements> = ({ isContainerSelected, settingItemId }) => {
+const Elements: FC<IElements> = ({ isContainerSelected }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
-  const items: IItems[] = useSelector((state: any) => state.items);
-
-  const selectedItem =
-    items?.find((item) => item.i === settingItemId) ||
-    items?.map((item) =>
-      item.children?.find((child: IItems) => child.i === settingItemId)
-    )[0];
+  const workspaceElements: IWorkspaceElement[] = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
+  );
+  const selectedElement: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
+  );
 
   const onClickFunction = (name) => {
-    let c = components?.find((component) => component.name == name);
+    let c = components?.find((component) => component.name === name);
     if (isContainerSelected) {
       const availableHandles: ResizeHandles = ["se"];
-      let y = checkContainerY(selectedItem);
+      let y = checkContainerY(selectedElement);
       let newC = {
         ...c,
         i: uid(),
@@ -39,20 +40,20 @@ const Elements: FC<IElements> = ({ isContainerSelected, settingItemId }) => {
         resizeHandles: availableHandles,
       };
       let updatedItem = {
-        ...selectedItem,
+        ...selectedElement,
         h: y + c.h,
-        children: [...selectedItem.children, newC],
+        children: [...selectedElement.children, newC],
       };
-      const elementsIndex = items.findIndex(
-        (item) => item.i === selectedItem.i
+      const elementsIndex = workspaceElements.findIndex(
+        (item) => item.i === selectedElement.i
       );
-      let newArray = [...items];
+      let newArray = [...workspaceElements];
       newArray[elementsIndex] = updatedItem;
-      dispatch(updateItemsArray(newArray));
+      dispatch(updateWorkspaceElementsArray(newArray));
     } else {
       const availableHandles: ResizeHandles = ["se"];
       const containerHandles: ResizeHandles = ["e"];
-      let y = checkY(items);
+      let y = checkY(workspaceElements);
       let newC = {
         ...c,
         i: uid(),
@@ -76,26 +77,28 @@ const Elements: FC<IElements> = ({ isContainerSelected, settingItemId }) => {
         }));
         newC.children = newChildren;
       }
-      dispatch(updateItemsArray([...items, newC]));
+      dispatch(updateWorkspaceElementsArray([...workspaceElements, newC]));
     }
   };
-
-  const checkY = (items: IItems[]) => {
+  const checkY = (items: IWorkspaceElement[]) => {
     if (items.length === 0) return 0;
     else {
       let arr = items.map((item) => {
         return containerCheck(item)
-          ? Math.max(...item?.children.map((obj: IItems) => obj.y), item.y)
+          ? Math.max(
+              ...item.children.map((obj: IWorkspaceElement) => obj.y),
+              item.y
+            )
           : item.y;
       });
       return Math.max(...arr) + 1;
     }
   };
 
-  const checkContainerY = (selectedItem: IItems) => {
-    if (selectedItem?.children?.length === 0) return 0;
+  const checkContainerY = (selectedElement: IWorkspaceElement) => {
+    if (selectedElement.children.length === 0) return 0;
     else {
-      let arr = selectedItem?.children.map((item: IItems) => item.y);
+      let arr = selectedElement.children.map((item: IWorkspaceElement) => item.y);
       return Math.max(...arr) + 1;
     }
   };

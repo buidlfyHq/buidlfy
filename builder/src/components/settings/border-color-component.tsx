@@ -3,9 +3,7 @@ import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import ColorPicker from "react-best-gradient-color-picker";
-import { updateItems } from "reducers/itemsReducer";
-import { ReplaceStyle } from "components/utils/render-setting";
-import IItems from "interfaces/items";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -35,8 +33,7 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
 
   const handleChange = (e: string) => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: i,
         propertyName: "borderColor",
         propertyValue: e,

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { BsBrightnessLow } from "react-icons/bs";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -17,8 +17,7 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
   const handleChange = (action: ReplaceStyle) => {
     if (action == ReplaceStyle.SMALL) {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: "shadow",
           propertyValue:
@@ -29,8 +28,7 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
       );
     } else if (action == ReplaceStyle.MEDIUM) {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: "shadow",
           propertyValue:
@@ -41,8 +39,7 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
       );
     } else if (action == ReplaceStyle.LARGE) {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: "shadow",
           propertyValue:

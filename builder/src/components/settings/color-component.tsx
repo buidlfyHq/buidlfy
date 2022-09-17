@@ -3,17 +3,17 @@ import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { Dialog } from "@headlessui/react";
 import ColorPicker from "react-best-gradient-color-picker";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
+
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IColorComponent {
   i: string;
   color: string;
-  isContainer: boolean;
 }
 
-const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
+const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
@@ -31,8 +31,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, isContainer }) => {
 
   const handleChange = (e: string) => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: i,
         propertyName: "color",
         propertyValue: e,

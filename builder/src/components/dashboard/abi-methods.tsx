@@ -1,35 +1,31 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineLeft } from "react-icons/ai";
-import { updateItemsArray } from "reducers/itemsReducer";
-import IItems from "interfaces/items";
-import "styles/dashboard.css";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { IRootState } from "redux/root-state.interface";
+import {
+  IShowComponent,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
+import { IContractDetails } from "redux/contract/contract.interfaces";
 
 interface IAbiMethods {
-  setShowComponent: (showComponent: {
-    id: string;
-    value: {
-      name: string;
-      inputs: object[];
-      outputs: object[];
-      stateMutability: string;
-    };
-  }) => void;
-  selectedItem: IItems;
-  methodOpen: boolean;
+  setShowComponent: (showComponent: IShowComponent) => void;
+  selectedElement: IWorkspaceElement;
   setMethodOpen: (methodOpen: boolean) => void;
 }
 
 const AbiMethods: FC<IAbiMethods> = ({
   setShowComponent,
-  selectedItem,
-  methodOpen,
+  selectedElement,
   setMethodOpen,
 }) => {
   const dispatch = useDispatch();
-  const items: IItems[] = useSelector((state: any) => state.items);
-  const contract: { abi: string; address: string } = useSelector(
-    (state: any) => state.contract
+  const workspaceElements: IWorkspaceElement[] = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
+  );
+  const contractDetails: IContractDetails = useSelector(
+    (state: IRootState) => state.contract.contractDetails
   );
 
   const [abiJson, setAbiJson] = useState<
@@ -41,20 +37,21 @@ const AbiMethods: FC<IAbiMethods> = ({
       type: string;
     }[]
   >([]);
+
   useEffect(() => {
-    if (contract.abi) {
-      const parsedAbi = JSON.parse(contract.abi);
+    if (contractDetails.abi) {
+      const parsedAbi = JSON.parse(contractDetails.abi);
       try {
         setAbiJson(parsedAbi);
-        let selectedItemIndex = parsedAbi.findIndex(
+        let selectedElementIndex = parsedAbi.findIndex(
           (method: { name: string }) =>
-            method.name === selectedItem.contract.methodName
+            method.name === selectedElement.contract.methodName
         );
 
-        if (selectedItemIndex !== -1) {
+        if (selectedElementIndex !== -1) {
           setShowComponent({
-            id: selectedItemIndex,
-            value: parsedAbi[selectedItemIndex],
+            id: selectedElementIndex,
+            value: parsedAbi[selectedElementIndex],
           });
         } else {
           setShowComponent(null);
@@ -63,7 +60,7 @@ const AbiMethods: FC<IAbiMethods> = ({
         console.log("error");
       }
     }
-  }, [contract.abi, selectedItem]); // eslint-disable-line
+  }, [contractDetails.abi, selectedElement]); // eslint-disable-line
 
   const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value) {
@@ -74,7 +71,7 @@ const AbiMethods: FC<IAbiMethods> = ({
 
       // initialize contract
       let updatedItem = {
-        ...selectedItem,
+        ...selectedElement,
         contract: {
           methodName: abiJson[e.target.value].name,
           stateMutability: abiJson[e.target.value].stateMutability,
@@ -84,15 +81,15 @@ const AbiMethods: FC<IAbiMethods> = ({
       };
 
       // search id in items
-      const elementsIndex = items.findIndex(
-        (item) => item.i === selectedItem.i
+      const elementsIndex = workspaceElements.findIndex(
+        (item) => item.i === selectedElement.i
       );
 
       if (elementsIndex === -1) {
         // search id in children
-        const updatedItems = items.map((item) => {
+        const updatedItems = workspaceElements.map((item) => {
           const childIndex = item.children?.findIndex(
-            (child) => child.i === selectedItem.i
+            (child) => child.i === selectedElement.i
           );
           let newArray = [...item.children];
           newArray[childIndex] = updatedItem;
@@ -101,11 +98,11 @@ const AbiMethods: FC<IAbiMethods> = ({
             children: newArray,
           };
         });
-        dispatch(updateItemsArray(updatedItems));
+        dispatch(updateWorkspaceElementsArray(updatedItems));
       } else {
-        let newArray = [...items];
+        let newArray = [...workspaceElements];
         newArray[elementsIndex] = updatedItem;
-        dispatch(updateItemsArray(newArray));
+        dispatch(updateWorkspaceElementsArray(newArray));
       }
     } else {
       setShowComponent(null);
@@ -116,7 +113,7 @@ const AbiMethods: FC<IAbiMethods> = ({
 
   return (
     <>
-      {contract.abi ? (
+      {contractDetails.abi ? (
         <div>
           <span className="contract-text flex" onClick={() => handleBack()}>
             <AiOutlineLeft className="text-[10px] mr-2" />{" "}
@@ -136,19 +133,19 @@ const AbiMethods: FC<IAbiMethods> = ({
                 >
                   <option
                     value=""
-                    selected={!selectedItem.contract.methodName}
+                    selected={!selectedElement.contract.methodName}
                     hidden
                   >
                     Select a Method{" "}
                   </option>
-                  {contract.abi &&
+                  {contractDetails.abi &&
                     abiJson.map((method: { name: string }, i: number) => (
                       <>
                         <option
                           value={i}
                           key={i}
                           selected={
-                            selectedItem.contract.methodName === method.name
+                            selectedElement.contract.methodName === method.name
                           }
                         >
                           {method.name}

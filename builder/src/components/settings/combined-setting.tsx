@@ -5,7 +5,7 @@ import {
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -30,8 +30,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   const handleChange = (action: ReplaceStyle) => {
     if (action == ReplaceStyle.BOLD) {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: "fontWeight",
           propertyValue:
@@ -40,8 +39,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
       );
     } else if (action == ReplaceStyle.ITALIC) {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: "fontStyle",
           propertyValue:
@@ -50,8 +48,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
       );
     } else if (action == ReplaceStyle.UNDERLINE) {
       dispatch(
-        updateItems({
-          level: 1,
+        updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: "textDecoration",
           propertyValue:
@@ -65,8 +62,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
 
   const handleAlignChange = (type: string) => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: i,
         propertyName: "justifyContent",
         propertyValue: justifyContent === type ? "inherit" : type,

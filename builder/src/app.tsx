@@ -4,9 +4,6 @@ import Home from "pages/home";
 import Dashboard from "pages/dashboard";
 
 const App: FC = () => {
-  useEffect(() => {
-    // storeFiles(makeFileObjects());
-  }, []);
   return (
     <Router>
       <Routes>

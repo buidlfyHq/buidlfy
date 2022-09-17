@@ -1,12 +1,16 @@
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
-import { updateItems } from "reducers/itemsReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
 import GeneralSettings from "components/dashboard/general-settings";
-import ISettings from "interfaces/settings";
+import { IRootState } from "redux/root-state.interface";
+import {
+  ISettings,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -52,62 +56,49 @@ export enum ReplaceStyle {
   DECREMENTHEIGHT = "decrementHeight",
 }
 
-const SettingComponent: FC<ISettings> = ({
-  selectedItem,
-  elementConfig,
-  openTab,
-  setOpenTab,
-}) => {
+const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const dispatch = useDispatch();
+  const selectedElement: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
+  );
 
-  const handleChange = (
+  const handleSettingChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
     propertyName: string
   ) => {
     dispatch(
-      updateItems({
-        level: 0,
-        settingItemId: selectedItem.i,
+      updateWorkspaceElement({
+        settingItemId: selectedElement.i,
         propertyName,
         propertyValue: e.target.value,
       })
     );
   };
 
-  switch (selectedItem.name) {
+  switch (selectedElement.name) {
     case "Button":
       return (
         <ButtonSettings
-          handleChange={handleChange}
-          selectedItem={selectedItem}
-          elementConfig={elementConfig}
+          handleSettingChange={handleSettingChange}
           openTab={openTab}
           setOpenTab={setOpenTab}
         />
       );
     case "Image":
-      return <ImageSettings selectedItem={selectedItem} />;
+      return <ImageSettings />;
+
     case "Container":
     case "Horizontal Container":
     case "Vertical Container":
-      return <ContainerSettings selectedItem={selectedItem} />;
+      return <ContainerSettings />;
 
     case "Input":
-      return (
-        <InputSettings
-          handleChange={handleChange}
-          selectedItem={selectedItem}
-        />
-      );
+      return <InputSettings handleSettingChange={handleSettingChange} />;
+
     default:
-      return (
-        <GeneralSettings
-          handleChange={handleChange}
-          selectedItem={selectedItem}
-        />
-      );
+      return <GeneralSettings handleSettingChange={handleSettingChange} />;
   }
 };
 

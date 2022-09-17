@@ -5,7 +5,7 @@ import {
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
-import { updateItems } from "reducers/itemsReducer";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -19,8 +19,7 @@ const AlignComponent: FC<IAlignComponent> = ({ i, justifyContent }) => {
 
   const handleAlignChange = (type: string) => {
     dispatch(
-      updateItems({
-        level: 1,
+      updateWorkspaceElementStyle({
         settingItemId: i,
         propertyName: "justifyContent",
         propertyValue: justifyContent === type ? "inherit" : type,

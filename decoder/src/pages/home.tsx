@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import BuilderConfig from "config";
 import RenderItem from "utils/render-item";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
@@ -29,7 +29,7 @@ const Home: FC = () => {
         margin={[0, 0]}
         className="h-fit overflow-hidden"
       >
-        {config.builder.map((c: IItems) => {
+        {config.builder.map((c: IWorkspace) => {
           const { x, y, w, h, minW, i } = c;
           return (
             <div key={i} data-grid={{ x, y, w, h, minW }}>

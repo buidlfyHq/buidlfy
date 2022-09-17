@@ -17,13 +17,8 @@ const defaultPaddingStyles = {
 };
 
 const defaultColorStyles = {
-<<<<<<< HEAD
-  backgroundColor: { r: "0", g: "0", b: "0", a: "0" },
-  color: { r: "0", g: "0", b: "0", a: "100" },
-=======
   backgroundColor: "rgba(0, 0, 0, 0)",
   color: "rgba(0, 0, 0, 100)",
->>>>>>> feat/new-ui-design
 }
 
 const defaultFontStyles = {

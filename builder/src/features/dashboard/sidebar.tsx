@@ -1,16 +1,14 @@
 import React, { FC, useRef } from "react";
-import Elements from "./elements";
-import Template from "pages/templates";
-import "styles/components.css";
 import { AiOutlineLeft } from "react-icons/ai";
-import { SidebarEnum } from "pages/dashboard";
+import Template from "pages/templates";
+import Elements from "features/dashboard/elements";
 import DefaultSettings from "features/dashboard/default-settings";
+import { SidebarEnum } from "redux/workspace/workspace.interfaces";
+import "styles/components.css";
 
 interface ISidebar {
   isContainerSelected: boolean;
-  settingItemId: string;
   sideElement: string;
-  setSideElement: (sideElement: string) => void;
   isNavHidden: boolean;
   setIsNavHidden: (isNavHidden: boolean) => void;
   showSidebar;
@@ -27,9 +25,7 @@ interface ISidebar {
 
 const Sidebar: FC<ISidebar> = ({
   isContainerSelected,
-  settingItemId,
   sideElement,
-  setSideElement,
   isNavHidden,
   setIsNavHidden,
   hideSidebar,
@@ -103,7 +99,6 @@ const Sidebar: FC<ISidebar> = ({
       {sideElement == SidebarEnum.ELEMENTS ? (
         <Elements
           isContainerSelected={isContainerSelected}
-          settingItemId={settingItemId}
         />
       ) : null}
       {sideElement == SidebarEnum.TEMPLATES ? <Template /> : null}

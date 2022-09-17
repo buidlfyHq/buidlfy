@@ -1,7 +1,6 @@
 import Styles from "./styles";
-import { ResizeHandles } from "./handle";
 
-export default interface IItems {
+export default interface IWorkspace {
   i: string;
   x: number;
   y: number;
@@ -11,19 +10,18 @@ export default interface IItems {
   w: number;
   minW?: number;
   maxW?: number;
-  link?: string;
   name: string;
+  link?: string;
   value?: string;
   style: Styles;
-  children?: any; // Fix: Work in progress as it is not compatible new children type
+  children?: IWorkspace[];
   isBounded?: boolean;
   isDraggable?: boolean;
   isResizable?: boolean;
   moved?: boolean;
   static?: boolean;
-  resizeHandles?: ResizeHandles | undefined;
-  contract?: any;
+  resizeHandles?: [];
+  contract?: any; // breaking while assigning a type, work in progress
   imgData?: string | ArrayBuffer;
   connectWallet?: string;
-  placeholder?: string;
 }
