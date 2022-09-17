@@ -1,225 +1,104 @@
 import React, { FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
 import GeneralSettings from "components/dashboard/general-settings";
-import ISettings from "interfaces/settings";
+import { IRootState } from "redux/root-state.interface";
+import {
+  ISettings,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
 
-const SettingComponent: FC<ISettings> = ({
-  items,
-  setItems,
-  selectedItem,
-  setLink,
-  link,
-  setValue,
-  value,
-  setBold,
-  setItalic,
-  setUnderline,
-  setColor,
-  setBgColor,
-  setDeleteComponent,
-  setLeft,
-  setCenter,
-  setRight,
-  setFontSize,
-  contractConfig,
-  setContractConfig,
-  showComponent,
-  setShowComponent,
-  selector,
-  setSelector,
-  elementConfig,
-  openTab,
-  setOpenTab,
-  setBorderRadius,
-  setBorderWidth,
-  setSmall,
-  setMedium,
-  setLarge,
-  setOn,
-  placeholder,
-  setPlaceholder,
-  setMarginTop,
-  setMarginRight,
-  setMarginBottom,
-  setMarginLeft,
-  setPaddingTop,
-  setPaddingRight,
-  setPaddingBottom,
-  setPaddingLeft,
-}) => {
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
+export enum ReplaceValue {
+  INCREMENT = "increment",
+  DECREMENT = "decrement",
+  CHANGE = "change",
+}
+export enum ReplaceSpacingValue {
+  LEFT = "left",
+  RIGHT = "right",
+  TOP = "top",
+  BOTTOM = "bottom",
+  INCREMENTLEFT = "incrementLeft",
+  INCREMENTRIGHT = "incrementRight",
+  INCREMENTTOP = "incrementTop",
+  INCREMENTBOTTOM = "incrementBottom",
+  DECREMENTLEFT = "decrementLeft",
+  DECREMENTRIGHT = "decrementRight",
+  DECREMENTTOP = "decrementTop",
+  DECREMENTBOTTOM = "decrementBottom",
+}
+export enum ReplaceStyle {
+  BOLD = "bold",
+  ITALIC = "italic",
+  UNDERLINE = "underline",
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center",
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+  TRUE = "true",
+  FALSE = "false",
+  COVER = "cover",
+  CONTAIN = "contain",
+  AUTO = "auto",
+  WIDTH = "width",
+  HEIGHT = "height",
+  INCREMENTWIDTH = "incrementWidth",
+  INCREMENTHEIGHT = "incrementHeight",
+  DECREMENTWIDTH = "decrementWidth",
+  DECREMENTHEIGHT = "decrementHeight",
+}
+
+const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
+  const dispatch = useDispatch();
+  const selectedElement: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
+  );
+
+  const handleSettingChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+    propertyName: string
+  ) => {
+    dispatch(
+      updateWorkspaceElement({
+        settingItemId: selectedElement.i,
+        propertyName,
+        propertyValue: e.target.value,
+      })
+    );
   };
 
-  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLink(e.target.value);
-  };
-
-  const handlePlaceholderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPlaceholder(e.target.value);
-  };
-
-  switch (selectedItem?.name) {
+  switch (selectedElement.name) {
     case "Button":
       return (
         <ButtonSettings
-          selectedItem={selectedItem}
-          textVal={value}
-          handleTextChange={handleTextChange}
-          linkVal={link}
-          handleLinkChange={handleLinkChange}
-          items={items}
-          setItems={setItems}
-          setBold={setBold}
-          setItalic={setItalic}
-          setUnderline={setUnderline}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setLeft={setLeft}
-          setCenter={setCenter}
-          setRight={setRight}
-          setFontSize={setFontSize}
-          setContractConfig={setContractConfig}
-          contractConfig={contractConfig}
-          setShowComponent={setShowComponent}
-          showComponent={showComponent}
-          setSelector={setSelector}
-          selector={selector}
-          elementConfig={elementConfig}
+          handleSettingChange={handleSettingChange}
           openTab={openTab}
           setOpenTab={setOpenTab}
-          setBorderRadius={setBorderRadius}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-          shadow={selectedItem?.style?.shadow}
-          setOn={setOn}
-          setMarginTop={setMarginTop}
-          setMarginRight={setMarginRight}
-          setMarginBottom={setMarginBottom}
-          setMarginLeft={setMarginLeft}
-          setPaddingTop={setPaddingTop}
-          setPaddingRight={setPaddingRight}
-          setPaddingBottom={setPaddingBottom}
-          setPaddingLeft={setPaddingLeft}
         />
       );
     case "Image":
-      return (
-        <ImageSettings
-          selectedItem={selectedItem}
-          items={items}
-          setItems={setItems}
-          setDeleteComponent={setDeleteComponent}
-          setLeft={setLeft}
-          setCenter={setCenter}
-          setRight={setRight}
-          setMarginTop={setMarginTop}
-          setMarginRight={setMarginRight}
-          setMarginBottom={setMarginBottom}
-          setMarginLeft={setMarginLeft}
-        />
-      );
+      return <ImageSettings />;
+
     case "Container":
-      return (
-        <ContainerSettings
-          selectedItem={selectedItem}
-          items={items}
-          setItems={setItems}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setBorderRadius={setBorderRadius}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-        />
-      );
     case "Horizontal Container":
-      return (
-        <ContainerSettings
-          selectedItem={selectedItem}
-          items={items}
-          setItems={setItems}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setBorderRadius={setBorderRadius}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-        />
-      );
     case "Vertical Container":
-      return (
-        <ContainerSettings
-          selectedItem={selectedItem}
-          items={items}
-          setItems={setItems}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setBorderRadius={setBorderRadius}
-          setBorderWidth={setBorderWidth}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-        />
-      );
+      return <ContainerSettings />;
+
     case "Input":
-      return (
-        <InputSettings
-          selectedItem={selectedItem}
-          placeholder={placeholder}
-          handlePlaceholderChange={handlePlaceholderChange}
-          setColor={setColor}
-          setDeleteComponent={setDeleteComponent}
-          setBorderRadius={setBorderRadius}
-          setSmall={setSmall}
-          setMedium={setMedium}
-          setLarge={setLarge}
-          setMarginTop={setMarginTop}
-          setMarginRight={setMarginRight}
-          setMarginBottom={setMarginBottom}
-          setMarginLeft={setMarginLeft}
-        />
-      );
+      return <InputSettings handleSettingChange={handleSettingChange} />;
+
     default:
-      return (
-        <GeneralSettings
-          selectedItem={selectedItem}
-          textVal={value}
-          handleTextChange={handleTextChange}
-          linkVal={link}
-          handleLinkChange={handleLinkChange}
-          setBold={setBold}
-          setItalic={setItalic}
-          setUnderline={setUnderline}
-          setColor={setColor}
-          setBgColor={setBgColor}
-          setDeleteComponent={setDeleteComponent}
-          setLeft={setLeft}
-          setCenter={setCenter}
-          setRight={setRight}
-          setFontSize={setFontSize}
-          setMarginTop={setMarginTop}
-          setMarginRight={setMarginRight}
-          setMarginBottom={setMarginBottom}
-          setMarginLeft={setMarginLeft}
-          setPaddingTop={setPaddingTop}
-          setPaddingRight={setPaddingRight}
-          setPaddingBottom={setPaddingBottom}
-          setPaddingLeft={setPaddingLeft}
-        />
-      );
+      return <GeneralSettings handleSettingChange={handleSettingChange} />;
   }
 };
 

@@ -1,106 +1,76 @@
 import React, { FC } from "react";
-import { RiText } from "react-icons/ri";
-import { AiOutlineLink } from "react-icons/ai";
-import AlignComponent from "components/settings/align-component";
-import FontStyleComponent from "components/settings/font-style-component";
-import UtilitiesComponent from "components/settings/utilities-component";
+import { useSelector } from "react-redux";
+import { IoMdLink } from "react-icons/io";
 import ColorComponent from "components/settings/color-component";
 import BgColorComponent from "components/settings/bg-color-component";
 import FontSizeComponent from "components/settings/font-size-component";
-import ISettings from "interfaces/settings";
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
+import CombinedComponent from "components/settings/combined-setting";
+import { IRootState } from "redux/root-state.interface";
+import {
+  ISettings,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
+import "styles/components.css";
 
-const GeneralSettings: FC<ISettings> = ({
-  selectedItem,
-  textVal,
-  handleTextChange,
-  linkVal,
-  handleLinkChange,
-  setBold,
-  setItalic,
-  setUnderline,
-  setColor,
-  setBgColor,
-  setDeleteComponent,
-  setLeft,
-  setCenter,
-  setRight,
-  setFontSize,
-  setMarginTop,
-  setMarginRight,
-  setMarginBottom,
-  setMarginLeft,
-  setPaddingTop,
-  setPaddingRight,
-  setPaddingBottom,
-  setPaddingLeft,
-}) => (
-  <>
-    <h3 className="mb-3 ml-8">
-      Component -
-      {selectedItem ? (
-        <span className="font-bold">{selectedItem.name}</span>
-      ) : null}
-    </h3>
-    <div className="flex items-center px-3 mt-1 text-black">
-      <RiText className="text-[18px] mr-3" />
-      <textarea 
-        value={textVal} 
-        onChange={(e) => handleTextChange(e)}
-        className="changeText"
+const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
+  const selectedElement: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
+  );
+
+  return (
+    <>
+      <h3 className="ml-[0.5rem]">
+        {selectedElement ? (
+          <span className="setting-text">{selectedElement.name}</span>
+        ) : null}
+      </h3>
+      <CombinedComponent
+        i={selectedElement.i}
+        fontWeight={selectedElement.style.fontWeight}
+        fontStyle={selectedElement.style.fontStyle}
+        textDecoration={selectedElement.style.textDecoration}
+        justifyContent={selectedElement.style.justifyContent}
       />
-    </div>
-    <div className="flex items-center px-3 mt-2 text-black">
-      <AiOutlineLink className="text-[18px] mr-3" />
-      <input
-        value={linkVal}
-        onChange={(e) => handleLinkChange(e)}
-        className="changeText"
-        type="text"
-        placeholder="URL..."
+      <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
+        {/* <RiText className="text-[18px] mr-3" /> */}
+        <textarea
+          value={selectedElement.value}
+          onChange={(e) => handleSettingChange(e, "value")}
+          className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
+          placeholder="Please write your text here..."
+        />
+      </div>
+      <div className="flex items-center mt-4 mx-2  w-[13.5rem] text-black">
+        <div className="link-div px-1 py-1">
+          <IoMdLink className="text-[18px]" />
+        </div>
+        <input
+          value={selectedElement.link}
+          onChange={(e) => handleSettingChange(e, "link")}
+          className="changeText pl-[2.5rem] py-[0.4rem] input-text"
+          type="text"
+          placeholder="Link"
+        />
+      </div>
+
+      <FontSizeComponent
+        i={selectedElement.i}
+        fontSize={selectedElement.style.fontSize}
       />
-    </div>
-    <FontStyleComponent
-      bold={selectedItem?.style?.fontWeight}
-      italic={selectedItem?.style?.fontStyle}
-      underline={selectedItem?.style?.textDecoration}
-      setBold={setBold}
-      setItalic={setItalic}
-      setUnderline={setUnderline}
-    />
-    <MarginComponent
-      margin={selectedItem?.style?.margin}
-      setMarginTop={setMarginTop}
-      setMarginRight={setMarginRight}
-      setMarginBottom={setMarginBottom}
-      setMarginLeft={setMarginLeft}
-    />
-    <PaddingComponent
-      padding={selectedItem?.style?.padding}
-      setPaddingTop={setPaddingTop}
-      setPaddingRight={setPaddingRight}
-      setPaddingBottom={setPaddingBottom}
-      setPaddingLeft={setPaddingLeft}
-    />
-    <AlignComponent
-      justifyContent={selectedItem?.style?.justifyContent}
-      setLeft={setLeft}
-      setRight={setRight}
-      setCenter={setCenter}
-    />
-    <FontSizeComponent fontSize={selectedItem?.style?.fontSize} setFontSize={setFontSize} />
-    <ColorComponent
-      color={selectedItem?.style?.color}
-      setColor={setColor}
-      selectedItem={selectedItem}
-    />
-    <BgColorComponent color={selectedItem?.style?.backgroundColor} setBgColor={setBgColor} />
-    <UtilitiesComponent
-      deleteComponent={selectedItem?.style?.deleteComponent}
-      setDeleteComponent={setDeleteComponent}
-    />
-  </>
-);
+      <ColorComponent i={selectedElement.i} color={selectedElement.style.color} />
+      <BgColorComponent
+        i={selectedElement.i}
+        elementBackgroundColor={selectedElement.style.backgroundColor}
+      />
+      <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
+      <PaddingComponent
+        i={selectedElement.i}
+        padding={selectedElement.style.padding}
+      />
+    </>
+  );
+};
 
 export default GeneralSettings;

@@ -5,72 +5,36 @@ import Text from "components/custom-components/text";
 import Image from "components/custom-components/image";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
-import IItems from "interfaces/items";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 interface IRenderItem {
-  item: IItems;
-  items?: IItems[];
-  setItems?: (items?: IItems[]) => void;
+  item: IWorkspaceElement;
   setDrag: (drag?: boolean) => void;
   setOpenSetting?: (openSetting: boolean) => void;
-  setSettingItemId?: (settingItemId: string) => void;
   setOpenTab?: (openTab: number) => void;
-  setAddContainer?: (addContainer: boolean) => void;
-  selector?: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  };
-  setSelector?: (selector: {
-    methodName: string;
-    type: string;
-    name: string;
-    buttonId: string;
-  }) => void;
-  elementConfig?: object;
-  setElementConfig?: (elementConfig: object) => void;
+  setIsContainerSelected?: (isContainerSelected: boolean) => void;
+  setSideElement: (sideElement: string) => void;
+  dragContainer?: boolean;
+  setDragContainer?: (dragContainer?: boolean) => void;
+  showSidebar?: () => void;
+  hideSidebar?: () => void;
+  hideSettingSidebar?: () => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
   item,
-  items,
-  setItems,
   setDrag,
   setOpenSetting,
-  setSettingItemId,
   setOpenTab,
-  setAddContainer,
-  selector,
-  setSelector,
-  elementConfig,
-  setElementConfig,
+  setIsContainerSelected,
+  setSideElement,
+  dragContainer,
+  setDragContainer,
+  showSidebar,
+  hideSidebar,
+  hideSettingSidebar,
 }) => {
   switch (item.name) {
-    case "Container":
-      return (
-        <Container
-          item={item}
-          items={items}
-          setItems={setItems}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          imgData={item.imgData}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
-          setOpenTab={setOpenTab}
-          setDrag={setDrag}
-          setAddContainer={setAddContainer}
-          selector={selector}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
-        />
-      );
     case "Button":
       return (
         <Button
@@ -78,6 +42,7 @@ const RenderItem: FC<IRenderItem> = ({
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
           color={item.style.color}
+          borderColor={item.style.borderColor}
           justifyContent={item.style.justifyContent}
           fontSize={item.style.fontSize}
           value={item.value}
@@ -91,64 +56,12 @@ const RenderItem: FC<IRenderItem> = ({
         />
       );
     case "Text":
-      return (
-        <Text
-          item={item}
-          items={items}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          margin={item.style.margin}
-          padding={item.style.padding}
-        />
-      );
     case "Heading 1":
-      return (
-        <Text
-          item={item}
-          items={items}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          margin={item.style.margin}
-          padding={item.style.padding}
-        />
-      );
     case "Heading 2":
-      return (
-        <Text
-          item={item}
-          items={items}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          margin={item.style.margin}
-          padding={item.style.padding}
-        />
-      );
     case "Heading 3":
       return (
         <Text
           item={item}
-          items={items}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -175,43 +88,24 @@ const RenderItem: FC<IRenderItem> = ({
     case "Image":
       return (
         <Image
+          i={item.i}
           imgData={item.imgData}
           justifyContent={item.style.justifyContent}
+          width={item.style.width}
+          height={item.style.height}
+          backgroundSize={item.style.backgroundSize}
+          isAuto={item.style.isAuto}
           margin={item.style.margin}
         />
       );
     case "Divider":
       return <Divider />;
+    case "Container":
     case "Horizontal Container":
-      return (
-        <Container
-          item={item}
-          items={items}
-          setItems={setItems}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          imgData={item.imgData}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
-          setOpenTab={setOpenTab}
-          setDrag={setDrag}
-          setAddContainer={setAddContainer}
-          selector={selector}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
-        />
-      );
     case "Vertical Container":
       return (
         <Container
           item={item}
-          items={items}
-          setItems={setItems}
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
@@ -220,14 +114,16 @@ const RenderItem: FC<IRenderItem> = ({
           borderWidth={item.style.borderWidth}
           shadow={item.style.shadow}
           setOpenSetting={setOpenSetting}
-          setSettingItemId={setSettingItemId}
           setOpenTab={setOpenTab}
           setDrag={setDrag}
-          setAddContainer={setAddContainer}
-          selector={selector}
-          setSelector={setSelector}
-          elementConfig={elementConfig}
-          setElementConfig={setElementConfig}
+          setIsContainerSelected={setIsContainerSelected}
+          setSideElement={setSideElement}
+          dragContainer={dragContainer}
+          setDragContainer={setDragContainer}
+          showSidebar={showSidebar}
+          hideSidebar={hideSidebar}
+          hideSettingSidebar={hideSettingSidebar}
+          padding={item.style.padding}
         />
       );
     default:

@@ -1,25 +1,22 @@
 import React, { useState, FC, useEffect, useRef } from "react";
-import { VscSymbolColor } from "react-icons/vsc";
-import { SketchPicker } from "react-color";
-import IItems from "interfaces/items";
-import IColor from "interfaces/color";
+import { useDispatch } from "react-redux";
+import { AiOutlineCaretDown } from "react-icons/ai";
+import { Dialog } from "@headlessui/react";
+import ColorPicker from "react-best-gradient-color-picker";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
+
 import "styles/components.css";
 import "styles/dashboard.css";
-import { containerCheck } from "utils/container-check";
 
 interface IColorComponent {
-  color: IColor;
-  setColor: (color: IColor) => void;
-  selectedItem: IItems;
+  i: string;
+  color: string;
 }
 
-const ColorComponent: FC<IColorComponent> = ({
-  color,
-  setColor,
-  selectedItem,
-}) => {
-  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
+const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
+  const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
+  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
   useEffect(() => {
     // FIX: find a suitable type for this event
@@ -32,47 +29,64 @@ const ColorComponent: FC<IColorComponent> = ({
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [ref]);
 
-  const handleClick = () => {
-    setDisplayColorPicker(true);
-  };
-
-  const handleClose = () => {
-    setDisplayColorPicker(false);
-  };
-
-  const handleChange = (color: { rgb: IColor }) => {
-    if (!color) {
-      return;
-    }
-    setColor(color.rgb);
+  const handleChange = (e: string) => {
+    dispatch(
+      updateWorkspaceElementStyle({
+        settingItemId: i,
+        propertyName: "color",
+        propertyValue: e,
+      })
+    );
   };
 
   return (
     <>
       <div
-        ref={ref}
-        onClick={handleClick}
-        className="flex flex-col items-start justify-center py-2 text-gray-600 cursor-pointer"
+        className="py-2 text-gray-600"
+        style={{ width: "-webkit-fill-available" }}
       >
-        <div className="flex items-center w-full px-3 py-2 mb-2 hover:bg-slate-100">
-          <VscSymbolColor className="text-[18px] mr-3" />
-          <div>
-            {containerCheck(selectedItem) ? (
-              <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
-                Border Color
-              </span>
-            ) : (
-              <span className="flex px-1 my-1 text-xl not-italic font-normal text-gray-500 font-regular">
-                Text Color
-              </span>
-            )}
+        <div className="mx-2 py-2 mb-2">
+          <div className="flex">
+            <div className="margin-text grow flex my-1 px-1 text-xl not-italic font-normal text-gray-500 font-regular">
+              Color
+            </div>
+
+            <div
+              ref={ref}
+              onClick={() => setDisplayColorPicker(true)}
+              className="flex items-center cursor-pointer"
+            >
+              <div
+                style={{
+                  background: color,
+                }}
+                className="w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"
+              ></div>
+              <AiOutlineCaretDown className="text-[14px]" />
+            </div>
           </div>
         </div>
         {displayColorPicker ? (
-          <div>
-            <div onClick={handleClose} />
-            <SketchPicker color={color} onChange={handleChange} />
-          </div>
+          <Dialog
+            as="div"
+            className="absolute top-[220px] right-[260px] bottom-[1px] py-[15px] z-100 overflow-none bg-white shadow-lg"
+            open={displayColorPicker}
+            onClose={() => setDisplayColorPicker(false)}
+          >
+            <div className=" px-4 text-right">
+              <div>
+                <div onClick={() => setDisplayColorPicker(false)} />
+                <ColorPicker
+                  hideEyeDrop="false"
+                  hideInputType="false"
+                  hideColorGuide="false"
+                  hideAdvancedSliders="false"
+                  value={color}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </Dialog>
         ) : null}
       </div>
     </>

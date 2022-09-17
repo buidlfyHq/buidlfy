@@ -16,7 +16,13 @@
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.08);
   /* width: 200px; */
 }
-
+.btn-border {
+  border-image-slice: 1 !important;
+}
+.text-class{
+  background-clip: text;
+  -webkit-background-clip: text !important;
+}
 .btn:hover {
   background: #f9f8ff;
   /* Solid Colours/Brand/Primary/Primary-400 */
@@ -36,18 +42,13 @@
   box-shadow: 0px 2px 2px -1px rgba(0, 0, 0, 0.12), 0px 0px 0px 3px #dcd4ff;
 }
 .input {
-  /* background: #FFFFFF; */
-  /* Solid Colours/Brand/Gray/Gray-400 */
-
-  border-color: #e2e4e8;
-  /* border-radius: 3px; */
+  /* border-color: #e2e4e8; */
 }
-.input:focus-visible {
+/* .input:focus-visible {
   border: 1px solid #8247e5 !important;
-  /* State/Primary Focus */
   outline: none;
   box-shadow: 0px 2px 2px -1px rgba(0, 0, 0, 0.12), 0px 0px 0px 1px #dcd4ff;
-}
+} */
 
 .color-span {
   width: 1.5rem;

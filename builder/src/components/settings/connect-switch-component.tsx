@@ -1,27 +1,33 @@
 import React, { FC, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IConnectSwitchComponent {
-  setOn: (connectWallet: string | boolean) => void;
+  i: string;
   connectWallet: string;
 }
 
 const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
-  setOn,
+  i,
   connectWallet,
 }) => {
+  const dispatch = useDispatch();
+
   const [connectToggle, setConnectToggle] = useState(
     connectWallet === "on" ? true : false
   );
-  
+
   const handleOnChange = () => {
     setConnectToggle(!connectToggle);
-    if (connectWallet === "on") {
-      setOn(false);
-    } else {
-      setOn(true);
-    }
+    dispatch(
+      updateWorkspaceElementStyle({
+        settingItemId: i,
+        propertyName: "connectWallet",
+        propertyValue: connectWallet === "on" ? "off" : "on",
+      })
+    );
   };
 
   useEffect(() => {
@@ -29,14 +35,14 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
   }, [connectWallet]);
 
   return (
-    <span className="flex items-center">
-      <span className="text-left px-3 mt-2 mb-0 text-l text-gray-500 font-regular font-normal not-italic">
+    <span className="flex mt-5">
+      <span className="margin-text grow text-left px-3 mt-2 mb-0 text-l text-gray-500 font-regular font-normal not-italic">
         Connect Wallet
       </span>
-      <div className="flex justify-center ml-3 mt-1">
-        <div onClick={handleOnChange} className="form-check form-switch w-14">
+      <div className="flex ml-2 justify-center mt-1">
+        <div onClick={handleOnChange} className="form-check form-switch">
           <input
-            className="form-check-input w-12 -ml-10 bg-blue rounded-full float-left h-5 align-top cursor-pointer shadow-sm"
+            className="form-check-input w-12 -ml-10 bg-blue rounded-full h-5 align-top cursor-pointer shadow-sm"
             type="checkbox"
             role="switch"
             id="flexSwitchCheckDefault"

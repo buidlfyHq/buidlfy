@@ -1,71 +1,84 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
+import { BsBrightnessLow } from "react-icons/bs";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IShadowComponent {
-  setSmall: (shadow: string | boolean) => void;
-  setMedium: (shadow: string | boolean) => void;
-  setLarge: (shadow: string | boolean) => void;
+  i: string;
   shadow: string;
 }
 
-const ShadowComponent: FC<IShadowComponent> = ({
-  setSmall,
-  setMedium,
-  setLarge,
-  shadow,
-}) => {
-  const handleSmallChange = () => {
-    // setLeft(!left);
-    if (shadow === "small") {
-      setSmall(false);
-    } else {
-      setSmall(true);
-    }
-  };
+const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
+  const dispatch = useDispatch();
 
-  const handleMediumChange = () => {
-    // setLeft(!center);
-    if (shadow === "medium") {
-      setMedium(false);
-    } else {
-      setMedium(true);
-    }
-  };
-
-  const handleLargeChange = () => {
-    // setRight(!right);
-    if (shadow === "large") {
-      setLarge(false);
-    } else {
-      setLarge(true);
+  const handleChange = (action: ReplaceStyle) => {
+    if (action == ReplaceStyle.SMALL) {
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "shadow",
+          propertyValue:
+            shadow === ReplaceStyle.SMALL
+              ? "none"
+              : "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        })
+      );
+    } else if (action == ReplaceStyle.MEDIUM) {
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "shadow",
+          propertyValue:
+            shadow === ReplaceStyle.MEDIUM
+              ? "inherit"
+              : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+        })
+      );
+    } else if (action == ReplaceStyle.LARGE) {
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "shadow",
+          propertyValue:
+            shadow === ReplaceStyle.LARGE
+              ? "inherit"
+              : "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+        })
+      );
     }
   };
 
   return (
-    <span className=" text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
-      Shadow
-      <div className="flex mt-3 px-3">
+    <div className="margin-text text-left px-3 mt-6 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
+      <span className="flex px-1">
+        <span> Shadow </span>{" "}
+        <BsBrightnessLow className="text-[18px] ml-2 mt-[-2px]" />
+      </span>
+      <div className="flex mt-3 px-1">
         <span
-          onClick={handleSmallChange}
-          className="flex items-center justify-center shadow text-[18px] w-8 h-10 my-2 font-regular"
+          onClick={() => handleChange(ReplaceStyle.SMALL)}
+          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
         >
-          Sm
+          S
         </span>
         <span
-          onClick={handleMediumChange}
-          className="flex items-center justify-center shadow text-[18px] w-8 h-10 m-2 font-regular"
+          onClick={() => handleChange(ReplaceStyle.MEDIUM)}
+          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 mx-3 font-regular"
         >
-          Md
+          M
         </span>
         <span
-          onClick={handleLargeChange}
-          className="flex items-center justify-center shadow text-[18px] w-8 h-10 my-2 font-regular"
+          onClick={() => handleChange(ReplaceStyle.LARGE)}
+          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
         >
-          Lg
+          L
         </span>
       </div>
-    </span>
+    </div>
   );
 };
+
 export default ShadowComponent;
