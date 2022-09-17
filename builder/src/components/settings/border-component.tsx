@@ -1,32 +1,48 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceValue } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBorderComponent {
+  i: string;
   borderWidth: number;
-  setBorderWidth: (borderWidth: number) => void;
 }
 
-const BorderComponent: FC<IBorderComponent> = ({
-  borderWidth,
-  setBorderWidth,
-}) => {
-  // Derive best type of e
+const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
+  const dispatch = useDispatch();
+
+  // FIX: find suitable type
   const handleWidth = (e, action: ReplaceValue) => {
     if (action == ReplaceValue.INCREMENT) {
-      setBorderWidth(borderWidth + 1);
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "borderWidth",
+          propertyValue: borderWidth + 1,
+        })
+      );
     } else if (action == ReplaceValue.DECREMENT) {
-      if (borderWidth <= 0) {
-        setBorderWidth(0);
-      } else {
-        setBorderWidth(borderWidth - 1);
-      }
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "borderWidth",
+          propertyValue: borderWidth <= 0 ? 0 : borderWidth - 1,
+        })
+      );
     } else if (action == ReplaceValue.CHANGE) {
-      setBorderWidth(+e.target.value);
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "borderWidth",
+          propertyValue: +e.target.value,
+        })
+      );
     }
   };
+
   const renderOptions = [1, 3, 5, 7, 9, 10, 12].map((number) => (
     <option key={number} value={number}>
       {number}

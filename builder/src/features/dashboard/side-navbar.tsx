@@ -1,48 +1,20 @@
 import React, { FC } from "react";
-import ShortUniqueId from "short-unique-id";
-import { components } from "config/component";
-import { containerCheck } from "utils/container-check";
-import IItems from "interfaces/items";
-import { ResizeHandles } from "interfaces/handle";
-import { Link } from "react-router-dom";
 import elements from "assets/elements.png";
-import help from "assets/help.png";
-import media from "assets/media.png";
-import pages from "assets/pages.png";
-import setting from "assets/setting.png";
 import styles from "assets/styles.png";
 import templates from "assets/templates.png";
+import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
-import { SidebarEnum } from "pages/dashboard";
 
 interface ISideNavbar {
   className: string;
-  setClassName: (className: string) => void;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
-  isContainerSelected: boolean;
-  settingItemId: string;
-  sideElement: string;
   setSideElement: (sideElement: string) => void;
-  isNavHidden: boolean;
-  setIsNavHidden: (isNavHidden: boolean) => void;
   showSidebar;
-  hideSidebar;
   hideSettingSidebar;
 }
 
 const SideNavbar: FC<ISideNavbar> = ({
   className,
-  setClassName,
-  items,
-  setItems,
-  isContainerSelected,
-  settingItemId,
-  sideElement,
   setSideElement,
-  isNavHidden,
-  setIsNavHidden,
-  hideSidebar,
   showSidebar,
   hideSettingSidebar,
 }) => {
@@ -103,7 +75,7 @@ const SideNavbar: FC<ISideNavbar> = ({
           className="cursor-pointer"
         >
           <div className="side-icon px-3.5 py-4 rounded-full mt-3">
-            <img src={templates} />
+            <img src={templates} alt="Templates" />
           </div>
           <h3 className="side-text mt-1">Templates</h3>
         </div>
@@ -122,7 +94,7 @@ const SideNavbar: FC<ISideNavbar> = ({
           className="mt-8 cursor-pointer"
         >
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
-            <img src={elements} />
+            <img src={elements} alt="Elements" />
           </div>
           <h3 className="side-text mt-1">Elements</h3>
         </div>
@@ -141,7 +113,7 @@ const SideNavbar: FC<ISideNavbar> = ({
           className="mt-8 cursor-pointer"
         >
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
-            <img src={styles} />
+            <img src={styles} alt="Styles" />
           </div>
           <h3 className="side-text mt-1">Styles</h3>
         </div>

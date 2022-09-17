@@ -1,8 +1,8 @@
-import React, { FC, useState } from "react";
-import ITexts from "interfaces/texts";
+import React, { FC } from "react";
+import { IText } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
-const Button: FC<ITexts> = ({
+const Button: FC<IText> = ({
   bold,
   italic,
   underline,

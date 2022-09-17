@@ -1,22 +1,23 @@
 import React, { useState, FC, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown } from "react-icons/ai";
-import IItems from "interfaces/items";
-import ColorPicker from "react-best-gradient-color-picker";
 import { Dialog } from "@headlessui/react";
-import { ReplaceStyle } from "components/utils/render-setting";
+import ColorPicker from "react-best-gradient-color-picker";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
+
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IColorComponent {
+  i: string;
   color: string;
-  setColor: (color: string) => void;
-  selectedItem: IItems;
 }
 
-const ColorComponent: FC<IColorComponent> = ({ color, setColor }) => {
+const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
+  const dispatch = useDispatch();
+  const ref = useRef<HTMLDivElement>();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
-  const ref = useRef<HTMLDivElement>();
   useEffect(() => {
     // FIX: find a suitable type for this event
     const handleOutsideClick = (event) => {
@@ -28,12 +29,14 @@ const ColorComponent: FC<IColorComponent> = ({ color, setColor }) => {
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [ref]);
 
-  const handleClick = (action: ReplaceStyle) => {
-    if (action == ReplaceStyle.TRUE) {
-      setDisplayColorPicker(true);
-    } else if (action == ReplaceStyle.FALSE) {
-      setDisplayColorPicker(false);
-    }
+  const handleChange = (e: string) => {
+    dispatch(
+      updateWorkspaceElementStyle({
+        settingItemId: i,
+        propertyName: "color",
+        propertyValue: e,
+      })
+    );
   };
 
   return (
@@ -50,7 +53,7 @@ const ColorComponent: FC<IColorComponent> = ({ color, setColor }) => {
 
             <div
               ref={ref}
-              onClick={() => handleClick(ReplaceStyle.TRUE)}
+              onClick={() => setDisplayColorPicker(true)}
               className="flex items-center cursor-pointer"
             >
               <div
@@ -72,14 +75,14 @@ const ColorComponent: FC<IColorComponent> = ({ color, setColor }) => {
           >
             <div className=" px-4 text-right">
               <div>
-                <div onClick={() => handleClick(ReplaceStyle.FALSE)} />
+                <div onClick={() => setDisplayColorPicker(false)} />
                 <ColorPicker
                   hideEyeDrop="false"
                   hideInputType="false"
                   hideColorGuide="false"
                   hideAdvancedSliders="false"
                   value={color}
-                  onChange={setColor}
+                  onChange={handleChange}
                 />
               </div>
             </div>

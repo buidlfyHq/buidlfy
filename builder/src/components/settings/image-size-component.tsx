@@ -1,70 +1,79 @@
-import React, { FC, useEffect } from "react";
-import "styles/components.css";
+import React, { FC } from "react";
+import { useDispatch } from "react-redux";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/dashboard.css";
 import "styles/components.css";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { ReplaceStyle } from "components/utils/render-setting";
 
 interface ISizeComponent {
+  i: string;
   width: number;
   height: number;
-  setHeight: (height: number) => void;
-  setWidth: (width: number) => void;
-  setCover: (backgroundSize: string | boolean) => void;
-  setContain: (backgroundSize: string | boolean) => void;
-  setAuto: (backgroundSize: string | boolean) => void;
-  isAuto?: boolean;
-  setIsAuto?: (isAuto: boolean) => void;
-  dynamicWidth?: number;
-  dynamicHeight?: number;
-  setDynamicWidth?: (dynamicWidth?: number) => void;
-  setDynamicHeight?: (dynamicHeight?: number) => void;
 }
 
-const SizeComponent: FC<ISizeComponent> = ({
-  width,
-  height,
-  setWidth,
-  setHeight,
-  setIsAuto,
-  isAuto,
-  dynamicHeight,
-  dynamicWidth,
-  setDynamicHeight,
-  setDynamicWidth,
-}) => {
-  // Add ClientWidth and ClientHeight of Image when it changes its position
-  // useEffect(() => {
-  //   if (dynamicWidth && dynamicHeight) {
-  //     setWidth(dynamicWidth);
-  //     setHeight(dynamicHeight);
-  //   }
-
-  // }, [dynamicWidth, dynamicHeight]);
-
-  // useEffect(() => {
-  //   if (dynamicHeight) {
-  //     console.log(dynamicHeight, "dh");
-  //     setHeight(dynamicHeight);
-  //   }
-  // }, [dynamicHeight]);
+const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
+  const dispatch = useDispatch();
 
   // Derive best type of e
   const handleChange = (e, action: ReplaceStyle) => {
     if (action == ReplaceStyle.WIDTH) {
-      setWidth(+e.target.value);
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: "width",
+          propertyValue: +e.target.value,
+          imageSizeProperty: false,
+        })
+      );
     } else if (action == ReplaceStyle.HEIGHT) {
-      setHeight(+e.target.value);
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: "height",
+          propertyValue: +e.target.value,
+          imageSizeProperty: false,
+        })
+      );
     } else if (action == ReplaceStyle.INCREMENTWIDTH) {
-      setWidth(width + 1);
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: "width",
+          propertyValue: width + 1,
+          imageSizeProperty: false,
+        })
+      );
     } else if (action == ReplaceStyle.INCREMENTHEIGHT) {
-      setHeight(height + 1);
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: "height",
+          propertyValue: height + 1,
+          imageSizeProperty: false,
+        })
+      );
     } else if (action == ReplaceStyle.DECREMENTWIDTH) {
-      setWidth(width - 1);
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: "width",
+          propertyValue: width - 1,
+          imageSizeProperty: false,
+        })
+      );
     } else if (action == ReplaceStyle.DECREMENTHEIGHT) {
-      setHeight(height - 1);
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: "height",
+          propertyValue: height - 1,
+          imageSizeProperty: false,
+        })
+      );
     }
   };
+
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">

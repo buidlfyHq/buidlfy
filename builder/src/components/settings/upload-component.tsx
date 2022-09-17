@@ -1,59 +1,35 @@
 import React, { FC, useState } from "react";
-import IItems from "interfaces/items";
+import { useDispatch } from "react-redux";
+import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
+import { uploadFileToWeb3Storage } from "utils/web3storage";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { uploadFileToWeb3Storage } from "utils/web3storage";
 
 interface IUploadComponent {
-  selectedItem: IItems;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
+  i: string;
 }
 
-const UploadComponent: FC<IUploadComponent> = ({
-  selectedItem,
-  items,
-  setItems,
-}) => {
-  const [size, setSize] = useState<boolean>(false);
+const UploadComponent: FC<IUploadComponent> = ({ i }) => {
+  const dispatch = useDispatch();
+  const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
 
+  // FIX: find suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
-        setSize(true);
+        setSizeExceeded(true);
       } else {
-        setSize(false);
+        setSizeExceeded(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
-          const updatedItems = items.map((item) => {
-            let selectedChild = item.children?.find(
-              (child) => child.i === selectedItem.i
-            );
-            if (item.i === selectedItem.i) {
-              return {
-                ...item,
-                imgData: cid,
-              };
-            } else if (selectedChild?.i === selectedItem.i) {
-              let child = {
-                ...selectedChild,
-                imgData: cid,
-              };
-              const childIndex = item.children?.findIndex(
-                (c) => c.i === selectedItem.i
-              );
-              let newChildren = [...item.children];
-              newChildren[childIndex] = child;
-
-              return {
-                ...item,
-                children: newChildren,
-              };
-            }
-            return item;
-          });
-          setItems(updatedItems);
+          dispatch(
+            updateWorkspaceElement({
+              settingItemId: i,
+              propertyName: "imgData",
+              propertyValue: cid,
+            })
+          );
         });
         reader.readAsDataURL(e.target.files[0]);
       }
@@ -85,7 +61,7 @@ const UploadComponent: FC<IUploadComponent> = ({
       <div className="flex justify-center">
         <button className="upload-btn mx-2 ">Upload</button>
       </div>
-      {size ? (
+      {sizeExceeded ? (
         <h3 className="text-red-500 text-sm ml-5 mb-2">
           Please upload file below 5 mb
         </h3>

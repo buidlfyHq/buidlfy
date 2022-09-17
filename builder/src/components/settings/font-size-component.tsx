@@ -1,30 +1,45 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceValue } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IFontSizeComponent {
+  i: string;
   fontSize: number;
-  setFontSize: (fontSize: number) => void;
 }
 
-const FontSizeComponent: FC<IFontSizeComponent> = ({
-  fontSize,
-  setFontSize,
-}) => {
-  // Derive best type of e
+const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
+  const dispatch = useDispatch();
+
+  // FIX: find suitable type
   const handleFontSize = (e, action: ReplaceValue) => {
     if (action == ReplaceValue.INCREMENT) {
-      setFontSize(fontSize + 1);
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "fontSize",
+          propertyValue: fontSize + 1,
+        })
+      );
     } else if (action == ReplaceValue.DECREMENT) {
-      if (fontSize <= 1) {
-        setFontSize(1);
-      } else {
-        setFontSize(fontSize - 1);
-      }
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "fontSize",
+          propertyValue: fontSize <= 1 ? 1 : fontSize - 1,
+        })
+      );
     } else if (action == ReplaceValue.CHANGE) {
-      setFontSize(+e.target.value);
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "fontSize",
+          propertyValue: +e.target.value,
+        })
+      );
     }
   };
 

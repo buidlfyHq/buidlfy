@@ -150,13 +150,13 @@ color: #BAB9BD;
 
   box-shadow: 0px 2px 2px -1px rgba(0, 0, 0, 0.12), 0px 0px 0px 3px #dcd4ff;
 }
-.input {
-  /* background: #FFFFFF; */
-  /* Solid Colours/Brand/Gray/Gray-400 */
+/* .input {
+  background: #FFFFFF;
+  Solid Colours/Brand/Gray/Gray-400
 
-  /* border-color: #e2e4e8; */
-  /* border-radius: 3px; */
-}
+  border-color: #e2e4e8;
+  border-radius: 3px;
+} */
 
 /* .input:focus-visible {
   border: 1px solid #8247e5 !important;
@@ -603,7 +603,7 @@ color: #458CDE;
   
 }
 .purple-label {
-  ont-style: normal;
+  font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 20px;

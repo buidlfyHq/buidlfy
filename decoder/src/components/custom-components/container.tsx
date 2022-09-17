@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import GridLayout from "react-grid-layout";
 import RenderItem from "utils/render-item";
 import IBgContainer from "interfaces/container";
-import IItems from "interfaces/items";
+import IWorkspace from "interfaces/workspace";
 import "styles/components.css";
 
 const Container: FC<IBgContainer> = ({
@@ -63,7 +63,7 @@ const Container: FC<IBgContainer> = ({
             boxShadow: shadow,
           }}
         >
-          {children.map((c: IItems) => {
+          {children.map((c: IWorkspace) => {
             const { x, y, w, h, minW, i } = c;
             return (
               <div key={i} data-grid={{ x, y, w, h, minW }}>

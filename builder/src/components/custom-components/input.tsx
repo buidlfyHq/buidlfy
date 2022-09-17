@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import IColor from "interfaces/color";
 import "styles/components.css";
 
 interface IInput {

@@ -1,34 +1,58 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { BsBrightnessLow } from "react-icons/bs";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IShadowComponent {
-  setSmall: (shadow: string | boolean) => void;
-  setMedium: (shadow: string | boolean) => void;
-  setLarge: (shadow: string | boolean) => void;
+  i: string;
   shadow: string;
 }
 
-const ShadowComponent: FC<IShadowComponent> = ({
-  setSmall,
-  setMedium,
-  setLarge,
-  shadow,
-}) => {
+const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
+  const dispatch = useDispatch();
+
   const handleChange = (action: ReplaceStyle) => {
     if (action == ReplaceStyle.SMALL) {
-      setSmall(shadow !== "small");
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "shadow",
+          propertyValue:
+            shadow === ReplaceStyle.SMALL
+              ? "none"
+              : "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        })
+      );
     } else if (action == ReplaceStyle.MEDIUM) {
-      setMedium(shadow !== "medium");
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "shadow",
+          propertyValue:
+            shadow === ReplaceStyle.MEDIUM
+              ? "inherit"
+              : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+        })
+      );
     } else if (action == ReplaceStyle.LARGE) {
-      setLarge(shadow !== "large");
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "shadow",
+          propertyValue:
+            shadow === ReplaceStyle.LARGE
+              ? "inherit"
+              : "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+        })
+      );
     }
   };
 
   return (
-    <div className="margin-text text-left px-3 py-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
+    <div className="margin-text text-left px-3 mt-6 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
       <span className="flex px-1">
         <span> Shadow </span>{" "}
         <BsBrightnessLow className="text-[18px] ml-2 mt-[-2px]" />
@@ -56,4 +80,5 @@ const ShadowComponent: FC<IShadowComponent> = ({
     </div>
   );
 };
+
 export default ShadowComponent;

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import ITexts from "interfaces/texts";
+import { IText } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
-const Text: FC<ITexts> = ({
+const Text: FC<IText> = ({
   item,
   bold,
   italic,
@@ -22,6 +22,7 @@ const Text: FC<ITexts> = ({
       id={item.i}
       value={value}
       style={{
+        height: "-webkit-fill-available",
         fontWeight: bold,
         fontStyle: italic,
         textDecoration: underline,

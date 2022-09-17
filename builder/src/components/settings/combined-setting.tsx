@@ -1,52 +1,73 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import {
   AiOutlineAlignLeft,
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface ICombinedComponent {
-  bold: string;
-  italic: string;
-  underline: string;
-  setBold: (bold: string | boolean) => void;
-  setItalic: (italic: string | boolean) => void;
-  setUnderline: (underline: string | boolean) => void;
-  setLeft: (justifyContent: string | boolean) => void;
-  setRight: (justifyContent: string | boolean) => void;
-  setCenter: (justifyContent: string | boolean) => void;
+  i: string;
+  fontWeight: string;
+  fontStyle: string;
+  textDecoration: string;
   justifyContent: string;
 }
 
 const CombinedComponent: FC<ICombinedComponent> = ({
-  bold,
-  italic,
-  underline,
-  setBold,
-  setItalic,
-  setUnderline,
-  setLeft,
-  setRight,
-  setCenter,
+  i,
+  fontWeight,
+  fontStyle,
+  textDecoration,
   justifyContent,
 }) => {
+  const dispatch = useDispatch();
+
   const handleChange = (action: ReplaceStyle) => {
     if (action == ReplaceStyle.BOLD) {
-      setBold(bold !== "bold");
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "fontWeight",
+          propertyValue:
+            fontWeight === ReplaceStyle.BOLD ? "normal" : ReplaceStyle.BOLD,
+        })
+      );
     } else if (action == ReplaceStyle.ITALIC) {
-      setItalic(italic !== "italic");
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "fontStyle",
+          propertyValue:
+            fontStyle === ReplaceStyle.ITALIC ? "normal" : ReplaceStyle.ITALIC,
+        })
+      );
     } else if (action == ReplaceStyle.UNDERLINE) {
-      setUnderline(underline !== "underline");
-    } else if (action == ReplaceStyle.LEFT) {
-      setLeft(justifyContent !== "left");
-    } else if (action == ReplaceStyle.RIGHT) {
-      setRight(justifyContent !== "right");
-    } else if (action == ReplaceStyle.CENTER) {
-      setCenter(justifyContent !== "center");
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "textDecoration",
+          propertyValue:
+            textDecoration === ReplaceStyle.UNDERLINE
+              ? "none"
+              : ReplaceStyle.UNDERLINE,
+        })
+      );
     }
+  };
+
+  const handleAlignChange = (type: string) => {
+    dispatch(
+      updateWorkspaceElementStyle({
+        settingItemId: i,
+        propertyName: "justifyContent",
+        propertyValue: justifyContent === type ? "inherit" : type,
+      })
+    );
   };
 
   return (
@@ -71,19 +92,19 @@ const CombinedComponent: FC<ICombinedComponent> = ({
       </span>
       <div className="flex">
         <span
-          onClick={() => handleChange(ReplaceStyle.LEFT)}
+          onClick={() => handleAlignChange("left")}
           className="flex items-center mx-[0.75rem] justify-center text-[16px] py-1 font-regular"
         >
           <AiOutlineAlignLeft className="text-[16px]" />
         </span>
         <span
-          onClick={() => handleChange(ReplaceStyle.CENTER)}
+          onClick={() => handleAlignChange("center")}
           className="flex items-center mx-[0.75rem] justify-center text-[16px] py-1 font-regular text-black"
         >
           <AiOutlineAlignCenter className="text-[16px]" />
         </span>
         <span
-          onClick={() => handleChange(ReplaceStyle.RIGHT)}
+          onClick={() => handleAlignChange("right")}
           className="flex items-center mx-[0.75rem] justify-center text-[16px] py-1 font-regular text-black"
         >
           <AiOutlineAlignRight className="text-[16px]" />

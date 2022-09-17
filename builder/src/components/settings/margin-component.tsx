@@ -1,55 +1,59 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import { ReplaceSpacingValue } from "components/utils/render-setting";
-import "styles/dashboard.css";
+import { updateWorkspaceElementSubStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
+import "styles/dashboard.css";
+
 interface IMarginComponent {
-  margin?: {
+  i: string;
+  margin: {
     marginLeft?: number;
     marginRight?: number;
     marginTop?: number;
     marginBottom?: number;
   };
-  setMarginLeft?: (marginLeft: number) => void;
-  setMarginRight?: (marginRight: number) => void;
-  setMarginTop?: (marginTop: number) => void;
-  setMarginBottom?: (marginBottom: number) => void;
 }
-const MarginComponent: FC<IMarginComponent> = ({
-  margin,
-  setMarginLeft,
-  setMarginRight,
-  setMarginTop,
-  setMarginBottom,
-}) => {
-  // Derive best type of e
-  const handleMarginChange = (e, action: ReplaceSpacingValue) => {
-    if (action == ReplaceSpacingValue.LEFT) {
-      setMarginLeft(+e.target.value);
-    } else if (action == ReplaceSpacingValue.RIGHT) {
-      setMarginRight(+e.target.value);
-    } else if (action == ReplaceSpacingValue.TOP) {
-      setMarginTop(+e.target.value);
-    } else if (action == ReplaceSpacingValue.BOTTOM) {
-      setMarginBottom(+e.target.value);
-    } else if (action == ReplaceSpacingValue.INCREMENTLEFT) {
-      setMarginLeft(margin.marginLeft + 1);
-    } else if (action == ReplaceSpacingValue.INCREMENTRIGHT) {
-      setMarginRight(margin.marginRight + 1);
-    } else if (action == ReplaceSpacingValue.INCREMENTTOP) {
-      setMarginTop(margin.marginTop + 1);
-    } else if (action == ReplaceSpacingValue.INCREMENTBOTTOM) {
-      setMarginBottom(margin.marginBottom + 1);
-    } else if (action == ReplaceSpacingValue.DECREMENTLEFT) {
-      setMarginLeft(margin.marginLeft - 1);
-    } else if (action == ReplaceSpacingValue.DECREMENTRIGHT) {
-      setMarginRight(margin.marginRight - 1);
-    } else if (action == ReplaceSpacingValue.DECREMENTTOP) {
-      setMarginTop(margin.marginTop - 1);
-    } else if (action == ReplaceSpacingValue.DECREMENTBOTTOM) {
-      setMarginBottom(margin.marginBottom - 1);
-    }
+
+const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
+  const dispatch = useDispatch();
+
+  const handleChange = (
+    property: string,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    dispatch(
+      updateWorkspaceElementSubStyle({
+        settingItemId: i,
+        propertyName: "margin",
+        propertyValue: +e.target.value,
+        childPropertyName: property,
+      })
+    );
   };
+
+  const incrementCounter = (property: string, value: number) => {
+    dispatch(
+      updateWorkspaceElementSubStyle({
+        settingItemId: i,
+        propertyName: "margin",
+        propertyValue: value + 1,
+        childPropertyName: property,
+      })
+    );
+  };
+
+  const decrementCounter = (property: string, value: number) => {
+    dispatch(
+      updateWorkspaceElementSubStyle({
+        settingItemId: i,
+        propertyName: "margin",
+        propertyValue: value - 1,
+        childPropertyName: property,
+      })
+    );
+  };
+
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">
@@ -62,18 +66,14 @@ const MarginComponent: FC<IMarginComponent> = ({
               value={margin?.marginLeft}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleMarginChange(e, ReplaceSpacingValue.LEFT)}
+              onChange={(e) => handleChange("marginLeft", e)}
             />
             <AiOutlineCaretUp
-              onClick={(e) =>
-                handleMarginChange(e, ReplaceSpacingValue.INCREMENTLEFT)
-              }
+              onClick={() => incrementCounter("marginLeft", margin?.marginLeft)}
               className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
-              onClick={(e) =>
-                handleMarginChange(e, ReplaceSpacingValue.DECREMENTLEFT)
-              }
+              onClick={() => decrementCounter("marginLeft", margin?.marginLeft)}
               className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
             />
             <h6 className="ml-5 mr-2 margin-subtext">R</h6>
@@ -82,17 +82,17 @@ const MarginComponent: FC<IMarginComponent> = ({
               value={margin?.marginRight}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleMarginChange(e, ReplaceSpacingValue.RIGHT)}
+              onChange={(e) => handleChange("marginRight", e)}
             />
             <AiOutlineCaretUp
-              onClick={(e) =>
-                handleMarginChange(e, ReplaceSpacingValue.INCREMENTRIGHT)
+              onClick={() =>
+                incrementCounter("marginRight", margin?.marginRight)
               }
               className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
-              onClick={(e) =>
-                handleMarginChange(e, ReplaceSpacingValue.INCREMENTRIGHT)
+              onClick={() =>
+                decrementCounter("marginRight", margin?.marginRight)
               }
               className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
             />
@@ -104,18 +104,14 @@ const MarginComponent: FC<IMarginComponent> = ({
               value={margin?.marginTop}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) => handleMarginChange(e, ReplaceSpacingValue.TOP)}
+              onChange={(e) => handleChange("marginTop", e)}
             />
             <AiOutlineCaretUp
-              onClick={(e) =>
-                handleMarginChange(e, ReplaceSpacingValue.INCREMENTTOP)
-              }
+              onClick={() => incrementCounter("marginTop", margin?.marginTop)}
               className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
-              onClick={(e) =>
-                handleMarginChange(e, ReplaceSpacingValue.DECREMENTTOP)
-              }
+              onClick={() => decrementCounter("marginTop", margin?.marginTop)}
               className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
             />
             <h6 className="ml-5 mr-2 margin-subtext">B</h6>
@@ -124,19 +120,17 @@ const MarginComponent: FC<IMarginComponent> = ({
               value={margin?.marginBottom}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
-              onChange={(e) =>
-                handleMarginChange(e, ReplaceSpacingValue.BOTTOM)
-              }
+              onChange={(e) => handleChange("marginBottom", e)}
             />
             <AiOutlineCaretUp
-              onClick={(e) =>
-                handleMarginChange(e, ReplaceSpacingValue.INCREMENTBOTTOM)
+              onClick={() =>
+                incrementCounter("marginBottom", margin?.marginBottom)
               }
               className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
             />
             <AiOutlineCaretDown
-              onClick={(e) =>
-                handleMarginChange(e, ReplaceSpacingValue.DECREMENTBOTTOM)
+              onClick={() =>
+                decrementCounter("marginBottom", margin?.marginBottom)
               }
               className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
             />

@@ -1,34 +1,21 @@
-import React, { FC, useState, useRef, useEffect } from "react";
-import ShortUniqueId from "short-unique-id";
-import { components } from "config/component";
-import { containerCheck } from "utils/container-check";
-import IItems from "interfaces/items";
-import { ResizeHandles } from "interfaces/handle";
-import { Link } from "react-router-dom";
-import Elements from "./elements";
-import Template from "pages/templates";
-import "styles/components.css";
+import React, { FC, useRef } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
-import { SidebarEnum } from "pages/dashboard";
+import Template from "pages/templates";
+import Elements from "features/dashboard/elements";
 import DefaultSettings from "features/dashboard/default-settings";
-import IColor from "interfaces/color";
+import { SidebarEnum } from "redux/workspace/workspace.interfaces";
+import "styles/components.css";
 
 interface ISidebar {
-  className: string;
-  setClassName: (className: string) => void;
-  items: IItems[];
-  setItems: (items: IItems[]) => void;
   isContainerSelected: boolean;
-  settingItemId: string;
   sideElement: string;
-  setSideElement: (sideElement: string) => void;
   isNavHidden: boolean;
   setIsNavHidden: (isNavHidden: boolean) => void;
   showSidebar;
   hideSidebar;
   hideSettingSidebar;
-  backgroundColor: string;
-  setBackgroundColor: (backgroundColor: string) => void;
+  workspaceBackgroundColor: string;
+  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;
@@ -37,21 +24,15 @@ interface ISidebar {
 }
 
 const Sidebar: FC<ISidebar> = ({
-  className,
-  setClassName,
-  items,
-  setItems,
   isContainerSelected,
-  settingItemId,
   sideElement,
-  setSideElement,
   isNavHidden,
   setIsNavHidden,
   hideSidebar,
   showSidebar,
   hideSettingSidebar,
-  backgroundColor,
-  setBackgroundColor,
+  workspaceBackgroundColor,
+  setWorkspaceBackgroundColor,
   head,
   setHead,
 }) => {
@@ -117,21 +98,14 @@ const Sidebar: FC<ISidebar> = ({
       {/* Components */}
       {sideElement == SidebarEnum.ELEMENTS ? (
         <Elements
-          className={className}
-          setClassName={setClassName}
-          items={items}
-          setItems={setItems}
           isContainerSelected={isContainerSelected}
-          settingItemId={settingItemId}
         />
       ) : null}
-      {sideElement == SidebarEnum.TEMPLATES ? (
-        <Template setItems={setItems} />
-      ) : null}
+      {sideElement == SidebarEnum.TEMPLATES ? <Template /> : null}
       {sideElement == SidebarEnum.STYLES ? (
         <DefaultSettings
-          backgroundColor={backgroundColor}
-          setBackgroundColor={setBackgroundColor}
+          workspaceBackgroundColor={workspaceBackgroundColor}
+          setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           head={head}
           setHead={setHead}
         />

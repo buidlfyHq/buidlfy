@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import IItems from "interfaces/items";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IImageComponent {
@@ -14,12 +14,8 @@ interface IImageComponent {
   width?: number;
   height?: number;
   backgroundSize?: string;
-  item?: IItems;
+  i: string;
   isAuto?: boolean;
-  dynamicWidth?: number;
-  dynamicHeight?: number;
-  setDynamicWidth?: (dynamicWidth?: number) => void;
-  setDynamicHeight?: (dynamicHeight?: number) => void;
 }
 
 const Image: FC<IImageComponent> = ({
@@ -29,12 +25,8 @@ const Image: FC<IImageComponent> = ({
   width,
   height,
   backgroundSize,
-  item,
+  i,
   isAuto,
-  dynamicHeight,
-  dynamicWidth,
-  setDynamicHeight,
-  setDynamicWidth,
 }) => {
   // Add ClientWidth and ClientHeight of Image when it changes its position
   // const ref = useRef<HTMLDivElement>();
@@ -60,7 +52,7 @@ const Image: FC<IImageComponent> = ({
         <div className="flex w-full h-full">
           <div
             // ref={ref}
-            id={item.i}
+            id={i}
             className="flex w-full h-full"
             style={{
               backgroundImage: `url(${imgData})`,

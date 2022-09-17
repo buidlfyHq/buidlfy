@@ -1,15 +1,16 @@
 import React, { FC, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import IItems from "interfaces/items";
-import ITemplate from "interfaces/template";
+import { useDispatch } from "react-redux";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import {
+  ITemplate,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
-interface INew {
-  setItems: (items: IItems[]) => void;
-}
-const Template: FC<INew> = ({ setItems }) => {
-  const navigate = useNavigate();
+const Template: FC = () => {
+  const dispatch = useDispatch();
   const [newTemp, setNewTemp] = useState<ITemplate[]>([]);
+
   useEffect(() => {
     const templates = localStorage.getItem("templates");
     const newTemplates = JSON.parse(templates);
@@ -18,12 +19,11 @@ const Template: FC<INew> = ({ setItems }) => {
 
   const handleClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    value: IItems[]
+    value: IWorkspaceElement[]
   ) => {
     localStorage.removeItem("items");
     localStorage.setItem("items", JSON.stringify(value));
-    setItems(value);
-    // navigate("/dashboard", { replace: true });
+    dispatch(updateWorkspaceElementsArray(value));
   };
 
   return (
@@ -62,18 +62,24 @@ const Template: FC<INew> = ({ setItems }) => {
       <div className="min-h-screen px-1 py-10 mt-2">
         <div className="grid grid-cols-2 gap-4">
           {newTemp &&
-            newTemp?.map((temp: { name: string; value: IItems[]; image }) => {
-              const { name, value, image } = temp;
-              return (
-                <div
-                  onClick={(e) => handleClick(e, value)}
-                  className="cursor-pointer flex flex-col justify-center items-center"
-                >
-                  <img className="rounded-[0.25rem]" src={image} />
-                  <div className="margin-text text-xs">{name}</div>
-                </div>
-              );
-            })}
+            newTemp?.map(
+              (temp: { name: string; value: IWorkspaceElement[]; image }) => {
+                const { name, value, image } = temp;
+                return (
+                  <div
+                    onClick={(e) => handleClick(e, value)}
+                    className="cursor-pointer flex flex-col justify-center items-center"
+                  >
+                    <img
+                      className="rounded-[0.25rem]"
+                      src={image}
+                      alt="Template"
+                    />
+                    <div className="margin-text text-xs">{name}</div>
+                  </div>
+                );
+              }
+            )}
         </div>
       </div>
     </>

@@ -1,34 +1,30 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import {
   AiOutlineAlignLeft,
   AiOutlineAlignRight,
   AiOutlineAlignCenter,
 } from "react-icons/ai";
-import { ReplaceStyle } from "components/utils/render-setting";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IAlignComponent {
-  setLeft: (justifyContent: string | boolean) => void;
-  setRight: (justifyContent: string | boolean) => void;
-  setCenter: (justifyContent: string | boolean) => void;
+  i: string;
   justifyContent: string;
 }
 
-const AlignComponent: FC<IAlignComponent> = ({
-  setLeft,
-  setRight,
-  setCenter,
-  justifyContent,
-}) => {
-  const handleChange = (action: ReplaceStyle) => {
-    if (action == ReplaceStyle.LEFT) {
-      setLeft(justifyContent !== "left");
-    } else if (action == ReplaceStyle.RIGHT) {
-      setRight(justifyContent !== "right");
-    } else if (action == ReplaceStyle.CENTER) {
-      setCenter(justifyContent !== "center");
-    }
+const AlignComponent: FC<IAlignComponent> = ({ i, justifyContent }) => {
+  const dispatch = useDispatch();
+
+  const handleAlignChange = (type: string) => {
+    dispatch(
+      updateWorkspaceElementStyle({
+        settingItemId: i,
+        propertyName: "justifyContent",
+        propertyValue: justifyContent === type ? "inherit" : type,
+      })
+    );
   };
 
   return (
@@ -37,19 +33,19 @@ const AlignComponent: FC<IAlignComponent> = ({
         Text Align
         <div className="flex mt-3 px-3">
           <span
-            onClick={() => handleChange(ReplaceStyle.LEFT)}
+            onClick={() => handleAlignChange("left")}
             className="align-div flex items-center justify-center font-bold shadow text-[18px] p-2 mr-2 my-2 font-regular"
           >
             <AiOutlineAlignLeft className="text-[18px]" />
           </span>
           <span
-            onClick={() => handleChange(ReplaceStyle.CENTER)}
+            onClick={() => handleAlignChange("center")}
             className="align-div flex items-center justify-center italic shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
           >
             <AiOutlineAlignCenter className="text-[18px]" />
           </span>
           <span
-            onClick={() => handleChange(ReplaceStyle.RIGHT)}
+            onClick={() => handleAlignChange("right")}
             className="align-div flex items-center justify-center underline shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
           >
             <AiOutlineAlignRight className="text-[18px]" />

@@ -1,30 +1,48 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceValue } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IBorderRadiusComponent {
+  i: string;
   borderRadius: number;
-  setBorderRadius: (borderRadius: number) => void;
 }
 
 const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
+  i,
   borderRadius,
-  setBorderRadius,
 }) => {
-  // Derive best type of e
+  const dispatch = useDispatch();
+
+  // FIX: find suitable type
   const handleRadius = (e, action: ReplaceValue) => {
     if (action == ReplaceValue.INCREMENT) {
-      setBorderRadius(borderRadius + 1);
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "borderRadius",
+          propertyValue: borderRadius + 1,
+        })
+      );
     } else if (action == ReplaceValue.DECREMENT) {
-      if (borderRadius <= 0) {
-        setBorderRadius(0);
-      } else {
-        setBorderRadius(borderRadius - 1);
-      }
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "borderRadius",
+          propertyValue: borderRadius <= 0 ? 0 : borderRadius - 1,
+        })
+      );
     } else if (action == ReplaceValue.CHANGE) {
-      setBorderRadius(+e.target.value);
+      dispatch(
+        updateWorkspaceElementStyle({
+          settingItemId: i,
+          propertyName: "borderRadius",
+          propertyValue: +e.target.value,
+        })
+      );
     }
   };
 

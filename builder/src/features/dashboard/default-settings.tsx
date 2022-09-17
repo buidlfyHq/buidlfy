@@ -1,12 +1,10 @@
 import React, { FC } from "react";
 import BgColorComponent from "components/settings/bg-color-component";
-import { RiText } from "react-icons/ri";
-import IColor from "interfaces/color";
 import "styles/components.css";
 
 interface IDefaultSettings {
-  backgroundColor: string;
-  setBackgroundColor: (backgroundColor: string) => void;
+  workspaceBackgroundColor: string;
+  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;
@@ -15,8 +13,8 @@ interface IDefaultSettings {
 }
 
 const DefaultSettings: FC<IDefaultSettings> = ({
-  backgroundColor,
-  setBackgroundColor,
+  workspaceBackgroundColor,
+  setWorkspaceBackgroundColor,
   head,
   setHead,
 }) => {
@@ -36,8 +34,8 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         <h3 className="mb-2 setting-text mt-4">Site Settings</h3>
         <aside className="mb-1">
           <BgColorComponent
-            backgroundColor={backgroundColor}
-            setBackgroundColor={setBackgroundColor}
+            workspaceBackgroundColor={workspaceBackgroundColor}
+            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           />
         </aside>
 
