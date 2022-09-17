@@ -10,35 +10,35 @@ import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 const ContainerSettings: FC = () => {
-  const selectedItem: IWorkspaceElement = useSelector(
+  const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
   return (
     <>
       <h3 className="ml-[1rem]">
-        {selectedItem ? (
-          <span className="setting-text">{selectedItem.name}</span>
+        {selectedElement ? (
+          <span className="setting-text">{selectedElement.name}</span>
         ) : null}
       </h3>
-      <UploadComponent i={selectedItem.i} />
+      <UploadComponent i={selectedElement.i} />
       <BgColorComponent
-        i={selectedItem.i}
-        elementBackgroundColor={selectedItem.style.backgroundColor}
+        i={selectedElement.i}
+        elementBackgroundColor={selectedElement.style.backgroundColor}
       />
       <ColorComponent
-        i={selectedItem.i}
-        color={selectedItem.style.color}
+        i={selectedElement.i}
+        color={selectedElement.style.color}
       />
       <BorderRadiusComponent
-        i={selectedItem.i}
-        borderRadius={selectedItem.style.borderRadius}
+        i={selectedElement.i}
+        borderRadius={selectedElement.style.borderRadius}
       />
       <BorderComponent
-        i={selectedItem.i}
-        borderWidth={selectedItem.style.borderWidth}
+        i={selectedElement.i}
+        borderWidth={selectedElement.style.borderWidth}
       />
-      <ShadowComponent i={selectedItem.i} shadow={selectedItem.style.shadow} />
+      <ShadowComponent i={selectedElement.i} shadow={selectedElement.style.shadow} />
     </>
   );
 };

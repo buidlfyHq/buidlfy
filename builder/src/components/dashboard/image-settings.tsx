@@ -9,32 +9,32 @@ import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 const ImageSettings: FC = () => {
-  const selectedItem: IWorkspaceElement = useSelector(
+  const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
   return (
     <>
       <h3 className="ml-[1rem]">
-        {selectedItem ? (
-          <span className="setting-text">{selectedItem.name}</span>
+        {selectedElement ? (
+          <span className="setting-text">{selectedElement.name}</span>
         ) : null}
       </h3>
-      <UploadComponent i={selectedItem.i} />
+      <UploadComponent i={selectedElement.i} />
       <AlignComponent
-        i={selectedItem.i}
-        justifyContent={selectedItem.style.justifyContent}
+        i={selectedElement.i}
+        justifyContent={selectedElement.style.justifyContent}
       />
       <SizeComponent
-        i={selectedItem.i}
-        width={selectedItem.style?.width}
-        height={selectedItem.style?.height}
+        i={selectedElement.i}
+        width={selectedElement.style?.width}
+        height={selectedElement.style?.height}
       />
       <BackgroundSizeComponent
-        i={selectedItem.i}
-        backgroundSize={selectedItem.style?.backgroundSize}
+        i={selectedElement.i}
+        backgroundSize={selectedElement.style?.backgroundSize}
       />
-      <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
+      <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
     </>
   );
 };

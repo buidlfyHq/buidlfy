@@ -16,7 +16,7 @@ import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
 import { IRootState } from "redux/root-state.interface";
 import {
-  IWorkspaceElement, sidebarEnum,
+  IWorkspaceElement, SidebarEnum,
 } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
@@ -87,12 +87,12 @@ const Container: FC<IContainer> = ({
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
-      let selectedItem = children.filter(
+      let selectedElement = children.filter(
         (item: IWorkspaceElement) => item.i === obj.i
       )[0];
       const { h, minW, x, y, w, i, minH } = obj;
-      return (selectedItem = {
-        ...selectedItem,
+      return (selectedElement = {
+        ...selectedElement,
         h,
         minW,
         minH,
@@ -188,7 +188,7 @@ const Container: FC<IContainer> = ({
   const onComponentAddClick = (itemName: string, i: string) => {
     setIsContainerSelected(true);
     showSidebar();
-    handleSidebar(sidebarEnum.ELEMENTS);
+    handleSidebar(SidebarEnum.ELEMENTS);
     setOpenSetting(false);
     dispatch(setSelectedElement(i));
   };

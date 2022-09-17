@@ -3,7 +3,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 import Template from "pages/templates";
 import Elements from "features/dashboard/elements";
 import DefaultSettings from "features/dashboard/default-settings";
-import { sidebarEnum } from "redux/workspace/workspace.interfaces";
+import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface ISidebar {
@@ -96,13 +96,13 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </div>
       {/* Components */}
-      {sideElement == sidebarEnum.ELEMENTS ? (
+      {sideElement == SidebarEnum.ELEMENTS ? (
         <Elements
           isContainerSelected={isContainerSelected}
         />
       ) : null}
-      {sideElement == sidebarEnum.TEMPLATES ? <Template /> : null}
-      {sideElement == sidebarEnum.STYLES ? (
+      {sideElement == SidebarEnum.TEMPLATES ? <Template /> : null}
+      {sideElement == SidebarEnum.STYLES ? (
         <DefaultSettings
           workspaceBackgroundColor={workspaceBackgroundColor}
           setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}

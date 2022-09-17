@@ -13,14 +13,14 @@ import "styles/components.css";
 const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const ref = useRef(null);
   const dispatch = useDispatch();
-  const selectedItem: IWorkspaceElement = useSelector(
+  const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
   const handleDelete = () => {
     dispatch(
       updateWorkspaceElementStyle({
-        settingItemId: selectedItem.i,
+        settingItemId: selectedElement.i,
         propertyName: "deleteComponent",
         propertyValue: true,
       })
@@ -29,7 +29,7 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
 
   return (
     <>
-      {selectedItem.i ? (
+      {selectedElement.i ? (
         <>
           <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
             <div

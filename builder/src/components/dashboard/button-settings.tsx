@@ -26,7 +26,7 @@ const ButtonSettings: FC<ISettings> = ({
   setOpenTab,
 }) => {
   const dispatch = useDispatch();
-  const selectedItem: IWorkspaceElement = useSelector(
+  const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
@@ -59,21 +59,21 @@ const ButtonSettings: FC<ISettings> = ({
       </span>
       <span className={openTab === 1 ? "block" : "hidden"} id="link-one">
         <h3 className="ml-[0.5rem] mt-[3rem]">
-          {selectedItem ? (
-            <span className="setting-text ">{selectedItem.name}</span>
+          {selectedElement ? (
+            <span className="setting-text ">{selectedElement.name}</span>
           ) : null}
         </h3>
         <CombinedComponent
-          i={selectedItem.i}
-          fontWeight={selectedItem.style.fontWeight}
-          fontStyle={selectedItem.style.fontStyle}
-          textDecoration={selectedItem.style.textDecoration}
-          justifyContent={selectedItem.style.justifyContent}
+          i={selectedElement.i}
+          fontWeight={selectedElement.style.fontWeight}
+          fontStyle={selectedElement.style.fontStyle}
+          textDecoration={selectedElement.style.textDecoration}
+          justifyContent={selectedElement.style.justifyContent}
         />
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
           {/* <RiText className="text-[18px] mr-3" /> */}
           <textarea
-            value={selectedItem.value}
+            value={selectedElement.value}
             onChange={(e) => handleSettingChange(e, "value")}
             className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
             placeholder="Please write your text here..."
@@ -84,7 +84,7 @@ const ButtonSettings: FC<ISettings> = ({
             <IoMdLink className="text-[18px]" />
           </div>
           <input
-            value={selectedItem.link}
+            value={selectedElement.link}
             onChange={(e) => handleSettingChange(e, "link")}
             className="changeText pl-[2.5rem] py-[0.4rem] input-text"
             type="text"
@@ -92,41 +92,41 @@ const ButtonSettings: FC<ISettings> = ({
           />
         </div>
         <ConnectSwitchComponent
-          i={selectedItem.i}
-          connectWallet={selectedItem.connectWallet}
+          i={selectedElement.i}
+          connectWallet={selectedElement.connectWallet}
         />
         <FontSizeComponent
-          i={selectedItem.i}
-          fontSize={selectedItem.style.fontSize}
+          i={selectedElement.i}
+          fontSize={selectedElement.style.fontSize}
         />
         <BorderRadiusComponent
-          i={selectedItem.i}
-          borderRadius={selectedItem.style.borderRadius}
+          i={selectedElement.i}
+          borderRadius={selectedElement.style.borderRadius}
         />
-        <ColorComponent i={selectedItem.i} color={selectedItem.style.color} />
+        <ColorComponent i={selectedElement.i} color={selectedElement.style.color} />
         <BorderColorComponent
-          i={selectedItem.i}
-          borderColor={selectedItem.style.borderColor}
+          i={selectedElement.i}
+          borderColor={selectedElement.style.borderColor}
         />
         <BgColorComponent
-          i={selectedItem.i}
-          elementBackgroundColor={selectedItem.style.backgroundColor}
+          i={selectedElement.i}
+          elementBackgroundColor={selectedElement.style.backgroundColor}
         />
         <MarginComponent
-          i={selectedItem.i}
-          margin={selectedItem.style.margin}
+          i={selectedElement.i}
+          margin={selectedElement.style.margin}
         />
         <PaddingComponent
-          i={selectedItem.i}
-          padding={selectedItem.style.padding}
+          i={selectedElement.i}
+          padding={selectedElement.style.padding}
         />
         <ShadowComponent
-          i={selectedItem.i}
-          shadow={selectedItem.style.shadow}
+          i={selectedElement.i}
+          shadow={selectedElement.style.shadow}
         />
       </span>
       <div className={openTab === 2 ? "block" : "hidden"} id="link-two">
-        <AdvanceComponent selectedItem={selectedItem} />
+        <AdvanceComponent selectedElement={selectedElement} />
       </div>
     </>
   );

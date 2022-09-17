@@ -77,7 +77,7 @@ export interface IElementDetail {
   imageSizeProperty?: boolean;
 }
 
-export enum sidebarEnum {
+export enum SidebarEnum {
   PAGES = "pages",
   TEMPLATES = "templates",
   ELEMENTS = "elements",
@@ -97,7 +97,7 @@ export interface IBackgroundContainer {
 }
 
 export interface ISettings {
-  selectedItem?: IWorkspaceElement;
+  selectedElement?: IWorkspaceElement;
   setShowComponent?: (showComponent: IShowComponent) => void;
   showComponent?: IShowComponent;
   settingItemId?: string;

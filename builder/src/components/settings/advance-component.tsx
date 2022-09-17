@@ -13,7 +13,7 @@ import "styles/components.css";
 import "styles/dashboard.css";
 
 interface IAdvanceComponent {
-  selectedItem: IWorkspaceElement;
+  selectedElement: IWorkspaceElement;
 }
 
 interface IContract {
@@ -21,7 +21,7 @@ interface IContract {
   text; // type to be added
 }
 
-const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedItem }) => {
+const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const dispatch = useDispatch();
   const contract: { abi: string; address: string } = useSelector(
     (state: any) => state.contract
@@ -63,12 +63,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedItem }) => {
           <div className="flex justify-center mt-[3rem]" />
           <AbiMethods
             setShowComponent={setShowComponent}
-            selectedItem={selectedItem}
+            selectedElement={selectedElement}
             setMethodOpen={setMethodOpen}
           />
           <AbiComponents
             showComponent={showComponent}
-            elementId={selectedItem.i}
+            elementId={selectedElement.i}
           />
           ]
         </>

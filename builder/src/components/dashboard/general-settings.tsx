@@ -15,28 +15,28 @@ import {
 import "styles/components.css";
 
 const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
-  const selectedItem: IWorkspaceElement = useSelector(
+  const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
   return (
     <>
       <h3 className="ml-[0.5rem]">
-        {selectedItem ? (
-          <span className="setting-text">{selectedItem.name}</span>
+        {selectedElement ? (
+          <span className="setting-text">{selectedElement.name}</span>
         ) : null}
       </h3>
       <CombinedComponent
-        i={selectedItem.i}
-        fontWeight={selectedItem.style.fontWeight}
-        fontStyle={selectedItem.style.fontStyle}
-        textDecoration={selectedItem.style.textDecoration}
-        justifyContent={selectedItem.style.justifyContent}
+        i={selectedElement.i}
+        fontWeight={selectedElement.style.fontWeight}
+        fontStyle={selectedElement.style.fontStyle}
+        textDecoration={selectedElement.style.textDecoration}
+        justifyContent={selectedElement.style.justifyContent}
       />
       <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
         {/* <RiText className="text-[18px] mr-3" /> */}
         <textarea
-          value={selectedItem.value}
+          value={selectedElement.value}
           onChange={(e) => handleSettingChange(e, "value")}
           className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
           placeholder="Please write your text here..."
@@ -47,7 +47,7 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
           <IoMdLink className="text-[18px]" />
         </div>
         <input
-          value={selectedItem.link}
+          value={selectedElement.link}
           onChange={(e) => handleSettingChange(e, "link")}
           className="changeText pl-[2.5rem] py-[0.4rem] input-text"
           type="text"
@@ -56,18 +56,18 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
       </div>
 
       <FontSizeComponent
-        i={selectedItem.i}
-        fontSize={selectedItem.style.fontSize}
+        i={selectedElement.i}
+        fontSize={selectedElement.style.fontSize}
       />
-      <ColorComponent i={selectedItem.i} color={selectedItem.style.color} />
+      <ColorComponent i={selectedElement.i} color={selectedElement.style.color} />
       <BgColorComponent
-        i={selectedItem.i}
-        elementBackgroundColor={selectedItem.style.backgroundColor}
+        i={selectedElement.i}
+        elementBackgroundColor={selectedElement.style.backgroundColor}
       />
-      <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
+      <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
       <PaddingComponent
-        i={selectedItem.i}
-        padding={selectedItem.style.padding}
+        i={selectedElement.i}
+        padding={selectedElement.style.padding}
       />
     </>
   );

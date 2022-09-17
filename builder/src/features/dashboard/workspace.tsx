@@ -93,18 +93,18 @@ const Workspace: FC<IWorkspaceComponent> = ({
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
     if (layout.length === 0) setIsContainerSelected(false);
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
-      let selectedItem = workspaceElements.filter(
+      let selectedElement = workspaceElements.filter(
         (item) => item.i === obj.i
       )[0];
       let height: number;
       const { h, minW, minH, x, y, w, i } = obj;
-      if (containerCheck(selectedItem)) {
-        let maxY = Math.max(...selectedItem.children.map((item) => item.y));
-        let el = selectedItem.children?.filter((item) => item.y === maxY)[0];
+      if (containerCheck(selectedElement)) {
+        let maxY = Math.max(...selectedElement.children.map((item) => item.y));
+        let el = selectedElement.children?.filter((item) => item.y === maxY)[0];
         height = el ? el.h + el.y : minH;
       }
-      return (selectedItem = {
-        ...selectedItem,
+      return (selectedElement = {
+        ...selectedElement,
         h,
         minW,
         minH: height,

@@ -21,7 +21,7 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
   const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const selectedItem: IWorkspaceElement = useSelector(
+  const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
@@ -29,7 +29,7 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
     let c = components?.find((component) => component.name === name);
     if (isContainerSelected) {
       const availableHandles: ResizeHandles = ["se"];
-      let y = checkContainerY(selectedItem);
+      let y = checkContainerY(selectedElement);
       let newC = {
         ...c,
         i: uid(),
@@ -40,12 +40,12 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
         resizeHandles: availableHandles,
       };
       let updatedItem = {
-        ...selectedItem,
+        ...selectedElement,
         h: y + c.h,
-        children: [...selectedItem.children, newC],
+        children: [...selectedElement.children, newC],
       };
       const elementsIndex = workspaceElements.findIndex(
-        (item) => item.i === selectedItem.i
+        (item) => item.i === selectedElement.i
       );
       let newArray = [...workspaceElements];
       newArray[elementsIndex] = updatedItem;
@@ -95,10 +95,10 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
     }
   };
 
-  const checkContainerY = (selectedItem: IWorkspaceElement) => {
-    if (selectedItem.children.length === 0) return 0;
+  const checkContainerY = (selectedElement: IWorkspaceElement) => {
+    if (selectedElement.children.length === 0) return 0;
     else {
-      let arr = selectedItem.children.map((item: IWorkspaceElement) => item.y);
+      let arr = selectedElement.children.map((item: IWorkspaceElement) => item.y);
       return Math.max(...arr) + 1;
     }
   };

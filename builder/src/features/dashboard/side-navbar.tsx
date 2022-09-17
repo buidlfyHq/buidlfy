@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import elements from "assets/elements.png";
 import styles from "assets/styles.png";
 import templates from "assets/templates.png";
-import { sidebarEnum } from "redux/workspace/workspace.interfaces";
+import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface ISideNavbar {
@@ -69,7 +69,7 @@ const SideNavbar: FC<ISideNavbar> = ({
         <div
           onClick={() => {
             showSidebar(true);
-            handleSidebar(sidebarEnum.TEMPLATES);
+            handleSidebar(SidebarEnum.TEMPLATES);
             hideSettingSidebar();
           }}
           className="cursor-pointer"
@@ -88,7 +88,7 @@ const SideNavbar: FC<ISideNavbar> = ({
         <div
           onClick={() => {
             showSidebar(true);
-            handleSidebar(sidebarEnum.ELEMENTS);
+            handleSidebar(SidebarEnum.ELEMENTS);
             hideSettingSidebar();
           }}
           className="mt-8 cursor-pointer"
@@ -107,7 +107,7 @@ const SideNavbar: FC<ISideNavbar> = ({
         <div
           onClick={() => {
             showSidebar(true);
-            handleSidebar(sidebarEnum.STYLES);
+            handleSidebar(SidebarEnum.STYLES);
             hideSettingSidebar();
           }}
           className="mt-8 cursor-pointer"

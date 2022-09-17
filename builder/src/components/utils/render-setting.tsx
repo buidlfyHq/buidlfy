@@ -58,7 +58,7 @@ export enum ReplaceStyle {
 
 const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const dispatch = useDispatch();
-  const selectedItem: IWorkspaceElement = useSelector(
+  const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
@@ -70,14 +70,14 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   ) => {
     dispatch(
       updateWorkspaceElement({
-        settingItemId: selectedItem.i,
+        settingItemId: selectedElement.i,
         propertyName,
         propertyValue: e.target.value,
       })
     );
   };
 
-  switch (selectedItem.name) {
+  switch (selectedElement.name) {
     case "Button":
       return (
         <ButtonSettings

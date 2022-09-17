@@ -12,22 +12,22 @@ import {
 import "styles/components.css";
 
 const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
-  const selectedItem: IWorkspaceElement = useSelector(
+  const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
   return (
     <>
       <h3 className="ml-[1rem]">
-        {selectedItem ? (
-          <span className="setting-text">{selectedItem.name}</span>
+        {selectedElement ? (
+          <span className="setting-text">{selectedElement.name}</span>
         ) : null}
       </h3>
 
       <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
         {/* <RiText className="text-[18px] mr-3" /> */}
         <textarea
-          value={selectedItem.placeholder}
+          value={selectedElement.placeholder}
           onChange={(e) => handleSettingChange(e, "placeholder")}
           className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
           placeholder="Please write your text here..."
@@ -35,15 +35,15 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       </div>
 
       <BorderRadiusComponent
-        i={selectedItem.i}
-        borderRadius={selectedItem.style.borderRadius}
+        i={selectedElement.i}
+        borderRadius={selectedElement.style.borderRadius}
       />
-      <MarginComponent i={selectedItem.i} margin={selectedItem.style.margin} />
+      <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
       <ColorComponent
-        i={selectedItem.i}
-        color={selectedItem.style.color}
+        i={selectedElement.i}
+        color={selectedElement.style.color}
       />
-      <ShadowComponent i={selectedItem.i} shadow={selectedItem.style.shadow} />
+      <ShadowComponent i={selectedElement.i} shadow={selectedElement.style.shadow} />
     </>
   );
 };
