@@ -38,9 +38,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
 
   return (
     <div className="items-center w-full mx-1 py-2 text-gray-600 rounded">
-      <div className="px-2 margin-text text-left mt-2 text-xl text-gray-500 font-regular font-normal not-italic">
-        Upload Image
-      </div>
+      <div className="px-2 margin-text text-left mt-2 ">Upload Image</div>
       <div className="flex justify-center">
         <div className="mb-3 mt-5 upload-img">
           <label htmlFor="inputTag" className="image-label">

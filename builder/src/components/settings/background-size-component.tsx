@@ -28,7 +28,7 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
 
   return (
     <>
-      <span className="margin-text text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
+      <span className="margin-text text-left px-3 mt-2 mb-0 ">
         Background Size
         <div className="flex mt-3 px-3">
           <span

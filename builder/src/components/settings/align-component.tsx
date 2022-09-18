@@ -29,7 +29,7 @@ const AlignComponent: FC<IAlignComponent> = ({ i, justifyContent }) => {
 
   return (
     <>
-      <span className="margin-text text-left px-3 mt-2 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
+      <span className="margin-text text-left px-3 mt-2 mb-0 ">
         Text Align
         <div className="flex mt-3 px-3">
           <span

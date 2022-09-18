@@ -57,7 +57,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding }) => {
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">
-        <span className="px-1 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
+        <span className="px-1 text-left my-1 ">
           <span className="margin-text">Padding</span>
           <div className="flex mt-3">
             <h6 className="margin-subtext mr-2">L</h6>
@@ -67,7 +67,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding }) => {
               name="paddingLeft"
               value={padding?.paddingLeft}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange("paddingLeft", e)}
             />
             <AiOutlineCaretUp
@@ -89,7 +89,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding }) => {
               name="paddingRight"
               value={padding?.paddingRight}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange("paddingRight", e)}
             />
             <AiOutlineCaretUp
@@ -113,7 +113,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding }) => {
               name="paddingTop"
               value={padding?.paddingTop}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange("paddingTop", e)}
             />
             <AiOutlineCaretUp
@@ -135,7 +135,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding }) => {
               name="paddingBottom"
               value={padding?.paddingBottom}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange("paddingBottom", e)}
             />
             <AiOutlineCaretUp

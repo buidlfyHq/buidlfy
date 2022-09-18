@@ -50,7 +50,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         </aside>
 
         <aside className="items-center w-full px-3 py-2 text-gray-600 rounded">
-          <div className="px-1 margin-text text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
+          <div className="px-1 margin-text text-left my-1 ">
             Upload Site Logo
           </div>
           {/* It will be used in later features */}

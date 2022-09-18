@@ -77,7 +77,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">
-        <span className="px-1 text-left text-xl text-gray-500 font-regular font-normal not-italic">
+        <span className="px-1 text-left my-1 ">
           <span className="margin-text">Sizing Options</span>
           <div className="flex mt-3">
             <h6 className="mr-2 margin-subtext">W</h6>
@@ -85,7 +85,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
               inputMode="numeric"
               value={width}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange(e, ReplaceStyle.WIDTH)}
             />
             <AiOutlineCaretUp
@@ -101,7 +101,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
               inputMode="numeric"
               value={height}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange(e, ReplaceStyle.HEIGHT)}
             />
             <AiOutlineCaretUp

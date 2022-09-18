@@ -16,7 +16,8 @@ import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
 import { IRootState } from "redux/root-state.interface";
 import {
-  IWorkspaceElement, SidebarEnum,
+  IWorkspaceElement,
+  SidebarEnum,
 } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
@@ -185,12 +186,12 @@ const Container: FC<IContainer> = ({
     setSideElement(selectedSidebarElements);
   };
 
-  const onComponentAddClick = (itemName: string, i: string) => {
+  const onComponentAddClick = (i: string) => {
     setIsContainerSelected(true);
     showSidebar();
     handleSidebar(SidebarEnum.ELEMENTS);
-    setOpenSetting(false);
     dispatch(setSelectedElement(i));
+    setOpenSetting(false);
   };
 
   const onComponentClick = (itemName: string, i: string) => {
@@ -214,7 +215,7 @@ const Container: FC<IContainer> = ({
       dispatch(setSelectorToDefault());
     }
   };
-  const onComponentEditClick = (itemName: string, i: string) => {
+  const onComponentEditClick = (i: string) => {
     setIsContainerSelected(false);
     setOpenSetting(true);
     hideSidebar();
@@ -318,7 +319,7 @@ const Container: FC<IContainer> = ({
             id="add-img"
             onMouseOut={() => setDrag(false)}
             onMouseOver={() => setDrag(false)}
-            onClick={() => onComponentAddClick(item.name, item.i)}
+            onClick={() => onComponentAddClick(item.i)}
           >
             <img src={add} />
           </span>
@@ -326,7 +327,7 @@ const Container: FC<IContainer> = ({
             onMouseOut={() => setDrag(false)}
             onMouseOver={() => setDrag(false)}
             id="edit-img"
-            onClick={() => onComponentEditClick(item.name, item.i)}
+            onClick={() => onComponentEditClick(item.i)}
           >
             <img src={edit} />
           </span>
