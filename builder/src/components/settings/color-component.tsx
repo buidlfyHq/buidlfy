@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect, useRef } from "react";
+import React, { useState, FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import ColorPicker from "react-best-gradient-color-picker";
@@ -14,19 +14,7 @@ interface IColorComponent {
 
 const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
   const dispatch = useDispatch();
-  const ref = useRef<HTMLDivElement>();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
-
-  useEffect(() => {
-    // FIX: find a suitable type for this event
-    const handleOutsideClick = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setDisplayColorPicker(false);
-      }
-    };
-    document.addEventListener("click", handleOutsideClick);
-    return () => document.removeEventListener("click", handleOutsideClick);
-  }, [ref]);
 
   const handleChange = (e: string) => {
     dispatch(
@@ -47,7 +35,6 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
           <div className="flex">
             <div className="margin-text grow flex my-1 px-1">Color</div>
             <div
-              ref={ref}
               onClick={() => setDisplayColorPicker(true)}
               className="flex items-center cursor-pointer"
             >
@@ -64,17 +51,17 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
         {displayColorPicker ? (
           <Dialog
             as="div"
-            className="fixed top-[220px] right-[260px] bottom-[1px] py-[15px] z-100 overflow-none bg-white shadow-lg"
+            className="absolute top-[220px] right-[260px] bottom-[1px] py-[15px] z-100 overflow-none bg-white shadow-lg"
             open={displayColorPicker}
             onClose={() => setDisplayColorPicker(false)}
           >
             <div className=" px-4 text-right">
               <div onClick={() => setDisplayColorPicker(false)} />
               <ColorPicker
-                hideEyeDrop="false"
-                hideInputType="false"
-                hideColorGuide="false"
-                hideAdvancedSliders="false"
+                hideEyeDrop={false}
+                hideInputType={false}
+                hideColorGuide={false}
+                hideAdvancedSliders={false}
                 value={color}
                 onChange={handleChange}
               />

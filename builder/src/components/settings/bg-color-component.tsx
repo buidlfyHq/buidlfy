@@ -1,4 +1,4 @@
-import React, { useState, FC, useRef, useEffect } from "react";
+import React, { useState, FC } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { Dialog } from "@headlessui/react";
@@ -21,23 +21,11 @@ const BgColorComponent: FC<IBgColorComponent> = ({
   setWorkspaceBackgroundColor,
 }) => {
   const dispatch = useDispatch();
-  const ref = useRef<HTMLDivElement>();
   const color = workspaceBackgroundColor
     ? workspaceBackgroundColor
     : elementBackgroundColor;
 
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
-
-  useEffect(() => {
-    // FIX: find a suitable type for this event
-    const handleOutsideClick = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setDisplayColorPicker(false);
-      }
-    };
-    document.addEventListener("click", handleOutsideClick);
-    return () => document.removeEventListener("click", handleOutsideClick);
-  }, [ref]);
 
   const handleChange = (e: string) => {
     if (workspaceBackgroundColor) {
@@ -58,10 +46,10 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       <div>
         <div onClick={() => setDisplayColorPicker(false)} />
         <ColorPicker
-          hideEyeDrop="false"
-          hideInputType="false"
-          hideColorGuide="false"
-          hideAdvancedSliders="false"
+          hideEyeDrop={false}
+          hideInputType={false}
+          hideColorGuide={false}
+          hideAdvancedSliders={false}
           value={color}
           onChange={handleChange}
         />
@@ -80,7 +68,6 @@ const BgColorComponent: FC<IBgColorComponent> = ({
             Background Color
           </div>
           <div
-            ref={ref}
             onClick={() => setDisplayColorPicker(true)}
             className="flex items-center cursor-pointer"
           >
