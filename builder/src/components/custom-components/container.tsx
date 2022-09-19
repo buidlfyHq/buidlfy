@@ -196,8 +196,8 @@ const Container: FC<IContainer> = ({
 
   const onComponentClick = (itemName: string, i: string) => {
     if (contractElementSelector === null) {
-      setOpenSetting(true);
       dispatch(setSelectedElement(i));
+      setOpenSetting(true);
       setOpenTab(1);
     } else {
       // Add validation for selection
@@ -310,21 +310,21 @@ const Container: FC<IContainer> = ({
         <div className="flex">
           <span
             id="drag"
-            onMouseOut={() => setDrag(false)}
+            onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(true)}
           >
             <img className="" src={dragImg} />
           </span>
           <span
             id="add-img"
-            onMouseOut={() => setDrag(false)}
+            onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
             onClick={() => onComponentAddClick(item.i)}
           >
             <img src={add} />
           </span>
           <span
-            onMouseOut={() => setDrag(false)}
+            onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
             id="edit-img"
             onClick={() => onComponentEditClick(item.i)}
