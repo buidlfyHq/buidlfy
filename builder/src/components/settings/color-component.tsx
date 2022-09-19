@@ -38,7 +38,6 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
       })
     );
   };
-  console.log(displayColorPicker, "display");
   return (
     <>
       <div
