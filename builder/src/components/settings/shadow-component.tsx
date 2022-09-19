@@ -52,7 +52,7 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
   };
 
   return (
-    <div className="margin-text text-left px-3 mt-6 mb-0 text-xl text-gray-500 font-regular font-normal not-italic">
+    <div className="margin-text text-left px-3 py-2 mb-0 ">
       <span className="flex px-1">
         <span> Shadow </span>{" "}
         <BsBrightnessLow className="text-[18px] ml-2 mt-[-2px]" />
@@ -60,19 +60,19 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
       <div className="flex mt-3 px-1">
         <span
           onClick={() => handleChange(ReplaceStyle.SMALL)}
-          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
+          className="shadow-div flex items-center justify-center shadow py-2 px-3 font-regular"
         >
           S
         </span>
         <span
           onClick={() => handleChange(ReplaceStyle.MEDIUM)}
-          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 mx-3 font-regular"
+          className="shadow-div flex items-center justify-center shadow py-2 px-3 mx-3 font-regular"
         >
           M
         </span>
         <span
           onClick={() => handleChange(ReplaceStyle.LARGE)}
-          className="shadow-div flex items-center justify-center shadow text-[18px] py-2 px-3 font-regular"
+          className="shadow-div flex items-center justify-center shadow py-2 px-3 font-regular"
         >
           L
         </span>

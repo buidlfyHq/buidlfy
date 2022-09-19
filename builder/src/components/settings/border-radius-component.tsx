@@ -55,16 +55,16 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
   return (
     <>
       <div className="flex text-gray-600 w-full mt-4 mx-2">
-        <span className="text-left text-xl text-gray-500 font-regular font-normal not-italic">
+        <span className="text-left ">
           <div className="flex mt-3">
             <div className="flex">
               <span className="font-text">Border Radius:</span>
               <select
-                defaultValue={borderRadius}
-                onClick={(e) => handleRadius(e, ReplaceValue.CHANGE)}
-                className="form-select font-div appearance-none block py-1.5 pl-[10.5rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:outline-none focus:shadow-none"
+                onChange={(e) => handleRadius(e, ReplaceValue.CHANGE)}
+                className="form-select font-div appearance-none block py-1.5 pl-[10.5rem] text-sm font-normal text-gray-700"
                 aria-label="Default select example"
               >
+                <option value={borderRadius}>{borderRadius}</option>
                 {options}
               </select>
               <AiOutlineCaretUp

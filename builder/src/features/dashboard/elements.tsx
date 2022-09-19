@@ -98,7 +98,9 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
   const checkContainerY = (selectedElement: IWorkspaceElement) => {
     if (selectedElement.children.length === 0) return 0;
     else {
-      let arr = selectedElement.children.map((item: IWorkspaceElement) => item.y);
+      let arr = selectedElement.children.map(
+        (item: IWorkspaceElement) => item.y
+      );
       return Math.max(...arr) + 1;
     }
   };
@@ -127,7 +129,7 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
           <input
             type="text"
             id="simple-search"
-            className="search rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 "
+            className="search rounded-full focus:ring-[#dee0e9] focus:border-[#dee0e9] block w-full pl-10 p-2.5 "
             placeholder="Search"
             required
           />

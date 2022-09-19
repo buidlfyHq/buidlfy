@@ -22,9 +22,13 @@ interface IContract {
   text: any; // type to be added
 }
 
-const Modal: FC<IModal> = ({ isOpen, setIsOpen, methodOpen,
+const Modal: FC<IModal> = ({
+  isOpen,
+  setIsOpen,
+  methodOpen,
   setMethodOpen,
-  setNewContractList, }) => {
+  setNewContractList,
+}) => {
   const dispatch = useDispatch();
   const contractDetails: IContractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
@@ -171,8 +175,8 @@ const Modal: FC<IModal> = ({ isOpen, setIsOpen, methodOpen,
 
           <div className="mt-4">
             <button
-              type="button"
-              className="contract-button inline-flex flex contract-button py-2 px-[7.5rem]"
+              // type="button"
+              className="contract-button py-2 px-[7.5rem]"
               onClick={() => {
                 setIsOpen(false);
                 setMethodOpen(false);

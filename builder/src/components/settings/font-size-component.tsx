@@ -53,7 +53,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
 
   return (
     <div className="flex text-gray-600 w-full mt-4 mx-2">
-      <span className="text-left text-xl text-gray-500 font-regular font-normal not-italic">
+      <span className="text-left ">
         <div className="flex mt-3">
           <div className="flex">
             <span className="font-text">Font Size:</span>

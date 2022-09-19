@@ -50,9 +50,7 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
         <div className="items-center mx-2 py-2 mb-2">
           {/* <VscSymbolColor className="text-[18px] mr-3" /> */}
           <div className="flex">
-            <div className="margin-text grow flex my-1 px-1 text-xl not-italic font-normal text-gray-500 font-regular">
-              Border Color
-            </div>
+            <div className="margin-text grow flex my-1 px-1">Border Color</div>
             <div
               ref={ref}
               onClick={() => setDisplayColorPicker(true)}
