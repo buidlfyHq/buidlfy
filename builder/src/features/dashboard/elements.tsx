@@ -49,7 +49,12 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
       );
       let newArray = [...workspaceElements];
       newArray[elementsIndex] = updatedItem;
-      dispatch(updateWorkspaceElementsArray(newArray));
+      dispatch(
+        updateWorkspaceElementsArray({
+          workspaceElements: newArray,
+          settingItemId: selectedElement?.i,
+        })
+      );
     } else {
       const availableHandles: ResizeHandles = ["se"];
       const containerHandles: ResizeHandles = ["e"];
@@ -77,7 +82,12 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
         }));
         newC.children = newChildren;
       }
-      dispatch(updateWorkspaceElementsArray([...workspaceElements, newC]));
+      dispatch(
+        updateWorkspaceElementsArray({
+          workspaceElements: [...workspaceElements, newC],
+          settingItemId: selectedElement?.i,
+        })
+      );
     }
   };
   const checkY = (items: IWorkspaceElement[]) => {
@@ -98,7 +108,9 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
   const checkContainerY = (selectedElement: IWorkspaceElement) => {
     if (selectedElement.children.length === 0) return 0;
     else {
-      let arr = selectedElement.children.map((item: IWorkspaceElement) => item.y);
+      let arr = selectedElement.children.map(
+        (item: IWorkspaceElement) => item.y
+      );
       return Math.max(...arr) + 1;
     }
   };
@@ -118,9 +130,9 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
           </div>

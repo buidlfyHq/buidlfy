@@ -35,6 +35,7 @@ const ButtonSettings: FC<ISettings> = ({
     num: number
   ) => {
     e.preventDefault();
+    
     setOpenTab(num);
     if (num === 1) {
       dispatch(setSelectorToDefault());
@@ -71,7 +72,6 @@ const ButtonSettings: FC<ISettings> = ({
           justifyContent={selectedElement.style.justifyContent}
         />
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
-          {/* <RiText className="text-[18px] mr-3" /> */}
           <textarea
             value={selectedElement.value}
             onChange={(e) => handleSettingChange(e, "value")}

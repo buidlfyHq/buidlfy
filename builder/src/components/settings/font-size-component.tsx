@@ -43,7 +43,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
     }
   };
 
-  const options = [8, 9, 10, 11, 12, 14, 18, 24, 30, 36, 48, 60, 72, 96].map(
+  const options = [8, 9, 10, 11, 12, 14, 15, 18, 24, 30, 36, 48, 60, 72, 96].map(
     (number) => (
       <option key={number} value={number}>
         {number}
@@ -58,12 +58,11 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
           <div className="flex">
             <span className="font-text">Font Size:</span>
             <select
-              value={fontSize}
-              onClick={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
+              onChange={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
               className="form-select font-div appearance-none block py-1.5 pl-[10.2rem] text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:outline-none focus:shadow-none"
               aria-label="Default select example"
             >
-              <option selected>{fontSize}</option>
+              <option value={fontSize}>{fontSize}</option>
               {options}
             </select>
             <AiOutlineCaretUp
