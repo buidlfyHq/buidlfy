@@ -23,15 +23,23 @@ const workspaceSlice = createSlice({
   initialState,
   reducers: {
     // to update an element in workspace
-    updateWorkspaceElement(state, action: IAction) {
+    updateWorkspaceElement(state: IWorkspaceState, action: IAction) {
       if (!action.payload.settingItemId) return;
 
-      const updatedElements = state.workspaceElements.map(
-        (element: IWorkspaceElement) =>
-          mapElementsToWorkspace(element, action.payload)
+      const updatedElements = state.workspaceElements.map((element) =>
+        mapElementsToWorkspace(element, action.payload)
       );
 
-      return { ...state, workspaceElements: updatedElements };
+      const updatedSelectedElement = fetchSelectedElement(
+        updatedElements,
+        action.payload.settingItemId
+      );
+
+      return {
+        ...state,
+        workspaceElements: updatedElements,
+        selectedElement: updatedSelectedElement,
+      };
     },
     // to update the style of an element in workspace
     updateWorkspaceElementStyle(state, action: IAction) {
@@ -41,7 +49,17 @@ const workspaceSlice = createSlice({
         (element: IWorkspaceElement) =>
           mapElementStylesToWorkspace(element, action.payload)
       );
-      return { ...state, workspaceElements: updatedElements };
+
+      const updatedSelectedElement = fetchSelectedElement(
+        updatedElements,
+        action.payload.settingItemId
+      );
+
+      return {
+        ...state,
+        workspaceElements: updatedElements,
+        selectedElement: updatedSelectedElement,
+      };
     },
     // to update the sub style of an element in workspace
     updateWorkspaceElementSubStyle(state, action: IAction) {
@@ -51,7 +69,17 @@ const workspaceSlice = createSlice({
         (element: IWorkspaceElement) =>
           mapElementSubStyleToWorkspace(element, action.payload)
       );
-      return { ...state, workspaceElements: updatedElements };
+
+      const updatedSelectedElement = fetchSelectedElement(
+        updatedElements,
+        action.payload.settingItemId
+      );
+
+      return {
+        ...state,
+        workspaceElements: updatedElements,
+        selectedElement: updatedSelectedElement,
+      };
     },
     // to update the style of an image element in workspace
     updateWorkspaceImageElementStyle(state, action: IAction) {
@@ -61,7 +89,17 @@ const workspaceSlice = createSlice({
         (element: IWorkspaceElement) =>
           mapImageElementStylesToWorkspace(element, action.payload)
       );
-      return { ...state, workspaceElements: updatedElements };
+
+      const updatedSelectedElement = fetchSelectedElement(
+        updatedElements,
+        action.payload.settingItemId
+      );
+
+      return {
+        ...state,
+        workspaceElements: updatedElements,
+        selectedElement: updatedSelectedElement,
+      };
     },
 
     // to update the elements
@@ -69,7 +107,16 @@ const workspaceSlice = createSlice({
       state,
       action: { payload: IWorkspaceElement[] }
     ) {
-      return { ...state, workspaceElements: action.payload };
+      const updatedSelectedElement = fetchSelectedElement(
+        action.payload,
+        state.selectedElement?.i
+      );
+
+      return {
+        ...state,
+        workspaceElements: action.payload,
+        selectedElement: updatedSelectedElement,
+      };
     },
 
     // to set current selected element
@@ -85,13 +132,21 @@ const workspaceSlice = createSlice({
 
     // to save contract config
     saveContractConfig(state: IWorkspaceState, action: { payload }) {
+      const updatedContract = updateContractInElement(
+        state.workspaceElements,
+        state.selectedElement,
+        action.payload
+      );
+
+      const updatedSelectedElement = fetchSelectedElement(
+        updatedContract,
+        state.selectedElement.i
+      );
+
       return {
         ...state,
-        workspaceElements: updateContractInElement(
-          state.workspaceElements,
-          state.selectedElement,
-          action.payload
-        ),
+        workspaceElements: updatedContract,
+        selectedElement: updatedSelectedElement,
       };
     },
   },

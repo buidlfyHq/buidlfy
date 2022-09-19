@@ -9,7 +9,6 @@ import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
 
-const BACKEND_ADDR = "http://localhost:8000/api"; // backend url
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
 const Dashboard: FC = () => {
@@ -36,19 +35,6 @@ const Dashboard: FC = () => {
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
 
   useEffect(() => {
-    // Checks if user is authenticated
-    const getInformation = async () => {
-      const res = await fetch(`${BACKEND_ADDR}/is_authenticated`, {
-        credentials: "include",
-      });
-      const response = await res.text();
-      // If not authenticated redirect to sign-in page
-      if (JSON.parse(response).error) {
-        navigate("/");
-      }
-    };
-    getInformation();
-
     // checks for stored config
     let saveItems = localStorage.getItem("items");
     if (saveItems) {
