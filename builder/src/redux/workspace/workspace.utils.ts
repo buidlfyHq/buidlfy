@@ -47,7 +47,7 @@ export const mapElementStylesToWorkspace = (
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
   let selectedChild = findSelected(element, settingItemId);
-
+  
   if (element.i === settingItemId) {
     return {
       ...element,
