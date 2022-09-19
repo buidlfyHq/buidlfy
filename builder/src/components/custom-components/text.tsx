@@ -25,7 +25,7 @@ const Text: FC<IText> = ({
         height: "-webkit-fill-available",
         fontWeight: bold,
         fontStyle: italic,
-        textDecoration: underline,
+
         background: color,
         WebkitTextFillColor: "transparent",
         display: "flex",
@@ -43,6 +43,8 @@ const Text: FC<IText> = ({
     <section
       id="text-one"
       style={{
+        textDecoration: underline,
+        textDecorationColor: color,
         height: "-webkit-fill-available",
         background: backgroundColor,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,

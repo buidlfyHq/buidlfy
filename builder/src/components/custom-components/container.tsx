@@ -216,10 +216,10 @@ const Container: FC<IContainer> = ({
     }
   };
   const onComponentEditClick = (i: string) => {
-    dispatch(setSelectedElement(i));
     setIsContainerSelected(false);
     setOpenSetting(true);
     hideSidebar();
+    dispatch(setSelectedElement(i));
   };
 
   let containerW = document

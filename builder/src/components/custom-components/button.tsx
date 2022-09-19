@@ -27,7 +27,6 @@ const Button: FC<IText> = ({
       style={{
         fontWeight: bold,
         fontStyle: italic,
-        textDecoration: underline,
         border: `1px solid ${borderColor}`,
         borderImage: borderColor,
         display: "flex",
@@ -46,6 +45,8 @@ const Button: FC<IText> = ({
         style={{
           background: color,
           WebkitTextFillColor: "transparent",
+          textDecoration: underline,
+          textDecorationColor: color,
         }}
         className="text-class"
       >
