@@ -349,7 +349,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
             )}
 
           {show ? (
-            <button className="fixed right-3 bottom-5 flex contract-button py-3 px-[6rem]">
+            <button className="fixed right-3 bottom-5 flex contract-button py-3 px-[4.8rem]">
               <Spinner />
               Saving
             </button>

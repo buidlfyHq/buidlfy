@@ -57,7 +57,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
   return (
     <>
       <div className="flex items-center w-full px-3 py-2 text-gray-600">
-        <span className="px-1 text-left text-xl text-gray-500 font-regular font-normal not-italic">
+        <span className="px-1 text-left ">
           <span className="margin-text">Margin</span>
           <div className="flex mt-3">
             <h6 className="mr-2 margin-subtext">L</h6>
@@ -65,7 +65,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
               inputMode="numeric"
               value={margin?.marginLeft}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange("marginLeft", e)}
             />
             <AiOutlineCaretUp
@@ -81,7 +81,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
               inputMode="numeric"
               value={margin?.marginRight}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange("marginRight", e)}
             />
             <AiOutlineCaretUp
@@ -103,7 +103,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
               inputMode="numeric"
               value={margin?.marginTop}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange("marginTop", e)}
             />
             <AiOutlineCaretUp
@@ -119,7 +119,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
               inputMode="numeric"
               value={margin?.marginBottom}
               placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px] text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none focus:shadow-none"
+              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange("marginBottom", e)}
             />
             <AiOutlineCaretUp

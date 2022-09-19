@@ -13,12 +13,14 @@ interface IAbiMethods {
   setShowComponent: (showComponent: IShowComponent) => void;
   selectedElement: IWorkspaceElement;
   setMethodOpen: (methodOpen: boolean) => void;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
 const AbiMethods: FC<IAbiMethods> = ({
   setShowComponent,
   selectedElement,
   setMethodOpen,
+  setIsOpen,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -109,7 +111,10 @@ const AbiMethods: FC<IAbiMethods> = ({
     }
   };
 
-  const handleBack = () => setMethodOpen(true);
+  const handleBack = () => {
+    setMethodOpen(true);
+    setIsOpen(false);
+  };
 
   return (
     <>

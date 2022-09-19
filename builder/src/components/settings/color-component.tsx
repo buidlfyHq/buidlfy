@@ -38,7 +38,6 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
       })
     );
   };
-
   return (
     <>
       <div
@@ -47,9 +46,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
       >
         <div className="mx-2 py-2 mb-2">
           <div className="flex">
-            <div className="margin-text grow flex my-1 px-1 text-xl not-italic font-normal text-gray-500 font-regular">
-              Color
-            </div>
+            <div className="margin-text grow flex my-1 px-1">Color</div>
 
             <div
               ref={ref}
@@ -74,17 +71,15 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
             onClose={() => setDisplayColorPicker(false)}
           >
             <div className=" px-4 text-right">
-              <div>
-                <div onClick={() => setDisplayColorPicker(false)} />
-                <ColorPicker
-                  hideEyeDrop="false"
-                  hideInputType="false"
-                  hideColorGuide="false"
-                  hideAdvancedSliders="false"
-                  value={color}
-                  onChange={handleChange}
-                />
-              </div>
+              <div onClick={() => setDisplayColorPicker(false)} />
+              <ColorPicker
+                hideEyeDrop="false"
+                hideInputType="false"
+                hideColorGuide="false"
+                hideAdvancedSliders="false"
+                value={color}
+                onChange={handleChange}
+              />
             </div>
           </Dialog>
         ) : null}

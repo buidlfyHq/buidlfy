@@ -30,16 +30,15 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
   const [methodOpen, setMethodOpen] = useState<boolean>(true);
   const [newContractList, setNewContractList] = useState<IContract[]>([]);
-  const [showComponent, setShowComponent] =
-    useState<{
-      id: string;
-      value: {
-        name: string;
-        inputs: object[];
-        outputs: object[];
-        stateMutability: string;
-      };
-    }>(null); // for abi method component
+  const [showComponent, setShowComponent] = useState<{
+    id: string;
+    value: {
+      name: string;
+      inputs: object[];
+      outputs: object[];
+      stateMutability: string;
+    };
+  }>(null); // for abi method component
 
   useEffect(() => {
     try {
@@ -65,12 +64,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
             setShowComponent={setShowComponent}
             selectedElement={selectedElement}
             setMethodOpen={setMethodOpen}
+            setIsOpen={setIsOpen}
           />
           <AbiComponents
             showComponent={showComponent}
             elementId={selectedElement.i}
           />
-          ]
         </>
       ) : (
         <>

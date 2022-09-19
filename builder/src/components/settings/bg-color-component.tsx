@@ -76,7 +76,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     >
       <div className="mx-2 py-2 mb-2">
         <div className="flex">
-          <div className="margin-text grow flex my-1 px-1 text-xl not-italic font-normal text-gray-500 font-regular">
+          <div className="margin-text grow flex my-1 px-1">
             Background Color
           </div>
           <div
