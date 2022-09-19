@@ -22,9 +22,8 @@ const Dashboard: FC = () => {
   const [drag, setDrag] = useState<boolean>(true);
   const [isContainerSelected, setIsContainerSelected] =
     useState<boolean>(false);
-  const [workspaceBackgroundColor, setWorkspaceBackgroundColor] = useState<string>(
-    "rgba(255, 255, 255, 0)"
-  );
+  const [workspaceBackgroundColor, setWorkspaceBackgroundColor] =
+    useState<string>("rgba(255, 255, 255, 1)");
   const [head, setHead] = useState<{
     title: string;
     logo: string | ArrayBuffer;
@@ -72,7 +71,7 @@ const Dashboard: FC = () => {
     // setIsNavHidden(false);
     setOpenSetting(false);
   };
-  
+
   return (
     <main>
       {size.width > 1024 ? (
@@ -129,10 +128,7 @@ const Dashboard: FC = () => {
             </aside>
           </section>
           {openSetting ? (
-            <Settings
-              openTab={openTab}
-              setOpenTab={setOpenTab}
-            />
+            <Settings openTab={openTab} setOpenTab={setOpenTab} />
           ) : null}
         </section>
       ) : (
