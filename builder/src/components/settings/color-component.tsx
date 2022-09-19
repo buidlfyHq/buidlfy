@@ -1,10 +1,9 @@
 import React, { useState, FC, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown } from "react-icons/ai";
-import { Dialog } from "@headlessui/react";
 import ColorPicker from "react-best-gradient-color-picker";
+import { Dialog } from "@headlessui/react";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -47,7 +46,6 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
         <div className="mx-2 py-2 mb-2">
           <div className="flex">
             <div className="margin-text grow flex my-1 px-1">Color</div>
-
             <div
               ref={ref}
               onClick={() => setDisplayColorPicker(true)}
@@ -66,20 +64,22 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
         {displayColorPicker ? (
           <Dialog
             as="div"
-            className="absolute top-[220px] right-[260px] bottom-[1px] py-[15px] z-100 overflow-none bg-white shadow-lg"
+            className="fixed top-[220px] right-[260px] bottom-[1px] py-[15px] z-100 overflow-none bg-white shadow-lg"
             open={displayColorPicker}
             onClose={() => setDisplayColorPicker(false)}
           >
-            <div className=" px-4 text-right">
-              <div onClick={() => setDisplayColorPicker(false)} />
-              <ColorPicker
-                hideEyeDrop="false"
-                hideInputType="false"
-                hideColorGuide="false"
-                hideAdvancedSliders="false"
-                value={color}
-                onChange={handleChange}
-              />
+            <div className="px-4 text-right">
+              <div>
+                <div onClick={() => setDisplayColorPicker(false)} />
+                <ColorPicker
+                  hideEyeDrop="false"
+                  hideInputType="false"
+                  hideColorGuide="false"
+                  hideAdvancedSliders="false"
+                  value={color}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
           </Dialog>
         ) : null}
