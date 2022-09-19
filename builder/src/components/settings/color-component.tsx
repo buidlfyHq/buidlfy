@@ -22,7 +22,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
     // FIX: find a suitable type for this event
     const handleOutsideClick = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
-        setDisplayColorPicker(true);
+        setDisplayColorPicker(false);
       }
     };
     document.addEventListener("click", handleOutsideClick);
@@ -71,7 +71,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
             onClose={() => setDisplayColorPicker(false)}
           >
             <div className=" px-4 text-right">
-              <div onClick={() => setDisplayColorPicker(true)} />
+              <div onClick={() => setDisplayColorPicker(false)} />
               <ColorPicker
                 hideEyeDrop="false"
                 hideInputType="false"
