@@ -16,8 +16,7 @@ import RenderItem from "components/utils/render-item";
 import defaultItem from "config/default-container";
 import { IRootState } from "redux/root-state.interface";
 import {
-  IWorkspaceElement,
-  SidebarEnum,
+  IWorkspaceElement, SidebarEnum,
 } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
@@ -118,28 +117,15 @@ const Container: FC<IContainer> = ({
         (element) => element.i !== item.i
       );
       dispatch(
-        updateWorkspaceElementsArray({
-          workspaceElements: [...filterItems, newModifiedContainer],
-          settingItemId: item.i,
-        })
+        updateWorkspaceElementsArray([...filterItems, newModifiedContainer])
       );
     } else if (layout.length === 0) {
       let removeContainerItems = workspaceElements.filter(
         (element) => element.i !== item.i
       );
-      dispatch(
-        updateWorkspaceElementsArray({
-          workspaceElements: removeContainerItems,
-          settingItemId: item.i,
-        })
-      );
+      dispatch(updateWorkspaceElementsArray(removeContainerItems));
     } else {
-      dispatch(
-        updateWorkspaceElementsArray({
-          workspaceElements,
-          settingItemId: item.i,
-        })
-      );
+      dispatch(updateWorkspaceElementsArray(workspaceElements));
     }
   };
 

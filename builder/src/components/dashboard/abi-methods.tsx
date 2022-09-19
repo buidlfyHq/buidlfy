@@ -98,21 +98,11 @@ const AbiMethods: FC<IAbiMethods> = ({
             children: newArray,
           };
         });
-        dispatch(
-          updateWorkspaceElementsArray({
-            workspaceElements: updatedItems,
-            settingItemId: selectedElement.i,
-          })
-        );
+        dispatch(updateWorkspaceElementsArray(updatedItems));
       } else {
         let newArray = [...workspaceElements];
         newArray[elementsIndex] = updatedItem;
-        dispatch(
-          updateWorkspaceElementsArray({
-            workspaceElements: newArray,
-            settingItemId: selectedElement.i,
-          })
-        );
+        dispatch(updateWorkspaceElementsArray(newArray));
       }
     } else {
       setShowComponent(null);

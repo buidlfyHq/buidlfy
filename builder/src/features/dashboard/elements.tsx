@@ -49,12 +49,7 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
       );
       let newArray = [...workspaceElements];
       newArray[elementsIndex] = updatedItem;
-      dispatch(
-        updateWorkspaceElementsArray({
-          workspaceElements: newArray,
-          settingItemId: selectedElement?.i,
-        })
-      );
+      dispatch(updateWorkspaceElementsArray(newArray));
     } else {
       const availableHandles: ResizeHandles = ["se"];
       const containerHandles: ResizeHandles = ["e"];
@@ -82,12 +77,7 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
         }));
         newC.children = newChildren;
       }
-      dispatch(
-        updateWorkspaceElementsArray({
-          workspaceElements: [...workspaceElements, newC],
-          settingItemId: selectedElement?.i,
-        })
-      );
+      dispatch(updateWorkspaceElementsArray([...workspaceElements, newC]));
     }
   };
   const checkY = (items: IWorkspaceElement[]) => {
@@ -108,9 +98,7 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
   const checkContainerY = (selectedElement: IWorkspaceElement) => {
     if (selectedElement.children.length === 0) return 0;
     else {
-      let arr = selectedElement.children.map(
-        (item: IWorkspaceElement) => item.y
-      );
+      let arr = selectedElement.children.map((item: IWorkspaceElement) => item.y);
       return Math.max(...arr) + 1;
     }
   };

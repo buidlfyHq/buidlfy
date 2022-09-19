@@ -14,7 +14,9 @@ import {
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import {
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
   IContractElementSelector,
@@ -113,18 +115,8 @@ const Workspace: FC<IWorkspaceComponent> = ({
       });
     });
     newItemsArr.length > 0
-      ? dispatch(
-          updateWorkspaceElementsArray({
-            workspaceElements: newItemsArr,
-            settingItemId: null,
-          })
-        )
-      : dispatch(
-          updateWorkspaceElementsArray({
-            workspaceElements,
-            settingItemId: null,
-          })
-        );
+      ? dispatch(updateWorkspaceElementsArray(newItemsArr))
+      : dispatch(updateWorkspaceElementsArray(workspaceElements));
   };
 
   // to update selected element config

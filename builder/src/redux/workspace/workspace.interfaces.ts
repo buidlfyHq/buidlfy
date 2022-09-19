@@ -69,11 +69,6 @@ export interface IAction {
   payload: IElementDetail;
 }
 
-export interface IWorkspaceElementsArray {
-  workspaceElements: IWorkspaceElement[];
-  settingItemId: string;
-}
-
 export interface IElementDetail {
   settingItemId: string;
   propertyName: string;

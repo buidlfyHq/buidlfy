@@ -10,7 +10,6 @@ import {
 import {
   IAction,
   IWorkspaceElement,
-  IWorkspaceElementsArray,
   IWorkspaceState,
 } from "./workspace.interfaces";
 
@@ -106,18 +105,16 @@ const workspaceSlice = createSlice({
     // to update the elements
     updateWorkspaceElementsArray(
       state,
-      action: { payload: IWorkspaceElementsArray }
+      action: { payload: IWorkspaceElement[] }
     ) {
-      const { workspaceElements, settingItemId } = action.payload;
-
       const updatedSelectedElement = fetchSelectedElement(
-        workspaceElements,
-        settingItemId
+        action.payload,
+        state.selectedElement?.i
       );
 
       return {
         ...state,
-        workspaceElements: workspaceElements,
+        workspaceElements: action.payload,
         selectedElement: updatedSelectedElement,
       };
     },
@@ -135,13 +132,21 @@ const workspaceSlice = createSlice({
 
     // to save contract config
     saveContractConfig(state: IWorkspaceState, action: { payload }) {
+      const updatedContract = updateContractInElement(
+        state.workspaceElements,
+        state.selectedElement,
+        action.payload
+      );
+
+      const updatedSelectedElement = fetchSelectedElement(
+        updatedContract,
+        state.selectedElement.i
+      );
+
       return {
         ...state,
-        workspaceElements: updateContractInElement(
-          state.workspaceElements,
-          state.selectedElement,
-          action.payload
-        ),
+        workspaceElements: updatedContract,
+        selectedElement: updatedSelectedElement,
       };
     },
   },

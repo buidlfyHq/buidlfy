@@ -114,12 +114,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
   const handleClear = () => {
     // FIX: remove full config from local storage
     localStorage.removeItem("items");
-    dispatch(
-      updateWorkspaceElementsArray({
-        workspaceElements: [],
-        settingItemId: null,
-      })
-    );
+    dispatch(updateWorkspaceElementsArray([]));
     dispatch(setSelectorToDefault());
   };
 
