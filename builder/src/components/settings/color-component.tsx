@@ -68,18 +68,16 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
             open={displayColorPicker}
             onClose={() => setDisplayColorPicker(false)}
           >
-            <div className="px-4 text-right">
-              <div>
-                <div onClick={() => setDisplayColorPicker(false)} />
-                <ColorPicker
-                  hideEyeDrop="false"
-                  hideInputType="false"
-                  hideColorGuide="false"
-                  hideAdvancedSliders="false"
-                  value={color}
-                  onChange={handleChange}
-                />
-              </div>
+            <div className=" px-4 text-right">
+              <div onClick={() => setDisplayColorPicker(false)} />
+              <ColorPicker
+                hideEyeDrop="false"
+                hideInputType="false"
+                hideColorGuide="false"
+                hideAdvancedSliders="false"
+                value={color}
+                onChange={handleChange}
+              />
             </div>
           </Dialog>
         ) : null}
