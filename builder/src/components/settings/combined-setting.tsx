@@ -29,7 +29,6 @@ const CombinedComponent: FC<ICombinedComponent> = ({
 
   const handleChange = (action: ReplaceStyle) => {
     if (action == ReplaceStyle.BOLD) {
-      console.log(fontWeight, "fw");
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -39,7 +38,6 @@ const CombinedComponent: FC<ICombinedComponent> = ({
         })
       );
     } else if (action == ReplaceStyle.ITALIC) {
-      console.log(fontStyle, "fs");
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -49,7 +47,6 @@ const CombinedComponent: FC<ICombinedComponent> = ({
         })
       );
     } else if (action == ReplaceStyle.UNDERLINE) {
-      console.log(textDecoration, "td");
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
