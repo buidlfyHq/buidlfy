@@ -20,7 +20,7 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
       updateWorkspaceImageElementStyle({
         settingItemId: i,
         propertyName: "backgroundSize",
-        propertyValue: backgroundSize === action ? action : "contain",
+        propertyValue: backgroundSize === action ? "contain" : action,
         imageSizeProperty: true,
       })
     );

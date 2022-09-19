@@ -29,7 +29,7 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
 
   return (
     <>
-      {selectedElement.i ? (
+      {selectedElement?.i ? (
         <>
           <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
             <div

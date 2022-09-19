@@ -97,9 +97,7 @@ const Sidebar: FC<ISidebar> = ({
       </div>
       {/* Components */}
       {sideElement == SidebarEnum.ELEMENTS ? (
-        <Elements
-          isContainerSelected={isContainerSelected}
-        />
+        <Elements isContainerSelected={isContainerSelected} />
       ) : null}
       {sideElement == SidebarEnum.TEMPLATES ? <Template /> : null}
       {sideElement == SidebarEnum.STYLES ? (

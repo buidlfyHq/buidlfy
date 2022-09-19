@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect, useRef } from "react";
+import React, { useState, FC } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { AiOutlineCaretDown } from "react-icons/ai";
@@ -17,19 +17,7 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
   borderColor,
 }) => {
   const dispatch = useDispatch();
-  const ref = useRef<HTMLDivElement>();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
-
-  useEffect(() => {
-    // FIX: find a suitable type for this event
-    const handleOutsideClick = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setDisplayColorPicker(false);
-      }
-    };
-    document.addEventListener("click", handleOutsideClick);
-    return () => document.removeEventListener("click", handleOutsideClick);
-  }, [ref]);
 
   const handleChange = (e: string) => {
     dispatch(
@@ -48,11 +36,9 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
         style={{ width: "-webkit-fill-available" }}
       >
         <div className="items-center mx-2 py-2 mb-2">
-          {/* <VscSymbolColor className="text-[18px] mr-3" /> */}
           <div className="flex">
             <div className="margin-text grow flex my-1 px-1">Border Color</div>
             <div
-              ref={ref}
               onClick={() => setDisplayColorPicker(true)}
               className="flex items-center cursor-pointer"
             >
@@ -78,10 +64,10 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
               <div>
                 <div onClick={() => setDisplayColorPicker(false)} />
                 <ColorPicker
-                  hideEyeDrop="false"
-                  hideInputType="false"
-                  hideColorGuide="false"
-                  hideAdvancedSliders="false"
+                  hideEyeDrop={false}
+                  hideInputType={false}
+                  hideColorGuide={false}
+                  hideAdvancedSliders={false}
                   value={borderColor}
                   onChange={handleChange}
                 />

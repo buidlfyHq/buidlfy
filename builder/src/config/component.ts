@@ -17,7 +17,7 @@ const defaultPaddingStyles = {
 };
 
 const defaultColorStyles = {
-  backgroundColor: "rgba(0, 0, 0, 0)",
+  backgroundColor: "rgba(255, 255, 255, 1)",
   color: "rgba(0, 0, 0, 100)",
 }
 
