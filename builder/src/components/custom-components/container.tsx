@@ -214,20 +214,19 @@ const Container: FC<IContainer> = ({
       dispatch(setSelectorToDefault());
     }
   };
-  
+
   const onComponentEditClick = (i: string) => {
     setIsContainerSelected(false);
     dispatch(setSelectedElement(i));
     setOpenSetting(true);
     hideSidebar();
   };
-  
 
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
   let finalPadding = padding.paddingLeft + padding.paddingRight;
-  
+
   return (
     <>
       <section
@@ -247,7 +246,7 @@ const Container: FC<IContainer> = ({
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           compactType={null}
-          className="h-full btn-border"
+          className="h-fit btn-border"
           style={{
             background: backgroundColor,
             border: `1px solid ${color}`,

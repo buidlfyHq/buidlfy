@@ -26,7 +26,6 @@ const Text: FC<IText> = ({
         fontWeight: bold,
         fontStyle: italic,
         background: color,
-        WebkitTextFillColor: "transparent",
         display: "flex",
         justifyContent,
         alignItems: "center",
@@ -43,6 +42,7 @@ const Text: FC<IText> = ({
       id="text-one"
       style={{
         textDecoration: underline,
+        WebkitTextFillColor: "transparent",
         textDecorationColor: color,
         height: "-webkit-fill-available",
         background: backgroundColor,
