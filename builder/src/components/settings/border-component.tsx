@@ -56,12 +56,11 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
           <div className="flex">
             <span className="font-text">Border Width:</span>
             <select
-              value={borderWidth}
-              onClick={(e) => handleWidth(e, ReplaceValue.CHANGE)}
+              onChange={(e) => handleWidth(e, ReplaceValue.CHANGE)}
               className="form-select font-div appearance-none block py-1.5 pl-[10.5rem] text-sm font-normal text-gray-700"
               aria-label="select"
             >
-              <option selected>{borderWidth}</option>
+              <option value={borderWidth}>{borderWidth}</option>
               {renderOptions}
             </select>
             <AiOutlineCaretUp

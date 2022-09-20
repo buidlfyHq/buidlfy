@@ -16,7 +16,7 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
-
+  
   const handleDelete = () => {
     dispatch(
       updateWorkspaceElementStyle({

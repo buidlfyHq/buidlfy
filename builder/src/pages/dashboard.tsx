@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { useWindowSize } from "hooks/use-window-size";
@@ -12,7 +11,6 @@ import Settings from "features/dashboard/settings";
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
 const Dashboard: FC = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const size = useWindowSize();
   const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
