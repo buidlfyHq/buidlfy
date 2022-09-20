@@ -4,6 +4,7 @@ import ColorComponent from "components/settings/color-component";
 import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import MarginComponent from "components/settings/margin-component";
+import PaddingComponent from "components/settings/padding-component";
 import { IRootState } from "redux/root-state.interface";
 import {
   ISettings,
@@ -42,9 +43,14 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
         i={selectedElement.i}
         margin={selectedElement.style.margin}
       />
+      <PaddingComponent 
+        i={selectedElement.i}
+        padding={selectedElement.style.padding}
+      />
       <ColorComponent
         i={selectedElement.i}
         color={selectedElement.style.color}
+        name="Border Color"
       />
       <ShadowComponent
         i={selectedElement.i}

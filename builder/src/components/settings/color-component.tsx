@@ -10,9 +10,10 @@ import "styles/dashboard.css";
 interface IColorComponent {
   i: string;
   color: string;
+  name?: string; 
 }
 
-const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
+const ColorComponent: FC<IColorComponent> = ({ i, color, name = 'Text Color' }) => {
   const dispatch = useDispatch();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
@@ -31,9 +32,9 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
         className="py-4 text-gray-600"
         style={{ width: "-webkit-fill-available" }}
       >
-        <div className="mx-2 px-1">
+        <div className="px-1 mx-2">
           <div className="flex">
-            <div className="margin-text grow flex px-1">Color</div>
+            <div className="flex px-1 margin-text grow">{name}</div>
             <div
               onClick={() => setDisplayColorPicker(true)}
               className="flex items-center cursor-pointer"
@@ -55,7 +56,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
             open={displayColorPicker}
             onClose={() => setDisplayColorPicker(false)}
           >
-            <div className=" px-4 text-right">
+            <div className="px-4 text-right ">
               <div onClick={() => setDisplayColorPicker(false)} />
               <ColorPicker
                 hideEyeDrop={false}

@@ -12,6 +12,12 @@ interface IInput {
     marginTop?: number;
     marginBottom?: number;
   };
+  padding?: {
+    paddingLeft?: number,
+    paddingRight?: number,
+    paddingTop?: number,
+    paddingBottom?: number,
+  }
 }
 
 const Input: FC<IInput> = ({
@@ -20,9 +26,10 @@ const Input: FC<IInput> = ({
   color,
   placeholder,
   margin,
+  padding
 }) => (
   <section
-    className="flex items-center justify-center overflow-hidden h-full"
+    className="flex items-center justify-center h-full overflow-hidden"
     id="input-section"
   >
     <input
@@ -33,8 +40,9 @@ const Input: FC<IInput> = ({
         border: `1px solid ${color}`,
         borderImage: color,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
+        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
-      className="btn-border w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
+      className="w-full leading-tight bg-white appearance-none input"
       id="input"
       type="text"
       placeholder={placeholder}
