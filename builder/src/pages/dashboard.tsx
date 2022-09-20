@@ -112,7 +112,11 @@ const Dashboard: FC = () => {
             </aside>
           </section>
           {openSetting ? (
-            <Settings openTab={openTab} setOpenTab={setOpenTab} />
+            <Settings
+              setOpenSetting={setOpenSetting}
+              openTab={openTab}
+              setOpenTab={setOpenTab}
+            />
           ) : null}
         </section>
       ) : (

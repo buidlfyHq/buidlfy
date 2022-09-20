@@ -28,7 +28,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   const dispatch = useDispatch();
 
   const handleChange = (action: ReplaceStyle) => {
-    if (action == ReplaceStyle.BOLD) {
+    if (action === ReplaceStyle.BOLD) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -37,7 +37,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
             fontWeight === ReplaceStyle.BOLD ? "normal" : ReplaceStyle.BOLD,
         })
       );
-    } else if (action == ReplaceStyle.ITALIC) {
+    } else if (action === ReplaceStyle.ITALIC) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -46,7 +46,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
             fontStyle === ReplaceStyle.ITALIC ? "normal" : ReplaceStyle.ITALIC,
         })
       );
-    } else if (action == ReplaceStyle.UNDERLINE) {
+    } else if (action === ReplaceStyle.UNDERLINE) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,

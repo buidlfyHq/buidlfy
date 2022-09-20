@@ -41,7 +41,7 @@ const defaultBorderStyles = {
 export const components = [
   {
     name: "Container",
-    h: 2,
+    h: 3,
     minH: 2,
     style: {
       padding: {
@@ -181,7 +181,6 @@ export const components = [
   {
     name: "Button",
     h: 1,
-
     minH: 1,
     value: "Add Button",
     link: "",

@@ -18,7 +18,7 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
 
   return (
     <>
-      <h3 className="ml-[1rem]">
+      <h3 className="ml-[0.7rem]">
         {selectedElement ? (
           <span className="setting-text">{selectedElement.name}</span>
         ) : null}
@@ -38,12 +38,18 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
         i={selectedElement.i}
         borderRadius={selectedElement.style.borderRadius}
       />
-      <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
+      <MarginComponent
+        i={selectedElement.i}
+        margin={selectedElement.style.margin}
+      />
       <ColorComponent
         i={selectedElement.i}
         color={selectedElement.style.color}
       />
-      <ShadowComponent i={selectedElement.i} shadow={selectedElement.style.shadow} />
+      <ShadowComponent
+        i={selectedElement.i}
+        shadow={selectedElement.style.shadow}
+      />
     </>
   );
 };

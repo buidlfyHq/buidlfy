@@ -59,14 +59,12 @@ const BgColorComponent: FC<IBgColorComponent> = ({
 
   return (
     <div
-      className={`py-2 text-gray-600`}
+      className={`py-4 text-gray-600`}
       style={{ width: "-webkit-fill-available" }}
     >
-      <div className="mx-2 py-2 mb-2">
+      <div className="mx-2 px-1">
         <div className="flex">
-          <div className="margin-text grow flex my-1 px-1">
-            Background Color
-          </div>
+          <div className="margin-text grow flex px-1">Background Color</div>
           <div
             onClick={() => setDisplayColorPicker(true)}
             className="flex items-center cursor-pointer"

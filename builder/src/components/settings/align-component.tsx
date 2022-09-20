@@ -29,29 +29,34 @@ const AlignComponent: FC<IAlignComponent> = ({ i, justifyContent }) => {
 
   return (
     <>
-      <span className="margin-text text-left px-3 mt-2 mb-0 ">
-        Text Align
-        <div className="flex mt-3 px-3">
-          <span
-            onClick={() => handleAlignChange("left")}
-            className="align-div flex items-center justify-center font-bold shadow text-[18px] p-2 mr-2 my-2 font-regular"
-          >
-            <AiOutlineAlignLeft className="text-[18px]" />
-          </span>
-          <span
-            onClick={() => handleAlignChange("center")}
-            className="align-div flex items-center justify-center italic shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
-          >
-            <AiOutlineAlignCenter className="text-[18px]" />
-          </span>
-          <span
-            onClick={() => handleAlignChange("right")}
-            className="align-div flex items-center justify-center underline shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
-          >
-            <AiOutlineAlignRight className="text-[18px]" />
-          </span>
-        </div>
-      </span>
+      <div
+        className="flex py-4 mb-0"
+        style={{ width: "-webkit-fill-available" }}
+      >
+        <span className="margin-text text-left px-3">
+          Text Align
+          <div className="flex px-3">
+            <span
+              onClick={() => handleAlignChange("left")}
+              className="align-div flex items-center justify-center font-bold shadow text-[18px] p-2 mr-2 my-2 font-regular"
+            >
+              <AiOutlineAlignLeft className="text-[18px]" />
+            </span>
+            <span
+              onClick={() => handleAlignChange("center")}
+              className="align-div flex items-center justify-center italic shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
+            >
+              <AiOutlineAlignCenter className="text-[18px]" />
+            </span>
+            <span
+              onClick={() => handleAlignChange("right")}
+              className="align-div flex items-center justify-center underline shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
+            >
+              <AiOutlineAlignRight className="text-[18px]" />
+            </span>
+          </div>
+        </span>
+      </div>
     </>
   );
 };

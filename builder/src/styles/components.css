@@ -33,6 +33,7 @@ text-align: center;
 .text-class{
   background-clip: text;
   -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent;
 }
 .modal-subheading {
 font-style: normal;
