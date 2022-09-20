@@ -185,6 +185,8 @@ const Container: FC<IContainer> = ({
   };
 
   const onComponentAddClick = (i: string) => {
+    console.log(i);
+    
     setIsContainerSelected(true);
     showSidebar();
     handleSidebar(SidebarEnum.ELEMENTS);
@@ -227,6 +229,7 @@ const Container: FC<IContainer> = ({
     ?.getBoundingClientRect().width;
   let finalPadding = padding.paddingLeft + padding.paddingRight;
   
+
   return (
     <>
       <section

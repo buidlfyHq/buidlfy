@@ -155,7 +155,7 @@ export const fetchSelectedElement = (
     workspaceElements?.find((element) => element.i === payload) ||
     workspaceElements?.map((element) =>
       element.children?.find((child: IWorkspaceElement) => child.i === payload)
-    )[0]
+    )[1]
   );
 };
 
