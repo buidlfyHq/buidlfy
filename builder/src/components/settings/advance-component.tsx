@@ -1,14 +1,11 @@
 import React, { useState, FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FaFileContract } from "react-icons/fa";
 import Modal from "features/dashboard/modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
 import { updateContractAbi } from "redux/contract/contract.reducers";
-import {
-  IShowComponent,
-  IWorkspaceElement,
-} from "redux/workspace/workspace.interfaces";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -23,10 +20,6 @@ interface IContract {
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const dispatch = useDispatch();
-  const contract: { abi: string; address: string } = useSelector(
-    (state: any) => state.contract
-  );
-
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
   const [methodOpen, setMethodOpen] = useState<boolean>(true);
   const [newContractList, setNewContractList] = useState<IContract[]>([]);

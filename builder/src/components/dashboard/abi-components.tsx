@@ -8,10 +8,7 @@ import {
 } from "redux/contract/contract.reducers";
 import Spinner from "components/utils/spinner";
 import { IRootState } from "redux/root-state.interface";
-import {
-  IShowComponent,
-  IWorkspaceElement,
-} from "redux/workspace/workspace.interfaces";
+import { IShowComponent } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
   IContractElementSelector,

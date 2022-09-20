@@ -14,9 +14,7 @@ import {
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
-import {
-  IWorkspaceElement,
-} from "redux/workspace/workspace.interfaces";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
   IContractElementSelector,
@@ -235,11 +233,11 @@ const Workspace: FC<IWorkspaceComponent> = ({
           id={name}
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
-          className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 ${
+          className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 border-2 border-[transparent] ${
             !containerCheck(item)
               ? contractElementSelector
-                ? "border-hover"
-                : "hover:border-slate-300 hover:border-dashed"
+                ? "hover:border-slate-300 hover:border-dashed"
+                : "border-hover"
               : null
           }`}
           // open item setting on click

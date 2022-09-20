@@ -16,7 +16,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
 
   // FIX: find suitable type
   const handleFontSize = (e, action: ReplaceValue) => {
-    if (action == ReplaceValue.INCREMENT) {
+    if (action === ReplaceValue.INCREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -24,7 +24,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
           propertyValue: fontSize + 1,
         })
       );
-    } else if (action == ReplaceValue.DECREMENT) {
+    } else if (action === ReplaceValue.DECREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -32,7 +32,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
           propertyValue: fontSize <= 1 ? 1 : fontSize - 1,
         })
       );
-    } else if (action == ReplaceValue.CHANGE) {
+    } else if (action === ReplaceValue.CHANGE) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -43,13 +43,13 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
     }
   };
 
-  const options = [8, 9, 10, 11, 12, 14, 15, 18, 24, 30, 36, 48, 60, 72, 96].map(
-    (number) => (
-      <option key={number} value={number}>
-        {number}
-      </option>
-    )
-  );
+  const options = [
+    8, 9, 10, 11, 12, 14, 15, 18, 24, 30, 36, 48, 60, 72, 96,
+  ].map((number) => (
+    <option key={number} value={number}>
+      {number}
+    </option>
+  ));
 
   return (
     <div className="flex text-gray-600 w-full mt-4 mx-2">

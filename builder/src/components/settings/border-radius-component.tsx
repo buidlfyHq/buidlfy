@@ -19,7 +19,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
 
   // FIX: find suitable type
   const handleRadius = (e, action: ReplaceValue) => {
-    if (action == ReplaceValue.INCREMENT) {
+    if (action === ReplaceValue.INCREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -27,7 +27,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
           propertyValue: borderRadius + 1,
         })
       );
-    } else if (action == ReplaceValue.DECREMENT) {
+    } else if (action === ReplaceValue.DECREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -35,7 +35,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
           propertyValue: borderRadius <= 0 ? 0 : borderRadius - 1,
         })
       );
-    } else if (action == ReplaceValue.CHANGE) {
+    } else if (action === ReplaceValue.CHANGE) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,

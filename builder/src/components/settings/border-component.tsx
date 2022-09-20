@@ -16,7 +16,7 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
 
   // FIX: find suitable type
   const handleWidth = (e, action: ReplaceValue) => {
-    if (action == ReplaceValue.INCREMENT) {
+    if (action === ReplaceValue.INCREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -24,7 +24,7 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
           propertyValue: borderWidth + 1,
         })
       );
-    } else if (action == ReplaceValue.DECREMENT) {
+    } else if (action === ReplaceValue.DECREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -32,7 +32,7 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
           propertyValue: borderWidth <= 0 ? 0 : borderWidth - 1,
         })
       );
-    } else if (action == ReplaceValue.CHANGE) {
+    } else if (action === ReplaceValue.CHANGE) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,

@@ -109,6 +109,7 @@ export interface ISettings {
       | React.ChangeEvent<HTMLInputElement>,
     propertyName: string
   ) => void;
+  setOpenSetting?: (openSetting?: boolean) => void;
 }
 
 export interface IShowComponent {

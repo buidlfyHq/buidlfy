@@ -10,7 +10,7 @@ import {
 } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
-const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
+const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
   const ref = useRef(null);
   const dispatch = useDispatch();
   const selectedElement: IWorkspaceElement = useSelector(
@@ -25,6 +25,7 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab }) => {
         propertyValue: true,
       })
     );
+    setOpenSetting(false);
   };
 
   return (
