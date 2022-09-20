@@ -35,8 +35,8 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
   }, [connectWallet]);
 
   return (
-    <span className="flex mt-5">
-      <span className="margin-text grow text-left px-3 mt-2 mb-0 text-l text-gray-500 font-regular font-normal not-italic">
+    <div className="flex py-4">
+      <span className="margin-text grow text-left px-3 mb-0">
         Connect Wallet
       </span>
       <div className="flex ml-2 justify-center mt-1">
@@ -51,7 +51,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
           />
         </div>
       </div>
-    </span>
+    </div>
   );
 };
 export default ConnectSwitchComponent;

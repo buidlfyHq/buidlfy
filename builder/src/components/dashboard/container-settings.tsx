@@ -8,6 +8,7 @@ import BorderRadiusComponent from "components/settings/border-radius-component";
 import ShadowComponent from "components/settings/shadow-component";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import PaddingComponent from "components/settings/padding-component";
 
 const ContainerSettings: FC = () => {
   const selectedElement: IWorkspaceElement = useSelector(
@@ -16,7 +17,7 @@ const ContainerSettings: FC = () => {
 
   return (
     <>
-      <h3 className="ml-[1rem]">
+      <h3 className="ml-[0.7rem]">
         {selectedElement ? (
           <span className="setting-text">{selectedElement.name}</span>
         ) : null}
@@ -38,7 +39,14 @@ const ContainerSettings: FC = () => {
         i={selectedElement.i}
         borderWidth={selectedElement.style.borderWidth}
       />
-      <ShadowComponent i={selectedElement.i} shadow={selectedElement.style.shadow} />
+      <PaddingComponent
+        i={selectedElement.i}
+        padding={selectedElement.style.padding}
+      />
+      <ShadowComponent
+        i={selectedElement.i}
+        shadow={selectedElement.style.shadow}
+      />
     </>
   );
 };

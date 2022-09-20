@@ -76,8 +76,8 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
 
   return (
     <>
-      <div className="flex items-center w-full px-3 py-2 text-gray-600">
-        <span className="px-1 text-left my-1 ">
+      <div className="flex items-center w-full px-3 text-gray-600">
+        <span className="px-1 text-left">
           <span className="margin-text">Sizing Options</span>
           <div className="flex mt-3">
             <h6 className="mr-2 margin-subtext">W</h6>

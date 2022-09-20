@@ -56,9 +56,10 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding }) => {
 
   return (
     <>
-      <div className="flex items-center w-full px-3 py-2 text-gray-600">
-        <span className="px-1 text-left my-1 ">
+      <div className="flex items-center w-full px-3 py-4 text-gray-600">
+        <span className="px-1 text-left ">
           <span className="margin-text">Padding</span>
+
           <div className="flex mt-3">
             <h6 className="margin-subtext mr-2">L</h6>
             <input

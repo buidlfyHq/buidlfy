@@ -56,7 +56,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
 
   return (
     <>
-      <div className="flex items-center w-full px-3 py-2 text-gray-600">
+      <div className="flex items-center w-full px-3 py-4 text-gray-600">
         <span className="px-1 text-left ">
           <span className="margin-text">Margin</span>
           <div className="flex mt-3">

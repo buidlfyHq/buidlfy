@@ -54,9 +54,9 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
 
   return (
     <>
-      <div className="flex text-gray-600 w-full mt-4 mx-2">
+      <div className="flex text-gray-600 w-full py-4 mx-2">
         <span className="text-left ">
-          <div className="flex mt-3">
+          <div className="flex">
             <div className="flex">
               <span className="font-text">Border Radius:</span>
               <select
