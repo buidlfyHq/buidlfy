@@ -9,11 +9,11 @@ import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 interface IRenderItem {
   item: IWorkspaceElement;
-  setDrag: (drag?: boolean) => void;
+  setDrag?: (drag?: boolean) => void;
   setOpenSetting?: (openSetting: boolean) => void;
   setOpenTab?: (openTab: number) => void;
   setIsContainerSelected?: (isContainerSelected: boolean) => void;
-  setSideElement: (sideElement: string) => void;
+  setSideElement?: (sideElement: string) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   showSidebar?: () => void;
