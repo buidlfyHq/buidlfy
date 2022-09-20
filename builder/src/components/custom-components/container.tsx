@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Layout } from "react-grid-layout";
-import GridLayout from "react-grid-layout";
+import GridLayout, { Layout } from "react-grid-layout";
 import {
   setSelectedElement,
   updateWorkspaceElementsArray,

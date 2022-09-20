@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
+import GridLayout, { Layout } from "react-grid-layout";
 import {
   setSelectedElement,
   updateWorkspaceElementsArray,
@@ -14,16 +14,12 @@ import {
 import RenderItem from "components/utils/render-item";
 import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
-import {
-  IWorkspaceElement,
-} from "redux/workspace/workspace.interfaces";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
   IContractElementSelector,
 } from "redux/contract/contract.interfaces";
 import "styles/components.css";
-
-const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 interface IWorkspaceComponent {
   setOpenSetting: (open: boolean) => void;
@@ -42,10 +38,6 @@ interface IWorkspaceComponent {
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   hideSettingSidebar?: () => void;
-  dynamicWidth?: number;
-  dynamicHeight?: number;
-  setDynamicWidth?: (dynamicWidth?: number) => void;
-  setDynamicHeight?: (dynamicHeight?: number) => void;
 }
 
 const Workspace: FC<IWorkspaceComponent> = ({
@@ -63,10 +55,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
   dragContainer,
   setDragContainer,
   hideSettingSidebar,
-  dynamicHeight,
-  dynamicWidth,
-  setDynamicHeight,
-  setDynamicWidth,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -79,18 +67,29 @@ const Workspace: FC<IWorkspaceComponent> = ({
     (state: IRootState) => state.contract.contractElementSelected
   );
 
-  const [currentSize, setCurrentSize] = useState<number>(6);
-  // const [isLoading, setLoading] = useState(true);
+  const [fullViewWidth, setFullViewWidth] = useState<number>(1200);
+  const [leftSideViewWidth, setLeftSideViewWidth] = useState<number>(996);
+  const [rightSideViewWidth, setRightSideViewWidth] = useState<number>(996);
 
   useEffect(() => {
-    if (isNavHidden && !openSetting) {
-      setCurrentSize(6);
-    } else {
-      setCurrentSize(7.5);
-    }
+    let fullView = document
+      ?.getElementById("full-view")
+      ?.getBoundingClientRect().width;
+
+    let leftSideView = document
+      ?.getElementById("left-side-view")
+      ?.getBoundingClientRect().width;
+
+    let rightSideView = document
+      ?.getElementById("right-side-view")
+      ?.getBoundingClientRect().width;
+
+    setFullViewWidth((fullViewWidth) => fullView);
+    setLeftSideViewWidth((leftSideViewWidth) => leftSideView);
+    setRightSideViewWidth((rightSideViewWidth) => rightSideView);
   }, [isNavHidden, openSetting]);
 
-  const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
+  const onLayoutChange = (layout: Layout[]) => {
     if (layout.length === 0) setIsContainerSelected(false);
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
       let selectedElement = workspaceElements.filter(
@@ -265,31 +264,25 @@ const Workspace: FC<IWorkspaceComponent> = ({
     });
 
   return (
-    <div
+    <main
       style={{ width: "-webkit-fill-available" }}
       className="main-div h-full"
     >
-      <main onClick={handleCheckIsContainer}>
+      <section onClick={handleCheckIsContainer}>
         {isNavHidden && !openSetting ? (
           <section
+            id="full-view"
             style={{
               width: "-webkit-fill-available",
               background: workspaceBackgroundColor,
             }}
             className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
           >
-            <ResponsiveGridLayout
-              layouts={{ lg: workspaceElements }}
-              breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-              cols={{
-                lg: currentSize,
-                md: currentSize,
-                sm: 6,
-                xs: 4,
-                xxs: 2,
-              }}
+            <GridLayout
+              layout={workspaceElements}
+              cols={6}
               rowHeight={50}
-              // width={window.innerWidth - 250}
+              width={fullViewWidth || 1200}
               resizeHandles={["se"]}
               isDraggable={drag}
               onLayoutChange={onLayoutChange}
@@ -298,30 +291,24 @@ const Workspace: FC<IWorkspaceComponent> = ({
               className="h-fit overflow-hidden"
             >
               {renderItemFunction}
-            </ResponsiveGridLayout>
+            </GridLayout>
           </section>
         ) : (
           <>
             {openSetting ? (
               <section
+                id="left-side-view"
                 style={{
                   width: "-webkit-fill-available",
                   background: workspaceBackgroundColor,
                 }}
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
-                <ResponsiveGridLayout
-                  layouts={{ lg: workspaceElements }}
-                  breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-                  cols={{
-                    lg: currentSize,
-                    md: currentSize,
-                    sm: 6,
-                    xs: 4,
-                    xxs: 2,
-                  }}
+                <GridLayout
+                  layout={workspaceElements}
+                  cols={6}
                   rowHeight={50}
-                  // width={window.innerWidth - 250}
+                  width={leftSideViewWidth || 1200}
                   resizeHandles={["se"]}
                   isDraggable={drag}
                   onLayoutChange={onLayoutChange}
@@ -330,28 +317,22 @@ const Workspace: FC<IWorkspaceComponent> = ({
                   className="h-fit overflow-hidden"
                 >
                   {renderItemFunction}
-                </ResponsiveGridLayout>
+                </GridLayout>
               </section>
             ) : (
               <section
+                id="right-side-view"
                 style={{
                   width: "-webkit-fill-available",
                   background: workspaceBackgroundColor,
                 }}
                 className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
-                <ResponsiveGridLayout
-                  layouts={{ lg: workspaceElements }}
-                  breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-                  cols={{
-                    lg: currentSize,
-                    md: currentSize,
-                    sm: 6,
-                    xs: 4,
-                    xxs: 2,
-                  }}
+                <GridLayout
+                  layout={workspaceElements}
+                  cols={6}
                   rowHeight={50}
-                  // width={window.innerWidth - 250}
+                  width={rightSideViewWidth || 1200}
                   resizeHandles={["se"]}
                   isDraggable={drag}
                   onLayoutChange={onLayoutChange}
@@ -360,13 +341,13 @@ const Workspace: FC<IWorkspaceComponent> = ({
                   className="h-fit overflow-hidden"
                 >
                   {renderItemFunction}
-                </ResponsiveGridLayout>
+                </GridLayout>
               </section>
             )}
           </>
         )}
-      </main>
-    </div>
+      </section>
+    </main>
   );
 };
 
