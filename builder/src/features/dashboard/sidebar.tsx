@@ -96,11 +96,11 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </div>
       {/* Components */}
-      {sideElement == SidebarEnum.ELEMENTS ? (
+      {sideElement === SidebarEnum.ELEMENTS ? (
         <Elements isContainerSelected={isContainerSelected} />
       ) : null}
-      {sideElement == SidebarEnum.TEMPLATES ? <Template /> : null}
-      {sideElement == SidebarEnum.STYLES ? (
+      {sideElement === SidebarEnum.TEMPLATES ? <Template /> : null}
+      {sideElement === SidebarEnum.STYLES ? (
         <DefaultSettings
           workspaceBackgroundColor={workspaceBackgroundColor}
           setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}

@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IImageComponent {

@@ -213,20 +213,18 @@ const Container: FC<IContainer> = ({
       dispatch(setSelectorToDefault());
     }
   };
-  
+
   const onComponentEditClick = (i: string) => {
     setIsContainerSelected(false);
     dispatch(setSelectedElement(i));
     setOpenSetting(true);
     hideSidebar();
   };
-  
 
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
   let finalPadding = padding.paddingLeft + padding.paddingRight;
-  
 
   return (
     <>
@@ -247,7 +245,7 @@ const Container: FC<IContainer> = ({
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           compactType={null}
-          className="h-full btn-border"
+          className="h-fit btn-border"
           style={{
             background: backgroundColor,
             border: `1px solid ${color}`,
@@ -286,8 +284,8 @@ const Container: FC<IContainer> = ({
                   <div
                     className={`w-full h-full hover:border hover:border-2 ${
                       contractElementSelector
-                        ? "border-hover"
-                        : "hover:border-slate-300 hover:border-dashed"
+                        ? "hover:border-slate-300 hover:border-dashed"
+                        : "border-hover"
                     }`}
                     key={i}
                     data-grid={{ x, y, w, h, minW, resizeHandles }}
@@ -311,7 +309,7 @@ const Container: FC<IContainer> = ({
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(true)}
           >
-            <img className="" src={dragImg} />
+            <img className="" src={dragImg} alt="drag" />
           </span>
           <span
             id="add-img"
@@ -319,7 +317,7 @@ const Container: FC<IContainer> = ({
             onMouseOver={() => setDrag(false)}
             onClick={() => onComponentAddClick(item.i)}
           >
-            <img src={add} />
+            <img src={add} alt="add" />
           </span>
           <span
             onMouseOut={() => setDrag(true)}
@@ -327,7 +325,7 @@ const Container: FC<IContainer> = ({
             id="edit-img"
             onClick={() => onComponentEditClick(item.i)}
           >
-            <img src={edit} />
+            <img src={edit} alt="edit" />
           </span>
         </div>
       </section>

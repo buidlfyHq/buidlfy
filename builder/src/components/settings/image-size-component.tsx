@@ -17,7 +17,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
 
   // Derive best type of e
   const handleChange = (e, action: ReplaceStyle) => {
-    if (action == ReplaceStyle.WIDTH) {
+    if (action === ReplaceStyle.WIDTH) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -26,7 +26,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
           imageSizeProperty: false,
         })
       );
-    } else if (action == ReplaceStyle.HEIGHT) {
+    } else if (action === ReplaceStyle.HEIGHT) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -35,7 +35,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
           imageSizeProperty: false,
         })
       );
-    } else if (action == ReplaceStyle.INCREMENTWIDTH) {
+    } else if (action === ReplaceStyle.INCREMENTWIDTH) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -44,7 +44,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
           imageSizeProperty: false,
         })
       );
-    } else if (action == ReplaceStyle.INCREMENTHEIGHT) {
+    } else if (action === ReplaceStyle.INCREMENTHEIGHT) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -53,7 +53,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
           imageSizeProperty: false,
         })
       );
-    } else if (action == ReplaceStyle.DECREMENTWIDTH) {
+    } else if (action === ReplaceStyle.DECREMENTWIDTH) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -62,7 +62,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
           imageSizeProperty: false,
         })
       );
-    } else if (action == ReplaceStyle.DECREMENTHEIGHT) {
+    } else if (action === ReplaceStyle.DECREMENTHEIGHT) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -76,8 +76,8 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
 
   return (
     <>
-      <div className="flex items-center w-full px-3 py-2 text-gray-600">
-        <span className="px-1 text-left my-1 ">
+      <div className="flex items-center w-full px-3 text-gray-600">
+        <span className="px-1 text-left">
           <span className="margin-text">Sizing Options</span>
           <div className="flex mt-3">
             <h6 className="mr-2 margin-subtext">W</h6>

@@ -15,7 +15,7 @@ const ImageSettings: FC = () => {
 
   return (
     <>
-      <h3 className="ml-[1rem]">
+      <h3 className="ml-[0.7rem]">
         {selectedElement ? (
           <span className="setting-text">{selectedElement.name}</span>
         ) : null}
@@ -34,7 +34,10 @@ const ImageSettings: FC = () => {
         i={selectedElement.i}
         backgroundSize={selectedElement.style?.backgroundSize}
       />
-      <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
+      <MarginComponent
+        i={selectedElement.i}
+        margin={selectedElement.style.margin}
+      />
     </>
   );
 };

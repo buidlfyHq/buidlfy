@@ -16,7 +16,7 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
 
   // FIX: find suitable type
   const handleWidth = (e, action: ReplaceValue) => {
-    if (action == ReplaceValue.INCREMENT) {
+    if (action === ReplaceValue.INCREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -24,7 +24,7 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
           propertyValue: borderWidth + 1,
         })
       );
-    } else if (action == ReplaceValue.DECREMENT) {
+    } else if (action === ReplaceValue.DECREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -32,7 +32,7 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
           propertyValue: borderWidth <= 0 ? 0 : borderWidth - 1,
         })
       );
-    } else if (action == ReplaceValue.CHANGE) {
+    } else if (action === ReplaceValue.CHANGE) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -50,9 +50,9 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
   ));
 
   return (
-    <div className="flex text-gray-600 w-full mt-4 mx-2">
+    <div className="flex text-gray-600 w-full py-4 mx-2">
       <span className="text-left ">
-        <div className="flex mt-3">
+        <div className="flex">
           <div className="flex">
             <span className="font-text">Border Width:</span>
             <select

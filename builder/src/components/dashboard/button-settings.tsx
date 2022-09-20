@@ -35,7 +35,7 @@ const ButtonSettings: FC<ISettings> = ({
     num: number
   ) => {
     e.preventDefault();
-    
+
     setOpenTab(num);
     if (num === 1) {
       dispatch(setSelectorToDefault());
@@ -103,7 +103,10 @@ const ButtonSettings: FC<ISettings> = ({
           i={selectedElement.i}
           borderRadius={selectedElement.style.borderRadius}
         />
-        <ColorComponent i={selectedElement.i} color={selectedElement.style.color} />
+        <ColorComponent
+          i={selectedElement.i}
+          color={selectedElement.style.color}
+        />
         <BorderColorComponent
           i={selectedElement.i}
           borderColor={selectedElement.style.borderColor}
