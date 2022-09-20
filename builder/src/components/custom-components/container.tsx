@@ -185,8 +185,6 @@ const Container: FC<IContainer> = ({
   };
 
   const onComponentAddClick = (i: string) => {
-    console.log(i);
-    
     setIsContainerSelected(true);
     showSidebar();
     handleSidebar(SidebarEnum.ELEMENTS);
