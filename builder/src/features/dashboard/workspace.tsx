@@ -215,7 +215,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       e.target.parentNode.parentNode.id === "Vertical Container" ||
       e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
     ) {
-      setOpenSetting(false);
+      setIsContainerSelected(true);
     } else {
       setIsContainerSelected(false);
       hideSidebar();

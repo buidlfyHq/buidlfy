@@ -25,7 +25,6 @@ const Text: FC<IText> = ({
         height: "-webkit-fill-available",
         fontWeight: bold,
         fontStyle: italic,
-
         background: color,
         WebkitTextFillColor: "transparent",
         display: "flex",

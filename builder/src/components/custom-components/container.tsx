@@ -13,7 +13,6 @@ import {
   updateSelectedElement,
 } from "redux/contract/contract.reducers";
 import RenderItem from "components/utils/render-item";
-import defaultItem from "config/default-container";
 import { IRootState } from "redux/root-state.interface";
 import {
   IWorkspaceElement,
@@ -215,17 +214,20 @@ const Container: FC<IContainer> = ({
       dispatch(setSelectorToDefault());
     }
   };
+  
   const onComponentEditClick = (i: string) => {
     setIsContainerSelected(false);
+    dispatch(setSelectedElement(i));
     setOpenSetting(true);
     hideSidebar();
-    dispatch(setSelectedElement(i));
   };
+  
 
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
   let finalPadding = padding.paddingLeft + padding.paddingRight;
+  
   return (
     <>
       <section
@@ -261,7 +263,7 @@ const Container: FC<IContainer> = ({
         >
           {!children?.length ? (
             <div
-              className="w-full h-full py-10"
+              className="w-full h-full py-10 flex justify-center"
               key={"DefaultElement"}
               data-grid={{
                 x: 0,
@@ -273,11 +275,7 @@ const Container: FC<IContainer> = ({
                 resizeHandles: [],
               }}
             >
-              <RenderItem
-                setSideElement={setSideElement}
-                item={defaultItem}
-                setDrag={setDrag}
-              />
+              Hover and click on drag to add components in container
             </div>
           ) : (
             children
