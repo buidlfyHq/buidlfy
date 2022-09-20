@@ -13,7 +13,6 @@ import {
   updateSelectedElement,
 } from "redux/contract/contract.reducers";
 import RenderItem from "components/utils/render-item";
-// import defaultItem from "config/default-container";
 import { IRootState } from "redux/root-state.interface";
 import {
   IWorkspaceElement,
