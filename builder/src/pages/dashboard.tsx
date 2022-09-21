@@ -7,6 +7,7 @@ import Sidebar from "features/dashboard/sidebar";
 import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
+import DefaultSettings from "features/dashboard/default-settings";
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
@@ -117,7 +118,14 @@ const Dashboard: FC = () => {
               openTab={openTab}
               setOpenTab={setOpenTab}
             />
-          ) : null}
+          ) : (
+            <DefaultSettings
+              workspaceBackgroundColor={workspaceBackgroundColor}
+              setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+              head={head}
+              setHead={setHead}
+            />
+          )}
         </section>
       ) : (
         <h1 className="items-center text-center justify-center flex h-[100vh]">

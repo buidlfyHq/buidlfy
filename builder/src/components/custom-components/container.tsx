@@ -245,7 +245,7 @@ const Container: FC<IContainer> = ({
           cols={6}
           rowHeight={
             children?.length
-              ? 50 - (borderWidth ? borderWidth * 2 : 2) / children?.length
+              ? 50 - (borderWidth ? borderWidth * 2 : 1) / children?.length
               : 50
           }
           width={containerW - (finalPadding + borderWidth * 2) || 200}
