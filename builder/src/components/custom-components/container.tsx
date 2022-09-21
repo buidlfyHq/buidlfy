@@ -233,13 +233,15 @@ const Container: FC<IContainer> = ({
         style={{
           paddingLeft: `${padding.paddingLeft}px`,
           paddingRight: `${padding.paddingRight}px`,
+          borderRadius: `${borderRadius}px`,
+          borderWidth: `${borderWidth ? borderWidth : 2}px`,
         }}
-        className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
+        className="h-fit w-full cursor-pointer container-drag box-border border-2 overflow-hidden"
       >
         <GridLayout
           layout={children}
           cols={6}
-          rowHeight={50}
+          rowHeight={children?.length ? 50 - (borderWidth ? borderWidth * 2 : 4) / children?.length : 50}
           width={containerW - finalPadding || 200}
           isBounded={true}
           onLayoutChange={onLayoutChange}
@@ -248,10 +250,7 @@ const Container: FC<IContainer> = ({
           className="h-fit btn-border"
           style={{
             background: backgroundColor,
-            border: `1px solid ${color}`,
             borderImage: color,
-            borderRadius: `${borderRadius}px`,
-            borderWidth: `${borderWidth}px`,
             backgroundImage: `url(${imgData})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
@@ -282,7 +281,7 @@ const Container: FC<IContainer> = ({
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (
                   <div
-                    className={`w-full h-full hover:border hover:border-2 ${
+                    className={`w-full h-full border-2 border-[transparent] ${
                       contractElementSelector
                         ? "hover:border-slate-300 hover:border-dashed"
                         : "border-hover"
