@@ -239,11 +239,11 @@ const Workspace: FC<IWorkspaceComponent> = ({
           id={name}
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
-          className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 border-2 border-[transparent] ${
+          className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
             !containerCheck(item)
               ? contractElementSelector
-                ? "hover:border-slate-300 hover:border-dashed"
-                : "border-hover"
+                ? "border-2 border-[transparent] hover:border-slate-300 hover:border-dashed"
+                : "border-2 border-[transparent] border-hover"
               : null
           }`}
           // open item setting on click

@@ -233,25 +233,29 @@ const Container: FC<IContainer> = ({
         style={{
           paddingLeft: `${padding.paddingLeft}px`,
           paddingRight: `${padding.paddingRight}px`,
+          borderRadius: `${borderRadius}px`,
+          borderWidth: `${borderWidth ? borderWidth : 1}px`,
+          borderColor: color,
+          borderImage: color,
         }}
-        className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
+        className="h-fit btn-border w-full cursor-pointer container-drag box-border border-1 overflow-hidden"
       >
         <GridLayout
           layout={children}
           cols={6}
-          rowHeight={50}
-          width={containerW - finalPadding || 200}
+          rowHeight={
+            children?.length
+              ? 50 - (borderWidth ? borderWidth * 2 : 2) / children?.length
+              : 50
+          }
+          width={containerW - (finalPadding + borderWidth * 2) || 200}
           isBounded={true}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           compactType={null}
-          className="h-fit btn-border"
+          className="h-fit"
           style={{
             background: backgroundColor,
-            border: `1px solid ${color}`,
-            borderImage: color,
-            borderRadius: `${borderRadius}px`,
-            borderWidth: `${borderWidth}px`,
             backgroundImage: `url(${imgData})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
@@ -282,10 +286,10 @@ const Container: FC<IContainer> = ({
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (
                   <div
-                    className={`w-full h-full hover:border hover:border-2 ${
+                    className={`w-full h-full ${
                       contractElementSelector
-                        ? "hover:border-slate-300 hover:border-dashed"
-                        : "border-hover"
+                        ? "border-2 border-[transparent] hover:border-slate-300 hover:border-dashed"
+                        : "border-2 border-[transparent] border-hover"
                     }`}
                     key={i}
                     data-grid={{ x, y, w, h, minW, resizeHandles }}
