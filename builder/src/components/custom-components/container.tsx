@@ -228,7 +228,6 @@ const Container: FC<IContainer> = ({
 
   return (
     <>
-      {/* <div className="relative"> */}
       <section
         id={item.i}
         style={{
@@ -334,7 +333,6 @@ const Container: FC<IContainer> = ({
           </span>
         </div>
       </section>
-      {/* </div> */}
     </>
   );
 };

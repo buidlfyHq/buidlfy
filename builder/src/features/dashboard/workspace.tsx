@@ -68,25 +68,13 @@ const Workspace: FC<IWorkspaceComponent> = ({
   );
 
   const [fullViewWidth, setFullViewWidth] = useState<number>(1200);
-  const [leftSideViewWidth, setLeftSideViewWidth] = useState<number>(996);
-  const [rightSideViewWidth, setRightSideViewWidth] = useState<number>(996);
 
   useEffect(() => {
     let fullView = document
       ?.getElementById("full-view")
       ?.getBoundingClientRect().width;
 
-    let leftSideView = document
-      ?.getElementById("left-side-view")
-      ?.getBoundingClientRect().width;
-
-    let rightSideView = document
-      ?.getElementById("right-side-view")
-      ?.getBoundingClientRect().width;
-
     setFullViewWidth((fullViewWidth) => fullView);
-    setLeftSideViewWidth((leftSideViewWidth) => leftSideView);
-    setRightSideViewWidth((rightSideViewWidth) => rightSideView);
   }, [isNavHidden, openSetting]);
 
   const onLayoutChange = (layout: Layout[]) => {
@@ -274,133 +262,31 @@ const Workspace: FC<IWorkspaceComponent> = ({
       className="main-div h-full"
     >
       <section onClick={handleCheckIsContainer} className="z-100">
-        {!openSetting ? (
-          <section
-            id="left-side-view"
-            style={{
-              width: "-webkit-fill-available",
-              background: workspaceBackgroundColor,
-            }}
-            className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
+        <section
+          id="full-view"
+          style={{
+            width: "-webkit-fill-available",
+            background: workspaceBackgroundColor,
+          }}
+          className={`mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl ${
+            !openSetting ? "mr-[40px]" : "mr-[290px]"
+          }`}
+        >
+          <GridLayout
+            layout={workspaceElements}
+            cols={6}
+            rowHeight={50}
+            width={fullViewWidth || 1200}
+            resizeHandles={["se"]}
+            isDraggable={drag}
+            onLayoutChange={onLayoutChange}
+            compactType={null}
+            margin={[0, 0]}
+            className="h-fit overflow-hidden"
           >
-            <GridLayout
-              layout={workspaceElements}
-              cols={6}
-              rowHeight={50}
-              width={leftSideViewWidth || 1200}
-              resizeHandles={["se"]}
-              isDraggable={drag}
-              onLayoutChange={onLayoutChange}
-              compactType={null}
-              margin={[0, 0]}
-              className="h-fit overflow-hidden"
-            >
-              {renderItemFunction}
-            </GridLayout>
-          </section>
-        ) : (
-          <section
-            id="right-side-view"
-            style={{
-              width: "-webkit-fill-available",
-              background: workspaceBackgroundColor,
-            }}
-            className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[290px] mb-[20px] min-h-[87vh] shadow-2xl"
-          >
-            <GridLayout
-              layout={workspaceElements}
-              cols={6}
-              rowHeight={50}
-              width={rightSideViewWidth || 1200}
-              resizeHandles={["se"]}
-              isDraggable={drag}
-              onLayoutChange={onLayoutChange}
-              compactType={null}
-              margin={[0, 0]}
-              className="h-fit overflow-hidden"
-            >
-              {renderItemFunction}
-            </GridLayout>
-          </section>
-        )}
-
-        {/* {isNavHidden && !openSetting ? (
-          <section
-            id="full-view"
-            style={{
-              width: "-webkit-fill-available",
-              background: workspaceBackgroundColor,
-            }}
-            className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
-          >
-            <GridLayout
-              layout={workspaceElements}
-              cols={6}
-              rowHeight={50}
-              width={fullViewWidth || 1200}
-              resizeHandles={["se"]}
-              isDraggable={drag}
-              onLayoutChange={onLayoutChange}
-              compactType={null}
-              margin={[0, 0]}
-              className="h-fit overflow-hidden"
-            >
-              {renderItemFunction}
-            </GridLayout>
-          </section>
-        ) : (
-          <>
-            {openSetting ? (
-              <section
-                id="left-side-view"
-                style={{
-                  width: "-webkit-fill-available",
-                  background: workspaceBackgroundColor,
-                }}
-                className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
-              >
-                <GridLayout
-                  layout={workspaceElements}
-                  cols={6}
-                  rowHeight={50}
-                  width={leftSideViewWidth || 1200}
-                  resizeHandles={["se"]}
-                  isDraggable={drag}
-                  onLayoutChange={onLayoutChange}
-                  compactType={null}
-                  margin={[0, 0]}
-                  className="h-fit overflow-hidden"
-                >
-                  {renderItemFunction}
-                </GridLayout>
-              </section>
-            ) : (
-              <section
-                id="right-side-view"
-                style={{
-                  width: "-webkit-fill-available",
-                  background: workspaceBackgroundColor,
-                }}
-                className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
-              >
-                <GridLayout
-                  layout={workspaceElements}
-                  cols={6}
-                  rowHeight={50}
-                  width={rightSideViewWidth || 1200}
-                  resizeHandles={["se"]}
-                  isDraggable={drag}
-                  onLayoutChange={onLayoutChange}
-                  compactType={null}
-                  margin={[0, 0]}
-                  className="h-fit overflow-hidden"
-                >
-                  {renderItemFunction}
-                </GridLayout>
-              </section>
-            )}
-          </>
-        )} */}
+            {renderItemFunction}
+          </GridLayout>
+        </section>
       </section>
     </main>
   );
