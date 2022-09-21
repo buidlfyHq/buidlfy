@@ -539,6 +539,15 @@
   background: #e9edfd;
   border-radius: 6px;
 }
+.default-container {
+  background: #f3eeff;
+  /* Purple/100 */
+  border: 1px dashed #651fff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .upload-img {
   background: #f3eeff;
   /* Purple/100 */

@@ -41,7 +41,7 @@ const defaultBorderStyles = {
 export const components = [
   {
     name: "Container",
-    h: 3,
+    h: 2,
     minH: 2,
     style: {
       padding: {

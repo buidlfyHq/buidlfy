@@ -239,22 +239,6 @@ const Container: FC<IContainer> = ({
           borderImage: color,
         }}
         className="h-fit w-full cursor-pointer container-drag overflow-hidden btn-border"
-        // onMouseOut={() => {
-        //   const handles = document.getElementsByClassName(
-        //     "react-resizable-handle-se"
-        //   );
-        //   Array.prototype.map.call(handles, (e) => {
-        //     e.style.visibility = "hidden";
-        //   });
-        // }}
-        // onMouseOver={() => {
-        //   const handles = document.getElementsByClassName(
-        //     "react-resizable-handle-se"
-        //   );
-        //   Array.prototype.map.call(handles, (e) => {
-        //     e.style.visibility = "visible";
-        //   });
-        // }}
       >
         <GridLayout
           layout={children}
@@ -281,7 +265,7 @@ const Container: FC<IContainer> = ({
         >
           {!children?.length ? (
             <div
-              className="w-full h-full py-10 flex justify-center bg-gray-300"
+              className="w-full h-full py-10 default-container"
               key={"DefaultElement"}
               data-grid={{
                 x: 0,

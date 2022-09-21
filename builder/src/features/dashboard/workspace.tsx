@@ -201,18 +201,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
   // FIX: find a suitable type for this event
   const handleCheckIsContainer = (e) => {
     if (
-      e.target.id === "Container" ||
-      e.target.parentNode.id === "Container" ||
-      e.target.parentNode.parentNode.id === "Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Container" ||
-      e.target.id === "Horizontal Container" ||
-      e.target.parentNode.id === "Horizontal Container" ||
-      e.target.parentNode.parentNode.id === "Horizontal Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Horizontal Container" ||
-      e.target.id === "Vertical Container" ||
-      e.target.parentNode.id === "Vertical Container" ||
-      e.target.parentNode.parentNode.id === "Vertical Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
+      e.target.id.slice(6) === "Container" ||
+      e.target.parentNode.id.slice(6) === "Container" ||
+      e.target.parentNode.parentNode.id.slice(6) === "Container" ||
+      e.target.parentNode.parentNode.parentNode.id.slice(6) === "Container"
     ) {
       setIsContainerSelected(true);
     } else {
@@ -236,7 +228,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       return (
         <div
           key={i}
-          id={i}
+          id={i + name}
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
@@ -249,13 +241,13 @@ const Workspace: FC<IWorkspaceComponent> = ({
           onMouseOver={() => {
             if (!containerCheck(item))
               (
-                document.getElementById(i).childNodes[1] as HTMLElement
+                document.getElementById(i+name).childNodes[1] as HTMLElement
               ).style.visibility = "visible";
           }}
           onMouseOut={() => {
             if (!containerCheck(item))
               (
-                document.getElementById(i).childNodes[1] as HTMLElement
+                document.getElementById(i+name).childNodes[1] as HTMLElement
               ).style.visibility = "hidden";
           }}
           // open item setting on click
