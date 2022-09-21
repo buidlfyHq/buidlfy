@@ -83,6 +83,15 @@ const Container: FC<IContainer> = ({
     (state: IRootState) => state.contract.contractElementSelected
   );
 
+  let containerW = document
+    ?.getElementById(`${item.i}`)
+    ?.getBoundingClientRect().width;
+  let finalPadding = padding.paddingLeft + padding.paddingRight;
+
+  const elementHoverStyles = contractElementSelector
+    ? "border-1 border-[transparent] hover:border-slate-300 hover:border-dashed"
+    : "border-1 border-[transparent] border-hover";
+
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
@@ -180,6 +189,22 @@ const Container: FC<IContainer> = ({
     }
   };
 
+  const handleMouseOver = (id: string) => {
+    setDrag(false);
+    (
+      document.getElementById(id).parentNode.parentNode
+        .childNodes[1] as HTMLElement
+    ).style.visibility = "visible";
+  };
+
+  const handleMouseOut = (id: string) => {
+    setDrag(true);
+    (
+      document.getElementById(id).parentNode.parentNode
+        .childNodes[1] as HTMLElement
+    ).style.visibility = "hidden";
+  };
+
   const handleSidebar = (selectedSidebarElements: string) => {
     setSideElement(selectedSidebarElements);
   };
@@ -220,11 +245,6 @@ const Container: FC<IContainer> = ({
     setOpenSetting(true);
     hideSidebar();
   };
-
-  let containerW = document
-    ?.getElementById(`${item.i}`)
-    ?.getBoundingClientRect().width;
-  let finalPadding = padding.paddingLeft + padding.paddingRight;
 
   return (
     <>
@@ -286,27 +306,11 @@ const Container: FC<IContainer> = ({
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (
                   <div
-                    className={`w-full h-full ${
-                      contractElementSelector
-                        ? "border-1 border-[transparent] hover:border-slate-300 hover:border-dashed"
-                        : "border-1 border-[transparent] border-hover"
-                    }`}
+                    className={`w-full h-full ${elementHoverStyles}`}
                     key={i}
                     data-grid={{ x, y, w, h, minW, resizeHandles }}
-                    onMouseOver={() => {
-                      setDrag(false);
-                      (
-                        document.getElementById(item.i).parentNode.parentNode
-                          .childNodes[1] as HTMLElement
-                      ).style.visibility = "visible";
-                    }}
-                    onMouseOut={() => {
-                      setDrag(true);
-                      (
-                        document.getElementById(item.i).parentNode.parentNode
-                          .childNodes[1] as HTMLElement
-                      ).style.visibility = "hidden";
-                    }}
+                    onMouseOver={() => handleMouseOver(i)}
+                    onMouseOut={() => handleMouseOut(i)}
                     onClick={() => onComponentClick(item.name, i)}
                   >
                     <RenderItem

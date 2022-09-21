@@ -172,6 +172,18 @@ const Workspace: FC<IWorkspaceComponent> = ({
     dispatch(setSelectorToDefault());
   };
 
+  const handleMouseOver = (id: string) => {
+    (
+      document.getElementById(id).childNodes[1] as HTMLElement
+    ).style.visibility = "visible";
+  };
+
+  const handleMouseOut = (id: string) => {
+    (
+      document.getElementById(id).childNodes[1] as HTMLElement
+    ).style.visibility = "hidden";
+  };
+
   const onComponentClick = (itemName: string, i: string) => {
     setIsContainerSelected(true);
     hideSidebar();
@@ -238,18 +250,8 @@ const Workspace: FC<IWorkspaceComponent> = ({
                 : "border-2 border-[transparent] border-hover"
               : null
           }`}
-          onMouseOver={() => {
-            if (!containerCheck(item))
-              (
-                document.getElementById(i+name).childNodes[1] as HTMLElement
-              ).style.visibility = "visible";
-          }}
-          onMouseOut={() => {
-            if (!containerCheck(item))
-              (
-                document.getElementById(i+name).childNodes[1] as HTMLElement
-              ).style.visibility = "hidden";
-          }}
+          onMouseOver={() => !containerCheck(item) && handleMouseOver(i + name)}
+          onMouseOut={() => !containerCheck(item) && handleMouseOut(i + name)}
           // open item setting on click
           onClick={() =>
             containerCheck(item) ? null : onComponentClick(item.name, i)
