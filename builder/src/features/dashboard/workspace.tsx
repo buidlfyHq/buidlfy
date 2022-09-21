@@ -219,7 +219,12 @@ const Workspace: FC<IWorkspaceComponent> = ({
       setIsContainerSelected(false);
       hideSidebar();
     }
-    if (e.target.id === "") {
+    if (
+      e.target.id === "full-view" ||
+      e.target.id === "left-side-view" ||
+      e.target.id === "right-side-view" ||
+      e.target.id === ""
+    ) {
       setOpenSetting(false);
     }
   };
