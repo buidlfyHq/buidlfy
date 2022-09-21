@@ -67,6 +67,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
     (state: IRootState) => state.contract.contractElementSelected
   );
 
+  const elementHoverStyles = contractElementSelector
+    ? "border-2 border-[transparent] hover:border-slate-300 hover:border-dashed"
+    : "border-2 border-[transparent] border-hover";
+
   const [fullViewWidth, setFullViewWidth] = useState<number>(1200);
   const [leftSideViewWidth, setLeftSideViewWidth] = useState<number>(996);
   const [rightSideViewWidth, setRightSideViewWidth] = useState<number>(996);
@@ -244,11 +248,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
-            !containerCheck(item)
-              ? contractElementSelector
-                ? "border-2 border-[transparent] hover:border-slate-300 hover:border-dashed"
-                : "border-2 border-[transparent] border-hover"
-              : null
+            !containerCheck(item) && elementHoverStyles
           }`}
           onMouseOver={() => !containerCheck(item) && handleMouseOver(i + name)}
           onMouseOut={() => !containerCheck(item) && handleMouseOut(i + name)}
