@@ -268,7 +268,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
             width: "-webkit-fill-available",
             background: workspaceBackgroundColor,
           }}
-          className={`mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl ${
+          className={`mt-[90px] z-[100] overflow-y-scroll bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl ${
             !openSetting ? "mr-[40px]" : "mr-[290px]"
           }`}
         >

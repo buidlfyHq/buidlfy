@@ -1,6 +1,6 @@
 import React, { useRef, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdOutlineDeleteOutline } from "react-icons/md";
+import { MdOutlineDeleteOutline, MdArrowBack } from "react-icons/md";
 import SettingComponent from "components/utils/render-setting";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
@@ -59,11 +59,10 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
               </div>
 
               <div
-                style={{ marginTop: "1rem" }}
-                className="py-4 px-2 text-sm"
+                className="py-4 px-2 text-sm mt-[1rem] flex"
                 onClick={handleOpenSetting}
               >
-                {"<"}
+                <MdArrowBack className="text-[12px] mt-[0.25rem]" />
                 <span className="ml-2">Site Settings</span>
               </div>
               <div>
