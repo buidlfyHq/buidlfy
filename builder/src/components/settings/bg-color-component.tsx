@@ -81,7 +81,6 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       </div>
       {displayColorPicker ? (
         <>
-          {/* {i ? ( */}
           <Dialog
             as="div"
             className="absolute top-[220px] right-[260px] bottom-[1px] py-[15px] z-100 overflow-none bg-white shadow-lg"
@@ -90,16 +89,6 @@ const BgColorComponent: FC<IBgColorComponent> = ({
           >
             {backgroundDialogContent}
           </Dialog>
-          {/* ) : (
-            <Dialog
-              as="div"
-              className="absolute top-[150px] left-[370px] bottom-[1px] py-[15px] z-100 overflow-none bg-white shadow-lg"
-              open={displayColorPicker}
-              onClose={() => setDisplayColorPicker(false)}
-            >
-              {backgroundDialogContent}
-            </Dialog>
-          )} */}
         </>
       ) : null}
     </div>

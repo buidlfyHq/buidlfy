@@ -332,6 +332,7 @@
 .sidebar {
    background: #EDEBF5;
    z-index: 7777 !important;
+  
   /* background: rgba(63, 60, 197, 0.04); */
 }
 .sidebar::-webkit-scrollbar {
