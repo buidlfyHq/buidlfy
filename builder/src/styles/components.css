@@ -341,6 +341,7 @@ border-image-slice: 1;
   background: rgba(63, 60, 197, 0.04);
 }
 .sidebar::-webkit-scrollbar {
+  width: 0;
 background-color: transparent;
 }
 .search {
@@ -715,4 +716,52 @@ border-bottom: 1.15px solid;
 border-image-slice: 1;
 border-image-source: linear-gradient(93.43deg, #9768FB 27.32%, #6892FF 75.6%);
 color: #100F11;
+}
+
+#gradient {
+  --color-stop-1: #00c3ff;
+  --color-stop-2: #77e190;
+  --color-stop-3: #ffff1c;
+}
+
+.hover-icon{
+  stroke: #8484AA;
+  stroke-width: 2
+}
+
+.hover-icon:hover{
+  stroke-width: 2.7px;
+  /* stroke: #a673ef; */
+  stroke:  rgb(114, 90, 202);
+  /* stroke: rgb(82, 143, 233) */
+  /* stroke: url({
+    --color-stop-1: #00c3ff;
+    --color-stop-2: #77e190;
+    --color-stop-3: #ffff1c;
+  }) transparent; */
+}
+
+.modal-line-element{
+  background: linear-gradient(#5799EB 0%,#9F74FB 100%);
+}
+
+.preview-button{
+  background-clip: padding-box;
+  background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  /* border: 10px solid; */
+  border-image-slice: 1;
+  border-width: 2px;
+  border-radius: 8px;
+  border-image-source: linear-gradient(to left, #5799EB, #9F74FB);
+  -webkit-mask: 
+  linear-gradient(#fff 0 0) content-box, 
+  linear-gradient(#fff 0 0);
+}
+
+.connect-wallet-button{
+  background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
 }

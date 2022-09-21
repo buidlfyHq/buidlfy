@@ -111,7 +111,7 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
 
       <form className="flex items-center mb-5">
         <div className="relative mt-[4rem] mx-3 w-full">
-          <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg
               aria-hidden="true"
               className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -129,92 +129,92 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
           <input
             type="text"
             id="simple-search"
-            className="search rounded-full focus:ring-[#dee0e9] focus:border-[#dee0e9] block w-full pl-10 p-2.5 "
+            className="search rounded-full focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
             placeholder="Search"
             required
           />
         </div>
       </form>
-      <div className="mx-9">
+      {/* <div className="mx-9">
         <span className="badge mt-12 px-2.5 py-2.5">Default</span>
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
-      </div>
+      </div> */}
 
       {!isContainerSelected ? (
         <>
           {" "}
-          <div className="mt-6 px-4">
+          <div className="px-4 mt-6">
             <span className="element-text">Button</span>
             <div className="flex">
               <button
                 onClick={() => onClickFunction("Button")}
-                className="element-btn mt-3 px-4 py-2 rounded-xl"
+                className="px-4 py-2 mt-3 element-btn rounded-xl"
               >
                 Button
               </button>
             </div>
           </div>
-          <div className="mt-6 px-4">
+          <div className="px-4 mt-6">
             <span className="element-text">Container</span>
-            <div className="flex py-2.5">
+            <div className="flex py-2.5 cursor-pointer">
               <div
                 className="element-container "
                 onClick={() => onClickFunction("Container")}
               ></div>
             </div>
           </div>
-          <div className="mt-6 px-4">
+          <div className="px-4 mt-6">
             <span className="element-text">Text</span>
             <div>
               <div
-                className="heading-container mt-3 py-2 pl-3"
+                className="py-2 pl-3 mt-3 cursor-pointer heading-container"
                 onClick={() => onClickFunction("Heading 1")}
               >
                 <h1 className="text-2xl">Heading 1</h1>
               </div>
               <div
-                className="heading-container mt-3 py-2.5 pl-3"
+                className="heading-container mt-3 py-2.5 pl-3 cursor-pointer"
                 onClick={() => onClickFunction("Heading 2")}
               >
                 <h2 className="text-xl">Heading 2</h2>
               </div>
               <div
-                className="heading-container mt-3 py-2 pl-3"
+                className="py-2 pl-3 mt-3 cursor-pointer heading-container"
                 onClick={() => onClickFunction("Heading 3")}
               >
                 <h3 className="text-lg">Heading 3</h3>
               </div>
               <div
-                className="paragraph-container mt-3 py-3 pl-3"
+                className="py-3 pl-3 mt-3 cursor-pointer paragraph-container"
                 onClick={() => onClickFunction("Text")}
               >
                 <span className="text-sm">Paragraph</span>
               </div>
             </div>
           </div>
-          <div className="mt-6 px-4">
+          <div className="px-4 mt-6">
             <span className="element-text">Input</span>
             <div>
               <div
-                className="heading-container mt-3 py-2.5 pl-3"
+                className="heading-container mt-3 py-2.5 pl-3 cursor-pointer"
                 onClick={() => onClickFunction("Input")}
               >
                 <h1 className="text-base">Input</h1>
               </div>
             </div>
           </div>
-          <div onClick={() => onClickFunction("Image")} className="mt-6 px-4">
+          <div onClick={() => onClickFunction("Image")} className="px-4 mt-6">
             <span className="element-text">Image Upload</span>
-            <div className="image-container mt-2 pt-2">
-              <div className="upload-img mx-6">
+            <div className="pt-2 mt-2 cursor-pointer image-container">
+              <div className="mx-6 upload-img">
                 <span className="image-label">
                   Drag and drop a file, or{" "}
                   <span className="purple-label">browse</span>
                 </span>
               </div>
               <div className="flex justify-center">
-                <button className="upload-btn mx-2 mt-4">Upload</button>
+                <button className="mx-2 mt-4 upload-btn">Upload</button>
               </div>
             </div>
             {/* <img src={image} /> */}
@@ -223,22 +223,22 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
       ) : (
         <>
           {" "}
-          <div className="mt-6 px-4">
+          <div className="px-4 mt-6">
             <span className="element-text">Button</span>
             <div className="flex">
               <button
                 onClick={() => onClickFunction("Button")}
-                className="element-btn mt-3 px-4 py-2 rounded-xl"
+                className="px-4 py-2 mt-3 element-btn rounded-xl"
               >
                 Button
               </button>
             </div>
           </div>
-          <div className="mt-6 px-4">
+          <div className="px-4 mt-6">
             <span className="element-text">Text</span>
             <div>
               <div
-                className="heading-container mt-3 py-2 pl-3"
+                className="py-2 pl-3 mt-3 heading-container"
                 onClick={() => onClickFunction("Heading 1")}
               >
                 <h1 className="text-2xl">Heading 1</h1>
@@ -250,20 +250,20 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
                 <h2 className="text-xl">Heading 2</h2>
               </div>
               <div
-                className="heading-container mt-3 py-2 pl-3"
+                className="py-2 pl-3 mt-3 heading-container"
                 onClick={() => onClickFunction("Heading 3")}
               >
                 <h3 className="text-lg">Heading 3</h3>
               </div>
               <div
-                className="paragraph-container mt-3 py-3 pl-3"
+                className="py-3 pl-3 mt-3 paragraph-container"
                 onClick={() => onClickFunction("Text")}
               >
                 <span className="text-sm">Paragraph</span>
               </div>
             </div>
           </div>
-          <div className="mt-6 px-4">
+          <div className="px-4 mt-6">
             <span className="element-text">Input</span>
             <div>
               <div
@@ -274,17 +274,17 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
               </div>
             </div>
           </div>
-          <div onClick={() => onClickFunction("Image")} className="mt-6 px-4">
+          <div onClick={() => onClickFunction("Image")} className="px-4 mt-6">
             <span className="element-text">Image Upload</span>
-            <div className="image-container mt-2 pt-2">
-              <div className="upload-img mx-6">
+            <div className="pt-2 mt-2 image-container">
+              <div className="mx-6 upload-img">
                 <span className="image-label">
                   Drag and drop a file, or{" "}
                   <span className="purple-label">browse</span>
                 </span>
               </div>
               <div className="flex justify-center">
-                <button className="upload-btn mx-2 mt-4">Upload</button>
+                <button className="mx-2 mt-4 upload-btn">Upload</button>
               </div>
             </div>
             {/* <img src={image} /> */}
