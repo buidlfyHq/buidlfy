@@ -188,16 +188,19 @@ export const components = [
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
-      fontSize: 15,
-      borderColor: "rgba(0, 0, 0, 100)",
+      fontSize: 16,
+      backgroundColor: "rgba(119,66,231,100)",
+      color: "rgba(255,255,255,100)",
+      borderColor: "rgba(119,66,231,100)",
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
+      borderRadius: 25,
       ...defaultMarginStyles,
       padding: {
-        paddingLeft: 24,
-        paddingRight: 24,
-        paddingTop: 8,
-        paddingBottom: 8,
+        paddingLeft: 48,
+        paddingRight: 48,
+        paddingTop: 12,
+        paddingBottom: 12,
       },
     },
     connectWallet: "off",
@@ -271,19 +274,27 @@ export const components = [
     style: {
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
+      borderRadius: 5,
       ...defaultColorStyles,
+      color: "rgba(222,222,222,100)",
       margin: {
         marginLeft: 24,
         marginRight: 24,
         marginTop: 0,
         marginBottom: 0,
       },
+      padding: {
+        paddingLeft: 12,
+        paddingRight: 12,
+        paddingTop: 8,
+        paddingBottom: 8
+      }
     },
   },
   {
     name: "Image",
-    h: 1.2,
-    minH: 1.2,
+    h: 1.8,
+    minH: 1,
     style: {
       width: 80,
       height: 60,

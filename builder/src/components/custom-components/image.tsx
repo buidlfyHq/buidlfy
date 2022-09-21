@@ -65,12 +65,13 @@ const Image: FC<IImageComponent> = ({
           />
         </div>
       ) : (
-        <div className="flex overflow-hidden items-center justify-center w-auto h-full">
+        <div className="flex justify-center">
           <div
             id="image-two"
-            className="px-10 bold py-[10px] rounded-xl bg-indigo-700 text-white"
+            className="mb-3 mt-5 upload-img px-3 text-[12px] whitespace-nowrap"
           >
-            Upload Image
+            Click and upload file, or{" "}
+            <span className="ml-2 purple-label">browse</span>
           </div>
         </div>
       )}
