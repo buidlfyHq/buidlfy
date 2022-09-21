@@ -248,7 +248,7 @@ const Container: FC<IContainer> = ({
               ? 50 - (borderWidth ? borderWidth * 2 : 4) / children?.length
               : 50
           }
-          width={containerW - finalPadding || 200}
+          width={containerW - (finalPadding + borderWidth * 2) || 200}
           isBounded={true}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
