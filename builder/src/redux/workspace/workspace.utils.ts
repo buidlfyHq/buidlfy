@@ -47,7 +47,7 @@ export const mapElementStylesToWorkspace = (
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
   let selectedChild = findSelected(element, settingItemId);
-  
+
   if (element.i === settingItemId) {
     return {
       ...element,
@@ -151,12 +151,16 @@ export const fetchSelectedElement = (
   workspaceElements: IWorkspaceElement[],
   payload: string
 ) => {
-  return (
-    workspaceElements?.find((element) => element.i === payload) ||
-    workspaceElements?.map((element) =>
-      element.children?.find((child: IWorkspaceElement) => child.i === payload)
-    )[1]
+  const searchSelectedElement = workspaceElements?.find(
+    (element) => element.i === payload
   );
+  
+  const searchSelectedChild = workspaceElements?.map((element) =>
+    element.children?.find((child: IWorkspaceElement) => child.i === payload)
+  );
+  const getSelectedChild = searchSelectedChild.filter((child) => child)[0];
+
+  return searchSelectedElement || getSelectedChild;
 };
 
 export const updateContractInElement = (
