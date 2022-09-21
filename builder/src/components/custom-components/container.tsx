@@ -235,22 +235,27 @@ const Container: FC<IContainer> = ({
           paddingRight: `${padding.paddingRight}px`,
           borderRadius: `${borderRadius}px`,
           borderWidth: `${borderWidth ? borderWidth : 2}px`,
+          borderColor: color,
+          borderImage: color,
         }}
-        className="h-fit w-full cursor-pointer container-drag box-border border-2 overflow-hidden"
+        className="h-fit btn-border w-full cursor-pointer container-drag box-border border-2 overflow-hidden"
       >
         <GridLayout
           layout={children}
           cols={6}
-          rowHeight={children?.length ? 50 - (borderWidth ? borderWidth * 2 : 4) / children?.length : 50}
+          rowHeight={
+            children?.length
+              ? 50 - (borderWidth ? borderWidth * 2 : 4) / children?.length
+              : 50
+          }
           width={containerW - finalPadding || 200}
           isBounded={true}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           compactType={null}
-          className="h-fit btn-border"
+          className="h-fit"
           style={{
             background: backgroundColor,
-            borderImage: color,
             backgroundImage: `url(${imgData})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
