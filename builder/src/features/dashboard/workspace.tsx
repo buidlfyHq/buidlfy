@@ -273,8 +273,58 @@ const Workspace: FC<IWorkspaceComponent> = ({
       style={{ width: "-webkit-fill-available" }}
       className="main-div h-full"
     >
-      <section onClick={handleCheckIsContainer}>
-        {isNavHidden && !openSetting ? (
+      <section onClick={handleCheckIsContainer} className="z-100">
+        {!openSetting ? (
+          <section
+            id="left-side-view"
+            style={{
+              width: "-webkit-fill-available",
+              background: workspaceBackgroundColor,
+            }}
+            className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
+          >
+            <GridLayout
+              layout={workspaceElements}
+              cols={6}
+              rowHeight={50}
+              width={leftSideViewWidth || 1200}
+              resizeHandles={["se"]}
+              isDraggable={drag}
+              onLayoutChange={onLayoutChange}
+              compactType={null}
+              margin={[0, 0]}
+              className="h-fit overflow-hidden"
+            >
+              {renderItemFunction}
+            </GridLayout>
+          </section>
+        ) : (
+          <section
+            id="right-side-view"
+            style={{
+              width: "-webkit-fill-available",
+              background: workspaceBackgroundColor,
+            }}
+            className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[290px] mb-[20px] min-h-[87vh] shadow-2xl"
+          >
+            <GridLayout
+              layout={workspaceElements}
+              cols={6}
+              rowHeight={50}
+              width={rightSideViewWidth || 1200}
+              resizeHandles={["se"]}
+              isDraggable={drag}
+              onLayoutChange={onLayoutChange}
+              compactType={null}
+              margin={[0, 0]}
+              className="h-fit overflow-hidden"
+            >
+              {renderItemFunction}
+            </GridLayout>
+          </section>
+        )}
+
+        {/* {isNavHidden && !openSetting ? (
           <section
             id="full-view"
             style={{
@@ -350,7 +400,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
               </section>
             )}
           </>
-        )}
+        )} */}
       </section>
     </main>
   );

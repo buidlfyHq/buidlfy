@@ -228,6 +228,7 @@ const Container: FC<IContainer> = ({
 
   return (
     <>
+      {/* <div className="relative"> */}
       <section
         id={item.i}
         style={{
@@ -245,7 +246,7 @@ const Container: FC<IContainer> = ({
           cols={6}
           rowHeight={
             children?.length
-              ? 50 - (borderWidth ? borderWidth * 2 : 2) / children?.length
+              ? 50 - (borderWidth ? borderWidth * 2 : 1) / children?.length
               : 50
           }
           width={containerW - (finalPadding + borderWidth * 2) || 200}
@@ -333,6 +334,7 @@ const Container: FC<IContainer> = ({
           </span>
         </div>
       </section>
+      {/* </div> */}
     </>
   );
 };

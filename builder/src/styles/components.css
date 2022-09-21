@@ -330,7 +330,9 @@
   border-image-slice: 1;
 }
 .sidebar {
-  background: rgba(63, 60, 197, 0.04);
+   background: #EDEBF5;
+   z-index: 7777 !important;
+  /* background: rgba(63, 60, 197, 0.04); */
 }
 .sidebar::-webkit-scrollbar {
   background-color: transparent;
@@ -340,6 +342,7 @@
   border: 1px solid #dee0e9;
   color: rgba(16, 15, 17, 0.5);
 }
+
 .search::placeholder {
   font-style: normal;
   font-weight: 400;
