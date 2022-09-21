@@ -325,7 +325,7 @@
   position: absolute;
 }
 .border-hover:hover {
-  border: 2px solid;
+  border: 1px solid;
   border-image-source: linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
   border-image-slice: 1;
 }

@@ -234,18 +234,18 @@ const Container: FC<IContainer> = ({
           paddingLeft: `${padding.paddingLeft}px`,
           paddingRight: `${padding.paddingRight}px`,
           borderRadius: `${borderRadius}px`,
-          borderWidth: `${borderWidth ? borderWidth : 2}px`,
+          borderWidth: `${borderWidth ? borderWidth : 1}px`,
           borderColor: color,
           borderImage: color,
         }}
-        className="h-fit btn-border w-full cursor-pointer container-drag box-border border-2 overflow-hidden"
+        className="h-fit btn-border w-full cursor-pointer container-drag box-border border-1 overflow-hidden"
       >
         <GridLayout
           layout={children}
           cols={6}
           rowHeight={
             children?.length
-              ? 50 - (borderWidth ? borderWidth * 2 : 4) / children?.length
+              ? 50 - (borderWidth ? borderWidth * 2 : 2) / children?.length
               : 50
           }
           width={containerW - (finalPadding + borderWidth * 2) || 200}
@@ -286,10 +286,10 @@ const Container: FC<IContainer> = ({
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (
                   <div
-                    className={`w-full h-full border-2 border-[transparent] ${
+                    className={`w-full h-full ${
                       contractElementSelector
-                        ? "hover:border-slate-300 hover:border-dashed"
-                        : "border-hover"
+                        ? "border-2 border-[transparent] hover:border-slate-300 hover:border-dashed"
+                        : "border-2 border-[transparent] border-hover"
                     }`}
                     key={i}
                     data-grid={{ x, y, w, h, minW, resizeHandles }}

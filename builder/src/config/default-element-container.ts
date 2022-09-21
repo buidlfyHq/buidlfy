@@ -6,8 +6,8 @@ const defaultItem = {
   minW: 1,
   name: "Text",
   style: {
-    color: "rgba(0, 0, 0, 100)",
     backgroundColor: "rgba(255, 255, 255, 1)",
+    color: "rgba(218, 218, 218, 100)",
     fontWeight: "normal",
     fontStyle: "normal",
     textDecoration: "none",
