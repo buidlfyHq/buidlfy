@@ -51,7 +51,7 @@ export const components = [
         paddingBottom: 0
       },
       backgroundColor: "rgba(255, 255, 255, 1)",
-      color: "rgba(218, 218, 218, 100)",
+      color: "transparent",
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
     },

@@ -236,7 +236,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       return (
         <div
           key={i}
-          id={name}
+          id={i}
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
@@ -246,6 +246,18 @@ const Workspace: FC<IWorkspaceComponent> = ({
                 : "border-2 border-[transparent] border-hover"
               : null
           }`}
+          onMouseOver={() => {
+            if (!containerCheck(item))
+              (
+                document.getElementById(i).childNodes[1] as HTMLElement
+              ).style.visibility = "visible";
+          }}
+          onMouseOut={() => {
+            if (!containerCheck(item))
+              (
+                document.getElementById(i).childNodes[1] as HTMLElement
+              ).style.visibility = "hidden";
+          }}
           // open item setting on click
           onClick={() =>
             containerCheck(item) ? null : onComponentClick(item.name, i)

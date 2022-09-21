@@ -234,11 +234,27 @@ const Container: FC<IContainer> = ({
           paddingLeft: `${padding.paddingLeft}px`,
           paddingRight: `${padding.paddingRight}px`,
           borderRadius: `${borderRadius}px`,
-          borderWidth: `${borderWidth ? borderWidth : 1}px`,
+          borderWidth: borderWidth,
           borderColor: color,
           borderImage: color,
         }}
-        className="h-fit btn-border w-full cursor-pointer container-drag box-border border-1 overflow-hidden"
+        className="h-fit w-full cursor-pointer container-drag overflow-hidden btn-border"
+        // onMouseOut={() => {
+        //   const handles = document.getElementsByClassName(
+        //     "react-resizable-handle-se"
+        //   );
+        //   Array.prototype.map.call(handles, (e) => {
+        //     e.style.visibility = "hidden";
+        //   });
+        // }}
+        // onMouseOver={() => {
+        //   const handles = document.getElementsByClassName(
+        //     "react-resizable-handle-se"
+        //   );
+        //   Array.prototype.map.call(handles, (e) => {
+        //     e.style.visibility = "visible";
+        //   });
+        // }}
       >
         <GridLayout
           layout={children}
@@ -265,7 +281,7 @@ const Container: FC<IContainer> = ({
         >
           {!children?.length ? (
             <div
-              className="w-full h-full py-10 flex justify-center"
+              className="w-full h-full py-10 flex justify-center bg-gray-300"
               key={"DefaultElement"}
               data-grid={{
                 x: 0,
@@ -288,13 +304,25 @@ const Container: FC<IContainer> = ({
                   <div
                     className={`w-full h-full ${
                       contractElementSelector
-                        ? "border-2 border-[transparent] hover:border-slate-300 hover:border-dashed"
-                        : "border-2 border-[transparent] border-hover"
+                        ? "border-1 border-[transparent] hover:border-slate-300 hover:border-dashed"
+                        : "border-1 border-[transparent] border-hover"
                     }`}
                     key={i}
                     data-grid={{ x, y, w, h, minW, resizeHandles }}
-                    onMouseOver={() => setDrag(false)}
-                    onMouseOut={() => setDrag(true)}
+                    onMouseOver={() => {
+                      setDrag(false);
+                      (
+                        document.getElementById(item.i).parentNode.parentNode
+                          .childNodes[1] as HTMLElement
+                      ).style.visibility = "visible";
+                    }}
+                    onMouseOut={() => {
+                      setDrag(true);
+                      (
+                        document.getElementById(item.i).parentNode.parentNode
+                          .childNodes[1] as HTMLElement
+                      ).style.visibility = "hidden";
+                    }}
                     onClick={() => onComponentClick(item.name, i)}
                   >
                     <RenderItem
