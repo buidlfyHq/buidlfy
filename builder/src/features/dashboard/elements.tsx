@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ShortUniqueId from "short-unique-id";
 import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { MdOutlineClose } from "react-icons/md";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
 import {
@@ -13,9 +15,15 @@ import "styles/components.css";
 
 interface IElements {
   isContainerSelected: boolean;
+  hideSidebar: () => void;
+  hideSettingSidebar: () => void;
 }
 
-const Elements: FC<IElements> = ({ isContainerSelected }) => {
+const Elements: FC<IElements> = ({
+  isContainerSelected,
+  hideSidebar,
+  hideSettingSidebar,
+}) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -105,200 +113,122 @@ const Elements: FC<IElements> = ({ isContainerSelected }) => {
     }
   };
 
+  const elementsList = (
+    <>
+      {/* Fix: Add all style to common tailwind  */}
+      <div className="element-div">
+        <div className="px-[4.1rem] py-4">
+          <div className="flex">
+            <button
+              onClick={() => onClickFunction("Button")}
+              className="element-btn "
+            >
+              Button
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="element-div">
+        <div className="py-3 px-10">
+          <div>
+            <h1
+              className="font-normal text-2xl mb-4"
+              onClick={() => onClickFunction("Heading 1")}
+            >
+              Add Heading 1
+            </h1>
+
+            <h2
+              onClick={() => onClickFunction("Heading 2")}
+              className="font-normal text-xl mb-4"
+            >
+              Add Heading 2
+            </h2>
+
+            <h3
+              onClick={() => onClickFunction("Heading 3")}
+              className="font-normal text-lg mb-4"
+            >
+              Add Heading 3
+            </h3>
+
+            <div
+              onClick={() => onClickFunction("Text")}
+              className="font-normal text-[13px] text-four w-[200px]"
+            >
+              I am a paragrah. Click here to add your own text and edit me. It's
+              easy & simple.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="element-div">
+        <div className="px-[1.75rem] py-4">
+          <div>
+            <div
+              className="input-container"
+              onClick={() => onClickFunction("Input")}
+            >
+              <h1 className="element-input-text">Add Input</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="element-div">
+        <div onClick={() => onClickFunction("Image")} className="px-4 py-4">
+          <div className="image-container pt-2">
+            <span className="element-text ml-[1rem] my-[0.7rem] text-black">
+              File Upload
+            </span>
+            <div className="element-upload mx-4">
+              <span className="image-label text-[10px]">
+                Drag and drop a file, or{" "}
+                <span className="purple-label">browse</span>
+              </span>
+            </div>
+            <div className="flex justify-center">
+              <button className="upload-btn mx-2 mt-4">Upload</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
   return (
     <>
       {/* Components */}
-
-      <form className="flex items-center mb-5">
-        <div className="relative mt-[2rem] mx-3 w-full">
-          <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5 text-gray-500 dark:text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </div>
-          <input
-            type="text"
-            id="simple-search"
-            className="search rounded-full focus:ring-[#dee0e9] focus:border-[#dee0e9] block w-full pl-10 p-2.5 "
-            placeholder="Search"
-            required
-          />
-        </div>
-      </form>
-      <div className="mx-9">
-        <span className="badge mt-12 px-2.5 py-2.5">Default</span>
-        <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
-        <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
+      <div className="element-heading-div pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem]">
+        <h3 className="element-heading">Add Elements</h3>
+        <MdOutlineClose
+          onClick={() => {
+            hideSidebar();
+            hideSettingSidebar();
+          }}
+          className="text-[16px]"
+        />
       </div>
-
       {!isContainerSelected ? (
         <>
-          {" "}
-          <div className="mt-6 px-4">
-            <span className="element-text">Button</span>
-            <div className="flex">
-              <button
-                onClick={() => onClickFunction("Button")}
-                className="element-btn mt-3 px-4 py-2 rounded-xl"
-              >
-                Button
-              </button>
-            </div>
-          </div>
-          <div className="mt-6 px-4">
-            <span className="element-text">Container</span>
-            <div className="flex py-2.5">
-              <div
-                className="element-container "
-                onClick={() => onClickFunction("Container")}
-              ></div>
-            </div>
-          </div>
-          <div className="mt-6 px-4">
-            <span className="element-text">Text</span>
-            <div>
-              <div
-                className="heading-container mt-3 py-2 pl-3"
-                onClick={() => onClickFunction("Heading 1")}
-              >
-                <h1 className="text-2xl">Heading 1</h1>
-              </div>
-              <div
-                className="heading-container mt-3 py-2.5 pl-3"
-                onClick={() => onClickFunction("Heading 2")}
-              >
-                <h2 className="text-xl">Heading 2</h2>
-              </div>
-              <div
-                className="heading-container mt-3 py-2 pl-3"
-                onClick={() => onClickFunction("Heading 3")}
-              >
-                <h3 className="text-lg">Heading 3</h3>
-              </div>
-              <div
-                className="paragraph-container mt-3 py-3 pl-3"
-                onClick={() => onClickFunction("Text")}
-              >
-                <span className="text-sm">Paragraph</span>
+          <div className="element-div">
+            <div className="px-4 py-4">
+              <div className="flex">
+                <div
+                  className="element-container"
+                  onClick={() => onClickFunction("Container")}
+                >
+                  <span className="element-text">
+                    Add Container
+                    <IoIosAddCircleOutline className="text-[16px] ml-1" />
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-          <div className="mt-6 px-4">
-            <span className="element-text">Input</span>
-            <div>
-              <div
-                className="heading-container mt-3 py-2.5 pl-3"
-                onClick={() => onClickFunction("Input")}
-              >
-                <h1 className="text-base">Input</h1>
-              </div>
-            </div>
-          </div>
-          <div onClick={() => onClickFunction("Image")} className="mt-6 px-4">
-            <span className="element-text">Image Upload</span>
-            <div className="image-container mt-2 pt-2">
-              <div className="upload-img mx-6">
-                <span className="image-label">
-                  Drag and drop a file, or{" "}
-                  <span className="purple-label">browse</span>
-                </span>
-              </div>
-              <div className="flex justify-center">
-                <button className="upload-btn mx-2 mt-4">Upload</button>
-              </div>
-            </div>
-            {/* <img src={image} /> */}
-          </div>
+          {elementsList}
         </>
       ) : (
-        <>
-          {" "}
-          <div className="mt-6 px-4">
-            <span className="element-text">Button</span>
-            <div className="flex">
-              <button
-                onClick={() => onClickFunction("Button")}
-                className="element-btn mt-3 px-4 py-2 rounded-xl"
-              >
-                Button
-              </button>
-            </div>
-          </div>
-          <div className="mt-6 px-4">
-            <span className="element-text">Text</span>
-            <div>
-              <div
-                className="heading-container mt-3 py-2 pl-3"
-                onClick={() => onClickFunction("Heading 1")}
-              >
-                <h1 className="text-2xl">Heading 1</h1>
-              </div>
-              <div
-                className="heading-container mt-3 py-2.5 pl-3"
-                onClick={() => onClickFunction("Heading 2")}
-              >
-                <h2 className="text-xl">Heading 2</h2>
-              </div>
-              <div
-                className="heading-container mt-3 py-2 pl-3"
-                onClick={() => onClickFunction("Heading 3")}
-              >
-                <h3 className="text-lg">Heading 3</h3>
-              </div>
-              <div
-                className="paragraph-container mt-3 py-3 pl-3"
-                onClick={() => onClickFunction("Text")}
-              >
-                <span className="text-sm">Paragraph</span>
-              </div>
-            </div>
-          </div>
-          <div className="mt-6 px-4">
-            <span className="element-text">Input</span>
-            <div>
-              <div
-                className="heading-container mt-3 py-2.5 pl-3"
-                onClick={() => onClickFunction("Input")}
-              >
-                <h1 className="text-base">Input</h1>
-              </div>
-            </div>
-          </div>
-          <div onClick={() => onClickFunction("Image")} className="mt-6 px-4">
-            <span className="element-text">Image Upload</span>
-            <div className="image-container mt-2 pt-2">
-              <div className="upload-img mx-6">
-                <span className="image-label">
-                  Drag and drop a file, or{" "}
-                  <span className="purple-label">browse</span>
-                </span>
-              </div>
-              <div className="flex justify-center">
-                <button className="upload-btn mx-2 mt-4">Upload</button>
-              </div>
-            </div>
-            {/* <img src={image} /> */}
-          </div>
-        </>
+        elementsList
       )}
-
-      {/* <div className="px-6 py-3 mt-4">
-        {isContainerSelected ? (
-          <>{renderContainerComponents}</>
-        ) : (
-          <>{renderComponents}</>
-        )}
-      </div> */}
     </>
   );
 };

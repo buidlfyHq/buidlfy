@@ -24,7 +24,7 @@ const SideNavbar: FC<ISideNavbar> = ({
 
   return (
     <main
-      className={`w-[80px] bg-white shadow-sm fixed top-0 bottom-0 left-0 border-r ${className}`}
+      className={`w-[80px] sidenav z-[100] fixed top-0 bottom-0 left-0 ${className}`}
     >
       {/* Components */}
       <div className="side-border px-4 py-3">
