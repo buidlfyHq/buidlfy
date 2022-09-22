@@ -205,13 +205,13 @@ const Workspace: FC<IWorkspaceComponent> = ({
   // FIX: find a suitable type for this event
   const handleCheckIsContainer = (e) => {
     if (
-      e.target.id.slice(6) === "Container" ||
-      e.target.parentNode.id.slice(6) === "Container" ||
-      e.target.parentNode.parentNode.id.slice(6) === "Container" ||
-      e.target.parentNode.parentNode.parentNode.id.slice(6) === "Container"
+      !(
+        e.target.id.slice(6) === "Container" ||
+        e.target.parentNode.id.slice(6) === "Container" ||
+        e.target.parentNode.parentNode.id.slice(6) === "Container" ||
+        e.target.parentNode.parentNode.parentNode.id.slice(6) === "Container"
+      )
     ) {
-      setIsContainerSelected(true);
-    } else {
       setIsContainerSelected(false);
       hideSidebar();
     }
@@ -274,9 +274,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
             width: "-webkit-fill-available",
             background: workspaceBackgroundColor,
           }}
-          className="mt-[90px] z-[100] bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl
-            mr-[290px]
-          "
+          className="mt-[90px] z-[100] bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl mr-[290px]"
         >
           <GridLayout
             layout={workspaceElements}

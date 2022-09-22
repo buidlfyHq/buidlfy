@@ -67,7 +67,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
       ) : (
         <>
           <div className="flex justify-center mt-[3rem]" />
-          <h3 className="ml-[0.5rem]">
+          <h3 className="ml-[0.5rem] mt-[2rem]">
             <span className="setting-text">Import Contract</span>
           </h3>
           <p className="contract-text ml-[0.5rem]">
