@@ -245,7 +245,6 @@ const Container: FC<IContainer> = ({
     setOpenSetting(true);
     hideSidebar();
   };
-  console.log(color, "color");
 
   return (
     <>

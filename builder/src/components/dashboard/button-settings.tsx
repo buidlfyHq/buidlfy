@@ -32,12 +32,12 @@ const ButtonSettings: FC<ISettings> = ({
 
   const handleToggleTab = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
-    num: number
+    tab: number
   ) => {
     e.preventDefault();
 
-    setOpenTab(num);
-    if (num === 1) {
+    setOpenTab(tab);
+    if (tab === 1) {
       dispatch(setSelectorToDefault());
     }
   };

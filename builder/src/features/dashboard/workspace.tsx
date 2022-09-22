@@ -205,13 +205,13 @@ const Workspace: FC<IWorkspaceComponent> = ({
   // FIX: find a suitable type for this event
   const handleCheckIsContainer = (e) => {
     if (
-      e.target.id.slice(6) === "Container" ||
-      e.target.parentNode.id.slice(6) === "Container" ||
-      e.target.parentNode.parentNode.id.slice(6) === "Container" ||
-      e.target.parentNode.parentNode.parentNode.id.slice(6) === "Container"
+      !(
+        e.target.id.slice(6) === "Container" ||
+        e.target.parentNode.id.slice(6) === "Container" ||
+        e.target.parentNode.parentNode.id.slice(6) === "Container" ||
+        e.target.parentNode.parentNode.parentNode.id.slice(6) === "Container"
+      )
     ) {
-      // setIsContainerSelected(true);
-    } else {
       setIsContainerSelected(false);
       hideSidebar();
     }
