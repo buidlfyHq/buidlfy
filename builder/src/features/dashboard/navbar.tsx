@@ -141,8 +141,8 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
     <main
       className={
         !className
-          ? `fixed left-[80px] right-0 h-[60px] top-0 border-b flex flex-row justify-between items-center p-3 bg-white z-20`
-          : `h-[57px] w-full top-0 border-b flex flex-row justify-between items-center p-3 z-20`
+          ? `fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20`
+          : `h-[57px] w-full top-0 topnav flex flex-row justify-between items-center p-3 z-20`
       }
     >
       <div className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer">
