@@ -16,7 +16,7 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
   const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
-  
+
   const handleDelete = () => {
     dispatch(
       updateWorkspaceElementStyle({
@@ -27,14 +27,16 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
     );
     setOpenSetting(false);
   };
-
+  const handleOpenSetting = () => {
+    setOpenSetting(false);
+  };
   return (
     <>
       {selectedElement?.i ? (
         <>
           <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
             <div
-              className="border shadow-sm overflow-x-hidden mt-[40px] sidebar menu"
+              className="border shadow-sm overflow-x-hidden mt-[40px] menu"
               ref={ref}
             >
               <div className="delete-div flex py-2 pl-3">
@@ -56,7 +58,15 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
                 </div> */}
               </div>
 
-              <div style={{ marginTop: "3rem" }}>
+              <div
+                style={{ marginTop: "1rem" }}
+                className="py-4 px-2 text-sm"
+                onClick={handleOpenSetting}
+              >
+                {"<"}
+                <span className="ml-2">Site Settings</span>
+              </div>
+              <div>
                 <SettingComponent openTab={openTab} setOpenTab={setOpenTab} />
               </div>
             </div>

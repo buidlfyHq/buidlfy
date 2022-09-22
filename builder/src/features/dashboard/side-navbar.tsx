@@ -66,7 +66,7 @@ const SideNavbar: FC<ISideNavbar> = ({
           </div>
           <h3 className="side-text mt-1">Media</h3>
         </div> */}
-        <div
+        {/* <div
           onClick={() => {
             showSidebar(true);
             handleSidebar(SidebarEnum.STYLES);
@@ -78,7 +78,7 @@ const SideNavbar: FC<ISideNavbar> = ({
             <img src={styles} alt="Styles" />
           </div>
           <h3 className="side-text mt-1">Styles</h3>
-        </div>
+        </div> */}
         {/* <div className="mt-8 cursor-pointer">
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={help} />

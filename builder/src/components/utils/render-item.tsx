@@ -83,7 +83,6 @@ const RenderItem: FC<IRenderItem> = ({
           shadow={item.style.shadow}
           color={item.style.color}
           margin={item.style.margin}
-          padding={item.style.padding}
         />
       );
     case "Image":
