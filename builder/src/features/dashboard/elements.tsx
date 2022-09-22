@@ -115,7 +115,7 @@ const Elements: FC<IElements> = ({
 
   const elementsList = (
     <>
-      {" "}
+      {/* Fix: Add all style to common tailwind  */}
       <div className="element-div">
         <div className="px-[4.1rem] py-4">
           <div className="flex">
