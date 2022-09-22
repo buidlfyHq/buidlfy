@@ -41,7 +41,7 @@ const Sidebar: FC<ISidebar> = ({
   return (
     <main
       ref={ref}
-      className={`sidebar ease-in-out duration-200 transition overflow-scroll fixed left-[80px] shadow-xl bottom-0 top-[60px] w-[280px] pb-8 border-r z-100 ${
+      className={`sidebar ease-in-out duration-200 transition overflow-scroll fixed left-[80px] shadow-xl bottom-0 top-[60px] w-[320px] pb-8 z-100 ${
         isNavHidden ? "hidden" : ""
       }`}
     >
@@ -84,7 +84,7 @@ const Sidebar: FC<ISidebar> = ({
         </div>
       </div> */}
       {/* </section> */}
-      <div className="flex justify-end absolute">
+      {/* <div className="flex justify-end absolute">
         <div
           onClick={() => {
             hideSidebar();
@@ -94,10 +94,14 @@ const Sidebar: FC<ISidebar> = ({
         >
           <AiOutlineLeft className="text-[18px] mr-3 text-[#8350F0] font-black" />
         </div>
-      </div>
+      </div> */}
       {/* Components */}
       {sideElement === SidebarEnum.ELEMENTS ? (
-        <Elements isContainerSelected={isContainerSelected} />
+        <Elements
+          hideSidebar={hideSidebar}
+          isContainerSelected={isContainerSelected}
+          hideSettingSidebar={hideSettingSidebar}
+        />
       ) : null}
       {sideElement === SidebarEnum.TEMPLATES ? <Template /> : null}
       {sideElement === SidebarEnum.STYLES ? (
