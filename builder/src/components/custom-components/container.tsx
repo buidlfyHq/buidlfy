@@ -89,8 +89,8 @@ const Container: FC<IContainer> = ({
   let finalPadding = padding.paddingLeft + padding.paddingRight;
 
   const elementHoverStyles = contractElementSelector
-    ? "border-1 border-[transparent] hover:border-slate-300 hover:border-dashed"
-    : "border-1 border-[transparent] border-hover";
+    ? "border border-[transparent] hover:border-slate-300 hover:border-dashed"
+    : "border border-[transparent] border-hover";
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {

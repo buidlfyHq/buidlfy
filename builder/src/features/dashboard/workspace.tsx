@@ -68,8 +68,8 @@ const Workspace: FC<IWorkspaceComponent> = ({
   );
 
   const elementHoverStyles = contractElementSelector
-    ? "border-2 border-[transparent] hover:border-slate-300 hover:border-dashed"
-    : "border-2 border-[transparent] border-hover";
+    ? "border border-[transparent] hover:border-slate-300 hover:border-dashed"
+    : "border border-[transparent] border-hover";
 
   const [fullViewWidth, setFullViewWidth] = useState<number>(1200);
   const [leftSideViewWidth, setLeftSideViewWidth] = useState<number>(996);
@@ -287,7 +287,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
               width: "-webkit-fill-available",
               background: workspaceBackgroundColor,
             }}
-            className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
+            className="mt-[100px] z-[100] bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
           >
             <GridLayout
               layout={workspaceElements}
@@ -313,7 +313,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
                   width: "-webkit-fill-available",
                   background: workspaceBackgroundColor,
                 }}
-                className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
+                className="mt-[100px] z-[100] bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
                 <GridLayout
                   layout={workspaceElements}
@@ -337,7 +337,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
                   width: "-webkit-fill-available",
                   background: workspaceBackgroundColor,
                 }}
-                className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
+                className="mt-[100px] z-[100] bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
               >
                 <GridLayout
                   layout={workspaceElements}
