@@ -83,6 +83,15 @@ const Container: FC<IContainer> = ({
     (state: IRootState) => state.contract.contractElementSelected
   );
 
+  let containerW = document
+    ?.getElementById(`${item.i}`)
+    ?.getBoundingClientRect().width;
+  let finalPadding = padding.paddingLeft + padding.paddingRight;
+
+  const elementHoverStyles = contractElementSelector
+    ? "border border-[transparent] hover:border-slate-300 hover:border-dashed"
+    : "border border-[transparent] border-hover";
+
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
@@ -180,6 +189,22 @@ const Container: FC<IContainer> = ({
     }
   };
 
+  const handleMouseOver = (id: string) => {
+    setDrag(false);
+    (
+      document.getElementById(id).parentNode.parentNode
+        .childNodes[1] as HTMLElement
+    ).style.visibility = "visible";
+  };
+
+  const handleMouseOut = (id: string) => {
+    setDrag(true);
+    (
+      document.getElementById(id).parentNode.parentNode
+        .childNodes[1] as HTMLElement
+    ).style.visibility = "hidden";
+  };
+
   const handleSidebar = (selectedSidebarElements: string) => {
     setSideElement(selectedSidebarElements);
   };
@@ -221,11 +246,6 @@ const Container: FC<IContainer> = ({
     hideSidebar();
   };
 
-  let containerW = document
-    ?.getElementById(`${item.i}`)
-    ?.getBoundingClientRect().width;
-  let finalPadding = padding.paddingLeft + padding.paddingRight;
-
   return (
     <>
       <section
@@ -234,11 +254,11 @@ const Container: FC<IContainer> = ({
           paddingLeft: `${padding.paddingLeft}px`,
           paddingRight: `${padding.paddingRight}px`,
           borderRadius: `${borderRadius}px`,
-          borderWidth: `${borderWidth ? borderWidth : 1}px`,
+          borderWidth: borderWidth,
           borderColor: color,
           borderImage: color,
         }}
-        className="h-fit btn-border w-full cursor-pointer container-drag box-border border-1 overflow-hidden"
+        className="h-fit w-full cursor-pointer container-drag overflow-hidden btn-border"
       >
         <GridLayout
           layout={children}
@@ -265,7 +285,7 @@ const Container: FC<IContainer> = ({
         >
           {!children?.length ? (
             <div
-              className="w-full h-full py-10 flex justify-center"
+              className="w-full h-full py-10 default-container"
               key={"DefaultElement"}
               data-grid={{
                 x: 0,
@@ -286,15 +306,11 @@ const Container: FC<IContainer> = ({
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (
                   <div
-                    className={`w-full h-full ${
-                      contractElementSelector
-                        ? "border-2 border-[transparent] hover:border-slate-300 hover:border-dashed"
-                        : "border-2 border-[transparent] border-hover"
-                    }`}
+                    className={`w-full h-full ${elementHoverStyles}`}
                     key={i}
                     data-grid={{ x, y, w, h, minW, resizeHandles }}
-                    onMouseOver={() => setDrag(false)}
-                    onMouseOut={() => setDrag(true)}
+                    onMouseOver={() => handleMouseOver(i)}
+                    onMouseOut={() => handleMouseOut(i)}
                     onClick={() => onComponentClick(item.name, i)}
                   >
                     <RenderItem

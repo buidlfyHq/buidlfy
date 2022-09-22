@@ -23,6 +23,8 @@ const Text: FC<IText> = ({
       value={value}
       style={{
         height: "-webkit-fill-available",
+        WebkitTextFillColor:
+          color.slice(0, 15) === "linear-gradient" ? "transparent" : color,
         fontWeight: bold,
         fontStyle: italic,
         background: color,
@@ -42,7 +44,6 @@ const Text: FC<IText> = ({
       id="text-one"
       style={{
         textDecoration: underline,
-        WebkitTextFillColor: "transparent",
         textDecorationColor: color,
         height: "-webkit-fill-available",
         background: backgroundColor,
