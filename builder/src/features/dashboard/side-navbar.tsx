@@ -26,44 +26,6 @@ const SideNavbar: FC<ISideNavbar> = ({
     <main
       className={`w-[80px] bg-white shadow-sm fixed top-0 bottom-0 left-0 border-r ${className}`}
     >
-      {/* user name */}
-      {/* It will be used for a later code */}
-      {/* <section className="flex flex-row justify-between items-center h-[60px]">
-        <Popover className="relative p-3 bg-white">
-          <Popover.Button>
-            <span className="bg-blue-300 mr-2 rounded-[50%] p-1">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            User Name
-          </Popover.Button>
-
-          <Popover.Panel className="absolute bg-white z-10 mt-5 rounded-md shadow-sm border w-[225px] p-2">
-            <div className="flex flex-row items-center justify-start">
-              <span className="bg-blue-300 mr-2 rounded-[50%] p-3">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </span>
-              <div className="flex flex-col">
-                <div>User Name</div>
-                <div>xyz.spheron.com</div>
-              </div>
-            </div>
-            <hr className="my-2" />
-            <div>
-              <div>All Sites</div>
-              <div>Create a new Site</div>
-            </div>
-            <hr className="my-2" />
-            <div>Logout</div>
-          </Popover.Panel>
-        </Popover>
-        <div
-          onClick={hideSidebar}
-          className="m-2 p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"
-        >
-          <AiOutlineDoubleLeft />
-        </div>
-      </section> */}
-
       {/* Components */}
       <div className="side-border px-4 py-3">
         <div

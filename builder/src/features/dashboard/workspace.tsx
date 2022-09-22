@@ -67,6 +67,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
     (state: IRootState) => state.contract.contractElementSelected
   );
 
+  const elementHoverStyles = contractElementSelector
+    ? "border border-[transparent] hover:border-slate-300 hover:border-dashed"
+    : "border border-[transparent] border-hover";
+
   const [fullViewWidth, setFullViewWidth] = useState<number>(1200);
 
   useEffect(() => {
@@ -160,6 +164,18 @@ const Workspace: FC<IWorkspaceComponent> = ({
     dispatch(setSelectorToDefault());
   };
 
+  const handleMouseOver = (id: string) => {
+    (
+      document.getElementById(id).childNodes[1] as HTMLElement
+    ).style.visibility = "visible";
+  };
+
+  const handleMouseOut = (id: string) => {
+    (
+      document.getElementById(id).childNodes[1] as HTMLElement
+    ).style.visibility = "hidden";
+  };
+
   const onComponentClick = (itemName: string, i: string) => {
     setIsContainerSelected(true);
     hideSidebar();
@@ -189,18 +205,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
   // FIX: find a suitable type for this event
   const handleCheckIsContainer = (e) => {
     if (
-      e.target.id === "Container" ||
-      e.target.parentNode.id === "Container" ||
-      e.target.parentNode.parentNode.id === "Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Container" ||
-      e.target.id === "Horizontal Container" ||
-      e.target.parentNode.id === "Horizontal Container" ||
-      e.target.parentNode.parentNode.id === "Horizontal Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Horizontal Container" ||
-      e.target.id === "Vertical Container" ||
-      e.target.parentNode.id === "Vertical Container" ||
-      e.target.parentNode.parentNode.id === "Vertical Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
+      e.target.id.slice(6) === "Container" ||
+      e.target.parentNode.id.slice(6) === "Container" ||
+      e.target.parentNode.parentNode.id.slice(6) === "Container" ||
+      e.target.parentNode.parentNode.parentNode.id.slice(6) === "Container"
     ) {
       setIsContainerSelected(true);
     } else {
@@ -224,16 +232,14 @@ const Workspace: FC<IWorkspaceComponent> = ({
       return (
         <div
           key={i}
-          id={name}
+          id={i + name}
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
-            !containerCheck(item)
-              ? contractElementSelector
-                ? "border-2 border-[transparent] hover:border-slate-300 hover:border-dashed"
-                : "border-2 border-[transparent] border-hover"
-              : null
+            !containerCheck(item) && elementHoverStyles
           }`}
+          onMouseOver={() => !containerCheck(item) && handleMouseOver(i + name)}
+          onMouseOut={() => !containerCheck(item) && handleMouseOut(i + name)}
           // open item setting on click
           onClick={() =>
             containerCheck(item) ? null : onComponentClick(item.name, i)
