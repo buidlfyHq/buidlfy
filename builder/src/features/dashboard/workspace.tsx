@@ -274,9 +274,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
             width: "-webkit-fill-available",
             background: workspaceBackgroundColor,
           }}
-          className={`mt-[100px] z-[100] bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl ${
-            !openSetting ? "mr-[40px]" : "mr-[290px]"
-          }`}
+          className="mt-[90px] z-[100] bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl
+            mr-[290px]
+          "
         >
           <GridLayout
             layout={workspaceElements}

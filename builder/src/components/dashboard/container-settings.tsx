@@ -42,6 +42,7 @@ const ContainerSettings: FC = () => {
       <PaddingComponent
         i={selectedElement.i}
         padding={selectedElement.style.padding}
+        name={selectedElement.name}
       />
       <ShadowComponent
         i={selectedElement.i}
