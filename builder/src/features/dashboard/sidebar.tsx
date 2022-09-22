@@ -41,7 +41,7 @@ const Sidebar: FC<ISidebar> = ({
   return (
     <main
       ref={ref}
-      className={`sidebar ease-in-out duration-200 transition overflow-scroll absolute left-[80px] shadow-xl bottom-0 top-[60px] w-[280px] pb-8 border-r z-100 ${
+      className={`sidebar ease-in-out duration-200 transition overflow-scroll fixed left-[80px] shadow-xl bottom-0 top-[60px] w-[280px] pb-8 border-r z-100 ${
         isNavHidden ? "hidden" : ""
       }`}
     >
