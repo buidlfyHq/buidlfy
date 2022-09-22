@@ -33,8 +33,8 @@ const MintTemplateModal : FC<MintTemplateModal> = ({
                             Save this page as a template so you can use it later and you can also mint it as NFT
                         </div>
                         <div className="my-8 mint-upload-img">
-                            <div className="w-full h-[300px] upload-img cursor-pointer">
-                                <label htmlFor="inputTag" className="flex flex-col items-center image-label ">
+                            <div className="w-full h-[300px] upload-img-mint cursor-pointer">
+                                <label htmlFor="inputTag" className="flex flex-col items-center justify-center h-full text-[12px] text-[#130F1C]">
                                     <img src={MintUploadImg} alt="icon" width={50} height={50} />
                                     <div className="text-[13px] text-[#7A7B93] w-[240px] text-center mt-9">
                                     Upload a file or drag and drop PNG, JPG, GIF in 800*400 resolution.

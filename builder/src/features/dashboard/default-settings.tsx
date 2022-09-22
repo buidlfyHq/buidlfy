@@ -29,9 +29,9 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   };
 
   return (
-    <main className={`relative right-0 top-[60px] w-[250px] border-l h-full`}>
+    <main className="fixed right-0 top-[60px] w-[250px] setting-nav h-full  bg-white">
       <div className="mx-3 my-2">
-        <h3 className="mb-2 setting-text mt-4">Site Settings</h3>
+        <h3 className="mb-2 setting-text mt-4 ml-[0.8rem]">Site Settings</h3>
         <aside className="mb-1">
           <BgColorComponent
             workspaceBackgroundColor={workspaceBackgroundColor}

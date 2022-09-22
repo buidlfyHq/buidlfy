@@ -32,12 +32,12 @@ const ButtonSettings: FC<ISettings> = ({
 
   const handleToggleTab = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
-    num: number
+    tab: number
   ) => {
     e.preventDefault();
 
-    setOpenTab(num);
-    if (num === 1) {
+    setOpenTab(tab);
+    if (tab === 1) {
       dispatch(setSelectorToDefault());
     }
   };
@@ -46,20 +46,24 @@ const ButtonSettings: FC<ISettings> = ({
     <>
       <span className="flex tab mb-[0.5rem]">
         <span
-          className="tab-one w-[8rem] pb-[0.8rem]"
+          className={`w-[8rem] pb-[0.8rem] ${
+            openTab === 1 ? "tab-active" : "tab-heading"
+          }`}
           onClick={(e) => handleToggleTab(e, 1)}
         >
           Setting
         </span>
         <span
-          className="tab-two w-[8rem] pb-[0.8rem]"
+          className={`w-[8rem] pb-[0.8rem] ${
+            openTab === 2 ? "tab-active" : "tab-heading"
+          }`}
           onClick={(e) => handleToggleTab(e, 2)}
         >
           Contract
         </span>
       </span>
       <span className={openTab === 1 ? "block" : "hidden"} id="link-one">
-        <h3 className="ml-[0.5rem] mt-[3rem]">
+        <h3 className="ml-[0.5rem] mt-[4.5rem]">
           {selectedElement ? (
             <span className="setting-text ">{selectedElement.name}</span>
           ) : null}

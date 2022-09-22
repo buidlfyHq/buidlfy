@@ -67,26 +67,18 @@ const Workspace: FC<IWorkspaceComponent> = ({
     (state: IRootState) => state.contract.contractElementSelected
   );
 
+  const elementHoverStyles = contractElementSelector
+    ? "border border-[transparent] hover:border-slate-300 hover:border-dashed"
+    : "border border-[transparent] border-hover";
+
   const [fullViewWidth, setFullViewWidth] = useState<number>(1200);
-  const [leftSideViewWidth, setLeftSideViewWidth] = useState<number>(996);
-  const [rightSideViewWidth, setRightSideViewWidth] = useState<number>(996);
 
   useEffect(() => {
     let fullView = document
       ?.getElementById("full-view")
       ?.getBoundingClientRect().width;
 
-    let leftSideView = document
-      ?.getElementById("left-side-view")
-      ?.getBoundingClientRect().width;
-
-    let rightSideView = document
-      ?.getElementById("right-side-view")
-      ?.getBoundingClientRect().width;
-
     setFullViewWidth((fullViewWidth) => fullView);
-    setLeftSideViewWidth((leftSideViewWidth) => leftSideView);
-    setRightSideViewWidth((rightSideViewWidth) => rightSideView);
   }, [isNavHidden, openSetting]);
 
   const onLayoutChange = (layout: Layout[]) => {
@@ -172,6 +164,18 @@ const Workspace: FC<IWorkspaceComponent> = ({
     dispatch(setSelectorToDefault());
   };
 
+  const handleMouseOver = (id: string) => {
+    (
+      document.getElementById(id).childNodes[1] as HTMLElement
+    ).style.visibility = "visible";
+  };
+
+  const handleMouseOut = (id: string) => {
+    (
+      document.getElementById(id).childNodes[1] as HTMLElement
+    ).style.visibility = "hidden";
+  };
+
   const onComponentClick = (itemName: string, i: string) => {
     setIsContainerSelected(true);
     hideSidebar();
@@ -201,25 +205,22 @@ const Workspace: FC<IWorkspaceComponent> = ({
   // FIX: find a suitable type for this event
   const handleCheckIsContainer = (e) => {
     if (
-      e.target.id === "Container" ||
-      e.target.parentNode.id === "Container" ||
-      e.target.parentNode.parentNode.id === "Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Container" ||
-      e.target.id === "Horizontal Container" ||
-      e.target.parentNode.id === "Horizontal Container" ||
-      e.target.parentNode.parentNode.id === "Horizontal Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Horizontal Container" ||
-      e.target.id === "Vertical Container" ||
-      e.target.parentNode.id === "Vertical Container" ||
-      e.target.parentNode.parentNode.id === "Vertical Container" ||
-      e.target.parentNode.parentNode.parentNode.id === "Vertical Container"
+      !(
+        e.target.id.slice(6) === "Container" ||
+        e.target.parentNode.id.slice(6) === "Container" ||
+        e.target.parentNode.parentNode.id.slice(6) === "Container" ||
+        e.target.parentNode.parentNode.parentNode.id.slice(6) === "Container"
+      )
     ) {
-      setIsContainerSelected(true);
-    } else {
       setIsContainerSelected(false);
       hideSidebar();
     }
-    if (e.target.id === "") {
+    if (
+      e.target.id === "full-view" ||
+      e.target.id === "left-side-view" ||
+      e.target.id === "right-side-view" ||
+      e.target.id === ""
+    ) {
       setOpenSetting(false);
     }
   };
@@ -231,16 +232,14 @@ const Workspace: FC<IWorkspaceComponent> = ({
       return (
         <div
           key={i}
-          id={name}
+          id={i + name}
           unselectable="on"
           data-grid={{ x, y, w, h, minW, minH, resizeHandles }}
-          className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element hover:border hover:border-2 border-2 border-[transparent] ${
-            !containerCheck(item)
-              ? contractElementSelector
-                ? "hover:border-slate-300 hover:border-dashed"
-                : "border-hover"
-              : null
+          className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
+            !containerCheck(item) && elementHoverStyles
           }`}
+          onMouseOver={() => !containerCheck(item) && handleMouseOver(i + name)}
+          onMouseOut={() => !containerCheck(item) && handleMouseOut(i + name)}
           // open item setting on click
           onClick={() =>
             containerCheck(item) ? null : onComponentClick(item.name, i)
@@ -268,84 +267,30 @@ const Workspace: FC<IWorkspaceComponent> = ({
       style={{ width: "-webkit-fill-available" }}
       className="main-div h-full"
     >
-      <section onClick={handleCheckIsContainer}>
-        {isNavHidden && !openSetting ? (
-          <section
-            id="full-view"
-            style={{
-              width: "-webkit-fill-available",
-              background: workspaceBackgroundColor,
-            }}
-            className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[110px] mr-[40px] mb-[20px] min-h-[87vh] shadow-2xl"
+      <section onClick={handleCheckIsContainer} className="z-100">
+        <section
+          id="full-view"
+          style={{
+            width: "-webkit-fill-available",
+            background: workspaceBackgroundColor,
+          }}
+          className="mt-[90px] z-[100] bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl mr-[290px]"
+        >
+          <GridLayout
+            layout={workspaceElements}
+            cols={6}
+            rowHeight={50}
+            width={fullViewWidth || 1200}
+            resizeHandles={["se"]}
+            isDraggable={drag}
+            onLayoutChange={onLayoutChange}
+            compactType={null}
+            margin={[0, 0]}
+            className="h-fit overflow-hidden"
           >
-            <GridLayout
-              layout={workspaceElements}
-              cols={6}
-              rowHeight={50}
-              width={fullViewWidth || 1200}
-              resizeHandles={["se"]}
-              isDraggable={drag}
-              onLayoutChange={onLayoutChange}
-              compactType={null}
-              margin={[0, 0]}
-              className="h-fit overflow-hidden"
-            >
-              {renderItemFunction}
-            </GridLayout>
-          </section>
-        ) : (
-          <>
-            {openSetting ? (
-              <section
-                id="left-side-view"
-                style={{
-                  width: "-webkit-fill-available",
-                  background: workspaceBackgroundColor,
-                }}
-                className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[120px] mr-[302px] mb-[20px] min-h-[87vh] shadow-2xl"
-              >
-                <GridLayout
-                  layout={workspaceElements}
-                  cols={6}
-                  rowHeight={50}
-                  width={leftSideViewWidth || 1200}
-                  resizeHandles={["se"]}
-                  isDraggable={drag}
-                  onLayoutChange={onLayoutChange}
-                  compactType={null}
-                  margin={[0, 0]}
-                  className="h-fit overflow-hidden"
-                >
-                  {renderItemFunction}
-                </GridLayout>
-              </section>
-            ) : (
-              <section
-                id="right-side-view"
-                style={{
-                  width: "-webkit-fill-available",
-                  background: workspaceBackgroundColor,
-                }}
-                className="mt-[100px] z-[100] overflow-y-scroll bg-white ml-[390px] mr-[32px] mb-[20px] min-h-[87vh] shadow-2xl"
-              >
-                <GridLayout
-                  layout={workspaceElements}
-                  cols={6}
-                  rowHeight={50}
-                  width={rightSideViewWidth || 1200}
-                  resizeHandles={["se"]}
-                  isDraggable={drag}
-                  onLayoutChange={onLayoutChange}
-                  compactType={null}
-                  margin={[0, 0]}
-                  className="h-fit overflow-hidden"
-                >
-                  {renderItemFunction}
-                </GridLayout>
-              </section>
-            )}
-          </>
-        )}
+            {renderItemFunction}
+          </GridLayout>
+        </section>
       </section>
     </main>
   );

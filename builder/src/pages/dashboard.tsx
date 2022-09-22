@@ -11,6 +11,7 @@ import StartModal from "components/custom-components/modals/start-modal";
 import TemplateModal from "components/custom-components/modals/template-modal";
 import SingleTemplateDetails from "components/custom-components/modals/single-template-details";
 import FinalModal from "components/custom-components/modals/final-modal";
+import DefaultSettings from "features/dashboard/default-settings";
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
@@ -66,7 +67,7 @@ const Dashboard: FC = () => {
   };
   const hideSidebar = () => {
     setIsNavHidden(true);
-    setOpenSetting(true);
+    setOpenSetting(false);
   };
   const showSettingSidebar = () => {
     // setIsNavHidden(true);
@@ -132,13 +133,22 @@ const Dashboard: FC = () => {
               {/* Right Sidebar Settings */}
             </aside>
           </section>
-          {openSetting ? (
-            <Settings
-              setOpenSetting={setOpenSetting}
-              openTab={openTab}
-              setOpenTab={setOpenTab}
-            />
-          ) : null}
+          <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
+            {openSetting ? (
+              <Settings
+                setOpenSetting={setOpenSetting}
+                openTab={openTab}
+                setOpenTab={setOpenTab}
+              />
+            ) : (
+              <DefaultSettings
+                workspaceBackgroundColor={workspaceBackgroundColor}
+                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+                head={head}
+                setHead={setHead}
+              />
+            )}
+          </div>
         </section>
       ) : (
         <h1 className="items-center text-center justify-center flex h-[100vh]">
