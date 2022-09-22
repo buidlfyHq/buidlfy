@@ -14,14 +14,10 @@ interface IPaddingComponent {
     paddingTop?: number;
     paddingBottom?: number;
   };
-  selectedElement?: IWorkspaceElement;
+  name?: string;
 }
 
-const PaddingComponent: FC<IPaddingComponent> = ({
-  i,
-  padding,
-  selectedElement,
-}) => {
+const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
   const dispatch = useDispatch();
 
   const handleChange = (
@@ -150,7 +146,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({
       <div className="flex items-center w-full px-3 py-4 text-gray-600">
         <span className="px-1 text-left ">
           <span className="margin-text">Padding</span>
-          {selectedElement?.name == "Container" ? (
+          {name == "Container" ? (
             paddingFirstLayer
           ) : (
             <>

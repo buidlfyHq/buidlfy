@@ -112,20 +112,22 @@ const Dashboard: FC = () => {
               {/* Right Sidebar Settings */}
             </aside>
           </section>
-          {openSetting ? (
-            <Settings
-              setOpenSetting={setOpenSetting}
-              openTab={openTab}
-              setOpenTab={setOpenTab}
-            />
-          ) : (
-            <DefaultSettings
-              workspaceBackgroundColor={workspaceBackgroundColor}
-              setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-              head={head}
-              setHead={setHead}
-            />
-          )}
+          <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
+            {openSetting ? (
+              <Settings
+                setOpenSetting={setOpenSetting}
+                openTab={openTab}
+                setOpenTab={setOpenTab}
+              />
+            ) : (
+              <DefaultSettings
+                workspaceBackgroundColor={workspaceBackgroundColor}
+                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+                head={head}
+                setHead={setHead}
+              />
+            )}
+          </div>
         </section>
       ) : (
         <h1 className="items-center text-center justify-center flex h-[100vh]">
