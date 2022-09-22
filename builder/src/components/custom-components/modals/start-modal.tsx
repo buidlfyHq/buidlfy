@@ -1,9 +1,16 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { Dialog } from '@headlessui/react'
 import {ReactComponent as ScratchIcon} from 'assets/modalIcons/scratchIcon.svg'
 import {ReactComponent as TemplateIcon} from 'assets/modalIcons/templateIcon.svg'
 
-const StartModal = ({
+interface StartModal {
+    isOpen: boolean;
+    setIsOpen: (isOpen: boolean) => void;
+    handleStartFromTemplate: () => void;
+    handleStartFromScratch: () => void;
+}
+
+const StartModal : FC<StartModal> = ({
     isOpen,
     setIsOpen,
     handleStartFromTemplate,
