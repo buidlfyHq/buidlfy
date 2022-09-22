@@ -338,12 +338,9 @@ align-content: center;
    background: #FDFDFF;
    z-index: 7777 !important;
    border-right: 0.75px solid rgba(72, 72, 135, 0.1);
-
-  /* background: rgba(63, 60, 197, 0.04); */
 }
 .sidebar::-webkit-scrollbar {
   width: 0 !important;
-  /* background-color: transparent; */
 }
 .sidenav {
   background: #FFFFFF;
@@ -476,13 +473,10 @@ align-content: center;
   background: #FFFFFF;
   border-top: 0.75px solid rgba(72, 72, 135, 0.1);}
 .element-text {
-  /* font-family: 'Nunito'; */
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
-  line-height: 21px;
-  /* identical to box height, or 150% */
- 
+  line-height: 21px; 
   display: flex;
   align-items: center;
   color: #666BD3;
@@ -515,43 +509,31 @@ align-content: center;
   display: flex;
   justify-content: center;
 }
-.heading-container {
-  width: 245px;
-  height: 48px;
 
-  /* White */
-
-  background: #ffffff;
-  /* Gray/300 */
-
-  border: 1px solid #dedee0;
-  border-radius: 5px;
-}
 .input-container {
-  background: #FCFCFC;
-/* Grayscale/Header */
+background: #FCFCFC;
 height: 45px;
 width: 225px;
 padding: 12px 12px;
 border: 1px solid #14142B;
 border-radius: 8px;
 }
+
 .element-heading-div {
 display: flex;
 height: 60px;
 border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
+
 .element-heading {
-  font-style: normal;
+font-style: normal;
 font-weight: 500;
 font-size: 16px;
 line-height: 19px;
-/* identical to box height */
-
-
 color: #000000;
 flex-grow: 1;
 }
+
 .element-input-text {
 font-style: normal;
 font-weight: 400;
@@ -574,7 +556,6 @@ color: #6E7191;
 }
 .element-upload {
   background: #f3eeff;
-  /* Purple/100 */
   border: 1px dashed #651fff;
   border-radius: 5px;
   width: 210px;
@@ -592,13 +573,10 @@ color: #6E7191;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  /* or 123% */
   color: rgba(19, 27, 66, 0.502378);
 }
 .main-div {
   background: #f9f9fa;
-  /* opacity: 0.2; */
-  /* filter: blur(118.75px); */
 }
 .font-div {
   background: #e9edfd;
