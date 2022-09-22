@@ -245,6 +245,7 @@ const Container: FC<IContainer> = ({
     setOpenSetting(true);
     hideSidebar();
   };
+  console.log(color, "color");
 
   return (
     <>
@@ -255,6 +256,7 @@ const Container: FC<IContainer> = ({
           paddingRight: `${padding.paddingRight}px`,
           borderRadius: `${borderRadius}px`,
           borderWidth: borderWidth,
+          borderStyle: "solid",
           borderColor: color,
           borderImage: color,
         }}
@@ -333,20 +335,23 @@ const Container: FC<IContainer> = ({
           </span>
           <span
             id="add-img"
+            className={`${children?.length ? "right-[3rem]" : "right-[1rem]"}`}
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
             onClick={() => onComponentAddClick(item.i)}
           >
             <img src={add} alt="add" />
           </span>
-          <span
-            onMouseOut={() => setDrag(true)}
-            onMouseOver={() => setDrag(false)}
-            id="edit-img"
-            onClick={() => onComponentEditClick(item.i)}
-          >
-            <img src={edit} alt="edit" />
-          </span>
+          {children?.length ? (
+            <span
+              onMouseOut={() => setDrag(true)}
+              onMouseOver={() => setDrag(false)}
+              id="edit-img"
+              onClick={() => onComponentEditClick(item.i)}
+            >
+              <img src={edit} alt="edit" />
+            </span>
+          ) : null}
         </div>
       </section>
     </>

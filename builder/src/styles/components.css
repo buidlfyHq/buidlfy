@@ -208,7 +208,6 @@
   position: absolute;
   z-index: 1;
   top: 0.5rem;
-  right: 3rem;
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -657,22 +656,21 @@
 
   color: #130f1c;
 }
-.tab-one {
+.tab-heading {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   text-align: center;
-
   color: rgba(16, 15, 17, 0.7);
 }
-.tab-one:hover {
+.tab-active {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   text-align: center;
-  border-bottom: 1.15px solid;
+  border-bottom: 2px solid;
   border-image-slice: 1;
   border-image-source: linear-gradient(93.43deg, #9768fb 27.32%, #6892ff 75.6%);
   color: #100f11;
@@ -683,27 +681,7 @@
   position: fixed;
   z-index: 88888 !important;
   margin-left: -0.5rem;
-  margin-top: -1rem;
+  margin-top: 1.2rem;
   padding-top: 1rem;
 }
 
-.tab-two {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  text-align: center;
-
-  color: rgba(16, 15, 17, 0.7);
-}
-.tab-two:hover {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  text-align: center;
-  border-bottom: 1.15px solid;
-  border-image-slice: 1;
-  border-image-source: linear-gradient(93.43deg, #9768fb 27.32%, #6892ff 75.6%);
-  color: #100f11;
-}

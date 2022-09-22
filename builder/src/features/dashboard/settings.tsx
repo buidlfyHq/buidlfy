@@ -27,9 +27,7 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
     );
     setOpenSetting(false);
   };
-  const handleOpenSetting = () => {
-    setOpenSetting(false);
-  };
+
   return (
     <>
       {selectedElement?.i ? (
@@ -57,13 +55,6 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
                 </div> */}
             </div>
 
-            <div
-              className="py-4 px-2 text-sm mt-[1rem] flex"
-              onClick={handleOpenSetting}
-            >
-              <MdArrowBack className="text-[12px] mt-[0.25rem]" />
-              <span className="ml-2">Site Settings</span>
-            </div>
             <div>
               <SettingComponent openTab={openTab} setOpenTab={setOpenTab} />
             </div>

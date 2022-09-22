@@ -13,11 +13,11 @@ interface IInput {
     marginBottom?: number;
   };
   padding?: {
-    paddingLeft?: number,
-    paddingRight?: number,
-    paddingTop?: number,
-    paddingBottom?: number,
-  }
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
 }
 
 const Input: FC<IInput> = ({
@@ -26,7 +26,7 @@ const Input: FC<IInput> = ({
   color,
   placeholder,
   margin,
-  padding
+  padding,
 }) => (
   <section
     className="flex items-center justify-center h-full overflow-hidden"
@@ -42,7 +42,7 @@ const Input: FC<IInput> = ({
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
         padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
-      className="w-full leading-tight bg-white appearance-none input"
+      className="btn-border w-full leading-tight bg-white appearance-none input"
       id="input"
       type="text"
       placeholder={placeholder}
