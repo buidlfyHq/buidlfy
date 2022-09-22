@@ -41,7 +41,7 @@ const defaultBorderStyles = {
 export const components = [
   {
     name: "Container",
-    h: 3,
+    h: 2,
     minH: 2,
     style: {
       padding: {
@@ -50,8 +50,9 @@ export const components = [
         paddingTop: 0,
         paddingBottom: 0
       },
+      backgroundColor: "rgba(255, 255, 255, 1)",
+      color: "rgba(0, 0, 0, 1)",
       ...defaultDeleteStyles,
-      ...defaultColorStyles,
       ...defaultBorderStyles,
     },
     children: [],

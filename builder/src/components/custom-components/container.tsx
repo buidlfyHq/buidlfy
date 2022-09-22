@@ -83,6 +83,15 @@ const Container: FC<IContainer> = ({
     (state: IRootState) => state.contract.contractElementSelected
   );
 
+  let containerW = document
+    ?.getElementById(`${item.i}`)
+    ?.getBoundingClientRect().width;
+  let finalPadding = padding.paddingLeft + padding.paddingRight;
+
+  const elementHoverStyles = contractElementSelector
+    ? "border border-[transparent] hover:border-slate-300 hover:border-dashed"
+    : "border border-[transparent] border-hover";
+
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
@@ -180,6 +189,22 @@ const Container: FC<IContainer> = ({
     }
   };
 
+  const handleMouseOver = (id: string) => {
+    setDrag(false);
+    (
+      document.getElementById(id).parentNode.parentNode
+        .childNodes[1] as HTMLElement
+    ).style.visibility = "visible";
+  };
+
+  const handleMouseOut = (id: string) => {
+    setDrag(true);
+    (
+      document.getElementById(id).parentNode.parentNode
+        .childNodes[1] as HTMLElement
+    ).style.visibility = "hidden";
+  };
+
   const handleSidebar = (selectedSidebarElements: string) => {
     setSideElement(selectedSidebarElements);
   };
@@ -221,11 +246,6 @@ const Container: FC<IContainer> = ({
     hideSidebar();
   };
 
-  let containerW = document
-    ?.getElementById(`${item.i}`)
-    ?.getBoundingClientRect().width;
-  let finalPadding = padding.paddingLeft + padding.paddingRight;
-
   return (
     <>
       <section
@@ -233,25 +253,30 @@ const Container: FC<IContainer> = ({
         style={{
           paddingLeft: `${padding.paddingLeft}px`,
           paddingRight: `${padding.paddingRight}px`,
+          borderRadius: `${borderRadius}px`,
+          borderWidth: borderWidth,
+          borderStyle: "solid",
+          borderColor: color,
+          borderImage: color,
         }}
-        className="h-fit w-full outline outline-1 outline-slate-300 cursor-pointer container-drag overflow-hidden"
+        className="h-fit w-full cursor-pointer container-drag overflow-hidden btn-border"
       >
         <GridLayout
           layout={children}
           cols={6}
-          rowHeight={50}
-          width={containerW - finalPadding || 200}
+          rowHeight={
+            children?.length
+              ? 50 - (borderWidth ? borderWidth * 2 : 1) / children?.length
+              : 50
+          }
+          width={containerW - (finalPadding + borderWidth * 2) || 200}
           isBounded={true}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           compactType={null}
-          className="h-fit btn-border"
+          className="h-fit"
           style={{
             background: backgroundColor,
-            border: `1px solid ${color}`,
-            borderImage: color,
-            borderRadius: `${borderRadius}px`,
-            borderWidth: `${borderWidth}px`,
             backgroundImage: `url(${imgData})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
@@ -261,7 +286,7 @@ const Container: FC<IContainer> = ({
         >
           {!children?.length ? (
             <div
-              className="w-full h-full py-10 flex justify-center"
+              className="w-full h-full py-10 default-container"
               key={"DefaultElement"}
               data-grid={{
                 x: 0,
@@ -282,15 +307,11 @@ const Container: FC<IContainer> = ({
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (
                   <div
-                    className={`w-full h-full hover:border hover:border-2 ${
-                      contractElementSelector
-                        ? "hover:border-slate-300 hover:border-dashed"
-                        : "border-hover"
-                    }`}
+                    className={`w-full h-full ${elementHoverStyles}`}
                     key={i}
                     data-grid={{ x, y, w, h, minW, resizeHandles }}
-                    onMouseOver={() => setDrag(false)}
-                    onMouseOut={() => setDrag(true)}
+                    onMouseOver={() => handleMouseOver(i)}
+                    onMouseOut={() => handleMouseOut(i)}
                     onClick={() => onComponentClick(item.name, i)}
                   >
                     <RenderItem
@@ -313,20 +334,23 @@ const Container: FC<IContainer> = ({
           </span>
           <span
             id="add-img"
+            className={`${children?.length ? "right-[3rem]" : "right-[1rem]"}`}
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
             onClick={() => onComponentAddClick(item.i)}
           >
             <img src={add} alt="add" />
           </span>
-          <span
-            onMouseOut={() => setDrag(true)}
-            onMouseOver={() => setDrag(false)}
-            id="edit-img"
-            onClick={() => onComponentEditClick(item.i)}
-          >
-            <img src={edit} alt="edit" />
-          </span>
+          {children?.length ? (
+            <span
+              onMouseOut={() => setDrag(true)}
+              onMouseOver={() => setDrag(false)}
+              id="edit-img"
+              onClick={() => onComponentEditClick(item.i)}
+            >
+              <img src={edit} alt="edit" />
+            </span>
+          ) : null}
         </div>
       </section>
     </>
