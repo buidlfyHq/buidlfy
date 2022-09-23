@@ -357,6 +357,7 @@ const Container: FC<IContainer> = ({
           <div
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
+            className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
             id="add-img"
             onClick={() => onComponentAddClick(item.i)}
           >
@@ -366,6 +367,7 @@ const Container: FC<IContainer> = ({
             <div
               onMouseOut={() => setDrag(true)}
               onMouseOver={() => setDrag(false)}
+              className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
               id="edit-img"
               onClick={() => onComponentEditClick(item.i)}
             >
@@ -375,6 +377,7 @@ const Container: FC<IContainer> = ({
             <div
               onMouseOut={() => setDrag(true)}
               onMouseOver={() => setDrag(false)}
+              className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
               id="delete-img"
               onClick={() => onComponentDeleteClick(item.i)}
             >

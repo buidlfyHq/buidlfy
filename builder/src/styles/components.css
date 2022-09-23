@@ -182,14 +182,6 @@
   /* border-radius: 0 0 5px 5px; */
 }
 #add-img {
-  height: 30px;
-  width: 30px;
-  border-radius: 25px;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  background: #FFFFFF;
   border: 1px solid rgba(75, 67, 121, 0.1);
 }
 #add-img:hover {
@@ -197,14 +189,6 @@
   border: 1px solid transparent;
 }
 #edit-img {
-  height: 30px;
-  width: 30px;
-  border-radius: 25px;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  background: #FFFFFF;
   border: 1px solid rgba(75, 67, 121, 0.1);
 }
 #edit-img:hover {
@@ -212,14 +196,6 @@
   border: 1px solid transparent;
 }
 #delete-img {
-  height: 30px;
-  width: 30px;
-  border-radius: 25px;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  background: #FFFFFF;
   border: 1px solid rgba(75, 67, 121, 0.1);
 }
 #delete-img:hover {
@@ -379,6 +355,7 @@ align-content: center;
 .sidebar::-webkit-scrollbar {
   width: 0 !important;
 }
+
 .sidenav {
   background: #FFFFFF;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
@@ -830,17 +807,19 @@ border-radius: 8px;
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
-  background-color: black;
+  background: #262338;
+  border-radius: 6px;
+  min-width: 240px;
   color: #fff;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
   position: absolute;
   z-index: 7777 !important;
-  top: 0px;
+  /* top: 0px; */
   left: 110%;
 }
+
 .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
@@ -849,7 +828,7 @@ border-radius: 8px;
   margin-top: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent black transparent transparent;
+  border-color: transparent #262338 transparent transparent;
 }
 .tooltip:hover .tooltiptext {
   visibility: visible;
