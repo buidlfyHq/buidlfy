@@ -198,16 +198,22 @@
   display: flex;
   justify-content: flex-start;
   text-align: left;
-  /* font-size: 12px;
-  background: #a673ef; */
   background-color: transparent;
-  /* border-radius: 0 0 5px 5px; */
+}
+#delete-img {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  background-color: transparent;
 }
 .container-drag #add-img {
   visibility: hidden;
   position: absolute;
   z-index: 1;
   top: 0.5rem;
+  right: 3rem;
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -225,7 +231,19 @@
   opacity: 0;
   transition: opacity 0.2s;
 }
-
+.container-drag #delete-img {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.container-drag:hover #delete-img {
+  visibility: visible;
+  opacity: 1;
+}
 .container-drag:hover #edit-img {
   visibility: visible;
   opacity: 1;

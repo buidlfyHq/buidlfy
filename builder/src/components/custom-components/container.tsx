@@ -4,6 +4,7 @@ import GridLayout, { Layout } from "react-grid-layout";
 import {
   setSelectedElement,
   updateWorkspaceElementsArray,
+  updateWorkspaceElementStyle,
 } from "redux/workspace/workspace.reducers";
 import {
   setSelectorToDefault,
@@ -21,6 +22,7 @@ import {
   IContractElementSelected,
   IContractElementSelector,
 } from "redux/contract/contract.interfaces";
+import { AiFillDelete } from "react-icons/ai";
 import add from "assets/add.png";
 import edit from "assets/edit.png";
 import dragImg from "assets/drag.png";
@@ -82,6 +84,16 @@ const Container: FC<IContainer> = ({
   const contractElementSelected: IContractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
   );
+  console.log(item.i, "i");
+  const handleDelete = () => {
+    dispatch(
+      updateWorkspaceElementStyle({
+        settingItemId: item.i,
+        propertyName: "deleteComponent",
+        propertyValue: true,
+      })
+    );
+  };
 
   let containerW = document
     ?.getElementById(`${item.i}`)
@@ -216,7 +228,9 @@ const Container: FC<IContainer> = ({
     dispatch(setSelectedElement(i));
     setOpenSetting(false);
   };
-
+  const onComponentDeleteClick = (i: string) => {
+    handleDelete();
+  };
   const onComponentClick = (itemName: string, i: string) => {
     if (contractElementSelector === null) {
       dispatch(setSelectedElement(i));
@@ -334,7 +348,7 @@ const Container: FC<IContainer> = ({
           </span>
           <span
             id="add-img"
-            className={`${children?.length ? "right-[3rem]" : "right-[1rem]"}`}
+            // className={`${children?.length ? "right-[3rem]" : "right-[1rem]"}`}
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
             onClick={() => onComponentAddClick(item.i)}
@@ -350,7 +364,16 @@ const Container: FC<IContainer> = ({
             >
               <img src={edit} alt="edit" />
             </span>
-          ) : null}
+          ) : (
+            <span
+              onMouseOut={() => setDrag(true)}
+              onMouseOver={() => setDrag(false)}
+              id="delete-img"
+              onClick={() => onComponentDeleteClick(item.i)}
+            >
+              <AiFillDelete className="text-[12px]" />
+            </span>
+          )}
         </div>
       </section>
     </>
