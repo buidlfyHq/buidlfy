@@ -796,40 +796,4 @@ border-radius: 8px;
   color: #6150C9;
   display: flex;
 }
-.dashboard-main::-webkit-scrollbar {
-  width: 0 !important;
-}
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  background: #262338;
-  border-radius: 6px;
-  min-width: 240px;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 7777 !important;
-  /* top: 0px; */
-  left: 110%;
-}
-
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  margin-top: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent #262338 transparent transparent;
-}
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
