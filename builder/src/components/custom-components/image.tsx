@@ -68,7 +68,7 @@ const Image: FC<IImageComponent> = ({
         <div className="flex justify-center">
           <div
             id="image-two"
-            className="mb-3 mt-5 upload-img px-3 text-[12px] whitespace-nowrap"
+            className="my-[1.8rem] upload-img px-3 text-[12px] whitespace-nowrap"
           >
             Click and upload file, or{" "}
             <span className="ml-2 purple-label">browse</span>

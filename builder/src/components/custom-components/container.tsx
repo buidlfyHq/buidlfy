@@ -27,6 +27,8 @@ import add from "assets/add.png";
 import edit from "assets/edit.png";
 import dragImg from "assets/drag.png";
 import "styles/components.css";
+import { IoIosAddCircleOutline, IoMdAdd } from "react-icons/io";
+import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 
 interface IContainer {
   item: IWorkspaceElement;
@@ -84,7 +86,6 @@ const Container: FC<IContainer> = ({
   const contractElementSelected: IContractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
   );
-  console.log(item.i, "i");
   const handleDelete = () => {
     dispatch(
       updateWorkspaceElementStyle({
@@ -101,8 +102,8 @@ const Container: FC<IContainer> = ({
   let finalPadding = padding.paddingLeft + padding.paddingRight;
 
   const elementHoverStyles = contractElementSelector
-    ? "border border-[transparent] hover:border-slate-300 hover:border-dashed"
-    : "border border-[transparent] border-hover";
+    ? "border border-[transparent] border-hover"
+    : "border border-[transparent] hover:border-slate-300 hover:border-dashed ";
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -230,6 +231,7 @@ const Container: FC<IContainer> = ({
   };
   const onComponentDeleteClick = (i: string) => {
     handleDelete();
+    dispatch(setSelectedElement(i));
   };
   const onComponentClick = (itemName: string, i: string) => {
     if (contractElementSelector === null) {
@@ -280,7 +282,7 @@ const Container: FC<IContainer> = ({
           cols={6}
           rowHeight={
             children?.length
-              ? 50 - (borderWidth ? borderWidth * 2 : 1) / children?.length
+              ? 50 - (borderWidth ? borderWidth * 2 : 0) / children?.length
               : 50
           }
           width={containerW - (finalPadding + borderWidth * 2) || 200}
@@ -312,7 +314,12 @@ const Container: FC<IContainer> = ({
                 resizeHandles: [],
               }}
             >
-              Hover and click on drag to add components in container
+              <div className="container-div">
+                <span className="container-text">
+                  Add Elements
+                  <IoIosAddCircleOutline className="text-[18px] ml-1 mt-[2px]" />
+                </span>
+              </div>
             </div>
           ) : (
             children
@@ -346,33 +353,37 @@ const Container: FC<IContainer> = ({
           >
             <img className="" src={dragImg} alt="drag" />
           </span>
-          <span
-            id="add-img"
-            // className={`${children?.length ? "right-[3rem]" : "right-[1rem]"}`}
+          {/* Fix: Add and Edit Icons are bit buggy */}
+          <div
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
+            id="add-img"
             onClick={() => onComponentAddClick(item.i)}
           >
-            <img src={add} alt="add" />
-          </span>
+            <IoMdAdd
+              onMouseOut={() => setDrag(true)}
+              onMouseOver={() => setDrag(false)}
+              className="text-[16px] fill-[#4B4379]"
+            />
+          </div>
           {children?.length ? (
-            <span
+            <div
               onMouseOut={() => setDrag(true)}
               onMouseOver={() => setDrag(false)}
               id="edit-img"
               onClick={() => onComponentEditClick(item.i)}
             >
-              <img src={edit} alt="edit" />
-            </span>
+              <MdOutlineEdit className="text-[16px] fill-[#4B4379]" />
+            </div>
           ) : (
-            <span
+            <div
               onMouseOut={() => setDrag(true)}
               onMouseOver={() => setDrag(false)}
               id="delete-img"
               onClick={() => onComponentDeleteClick(item.i)}
             >
-              <AiFillDelete className="text-[12px]" />
-            </span>
+              <MdOutlineDelete className="text-[15px] fill-[#4B4379]" />
+            </div>
           )}
         </div>
       </section>

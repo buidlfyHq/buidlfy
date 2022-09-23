@@ -1,5 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import BgColorComponent from "components/settings/bg-color-component";
+import { uploadFileToWeb3Storage } from "config/web3storage";
 import "styles/components.css";
 
 interface IDefaultSettings {
@@ -18,18 +19,24 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   head,
   setHead,
 }) => {
+  const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
   const onChangeLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
-      const reader = new FileReader();
-      reader.addEventListener("load", () => {
-        setHead({ ...head, logo: reader.result });
-      });
-      reader.readAsDataURL(e.target.files[0]);
+      if (e.target.files[0].size > 5242880) {
+        setSizeExceeded(true);
+      } else {
+        const reader = new FileReader();
+        reader.addEventListener("load", async () => {
+          const cid = await uploadFileToWeb3Storage(reader.result as string);
+          setHead({ ...head, logo: reader.result });
+        });
+        reader.readAsDataURL(e.target.files[0]);
+      }
     }
   };
 
   return (
-    <main className="fixed right-0 top-[60px] w-[250px] border-l h-full  bg-white">
+    <main className="fixed right-0 top-[60px] w-[250px] setting-nav h-full  bg-white">
       <div className="mx-3 my-2">
         <h3 className="mb-2 setting-text mt-4 ml-[0.8rem]">Site Settings</h3>
         <aside className="mb-1">
@@ -65,18 +72,12 @@ const DefaultSettings: FC<IDefaultSettings> = ({
             </div>
           </div> */}
         </aside>
-        <div className="flex justify-center">
+        <div className="flex justify-center" onChange={onChangeLogo}>
           <div className="mb-3 mt-5 upload-img">
             <label htmlFor="inputTag" className="image-label">
               Drag and drop a file, or{" "}
               <span className="purple-label">browse</span>
-              <input
-                onChange={onChangeLogo}
-                className="upload-input"
-                // className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
-                type="file"
-                id="inputTag"
-              />
+              <input className="upload-input" type="file" id="inputTag" />
             </label>
           </div>
           <br />
@@ -86,11 +87,11 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         </div>
         <div
           id="logo"
-          className="mx-3 mb-2 h-48 w-48 text-center mx-4 flex items-center justify-center"
+          className="mx-[4.5rem] mt-[2rem] mb-2 h-14 w-15 text-center mx-4 flex items-center justify-center"
           style={{
             backgroundImage: `url(${head.logo})`,
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "left",
+            backgroundPosition: "center",
             backgroundSize: "contain",
           }}
         />

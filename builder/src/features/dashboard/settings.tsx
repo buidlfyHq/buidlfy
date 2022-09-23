@@ -33,7 +33,7 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
       {selectedElement?.i ? (
         <>
           <div
-            className="border shadow-sm overflow-x-hidden mt-[40px] menu"
+            className="border overflow-x-hidden setting-nav mt-[40px] menu"
             ref={ref}
           >
             <div className="delete-div flex py-2 pl-3">

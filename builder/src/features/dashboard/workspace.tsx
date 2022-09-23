@@ -68,8 +68,8 @@ const Workspace: FC<IWorkspaceComponent> = ({
   );
 
   const elementHoverStyles = contractElementSelector
-    ? "border border-[transparent] hover:border-slate-300 hover:border-dashed"
-    : "border border-[transparent] border-hover";
+    ? "border border-[transparent] border-hover"
+    : "border border-[transparent] hover:border-slate-300 hover:border-dashed";
 
   const [fullViewWidth, setFullViewWidth] = useState<number>(1200);
 
@@ -238,8 +238,8 @@ const Workspace: FC<IWorkspaceComponent> = ({
           className={`justify-center transition-colors duration-150 ease-in-out cursor-pointer droppable-element ${
             !containerCheck(item) && elementHoverStyles
           }`}
-          onMouseOver={() => !containerCheck(item) && handleMouseOver(i + name)}
-          onMouseOut={() => !containerCheck(item) && handleMouseOut(i + name)}
+          onMouseOver={() => handleMouseOver(i + name)}
+          onMouseOut={() => handleMouseOut(i + name)}
           // open item setting on click
           onClick={() =>
             containerCheck(item) ? null : onComponentClick(item.name, i)
