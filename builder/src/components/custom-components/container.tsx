@@ -22,13 +22,12 @@ import {
   IContractElementSelected,
   IContractElementSelector,
 } from "redux/contract/contract.interfaces";
-import { AiFillDelete } from "react-icons/ai";
 import add from "assets/add.png";
 import edit from "assets/edit.png";
 import deleteContainer from "assets/delete.png";
 import dragImg from "assets/drag.png";
-import "styles/components.css";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import "styles/components.css";
 
 interface IContainer {
   item: IWorkspaceElement;
@@ -353,7 +352,6 @@ const Container: FC<IContainer> = ({
           >
             <img className="" src={dragImg} alt="drag" />
           </span>
-          {/* Fix: Add and Edit Icons are bit buggy */}
           <div
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
