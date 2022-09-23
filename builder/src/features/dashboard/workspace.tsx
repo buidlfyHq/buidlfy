@@ -265,7 +265,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
   return (
     <main
       style={{ width: "-webkit-fill-available" }}
-      className="main-div h-full"
+      className="main-div h-full "
     >
       <section onClick={handleCheckIsContainer} className="z-100">
         <section

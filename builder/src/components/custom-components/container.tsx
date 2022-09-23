@@ -25,10 +25,10 @@ import {
 import { AiFillDelete } from "react-icons/ai";
 import add from "assets/add.png";
 import edit from "assets/edit.png";
+import deleteContainer from "assets/delete.png";
 import dragImg from "assets/drag.png";
 import "styles/components.css";
-import { IoIosAddCircleOutline, IoMdAdd } from "react-icons/io";
-import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
+import { IoIosAddCircleOutline } from "react-icons/io";
 
 interface IContainer {
   item: IWorkspaceElement;
@@ -360,11 +360,7 @@ const Container: FC<IContainer> = ({
             id="add-img"
             onClick={() => onComponentAddClick(item.i)}
           >
-            <IoMdAdd
-              onMouseOut={() => setDrag(true)}
-              onMouseOver={() => setDrag(false)}
-              className="text-[16px] fill-[#4B4379]"
-            />
+            <img className="w-[11px] h-[11px]" src={add} />
           </div>
           {children?.length ? (
             <div
@@ -373,7 +369,7 @@ const Container: FC<IContainer> = ({
               id="edit-img"
               onClick={() => onComponentEditClick(item.i)}
             >
-              <MdOutlineEdit className="text-[16px] fill-[#4B4379]" />
+              <img className="w-[13px] h-[13px]" src={edit} />
             </div>
           ) : (
             <div
@@ -382,7 +378,7 @@ const Container: FC<IContainer> = ({
               id="delete-img"
               onClick={() => onComponentDeleteClick(item.i)}
             >
-              <MdOutlineDelete className="text-[15px] fill-[#4B4379]" />
+              <img className="w-[13px] h-[13px]" src={deleteContainer} />
             </div>
           )}
         </div>

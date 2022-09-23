@@ -190,7 +190,7 @@
   align-items: center;
   align-content: center;
   background: #FFFFFF;
-  border: 1px solid rgba(75, 67, 121, 0.04);
+  border: 1px solid rgba(75, 67, 121, 0.1);
 }
 #add-img:hover {
   background: rgba(206, 190, 255, 0.31);
@@ -205,7 +205,7 @@
   align-items: center;
   align-content: center;
   background: #FFFFFF;
-  border: 1px solid rgba(75, 67, 121, 0.04);
+  border: 1px solid rgba(75, 67, 121, 0.1);
 }
 #edit-img:hover {
   background: rgba(206, 190, 255, 0.31);
@@ -220,7 +220,7 @@
   align-items: center;
   align-content: center;
   background: #FFFFFF;
-  border: 1px solid rgba(75, 67, 121, 0.04);
+  border: 1px solid rgba(75, 67, 121, 0.1);
 }
 #delete-img:hover {
   background: rgba(206, 190, 255, 0.31);
@@ -387,6 +387,9 @@ align-content: center;
   background: #FFFFFF;
   border-left: 0.75px solid rgba(72, 72, 135, 0.1);
 }
+.setting-nav::-webkit-scrollbar {
+  width: 0 !important;
+}
 .topnav {
   background: #FFFFFF;
   border-bottom: 0.75px solid rgba(72, 72, 135, 0.1);
@@ -506,7 +509,6 @@ align-content: center;
   border-radius: 22px;
 }
 .side-border {
-  margin-top: 3.65rem;
   background: #FFFFFF;
   border-top: 0.75px solid rgba(72, 72, 135, 0.1);}
 .element-text {
@@ -525,13 +527,18 @@ align-content: center;
   padding: 4px 15px;
   width: 150px;
   height: 40px;
-  border-radius: 2px;
+  border-radius: 4px;
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 15px;
   
   color: #FFFFFF;
+}
+.btn-div:hover {
+background: #503DCF;
+outline: 6px solid rgba(0, 0, 0, 0.14);
+border-radius: 4px;
 }
 .text-four {
  color: rgba(0, 0, 0, 0.5);
@@ -540,13 +547,17 @@ align-content: center;
 .element-container {
   border: 1px dashed #7046E4;
   background: rgba(255, 255, 255, 0.6);
-  border-radius: 12px;  
+  border-radius: 4px;  
   width: 245px;
   height: 65px;
   display: flex;
   justify-content: center;
 }
-
+.element-container:hover {
+  background: rgba(106, 88, 231, 0.1);
+border: 1px dashed #3F2BC9;
+border-radius: 4px;
+}
 .input-container {
 background: #FCFCFC;
 height: 45px;
@@ -555,7 +566,11 @@ padding: 12px 12px;
 border: 1px solid #14142B;
 border-radius: 8px;
 }
-
+.input-container:hover {
+  background: #FFFFFF;
+border: 1px solid #6A58E7;
+border-radius: 8px;
+}
 .element-heading-div {
 display: flex;
 height: 60px;
@@ -591,12 +606,17 @@ color: #6E7191;
   width: 245px;
   height: 175px;
 }
+.image-container:hover{
+  background: #FFFFFF;
+border: 2px solid rgba(63, 43, 201, 0.1);
+border-radius: 10px;
+}
 .element-upload {
-  background: #f3eeff;
-  border: 1px dashed #651fff;
+  background: #FAF8FF;
+  border: 1px dashed #6A58E7;
   border-radius: 5px;
+  height: 55px;
   width: 210px;
-  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -655,12 +675,11 @@ color: #6E7191;
   justify-content: center;
 }
 .upload-img {
-  background: #f3eeff;
-  /* Purple/100 */
-  border: 1px dashed #651fff;
+  background: #FAF8FF;
+  border: 1px dashed #6A58E7;
   border-radius: 5px;
+  height: 55px;
   width: 200px;
-  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -799,4 +818,39 @@ border-radius: 8px;
   line-height: 21px;  
   color: #6150C9;
   display: flex;
+}
+.dashboard-main::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 7777 !important;
+  top: 0px;
+  left: 110%;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

@@ -18,13 +18,13 @@ interface IImageComponent {
 }
 
 const Image: FC<IImageComponent> = ({
+  i,
   imgData,
   justifyContent,
   margin,
   width,
   height,
   backgroundSize,
-  i,
   isAuto,
 }) => {
   // Add ClientWidth and ClientHeight of Image when it changes its position
@@ -67,7 +67,7 @@ const Image: FC<IImageComponent> = ({
       ) : (
         <div className="flex justify-center">
           <div
-            id="image-two"
+            id={i}
             className="my-[1.8rem] upload-img px-3 text-[12px] whitespace-nowrap"
           >
             Click and upload file, or{" "}

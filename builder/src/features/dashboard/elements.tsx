@@ -117,11 +117,11 @@ const Elements: FC<IElements> = ({
     <>
       {/* Fix: Add all style to common tailwind  */}
       <div className="element-div">
-        <div className="px-[4.1rem] py-4">
+        <div className="px-[4.1rem] py-4 ">
           <div className="flex">
             <button
               onClick={() => onClickFunction("Button")}
-              className="element-btn "
+              className="element-btn cursor-pointer btn-div"
             >
               Button
             </button>
@@ -131,30 +131,32 @@ const Elements: FC<IElements> = ({
       <div className="element-div">
         <div className="py-3 px-10">
           <div>
-            <h1
-              className="font-normal text-2xl mb-4"
-              onClick={() => onClickFunction("Heading 1")}
-            >
-              Add Heading 1
-            </h1>
-
+            <div className="tooltip">
+              <h1
+                className="font-normal text-2xl mb-4 cursor-pointer hover:text-[#5A4471]"
+                onClick={() => onClickFunction("Heading 1")}
+              >
+                Add Heading 1
+              </h1>
+              <div className="tooltiptext">Tooltip text</div>
+            </div>
             <h2
               onClick={() => onClickFunction("Heading 2")}
-              className="font-normal text-xl mb-4"
+              className="font-normal text-xl mb-4 cursor-pointer hover:text-[#5A4471]"
             >
               Add Heading 2
             </h2>
 
             <h3
               onClick={() => onClickFunction("Heading 3")}
-              className="font-normal text-lg mb-4"
+              className="font-normal text-lg mb-4 cursor-pointer hover:text-[#5A4471]"
             >
               Add Heading 3
             </h3>
 
             <div
               onClick={() => onClickFunction("Text")}
-              className="font-normal text-[13px] text-four w-[200px]"
+              className="font-normal text-[13px] text-four w-[200px] cursor-pointer hover:text-[#5A4471]"
             >
               I am a paragrah. Click here to add your own text and edit me. It's
               easy & simple.
@@ -166,7 +168,7 @@ const Elements: FC<IElements> = ({
         <div className="px-[1.75rem] py-4">
           <div>
             <div
-              className="input-container"
+              className="input-container cursor-pointer"
               onClick={() => onClickFunction("Input")}
             >
               <h1 className="element-input-text">Add Input</h1>
@@ -175,7 +177,10 @@ const Elements: FC<IElements> = ({
         </div>
       </div>
       <div className="element-div">
-        <div onClick={() => onClickFunction("Image")} className="px-4 py-4">
+        <div
+          onClick={() => onClickFunction("Image")}
+          className="px-4 py-4 cursor-pointer"
+        >
           <div className="image-container pt-2">
             <span className="element-text ml-[1rem] my-[0.7rem] text-black">
               File Upload
@@ -213,7 +218,7 @@ const Elements: FC<IElements> = ({
             <div className="px-4 py-4">
               <div className="flex">
                 <div
-                  className="element-container"
+                  className="element-container cursor-pointer"
                   onClick={() => onClickFunction("Container")}
                 >
                   <span className="element-text">
