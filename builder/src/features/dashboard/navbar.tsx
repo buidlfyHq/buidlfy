@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDoubleRight } from "react-icons/ai";
+import makeBlockie from "ethereum-blockies-base64";
 import { encode as base64_encode } from "base-64";
 import { Dialog } from "@headlessui/react";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
@@ -13,6 +14,7 @@ import {
 } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
+import { connectWallet } from "redux/web3/web3.actions";
 
 interface INavbar {
   className: string;
@@ -31,6 +33,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
   const contractDetails: IContractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
   );
+  const currentAccount = useSelector((state: any) => state.web3.currentAccount);
 
   const [abiJSON, setAbiJSON] = useState<
     {
@@ -137,6 +140,15 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
     setIsOpen(true);
   };
 
+  const truncate = (input: string) =>
+    input.length > 5
+      ? `${input.substring(0, 5)}...${input.substr(input.length - 5)}`
+      : input;
+
+  const handleClick = () => {
+    dispatch(connectWallet());
+  };
+
   return (
     <main
       className={
@@ -190,6 +202,23 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
         >
           Publish
         </button>
+        {currentAccount ? (
+          <div className="flex justify-center items-center my-2 ml-2 px-4">
+            <img
+              className="bg-black w-8 h-8 mr-3 rounded-full"
+              src={makeBlockie(currentAccount)}
+              alt="Blockie"
+            />
+            {truncate(currentAccount)}
+          </div>
+        ) : (
+          <button
+            className="h-10 px-4 my-2 ml-3 whitespace-nowrap upload-btn rounded"
+            onClick={handleClick}
+          >
+            Connect Wallet
+          </button>
+        )}
         <Dialog
           as="div"
           className="fixed inset-0 z-20 overflow-y-auto"

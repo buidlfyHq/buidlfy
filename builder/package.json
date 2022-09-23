@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.6.0",
     "base-64": "^1.0.0",
     "buffer": "^6.0.3",
+    "ethereum-blockies-base64": "^1.0.2",
     "ethers": "^5.5.3",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.1.0",

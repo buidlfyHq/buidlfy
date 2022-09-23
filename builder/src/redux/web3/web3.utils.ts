@@ -1,5 +1,5 @@
-import Polygon from "../../assets/icons/polygon-network.svg";
-import Arbitrum from "../../assets/icons/arbitrum.svg";
+// import Polygon from "../../assets/icons/polygon-network.svg";
+// import Arbitrum from "../../assets/icons/arbitrum.svg";
 
 export const networks = {
   80001: {
@@ -14,7 +14,7 @@ export const networks = {
       "https://polygon-mumbai.g.alchemy.com/v2/i0JIYxK_EGtBX5aGG1apX4KuoH7j_7dq",
     ],
     blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
-    logo: Polygon,
+    // logo: Polygon,
     networkId: 80001,
   },
   421611: {
@@ -27,7 +27,7 @@ export const networks = {
     },
     rpcUrls: ["https://rinkeby.arbitrum.io/rpc"], // needs to be changed before deploying to alchemy
     blockExplorerUrls: ["https://testnet.arbiscan.io/"],
-    logo: Arbitrum,
+    // logo: Arbitrum,
     networkId: 421611,
   },
   137: {
@@ -42,7 +42,7 @@ export const networks = {
       "https://polygon-mainnet.g.alchemy.com/v2/2WHiOE7RDIfdtrrAIJ95Mr2-R75pd-Rr",
     ],
     blockExplorerUrls: ["https://polygonscan.com/"],
-    logo: Polygon,
+    // logo: Polygon,
     networkId: 137,
   },
 };

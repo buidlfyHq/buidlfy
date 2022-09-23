@@ -21,7 +21,7 @@ export const connectWalletService = async () => {
     return { error: false, errorMessage: "", account: address };
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log("Error in connectWalletService --> ", error);
+    console.error("Error in connectWalletService --> ", error);
     return { error: true, errorMessage: (error as Error).message, account: "" };
   }
 };
