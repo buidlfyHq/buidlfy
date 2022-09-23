@@ -46,7 +46,7 @@ const Dashboard: FC = () => {
   };
   const hideSidebar = () => {
     setIsNavHidden(true);
-    setOpenSetting(false);
+    setOpenSetting(true);
   };
   const showSettingSidebar = () => {
     // setIsNavHidden(true);
