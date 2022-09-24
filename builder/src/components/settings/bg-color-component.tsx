@@ -81,9 +81,14 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       </div>
       {displayColorPicker ? (
         <>
+          {/* Check if modal is looking okay on top for background color */}
           <Dialog
             as="div"
-            className="absolute top-[220px] right-[260px] bottom-[1px] py-[15px] z-100 overflow-none bg-white shadow-lg"
+            className={`absolute py-[15px] z-100 overflow-none bg-white shadow-lg ${
+              i
+                ? "top-[220px] right-[260px] bottom-[1px]"
+                : "top-[150px] right-[20px] bottom-[70px]"
+            }`}
             open={displayColorPicker}
             onClose={() => setDisplayColorPicker(false)}
           >
