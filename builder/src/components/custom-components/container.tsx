@@ -4,6 +4,7 @@ import GridLayout, { Layout } from "react-grid-layout";
 import {
   setSelectedElement,
   updateWorkspaceElementsArray,
+  updateWorkspaceElementStyle,
 } from "redux/workspace/workspace.reducers";
 import {
   setSelectorToDefault,
@@ -23,7 +24,9 @@ import {
 } from "redux/contract/contract.interfaces";
 import add from "assets/add.png";
 import edit from "assets/edit.png";
+import deleteContainer from "assets/delete.png";
 import dragImg from "assets/drag.png";
+import { IoIosAddCircleOutline } from "react-icons/io";
 import "styles/components.css";
 
 interface IContainer {
@@ -82,6 +85,15 @@ const Container: FC<IContainer> = ({
   const contractElementSelected: IContractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
   );
+  const handleDelete = () => {
+    dispatch(
+      updateWorkspaceElementStyle({
+        settingItemId: item.i,
+        propertyName: "deleteComponent",
+        propertyValue: true,
+      })
+    );
+  };
 
   let containerW = document
     ?.getElementById(`${item.i}`)
@@ -89,8 +101,8 @@ const Container: FC<IContainer> = ({
   let finalPadding = padding.paddingLeft + padding.paddingRight;
 
   const elementHoverStyles = contractElementSelector
-    ? "border border-[transparent] hover:border-slate-300 hover:border-dashed"
-    : "border border-[transparent] border-hover";
+    ? "border border-[transparent] border-hover"
+    : "border border-[transparent] hover:border-slate-300 hover:border-dashed ";
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -216,7 +228,10 @@ const Container: FC<IContainer> = ({
     dispatch(setSelectedElement(i));
     setOpenSetting(false);
   };
-
+  const onComponentDeleteClick = (i: string) => {
+    handleDelete();
+    dispatch(setSelectedElement(i));
+  };
   const onComponentClick = (itemName: string, i: string) => {
     if (contractElementSelector === null) {
       dispatch(setSelectedElement(i));
@@ -266,7 +281,7 @@ const Container: FC<IContainer> = ({
           cols={6}
           rowHeight={
             children?.length
-              ? 50 - (borderWidth ? borderWidth * 2 : 1) / children?.length
+              ? 50 - (borderWidth ? borderWidth * 2 : 0) / children?.length
               : 50
           }
           width={containerW - (finalPadding + borderWidth * 2) || 200}
@@ -298,7 +313,12 @@ const Container: FC<IContainer> = ({
                 resizeHandles: [],
               }}
             >
-              Hover and click on drag to add components in container
+              <div className="container-div">
+                <span className="container-text">
+                  Add Elements
+                  <IoIosAddCircleOutline className="text-[18px] ml-1 mt-[2px]" />
+                </span>
+              </div>
             </div>
           ) : (
             children
@@ -332,25 +352,36 @@ const Container: FC<IContainer> = ({
           >
             <img className="" src={dragImg} alt="drag" />
           </span>
-          <span
-            id="add-img"
-            className={`${children?.length ? "right-[3rem]" : "right-[1rem]"}`}
+          <div
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
+            className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
+            id="add-img"
             onClick={() => onComponentAddClick(item.i)}
           >
-            <img src={add} alt="add" />
-          </span>
+            <img className="w-[11px] h-[11px]" src={add} />
+          </div>
           {children?.length ? (
-            <span
+            <div
               onMouseOut={() => setDrag(true)}
               onMouseOver={() => setDrag(false)}
+              className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
               id="edit-img"
               onClick={() => onComponentEditClick(item.i)}
             >
-              <img src={edit} alt="edit" />
-            </span>
-          ) : null}
+              <img className="w-[13px] h-[13px]" src={edit} />
+            </div>
+          ) : (
+            <div
+              onMouseOut={() => setDrag(true)}
+              onMouseOver={() => setDrag(false)}
+              className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
+              id="delete-img"
+              onClick={() => onComponentDeleteClick(item.i)}
+            >
+              <img className="w-[13px] h-[13px]" src={deleteContainer} />
+            </div>
+          )}
         </div>
       </section>
     </>
