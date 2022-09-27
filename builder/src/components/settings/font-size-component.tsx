@@ -43,14 +43,6 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
     }
   };
 
-  const options = [
-    8, 9, 10, 11, 12, 14, 15, 18, 24, 30, 36, 48, 60, 72, 96,
-  ].map((number) => (
-    <option key={number} value={number}>
-      {number}
-    </option>
-  ));
-
   return (
     <div className="flex px-1">
       <div className="mt-7 ml-3 margin-text w-[120px]">Font Size</div>
@@ -62,14 +54,6 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
           className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
           onChange={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
         />
-        {/* <select
-              onChange={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
-              className="form-select font-div appearance-none block py-1.5 pl-[10.2rem] text-sm font-normal text-gray-700"
-              aria-label="Default select example"
-            >
-              <option value={fontSize}>{fontSize}</option>
-              {options}
-            </select> */}
         <AiOutlineCaretUp
           onClick={(e) => handleFontSize(e, ReplaceValue.INCREMENT)}
           className="text-[10px] arrow absolute left-[13.5rem] mt-[0.3rem] cursor-pointer"

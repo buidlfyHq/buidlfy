@@ -46,12 +46,6 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
     }
   };
 
-  const options = [0, 2, 4, 5, 7, 8, 10, 15, 20, 25].map((number) => (
-    <option key={number} value={number}>
-      {number}
-    </option>
-  ));
-
   return (
     <>
       <div className="flex px-1">
@@ -66,14 +60,6 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
             className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
             onChange={(e) => handleRadius(e, ReplaceValue.CHANGE)}
           />
-          {/* <select
-            onChange={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
-            className="form-select font-div appearance-none block py-1.5 pl-[10.2rem] text-sm font-normal text-gray-700"
-            aria-label="Default select example"
-          >
-            <option value={fontSize}>{fontSize}</option>
-            {options}
-          </select> */}
           <AiOutlineCaretUp
             onClick={(e) => handleRadius(e, ReplaceValue.INCREMENT)}
             className="text-[10px] absolute left-[13.5rem] arrow mt-[0.3rem] cursor-pointer"
