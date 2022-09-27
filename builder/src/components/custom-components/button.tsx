@@ -24,11 +24,18 @@ const Button: FC<IText> = ({
     id="button-one"
     className="flex overflow-hidden items-center justify-center w-auto h-full"
   >
-    <div
+    <button
       style={{
         fontWeight: bold,
         fontStyle: italic,
-        border: `1px solid ${borderColor}`,
+        border:
+          borderColor.slice(0, 15) === "linear-gradient"
+            ? "1px solid transparent"
+            : `1px solid ${borderColor}`,
+        backgroundOrigin: "border-box",
+        backgroundClip: "border-box",
+        MozBackgroundClip: "border-box",
+        WebkitBackgroundClip: "border-box",
         borderImage: borderColor,
         display: "flex",
         justifyContent: "center",
@@ -55,7 +62,7 @@ const Button: FC<IText> = ({
       >
         {link.length > 0 ? <a href={link}>{value}</a> : <>{value}</>}
       </span>
-    </div>
+    </button>
   </section>
 );
 

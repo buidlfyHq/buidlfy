@@ -72,18 +72,20 @@ const DefaultSettings: FC<IDefaultSettings> = ({
             </div>
           </div> */}
         </aside>
-        <div className="flex justify-center" onChange={onChangeLogo}>
-          <div className="mb-3 mt-5 upload-img">
-            <label htmlFor="inputTag" className="image-label">
-              Drag and drop a file, or{" "}
-              <span className="purple-label">browse</span>
-              <input className="upload-input" type="file" id="inputTag" />
-            </label>
+        <div>
+          <div className="flex justify-center" onChange={onChangeLogo}>
+            <div className="mb-3 mt-5 upload-img cursor-pointer">
+              <label htmlFor="inputTag" className="image-label">
+                Drag and drop a file, or{" "}
+                <span className="purple-label">browse</span>
+                <input className="upload-input" type="file" id="inputTag" />
+              </label>
+            </div>
+            <br />
           </div>
-          <br />
-        </div>
-        <div className="flex justify-center">
-          <button className="upload-btn mx-2 ">Upload</button>
+          <div className="flex justify-center" onChange={onChangeLogo}>
+            <button className="upload-btn mx-2 cursor">Upload</button>
+          </div>
         </div>
         <div
           id="logo"

@@ -28,6 +28,10 @@
 }
 .btn-border {
   border-image-slice: 1 !important;
+  background-origin: border-box !important;
+  background-clip: border-box !important;
+  -moz-background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
 }
 .text-class {
   background-clip: text;
@@ -358,7 +362,7 @@
 
 .sidebar {
   background: #fdfdff;
-  z-index: 7777 !important;
+  z-index: 5 !important;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
 }
 .sidebar::-webkit-scrollbar {

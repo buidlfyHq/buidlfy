@@ -25,7 +25,7 @@ const SideNavbar: FC<ISideNavbar> = ({
 
   return (
     <main
-      className={`w-[80px] sidenav z-[100] fixed top-0 bottom-0 left-0 ${className}`}
+      className={`w-[80px] sidenav z-[1] fixed top-0 bottom-0 left-0 ${className}`}
     >
       {/* Components */}
       <img src={logo} className="w-[2.4rem] mx-[1.3rem] my-[0.65rem]" />

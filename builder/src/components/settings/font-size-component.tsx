@@ -49,7 +49,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
       <div className="flex justify-end text-gray-600 w-full py-4 mx-2">
         <input
           inputMode="numeric"
-          value={fontSize}
+          value={`${fontSize}px`}
           placeholder="0"
           className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
           onChange={(e) => handleFontSize(e, ReplaceValue.CHANGE)}

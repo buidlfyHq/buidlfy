@@ -55,7 +55,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
         <div className="flex justify-end text-gray-600 w-[4.2rem] py-4">
           <input
             inputMode="numeric"
-            value={borderRadius}
+            value={`${borderRadius}px`}
             placeholder="0"
             className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
             onChange={(e) => handleRadius(e, ReplaceValue.CHANGE)}
