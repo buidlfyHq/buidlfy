@@ -90,11 +90,11 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
             />
             <AiOutlineCaretUp
               onClick={(e) => handleChange(e, ReplaceStyle.INCREMENTWIDTH)}
-              className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
+              className="text-[10px] z-[100] absolute left-[6.2rem] arrow mt-[0.4rem] cursor-pointer"
             />
             <AiOutlineCaretDown
               onClick={(e) => handleChange(e, ReplaceStyle.DECREMENTWIDTH)}
-              className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
+              className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] arrow cursor-pointer"
             />
             <h6 className="ml-5 mr-2 margin-subtext">H</h6>
             <input
@@ -106,11 +106,11 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
             />
             <AiOutlineCaretUp
               onClick={(e) => handleChange(e, ReplaceStyle.INCREMENTHEIGHT)}
-              className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
+              className="text-[10px] z-[100] absolute left-[13.2rem] arrow mt-[0.4rem] cursor-pointer"
             />
             <AiOutlineCaretDown
               onClick={(e) => handleChange(e, ReplaceStyle.DECREMENTHEIGHT)}
-              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
+              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] arrow cursor-pointer"
             />
           </div>
         </span>

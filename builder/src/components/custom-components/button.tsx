@@ -36,6 +36,7 @@ const Button: FC<IText> = ({
         fontSize: `${fontSize}px`,
         background: backgroundColor,
         boxShadow: shadow,
+        alignItems: "center",
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
       }}

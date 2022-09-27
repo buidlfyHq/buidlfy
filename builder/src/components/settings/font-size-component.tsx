@@ -52,30 +52,33 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
   ));
 
   return (
-    <div className="flex text-gray-600 w-full py-4 mx-2">
-      <span className="text-left ">
-        <div className="flex">
-          <div className="flex">
-            <span className="font-text">Font Size:</span>
-            <select
+    <div className="flex px-1">
+      <div className="mt-7 ml-3 margin-text w-[120px]">Font Size</div>
+      <div className="flex justify-end text-gray-600 w-full py-4 mx-2">
+        <input
+          inputMode="numeric"
+          value={fontSize}
+          placeholder="0"
+          className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
+          onChange={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
+        />
+        {/* <select
               onChange={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
               className="form-select font-div appearance-none block py-1.5 pl-[10.2rem] text-sm font-normal text-gray-700"
               aria-label="Default select example"
             >
               <option value={fontSize}>{fontSize}</option>
               {options}
-            </select>
-            <AiOutlineCaretUp
-              onClick={(e) => handleFontSize(e, ReplaceValue.INCREMENT)}
-              className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
-            />
-            <AiOutlineCaretDown
-              onClick={(e) => handleFontSize(e, ReplaceValue.DECREMENT)}
-              className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
-            />
-          </div>
-        </div>
-      </span>
+            </select> */}
+        <AiOutlineCaretUp
+          onClick={(e) => handleFontSize(e, ReplaceValue.INCREMENT)}
+          className="text-[10px] arrow absolute left-[13.5rem] mt-[0.3rem] cursor-pointer"
+        />
+        <AiOutlineCaretDown
+          onClick={(e) => handleFontSize(e, ReplaceValue.DECREMENT)}
+          className="text-[10px] arrow absolute left-[13.5rem] mt-[0.9rem] cursor-pointer"
+        />
+      </div>
     </div>
   );
 };

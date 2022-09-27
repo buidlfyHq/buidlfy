@@ -43,37 +43,26 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
     }
   };
 
-  const renderOptions = [1, 3, 5, 7, 9, 10, 12].map((number) => (
-    <option key={number} value={number}>
-      {number}
-    </option>
-  ));
-
   return (
-    <div className="flex text-gray-600 w-full py-4 mx-2">
-      <span className="text-left ">
-        <div className="flex">
-          <div className="flex">
-            <span className="font-text">Border Width:</span>
-            <select
-              onChange={(e) => handleWidth(e, ReplaceValue.CHANGE)}
-              className="form-select font-div appearance-none block py-1.5 pl-[10.5rem] text-sm font-normal text-gray-700"
-              aria-label="select"
-            >
-              <option value={borderWidth}>{borderWidth}</option>
-              {renderOptions}
-            </select>
-            <AiOutlineCaretUp
-              onClick={(e) => handleWidth(e, ReplaceValue.INCREMENT)}
-              className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
-            />
-            <AiOutlineCaretDown
-              onClick={(e) => handleWidth(e, ReplaceValue.DECREMENT)}
-              className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
-            />
-          </div>
-        </div>
-      </span>
+    <div className="flex px-1">
+      <div className="mt-[1.4rem] ml-3 margin-text w-[140px]">Border Width</div>
+      <div className="flex justify-end text-gray-600 w-[4.2rem] py-4">
+        <input
+          inputMode="numeric"
+          value={borderWidth}
+          placeholder="0"
+          className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
+          onChange={(e) => handleWidth(e, ReplaceValue.CHANGE)}
+        />
+        <AiOutlineCaretUp
+          onClick={(e) => handleWidth(e, ReplaceValue.INCREMENT)}
+          className="text-[10px] absolute left-[13.5rem] arrow mt-[0.3rem] cursor-pointer"
+        />
+        <AiOutlineCaretDown
+          onClick={(e) => handleWidth(e, ReplaceValue.DECREMENT)}
+          className="text-[10px] absolute left-[13.5rem] mt-[0.9rem] arrow cursor-pointer"
+        />
+      </div>
     </div>
   );
 };

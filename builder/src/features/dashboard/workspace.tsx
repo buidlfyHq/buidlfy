@@ -19,6 +19,9 @@ import {
   IContractElementSelected,
   IContractElementSelector,
 } from "redux/contract/contract.interfaces";
+import { SidebarEnum } from "redux/workspace/workspace.interfaces";
+import feather from "assets/feather.png";
+import { IoIosAddCircleOutline } from "react-icons/io";
 import "styles/components.css";
 
 interface IWorkspaceComponent {
@@ -29,7 +32,7 @@ interface IWorkspaceComponent {
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   workspaceBackgroundColor: string;
   hideSidebar?: () => void;
-  showSidebar?: () => void;
+  showSidebar?;
   showSettingSidebar?: () => void;
   isNavHidden?: boolean;
   openSetting?: boolean;
@@ -80,7 +83,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
     setFullViewWidth((fullViewWidth) => fullView);
   }, [isNavHidden, openSetting]);
-
+  const handleSidebar = (selectedSidebarElements: string) => {
+    setSideElement(selectedSidebarElements);
+  };
   const onLayoutChange = (layout: Layout[]) => {
     if (layout.length === 0) setIsContainerSelected(false);
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
@@ -109,7 +114,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
       ? dispatch(updateWorkspaceElementsArray(newItemsArr))
       : dispatch(updateWorkspaceElementsArray(workspaceElements));
   };
-
   // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {
     const searchExistingValue = Object.keys(contractElementSelected).filter(
@@ -224,7 +228,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
       setOpenSetting(false);
     }
   };
-
   const renderItemFunction = workspaceElements
     ?.filter((i) => i.style?.deleteComponent === false)
     .map((item: IWorkspaceElement) => {
@@ -267,31 +270,72 @@ const Workspace: FC<IWorkspaceComponent> = ({
       style={{ width: "-webkit-fill-available" }}
       className="main-div h-full "
     >
-      <section onClick={handleCheckIsContainer} className="z-100">
-        <section
-          id="full-view"
-          style={{
-            width: "-webkit-fill-available",
-            background: workspaceBackgroundColor,
-          }}
-          className="mt-[90px] z-[100] bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl mr-[290px]"
-        >
-          <GridLayout
-            layout={workspaceElements}
-            cols={6}
-            rowHeight={50}
-            width={fullViewWidth || 1200}
-            resizeHandles={["se"]}
-            isDraggable={drag}
-            onLayoutChange={onLayoutChange}
-            compactType={null}
-            margin={[0, 0]}
-            className="h-fit overflow-hidden"
+      {workspaceElements?.length > 0 ? (
+        <section onClick={handleCheckIsContainer} className="z-100">
+          <section
+            id="full-view"
+            style={{
+              width: "-webkit-fill-available",
+              background: workspaceBackgroundColor,
+            }}
+            className="mt-[90px] z-[100] ml-[120px] mb-[20px] min-h-[87vh] main-grid mr-[290px]"
           >
-            {renderItemFunction}
-          </GridLayout>
+            <GridLayout
+              layout={workspaceElements}
+              cols={6}
+              rowHeight={50}
+              width={fullViewWidth || 1200}
+              resizeHandles={["se"]}
+              isDraggable={drag}
+              onLayoutChange={onLayoutChange}
+              compactType={null}
+              margin={[0, 0]}
+              className="h-fit overflow-hidden"
+            >
+              {renderItemFunction}
+            </GridLayout>
+          </section>
         </section>
-      </section>
+      ) : (
+        <section className="z-100">
+          <section
+            style={{
+              width: "-webkit-fill-available",
+            }}
+            className="mt-[90px] z-[100] ml-[120px] mb-[20px] min-h-[87vh] main-section flex items-center justify-center mr-[290px]"
+          >
+            <div className="flex items-center justify-center">
+              <div className="text-center">
+                <div className="flex justify-center">
+                  <div className="feather-div">
+                    <img src={feather} style={{ width: "2rem" }} />
+                  </div>
+                </div>
+                <h4 className="color-[#14142B] text-[18px] font-semibold mt-[1rem]">
+                  Please add your first element to start
+                </h4>
+                <h6 className="color-[#4E4B66] text-[15px] font-light mt-[0.5rem]">
+                  Click on the add elements button and start designing your
+                  site.
+                </h6>
+                <div className="flex justify-center">
+                  <button
+                    onClick={() => {
+                      showSidebar(true);
+                      handleSidebar(SidebarEnum.ELEMENTS);
+                      hideSettingSidebar();
+                    }}
+                    className="flex add-btn mt-[1.5rem]"
+                  >
+                    Add Elements
+                    <IoIosAddCircleOutline className="text-[18px] ml-1 mt-[4px]" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      )}
     </main>
   );
 };

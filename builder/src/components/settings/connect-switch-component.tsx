@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
+import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -14,7 +14,6 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
   connectWallet,
 }) => {
   const dispatch = useDispatch();
-
   const [connectToggle, setConnectToggle] = useState(
     connectWallet === "on" ? true : false
   );
@@ -22,7 +21,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
   const handleOnChange = () => {
     setConnectToggle(!connectToggle);
     dispatch(
-      updateWorkspaceElementStyle({
+      updateWorkspaceElement({
         settingItemId: i,
         propertyName: "connectWallet",
         propertyValue: connectWallet === "on" ? "off" : "on",

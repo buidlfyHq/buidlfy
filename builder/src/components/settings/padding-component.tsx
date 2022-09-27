@@ -70,11 +70,11 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
       />
       <AiOutlineCaretUp
         onClick={() => incrementCounter("paddingLeft", padding?.paddingLeft)}
-        className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
+        className="text-[10px] z-[100] absolute left-[6.2rem] arrow mt-[0.4rem] cursor-pointer"
       />
       <AiOutlineCaretDown
         onClick={() => decrementCounter("paddingLeft", padding?.paddingLeft)}
-        className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
+        className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] arrow cursor-pointer"
       />
       <h6 className="margin-text ml-5 mr-2 margin-subtext">R</h6>
       <input
@@ -88,11 +88,11 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
       />
       <AiOutlineCaretUp
         onClick={() => incrementCounter("paddingRight", padding?.paddingRight)}
-        className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
+        className="text-[10px] z-[100] absolute left-[13.2rem] arrow mt-[0.4rem] cursor-pointer"
       />
       <AiOutlineCaretDown
         onClick={() => decrementCounter("paddingRight", padding?.paddingRight)}
-        className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
+        className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] arrow cursor-pointer"
       />
     </div>
   );
@@ -111,11 +111,11 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
       />
       <AiOutlineCaretUp
         onClick={() => incrementCounter("paddingTop", padding?.paddingTop)}
-        className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
+        className="text-[10px] z-[100] absolute left-[6.2rem] arrow mt-[0.4rem]"
       />
       <AiOutlineCaretDown
         onClick={() => decrementCounter("paddingTop", padding?.paddingTop)}
-        className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
+        className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] arrow"
       />
       <h6 className="ml-5 mr-2 margin-subtext">B</h6>
       <input
@@ -131,13 +131,13 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
         onClick={() =>
           incrementCounter("paddingBottom", padding?.paddingBottom)
         }
-        className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
+        className="text-[10px] z-[100] absolute left-[13.2rem] arrow mt-[0.4rem]"
       />
       <AiOutlineCaretDown
         onClick={() =>
           decrementCounter("paddingBottom", padding?.paddingBottom)
         }
-        className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
+        className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] arrow"
       />
     </div>
   );

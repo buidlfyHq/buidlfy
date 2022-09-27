@@ -31,6 +31,8 @@ const Text: FC<IText> = ({
         display: "flex",
         justifyContent,
         alignItems: "center",
+        textDecoration: underline,
+        textDecorationColor: color,
         textAlign: `${justifyContent}` as CanvasTextAlign,
         fontSize: `${fontSize}px`,
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
@@ -43,22 +45,22 @@ const Text: FC<IText> = ({
     <section
       id="text-one"
       style={{
+        height: "-webkit-fill-available",
         textDecoration: underline,
         textDecorationColor: color,
-        height: "-webkit-fill-available",
         background: backgroundColor,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}
       className="flex overflow-hidden items-center justify-center w-auto h-full"
     >
       <>
-        {link.length > 0 ? (
+        {link?.length > 0 ? (
           <a
             rel="noreferrer"
             target="_blank"
             href={link}
             id="text-two"
-            className="text-class"
+            className="text-class flex overflow-hidden items-center justify-center w-auto h-full"
             style={{
               background: color,
               WebkitTextFillColor: "transparent",

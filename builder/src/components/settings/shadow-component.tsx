@@ -60,19 +60,19 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
       <div className="flex mt-3 px-1">
         <span
           onClick={() => handleChange(ReplaceStyle.SMALL)}
-          className="shadow-div flex items-center justify-center shadow py-2 px-3 font-regular"
+          className="shadow-div flex items-center justify-center cursor-pointer shadow py-2 px-3 font-regular"
         >
           S
         </span>
         <span
           onClick={() => handleChange(ReplaceStyle.MEDIUM)}
-          className="shadow-div flex items-center justify-center shadow py-2 px-3 mx-3 font-regular"
+          className="shadow-div flex items-center justify-center cursor-pointer shadow py-2 px-3 mx-3 font-regular"
         >
           M
         </span>
         <span
           onClick={() => handleChange(ReplaceStyle.LARGE)}
-          className="shadow-div flex items-center justify-center shadow py-2 px-3 font-regular"
+          className="shadow-div flex items-center justify-center cursor-pointer shadow py-2 px-3 font-regular"
         >
           L
         </span>
