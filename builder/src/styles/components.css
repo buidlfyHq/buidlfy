@@ -621,7 +621,6 @@
 }
 .disable-text {
   background: rgba(233, 237, 253, 0.24);
-  border: 1px solid rgba(218, 218, 218, 0.57);
   border-radius: 6px;
   pointer-events: none;
 }

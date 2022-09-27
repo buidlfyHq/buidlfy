@@ -6,7 +6,7 @@ import "styles/dashboard.css";
 
 interface IConnectSwitchComponent {
   i: string;
-  connectWallet: string;
+  connectWallet: boolean;
 }
 
 const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
@@ -15,7 +15,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
 }) => {
   const dispatch = useDispatch();
   const [connectToggle, setConnectToggle] = useState(
-    connectWallet === "on" ? true : false
+    connectWallet ? true : false
   );
 
   const handleOnChange = () => {
@@ -24,13 +24,13 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
       updateWorkspaceElement({
         settingItemId: i,
         propertyName: "connectWallet",
-        propertyValue: connectWallet === "on" ? "off" : "on",
+        propertyValue: connectWallet ? false : true,
       })
     );
   };
 
   useEffect(() => {
-    setConnectToggle(connectWallet === "on" ? true : false);
+    setConnectToggle(connectWallet ? true : false);
   }, [connectWallet]);
 
   return (

@@ -86,35 +86,23 @@ const ButtonSettings: FC<ISettings> = ({
           i={selectedElement.i}
           connectWallet={selectedElement.connectWallet}
         />
-        {selectedElement.connectWallet == "off" ? (
-          <div className="flex items-center mb-2 mx-2 w-[13.5rem] text-black">
-            <div className="link-div px-1 py-1">
-              <IoMdLink className="text-[18px]" />
-            </div>
-            <input
-              value={selectedElement.link}
-              onChange={(e) => handleSettingChange(e, "link")}
-              className="changeText pl-[2.5rem] py-[0.4rem] input-text"
-              type="text"
-              placeholder="Link"
-            />
+        <div
+          className={`flex items-center mb-2 mx-2 w-[13.5rem] text-black rounded-[6px] ${
+            selectedElement.connectWallet ? "disable-text" : ""
+          }`}
+        >
+          <div className="link-div px-1 py-1">
+            <IoMdLink className="text-[18px]" />
           </div>
-        ) : (
-          <div className="flex items-center mb-2 mx-2 w-[13.5rem] disable-text text-black">
-            <div className="link-div px-1 py-1">
-              <IoMdLink className="text-[18px]" />
-            </div>
-            <input
-              value={selectedElement.link}
-              onChange={(e) => handleSettingChange(e, "link")}
-              className="changeText pl-[2.5rem] py-[0.4rem]"
-              type="text"
-              disabled={true}
-              placeholder="Link"
-            />
-          </div>
-        )}
-
+          <input
+            value={selectedElement.link}
+            onChange={(e) => handleSettingChange(e, "link")}
+            className={`changeText pl-[2.5rem] py-[0.4rem] rounded-[6px]`}
+            type="text"
+            disabled={selectedElement.connectWallet ? true : false}
+            placeholder="Link"
+          />
+        </div>
         <FontSizeComponent
           i={selectedElement.i}
           fontSize={selectedElement.style.fontSize}

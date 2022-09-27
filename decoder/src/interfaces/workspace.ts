@@ -23,5 +23,5 @@ export default interface IWorkspace {
   resizeHandles?: [];
   contract?: any; // breaking while assigning a type, work in progress
   imgData?: string | ArrayBuffer;
-  connectWallet?: string;
+  connectWallet?: boolean;
 }
