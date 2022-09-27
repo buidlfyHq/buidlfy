@@ -28,10 +28,7 @@ const Button: FC<IText> = ({
       style={{
         fontWeight: bold,
         fontStyle: italic,
-        border:
-          borderColor.slice(0, 15) === "linear-gradient"
-            ? "1px solid transparent"
-            : `1px solid ${borderColor}`,
+        border: `1px solid ${borderColor}`,
         backgroundOrigin: "border-box",
         backgroundClip: "border-box",
         MozBackgroundClip: "border-box",
@@ -41,7 +38,10 @@ const Button: FC<IText> = ({
         justifyContent: "center",
         borderRadius: `${borderRadius}px`,
         fontSize: `${fontSize}px`,
-        background: backgroundColor,
+        background:
+          backgroundColor.slice(0, 15) === "linear-gradient"
+            ? "transparent"
+            : backgroundColor,
         boxShadow: shadow,
         alignItems: "center",
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
@@ -52,7 +52,8 @@ const Button: FC<IText> = ({
     >
       <span
         style={{
-          background: color,
+          background:
+            color.slice(0, 15) === "linear-gradient" ? backgroundColor : color,
           WebkitTextFillColor:
             color.slice(0, 15) === "linear-gradient" ? "transparent" : color,
           textDecoration: underline,
@@ -60,7 +61,7 @@ const Button: FC<IText> = ({
         }}
         className="text-class"
       >
-        {link.length > 0 ? <a href={link}>{value}</a> : <>{value}</>}
+        {link.length > 0 ? <a href={link}>{value}</a> : value}
       </span>
     </button>
   </section>
