@@ -152,9 +152,7 @@ const workspaceSlice = createSlice({
 
     updateUploadedImageData(state: IWorkspaceState, action: { payload }) {
       const { settingItemId, uploadedImageData } = action.payload;
-      const newUploadedImagesData = getUploadedImageData(settingItemId, uploadedImageData, state.uploadedImagesData)
-      console.log(newUploadedImagesData,"newdata");
-      
+      const newUploadedImagesData = getUploadedImageData(settingItemId, uploadedImageData, state.uploadedImagesData)      
       return {
         ...state,
        uploadedImagesData: newUploadedImagesData

@@ -37,8 +37,6 @@ const Image: FC<IImageComponent> = ({
     (image: IUploadedImageData) => image.settingItemId == i
   );
 
-  console.log(imageData, "imagedata");
-
   // Add ClientWidth and ClientHeight of Image when it changes its position
   // const ref = useRef<HTMLDivElement>();
 
