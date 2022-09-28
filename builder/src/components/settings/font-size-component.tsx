@@ -44,6 +44,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
   };
 
   return (
+    // ADD: Common input component for this will be added in following PR
     <div className="flex px-1">
       <div className="mt-7 ml-3 margin-text w-[120px]">Font Size</div>
       <div className="flex justify-end text-gray-600 w-full py-4 mx-2">

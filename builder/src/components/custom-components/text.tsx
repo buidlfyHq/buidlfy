@@ -27,7 +27,8 @@ const Text: FC<IText> = ({
           color.slice(0, 15) === "linear-gradient" ? "transparent" : color,
         fontWeight: bold,
         fontStyle: italic,
-        background: color.slice(0, 15) === "linear-gradient" ? color : "transparent",
+        background:
+          color.slice(0, 15) === "linear-gradient" ? color : "transparent",
         display: "flex",
         justifyContent,
         alignItems: "center",
@@ -61,10 +62,10 @@ const Text: FC<IText> = ({
             href={link}
             id="text-two"
             className="text-class flex overflow-hidden items-center justify-center w-auto h-full"
-            // style={{
-            //   background: color,
-            //   WebkitTextFillColor: "transparent",
-            // }}
+            style={{
+              background: color,
+              WebkitTextFillColor: "transparent",
+            }}
           >
             {textAreaContent}
           </a>

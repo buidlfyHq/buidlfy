@@ -44,6 +44,7 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
   };
 
   return (
+    // ADD: Common input component for this will be added in following PR
     <div className="flex px-1">
       <div className="mt-[1.4rem] ml-3 margin-text w-[140px]">Border Width</div>
       <div className="flex justify-end text-gray-600 w-[4.2rem] py-4">
