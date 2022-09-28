@@ -14,9 +14,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
   connectWallet,
 }) => {
   const dispatch = useDispatch();
-  const [connectToggle, setConnectToggle] = useState(
-    connectWallet ? true : false
-  );
+  const [connectToggle, setConnectToggle] = useState(connectWallet);
 
   const handleOnChange = () => {
     setConnectToggle(!connectToggle);
@@ -30,7 +28,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
   };
 
   useEffect(() => {
-    setConnectToggle(connectWallet ? true : false);
+    setConnectToggle(connectWallet);
   }, [connectWallet]);
 
   return (

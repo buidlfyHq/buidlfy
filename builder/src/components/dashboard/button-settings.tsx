@@ -41,6 +41,7 @@ const ButtonSettings: FC<ISettings> = ({
       dispatch(setSelectorToDefault());
     }
   };
+  console.log(selectedElement.connectWallet);
   return (
     <>
       <span className="flex tab mb-[0.5rem]">
@@ -99,7 +100,7 @@ const ButtonSettings: FC<ISettings> = ({
             onChange={(e) => handleSettingChange(e, "link")}
             className={`changeText pl-[2.5rem] py-[0.4rem] rounded-[6px]`}
             type="text"
-            disabled={selectedElement.connectWallet ? true : false}
+            disabled={selectedElement.connectWallet}
             placeholder="Link"
           />
         </div>
