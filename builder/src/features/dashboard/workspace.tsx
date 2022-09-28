@@ -30,7 +30,7 @@ interface IWorkspaceComponent {
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   workspaceBackgroundColor: string;
   hideSidebar?: () => void;
-  showSidebar?;
+  showSidebar?: () => void;
   showSettingSidebar?: () => void;
   isNavHidden?: boolean;
   openSetting?: boolean;
@@ -81,9 +81,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
     setFullViewWidth((fullViewWidth) => fullView);
   }, [isNavHidden, openSetting]);
-  const handleSidebar = (selectedSidebarElements: string) => {
-    setSideElement(selectedSidebarElements);
-  };
+
   const onLayoutChange = (layout: Layout[]) => {
     if (layout.length === 0) setIsContainerSelected(false);
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
