@@ -34,7 +34,7 @@ const Image: FC<IImageComponent> = ({
     (state: IRootState) => state.workspace.uploadedImagesData
   );
   const imageData: IUploadedImageData = imagesData.find(
-    (image: IUploadedImageData) => image.settingItemId == i
+    (image: IUploadedImageData) => image.settingItemId === i
   );
 
   // Add ClientWidth and ClientHeight of Image when it changes its position
