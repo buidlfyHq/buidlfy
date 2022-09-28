@@ -29,15 +29,12 @@ const Button: FC<IText> = ({
         fontWeight: bold,
         fontStyle: italic,
         border: `1px solid ${borderColor}`,
-        borderImageSource: borderColor,
+        borderImage: borderColor,
         display: "flex",
         justifyContent: "center",
         borderRadius: `${borderRadius}px`,
         fontSize: `${fontSize}px`,
-        background:
-          backgroundColor.slice(0, 15) === "linear-gradient"
-            ? ""
-            : backgroundColor,
+        background: backgroundColor,
         boxShadow: shadow,
         alignItems: "center",
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,

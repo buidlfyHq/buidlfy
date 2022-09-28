@@ -55,6 +55,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
   };
 
   return (
+    // ADD: Common tailwind style and Input
     <>
       <div className="flex items-center w-full px-3 py-4 text-gray-600">
         <span className="px-1 text-left ">

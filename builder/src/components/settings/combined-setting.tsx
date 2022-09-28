@@ -71,6 +71,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   };
 
   return (
+    // ADD: Common tailwind style
     <div className="flex grey-div w-auto mx-2 mb-3 items-center mt-2 text-black">
       <span
         onClick={() => handleChange(ReplaceStyle.BOLD)}

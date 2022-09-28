@@ -56,6 +56,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
     );
   };
 
+  // ADD: Common tailwind style and Input
   const paddingFirstLayer = (
     <div className="flex mt-3">
       <h6 className="margin-subtext mr-2">L</h6>
