@@ -27,10 +27,6 @@
 }
 .btn-border {
   border-image-slice: 1 !important;
-  background-origin: border-box !important;
-  background-clip: border-box, content-box !important;
-  -moz-background-clip: border-box, content-box !important;
-  -webkit-background-clip: border-box, content-box !important;
 }
 .text-class {
   background-clip: text;
@@ -624,7 +620,6 @@
 }
 .disable-text {
   background: rgba(233, 237, 253, 0.24);
-  border: 1px solid rgba(218, 218, 218, 0.57);
   border-radius: 6px;
   pointer-events: none;
 }
@@ -833,6 +828,50 @@
   line-height: 21px;
   color: #6150c9;
   display: flex;
+}
+
+.main-grid {
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.2)
+    ),
+    #ffffff;
+  outline: 1px solid rgba(93, 70, 228, 0.16);
+}
+
+.feather-div {
+  background: linear-gradient(
+    132.56deg,
+    rgba(87, 153, 235, 0.1) 5.63%,
+    rgba(159, 116, 251, 0.1) 106.18%
+  );
+  border-radius: 30px;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-btn {
+  background: linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
+  border-radius: 28px;
+  padding: 10px 20px;
+  color: white;
+}
+.add-btn:hover {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
+}
+.arrow {
+  color: #475385;
+}
+.arrow:hover {
+  color: #000000;
+}
+.arrow:active {
+  color: #000000;
 }
 
 .main-grid {

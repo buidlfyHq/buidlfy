@@ -203,7 +203,7 @@ export const components = [
         paddingBottom: 10,
       },
     },
-    connectWallet: "off",
+    connectWallet: false,
     contract: {},
   },
   {
