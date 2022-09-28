@@ -17,7 +17,7 @@ const ArrowInput: FC<IArrowInput> = ({
 }) => {
   return (
     <div className="flex px-1">
-      <div className="ml-3 margin-text w-[140px] flex items-center">{text}</div>
+      <div className="ml-3 margin-text flex w-[135px] items-center">{text}</div>
       <div className="flex justify-end text-gray-600 py-4">
         <input
           inputMode="numeric"
