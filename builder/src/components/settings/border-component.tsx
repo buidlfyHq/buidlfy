@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceValue } from "components/utils/render-setting";
+import ArrowInput from "components/utils/arrow-input";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -44,26 +45,13 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
   };
 
   return (
-    <div className="flex px-1">
-      <div className="mt-[1.4rem] ml-3 margin-text w-[140px]">Border Width</div>
-      <div className="flex justify-end text-gray-600 w-[4.2rem] py-4">
-        <input
-          inputMode="numeric"
-          value={`${borderWidth}px`}
-          placeholder="0"
-          className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
-          onChange={(e) => handleWidth(e, ReplaceValue.CHANGE)}
-        />
-        <AiOutlineCaretUp
-          onClick={(e) => handleWidth(e, ReplaceValue.INCREMENT)}
-          className="text-[10px] absolute left-[13.5rem] arrow mt-[0.3rem] cursor-pointer"
-        />
-        <AiOutlineCaretDown
-          onClick={(e) => handleWidth(e, ReplaceValue.DECREMENT)}
-          className="text-[10px] absolute left-[13.5rem] mt-[0.9rem] arrow cursor-pointer"
-        />
-      </div>
-    </div>
+    <ArrowInput
+      text="Border Width"
+      value={borderWidth}
+      handleChange={(e) => handleWidth(e, ReplaceValue.CHANGE)}
+      handleIncrement={(e) => handleWidth(e, ReplaceValue.INCREMENT)}
+      handleDecrement={(e) => handleWidth(e, ReplaceValue.DECREMENT)}
+    />
   );
 };
 export default BorderComponent;

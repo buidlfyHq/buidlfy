@@ -1,4 +1,7 @@
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
+import { IRootState } from "redux/root-state.interface";
+import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IImageComponent {
@@ -27,6 +30,15 @@ const Image: FC<IImageComponent> = ({
   backgroundSize,
   isAuto,
 }) => {
+  const imagesData: IUploadedImageData[] = useSelector(
+    (state: IRootState) => state.workspace.uploadedImagesData
+  );
+  const imageData: IUploadedImageData = imagesData.find(
+    (image: IUploadedImageData) => image.settingItemId == i
+  );
+
+  console.log(imageData, "imagedata");
+
   // Add ClientWidth and ClientHeight of Image when it changes its position
   // const ref = useRef<HTMLDivElement>();
 
@@ -45,16 +57,17 @@ const Image: FC<IImageComponent> = ({
   //     setDynamicHeight(ref.current.clientHeight);
   //   }
   // }, [ref?.current?.clientHeight]);
+
   return (
     <>
-      {imgData ? (
+      {imageData ? (
         <div className="flex w-full h-full">
           <div
             // ref={ref}
             id={i}
             className="flex w-full h-full"
             style={{
-              backgroundImage: `url(${imgData})`,
+              backgroundImage: `url(${imageData.uploadedImageData})`,
               backgroundRepeat: "no-repeat",
               backgroundPosition: justifyContent,
               backgroundSize: `${

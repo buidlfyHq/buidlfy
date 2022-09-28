@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceValue } from "components/utils/render-setting";
+import ArrowInput from "components/utils/arrow-input";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -44,26 +45,13 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
   };
 
   return (
-    <div className="flex px-1">
-      <div className="mt-7 ml-3 margin-text w-[120px]">Font Size</div>
-      <div className="flex justify-end text-gray-600 w-full py-4 mx-2">
-        <input
-          inputMode="numeric"
-          value={`${fontSize}px`}
-          placeholder="0"
-          className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
-          onChange={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
-        />
-        <AiOutlineCaretUp
-          onClick={(e) => handleFontSize(e, ReplaceValue.INCREMENT)}
-          className="text-[10px] arrow absolute left-[13.5rem] mt-[0.3rem] cursor-pointer"
-        />
-        <AiOutlineCaretDown
-          onClick={(e) => handleFontSize(e, ReplaceValue.DECREMENT)}
-          className="text-[10px] arrow absolute left-[13.5rem] mt-[0.9rem] cursor-pointer"
-        />
-      </div>
-    </div>
+    <ArrowInput
+      text="Font Size"
+      value={fontSize}
+      handleChange={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
+      handleIncrement={(e) => handleFontSize(e, ReplaceValue.INCREMENT)}
+      handleDecrement={(e) => handleFontSize(e, ReplaceValue.DECREMENT)}
+    />
   );
 };
 export default FontSizeComponent;

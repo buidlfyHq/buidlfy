@@ -1,6 +1,12 @@
+export interface IUploadedImageData {
+  settingItemId: string;
+  uploadedImageData: string;
+}
+
 export interface IWorkspaceState {
   workspaceElements: IWorkspaceElement[];
   selectedElement: IWorkspaceElement;
+  uploadedImagesData: IUploadedImageData[];
 }
 
 export interface IWorkspaceElement {

@@ -1,6 +1,9 @@
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
+import {
+  updateWorkspaceElement,
+  updateUploadedImageData,
+} from "redux/workspace/workspace.reducers";
 import { uploadFileToWeb3Storage } from "utils/web3storage";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -22,6 +25,12 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
         setSizeExceeded(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
+          dispatch(
+            updateUploadedImageData({
+              settingItemId: i,
+              uploadedImageData: reader.result as string,
+            })
+          );
           const cid = await uploadFileToWeb3Storage(reader.result as string);
           dispatch(
             updateWorkspaceElement({

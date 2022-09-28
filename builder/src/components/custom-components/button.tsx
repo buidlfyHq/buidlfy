@@ -29,18 +29,14 @@ const Button: FC<IText> = ({
         fontWeight: bold,
         fontStyle: italic,
         border: `1px solid ${borderColor}`,
-        backgroundOrigin: "border-box",
-        backgroundClip: "border-box",
-        MozBackgroundClip: "border-box",
-        WebkitBackgroundClip: "border-box",
-        borderImage: borderColor,
+        borderImageSource: borderColor,
         display: "flex",
         justifyContent: "center",
         borderRadius: `${borderRadius}px`,
         fontSize: `${fontSize}px`,
         background:
           backgroundColor.slice(0, 15) === "linear-gradient"
-            ? "transparent"
+            ? ""
             : backgroundColor,
         boxShadow: shadow,
         alignItems: "center",
@@ -48,12 +44,11 @@ const Button: FC<IText> = ({
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
       }}
       id={i}
-      className="btn-border border-[1px] border-solid w-[170px] h-[40px] cursor-pointer btn whitespace-nowrap"
+      className="btn-border w-[170px] h-[40px] cursor-pointer btn whitespace-nowrap"
     >
       <span
         style={{
-          background:
-            color.slice(0, 15) === "linear-gradient" ? backgroundColor : color,
+          background: color,
           WebkitTextFillColor:
             color.slice(0, 15) === "linear-gradient" ? "transparent" : color,
           textDecoration: underline,
