@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { encode as base64_encode } from "base-64";
 import { Dialog } from "@headlessui/react";
+import MintTemplateModal from "components/custom-components/modals/mint-template-form";
+import PublishSiteModal from "components/custom-components/modals/publish-site";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
@@ -46,6 +48,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [file, setFile] = useState<string>("");
+  const [isMintTemplateOpen, setIsMintTemplateOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (contractDetails.abi) {
@@ -137,6 +140,10 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
     setIsOpen(true);
   };
 
+  const handleMintTemplateForm = () => {
+    setIsMintTemplateOpen(true)
+  } 
+
   return (
     <main
       className={
@@ -148,7 +155,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
       <div className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer">
         {className && <AiOutlineDoubleRight />}
       </div>
-      <div className="flex flex-row h-[60px]">
+      <div className="flex flex-row items-center h-[60px]">
         <div className="flex flex-row items-center">
           <div
             onClick={handleClear}
@@ -184,58 +191,28 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
           </span>
           Preview
         </div> */}
+        <div 
+          className="mint-button text-[14px] text-[#855FD8] font[500] py-2 px-6 cursor-pointer"
+          onClick={handleMintTemplateForm}
+        >
+          Mint as NFT
+          <MintTemplateModal 
+            isMintTemplateOpen={isMintTemplateOpen}
+            setIsMintTemplateOpen={setIsMintTemplateOpen}
+          />
+        </div>
         <button
-          className="h-10 px-4 my-2 rounded cursor-pointer btn whitespace-nowrap"
+          className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
           onClick={handlePublish}
         >
           Publish
         </button>
-        <Dialog
-          as="div"
-          className="fixed inset-0 z-20 overflow-y-auto"
-          open={isOpen}
-          onClose={() => setIsOpen(false)}
-        >
-          <div className="min-h-screen px-4 text-center">
-            {/* This element is to trick the browser into centering the modal contents. */}
-            <span
-              className="inline-block h-screen align-middle"
-              aria-hidden="true"
-            >
-              &#8203;
-            </span>
-
-            {/* Use the overlay to style a dim backdrop for your dialog */}
-            <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-
-            {/* Dialog Content */}
-            <section className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-              <Dialog.Title
-                as="h3"
-                className="text-lg font-medium leading-6 text-gray-900"
-              >
-                Generated base64 Config{" "}
-              </Dialog.Title>
-              <div className="mt-2">
-                <p className="h-10 overflow-auto text-sm text-gray-500">
-                  {generatedConfig}
-                </p>
-              </div>
-              <div className="mt-4">
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                  onClick={() => {
-                    navigator.clipboard.writeText(generatedConfig);
-                    setIsOpen(false);
-                  }}
-                >
-                  Click here to copy Config
-                </button>
-              </div>
-            </section>
-          </div>
-        </Dialog>
+        <div className="my-3 ml-2 bg-[#9CB0D7] w-[32px] h-[32px] rounded-[50%] mt-30">{" "}</div>
+        <PublishSiteModal 
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          generatedConfig={generatedConfig}
+        />
         <Dialog
           as="div"
           className="fixed inset-0 z-20 overflow-y-auto"
@@ -257,16 +234,16 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
             {/* Dialog Content */}
             <section className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
               <div className="mt-2">
-                <div className="px-1 text-left mt-3 text-gray-500 font-regular font-normal not-italic">
+                <div className="px-1 mt-3 not-italic font-normal text-left text-gray-500 font-regular">
                   Name
                 </div>
                 <input
-                  className="w-full mt-2 py-1 px-2 bg-white/90 rounded border"
+                  className="w-full px-2 py-1 mt-2 border rounded bg-white/90"
                   placeholder="Name"
                   value={inputValue}
                   onChange={(e) => handleInput(e)}
                 />
-                <div className="px-1 text-left mt-6 text-gray-500 font-regular font-normal not-italic">
+                <div className="px-1 mt-6 not-italic font-normal text-left text-gray-500 font-regular">
                   Upload Image
                 </div>
                 {/* Input required and function added in next branch            */}

@@ -7,6 +7,10 @@ import Sidebar from "features/dashboard/sidebar";
 import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
+import StartModal from "components/custom-components/modals/start-modal";
+import TemplateModal from "components/custom-components/modals/template-modal";
+import SingleTemplateDetails from "components/custom-components/modals/single-template-details";
+import FinalModal from "components/custom-components/modals/final-modal";
 import DefaultSettings from "features/dashboard/default-settings";
 import "styles/components.css";
 
@@ -32,6 +36,23 @@ const Dashboard: FC = () => {
   });
   const [sideElement, setSideElement] = useState<string>("");
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState(false)
+  const [isOpenTemplate, setIsOpenTemplate] = useState(false)
+  const [isOpenSingleTemplate, setIsOpenSingleTemplate] = useState(false)
+  const [isOpenFinalTemplate, setIsOpenFinalTemplate] = useState(false)
+
+  useEffect(() => {
+    setIsOpen(true)
+    // storeFiles(makeFileObjects());
+  }, []);
+
+  const handleStartFromTemplate = () => {
+    setIsOpen(false)
+    setIsOpenTemplate(true)
+  }
+  const handleStartFromScratch = () => {
+    setIsOpen(false)
+  }
 
   useEffect(() => {
     // checks for stored config
@@ -61,7 +82,7 @@ const Dashboard: FC = () => {
   return (
     <main>
       {size.width > 1024 ? (
-        <section className="flex columns-3 flex-row w-full min-h-screen">
+        <section className="flex flex-row w-full min-h-screen columns-3">
           {/* Sidebar */}
           <SideNavbar
             className={className}
@@ -136,6 +157,28 @@ const Dashboard: FC = () => {
           coming soon!
         </h1>
       )}
+
+      {/* Dailogs for template */}
+      <StartModal 
+        isOpen={isOpen} 
+        setIsOpen={setIsOpen}
+        handleStartFromTemplate={handleStartFromTemplate} 
+        handleStartFromScratch={handleStartFromScratch}
+      />
+      <TemplateModal 
+        isOpenTemplate={isOpenTemplate}
+        setIsOpenTemplate={setIsOpenTemplate}
+        setIsOpenSingleTemplate={setIsOpenSingleTemplate}
+      />
+      <SingleTemplateDetails
+        isOpenSingleTemplate={isOpenSingleTemplate}
+        setIsOpenSingleTemplate={setIsOpenSingleTemplate} 
+        setIsOpenFinalTemplate={setIsOpenFinalTemplate}
+      />
+      <FinalModal
+        isOpenFinalTemplate={isOpenFinalTemplate}
+        setIsOpenFinalTemplate={setIsOpenFinalTemplate}
+      />
     </main>
   );
 };

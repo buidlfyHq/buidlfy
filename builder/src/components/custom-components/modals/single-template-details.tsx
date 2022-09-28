@@ -1,38 +1,24 @@
-import React, { FC, useState } from "react";
-import { ethers, Contract } from "ethers";
-// import Web3Modal from "web3modal";
+import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
 import { IoArrowBack } from "react-icons/io5";
 import { VscArrowRight } from "react-icons/vsc";
 import SignleTempImg from "assets/modalIcons/single-temp-img.png";
 
-const SingleTemplateDetails = ({
+interface MintedTemplateModal {
+  isOpenSingleTemplate: boolean;
+  setIsOpenSingleTemplate: (isOpenSingleTemplate: boolean) => void;
+  setIsOpenFinalTemplate: (isOpenFinalTemplate: boolean) => void;
+}
+
+const SingleTemplateDetails: FC<MintedTemplateModal> = ({
   isOpenSingleTemplate,
   setIsOpenSingleTemplate,
+  setIsOpenFinalTemplate,
 }) => {
-  const [contract, setContract] = useState<Contract>();
-  const [account, setAccount] = useState<string>(null);
+  const handleSubmit = () => {
+    setIsOpenFinalTemplate(true);
+  };
 
-  // const connectWalletButton = async () => {
-  //     try {
-  //       const provider = await web3Modal.connect();
-  //       const library: any = new ethers.providers.Web3Provider(provider); // required
-  //       const accounts: any = await library.listAccounts(); // required
-  //       if (accounts) setAccount(accounts[0]);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   const refreshState = () => {
-  //     setAccount(null);
-  //   };
-
-  //   const disconnect = async () => {
-  //     await web3Modal.clearCachedProvider();
-  //     refreshState();
-  //   };
-  
   return (
     <Dialog
       className="relative z-50"
@@ -75,7 +61,10 @@ const SingleTemplateDetails = ({
             <div className="w-full mt-10 text-center text-[20px] text-[#202525] font-[500] py-4 rounded-[8px] preview-button cursor-pointer">
               Preview in browser
             </div>
-            <div className="w-full flex justify-center items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button">
+            <div
+              onClick={handleSubmit}
+              className="w-full flex justify-center items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
+            >
               <div className="text-[14px]">Connect Wallet to buy </div>
               <VscArrowRight className="ml-2 text-[18px]" />
             </div>
