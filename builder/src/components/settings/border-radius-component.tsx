@@ -10,11 +10,13 @@ import "styles/dashboard.css";
 interface IBorderRadiusComponent {
   i: string;
   borderRadius: number;
+  elementBackgroundColor?: string;
 }
 
 const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
   i,
   borderRadius,
+  elementBackgroundColor,
 }) => {
   const dispatch = useDispatch();
 
@@ -48,13 +50,20 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
   };
 
   return (
-    <ArrowInput
-      text="Border Radius"
-      value={borderRadius}
-      handleChange={(e) => handleRadius(e, ReplaceValue.CHANGE)}
-      handleIncrement={(e) => handleRadius(e, ReplaceValue.INCREMENT)}
-      handleDecrement={(e) => handleRadius(e, ReplaceValue.DECREMENT)}
-    />
+    <>
+      <ArrowInput
+        text="Border Radius"
+        value={borderRadius}
+        handleChange={(e) => handleRadius(e, ReplaceValue.CHANGE)}
+        handleIncrement={(e) => handleRadius(e, ReplaceValue.INCREMENT)}
+        handleDecrement={(e) => handleRadius(e, ReplaceValue.DECREMENT)}
+      />
+      {elementBackgroundColor?.slice(0, 15) === "linear-gradient" ? (
+        <p className="text-[10px] ml-[1rem] mb-[0.5rem] text-[#475385]">
+          Background gradient and border radius cannot be use together
+        </p>
+      ) : null}
+    </>
   );
 };
 export default BorderRadiusComponent;

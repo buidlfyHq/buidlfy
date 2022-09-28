@@ -87,7 +87,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
       </span>
       <span
         onClick={() => handleChange(ReplaceStyle.UNDERLINE)}
-        className="flex items-center justify-center underline text-[16px] py-0.5 w-[22px] h-[25px] rounded-[4px] mr-[13px] my-1 font-regular text-black hover:bg-[#CDD4F3] cursor-pointer"
+        className="flex items-center justify-center underline text-[16px] py-0.5 w-[22px] h-[25px] rounded-[4px] mr-[13px] my-1 font-regular text-black hover:bg-[#CDD4F3] active:bg-[#CDD4F3] cursor-pointer"
       >
         U
       </span>

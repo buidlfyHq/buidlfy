@@ -110,6 +110,7 @@ const ButtonSettings: FC<ISettings> = ({
         <BorderRadiusComponent
           i={selectedElement.i}
           borderRadius={selectedElement.style.borderRadius}
+          elementBackgroundColor={selectedElement.style.backgroundColor}
         />
         <ColorComponent
           i={selectedElement.i}

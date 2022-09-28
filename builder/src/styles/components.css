@@ -417,6 +417,7 @@
 
   color: #000000;
 }
+
 .margin-form {
   background: #e9edfd;
   box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04),
@@ -560,6 +561,8 @@
 .element-heading-div {
   display: flex;
   height: 60px;
+  z-index: 88888 !important;
+  backdrop-filter: saturate(180%) blur(15px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 

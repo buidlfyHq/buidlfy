@@ -217,9 +217,9 @@ const Elements: FC<IElements> = ({
   return (
     <>
       {/* Components */}
-      <div className="element-heading-div pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem]">
-        <h3 className="element-heading">Add Elements</h3>
-        <div className="close-btn">
+      <div className="element-heading-div pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem] fixed left-[5rem]">
+        <h3 className="element-heading mt-[2.5px]">Add Elements</h3>
+        <div className="close-btn ml-[10rem]">
           <MdOutlineClose
             onClick={() => {
               hideSidebar();
@@ -230,7 +230,7 @@ const Elements: FC<IElements> = ({
         </div>
       </div>
       {!isContainerSelected ? (
-        <>
+        <div className="mt-[6rem]">
           <div className="element-div">
             <div className="px-4 py-4">
               <div data-tip="Click here to add the container">
@@ -249,7 +249,7 @@ const Elements: FC<IElements> = ({
             </div>
           </div>
           {elementsList}
-        </>
+        </div>
       ) : (
         elementsList
       )}

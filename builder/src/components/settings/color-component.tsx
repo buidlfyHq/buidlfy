@@ -45,7 +45,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, name = "Color" }) => {
                 }}
                 className="w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"
               ></div>
-              <AiOutlineCaretDown className="text-[14px]" />
+              <AiOutlineCaretDown className="text-[12px] arrow" />
             </div>
           </div>
         </div>

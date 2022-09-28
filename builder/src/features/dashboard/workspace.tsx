@@ -295,7 +295,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
       ) : (
         <DefaultBuilder
           showSidebar={showSidebar}
-          hideSettingSidebar={hideSettingSidebar}
           setSideElement={setSideElement}
         />
       )}
