@@ -27,20 +27,17 @@ const Text: FC<IText> = ({
       style={{
         height: "-webkit-fill-available",
         WebkitTextFillColor:
-          color.slice(0, 15) === "linear-gradient" || "radial-gradient"
-            ? "transparent"
-            : color,
+          color.slice(0, 15) === "linear-gradient" ? "transparent" : color,
         fontWeight: bold,
         fontStyle: italic,
         background:
-          color.slice(0, 15) === "linear-gradient" || "radial-gradient"
-            ? color
-            : "transparent",
+          color.slice(0, 15) === "linear-gradient" ? color : "transparent",
         display: "flex",
         justifyContent,
         alignItems: "center",
         textDecoration: underline,
-        textDecorationColor: color,
+        textDecorationColor:
+          color.slice(0, 15) === "linear-gradient" ? newColor : color,
         textAlign: `${justifyContent}` as CanvasTextAlign,
         fontSize: `${fontSize}px`,
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
@@ -56,9 +53,7 @@ const Text: FC<IText> = ({
         height: "-webkit-fill-available",
         textDecoration: underline,
         textDecorationColor:
-          color.slice(0, 15) === "linear-gradient" || "radial-gradient"
-            ? `${color.slice(23, 48)}`
-            : color,
+          color.slice(0, 15) === "linear-gradient" ? newColor : color,
         background: backgroundColor,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}

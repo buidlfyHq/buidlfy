@@ -46,13 +46,9 @@ const Button: FC<IText> = ({
       <span
         style={{
           background:
-            color.slice(0, 15) === "linear-gradient" || "radial-gradient"
-              ? color
-              : "transparent",
+            color.slice(0, 15) === "linear-gradient" ? color : "transparent",
           WebkitTextFillColor:
-            color.slice(0, 15) === "linear-gradient" || "radial-gradient"
-              ? "transparent"
-              : color,
+            color.slice(0, 15) === "linear-gradient" ? "transparent" : color,
           textDecoration: underline,
           textDecorationColor: color,
         }}
