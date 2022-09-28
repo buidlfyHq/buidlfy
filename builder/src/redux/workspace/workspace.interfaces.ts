@@ -128,8 +128,7 @@ export interface ITemplate {
 }
 
 export interface IText {
-  item?: IWorkspaceElement;
-  items?: IWorkspaceElement[];
+  i?: string;
   setItems?: (items?: IWorkspaceElement[]) => void;
   bold: string;
   italic: string;

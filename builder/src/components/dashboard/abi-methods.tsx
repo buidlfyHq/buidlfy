@@ -120,11 +120,14 @@ const AbiMethods: FC<IAbiMethods> = ({
     <>
       {contractDetails.abi ? (
         <div>
-          <span className="contract-text flex" onClick={() => handleBack()}>
+          <span
+            className="contract-text flex mt-[2.5rem]"
+            onClick={() => handleBack()}
+          >
             <AiOutlineLeft className="text-[10px] mr-2" />{" "}
             <span className="mt-[-5px]">Back</span>
           </span>
-          <div className="mt-[2rem]">
+          <div className="mt-[1rem]">
             <div className="setting-text ml-[0.25rem] px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
               Select Method
             </div>

@@ -17,7 +17,7 @@ const defaultPaddingStyles = {
 };
 
 const defaultColorStyles = {
-  backgroundColor: "rgba(255, 255, 255, 1)",
+  backgroundColor: "rgba(255, 255, 255, 0)",
   color: "rgba(0, 0, 0, 100)",
 }
 
@@ -42,7 +42,7 @@ export const components = [
   {
     name: "Container",
     h: 2,
-    minH: 2,
+    // minH: 2,
     style: {
       padding: {
         paddingLeft: 0,
@@ -188,19 +188,19 @@ export const components = [
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
-      fontSize: 16,
-      backgroundColor: "rgba(119,66,231,100)",
+      fontSize: 13,
+      backgroundColor: "rgba(106, 88, 231, 100)",
       color: "rgba(255,255,255,100)",
-      borderColor: "rgba(119,66,231,100)",
+      borderColor: "rgba(106, 88, 231, 100)",
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
-      borderRadius: 25,
+      borderRadius: 2,
       ...defaultMarginStyles,
       padding: {
         paddingLeft: 48,
         paddingRight: 48,
-        paddingTop: 12,
-        paddingBottom: 12,
+        paddingTop: 10,
+        paddingBottom: 10,
       },
     },
     connectWallet: "off",
@@ -293,7 +293,7 @@ export const components = [
   },
   {
     name: "Image",
-    h: 1.8,
+    h: 2,
     minH: 1,
     style: {
       width: 80,
