@@ -219,13 +219,15 @@ const Elements: FC<IElements> = ({
       {/* Components */}
       <div className="element-heading-div pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem]">
         <h3 className="element-heading">Add Elements</h3>
-        <MdOutlineClose
-          onClick={() => {
-            hideSidebar();
-            hideSettingSidebar();
-          }}
-          className="text-[16px]"
-        />
+        <div className="close-btn">
+          <MdOutlineClose
+            onClick={() => {
+              hideSidebar();
+              hideSettingSidebar();
+            }}
+            className="text-[16px]"
+          />
+        </div>
       </div>
       {!isContainerSelected ? (
         <>

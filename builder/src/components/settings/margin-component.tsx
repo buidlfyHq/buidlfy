@@ -70,11 +70,11 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
             />
             <AiOutlineCaretUp
               onClick={() => incrementCounter("marginLeft", margin?.marginLeft)}
-              className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
+              className="text-[10px] z-[100] absolute left-[6.2rem] arrow mt-[0.4rem] cursor-pointer"
             />
             <AiOutlineCaretDown
               onClick={() => decrementCounter("marginLeft", margin?.marginLeft)}
-              className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
+              className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] arrow cursor-pointer"
             />
             <h6 className="ml-5 mr-2 margin-subtext">R</h6>
             <input
@@ -88,13 +88,13 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
               onClick={() =>
                 incrementCounter("marginRight", margin?.marginRight)
               }
-              className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
+              className="text-[10px] z-[100] absolute left-[13.2rem] arrow mt-[0.4rem] cursor-pointer"
             />
             <AiOutlineCaretDown
               onClick={() =>
                 decrementCounter("marginRight", margin?.marginRight)
               }
-              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
+              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] arrow cursor-pointer"
             />
           </div>
           <div className="flex mt-3">
@@ -108,11 +108,11 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
             />
             <AiOutlineCaretUp
               onClick={() => incrementCounter("marginTop", margin?.marginTop)}
-              className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
+              className="text-[10px] z-[100] absolute left-[6.2rem] arrow mt-[0.4rem]"
             />
             <AiOutlineCaretDown
               onClick={() => decrementCounter("marginTop", margin?.marginTop)}
-              className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
+              className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] arrow"
             />
             <h6 className="ml-5 mr-2 margin-subtext">B</h6>
             <input
@@ -126,13 +126,13 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
               onClick={() =>
                 incrementCounter("marginBottom", margin?.marginBottom)
               }
-              className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
+              className="text-[10px] z-[100] absolute left-[13.2rem] arrow mt-[0.4rem]"
             />
             <AiOutlineCaretDown
               onClick={() =>
                 decrementCounter("marginBottom", margin?.marginBottom)
               }
-              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
+              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] arrow"
             />
           </div>
         </span>

@@ -44,17 +44,14 @@ const workspaceSlice = createSlice({
     // to update the style of an element in workspace
     updateWorkspaceElementStyle(state, action: IAction) {
       if (!action.payload.settingItemId) return;
-
       const updatedElements = state.workspaceElements.map(
         (element: IWorkspaceElement) =>
           mapElementStylesToWorkspace(element, action.payload)
       );
-
       const updatedSelectedElement = fetchSelectedElement(
         updatedElements,
         action.payload.settingItemId
-      );
-
+      );      
       return {
         ...state,
         workspaceElements: updatedElements,

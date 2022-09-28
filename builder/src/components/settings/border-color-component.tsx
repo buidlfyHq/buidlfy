@@ -18,7 +18,6 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
 }) => {
   const dispatch = useDispatch();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
-
   const handleChange = (e: string) => {
     dispatch(
       updateWorkspaceElementStyle({

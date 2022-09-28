@@ -41,7 +41,6 @@ const ButtonSettings: FC<ISettings> = ({
       dispatch(setSelectorToDefault());
     }
   };
-
   return (
     <>
       <span className="flex tab mb-[0.5rem]">
@@ -83,22 +82,27 @@ const ButtonSettings: FC<ISettings> = ({
             placeholder="Please write your text here..."
           />
         </div>
-        <div className="flex items-center mt-4 mx-2  w-[13.5rem] text-black">
+        <ConnectSwitchComponent
+          i={selectedElement.i}
+          connectWallet={selectedElement.connectWallet}
+        />
+        <div
+          className={`flex items-center mb-2 mx-2 w-[13.5rem] text-black rounded-[6px] ${
+            selectedElement.connectWallet ? "disable-text" : ""
+          }`}
+        >
           <div className="link-div px-1 py-1">
             <IoMdLink className="text-[18px]" />
           </div>
           <input
             value={selectedElement.link}
             onChange={(e) => handleSettingChange(e, "link")}
-            className="changeText pl-[2.5rem] py-[0.4rem] input-text"
+            className={`changeText pl-[2.5rem] py-[0.4rem] rounded-[6px]`}
             type="text"
+            disabled={selectedElement.connectWallet}
             placeholder="Link"
           />
         </div>
-        <ConnectSwitchComponent
-          i={selectedElement.i}
-          connectWallet={selectedElement.connectWallet}
-        />
         <FontSizeComponent
           i={selectedElement.i}
           fontSize={selectedElement.style.fontSize}

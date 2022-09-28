@@ -112,7 +112,7 @@ const Button: FC<ITexts> = ({
           </Dialog.Panel>
         </div>
       </Dialog>
-      {connectWallet === "on" ? (
+      {connectWallet ? (
         <div
           style={{
             fontWeight: bold,

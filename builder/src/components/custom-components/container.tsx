@@ -273,6 +273,7 @@ const Container: FC<IContainer> = ({
           borderStyle: "solid",
           borderColor: color,
           borderImage: color,
+          boxShadow: shadow,
         }}
         className="h-fit w-full cursor-pointer container-drag overflow-hidden btn-border"
       >
@@ -296,12 +297,11 @@ const Container: FC<IContainer> = ({
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            boxShadow: shadow,
           }}
         >
           {!children?.length ? (
             <div
-              className="w-full h-full py-10 default-container"
+              className="w-full h-full py-10 default-container "
               key={"DefaultElement"}
               data-grid={{
                 x: 0,
@@ -345,13 +345,14 @@ const Container: FC<IContainer> = ({
           )}
         </GridLayout>
         <div className="flex">
-          <span
+          <div
             id="drag"
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(true)}
+            className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
           >
-            <img className="" src={dragImg} alt="drag" />
-          </span>
+            <img className="w-[13px] h-[13px]" src={dragImg} />
+          </div>
           <div
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
