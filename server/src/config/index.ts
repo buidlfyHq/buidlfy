@@ -14,4 +14,5 @@ export const {
   SPHERON_TOKEN,
   ORGANIZATION_ID,
   DECODER_GIT_URL,
+  CORS_ADDRESS,
 } = process.env;

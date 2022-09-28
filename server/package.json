@@ -30,12 +30,14 @@
     "helmet": "^5.1.1",
     "hpp": "^0.2.3",
     "morgan": "^1.10.0",
+    "socket.io": "^4.5.2",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.5.0",
     "winston": "^3.8.1",
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
+    "@types/socket.io": "^3.0.2",
     "@swc/cli": "^0.1.57",
     "@swc/core": "^1.2.220",
     "@types/bcrypt": "^5.0.0",

@@ -11,6 +11,8 @@ import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
+import { socketServer } from './socket';
+import { Server } from 'http';
 
 class App {
   public app: express.Application;
@@ -23,6 +25,7 @@ class App {
     this.port = PORT || 3000;
 
     this.initializeMiddlewares();
+    this.initializeSocket();
     this.initializeRoutes(routes);
     this.initializeSwagger();
     this.initializeErrorHandling();
@@ -50,6 +53,10 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
+  }
+
+  public initializeSocket() {
+    socketServer.init(new Server(this.app));
   }
 
   private initializeRoutes(routes: Routes[]) {
