@@ -1,8 +1,3 @@
-export interface IUploadedImageData {
-  settingItemId: string;
-  uploadedImageData: string;
-}
-
 export interface IWorkspaceState {
   workspaceElements: IWorkspaceElement[];
   selectedElement: IWorkspaceElement;
@@ -34,6 +29,11 @@ export interface IWorkspaceElement {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
+}
+
+export interface IUploadedImageData {
+  settingItemId: string;
+  uploadedImageData: string;
 }
 
 export interface IStyle {
