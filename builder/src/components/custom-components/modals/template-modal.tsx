@@ -1,14 +1,17 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { Dialog } from '@headlessui/react'
 import {CgClose} from 'react-icons/cg'
-import ImgTemp from 'assets/modalIcons/imagetemp.png'
 import Temp1 from 'assets/temp-1.png'
 import Temp2 from 'assets/temp-2.png'
 import Temp3 from 'assets/temp-3.png'
-import {ReactComponent as ScratchIcon} from 'assets/modalIcons/scratchIcon.svg'
-import {ReactComponent as TemplateIcon} from 'assets/modalIcons/templateIcon.svg'
 
-const TemplateModal = ({
+interface TemplateModal {
+    isOpenTemplate: boolean;
+    setIsOpenTemplate: (isOpenTemplate: boolean) => void;
+    setIsOpenSingleTemplate: (isOpenSingleTemplate: boolean) => void;
+}
+
+const TemplateModal : FC<TemplateModal> = ({
     isOpenTemplate,
     setIsOpenTemplate,
     setIsOpenSingleTemplate
