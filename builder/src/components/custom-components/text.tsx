@@ -27,7 +27,8 @@ const Text: FC<IText> = ({
           color.slice(0, 15) === "linear-gradient" ? "transparent" : color,
         fontWeight: bold,
         fontStyle: italic,
-        background: color,
+        background:
+          color.slice(0, 15) === "linear-gradient" ? color : "transparent",
         display: "flex",
         justifyContent,
         alignItems: "center",
