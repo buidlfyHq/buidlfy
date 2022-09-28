@@ -16,9 +16,6 @@ const Text: FC<IText> = ({
   padding,
   link,
 }) => {
-  console.log(color, "color");
-  console.log(color.slice(23, 48), "slice");
-  let newColor = color.slice(23, 48);
   const textAreaContent = (
     <textarea
       readOnly
@@ -36,8 +33,7 @@ const Text: FC<IText> = ({
         justifyContent,
         alignItems: "center",
         textDecoration: underline,
-        textDecorationColor:
-          color.slice(0, 15) === "linear-gradient" ? newColor : color,
+        textDecorationColor: color,
         textAlign: `${justifyContent}` as CanvasTextAlign,
         fontSize: `${fontSize}px`,
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
@@ -52,8 +48,7 @@ const Text: FC<IText> = ({
       style={{
         height: "-webkit-fill-available",
         textDecoration: underline,
-        textDecorationColor:
-          color.slice(0, 15) === "linear-gradient" ? newColor : color,
+        textDecorationColor: color,
         background: backgroundColor,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}

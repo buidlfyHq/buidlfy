@@ -45,7 +45,7 @@ const ButtonSettings: FC<ISettings> = ({
     <>
       <span className="flex tab mb-[0.5rem]">
         <span
-          className={`w-[8rem] pb-[0.8rem] ${
+          className={`w-[8rem] pb-[0.8rem] cursor-pointer ${
             openTab === 1 ? "tab-active" : "tab-heading"
           }`}
           onClick={(e) => handleToggleTab(e, 1)}
@@ -53,7 +53,7 @@ const ButtonSettings: FC<ISettings> = ({
           Setting
         </span>
         <span
-          className={`w-[8rem] pb-[0.8rem] ${
+          className={`w-[8rem] pb-[0.8rem] cursor-pointer ${
             openTab === 2 ? "tab-active" : "tab-heading"
           }`}
           onClick={(e) => handleToggleTab(e, 2)}
