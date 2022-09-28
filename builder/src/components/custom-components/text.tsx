@@ -16,6 +16,9 @@ const Text: FC<IText> = ({
   padding,
   link,
 }) => {
+  console.log(color, "color");
+  console.log(color.slice(23, 48), "slice");
+  let newColor = color.slice(23, 48);
   const textAreaContent = (
     <textarea
       readOnly
@@ -24,11 +27,15 @@ const Text: FC<IText> = ({
       style={{
         height: "-webkit-fill-available",
         WebkitTextFillColor:
-          color.slice(0, 15) === "linear-gradient" ? "transparent" : color,
+          color.slice(0, 15) === "linear-gradient" || "radial-gradient"
+            ? "transparent"
+            : color,
         fontWeight: bold,
         fontStyle: italic,
         background:
-          color.slice(0, 15) === "linear-gradient" ? color : "transparent",
+          color.slice(0, 15) === "linear-gradient" || "radial-gradient"
+            ? color
+            : "transparent",
         display: "flex",
         justifyContent,
         alignItems: "center",
@@ -48,7 +55,10 @@ const Text: FC<IText> = ({
       style={{
         height: "-webkit-fill-available",
         textDecoration: underline,
-        textDecorationColor: color,
+        textDecorationColor:
+          color.slice(0, 15) === "linear-gradient" || "radial-gradient"
+            ? `${color.slice(23, 48)}`
+            : color,
         background: backgroundColor,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}

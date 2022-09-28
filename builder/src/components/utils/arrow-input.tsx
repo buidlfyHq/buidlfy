@@ -15,11 +15,13 @@ const ArrowInput: FC<IArrowInput> = ({
   handleIncrement,
   handleDecrement,
 }) => {
+  console.log(`${value}px`, "value");
   return (
     <div className="flex px-1">
       <div className="ml-3 margin-text flex w-[135px] items-center">{text}</div>
       <div className="flex justify-end text-gray-600 py-4">
         <input
+          //   type="text"
           inputMode="numeric"
           value={`${value}px`}
           placeholder="0"
