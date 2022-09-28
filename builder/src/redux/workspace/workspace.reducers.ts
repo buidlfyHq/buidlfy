@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchSelectedElement,
-  getUploadedImageData,
+  fetchUploadedImageData,
   mapElementsToWorkspace,
   mapElementStylesToWorkspace,
   mapElementSubStyleToWorkspace,
@@ -152,7 +152,7 @@ const workspaceSlice = createSlice({
 
     updateUploadedImageData(state: IWorkspaceState, action: { payload }) {
       const { settingItemId, uploadedImageData } = action.payload;
-      const newUploadedImagesData = getUploadedImageData(settingItemId, uploadedImageData, state.uploadedImagesData)      
+      const newUploadedImagesData = fetchUploadedImageData(settingItemId, uploadedImageData, state.uploadedImagesData)      
       return {
         ...state,
        uploadedImagesData: newUploadedImagesData

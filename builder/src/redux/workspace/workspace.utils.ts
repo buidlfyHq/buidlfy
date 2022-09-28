@@ -250,7 +250,7 @@ export const updateContractInElement = (
   }
 };
 
-export const getUploadedImageData = (settingItemId: string, uploadedImageData: string, uploadedImagesData: IUploadedImageData[] ) => {
+export const fetchUploadedImageData = (settingItemId: string, uploadedImageData: string, uploadedImagesData: IUploadedImageData[] ) => {
   const uploadedImageIndex = uploadedImagesData.findIndex((uploadImageData) => uploadImageData.settingItemId == settingItemId);
   let newUploadedImagesData = [...uploadedImagesData]
   if (uploadedImageIndex >= 0) {
