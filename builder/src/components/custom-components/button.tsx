@@ -3,6 +3,7 @@ import { IText } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 const Button: FC<IText> = ({
+  i,
   bold,
   italic,
   underline,
@@ -38,8 +39,8 @@ const Button: FC<IText> = ({
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
       }}
-      id="button-two"
-      className="btn-border border-[1px] border-solid w-48 h-auto cursor-pointer btn whitespace-nowrap"
+      id={i}
+      className="btn-border border-[1px] border-solid w-[170px] h-[40px] cursor-pointer btn whitespace-nowrap"
     >
       <span
         style={{

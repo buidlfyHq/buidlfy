@@ -7,13 +7,13 @@ import EyeImg from 'assets/eye.png'
 import TempexImg from 'assets/tempex.png'
 import InfoCircleImg from 'assets/info-circle.png'
 
-interface MintedTemplateModal {
+interface SingleTemplateDetails {
     isOpenSingleTemplate: boolean;
     setIsOpenSingleTemplate: (isOpenSingleTemplate: boolean) => void;
     setIsOpenFinalTemplate: (isOpenFinalTemplate: boolean) => void;
 }
 
-const SingleTemplateDetails : FC<MintedTemplateModal>  = ({
+const SingleTemplateDetails : FC<SingleTemplateDetails>  = ({
     isOpenSingleTemplate,
     setIsOpenSingleTemplate,
     setIsOpenFinalTemplate,
@@ -30,7 +30,7 @@ const SingleTemplateDetails : FC<MintedTemplateModal>  = ({
             <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
                 <div className="flex items-center justify-between">
                     <div className="text-[22px] font-[500] text-[#14142B]">Cryptin Next Generation Web Template</div>
-                    <div className="preview-button flex items-center py-2.5 px-6 rounded-[24px]">
+                    <div className="preview-button flex items-center py-2.5 px-6 rounded-[24px] cursor-pointer">
                         <img src={EyeImg} alt="icon" width={18} height={18} />
                         <div className="ml-2">Preview</div>
                     </div>
@@ -48,7 +48,7 @@ const SingleTemplateDetails : FC<MintedTemplateModal>  = ({
                             </div>
                         </div>
                         <div>
-                            <div className="w-full mt-8 text-center text-[14px] text-[#202525] bg-[#E6EAF4] rounded-[4px] font-[600] py-4">
+                            <div className="w-full mt-8 text-center text-[14px] text-[#202525] bg-[#E6EAF4] rounded-[4px] font-[600] py-4 cursor-pointer">
                                 $149.00
                             </div>
                             <div
@@ -65,7 +65,7 @@ const SingleTemplateDetails : FC<MintedTemplateModal>  = ({
                         </div>
                     </div>
                 </div>
-                <div className="mt-7 flex gap-3">
+                <div className="flex gap-3 mt-7">
                     <div className="w-auto py-2 px-3.5 bg-gray-100 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">Web3</div>
                     <div className="w-auto py-2 px-3.5 bg-gray-100 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">Crypto</div>
                 </div>

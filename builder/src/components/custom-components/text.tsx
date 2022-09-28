@@ -3,7 +3,7 @@ import { IText } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 const Text: FC<IText> = ({
-  item,
+  i,
   bold,
   italic,
   underline,
@@ -19,7 +19,7 @@ const Text: FC<IText> = ({
   const textAreaContent = (
     <textarea
       readOnly
-      id={item.i}
+      id={i}
       value={value}
       style={{
         height: "-webkit-fill-available",

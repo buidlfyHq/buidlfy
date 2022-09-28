@@ -18,6 +18,7 @@ interface IInput {
     paddingTop?: number;
     paddingBottom?: number;
   };
+  i?: string;
 }
 
 const Input: FC<IInput> = ({
@@ -27,6 +28,7 @@ const Input: FC<IInput> = ({
   placeholder,
   margin,
   padding,
+  i,
 }) => (
   <section
     className="flex items-center justify-center h-full overflow-hidden"
@@ -43,7 +45,7 @@ const Input: FC<IInput> = ({
         padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
       className="btn-border w-full leading-tight bg-white appearance-none input"
-      id="input"
+      id={i}
       type="text"
       placeholder={placeholder}
     />

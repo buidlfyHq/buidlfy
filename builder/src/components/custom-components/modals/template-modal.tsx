@@ -23,7 +23,7 @@ const TemplateModal = ({
         <Dialog className="relative z-50" open={isOpenTemplate} onClose={() => setIsOpenTemplate(false)}>
             <div className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
             <Dialog.Panel className="flex flex-col items-center w-full max-w-[1200px] my-20 mx-28 rounded-[24px] bg-white">
-                <div className="flex flex-col items-center pt-12 px-10">
+                <div className="flex flex-col items-center px-10 pt-12">
                     <div className="flex items-start justify-end w-full">
                         <CgClose className="text-[24px] cursor-pointer" /> 
                     </div>
@@ -34,7 +34,7 @@ const TemplateModal = ({
                         </div>
                     </div>
                     <form className="flex items-center mt-5">
-                        <div className="relative mx-3 w-full">
+                        <div className="relative w-full mx-3">
                             <input
                                 type="text"
                                 id="simple-search"
@@ -42,7 +42,7 @@ const TemplateModal = ({
                                 placeholder="Search by template name"
                                 required
                             />
-                            <div className="flex absolute inset-y-0 right-0 items-center pr-3 pointer-events-none">
+                            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                                 <svg
                                 aria-hidden="true"
                                 className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -80,8 +80,8 @@ const TemplateModal = ({
                     </div>
                 </div>
                 <hr className="bg-hr h-[2px] w-full mt-6" />
-                <div className="bg-lower-template w-full">
-                    <div className="grid grid-cols-3 gap-4 pt-7 pb-12 px-10">
+                <div className="w-full bg-lower-template">
+                    <div className="grid grid-cols-3 gap-4 px-10 pb-12 pt-7">
                         {templates.map((temp, index) => {
                             return(
                                 <div onClick={handleOpenSingleTemplate} key={index} className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box">

@@ -38,6 +38,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Button":
       return (
         <Button
+          i={item.i}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -61,7 +62,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Heading 3":
       return (
         <Text
-          item={item}
+          i={item.i}
           bold={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
@@ -78,6 +79,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Input":
       return (
         <Input
+          i={item.i}
           placeholder={item.placeholder}
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
