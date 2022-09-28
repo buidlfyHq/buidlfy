@@ -41,7 +41,6 @@ const ButtonSettings: FC<ISettings> = ({
       dispatch(setSelectorToDefault());
     }
   };
-  console.log(selectedElement.connectWallet);
   return (
     <>
       <span className="flex tab mb-[0.5rem]">
