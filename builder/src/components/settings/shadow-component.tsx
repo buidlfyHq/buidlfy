@@ -13,7 +13,6 @@ interface IShadowComponent {
 
 const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
   const dispatch = useDispatch();
-  console.log(shadow, "shadow");
 
   const handleChange = (action: ReplaceStyle) => {
     if (action === ReplaceStyle.SMALL) {
@@ -22,9 +21,7 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
           settingItemId: i,
           propertyName: "shadow",
           propertyValue:
-            shadow === ReplaceStyle.SMALL
-              ? "none"
-              : "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+            shadow === ReplaceStyle.SMALL ? "none" : ReplaceStyle.SMALL,
         })
       );
     } else if (action === ReplaceStyle.MEDIUM) {
@@ -33,9 +30,7 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
           settingItemId: i,
           propertyName: "shadow",
           propertyValue:
-            shadow === ReplaceStyle.MEDIUM
-              ? "none"
-              : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+            shadow === ReplaceStyle.MEDIUM ? "none" : ReplaceStyle.MEDIUM,
         })
       );
     } else if (action === ReplaceStyle.LARGE) {
@@ -44,9 +39,7 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
           settingItemId: i,
           propertyName: "shadow",
           propertyValue:
-            shadow === ReplaceStyle.LARGE
-              ? "none"
-              : "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+            shadow === ReplaceStyle.LARGE ? "none" : ReplaceStyle.LARGE,
         })
       );
     }
@@ -61,19 +54,25 @@ const ShadowComponent: FC<IShadowComponent> = ({ i, shadow }) => {
       <div className="flex mt-3 px-1">
         <span
           onClick={() => handleChange(ReplaceStyle.SMALL)}
-          className="shadow-div flex items-center justify-center cursor-pointer shadow py-2 px-3 font-regular"
+          className={`shadow-div flex items-center justify-center cursor-pointer shadow py-2 px-3 font-regular ${
+            shadow === ReplaceStyle.SMALL ? "bg-[#b7c1ec]" : ""
+          }`}
         >
           S
         </span>
         <span
           onClick={() => handleChange(ReplaceStyle.MEDIUM)}
-          className="shadow-div flex items-center justify-center cursor-pointer shadow py-2 px-3 mx-3 font-regular"
+          className={`shadow-div flex items-center justify-center cursor-pointer shadow py-2 px-3 mx-3 font-regular ${
+            shadow === ReplaceStyle.MEDIUM ? "bg-[#b7c1ec]" : ""
+          }`}
         >
           M
         </span>
         <span
           onClick={() => handleChange(ReplaceStyle.LARGE)}
-          className="shadow-div flex items-center justify-center cursor-pointer shadow py-2 px-3 font-regular"
+          className={`shadow-div flex items-center justify-center cursor-pointer shadow py-2 px-3 font-regular ${
+            shadow === ReplaceStyle.LARGE ? "bg-[#b7c1ec]" : ""
+          }`}
         >
           L
         </span>
