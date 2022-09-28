@@ -12,15 +12,17 @@ import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
 import { socketServer } from './socket';
-import { Server } from 'http';
+import { createServer, Server } from 'http';
 
 class App {
   public app: express.Application;
+  public server: Server;
   public env: string;
   public port: string | number;
 
   constructor(routes: Routes[]) {
     this.app = express();
+    this.server = createServer(this.app);
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;
 
@@ -32,7 +34,7 @@ class App {
   }
 
   public listen() {
-    this.app.listen(this.port, () => {
+    this.server.listen(this.port, () => {
       logger.info(`=================================`);
       logger.info(`======= ENV: ${this.env} =======`);
       logger.info(`🚀 App listening on the port ${this.port}`);
@@ -56,7 +58,7 @@ class App {
   }
 
   public initializeSocket() {
-    socketServer.init(new Server(this.app));
+    socketServer.init(this.server);
   }
 
   private initializeRoutes(routes: Routes[]) {
