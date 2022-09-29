@@ -24,4 +24,5 @@ export default interface IWorkspace {
   contract?: any; // breaking while assigning a type, work in progress
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
+  placeholder?: string;
 }

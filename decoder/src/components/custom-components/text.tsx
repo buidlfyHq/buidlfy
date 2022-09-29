@@ -43,7 +43,7 @@ const Text: FC<ITexts> = ({
           fontSize: `${fontSize}px`,
           padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
         }}
-        className="flex text-class overflow-hidden items-center justify-center h-full w-full"
+        className="flex focus-visible:outline-[transparent] resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
       >
         {outputValue ? (
           outputValue.find((output) => output.id === id) ? (
