@@ -4,10 +4,10 @@ import socketio, { Server as WebSocketServer, Socket as WebSocket } from 'socket
 import { CORS_ADDRESS } from './config';
 
 class SocketServer {
-  private serverSocket: WebSocketServer;
+  private socketServer: WebSocketServer;
 
   init(server: Server) {
-    this.serverSocket = new socketio.Server(server, {
+    this.socketServer = new socketio.Server(server, {
       cors: {
         origin: CORS_ADDRESS,
         credentials: true,
@@ -19,7 +19,7 @@ class SocketServer {
       },
     });
 
-    this.serverSocket.on('connection', (socket: WebSocket) => {
+    this.socketServer.on('connection', (socket: WebSocket) => {
       console.log('A session connected');
       socket.emit('session', { id: randomUUID() });
 
@@ -31,7 +31,7 @@ class SocketServer {
   }
 
   emit(topic: string, data: any) {
-    this.serverSocket.emit(topic, data);
+    this.socketServer.emit(topic, data);
   }
 }
 

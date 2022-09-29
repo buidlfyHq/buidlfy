@@ -1,3 +1,6 @@
+import { SPHERON_TOKEN } from '@/config';
+import * as crypto from 'crypto';
+
 /**
  * @method isEmpty
  * @param {String | Number | Object} value
@@ -16,4 +19,16 @@ export const isEmpty = (value: string | number | object): boolean => {
   } else {
     return false;
   }
+};
+
+export const generateRandomHexString = (length: number): string => {
+  const buffer: Buffer = crypto.randomBytes(length);
+  const randomHexString = buffer.toString('hex');
+  // last half of the string is returned because there are two hex characters in a byte
+  return randomHexString.slice(randomHexString.length / 2);
+};
+
+export const spheronAuthHeaders = {
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${SPHERON_TOKEN}`,
 };

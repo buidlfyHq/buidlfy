@@ -1,12 +1,17 @@
 import axios from 'axios';
-import { DeployAppDto } from '@/dtos/deployments.dto';
+import { DeployAppDto, DeploymentResponseDto } from '@/dtos/deployments.dto';
 import { HttpException } from '@exceptions/HttpException';
-import { isEmpty } from '@utils/util';
-import { DECODER_GIT_URL, DEPLOYMENT_ENDPOINT, ORGANIZATION_ID, SPHERON_API_HOST, SPHERON_TOKEN } from '@/config';
+import { isEmpty, spheronAuthHeaders } from '@utils/util';
+import { DECODER_GIT_URL, DEPLOYMENT_ENDPOINT, ORGANIZATION_ID, SPHERON_API_HOST } from '@/config';
 import { randomUUID } from 'crypto';
+import { SocketClient } from '@/socket-client';
+import { socketServer } from '@/socket';
+import { DeploymentStatus, StreamType, SpheronDeploymentResponse } from '@/interfaces/deployments.interface';
+import DomainService from './domain.service';
 
 class DeploymentService {
-  public async deployApp(deploymentData: DeployAppDto): Promise<any> {
+  domainService = new DomainService();
+  public async deployApp(deploymentData: DeployAppDto): Promise<DeploymentResponseDto> {
     if (isEmpty(deploymentData)) throw new HttpException(400, 'deploymentData is empty');
     try {
       const deploymentPayload = {
@@ -30,17 +35,31 @@ class DeploymentService {
         provider: 'GITHUB',
         branch: 'dev',
       };
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${SPHERON_TOKEN}`,
-      };
-      const response = await axios.post(`${SPHERON_API_HOST}${DEPLOYMENT_ENDPOINT}`, deploymentPayload, { headers });
-      console.log(response.data);
-      return;
+      const response = await axios.post(`${SPHERON_API_HOST}${DEPLOYMENT_ENDPOINT}`, deploymentPayload, { headers: spheronAuthHeaders });
+      const deploymentResponse: SpheronDeploymentResponse = response.data;
+      const deploymentDto = new DeploymentResponseDto(deploymentResponse);
+      this.listenDeployment(deploymentData.clientTopic, deploymentDto.topic);
+      const sitename = await this.domainService.generateSitename(deploymentData.name, deploymentResponse.projectId);
+      deploymentDto.populateSitename(sitename);
+      return deploymentDto;
     } catch (error) {
       console.log(error);
       throw error;
     }
+  }
+  private async listenDeployment(clientTopic: string, deploymentTopic: string): Promise<void> {
+    if (!deploymentTopic) throw new HttpException(400, 'deploymentData is empty');
+    const socketClient = new SocketClient();
+    await socketClient.connect();
+    socketClient.listen(`deployment.${deploymentTopic}`, (stream: StreamType) => {
+      console.log(stream);
+      if (stream.type === 1) socketServer.emit(`deployment.${clientTopic}`, { status: DeploymentStatus.DEPLOYING as string });
+      if (stream.type === 2) socketServer.emit(`deployment.${clientTopic}`, { status: DeploymentStatus.DEPLOYED as string });
+      if (stream.type === 3) socketServer.emit(`deployment.${clientTopic}`, { status: DeploymentStatus.FAILED as string });
+      if (stream.type === 4) socketServer.emit(`deployment.${clientTopic}`, { status: DeploymentStatus.PREPARING as string });
+
+      if (stream.type === 2 || stream.type === 3) socketClient.destroy();
+    });
   }
 }
 
