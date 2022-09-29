@@ -47,30 +47,29 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
   };
 
   return (
-    <>
-      <div className="flex px-1">
-        <div className="mt-[1.4rem] ml-3 margin-text w-[140px]">
-          Border Radius
-        </div>
-        <div className="flex justify-end text-gray-600 w-[4.2rem] py-4">
-          <input
-            inputMode="numeric"
-            value={borderRadius}
-            placeholder="0"
-            className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
-            onChange={(e) => handleRadius(e, ReplaceValue.CHANGE)}
-          />
-          <AiOutlineCaretUp
-            onClick={(e) => handleRadius(e, ReplaceValue.INCREMENT)}
-            className="text-[10px] absolute left-[13.5rem] arrow mt-[0.3rem] cursor-pointer"
-          />
-          <AiOutlineCaretDown
-            onClick={(e) => handleRadius(e, ReplaceValue.DECREMENT)}
-            className="text-[10px] absolute left-[13.5rem] mt-[0.9rem] arrow cursor-pointer"
-          />
-        </div>
+    // ADD: Common input component for this will be added in following PR
+    <div className="flex px-1">
+      <div className="mt-[1.4rem] ml-3 margin-text w-[140px]">
+        Border Radius
       </div>
-    </>
+      <div className="flex justify-end text-gray-600 w-[4.2rem] py-4">
+        <input
+          inputMode="numeric"
+          value={borderRadius}
+          placeholder="0"
+          className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
+          onChange={(e) => handleRadius(e, ReplaceValue.CHANGE)}
+        />
+        <AiOutlineCaretUp
+          onClick={(e) => handleRadius(e, ReplaceValue.INCREMENT)}
+          className="text-[10px] absolute left-[13.5rem] arrow mt-[0.3rem] cursor-pointer"
+        />
+        <AiOutlineCaretDown
+          onClick={(e) => handleRadius(e, ReplaceValue.DECREMENT)}
+          className="text-[10px] absolute left-[13.5rem] mt-[0.9rem] arrow cursor-pointer"
+        />
+      </div>
+    </div>
   );
 };
 export default BorderRadiusComponent;

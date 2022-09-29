@@ -19,9 +19,7 @@ import {
   IContractElementSelected,
   IContractElementSelector,
 } from "redux/contract/contract.interfaces";
-import { SidebarEnum } from "redux/workspace/workspace.interfaces";
-import feather from "assets/feather.png";
-import { IoIosAddCircleOutline } from "react-icons/io";
+import DefaultBuilder from "./deafult-builder";
 import "styles/components.css";
 
 interface IWorkspaceComponent {
@@ -32,7 +30,7 @@ interface IWorkspaceComponent {
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   workspaceBackgroundColor: string;
   hideSidebar?: () => void;
-  showSidebar?;
+  showSidebar?: () => void;
   showSettingSidebar?: () => void;
   isNavHidden?: boolean;
   openSetting?: boolean;
@@ -83,9 +81,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
     setFullViewWidth((fullViewWidth) => fullView);
   }, [isNavHidden, openSetting]);
-  const handleSidebar = (selectedSidebarElements: string) => {
-    setSideElement(selectedSidebarElements);
-  };
+
   const onLayoutChange = (layout: Layout[]) => {
     if (layout.length === 0) setIsContainerSelected(false);
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
@@ -297,44 +293,11 @@ const Workspace: FC<IWorkspaceComponent> = ({
           </section>
         </section>
       ) : (
-        <section className="z-100">
-          <section
-            style={{
-              width: "-webkit-fill-available",
-            }}
-            className="mt-[90px] z-[100] ml-[120px] mb-[20px] min-h-[87vh] main-section flex items-center justify-center mr-[290px]"
-          >
-            <div className="flex items-center justify-center">
-              <div className="text-center">
-                <div className="flex justify-center">
-                  <div className="feather-div">
-                    <img src={feather} style={{ width: "2rem" }} />
-                  </div>
-                </div>
-                <h4 className="color-[#14142B] text-[18px] font-semibold mt-[1rem]">
-                  Please add your first element to start
-                </h4>
-                <h6 className="color-[#4E4B66] text-[15px] font-light mt-[0.5rem]">
-                  Click on the add elements button and start designing your
-                  site.
-                </h6>
-                <div className="flex justify-center">
-                  <button
-                    onClick={() => {
-                      showSidebar(true);
-                      handleSidebar(SidebarEnum.ELEMENTS);
-                      hideSettingSidebar();
-                    }}
-                    className="flex add-btn mt-[1.5rem]"
-                  >
-                    Add Elements
-                    <IoIosAddCircleOutline className="text-[18px] ml-1 mt-[4px]" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-        </section>
+        <DefaultBuilder
+          showSidebar={showSidebar}
+          hideSettingSidebar={hideSettingSidebar}
+          setSideElement={setSideElement}
+        />
       )}
     </main>
   );

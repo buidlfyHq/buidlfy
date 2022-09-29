@@ -20,7 +20,7 @@ export default interface ITexts {
   setInputValue?: (inputValue: IInput[]) => void;
   outputValue?: IOutput[];
   setOutputValue?: (outputValue: IOutput[]) => void;
-  connectWallet?: string;
+  connectWallet?: boolean;
   margin?: {
     marginLeft?: number,
     marginRight?: number,

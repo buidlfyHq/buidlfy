@@ -26,7 +26,7 @@ export interface IWorkspaceElement {
   resizeHandles?: ResizeHandles | undefined;
   contract?: any;
   imgData?: string | ArrayBuffer;
-  connectWallet?: string;
+  connectWallet?: boolean;
   placeholder?: string;
 }
 
@@ -142,7 +142,7 @@ export interface IText {
   borderRadius?: number;
   backgroundColor?: string;
   shadow?: string;
-  connectWallet?: string;
+  connectWallet?: boolean;
   margin?: {
     marginLeft?: number;
     marginRight?: number;
