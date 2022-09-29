@@ -3,18 +3,18 @@ import { Dialog } from '@headlessui/react'
 import {ReactComponent as ScratchIcon} from 'assets/modalIcons/scratchIcon.svg'
 import {ReactComponent as TemplateIcon} from 'assets/modalIcons/templateIcon.svg'
 
-interface StartModal {
-    isOpen: boolean;
-    setIsOpen: (isOpen: boolean) => void;
-    handleStartFromTemplate: () => void;
-    handleStartFromScratch: () => void;
+interface IStartModal {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  handleStartFromTemplate: () => void;
+  handleStartFromScratch: () => void;
 }
 
-const StartModal : FC<StartModal> = ({
-    isOpen,
-    setIsOpen,
-    handleStartFromTemplate,
-    handleStartFromScratch
+const StartModal: FC<IStartModal> = ({
+  isOpen,
+  setIsOpen,
+  handleStartFromTemplate,
+  handleStartFromScratch,
 }) => {
     return (
         <Dialog className="relative z-50" open={isOpen} onClose={() => setIsOpen(false)}>
