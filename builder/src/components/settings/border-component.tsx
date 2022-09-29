@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceValue } from "components/utils/render-setting";
-import ArrowInput from "components/utils/arrow-input";
+import NumberInput from "components/utils/number-input";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -15,8 +15,7 @@ interface IBorderComponent {
 const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
   const dispatch = useDispatch();
 
-  // FIX: find suitable type
-  const handleWidth = (e, action: ReplaceValue) => {
+  const handleWidth = (action: ReplaceValue, updatedBorderWidth?: number) => {
     if (action === ReplaceValue.INCREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
@@ -38,19 +37,21 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
         updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: "borderWidth",
-          propertyValue: +e.target.value,
+          propertyValue: updatedBorderWidth,
         })
       );
     }
   };
 
   return (
-    <ArrowInput
+    <NumberInput
       text="Border Width"
       value={borderWidth}
-      handleChange={(e) => handleWidth(e, ReplaceValue.CHANGE)}
-      handleIncrement={(e) => handleWidth(e, ReplaceValue.INCREMENT)}
-      handleDecrement={(e) => handleWidth(e, ReplaceValue.DECREMENT)}
+      handleChange={(updatedBorderWidth: number) =>
+        handleWidth(ReplaceValue.CHANGE, updatedBorderWidth)
+      }
+      handleIncrement={() => handleWidth(ReplaceValue.INCREMENT)}
+      handleDecrement={() => handleWidth(ReplaceValue.DECREMENT)}
     />
   );
 };

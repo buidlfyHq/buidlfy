@@ -57,6 +57,15 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
   return (
     // ADD: Common tailwind style and Input
     <>
+      {/* <SpaceInput
+       text="Border Width"
+       value={margin}
+       handleChange={(updatedBorderWidth: number) =>
+         handleWidth(ReplaceValue.CHANGE, updatedBorderWidth)
+       }
+       handleIncrement={() => incrementCounter("marginLeft", margin?.marginLeft)}
+       handleDecrement={() => handleWidth(ReplaceValue.DECREMENT)}
+      /> */}
       <div className="flex items-center w-full px-3 py-4 text-gray-600">
         <span className="px-1 text-left ">
           <span className="margin-text">Margin</span>
