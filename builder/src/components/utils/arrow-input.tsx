@@ -19,7 +19,7 @@ const ArrowInput: FC<IArrowInput> = ({
   };
 
   return (
-    <div className="flex justify-end text-gray-600 py-4">
+    <div className="flex justify-end text-gray-600 py-[5px]">
       <input
         value={`${value}px`}
         placeholder="0"
@@ -28,11 +28,11 @@ const ArrowInput: FC<IArrowInput> = ({
       />
       <AiOutlineCaretUp
         onClick={handleIncrement}
-        className="text-[10px] arrow absolute left-[13.5rem] mt-[0.3rem] cursor-pointer"
+        className="text-[10px] arrow absolute mr-[0.5rem] mt-[0.3rem] cursor-pointer"
       />
       <AiOutlineCaretDown
         onClick={handleDecrement}
-        className="text-[10px] arrow absolute left-[13.5rem] mt-[0.9rem] cursor-pointer"
+        className="text-[10px] arrow absolute mr-[0.5rem] mt-[0.9rem] cursor-pointer"
       />
     </div>
   );

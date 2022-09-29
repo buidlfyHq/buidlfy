@@ -34,10 +34,11 @@ const Dashboard: FC = () => {
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
 
   useEffect(() => {
-    // checks for stored config
+    // checks for stored configs
     let saveItems = localStorage.getItem("items");
     if (saveItems) {
-      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems)));
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).builder));
+      setWorkspaceBackgroundColor(JSON.parse(saveItems).background);
     }
   }, []); // eslint-disable-line
 
@@ -82,6 +83,7 @@ const Dashboard: FC = () => {
             <Navbar
               className={className}
               workspaceBackgroundColor={workspaceBackgroundColor}
+              setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
               head={head}
             />
 

@@ -22,7 +22,6 @@ const Template: FC = () => {
     value: IWorkspaceElement[]
   ) => {
     localStorage.removeItem("items");
-    localStorage.setItem("items", JSON.stringify(value));
     dispatch(updateWorkspaceElementsArray(value));
   };
 

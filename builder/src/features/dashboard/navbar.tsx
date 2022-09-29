@@ -17,13 +17,19 @@ import "styles/components.css";
 interface INavbar {
   className: string;
   workspaceBackgroundColor: string;
+  setWorkspaceBackgroundColor?: (workspaceBackgroundColor: string) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;
   };
 }
 
-const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
+const Navbar: FC<INavbar> = ({
+  className,
+  workspaceBackgroundColor,
+  head,
+  setWorkspaceBackgroundColor,
+}) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
@@ -56,7 +62,20 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
       }
     }
   }, [contractDetails.abi]);
-
+  const getConfig = () => {
+    return {
+      head: {
+        title: head.title,
+        logo: head.logo,
+      },
+      background: workspaceBackgroundColor,
+      builder: workspaceElements,
+      contract: {
+        abi: abiJSON,
+        address: contractDetails.address,
+      },
+    };
+  };
   // find suitable type
   const onChangeImage = (e) => {
     if (e.target.files[0]) {
@@ -81,7 +100,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
   const handleSave = () => {
     // FIX: save full config to local storage
     if (workspaceElements?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(workspaceElements));
+      localStorage.setItem("items", JSON.stringify(getConfig()));
     }
   };
 
@@ -116,23 +135,11 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
     localStorage.removeItem("items");
     dispatch(updateWorkspaceElementsArray([]));
     dispatch(setSelectorToDefault());
+    setWorkspaceBackgroundColor("rgba(255, 255, 255, 1)");
   };
 
   const handlePublish = () => {
-    let config = {
-      head: {
-        title: head.title,
-        logo: head.logo,
-      },
-      background: workspaceBackgroundColor,
-      builder: workspaceElements,
-      contract: {
-        abi: abiJSON,
-        address: contractDetails.address,
-      },
-    };
-    let stringifiedConfig = JSON.stringify(config);
-
+    let stringifiedConfig = JSON.stringify(getConfig());
     setGeneratedConfig(base64_encode(stringifiedConfig));
     setIsOpen(true);
   };
