@@ -132,7 +132,7 @@ const Elements: FC<IElements> = ({
             <div data-tip="Click here to add the button">
               <button
                 onClick={() => onClickFunction("Button")}
-                className="element-btn cursor-pointer btn-div"
+                className="cursor-pointer element-btn btn-div"
               >
                 Button
               </button>
@@ -141,7 +141,7 @@ const Elements: FC<IElements> = ({
         </div>
       </div>
       <div className="element-div">
-        <div className="py-3 px-10">
+        <div className="px-10 py-3">
           <div data-tip="Click here to add the heading">
             <h1
               className="font-normal text-2xl mb-4 cursor-pointer hover:text-[#5A4471]"
@@ -181,7 +181,7 @@ const Elements: FC<IElements> = ({
         <div className="px-[1.75rem] py-4">
           <div data-tip="Click here to add the input">
             <div
-              className="input-container cursor-pointer"
+              className="cursor-pointer input-container"
               onClick={() => onClickFunction("Input")}
             >
               <h1 className="element-input-text">Add Input</h1>
@@ -195,18 +195,18 @@ const Elements: FC<IElements> = ({
           className="px-4 py-4 cursor-pointer"
         >
           <div data-tip="Click here to add the image upload">
-            <div className="image-container pt-2">
+            <div className="pt-2 image-container">
               <span className="element-text ml-[1rem] my-[0.7rem] text-black">
                 File Upload
               </span>
-              <div className="element-upload mx-4">
+              <div className="mx-4 element-upload">
                 <span className="image-label text-[10px]">
                   Drag and drop a file, or{" "}
                   <span className="purple-label">browse</span>
                 </span>
               </div>
               <div className="flex justify-center">
-                <button className="upload-btn mx-2 mt-4">Upload</button>
+                <button className="mx-2 mt-4 upload-btn">Upload</button>
               </div>
             </div>
           </div>
@@ -234,7 +234,7 @@ const Elements: FC<IElements> = ({
               <div data-tip="Click here to add the container">
                 <div className="flex">
                   <div
-                    className="element-container cursor-pointer"
+                    className="cursor-pointer element-container"
                     onClick={() => onClickFunction("Container")}
                   >
                     <span className="element-text">

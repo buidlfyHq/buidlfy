@@ -814,15 +814,15 @@
   --color-stop-3: #ffff1c;
 }
 
-.hover-icon {
-  stroke: #8484aa;
-  stroke-width: 2;
+.hover-icon{
+  stroke: #8484AA;
+  stroke-width: 2
 }
 
-.hover-icon:hover {
+.hover-icon:hover{
   stroke-width: 2.7px;
   /* stroke: #a673ef; */
-  stroke: rgb(114, 90, 202);
+  stroke:  rgb(114, 90, 202);
   /* stroke: rgb(82, 143, 233) */
   /* stroke: url({
     --color-stop-1: #00c3ff;
@@ -831,13 +831,13 @@
   }) transparent; */
 }
 
-.modal-line-element {
-  background: linear-gradient(#5799eb 0%, #9f74fb 100%);
+.modal-line-element{
+  background: linear-gradient(#5799EB 0%,#9F74FB 100%);
 }
 
-.preview-button {
+.preview-button{
   background-clip: padding-box;
-  background: linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
+  background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -846,23 +846,28 @@
   border-image-slice: 1;
   border-width: 2px;
   border-radius: 8px;
-  border-image-source: linear-gradient(to left, #5799eb, #9f74fb);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  border-image-source: linear-gradient(to left, #5799EB, #9F74FB);
+  -webkit-mask: 
+  linear-gradient(#fff 0 0) content-box, 
+  linear-gradient(#fff 0 0);
 }
-.mint-button {
+
+.mint-button{
   background-clip: padding-box;
-  background: linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
+  background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
   -webkit-background-clip: text;
   /* -webkit-text-fill-color: transparent; */
   border-image-slice: 1;
   border-width: 2px;
   border-radius: 8px;
-  border-image-source: linear-gradient(to left, #5799eb, #9f74fb);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  border-image-source: linear-gradient(to left, #5799EB, #9F74FB);
+  -webkit-mask: 
+  linear-gradient(#fff 0 0) content-box, 
+  linear-gradient(#fff 0 0);
 }
 
-.link-bg {
-  background: linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
+.link-bg{
+  background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -871,19 +876,33 @@
   border: none;
 }
 
-.connect-wallet-button {
-  background: linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
+.connect-wallet-button{
+  background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
 }
 
-.mint-upload-img {
-  background: #ffffff;
-  border: 2px dashed #7a7b93;
+.mint-upload-img{
+  background: #FFFFFF;
+  border: 2px dashed #7A7B93;
   border-radius: 12px;
   padding: 17px;
 }
 
 .upload-img-mint {
   background: rgba(130, 104, 229, 0.06);
+  border: 2px dashed #FFFFFF;
+  border-radius: 12px;
+}
+
+.bg-hr{
+  background: rgba(61, 22, 174, 0.04);
+}
+
+.bg-lower-template{
+  background: rgba(61, 22, 174, 0.04);
+}
+
+.shadow-template-box{
+  box-shadow: 0px 0px 1px rgba(12, 26, 75, 0.24), 0px 3px 8px -1px rgba(50, 50, 71, 0.05);
   border: 2px dashed #ffffff;
   border-radius: 12px;
 }
