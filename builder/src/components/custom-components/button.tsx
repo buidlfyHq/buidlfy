@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { IText } from "redux/workspace/workspace.interfaces";
+import { gradientCheck } from "utils/gradient-check";
 import "styles/components.css";
 
 const Button: FC<IText> = ({
@@ -45,10 +46,8 @@ const Button: FC<IText> = ({
     >
       <span
         style={{
-          background:
-            color.slice(0, 15) === "linear-gradient" ? color : "transparent",
-          WebkitTextFillColor:
-            color.slice(0, 15) === "linear-gradient" ? "transparent" : color,
+          background: gradientCheck(color, true),
+          WebkitTextFillColor: gradientCheck(color, false),
           textDecoration: underline,
           textDecorationColor: color,
         }}

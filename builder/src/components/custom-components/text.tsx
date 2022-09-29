@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { IText } from "redux/workspace/workspace.interfaces";
+import { gradientCheck } from "utils/gradient-check";
 import "styles/components.css";
 
 const Text: FC<IText> = ({
@@ -23,12 +24,10 @@ const Text: FC<IText> = ({
       value={value}
       style={{
         height: "-webkit-fill-available",
-        WebkitTextFillColor:
-          color.slice(0, 15) === "linear-gradient" ? "transparent" : color,
+        background: gradientCheck(color, true),
+        WebkitTextFillColor: gradientCheck(color, false),
         fontWeight: bold,
         fontStyle: italic,
-        background:
-          color.slice(0, 15) === "linear-gradient" ? color : "transparent",
         display: "flex",
         justifyContent,
         alignItems: "center",
@@ -41,7 +40,6 @@ const Text: FC<IText> = ({
       className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
     />
   );
-
   return (
     <section
       id="text-one"

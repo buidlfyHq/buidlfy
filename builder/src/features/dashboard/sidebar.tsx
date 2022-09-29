@@ -10,31 +10,16 @@ interface ISidebar {
   isContainerSelected: boolean;
   sideElement: string;
   isNavHidden: boolean;
-  setIsNavHidden: (isNavHidden: boolean) => void;
-  showSidebar;
-  hideSidebar;
-  hideSettingSidebar;
-  workspaceBackgroundColor: string;
-  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
-  head: {
-    title: string;
-    logo: string | ArrayBuffer;
-  };
-  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
+  hideSidebar?: () => void;
+  hideSettingSidebar?: () => void;
 }
 
 const Sidebar: FC<ISidebar> = ({
   isContainerSelected,
   sideElement,
   isNavHidden,
-  setIsNavHidden,
   hideSidebar,
-  showSidebar,
   hideSettingSidebar,
-  workspaceBackgroundColor,
-  setWorkspaceBackgroundColor,
-  head,
-  setHead,
 }) => {
   const ref = useRef(null);
 
@@ -45,6 +30,7 @@ const Sidebar: FC<ISidebar> = ({
         isNavHidden ? "hidden" : ""
       }`}
     >
+      {/* It will be used for future */}
       {/* user name */}
       {/* It will be used for a later code */}
       {/* <section className="flex flex-row justify-between items-center h-[60px]">
@@ -104,14 +90,15 @@ const Sidebar: FC<ISidebar> = ({
         />
       ) : null}
       {sideElement === SidebarEnum.TEMPLATES ? <Template /> : null}
-      {sideElement === SidebarEnum.STYLES ? (
+      {/* It will be used for future */}
+      {/* {sideElement === SidebarEnum.STYLES ? (
         <DefaultSettings
           workspaceBackgroundColor={workspaceBackgroundColor}
           setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           head={head}
           setHead={setHead}
         />
-      ) : null}
+      ) : null} */}
     </main>
   );
 };

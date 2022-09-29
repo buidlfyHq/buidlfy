@@ -684,6 +684,7 @@
   border: 1px dashed rgba(151, 104, 251, 0.72);
   border-radius: 1px;
   display: flex;
+  border-width: 2px;
   align-items: center;
   justify-content: center;
 }

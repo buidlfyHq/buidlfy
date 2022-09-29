@@ -1,7 +1,7 @@
 import React, { useState, FC } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
-import { AiOutlineCaretDown } from "react-icons/ai";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import ColorPicker from "react-best-gradient-color-picker";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
@@ -47,7 +47,11 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
                 }}
                 className="w-10 h-5 mr-2 rounded border border-solid border-[#e9edfd]"
               ></div>
-              <AiOutlineCaretDown className="arrow text-[12px]" />
+              {displayColorPicker ? (
+                <AiOutlineCaretUp className="arrow text-[12px]" />
+              ) : (
+                <AiOutlineCaretDown className="arrow text-[12px]" />
+              )}
             </div>
           </div>
         </div>

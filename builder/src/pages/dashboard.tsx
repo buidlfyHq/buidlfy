@@ -73,14 +73,8 @@ const Dashboard: FC = () => {
             isContainerSelected={isContainerSelected}
             sideElement={sideElement}
             isNavHidden={isNavHidden}
-            setIsNavHidden={setIsNavHidden}
-            showSidebar={showSidebar}
             hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
-            workspaceBackgroundColor={workspaceBackgroundColor}
-            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-            head={head}
-            setHead={setHead}
           />
 
           <section className="flex-1">
@@ -109,6 +103,9 @@ const Dashboard: FC = () => {
                 setIsNavHidden={setIsNavHidden}
                 setSideElement={setSideElement}
                 hideSettingSidebar={undefined}
+                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+                head={head}
+                setHead={setHead}
               />
               {/* Right Sidebar Settings */}
             </aside>
