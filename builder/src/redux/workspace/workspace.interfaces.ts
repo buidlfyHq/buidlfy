@@ -36,6 +36,11 @@ export interface IWorkspaceElement {
   placeholder?: string;
 }
 
+export interface IUploadedImageData {
+  settingItemId: string;
+  uploadedImageData: string;
+}
+
 export interface IStyle {
   color?: string;
   borderColor?: string;

@@ -270,7 +270,6 @@ const Container: FC<IContainer> = ({
           paddingRight: `${padding.paddingRight}px`,
           borderRadius: `${borderRadius}px`,
           border: `${borderWidth}px solid ${color}`,
-          borderColor: color,
           borderImage: color,
           boxShadow: shadow,
         }}
