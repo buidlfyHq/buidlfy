@@ -13,6 +13,8 @@ import SingleTemplateDetails from "components/custom-components/modals/single-te
 import FinalModal from "components/custom-components/modals/final-modal";
 import DefaultSettings from "features/dashboard/default-settings";
 import "styles/components.css";
+import SelectWallet from "components/custom-components/modals/select-wallet";
+import CheckoutModal from "components/custom-components/modals/checkout-modal";
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
@@ -39,6 +41,8 @@ const Dashboard: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenTemplate, setIsOpenTemplate] = useState(false)
   const [isOpenSingleTemplate, setIsOpenSingleTemplate] = useState(false)
+  const [isOpenSelectWallet, setIsOpenSelectWallet] = useState(false)
+  const [isOpenCheckout, setIsOpenCheckout] = useState(false)
   const [isOpenFinalTemplate, setIsOpenFinalTemplate] = useState(false)
 
   useEffect(() => {
@@ -173,6 +177,16 @@ const Dashboard: FC = () => {
       <SingleTemplateDetails
         isOpenSingleTemplate={isOpenSingleTemplate}
         setIsOpenSingleTemplate={setIsOpenSingleTemplate} 
+        setIsOpenSelectWallet={setIsOpenSelectWallet}
+      />
+      <SelectWallet 
+        isOpenSelectWallet={isOpenSelectWallet}
+        setIsOpenSelectWallet={setIsOpenSelectWallet}
+        setIsOpenCheckout={setIsOpenCheckout}
+      />
+      <CheckoutModal 
+        isOpenCheckout={isOpenCheckout}
+        setIsOpenCheckout={setIsOpenCheckout}
         setIsOpenFinalTemplate={setIsOpenFinalTemplate}
       />
       <FinalModal

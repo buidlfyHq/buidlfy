@@ -964,6 +964,13 @@
   -webkit-text-fill-color: transparent;
 }
 
+.gradient-text-bg{
+  background-color: linear-gradient(132.56deg, rgba(87, 153, 235, 0.12) 5.63%, rgba(159, 116, 251, 0.12) 106.18%);;
+  background: linear-gradient(to right, #68AEFF 0%, #9768FB 79.17%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .border-bottom-divider{
   border: 1px solid #DFDFE0;
 }

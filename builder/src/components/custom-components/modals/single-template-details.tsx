@@ -8,17 +8,17 @@ import InfoCircleImg from "assets/info-circle.png";
 interface ISingleTemplateDetails {
   isOpenSingleTemplate: boolean;
   setIsOpenSingleTemplate: (isOpenSingleTemplate: boolean) => void;
-  setIsOpenFinalTemplate: (isOpenFinalTemplate: boolean) => void;
+  setIsOpenSelectWallet: (isOpenSelectWallet: boolean) => void;
 }
 
 const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
   isOpenSingleTemplate,
   setIsOpenSingleTemplate,
-  setIsOpenFinalTemplate,
+  setIsOpenSelectWallet,
 }) => {
   const handleSubmit = () => {
     setIsOpenSingleTemplate(false);
-    setIsOpenFinalTemplate(true);
+    setIsOpenSelectWallet(true);
   };
 
   return (
@@ -33,9 +33,9 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
             <div className="text-[22px] font-[500] text-[#14142B]">
               Cryptin Next Generation Web Template
             </div>
-            <div className="preview-button flex items-center py-2.5 px-6 rounded-[24px] cursor-pointer">
+            <div className="bordered-button  flex items-center py-2.5 px-6 rounded-[24px] cursor-pointer">
               <img src={EyeImg} alt="icon" width={18} height={18} />
-              <div className="ml-2">Preview</div>
+              <div className="ml-2 gradient-text font-[500]">Preview</div>
             </div>
           </div>
           <div className="mt-5">
@@ -62,7 +62,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
                 </div>
               </div>
               <div>
-                <div className="w-full mt-8 text-center text-[14px] text-[#202525] bg-[#E6EAF4] rounded-[4px] font-[600] py-4 cursor-pointer">
+                <div className="w-full mt-8 text-center text-[22px] text-[#202525] bg-[#E6EAF4] rounded-[4px] font-[600] py-4 cursor-pointer">
                   $149.00
                 </div>
                 <div
@@ -82,10 +82,10 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
             </div>
           </div>
           <div className="flex gap-3 mt-7">
-            <div className="w-auto py-2 px-3.5 bg-gray-100 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">
+            <div className="w-auto gradient-text-bg py-2 px-3.5 bg-gray-200 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">
               Web3
             </div>
-            <div className="w-auto py-2 px-3.5 bg-gray-100 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">
+            <div className="w-auto gradient-text-bg py-2 px-3.5 bg-gray-200 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">
               Crypto
             </div>
           </div>
