@@ -1,6 +1,7 @@
 import { IContractElementSelected } from "redux/contract/contract.interfaces";
 import {
   IElementDetail,
+  IUploadedImageData,
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 
@@ -248,3 +249,14 @@ export const updateContractInElement = (
     return newArray;
   }
 };
+
+export const fetchUploadedImageData = (settingItemId: string, uploadedImageData: string, uploadedImagesData: IUploadedImageData[] ) => {
+  const uploadedImageIndex = uploadedImagesData.findIndex((uploadImageData) => uploadImageData.settingItemId === settingItemId);
+  let newUploadedImagesData = [...uploadedImagesData]
+  if (uploadedImageIndex >= 0) {
+  newUploadedImagesData[uploadedImageIndex] = { ...newUploadedImagesData[uploadedImageIndex], uploadedImageData }
+  return newUploadedImagesData;
+  }
+  newUploadedImagesData.push({ settingItemId, uploadedImageData })
+  return newUploadedImagesData;
+}

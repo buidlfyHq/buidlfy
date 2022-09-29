@@ -20,6 +20,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   setHead,
 }) => {
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
+  const [siteImage, setSiteImage] = useState<string>();
   const onChangeLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
@@ -27,8 +28,9 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       } else {
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
+          setSiteImage(reader.result as string);
           const cid = await uploadFileToWeb3Storage(reader.result as string);
-          setHead({ ...head, logo: reader.result });
+          setHead({ ...head, logo: cid });
         });
         reader.readAsDataURL(e.target.files[0]);
       }
@@ -72,24 +74,26 @@ const DefaultSettings: FC<IDefaultSettings> = ({
             </div>
           </div> */}
         </aside>
-        <div className="flex justify-center" onChange={onChangeLogo}>
-          <div className="mb-3 mt-5 upload-img">
-            <label htmlFor="inputTag" className="image-label">
-              Drag and drop a file, or{" "}
-              <span className="purple-label">browse</span>
-              <input className="upload-input" type="file" id="inputTag" />
-            </label>
+        <div>
+          <div className="flex justify-center" onChange={onChangeLogo}>
+            <div className="mb-3 mt-5 upload-img cursor-pointer">
+              <label htmlFor="inputTag" className="image-label">
+                Drag and drop a file, or{" "}
+                <span className="purple-label">browse</span>
+                <input className="upload-input" type="file" id="inputTag" />
+              </label>
+            </div>
+            <br />
           </div>
-          <br />
-        </div>
-        <div className="flex justify-center">
-          <button className="upload-btn mx-2 ">Upload</button>
+          <div className="flex justify-center" onChange={onChangeLogo}>
+            <button className="upload-btn mx-2 cursor">Upload</button>
+          </div>
         </div>
         <div
           id="logo"
           className="mx-[4.5rem] mt-[2rem] mb-2 h-14 w-15 text-center mx-4 flex items-center justify-center"
           style={{
-            backgroundImage: `url(${head.logo})`,
+            backgroundImage: `url(${siteImage})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "contain",

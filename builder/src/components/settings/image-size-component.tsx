@@ -83,7 +83,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
             <h6 className="mr-2 margin-subtext">W</h6>
             <input
               inputMode="numeric"
-              value={width}
+              value={`${width}px`}
               placeholder="0"
               className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange(e, ReplaceStyle.WIDTH)}
@@ -99,7 +99,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
             <h6 className="ml-5 mr-2 margin-subtext">H</h6>
             <input
               inputMode="numeric"
-              value={height}
+              value={`${height}px`}
               placeholder="0"
               className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
               onChange={(e) => handleChange(e, ReplaceStyle.HEIGHT)}

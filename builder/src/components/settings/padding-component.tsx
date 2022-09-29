@@ -56,6 +56,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
     );
   };
 
+  // ADD: Common tailwind style and Input
   const paddingFirstLayer = (
     <div className="flex mt-3">
       <h6 className="margin-subtext mr-2">L</h6>
@@ -63,7 +64,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
         inputMode="numeric"
         id="padding-left"
         name="paddingLeft"
-        value={padding?.paddingLeft}
+        value={`${padding?.paddingLeft}px`}
         placeholder="0"
         className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
         onChange={(e) => handleChange("paddingLeft", e)}
@@ -81,7 +82,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
         inputMode="numeric"
         id="padding-right"
         name="paddingRight"
-        value={padding?.paddingRight}
+        value={`${padding?.paddingRight}px`}
         placeholder="0"
         className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
         onChange={(e) => handleChange("paddingRight", e)}
@@ -104,7 +105,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
         inputMode="numeric"
         id="padding-top"
         name="paddingTop"
-        value={padding?.paddingTop}
+        value={`${padding?.paddingTop}px`}
         placeholder="0"
         className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
         onChange={(e) => handleChange("paddingTop", e)}
@@ -122,7 +123,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
         inputMode="numeric"
         id="padding-bottom"
         name="paddingBottom"
-        value={padding?.paddingBottom}
+        value={`${padding?.paddingBottom}px`}
         placeholder="0"
         className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
         onChange={(e) => handleChange("paddingBottom", e)}
