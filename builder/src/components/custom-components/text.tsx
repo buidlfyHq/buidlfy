@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { IText } from "redux/workspace/workspace.interfaces";
 import { gradientCheck } from "utils/gradient-check";
+import { IText } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 const Text: FC<IText> = ({
@@ -24,10 +24,10 @@ const Text: FC<IText> = ({
       value={value}
       style={{
         height: "-webkit-fill-available",
-        background: gradientCheck(color, true),
         WebkitTextFillColor: gradientCheck(color, false),
         fontWeight: bold,
         fontStyle: italic,
+        background: gradientCheck(color, true),
         display: "flex",
         justifyContent,
         alignItems: "center",
@@ -60,10 +60,6 @@ const Text: FC<IText> = ({
             href={link}
             id="text-two"
             className="text-class flex overflow-hidden items-center justify-center w-auto h-full"
-            style={{
-              background: color,
-              WebkitTextFillColor: "transparent",
-            }}
           >
             {textAreaContent}
           </a>

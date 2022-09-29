@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { IText } from "redux/workspace/workspace.interfaces";
 import { gradientCheck } from "utils/gradient-check";
+import { IText } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 const Button: FC<IText> = ({

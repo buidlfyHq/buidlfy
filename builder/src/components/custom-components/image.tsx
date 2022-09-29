@@ -30,11 +30,10 @@ const Image: FC<IImageComponent> = ({
   backgroundSize,
   isAuto,
 }) => {
-  const imagesData: IUploadedImageData[] = useSelector(
-    (state: IRootState) => state.workspace.uploadedImagesData
-  );
-  const imageData: IUploadedImageData = imagesData.find(
-    (image: IUploadedImageData) => image.settingItemId == i
+  const imageData: IUploadedImageData = useSelector((state: IRootState) =>
+    state.workspace.uploadedImagesData.find(
+      (image: IUploadedImageData) => image.settingItemId === i
+    )
   );
 
   // Add ClientWidth and ClientHeight of Image when it changes its position
