@@ -28,9 +28,9 @@ const SingleTemplateDetails : FC<SingleTemplateDetails>  = ({
             <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
                 <div className="flex items-center justify-between">
                     <div className="text-[22px] font-[500] text-[#14142B]">Cryptin Next Generation Web Template</div>
-                    <div className="preview-button flex items-center py-2.5 px-6 rounded-[24px] cursor-pointer">
+                    <div className="bordered-button flex items-center py-2.5 px-6 cursor-pointer">
                         <img src={EyeImg} alt="icon" width={18} height={18} />
-                        <div className="ml-2">Preview</div>
+                        <div className="ml-2 gradient-text">Preview</div>
                     </div>
                 </div>
                 <div className="mt-5">
@@ -64,8 +64,8 @@ const SingleTemplateDetails : FC<SingleTemplateDetails>  = ({
                     </div>
                 </div>
                 <div className="flex gap-3 mt-7">
-                    <div className="w-auto py-2 px-3.5 bg-gray-100 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">Web3</div>
-                    <div className="w-auto py-2 px-3.5 bg-gray-100 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">Crypto</div>
+                    <div className="w-auto gradient-text py-2 px-3.5 bg-gray-100 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">Web3</div>
+                    <div className="w-auto gradient-text py-2 px-3.5 bg-gray-100 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">Crypto</div>
                 </div>
             </Dialog.Panel>
             </div>
