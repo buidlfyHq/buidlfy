@@ -61,7 +61,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
 
   return (
     <>
-      {name == "Container" ? (
+      {name === "Container" ? (
         <SpaceInput
           heading="Padding"
           text={["L", "R"]}
