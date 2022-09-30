@@ -1,7 +1,8 @@
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
+import { connectWallet } from "redux/web3/web3.actions";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import EyeImg from "assets/eye.png";
 import TempexImg from "assets/tempex.png";
@@ -9,6 +10,14 @@ import InfoCircleImg from "assets/info-circle.png";
 
 const SingleTemplateDetails: FC = () => {
   const dispatch = useDispatch();
+  const currentAccount = useSelector((state: any) => state.web3.currentAccount);
+
+  const handleBuy = async () => {
+    if (!currentAccount) {
+      await dispatch(connectWallet());
+    }
+    dispatch(toggleModalType("final"));
+  };
 
   return (
     <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
@@ -50,10 +59,12 @@ const SingleTemplateDetails: FC = () => {
                 $149.00
               </div>
               <div
-                onClick={() => dispatch(toggleModalType("final"))}
+                onClick={handleBuy}
                 className="w-full flex justify-center items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
               >
-                <div className="text-[14px]">Connect Wallet to buy </div>
+                <div className="text-[14px]">
+                  {currentAccount ? "Proceed to buy" : "Connect Wallet to buy"}
+                </div>
                 <VscArrowRight className="ml-2 text-[18px]" />
               </div>
               <div className="flex mt-3 bg-gray-100 rounded-[4px] items-center text-[#4E4B66] opacity-70 text-[13px] py-3 px-4">

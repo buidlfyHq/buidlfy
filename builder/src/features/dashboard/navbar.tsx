@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDoubleRight } from "react-icons/ai";
+import makeBlockie from "ethereum-blockies-base64";
 import { encode as base64_encode } from "base-64";
 import { Dialog } from "@headlessui/react";
 import MintTemplateModal from "components/modals/mint-template-form";
@@ -15,6 +16,7 @@ import {
 } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
+import { connectWallet } from "redux/web3/web3.actions";
 
 interface INavbar {
   className: string;
@@ -33,6 +35,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
   const contractDetails: IContractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
   );
+  const currentAccount = useSelector((state: any) => state.web3.currentAccount);
 
   const [abiJSON, setAbiJSON] = useState<
     {
@@ -141,8 +144,10 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
   };
 
   const handleMintTemplateForm = () => {
-    setIsMintTemplateOpen(true)
-  } 
+    setIsMintTemplateOpen(true);
+  };
+
+
 
   return (
     <main
@@ -191,12 +196,12 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
           </span>
           Preview
         </div> */}
-        <div 
+        <div
           className="mint-button text-[14px] text-[#855FD8] font[500] py-2 px-6 cursor-pointer"
           onClick={handleMintTemplateForm}
         >
           Mint as NFT
-          <MintTemplateModal 
+          <MintTemplateModal
             isMintTemplateOpen={isMintTemplateOpen}
             setIsMintTemplateOpen={setIsMintTemplateOpen}
           />
@@ -207,8 +212,25 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
         >
           Publish
         </button>
-        <div className="my-3 ml-2 bg-[#9CB0D7] w-[32px] h-[32px] rounded-[50%] mt-30">{" "}</div>
-        <PublishSiteModal 
+
+        {currentAccount ? (
+          <div className="flex justify-center items-center my-2 ml-3">
+            <img
+              className="bg-black w-8 h-8 rounded-full"
+              src={makeBlockie(currentAccount)}
+              alt="Blockie"
+            />
+          </div>
+        ) : (
+          <button
+            className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
+            onClick={() => dispatch(connectWallet())}
+          >
+            Connect Wallet
+          </button>
+        )}
+
+        <PublishSiteModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           generatedConfig={generatedConfig}
