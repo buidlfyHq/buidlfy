@@ -1,8 +1,8 @@
 import { FC } from "react";
-import StartModal from "components/custom-components/modals/start-modal";
-import SelectTemplateModal from "components/custom-components/modals/select-template-modal";
-import SingleTemplateDetails from "components/custom-components/modals/single-template-details";
-import FinalModal from "components/custom-components/modals/final-modal";
+import StartModal from "components/modals/start-modal";
+import SelectTemplateModal from "components/modals/select-template-modal";
+import SingleTemplateDetails from "components/modals/single-template-details";
+import FinalModal from "components/modals/final-modal";
 
 interface IRenderModal {
   modalType: string;
