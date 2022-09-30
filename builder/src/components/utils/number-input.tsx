@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import ArrowInput from "./arrow-input";
 
-// Fix: Infer Better type of e
 interface INumberInput {
   text: string;
   value: number;
