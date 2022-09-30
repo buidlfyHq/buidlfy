@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
 import Confetti from "react-confetti";
 
-function ConfettiShower() {
-    let height = window.screen.height
-    let width = window.screen.width
+const ConfettiShower = () => {
+  let height = window.screen.height;
+  let width = window.screen.width;
+
   return (
     <Confetti
       width={width}
       height={height}
-    //   recycle={false}
       numberOfPieces={300}
       colors={[
         "#9B70FFD9",
@@ -24,6 +23,6 @@ function ConfettiShower() {
       tweenDuration={9000}
     />
   );
-}
+};
 
 export { ConfettiShower };

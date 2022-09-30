@@ -10,9 +10,9 @@ import { IRootState } from "redux/root-state.interface";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
-interface IModal {
+interface IContractModal {
   isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: (isOpen: boolean) => void;
   methodOpen: boolean;
   setMethodOpen: (methodOpen: boolean) => void;
   setNewContractList: (newContractList: IContract[]) => void;
@@ -22,7 +22,7 @@ interface IContract {
   text: any; // type to be added
 }
 
-const Modal: FC<IModal> = ({
+const ContractModal: FC<IContractModal> = ({
   isOpen,
   setIsOpen,
   methodOpen,
@@ -192,4 +192,4 @@ const Modal: FC<IModal> = ({
   );
 };
 
-export default Modal;
+export default ContractModal;
