@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import BgColorComponent from "components/settings/bg-color-component";
 import { uploadFileToWeb3Storage } from "config/web3storage";
+import { SITE_SIZE_VARIABLE } from "config/constant";
 import "styles/components.css";
 
 interface IDefaultSettings {
@@ -23,7 +24,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   const [siteImage, setSiteImage] = useState<string>();
   const onChangeLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
-      if (e.target.files[0].size > 5242880) {
+      if (e.target.files[0].size > SITE_SIZE_VARIABLE) {
         setSizeExceeded(true);
       } else {
         const reader = new FileReader();
@@ -80,7 +81,12 @@ const DefaultSettings: FC<IDefaultSettings> = ({
               <label htmlFor="inputTag" className="image-label">
                 Drag and drop a file, or{" "}
                 <span className="purple-label">browse</span>
-                <input className="upload-input" type="file" id="inputTag" />
+                <input
+                  className="upload-input"
+                  type="file"
+                  id="inputTag"
+                  accept=".ico"
+                />
               </label>
             </div>
             <br />
@@ -89,6 +95,11 @@ const DefaultSettings: FC<IDefaultSettings> = ({
             <button className="upload-btn mx-2 cursor">Upload</button>
           </div>
         </div>
+        {sizeExceeded ? (
+          <h3 className="text-red-500 text-sm ml-5 mb-2">
+            Please upload file below 1 mb
+          </h3>
+        ) : null}
         <div
           id="logo"
           className="mx-[4.5rem] mt-[2rem] mb-2 h-14 w-15 text-center mx-4 flex items-center justify-center"

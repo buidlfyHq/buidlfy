@@ -1,0 +1,2 @@
+export const SITE_SIZE_VARIABLE = 1000000;
+export const IMAGE_SIZE_VARIABLE = 5242880;

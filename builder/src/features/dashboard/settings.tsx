@@ -39,7 +39,7 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
             <div className="delete-div flex py-2 pl-3">
               <div
                 onClick={handleDelete}
-                className="flex delete-btn px-2 py-[0.1rem]"
+                className="flex delete-btn px-2 py-[0.1rem] cursor-pointer hover:bg-[#b7c1ec]"
               >
                 <span className="flex text-[12px]">
                   Remove

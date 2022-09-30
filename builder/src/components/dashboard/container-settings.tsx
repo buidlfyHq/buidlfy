@@ -34,6 +34,7 @@ const ContainerSettings: FC = () => {
       <BorderRadiusComponent
         i={selectedElement.i}
         borderRadius={selectedElement.style.borderRadius}
+        borderColor={selectedElement.style.color}
       />
       <BorderComponent
         i={selectedElement.i}

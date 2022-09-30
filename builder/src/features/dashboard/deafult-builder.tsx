@@ -6,13 +6,11 @@ import "styles/components.css";
 
 interface IDefaultBuilder {
   showSidebar?: () => void;
-  hideSettingSidebar?: () => void;
   setSideElement?: (sideElement?: string) => void;
 }
 
 const DefaultBuilder: FC<IDefaultBuilder> = ({
   showSidebar,
-  hideSettingSidebar,
   setSideElement,
 }) => {
   const handleSidebar = (selectedSidebarElements: string) => {
@@ -44,7 +42,6 @@ const DefaultBuilder: FC<IDefaultBuilder> = ({
                 onClick={() => {
                   showSidebar();
                   handleSidebar(SidebarEnum.ELEMENTS);
-                  hideSettingSidebar();
                 }}
                 className="flex add-btn mt-[1.5rem]"
               >
