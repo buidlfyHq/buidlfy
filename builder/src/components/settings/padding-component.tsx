@@ -16,6 +16,13 @@ interface IPaddingComponent {
   name?: string;
 }
 
+enum Padding {
+  PADDINGLEFT = "paddingLeft",
+  PADDINGRIGHT = "paddingRight",
+  PADDINGTOP = "paddingTop",
+  PADDINGBOTTOM = "paddingBottom",
+}
+
 const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
   const dispatch = useDispatch();
 
@@ -51,13 +58,6 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
       })
     );
   };
-
-  enum Padding {
-    PADDINGLEFT = "paddingLeft",
-    PADDINGRIGHT = "paddingRight",
-    PADDINGTOP = "paddingTop",
-    PADDINGBOTTOM = "paddingBottom",
-  }
 
   return (
     <>

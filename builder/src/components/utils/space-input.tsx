@@ -1,14 +1,13 @@
 import React, { FC } from "react";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import ArrowInput from "./arrow-input";
 
 interface ISpaceInput {
   heading: string;
-  text;
-  value;
-  handleChange;
-  handleIncrement;
-  handleDecrement;
+  text: string[];
+  value: number[];
+  handleChange: ((updatedSpace: number) => void)[];
+  handleIncrement: (() => void)[];
+  handleDecrement: (() => void)[];
 }
 const SpaceInput: FC<ISpaceInput> = ({
   heading,

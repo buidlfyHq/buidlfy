@@ -3,9 +3,9 @@ import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
 
 interface IArrowInput {
   value: number;
-  handleChange: (e) => void;
-  handleIncrement: (e) => void;
-  handleDecrement: (e) => void;
+  handleChange: (e: number) => void;
+  handleIncrement: () => void;
+  handleDecrement: () => void;
 }
 const ArrowInput: FC<IArrowInput> = ({
   value,

@@ -1,12 +1,13 @@
 import React, { FC } from "react";
 import ArrowInput from "./arrow-input";
 
+// Fix: Infer Better type of e
 interface INumberInput {
   text: string;
   value: number;
-  handleChange: (e) => void;
-  handleIncrement: (e) => void;
-  handleDecrement: (e) => void;
+  handleChange: (e: number) => void;
+  handleIncrement: () => void;
+  handleDecrement: () => void;
 }
 const NumberInput: FC<INumberInput> = ({
   text,

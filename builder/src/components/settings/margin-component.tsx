@@ -15,6 +15,13 @@ interface IMarginComponent {
   };
 }
 
+enum Margin {
+  MARGINLEFT = "marginLeft",
+  MARGINRIGHT = "marginRight",
+  MARGINTOP = "marginTop",
+  MARGINBOTTOM = "marginBottom",
+}
+
 const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
   const dispatch = useDispatch();
 
@@ -50,13 +57,6 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
       })
     );
   };
-
-  enum Margin {
-    MARGINLEFT = "marginLeft",
-    MARGINRIGHT = "marginRight",
-    MARGINTOP = "marginTop",
-    MARGINBOTTOM = "marginBottom",
-  }
 
   return (
     // ADD: Common tailwind style and Input
