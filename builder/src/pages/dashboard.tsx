@@ -7,11 +7,8 @@ import Sidebar from "features/dashboard/sidebar";
 import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
-import StartModal from "components/custom-components/modals/start-modal";
-import TemplateModal from "components/custom-components/modals/template-modal";
-import SingleTemplateDetails from "components/custom-components/modals/single-template-details";
-import FinalModal from "components/custom-components/modals/final-modal";
 import DefaultSettings from "features/dashboard/default-settings";
+import TemplateModal from "features/dashboard/template-modal";
 import "styles/components.css";
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
@@ -36,23 +33,12 @@ const Dashboard: FC = () => {
   });
   const [sideElement, setSideElement] = useState<string>("");
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
-  const [isOpen, setIsOpen] = useState(false)
-  const [isOpenTemplate, setIsOpenTemplate] = useState(false)
-  const [isOpenSingleTemplate, setIsOpenSingleTemplate] = useState(false)
-  const [isOpenFinalTemplate, setIsOpenFinalTemplate] = useState(false)
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    setIsOpen(true)
+    setOpenModal(true);
     // storeFiles(makeFileObjects());
   }, []);
-
-  const handleStartFromTemplate = () => {
-    setIsOpen(false)
-    setIsOpenTemplate(true)
-  }
-  const handleStartFromScratch = () => {
-    setIsOpen(false)
-  }
 
   useEffect(() => {
     // checks for stored config
@@ -131,7 +117,6 @@ const Dashboard: FC = () => {
                 setSideElement={setSideElement}
                 hideSettingSidebar={undefined}
               />
-              {/* Right Sidebar Settings */}
             </aside>
           </section>
           <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
@@ -158,27 +143,8 @@ const Dashboard: FC = () => {
         </h1>
       )}
 
-      {/* Dailogs for template */}
-      <StartModal 
-        isOpen={isOpen} 
-        setIsOpen={setIsOpen}
-        handleStartFromTemplate={handleStartFromTemplate} 
-        handleStartFromScratch={handleStartFromScratch}
-      />
-      <TemplateModal 
-        isOpenTemplate={isOpenTemplate}
-        setIsOpenTemplate={setIsOpenTemplate}
-        setIsOpenSingleTemplate={setIsOpenSingleTemplate}
-      />
-      <SingleTemplateDetails
-        isOpenSingleTemplate={isOpenSingleTemplate}
-        setIsOpenSingleTemplate={setIsOpenSingleTemplate} 
-        setIsOpenFinalTemplate={setIsOpenFinalTemplate}
-      />
-      <FinalModal
-        isOpenFinalTemplate={isOpenFinalTemplate}
-        setIsOpenFinalTemplate={setIsOpenFinalTemplate}
-      />
+      {/* Modal HOC for template */}
+      <TemplateModal openModal={openModal} setOpenModal={setOpenModal} />
     </main>
   );
 };

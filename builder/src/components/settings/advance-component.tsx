@@ -1,7 +1,7 @@
 import React, { useState, FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { FaFileContract } from "react-icons/fa";
-import Modal from "features/dashboard/modal";
+import ContractModal from "features/dashboard/contract-modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
 import { updateContractAbi } from "redux/contract/contract.reducers";
@@ -82,7 +82,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                 <FaFileContract />
               </span>{" "}
               Import Contract
-              <Modal
+              <ContractModal
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
                 methodOpen={methodOpen}
