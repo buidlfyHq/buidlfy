@@ -1,8 +1,6 @@
 import React, { FC, useRef } from "react";
-import { AiOutlineLeft } from "react-icons/ai";
 import Template from "pages/templates";
 import Elements from "features/dashboard/elements";
-import DefaultSettings from "features/dashboard/default-settings";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
@@ -10,8 +8,8 @@ interface ISidebar {
   isContainerSelected: boolean;
   sideElement: string;
   isNavHidden: boolean;
-  hideSidebar?: () => void;
-  hideSettingSidebar?: () => void;
+  hideSidebar: () => void;
+  hideSettingSidebar: () => void;
 }
 
 const Sidebar: FC<ISidebar> = ({

@@ -59,62 +59,77 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
     );
   };
 
+  const paddingData = {
+    container: {
+      text: ["L", "R"],
+      value: [padding?.paddingLeft, padding?.paddingRight],
+      handleChange: [
+        (updatedPadding: number) =>
+          handleChange(Padding.PADDINGLEFT, updatedPadding),
+        (updatedPadding: number) =>
+          handleChange(Padding.PADDINGRIGHT, updatedPadding),
+      ],
+      handleIncrement: [
+        () => incrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
+        () => incrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
+      ],
+      handleDecrement: [
+        () => decrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
+        () => decrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
+      ],
+    },
+    text: ["L", "R", "T", "B"],
+    value: [
+      padding?.paddingLeft,
+      padding?.paddingRight,
+      padding?.paddingTop,
+      padding?.paddingBottom,
+    ],
+    handleChange: [
+      (updatedPadding: number) =>
+        handleChange(Padding.PADDINGLEFT, updatedPadding),
+      (updatedPadding: number) =>
+        handleChange(Padding.PADDINGRIGHT, updatedPadding),
+      (updatedPadding: number) =>
+        handleChange(Padding.PADDINGTOP, updatedPadding),
+      (updatedPadding: number) =>
+        handleChange(Padding.PADDINGBOTTOM, updatedPadding),
+    ],
+    handleIncrement: [
+      () => incrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
+      () => incrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
+      () => incrementCounter(Padding.PADDINGTOP, padding?.paddingTop),
+      () => incrementCounter(Padding.PADDINGBOTTOM, padding?.paddingBottom),
+    ],
+    handleDecrement: [
+      () => decrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
+      () => decrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
+      () => decrementCounter(Padding.PADDINGTOP, padding?.paddingTop),
+      () => decrementCounter(Padding.PADDINGBOTTOM, padding?.paddingBottom),
+    ],
+  };
+
+  const isContainer = name === "Container";
+
   return (
     <>
-      {name === "Container" ? (
+      {isContainer ? (
         <SpaceInput
           heading="Padding"
-          text={["L", "R"]}
-          value={[padding?.paddingLeft, padding?.paddingRight]}
-          handleChange={[
-            (updatedPadding: number) =>
-              handleChange(Padding.PADDINGLEFT, updatedPadding),
-            (updatedPadding: number) =>
-              handleChange(Padding.PADDINGRIGHT, updatedPadding),
-          ]}
-          handleIncrement={[
-            () => incrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
-            () => incrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
-          ]}
-          handleDecrement={[
-            () => decrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
-            () => decrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
-          ]}
+          text={paddingData.container.text}
+          value={paddingData.container.value}
+          handleChange={paddingData.container.handleChange}
+          handleIncrement={paddingData.container.handleIncrement}
+          handleDecrement={paddingData.container.handleDecrement}
         />
       ) : (
         <SpaceInput
           heading="Padding"
-          text={["L", "R", "T", "B"]}
-          value={[
-            padding?.paddingLeft,
-            padding?.paddingRight,
-            padding?.paddingTop,
-            padding?.paddingBottom,
-          ]}
-          handleChange={[
-            (updatedPadding: number) =>
-              handleChange(Padding.PADDINGLEFT, updatedPadding),
-            (updatedPadding: number) =>
-              handleChange(Padding.PADDINGRIGHT, updatedPadding),
-            (updatedPadding: number) =>
-              handleChange(Padding.PADDINGTOP, updatedPadding),
-            (updatedPadding: number) =>
-              handleChange(Padding.PADDINGBOTTOM, updatedPadding),
-          ]}
-          handleIncrement={[
-            () => incrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
-            () => incrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
-            () => incrementCounter(Padding.PADDINGTOP, padding?.paddingTop),
-            () =>
-              incrementCounter(Padding.PADDINGBOTTOM, padding?.paddingBottom),
-          ]}
-          handleDecrement={[
-            () => decrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
-            () => decrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
-            () => decrementCounter(Padding.PADDINGTOP, padding?.paddingTop),
-            () =>
-              decrementCounter(Padding.PADDINGBOTTOM, padding?.paddingBottom),
-          ]}
+          text={paddingData.text}
+          value={paddingData.value}
+          handleChange={paddingData.handleChange}
+          handleIncrement={paddingData.handleIncrement}
+          handleDecrement={paddingData.handleDecrement}
         />
       )}
     </>

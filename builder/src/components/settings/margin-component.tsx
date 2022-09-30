@@ -58,42 +58,45 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
     );
   };
 
+  const marginData = {
+    text: ["L", "R", "T", "B"],
+    value: [
+      margin?.marginLeft,
+      margin?.marginRight,
+      margin?.marginTop,
+      margin?.marginBottom,
+    ],
+    handleChange: [
+      (updatedMargin: number) => handleChange(Margin.MARGINLEFT, updatedMargin),
+      (updatedMargin: number) =>
+        handleChange(Margin.MARGINRIGHT, updatedMargin),
+      (updatedMargin: number) => handleChange(Margin.MARGINTOP, updatedMargin),
+      (updatedMargin: number) =>
+        handleChange(Margin.MARGINBOTTOM, updatedMargin),
+    ],
+    handleIncrement: [
+      () => incrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
+      () => incrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
+      () => incrementCounter(Margin.MARGINTOP, margin?.marginTop),
+      () => incrementCounter(Margin.MARGINBOTTOM, margin?.marginBottom),
+    ],
+    handleDecrement: [
+      () => decrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
+      () => decrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
+      () => decrementCounter(Margin.MARGINTOP, margin?.marginTop),
+      () => decrementCounter(Margin.MARGINBOTTOM, margin?.marginBottom),
+    ],
+  };
+
   return (
-    // ADD: Common tailwind style and Input
-    <>
-      <SpaceInput
-        heading="Margin"
-        text={["L", "R", "T", "B"]}
-        value={[
-          margin?.marginLeft,
-          margin?.marginRight,
-          margin?.marginTop,
-          margin?.marginBottom,
-        ]}
-        handleChange={[
-          (updatedMargin: number) =>
-            handleChange(Margin.MARGINLEFT, updatedMargin),
-          (updatedMargin: number) =>
-            handleChange(Margin.MARGINRIGHT, updatedMargin),
-          (updatedMargin: number) =>
-            handleChange(Margin.MARGINTOP, updatedMargin),
-          (updatedMargin: number) =>
-            handleChange(Margin.MARGINBOTTOM, updatedMargin),
-        ]}
-        handleIncrement={[
-          () => incrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
-          () => incrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
-          () => incrementCounter(Margin.MARGINTOP, margin?.marginTop),
-          () => incrementCounter(Margin.MARGINBOTTOM, margin?.marginBottom),
-        ]}
-        handleDecrement={[
-          () => decrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
-          () => decrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
-          () => decrementCounter(Margin.MARGINTOP, margin?.marginTop),
-          () => decrementCounter(Margin.MARGINBOTTOM, margin?.marginBottom),
-        ]}
-      />
-    </>
+    <SpaceInput
+      heading="Margin"
+      text={marginData.text}
+      value={marginData.value}
+      handleChange={marginData.handleChange}
+      handleIncrement={marginData.handleIncrement}
+      handleDecrement={marginData.handleDecrement}
+    />
   );
 };
 export default MarginComponent;
