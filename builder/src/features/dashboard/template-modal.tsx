@@ -1,26 +1,21 @@
-import { useState } from "react";
+import { FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import RenderModal from "components/utils/render-modals";
+import { IRootState } from "redux/root-state.interface";
+import { toggleModal } from "redux/modal/modal.reducers";
 
-interface ITemplateModal {
-  openModal: boolean;
-  setOpenModal: (openModal: boolean) => void;
-}
+const TemplateModal: FC = () => {
+  const dispatch = useDispatch();
+  const modalShow = useSelector((state: IRootState) => state.modal.modalShow);
 
-const TemplateModal = ({ openModal, setOpenModal }) => {
-  const [modalType, setModalType] = useState<string>("start");
+  const handleClose = () => {
+    dispatch(toggleModal(false));
+  };
 
   return (
-    <Dialog
-      className="relative z-50"
-      open={openModal}
-      onClose={() => setOpenModal(false)}
-    >
-      <RenderModal
-        modalType={modalType}
-        setModalType={setModalType}
-        setOpenModal={setOpenModal}
-      />
+    <Dialog className="relative z-50" open={modalShow} onClose={handleClose}>
+      <RenderModal />
     </Dialog>
   );
 };

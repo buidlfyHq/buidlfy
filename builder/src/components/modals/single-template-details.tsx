@@ -1,17 +1,15 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
+import { toggleModalType } from "redux/modal/modal.reducers";
 import EyeImg from "assets/eye.png";
 import TempexImg from "assets/tempex.png";
 import InfoCircleImg from "assets/info-circle.png";
 
-interface ISingleTemplateDetails {
-  setModalType: (modalType: string) => void;
-}
+const SingleTemplateDetails: FC = () => {
+  const dispatch = useDispatch();
 
-const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
-  setModalType,
-}) => {
   return (
     <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
       <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
@@ -52,7 +50,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
                 $149.00
               </div>
               <div
-                onClick={() => setModalType("final")}
+                onClick={() => dispatch(toggleModalType("final"))}
                 className="w-full flex justify-center items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
               >
                 <div className="text-[14px]">Connect Wallet to buy </div>

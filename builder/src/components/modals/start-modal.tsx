@@ -1,14 +1,13 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { ReactComponent as ScratchIcon } from "assets/modalIcons/scratchIcon.svg";
 import { ReactComponent as TemplateIcon } from "assets/modalIcons/templateIcon.svg";
 
-interface IStartModal {
-  setModalType: (modalType: string) => void;
-  setOpenModal: (openModal: boolean) => void;
-}
+const StartModal: FC = () => {
+  const dispatch = useDispatch();
 
-const StartModal: FC<IStartModal> = ({ setModalType, setOpenModal }) => {
   return (
     <main className="fixed inset-0 flex items-center justify-center p-4 bg-black/70 backdrop-blur-[10px]">
       <Dialog.Panel className="rounded-[24px] py-16 px-20 bg-white rounded flex flex-row justify-start items-center gap-16">
@@ -24,7 +23,7 @@ const StartModal: FC<IStartModal> = ({ setModalType, setOpenModal }) => {
             Create a website from scratch by using our easy no code builder
           </div>
           <div
-            onClick={() => setOpenModal(false)}
+            onClick={() => dispatch(toggleModal(false))}
             className="mt-10 rounded-[28px] bg-[#5D46E4] px-9 py-4 text-white text-[16px] text-center text-[600] cursor-pointer"
           >
             Create from Scratch
@@ -39,7 +38,7 @@ const StartModal: FC<IStartModal> = ({ setModalType, setOpenModal }) => {
             Select over 100 stunning templates to create a stunning wesite
           </div>
           <div
-            onClick={() => setModalType('template')}
+            onClick={() => dispatch(toggleModalType("template"))}
             className="mt-10 rounded-[28px] bg-[#5D46E4] px-9 py-4 text-white text-[16px] text-center text-[600] cursor-pointer"
           >
             Start from a template

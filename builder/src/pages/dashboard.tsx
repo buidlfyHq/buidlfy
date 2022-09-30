@@ -33,12 +33,6 @@ const Dashboard: FC = () => {
   });
   const [sideElement, setSideElement] = useState<string>("");
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
-  const [openModal, setOpenModal] = useState(false);
-
-  useEffect(() => {
-    setOpenModal(true);
-    // storeFiles(makeFileObjects());
-  }, []);
 
   useEffect(() => {
     // checks for stored config
@@ -144,7 +138,7 @@ const Dashboard: FC = () => {
       )}
 
       {/* Modal HOC for template */}
-      <TemplateModal openModal={openModal} setOpenModal={setOpenModal} />
+      <TemplateModal />
     </main>
   );
 };

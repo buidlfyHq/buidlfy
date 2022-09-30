@@ -1,13 +1,11 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
+import { toggleModalType } from "redux/modal/modal.reducers";
 import Temp1 from "assets/temp-1.png";
 import Temp2 from "assets/temp-2.png";
 import Temp3 from "assets/temp-3.png";
-
-interface ISelectTemplateModal {
-  setModalType: (modalType: string) => void;
-}
 
 const TEMPLATE_CATEGORIES = [
   "ALL",
@@ -21,7 +19,9 @@ const TEMPLATE_CATEGORIES = [
 
 const TEMPLATES = [Temp1, Temp2, Temp3, Temp3, Temp1, Temp2];
 
-const SelectTemplateModal: FC<ISelectTemplateModal> = ({ setModalType }) => {
+const SelectTemplateModal: FC = () => {
+  const dispatch = useDispatch();
+
   return (
     <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
       <Dialog.Panel className="flex flex-col items-center w-full max-w-[1200px] my-20 mx-28 rounded-[24px] bg-white">
@@ -97,7 +97,7 @@ const SelectTemplateModal: FC<ISelectTemplateModal> = ({ setModalType }) => {
             {TEMPLATES.map((temp, index) => {
               return (
                 <div
-                  onClick={() => setModalType("single")}
+                  onClick={() => dispatch(toggleModalType("single"))}
                   key={index}
                   className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box"
                 >

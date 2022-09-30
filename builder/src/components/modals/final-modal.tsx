@@ -1,14 +1,14 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { ConfettiShower } from "components/utils/confetti-shower";
+import { toggleModal } from "redux/modal/modal.reducers";
 import { ReactComponent as FeatherIcon } from "assets/svgAsIcons/feather.svg";
 import CongratulationsImg from "assets/congratulations.png";
 
-interface IFinalModal {
-  setOpenModal: (openModal: boolean) => void;
-}
+const FinalModal: FC = () => {
+  const dispatch = useDispatch();
 
-const FinalModal: FC<IFinalModal> = ({ setOpenModal }) => {
   return (
     <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
       <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[1140px] my-20 mx-28 rounded-[24px] py-36 px-64 bg-white h-full max-h-[645px]">
@@ -24,7 +24,7 @@ const FinalModal: FC<IFinalModal> = ({ setOpenModal }) => {
           the button given below to start using the template
         </div>
         <div
-          onClick={() => setOpenModal(false)}
+          onClick={() => dispatch(toggleModal(false))}
           className="flex items-center text-white px-12 py-5 text-[20px] font-[600] connect-wallet-button rounded-[60px] mt-10 cursor-pointer"
         >
           Start Creating Now
