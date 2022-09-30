@@ -39,7 +39,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     }
   };
 
-  const isElement = i ? true : false;
+  const isElement = !!i;
 
   return (
     <ColorPickerDropdown

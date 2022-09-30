@@ -25,7 +25,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, name = "Color" }) => {
     );
   };
 
-  const isElement = i ? true : false;
+  const isElement = !!i;
 
   return (
     <ColorPickerDropdown

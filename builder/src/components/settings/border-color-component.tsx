@@ -26,7 +26,7 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({
     );
   };
 
-  const isElement = i ? true : false;
+  const isElement = !!i;
 
   return (
     <ColorPickerDropdown
