@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import BgColorComponent from "components/settings/bg-color-component";
 import { uploadFileToWeb3Storage } from "config/web3storage";
+import { SITE_SIZE_VARIABLE } from "config/constant";
 import "styles/components.css";
 
 interface IDefaultSettings {
@@ -23,7 +24,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   const [siteImage, setSiteImage] = useState<string>();
   const onChangeLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
-      if (e.target.files[0].size > 1000000) {
+      if (e.target.files[0].size > SITE_SIZE_VARIABLE) {
         setSizeExceeded(true);
       } else {
         const reader = new FileReader();

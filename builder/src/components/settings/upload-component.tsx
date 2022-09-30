@@ -5,6 +5,7 @@ import {
   updateUploadedImageData,
 } from "redux/workspace/workspace.reducers";
 import { uploadFileToWeb3Storage } from "utils/web3storage";
+import { IMAGE_SIZE_VARIABLE } from "config/constant";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -19,7 +20,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
   // FIX: find suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
-      if (e.target.files[0].size > 5242880) {
+      if (e.target.files[0].size > IMAGE_SIZE_VARIABLE) {
         setSizeExceeded(true);
       } else {
         setSizeExceeded(false);
