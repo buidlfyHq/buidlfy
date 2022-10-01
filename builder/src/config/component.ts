@@ -293,8 +293,8 @@ export const components = [
   },
   {
     name: "Image",
-    h: 2,
-    minH: 1,
+    h: 3,
+    minH: 3,
     style: {
       width: 80,
       height: 60,

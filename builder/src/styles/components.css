@@ -946,3 +946,15 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   grid-column-gap: 3.5rem;
   grid-row-gap: -1rem;
 }
+
+.default-image {
+  background: rgba(98, 61, 238, 0.03);
+}
+
+.image-div {
+  background: linear-gradient(93.43deg, rgba(104, 174, 255, 0.06) 19.42%, rgba(151, 104, 251, 0.06) 63.9%);
+}
+.default-upload {
+  background: rgba(176, 148, 254, 0.04);
+  border: 1px dashed #87898E;
+}

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import defaultImage from "assets/default-image.png";
-import "styles/components.css";
 import { MARGIN_VARIABLE } from "config/constants";
+import "styles/components.css";
 
 interface IImageComponent {
   imgData: string | ArrayBuffer;

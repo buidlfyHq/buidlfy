@@ -2,6 +2,8 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { IRootState } from "redux/root-state.interface";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
+import image from "assets/default-image.png";
+import add from "assets/add-image.png";
 import "styles/components.css";
 
 interface IImageComponent {
@@ -75,13 +77,21 @@ const Image: FC<IImageComponent> = ({
           />
         </div>
       ) : (
-        <div className="flex justify-center">
-          <div
-            id={i}
-            className="my-[1.8rem] upload-img px-3 text-[12px] whitespace-nowrap"
-          >
-            Click and upload file, or{" "}
-            <span className="ml-2 purple-label">browse</span>
+        // Fix: Open setting on Image click
+        <div className="default-image w-full h-full">
+          <div id={i} className="flex justify-center items-center h-full">
+            <div>
+              <div className="flex justify-center">
+                <img className="w-6" src={image} alt="default" />
+              </div>
+              <h6 className="text-[#3F405C] text-[12px] mt-3">
+                Click here to add the image
+              </h6>
+              <div className="flex mt-3 justify-center py-2.5 image-div rounded-[8px]">
+                <h6 className="text-[#666BD3] text-[13px]">Add Image</h6>
+                <img className="w-5 ml-2" src={add} alt="add" />
+              </div>
+            </div>
           </div>
         </div>
       )}
