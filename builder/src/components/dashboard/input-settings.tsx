@@ -38,12 +38,13 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <BorderRadiusComponent
         i={selectedElement.i}
         borderRadius={selectedElement.style.borderRadius}
+        borderColor={selectedElement.style.color}
       />
       <MarginComponent
         i={selectedElement.i}
         margin={selectedElement.style.margin}
       />
-      <PaddingComponent 
+      <PaddingComponent
         i={selectedElement.i}
         padding={selectedElement.style.padding}
       />

@@ -438,6 +438,10 @@
   font-size: 12px;
   line-height: 14px;
 }
+.margin-form:focus-visible {
+outline: 1px solid rgba(111, 91, 151, 0.28);
+box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba(255, 255, 255, 0.03);
+}
 .margin-subtext {
   font-style: normal;
   font-weight: 400;
@@ -684,6 +688,7 @@
   border: 1px dashed rgba(151, 104, 251, 0.72);
   border-radius: 1px;
   display: flex;
+  border-width: 2px;
   align-items: center;
   justify-content: center;
 }
@@ -877,6 +882,7 @@
   color: #000000;
 }
 
+
 .main-grid {
   background: linear-gradient(
       0deg,
@@ -933,4 +939,10 @@
 }
 .close-btn:hover {
   background: rgba(93, 56, 244, 0.15);
+}
+
+.margin-grid {
+  grid-template-columns: 60px 60px;
+  grid-column-gap: 3.5rem;
+  grid-row-gap: -1rem;
 }

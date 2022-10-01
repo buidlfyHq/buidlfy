@@ -4,9 +4,9 @@ import ArrowInput from "./arrow-input";
 interface INumberInput {
   text: string;
   value: number;
-  handleChange: (e) => void;
-  handleIncrement: (e) => void;
-  handleDecrement: (e) => void;
+  handleChange: (e: number) => void;
+  handleIncrement: () => void;
+  handleDecrement: () => void;
 }
 const NumberInput: FC<INumberInput> = ({
   text,
@@ -16,8 +16,10 @@ const NumberInput: FC<INumberInput> = ({
   handleDecrement,
 }) => {
   return (
-    <div className="flex px-1">
-      <div className="ml-3 margin-text flex w-[135px] items-center">{text}</div>
+    <div className="flex px-1 py-4">
+      <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">
+        {text}
+      </div>
       <ArrowInput
         value={value}
         handleChange={handleChange}

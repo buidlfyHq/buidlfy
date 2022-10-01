@@ -34,10 +34,11 @@ const Dashboard: FC = () => {
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
 
   useEffect(() => {
-    // checks for stored config
+    // checks for stored configs
     let saveItems = localStorage.getItem("items");
     if (saveItems) {
-      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems)));
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).builder));
+      setWorkspaceBackgroundColor(JSON.parse(saveItems).background);
     }
   }, []); // eslint-disable-line
 
@@ -73,14 +74,8 @@ const Dashboard: FC = () => {
             isContainerSelected={isContainerSelected}
             sideElement={sideElement}
             isNavHidden={isNavHidden}
-            setIsNavHidden={setIsNavHidden}
-            showSidebar={showSidebar}
             hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
-            workspaceBackgroundColor={workspaceBackgroundColor}
-            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-            head={head}
-            setHead={setHead}
           />
 
           <section className="flex-1">
@@ -88,6 +83,7 @@ const Dashboard: FC = () => {
             <Navbar
               className={className}
               workspaceBackgroundColor={workspaceBackgroundColor}
+              setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
               head={head}
             />
 
@@ -109,6 +105,9 @@ const Dashboard: FC = () => {
                 setIsNavHidden={setIsNavHidden}
                 setSideElement={setSideElement}
                 hideSettingSidebar={undefined}
+                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+                head={head}
+                setHead={setHead}
               />
               {/* Right Sidebar Settings */}
             </aside>

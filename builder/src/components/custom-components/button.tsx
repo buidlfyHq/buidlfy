@@ -42,7 +42,7 @@ const Button: FC<IText> = ({
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
       }}
       id={i}
-      className="btn-border w-[170px] h-[40px] cursor-pointer btn whitespace-nowrap"
+      className="btn-border cursor-pointer btn whitespace-nowrap"
     >
       <span
         style={{

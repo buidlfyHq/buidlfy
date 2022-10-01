@@ -40,7 +40,6 @@ const Text: FC<IText> = ({
       className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
     />
   );
-
   return (
     <section
       id="text-one"

@@ -5,7 +5,7 @@ import { MARGIN_VARIABLE } from "config/constants";
 import "styles/components.css";
 
 interface IInputComponent {
-  id: string;
+  i: string;
   inputValue: IInput[];
   setInputValue: (inputValue: object[]) => void;
   borderRadius: number;
@@ -17,20 +17,29 @@ interface IInputComponent {
     marginTop?: number;
     marginBottom?: number;
   };
+  padding?: {
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
+  placeholder: string;
 }
 
 const Input: FC<IInputComponent> = ({
-  id,
+  i,
   inputValue,
   setInputValue,
   borderRadius,
   shadow,
   color,
   margin,
+  padding,
+  placeholder,
 }) => {
   const getValue = (inputArray: IInput[]) => {
     const requiredValue = inputArray.filter(
-      (input: IInput) => input.id === id
+      (input: IInput) => input.id === i
     )[0];
     return requiredValue ? requiredValue.value : "";
   };
@@ -48,15 +57,14 @@ const Input: FC<IInputComponent> = ({
           }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
             margin.marginLeft * MARGIN_VARIABLE
           }px`,
+          padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
         }}
         className="btn-border w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
-        id="input"
+        id={i}
         type="text"
-        placeholder="Input"
+        placeholder={placeholder}
         value={getValue(inputValue)}
-        onChange={(e) =>
-          setInputValue(setValue(inputValue, id, e.target.value))
-        }
+        onChange={(e) => setInputValue(setValue(inputValue, i, e.target.value))}
       />
     </section>
   );

@@ -142,13 +142,15 @@ const RenderItem: FC<IRenderItem> = ({
     case "Input":
       return (
         <Input
-          id={item.i}
+          i={item.i}
           inputValue={inputValue}
           setInputValue={setInputValue}
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           color={item.style.color}
           margin={item.style.margin}
+          padding={item.style.padding}
+          placeholder={item.placeholder}
         />
       );
     case "Divider":

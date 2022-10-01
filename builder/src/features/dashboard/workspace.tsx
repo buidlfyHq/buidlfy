@@ -21,6 +21,7 @@ import {
 } from "redux/contract/contract.interfaces";
 import DefaultBuilder from "./deafult-builder";
 import "styles/components.css";
+import DefaultSettings from "./default-settings";
 
 interface IWorkspaceComponent {
   setOpenSetting: (open: boolean) => void;
@@ -39,6 +40,12 @@ interface IWorkspaceComponent {
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   hideSettingSidebar?: () => void;
+  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
+  head: {
+    title: string;
+    logo: string | ArrayBuffer;
+  };
+  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
 }
 
 const Workspace: FC<IWorkspaceComponent> = ({
@@ -56,6 +63,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
   dragContainer,
   setDragContainer,
   hideSettingSidebar,
+  setWorkspaceBackgroundColor,
+  head,
+  setHead,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -293,10 +303,18 @@ const Workspace: FC<IWorkspaceComponent> = ({
           </section>
         </section>
       ) : (
-        <DefaultBuilder
-          showSidebar={showSidebar}
-          setSideElement={setSideElement}
-        />
+        <>
+          <DefaultBuilder
+            showSidebar={showSidebar}
+            setSideElement={setSideElement}
+          />
+          <DefaultSettings
+            workspaceBackgroundColor={workspaceBackgroundColor}
+            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+            head={head}
+            setHead={setHead}
+          />
+        </>
       )}
     </main>
   );
