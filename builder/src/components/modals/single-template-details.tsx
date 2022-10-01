@@ -12,11 +12,12 @@ const SingleTemplateDetails: FC = () => {
   const dispatch = useDispatch();
   const currentAccount = useSelector((state: any) => state.web3.currentAccount);
 
-  const handleBuy = async () => {
+  const handleBuy = () => {
     if (!currentAccount) {
-      await dispatch(connectWallet());
+      dispatch(connectWallet());
+    } else {
+      dispatch(toggleModalType("final"));
     }
-    dispatch(toggleModalType("final"));
   };
 
   return (
