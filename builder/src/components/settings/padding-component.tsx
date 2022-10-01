@@ -123,25 +123,6 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
         handleIncrement={paddingData[containerType].handleIncrement}
         handleDecrement={paddingData[containerType].handleDecrement}
       />
-      {/* {isContainer ? (
-        <SpaceInput
-          heading="Padding"
-          text={paddingData.container.text}
-          value={paddingData.container.value}
-          handleChange={paddingData.container.handleChange}
-          handleIncrement={paddingData.container.handleIncrement}
-          handleDecrement={paddingData.container.handleDecrement}
-        />
-      ) : (
-        <SpaceInput
-          heading="Padding"
-          text={paddingData.text}
-          value={paddingData.value}
-          handleChange={paddingData.handleChange}
-          handleIncrement={paddingData.handleIncrement}
-          handleDecrement={paddingData.handleDecrement}
-        />
-      )} */}
     </>
   );
 };
