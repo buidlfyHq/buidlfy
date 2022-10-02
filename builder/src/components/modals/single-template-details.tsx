@@ -1,36 +1,20 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
+import { toggleModalType } from "redux/modal/modal.reducers";
 import EyeImg from "assets/eye.png";
 import TempexImg from "assets/tempex.png";
 import InfoCircleImg from "assets/info-circle.png";
 
-interface ISingleTemplateDetails {
-  isOpenSingleTemplate: boolean;
-  setIsOpenSingleTemplate: (isOpenSingleTemplate: boolean) => void;
-  setIsOpenSelectWallet?: (isOpenSelectWallet: boolean) => void;
-  setIsOpenListForSale?: (isOpenListForSale: boolean) => void;
-}
-
-const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
-  isOpenSingleTemplate,
-  setIsOpenSingleTemplate,
-  setIsOpenSelectWallet,
-  setIsOpenListForSale
-}) => {
+const SingleTemplateDetails: FC<{list: boolean}> = ({list}) => {
+  const dispatch = useDispatch();
   const handleSubmit = () => {
-    setIsOpenSingleTemplate(false);
-    setIsOpenSelectWallet ? setIsOpenSelectWallet(true) : setIsOpenListForSale(true)
-  };
-
+    list ? dispatch(toggleModalType("list-template-for-sale")) : dispatch(toggleModalType("select-wallet"))
+  }
   return (
-    <Dialog
-      className="relative z-50"
-      open={isOpenSingleTemplate}
-      onClose={() => setIsOpenSingleTemplate(false)}
-    >
-      <div className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
-        <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
+    <main className={`${list ? 'bg-black/10' : 'bg-black/70'} fixed inset-0 flex items-center justify-center backdrop-blur-[10px]`}>
+      <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
           <div className="flex items-center justify-between">
             <div className="text-[22px] font-[500] text-[#14142B]">
               Cryptin Next Generation Web Template
@@ -64,7 +48,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
                 </div>
               </div>
               <div>
-                {setIsOpenSelectWallet ? (
+                {!list ? (
                   <div className="w-full mt-8 text-center text-[22px] text-[#202525] bg-[#E6EAF4] rounded-[4px] font-[600] py-4 cursor-pointer">
                   $149.00
                 </div>
@@ -94,8 +78,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
             </div>
           </div>
         </Dialog.Panel>
-      </div>
-    </Dialog>
+    </main>
   );
 };
 

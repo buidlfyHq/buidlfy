@@ -2,15 +2,19 @@ import React, { FC, useState } from 'react'
 import Temp1 from 'assets/temp-1.png'
 import {ReactComponent as ColorFeather} from 'assets/svgAsIcons/feather-color.svg'
 import {BiChevronDown} from 'react-icons/bi'
-import SingleTemplateDetails from 'components/custom-components/modals/single-template-details'
-import ListTemplate from 'components/custom-components/modals/list-template'
+import TemplateModal from "features/dashboard/template-modal";
+import { useDispatch } from 'react-redux';
+import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
+// import ListTemplate from 'components/custom-components/modals/list-template'
 
 const MyTemplates : FC = () => {
+    const dispatch = useDispatch()
     const [isOpenSingleTemplate,setIsOpenSingleTemplate] = useState<boolean>(false)
     const [isOpenListForSale,setIsOpenListForSale] = useState<boolean>(false)
-    const templates = [Temp1,Temp1,Temp1,Temp1,Temp1,Temp1]
+    const templates = [Temp1,Temp1,Temp1,Temp1,Temp1,Temp1,Temp1,Temp1,Temp1]
     const handleListOnBuidlfy = () => {
-        setIsOpenSingleTemplate(true)
+        dispatch(toggleModal(true))
+        dispatch(toggleModalType("list-single"))
     }
   return (
     <div className='min-h-screen'>
@@ -42,12 +46,12 @@ const MyTemplates : FC = () => {
                     <div className='py-3 cursor-pointer px-7'>Published</div>
                 </div>
             </div>
-            <div className="w-full bg-lower-template px-36">
-                    <div className='flex items-center justify-center pt-12 pb-4 px-36 gap-5'>
+            <div className="w-full bg-lower-template">
+                    <div className='flex items-center justify-center gap-5 pt-12 pb-4 px-36'>
                         <div>
                             <form className="flex items-center">
                                 <div className="relative ">
-                                <div className="flex absolute inset-y-0 right-0 items-center pr-3 pointer-events-none">
+                                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                                     <svg
                                         aria-hidden="true"
                                         className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -81,38 +85,30 @@ const MyTemplates : FC = () => {
                             <BiChevronDown className='ml-2 text-[18px]' />
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-8 pb-12 pt-7 px-40">
+                    <div className="grid grid-cols-3 gap-8 px-40 pb-12 pt-7">
                         {templates.map((temp, index) => {
                             return (
-                                <div key={index} className="w-full w-auto bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative">
+                                <div key={index} className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative">
                                    <div className='relative w-full w-auto rounded-[16px] h-[200px]'>
                                         <div className='absolute right-0 flex justify-end my-2 mx-4 py-1 px-3 text-[#14142B] text-[10px] bg-[#FFE6B0] rounded-[5px]'>
                                             In Review
                                         </div>
-                                        <div className='absolute flex justify-center items-center flex-col w-full h-full'>
-                                            <div className='py-2 px-10 font-[13px] font-[600] rounded-[8px] bg-white text-[#7743E7]'>View Details</div>
+                                        <div className='absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600]'>
+                                            <div className='py-2 px-10 rounded-[8px] bg-white text-[#7743E7]'>View Details</div>
                                             <div 
-                                             className='py-2 px-8 mt-4 font-[13px] font-[600] rounded-[8px] connect-wallet-button text-white'
+                                             className='py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white'
                                              onClick={handleListOnBuidlfy}
                                             >
                                                 List on Buidlfy
                                             </div>
                                         </div>
-                                        <img src={temp} alt="img_temp" className="rounded-[16px]" />
+                                        <img src={temp} alt="img_temp" className="rounded-[16px] w-full" />
                                     </div>
                                     <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
                                         <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">Cryptin Next Gen Template</div>
                                         <div className="text-[12px] text-[#14142B] py-2 px-4 bg-gray-100 font-[500] rounded-[4px]">Crypto</div>
                                     </div>
-                                    <SingleTemplateDetails 
-                                      isOpenSingleTemplate={isOpenSingleTemplate}
-                                      setIsOpenSingleTemplate={setIsOpenSingleTemplate}
-                                      setIsOpenListForSale={setIsOpenListForSale}
-                                    />
-                                    <ListTemplate 
-                                        isOpenListForSale={isOpenListForSale}
-                                        setIsOpenListForSale={setIsOpenListForSale}
-                                    />
+                                    <TemplateModal />
                                 </div>
                             )
                         })}
