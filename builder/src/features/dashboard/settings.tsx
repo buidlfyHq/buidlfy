@@ -1,6 +1,6 @@
 import React, { useRef, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdOutlineDeleteOutline, MdArrowBack } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import SettingComponent from "components/utils/render-setting";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";

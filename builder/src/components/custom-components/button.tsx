@@ -51,6 +51,7 @@ const Button: FC<IText> = ({
           textDecoration: underline,
           textDecorationColor: color,
         }}
+        id={i}
         className="text-class"
       >
         {link.length > 0 ? <a href={link}>{value}</a> : value}

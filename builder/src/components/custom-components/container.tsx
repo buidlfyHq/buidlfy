@@ -349,7 +349,7 @@ const Container: FC<IContainer> = ({
             onMouseOver={() => setDrag(true)}
             className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
           >
-            <img className="w-[13px] h-[13px]" src={dragImg} />
+            <img className="w-[13px] h-[13px]" src={dragImg} alt="drag" />
           </div>
           <div
             onMouseOut={() => setDrag(true)}
@@ -358,7 +358,7 @@ const Container: FC<IContainer> = ({
             id="add-img"
             onClick={() => onComponentAddClick(item.i)}
           >
-            <img className="w-[11px] h-[11px]" src={add} />
+            <img className="w-[11px] h-[11px]" src={add} alt="add" />
           </div>
           {children?.length ? (
             <div
@@ -368,7 +368,7 @@ const Container: FC<IContainer> = ({
               id="edit-img"
               onClick={() => onComponentEditClick(item.i)}
             >
-              <img className="w-[13px] h-[13px]" src={edit} />
+              <img className="w-[13px] h-[13px]" src={edit} alt="edit" />
             </div>
           ) : (
             <div
@@ -378,7 +378,11 @@ const Container: FC<IContainer> = ({
               id="delete-img"
               onClick={() => onComponentDeleteClick(item.i)}
             >
-              <img className="w-[13px] h-[13px]" src={deleteContainer} />
+              <img
+                className="w-[13px] h-[13px]"
+                src={deleteContainer}
+                alt="delete"
+              />
             </div>
           )}
         </div>
