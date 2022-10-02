@@ -61,10 +61,10 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
   const marginData = {
     text: ["L", "R", "T", "B"],
     value: [
-      margin?.marginLeft,
-      margin?.marginRight,
-      margin?.marginTop,
-      margin?.marginBottom,
+      margin?.marginLeft || 0,
+      margin?.marginRight || 0,
+      margin?.marginTop || 0,
+      margin?.marginBottom || 0,
     ],
     handleChange: [
       (updatedMargin: number) => handleChange(Margin.MARGINLEFT, updatedMargin),
