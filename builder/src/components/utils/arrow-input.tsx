@@ -7,6 +7,7 @@ interface IArrowInput {
   handleIncrement: () => void;
   handleDecrement: () => void;
 }
+
 const ArrowInput: FC<IArrowInput> = ({
   value,
   handleChange,

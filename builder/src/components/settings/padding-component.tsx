@@ -81,10 +81,10 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
     default: {
       text: ["L", "R", "T", "B"],
       value: [
-        padding?.paddingLeft,
-        padding?.paddingRight,
-        padding?.paddingTop,
-        padding?.paddingBottom,
+        padding?.paddingLeft || 0,
+        padding?.paddingRight || 0,
+        padding?.paddingTop || 0,
+        padding?.paddingBottom || 0,
       ],
       handleChange: [
         (updatedPadding: number) =>

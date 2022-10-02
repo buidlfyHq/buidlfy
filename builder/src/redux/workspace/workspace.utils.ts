@@ -81,7 +81,7 @@ export const mapElementSubStyleToWorkspace = (
   const { settingItemId, propertyName, propertyValue, childPropertyName } =
     payload;
   let selectedChild = findSelected(element, settingItemId);
-
+  
   if (element.i === settingItemId) {
     return {
       ...element,
@@ -99,7 +99,7 @@ export const mapElementSubStyleToWorkspace = (
       style: {
         ...selectedChild["style"],
         [propertyName]: {
-          ...element.style[propertyName],
+          ...selectedChild.style[propertyName],
           [childPropertyName]: propertyValue,
         },
       },
@@ -155,7 +155,7 @@ export const fetchSelectedElement = (
   const searchSelectedElement = workspaceElements?.find(
     (element) => element.i === payload
   );
-  
+
   const searchSelectedChild = workspaceElements?.map((element) =>
     element.children?.find((child: IWorkspaceElement) => child.i === payload)
   );
@@ -250,13 +250,22 @@ export const updateContractInElement = (
   }
 };
 
-export const fetchUploadedImageData = (settingItemId: string, uploadedImageData: string, uploadedImagesData: IUploadedImageData[] ) => {
-  const uploadedImageIndex = uploadedImagesData.findIndex((uploadImageData) => uploadImageData.settingItemId === settingItemId);
-  let newUploadedImagesData = [...uploadedImagesData]
+export const fetchUploadedImageData = (
+  settingItemId: string,
+  uploadedImageData: string,
+  uploadedImagesData: IUploadedImageData[]
+) => {
+  const uploadedImageIndex = uploadedImagesData.findIndex(
+    (uploadImageData) => uploadImageData.settingItemId === settingItemId
+  );
+  let newUploadedImagesData = [...uploadedImagesData];
   if (uploadedImageIndex >= 0) {
-  newUploadedImagesData[uploadedImageIndex] = { ...newUploadedImagesData[uploadedImageIndex], uploadedImageData }
-  return newUploadedImagesData;
+    newUploadedImagesData[uploadedImageIndex] = {
+      ...newUploadedImagesData[uploadedImageIndex],
+      uploadedImageData,
+    };
+    return newUploadedImagesData;
   }
-  newUploadedImagesData.push({ settingItemId, uploadedImageData })
+  newUploadedImagesData.push({ settingItemId, uploadedImageData });
   return newUploadedImagesData;
-}
+};
