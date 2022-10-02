@@ -8,6 +8,7 @@ import {
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 import "styles/dashboard.css";
+import { ReplaceStyle } from "components/utils/render-setting";
 
 interface IAlignComponent {
   i: string;
@@ -38,19 +39,25 @@ const AlignComponent: FC<IAlignComponent> = ({ i, justifyContent }) => {
           <div className="flex px-3">
             <span
               onClick={() => handleAlignChange("left")}
-              className="align-div flex items-center justify-center font-bold shadow text-[18px] p-2 mr-2 my-2 font-regular"
+              className={`align-div cursor-pointer flex items-center justify-center font-bold shadow text-[18px] p-2 mr-2 my-2 font-regular ${
+                justifyContent === ReplaceStyle.LEFT ? "bg-[#b7c1ec]" : ""
+              }`}
             >
               <AiOutlineAlignLeft className="text-[18px]" />
             </span>
             <span
               onClick={() => handleAlignChange("center")}
-              className="align-div flex items-center justify-center italic shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
+              className={`align-div cursor-pointer flex items-center justify-center italic shadow text-[18px] p-2 mx-2 my-2 font-regular text-black ${
+                justifyContent === ReplaceStyle.CENTER ? "bg-[#b7c1ec]" : ""
+              }`}
             >
               <AiOutlineAlignCenter className="text-[18px]" />
             </span>
             <span
               onClick={() => handleAlignChange("right")}
-              className="align-div flex items-center justify-center underline shadow text-[18px] p-2 mx-2 my-2 font-regular text-black"
+              className={`align-div cursor-pointer flex items-center justify-center underline shadow text-[18px] p-2 mx-2 my-2 font-regular text-black ${
+                justifyContent === ReplaceStyle.RIGHT ? "bg-[#b7c1ec]" : ""
+              }`}
             >
               <AiOutlineAlignRight className="text-[18px]" />
             </span>

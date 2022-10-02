@@ -37,19 +37,25 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
           <div className="flex px-3 mt-3">
             <span
               onClick={() => handleChange("contain")}
-              className="align-div flex items-center justify-center shadow text-[12px] p-2 mr-2 my-2 font-regular text-black"
+              className={`align-div cursor-pointer flex items-center justify-center shadow text-[12px] p-2 mr-2 my-2 font-regular text-black ${
+                backgroundSize === "contain" ? "bg-[#b7c1ec]" : ""
+              }`}
             >
               Contain
             </span>
             <span
               onClick={() => handleChange("cover")}
-              className="align-div flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black"
+              className={`align-div cursor-pointer flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black  ${
+                backgroundSize === "cover" ? "bg-[#b7c1ec]" : ""
+              }`}
             >
               Cover
             </span>
             <span
               onClick={() => handleChange("auto")}
-              className="align-div flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black"
+              className={`align-div cursor-pointer flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black  ${
+                backgroundSize === "auto" ? "bg-[#b7c1ec]" : ""
+              }`}
             >
               Auto
             </span>
