@@ -8,17 +8,19 @@ import InfoCircleImg from "assets/info-circle.png";
 interface ISingleTemplateDetails {
   isOpenSingleTemplate: boolean;
   setIsOpenSingleTemplate: (isOpenSingleTemplate: boolean) => void;
-  setIsOpenSelectWallet: (isOpenSelectWallet: boolean) => void;
+  setIsOpenSelectWallet?: (isOpenSelectWallet: boolean) => void;
+  setIsOpenListForSale?: (isOpenListForSale: boolean) => void;
 }
 
 const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
   isOpenSingleTemplate,
   setIsOpenSingleTemplate,
   setIsOpenSelectWallet,
+  setIsOpenListForSale
 }) => {
   const handleSubmit = () => {
     setIsOpenSingleTemplate(false);
-    setIsOpenSelectWallet(true);
+    setIsOpenSelectWallet ? setIsOpenSelectWallet(true) : setIsOpenListForSale(true)
   };
 
   return (
@@ -62,14 +64,16 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({
                 </div>
               </div>
               <div>
-                <div className="w-full mt-8 text-center text-[22px] text-[#202525] bg-[#E6EAF4] rounded-[4px] font-[600] py-4 cursor-pointer">
+                {setIsOpenSelectWallet ? (
+                  <div className="w-full mt-8 text-center text-[22px] text-[#202525] bg-[#E6EAF4] rounded-[4px] font-[600] py-4 cursor-pointer">
                   $149.00
                 </div>
+                ) : <div className="mt-16">{" "}</div>}
                 <div
                   onClick={handleSubmit}
                   className="w-full flex justify-center items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
                 >
-                  <div className="text-[14px]">Connect Wallet to buy </div>
+                  <div className="text-[14px]">List on Buidlfy</div>
                   <VscArrowRight className="ml-2 text-[18px]" />
                 </div>
                 <div className="flex mt-3 bg-gray-100 rounded-[4px] items-center text-[#4E4B66] opacity-70 text-[13px] py-3 px-4">

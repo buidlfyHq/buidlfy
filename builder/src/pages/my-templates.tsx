@@ -1,10 +1,17 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import Temp1 from 'assets/temp-1.png'
 import {ReactComponent as ColorFeather} from 'assets/svgAsIcons/feather-color.svg'
 import {BiChevronDown} from 'react-icons/bi'
+import SingleTemplateDetails from 'components/custom-components/modals/single-template-details'
+import ListTemplate from 'components/custom-components/modals/list-template'
 
 const MyTemplates : FC = () => {
+    const [isOpenSingleTemplate,setIsOpenSingleTemplate] = useState<boolean>(false)
+    const [isOpenListForSale,setIsOpenListForSale] = useState<boolean>(false)
     const templates = [Temp1,Temp1,Temp1,Temp1,Temp1,Temp1]
+    const handleListOnBuidlfy = () => {
+        setIsOpenSingleTemplate(true)
+    }
   return (
     <div className='min-h-screen'>
         {/* nav */}
@@ -65,30 +72,31 @@ const MyTemplates : FC = () => {
                                 </div>
                             </form>
                         </div>
-                        <div className='flex items-center py-4 px-5 text-[#14142A] text-[15px] bg-white rounded-[10px]'>
+                        <div className='flex items-center whitespace-nowrap py-4 px-5 text-[#14142A] text-[15px] bg-white rounded-[10px]'>
                             Sort by: Time
                             <BiChevronDown className='ml-2 text-[18px]' />
                         </div>
-                        <div className='flex items-center py-4 px-5 text-[#14142A] text-[15px] bg-white rounded-[10px]'>
+                        <div className='flex items-center whitespace-nowrap py-4 px-5 text-[#14142A] text-[15px] bg-white rounded-[10px]'>
                             All categories
                             <BiChevronDown className='ml-2 text-[18px]' />
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 pb-12 pt-7 px-40">
+                    <div className="grid grid-cols-3 gap-8 pb-12 pt-7 px-40">
                         {templates.map((temp, index) => {
                             return (
-                                <div key={index} className="w-full max-w-[330px] bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative">
-                                    {/* <div className='absolute'> */}
-                                        
-                                        
-                                    {/* </div> */}
-                                   <div className='relative w-full max-w-[314px] rounded-[16px] h-[200px'>
+                                <div key={index} className="w-full w-auto bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative">
+                                   <div className='relative w-full w-auto rounded-[16px] h-[200px]'>
                                         <div className='absolute right-0 flex justify-end my-2 mx-4 py-1 px-3 text-[#14142B] text-[10px] bg-[#FFE6B0] rounded-[5px]'>
                                             In Review
                                         </div>
                                         <div className='absolute flex justify-center items-center flex-col w-full h-full'>
                                             <div className='py-2 px-10 font-[13px] font-[600] rounded-[8px] bg-white text-[#7743E7]'>View Details</div>
-                                            <div className='py-2 px-8 mt-4 font-[13px] font-[600] rounded-[8px] connect-wallet-button text-white'>List on Buidlfy</div>
+                                            <div 
+                                             className='py-2 px-8 mt-4 font-[13px] font-[600] rounded-[8px] connect-wallet-button text-white'
+                                             onClick={handleListOnBuidlfy}
+                                            >
+                                                List on Buidlfy
+                                            </div>
                                         </div>
                                         <img src={temp} alt="img_temp" className="rounded-[16px]" />
                                     </div>
@@ -96,6 +104,15 @@ const MyTemplates : FC = () => {
                                         <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">Cryptin Next Gen Template</div>
                                         <div className="text-[12px] text-[#14142B] py-2 px-4 bg-gray-100 font-[500] rounded-[4px]">Crypto</div>
                                     </div>
+                                    <SingleTemplateDetails 
+                                      isOpenSingleTemplate={isOpenSingleTemplate}
+                                      setIsOpenSingleTemplate={setIsOpenSingleTemplate}
+                                      setIsOpenListForSale={setIsOpenListForSale}
+                                    />
+                                    <ListTemplate 
+                                        isOpenListForSale={isOpenListForSale}
+                                        setIsOpenListForSale={setIsOpenListForSale}
+                                    />
                                 </div>
                             )
                         })}
