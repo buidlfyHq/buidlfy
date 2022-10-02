@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -36,25 +37,25 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
           Background Size
           <div className="flex px-3 mt-3">
             <span
-              onClick={() => handleChange("contain")}
+              onClick={() => handleChange(ReplaceStyle.CONTAIN)}
               className={`align-div cursor-pointer flex items-center justify-center shadow text-[12px] p-2 mr-2 my-2 font-regular text-black ${
-                backgroundSize === "contain" ? "bg-[#b7c1ec]" : ""
+                backgroundSize === ReplaceStyle.CONTAIN ? "bg-[#b7c1ec]" : ""
               }`}
             >
               Contain
             </span>
             <span
-              onClick={() => handleChange("cover")}
+              onClick={() => handleChange(ReplaceStyle.COVER)}
               className={`align-div cursor-pointer flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black  ${
-                backgroundSize === "cover" ? "bg-[#b7c1ec]" : ""
+                backgroundSize === ReplaceStyle.COVER ? "bg-[#b7c1ec]" : ""
               }`}
             >
               Cover
             </span>
             <span
-              onClick={() => handleChange("auto")}
+              onClick={() => handleChange(ReplaceStyle.AUTO)}
               className={`align-div cursor-pointer flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black  ${
-                backgroundSize === "auto" ? "bg-[#b7c1ec]" : ""
+                backgroundSize === ReplaceStyle.AUTO ? "bg-[#b7c1ec]" : ""
               }`}
             >
               Auto
