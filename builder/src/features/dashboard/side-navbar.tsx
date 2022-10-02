@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import elements from "assets/elements.png";
-import styles from "assets/styles.png";
 import templates from "assets/templates.png";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import logo from "assets/buidlfy.png";
@@ -28,7 +27,11 @@ const SideNavbar: FC<ISideNavbar> = ({
       className={`w-[80px] sidenav z-[1] fixed top-0 bottom-0 left-0 ${className}`}
     >
       {/* Components */}
-      <img src={logo} className="w-[2.4rem] mx-[1.3rem] my-[0.65rem]" />
+      <img
+        src={logo}
+        className="w-[2.4rem] mx-[1.3rem] my-[0.65rem]"
+        alt="logo"
+      />
       <div className="side-border px-4 pt-[1rem]">
         <div
           onClick={() => {
