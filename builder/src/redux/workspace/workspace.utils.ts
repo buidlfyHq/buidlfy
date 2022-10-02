@@ -81,9 +81,7 @@ export const mapElementSubStyleToWorkspace = (
   const { settingItemId, propertyName, propertyValue, childPropertyName } =
     payload;
   let selectedChild = findSelected(element, settingItemId);
-  console.log(payload);
   
-
   if (element.i === settingItemId) {
     return {
       ...element,
@@ -106,7 +104,6 @@ export const mapElementSubStyleToWorkspace = (
         },
       },
     };
-    console.log({...selectedChild.style.margin}, "child-utils");
 
     const childIndex = findIndex(element, settingItemId);
     let newChildren = [...element.children];
