@@ -7,7 +7,11 @@ import EyeImg from "assets/eye.png";
 import TempexImg from "assets/tempex.png";
 import InfoCircleImg from "assets/info-circle.png";
 
-const SingleTemplateDetails: FC<{list: boolean}> = ({list}) => {
+interface ISingleTemplateDetails {
+  list: boolean
+}
+
+const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({list}) => {
   const dispatch = useDispatch();
   const handleSubmit = () => {
     list ? dispatch(toggleModalType("list-template-for-sale")) : dispatch(toggleModalType("select-wallet"))

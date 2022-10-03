@@ -1,11 +1,14 @@
 import React, { FC, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import HourGlassImg from "assets/hourglass.png";
-import MintedTemplateModal from "./minted-template";
 import { useDispatch } from "react-redux";
 import { toggleModalType } from "redux/modal/modal.reducers";
 
-const PublishSiteModal: FC<{generatedConfig:any}> = ({generatedConfig}) => {
+interface IPublishSiteModal {
+  generatedConfig:any
+}
+
+const PublishSiteModal: FC<IPublishSiteModal> = ({generatedConfig}) => {
   const dispatch = useDispatch()
   return (
     <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
@@ -47,10 +50,6 @@ const PublishSiteModal: FC<{generatedConfig:any}> = ({generatedConfig}) => {
             >
               Click here to copy Config
             </button>
-            {/* <MintedTemplateModal
-              isMintedOpen={isMintedOpen}
-              setIsMintedOpen={setIsMintedOpen}
-            /> */}
           </div>
         </section>
       </main>
