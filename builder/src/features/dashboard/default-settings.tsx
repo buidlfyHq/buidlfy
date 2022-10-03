@@ -27,6 +27,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       if (e.target.files[0].size > SITE_SIZE_VARIABLE) {
         setSizeExceeded(true);
       } else {
+        setSizeExceeded(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           setSiteImage(reader.result as string);
