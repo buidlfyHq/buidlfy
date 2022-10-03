@@ -55,5 +55,5 @@ export const uploadFileToWeb3Storage = async (
     onRootCidReady,
     onStoredChunk,
   });
-  return `https://${cid}.ipfs.dweb.link/`;
+  return `https://${cid}.ipfs.w3s.link/`;
 };

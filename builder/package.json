@@ -11,6 +11,8 @@
     "base-64": "^1.0.0",
     "buffer": "^6.0.3",
     "ethers": "^5.5.3",
+    "mime": "^3.0.0",
+    "nft.storage": "^7.0.0",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.1.0",
     "react-best-gradient-color-picker": "^2.0.17",

@@ -593,16 +593,9 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   width: 245px;
   height: 100px;
 }
-.image-container {
-  background: #ffffff;
-  border-radius: 5px;
-  width: 245px;
-  height: 175px;
-}
 .image-container:hover {
-  background: #ffffff;
-  outline: 2px solid rgba(63, 43, 201, 0.1);
-  border-radius: 10px;
+  border-radius: 5px;
+  background-color: rgb(106, 88, 231,0.2);
 }
 .element-upload {
   background: #faf8ff;
@@ -956,5 +949,9 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 }
 .default-upload {
   background: rgba(176, 148, 254, 0.04);
+  border: 1px dashed #87898E;
+}
+.image-overlay {
+  background: rgba(0, 0, 0, 0.6);
   border: 1px dashed #87898E;
 }
