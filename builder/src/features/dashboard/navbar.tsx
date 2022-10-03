@@ -9,12 +9,14 @@ import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { uploadFileToWeb3Storage } from "config/web3storage";
 import { IRootState } from "redux/root-state.interface";
+import { Menu } from '@headlessui/react'
 import {
   ITemplate,
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
+import { Link } from "react-router-dom";
 
 interface INavbar {
   className: string;
@@ -192,7 +194,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
           Preview
         </div> */}
         <div 
-          className="mint-button text-[14px] text-[#855FD8] font[500] py-2 px-6 cursor-pointer"
+          className="bordered-button text-[14px] text-[#855FD8] font[500] py-2 px-6 cursor-pointer"
           onClick={handleMintTemplateForm}
         >
           Mint as NFT
@@ -207,7 +209,24 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
         >
           Publish
         </button>
-        <div className="my-3 ml-2 bg-[#9CB0D7] w-[32px] h-[32px] rounded-[50%] mt-30">{" "}</div>
+
+        {/* profile menu */}
+        
+        <Menu>
+          <Menu.Button className="relative">
+            <div className="my-3 ml-2 bg-[#9CB0D7] w-[32px] h-[32px] rounded-[50%] mt-30">{" "}</div>
+          </Menu.Button>
+          <Menu.Items className="absolute h-full top-0 right-0 flex flex-col w-56 px-4 py-2 mt-16 shadow-lg mr-5 rounded-[8px] origin-top-right bg-white" >
+            <Menu.Item>
+              {({ active }) => (
+                <Link to='/my-templates' className={`${active && 'bg-slate-100 rounded-[8px] cursor-pointer'} font-[500] px-4 py-2 font-[16px]`}>
+                  My Templates
+                </Link>
+              )}
+            </Menu.Item>
+          </Menu.Items>
+        </Menu>
+
         <PublishSiteModal 
           isOpen={isOpen}
           setIsOpen={setIsOpen}
