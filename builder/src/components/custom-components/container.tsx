@@ -55,6 +55,12 @@ interface IContainer {
     paddingTop?: number;
     paddingBottom?: number;
   };
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
 }
 
 const Container: FC<IContainer> = ({
@@ -74,6 +80,7 @@ const Container: FC<IContainer> = ({
   showSidebar,
   hideSidebar,
   padding,
+  margin,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -98,7 +105,11 @@ const Container: FC<IContainer> = ({
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
-  let finalPadding = padding.paddingLeft + padding.paddingRight;
+  let finalSpacing =
+    margin.marginLeft +
+    margin.marginRight +
+    padding.paddingLeft +
+    padding.paddingRight;
 
   const elementHoverStyles = contractElementSelector
     ? "border border-[transparent] border-hover"
@@ -266,8 +277,8 @@ const Container: FC<IContainer> = ({
       <section
         id={item.i}
         style={{
-          paddingLeft: `${padding.paddingLeft}px`,
-          paddingRight: `${padding.paddingRight}px`,
+          marginLeft: `${margin.marginLeft}px`,
+          marginRight: `${margin.marginRight}px`,
           borderRadius: `${borderRadius}px`,
           border: `${borderWidth}px solid ${color}`,
           borderImage: color,
@@ -283,7 +294,7 @@ const Container: FC<IContainer> = ({
               ? 50 - (borderWidth ? borderWidth * 2 : 0) / children?.length
               : 50
           }
-          width={containerW - (finalPadding + borderWidth * 2) || 200}
+          width={containerW - (finalSpacing + borderWidth * 2) || 200}
           isBounded={true}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
@@ -295,6 +306,8 @@ const Container: FC<IContainer> = ({
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
+            paddingLeft: `${padding.paddingLeft}px`,
+            paddingRight: `${padding.paddingRight}px`,
           }}
         >
           {!children?.length ? (

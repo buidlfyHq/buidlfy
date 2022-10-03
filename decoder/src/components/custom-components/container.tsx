@@ -19,6 +19,7 @@ const Container: FC<IBgContainer> = ({
   outputValue,
   setOutputValue,
   padding,
+  margin,
 }) => {
   const [containerW, setContainerW] = useState(null);
 
@@ -34,8 +35,9 @@ const Container: FC<IBgContainer> = ({
       id={item.i}
       style={{
         background: backgroundColor,
-        paddingLeft: `${padding.paddingLeft}px`,
-        paddingRight: `${padding.paddingRight}px`,
+        marginLeft: `${margin?.marginLeft}px`,
+        marginRight: `${margin?.marginRight}px`,
+        boxShadow: shadow,
       }}
       className="w-full h-fit"
     >
@@ -60,7 +62,8 @@ const Container: FC<IBgContainer> = ({
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            boxShadow: shadow,
+            paddingLeft: `${padding.paddingLeft}px`,
+            paddingRight: `${padding.paddingRight}px`,
           }}
         >
           {children.map((c: IWorkspace) => {

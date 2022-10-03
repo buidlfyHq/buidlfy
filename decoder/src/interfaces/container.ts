@@ -21,4 +21,10 @@ export default interface IBgContainer {
     paddingTop?: number;
     paddingBottom?: number;
   };
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  }
 }
