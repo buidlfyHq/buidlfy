@@ -47,12 +47,10 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
       type: string;
     }[]
   >([]); // work in progress
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [file, setFile] = useState<string>("");
-  const [isMintTemplateOpen, setIsMintTemplateOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (contractDetails.abi) {

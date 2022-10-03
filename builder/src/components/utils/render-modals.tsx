@@ -15,7 +15,11 @@ import PublishingProcessModal from "components/modals/publish-process";
 import PublishSiteModal from "components/modals/publish-site";
 import SitePublishedModal from "components/modals/site-published-modal";
 
-const RenderModal: FC<{generatedConfig?:any}> = ({generatedConfig}) => {
+interface IRenderModal{
+  generatedConfig?: string
+}
+
+const RenderModal: FC<IRenderModal> = ({generatedConfig}) => {
   const modalType = useSelector((state: IRootState) => state.modal.modalType);
 
   switch (modalType) {
