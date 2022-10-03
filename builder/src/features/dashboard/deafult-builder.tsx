@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import feather from "assets/feather.png";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
@@ -28,7 +28,7 @@ const DefaultBuilder: FC<IDefaultBuilder> = ({
           <div className="text-center">
             <div className="flex justify-center">
               <div className="feather-div">
-                <img src={feather} style={{ width: "2rem" }} />
+                <img src={feather} style={{ width: "2rem" }} alt="default" />
               </div>
             </div>
             <h4 className="color-[#14142B] text-[18px] font-semibold mt-[1rem]">

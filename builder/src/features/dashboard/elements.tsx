@@ -249,7 +249,7 @@ const Elements: FC<IElements> = ({
           {elementsList}
         </div>
       ) : (
-        elementsList
+        <div className="mt-[6rem]">{elementsList}</div>
       )}
     </>
   );

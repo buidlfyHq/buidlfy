@@ -24,7 +24,7 @@ const SpaceInput: FC<ISpaceInput> = ({
         <div className="grid mt-3 margin-grid">
           {Array.from(Array(text.length).keys())?.map((i: string | number) => {
             return (
-              <div className="flex">
+              <div key={i} className="flex">
                 <h6 className="mr-2 margin-subtext">{text[i]}</h6>
                 <ArrowInput
                   value={value[i]}

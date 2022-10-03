@@ -7,6 +7,7 @@ interface IArrowInput {
   handleIncrement: () => void;
   handleDecrement: () => void;
 }
+
 const ArrowInput: FC<IArrowInput> = ({
   value,
   handleChange,
@@ -21,7 +22,7 @@ const ArrowInput: FC<IArrowInput> = ({
   return (
     <div className="flex justify-end text-gray-600 py-[5px]">
       <input
-        value={`${value}px`}
+        value={value}
         placeholder="0"
         className="margin-form pl-2 py-1.5 relative form-select appearance-none block w-[75px]"
         onChange={(e) => handleInputChange(e)}
