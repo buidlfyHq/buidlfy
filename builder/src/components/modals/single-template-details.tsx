@@ -38,7 +38,7 @@ const SingleTemplateDetails: FC<{list: boolean}> = ({list}) => {
                     {" "}
                   </div>
                   <div className="ml-2 text-[14px] text-[#14142B] opacity-70">
-                    Stevan Mark - 0xBBB6...e96e
+                    0xBBB6...e96e
                   </div>
                 </div>
                 <div className="mt-8 text-[#4E4B66] opacity-70 text-[13px] max-w-[400px]">
@@ -57,7 +57,7 @@ const SingleTemplateDetails: FC<{list: boolean}> = ({list}) => {
                   onClick={handleSubmit}
                   className="w-full flex justify-center items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
                 >
-                  <div className="text-[14px]">List on Buidlfy</div>
+                  <div className="text-[14px]">Connect Wallet to Buy</div>
                   <VscArrowRight className="ml-2 text-[18px]" />
                 </div>
                 <div className="flex mt-3 bg-gray-100 rounded-[4px] items-center text-[#4E4B66] opacity-70 text-[13px] py-3 px-4">

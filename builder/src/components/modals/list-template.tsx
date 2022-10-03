@@ -2,15 +2,7 @@ import React, { FC } from "react";
 import { Dialog } from '@headlessui/react'
 import IconImg from 'assets/icon-crypto.png'
 
-// interface IListTemplate {
-//     isOpenListForSale: boolean;
-//     setIsOpenListForSale: (isOpenListForSale: boolean) => void;
-// }
-
 const ListTemplate: FC = () => {
-  const handleClick = () => {
-    // setIsOpenListForSale(false)
-  }
   return (
       <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[8px]">
         <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[475px] min-w-[330px] my-20 sm:mx-28 mx-12 rounded-[15px] py-8 px-10 bg-white">
@@ -58,13 +50,13 @@ const ListTemplate: FC = () => {
                 </div>
                 <div className="flex items-center justify-end gap-4 mt-7">
                   <div 
-                        onClick={handleClick}
+                        // onClick={handleClick}
                         className="bg-[#E7E7E7] text-[13px] py-3 px-10 text-[#1C1C1E] cursor-pointer rounded-[4px] font-[500]"
                     >
                       Cancel
                   </div>
                   <div 
-                      onClick={handleClick}
+                      // onClick={handleClick}
                       className="bg-[#8268E5] text-[13px] font-[500] text-white cursor-pointer py-3 px-6 rounded-[4px]"
                   >
                       Continue to list

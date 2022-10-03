@@ -3,12 +3,6 @@ import { Dialog } from '@headlessui/react'
 import { useDispatch } from "react-redux";
 import { toggleModalType } from "redux/modal/modal.reducers";
 
-// interface ICheckoutModal {
-//     isOpenCheckout: boolean;
-//     setIsOpenCheckout: (isOpenCheckout: boolean) => void;
-//     setIsOpenFinalTemplate: (isOpenFinalTemplate: boolean) => void;
-// }
-
 const CheckoutModal: FC = () => {
   const dispatch = useDispatch()
   return (

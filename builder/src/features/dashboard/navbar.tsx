@@ -17,6 +17,8 @@ import {
 import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 import { Link } from "react-router-dom";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import TemplateModal from "./template-modal";
 
 interface INavbar {
   className: string;
@@ -139,11 +141,13 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
     let stringifiedConfig = JSON.stringify(config);
 
     setGeneratedConfig(base64_encode(stringifiedConfig));
-    setIsOpen(true);
+    dispatch(toggleModal(true))
+    dispatch(toggleModalType('publish-process'))
   };
 
   const handleMintTemplateForm = () => {
-    setIsMintTemplateOpen(true)
+    dispatch(toggleModal(true))
+    dispatch(toggleModalType('mint-nft-form'))
   } 
 
   return (
@@ -198,10 +202,6 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
           onClick={handleMintTemplateForm}
         >
           Mint as NFT
-          <MintTemplateModal 
-            isMintTemplateOpen={isMintTemplateOpen}
-            setIsMintTemplateOpen={setIsMintTemplateOpen}
-          />
         </div>
         <button
           className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
@@ -227,11 +227,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
           </Menu.Items>
         </Menu>
 
-        <PublishSiteModal 
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          generatedConfig={generatedConfig}
-        />
+        <TemplateModal generatedConfig={generatedConfig} />
         <Dialog
           as="div"
           className="fixed inset-0 z-20 overflow-y-auto"
