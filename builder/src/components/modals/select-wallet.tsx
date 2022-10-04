@@ -11,7 +11,6 @@ const SelectWallet: FC = () => {
     dispatch(toggleModalType("checkout"))
   }
   return (
-    <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[8px]">
       <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[464px] my-20 mx-28 rounded-[8px] py-7 px-8 bg-white">
         <div className="w-full">
           <div className="flex items-center justify-between">
@@ -34,11 +33,10 @@ const SelectWallet: FC = () => {
           </div>
           <div className="flex items-center mt-4">
               <div className="text-[16px] text-[#636A7E]">New to Ethereum?</div>
-              <a href="#" className="text-[16px] gradient-text ml-1">Learn more about wallets</a>
+              <a href="#" className="text-[14px] font-[500] gradient-text ml-1 underline underline-offset-1">Learn more about wallets</a>
           </div>
         </div>
       </Dialog.Panel>
-    </main>
   );
 };
 

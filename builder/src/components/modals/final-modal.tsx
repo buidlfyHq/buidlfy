@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { ConfettiShower } from "components/utils/confetti-shower";
@@ -8,11 +8,24 @@ import CongratulationsImg from "assets/congratulations.png";
 
 const FinalModal: FC = () => {
   const dispatch = useDispatch();
-
+  const [dimentions, setDimentions] = useState<object>({
+    width: 0,
+    height: 0
+  })
+  useEffect(() => {
+    let El = document.getElementById('#confetti')
+    console.log(El)
+    // let width = window.screen.width
+    // let height = window.screen.height
+    // setDimentions({
+    //   ...dimentions,
+    //   width,
+    //   height
+    // })
+  }, [])
   return (
-    <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
-      <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[1140px] my-20 mx-28 rounded-[24px] py-36 px-64 bg-white h-full max-h-[645px]">
-        <ConfettiShower />
+      <Dialog.Panel id="#confetti" className="flex flex-col justify-center items-center w-full max-w-[1140px] my-20 mx-28 rounded-[24px] py-20 lg:py-36 lg:px-64 px-28 bg-white ">
+        {/* <ConfettiShower dimentions={dimentions} /> */}
         <div>
           <img src={CongratulationsImg} alt="img_temp" width={50} height={60} />
         </div>
@@ -31,7 +44,7 @@ const FinalModal: FC = () => {
           <FeatherIcon className="ml-3" />
         </div>
       </Dialog.Panel>
-    </main>
+    
   );
 };
 

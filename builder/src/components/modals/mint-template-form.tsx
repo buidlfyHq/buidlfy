@@ -10,8 +10,7 @@ import MintUploadImg from "assets/mint-form-img.png";
 const MintTemplateModal: FC = () => {
   const dispatch = useDispatch()
   return (
-      <main className="fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[10px] overflow-y-auto">
-        <div className="flex items-center justify-center min-h-full mt-96">
+
           <Dialog.Panel className="flex flex-col w-full max-w-[800px] my-20 mx-28 rounded-[24px] py-12 px-10 bg-white min-h-full">
             <div className="flex items-start justify-end w-full">
               <div className="flex items-center justify-start w-full mt-6 cursor-pointer">
@@ -106,8 +105,7 @@ const MintTemplateModal: FC = () => {
               </div>
             </div>
           </Dialog.Panel>
-        </div>
-      </main>
+        
   );
 };
 
