@@ -1,36 +1,17 @@
 import React, { FC, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import HourGlassImg from "assets/hourglass.png";
-import MintedTemplateModal from "./minted-template";
+import { useDispatch } from "react-redux";
+import { toggleModalType } from "redux/modal/modal.reducers";
 
 interface IPublishSiteModal {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  generatedConfig: string;
+  generatedConfig:any
 }
 
-const PublishSiteModal: FC<IPublishSiteModal> = ({
-  isOpen,
-  setIsOpen,
-  generatedConfig,
-}) => {
-  const [isMintedOpen, setIsMintedOpen] = useState<boolean>(false);
+const PublishSiteModal: FC<IPublishSiteModal> = ({generatedConfig}) => {
+  const dispatch = useDispatch()
   return (
-    <Dialog
-      as="div"
-      className="fixed inset-0 z-20 overflow-y-auto"
-      open={isOpen}
-      onClose={() => setIsOpen(false)}
-    >
-      <div className="min-h-screen px-4 text-center">
-        {/* This element is to trick the browser into centering the modal contents. */}
-
-        <span className="inline-block h-screen align-middle" aria-hidden="true">
-          &#8203;
-        </span>
-
-        {/* Use the overlay to style a dim backdrop for your dialog */}
-        <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+    <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
 
         {/* Dialog Content */}
         <section className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
@@ -61,21 +42,17 @@ const PublishSiteModal: FC<IPublishSiteModal> = ({
               type="button"
               className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
               onClick={() => {
-                setIsMintedOpen(true);
+                // setIsMintedOpen(true);
+                dispatch(toggleModalType('publish-done'))
                 navigator.clipboard.writeText(generatedConfig);
-                setIsOpen(false);
+                // setIsOpen(false);
               }}
             >
               Click here to copy Config
             </button>
-            <MintedTemplateModal
-              isMintedOpen={isMintedOpen}
-              setIsMintedOpen={setIsMintedOpen}
-            />
           </div>
         </section>
-      </div>
-    </Dialog>
+      </main>
   );
 };
 

@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import makeBlockie from "ethereum-blockies-base64";
 import { encode as base64_encode } from "base-64";
-import { Dialog } from "@headlessui/react";
-import MintTemplateModal from "components/modals/mint-template-form";
-import PublishSiteModal from "components/modals/publish-site";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { setSelectorToDefault } from "redux/contract/contract.reducers";
+import { Dialog, Menu } from "@headlessui/react";
+import { Link } from "react-router-dom";
+import TemplateModal from "./template-modal";
 import { uploadFileToWeb3Storage } from "config/web3storage";
+import { connectWallet } from "redux/web3/web3.actions";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import {
   ITemplate,
@@ -16,7 +18,6 @@ import {
 } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
-import { connectWallet } from "redux/web3/web3.actions";
 
 interface INavbar {
   className: string;
@@ -46,12 +47,10 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
       type: string;
     }[]
   >([]); // work in progress
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [file, setFile] = useState<string>("");
-  const [isMintTemplateOpen, setIsMintTemplateOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (contractDetails.abi) {
@@ -140,14 +139,14 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
     let stringifiedConfig = JSON.stringify(config);
 
     setGeneratedConfig(base64_encode(stringifiedConfig));
-    setIsOpen(true);
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("publish-process"));
   };
 
   const handleMintTemplateForm = () => {
-    setIsMintTemplateOpen(true);
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("mint-nft-form"));
   };
-
-
 
   return (
     <main
@@ -197,14 +196,10 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
           Preview
         </div> */}
         <div
-          className="mint-button text-[14px] text-[#855FD8] font[500] py-2 px-6 cursor-pointer"
+          className="bordered-button text-[14px] text-[#855FD8] font[500] py-2 px-6 cursor-pointer"
           onClick={handleMintTemplateForm}
         >
           Mint as NFT
-          <MintTemplateModal
-            isMintTemplateOpen={isMintTemplateOpen}
-            setIsMintTemplateOpen={setIsMintTemplateOpen}
-          />
         </div>
         <button
           className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
@@ -214,13 +209,29 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
         </button>
 
         {currentAccount ? (
-          <div className="flex justify-center items-center my-2 ml-3">
-            <img
-              className="bg-black w-8 h-8 rounded-full"
-              src={makeBlockie(currentAccount)}
-              alt="Blockie"
-            />
-          </div>
+          <Menu>
+            <Menu.Button className="flex justify-center items-center my-2 ml-3">
+              <img
+                className="bg-black w-8 h-8 rounded-full"
+                src={makeBlockie(currentAccount)}
+                alt="Blockie"
+              />
+            </Menu.Button>
+            <Menu.Items className="absolute h-full top-0 right-0 flex flex-col w-56 px-4 py-2 mt-16 shadow-lg mr-5 rounded-[8px] origin-top-right bg-white">
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    to="/my-templates"
+                    className={`${
+                      active && "bg-slate-100 rounded-[8px] cursor-pointer"
+                    } font-[500] px-4 py-2 font-[16px]`}
+                  >
+                    My Templates
+                  </Link>
+                )}
+              </Menu.Item>
+            </Menu.Items>
+          </Menu>
         ) : (
           <button
             className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
@@ -230,11 +241,8 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
           </button>
         )}
 
-        <PublishSiteModal
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          generatedConfig={generatedConfig}
-        />
+        <TemplateModal generatedConfig={generatedConfig} />
+
         <Dialog
           as="div"
           className="fixed inset-0 z-20 overflow-y-auto"

@@ -9,7 +9,7 @@ const StartModal: FC = () => {
   const dispatch = useDispatch();
 
   return (
-    <main className="fixed inset-0 flex items-center justify-center p-4 bg-black/70 backdrop-blur-[10px]">
+    <main className="fixed inset-0 flex items-center justify-center p-4 bg-black/20 backdrop-blur-[2px]">
       <Dialog.Panel className="rounded-[24px] py-16 px-20 bg-white rounded flex flex-row justify-start items-center gap-16">
         <div className="flex flex-col items-center w-[300px] h-[280px] relative">
           <span className="absolute right-[-13%] w-[1px] h-[260px] bg-gray-200">
