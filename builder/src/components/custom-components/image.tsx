@@ -77,6 +77,7 @@ const Image: FC<IImageComponent> = ({
           />
         </div>
       ) : (
+        // We need id to make image clickable overall till we find a better way to write it
         <section className="default-image w-full h-full">
           <div id={i} className="flex justify-center items-center h-full">
             <div id={i}>
