@@ -1,6 +1,6 @@
 import { FC } from "react";
-import defaultImage from "assets/default-image.png";
 import { MARGIN_VARIABLE } from "config/constants";
+import defaultImage from "assets/default-image.png";
 import "styles/components.css";
 
 interface IImageComponent {
@@ -28,7 +28,7 @@ const Image: FC<IImageComponent> = ({
   isAuto,
 }) => {
   return (
-    <div className="flex w-full h-full">
+    <section className="w-full h-full overflow-hidden">
       <div
         className="flex h-full w-full"
         style={{
@@ -45,7 +45,7 @@ const Image: FC<IImageComponent> = ({
           }px`,
         }}
       />
-    </div>
+    </section>
   );
 };
 
