@@ -5,6 +5,8 @@ import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineClose } from "react-icons/md";
+import defaultImage from "assets/default-image.svg";
+import container from "assets/image-container.svg";
 import ReactTooltip from "react-tooltip";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
@@ -195,19 +197,15 @@ const Elements: FC<IElements> = ({
           className="px-4 py-4 cursor-pointer"
         >
           <div data-tip="Click here to add the image upload">
-            <div className="image-container pt-2">
-              <span className="element-text ml-[1rem] my-[0.7rem] text-black">
-                File Upload
-              </span>
-              <div className="element-upload mx-4">
-                <span className="image-label text-[10px]">
-                  Drag and drop a file, or{" "}
-                  <span className="purple-label">browse</span>
-                </span>
-              </div>
-              <div className="flex justify-center">
-                <button className="upload-btn mx-2 mt-4">Upload</button>
-              </div>
+            <div className="relative image-container">
+              <img className="w-[20rem]" src={container} />
+              <img
+                className="absolute w-[2.6rem] bottom-[5rem] left-[6.5rem]"
+                src={defaultImage}
+              />
+              <h6 className="absolute bottom-[3rem] left-[5.5rem] text-[#666BD3] text-[16px]">
+                Add Image
+              </h6>
             </div>
           </div>
         </div>

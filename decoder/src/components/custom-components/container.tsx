@@ -19,6 +19,7 @@ const Container: FC<IBgContainer> = ({
   outputValue,
   setOutputValue,
   padding,
+  margin,
 }) => {
   const [containerW, setContainerW] = useState(null);
 
@@ -28,14 +29,20 @@ const Container: FC<IBgContainer> = ({
       ?.getBoundingClientRect().width;
     if (cw) setContainerW(cw);
   }, []);
-  let finalPadding = padding.paddingLeft + padding.paddingRight;
+
+  let finalSpacing =
+    margin.marginLeft +
+    margin.marginRight +
+    padding.paddingLeft +
+    padding.paddingRight;
+
   return (
     <section
       id={item.i}
       style={{
         background: backgroundColor,
-        paddingLeft: `${padding.paddingLeft}px`,
-        paddingRight: `${padding.paddingRight}px`,
+        paddingLeft: `${margin.marginLeft}px`,
+        paddingRight: `${margin.marginRight}px`,
       }}
       className="w-full h-fit"
     >
@@ -43,8 +50,12 @@ const Container: FC<IBgContainer> = ({
         <GridLayout
           layout={children}
           cols={6}
-          rowHeight={50}
-          width={containerW - finalPadding || 1000}
+          rowHeight={
+            children?.length
+              ? 50 - (borderWidth ? borderWidth * 2 : 0) / children?.length
+              : 50
+          }
+          width={containerW - (finalSpacing + borderWidth * 2) || 1000}
           isDraggable={false}
           isResizable={false}
           compactType={null}
@@ -52,15 +63,16 @@ const Container: FC<IBgContainer> = ({
           className="btn-border"
           style={{
             background: backgroundColor,
-            border: `1px solid ${color}`,
-            borderImage: color,
-            borderRadius: `${borderRadius}px`,
-            borderWidth: `${borderWidth}px`,
             backgroundImage: `url(${imgData})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
+            border: `${borderWidth}px solid ${color}`,
+            borderRadius: `${borderRadius}px`,
+            borderImage: color,
             boxShadow: shadow,
+            paddingLeft: `${padding.paddingLeft}px`,
+            paddingRight: `${padding.paddingRight}px`,
           }}
         >
           {children.map((c: IWorkspace) => {

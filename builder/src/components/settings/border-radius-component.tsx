@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceValue } from "components/utils/render-setting";
 import NumberInput from "components/utils/number-input";
+import WarningText from "components/utils/setting-warning";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -59,9 +60,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
         handleDecrement={() => handleRadius(ReplaceValue.DECREMENT)}
       />
       {borderColor?.slice(0, 15) === "linear-gradient" ? (
-        <p className="text-[10px] ml-[1rem] mb-[0.5rem] text-[#475385]">
-          Border gradient and border radius cannot be use together
-        </p>
+        <WarningText text="Sorry, Border gradient and border radius cannot be use together!" />
       ) : null}
     </>
   );

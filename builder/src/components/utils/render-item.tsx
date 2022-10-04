@@ -127,6 +127,7 @@ const RenderItem: FC<IRenderItem> = ({
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
           padding={item.style.padding}
+          margin={item.style.margin}
         />
       );
     default:

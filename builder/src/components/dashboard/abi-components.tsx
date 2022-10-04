@@ -137,16 +137,16 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
             <Spinner />
             Selecting
           </span>
-          <AiOutlineClose className="mt-1.5" />
+          <AiOutlineClose className="mt-1.5 cursor-pointer" />
         </span>
       ) : (
         <>
-          <span>Select An Element</span>
+          <span className="cursor-pointer">Select An Element</span>
         </>
       )}
     </>
   );
-
+  // Create Common Input for all three inputs
   return (
     <main>
       {showComponent ? (
@@ -167,7 +167,9 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                     >
                       <div>
                         {!objects.length ? (
-                          <div>{renderDefault(selectedId)}</div>
+                          <div className="cursor-pointer">
+                            {renderDefault(selectedId)}
+                          </div>
                         ) : (
                           <>
                             {!filterObjects.length
@@ -191,7 +193,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                                                 <Spinner />
                                                 Selecting
                                               </span>
-                                              <AiOutlineClose className="mt-1.5" />
+                                              <AiOutlineClose className="mt-1.5 cursor-pointer" />
                                             </span>
                                           ) : (
                                             <span className="flex">
@@ -199,7 +201,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                                                 {filteredObject[0].name} -{" "}
                                                 {filteredObject[0].id}
                                               </span>
-                                              <AiOutlineEdit className="mt-1.5" />
+                                              <AiOutlineEdit className="mt-1.5 cursor-pointer" />
                                             </span>
                                           )}
                                         </>
@@ -220,9 +222,11 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
 
           {showComponent.value?.stateMutability === "payable" && (
             <section className="mt-3">
-              <h6>Input - Amount Payable</h6>
+              <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">
+                Input - Amount Payable
+              </h6>
               <div
-                className="mb-2 px-2 border rounded mt-1 h-7"
+                className="grid contract-input mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
                 onClick={() => {
                   handleStateSelector(elementId);
                 }}
@@ -230,7 +234,9 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                 {!Object.keys(contractElementSelected).filter(
                   (key: string) => key === showComponent.value.name
                 ).length ? (
-                  renderDefault(showComponent.value.name)
+                  <span className="cursor-pointer">
+                    {renderDefault(showComponent.value.name)}
+                  </span>
                 ) : (
                   <>
                     {Object.keys(contractElementSelected)
@@ -250,7 +256,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                                         <Spinner />
                                         Selecting
                                       </span>
-                                      <AiOutlineClose className="mt-1.5" />
+                                      <AiOutlineClose className="mt-1.5 cursor-pointer" />
                                     </span>
                                   ) : (
                                     <span className="flex">
@@ -258,7 +264,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                                         {filteredObject[0].name} -{" "}
                                         {filteredObject[0].id}
                                       </span>
-                                      <AiOutlineEdit className="mt-1.5" />
+                                      <AiOutlineEdit className="mt-1.5 cursor-pointer" />
                                     </span>
                                   )}
                                 </>
@@ -294,7 +300,9 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                     >
                       <div>
                         {objects.length === 0 ? (
-                          renderDefault(selectedId)
+                          <span className="cursor-pointer">
+                            {renderDefault(selectedId)}
+                          </span>
                         ) : (
                           <>
                             {filterObjects.length === 0
@@ -318,7 +326,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                                                 <Spinner />
                                                 Selecting
                                               </span>
-                                              <AiOutlineClose className="mt-1.5" />
+                                              <AiOutlineClose className="mt-1.5 cursor-pointer" />
                                             </span>
                                           ) : (
                                             <span className="flex">
@@ -326,7 +334,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                                                 {filteredObject[0].name} -{" "}
                                                 {filteredObject[0].id}
                                               </span>
-                                              <AiOutlineEdit className="mt-1.5" />
+                                              <AiOutlineEdit className="mt-1.5 cursor-pointer" />
                                             </span>
                                           )}
                                         </>

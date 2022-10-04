@@ -27,6 +27,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       if (e.target.files[0].size > SITE_SIZE_VARIABLE) {
         setSizeExceeded(true);
       } else {
+        setSizeExceeded(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           setSiteImage(reader.result as string);
@@ -37,7 +38,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       }
     }
   };
-
+  // ADD: New site design in next branch
   return (
     <main className="fixed right-0 top-[60px] w-[250px] setting-nav h-full  bg-white">
       <div className="mx-3 my-2">

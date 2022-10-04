@@ -43,7 +43,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     }
   }, []);
 
-  const handleClick = (abi: string) => {
+  const handleContractList = (abi: string) => {
     dispatch(updateContractAbi(JSON.parse(abi)));
     setMethodOpen(false);
   };
@@ -76,11 +76,11 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
           <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
             <div
               onClick={() => setIsOpen(true)}
-              className="flex contract-button w-full py-2.5 pl-6 pr-7 ml-2"
+              className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
             >
               <span className="mt-1 ml-4 mr-3">
                 <FaFileContract />
-              </span>{" "}
+              </span>
               Import Contract
               <Modal
                 isOpen={isOpen}
@@ -91,22 +91,27 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
               />
             </div>
           </div>
-          <span className="setting-text mt-[3rem] ml-[0.5rem]">
-            Import History
-          </span>
-          <p className="contract-text ml-[0.5rem]">
-            You can select the old file to continue{" "}
-          </p>
-          <div className="grid grid-cols-3 gap-2 mt-[1rem]">
+          {newContractList ? (
+            <>
+              <span className="setting-text mt-[3rem] ml-[0.5rem]">
+                Import History
+              </span>
+              <p className="contract-text ml-[0.5rem]">
+                You can select the old file to continue
+              </p>
+            </>
+          ) : null}
+
+          <div className="grid grid-cols-3 gap-4 mt-[1rem] mx-3">
             {newContractList &&
               newContractList?.map((contract: IContract) => {
                 const { name, text } = contract;
                 return (
                   <div
-                    onClick={() => handleClick(text)}
+                    onClick={() => handleContractList(text)}
                     className="cursor-pointer flex flex-col justify-center items-center contract-list"
                   >
-                    <div className="margin-text contract-name">{name}</div>
+                    <span className="contract-name">{name}</span>
                   </div>
                 );
               })}

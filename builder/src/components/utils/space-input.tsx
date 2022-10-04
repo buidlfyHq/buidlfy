@@ -9,7 +9,6 @@ interface ISpaceInput {
   handleIncrement: (() => void)[];
   handleDecrement: (() => void)[];
 }
-
 const SpaceInput: FC<ISpaceInput> = ({
   heading,
   text,

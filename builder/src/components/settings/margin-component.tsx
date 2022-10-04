@@ -13,6 +13,7 @@ interface IMarginComponent {
     marginTop?: number;
     marginBottom?: number;
   };
+  name?: string;
 }
 
 enum Margin {
@@ -22,7 +23,7 @@ enum Margin {
   MARGINBOTTOM = "marginBottom",
 }
 
-const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
+const MarginComponent: FC<IMarginComponent> = ({ i, margin, name }) => {
   const dispatch = useDispatch();
 
   const handleChange = (property: string, updatedMargin?: number) => {
@@ -59,43 +60,65 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
   };
 
   const marginData = {
-    text: ["L", "R", "T", "B"],
-    value: [
-      margin?.marginLeft || 0,
-      margin?.marginRight || 0,
-      margin?.marginTop || 0,
-      margin?.marginBottom || 0,
-    ],
-    handleChange: [
-      (updatedMargin: number) => handleChange(Margin.MARGINLEFT, updatedMargin),
-      (updatedMargin: number) =>
-        handleChange(Margin.MARGINRIGHT, updatedMargin),
-      (updatedMargin: number) => handleChange(Margin.MARGINTOP, updatedMargin),
-      (updatedMargin: number) =>
-        handleChange(Margin.MARGINBOTTOM, updatedMargin),
-    ],
-    handleIncrement: [
-      () => incrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
-      () => incrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
-      () => incrementCounter(Margin.MARGINTOP, margin?.marginTop),
-      () => incrementCounter(Margin.MARGINBOTTOM, margin?.marginBottom),
-    ],
-    handleDecrement: [
-      () => decrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
-      () => decrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
-      () => decrementCounter(Margin.MARGINTOP, margin?.marginTop),
-      () => decrementCounter(Margin.MARGINBOTTOM, margin?.marginBottom),
-    ],
+    container: {
+      text: ["L", "R"],
+      value: [margin?.marginLeft || 0, margin?.marginRight || 0],
+      handleChange: [
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINLEFT, updatedMargin),
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINRIGHT, updatedMargin),
+      ],
+      handleIncrement: [
+        () => incrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
+        () => incrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
+      ],
+      handleDecrement: [
+        () => decrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
+        () => decrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
+      ],
+    },
+    default: {
+      text: ["L", "R", "T", "B"],
+      value: [
+        margin?.marginLeft || 0,
+        margin?.marginRight || 0,
+        margin?.marginTop || 0,
+        margin?.marginBottom || 0,
+      ],
+      handleChange: [
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINLEFT, updatedMargin),
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINRIGHT, updatedMargin),
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINTOP, updatedMargin),
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINBOTTOM, updatedMargin),
+      ],
+      handleIncrement: [
+        () => incrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
+        () => incrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
+        () => incrementCounter(Margin.MARGINTOP, margin?.marginTop),
+        () => incrementCounter(Margin.MARGINBOTTOM, margin?.marginBottom),
+      ],
+      handleDecrement: [
+        () => decrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
+        () => decrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
+        () => decrementCounter(Margin.MARGINTOP, margin?.marginTop),
+        () => decrementCounter(Margin.MARGINBOTTOM, margin?.marginBottom),
+      ],
+    },
   };
-
+  const containerType = name === "Container" ? "container" : "default";
   return (
     <SpaceInput
       heading="Margin"
-      text={marginData.text}
-      value={marginData.value}
-      handleChange={marginData.handleChange}
-      handleIncrement={marginData.handleIncrement}
-      handleDecrement={marginData.handleDecrement}
+      text={marginData[containerType].text}
+      value={marginData[containerType].value}
+      handleChange={marginData[containerType].handleChange}
+      handleIncrement={marginData[containerType].handleIncrement}
+      handleDecrement={marginData[containerType].handleDecrement}
     />
   );
 };

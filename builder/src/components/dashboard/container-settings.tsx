@@ -9,6 +9,7 @@ import ShadowComponent from "components/settings/shadow-component";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import PaddingComponent from "components/settings/padding-component";
+import MarginComponent from "components/settings/margin-component";
 
 const ContainerSettings: FC = () => {
   const selectedElement: IWorkspaceElement = useSelector(
@@ -43,6 +44,11 @@ const ContainerSettings: FC = () => {
       <PaddingComponent
         i={selectedElement.i}
         padding={selectedElement.style.padding}
+        name={selectedElement.name}
+      />
+      <MarginComponent
+        i={selectedElement.i}
+        margin={selectedElement.style.margin}
         name={selectedElement.name}
       />
       <ShadowComponent

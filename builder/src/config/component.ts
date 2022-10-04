@@ -44,12 +44,8 @@ export const components = [
     h: 2,
     // minH: 2,
     style: {
-      padding: {
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0
-      },
+      ...defaultPaddingStyles,
+      ...defaultMarginStyles,
       backgroundColor: "rgba(255, 255, 255, 0)",
       color: "rgba(0, 0, 0, 1)",
       ...defaultDeleteStyles,
@@ -293,8 +289,8 @@ export const components = [
   },
   {
     name: "Image",
-    h: 2,
-    minH: 1,
+    h: 3,
+    minH: 3,
     style: {
       width: 80,
       height: 60,
