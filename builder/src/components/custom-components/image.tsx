@@ -77,10 +77,9 @@ const Image: FC<IImageComponent> = ({
           />
         </div>
       ) : (
-        // Fix: Open setting on Image click
-        <div className="default-image w-full h-full">
-          <span id={i} className="flex justify-center items-center h-full">
-            <span id={i}>
+        <section className="default-image w-full h-full">
+          <div id={i} className="flex justify-center items-center h-full">
+            <div id={i}>
               <span id={i} className="flex justify-center">
                 <img id={i} className="w-6" src={image} alt="default" />
               </span>
@@ -96,9 +95,9 @@ const Image: FC<IImageComponent> = ({
                 </span>
                 <img className="w-5 ml-2" src={add} alt="add" />
               </span>
-            </span>
-          </span>
-        </div>
+            </div>
+          </div>
+        </section>
       )}
     </>
   );

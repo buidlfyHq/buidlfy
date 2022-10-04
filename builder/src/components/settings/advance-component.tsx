@@ -76,7 +76,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
           <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
             <div
               onClick={() => setIsOpen(true)}
-              className="flex contract-button w-full py-2.5 pl-6 pr-7 ml-2"
+              className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
             >
               <span className="mt-1 ml-4 mr-3">
                 <FaFileContract />

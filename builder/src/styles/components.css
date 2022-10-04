@@ -62,7 +62,7 @@
 }
 .modal-img {
   display: flex;
-  width: 5rem;
+  width: 4rem;
   height: auto;
 }
 .modal-input {
@@ -712,12 +712,11 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 .contract-list {
   width: 65px;
   height: 44px;
-  background: linear-gradient(
-    93.43deg,
-    rgba(70, 143, 228, 0.1) 19.42%,
-    rgba(119, 66, 231, 0.1) 63.9%
-  );
+  background: #F0EAFC;
   border-radius: 2px;
+}
+.contract-list:hover {
+  background: #E1DAF0;
 }
 .contract-name {
   font-style: normal;
@@ -726,7 +725,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   line-height: 24px;
   /* identical to box height, or 218% */
 
-  color: #458cde;
+  color: #100F11;
 }
 .image-label {
   font-style: normal;
