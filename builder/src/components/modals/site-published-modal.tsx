@@ -3,23 +3,10 @@ import { Dialog } from "@headlessui/react";
 import UprightImg from "assets/upright.png";
 import CongratulationsImg from "assets/congratulations.png";
 
-interface ISitePublishedModal {
-  isOpenPublishModal: boolean;
-  setIsOpenPublishModal: (isOpenPublishModal: boolean) => void;
-}
-
-const SitePublishedModal: FC<ISitePublishedModal> = ({
-  isOpenPublishModal,
-  setIsOpenPublishModal,
-}) => {
+const SitePublishedModal: FC = () => {
   return (
-    <Dialog
-      className="relative z-50"
-      open={isOpenPublishModal}
-      onClose={() => setIsOpenPublishModal(false)}
-    >
-      <div className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
-        <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[670px] my-20 mx-28 rounded-[24px] py-12 px-10 bg-white max-h-[80vh]">
+      <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
+        <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[580px] my-20 mx-28 rounded-[4px] py-16 px-10 bg-white">
           <div>
             <img
               src={CongratulationsImg}
@@ -34,7 +21,7 @@ const SitePublishedModal: FC<ISitePublishedModal> = ({
           <div className="text-[13px] text-[#2C2D5E] font-[300] mt-2">
             Please open the link given below to see your site
           </div>
-          <div className="flex items-center py-2 another-bg link-bg px-7">
+          <div className="flex items-center py-2 mt-5 another-bg link-bg px-7">
             <a
               target="_blank"
               href="www.app.buildfy.com/sitename"
@@ -54,8 +41,7 @@ const SitePublishedModal: FC<ISitePublishedModal> = ({
             Visit Site
           </div>
         </Dialog.Panel>
-      </div>
-    </Dialog>
+      </main>
   );
 };
 

@@ -5,17 +5,9 @@ import MetamaskImg from 'assets/Metamask-icon.png'
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 
-// interface ISelectWallet {
-//     isOpenSelectWallet: boolean;
-//     setIsOpenSelectWallet: (isOpenSelectWallet: boolean) => void;
-//     setIsOpenCheckout: (isOpenCheckout: boolean) => void;
-// }
-
 const SelectWallet: FC = () => {
   const dispatch = useDispatch()
   const handleClick = () => {
-    // setIsOpenSelectWallet(false)
-    // setIsOpenCheckout(true)
     dispatch(toggleModalType("checkout"))
   }
   return (

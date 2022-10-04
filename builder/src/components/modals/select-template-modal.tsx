@@ -23,8 +23,8 @@ const SelectTemplateModal: FC = () => {
   const dispatch = useDispatch();
 
   return (
-    <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
-      <Dialog.Panel className="flex flex-col items-center w-full max-w-[1200px] my-20 mx-28 rounded-[24px] bg-white">
+    <main className="fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[2px] overflow-y-auto">
+      <Dialog.Panel className="flex flex-col items-center w-full max-w-[1200px] my-20 mx-28 rounded-[24px] bg-white mt-96">
         <div className="flex flex-col items-center px-10 pt-12">
           <div className="flex items-start justify-end w-full">
             <CgClose className="text-[24px] cursor-pointer" />

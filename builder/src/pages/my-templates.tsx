@@ -5,13 +5,10 @@ import {BiChevronDown} from 'react-icons/bi'
 import TemplateModal from "features/dashboard/template-modal";
 import { useDispatch } from 'react-redux';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
-// import ListTemplate from 'components/custom-components/modals/list-template'
 
 const MyTemplates : FC = () => {
     const dispatch = useDispatch()
-    const [isOpenSingleTemplate,setIsOpenSingleTemplate] = useState<boolean>(false)
-    const [isOpenListForSale,setIsOpenListForSale] = useState<boolean>(false)
-    const templates = [Temp1,Temp1,Temp1,Temp1,Temp1,Temp1,Temp1,Temp1,Temp1]
+    const templates = [Temp1,Temp1,Temp1]
     const handleListOnBuidlfy = () => {
         dispatch(toggleModal(true))
         dispatch(toggleModalType("list-single"))
@@ -19,7 +16,7 @@ const MyTemplates : FC = () => {
   return (
     <div className='min-h-screen'>
         {/* nav */}
-        <div className='flex justify-between px-36 py-6 h-[77px] border-bottom-divider'>
+        <div className='flex justify-between px-36 py-6 h-[77px] border-bottom-divider sticky-top'>
             <div className='font-[700] text-black text-[20px]'>Buidlfy</div>
             <div className='flex items-center'>
                 <div className='flex items-center px-10 py-3 bordered-button'>
@@ -85,19 +82,19 @@ const MyTemplates : FC = () => {
                             <BiChevronDown className='ml-2 text-[18px]' />
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-8 px-40 pb-12 pt-7">
+                    <div className="grid grid-cols-3 gap-10 px-40 pb-12 pt-7">
                         {templates.map((temp, index) => {
                             return (
                                 <div key={index} className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative">
-                                   <div className='relative w-full w-auto rounded-[16px] h-[200px]'>
+                                   <div className='relative rounded-[16px] h-auto'>
                                         <div className='absolute right-0 flex justify-end my-2 mx-4 py-1 px-3 text-[#14142B] text-[10px] bg-[#FFE6B0] rounded-[5px]'>
                                             In Review
                                         </div>
                                         <div className='absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600]'>
                                             <div className='py-2 px-10 rounded-[8px] bg-white text-[#7743E7]'>View Details</div>
                                             <div 
-                                             className='py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white'
-                                             onClick={handleListOnBuidlfy}
+                                            className='py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white'
+                                            onClick={handleListOnBuidlfy}
                                             >
                                                 List on Buidlfy
                                             </div>

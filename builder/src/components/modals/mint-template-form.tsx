@@ -1,32 +1,20 @@
 import React, { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import { toggleModalType } from "redux/modal/modal.reducers";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import { IoArrowBack } from "react-icons/io5";
 import InfoCircleImg from "assets/info-circle.png";
 import MintUploadImg from "assets/mint-form-img.png";
-import MintedTemplateModal from "./minted-template";
 
-interface IMintTemplateModal {
-  isMintTemplateOpen: boolean;
-  setIsMintTemplateOpen: (isMintTemplateOpen: boolean) => void;
-}
-
-const MintTemplateModal: FC<IMintTemplateModal> = ({
-  isMintTemplateOpen,
-  setIsMintTemplateOpen,
-}) => {
-  const [isMintedOpen, setIsMintedOpen] = useState<boolean>(false);
+const MintTemplateModal: FC = () => {
+  const dispatch = useDispatch()
   return (
-    <Dialog
-      className="relative z-50"
-      open={isMintTemplateOpen}
-      onClose={() => setIsMintTemplateOpen(false)}
-    >
-      <div className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px] overflow-y-auto">
+      <main className="fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[10px] overflow-y-auto">
         <div className="flex items-center justify-center min-h-full mt-96">
           <Dialog.Panel className="flex flex-col w-full max-w-[800px] my-20 mx-28 rounded-[24px] py-12 px-10 bg-white min-h-full">
             <div className="flex items-start justify-end w-full">
-              <div className="flex items-center justify-start w-full mt-8 cursor-pointer">
+              <div className="flex items-center justify-start w-full mt-6 cursor-pointer">
                 <IoArrowBack className="text-[16px] text-[#4E4B66]" />
                 <div className="ml-2 text-[13px] font-[500] text-[#4E4B66]">
                   Back
@@ -97,32 +85,29 @@ const MintTemplateModal: FC<IMintTemplateModal> = ({
                 placeholder="i.e. Crypto NFT Template"
               ></textarea>
             </div>
-            <div className="flex items-center justify-end mt-12">
-              <div className="bg-[#E8E6EE] cursor-pointer text-[#7B7B7B] font-[500] text-[14px] py-2 px-10 rounded-[4px]">
-                Cancel
-              </div>
-              <div
-                onClick={() => setIsMintedOpen(true)}
-                className="bg-[#8268E5] cursor-pointer text-white font-[500] text-[14px] py-2 px-5 rounded-[4px] ml-3"
-              >
-                Connect Wallet to mint
-              </div>
-              <MintedTemplateModal
-                isMintedOpen={isMintedOpen}
-                setIsMintedOpen={setIsMintedOpen}
-              />
-            </div>
-            <div className="flex w-full bg-gray-100 mt-4 rounded-[4px] items-center py-3 px-4">
+            <div className="flex w-full bg-gray-100 mt-5 rounded-[4px] items-center py-3 px-4">
               <img src={InfoCircleImg} alt="icon" width={17} height={17} />
               <div className="text-[14px] text-[#1C1C1E] opacity-60 ml-2">
                 Our team will review the template before making it available on
                 the market place.
               </div>
             </div>
+            <div className="flex items-center justify-end mt-8">
+              <div className="bg-[#E8E6EE] cursor-pointer text-[#7B7B7B] font-[500] text-[14px] py-3 px-10 rounded-[8px]">
+                Cancel
+              </div>
+              <div
+                onClick={() => {
+                  dispatch(toggleModalType("minting-progress"))
+                }}
+                className="connect-wallet-button cursor-pointer text-white font-[500] text-[14px] py-3 px-12 rounded-[8px] ml-3"
+              >
+                Mint
+              </div>
+            </div>
           </Dialog.Panel>
         </div>
-      </div>
-    </Dialog>
+      </main>
   );
 };
 
