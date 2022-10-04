@@ -105,6 +105,7 @@ const Container: FC<IContainer> = ({
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
+
   let finalSpacing =
     margin.marginLeft +
     margin.marginRight +
@@ -239,10 +240,12 @@ const Container: FC<IContainer> = ({
     dispatch(setSelectedElement(i));
     setOpenSetting(false);
   };
+
   const onComponentDeleteClick = (i: string) => {
     handleDelete();
     dispatch(setSelectedElement(i));
   };
+
   const onComponentClick = (itemName: string, i: string) => {
     if (contractElementSelector === null) {
       dispatch(setSelectedElement(i));
@@ -277,12 +280,8 @@ const Container: FC<IContainer> = ({
       <section
         id={item.i}
         style={{
-          marginLeft: `${margin.marginLeft}px`,
-          marginRight: `${margin.marginRight}px`,
-          borderRadius: `${borderRadius}px`,
-          border: `${borderWidth}px solid ${color}`,
-          borderImage: color,
-          boxShadow: shadow,
+          paddingLeft: `${margin.marginLeft}px`,
+          paddingRight: `${margin.marginRight}px`,
         }}
         className="h-fit w-full cursor-pointer container-drag overflow-hidden btn-border"
       >
@@ -306,6 +305,10 @@ const Container: FC<IContainer> = ({
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
+            border: `${borderWidth}px solid ${color}`,
+            borderRadius: `${borderRadius}px`,
+            borderImage: color,
+            boxShadow: shadow,
             paddingLeft: `${padding.paddingLeft}px`,
             paddingRight: `${padding.paddingRight}px`,
           }}
