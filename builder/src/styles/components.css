@@ -78,8 +78,19 @@
 
   /* Gray/200 */
 
-  color: #bab9bd;
 }
+.modal-input::placeholder {
+  color: #000000;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+}
+.modal-input:focus-visible {
+outline: 1px solid rgba(111, 91, 151, 0.28);
+box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba(255, 255, 255, 0.03);
+}
+
 .upload-modal-input {
   background: #f4f4f4;
   border-radius: 4px;
@@ -91,17 +102,17 @@
   height: 250px;
   width: 300px;
   /* Gray/200 */
-  color: #bab9bd;
 }
 .upload-modal-input::placeholder {
+  color: #000000;
   font-style: normal;
   font-weight: 400;
-  font-size: 13px;
-  line-height: 13px;
-  /* identical to box height, or 100% */
-  /* Gray/200 */
-
-  color: #bab9bd;
+  font-size: 10px;
+  line-height: 14px;
+}
+.upload-modal-input:focus-visible {
+outline: 1px solid rgba(111, 91, 151, 0.28);
+box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba(255, 255, 255, 0.03);
 }
 .modal-text {
   font-style: normal;
@@ -699,7 +710,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   display: none;
 }
 .contract-list {
-  width: 69px;
+  width: 65px;
   height: 44px;
   background: linear-gradient(
     93.43deg,
@@ -711,7 +722,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 .contract-name {
   font-style: normal;
   font-weight: 400;
-  font-size: 11px;
+  font-size: 9px;
   line-height: 24px;
   /* identical to box height, or 218% */
 

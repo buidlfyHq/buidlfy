@@ -38,7 +38,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       }
     }
   };
-
+  // ADD: New site design in next branch
   return (
     <main className="fixed right-0 top-[60px] w-[250px] setting-nav h-full  bg-white">
       <div className="mx-3 my-2">

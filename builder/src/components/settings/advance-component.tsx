@@ -80,7 +80,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
             >
               <span className="mt-1 ml-4 mr-3">
                 <FaFileContract />
-              </span>{" "}
+              </span>
               Import Contract
               <Modal
                 isOpen={isOpen}
@@ -91,13 +91,18 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
               />
             </div>
           </div>
-          <span className="setting-text mt-[3rem] ml-[0.5rem]">
-            Import History
-          </span>
-          <p className="contract-text ml-[0.5rem]">
-            You can select the old file to continue{" "}
-          </p>
-          <div className="grid grid-cols-3 gap-2 mt-[1rem]">
+          {newContractList ? (
+            <>
+              <span className="setting-text mt-[3rem] ml-[0.5rem]">
+                Import History
+              </span>
+              <p className="contract-text ml-[0.5rem]">
+                You can select the old file to continue
+              </p>
+            </>
+          ) : null}
+
+          <div className="grid grid-cols-3 gap-4 mt-[1rem] mx-3">
             {newContractList &&
               newContractList?.map((contract: IContract) => {
                 const { name, text } = contract;
@@ -106,7 +111,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                     onClick={() => handleClick(text)}
                     className="cursor-pointer flex flex-col justify-center items-center contract-list"
                   >
-                    <div className="margin-text contract-name">{name}</div>
+                    <span className="contract-name">{name}</span>
                   </div>
                 );
               })}

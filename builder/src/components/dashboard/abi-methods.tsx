@@ -121,10 +121,10 @@ const AbiMethods: FC<IAbiMethods> = ({
       {contractDetails.abi ? (
         <div>
           <span
-            className="contract-text flex mt-[2.5rem]"
+            className="contract-text flex mt-[2.5rem] cursor-pointer"
             onClick={() => handleBack()}
           >
-            <AiOutlineLeft className="text-[10px] mr-2" />{" "}
+            <AiOutlineLeft className="text-[10px] mr-2" />
             <span className="mt-[-5px]">Back</span>
           </span>
           <div className="mt-[1rem]">
@@ -135,7 +135,7 @@ const AbiMethods: FC<IAbiMethods> = ({
               <div className="mb-3">
                 <select
                   id="select"
-                  className="form-select contract-input mt-2 block w-full px-3 py-1.5 focus:outline-none focuse:border-none"
+                  className="form-select cursor-pointer contract-input mt-2 block w-full px-3 py-1.5 focus:outline-none focuse:border-none"
                   aria-label="Default select example"
                   onChange={(e) => onSelect(e)}
                 >
