@@ -43,7 +43,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     }
   }, []);
 
-  const handleClick = (abi: string) => {
+  const handleContractList = (abi: string) => {
     dispatch(updateContractAbi(JSON.parse(abi)));
     setMethodOpen(false);
   };
@@ -108,7 +108,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                 const { name, text } = contract;
                 return (
                   <div
-                    onClick={() => handleClick(text)}
+                    onClick={() => handleContractList(text)}
                     className="cursor-pointer flex flex-col justify-center items-center contract-list"
                   >
                     <span className="contract-name">{name}</span>

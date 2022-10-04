@@ -5,7 +5,7 @@ import {
   updateContractAbi,
   updateContractAddress,
 } from "redux/contract/contract.reducers";
-import upload from "assets/upload-img.png";
+import upload from "assets/upload-img.svg";
 import { IRootState } from "redux/root-state.interface";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";

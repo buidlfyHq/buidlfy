@@ -2,8 +2,7 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { IRootState } from "redux/root-state.interface";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
-import image from "assets/default-image.png";
-import add from "assets/add-image.png";
+import DefaultImage from "components/utils/default-image";
 import "styles/components.css";
 
 interface IImageComponent {
@@ -77,28 +76,7 @@ const Image: FC<IImageComponent> = ({
           />
         </div>
       ) : (
-        // We need id to make image clickable overall till we find a better way to write it
-        <section className="default-image w-full h-full">
-          <div id={i} className="flex justify-center items-center h-full">
-            <div id={i}>
-              <span id={i} className="flex justify-center">
-                <img id={i} className="w-6" src={image} alt="default" />
-              </span>
-              <span id={i} className="text-[#3F405C] text-[12px] mt-3">
-                Click here to add the image
-              </span>
-              <span
-                id={i}
-                className="flex mt-3 justify-center py-2.5 image-div rounded-[8px]"
-              >
-                <span id={i} className="text-[#666BD3] text-[13px]">
-                  Add Image
-                </span>
-                <img className="w-5 ml-2" src={add} alt="add" />
-              </span>
-            </div>
-          </div>
-        </section>
+        <DefaultImage id={i} />
       )}
     </>
   );

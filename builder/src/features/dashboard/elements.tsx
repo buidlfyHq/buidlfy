@@ -5,8 +5,8 @@ import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineClose } from "react-icons/md";
-import image from "assets/default-image.png";
-import container from "assets/image-container.png";
+import defaultImage from "assets/default-image.svg";
+import container from "assets/image-container.svg";
 import ReactTooltip from "react-tooltip";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
@@ -198,10 +198,10 @@ const Elements: FC<IElements> = ({
         >
           <div data-tip="Click here to add the image upload">
             <div className="relative image-container">
-              <img className="" src={container} />
+              <img className="w-[20rem]" src={container} />
               <img
                 className="absolute w-[2.6rem] bottom-[5rem] left-[6.5rem]"
-                src={image}
+                src={defaultImage}
               />
               <h6 className="absolute bottom-[3rem] left-[5.5rem] text-[#666BD3] text-[16px]">
                 Add Image

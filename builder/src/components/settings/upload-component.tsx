@@ -5,7 +5,7 @@ import {
   updateUploadedImageData,
 } from "redux/workspace/workspace.reducers";
 import { uploadFileToWeb3Storage } from "utils/web3storage";
-import upload from "assets/upload-img.png";
+import upload from "assets/upload-img.svg";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IMAGE_SIZE_VARIABLE } from "config/constant";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";

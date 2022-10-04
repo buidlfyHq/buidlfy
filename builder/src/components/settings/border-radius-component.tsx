@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceValue } from "components/utils/render-setting";
 import NumberInput from "components/utils/number-input";
+import WarningText from "components/utils/setting-warning";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { IoMdInformationCircleOutline } from "react-icons/io";
 
 interface IBorderRadiusComponent {
   i: string;
@@ -60,14 +60,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
         handleDecrement={() => handleRadius(ReplaceValue.DECREMENT)}
       />
       {borderColor?.slice(0, 15) === "linear-gradient" ? (
-        <div className="bg-[#EFEDFD] rounded-[4px] pt-1 pb-3 px-2 mr-[0.6rem] ml-[1rem] mb-[0.5rem]">
-          <div className="text-[10px] text-[#475385] flex">
-            <IoMdInformationCircleOutline className="text-[40px]" />
-            <p className="ml-[0.3rem] mt-[0.6rem]">
-              Sorry, Border gradient and border radius cannot be use together!
-            </p>
-          </div>
-        </div>
+        <WarningText text="Sorry, Border gradient and border radius cannot be use together!" />
       ) : null}
     </>
   );
