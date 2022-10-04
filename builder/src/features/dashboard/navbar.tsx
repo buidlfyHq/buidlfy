@@ -202,7 +202,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
           Mint as NFT
         </div>
         <button
-          className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
+          className="py-2 px-7 ml-3 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
           onClick={handlePublish}
         >
           Publish

@@ -9,8 +9,7 @@ const MintedTemplateModal: FC = () => {
   const dispatch = useDispatch()
   const handleClose = () => dispatch(toggleModal(false))
   return (
-      <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
-        <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[670px] my-20 mx-28 rounded-[24px] py-16 px-10 bg-white max-h-[80vh]">
+      <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[670px] my-20 mx-28 rounded-[24px] py-16 px-10 bg-white max-h-[80vh]">
           <div>
             <img src={TickCircleImg} alt="icon" width={80} height={80} />
           </div>
@@ -21,8 +20,10 @@ const MintedTemplateModal: FC = () => {
             Congratulations, you have saved the template with us! 
             Please check the template in the my template section.
           </div>
-          <Link to='/my-templates' onClick={handleClose} className="gradient-text text-[18px] fomt-[500] flex preview-button mt-8 rounded-[16px] items-center py-3 px-4">
-            View My Templates
+          <Link to='/my-templates' onClick={handleClose}>
+            <div className="text-[#7742E7] text-[18px] font-[500] flex bordered-button mt-8 items-center py-4 px-9">
+              View My Templates
+            </div>
           </Link>
           <div
             onClick={handleClose}
@@ -31,7 +32,6 @@ const MintedTemplateModal: FC = () => {
             Okay
           </div>
         </Dialog.Panel>
-      </main>
   );
 };
 
