@@ -5,7 +5,7 @@ import makeBlockie from "ethereum-blockies-base64";
 import TemplateModal from "features/dashboard/template-modal";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
-import Temp1 from "assets/temp-1.png";
+import Temp1 from "assets/icons/temp-1.png";
 
 const TEMPLATES = [Temp1, Temp1, Temp1];
 

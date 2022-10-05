@@ -1,11 +1,11 @@
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { toggleModalType } from "redux/modal/modal.reducers";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import { IoArrowBack } from "react-icons/io5";
-import InfoCircleImg from "assets/info-circle.png";
-import MintUploadImg from "assets/mint-form-img.png";
+import { toggleModalType } from "redux/modal/modal.reducers";
+import InfoCircleImg from "assets/icons/info-circle.png";
+import MintUploadImg from "assets/icons/mint-form-img.png";
 
 const MintTemplateModal: FC = () => {
   const dispatch = useDispatch()
