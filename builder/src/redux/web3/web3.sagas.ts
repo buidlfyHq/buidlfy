@@ -13,7 +13,7 @@ function* connectWalletGen(): any {
   const walletRes = yield call(connectWalletService);
   if (!walletRes.error) {
     yield put(
-      walletConnected({ address: walletRes.account, signer: walletRes.signer })
+      walletConnected({ address: walletRes.address, signer: walletRes.signer })
     );
   } else {
     yield put(toggleConnectWalletLoading(false));

@@ -37,6 +37,8 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
     (state: IRootState) => state.contract.contractDetails
   );
   const currentAccount = useSelector((state: any) => state.web3.currentAccount);
+  console.log(currentAccount);
+  
 
   const [abiJSON, setAbiJSON] = useState<
     {
