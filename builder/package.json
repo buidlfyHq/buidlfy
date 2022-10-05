@@ -12,6 +12,8 @@
     "buffer": "^6.0.3",
     "ethereum-blockies-base64": "^1.0.2",
     "ethers": "^5.5.3",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.0.0",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.1.0",
     "react-best-gradient-color-picker": "^2.0.17",
