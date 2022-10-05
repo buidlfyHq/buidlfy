@@ -10,10 +10,10 @@ const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    toggleModal(state, action) {
+    toggleModal(state, action: { payload: boolean }) {
       state.modalShow = action.payload;
     },
-    toggleModalType(state, action) {
+    toggleModalType(state, action: { payload: string }) {
       state.modalType = action.payload;
     },
   },
