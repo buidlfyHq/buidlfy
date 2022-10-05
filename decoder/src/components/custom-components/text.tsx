@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
 import { MARGIN_VARIABLE } from "config/constants";
@@ -18,6 +18,21 @@ const Text: FC<ITexts> = ({
   margin,
   padding,
 }) => {
+  console.log(outputValue, "ov");
+  const [isValue, setIsValue] = useState<string>(value);
+  const handleOnChange = () => {
+    if (outputValue && outputValue.find((output) => output.id === id)) {
+      const val = JSON.stringify(
+        outputValue.find((output) => output.id === id).value
+      );
+      setIsValue(val);
+    } else {
+      setIsValue(value);
+    }
+  };
+  useEffect(() => {
+    handleOnChange();
+  }, [outputValue]);
   return (
     <section
       id="text-one"
@@ -43,32 +58,9 @@ const Text: FC<ITexts> = ({
           fontSize: `${fontSize}px`,
           padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
         }}
+        value={isValue}
         className="flex focus-visible:outline-[transparent] resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
-      >
-        {outputValue ? (
-          outputValue.find((output) => output.id === id) ? (
-            link ? (
-              <a href={link} target="_blank" rel="noreferrer">
-                {JSON.stringify(
-                  outputValue.find((output) => output.id === id).value
-                )}
-              </a>
-            ) : (
-              JSON.stringify(
-                outputValue.find((output) => output.id === id).value
-              )
-            )
-          ) : link ? (
-            <a href={link} target="_blank" rel="noreferrer">
-              {value}
-            </a>
-          ) : (
-            value
-          )
-        ) : (
-          value
-        )}
-      </textarea>
+      ></textarea>
     </section>
   );
 };
