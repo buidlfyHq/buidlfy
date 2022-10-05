@@ -2,14 +2,18 @@ import React, { FC } from "react";
 import { Dialog } from '@headlessui/react'
 import IconImg from 'assets/icon-crypto.png'
 import { useDispatch } from "react-redux";
-import { toggleModal } from "redux/modal/modal.reducers";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { CgClose } from "react-icons/cg";
 
 const ListTemplate: FC = () => {
   const dispatch = useDispatch()
   return (
-      <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[475px] min-w-[330px] my-20 sm:mx-28 mx-12 rounded-[15px] py-8 px-10 bg-white">
+      <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[475px] py-5 px-6 min-w-[330px] my-20 sm:mx-28 mx-12 rounded-[15px] bg-white">
           <div className="w-full">
-            <div className="flex flex-col">
+          <div className="flex items-start justify-end w-full">
+            <CgClose onClick={() => dispatch(toggleModal(false))} className="text-[18px] cursor-pointer" />
+          </div>
+            <div className="flex flex-col py-3 px-4">
                 <div className="text-[#202525] font-[500] text-[20px]">List template for sale</div>
                 <div className="flex items-center text-[#14142B] opacity-70 text-[14px] mt-1">
                     <div>Cryptin Next Gen Template</div>
@@ -58,7 +62,7 @@ const ListTemplate: FC = () => {
                       Cancel
                   </div>
                   <div 
-                      // onClick={handleClick}
+                      onClick={() => dispatch(toggleModalType('complete-listing'))}
                       className="bg-[#8268E5] text-[13px] font-[500] text-white cursor-pointer py-3 px-6 rounded-[4px]"
                   >
                       Continue to list

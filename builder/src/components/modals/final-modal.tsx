@@ -5,6 +5,8 @@ import { ConfettiShower } from "components/utils/confetti-shower";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { ReactComponent as FeatherIcon } from "assets/svgAsIcons/feather.svg";
 import CongratulationsImg from "assets/congratulations.png";
+import Lottie from 'react-lottie';
+import ConfettiLottie1 from 'assets/lottie/confetti.json'
 
 const FinalModal: FC = () => {
   const dispatch = useDispatch();
@@ -12,6 +14,14 @@ const FinalModal: FC = () => {
     width: 0,
     height: 0
   })
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: ConfettiLottie1,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
   useEffect(() => {
     let El = document.getElementById('#confetti')
     console.log(El)
@@ -24,8 +34,15 @@ const FinalModal: FC = () => {
     // })
   }, [])
   return (
-      <Dialog.Panel id="#confetti" className="flex flex-col justify-center items-center w-full max-w-[1140px] my-20 mx-28 rounded-[24px] py-20 lg:py-36 lg:px-64 px-28 bg-white ">
+      <Dialog.Panel id="#confetti" className="relative flex flex-col justify-center items-center w-full max-w-[1140px] my-20 mx-28 rounded-[24px] py-20 lg:py-36 lg:px-64 px-28 bg-white ">
         {/* <ConfettiShower dimentions={dimentions} /> */}
+        <div className="absolute w-full h-full">
+          <Lottie 
+            options={defaultOptions}
+            height={600}
+            width={1200}
+          />
+        </div>
         <div>
           <img src={CongratulationsImg} alt="img_temp" width={50} height={60} />
         </div>

@@ -59,9 +59,11 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({list}) => {
             ) : <div className="mt-16">{" "}</div>}
             <div
               onClick={handleSubmit}
-              className="w-full flex justify-around items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
+              className="w-full flex justify-center gap-10 items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
             >
-              <div className="text-[14px]">Connect Wallet to Buy</div>
+              <div className="text-[14px]">
+                {!list ? 'Connect Wallet to Buy' : 'List on Buidlfy'}
+              </div>
               <VscArrowRight className="ml-2 text-[22px]" />
             </div>
             <div className="flex mt-3 bg-[#F7F7FF] rounded-[8px] items-center text-[#14142B] opacity-80 text-[13px] py-3 px-4">
