@@ -1,7 +1,8 @@
 export const gradientCheck = (color: string, background: boolean) => {
+  const gradientCondition = color.slice(0, 15) === "linear-gradient" || color.slice(0, 15) ===  "radial-gradient"
   if (background) {
-    return color.slice(0, 15) === "linear-gradient" ? color : "transparent";
+    return gradientCondition ? color : "transparent";
   } else {
-    return color.slice(0, 15) === "linear-gradient" ? "transparent" : color;
+    return gradientCondition ? "transparent" : color;
   }
 };

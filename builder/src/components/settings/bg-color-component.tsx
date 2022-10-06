@@ -52,32 +52,28 @@ const BgColorComponent: FC<IBgColorComponent> = ({
 
   const isElement = !!i;
 
+  const colorDropdown = (
+    <ColorPickerDropdown
+      name="Background Color"
+      value={color}
+      handleChange={handleChange}
+      displayColorPicker={displayColorPicker}
+      setDisplayColorPicker={setDisplayColorPicker}
+      isElement={isElement}
+    />
+  );
   return (
     <>
       {name === "Container" ? (
         <>
           {!imageData?.uploadedImageData ? (
-            <ColorPickerDropdown
-              name="Background Color"
-              value={color}
-              handleChange={handleChange}
-              displayColorPicker={displayColorPicker}
-              setDisplayColorPicker={setDisplayColorPicker}
-              isElement={isElement}
-            />
+            colorDropdown
           ) : (
             <WarningText text="Background Image and background Color cannot be use together!" />
           )}
         </>
       ) : (
-        <ColorPickerDropdown
-          name="Background Color"
-          value={color}
-          handleChange={handleChange}
-          displayColorPicker={displayColorPicker}
-          setDisplayColorPicker={setDisplayColorPicker}
-          isElement={isElement}
-        />
+        colorDropdown
       )}
     </>
   );
