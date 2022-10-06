@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
+import { toggleModal } from "redux/modal/modal.reducers";
 import RenderModal from "components/utils/render-modals";
 import { IRootState } from "redux/root-state.interface";
-import { toggleModal } from "redux/modal/modal.reducers";
 
 interface ITemplateModal{
   generatedConfig?: string

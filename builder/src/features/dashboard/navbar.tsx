@@ -6,8 +6,12 @@ import { encode as base64_encode } from "base-64";
 import { Dialog, Menu } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import TemplateModal from "./template-modal";
-import { uploadFileToWeb3Storage } from "config/web3storage";
+import {
+  uploadFileToWeb3Storage,
+  uploadTemplateToWeb3Storage,
+} from "config/web3storage";
 import { connectWallet } from "redux/web3/web3.actions";
+import { mintTemplate } from "redux/template/template.actions";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
@@ -94,25 +98,26 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
     setIsModalOpen(true);
   };
 
-  const handleSaveTemplate = () => {
+  const handleSaveTemplate = async () => {
     // FIX: save full config to local storage
     let newTemplates: ITemplate[] = [];
     if (workspaceElements?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(workspaceElements));
-      const templates = localStorage.getItem("templates") || "";
-      if (templates !== "") {
-        newTemplates = JSON.parse(templates);
-      } else {
-        newTemplates = [];
-      }
       let newTemplate = {
         name: inputValue,
         value: workspaceElements,
         image: file,
       };
 
-      newTemplates.push(newTemplate);
-      localStorage.setItem("templates", JSON.stringify(newTemplates));
+      if (!currentAccount) {
+        console.log("Open connect wallet modal"); // Keep log until this feature is implemented
+        // await connectWallet();
+      }
+      console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
+      const templateCID = await uploadTemplateToWeb3Storage(
+        JSON.stringify(newTemplate)
+      );
+      console.log("templateCID: ", templateCID);
+      dispatch(mintTemplate(templateCID));
     }
   };
 
@@ -276,15 +281,14 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
                 <div className="px-1 mt-6 not-italic font-normal text-left text-gray-500 font-regular">
                   Upload Image
                 </div>
-                {/* Input required and function added in next branch            */}
+                {/* Input required and function added in next branch */}
                 <input
                   onChange={onChangeImage}
                   className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
                   type="file"
                   id="formFile"
                 />
-
-                <img src={file} alt="Template" />
+                {file && <img src={file} alt="Template" />}
               </div>
               <div className="mt-6">
                 <button

@@ -60,3 +60,18 @@ export const uploadFileToWeb3Storage = async (
   });
   return `https://${cid}.ipfs.dweb.link/`;
 };
+
+export const uploadTemplateToWeb3Storage = async (
+  data: string
+): Promise<string> => {
+  const onRootCidReady = (cid: string) => {
+    console.log("uploading files with cid:", cid);
+  };
+
+  const client = makeStorageClient();
+  const cid = await client.put([new File([Buffer.from(data)], "")], {
+    wrapWithDirectory: false,
+    onRootCidReady,
+  });
+  return `https://${cid}.ipfs.dweb.link/`;
+};
