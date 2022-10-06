@@ -14,6 +14,7 @@ export default interface ITexts {
   link: string;
   backgroundColor?: string;
   borderRadius?: number;
+  borderWidth?: number;
   shadow?: string;
   contractFunction?: any; // breaking while assigning a type, work in progress
   inputValue?: IInput[];

@@ -8,10 +8,9 @@ import "styles/dashboard.css";
 interface IColorComponent {
   i: string;
   color: string;
-  name?: string;
 }
 
-const ColorComponent: FC<IColorComponent> = ({ i, color, name = "Color" }) => {
+const ColorComponent: FC<IColorComponent> = ({ i, color }) => {
   const dispatch = useDispatch();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 

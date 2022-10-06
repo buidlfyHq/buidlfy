@@ -33,6 +33,27 @@ const Text: FC<ITexts> = ({
   useEffect(() => {
     handleOnChange();
   }, [outputValue]);
+
+  const textArea = (
+    <textarea
+      readOnly
+      style={{
+        fontWeight: bold,
+        fontStyle: italic,
+        textDecoration: underline,
+        background: color,
+        WebkitTextFillColor: "transparent",
+        display: "flex",
+        justifyContent,
+        alignItems: "center",
+        textAlign: `${justifyContent}` as CanvasTextAlign,
+        fontSize: `${fontSize}px`,
+        padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+      }}
+      value={isValue}
+      className="flex focus-visible:outline-[transparent] resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
+    />
+  );
   return (
     <section
       id="text-one"
@@ -43,24 +64,13 @@ const Text: FC<ITexts> = ({
       }}
       className="flex overflow-hidden items-center justify-center w-auto h-full"
     >
-      <textarea
-        readOnly
-        style={{
-          fontWeight: bold,
-          fontStyle: italic,
-          textDecoration: underline,
-          background: color,
-          WebkitTextFillColor: "transparent",
-          display: "flex",
-          justifyContent,
-          alignItems: "center",
-          textAlign: `${justifyContent}` as CanvasTextAlign,
-          fontSize: `${fontSize}px`,
-          padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
-        }}
-        value={isValue}
-        className="flex focus-visible:outline-[transparent] resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
-      ></textarea>
+      {link ? (
+        <a target="_blank" className="cursor-pointer" href={link}>
+          {textArea}
+        </a>
+      ) : (
+        textArea
+      )}
     </section>
   );
 };

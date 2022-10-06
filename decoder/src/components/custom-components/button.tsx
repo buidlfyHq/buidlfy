@@ -34,6 +34,7 @@ const Button: FC<ITexts> = ({
   margin,
   padding,
   borderColor,
+  borderWidth,
 }) => {
   const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
@@ -118,7 +119,7 @@ const Button: FC<ITexts> = ({
             fontWeight: bold,
             fontStyle: italic,
             textDecoration: underline,
-            border: `1px solid ${borderColor}`,
+            border: `${borderWidth}px solid ${borderColor}`,
             borderImage: borderColor,
             display: "flex",
             justifyContent: "center",
@@ -151,7 +152,7 @@ const Button: FC<ITexts> = ({
             fontWeight: bold,
             fontStyle: italic,
             textDecoration: underline,
-            border: `1px solid ${borderColor}`,
+            border: `${borderWidth}px solid ${borderColor}`,
             borderImage: borderColor,
             display: "flex",
             justifyContent: "center",
