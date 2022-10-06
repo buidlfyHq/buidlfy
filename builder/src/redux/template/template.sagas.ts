@@ -19,14 +19,12 @@ import { NotificationType } from "redux/notification/notification.interfaces";
 
 function* buySelectedTemplate({ payload }) {
   const { listingId, buyoutPricePerToken } = payload.payload;
-  const signer = yield select((state: any) => state.web3.signer);
   // ADD: start buy-template loader
   // Check for approval if yes, then don't call approve otherwise call approve
   const transactionRes = yield call(
     initiateTransactionService,
     listingId,
     buyoutPricePerToken,
-    signer
   );
   if (!transactionRes.error) {
     yield put(buyTemplate(transactionRes.receipt));
@@ -79,11 +77,10 @@ function* getOwnedTemplates(): any {
 }
 
 function* mintSelectedTemplate({ payload }) {
-  const signer = yield select((state: any) => state.web3.signer);
   // ADD: start mint-template loader
-  console.log(payload);
+  console.log(payload); // REMOVE after implementing feature
 
-  const mintRes = yield call(mintTemplateService, payload, signer);
+  const mintRes = yield call(mintTemplateService, payload);
   if (!mintRes.error) {
     const tokenId = parseInt(mintRes.receipt.logs[1].topics[1].toString());
     // TODO: move this to minted reducer
@@ -91,7 +88,6 @@ function* mintSelectedTemplate({ payload }) {
       createListingService,
       tokenId,
       ethers.utils.parseEther("5"),
-      signer
     );
     if (!listingRes.error) {
       yield put(mintTemplate(listingRes.receipt));

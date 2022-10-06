@@ -1,21 +1,23 @@
-import { BigNumber, Signer } from "ethers";
+import { BigNumber } from "ethers";
 import request, { gql } from "graphql-request";
 import config from "config";
 import {
   addresses,
+  approveERC1155Token,
   approveERC20Token,
   getERC1155Contract,
   getMarketplaceContract,
+  getSigner,
   TOKENS_COUNT_ON_MINT,
 } from "redux/web3/web3.utils";
 import { getCurrentTime } from "./template.utils";
 
 export const initiateTransactionService = async (
   listingId: BigNumber,
-  buyoutPricePerToken: BigNumber,
-  signer: Signer
+  buyoutPricePerToken: BigNumber
 ) => {
   try {
+    const signer = getSigner();
     const marketplaceContract = getMarketplaceContract(signer);
     await approveERC20Token(buyoutPricePerToken, signer);
     const address = await signer.getAddress();
@@ -129,8 +131,9 @@ export const getOwnedTemplatesService = async (address: string) => {
   }
 };
 
-export const mintTemplateService = async (uri: string, signer: Signer) => {
+export const mintTemplateService = async (uri: string) => {
   try {
+    const signer = getSigner();
     const erc1155Contract = getERC1155Contract(signer);
     const tx = await erc1155Contract.mint(uri);
     const receipt = await tx.wait();
@@ -142,22 +145,12 @@ export const mintTemplateService = async (uri: string, signer: Signer) => {
   }
 };
 
-export const approveERC1155Token = async (signer: Signer): Promise<any> => {
-  const erc1155Contract = getERC1155Contract(signer);
-  const tx = await erc1155Contract.setApprovalForAll(
-    addresses.marketplace,
-    true
-  );
-
-  return await tx.wait();
-};
-
 export const createListingService = async (
   tokenId: number,
-  buyoutPricePerToken: BigNumber,
-  signer: Signer
+  buyoutPricePerToken: BigNumber
 ): Promise<any> => {
   try {
+    const signer = getSigner();
     const marketplaceContract = getMarketplaceContract(signer);
     // Check for approval if yes, then don't call approve otherwise call approve
     await approveERC1155Token(signer);
