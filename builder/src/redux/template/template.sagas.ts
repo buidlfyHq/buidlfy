@@ -18,7 +18,7 @@ import templateActionTypes from "./template.types";
 import { NotificationType } from "redux/notification/notification.interfaces";
 
 function* buySelectedTemplate({ payload }) {
-  const { listingId, buyoutPricePerToken } = payload.payload;
+  const { listingId, buyoutPricePerToken } = payload;
   // ADD: start buy-template loader
   // Check for approval if yes, then don't call approve otherwise call approve
   const transactionRes = yield call(

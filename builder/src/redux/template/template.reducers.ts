@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ISelectedTemplate, ITemplateState } from "./template.interfaces";
 
-const initialState = {
+const initialState: ITemplateState = {
   buyTemplateHash: "",
   buyTemplateLoading: false,
   mintTemplateHash: "",
   mintTemplateLoading: false,
   templateList: [],
   ownedTemplateList: [],
+  selectedTemplate: null,
 };
 
 const templateSlice = createSlice({
@@ -27,6 +29,9 @@ const templateSlice = createSlice({
       state.mintTemplateHash = action.payload;
       state.mintTemplateLoading = false;
     },
+    setSelectedTemplate(state, action: { payload: ISelectedTemplate }) {
+      state.selectedTemplate = action.payload;
+    },
   },
 });
 
@@ -35,5 +40,6 @@ export const {
   fetchAllTemplates,
   fetchOwnedTemplates,
   mintTemplate,
+  setSelectedTemplate,
 } = templateSlice.actions;
 export default templateSlice.reducer;

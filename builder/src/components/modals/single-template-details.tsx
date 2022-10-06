@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { toggleModalType } from "redux/modal/modal.reducers";
@@ -13,6 +13,9 @@ interface ISingleTemplateDetails {
 
 const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
   const dispatch = useDispatch();
+  const selectedTemplate = useSelector(
+    (state: any) => state.template.selectedTemplate
+  );
 
   const handleSubmit = () => {
     list
@@ -29,7 +32,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
       <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
         <div className="flex items-center justify-between">
           <div className="text-[22px] font-[500] text-[#14142B]">
-            Cryptin Next Generation Web Template
+            {selectedTemplate.name}
           </div>
           <div className="bordered-button  flex items-center py-2.5 px-6 rounded-[24px] cursor-pointer">
             <img src={EyeImg} alt="icon" width={18} height={18} />
@@ -38,7 +41,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
         </div>
         <div className="mt-5">
           <img
-            src={TempexImg}
+            src={selectedTemplate.image}
             className="w-full max-h-[509px] h-auto rounded-[28px]"
             alt="icon"
             height={669}
