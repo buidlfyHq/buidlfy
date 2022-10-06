@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import { toggleModalType, toggleModal } from "redux/modal/modal.reducers";
-import Temp1 from "assets/temp-1.png";
-import Temp2 from "assets/temp-2.png";
-import Temp3 from "assets/temp-3.png";
+import Temp1 from "assets/icons/temp-1.png";
+import Temp2 from "assets/icons/temp-2.png";
+import Temp3 from "assets/icons/temp-3.png";
 
 const TEMPLATE_CATEGORIES = [
   "ALL",

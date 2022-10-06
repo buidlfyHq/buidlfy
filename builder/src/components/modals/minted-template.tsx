@@ -1,9 +1,8 @@
 import React, { FC } from "react";
-import { Dialog } from "@headlessui/react";
-import TickCircleImg from "assets/tick-circle.png";
-import { useDispatch } from "react-redux";
-import { toggleModal } from "redux/modal/modal.reducers";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Dialog } from "@headlessui/react";
+import { toggleModal } from "redux/modal/modal.reducers";
 import Lottie from 'react-lottie';
 import MintLottie from 'assets/lottie/mint-success.json'
 

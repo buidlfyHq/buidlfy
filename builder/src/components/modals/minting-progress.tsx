@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
-import HourGlassImg from "assets/hourglass.png";
+import HourGlassImg from "assets/icons/hourglass.png";
 import { useDispatch } from "react-redux";
 import { toggleModalType } from "redux/modal/modal.reducers";
 

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Dialog } from '@headlessui/react'
-import IconImg from 'assets/icon-crypto.png'
+import IconImg from 'assets/icons/icon-crypto.png'
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { CgClose } from "react-icons/cg";

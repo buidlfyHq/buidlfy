@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
-import UprightImg from "assets/upright.png";
+import UprightImg from "assets/icons/upright.png";
 import { CgClose } from "react-icons/cg";
-import CongratulationsImg from "assets/congratulations.png";
+import CongratulationsImg from "assets/icons/congratulations.png";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { useDispatch } from "react-redux";
 

@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
-import HourGlassImg from "assets/hourglass.png";
+import HourGlassImg from "assets/icons/hourglass.png";
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import InfoCircleImg from "assets/info-circle.png";
+import InfoCircleImg from "assets/icons/info-circle.png";
 import { CgClose } from "react-icons/cg";
 
 const TemplateListing : FC = () => {

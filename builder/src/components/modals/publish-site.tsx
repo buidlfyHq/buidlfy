@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import HourGlassImg from "assets/hourglass.png";
+import HourGlassImg from "assets/icons/hourglass.png";
 import TickImg from "assets/colored.png";
 import { CgClose } from "react-icons/cg";
 
