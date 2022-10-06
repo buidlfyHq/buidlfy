@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
 import HourGlassImg from "assets/hourglass.png";
 import { useDispatch } from "react-redux";
-import { toggleModalType } from "redux/modal/modal.reducers";
 
 const PublishingProcessModal : FC = () => {
   const dispatch = useDispatch()

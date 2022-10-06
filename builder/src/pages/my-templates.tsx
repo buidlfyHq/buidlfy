@@ -5,6 +5,8 @@ import {BiChevronDown} from 'react-icons/bi'
 import TemplateModal from "features/dashboard/template-modal";
 import { useDispatch } from 'react-redux';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
+import { Menu } from '@headlessui/react';
+import { ReactComponent as SettingsIcon } from "assets/svgAsIcons/dots.svg";
 
 const MyTemplates : FC = () => {
     const dispatch = useDispatch()
@@ -82,13 +84,44 @@ const MyTemplates : FC = () => {
                             <BiChevronDown className='ml-2 text-[18px]' />
                         </div>
                     </div>
-                    <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 px-28 pb-12 pt-7">
+                    <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 px-32 pb-12 pt-7">
                         {templates.map((temp, index) => {
                             return (
                                 <div key={index} className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative">
                                    <div className='relative rounded-[16px] h-auto'>
-                                        <div className='absolute right-0 flex justify-end my-2 mx-4 py-1 px-3 text-[#14142B] text-[10px] bg-[#FFE6B0] rounded-[5px]'>
-                                            In Review
+                                        <div className='absolute right-0 flex items-center my-2 mx-2'>
+                                            <div className='flex justify-end mr-2 py-1 px-3 text-[#14142B] text-[10px] bg-[#FFE6B0] rounded-[5px]'>
+                                                In Review
+                                            </div>
+                                            <div className='relative'>
+                                                <Menu>
+                                                    <Menu.Button className="p-1 bg-white rounded-[50%]">
+                                                        <SettingsIcon />
+                                                    </Menu.Button>
+                                                    <Menu.Items className="absolute flex flex-col rounded-[4px] bg-white px-4 py-2 mt-8 right-0 top-0 z-[200]">
+                                                        <Menu.Item>
+                                                            {({ active }) => (
+                                                            <a
+                                                                className={`whitespace-nowrap p-1 ${active && 'bg-blue-400'}`}
+                                                                href="/account-settings"
+                                                            >
+                                                                Edit site
+                                                            </a>
+                                                            )}
+                                                        </Menu.Item>
+                                                        <Menu.Item>
+                                                            {({ active }) => (
+                                                            <a
+                                                                className={`whitespace-nowrap p-1 ${active && 'bg-blue-400'}`}
+                                                                href="/account-settings"
+                                                            >
+                                                                View site
+                                                            </a>
+                                                            )}
+                                                        </Menu.Item>
+                                                    </Menu.Items>
+                                                </Menu>
+                                            </div>
                                         </div>
                                         <div className='absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600]'>
                                             <div className='py-2 px-10 rounded-[8px] bg-white text-[#7743E7]'>View Details</div>

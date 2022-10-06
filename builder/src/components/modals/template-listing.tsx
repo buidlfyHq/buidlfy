@@ -1,14 +1,24 @@
 import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
-import HourGlassImg from "assets/hourglass.png";
 import { useDispatch } from "react-redux";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { toggleModal } from "redux/modal/modal.reducers";
 import InfoCircleImg from "assets/info-circle.png";
 import { CgClose } from "react-icons/cg";
+import Lottie from 'react-lottie';
+import Hourglass from 'assets/lottie/hourglass.json'
+
 
 const TemplateListing : FC = () => {
   const dispatch = useDispatch()
   const handleClose = () => dispatch(toggleModal(false))
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: Hourglass,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
   return (
         <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[527px] my-20 sm:mx-28 mx-14 rounded-[24px] bg-white py-5 px-6">
           <div className="flex items-start justify-end w-full ">
@@ -16,7 +26,11 @@ const TemplateListing : FC = () => {
           </div>
           <div className="flex flex-col justify-center items-center pt-3">
             <div>
-                <img src={HourGlassImg} alt="icon" width={54} height={54} />
+                <Lottie 
+                options={defaultOptions}
+                height={75}
+                width={75}
+                />
             </div>
             <div className="font-[600] text-[24px] text-[#14142B] mt-7">
                 Template listing is currently in review...
