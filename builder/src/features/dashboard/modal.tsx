@@ -20,6 +20,7 @@ interface IModal {
 interface IContract {
   name: string;
   text: any; // type to be added
+  address: string;
 }
 
 const Modal: FC<IModal> = ({
@@ -48,6 +49,7 @@ const Modal: FC<IModal> = ({
     let newContract: IContract = {
       name: inputValue,
       text: JSON.stringify(contractDetails.abi),
+      address: JSON.stringify(contractDetails.address),
     };
     // localStorage.setItem("items", JSON.stringify(items));
     const contractList = localStorage.getItem("contractList") || "";
@@ -79,6 +81,7 @@ const Modal: FC<IModal> = ({
       handleSetAbi(e.target.result.toString());
     };
   };
+  console.log(contractDetails, "cd");
 
   return (
     <Dialog
@@ -137,9 +140,9 @@ const Modal: FC<IModal> = ({
                       type="file"
                       id="inputTag"
                     />
-                    <button className="contract-button mt-[0.75rem] px-5 py-1">
+                    <span className="contract-button mt-[0.75rem] px-5 py-1">
                       Browse
-                    </button>
+                    </span>
                     <br />
                   </div>
                   {files ? (
@@ -175,8 +178,13 @@ const Modal: FC<IModal> = ({
 
           <div className="mt-4">
             <button
+              disabled={!(contractDetails.abi && contractDetails.address)}
               // type="button"
-              className="contract-button py-2 px-[7.5rem]"
+              className={`rounded-[44px] font-medium text-white text-[14px] py-2 px-[7.5rem] ${
+                contractDetails.abi && contractDetails.address
+                  ? "contract-button"
+                  : "contract-disable-button"
+              }`}
               onClick={() => {
                 setIsOpen(false);
                 setMethodOpen(false);

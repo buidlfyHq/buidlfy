@@ -1,10 +1,13 @@
 import React, { useState, FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { FaFileContract } from "react-icons/fa";
+import { FaChevronRight, FaFileContract } from "react-icons/fa";
 import Modal from "features/dashboard/modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
-import { updateContractAbi } from "redux/contract/contract.reducers";
+import {
+  updateContractAbi,
+  updateContractAddress,
+} from "redux/contract/contract.reducers";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -16,6 +19,7 @@ interface IAdvanceComponent {
 interface IContract {
   name: string;
   text; // type to be added
+  address: string;
 }
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
@@ -32,21 +36,34 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
       stateMutability: string;
     };
   }>(null); // for abi method component
+  const [isViewMore, setIsViewMore] = useState<boolean>(false);
 
   useEffect(() => {
     try {
       const contractList = localStorage.getItem("contractList");
       const newContract = JSON.parse(contractList);
       setNewContractList(newContract);
+      setIsViewMore(!!(newContract?.length >= 4));
     } catch (error) {
       console.log(error, "error");
     }
   }, []);
 
-  const handleContractList = (abi: string) => {
+  const handleContractList = (abi: string, address: string) => {
     dispatch(updateContractAbi(JSON.parse(abi)));
+    dispatch(updateContractAddress(JSON.parse(address)));
     setMethodOpen(false);
   };
+
+  const handleShow = () => {
+    setIsViewMore(false);
+  };
+  console.log(isViewMore, "isviewmore");
+  console.log(newContractList, "contractlist");
+
+  const paginatedContractList = isViewMore
+    ? newContractList?.slice(0, 4)
+    : newContractList;
 
   return (
     <>
@@ -102,19 +119,35 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
             </>
           ) : null}
 
-          <div className="grid grid-cols-3 gap-4 mt-[1rem] mx-3">
-            {newContractList &&
-              newContractList?.map((contract: IContract) => {
-                const { name, text } = contract;
+          <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
+            {paginatedContractList &&
+              paginatedContractList.map((contract: IContract) => {
+                const { name, text, address } = contract;
                 return (
-                  <div
-                    onClick={() => handleContractList(text)}
-                    className="cursor-pointer flex flex-col justify-center items-center contract-list"
-                  >
-                    <span className="contract-name">{name}</span>
-                  </div>
+                  <>
+                    <div
+                      onClick={() => handleContractList(text, address)}
+                      className="cursor-pointer flex flex-col justify-center contract-list"
+                    >
+                      <span className="flex items-center">
+                        <span className="contract-name ml-[1rem] grow flex">
+                          {name}
+                        </span>
+                        <FaChevronRight className="text-[10px] text-[#100F11] mr-[0.5rem]" />
+                      </span>
+                    </div>
+                  </>
                 );
               })}
+            {isViewMore ? (
+              <span
+                onClick={handleShow}
+                className="text-[#458CDE] cursor-pointer flex items-center justify-end text-[9px] text-right underline"
+              >
+                View More
+                <FaChevronRight className="text-[7px] ml-[2px]" />
+              </span>
+            ) : null}
           </div>
         </>
       )}
