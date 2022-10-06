@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
-import { Dialog } from "@headlessui/react";
-import HourGlassImg from "assets/hourglass.png";
 import { useDispatch } from "react-redux";
+import { Dialog } from "@headlessui/react";
 import { toggleModalType } from "redux/modal/modal.reducers";
+import HourGlassImg from "assets/icons/hourglass.png";
 
 interface IPublishSiteModal {
   generatedConfig:any

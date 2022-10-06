@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
-import UprightImg from "assets/upright.png";
-import CongratulationsImg from "assets/congratulations.png";
+import UprightImg from "assets/icons/upright.png";
+import CongratulationsImg from "assets/icons/congratulations.png";
 
 const SitePublishedModal: FC = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Dialog } from '@headlessui/react'
-import IconImg from 'assets/icon-crypto.png'
+import IconImg from 'assets/icons/icon-crypto.png'
 
 const ListTemplate: FC = () => {
   return (

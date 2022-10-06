@@ -5,9 +5,9 @@ import {
   updateContractAbi,
   updateContractAddress,
 } from "redux/contract/contract.reducers";
-import upload from "assets/upload-img.png";
 import { IRootState } from "redux/root-state.interface";
 import { IContractDetails } from "redux/contract/contract.interfaces";
+import upload from "assets/icons/upload-img.png";
 import "styles/components.css";
 
 interface IContractModal {

@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { Dialog } from "@headlessui/react";
-import TickCircleImg from "assets/tick-circle.png";
-import { useDispatch } from "react-redux";
-import { toggleModal } from "redux/modal/modal.reducers";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Dialog } from "@headlessui/react";
+import { toggleModal } from "redux/modal/modal.reducers";
+import TickCircleImg from "assets/icons/tick-circle.png";
 
 const MintedTemplateModal: FC = () => {
   const dispatch = useDispatch()

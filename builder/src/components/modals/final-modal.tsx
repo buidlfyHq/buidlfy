@@ -4,7 +4,7 @@ import { Dialog } from "@headlessui/react";
 import { ConfettiShower } from "components/utils/confetti-shower";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { ReactComponent as FeatherIcon } from "assets/svgAsIcons/feather.svg";
-import CongratulationsImg from "assets/congratulations.png";
+import CongratulationsImg from "assets/icons/congratulations.png";
 
 const FinalModal: FC = () => {
   const dispatch = useDispatch();

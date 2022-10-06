@@ -4,7 +4,7 @@ import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import { connectWallet } from "redux/web3/web3.actions";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import MetamaskImg from "assets/Metamask-icon.png";
+import MetamaskImg from "assets/icons/Metamask-icon.png";
 
 const SelectWallet: FC = () => {
   const dispatch = useDispatch();
