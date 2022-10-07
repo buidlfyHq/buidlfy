@@ -8,6 +8,7 @@ import { SocketClient } from '@/socket-client';
 import { socketServer } from '@/socket';
 import { DeploymentStatus, StreamType, ISpheronDeploymentResponse } from '@/interfaces/deployments.interface';
 import DomainService from './domain.service';
+import Logger from '@/logger';
 
 class DeploymentService {
   domainService = new DomainService();
@@ -34,7 +35,7 @@ class DeploymentService {
         protocol: 'ipfs-filecoin',
         createDefaultWebhook: false,
         provider: 'GITHUB',
-        branch: 'dev',
+        branch: 'feat/deployment-api',
       };
       const response = await axios.post(`${SPHERON_API_HOST}${DEPLOYMENT_ENDPOINT}`, deploymentPayload, { headers: spheronAuthHeaders });
       const deploymentResponse: ISpheronDeploymentResponse = response.data;
@@ -42,7 +43,7 @@ class DeploymentService {
       this.listenDeployment(deploymentData.clientTopic, deploymentDto.topic);
       return deploymentDto;
     } catch (error) {
-      console.log(error);
+      Logger.error(`Error found in ${__filename} - deployApp - ${error.message}`);
       throw error;
     }
   }
@@ -52,7 +53,7 @@ class DeploymentService {
     const socketClient = new SocketClient();
     await socketClient.connect();
     socketClient.listen(`deployment.${deploymentTopic}`, (stream: StreamType) => {
-      console.log(stream);
+      Logger.info(`Deployment stream from Spheron - ${JSON.stringify(stream)}`);
       if (stream.type === 1) socketServer.emit(`deployment.${clientTopic}`, { status: DeploymentStatus.DEPLOYING as string });
       if (stream.type === 2) socketServer.emit(`deployment.${clientTopic}`, { status: DeploymentStatus.DEPLOYED as string });
       if (stream.type === 3) socketServer.emit(`deployment.${clientTopic}`, { status: DeploymentStatus.FAILED as string });

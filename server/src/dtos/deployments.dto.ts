@@ -9,14 +9,15 @@ export class DeployAppDto {
   public clientTopic: string;
 }
 
-export class UpdateDeploymentDomainDto {
+export class CreateDeploymentSubdomainDto {
   @IsString()
   public deploymentId: string;
 
   @IsString()
   public siteName: string;
 }
-export class VerifyDeploymentDomainDto {
+
+export class VerifyDeploymentSubdomainDto {
   @IsString()
   public domainId: string;
 

@@ -1,4 +1,5 @@
 import { SITE_DOMAIN_NAME, SPHERON_API_HOST } from '@/config';
+import Logger from '@/logger';
 import { generateRandomHexString, spheronAuthHeaders } from '@/utils/util';
 import axios, { AxiosResponse } from 'axios';
 import CloudflareService from './cloudflare.service';
@@ -8,10 +9,13 @@ class DomainService {
 
   public async generateSitename(sitename: string, projectId: string, deploymentLink: string): Promise<any> {
     const randomString: string = generateRandomHexString(6);
-    const projectNameNormalized = sitename.toLowerCase().replace(/\s/g, '-').replace(/\./g, '-').replace(/_/g, '-');
+    const siteNameNormalized = sitename.replace(/\s/g, '-').replace(/\./g, '-').replace(/_/g, '-');
+    Logger.info(`Site name normalised - ${siteNameNormalized}`);
+
     const defaultDomainSuffix = `-${randomString}.${SITE_DOMAIN_NAME}`;
-    const projectNameNormalizedSliced = projectNameNormalized.slice(0, 64 - defaultDomainSuffix.length); // take only first (N - domainSuffix) characters because limit on DNS name length is 64
-    const subdomainName: string = `${projectNameNormalizedSliced}${defaultDomainSuffix}`.toLowerCase();
+    const siteNameNormalizedSliced = siteNameNormalized.slice(0, 64 - defaultDomainSuffix.length); // take only first (N - domainSuffix) characters because limit on DNS name length is 64
+    const subdomainName: string = `${siteNameNormalizedSliced}${defaultDomainSuffix}`.toLowerCase();
+    Logger.info(`Site name normalised - ${subdomainName}`);
 
     const res = await Promise.all([
       this.cloudflareService.addSubdomain(subdomainName),
