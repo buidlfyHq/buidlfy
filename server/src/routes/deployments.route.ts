@@ -14,14 +14,14 @@ class DeploymentsRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}`, validationMiddleware(DeployAppDto, 'body'), this.deploymentController.startDeployment);
+    this.router.post(`${this.path}/create`, validationMiddleware(DeployAppDto, 'body'), this.deploymentController.startDeployment);
     this.router.put(
-      `${this.path}/update`,
+      `${this.path}/create-subdomain`,
       validationMiddleware(CreateDeploymentSubdomainDto, 'body'),
       this.deploymentController.createDeploymentSubdomain,
     );
     this.router.patch(
-      `${this.path}/verify`,
+      `${this.path}/verify-subdomain`,
       validationMiddleware(VerifyDeploymentSubdomainDto, 'body'),
       this.deploymentController.verifyDeploymentSubdomain,
     );
