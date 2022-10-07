@@ -8,6 +8,10 @@ import {
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
+import {
+  updateContractAbi,
+  updateContractAddress,
+} from "redux/contract/contract.reducers";
 
 interface IAbiMethods {
   setShowComponent: (showComponent: IShowComponent) => void;
@@ -114,6 +118,8 @@ const AbiMethods: FC<IAbiMethods> = ({
   const handleBack = () => {
     setMethodOpen(true);
     setIsOpen(false);
+    dispatch(updateContractAbi(JSON.parse(null)));
+    dispatch(updateContractAddress(JSON.parse(null)));
   };
 
   return (
