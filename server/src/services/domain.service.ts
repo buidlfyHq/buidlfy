@@ -6,21 +6,24 @@ import CloudflareService from './cloudflare.service';
 class DomainService {
   cloudflareService = new CloudflareService();
 
-  public async generateSitename(sitename: string, projectId: string): Promise<string> {
+  public async generateSitename(sitename: string, projectId: string, deploymentLink: string): Promise<any> {
     const randomString: string = generateRandomHexString(6);
-    const projectNameNormalized = sitename.replace(/\s/g, '-').replace(/\./g, '-').replace(/_/g, '-');
+    const projectNameNormalized = sitename.toLowerCase().replace(/\s/g, '-').replace(/\./g, '-').replace(/_/g, '-');
     const defaultDomainSuffix = `-${randomString}.${SITE_DOMAIN_NAME}`;
     const projectNameNormalizedSliced = projectNameNormalized.slice(0, 64 - defaultDomainSuffix.length); // take only first (N - domainSuffix) characters because limit on DNS name length is 64
     const subdomainName: string = `${projectNameNormalizedSliced}${defaultDomainSuffix}`.toLowerCase();
 
-    await Promise.all([this.cloudflareService.addSubdomain(subdomainName), this.addSubdomainToSpheron(subdomainName, projectId)]);
-    return subdomainName;
+    const res = await Promise.all([
+      this.cloudflareService.addSubdomain(subdomainName),
+      this.addSubdomainToSpheron(subdomainName, projectId, deploymentLink),
+    ]);
+    return res[1].data;
   }
 
-  private async addSubdomainToSpheron(subdomainName: string, projectId: string): Promise<AxiosResponse> {
+  private async addSubdomainToSpheron(subdomainName: string, projectId: string, link: string): Promise<AxiosResponse> {
     const payload = {
       name: subdomainName,
-      link: '',
+      link,
       type: 'subdomain',
       deploymentEnvironments: [],
       isLatest: false,
@@ -37,7 +40,7 @@ class DomainService {
 
   public async verifySubdomain(subdomainId: string, projectId: string): Promise<AxiosResponse> {
     const payload = {};
-    return axios.put(`${SPHERON_API_HOST}/v1/project/${projectId}/domains/${subdomainId}/`, payload, { headers: spheronAuthHeaders });
+    return axios.put(`${SPHERON_API_HOST}/v1/project/${projectId}/domains/${subdomainId}/verify`, payload, { headers: spheronAuthHeaders });
   }
 
   public async getDomain(projectId: string, domain: string): Promise<AxiosResponse> {

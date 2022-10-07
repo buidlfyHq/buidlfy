@@ -1,6 +1,4 @@
-import { HttpException } from '@exceptions/HttpException';
-import { IDomain } from './../interfaces/domain.interface';
-import { UpdateDeploymentDomainDto } from './../dtos/deployments.dto';
+import { UpdateDeploymentDomainDto, VerifyDeploymentDomainDto } from '@/dtos/deployments.dto';
 import { DeployAppDto, DeploymentResponseDto } from '@/dtos/deployments.dto';
 import DeploymentService from '@/services/deployments.service';
 import { NextFunction, Request, Response } from 'express';
@@ -24,25 +22,33 @@ class DeploymentsController {
 
   public updateDeploymentDomain = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { domainName, deploymentId }: UpdateDeploymentDomainDto = req.body;
+      const { siteName, deploymentId }: UpdateDeploymentDomainDto = req.body;
       const deploymentResponse = await this.deploymentService.getDeployment(deploymentId);
-      const { project: projectId, sitePreview: deploymentLink }: IFetchDeploymentResponse = deploymentResponse.data;
-      const domainResponse = await this.domainService.getDomain(projectId, domainName);
-      const { _id: domainId }: IDomain = domainResponse.data.domain;
-      const updatedDomainResponse = await this.domainService.updateSubdomainLink(domainId, projectId, deploymentLink);
-      const { link: updatedDeploymentLink }: IDomain = updatedDomainResponse.data.domain;
-      if (updatedDeploymentLink === deploymentLink) {
-        const verifyResponse = await this.domainService.verifySubdomain(domainId, projectId);
-        const domainVerified: boolean = verifyResponse.data.success;
-        if (domainVerified) {
-          res.status(200).json({ data: { success: domainVerified }, message: 'Subdomain updated and verified!' });
-        } else {
-          throw new HttpException(406, "Domain couldn't be verified, please try again.");
-        }
-      } else {
-        throw new HttpException(406, "Deployment link doesn't get updated, please try again.");
-      }
+      const {
+        project: { _id: projectId },
+        sitePreview: deploymentLink,
+      }: IFetchDeploymentResponse = deploymentResponse.data.deployment;
+      console.log(deploymentResponse.data, projectId, deploymentLink);
+      const { domain } = await this.domainService.generateSitename(siteName, projectId, deploymentLink);
+      res.status(200).json({ data: { success: true, domain }, message: 'Subdomain created!' });
     } catch (error) {
+      next(error);
+    }
+  };
+
+  public verifyDeploymentDomain = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { domainId, projectId }: VerifyDeploymentDomainDto = req.body;
+
+      console.log(domainId, projectId);
+      const verifyResponse = await this.domainService.verifySubdomain(domainId, projectId);
+      console.log(verifyResponse);
+      const {
+        domain: { verified: domainVerified },
+      } = verifyResponse.data;
+      res.status(200).json({ data: { success: domainVerified }, message: domainVerified ? 'Subdomain verified!' : 'Subdomain not verified' });
+    } catch (error) {
+      console.log(error);
       next(error);
     }
   };

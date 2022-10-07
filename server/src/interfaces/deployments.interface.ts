@@ -39,7 +39,7 @@ export interface IFetchDeploymentResponse {
   sitePreview: string;
   topic: string;
   status: DeploymentStatus;
-  project: string;
+  project: any;
   createdAt: any;
   updatedAt: any;
   protocol: string;

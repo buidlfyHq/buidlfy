@@ -29,7 +29,7 @@ class DeploymentService {
           nodeVersion: 'V_14',
         },
         env: {
-          CONFIGURATION: deploymentData.config,
+          REACT_APP_BUIDLFY_CONFIGURATION: deploymentData.config,
         },
         protocol: 'ipfs-filecoin',
         createDefaultWebhook: false,
@@ -40,8 +40,6 @@ class DeploymentService {
       const deploymentResponse: ISpheronDeploymentResponse = response.data;
       const deploymentDto = new DeploymentResponseDto(deploymentResponse);
       this.listenDeployment(deploymentData.clientTopic, deploymentDto.topic);
-      const sitename = await this.domainService.generateSitename(deploymentData.name, deploymentResponse.projectId);
-      deploymentDto.populateSitename(sitename);
       return deploymentDto;
     } catch (error) {
       console.log(error);
@@ -65,7 +63,7 @@ class DeploymentService {
   }
 
   public async getDeployment(deploymentId: string): Promise<AxiosResponse> {
-    return axios.get(`${SPHERON_API_HOST}/deployment/${deploymentId}`, { headers: spheronAuthHeaders });
+    return axios.get(`${SPHERON_API_HOST}/v1/deployment/${deploymentId}`, { headers: spheronAuthHeaders });
   }
 }
 

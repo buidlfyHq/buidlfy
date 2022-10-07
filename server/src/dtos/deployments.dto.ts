@@ -6,9 +6,6 @@ export class DeployAppDto {
   public config: string;
 
   @IsString()
-  public name: string;
-
-  @IsString()
   public clientTopic: string;
 }
 
@@ -17,7 +14,14 @@ export class UpdateDeploymentDomainDto {
   public deploymentId: string;
 
   @IsString()
-  public domainName: string;
+  public siteName: string;
+}
+export class VerifyDeploymentDomainDto {
+  @IsString()
+  public domainId: string;
+
+  @IsString()
+  public projectId: string;
 }
 
 export class DeploymentResponseDto implements IDeploymentResponse {
