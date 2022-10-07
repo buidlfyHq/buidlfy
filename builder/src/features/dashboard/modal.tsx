@@ -81,8 +81,6 @@ const Modal: FC<IModal> = ({
       handleSetAbi(e.target.result.toString());
     };
   };
-  console.log(contractDetails, "cd");
-
   return (
     <Dialog
       as="div"
@@ -180,10 +178,10 @@ const Modal: FC<IModal> = ({
             <button
               disabled={!(contractDetails.abi && contractDetails.address)}
               // type="button"
-              className={`rounded-[44px] font-medium text-white text-[14px] py-2 px-[7.5rem] ${
+              className={`rounded-[44px] contract-button font-medium text-white text-[14px] py-2 px-[7.5rem] ${
                 contractDetails.abi && contractDetails.address
-                  ? "contract-button"
-                  : "contract-disable-button"
+                  ? ""
+                  : "opacity-40"
               }`}
               onClick={() => {
                 setIsOpen(false);

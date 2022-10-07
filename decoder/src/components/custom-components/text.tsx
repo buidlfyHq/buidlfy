@@ -18,7 +18,6 @@ const Text: FC<ITexts> = ({
   margin,
   padding,
 }) => {
-  console.log(outputValue, "ov");
   const [isValue, setIsValue] = useState<string>(value);
   const handleOnChange = () => {
     if (outputValue && outputValue.find((output) => output.id === id)) {

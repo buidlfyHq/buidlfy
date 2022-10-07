@@ -58,8 +58,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const handleShow = () => {
     setIsViewMore(false);
   };
-  console.log(isViewMore, "isviewmore");
-  console.log(newContractList, "contractlist");
 
   const paginatedContractList = isViewMore
     ? newContractList?.slice(0, 4)
