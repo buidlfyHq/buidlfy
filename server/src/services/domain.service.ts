@@ -39,6 +39,10 @@ class DomainService {
     const payload = {};
     return axios.put(`${SPHERON_API_HOST}/v1/project/${projectId}/domains/${subdomainId}/`, payload, { headers: spheronAuthHeaders });
   }
+
+  public async getDomain(projectId: string, domain: string): Promise<AxiosResponse> {
+    return axios.get(`${SPHERON_API_HOST}/v1/project/${projectId}/domains/${domain}/`, { headers: spheronAuthHeaders });
+  }
 }
 
 export default DomainService;

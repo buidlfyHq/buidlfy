@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { DeployAppDto, DeploymentResponseDto } from '@/dtos/deployments.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { isEmpty, spheronAuthHeaders } from '@utils/util';
@@ -6,11 +6,12 @@ import { DECODER_GIT_URL, DEPLOYMENT_ENDPOINT, ORGANIZATION_ID, SPHERON_API_HOST
 import { randomUUID } from 'crypto';
 import { SocketClient } from '@/socket-client';
 import { socketServer } from '@/socket';
-import { DeploymentStatus, StreamType, SpheronDeploymentResponse } from '@/interfaces/deployments.interface';
+import { DeploymentStatus, StreamType, ISpheronDeploymentResponse } from '@/interfaces/deployments.interface';
 import DomainService from './domain.service';
 
 class DeploymentService {
   domainService = new DomainService();
+
   public async deployApp(deploymentData: DeployAppDto): Promise<DeploymentResponseDto> {
     if (isEmpty(deploymentData)) throw new HttpException(400, 'deploymentData is empty');
     try {
@@ -36,7 +37,7 @@ class DeploymentService {
         branch: 'dev',
       };
       const response = await axios.post(`${SPHERON_API_HOST}${DEPLOYMENT_ENDPOINT}`, deploymentPayload, { headers: spheronAuthHeaders });
-      const deploymentResponse: SpheronDeploymentResponse = response.data;
+      const deploymentResponse: ISpheronDeploymentResponse = response.data;
       const deploymentDto = new DeploymentResponseDto(deploymentResponse);
       this.listenDeployment(deploymentData.clientTopic, deploymentDto.topic);
       const sitename = await this.domainService.generateSitename(deploymentData.name, deploymentResponse.projectId);
@@ -47,6 +48,7 @@ class DeploymentService {
       throw error;
     }
   }
+
   private async listenDeployment(clientTopic: string, deploymentTopic: string): Promise<void> {
     if (!deploymentTopic) throw new HttpException(400, 'deploymentData is empty');
     const socketClient = new SocketClient();
@@ -60,6 +62,10 @@ class DeploymentService {
 
       if (stream.type === 2 || stream.type === 3) socketClient.destroy();
     });
+  }
+
+  public async getDeployment(deploymentId: string): Promise<AxiosResponse> {
+    return axios.get(`${SPHERON_API_HOST}/deployment/${deploymentId}`, { headers: spheronAuthHeaders });
   }
 }
 

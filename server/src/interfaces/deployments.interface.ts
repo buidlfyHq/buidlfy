@@ -1,6 +1,6 @@
 import { Error } from './common.interface';
 
-export interface DeploymentResponse extends Error {
+export interface IDeploymentResponse extends Error {
   deploymentId: string;
   topic: string;
   status: DeploymentStatus;
@@ -9,7 +9,7 @@ export interface DeploymentResponse extends Error {
   sitename: string;
 }
 
-export interface SpheronDeploymentResponse {
+export interface ISpheronDeploymentResponse {
   message: string;
   success: boolean;
   topic: string;
@@ -33,6 +33,17 @@ export interface SpheronDeploymentResponse {
     paidViaSubscription: boolean;
     commitId: string | null;
   };
+}
+
+export interface IFetchDeploymentResponse {
+  sitePreview: string;
+  topic: string;
+  status: DeploymentStatus;
+  project: string;
+  createdAt: any;
+  updatedAt: any;
+  protocol: string;
+  failedMessage: string;
 }
 
 export enum DeploymentStatus {

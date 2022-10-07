@@ -1,4 +1,4 @@
-import { DeploymentResponse, DeploymentStatus, SpheronDeploymentResponse } from '@/interfaces/deployments.interface';
+import { IDeploymentResponse, DeploymentStatus, ISpheronDeploymentResponse } from '@/interfaces/deployments.interface';
 import { IsString } from 'class-validator';
 
 export class DeployAppDto {
@@ -12,7 +12,15 @@ export class DeployAppDto {
   public clientTopic: string;
 }
 
-export class DeploymentResponseDto implements DeploymentResponse {
+export class UpdateDeploymentDomainDto {
+  @IsString()
+  public deploymentId: string;
+
+  @IsString()
+  public domainName: string;
+}
+
+export class DeploymentResponseDto implements IDeploymentResponse {
   deploymentId: string;
   topic: string;
   status: DeploymentStatus;
@@ -22,7 +30,7 @@ export class DeploymentResponseDto implements DeploymentResponse {
   error: boolean;
   message: string;
 
-  constructor(spheronResponse: SpheronDeploymentResponse) {
+  constructor(spheronResponse: ISpheronDeploymentResponse) {
     this.deploymentId = spheronResponse.deploymentId;
     this.topic = spheronResponse.topic;
     this.status = DeploymentStatus.QUEUED;
