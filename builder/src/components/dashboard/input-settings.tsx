@@ -40,7 +40,7 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <BorderRadiusComponent
         i={selectedElement.i}
         borderRadius={selectedElement.style.borderRadius}
-        borderColor={selectedElement.style.color}
+        borderColor={selectedElement.style.borderColor}
       />
       <MarginComponent
         i={selectedElement.i}
@@ -53,6 +53,7 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <ColorComponent
         i={selectedElement.i}
         color={selectedElement.style.color}
+        name={selectedElement.name}
       />
       <BorderColorComponent
         i={selectedElement.i}
