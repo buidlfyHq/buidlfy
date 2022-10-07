@@ -7,6 +7,7 @@ interface INumberInput {
   handleChange: (e: number) => void;
   handleIncrement: () => void;
   handleDecrement: () => void;
+  disableInput?: boolean;
 }
 const NumberInput: FC<INumberInput> = ({
   text,
@@ -14,6 +15,7 @@ const NumberInput: FC<INumberInput> = ({
   handleChange,
   handleIncrement,
   handleDecrement,
+  disableInput,
 }) => {
   return (
     <div className="flex px-1 py-4">
@@ -21,6 +23,7 @@ const NumberInput: FC<INumberInput> = ({
         {text}
       </div>
       <ArrowInput
+        disableInput={disableInput}
         value={value}
         handleChange={handleChange}
         handleIncrement={handleIncrement}
