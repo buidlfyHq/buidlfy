@@ -1,31 +1,21 @@
 import React, { FC } from "react";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import elements from "assets/icons/elements.png";
-import templates from "assets/icons/templates.png";
 import logo from "assets/icons/buidlfy.png";
 import "styles/components.css";
 
 interface ISideNavbar {
-  className: string;
   setSideElement: (sideElement: string) => void;
-  showSidebar;
-  hideSettingSidebar;
+  setIsNavHidden: (isNavHidden: boolean) => void;
 }
 
-const SideNavbar: FC<ISideNavbar> = ({
-  className,
-  setSideElement,
-  showSidebar,
-  hideSettingSidebar,
-}) => {
+const SideNavbar: FC<ISideNavbar> = ({ setSideElement, setIsNavHidden }) => {
   const handleSidebar = (selectedSidebarElements: string) => {
     setSideElement(selectedSidebarElements);
   };
 
   return (
-    <main
-      className={`w-[80px] sidenav z-[100] fixed top-0 bottom-0 left-0 ${className}`}
-    >
+    <main className="w-[80px] sidenav z-[100] fixed top-0 bottom-0 left-0">
       {/* Components */}
       <img src={logo} className="w-[2.4rem] mx-[1.3rem] my-[0.65rem]" />
       <div className="side-border px-4 pt-[1rem]">
@@ -37,9 +27,8 @@ const SideNavbar: FC<ISideNavbar> = ({
         </div> */}
         <div
           onClick={() => {
-            showSidebar(true);
             handleSidebar(SidebarEnum.ELEMENTS);
-            hideSettingSidebar();
+            setIsNavHidden(false);
           }}
           className="cursor-pointer"
         >
@@ -80,12 +69,6 @@ const SideNavbar: FC<ISideNavbar> = ({
           <h3 className="side-text mt-1">Settings</h3>
         </div> */}
       </div>
-
-      {/* <Link to="/templates" className="hover:text-black">
-        <div className="mx-6 px-4 py-3 mt-10 rounded-xl hover:bg-blue-100">
-          Templates
-        </div>
-      </Link> */}
     </main>
   );
 };

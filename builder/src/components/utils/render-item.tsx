@@ -16,8 +16,7 @@ interface IRenderItem {
   setSideElement?: (sideElement: string) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
-  showSidebar?: () => void;
-  hideSidebar?: () => void;
+  setIsNavHidden?: (isNavHidden: boolean) => void;
   hideSettingSidebar?: () => void;
 }
 
@@ -30,8 +29,7 @@ const RenderItem: FC<IRenderItem> = ({
   setSideElement,
   dragContainer,
   setDragContainer,
-  showSidebar,
-  hideSidebar,
+  setIsNavHidden,
   hideSettingSidebar,
 }) => {
   switch (item.name) {
@@ -123,8 +121,7 @@ const RenderItem: FC<IRenderItem> = ({
           setSideElement={setSideElement}
           dragContainer={dragContainer}
           setDragContainer={setDragContainer}
-          showSidebar={showSidebar}
-          hideSidebar={hideSidebar}
+          setIsNavHidden={setIsNavHidden}
           hideSettingSidebar={hideSettingSidebar}
           padding={item.style.padding}
         />

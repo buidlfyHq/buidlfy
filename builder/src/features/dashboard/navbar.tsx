@@ -1,30 +1,20 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AiOutlineDoubleRight } from "react-icons/ai";
 import makeBlockie from "ethereum-blockies-base64";
 import { encode as base64_encode } from "base-64";
-import { Dialog, Menu } from "@headlessui/react";
+import { Menu } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import TemplateModal from "./template-modal";
-import {
-  uploadFileToWeb3Storage,
-  uploadTemplateToWeb3Storage,
-} from "config/web3storage";
 import { connectWallet } from "redux/web3/web3.actions";
-import { mintTemplate } from "redux/template/template.actions";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
-import {
-  ITemplate,
-  IWorkspaceElement,
-} from "redux/workspace/workspace.interfaces";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 interface INavbar {
-  className: string;
   workspaceBackgroundColor: string;
   head: {
     title: string;
@@ -32,7 +22,7 @@ interface INavbar {
   };
 }
 
-const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
+const Navbar: FC<INavbar> = ({ workspaceBackgroundColor, head }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
@@ -103,16 +93,9 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
   };
 
   return (
-    <main
-      className={
-        !className
-          ? `fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20`
-          : `h-[57px] w-full top-0 topnav flex flex-row justify-between items-center p-3 z-20`
-      }
-    >
-      <div className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer">
-        {className && <AiOutlineDoubleRight />}
-      </div>
+    <main className="fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20">
+      {/* FIX: find out a way to remove this div */}
+      <div />
       <div className="flex flex-row items-center h-[60px]">
         <div className="flex flex-row items-center">
           <div
