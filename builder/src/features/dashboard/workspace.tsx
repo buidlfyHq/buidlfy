@@ -19,7 +19,9 @@ import {
   IContractElementSelected,
   IContractElementSelector,
 } from "redux/contract/contract.interfaces";
+import DefaultBuilder from "./deafult-builder";
 import "styles/components.css";
+import DefaultSettings from "./default-settings";
 
 interface IWorkspaceComponent {
   setOpenSetting: (open: boolean) => void;
@@ -38,6 +40,12 @@ interface IWorkspaceComponent {
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   hideSettingSidebar?: () => void;
+  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
+  head: {
+    title: string;
+    logo: string | ArrayBuffer;
+  };
+  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
 }
 
 const Workspace: FC<IWorkspaceComponent> = ({
@@ -55,6 +63,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
   dragContainer,
   setDragContainer,
   hideSettingSidebar,
+  setWorkspaceBackgroundColor,
+  head,
+  setHead,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -109,7 +120,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
       ? dispatch(updateWorkspaceElementsArray(newItemsArr))
       : dispatch(updateWorkspaceElementsArray(workspaceElements));
   };
-
   // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {
     const searchExistingValue = Object.keys(contractElementSelected).filter(
@@ -224,7 +234,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
       setOpenSetting(false);
     }
   };
-
   const renderItemFunction = workspaceElements
     ?.filter((i) => i.style?.deleteComponent === false)
     .map((item: IWorkspaceElement) => {
@@ -267,31 +276,46 @@ const Workspace: FC<IWorkspaceComponent> = ({
       style={{ width: "-webkit-fill-available" }}
       className="main-div h-full "
     >
-      <section onClick={handleCheckIsContainer} className="z-100">
-        <section
-          id="full-view"
-          style={{
-            width: "-webkit-fill-available",
-            background: workspaceBackgroundColor,
-          }}
-          className="mt-[90px] z-[100] bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl mr-[290px]"
-        >
-          <GridLayout
-            layout={workspaceElements}
-            cols={6}
-            rowHeight={50}
-            width={fullViewWidth || 1200}
-            resizeHandles={["se"]}
-            isDraggable={drag}
-            onLayoutChange={onLayoutChange}
-            compactType={null}
-            margin={[0, 0]}
-            className="h-fit overflow-hidden"
+      {workspaceElements?.length > 0 ? (
+        <section onClick={handleCheckIsContainer} className="z-100">
+          <section
+            id="full-view"
+            style={{
+              width: "-webkit-fill-available",
+              background: workspaceBackgroundColor,
+            }}
+            className="mt-[90px] z-[100] ml-[120px] mb-[20px] min-h-[87vh] main-grid mr-[290px]"
           >
-            {renderItemFunction}
-          </GridLayout>
+            <GridLayout
+              layout={workspaceElements}
+              cols={6}
+              rowHeight={50}
+              width={fullViewWidth || 1200}
+              resizeHandles={["se"]}
+              isDraggable={drag}
+              onLayoutChange={onLayoutChange}
+              compactType={null}
+              margin={[0, 0]}
+              className="h-fit overflow-hidden"
+            >
+              {renderItemFunction}
+            </GridLayout>
+          </section>
         </section>
-      </section>
+      ) : (
+        <>
+          <DefaultBuilder
+            showSidebar={showSidebar}
+            setSideElement={setSideElement}
+          />
+          <DefaultSettings
+            workspaceBackgroundColor={workspaceBackgroundColor}
+            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+            head={head}
+            setHead={setHead}
+          />
+        </>
+      )}
     </main>
   );
 };

@@ -40,6 +40,7 @@ const RenderItem: FC<IRenderItem> = ({
           outputValue={outputValue}
           setOutputValue={setOutputValue}
           padding={item.style.padding}
+          margin={item.style.margin}
         />
       );
     case "Button":
@@ -142,13 +143,15 @@ const RenderItem: FC<IRenderItem> = ({
     case "Input":
       return (
         <Input
-          id={item.i}
+          i={item.i}
           inputValue={inputValue}
           setInputValue={setInputValue}
           borderRadius={item.style.borderRadius}
           shadow={item.style.shadow}
           color={item.style.color}
           margin={item.style.margin}
+          padding={item.style.padding}
+          placeholder={item.placeholder}
         />
       );
     case "Divider":
@@ -163,42 +166,6 @@ const RenderItem: FC<IRenderItem> = ({
           backgroundSize={item.style.backgroundSize}
           isAuto={item.style.isAuto}
           margin={item.style.margin}
-        />
-      );
-    case "Horizontal Container":
-      return (
-        <Container
-          item={item}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          imgData={item.imgData}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          outputValue={outputValue}
-          setOutputValue={setOutputValue}
-          padding={item.style.padding}
-        />
-      );
-    case "Vertical Container":
-      return (
-        <Container
-          item={item}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          imgData={item.imgData}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          outputValue={outputValue}
-          setOutputValue={setOutputValue}
-          padding={item.style.padding}
         />
       );
     default:

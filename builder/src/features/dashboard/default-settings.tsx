@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import BgColorComponent from "components/settings/bg-color-component";
 import { uploadFileToWeb3Storage } from "config/web3storage";
+import { SITE_SIZE_VARIABLE } from "config/constant";
 import "styles/components.css";
 
 interface IDefaultSettings {
@@ -20,21 +21,24 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   setHead,
 }) => {
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
+  const [siteImage, setSiteImage] = useState<string>();
   const onChangeLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
-      if (e.target.files[0].size > 5242880) {
+      if (e.target.files[0].size > SITE_SIZE_VARIABLE) {
         setSizeExceeded(true);
       } else {
+        setSizeExceeded(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
+          setSiteImage(reader.result as string);
           const cid = await uploadFileToWeb3Storage(reader.result as string);
-          setHead({ ...head, logo: reader.result });
+          setHead({ ...head, logo: cid });
         });
         reader.readAsDataURL(e.target.files[0]);
       }
     }
   };
-
+  // ADD: New site design in next branch
   return (
     <main className="fixed right-0 top-[60px] w-[250px] setting-nav h-full  bg-white">
       <div className="mx-3 my-2">
@@ -72,24 +76,36 @@ const DefaultSettings: FC<IDefaultSettings> = ({
             </div>
           </div> */}
         </aside>
-        <div className="flex justify-center" onChange={onChangeLogo}>
-          <div className="mb-3 mt-5 upload-img">
-            <label htmlFor="inputTag" className="image-label">
-              Drag and drop a file, or{" "}
-              <span className="purple-label">browse</span>
-              <input className="upload-input" type="file" id="inputTag" />
-            </label>
+        <div>
+          <div className="flex justify-center" onChange={onChangeLogo}>
+            <div className="mb-3 mt-5 upload-img cursor-pointer">
+              <label htmlFor="inputTag" className="image-label">
+                Drag and drop a file, or{" "}
+                <span className="purple-label">browse</span>
+                <input
+                  className="upload-input"
+                  type="file"
+                  id="inputTag"
+                  accept=".ico"
+                />
+              </label>
+            </div>
+            <br />
           </div>
-          <br />
+          <div className="flex justify-center" onChange={onChangeLogo}>
+            <button className="upload-btn mx-2 cursor">Upload</button>
+          </div>
         </div>
-        <div className="flex justify-center">
-          <button className="upload-btn mx-2 ">Upload</button>
-        </div>
+        {sizeExceeded ? (
+          <h3 className="text-red-500 text-sm ml-5 mb-2">
+            Please upload file below 1 mb
+          </h3>
+        ) : null}
         <div
           id="logo"
           className="mx-[4.5rem] mt-[2rem] mb-2 h-14 w-15 text-center mx-4 flex items-center justify-center"
           style={{
-            backgroundImage: `url(${head.logo})`,
+            backgroundImage: `url(${siteImage})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "contain",

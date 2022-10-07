@@ -1,6 +1,12 @@
+export interface IUploadedImageData {
+  settingItemId: string;
+  uploadedImageData: string;
+}
+
 export interface IWorkspaceState {
   workspaceElements: IWorkspaceElement[];
   selectedElement: IWorkspaceElement;
+  uploadedImagesData: IUploadedImageData[];
 }
 
 export interface IWorkspaceElement {
@@ -26,8 +32,13 @@ export interface IWorkspaceElement {
   resizeHandles?: ResizeHandles | undefined;
   contract?: any;
   imgData?: string | ArrayBuffer;
-  connectWallet?: string;
+  connectWallet?: boolean;
   placeholder?: string;
+}
+
+export interface IUploadedImageData {
+  settingItemId: string;
+  uploadedImageData: string;
 }
 
 export interface IStyle {
@@ -142,7 +153,7 @@ export interface IText {
   borderRadius?: number;
   backgroundColor?: string;
   shadow?: string;
-  connectWallet?: string;
+  connectWallet?: boolean;
   margin?: {
     marginLeft?: number;
     marginRight?: number;

@@ -5,7 +5,7 @@ import {
   updateContractAbi,
   updateContractAddress,
 } from "redux/contract/contract.reducers";
-import upload from "assets/upload-img.png";
+import upload from "assets/upload-img.svg";
 import { IRootState } from "redux/root-state.interface";
 import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
@@ -97,7 +97,7 @@ const Modal: FC<IModal> = ({
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-10" />
 
         {/* Dialog Content */}
-        <section className="inline-block w-[340px] mr-[12rem] mt-[10rem] max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+        <section className="inline-block w-[345px] mr-[12rem] mt-[10rem] max-w-md py-6 px-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
           <Dialog.Title as="h3" className="modal-heading">
             Connect Contract
           </Dialog.Title>
@@ -111,7 +111,7 @@ const Modal: FC<IModal> = ({
             <input
               value={inputValue}
               onChange={handleInput}
-              className="modal-input pl-2 mt-1 mb-4"
+              className="modal-input pl-2 h-[2.5rem] mt-1 mb-4"
               placeholder="Please add a name"
             />
             <br /> <label className="modal-label mt-[3rem]">Abi Code</label>
@@ -149,7 +149,7 @@ const Modal: FC<IModal> = ({
                 {/* {"uploaded file content -- " + files} */}
                 <span
                   onClick={() => handleShow()}
-                  className="modal-text mt-[0.5rem] cursor-pointer"
+                  className="modal-text mt-[0.5rem] cursor-pointer text-[#8268E5] hover:text-[#5C47AD]"
                 >
                   Add Code Manually
                 </span>
@@ -166,7 +166,7 @@ const Modal: FC<IModal> = ({
             <label className="modal-label">Address</label>
             <br />
             <input
-              className="modal-input pl-2 mt-1"
+              className="modal-input pl-2 mt-1 h-[2.5rem]"
               placeholder="Paste Address here..."
               value={contractDetails.address}
               onChange={(e) => dispatch(updateContractAddress(e.target.value))}

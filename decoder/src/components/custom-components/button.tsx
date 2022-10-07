@@ -112,7 +112,7 @@ const Button: FC<ITexts> = ({
           </Dialog.Panel>
         </div>
       </Dialog>
-      {connectWallet === "on" ? (
+      {connectWallet ? (
         <div
           style={{
             fontWeight: bold,
@@ -132,7 +132,7 @@ const Button: FC<ITexts> = ({
             }px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
-          className="btn btn-border rounded w-48 cursor-pointer whitespace-nowrap"
+          className="btn btn-border rounded cursor-pointer whitespace-nowrap"
           onClick={!account ? connectWalletButton : disconnect}
         >
           <span
@@ -165,7 +165,7 @@ const Button: FC<ITexts> = ({
             }px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
-          className="btn btn-border rounded w-48 cursor-pointer whitespace-nowrap"
+          className="btn btn-border rounded cursor-pointer whitespace-nowrap"
           onClick={() =>
             contractFunction.methodName ? onResponse() : console.log("Clicked")
           }

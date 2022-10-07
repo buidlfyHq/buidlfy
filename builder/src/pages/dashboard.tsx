@@ -34,10 +34,11 @@ const Dashboard: FC = () => {
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
 
   useEffect(() => {
-    // checks for stored config
+    // checks for stored configs
     let saveItems = localStorage.getItem("items");
     if (saveItems) {
-      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems)));
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).builder));
+      setWorkspaceBackgroundColor(JSON.parse(saveItems).background);
     }
   }, []); // eslint-disable-line
 
@@ -73,14 +74,8 @@ const Dashboard: FC = () => {
             isContainerSelected={isContainerSelected}
             sideElement={sideElement}
             isNavHidden={isNavHidden}
-            setIsNavHidden={setIsNavHidden}
-            showSidebar={showSidebar}
             hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
-            workspaceBackgroundColor={workspaceBackgroundColor}
-            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-            head={head}
-            setHead={setHead}
           />
 
           <section className="flex-1">
@@ -88,6 +83,7 @@ const Dashboard: FC = () => {
             <Navbar
               className={className}
               workspaceBackgroundColor={workspaceBackgroundColor}
+              setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
               head={head}
             />
 
@@ -109,11 +105,14 @@ const Dashboard: FC = () => {
                 setIsNavHidden={setIsNavHidden}
                 setSideElement={setSideElement}
                 hideSettingSidebar={undefined}
+                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+                head={head}
+                setHead={setHead}
               />
               {/* Right Sidebar Settings */}
             </aside>
           </section>
-          <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
+          <div className="rounded-[8px] py-2 overflow-y-scroll fixed top-0 right-0 bottom-0">
             {openSetting ? (
               <Settings
                 setOpenSetting={setOpenSetting}

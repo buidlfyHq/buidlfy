@@ -1,8 +1,6 @@
 import React, { FC, useRef } from "react";
-import { AiOutlineLeft } from "react-icons/ai";
 import Template from "pages/templates";
 import Elements from "features/dashboard/elements";
-import DefaultSettings from "features/dashboard/default-settings";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
@@ -10,41 +8,27 @@ interface ISidebar {
   isContainerSelected: boolean;
   sideElement: string;
   isNavHidden: boolean;
-  setIsNavHidden: (isNavHidden: boolean) => void;
-  showSidebar;
-  hideSidebar;
-  hideSettingSidebar;
-  workspaceBackgroundColor: string;
-  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
-  head: {
-    title: string;
-    logo: string | ArrayBuffer;
-  };
-  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
+  hideSidebar: () => void;
+  hideSettingSidebar: () => void;
 }
 
 const Sidebar: FC<ISidebar> = ({
   isContainerSelected,
   sideElement,
   isNavHidden,
-  setIsNavHidden,
   hideSidebar,
-  showSidebar,
   hideSettingSidebar,
-  workspaceBackgroundColor,
-  setWorkspaceBackgroundColor,
-  head,
-  setHead,
 }) => {
   const ref = useRef(null);
 
   return (
     <main
       ref={ref}
-      className={`sidebar ease-in-out duration-200 transition fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] w-[320px]  z-100 ${
+      className={`sidebar ease-in-out duration-200 transition fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] w-[320px] z-[1] ${
         isNavHidden ? "hidden" : ""
       }`}
     >
+      {/* It will be used for future */}
       {/* user name */}
       {/* It will be used for a later code */}
       {/* <section className="flex flex-row justify-between items-center h-[60px]">
@@ -104,14 +88,15 @@ const Sidebar: FC<ISidebar> = ({
         />
       ) : null}
       {sideElement === SidebarEnum.TEMPLATES ? <Template /> : null}
-      {sideElement === SidebarEnum.STYLES ? (
+      {/* It will be used for future */}
+      {/* {sideElement === SidebarEnum.STYLES ? (
         <DefaultSettings
           workspaceBackgroundColor={workspaceBackgroundColor}
           setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           head={head}
           setHead={setHead}
         />
-      ) : null}
+      ) : null} */}
     </main>
   );
 };
