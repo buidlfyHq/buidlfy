@@ -274,7 +274,7 @@ export const components = [
       borderRadius: 5,
       ...defaultColorStyles,
       borderColor: "rgba(222,222,222,100)",
-      color: "rgba(255,255,255,100)",
+      color: "rgba(0,0,0,100)",
       margin: {
         marginLeft: 24,
         marginRight: 24,

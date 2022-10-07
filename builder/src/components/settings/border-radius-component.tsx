@@ -51,7 +51,6 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
   const borderGradientCondition =
     borderColor?.slice(0, 15) === "linear-gradient" ||
     borderColor?.slice(0, 15) === "radial-gradient";
-  console.log(borderGradientCondition, "bgc");
 
   return (
     <>

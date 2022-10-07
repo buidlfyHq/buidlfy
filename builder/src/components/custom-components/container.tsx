@@ -290,7 +290,7 @@ const Container: FC<IContainer> = ({
           paddingLeft: `${margin.marginLeft}px`,
           paddingRight: `${margin.marginRight}px`,
         }}
-        className="h-fit w-full cursor-pointer container-drag overflow-hidden btn-border"
+        className="h-fit w-full cursor-pointer container-drag overflow-hidden"
       >
         <GridLayout
           layout={children}
@@ -305,7 +305,7 @@ const Container: FC<IContainer> = ({
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           compactType={null}
-          className="h-fit"
+          className="h-fit btn-border"
           style={{
             background: backgroundColor,
             backgroundImage: `url(${imageData?.uploadedImageData})`,
