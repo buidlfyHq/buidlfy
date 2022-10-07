@@ -79,7 +79,6 @@ export interface IElementDetail {
 
 export enum SidebarEnum {
   PAGES = "pages",
-  TEMPLATES = "templates",
   ELEMENTS = "elements",
   MEDIA = "media",
   STYLES = "styles",

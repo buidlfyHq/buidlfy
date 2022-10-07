@@ -1,19 +1,25 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BiChevronDown } from "react-icons/bi";
 import makeBlockie from "ethereum-blockies-base64";
 import TemplateModal from "features/dashboard/template-modal";
+import { fetchOwnedTemplates } from "redux/template/template.actions";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { addresses } from "redux/web3/web3.utils";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
-import Temp1 from "assets/icons/temp-1.png";
-
-const TEMPLATES = [Temp1, Temp1, Temp1];
 
 const MyTemplates: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentAccount = useSelector((state: any) => state.web3.currentAccount);
+  const ownedTemplateList = useSelector(
+    (state: any) => state.template.ownedTemplateList
+  );
+
+  const [userTemplates, setUserTemplates] = useState<any>();
 
   const handleListOnBuidlfy = () => {
     dispatch(toggleModal(true));
@@ -24,7 +30,38 @@ const MyTemplates: FC = () => {
     if (!currentAccount) {
       return navigate("/");
     }
+    dispatch(fetchOwnedTemplates());
   }, []);
+
+  // set templates after fetching the templates
+  useEffect(() => {
+    setOwnedTemplates();
+  }, [ownedTemplateList]);
+
+  const setOwnedTemplates = async () => {
+    let newTemplates = (
+      await Promise.all(
+        ownedTemplateList.map(async (template: any) => {
+          if (
+            template.listing_assetContract.toLowerCase() ===
+            addresses.spheronErc1155.toLowerCase()
+          ) {
+            try {
+              const templateObj: IWorkspaceElement = await (
+                await fetch(template.token.uri)
+              ).json();
+
+              return { ...template, ...templateObj };
+            } catch (error) {
+              console.error("error: ", error);
+            }
+          }
+        })
+      )
+    ).filter((template: any) => template !== undefined);
+
+    setUserTemplates(newTemplates);
+  };
 
   return (
     <div className="min-h-screen">
@@ -64,7 +101,7 @@ const MyTemplates: FC = () => {
           <div className="flex justify-center mt-6 text-black font-[600] text-[15px] gap-8">
             <div className="py-3 cursor-pointer px-7">Minted Templates</div>
             <div className="py-3 cursor-pointer px-7">In Review</div>
-            <div className="py-3 cursor-pointer px-7">Published</div>
+            <div className="py-3 cursor-pointer px-7">Listed Templates</div>
           </div>
         </div>
         <div className="w-full bg-lower-template">
@@ -107,10 +144,10 @@ const MyTemplates: FC = () => {
             </div>
           </div>
           <div className="grid grid-cols-3 gap-10 px-40 pb-12 pt-7">
-            {TEMPLATES.map((temp, index) => {
-              return (
+            {userTemplates &&
+              userTemplates.map((temp: ISelectedTemplate) => (
                 <div
-                  key={index}
+                  key={temp.id}
                   className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative"
                 >
                   <div className="relative rounded-[16px] h-auto">
@@ -129,14 +166,14 @@ const MyTemplates: FC = () => {
                       </div>
                     </div>
                     <img
-                      src={temp}
+                      src={temp.image}
                       alt="img_temp"
                       className="rounded-[16px] w-full"
                     />
                   </div>
                   <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
                     <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">
-                      Cryptin Next Gen Template
+                      {temp.name}
                     </div>
                     <div className="text-[12px] text-[#14142B] py-2 px-4 bg-gray-100 font-[500] rounded-[4px]">
                       Crypto
@@ -144,8 +181,7 @@ const MyTemplates: FC = () => {
                   </div>
                   <TemplateModal />
                 </div>
-              );
-            })}
+              ))}
           </div>
         </div>
       </div>

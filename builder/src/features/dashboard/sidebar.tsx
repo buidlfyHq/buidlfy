@@ -1,5 +1,4 @@
 import React, { FC, useRef } from "react";
-import Template from "features/dashboard/templates";
 import Elements from "features/dashboard/elements";
 import DefaultSettings from "features/dashboard/default-settings";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
@@ -94,9 +93,6 @@ const Sidebar: FC<ISidebar> = ({
           isContainerSelected={isContainerSelected}
           setIsNavHidden={setIsNavHidden}
         />
-      ) : null}
-      {sideElement === SidebarEnum.TEMPLATES ? (
-        <Template setIsNavHidden={setIsNavHidden} />
       ) : null}
       {sideElement === SidebarEnum.STYLES ? (
         <DefaultSettings

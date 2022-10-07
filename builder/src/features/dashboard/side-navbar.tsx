@@ -29,19 +29,6 @@ const SideNavbar: FC<ISideNavbar> = ({
       {/* Components */}
       <img src={logo} className="w-[2.4rem] mx-[1.3rem] my-[0.65rem]" />
       <div className="side-border px-4 pt-[1rem]">
-        <div
-          onClick={() => {
-            showSidebar(true);
-            handleSidebar(SidebarEnum.TEMPLATES);
-            hideSettingSidebar();
-          }}
-          className="cursor-pointer"
-        >
-          <div className="side-icon px-3.5 py-4 rounded-full mt-3">
-            <img src={templates} alt="Templates" />
-          </div>
-          <h3 className="side-text mt-1">Templates</h3>
-        </div>
         {/* <div className="mt-8 cursor-pointer">
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={pages} />
@@ -54,7 +41,7 @@ const SideNavbar: FC<ISideNavbar> = ({
             handleSidebar(SidebarEnum.ELEMENTS);
             hideSettingSidebar();
           }}
-          className="mt-8 cursor-pointer"
+          className="cursor-pointer"
         >
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={elements} alt="Elements" />
