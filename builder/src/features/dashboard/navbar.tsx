@@ -51,10 +51,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
       type: string;
     }[]
   >([]); // work in progress
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
-  const [inputValue, setInputValue] = useState<string>("");
-  const [file, setFile] = useState<string>("");
 
   useEffect(() => {
     if (contractDetails.abi) {
@@ -66,58 +63,10 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
     }
   }, [contractDetails.abi]);
 
-  // find suitable type
-  const onChangeImage = (e) => {
-    if (e.target.files[0]) {
-      if (e.target.files[0].size > 5242880) {
-        // setSize(true);
-      } else {
-        // setSize(false);
-        const reader = new FileReader();
-        reader.addEventListener("load", async () => {
-          const cid = await uploadFileToWeb3Storage(reader.result as string);
-          setFile(cid);
-        });
-        reader.readAsDataURL(e.target.files[0]);
-      }
-    }
-  };
-
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
   const handleSave = () => {
     // FIX: save full config to local storage
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(workspaceElements));
-    }
-  };
-
-  const handleSaveTemplateButton = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleSaveTemplate = async () => {
-    // FIX: save full config to local storage
-    let newTemplates: ITemplate[] = [];
-    if (workspaceElements?.length > 0) {
-      let newTemplate = {
-        name: inputValue,
-        value: workspaceElements,
-        image: file,
-      };
-
-      if (!currentAccount) {
-        console.log("Open connect wallet modal"); // Keep log until this feature is implemented
-        // await connectWallet();
-      }
-      console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
-      const templateCID = await uploadTemplateToWeb3Storage(
-        JSON.stringify(newTemplate)
-      );
-      console.log("templateCID: ", templateCID);
-      dispatch(mintTemplate(templateCID));
     }
   };
 
@@ -177,12 +126,6 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
             className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
           >
             Save
-          </div>
-          <div
-            onClick={handleSaveTemplateButton}
-            className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
-          >
-            Save As Template
           </div>
         </div>
         {/* It will be used for the later code for undo, redo and preview of website */}
@@ -247,64 +190,6 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
         )}
 
         <TemplateModal generatedConfig={generatedConfig} />
-
-        <Dialog
-          as="div"
-          className="fixed inset-0 z-20 overflow-y-auto"
-          open={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        >
-          <div className="min-h-screen px-4 text-center">
-            {/* This element is to trick the browser into centering the modal contents. */}
-            <span
-              className="inline-block h-screen align-middle"
-              aria-hidden="true"
-            >
-              &#8203;
-            </span>
-
-            {/* Use the overlay to style a dim backdrop for your dialog */}
-            <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-
-            {/* Dialog Content */}
-            <section className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-              <div className="mt-2">
-                <div className="px-1 mt-3 not-italic font-normal text-left text-gray-500 font-regular">
-                  Name
-                </div>
-                <input
-                  className="w-full px-2 py-1 mt-2 border rounded bg-white/90"
-                  placeholder="Name"
-                  value={inputValue}
-                  onChange={(e) => handleInput(e)}
-                />
-                <div className="px-1 mt-6 not-italic font-normal text-left text-gray-500 font-regular">
-                  Upload Image
-                </div>
-                {/* Input required and function added in next branch */}
-                <input
-                  onChange={onChangeImage}
-                  className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
-                  type="file"
-                  id="formFile"
-                />
-                {file && <img src={file} alt="Template" />}
-              </div>
-              <div className="mt-6">
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                  onClick={() => {
-                    setIsModalOpen(false);
-                    handleSaveTemplate();
-                  }}
-                >
-                  Save As Template
-                </button>
-              </div>
-            </section>
-          </div>
-        </Dialog>
       </div>
     </main>
   );

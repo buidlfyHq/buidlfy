@@ -4,7 +4,7 @@ import { ISelectedTemplate, ITemplateState } from "./template.interfaces";
 const initialState: ITemplateState = {
   buyTemplateHash: "",
   buyTemplateLoading: false,
-  mintTemplateHash: "",
+  mintTokenId: 0,
   mintTemplateLoading: false,
   templateList: [],
   ownedTemplateList: [],
@@ -25,9 +25,12 @@ const templateSlice = createSlice({
     fetchOwnedTemplates(state, action) {
       state.ownedTemplateList = action.payload;
     },
-    mintTemplate(state, action: { payload: string }) {
-      state.mintTemplateHash = action.payload;
+    mintTemplate(state, action: { payload: number }) {
+      state.mintTokenId = action.payload;
       state.mintTemplateLoading = false;
+    },
+    startMintTemplateLoader(state) {
+      state.mintTemplateLoading = true;
     },
     setSelectedTemplate(state, action: { payload: ISelectedTemplate }) {
       state.selectedTemplate = action.payload;
@@ -40,6 +43,7 @@ export const {
   fetchAllTemplates,
   fetchOwnedTemplates,
   mintTemplate,
+  startMintTemplateLoader,
   setSelectedTemplate,
 } = templateSlice.actions;
 export default templateSlice.reducer;

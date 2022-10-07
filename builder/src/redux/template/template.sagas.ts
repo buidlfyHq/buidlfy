@@ -6,6 +6,7 @@ import {
   fetchAllTemplates,
   fetchOwnedTemplates,
   mintTemplate,
+  startMintTemplateLoader,
 } from "./template.reducers";
 import {
   createListingService,
@@ -24,7 +25,7 @@ function* buySelectedTemplate({ payload }) {
   const transactionRes = yield call(
     initiateTransactionService,
     listingId,
-    buyoutPricePerToken,
+    buyoutPricePerToken
   );
   if (!transactionRes.error) {
     yield put(buyTemplate(transactionRes.receipt));
@@ -78,28 +79,11 @@ function* getOwnedTemplates(): any {
 
 function* mintSelectedTemplate({ payload }) {
   // ADD: start mint-template loader
-  console.log(payload); // REMOVE after implementing feature
-
+  yield put(startMintTemplateLoader());
   const mintRes = yield call(mintTemplateService, payload);
   if (!mintRes.error) {
     const tokenId = parseInt(mintRes.receipt.logs[1].topics[1].toString());
-    // TODO: move this to minted reducer
-    const listingRes = yield call(
-      createListingService,
-      tokenId,
-      ethers.utils.parseEther("5"),
-    );
-    if (!listingRes.error) {
-      yield put(mintTemplate(listingRes.receipt));
-    } else {
-      yield put(
-        addNotification({
-          message: listingRes.errorMessage,
-          timestamp: new Date(),
-          type: NotificationType.Error,
-        })
-      );
-    }
+    yield put(mintTemplate(tokenId));
   } else {
     yield put(
       addNotification({
@@ -110,6 +94,25 @@ function* mintSelectedTemplate({ payload }) {
     );
   }
 }
+
+// function* createListingTemplate({ payload }) {
+//   const listingRes = yield call(
+//     createListingService,
+//     tokenId,
+//     ethers.utils.parseEther("5")
+//   );
+//   if (!listingRes.error) {
+//     yield put(mintTemplate(listingRes.receipt));
+//   } else {
+//     yield put(
+//       addNotification({
+//         message: listingRes.errorMessage,
+//         timestamp: new Date(),
+//         type: NotificationType.Error,
+//       })
+//     );
+//   }
+// }
 
 function* buyTemplateSaga() {
   yield takeLatest(templateActionTypes.BUY_TEMPLATE, buySelectedTemplate);

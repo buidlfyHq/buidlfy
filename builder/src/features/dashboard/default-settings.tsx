@@ -20,6 +20,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   setHead,
 }) => {
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
+  
   const onChangeLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
@@ -36,7 +37,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   };
 
   return (
-    <main className="fixed right-0 top-[60px] w-[250px] setting-nav h-full  bg-white">
+    <main className="fixed right-0 top-[60px] w-[250px] setting-nav h-full bg-white">
       <div className="mx-3 my-2">
         <h3 className="mb-2 setting-text mt-4 ml-[0.8rem]">Site Settings</h3>
         <aside className="mb-1">
@@ -74,16 +75,16 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         </aside>
         <div className="flex justify-center" onChange={onChangeLogo}>
           <div className="mb-3 mt-5 upload-img">
-            <label htmlFor="inputTag" className="image-label">
+            <label htmlFor="inputTag" className="image-label cursor-pointer">
               Drag and drop a file, or{" "}
               <span className="purple-label">browse</span>
-              <input className="upload-input" type="file" id="inputTag" />
+              <input className="hidden" type="file" id="inputTag" />
             </label>
           </div>
           <br />
         </div>
         <div className="flex justify-center">
-          <button className="upload-btn mx-2 ">Upload</button>
+          <button className="upload-btn mx-2">Upload</button>
         </div>
         <div
           id="logo"
