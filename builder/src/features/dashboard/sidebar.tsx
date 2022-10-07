@@ -10,9 +10,6 @@ interface ISidebar {
   sideElement: string;
   isNavHidden: boolean;
   setIsNavHidden: (isNavHidden: boolean) => void;
-  showSidebar;
-  hideSidebar;
-  hideSettingSidebar;
   workspaceBackgroundColor: string;
   setWorkspaceBackgroundColor: (backgroundColor: string) => void;
   head: {
@@ -27,9 +24,6 @@ const Sidebar: FC<ISidebar> = ({
   sideElement,
   isNavHidden,
   setIsNavHidden,
-  hideSidebar,
-  showSidebar,
-  hideSettingSidebar,
   workspaceBackgroundColor,
   setWorkspaceBackgroundColor,
   head,
@@ -97,12 +91,13 @@ const Sidebar: FC<ISidebar> = ({
       {/* Components */}
       {sideElement === SidebarEnum.ELEMENTS ? (
         <Elements
-          hideSidebar={hideSidebar}
           isContainerSelected={isContainerSelected}
-          hideSettingSidebar={hideSettingSidebar}
+          setIsNavHidden={setIsNavHidden}
         />
       ) : null}
-      {sideElement === SidebarEnum.TEMPLATES ? <Template /> : null}
+      {sideElement === SidebarEnum.TEMPLATES ? (
+        <Template setIsNavHidden={setIsNavHidden} />
+      ) : null}
       {sideElement === SidebarEnum.STYLES ? (
         <DefaultSettings
           workspaceBackgroundColor={workspaceBackgroundColor}

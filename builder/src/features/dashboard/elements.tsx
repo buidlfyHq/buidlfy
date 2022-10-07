@@ -16,15 +16,10 @@ import "styles/components.css";
 
 interface IElements {
   isContainerSelected: boolean;
-  hideSidebar: () => void;
-  hideSettingSidebar: () => void;
+  setIsNavHidden: (isNavHidden: boolean) => void;
 }
 
-const Elements: FC<IElements> = ({
-  isContainerSelected,
-  hideSidebar,
-  hideSettingSidebar,
-}) => {
+const Elements: FC<IElements> = ({ isContainerSelected, setIsNavHidden }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -89,6 +84,7 @@ const Elements: FC<IElements> = ({
       dispatch(updateWorkspaceElementsArray([...workspaceElements, newC]));
     }
   };
+
   const checkY = (items: IWorkspaceElement[]) => {
     if (items.length === 0) return 0;
     else {
@@ -214,17 +210,15 @@ const Elements: FC<IElements> = ({
       </div>
     </>
   );
+
   return (
     <>
       {/* Components */}
       <div className="element-heading-div pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem]">
         <h3 className="element-heading">Add Elements</h3>
         <MdOutlineClose
-          onClick={() => {
-            hideSidebar();
-            hideSettingSidebar();
-          }}
-          className="text-[16px]"
+          onClick={() => setIsNavHidden(true)}
+          className="text-[16px] cursor-pointer"
         />
       </div>
       {!isContainerSelected ? (

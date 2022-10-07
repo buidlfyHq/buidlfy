@@ -1,29 +1,107 @@
 import React, { FC, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { useDispatch, useSelector } from "react-redux";
+import { BigNumber } from "ethers";
 import {
-  ITemplate,
-  IWorkspaceElement,
-} from "redux/workspace/workspace.interfaces";
+  buyTemplate,
+  fetchOwnedTemplates,
+  fetchTemplates,
+} from "redux/template/template.actions";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { addresses } from "redux/web3/web3.utils";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
+import { ISelectedTemplate } from "redux/template/template.interfaces";
+import { setSelectedTemplate } from "redux/template/template.reducers";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 
-const Template: FC = () => {
+interface ITemplate {
+  setIsNavHidden: (isNavHidden: boolean) => void;
+}
+
+const Template: FC<ITemplate> = ({ setIsNavHidden }) => {
   const dispatch = useDispatch();
-  const [newTemp, setNewTemp] = useState<ITemplate[]>([]);
+  const [allTemplates, setAllTemplates] = useState<any>();
+  const [userTemplates, setUserTemplates] = useState<any>();
+  const templateList = useSelector((state: any) => state.template.templateList);
+  const ownedTemplateList = useSelector(
+    (state: any) => state.template.ownedTemplateList
+  );
 
   useEffect(() => {
-    const templates = localStorage.getItem("templates");
-    const newTemplates = JSON.parse(templates);
-    setNewTemp(newTemplates);
+    dispatch(fetchTemplates());
+    dispatch(fetchOwnedTemplates());
   }, []);
 
-  const handleClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    value: IWorkspaceElement[]
-  ) => {
-    localStorage.removeItem("items");
-    localStorage.setItem("items", JSON.stringify(value));
+  // set templates after fetching the templates
+  useEffect(() => {
+    setTemplates();
+  }, [templateList]);
+
+  // set templates after fetching the templates
+  useEffect(() => {
+    setOwnedTemplates();
+  }, [ownedTemplateList]);
+
+  const setTemplates = async () => {
+    let newTemplates = (
+      await Promise.all(
+        templateList.map(async (template: any) => {
+          if (
+            template.listing_assetContract.toLowerCase() ===
+            addresses.spheronErc1155.toLowerCase()
+          ) {
+            try {
+              const templateObj: IWorkspaceElement = await (
+                await fetch(template.token.uri)
+              ).json();
+
+              return { ...template, ...templateObj };
+            } catch (error) {
+              console.error("error: ", error);
+            }
+          }
+        })
+      )
+    ).filter((template: any) => template !== undefined);
+
+    setAllTemplates(newTemplates);
+  };
+
+  const setOwnedTemplates = async () => {
+    let newTemplates = (
+      await Promise.all(
+        ownedTemplateList.map(async (template: any) => {
+          if (
+            template.listing_assetContract.toLowerCase() ===
+            addresses.spheronErc1155.toLowerCase()
+          ) {
+            try {
+              const templateObj: IWorkspaceElement = await (
+                await fetch(template.token.uri)
+              ).json();
+
+              return { ...template, ...templateObj };
+            } catch (error) {
+              console.error("error: ", error);
+            }
+          }
+        })
+      )
+    ).filter((template: any) => template !== undefined);
+
+    setUserTemplates(newTemplates);
+  };
+
+  const handleOpenTemplate = (value: IWorkspaceElement[]) => {
     dispatch(updateWorkspaceElementsArray(value));
+    setIsNavHidden(true);
+  };
+
+  const handleBuyTemplate = (template: ISelectedTemplate) => {
+    dispatch(setSelectedTemplate(template));
+    setIsNavHidden(true);
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("single"));
   };
 
   return (
@@ -59,29 +137,42 @@ const Template: FC = () => {
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
         <span className="badge ml-2.5 mt-12 px-2.5 py-2.5">Default</span>
       </div>
-      <div className="min-h-screen px-1 py-10 mt-2">
-        <div className="grid grid-cols-2 gap-4">
-          {newTemp &&
-            newTemp?.map(
-              (temp: { name: string; value: IWorkspaceElement[]; image }) => {
-                const { name, value, image } = temp;
-                return (
-                  <div
-                    onClick={(e) => handleClick(e, value)}
-                    className="cursor-pointer flex flex-col justify-center items-center"
-                  >
-                    <img
-                      className="rounded-[0.25rem]"
-                      src={image}
-                      alt="Template"
-                    />
-                    <div className="margin-text text-xs">{name}</div>
-                  </div>
-                );
-              }
-            )}
-        </div>
-      </div>
+      <main className="min-h-screen px-1 py-10 mt-2">
+        {/* Owned Templates */}
+        <section className="mx-2 mb-2">
+          <p className="mb-2">Owned Templates</p>
+          <div className="grid grid-cols-2 gap-4">
+            {userTemplates &&
+              userTemplates.map((temp: ISelectedTemplate) => (
+                <div
+                  key={temp.id}
+                  onClick={() => handleOpenTemplate(temp.value)}
+                  className="cursor-pointer flex flex-col justify-center items-center"
+                >
+                  <img className="rounded-[0.25rem]" src={temp.image} />
+                  <div className="margin-text text-xs">{temp.name}</div>
+                </div>
+              ))}
+          </div>
+        </section>
+        {/* All Templates */}
+        <section className="mx-2 mb-2">
+          <p className="mb-2">All Templates</p>
+          <div className="grid grid-cols-2 gap-4">
+            {allTemplates &&
+              allTemplates.map((temp: ISelectedTemplate) => (
+                <div
+                  key={temp.id}
+                  onClick={() => handleBuyTemplate(temp)}
+                  className="cursor-pointer flex flex-col justify-center items-center"
+                >
+                  <img className="rounded-[0.25rem]" src={temp.image} />
+                  <div className="margin-text text-xs">{temp.name}</div>
+                </div>
+              ))}
+          </div>
+        </section>
+      </main>
     </>
   );
 };

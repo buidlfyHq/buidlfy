@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BiChevronDown } from "react-icons/bi";
 import makeBlockie from "ethereum-blockies-base64";
@@ -11,6 +12,7 @@ const TEMPLATES = [Temp1, Temp1, Temp1];
 
 const MyTemplates: FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentAccount = useSelector((state: any) => state.web3.currentAccount);
 
   const handleListOnBuidlfy = () => {
@@ -18,22 +20,30 @@ const MyTemplates: FC = () => {
     dispatch(toggleModalType("list-single"));
   };
 
+  useEffect(() => {
+    if (!currentAccount) {
+      return navigate("/");
+    }
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* nav */}
       <div className="flex justify-between px-36 py-6 h-[77px] border-bottom-divider sticky-top">
         <div className="font-[700] text-black text-[20px]">Buidlfy</div>
         <div className="flex items-center">
-          <div className="flex items-center px-10 py-3 bordered-button">
+          <Link to="/" className="flex items-center px-10 py-3 bordered-button">
             <ColorFeather className="mr-3" />
             <div className="gradient-text">Builder</div>
-          </div>
+          </Link>
           <div className="flex justify-center items-center my-2 ml-3">
-            <img
-              className="bg-black w-8 h-8 rounded-full"
-              src={makeBlockie(currentAccount)}
-              alt="Blockie"
-            />
+            {currentAccount && (
+              <img
+                className="bg-black w-8 h-8 rounded-full"
+                src={makeBlockie(currentAccount)}
+                alt="Blockie"
+              />
+            )}
           </div>
         </div>
       </div>

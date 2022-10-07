@@ -75,9 +75,6 @@ const Dashboard: FC = () => {
             sideElement={sideElement}
             isNavHidden={isNavHidden}
             setIsNavHidden={setIsNavHidden}
-            showSidebar={showSidebar}
-            hideSidebar={hideSidebar}
-            hideSettingSidebar={hideSettingSidebar}
             workspaceBackgroundColor={workspaceBackgroundColor}
             setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
             head={head}
