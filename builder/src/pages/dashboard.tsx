@@ -15,7 +15,6 @@ import "styles/components.css";
 const Dashboard: FC = () => {
   const dispatch = useDispatch();
   const size = useWindowSize();
-  const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [openTab, setOpenTab] = useState<number>(1);
   const [drag, setDrag] = useState<boolean>(true);
@@ -65,7 +64,6 @@ const Dashboard: FC = () => {
         <section className="flex columns-3 flex-row w-full min-h-screen">
           {/* Sidebar */}
           <SideNavbar
-            className={className}
             setSideElement={setSideElement}
             showSidebar={showSidebar}
             hideSettingSidebar={hideSettingSidebar}
@@ -81,7 +79,6 @@ const Dashboard: FC = () => {
           <section className="flex-1">
             {/* Navbar */}
             <Navbar
-              className={className}
               workspaceBackgroundColor={workspaceBackgroundColor}
               setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
               head={head}

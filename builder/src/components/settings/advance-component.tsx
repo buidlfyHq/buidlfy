@@ -11,7 +11,6 @@ import {
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { IContractDetails } from "redux/contract/contract.interfaces";
 import { useSelector } from "react-redux";
 import { IRootState } from "redux/root-state.interface";
 

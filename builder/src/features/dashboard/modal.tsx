@@ -1,13 +1,11 @@
 import React, { FC, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import {
   updateContractAbi,
   updateContractAddress,
 } from "redux/contract/contract.reducers";
 import upload from "assets/upload-img.svg";
-import { IRootState } from "redux/root-state.interface";
-import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 interface IModal {
@@ -31,9 +29,6 @@ const Modal: FC<IModal> = ({
   setNewContractList,
 }) => {
   const dispatch = useDispatch();
-  const contractDetails: IContractDetails = useSelector(
-    (state: IRootState) => state.contract.contractDetails
-  );
 
   const [showUpload, setShowUpload] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string>("");
