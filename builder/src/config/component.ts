@@ -48,6 +48,7 @@ export const components = [
       ...defaultMarginStyles,
       backgroundColor: "rgba(255, 255, 255, 0)",
       color: "rgba(0, 0, 0, 1)",
+      backgroundSize: "contain",
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
     },
@@ -189,8 +190,8 @@ export const components = [
       color: "rgba(255,255,255,100)",
       borderColor: "rgba(106, 88, 231, 100)",
       ...defaultDeleteStyles,
-      ...defaultBorderStyles,
       borderRadius: 2,
+      borderWidth: 0,
       ...defaultMarginStyles,
       padding: {
         paddingLeft: 48,
@@ -272,7 +273,8 @@ export const components = [
       ...defaultBorderStyles,
       borderRadius: 5,
       ...defaultColorStyles,
-      color: "rgba(222,222,222,100)",
+      borderColor: "rgba(222,222,222,100)",
+      color: "rgba(0,0,0,100)",
       margin: {
         marginLeft: 24,
         marginRight: 24,

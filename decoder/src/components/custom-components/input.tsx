@@ -11,6 +11,8 @@ interface IInputComponent {
   borderRadius: number;
   shadow: string;
   color: string;
+  backgroundColor: string;
+  borderColor: string;
   margin?: {
     marginLeft?: number;
     marginRight?: number;
@@ -36,6 +38,8 @@ const Input: FC<IInputComponent> = ({
   margin,
   padding,
   placeholder,
+  backgroundColor,
+  borderColor,
 }) => {
   const getValue = (inputArray: IInput[]) => {
     const requiredValue = inputArray.filter(
@@ -50,8 +54,10 @@ const Input: FC<IInputComponent> = ({
           borderRadius: `${borderRadius}px`,
           borderWidth: "1pt",
           boxShadow: shadow,
-          border: `1px solid ${color}`,
-          borderImage: color,
+          border: `1px solid ${borderColor}`,
+          borderImage: borderColor,
+          color: color,
+          background: backgroundColor,
           margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
             margin.marginRight * MARGIN_VARIABLE
           }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
@@ -59,7 +65,7 @@ const Input: FC<IInputComponent> = ({
           }px`,
           padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
         }}
-        className="btn-border w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
+        className="btn-border focus-visible:outline-none w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
         id={i}
         type="text"
         placeholder={placeholder}

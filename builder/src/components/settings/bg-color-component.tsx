@@ -1,12 +1,16 @@
 import React, { useState, FC } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import ColorPickerDropdown from "components/utils/color-picker";
 import "styles/components.css";
 import "styles/dashboard.css";
+import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
+import { IRootState } from "redux/root-state.interface";
+import WarningText from "components/utils/setting-warning";
 
 interface IBgColorComponent {
   i?: string;
+  name?: string;
   elementBackgroundColor?: string;
   workspaceBackgroundColor?: string;
   setWorkspaceBackgroundColor?: (workspaceBackgroundColor: string) => void;
@@ -14,11 +18,18 @@ interface IBgColorComponent {
 
 const BgColorComponent: FC<IBgColorComponent> = ({
   i,
+  name,
   elementBackgroundColor,
   workspaceBackgroundColor,
   setWorkspaceBackgroundColor,
 }) => {
   const dispatch = useDispatch();
+
+  const imageData: IUploadedImageData = useSelector((state: IRootState) =>
+    state.workspace.uploadedImagesData.find(
+      (image: IUploadedImageData) => image.settingItemId === i
+    )
+  );
   const color = workspaceBackgroundColor
     ? workspaceBackgroundColor
     : elementBackgroundColor;
@@ -41,7 +52,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
 
   const isElement = !!i;
 
-  return (
+  const colorDropdown = (
     <ColorPickerDropdown
       name="Background Color"
       value={color}
@@ -50,6 +61,21 @@ const BgColorComponent: FC<IBgColorComponent> = ({
       setDisplayColorPicker={setDisplayColorPicker}
       isElement={isElement}
     />
+  );
+  return (
+    <>
+      {name === "Container" ? (
+        <>
+          {!imageData?.uploadedImageData ? (
+            colorDropdown
+          ) : (
+            <WarningText text="Background Image and background Color cannot be use together!" />
+          )}
+        </>
+      ) : (
+        colorDropdown
+      )}
+    </>
   );
 };
 

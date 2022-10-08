@@ -20,6 +20,7 @@ const Container: FC<IBgContainer> = ({
   setOutputValue,
   padding,
   margin,
+  backgroundSize,
 }) => {
   const [containerW, setContainerW] = useState(null);
 
@@ -64,7 +65,7 @@ const Container: FC<IBgContainer> = ({
           style={{
             background: backgroundColor,
             backgroundImage: `url(${imgData})`,
-            backgroundSize: "contain",
+            backgroundSize: backgroundSize,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             border: `${borderWidth}px solid ${color}`,

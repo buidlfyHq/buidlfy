@@ -12,6 +12,7 @@ interface IColorPicker {
   displayColorPicker: boolean;
   setDisplayColorPicker: (displayColorPicker: boolean) => void;
   isElement?: boolean;
+  hideGradient?: boolean;
 }
 const ColorPickerDropdown: FC<IColorPicker> = ({
   name,
@@ -20,6 +21,7 @@ const ColorPickerDropdown: FC<IColorPicker> = ({
   displayColorPicker,
   setDisplayColorPicker,
   isElement,
+  hideGradient,
 }) => {
   return (
     <div
@@ -65,6 +67,7 @@ const ColorPickerDropdown: FC<IColorPicker> = ({
               hideInputType={false}
               hideColorGuide={false}
               hideAdvancedSliders={false}
+              hideControls={hideGradient}
               value={value}
               onChange={handleChange}
             />

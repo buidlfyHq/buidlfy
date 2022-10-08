@@ -10,6 +10,8 @@ import {
   ISettings,
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
+import BorderColorComponent from "components/settings/border-color-component";
+import BgColorComponent from "components/settings/bg-color-component";
 import "styles/components.css";
 
 const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
@@ -38,7 +40,7 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <BorderRadiusComponent
         i={selectedElement.i}
         borderRadius={selectedElement.style.borderRadius}
-        borderColor={selectedElement.style.color}
+        borderColor={selectedElement.style.borderColor}
       />
       <MarginComponent
         i={selectedElement.i}
@@ -51,7 +53,15 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <ColorComponent
         i={selectedElement.i}
         color={selectedElement.style.color}
-        name="Border Color"
+        name={selectedElement.name}
+      />
+      <BorderColorComponent
+        i={selectedElement.i}
+        borderColor={selectedElement.style.borderColor}
+      />
+      <BgColorComponent
+        i={selectedElement.i}
+        elementBackgroundColor={selectedElement.style.backgroundColor}
       />
       <ShadowComponent
         i={selectedElement.i}

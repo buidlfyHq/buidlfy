@@ -11,7 +11,7 @@ interface IColorComponent {
   name?: string;
 }
 
-const ColorComponent: FC<IColorComponent> = ({ i, color, name = "Color" }) => {
+const ColorComponent: FC<IColorComponent> = ({ i, color, name }) => {
   const dispatch = useDispatch();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
@@ -26,7 +26,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, name = "Color" }) => {
   };
 
   const isElement = !!i;
-
+  const hideGradient = name === "Input";
   return (
     <ColorPickerDropdown
       name="Color"
@@ -35,6 +35,7 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, name = "Color" }) => {
       displayColorPicker={displayColorPicker}
       setDisplayColorPicker={setDisplayColorPicker}
       isElement={isElement}
+      hideGradient={hideGradient}
     />
   );
 };
