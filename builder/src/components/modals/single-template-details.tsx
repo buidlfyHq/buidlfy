@@ -4,7 +4,6 @@ import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import EyeImg from "assets/icons/eye.png";
-import TempexImg from "assets/icons/tempex.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
 
 interface ISingleTemplateDetails {
@@ -74,7 +73,9 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
                 onClick={handleSubmit}
                 className="w-full flex justify-center items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
               >
-                <div className="text-[14px]">Connect Wallet to Buy</div>
+                <div className="text-[14px]">
+                  {list ? "Proceed to List" : "Connect Wallet to Buy"}
+                </div>
                 <VscArrowRight className="ml-2 text-[18px]" />
               </div>
               <div className="flex mt-3 bg-gray-100 rounded-[4px] items-center text-[#4E4B66] opacity-70 text-[13px] py-3 px-4">

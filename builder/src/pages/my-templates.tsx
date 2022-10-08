@@ -10,6 +10,7 @@ import { addresses } from "redux/web3/web3.utils";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
+import { setSelectedTemplate } from "redux/template/template.reducers";
 
 const MyTemplates: FC = () => {
   const dispatch = useDispatch();
@@ -21,10 +22,6 @@ const MyTemplates: FC = () => {
 
   const [userTemplates, setUserTemplates] = useState<any>();
 
-  const handleListOnBuidlfy = () => {
-    dispatch(toggleModal(true));
-    dispatch(toggleModalType("list-single"));
-  };
 
   useEffect(() => {
     if (!currentAccount) {
@@ -61,6 +58,12 @@ const MyTemplates: FC = () => {
     ).filter((template: any) => template !== undefined);
 
     setUserTemplates(newTemplates);
+  };
+
+  const handleListOnBuidlfy = (template: ISelectedTemplate) => {
+    dispatch(setSelectedTemplate(template));
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("list-single"));
   };
 
   return (
@@ -160,7 +163,7 @@ const MyTemplates: FC = () => {
                       </div>
                       <div
                         className="py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white"
-                        onClick={handleListOnBuidlfy}
+                        onClick={() => handleListOnBuidlfy(temp)}
                       >
                         List on Buidlfy
                       </div>

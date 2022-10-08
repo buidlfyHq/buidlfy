@@ -23,13 +23,13 @@ const FinalModal: FC = () => {
           Templated has been purchased and it is ready to use. Please click on
           the button given below to start using the template
         </div>
-        <div
+        <button
           onClick={() => dispatch(toggleModal(false))}
           className="flex items-center text-white px-12 py-5 text-[20px] font-[600] connect-wallet-button rounded-[60px] mt-10 cursor-pointer"
         >
           Start Creating Now
           <FeatherIcon className="ml-3" />
-        </div>
+        </button>
       </Dialog.Panel>
     </main>
   );
