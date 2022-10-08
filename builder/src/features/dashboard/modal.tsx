@@ -38,7 +38,8 @@ const Modal: FC<IModal> = ({
   const [showUpload, setShowUpload] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer>("");
-
+  const [updateAbi, setUpdateAbi] = useState<string>();
+  const [updateAddress, setUpdateAddress] = useState<string>();
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -48,8 +49,8 @@ const Modal: FC<IModal> = ({
     let newContractList: Array<IContract> = [];
     let newContract: IContract = {
       name: inputValue,
-      text: JSON.stringify(contractDetails.abi),
-      address: JSON.stringify(contractDetails.address),
+      text: JSON.stringify(updateAbi),
+      address: JSON.stringify(updateAddress),
     };
     // localStorage.setItem("items", JSON.stringify(items));
     const contractList = localStorage.getItem("contractList") || "";
@@ -61,6 +62,9 @@ const Modal: FC<IModal> = ({
     newContractList.push(newContract);
     localStorage.setItem("contractList", JSON.stringify(newContractList));
     setNewContractList(newContractList);
+
+    dispatch(updateContractAbi(updateAbi));
+    dispatch(updateContractAddress(updateAddress));
   };
 
   const handleShow = () => setShowUpload(false);
@@ -70,7 +74,7 @@ const Modal: FC<IModal> = ({
     const filteredAbi = JSON.parse(abi).filter(
       (m: { type: string }) => m.type === "function"
     );
-    dispatch(updateContractAbi(JSON.stringify(filteredAbi)));
+    setUpdateAbi(JSON.stringify(filteredAbi));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,7 +163,7 @@ const Modal: FC<IModal> = ({
               <textarea
                 className="upload-modal-input p-2"
                 placeholder="Paste ABI here..."
-                value={contractDetails.abi}
+                value={updateAbi}
                 onChange={(e) => handleSetAbi(e.target.value)}
               />
             )}
@@ -169,19 +173,17 @@ const Modal: FC<IModal> = ({
             <input
               className="modal-input pl-2 mt-1 h-[2.5rem]"
               placeholder="Paste Address here..."
-              value={contractDetails.address}
-              onChange={(e) => dispatch(updateContractAddress(e.target.value))}
+              value={updateAddress}
+              onChange={(e) => setUpdateAddress(e.target.value)}
             />
           </div>
 
           <div className="mt-4">
             <button
-              disabled={!(contractDetails.abi && contractDetails.address)}
+              disabled={!(updateAbi && updateAddress)}
               // type="button"
               className={`rounded-[44px] contract-button font-medium text-white text-[14px] py-2 px-[7.5rem] ${
-                contractDetails.abi && contractDetails.address
-                  ? ""
-                  : "opacity-40"
+                updateAbi && updateAddress ? "" : "opacity-40"
               }`}
               onClick={() => {
                 setIsOpen(false);

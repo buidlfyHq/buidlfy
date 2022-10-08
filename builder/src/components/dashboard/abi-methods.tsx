@@ -118,8 +118,8 @@ const AbiMethods: FC<IAbiMethods> = ({
   const handleBack = () => {
     setMethodOpen(true);
     setIsOpen(false);
-    dispatch(updateContractAbi(JSON.parse(null)));
-    dispatch(updateContractAddress(JSON.parse(null)));
+    dispatch(updateContractAbi(null));
+    dispatch(updateContractAddress(null));
   };
 
   return (

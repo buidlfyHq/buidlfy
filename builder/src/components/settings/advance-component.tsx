@@ -11,6 +11,9 @@ import {
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
+import { IContractDetails } from "redux/contract/contract.interfaces";
+import { useSelector } from "react-redux";
+import { IRootState } from "redux/root-state.interface";
 
 interface IAdvanceComponent {
   selectedElement: IWorkspaceElement;
@@ -25,7 +28,7 @@ interface IContract {
 const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
-  const [methodOpen, setMethodOpen] = useState<boolean>(true);
+  const [methodOpen, setMethodOpen] = useState<boolean>(false);
   const [newContractList, setNewContractList] = useState<IContract[]>([]);
   const [showComponent, setShowComponent] = useState<{
     id: string;
@@ -37,7 +40,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     };
   }>(null); // for abi method component
   const [isViewMore, setIsViewMore] = useState<boolean>(false);
-
+  const selectedContractAbi: string = useSelector(
+    (state: IRootState) => state.contract.contractDetails.abi
+  );
+  const selectedContractAddress: string = useSelector(
+    (state: IRootState) => state.contract.contractDetails.address
+  );
   useEffect(() => {
     try {
       const contractList = localStorage.getItem("contractList");
@@ -65,7 +73,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
 
   return (
     <>
-      {!methodOpen ? (
+      {selectedContractAbi && selectedContractAddress ? (
         <>
           <div className="flex justify-center mt-[3rem]" />
           <AbiMethods

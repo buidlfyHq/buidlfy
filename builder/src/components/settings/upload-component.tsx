@@ -120,6 +120,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
             <img
               className="w-[220px] h-[153px] object-fill absolute z-[-1]"
               src={imageData?.uploadedImageData}
+              alt="default"
             />
           </div>
         ) : (
@@ -133,6 +134,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
                 <img
                   className="w-[220px] h-[153px] object-fill"
                   src={imageData?.uploadedImageData}
+                  alt="default"
                 />
                 <label
                   htmlFor="inputTag"
