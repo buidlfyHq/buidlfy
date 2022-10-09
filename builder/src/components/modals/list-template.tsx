@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
+import { listTemplate } from "redux/minted/minted.actions";
 import { toggleModal } from "redux/modal/modal.reducers";
 import IconImg from "assets/icons/icon-crypto.png";
 
@@ -9,6 +10,12 @@ const ListTemplate: FC = () => {
   const selectedTemplate = useSelector(
     (state: any) => state.template.selectedTemplate
   );
+
+  const handleListTemplate = () => {
+    // WON'T WORK
+    // UPDATE: integrate selectedTemplate id
+    dispatch(listTemplate());
+  };
 
   return (
     <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[8px]">
@@ -86,10 +93,10 @@ const ListTemplate: FC = () => {
                 Cancel
               </button>
               <button
-                // onClick={handleClick}
-                className="bg-[#8268E5] text-[13px] font-[500] text-white cursor-pointer py-3 px-6 rounded-[4px]"
+                onClick={handleListTemplate}
+                className="bg-[#8268E5] text-[13px] font-[500] text-white cursor-pointer py-3 px-8 rounded-[4px]"
               >
-                Continue to list
+                List
               </button>
             </div>
           </div>

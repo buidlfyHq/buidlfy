@@ -1,4 +1,3 @@
-import { ethers } from "ethers";
 import { call, all, put, takeLatest, select } from "redux-saga/effects";
 import { addNotification } from "redux/notification/notification.reducers";
 import {
@@ -9,7 +8,6 @@ import {
   startMintTemplateLoader,
 } from "./template.reducers";
 import {
-  createListingService,
   getListedTemplatesService,
   getOwnedTemplatesService,
   initiateTransactionService,
@@ -78,7 +76,6 @@ function* getOwnedTemplates(): any {
 }
 
 function* mintSelectedTemplate({ payload }) {
-  // ADD: start mint-template loader
   yield put(startMintTemplateLoader());
   const mintRes = yield call(mintTemplateService, payload);
   if (!mintRes.error) {
@@ -94,25 +91,6 @@ function* mintSelectedTemplate({ payload }) {
     );
   }
 }
-
-// function* createListingTemplate({ payload }) {
-//   const listingRes = yield call(
-//     createListingService,
-//     tokenId,
-//     ethers.utils.parseEther("5")
-//   );
-//   if (!listingRes.error) {
-//     yield put(mintTemplate(listingRes.receipt));
-//   } else {
-//     yield put(
-//       addNotification({
-//         message: listingRes.errorMessage,
-//         timestamp: new Date(),
-//         type: NotificationType.Error,
-//       })
-//     );
-//   }
-// }
 
 function* buyTemplateSaga() {
   yield takeLatest(templateActionTypes.BUY_TEMPLATE, buySelectedTemplate);

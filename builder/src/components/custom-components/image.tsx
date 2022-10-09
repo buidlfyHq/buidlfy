@@ -27,24 +27,6 @@ const Image: FC<IImageComponent> = ({
   backgroundSize,
   isAuto,
 }) => {
-  // Add ClientWidth and ClientHeight of Image when it changes its position
-  // const ref = useRef<HTMLDivElement>();
-
-  // useEffect(() => {
-  //   if (ref?.current?.clientWidth) {
-  //     console.log(ref.current.clientWidth, "cw");
-  //     setDynamicWidth(ref.current.clientWidth);
-  //   }
-  //   if (ref?.current?.clientHeight) {
-  //     setDynamicHeight(ref.current.clientHeight);
-  //   }
-  // }, [ref?.current?.clientWidth, ref?.current?.clientHeight]);
-  // useEffect(() => {
-  //   if (ref?.current?.clientHeight) {
-  //     console.log(ref.current.clientHeight, "ch");
-  //     setDynamicHeight(ref.current.clientHeight);
-  //   }
-  // }, [ref?.current?.clientHeight]);
   return (
     <>
       {imgData ? (

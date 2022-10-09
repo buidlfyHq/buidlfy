@@ -19,9 +19,9 @@ const MyTemplates: FC = () => {
   const ownedTemplateList = useSelector(
     (state: any) => state.template.ownedTemplateList
   );
+  // How to get minted but not listed templates??
 
   const [userTemplates, setUserTemplates] = useState<any>();
-
 
   useEffect(() => {
     if (!currentAccount) {

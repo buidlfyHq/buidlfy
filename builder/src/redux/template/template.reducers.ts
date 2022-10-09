@@ -4,7 +4,7 @@ import { ISelectedTemplate, ITemplateState } from "./template.interfaces";
 const initialState: ITemplateState = {
   buyTemplateHash: "",
   buyTemplateLoading: false,
-  mintTokenId: 0,
+  mintTokenId: 0, // UPDATE: [{id: string, tokenId: number}]
   mintTemplateLoading: false,
   templateList: [],
   ownedTemplateList: [],
@@ -29,6 +29,9 @@ const templateSlice = createSlice({
       state.mintTokenId = action.payload;
       state.mintTemplateLoading = false;
     },
+    startBuyTemplateLoader(state) {
+      state.buyTemplateLoading = true;
+    },
     startMintTemplateLoader(state) {
       state.mintTemplateLoading = true;
     },
@@ -43,6 +46,7 @@ export const {
   fetchAllTemplates,
   fetchOwnedTemplates,
   mintTemplate,
+  startBuyTemplateLoader,
   startMintTemplateLoader,
   setSelectedTemplate,
 } = templateSlice.actions;

@@ -3,14 +3,11 @@ import request, { gql } from "graphql-request";
 import config from "config";
 import {
   addresses,
-  approveERC1155Token,
   approveERC20Token,
   getERC1155Contract,
   getMarketplaceContract,
   getSigner,
-  TOKENS_COUNT_ON_MINT,
 } from "redux/web3/web3.utils";
-import { getCurrentTime } from "./template.utils";
 
 export const initiateTransactionService = async (
   listingId: BigNumber,
@@ -141,41 +138,6 @@ export const mintTemplateService = async (uri: string) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log("Error in mintTemplateService --> ", error);
-    return { error: true, errorMessage: (error as Error).message, receipt: "" };
-  }
-};
-
-export const createListingService = async (
-  tokenId: number,
-  buyoutPricePerToken: BigNumber
-): Promise<any> => {
-  try {
-    const signer = getSigner();
-    const marketplaceContract = getMarketplaceContract(signer);
-    // Check for approval if yes, then don't call approve otherwise call approve
-    await approveERC1155Token(signer);
-    const tx = await marketplaceContract.createListing(
-      [
-        addresses.spheronErc1155,
-        tokenId,
-        getCurrentTime(),
-        getCurrentTime(),
-        TOKENS_COUNT_ON_MINT,
-        addresses.usdc,
-        buyoutPricePerToken,
-        buyoutPricePerToken,
-        0, // Always should be 0 cause Direct Listing
-      ],
-      {
-        gasLimit: 3000000,
-      }
-    );
-    console.log("tx: ", tx);
-    const receipt = await tx.wait();
-    return { error: false, errorMessage: "", receipt };
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log("Error in createListingService --> ", error);
     return { error: true, errorMessage: (error as Error).message, receipt: "" };
   }
 };
