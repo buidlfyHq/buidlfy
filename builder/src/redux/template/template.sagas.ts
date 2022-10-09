@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { call, all, put, takeLatest, select } from "redux-saga/effects";
 import { addNotification } from "redux/notification/notification.reducers";
+import { toggleModalType } from "redux/modal/modal.reducers";
 import {
   buyTemplate,
   fetchAllTemplates,
@@ -84,6 +85,7 @@ function* mintSelectedTemplate({ payload }) {
   if (!mintRes.error) {
     const tokenId = parseInt(mintRes.receipt.logs[1].topics[1].toString());
     yield put(mintTemplate(tokenId));
+    yield put(toggleModalType("minted-complete"));
   } else {
     yield put(
       addNotification({

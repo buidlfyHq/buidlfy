@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { BigNumber } from "ethers";
 import { Dialog } from "@headlessui/react";
 import makeBlockie from "ethereum-blockies-base64";
-import { fetchWalletBalance } from "redux/web3/web3.actions";
 import { buyTemplate } from "redux/template/template.actions";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
@@ -19,10 +18,6 @@ const CheckoutModal: FC = () => {
   const selectedTemplate = useSelector(
     (state: any) => state.template.selectedTemplate
   );
-
-  useEffect(() => {
-    dispatch(fetchWalletBalance());
-  }, []);
 
   const handleBuyTemplate = (
     value: IWorkspaceElement[],

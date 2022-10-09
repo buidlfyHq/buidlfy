@@ -1,21 +1,8 @@
-import React, { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC } from "react";
 import { Dialog } from "@headlessui/react";
-import { toggleModalType } from "redux/modal/modal.reducers";
 import HourGlassImg from "assets/icons/hourglass.png";
 
 const MintingProgressModal: FC = () => {
-  const dispatch = useDispatch();
-  const mintTemplateLoading = useSelector(
-    (state: any) => state.template.mintTemplateLoading
-  );
-
-  useEffect(() => {
-    if (!mintTemplateLoading) {
-      dispatch(toggleModalType("minted-complete"));
-    }
-  }, [mintTemplateLoading]);
-
   return (
     <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
       <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[582px] my-20 sm:mx-28 mx-14 rounded-[4px] py-16 px-10 bg-white">

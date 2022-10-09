@@ -31,7 +31,7 @@ const Dashboard: FC = () => {
     logo: "",
   });
   const [sideElement, setSideElement] = useState<string>("");
-  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
+  const [hideNavbar, setHideNavbar] = useState<boolean>(true);
 
   useEffect(() => {
     // checks for stored config
@@ -48,13 +48,13 @@ const Dashboard: FC = () => {
           {/* Sidebar */}
           <SideNavbar
             setSideElement={setSideElement}
-            setIsNavHidden={setIsNavHidden}
+            setHideNavbar={setHideNavbar}
           />
           <Sidebar
             isContainerSelected={isContainerSelected}
             sideElement={sideElement}
-            isNavHidden={isNavHidden}
-            setIsNavHidden={setIsNavHidden}
+            hideNavbar={hideNavbar}
+            setHideNavbar={setHideNavbar}
             workspaceBackgroundColor={workspaceBackgroundColor}
             setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
             head={head}
@@ -78,9 +78,9 @@ const Dashboard: FC = () => {
                 setDrag={setDrag}
                 workspaceBackgroundColor={workspaceBackgroundColor}
                 setIsContainerSelected={setIsContainerSelected}
-                isNavHidden={isNavHidden}
+                hideNavbar={hideNavbar}
                 openSetting={openSetting}
-                setIsNavHidden={setIsNavHidden}
+                setHideNavbar={setHideNavbar}
                 setSideElement={setSideElement}
                 hideSettingSidebar={undefined}
               />
