@@ -55,8 +55,6 @@ const Image: FC<IImageComponent> = ({
   //     setDynamicHeight(ref.current.clientHeight);
   //   }
   // }, [ref?.current?.clientHeight]);
-  console.log(imgData, "img");
-
   return (
     <>
       {imageData?.uploadedImageData ? (

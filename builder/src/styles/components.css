@@ -371,6 +371,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   z-index: 5 !important;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
 }
+
 .sidebar::-webkit-scrollbar {
   width: 0 !important;
 }

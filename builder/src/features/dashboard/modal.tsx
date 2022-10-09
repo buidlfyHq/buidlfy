@@ -176,7 +176,6 @@ const Modal: FC<IModal> = ({
           <div className="mt-4">
             <button
               disabled={!(updateAbi && updateAddress)}
-              // type="button"
               className={`rounded-[44px] contract-button font-medium text-white text-[14px] py-2 px-[7.5rem] ${
                 updateAbi && updateAddress ? "" : "opacity-40"
               }`}

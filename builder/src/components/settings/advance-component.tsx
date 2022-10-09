@@ -9,10 +9,10 @@ import {
   updateContractAddress,
 } from "redux/contract/contract.reducers";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
-import "styles/components.css";
-import "styles/dashboard.css";
 import { useSelector } from "react-redux";
 import { IRootState } from "redux/root-state.interface";
+import "styles/components.css";
+import "styles/dashboard.css";
 
 interface IAdvanceComponent {
   selectedElement: IWorkspaceElement;
