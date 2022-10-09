@@ -3,9 +3,9 @@ import { call, all, put, takeLatest, select } from "redux-saga/effects";
 import { addNotification } from "redux/notification/notification.reducers";
 import {
   buyTemplate,
-  fetchAllTemplates,
-  fetchOwnedTemplates,
-  mintTemplate,
+  allTemplatesFetched,
+  ownedTemplatesFetched,
+  templateMinted,
 } from "./template.reducers";
 import {
   createListingService,
@@ -24,7 +24,7 @@ function* buySelectedTemplate({ payload }) {
   const transactionRes = yield call(
     initiateTransactionService,
     listingId,
-    buyoutPricePerToken,
+    buyoutPricePerToken
   );
   if (!transactionRes.error) {
     yield put(buyTemplate(transactionRes.receipt));
@@ -43,7 +43,7 @@ function* getListedTemplates(): any {
   const fetchedTemplates = yield call(getListedTemplatesService);
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.listings.length !== 0) {
-      yield put(fetchAllTemplates(fetchedTemplates.listings));
+      yield put(allTemplatesFetched(fetchedTemplates.listings));
     }
   } else {
     yield put(
@@ -63,7 +63,7 @@ function* getOwnedTemplates(): any {
   const fetchedTemplates = yield call(getOwnedTemplatesService, currentAccount);
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.listings.length !== 0) {
-      yield put(fetchOwnedTemplates(fetchedTemplates.listings));
+      yield put(ownedTemplatesFetched(fetchedTemplates.listings));
     }
   } else {
     yield put(
@@ -87,10 +87,10 @@ function* mintSelectedTemplate({ payload }) {
     const listingRes = yield call(
       createListingService,
       tokenId,
-      ethers.utils.parseEther("5"),
+      ethers.utils.parseEther("5")
     );
     if (!listingRes.error) {
-      yield put(mintTemplate(listingRes.receipt));
+      yield put(templateMinted(listingRes.receipt));
     } else {
       yield put(
         addNotification({
