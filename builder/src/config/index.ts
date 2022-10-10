@@ -31,7 +31,7 @@ const production: IConfig = {
   },
 };
 
-const test: IConfig = {
+const local: IConfig = {
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGQ0YzVmOEYzRkQxNGU2NjY5MmYxMTEzOGYwNjI1NmI3OGI2OTZDOTAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjAwMzM3NTQ5MjcsIm5hbWUiOiJJbWFnZSJ9.qnAvxlOygBO6RQCkaPb2JSMVUeO-JQk7sRkeJygqOGg",
@@ -45,7 +45,7 @@ const test: IConfig = {
 const config: {
   [name: string]: IConfig;
 } = {
-  test,
+  local,
   development,
   production,
 };
