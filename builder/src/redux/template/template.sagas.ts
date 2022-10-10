@@ -3,16 +3,10 @@ import { addNotification } from "redux/notification/notification.reducers";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import {
   buyTemplate,
-<<<<<<< HEAD
-  fetchAllTemplates,
-  fetchOwnedTemplates,
-  mintTemplate,
-  startMintTemplateLoader,
-=======
   allTemplatesFetched,
   ownedTemplatesFetched,
   templateMinted,
->>>>>>> feat/modal-template
+  startMintTemplateLoader,
 } from "./template.reducers";
 import {
   createListingService,
@@ -89,28 +83,8 @@ function* mintSelectedTemplate({ payload }) {
   const mintRes = yield call(mintTemplateService, payload);
   if (!mintRes.error) {
     const tokenId = parseInt(mintRes.receipt.logs[1].topics[1].toString());
-<<<<<<< HEAD
-    yield put(mintTemplate(tokenId));
+    yield put(templateMinted(tokenId));
     yield put(toggleModalType("minted-complete"));
-=======
-    // TODO: move this to minted reducer
-    const listingRes = yield call(
-      createListingService,
-      tokenId,
-      ethers.utils.parseEther("5")
-    );
-    if (!listingRes.error) {
-      yield put(templateMinted(listingRes.receipt));
-    } else {
-      yield put(
-        addNotification({
-          message: listingRes.errorMessage,
-          timestamp: new Date(),
-          type: NotificationType.Error,
-        })
-      );
-    }
->>>>>>> feat/modal-template
   } else {
     yield put(
       addNotification({
