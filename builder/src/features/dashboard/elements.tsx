@@ -16,10 +16,10 @@ import "styles/components.css";
 
 interface IElements {
   isContainerSelected: boolean;
-  setIsNavHidden: (isNavHidden: boolean) => void;
+  setHideNavbar: (hideNavbar: boolean) => void;
 }
 
-const Elements: FC<IElements> = ({ isContainerSelected, setIsNavHidden }) => {
+const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -217,7 +217,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, setIsNavHidden }) => {
       <div className="element-heading-div pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem]">
         <h3 className="element-heading">Add Elements</h3>
         <MdOutlineClose
-          onClick={() => setIsNavHidden(true)}
+          onClick={() => setHideNavbar(true)}
           className="text-[16px] cursor-pointer"
         />
       </div>

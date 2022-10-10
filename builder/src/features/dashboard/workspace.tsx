@@ -28,8 +28,8 @@ interface IWorkspaceComponent {
   setDrag: (drag: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   workspaceBackgroundColor: string;
-  isNavHidden?: boolean;
-  setIsNavHidden?: (isNavHidden?: boolean) => void;
+  hideNavbar?: boolean;
+  setHideNavbar?: (hideNavbar?: boolean) => void;
   openSetting?: boolean;
   setSideElement?: (sideElement?: string) => void;
   dragContainer?: boolean;
@@ -44,8 +44,8 @@ const Workspace: FC<IWorkspaceComponent> = ({
   setDrag,
   setIsContainerSelected,
   workspaceBackgroundColor,
-  isNavHidden,
-  setIsNavHidden,
+  hideNavbar,
+  setHideNavbar,
   openSetting,
   setSideElement,
   dragContainer,
@@ -75,7 +75,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       ?.getBoundingClientRect().width;
 
     setFullViewWidth((fullViewWidth) => fullView);
-  }, [isNavHidden, openSetting]);
+  }, [hideNavbar, openSetting]);
 
   const onLayoutChange = (layout: Layout[]) => {
     if (layout.length === 0) setIsContainerSelected(false);
@@ -208,7 +208,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       )
     ) {
       setIsContainerSelected(false);
-      setIsNavHidden(true);
+      setHideNavbar(true);
     }
     if (
       e.target.id === "full-view" ||
@@ -249,7 +249,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
             setSideElement={setSideElement}
             dragContainer={dragContainer}
             setDragContainer={setDragContainer}
-            setIsNavHidden={setIsNavHidden}
+            setHideNavbar={setHideNavbar}
             hideSettingSidebar={hideSettingSidebar}
           />
         </div>

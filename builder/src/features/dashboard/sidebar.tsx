@@ -7,8 +7,8 @@ import "styles/components.css";
 interface ISidebar {
   isContainerSelected: boolean;
   sideElement: string;
-  isNavHidden: boolean;
-  setIsNavHidden: (isNavHidden: boolean) => void;
+  hideNavbar: boolean;
+  setHideNavbar: (hideNavbar: boolean) => void;
   workspaceBackgroundColor: string;
   setWorkspaceBackgroundColor: (backgroundColor: string) => void;
   head: {
@@ -21,8 +21,8 @@ interface ISidebar {
 const Sidebar: FC<ISidebar> = ({
   isContainerSelected,
   sideElement,
-  isNavHidden,
-  setIsNavHidden,
+  hideNavbar,
+  setHideNavbar,
   workspaceBackgroundColor,
   setWorkspaceBackgroundColor,
   head,
@@ -31,7 +31,7 @@ const Sidebar: FC<ISidebar> = ({
   return (
     <main
       className={`sidebar ease-in-out duration-200 transition fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] w-[320px]  z-100 ${
-        isNavHidden ? "hidden" : ""
+        hideNavbar ? "hidden" : ""
       }`}
     >
       {/* user name */}
@@ -88,7 +88,7 @@ const Sidebar: FC<ISidebar> = ({
       {sideElement === SidebarEnum.ELEMENTS ? (
         <Elements
           isContainerSelected={isContainerSelected}
-          setIsNavHidden={setIsNavHidden}
+          setHideNavbar={setHideNavbar}
         />
       ) : null}
       {sideElement === SidebarEnum.STYLES ? (

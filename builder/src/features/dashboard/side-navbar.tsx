@@ -6,10 +6,10 @@ import "styles/components.css";
 
 interface ISideNavbar {
   setSideElement: (sideElement: string) => void;
-  setIsNavHidden: (isNavHidden: boolean) => void;
+  setHideNavbar: (hideNavbar: boolean) => void;
 }
 
-const SideNavbar: FC<ISideNavbar> = ({ setSideElement, setIsNavHidden }) => {
+const SideNavbar: FC<ISideNavbar> = ({ setSideElement, setHideNavbar }) => {
   const handleSidebar = (selectedSidebarElements: string) => {
     setSideElement(selectedSidebarElements);
   };
@@ -28,7 +28,7 @@ const SideNavbar: FC<ISideNavbar> = ({ setSideElement, setIsNavHidden }) => {
         <div
           onClick={() => {
             handleSidebar(SidebarEnum.ELEMENTS);
-            setIsNavHidden(false);
+            setHideNavbar(false);
           }}
           className="cursor-pointer"
         >

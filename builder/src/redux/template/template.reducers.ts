@@ -19,13 +19,13 @@ const templateSlice = createSlice({
       state.buyTemplateHash = action.payload;
       state.buyTemplateLoading = false;
     },
-    fetchAllTemplates(state, action) {
+    allTemplatesFetched(state, action) {
       state.templateList = action.payload;
     },
-    fetchOwnedTemplates(state, action) {
+    ownedTemplatesFetched(state, action) {
       state.ownedTemplateList = action.payload;
     },
-    mintTemplate(state, action: { payload: number }) {
+    templateMinted(state, action: { payload: number }) {
       state.mintTokenId = action.payload;
       state.mintTemplateLoading = false;
     },
@@ -43,9 +43,9 @@ const templateSlice = createSlice({
 
 export const {
   buyTemplate,
-  fetchAllTemplates,
-  fetchOwnedTemplates,
-  mintTemplate,
+  allTemplatesFetched,
+  ownedTemplatesFetched,
+  templateMinted,
   startBuyTemplateLoader,
   startMintTemplateLoader,
   setSelectedTemplate,

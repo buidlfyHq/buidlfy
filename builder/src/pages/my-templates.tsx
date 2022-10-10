@@ -1,12 +1,10 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BiChevronDown } from "react-icons/bi";
 import makeBlockie from "ethereum-blockies-base64";
 import TemplateModal from "features/dashboard/template-modal";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import { addresses } from "redux/web3/web3.utils";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
 import { setSelectedTemplate } from "redux/template/template.reducers";
@@ -21,49 +19,17 @@ const MyTemplates: FC = () => {
   );
   console.log(ownedTemplateList);
 
-  // How to get minted but not listed templates??
-
-  const [userTemplates, setUserTemplates] = useState<any>();
-
-  useEffect(() => {
-    if (!currentAccount) {
-      return navigate("/");
-    }
-    dispatch(fetchOwnedTemplates());
-  }, []);
-
-  // set templates after fetching the templates
-  useEffect(() => {
-    setOwnedTemplates();
-  }, [ownedTemplateList]);
-
-  const setOwnedTemplates = async () => {
-    let newTemplates = (
-      await Promise.all(
-        ownedTemplateList.map(async (template: any) => {
-          if (addresses.spheronErc1155.toLowerCase()) {
-            try {
-              const templateObj: IWorkspaceElement = await (
-                await fetch(template.token_uri)
-              ).json();
-
-              return { ...template, ...templateObj };
-            } catch (error) {
-              console.error("error: ", error);
-            }
-          }
-        })
-      )
-    ).filter((template: any) => template !== undefined);
-
-    setUserTemplates(newTemplates);
-  };
-
   const handleListOnBuidlfy = (template: ISelectedTemplate) => {
     dispatch(setSelectedTemplate(template));
     dispatch(toggleModal(true));
     dispatch(toggleModalType("list-single"));
   };
+
+  useEffect(() => {
+    if (!currentAccount) {
+      return navigate("/");
+    }
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -146,8 +112,8 @@ const MyTemplates: FC = () => {
             </div>
           </div>
           <div className="grid grid-cols-3 gap-10 px-40 pb-12 pt-7">
-            {userTemplates &&
-              userTemplates.map((temp: ISelectedTemplate) => (
+            {ownedTemplateList &&
+              ownedTemplateList.map((temp: ISelectedTemplate) => (
                 <div
                   key={temp.id}
                   className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative"
