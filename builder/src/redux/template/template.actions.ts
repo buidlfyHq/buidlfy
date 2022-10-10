@@ -5,14 +5,6 @@ export const buyTemplate = (payload: any) => ({
   payload,
 });
 
-export const fetchTemplates = () => ({
-  type: templateActionTypes.FETCH_TEMPLATES,
-});
-
-export const fetchOwnedTemplates = () => ({
-  type: templateActionTypes.FETCH_OWNED_TEMPLATES,
-});
-
 export const mintTemplate = (payload: any) => ({
   type: templateActionTypes.MINT_TEMPLATE,
   payload,

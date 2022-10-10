@@ -4,31 +4,18 @@ import { addNotification } from "redux/notification/notification.reducers";
 import { NotificationType } from "redux/notification/notification.interfaces";
 import {
   createListingService,
+  getListedTemplatesService,
+  getOwnedListedTemplatesService,
   getOwnedTemplatesService,
 } from "./minted.services";
 import {
+  allTemplatesFetched,
   fetchOwnedTemplates,
   listTemplate,
+  ownedListedTemplatesFetched,
   startListTemplateLoader,
 } from "./minted.reducers";
 import mintedActionTypes from "./minted.types";
-
-function* getOwnedTemplates(): any {
-  const fetchedTemplates = yield call(getOwnedTemplatesService);
-  if (!fetchedTemplates.error) {
-    if (fetchedTemplates.templates.length !== 0) {
-      yield put(fetchOwnedTemplates(fetchedTemplates.templates));
-    }
-  } else {
-    yield put(
-      addNotification({
-        message: fetchedTemplates.errorMessage,
-        timestamp: new Date(),
-        type: NotificationType.Error,
-      })
-    );
-  }
-}
 
 function* createListingTemplate() {
   // UPDATE: filter token id of the selectedTemplate
@@ -53,6 +40,63 @@ function* createListingTemplate() {
   }
 }
 
+function* getOwnedTemplates(): any {
+  const fetchedTemplates = yield call(getOwnedTemplatesService);
+  if (!fetchedTemplates.error) {
+    if (fetchedTemplates.templates.length !== 0) {
+      yield put(fetchOwnedTemplates(fetchedTemplates.templates));
+    }
+  } else {
+    yield put(
+      addNotification({
+        message: fetchedTemplates.errorMessage,
+        timestamp: new Date(),
+        type: NotificationType.Error,
+      })
+    );
+  }
+}
+
+function* getListedTemplates(): any {
+  const fetchedTemplates = yield call(getListedTemplatesService);
+  if (!fetchedTemplates.error) {
+    if (fetchedTemplates.listings.length !== 0) {
+      yield put(allTemplatesFetched(fetchedTemplates.listings));
+    }
+  } else {
+    yield put(
+      addNotification({
+        message: fetchedTemplates.errorMessage,
+        timestamp: new Date(),
+        type: NotificationType.Error,
+      })
+    );
+  }
+}
+
+function* getOwnedListedTemplates(): any {
+  const currentAccount = yield select(
+    (state: any) => state.web3.currentAccount
+  );
+  const fetchedTemplates = yield call(
+    getOwnedListedTemplatesService,
+    currentAccount
+  );
+  if (!fetchedTemplates.error) {
+    if (fetchedTemplates.listings.length !== 0) {
+      yield put(ownedListedTemplatesFetched(fetchedTemplates.listings));
+    }
+  } else {
+    yield put(
+      addNotification({
+        message: fetchedTemplates.errorMessage,
+        timestamp: new Date(),
+        type: NotificationType.Error,
+      })
+    );
+  }
+}
+
 function* listTemplateSaga() {
   yield takeLatest(mintedActionTypes.LIST_TEMPLATE, createListingTemplate);
 }
@@ -61,6 +105,22 @@ function* fetchOwnedTemplatesSaga() {
   yield takeLatest(mintedActionTypes.FETCH_OWNED_TEMPLATES, getOwnedTemplates);
 }
 
+function* fetchTemplatesSaga() {
+  yield takeLatest(mintedActionTypes.FETCH_TEMPLATES, getListedTemplates);
+}
+
+function* fetchOwnedListedTemplatesSaga() {
+  yield takeLatest(
+    mintedActionTypes.FETCH_OWNED_LISTED_TEMPLATES,
+    getOwnedListedTemplates
+  );
+}
+
 export function* mintedSagas() {
-  yield all([call(listTemplateSaga), call(fetchOwnedTemplatesSaga)]);
+  yield all([
+    call(listTemplateSaga),
+    call(fetchOwnedTemplatesSaga),
+    call(fetchTemplatesSaga),
+    call(fetchOwnedListedTemplatesSaga),
+  ]);
 }

@@ -6,8 +6,6 @@ export interface ITemplateState {
   buyTemplateLoading: boolean;
   mintTokenId: number;
   mintTemplateLoading: boolean;
-  templateList: []; // ADD: suitable type
-  ownedTemplateList: []; // ADD: suitable type
   selectedTemplate: ISelectedTemplate;
 }
 

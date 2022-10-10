@@ -18,7 +18,7 @@ const TEMPLATE_CATEGORIES = [
 
 const SelectTemplateModal: FC = () => {
   const dispatch = useDispatch();
-  const templateList = useSelector((state: any) => state.template.templateList);
+  const templateList = useSelector((state: any) => state.minted.templateList);
 
   const handleSelectTemplate = (template: ISelectedTemplate) => {
     dispatch(setSelectedTemplate(template));
