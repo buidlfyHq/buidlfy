@@ -7,6 +7,7 @@ import { toggleModalType } from "redux/modal/modal.reducers";
 import EyeImg from "assets/icons/eye.png";
 import TempexImg from "assets/icons/tempex.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
+import { Tag } from "components/utils/tag-component";
 
 interface ISingleTemplateDetails {
   list: boolean;
@@ -27,10 +28,10 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
         <div className="text-[22px] font-[500] text-[#14142B]">
           Cryptin Next Generation Web Template
         </div>
-        <div className="button-singleTemp flex items-center py-2.5 px-6 cursor-pointer">
+        <button className="button-singleTemp flex items-center py-2.5 px-6 cursor-pointer">
           <img src={EyeImg} alt="icon" width={18} height={18} />
           <div className="ml-2 gradient-text font-[500]">Preview</div>
-        </div>
+        </button>
       </div>
       <div className="mt-5">
         <img
@@ -62,7 +63,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
                 <div className="text-[14px] font-[600] text-[#14142B] opacity-70">~$1209.00</div>
               </div>
             ) : <div className="mt-16">{" "}</div>}
-            <div
+            <button
               onClick={handleSubmit}
               className="w-full flex justify-center gap-10 items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
             >
@@ -70,7 +71,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
                 {!list ? 'Connect Wallet to Buy' : 'List on Buidlfy'}
               </div>
               <VscArrowRight className="ml-2 text-[22px]" />
-            </div>
+            </button>
             <div className="flex mt-3 bg-[#F7F7FF] rounded-[8px] items-center text-[#14142B] opacity-80 text-[13px] py-3 px-4">
               <img src={InfoCircleImg} alt="icon" width={17} height={17} />
               <div className="ml-2">
@@ -81,12 +82,8 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
         </div>
       </div>
       <div className="flex gap-3 mt-7">
-        <div className="w-auto gradient-text-bg py-2 px-3.5 bg-gray-200 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">
-          Web3
-        </div>
-        <div className="w-auto gradient-text-bg py-2 px-3.5 bg-gray-200 text-[#5799EB] rounded-[3px] text-[14px] font-[500]">
-          Crypto
-        </div>
+        <Tag name={'Web3'} />
+        <Tag name={'Crypto'} />
       </div>
     </Dialog.Panel>
   );

@@ -20,12 +20,11 @@ const MintedTemplateModal: FC = () => {
   return (
       <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[670px] my-20 mx-28 rounded-[24px] py-16 px-10 bg-white max-h-[80vh]">
           <div>
-          <Lottie 
-            options={defaultOptions}
-            height={200}
-            width={200}
-          />
-            {/* <img src={TickCircleImg} alt="icon" width={80} height={80} /> */}
+            <Lottie 
+              options={defaultOptions}
+              height={200}
+              width={200}
+            />
           </div>
           <div className="font-[600] text-[34px] text-[#1C1C1E]">
             Template is Minted!
@@ -35,16 +34,16 @@ const MintedTemplateModal: FC = () => {
             Please check the template in the my template section.
           </div>
           <Link to='/my-templates' onClick={handleClose}>
-            <div className="text-[#7742E7] text-[18px] font-[500] flex bordered-button mt-8 items-center py-4 px-9">
+            <button className="text-[#7742E7] text-[18px] font-[500] flex bordered-button mt-8 items-center py-4 px-9">
               View My Templates
-            </div>
+            </button>
           </Link>
-          <div
+          <button
             onClick={handleClose}
             className="text-[#8268E5] text-[18px] font-[500] mt-5 cursor-pointer"
           >
             Okay
-          </div>
+          </button>
         </Dialog.Panel>
   );
 };

@@ -2,10 +2,10 @@ import React, { FC, useState } from "react";
 import { Dialog } from '@headlessui/react'
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import Spinner from "components/utils/spinner";
 import { CgClose } from "react-icons/cg";
 import Approve1 from 'assets/approve-1.png'
 import Approve2 from 'assets/approve-2.png'
-import Spinner from "components/utils/spinner";
 
 const CompleteListing: FC = () => {
   const dispatch = useDispatch()
@@ -70,53 +70,6 @@ const CompleteListing: FC = () => {
             </div>
 
         </div>
-          
-          {/* <form className="flex flex-col">
-            <div className="font-[500] text-[13px] text-[#23314B] ">Price Details</div>
-            <div className="relative mt-2">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <img src={IconImg} alt="icon" width={24} height={24} />
-              </div>
-              <input
-                  type="text"
-                  id="simple-search"
-                  className="border border-[#C4C4C4] text-[#23314B] text-[13px] rounded-[8px] focus:ring-[#dee0e9] focus:border-[#dee0e9] block w-full pl-11 py-2.5"
-                  placeholder="Amount"
-                  required
-              />
-            </div>
-          </form> */}
-          {/* <div className="bg-[#F7F6FC] rounded-[8px] py-5 px-6 mt-6">
-            <div className="flex items-center justify-between">
-                <div className="text-[#8E8E93] text-[14px]">Amount</div>
-                <div className="text-[#1C1C1E] opacity-60 text-[14px] font-[500]">ETH 25</div>
-            </div>
-            <div className="flex items-center justify-between mt-3">
-                <div className="text-[#8E8E93] text-[14px]">Platform Fee (5%)</div>
-                <div className="text-[#1C1C1E] opacity-60 text-[14px] font-[500]">ETH 1.25</div>
-            </div>
-            <div className="flex items-center justify-between mt-3">
-                <div className="text-[#1C1C1E] text-[14px] font-[500]">Total</div>
-                <div className="text-[#1C1C1E] text-[16px] font-[700]">ETH 26.25</div>
-            </div>
-            <div className="flex items-center justify-end mt-3">
-                <div className="text-[#14142B] opacity-50 text-[14px] font-[500]">~$12,343.00 USD</div>
-            </div>
-          </div> */}
-          {/* <div className="flex items-center justify-end gap-4 mt-7">
-            <div 
-                  onClick={() => dispatch(toggleModal(false))}
-                  className="bg-[#E7E7E7] text-[13px] py-3 px-10 text-[#1C1C1E] cursor-pointer rounded-[4px] font-[500]"
-              >
-                Cancel
-            </div>
-            <div 
-                // onClick={() => dispatch(toggleModalType('listing-review'))}
-                className="bg-[#8268E5] text-[13px] font-[500] text-white cursor-pointer py-3 px-6 rounded-[4px]"
-            >
-                Continue to list
-            </div>
-          </div> */}
         </div>
   </Dialog.Panel>
   );

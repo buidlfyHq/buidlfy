@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
-import { ConfettiShower } from "components/utils/confetti-shower";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { ReactComponent as FeatherIcon } from "assets/svgAsIcons/feather.svg";
 import CongratulationsImg from "assets/icons/congratulations.png";
@@ -10,10 +9,6 @@ import ConfettiLottie1 from 'assets/lottie/confetti.json'
 
 const FinalModal: FC = () => {
   const dispatch = useDispatch();
-  const [dimentions, setDimentions] = useState<object>({
-    width: 0,
-    height: 0
-  })
   const defaultOptions = {
     loop: false,
     autoplay: true,
@@ -22,20 +17,10 @@ const FinalModal: FC = () => {
       preserveAspectRatio: "xMidYMid slice"
     }
   };
-  useEffect(() => {
-    let El = document.getElementById('#confetti')
-    console.log(El)
-    // let width = window.screen.width
-    // let height = window.screen.height
-    // setDimentions({
-    //   ...dimentions,
-    //   width,
-    //   height
-    // })
-  }, [])
   return (
       <Dialog.Panel id="#confetti" className="relative flex flex-col justify-center items-center w-full max-w-[1140px] my-20 mx-28 rounded-[24px] py-20 lg:py-36 lg:px-64 px-28 bg-white ">
-        {/* <ConfettiShower dimentions={dimentions} /> */}
+        {/* commented confetti-shower as confused which to use confetti or lottie */}
+        {/* <ConfettiShower /> */}
         <div className="absolute w-full h-full">
           <Lottie 
             options={defaultOptions}
