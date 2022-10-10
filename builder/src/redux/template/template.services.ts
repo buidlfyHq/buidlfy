@@ -11,6 +11,7 @@ import {
   TOKENS_COUNT_ON_MINT,
 } from "redux/web3/web3.utils";
 import { getCurrentTime } from "./template.utils";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 export const initiateTransactionService = async (
   listingId: BigNumber,
@@ -45,6 +46,32 @@ export const initiateTransactionService = async (
   }
 };
 
+export const formatList = async (listings) => {
+  let templates = (
+    await Promise.all(
+      listings.map(async (template: any) => {
+        if (
+          template.listing_assetContract.toLowerCase() ===
+          addresses.spheronErc1155.toLowerCase()
+        ) {
+          try {
+            const templateObj: IWorkspaceElement = await (
+              await fetch(template.token.uri)
+            ).json();
+
+            return { ...template, ...templateObj };
+          } catch (error) {
+            console.error("error: ", error);
+          }
+        }
+      })
+    )
+  ).filter((template: any) => template !== undefined);
+
+  return templates;
+};
+
+
 export const getListedTemplatesService = async () => {
   // Removed: isAccepted from query
   try {
@@ -76,7 +103,8 @@ export const getListedTemplatesService = async () => {
     `;
 
     const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
-    return { error: false, errorMessage: "", listings: res.listings };
+    const listings = await formatList(res.listings);
+    return { error: false, errorMessage: "", listings };
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error("Error in fetching --> ", error);
@@ -119,7 +147,8 @@ export const getOwnedTemplatesService = async (address: string) => {
     `;
 
     const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
-    return { error: false, errorMessage: "", listings: res.listings };
+    const listings = await formatList(res.listings);
+    return { error: false, errorMessage: "", listings };
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error("Error in fetching --> ", error);

@@ -1,4 +1,3 @@
-import { ethers } from "ethers";
 import { call, all, put, takeLatest, select } from "redux-saga/effects";
 import { addNotification } from "redux/notification/notification.reducers";
 import { toggleModalType } from "redux/modal/modal.reducers";

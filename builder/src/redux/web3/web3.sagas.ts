@@ -1,5 +1,6 @@
 import { call, put, all, takeLatest, select } from "redux-saga/effects";
 import { fetchWalletBalance } from "./web3.actions";
+import { fetchOwnedTemplates } from "redux/template/template.actions";
 import { addNotification } from "redux/notification/notification.reducers";
 import {
   toggleConnectWalletLoading,
@@ -15,6 +16,7 @@ function* connectWalletGen(): any {
   if (!walletRes.error) {
     yield put(walletConnected(walletRes.address));
     yield put(fetchWalletBalance());
+    yield put(fetchOwnedTemplates());
   } else {
     yield put(toggleConnectWalletLoading(false));
     yield put(

@@ -1,13 +1,9 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BigNumber } from "ethers";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
-import { fetchTemplates } from "redux/template/template.actions";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplate } from "redux/template/template.reducers";
-import { addresses } from "redux/web3/web3.utils";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 
 const TEMPLATE_CATEGORIES = [
@@ -22,42 +18,7 @@ const TEMPLATE_CATEGORIES = [
 
 const SelectTemplateModal: FC = () => {
   const dispatch = useDispatch();
-  const [allTemplates, setAllTemplates] = useState<any>();
   const templateList = useSelector((state: any) => state.template.templateList);
-
-  useEffect(() => {
-    dispatch(fetchTemplates());
-  }, []);
-
-  // set templates after fetching the templates
-  useEffect(() => {
-    setTemplates();
-  }, [templateList]);
-
-  const setTemplates = async () => {
-    let newTemplates = (
-      await Promise.all(
-        templateList.map(async (template: any) => {
-          if (
-            template.listing_assetContract.toLowerCase() ===
-            addresses.spheronErc1155.toLowerCase()
-          ) {
-            try {
-              const templateObj: IWorkspaceElement = await (
-                await fetch(template.token.uri)
-              ).json();
-
-              return { ...template, ...templateObj };
-            } catch (error) {
-              console.error("error: ", error);
-            }
-          }
-        })
-      )
-    ).filter((template: any) => template !== undefined);
-
-    setAllTemplates(newTemplates);
-  };
 
   const handleSelectTemplate = (template: ISelectedTemplate) => {
     dispatch(setSelectedTemplate(template));
@@ -136,8 +97,8 @@ const SelectTemplateModal: FC = () => {
         <hr className="bg-hr h-[2px] w-full mt-6" />
         <div className="w-full bg-lower-template">
           <div className="grid grid-cols-3 gap-4 px-10 pb-12 pt-7">
-            {allTemplates &&
-              allTemplates.map((temp: ISelectedTemplate) => {
+            {templateList &&
+              templateList.map((temp: ISelectedTemplate) => {
                 return (
                   <div
                     key={temp.id}
