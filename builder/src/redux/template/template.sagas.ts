@@ -17,6 +17,7 @@ import {
 } from "./template.services";
 import templateActionTypes from "./template.types";
 import { NotificationType } from "redux/notification/notification.interfaces";
+import { IRootState } from "redux/root-state.interface";
 
 function* buySelectedTemplate({ payload }) {
   const { listingId, buyoutPricePerToken } = payload;
@@ -59,7 +60,7 @@ function* getListedTemplates(): any {
 
 function* getOwnedTemplates(): any {
   const currentAccount = yield select(
-    (state: any) => state.web3.currentAccount
+    (state: IRootState) => state.web3.currentAccount
   );
   const fetchedTemplates = yield call(getOwnedTemplatesService, currentAccount);
   if (!fetchedTemplates.error) {
