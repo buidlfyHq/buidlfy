@@ -74,6 +74,7 @@ const ButtonSettings: FC<ISettings> = ({
           fontStyle={selectedElement.style.fontStyle}
           textDecoration={selectedElement.style.textDecoration}
           justifyContent={selectedElement.style.justifyContent}
+          color={selectedElement.style.color}
         />
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
           <textarea

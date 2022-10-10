@@ -97,6 +97,8 @@ const Navbar: FC<INavbar> = ({
   const handleSave = () => {
     // FIX: save full config to local storage
     if (workspaceElements?.length > 0) {
+      console.log(workspaceElements, "we");
+
       localStorage.setItem("items", JSON.stringify(getConfig()));
     }
   };

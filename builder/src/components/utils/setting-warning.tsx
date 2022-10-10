@@ -8,10 +8,12 @@ interface IWarningText {
 
 const WarningText: FC<IWarningText> = ({ text }) => {
   return (
-    <div className="bg-[#EFEDFD] rounded-[4px] pt-1 pb-3 px-2 mr-[0.6rem] ml-[0.3rem] mb-[0.5rem]">
+    <div className="bg-[#EFEDFD] rounded-[4px] pt-[1px] pb-3 px-2 mr-[0.6rem] ml-[0.3rem] mb-[0.5rem]">
       <div className="text-[10px] text-[#475385] flex">
-        <IoMdInformationCircleOutline className="text-[40px]" />
-        <p className="ml-[0.3rem] mt-[0.6rem]">{text}</p>
+        <span className="flex items-center">
+          <IoMdInformationCircleOutline className="text-[15px]" />
+        </span>
+        <p className="ml-[0.3rem] mt-[0.8rem]">{text}</p>
       </div>
     </div>
   );
