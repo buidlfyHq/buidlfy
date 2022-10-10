@@ -4,21 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { BiChevronDown } from "react-icons/bi";
 import makeBlockie from "ethereum-blockies-base64";
 import TemplateModal from "features/dashboard/template-modal";
-import { fetchOwnedTemplates } from "redux/template/template.actions";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { addresses } from "redux/web3/web3.utils";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
 import { setSelectedTemplate } from "redux/template/template.reducers";
+import { fetchOwnedTemplates } from "redux/minted/minted.actions";
 
 const MyTemplates: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentAccount = useSelector((state: any) => state.web3.currentAccount);
   const ownedTemplateList = useSelector(
-    (state: any) => state.template.ownedTemplateList
+    (state: any) => state.minted.ownedTemplateList
   );
+  console.log(ownedTemplateList);
+
   // How to get minted but not listed templates??
 
   const [userTemplates, setUserTemplates] = useState<any>();
@@ -39,13 +41,10 @@ const MyTemplates: FC = () => {
     let newTemplates = (
       await Promise.all(
         ownedTemplateList.map(async (template: any) => {
-          if (
-            template.listing_assetContract.toLowerCase() ===
-            addresses.spheronErc1155.toLowerCase()
-          ) {
+          if (addresses.spheronErc1155.toLowerCase()) {
             try {
               const templateObj: IWorkspaceElement = await (
-                await fetch(template.token.uri)
+                await fetch(template.token_uri)
               ).json();
 
               return { ...template, ...templateObj };
@@ -102,7 +101,7 @@ const MyTemplates: FC = () => {
       <div>
         <div className="py-0 px-36">
           <div className="flex justify-center mt-6 text-black font-[600] text-[15px] gap-8">
-            <div className="py-3 cursor-pointer px-7">Minted Templates</div>
+            <div className="py-3 cursor-pointer px-7">All Templates</div>
             <div className="py-3 cursor-pointer px-7">In Review</div>
             <div className="py-3 cursor-pointer px-7">Listed Templates</div>
           </div>

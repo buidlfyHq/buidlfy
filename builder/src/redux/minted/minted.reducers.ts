@@ -4,12 +4,16 @@ import { IMintedState } from "./minted.interfaces";
 const initialState: IMintedState = {
   listTemplateHash: "",
   listTemplateLoading: false,
+  ownedTemplateList: [],
 };
 
 const mintedSlice = createSlice({
   name: "minted",
   initialState,
   reducers: {
+    fetchOwnedTemplates(state, action) {
+      state.ownedTemplateList = action.payload;
+    },
     listTemplate(state, action: { payload: string }) {
       state.listTemplateHash = action.payload;
       state.listTemplateLoading = false;
@@ -20,5 +24,5 @@ const mintedSlice = createSlice({
   },
 });
 
-export const { listTemplate, startListTemplateLoader } = mintedSlice.actions;
+export const { fetchOwnedTemplates, listTemplate, startListTemplateLoader } = mintedSlice.actions;
 export default mintedSlice.reducer;

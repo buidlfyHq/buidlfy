@@ -8,6 +8,29 @@ import {
 } from "redux/web3/web3.utils";
 import { getCurrentTime } from "./minted.utils";
 
+export const getOwnedTemplatesService = async (): Promise<any> => {
+  try {
+    const allTemplates = await (
+      await fetch(
+        "https://deep-index.moralis.io/api/v2/0xd6c72729EbCC987b171eCF074993ce3C4e34b9f0/nft?chain=goerli&format=decimal&token_addresses=0xa69374d7371df89192f05c7b61a945f834bf2593",
+        {
+          method: "GET",
+          headers: {
+            "X-API-Key": "test",
+            accept: "application/json",
+          },
+        }
+      )
+    ).json();
+    
+    return { error: false, errorMessage: "", templates: allTemplates.result };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log("Error in getOwnedTemplatesService --> ", error);
+    return { error: true, errorMessage: (error as Error).message, receipt: "" };
+  }
+};
+
 export const createListingService = async (
   tokenId: number,
   buyoutPricePerToken: BigNumber
