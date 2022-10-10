@@ -94,6 +94,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
       backgroundColor="#262338"
       arrowColor="#262338"
       scrollHide={true}
+      delayShow={300}
     />
   );
 
@@ -101,7 +102,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
     <>
       {tooltip}
       <div
-        className={`relative w-[220px] h-[155px] mx-1 my-2 cursor-pointer ${
+        className={`relative w-[220px] h-[155px] rounded-[0.5rem] mx-1 my-2 cursor-pointer ${
           imageData?.uploadedImageData ? "image-overlay" : "default-upload"
         } `}
       >

@@ -278,24 +278,28 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   border-right: 2px solid;
   border-bottom: 2px solid;
 }
-
-.side-icon {
-  background: linear-gradient(
-    195.4deg,
-    rgba(134, 190, 255, 0.2) 10.8%,
-    rgba(205, 76, 250, 0.2) 163.89%
-  );
+.icon-div {
+  transition: 2s;
 }
+.icon-div:hover .side-icon{
+  background: linear-gradient(195.4deg, rgba(208, 230, 255, 0.28) 10.8%, rgba(222, 130, 255, 0.28) 163.89%);
+}
+.icon-div:hover .side-text{
+  color: #100F11;
+}
+.icon-div:hover .element-svg{
+  stroke: #6560E6;
+}
+.side-icon {
+  background: rgba(164, 179, 255, 0.1);
+}
+
 .side-text {
-  /* font-family: 'Roboto'; */
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  /* identical to box height */
-
   text-align: center;
-
   color: #504f82;
 }
 .element-div {
@@ -370,6 +374,8 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   background: #fdfdff;
   z-index: 5 !important;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
+  transition: 12s !important;
+  --animate-duration: 1.5s;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -503,8 +509,12 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   /* identical to box height, or 171% */
 
   /* White */
-
+cursor: pointer;
   color: #ffffff;
+}
+.contract-button:hover {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+  linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
 }
 .delete-btn {
   background: rgba(104, 146, 255, 0.29);
@@ -535,8 +545,8 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   font-weight: 400;
   font-size: 13px;
   line-height: 15px;
-
   color: #ffffff;
+  transition: 0.5s;
 }
 .btn-div:hover {
   background: #503dcf;
@@ -555,6 +565,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   height: 65px;
   display: flex;
   justify-content: center;
+  transition: 0.5s;
 }
 .element-container:hover {
   background: rgba(106, 88, 231, 0.1);
@@ -568,6 +579,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   padding: 12px 12px;
   border: 1px solid #14142b;
   border-radius: 8px;
+  transition: 0.5s;
 }
 .input-container:hover {
   background: #ffffff;
@@ -605,9 +617,15 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   width: 245px;
   height: 100px;
 }
+.image-container {
+  transition: 2s;
+}
 .image-container:hover {
   border-radius: 5px;
   background-color: rgb(106, 88, 231,0.2);
+}
+.heading-element {
+transition: 0.7s;
 }
 .element-upload {
   background: #faf8ff;
@@ -871,6 +889,7 @@ height: 40px;
   border-radius: 28px;
   padding: 10px 20px;
   color: white;
+  transition: 2s !important;
 }
 .add-btn:hover {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
@@ -978,4 +997,15 @@ height: 40px;
   /* White */
 
   color: #523f3f;
+}
+
+#elements:hover {
+  stroke: #6560E6;
+}
+/* .tool {
+  transition: 0.5s !important;
+} */
+
+.setting-sidebar {
+  transition: 5s !important;
 }

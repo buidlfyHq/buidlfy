@@ -126,6 +126,7 @@ const Elements: FC<IElements> = ({
         backgroundColor="#262338"
         arrowColor="#262338"
         scrollHide={true}
+        delayShow={300}
       />
       {/* Fix: Add all style to common tailwind  */}
       <div className="element-div">
@@ -146,7 +147,7 @@ const Elements: FC<IElements> = ({
         <div className="py-3 px-10">
           <div data-tip="Click here to add the heading">
             <h1
-              className="font-normal text-2xl mb-4 cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-2xl mb-4 cursor-pointer hover:text-[#5A4471]"
               onClick={() => onClickFunction("Heading 1")}
             >
               Add Heading 1
@@ -155,7 +156,7 @@ const Elements: FC<IElements> = ({
           <div data-tip="Click here to add the heading">
             <h2
               onClick={() => onClickFunction("Heading 2")}
-              className="font-normal text-xl mb-4 cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-xl mb-4 cursor-pointer hover:text-[#5A4471]"
             >
               Add Heading 2
             </h2>
@@ -163,7 +164,7 @@ const Elements: FC<IElements> = ({
           <div data-tip="Click here to add the heading">
             <h3
               onClick={() => onClickFunction("Heading 3")}
-              className="font-normal text-lg mb-4 cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-lg mb-4 cursor-pointer hover:text-[#5A4471]"
             >
               Add Heading 3
             </h3>
@@ -171,7 +172,7 @@ const Elements: FC<IElements> = ({
           <div data-tip="Click here to add the paragraph">
             <div
               onClick={() => onClickFunction("Text")}
-              className="font-normal text-[13px] text-four w-[200px] cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-[13px] text-four w-[200px] cursor-pointer hover:text-[#5A4471]"
             >
               I am a paragrah. Click here to add your own text and edit me. It's
               easy & simple.

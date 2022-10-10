@@ -68,6 +68,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       backgroundColor="#262338"
       arrowColor="#262338"
       scrollHide={true}
+      delayShow={300}
     />
   );
 

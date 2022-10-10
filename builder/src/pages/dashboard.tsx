@@ -109,7 +109,7 @@ const Dashboard: FC = () => {
               {/* Right Sidebar Settings */}
             </aside>
           </section>
-          <div className="rounded-[8px] py-2 overflow-y-scroll fixed top-0 right-0 bottom-0">
+          <div className="setting-sidebar rounded-[8px] py-2 overflow-y-scroll fixed top-0 right-0 bottom-0">
             {openSetting ? (
               <Settings
                 setOpenSetting={setOpenSetting}
