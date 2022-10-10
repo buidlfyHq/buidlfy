@@ -174,9 +174,9 @@ const DefaultSettings: FC<IDefaultSettings> = ({
             )}
           </div>
           {sizeExceeded ? (
-            <h3 className="text-red-500 text-sm ml-2 mb-2">
-              Please upload file below 5 mb
-            </h3>
+            <p className="text-red-500 text-sm ml-4 mb-2">
+              Please upload the file with a size of less than 1 Mb
+            </p>
           ) : null}
         </>
 

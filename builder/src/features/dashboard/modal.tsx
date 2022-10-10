@@ -6,6 +6,7 @@ import {
   updateContractAddress,
 } from "redux/contract/contract.reducers";
 import upload from "assets/upload-img.svg";
+import { IContract } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 interface IModal {
@@ -14,11 +15,6 @@ interface IModal {
   methodOpen: boolean;
   setMethodOpen: (methodOpen: boolean) => void;
   setNewContractList: (newContractList: IContract[]) => void;
-}
-interface IContract {
-  name: string;
-  text: any; // type to be added
-  address: string;
 }
 
 const Modal: FC<IModal> = ({

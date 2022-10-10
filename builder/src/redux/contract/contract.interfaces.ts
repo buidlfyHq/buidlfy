@@ -39,3 +39,9 @@ export interface ISelectedPayload {
   index?: number;
   id?: string;
 }
+
+export interface IContract {
+  name: string;
+  text; // type to be added
+  address: string;
+}

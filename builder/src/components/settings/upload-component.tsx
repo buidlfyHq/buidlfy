@@ -169,7 +169,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
       </div>
       {sizeExceeded ? (
         <h3 className="text-red-500 text-sm ml-2 mb-2">
-          Please upload file below 5 mb
+          Please upload the file with a size of less than 5 Mb
         </h3>
       ) : null}
     </>
