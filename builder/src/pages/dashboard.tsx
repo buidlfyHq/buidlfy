@@ -31,7 +31,6 @@ const Dashboard: FC = () => {
   });
   const [sideElement, setSideElement] = useState<string>("");
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
-  const [visible, setVisible] = useState<boolean>(false);
   useEffect(() => {
     // checks for stored configs
     let saveItems = localStorage.getItem("items");
@@ -75,7 +74,6 @@ const Dashboard: FC = () => {
             isNavHidden={isNavHidden}
             hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
-            visible={visible}
           />
 
           <section className="flex-1">

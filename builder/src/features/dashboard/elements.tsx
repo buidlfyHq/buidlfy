@@ -217,9 +217,10 @@ const Elements: FC<IElements> = ({
   return (
     <>
       {/* Components */}
-      <div className="element-heading-div pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem] fixed left-[5rem]">
+
+      <div className="element-heading-div fixed pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem] left-[5rem]">
         <h3 className="element-heading mt-[2.5px]">Add Elements</h3>
-        <div className="close-btn ml-[10rem]">
+        <div className="close-btn">
           <MdOutlineClose
             onClick={() => {
               hideSidebar();
@@ -229,6 +230,7 @@ const Elements: FC<IElements> = ({
           />
         </div>
       </div>
+
       {!isContainerSelected ? (
         <div className="mt-[6rem]">
           <div className="element-div">

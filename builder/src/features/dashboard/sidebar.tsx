@@ -11,7 +11,6 @@ interface ISidebar {
   isNavHidden: boolean;
   hideSidebar: () => void;
   hideSettingSidebar: () => void;
-  visible;
 }
 
 const Sidebar: FC<ISidebar> = ({
@@ -20,7 +19,6 @@ const Sidebar: FC<ISidebar> = ({
   isNavHidden,
   hideSidebar,
   hideSettingSidebar,
-  visible,
 }) => {
   const ref = useRef(null);
 
@@ -29,8 +27,8 @@ const Sidebar: FC<ISidebar> = ({
       ref={ref}
       className={`${
         isNavHidden
-          ? "hidden newbar animate__animated animate__fadeOut"
-          : "sidebar animate__animated animate__fadeIn fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] w-[320px] z-[1]"
+          ? "hidden"
+          : "sidebar animate__animated animate__slideInLeft fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] z-[1]"
       }`}
     >
       {/* It will be used for future */}

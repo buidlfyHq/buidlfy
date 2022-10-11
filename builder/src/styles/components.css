@@ -315,6 +315,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   display: flex;
   align-items: center;
   align-content: center;
+  width: 285px;
 }
 .setting-text {
   /* font-family: Roboto; */
@@ -369,27 +370,10 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   left: -0.4px;
   right: -0.4px;
 } */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
 
-  to {
-    opacity: 1;
-  }
-}
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
 .newbar {
-  -webkit-animation-name: fadeOut !important;
-  animation-name: fadeOut !important;
+  -webkit-animation-name: slideOut !important;
+  animation-name: slideOut !important;
   animation-duration: 3s;
 }
 /*
@@ -399,11 +383,12 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 } */
 .sidebar {
   background: #fdfdff;
-  z-index: 5 !important;
+  z-index: 1 !important;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
-  /* -webkit-animation-name: fadeIn !important;
-  animation-name: fadeIn !important; */
-  /* animation-duration: 3s; */
+  -webkit-animation-name: slidein !important;
+  animation-name: slidein !important;
+  animation-duration: 0.3s;
+  transition: 0.8s ease;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -412,7 +397,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 
 .sidenav {
   background: #ffffff;
-  z-index: 7777 !important;
+  z-index: 2 !important;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
 }
 .setting-nav {
@@ -618,9 +603,14 @@ cursor: pointer;
 .element-heading-div {
   display: flex;
   height: 60px;
-  z-index: 88888 !important;
+  width: 320px;
+  min-width: 0px;
+  z-index: 2 !important;
   backdrop-filter: saturate(180%) blur(15px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-animation-name: slideinHeading !important;
+  animation-name: slideinHeading !important;
+  animation-duration: 0.3s;
 }
 
 .element-heading {
@@ -630,6 +620,7 @@ cursor: pointer;
   line-height: 19px;
   color: #000000;
   flex-grow: 1;
+  min-width: 150px;
 }
 
 .element-input-text {
@@ -988,6 +979,8 @@ height: 40px;
 .close-btn {
   background: rgba(93, 56, 244, 0.05);
   border-radius: 24px;
+  min-width: 1.6rem;
+  min-height: 1.6rem;
   width: 1.6rem;
   height: 1.6rem;
   display: flex;
@@ -1045,3 +1038,53 @@ height: 40px;
   transition: 5s !important;
 }
 
+@keyframes slidein {
+  0% {
+    opacity:0;
+    width: 0;
+  }
+  1% {
+    opacity:1;
+  }
+  100% {
+    opacity:1;
+    width: 320px;
+  }
+}
+@keyframes slideinHeading {
+  0% {
+    opacity:0;
+    width: 0px;
+  }
+  1% {
+    opacity:1;
+  }
+  100% {
+    opacity:1;
+    width: 320px;
+  }
+}
+@-webkit-keyframes slideOut {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+}
+@keyframes slideOut {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+}
