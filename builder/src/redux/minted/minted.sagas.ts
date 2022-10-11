@@ -6,6 +6,7 @@ import {
   createListingService,
   getListedTemplatesService,
   getOwnedListedTemplatesService,
+  getOwnedReviewTemplatesService,
   getOwnedTemplatesService,
 } from "./minted.services";
 import {
@@ -13,6 +14,7 @@ import {
   fetchOwnedTemplates,
   listTemplate,
   ownedListedTemplatesFetched,
+  ownedReviewTemplatesFetched,
   startListTemplateLoader,
 } from "./minted.reducers";
 import mintedActionTypes from "./minted.types";
@@ -74,6 +76,29 @@ function* getListedTemplates(): any {
   }
 }
 
+function* getOwnedReviewTemplates(): any {
+  const currentAccount = yield select(
+    (state: any) => state.web3.currentAccount
+  );
+  const fetchedTemplates = yield call(
+    getOwnedReviewTemplatesService,
+    currentAccount
+  );
+  if (!fetchedTemplates.error) {
+    if (fetchedTemplates.listings.length !== 0) {
+      yield put(ownedReviewTemplatesFetched(fetchedTemplates.listings));
+    }
+  } else {
+    yield put(
+      addNotification({
+        message: fetchedTemplates.errorMessage,
+        timestamp: new Date(),
+        type: NotificationType.Error,
+      })
+    );
+  }
+}
+
 function* getOwnedListedTemplates(): any {
   const currentAccount = yield select(
     (state: any) => state.web3.currentAccount
@@ -109,6 +134,13 @@ function* fetchTemplatesSaga() {
   yield takeLatest(mintedActionTypes.FETCH_TEMPLATES, getListedTemplates);
 }
 
+function* fetchOwnedReviewTemplatesSaga() {
+  yield takeLatest(
+    mintedActionTypes.FETCH_OWNED_REVIEW_TEMPLATES,
+    getOwnedReviewTemplates
+  );
+}
+
 function* fetchOwnedListedTemplatesSaga() {
   yield takeLatest(
     mintedActionTypes.FETCH_OWNED_LISTED_TEMPLATES,
@@ -121,6 +153,7 @@ export function* mintedSagas() {
     call(listTemplateSaga),
     call(fetchOwnedTemplatesSaga),
     call(fetchTemplatesSaga),
+    call(fetchOwnedReviewTemplatesSaga),
     call(fetchOwnedListedTemplatesSaga),
   ]);
 }

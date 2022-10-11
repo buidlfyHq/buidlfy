@@ -6,6 +6,7 @@ const initialState: IMintedState = {
   listTemplateLoading: false,
   ownedTemplateList: [],
   templateList: [],
+  ownedReviewTemplateList: [],
   ownedListedTemplateList: [],
 };
 
@@ -26,6 +27,9 @@ const mintedSlice = createSlice({
     allTemplatesFetched(state, action) {
       state.templateList = action.payload;
     },
+    ownedReviewTemplatesFetched(state, action) {
+      state.ownedReviewTemplateList = action.payload;
+    },
     ownedListedTemplatesFetched(state, action) {
       state.ownedListedTemplateList = action.payload;
     },
@@ -37,6 +41,7 @@ export const {
   startListTemplateLoader,
   fetchOwnedTemplates,
   allTemplatesFetched,
+  ownedReviewTemplatesFetched,
   ownedListedTemplatesFetched,
 } = mintedSlice.actions;
 export default mintedSlice.reducer;

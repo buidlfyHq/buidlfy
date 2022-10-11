@@ -55,11 +55,15 @@ export const formatList = async (listings) => {
           addresses.spheronErc1155.toLowerCase()
         ) {
           try {
-            const templateObj: IWorkspaceElement = await (
-              await fetch(template.token.uri)
-            ).json();
+            if (template.token.uri) {
+              const templateObj: IWorkspaceElement = await (
+                await fetch(template.token.uri)
+              ).json();
 
-            return { ...template, ...templateObj };
+              return { ...template, ...templateObj };
+            } else {
+              return { ...template };
+            }
           } catch (error) {
             console.error("error: ", error);
           }
@@ -91,11 +95,15 @@ export const getOwnedTemplatesService = async (): Promise<any> => {
       await Promise.all(
         allTemplates.result.map(async (template: any) => {
           try {
-            const templateObj: IWorkspaceElement = await (
-              await fetch(template.token_uri)
-            ).json();
+            if (template.token_uri) {
+              const templateObj: IWorkspaceElement = await (
+                await fetch(template.token_uri)
+              ).json();
 
-            return { ...template, ...templateObj };
+              return { ...template, ...templateObj };
+            } else {
+              return { ...template };
+            }
           } catch (error) {
             console.error("error: ", error);
           }
@@ -156,12 +164,55 @@ export const getListedTemplatesService = async () => {
   }
 };
 
+export const getOwnedReviewTemplatesService = async (address: string) => {
+  try {
+    const query = gql`
+      {
+        listings(where: { listing_tokenOwner: "${address.toLowerCase()}", isAccepted: false }) {
+          id
+          token {
+            id
+            contract
+            identifier
+            uri
+          }
+          lister
+          listing_listingId
+          listing_tokenOwner
+          listing_assetContract
+          listing_tokenId
+          listing_startTime
+          listing_endTime
+          listing_quantity
+          listing_currency
+          listing_buyoutPricePerToken
+          listing_tokenType
+          listing_listingType
+          isAccepted
+        }
+      }
+    `;
+
+    const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
+    const listings = await formatList(res.listings);
+    return { error: false, errorMessage: "", listings };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Error in fetching --> ", error);
+    return {
+      error: true,
+      errorMessage: (error as Error).message,
+      listings: null,
+    };
+  }
+};
+
 export const getOwnedListedTemplatesService = async (address: string) => {
   // Removed: isAccepted from query
   try {
     const query = gql`
       {
-        listings(where: { listing_tokenOwner: "${address.toLowerCase()}" }) {
+        listings(where: { listing_tokenOwner: "${address.toLowerCase()}", isAccepted: true }) {
           id
           token {
             id

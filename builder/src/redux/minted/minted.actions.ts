@@ -12,6 +12,10 @@ export const fetchTemplates = () => ({
   type: mintedActionTypes.FETCH_TEMPLATES,
 });
 
+export const fetchOwnedReviewTemplates = () => ({
+  type: mintedActionTypes.FETCH_OWNED_REVIEW_TEMPLATES,
+});
+
 export const fetchOwnedListedTemplates = () => ({
   type: mintedActionTypes.FETCH_OWNED_LISTED_TEMPLATES,
 });

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BiChevronDown } from "react-icons/bi";
@@ -6,6 +6,7 @@ import makeBlockie from "ethereum-blockies-base64";
 import TemplateModal from "features/dashboard/template-modal";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
+import { ISelectedTemplate } from "redux/template/template.interfaces";
 
 const MyTemplates: FC = () => {
   const dispatch = useDispatch();
@@ -14,21 +15,100 @@ const MyTemplates: FC = () => {
   const ownedTemplateList = useSelector(
     (state: any) => state.minted.ownedTemplateList
   );
+  const ownedReviewTemplateList = useSelector(
+    (state: any) => state.minted.ownedReviewTemplateList
+  );
+  const ownedListedTemplateList = useSelector(
+    (state: any) => state.minted.ownedListedTemplateList
+  );
 
-  const handleListOnBuidlfy = (template: {
-    token_id: string;
-    image: string;
-    name: string;
-  }) => {
-    dispatch(toggleModal(true));
-    dispatch(toggleModalType("list-single"));
-  };
+  const [tab, setTab] = useState<number>(1);
 
   useEffect(() => {
     if (!currentAccount) {
       return navigate("/");
     }
   }, []);
+
+  const handleListOnBuidlfy = () => {
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("list-single"));
+  };
+
+  const templateCard = (image, name, list) => (
+    <div className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative">
+      <div className="relative rounded-[16px] h-auto">
+        <div className="absolute right-0 flex justify-end my-2 mx-4 py-1 px-3 text-[#14142B] text-[10px] bg-[#FFE6B0] rounded-[5px]">
+          In Review
+        </div>
+        <div className="absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600]">
+          <div className="py-2 px-10 rounded-[8px] bg-white text-[#7743E7]">
+            View Details
+          </div>
+          {list && (
+            <div
+              className="py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white"
+              onClick={() => handleListOnBuidlfy()}
+            >
+              List on Buidlfy
+            </div>
+          )}
+        </div>
+        <img src={image} alt="img_temp" className="rounded-[16px] w-full" />
+      </div>
+      <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
+        <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">
+          {name}
+        </div>
+        <div className="text-[12px] text-[#14142B] py-2 px-4 bg-gray-100 font-[500] rounded-[4px]">
+          Crypto
+        </div>
+      </div>
+      <TemplateModal />
+    </div>
+  );
+
+  const renderList = () => {
+    switch (tab) {
+      case 1:
+        return (
+          <>
+            {ownedTemplateList &&
+              ownedTemplateList.map(
+                (temp: { token_id: string; image: string; name: string }) => (
+                  <div key={temp.token_id}>
+                    {templateCard(temp.image, temp.name, true)}
+                  </div>
+                )
+              )}
+          </>
+        );
+      case 2:
+        return (
+          <>
+            {ownedReviewTemplateList &&
+              ownedReviewTemplateList.map((temp: ISelectedTemplate) => (
+                <div key={temp.id}>
+                  {templateCard(temp.image, temp.name, false)}
+                </div>
+              ))}
+          </>
+        );
+      case 3:
+        return (
+          <>
+            {ownedListedTemplateList &&
+              ownedListedTemplateList.map((temp: ISelectedTemplate) => (
+                <div key={temp.id}>
+                  {templateCard(temp.image, temp.name, false)}
+                </div>
+              ))}
+          </>
+        );
+      default:
+        break;
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -66,9 +146,30 @@ const MyTemplates: FC = () => {
       <div>
         <div className="py-0 px-36">
           <div className="flex justify-center mt-6 text-black font-[600] text-[15px] gap-8">
-            <div className="py-3 cursor-pointer px-7">All Templates</div>
-            <div className="py-3 cursor-pointer px-7">In Review</div>
-            <div className="py-3 cursor-pointer px-7">Listed Templates</div>
+            <button
+              className={`py-3 cursor-pointer px-7 outline-none ${
+                tab === 1 ? "border-b-4 border-purple-500" : null
+              }`}
+              onClick={() => setTab(1)}
+            >
+              All Templates
+            </button>
+            <button
+              className={`py-3 cursor-pointer px-7 outline-none ${
+                tab === 2 ? "border-b-4 border-purple-500" : null
+              }`}
+              onClick={() => setTab(2)}
+            >
+              In Review
+            </button>
+            <button
+              className={`py-3 cursor-pointer px-7 outline-none ${
+                tab === 3 ? "border-b-4 border-purple-500" : null
+              }`}
+              onClick={() => setTab(3)}
+            >
+              Listed Templates
+            </button>
           </div>
         </div>
         <div className="w-full bg-lower-template">
@@ -111,46 +212,7 @@ const MyTemplates: FC = () => {
             </div>
           </div>
           <div className="grid grid-cols-3 gap-10 px-40 pb-12 pt-7">
-            {ownedTemplateList &&
-              ownedTemplateList.map(
-                (temp: { token_id: string; image: string; name: string }) => (
-                  <div
-                    key={temp.token_id}
-                    className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative"
-                  >
-                    <div className="relative rounded-[16px] h-auto">
-                      <div className="absolute right-0 flex justify-end my-2 mx-4 py-1 px-3 text-[#14142B] text-[10px] bg-[#FFE6B0] rounded-[5px]">
-                        In Review
-                      </div>
-                      <div className="absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600]">
-                        <div className="py-2 px-10 rounded-[8px] bg-white text-[#7743E7]">
-                          View Details
-                        </div>
-                        <div
-                          className="py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white"
-                          onClick={() => handleListOnBuidlfy(temp)}
-                        >
-                          List on Buidlfy
-                        </div>
-                      </div>
-                      <img
-                        src={temp.image}
-                        alt="img_temp"
-                        className="rounded-[16px] w-full"
-                      />
-                    </div>
-                    <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
-                      <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">
-                        {temp.name}
-                      </div>
-                      <div className="text-[12px] text-[#14142B] py-2 px-4 bg-gray-100 font-[500] rounded-[4px]">
-                        Crypto
-                      </div>
-                    </div>
-                    <TemplateModal />
-                  </div>
-                )
-              )}
+            {renderList()}
           </div>
         </div>
       </div>

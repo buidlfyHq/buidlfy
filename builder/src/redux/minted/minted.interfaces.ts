@@ -3,5 +3,6 @@ export interface IMintedState {
   listTemplateLoading: boolean;
   ownedTemplateList: [];
   templateList: [];
+  ownedReviewTemplateList: [];
   ownedListedTemplateList: [];
 }
