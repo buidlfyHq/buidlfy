@@ -2,8 +2,8 @@ import React, { FC, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import { toggleModalType } from "redux/modal/modal.reducers";
-import Lottie from 'react-lottie';
 import Hourglass from 'assets/lottie/hourglass.json'
+import LottieComponent from "components/utils/lottie";
 
 const MintingProgressModal: FC = () => {
   const dispatch = useDispatch()
@@ -12,23 +12,9 @@ const MintingProgressModal: FC = () => {
       dispatch(toggleModalType('minted-complete'))
     }, 3000)
   }, [])
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: Hourglass,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice"
-    }
-  };
   return (
       <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[582px] my-20 sm:mx-28 mx-14 rounded-[4px] py-16 px-10 bg-white">
-          <div>
-            <Lottie 
-              options={defaultOptions}
-              height={75}
-              width={75}
-            />
-          </div>
+          <LottieComponent lottie={Hourglass} width={75} height={75} />
           <div className="font-[500] text-[20px] text-[#14142B] mt-5">
             Mint in process
           </div>

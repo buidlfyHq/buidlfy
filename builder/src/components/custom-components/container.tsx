@@ -22,10 +22,10 @@ import {
   IContractElementSelected,
   IContractElementSelector,
 } from "redux/contract/contract.interfaces";
-import add from "assets/add.png";
-import edit from "assets/edit.png";
-import deleteContainer from "assets/delete.png";
-import dragImg from "assets/drag.png";
+import add from "assets/icons/add.png";
+import edit from "assets/icons/edit.png";
+import deleteContainer from "assets/icons/delete.png";
+import dragImg from "assets/icons/drag.png";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import "styles/components.css";
 

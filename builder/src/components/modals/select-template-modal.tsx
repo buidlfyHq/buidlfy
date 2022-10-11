@@ -2,10 +2,9 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
-import { toggleModalType, toggleModal } from "redux/modal/modal.reducers";
-import Temp1 from "assets/temp-1.png";
-import Temp2 from "assets/temp-2.png";
-import Temp3 from "assets/temp-3.png";
+import { toggleModal } from "redux/modal/modal.reducers";
+import {ReactComponent as SearchIcon} from 'assets/svgAsIcons/search-icon.svg'
+import SelectTemplateTemplates from "components/utils/select-template-templates";
 
 const TEMPLATE_CATEGORIES = [
   "ALL",
@@ -16,8 +15,6 @@ const TEMPLATE_CATEGORIES = [
   "SHOP",
   "OTHER",
 ];
-
-const TEMPLATES = [Temp1, Temp2, Temp3, Temp3, Temp1, Temp2];
 
 const SelectTemplateModal: FC = () => {
   const dispatch = useDispatch();
@@ -46,19 +43,7 @@ const SelectTemplateModal: FC = () => {
               required
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <svg
-                aria-hidden="true"
-                className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              <SearchIcon />
             </div>
           </div>
         </form>
@@ -91,36 +76,7 @@ const SelectTemplateModal: FC = () => {
       </div>
       <hr className="bg-hr h-[2px] w-full mt-6" />
       <div className="w-full bg-lower-template">
-        <div className="grid grid-cols-3 gap-4 px-10 pb-12 pt-7">
-          {TEMPLATES.map((temp, index) => {
-            return (
-              <div
-                onClick={() => dispatch(toggleModalType("single"))}
-                key={index}
-                className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box"
-              >
-                <img
-                  src={temp}
-                  alt="img_temp"
-                  className="w-full rounded-[16px]"
-                  width={314}
-                  height={200}
-                />
-                <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
-                  <div className="text-[13px] text-[#14142B] opacity-80 ">
-                    Cryptin Next Gen Template
-                  </div>
-                  <div className="text-[10px] text-[#14142B] py-2 px-3 bg-gray-100 rounded-[28px]">
-                    Crypto
-                  </div>
-                </div>
-                <div className="text-[18px] font-[600] text-[#14142B] mt-2 px-2 pb-1">
-                  $399.00
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <SelectTemplateTemplates />
       </div>
     </Dialog.Panel>
   );

@@ -48,9 +48,9 @@ const RenderModal: FC<IRenderModal> = ({generatedConfig}) => {
     case "minting-progress": 
       return <MintingProgressModal />
     case "publish-process":
-      return <PublishSiteModal generatedConfig={generatedConfig} />
+      return <PublishSiteModal />
     case "publish-done":
-      return <SitePublishedModal />
+      return <SitePublishedModal generatedConfig={generatedConfig} />
     case "complete-listing":
       return <CompleteListing />
     case "listing-review":

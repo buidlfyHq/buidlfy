@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Dialog } from '@headlessui/react'
-import IconImg from 'assets/icon-crypto.png'
+import IconImg from 'assets/icons/icon-crypto.png'
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { CgClose } from "react-icons/cg";
@@ -55,18 +55,18 @@ const ListTemplate: FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center justify-end gap-4 mt-7">
-                  <div 
+                  <button 
                         onClick={() => dispatch(toggleModal(false))}
                         className="bg-[#E7E7E7] text-[13px] py-3 px-10 text-[#1C1C1E] cursor-pointer rounded-[4px] font-[500]"
                     >
                       Cancel
-                  </div>
-                  <div 
+                  </button>
+                  <button 
                       onClick={() => dispatch(toggleModalType('complete-listing'))}
                       className="bg-[#8268E5] text-[13px] font-[500] text-white cursor-pointer py-3 px-6 rounded-[4px]"
                   >
                       Continue to list
-                  </div>
+                  </button>
                 </div>
             </div>
           </div>

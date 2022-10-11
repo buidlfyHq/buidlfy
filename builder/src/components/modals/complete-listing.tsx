@@ -2,10 +2,10 @@ import React, { FC, useState } from "react";
 import { Dialog } from '@headlessui/react'
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import Spinner from "components/utils/spinner";
 import { CgClose } from "react-icons/cg";
 import Approve1 from 'assets/approve-1.png'
 import Approve2 from 'assets/approve-2.png'
-import Spinner from "components/utils/spinner";
 
 const CompleteListing: FC = () => {
   const dispatch = useDispatch()

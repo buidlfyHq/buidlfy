@@ -1,16 +1,31 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import HourGlassImg from "assets/hourglass.png";
+import HourGlassImg from "assets/icons/hourglass.png";
 import TickImg from "assets/colored.png";
 import { CgClose } from "react-icons/cg";
 
-interface IPublishSiteModal {
-  generatedConfig: string
-}
+const processes = [
+  {
+    name:'Preparing Queue',
+    className: ''
+  },
+  {
+    name:'Preparing Environment',
+    className: 'mt-12'
+  },
+  {
+    name:'Preparing Queue',
+    className: 'mt-12'
+  },
+  {
+    name:'Site is published',
+    className: 'mt-12 mb-4'
+  }
+]
 
-const PublishSiteModal: FC<IPublishSiteModal> = ({generatedConfig}) => {
+const PublishSiteModal: FC = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     setTimeout(() => {
@@ -33,7 +48,16 @@ const PublishSiteModal: FC<IPublishSiteModal> = ({generatedConfig}) => {
             </div>
           </div>
           <div className="w-full bg-lower-template border-top-divider-publish py-7 px-12">
-            <div className="flex items-center gap-5">
+            {processes.map(process => {
+              const {name, className} = process
+              return (
+                <div className={`flex items-center gap-5 ${className}`}>
+                  <div><img src={TickImg} alt="icon" width={24} height={24} /></div>
+                  <div className="text-[#14142B] text-[14px] font-[600]">{name}</div>
+                </div>
+              )
+            })}
+            {/* <div className="flex items-center gap-5">
               <div><img src={TickImg} alt="icon" width={24} height={24} /></div>
               <div className="text-[#14142B] text-[14px] font-[600]">Preparing Queue</div>
             </div>
@@ -48,23 +72,8 @@ const PublishSiteModal: FC<IPublishSiteModal> = ({generatedConfig}) => {
             <div className="flex items-center gap-5 mt-12 mb-4">
               <div><img src={TickImg} alt="icon" width={24} height={24} /></div>
               <div className="text-[#14142B] text-[14px] font-[600]">Site is published</div>
-            </div>
+            </div> */}
           </div>
-
-          {/* <div className="mt-4">
-            <button
-              type="button"
-              className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-              onClick={() => {
-                // setIsMintedOpen(true);
-                dispatch(toggleModalType('publish-done'))
-                navigator.clipboard.writeText(generatedConfig);
-                // setIsOpen(false);
-              }}
-            >
-              Click here to copy Config
-            </button>
-          </div> */}
       </Dialog.Panel>
   );
 };
