@@ -21,7 +21,7 @@ const contractSlice = createSlice({
   initialState,
   reducers: {
     // to update contract list
-    updateContractList(state, action: { payload: IContract }) {
+    updateContractList(state, action: { payload: IContract[] }) {
       state.contractList = action.payload;
     },
 

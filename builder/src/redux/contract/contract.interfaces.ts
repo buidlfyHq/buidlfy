@@ -2,7 +2,7 @@ export interface IContractState {
   contractDetails: IContractDetails;
   contractElementSelector: IContractElementSelector;
   contractElementSelected: IContractElementSelected;
-  contractList: IContract;
+  contractList: IContract[];
 }
 
 export interface IContractDetails {

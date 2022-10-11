@@ -26,7 +26,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
   const [methodOpen, setMethodOpen] = useState<boolean>(false);
-  const [newContractList, setNewContractList] = useState<IContract[]>([]);
   const [showComponent, setShowComponent] = useState<{
     id: string;
     value: {
@@ -43,15 +42,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const selectedContractAddress: string = useSelector(
     (state: IRootState) => state.contract.contractDetails.address
   );
-  const selectedContract: IContract = useSelector(
+  const updatedNewContractList: IContract[] = useSelector(
     (state: IRootState) => state.contract.contractList
   );
   useEffect(() => {
     try {
-      const contractList = localStorage.getItem("contractList");
-      const newContract = JSON.parse(contractList);
-      setNewContractList(newContract);
-      setIsViewMore(!!(newContract?.length >= 4));
+      setIsViewMore(!!(updatedNewContractList?.length >= 4));
     } catch (error) {
       console.log(error, "error");
     }
@@ -68,8 +64,8 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   };
 
   const paginatedContractList = isViewMore
-    ? newContractList?.slice(0, 4)
-    : newContractList;
+    ? updatedNewContractList?.slice(0, 4)
+    : updatedNewContractList;
 
   return (
     <>
@@ -110,11 +106,10 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                 setIsOpen={setIsOpen}
                 methodOpen={methodOpen}
                 setMethodOpen={setMethodOpen}
-                setNewContractList={setNewContractList}
               />
             </div>
           </div>
-          <ContractHistory newContractList={newContractList} />
+          <ContractHistory newContractList={updatedNewContractList} />
           <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
             {paginatedContractList &&
               paginatedContractList.map((contract: IContract) => {

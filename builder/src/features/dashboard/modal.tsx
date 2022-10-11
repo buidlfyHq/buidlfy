@@ -1,20 +1,21 @@
 import React, { FC, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import {
   updateContractAbi,
   updateContractAddress,
+  updateContractList,
 } from "redux/contract/contract.reducers";
 import upload from "assets/upload-img.svg";
 import { IContract } from "redux/contract/contract.interfaces";
 import "styles/components.css";
+import { IRootState } from "redux/root-state.interface";
 
 interface IModal {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   methodOpen: boolean;
   setMethodOpen: (methodOpen: boolean) => void;
-  setNewContractList: (newContractList: IContract[]) => void;
 }
 
 const Modal: FC<IModal> = ({
@@ -22,7 +23,6 @@ const Modal: FC<IModal> = ({
   setIsOpen,
   methodOpen,
   setMethodOpen,
-  setNewContractList,
 }) => {
   const dispatch = useDispatch();
 
@@ -52,8 +52,7 @@ const Modal: FC<IModal> = ({
     }
     newContractList.push(newContract);
     localStorage.setItem("contractList", JSON.stringify(newContractList));
-    setNewContractList(newContractList);
-
+    dispatch(updateContractList(newContractList));
     dispatch(updateContractAbi(updateAbi));
     dispatch(updateContractAddress(updateAddress));
   };
