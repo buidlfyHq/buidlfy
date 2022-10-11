@@ -1,6 +1,6 @@
 import React, { useState, FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { FaChevronRight, FaFileContract } from "react-icons/fa";
+import { FaFileContract } from "react-icons/fa";
 import Modal from "features/dashboard/modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
@@ -11,6 +11,10 @@ import {
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { useSelector } from "react-redux";
 import { IRootState } from "redux/root-state.interface";
+import { IContract } from "redux/contract/contract.interfaces";
+import ContractList from "components/utils/contract-list";
+import ContractView from "components/utils/contract-view";
+import ContractHistory from "components/utils/contract-history";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -18,17 +22,10 @@ interface IAdvanceComponent {
   selectedElement: IWorkspaceElement;
 }
 
-interface IContract {
-  name: string;
-  text; // type to be added
-  address: string;
-}
-
 const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
   const [methodOpen, setMethodOpen] = useState<boolean>(false);
-  const [newContractList, setNewContractList] = useState<IContract[]>([]);
   const [showComponent, setShowComponent] = useState<{
     id: string;
     value: {
@@ -45,12 +42,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const selectedContractAddress: string = useSelector(
     (state: IRootState) => state.contract.contractDetails.address
   );
+  const updatedNewContractList: IContract[] = useSelector(
+    (state: IRootState) => state.contract.contractList
+  );
   useEffect(() => {
     try {
-      const contractList = localStorage.getItem("contractList");
-      const newContract = JSON.parse(contractList);
-      setNewContractList(newContract);
-      setIsViewMore(!!(newContract?.length >= 4));
+      setIsViewMore(!!(updatedNewContractList?.length >= 4));
     } catch (error) {
       console.log(error, "error");
     }
@@ -67,8 +64,8 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   };
 
   const paginatedContractList = isViewMore
-    ? newContractList?.slice(0, 4)
-    : newContractList;
+    ? updatedNewContractList?.slice(0, 4)
+    : updatedNewContractList;
 
   return (
     <>
@@ -109,50 +106,22 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                 setIsOpen={setIsOpen}
                 methodOpen={methodOpen}
                 setMethodOpen={setMethodOpen}
-                setNewContractList={setNewContractList}
               />
             </div>
           </div>
-          {newContractList ? (
-            <>
-              <span className="setting-text mt-[3rem] ml-[0.5rem]">
-                Import History
-              </span>
-              <p className="contract-text ml-[0.5rem]">
-                You can select the old file to continue
-              </p>
-            </>
-          ) : null}
-
+          <ContractHistory newContractList={updatedNewContractList} />
           <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
             {paginatedContractList &&
               paginatedContractList.map((contract: IContract) => {
-                const { name, text, address } = contract;
+                const { text, address } = contract;
                 return (
-                  <>
-                    <div
-                      onClick={() => handleContractList(text, address)}
-                      className="cursor-pointer flex flex-col justify-center contract-list"
-                    >
-                      <span className="flex items-center">
-                        <span className="contract-name ml-[1rem] grow flex">
-                          {name}
-                        </span>
-                        <FaChevronRight className="text-[10px] text-[#100F11] mr-[0.5rem]" />
-                      </span>
-                    </div>
-                  </>
+                  <ContractList
+                    contract={contract}
+                    handleContractList={() => handleContractList(text, address)}
+                  />
                 );
               })}
-            {isViewMore ? (
-              <span
-                onClick={handleShow}
-                className="text-[#458CDE] cursor-pointer flex items-center justify-end text-[9px] text-right underline"
-              >
-                View More
-                <FaChevronRight className="text-[7px] ml-[2px]" />
-              </span>
-            ) : null}
+            <ContractView isViewMore={isViewMore} handleShow={handleShow} />
           </div>
         </>
       )}
