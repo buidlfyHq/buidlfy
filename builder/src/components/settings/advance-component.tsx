@@ -43,6 +43,9 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const selectedContractAddress: string = useSelector(
     (state: IRootState) => state.contract.contractDetails.address
   );
+  const selectedContract: IContract = useSelector(
+    (state: IRootState) => state.contract.contractList
+  );
   useEffect(() => {
     try {
       const contractList = localStorage.getItem("contractList");
