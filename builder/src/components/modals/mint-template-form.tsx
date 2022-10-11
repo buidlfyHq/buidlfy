@@ -1,17 +1,15 @@
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
+import { toggleModalType } from "redux/modal/modal.reducers";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import { IoArrowBack } from "react-icons/io5";
-import { toggleModalType } from "redux/modal/modal.reducers";
 import InfoCircleImg from "assets/icons/info-circle.png";
 import MintUploadImg from "assets/icons/mint-form-img.png";
 
 const MintTemplateModal: FC = () => {
   const dispatch = useDispatch()
   return (
-      <main className="fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[10px] overflow-y-auto">
-        <div className="flex items-center justify-center min-h-full mt-96">
           <Dialog.Panel className="flex flex-col w-full max-w-[800px] my-20 mx-28 rounded-[24px] py-12 px-10 bg-white min-h-full">
             <div className="flex items-start justify-end w-full">
               <div className="flex items-center justify-start w-full mt-6 cursor-pointer">
@@ -106,8 +104,7 @@ const MintTemplateModal: FC = () => {
               </div>
             </div>
           </Dialog.Panel>
-        </div>
-      </main>
+        
   );
 };
 

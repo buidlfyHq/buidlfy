@@ -6,7 +6,6 @@ import { toggleModalType } from "redux/modal/modal.reducers";
 const CheckoutModal: FC = () => {
   const dispatch = useDispatch()
   return (
-    <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[8px]">
       <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[342px] my-20 mx-28 rounded-[15px] py-8 px-5 bg-white">
         <div className="w-full">
           <div className="flex flex-col">
@@ -55,7 +54,6 @@ const CheckoutModal: FC = () => {
           </div>
         </div>
       </Dialog.Panel>
-    </main>
   );
 };
 

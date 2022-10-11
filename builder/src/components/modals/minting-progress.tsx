@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
-import { toggleModalType } from "redux/modal/modal.reducers";
 import HourGlassImg from "assets/icons/hourglass.png";
+import { useDispatch } from "react-redux";
+import { toggleModalType } from "redux/modal/modal.reducers";
 
 const MintingProgressModal: FC = () => {
   const dispatch = useDispatch()
@@ -12,8 +12,7 @@ const MintingProgressModal: FC = () => {
     }, 3000)
   }, [])
   return (
-      <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[10px]">
-        <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[582px] my-20 sm:mx-28 mx-14 rounded-[4px] py-16 px-10 bg-white">
+      <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[582px] my-20 sm:mx-28 mx-14 rounded-[4px] py-16 px-10 bg-white">
           <div>
             <img src={HourGlassImg} alt="icon" width={54} height={54} />
           </div>
@@ -27,7 +26,6 @@ const MintingProgressModal: FC = () => {
             <div className="animate-loading absolute bg-[#666BD3] h-2.5 rounded-full" style={{width: '45%'}}></div>
           </div>
         </Dialog.Panel>
-      </main>
   );
 };
 
