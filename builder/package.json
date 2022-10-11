@@ -13,6 +13,7 @@
     "buffer": "^6.0.3",
     "ethers": "^5.5.3",
     "react": "^17.0.1",
+    "react-animated-css": "^1.2.1",
     "react-beautiful-dnd": "^13.1.0",
     "react-best-gradient-color-picker": "^2.0.17",
     "react-color": "^2.19.3",

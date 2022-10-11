@@ -2,6 +2,7 @@ import React, { FC, useRef } from "react";
 import Template from "pages/templates";
 import Elements from "features/dashboard/elements";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
+import { Animated } from "react-animated-css";
 import "styles/components.css";
 
 interface ISidebar {
@@ -10,6 +11,7 @@ interface ISidebar {
   isNavHidden: boolean;
   hideSidebar: () => void;
   hideSettingSidebar: () => void;
+  visible;
 }
 
 const Sidebar: FC<ISidebar> = ({
@@ -18,14 +20,17 @@ const Sidebar: FC<ISidebar> = ({
   isNavHidden,
   hideSidebar,
   hideSettingSidebar,
+  visible,
 }) => {
   const ref = useRef(null);
 
   return (
     <main
       ref={ref}
-      className={`sidebar animate__animated animate__fadeIn fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] w-[320px] z-[1] ${
-        isNavHidden ? "hidden" : ""
+      className={`${
+        isNavHidden
+          ? "hidden newbar animate__animated animate__fadeOut"
+          : "sidebar animate__animated animate__fadeIn fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] w-[320px] z-[1]"
       }`}
     >
       {/* It will be used for future */}

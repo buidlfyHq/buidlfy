@@ -369,13 +369,41 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   left: -0.4px;
   right: -0.4px;
 } */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
 
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+.newbar {
+  -webkit-animation-name: fadeOut !important;
+  animation-name: fadeOut !important;
+  animation-duration: 3s;
+}
+/*
+.animate__fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+} */
 .sidebar {
   background: #fdfdff;
   z-index: 5 !important;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
-  transition: 12s !important;
-  --animate-duration: 1.5s;
+  /* -webkit-animation-name: fadeIn !important;
+  animation-name: fadeIn !important; */
+  /* animation-duration: 3s; */
 }
 
 .sidebar::-webkit-scrollbar {
@@ -384,6 +412,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 
 .sidenav {
   background: #ffffff;
+  z-index: 7777 !important;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
 }
 .setting-nav {
@@ -546,7 +575,7 @@ cursor: pointer;
   font-size: 13px;
   line-height: 15px;
   color: #ffffff;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 .btn-div:hover {
   background: #503dcf;
@@ -565,7 +594,7 @@ cursor: pointer;
   height: 65px;
   display: flex;
   justify-content: center;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 .element-container:hover {
   background: rgba(106, 88, 231, 0.1);
@@ -579,7 +608,7 @@ cursor: pointer;
   padding: 12px 12px;
   border: 1px solid #14142b;
   border-radius: 8px;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 .input-container:hover {
   background: #ffffff;
@@ -625,7 +654,7 @@ cursor: pointer;
   background-color: rgb(106, 88, 231,0.2);
 }
 .heading-element {
-transition: 0.7s;
+transition: 0.3s;
 }
 .element-upload {
   background: #faf8ff;
@@ -661,7 +690,10 @@ transition: 0.7s;
   color: rgba(19, 27, 66, 0.502378);
 }
 .main-div {
-  background: #f9f9fa;
+  background-color: #fafaff;
+  background-image: radial-gradient(#E0E0EA 1px, transparent 0);
+  background-size: 20px 20px;
+  /* background-position: -19px -19px; */
 }
 .main-section {
   background: linear-gradient(
@@ -670,7 +702,8 @@ transition: 0.7s;
       rgba(0, 0, 0, 0) 99.87%
     ),
     #ffffff;
-}
+    outline: 1px solid #f0effc;
+  }
 .font-div {
   background: #e9edfd;
   box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04),
@@ -867,7 +900,9 @@ height: 40px;
       rgba(255, 255, 255, 0.2)
     ),
     #ffffff;
-  outline: 1px solid rgba(93, 70, 228, 0.16);
+    outline: 1px solid rgb(241 239 248) !important;
+
+  /* outline: 1px solid rgba(93, 70, 228, 0.16); */
 }
 
 .feather-div {
@@ -1009,3 +1044,4 @@ height: 40px;
 .setting-sidebar {
   transition: 5s !important;
 }
+

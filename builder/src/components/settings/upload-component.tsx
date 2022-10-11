@@ -94,7 +94,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
       backgroundColor="#262338"
       arrowColor="#262338"
       scrollHide={true}
-      delayShow={300}
+      delayShow={200}
     />
   );
 

@@ -126,7 +126,7 @@ const Elements: FC<IElements> = ({
         backgroundColor="#262338"
         arrowColor="#262338"
         scrollHide={true}
-        delayShow={300}
+        delayShow={200}
       />
       {/* Fix: Add all style to common tailwind  */}
       <div className="element-div">
