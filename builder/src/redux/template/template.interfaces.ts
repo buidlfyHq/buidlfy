@@ -10,10 +10,12 @@ export interface ITemplateState {
 }
 
 export interface ISelectedTemplate {
-  id: string;
+  id?: string;
+  token_id?: string;
   name: string;
   value: IWorkspaceElement[];
   image: string;
   listing_listingId: BigNumber;
   listing_buyoutPricePerToken: BigNumber;
+  listing_tokenId?: string;
 }

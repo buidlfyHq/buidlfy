@@ -5,8 +5,11 @@ import { BiChevronDown } from "react-icons/bi";
 import makeBlockie from "ethereum-blockies-base64";
 import TemplateModal from "features/dashboard/template-modal";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { setSelectedTemplate } from "redux/template/template.reducers";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 const MyTemplates: FC = () => {
   const dispatch = useDispatch();
@@ -30,16 +33,27 @@ const MyTemplates: FC = () => {
     }
   }, []);
 
-  const handleListOnBuidlfy = () => {
+  const openTemplate = (config: IWorkspaceElement[]) => {
+    if (config) dispatch(updateWorkspaceElementsArray(config));
+    return navigate("/");
+  };
+
+  const handleListOnBuidlfy = (template: ISelectedTemplate) => {
+    dispatch(setSelectedTemplate(template));
     dispatch(toggleModal(true));
     dispatch(toggleModalType("list-single"));
   };
 
-  const templateCard = (image, name, list) => (
+  // UPDATE: Make separate component
+  const templateCard = (
+    temp: ISelectedTemplate,
+    badge: string,
+    list: boolean
+  ) => (
     <div className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative">
       <div className="relative rounded-[16px] h-auto">
         <div className="absolute right-0 flex justify-end my-2 mx-4 py-1 px-3 text-[#14142B] text-[10px] bg-[#FFE6B0] rounded-[5px]">
-          In Review
+          {badge}
         </div>
         <div className="absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600]">
           <div className="py-2 px-10 rounded-[8px] bg-white text-[#7743E7]">
@@ -48,17 +62,21 @@ const MyTemplates: FC = () => {
           {list && (
             <div
               className="py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white"
-              onClick={() => handleListOnBuidlfy()}
+              onClick={() => handleListOnBuidlfy(temp)}
             >
               List on Buidlfy
             </div>
           )}
         </div>
-        <img src={image} alt="img_temp" className="rounded-[16px] w-full" />
+        <img
+          src={temp.image}
+          alt="img_temp"
+          className="rounded-[16px] w-full"
+        />
       </div>
       <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
         <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">
-          {name}
+          {temp.name}
         </div>
         <div className="text-[12px] text-[#14142B] py-2 px-4 bg-gray-100 font-[500] rounded-[4px]">
           Crypto
@@ -68,19 +86,49 @@ const MyTemplates: FC = () => {
     </div>
   );
 
+  // UPDATE: Make separate util
+  const filterList = (inReview: boolean, listed: boolean) => {
+    if (listed) {
+      return { badge: "Listed", list: false };
+    } else if (inReview) {
+      return { badge: "In Review", list: false };
+    } else {
+      return { badge: "Unlisted", list: true };
+    }
+  };
+
+  // UPDATE: Make separate component
   const renderList = () => {
     switch (tab) {
       case 1:
         return (
           <>
             {ownedTemplateList &&
-              ownedTemplateList.map(
-                (temp: { token_id: string; image: string; name: string }) => (
-                  <div key={temp.token_id}>
-                    {templateCard(temp.image, temp.name, true)}
+              ownedTemplateList.map((temp: ISelectedTemplate) => {
+                const inReview =
+                  ownedReviewTemplateList.filter(
+                    (t: ISelectedTemplate) =>
+                      t.listing_tokenId === temp.token_id
+                  )[0] !== undefined;
+                const listed =
+                  ownedListedTemplateList.filter(
+                    (t: ISelectedTemplate) =>
+                      t.listing_tokenId === temp.token_id
+                  )[0] !== undefined;
+
+                return (
+                  <div
+                    key={temp.token_id}
+                    onClick={() => openTemplate(temp.value)}
+                  >
+                    {templateCard(
+                      temp,
+                      filterList(inReview, listed).badge,
+                      filterList(inReview, listed).list
+                    )}
                   </div>
-                )
-              )}
+                );
+              })}
           </>
         );
       case 2:
@@ -89,7 +137,7 @@ const MyTemplates: FC = () => {
             {ownedReviewTemplateList &&
               ownedReviewTemplateList.map((temp: ISelectedTemplate) => (
                 <div key={temp.id}>
-                  {templateCard(temp.image, temp.name, false)}
+                  {templateCard(temp, "In Review", false)}
                 </div>
               ))}
           </>
@@ -99,9 +147,7 @@ const MyTemplates: FC = () => {
           <>
             {ownedListedTemplateList &&
               ownedListedTemplateList.map((temp: ISelectedTemplate) => (
-                <div key={temp.id}>
-                  {templateCard(temp.image, temp.name, false)}
-                </div>
+                <div key={temp.id}>{templateCard(temp, "Listed", false)}</div>
               ))}
           </>
         );
@@ -146,6 +192,7 @@ const MyTemplates: FC = () => {
       <div>
         <div className="py-0 px-36">
           <div className="flex justify-center mt-6 text-black font-[600] text-[15px] gap-8">
+            {/* Make separate util */}
             <button
               className={`py-3 cursor-pointer px-7 outline-none ${
                 tab === 1 ? "border-b-4 border-purple-500" : null
