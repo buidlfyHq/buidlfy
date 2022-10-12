@@ -9,7 +9,6 @@ import {
   startMintTemplateLoader,
 } from "./template.reducers";
 import {
-  createListingService,
   getListedTemplatesService,
   getOwnedTemplatesService,
   initiateTransactionService,
@@ -96,25 +95,6 @@ function* mintSelectedTemplate({ payload }) {
     );
   }
 }
-
-// function* createListingTemplate({ payload }) {
-//   const listingRes = yield call(
-//     createListingService,
-//     tokenId,
-//     ethers.utils.parseEther("5")
-//   );
-//   if (!listingRes.error) {
-//     yield put(mintTemplate(listingRes.receipt));
-//   } else {
-//     yield put(
-//       addNotification({
-//         message: listingRes.errorMessage,
-//         timestamp: new Date(),
-//         type: NotificationType.Error,
-//       })
-//     );
-//   }
-// }
 
 function* buyTemplateSaga() {
   yield takeLatest(templateActionTypes.BUY_TEMPLATE, buySelectedTemplate);

@@ -83,14 +83,14 @@ const Navbar: FC<INavbar> = ({ workspaceBackgroundColor, head }) => {
     let stringifiedConfig = JSON.stringify(config);
 
     setGeneratedConfig(base64_encode(stringifiedConfig));
-    dispatch(toggleModal(true));
-    dispatch(toggleModalType("publish-process"));
+    dispatch(toggleModal(true))
+    dispatch(toggleModalType('publish-process'))
   };
 
   const handleMintTemplateForm = () => {
-    dispatch(toggleModal(true));
-    dispatch(toggleModalType("mint-nft-form"));
-  };
+    dispatch(toggleModal(true))
+    dispatch(toggleModalType('mint-nft-form'))
+  } 
 
   return (
     <main className="fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20">
@@ -133,7 +133,7 @@ const Navbar: FC<INavbar> = ({ workspaceBackgroundColor, head }) => {
           Mint as NFT
         </div>
         <button
-          className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
+          className="py-2 px-7 ml-3 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
           onClick={handlePublish}
         >
           Publish
