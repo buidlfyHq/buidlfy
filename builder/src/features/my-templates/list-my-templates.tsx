@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import TemplateModal from "features/dashboard/template-modal";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
+import { setSelectedTemplate } from "redux/template/template.reducers";
 
 const ListMyTemplates: FC = () => {
   const dispatch = useDispatch();
@@ -10,7 +10,8 @@ const ListMyTemplates: FC = () => {
     (state: any) => state.template.ownedTemplateList
   );
 
-  const handleListOnBuidlfy = () => {
+  const handleListOnBuidlfy = (template: ISelectedTemplate) => {
+    dispatch(setSelectedTemplate(template))
     dispatch(toggleModal(true));
     dispatch(toggleModalType("list-single"));
   };
@@ -33,7 +34,7 @@ const ListMyTemplates: FC = () => {
                 </div>
                 <div
                   className="py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white"
-                  onClick={handleListOnBuidlfy}
+                  onClick={() => handleListOnBuidlfy(temp)}
                 >
                   List on Buidlfy
                 </div>
@@ -52,7 +53,6 @@ const ListMyTemplates: FC = () => {
                 Crypto
               </div>
             </div>
-            <TemplateModal />
           </div>
         ))}
     </div>

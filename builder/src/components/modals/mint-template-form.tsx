@@ -21,7 +21,7 @@ const MintTemplateForm: FC = () => {
   );
   const currentAccount = useSelector((state: any) => state.web3.currentAccount);
 
-  const [file, setFile] = useState<string>("");
+  const [image, setImage] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -36,7 +36,7 @@ const MintTemplateForm: FC = () => {
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
-          setFile(cid);
+          setImage(cid);
         });
         reader.readAsDataURL(e.target.files[0]);
       }
@@ -46,7 +46,7 @@ const MintTemplateForm: FC = () => {
   const handleSaveTemplate = async () => {
     if (workspaceElements?.length > 0) {
       let newTemplate = {
-        image: file,
+        image,
         name,
         category,
         description,

@@ -1,9 +1,10 @@
 import { FC, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { BiChevronDown } from "react-icons/bi";
 import makeBlockie from "ethereum-blockies-base64";
-import MyTemplateTemplates from "features/my-templates/list-my-templates";
+import TemplateModal from "features/dashboard/template-modal";
+import ListMyTemplates from "features/my-templates/list-my-templates";
 import SearchForm from "features/my-templates/search-form";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
 
@@ -72,7 +73,8 @@ const MyTemplates: FC = () => {
               <BiChevronDown className="ml-2 text-[18px]" />
             </div>
           </div>
-          <MyTemplateTemplates />
+          <ListMyTemplates />
+          <TemplateModal />
         </div>
       </div>
     </div>
