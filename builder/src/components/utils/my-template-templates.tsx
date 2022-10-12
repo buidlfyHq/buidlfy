@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { Menu } from '@headlessui/react';
 import TemplateModal from 'features/dashboard/template-modal'
+import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { ReactComponent as SettingsIcon } from "assets/svgAsIcons/dots.svg";
 import Temp1 from "assets/icons/temp-1.png";
 const templates = [Temp1,Temp1,Temp1,Temp1]
@@ -15,7 +15,7 @@ const dispatch = useDispatch()
         dispatch(toggleModalType("list-single"))
     }
     return (
-        <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 px-40 pb-12 pt-7">
+        <div className="grid grid-cols-1 gap-4 px-40 pb-12 xl:grid-cols-3 sm:grid-cols-2 pt-7">
             {templates.map((temp, index) => {
                 return (
                     <div key={index} className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box">

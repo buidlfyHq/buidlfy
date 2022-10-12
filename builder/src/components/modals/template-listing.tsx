@@ -1,12 +1,11 @@
 import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
-import HourGlassImg from "assets/icons/hourglass.png";
 import { useDispatch } from "react-redux";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import InfoCircleImg from "assets/icons/info-circle.png";
-import { CgClose } from "react-icons/cg";
-import Hourglass from 'assets/lottie/hourglass.json'
+import { toggleModal } from "redux/modal/modal.reducers";
 import LottieComponent from "components/utils/lottie";
+import { CgClose } from "react-icons/cg";
+import InfoCircleImg from "assets/icons/info-circle.png";
+import Hourglass from 'assets/lottie/hourglass.json'
 
 const TemplateListing : FC = () => {
   const dispatch = useDispatch()
@@ -16,7 +15,7 @@ const TemplateListing : FC = () => {
           <div className="flex items-start justify-end w-full ">
             <CgClose onClick={handleClose} className="text-[18px] cursor-pointer" />
           </div>
-          <div className="flex flex-col justify-center items-center pt-3">
+          <div className="flex flex-col items-center justify-center pt-3">
           <LottieComponent lottie={Hourglass} width={75} height={75} />
             <div className="font-[600] text-[24px] text-[#14142B] mt-7">
                 Template listing is currently in review...

@@ -2,8 +2,8 @@ import React, { FC, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import { toggleModalType } from "redux/modal/modal.reducers";
-import Hourglass from 'assets/lottie/hourglass.json'
 import LottieComponent from "components/utils/lottie";
+import Hourglass from 'assets/lottie/hourglass.json'
 
 const MintingProgressModal: FC = () => {
   const dispatch = useDispatch()

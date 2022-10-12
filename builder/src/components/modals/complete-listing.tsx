@@ -30,10 +30,10 @@ const CompleteListing: FC = () => {
   }
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[527px] min-w-[330px] my-20 sm:mx-28 mx-12 rounded-[15px] bg-white">
-      <div className="flex items-start justify-end w-full py-5 px-6">
+      <div className="flex items-start justify-end w-full px-6 py-5">
         <CgClose onClick={() => dispatch(toggleModal(false))} className="text-[18px] cursor-pointer" />
       </div>
-      <div className="w-full items-center flex flex-col px-10">
+      <div className="flex flex-col items-center w-full px-10">
         <div className="text-[#14142B] font-[600] text-[20px] mb-6">Complete your listing</div>
         <div className="flex w-full justify-between items-center text-[#14142B]  text-[14px] my-5">
           <div className="flex items-center gap-6">
@@ -52,7 +52,7 @@ const CompleteListing: FC = () => {
               <div className="text-[#14142B] opacity-50 font-[500] text-[12px] ">$1234767.00 USD</div>
           </div>
         </div>
-        <div className="border-top-divider-publish w-full">
+        <div className="w-full border-top-divider-publish">
           <div className="flex gap-5 py-5">
             <div><img src={Approve1} alt="icon" width={35} height={35} /></div>
             <div className="flex flex-col items-start">

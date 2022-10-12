@@ -1,19 +1,13 @@
 import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
-import MyTemplateTemplates from "components/utils/my-template-templates";
+import { useSelector } from "react-redux";
 import makeBlockie from "ethereum-blockies-base64";
+import MyTemplateTemplates from "components/utils/my-template-templates";
 import SearchForm from "components/utils/search-form";
+import {BiChevronDown} from 'react-icons/bi'
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
-import { BiChevronDown } from "react-icons/bi";
 
 const MyTemplates : FC = () => {
-    const dispatch = useDispatch()  
     const currentAccount = useSelector((state: any) => state.web3.currentAccount);
-    const handleListOnBuidlfy = () => {
-        dispatch(toggleModal(true))
-        dispatch(toggleModalType("list-single"))
-    }
     return (
     <div className="min-h-screen">
       {/* nav */}
@@ -24,9 +18,9 @@ const MyTemplates : FC = () => {
             <ColorFeather className="mr-3" />
             <div className="gradient-text">Builder</div>
           </div>
-          <div className="flex justify-center items-center my-2 ml-3">
+          <div className="flex items-center justify-center my-2 ml-3">
             <img
-              className="bg-black w-8 h-8 rounded-full"
+              className="w-8 h-8 bg-black rounded-full"
               src={makeBlockie(currentAccount)}
               alt="Blockie"
             />

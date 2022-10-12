@@ -13,11 +13,10 @@ export const connectWalletService = async () => {
     }
 
     const provider = new ethers.providers.Web3Provider(ethereum);
-    await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
 
-    return { error: false, errorMessage: "", address, signer };
+    return { error: false, errorMessage: "", address };
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error("Error in connectWalletService --> ", error);
@@ -25,7 +24,6 @@ export const connectWalletService = async () => {
       error: true,
       errorMessage: (error as Error).message,
       address: "",
-      signer: null,
     };
   }
 };

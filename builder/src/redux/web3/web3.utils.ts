@@ -54,3 +54,19 @@ export const approveERC20Token = async (
 
   return await tx.wait();
 };
+
+export const approveERC1155Token = async (signer: Signer): Promise<any> => {
+  const erc1155Contract = getERC1155Contract(signer);
+  const tx = await erc1155Contract.setApprovalForAll(
+    addresses.marketplace,
+    true
+  );
+
+  return await tx.wait();
+};
+
+export const getSigner = () => {
+  const provider = new ethers.providers.Web3Provider((window as any).ethereum);
+  const signer = provider.getSigner();
+  return signer;
+};

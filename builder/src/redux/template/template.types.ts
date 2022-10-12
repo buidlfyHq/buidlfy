@@ -1,0 +1,8 @@
+const templateActionTypes = {
+  BUY_TEMPLATE: "BUY_TEMPLATE",
+  FETCH_TEMPLATES: "FETCH_TEMPLATES",
+  FETCH_OWNED_TEMPLATES: "FETCH_OWNED_TEMPLATES",
+  MINT_TEMPLATE: "MINT_TEMPLATE",
+};
+
+export default templateActionTypes;

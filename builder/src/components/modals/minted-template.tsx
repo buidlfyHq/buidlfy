@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { toggleModal } from "redux/modal/modal.reducers";
-import MintLottie from 'assets/lottie/mint-success.json'
 import LottieComponent from "components/utils/lottie";
+import MintLottie from 'assets/lottie/mint-success.json'
 
 const MintedTemplateModal: FC = () => {
   const dispatch = useDispatch()

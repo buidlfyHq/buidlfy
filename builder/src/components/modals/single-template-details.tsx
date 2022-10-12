@@ -1,8 +1,7 @@
 import React, { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
-import { connectWallet } from "redux/web3/web3.actions";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import EyeImg from "assets/icons/eye.png";
 import TempexImg from "assets/icons/tempex.png";
@@ -21,7 +20,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
       ? dispatch(toggleModalType("list-template-for-sale"))
       : dispatch(toggleModalType("select-wallet"));
   };
-  
+
   return (
     <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
       <div className="flex items-center justify-between">
