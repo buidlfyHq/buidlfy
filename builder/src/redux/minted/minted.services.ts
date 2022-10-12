@@ -12,18 +12,19 @@ import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { getCurrentTime } from "./minted.utils";
 
 export const createListingService = async (
-  tokenId: number,
+  tokenId: string,
   buyoutPricePerToken: BigNumber
 ): Promise<any> => {
   try {
     const signer = getSigner();
     const marketplaceContract = getMarketplaceContract(signer);
+    const token_id = parseInt(tokenId);
     // Check for approval if yes, then don't call approve otherwise call approve
     await approveERC1155Token(signer);
     const tx = await marketplaceContract.createListing(
       [
         addresses.spheronErc1155,
-        tokenId,
+        token_id,
         getCurrentTime(),
         getCurrentTime(),
         TOKENS_COUNT_ON_MINT,

@@ -12,8 +12,6 @@ const ListTemplate: FC = () => {
   );
 
   const handleListTemplate = () => {
-    // WON'T WORK
-    // UPDATE: integrate selectedTemplate id
     dispatch(listTemplate());
   };
 

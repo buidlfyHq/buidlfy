@@ -24,7 +24,7 @@ const MyTemplates: FC = () => {
   const ownedListedTemplateList = useSelector(
     (state: any) => state.minted.ownedListedTemplateList
   );
-
+  
   const [tab, setTab] = useState<number>(1);
 
   useEffect(() => {
@@ -56,17 +56,23 @@ const MyTemplates: FC = () => {
           {badge}
         </div>
         <div className="absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600]">
-          <div className="py-2 px-10 rounded-[8px] bg-white text-[#7743E7]">
+          <button className="py-2 px-10 rounded-[8px] bg-white text-[#7743E7]">
             View Details
-          </div>
+          </button>
           {list && (
-            <div
+            <button
               className="py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white"
               onClick={() => handleListOnBuidlfy(temp)}
             >
               List on Buidlfy
-            </div>
+            </button>
           )}
+          <button
+            className="py-2 px-10 mt-4 rounded-[8px] bg-white text-[#7743E7]"
+            onClick={() => openTemplate(temp.value)}
+          >
+            Use Template
+          </button>
         </div>
         <img
           src={temp.image}
@@ -117,10 +123,7 @@ const MyTemplates: FC = () => {
                   )[0] !== undefined;
 
                 return (
-                  <div
-                    key={temp.token_id}
-                    onClick={() => openTemplate(temp.value)}
-                  >
+                  <div key={temp.token_id}>
                     {templateCard(
                       temp,
                       filterList(inReview, listed).badge,

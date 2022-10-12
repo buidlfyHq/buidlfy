@@ -8,7 +8,7 @@ import {
   uploadTemplateToWeb3Storage,
 } from "config/web3storage";
 import { mintTemplate } from "redux/template/template.actions";
-import { toggleModalType } from "redux/modal/modal.reducers";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import InfoCircleImg from "assets/icons/info-circle.png";
@@ -155,15 +155,18 @@ const MintTemplateForm: FC = () => {
             </div>
           </div>
           <div className="flex items-center justify-end mt-8">
-            <div className="bg-[#E8E6EE] cursor-pointer text-[#7B7B7B] font-[500] text-[14px] py-3 px-10 rounded-[8px]">
+            <button
+              className="bg-[#E8E6EE] cursor-pointer text-[#7B7B7B] font-[500] text-[14px] py-3 px-10 rounded-[8px]"
+              onClick={() => dispatch(toggleModal(false))}
+            >
               Cancel
-            </div>
-            <div
+            </button>
+            <button
               onClick={handleSaveTemplate}
               className="connect-wallet-button cursor-pointer text-white font-[500] text-[14px] py-3 px-12 rounded-[8px] ml-3"
             >
               Mint
-            </div>
+            </button>
           </div>
         </Dialog.Panel>
       </div>

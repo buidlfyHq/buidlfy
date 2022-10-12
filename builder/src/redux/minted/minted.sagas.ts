@@ -20,13 +20,14 @@ import {
 import mintedActionTypes from "./minted.types";
 
 function* createListingTemplate() {
-  // UPDATE: filter token id of the selectedTemplate
-  const tokenId = yield select((state: any) => state.template.mintTokenId);
+  const selectedTemplate = yield select(
+    (state: any) => state.template.selectedTemplate
+  );
   yield put(startListTemplateLoader());
 
   const listingRes = yield call(
     createListingService,
-    tokenId,
+    selectedTemplate.token_id,
     ethers.utils.parseEther("5")
   );
   if (!listingRes.error) {
