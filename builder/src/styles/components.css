@@ -1094,9 +1094,11 @@ height: 40px;
   }
   1% {
     opacity:1;
+    visibility: hidden;
   }
   100% {
     opacity:1;
     width: 0px;
+    visibility: hidden;
   }
 }

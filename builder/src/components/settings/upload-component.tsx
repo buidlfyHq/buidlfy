@@ -10,7 +10,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IMAGE_SIZE_VARIABLE } from "config/constant";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
 import { IRootState } from "redux/root-state.interface";
-import Spinner from "components/utils/spinner";
+import Spinner from "components/utils/assets/spinner";
 import ReactTooltip from "react-tooltip";
 import "styles/components.css";
 import "styles/dashboard.css";
