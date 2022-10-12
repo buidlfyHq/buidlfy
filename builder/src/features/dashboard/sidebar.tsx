@@ -2,7 +2,6 @@ import React, { FC, useRef } from "react";
 import Template from "pages/templates";
 import Elements from "features/dashboard/elements";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
-import { Animated } from "react-animated-css";
 import "styles/components.css";
 
 interface ISidebar {

@@ -21,7 +21,6 @@ import {
 } from "redux/contract/contract.interfaces";
 import DefaultBuilder from "./deafult-builder";
 import DefaultSettings from "./default-settings";
-import circle from "assets/circle.svg";
 import "styles/components.css";
 
 interface IWorkspaceComponent {
@@ -275,7 +274,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
     <main
       style={{
         width: "-webkit-fill-available",
-        // background: `url(${circle})`,
       }}
       className="main-div h-full "
     >

@@ -1,11 +1,9 @@
 import React, { FC } from "react";
-import elements from "assets/elements.svg";
-import templates from "assets/templates.svg";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import logo from "assets/buidlfy.png";
-import "styles/components.css";
 import TemplateSvg from "components/utils/assets/template-svg";
 import ElementSvg from "components/utils/assets/elements-svg";
+import "styles/components.css";
 
 interface ISideNavbar {
   setSideElement: (sideElement: string) => void;
