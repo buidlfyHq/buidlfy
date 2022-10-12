@@ -11,17 +11,18 @@ import {
 } from "./minted.services";
 import {
   allTemplatesFetched,
-  fetchOwnedTemplates,
-  listTemplate,
+  ownedTemplatesFetched,
+  templateListed,
   ownedListedTemplatesFetched,
   ownedReviewTemplatesFetched,
   startListTemplateLoader,
 } from "./minted.reducers";
 import mintedActionTypes from "./minted.types";
+import { IRootState } from "redux/root-state.interface";
 
-function* createListingTemplate() {
+function* createTemplateListing() {
   // UPDATE: filter token id of the selectedTemplate
-  const tokenId = yield select((state: any) => state.template.mintTokenId);
+  const tokenId = yield select((state: IRootState) => state.template.mintTokenId);
   yield put(startListTemplateLoader());
 
   const listingRes = yield call(
@@ -30,7 +31,7 @@ function* createListingTemplate() {
     ethers.utils.parseEther("5")
   );
   if (!listingRes.error) {
-    yield put(listTemplate(listingRes.receipt));
+    yield put(templateListed(listingRes.receipt));
   } else {
     yield put(
       addNotification({
@@ -46,7 +47,7 @@ function* getOwnedTemplates(): any {
   const fetchedTemplates = yield call(getOwnedTemplatesService);
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.templates.length !== 0) {
-      yield put(fetchOwnedTemplates(fetchedTemplates.templates));
+      yield put(ownedTemplatesFetched(fetchedTemplates.templates));
     }
   } else {
     yield put(
@@ -78,7 +79,7 @@ function* getListedTemplates(): any {
 
 function* getOwnedReviewTemplates(): any {
   const currentAccount = yield select(
-    (state: any) => state.web3.currentAccount
+    (state: IRootState) => state.web3.currentAccount
   );
   const fetchedTemplates = yield call(
     getOwnedReviewTemplatesService,
@@ -101,7 +102,7 @@ function* getOwnedReviewTemplates(): any {
 
 function* getOwnedListedTemplates(): any {
   const currentAccount = yield select(
-    (state: any) => state.web3.currentAccount
+    (state: IRootState) => state.web3.currentAccount
   );
   const fetchedTemplates = yield call(
     getOwnedListedTemplatesService,
@@ -123,7 +124,7 @@ function* getOwnedListedTemplates(): any {
 }
 
 function* listTemplateSaga() {
-  yield takeLatest(mintedActionTypes.LIST_TEMPLATE, createListingTemplate);
+  yield takeLatest(mintedActionTypes.LIST_TEMPLATE, createTemplateListing);
 }
 
 function* fetchOwnedTemplatesSaga() {

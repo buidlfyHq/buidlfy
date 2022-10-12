@@ -10,19 +10,20 @@ import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { IRootState } from "redux/root-state.interface";
 
 const MyTemplates: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentAccount = useSelector((state: any) => state.web3.currentAccount);
   const ownedTemplateList = useSelector(
-    (state: any) => state.minted.ownedTemplateList
+    (state: IRootState) => state.minted.ownedTemplateList
   );
   const ownedReviewTemplateList = useSelector(
-    (state: any) => state.minted.ownedReviewTemplateList
+    (state: IRootState) => state.minted.ownedReviewTemplateList
   );
   const ownedListedTemplateList = useSelector(
-    (state: any) => state.minted.ownedListedTemplateList
+    (state: IRootState) => state.minted.ownedListedTemplateList
   );
 
   const [tab, setTab] = useState<number>(1);
