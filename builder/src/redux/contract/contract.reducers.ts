@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getContainerList } from "utils/container-list";
 import {
   IContract,
   IContractState,
@@ -13,7 +14,7 @@ const initialState: IContractState = {
   },
   contractElementSelector: null,
   contractElementSelected: {},
-  contractList: null,
+  contractList: getContainerList(),
 };
 
 const contractSlice = createSlice({

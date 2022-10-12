@@ -7,9 +7,9 @@ import {
 } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceStyle } from "components/utils/render-setting";
+import WarningText from "components/utils/setting-warning";
 import "styles/components.css";
 import "styles/dashboard.css";
-import WarningText from "components/utils/setting-warning";
 
 interface ICombinedComponent {
   i: string;
@@ -76,65 +76,65 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   const gradientCondition = color?.indexOf("gradient") !== -1;
   const activeClassName = (property: string, propertyName: string) =>
     property === propertyName ? "bg-[#CDD4F3]" : "";
+  const propertyData = [
+    {
+      text: "B",
+      className: `font-bold ml-[10px] combined-style ${activeClassName(
+        fontWeight,
+        ReplaceStyle.BOLD
+      )}`,
+      onclick: () => handleChange(ReplaceStyle.BOLD),
+    },
+    {
+      text: "i",
+      className: `italic combined-style ${activeClassName(
+        fontStyle,
+        ReplaceStyle.ITALIC
+      )}`,
+      onclick: () => handleChange(ReplaceStyle.ITALIC),
+    },
+    {
+      text: "U",
+      className: `underline combined-style ${activeClassName(
+        textDecoration,
+        ReplaceStyle.UNDERLINE
+      )} `,
+      onclick: () => handleChange(ReplaceStyle.UNDERLINE),
+    },
+    {
+      text: <AiOutlineAlignLeft className="text-[16px]" />,
+      className: `combined-style ${activeClassName(
+        justifyContent,
+        ReplaceStyle.LEFT
+      )}`,
+      onclick: () => handleAlignChange(ReplaceStyle.LEFT),
+    },
+    {
+      text: <AiOutlineAlignCenter className="text-[16px]" />,
+      className: `combined-style ${activeClassName(
+        justifyContent,
+        ReplaceStyle.CENTER
+      )}`,
+      onclick: () => handleAlignChange(ReplaceStyle.CENTER),
+    },
+    {
+      text: <AiOutlineAlignRight className="text-[16px]" />,
+      className: `combined-style ${activeClassName(
+        justifyContent,
+        ReplaceStyle.RIGHT
+      )}`,
+      onclick: () => handleAlignChange(ReplaceStyle.RIGHT),
+    },
+  ];
 
   return (
     <>
       <div className="flex grey-div w-auto mx-2 mb-3 items-center mt-2 text-black">
-        <span
-          onClick={() => handleChange(ReplaceStyle.BOLD)}
-          className={`font-bold ml-[10px] combined-style ${activeClassName(
-            fontWeight,
-            ReplaceStyle.BOLD
-          )}`}
-        >
-          B
-        </span>
-        <span
-          onClick={() => handleChange(ReplaceStyle.ITALIC)}
-          className={`italic combined-style ${activeClassName(
-            fontStyle,
-            ReplaceStyle.ITALIC
-          )}`}
-        >
-          i
-        </span>
-        <span
-          onClick={() => handleChange(ReplaceStyle.UNDERLINE)}
-          className={`underline combined-style ${activeClassName(
-            textDecoration,
-            ReplaceStyle.UNDERLINE
-          )} `}
-        >
-          U
-        </span>
-
-        <span
-          onClick={() => handleAlignChange(ReplaceStyle.LEFT)}
-          className={`combined-style ${activeClassName(
-            justifyContent,
-            ReplaceStyle.LEFT
-          )}`}
-        >
-          <AiOutlineAlignLeft className="text-[16px]" />
-        </span>
-        <span
-          onClick={() => handleAlignChange(ReplaceStyle.CENTER)}
-          className={`combined-style ${activeClassName(
-            justifyContent,
-            ReplaceStyle.CENTER
-          )}`}
-        >
-          <AiOutlineAlignCenter className="text-[16px]" />
-        </span>
-        <span
-          onClick={() => handleAlignChange(ReplaceStyle.RIGHT)}
-          className={`combined-style ${activeClassName(
-            justifyContent,
-            ReplaceStyle.RIGHT
-          )}`}
-        >
-          <AiOutlineAlignRight className="text-[16px]" />
-        </span>
+        {propertyData.map((value) => (
+          <span onClick={value.onclick} className={value.className}>
+            {value.text}
+          </span>
+        ))}
       </div>
       {gradientCondition ? (
         <WarningText text="Sorry, You can't make underline gradient!" />
