@@ -109,7 +109,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
         </span>
 
         <span
-          onClick={() => handleAlignChange("left")}
+          onClick={() => handleAlignChange(ReplaceStyle.LEFT)}
           className={`combined-style ${activeClassName(
             justifyContent,
             ReplaceStyle.LEFT
@@ -118,7 +118,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
           <AiOutlineAlignLeft className="text-[16px]" />
         </span>
         <span
-          onClick={() => handleAlignChange("center")}
+          onClick={() => handleAlignChange(ReplaceStyle.CENTER)}
           className={`combined-style ${activeClassName(
             justifyContent,
             ReplaceStyle.CENTER
@@ -127,7 +127,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
           <AiOutlineAlignCenter className="text-[16px]" />
         </span>
         <span
-          onClick={() => handleAlignChange("right")}
+          onClick={() => handleAlignChange(ReplaceStyle.RIGHT)}
           className={`combined-style ${activeClassName(
             justifyContent,
             ReplaceStyle.RIGHT

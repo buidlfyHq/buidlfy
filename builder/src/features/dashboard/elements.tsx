@@ -20,12 +20,14 @@ interface IElements {
   isContainerSelected: boolean;
   hideSidebar: () => void;
   hideSettingSidebar: () => void;
+  hideNavbar: boolean;
 }
 
 const Elements: FC<IElements> = ({
   isContainerSelected,
   hideSidebar,
   hideSettingSidebar,
+  hideNavbar,
 }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
@@ -218,7 +220,13 @@ const Elements: FC<IElements> = ({
     <>
       {/* Components */}
 
-      <div className="element-heading-div fixed pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem] left-[5rem]">
+      <div
+        className={`fixed pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem] left-[5rem] flex w-[320px] h-[60px] ${
+          !hideNavbar
+            ? "element-heading-div animate__animated animate__slideInLeft"
+            : "element-hide-div animate__animated animate__slideOutLeft"
+        }`}
+      >
         <h3 className="element-heading mt-[2.5px]">Add Elements</h3>
         <div className="close-btn">
           <MdOutlineClose

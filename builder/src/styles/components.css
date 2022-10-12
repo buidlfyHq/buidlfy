@@ -372,9 +372,15 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 } */
 
 .newbar {
+  background: #fdfdff;
+  z-index: 1 !important;
+  border-right: 0.75px solid rgba(72, 72, 135, 0.1);
   -webkit-animation-name: slideOut !important;
   animation-name: slideOut !important;
-  animation-duration: 3s;
+  animation-duration: 0.3s;
+}
+.newbar::-webkit-scrollbar {
+  width: 0 !important;
 }
 /*
 .animate__fadeIn {
@@ -388,7 +394,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   -webkit-animation-name: slidein !important;
   animation-name: slidein !important;
   animation-duration: 0.3s;
-  transition: 0.8s ease;
+  /* transition: 0.8s ease; */
 }
 
 .sidebar::-webkit-scrollbar {
@@ -601,15 +607,19 @@ cursor: pointer;
   border-radius: 8px;
 }
 .element-heading-div {
-  display: flex;
-  height: 60px;
-  width: 320px;
-  min-width: 0px;
   z-index: 2 !important;
   backdrop-filter: saturate(180%) blur(15px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   -webkit-animation-name: slideinHeading !important;
   animation-name: slideinHeading !important;
+  animation-duration: 0.3s;
+}
+.element-hide-div {
+  z-index: 2 !important;
+  backdrop-filter: saturate(180%) blur(15px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-animation-name: slideOutHeading !important;
+  animation-name: slideOutHeading !important;
   animation-duration: 0.3s;
 }
 
@@ -620,7 +630,7 @@ cursor: pointer;
   line-height: 19px;
   color: #000000;
   flex-grow: 1;
-  min-width: 150px;
+  min-width: 120px;
 }
 
 .element-input-text {
@@ -1041,7 +1051,7 @@ height: 40px;
 @keyframes slidein {
   0% {
     opacity:0;
-    width: 0;
+    width: 100px;
   }
   1% {
     opacity:1;
@@ -1054,7 +1064,7 @@ height: 40px;
 @keyframes slideinHeading {
   0% {
     opacity:0;
-    width: 0px;
+    width: 100px;
   }
   1% {
     opacity:1;
@@ -1064,27 +1074,29 @@ height: 40px;
     width: 320px;
   }
 }
-@-webkit-keyframes slideOut {
-  0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateX(-1000px);
-            transform: translateX(-1000px);
-    opacity: 0;
-  }
-}
 @keyframes slideOut {
   0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    opacity: 1;
+    opacity:0;
+    width: 320px;
+  }
+  1% {
+    opacity:1;
   }
   100% {
-    -webkit-transform: translateX(-1000px);
-            transform: translateX(-1000px);
-    opacity: 0;
+    opacity:1;
+    width: 0px;
+  }
+}
+@keyframes slideOutHeading {
+  0% {
+    opacity:0;
+    width: 320px;
+  }
+  1% {
+    opacity:1;
+  }
+  100% {
+    opacity:1;
+    width: 0px;
   }
 }

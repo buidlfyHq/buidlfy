@@ -31,6 +31,7 @@ const Dashboard: FC = () => {
   });
   const [sideElement, setSideElement] = useState<string>("");
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
+  const [hideNavbar, setHideNavbar] = useState<boolean>(false);
   useEffect(() => {
     // checks for stored configs
     let saveItems = localStorage.getItem("items");
@@ -41,11 +42,13 @@ const Dashboard: FC = () => {
   }, []); // eslint-disable-line
 
   const showSidebar = () => {
+    setHideNavbar(false);
     setIsNavHidden(false);
     setOpenSetting(false);
   };
 
   const hideSidebar = () => {
+    setHideNavbar(true);
     setIsNavHidden(true);
     setOpenSetting(true);
   };
@@ -74,6 +77,7 @@ const Dashboard: FC = () => {
             isNavHidden={isNavHidden}
             hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
+            hideNavbar={hideNavbar}
           />
 
           <section className="flex-1">
