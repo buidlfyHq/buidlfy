@@ -7,9 +7,9 @@ import {
 } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceStyle } from "components/utils/render-setting";
+import WarningText from "components/utils/setting-warning";
 import "styles/components.css";
 import "styles/dashboard.css";
-import WarningText from "components/utils/setting-warning";
 
 interface ICombinedComponent {
   i: string;
@@ -76,65 +76,54 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   const gradientCondition = color?.indexOf("gradient") !== -1;
   const activeClassName = (property: string, propertyName: string) =>
     property === propertyName ? "bg-[#CDD4F3]" : "";
-
+  const propertyData = {
+    text: [
+      "B",
+      "i",
+      "U",
+      <AiOutlineAlignLeft className="text-[16px]" />,
+      <AiOutlineAlignCenter className="text-[16px]" />,
+      <AiOutlineAlignRight className="text-[16px]" />,
+    ],
+    className: [
+      `font-bold ml-[10px] combined-style ${activeClassName(
+        fontWeight,
+        ReplaceStyle.BOLD
+      )}`,
+      `italic combined-style ${activeClassName(
+        fontStyle,
+        ReplaceStyle.ITALIC
+      )}`,
+      `underline combined-style ${activeClassName(
+        textDecoration,
+        ReplaceStyle.UNDERLINE
+      )} `,
+      `combined-style ${activeClassName(justifyContent, ReplaceStyle.LEFT)}`,
+      `combined-style ${activeClassName(justifyContent, ReplaceStyle.CENTER)}`,
+      `combined-style ${activeClassName(justifyContent, ReplaceStyle.RIGHT)}`,
+    ],
+    handleClick: [
+      () => handleChange(ReplaceStyle.BOLD),
+      () => handleChange(ReplaceStyle.ITALIC),
+      () => handleChange(ReplaceStyle.UNDERLINE),
+      () => handleAlignChange(ReplaceStyle.LEFT),
+      () => handleAlignChange(ReplaceStyle.CENTER),
+      () => handleAlignChange(ReplaceStyle.RIGHT),
+    ],
+  };
   return (
     <>
       <div className="flex grey-div w-auto mx-2 mb-3 items-center mt-2 text-black">
-        <span
-          onClick={() => handleChange(ReplaceStyle.BOLD)}
-          className={`font-bold ml-[10px] combined-style ${activeClassName(
-            fontWeight,
-            ReplaceStyle.BOLD
-          )}`}
-        >
-          B
-        </span>
-        <span
-          onClick={() => handleChange(ReplaceStyle.ITALIC)}
-          className={`italic combined-style ${activeClassName(
-            fontStyle,
-            ReplaceStyle.ITALIC
-          )}`}
-        >
-          i
-        </span>
-        <span
-          onClick={() => handleChange(ReplaceStyle.UNDERLINE)}
-          className={`underline combined-style ${activeClassName(
-            textDecoration,
-            ReplaceStyle.UNDERLINE
-          )} `}
-        >
-          U
-        </span>
-
-        <span
-          onClick={() => handleAlignChange("left")}
-          className={`combined-style ${activeClassName(
-            justifyContent,
-            ReplaceStyle.LEFT
-          )}`}
-        >
-          <AiOutlineAlignLeft className="text-[16px]" />
-        </span>
-        <span
-          onClick={() => handleAlignChange("center")}
-          className={`combined-style ${activeClassName(
-            justifyContent,
-            ReplaceStyle.CENTER
-          )}`}
-        >
-          <AiOutlineAlignCenter className="text-[16px]" />
-        </span>
-        <span
-          onClick={() => handleAlignChange("right")}
-          className={`combined-style ${activeClassName(
-            justifyContent,
-            ReplaceStyle.RIGHT
-          )}`}
-        >
-          <AiOutlineAlignRight className="text-[16px]" />
-        </span>
+        {Array.from(Array(propertyData.text.length).keys())?.map(
+          (i: string | number) => (
+            <span
+              onClick={propertyData.handleClick[i]}
+              className={propertyData.className[i]}
+            >
+              {propertyData.text[i]}
+            </span>
+          )
+        )}
       </div>
       {gradientCondition ? (
         <WarningText text="Sorry, You can't make underline gradient!" />
