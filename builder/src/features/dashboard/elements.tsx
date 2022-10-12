@@ -198,10 +198,11 @@ const Elements: FC<IElements> = ({
         >
           <div data-tip="Click here to add the image upload">
             <div className="relative image-container">
-              <img className="w-[20rem]" src={container} />
+              <img className="w-[20rem]" src={container} alt="container" />
               <img
                 className="absolute w-[2.6rem] bottom-[5rem] left-[6.5rem]"
                 src={defaultImage}
+                alt="default"
               />
               <h6 className="absolute bottom-[3rem] left-[5.5rem] text-[#666BD3] text-[16px]">
                 Add Image

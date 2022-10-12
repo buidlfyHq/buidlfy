@@ -272,9 +272,9 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
       borderRadius: 5,
-      ...defaultColorStyles,
       borderColor: "rgba(222,222,222,100)",
       color: "rgba(0,0,0,100)",
+      backgroundColor: "rgba(255, 255, 255, 0)",
       margin: {
         marginLeft: 24,
         marginRight: 24,

@@ -120,6 +120,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
             <img
               className="w-[220px] h-[153px] object-fill absolute z-[-1]"
               src={imageData?.uploadedImageData}
+              alt="default"
             />
           </div>
         ) : (
@@ -133,6 +134,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
                 <img
                   className="w-[220px] h-[153px] object-fill"
                   src={imageData?.uploadedImageData}
+                  alt="default"
                 />
                 <label
                   htmlFor="inputTag"
@@ -167,7 +169,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
       </div>
       {sizeExceeded ? (
         <h3 className="text-red-500 text-sm ml-2 mb-2">
-          Please upload file below 5 mb
+          Please upload the file with a size of less than 5 Mb
         </h3>
       ) : null}
     </>

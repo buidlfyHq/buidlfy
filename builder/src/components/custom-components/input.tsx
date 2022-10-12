@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import "styles/components.css";
-import { gradientCheck } from "utils/gradient-check";
 
 interface IInput {
   borderRadius: number;

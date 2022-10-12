@@ -77,7 +77,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
   const contractElementSelected: IContractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
   );
-
   const elementHoverStyles = contractElementSelector
     ? "border border-[transparent] border-hover"
     : "border border-[transparent] hover:border-slate-300 hover:border-dashed";

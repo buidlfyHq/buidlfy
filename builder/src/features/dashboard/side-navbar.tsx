@@ -6,14 +6,12 @@ import logo from "assets/buidlfy.png";
 import "styles/components.css";
 
 interface ISideNavbar {
-  className: string;
   setSideElement: (sideElement: string) => void;
-  showSidebar;
-  hideSettingSidebar;
+  showSidebar: () => void;
+  hideSettingSidebar: () => void;
 }
 
 const SideNavbar: FC<ISideNavbar> = ({
-  className,
   setSideElement,
   showSidebar,
   hideSettingSidebar,
@@ -23,9 +21,7 @@ const SideNavbar: FC<ISideNavbar> = ({
   };
 
   return (
-    <main
-      className={`w-[80px] sidenav z-[1] fixed top-0 bottom-0 left-0 ${className}`}
-    >
+    <main className="w-[80px] sidenav z-[1] fixed top-0 bottom-0 left-0">
       {/* Components */}
       <img
         src={logo}
@@ -35,7 +31,7 @@ const SideNavbar: FC<ISideNavbar> = ({
       <div className="side-border px-4 pt-[1rem]">
         <div
           onClick={() => {
-            showSidebar(true);
+            showSidebar();
             handleSidebar(SidebarEnum.TEMPLATES);
             hideSettingSidebar();
           }}
@@ -54,7 +50,7 @@ const SideNavbar: FC<ISideNavbar> = ({
         </div> */}
         <div
           onClick={() => {
-            showSidebar(true);
+            showSidebar();
             handleSidebar(SidebarEnum.ELEMENTS);
             hideSettingSidebar();
           }}

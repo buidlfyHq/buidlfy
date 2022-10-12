@@ -371,6 +371,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   z-index: 5 !important;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
 }
+
 .sidebar::-webkit-scrollbar {
   width: 0 !important;
 }
@@ -710,13 +711,13 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   display: none;
 }
 .contract-list {
-  width: 65px;
-  height: 44px;
-  background: #F0EAFC;
-  border-radius: 2px;
+  background: #F3F2F3;
+  border-radius: 8px;
+  width: 210px;
+height: 40px;
 }
 .contract-list:hover {
-  background: #E1DAF0;
+  background: rgba(92, 111, 230, 0.25);
 }
 .contract-name {
   font-style: normal;
@@ -964,4 +965,17 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 .image-overlay {
   background: rgba(0, 0, 0, 0.6);
   border: 1px dashed #87898E;
+}
+.contract-disable-button {
+  background: #acacac;
+  border-radius: 44px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  /* identical to box height, or 171% */
+
+  /* White */
+
+  color: #523f3f;
 }

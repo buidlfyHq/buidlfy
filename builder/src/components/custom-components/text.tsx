@@ -17,6 +17,7 @@ const Text: FC<IText> = ({
   padding,
   link,
 }) => {
+  const gradientCondition = color?.indexOf("gradient") !== -1;
   const textAreaContent = (
     <textarea
       readOnly
@@ -32,7 +33,7 @@ const Text: FC<IText> = ({
         justifyContent,
         alignItems: "center",
         textDecoration: underline,
-        textDecorationColor: color,
+        textDecorationColor: `${gradientCondition ? "black" : color}`,
         textAlign: `${justifyContent}` as CanvasTextAlign,
         fontSize: `${fontSize}px`,
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
