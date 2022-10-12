@@ -76,54 +76,65 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   const gradientCondition = color?.indexOf("gradient") !== -1;
   const activeClassName = (property: string, propertyName: string) =>
     property === propertyName ? "bg-[#CDD4F3]" : "";
-  const propertyData = {
-    text: [
-      "B",
-      "i",
-      "U",
-      <AiOutlineAlignLeft className="text-[16px]" />,
-      <AiOutlineAlignCenter className="text-[16px]" />,
-      <AiOutlineAlignRight className="text-[16px]" />,
-    ],
-    className: [
-      `font-bold ml-[10px] combined-style ${activeClassName(
+  const propertyData = [
+    {
+      text: "B",
+      className: `font-bold ml-[10px] combined-style ${activeClassName(
         fontWeight,
         ReplaceStyle.BOLD
       )}`,
-      `italic combined-style ${activeClassName(
+      onclick: () => handleChange(ReplaceStyle.BOLD),
+    },
+    {
+      text: "i",
+      className: `italic combined-style ${activeClassName(
         fontStyle,
         ReplaceStyle.ITALIC
       )}`,
-      `underline combined-style ${activeClassName(
+      onclick: () => handleChange(ReplaceStyle.ITALIC),
+    },
+    {
+      text: "U",
+      className: `underline combined-style ${activeClassName(
         textDecoration,
         ReplaceStyle.UNDERLINE
       )} `,
-      `combined-style ${activeClassName(justifyContent, ReplaceStyle.LEFT)}`,
-      `combined-style ${activeClassName(justifyContent, ReplaceStyle.CENTER)}`,
-      `combined-style ${activeClassName(justifyContent, ReplaceStyle.RIGHT)}`,
-    ],
-    handleClick: [
-      () => handleChange(ReplaceStyle.BOLD),
-      () => handleChange(ReplaceStyle.ITALIC),
-      () => handleChange(ReplaceStyle.UNDERLINE),
-      () => handleAlignChange(ReplaceStyle.LEFT),
-      () => handleAlignChange(ReplaceStyle.CENTER),
-      () => handleAlignChange(ReplaceStyle.RIGHT),
-    ],
-  };
+      onclick: () => handleChange(ReplaceStyle.UNDERLINE),
+    },
+    {
+      text: <AiOutlineAlignLeft className="text-[16px]" />,
+      className: `combined-style ${activeClassName(
+        justifyContent,
+        ReplaceStyle.LEFT
+      )}`,
+      onclick: () => handleAlignChange(ReplaceStyle.LEFT),
+    },
+    {
+      text: <AiOutlineAlignCenter className="text-[16px]" />,
+      className: `combined-style ${activeClassName(
+        justifyContent,
+        ReplaceStyle.CENTER
+      )}`,
+      onclick: () => handleAlignChange(ReplaceStyle.CENTER),
+    },
+    {
+      text: <AiOutlineAlignRight className="text-[16px]" />,
+      className: `combined-style ${activeClassName(
+        justifyContent,
+        ReplaceStyle.RIGHT
+      )}`,
+      onclick: () => handleAlignChange(ReplaceStyle.RIGHT),
+    },
+  ];
+
   return (
     <>
       <div className="flex grey-div w-auto mx-2 mb-3 items-center mt-2 text-black">
-        {Array.from(Array(propertyData.text.length).keys())?.map(
-          (i: string | number) => (
-            <span
-              onClick={propertyData.handleClick[i]}
-              className={propertyData.className[i]}
-            >
-              {propertyData.text[i]}
-            </span>
-          )
-        )}
+        {propertyData.map((value) => (
+          <span onClick={value.onclick} className={value.className}>
+            {value.text}
+          </span>
+        ))}
       </div>
       {gradientCondition ? (
         <WarningText text="Sorry, You can't make underline gradient!" />
