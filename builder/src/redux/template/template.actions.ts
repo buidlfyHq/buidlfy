@@ -1,11 +1,10 @@
 import templateActionTypes from "./template.types";
 
-export const buyTemplate = (payload: any) => ({
+export const buyTemplate = () => ({
   type: templateActionTypes.BUY_TEMPLATE,
-  payload,
 });
 
-export const mintTemplate = (payload: any) => ({
+export const mintTemplate = (payload: string) => ({
   type: templateActionTypes.MINT_TEMPLATE,
   payload,
 });

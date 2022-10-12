@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ISelectedTemplate, ITemplateState } from "./template.interfaces";
 
 const initialState: ITemplateState = {
-  buyTemplateHash: "",
+  buyTemplateReceipt: "",
   buyTemplateLoading: false,
   mintTokenId: 0, // UPDATE: [{id: string, tokenId: number}]
   mintTemplateLoading: false,
@@ -14,7 +14,7 @@ const templateSlice = createSlice({
   initialState,
   reducers: {
     buyTemplate(state, action: { payload: string }) {
-      state.buyTemplateHash = action.payload;
+      state.buyTemplateReceipt = action.payload;
       state.buyTemplateLoading = false;
     },
     templateMinted(state, action: { payload: number }) {

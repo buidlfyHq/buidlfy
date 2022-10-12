@@ -5,6 +5,7 @@ import {
   buyTemplate,
   templateMinted,
   startMintTemplateLoader,
+  startBuyTemplateLoader,
 } from "./template.reducers";
 import {
   initiateTransactionService,
@@ -12,18 +13,23 @@ import {
 } from "./template.services";
 import templateActionTypes from "./template.types";
 import { NotificationType } from "redux/notification/notification.interfaces";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 
-function* buySelectedTemplate({ payload }) {
-  const { listingId, buyoutPricePerToken } = payload;
-  // ADD: start buy-template loader
+function* buySelectedTemplate() {
+  const selectedTemplate = yield select(
+    (state: any) => state.template.selectedTemplate
+  );
+  yield put(startBuyTemplateLoader());
   // Check for approval if yes, then don't call approve otherwise call approve
   const transactionRes = yield call(
     initiateTransactionService,
-    listingId,
-    buyoutPricePerToken
+    selectedTemplate.listing_listingId,
+    selectedTemplate.listing_buyoutPricePerToken
   );
   if (!transactionRes.error) {
     yield put(buyTemplate(transactionRes.receipt));
+    yield put(updateWorkspaceElementsArray(selectedTemplate.value));
+    yield put(toggleModalType("final"));
   } else {
     yield put(
       addNotification({

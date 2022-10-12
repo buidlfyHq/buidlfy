@@ -1,13 +1,9 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BigNumber } from "ethers";
 import { Dialog } from "@headlessui/react";
 import makeBlockie from "ethereum-blockies-base64";
 import { buyTemplate } from "redux/template/template.actions";
-import { toggleModalType } from "redux/modal/modal.reducers";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { truncateString } from "utils/truncateString";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 const CheckoutModal: FC = () => {
   const dispatch = useDispatch();
@@ -18,16 +14,6 @@ const CheckoutModal: FC = () => {
   const selectedTemplate = useSelector(
     (state: any) => state.template.selectedTemplate
   );
-
-  const handleBuyTemplate = (
-    value: IWorkspaceElement[],
-    listingId: BigNumber,
-    buyoutPricePerToken: BigNumber
-  ) => {
-    dispatch(buyTemplate({ listingId, buyoutPricePerToken }));
-    // dispatch(updateWorkspaceElementsArray(value)); FIX: add value if transaction complete
-    // dispatch(toggleModalType("final")); ADD: manage toggle after transaction complete
-  };
 
   return (
     <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[8px]">
@@ -93,13 +79,7 @@ const CheckoutModal: FC = () => {
               </div>
             </div>
             <div
-              onClick={() =>
-                handleBuyTemplate(
-                  selectedTemplate.value,
-                  selectedTemplate.listing_listingId,
-                  selectedTemplate.listing_buyoutPricePerToken
-                )
-              }
+              onClick={() => dispatch(buyTemplate())}
               className="text-white cursor-pointer connect-wallet-button py-3 px-auto rounded-[7px] mt-8 text-center"
             >
               Buy Now
