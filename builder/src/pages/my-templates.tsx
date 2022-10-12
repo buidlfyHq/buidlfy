@@ -1,22 +1,13 @@
 import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { BiChevronDown } from "react-icons/bi";
+import { useSelector } from "react-redux";
 import makeBlockie from "ethereum-blockies-base64";
-import TemplateModal from "features/dashboard/template-modal";
-import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
-import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
-import Temp1 from "assets/icons/temp-1.png";
-import SearchForm from "components/utils/search-form";
 import MyTemplateTemplates from "components/utils/my-template-templates";
-const templates = [Temp1,Temp1,Temp1,Temp1]
+import SearchForm from "components/utils/search-form";
+import {BiChevronDown} from 'react-icons/bi'
+import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
 
 const MyTemplates : FC = () => {
-    const dispatch = useDispatch()  
     const currentAccount = useSelector((state: any) => state.web3.currentAccount);
-    const handleListOnBuidlfy = () => {
-        dispatch(toggleModal(true))
-        dispatch(toggleModalType("list-single"))
-    }
     return (
     <div className="min-h-screen">
       {/* nav */}
@@ -27,9 +18,9 @@ const MyTemplates : FC = () => {
             <ColorFeather className="mr-3" />
             <div className="gradient-text">Builder</div>
           </div>
-          <div className="flex justify-center items-center my-2 ml-3">
+          <div className="flex items-center justify-center my-2 ml-3">
             <img
-              className="bg-black w-8 h-8 rounded-full"
+              className="w-8 h-8 bg-black rounded-full"
               src={makeBlockie(currentAccount)}
               alt="Blockie"
             />
@@ -41,7 +32,7 @@ const MyTemplates : FC = () => {
       <div className="flex flex-col items-center py-16 px-36">
         <div className="font-[600] text-[28px] text-[#14142B]">
           My Templates
-        </div>
+        </div>            
         <div className="max-w-[412px] text-[13px] text-[#14142A] opacity-60 text-center mt-4 ">
           Create a beautiful website that meets your needs by choosing from over
           100 beautiful templates.
