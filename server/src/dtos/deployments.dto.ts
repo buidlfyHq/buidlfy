@@ -17,6 +17,14 @@ export class CreateDeploymentSubdomainDto {
   public siteName: string;
 }
 
+export class UpdateDeploymentSubdomainDto {
+  @IsString()
+  public deploymentId: string;
+
+  @IsString()
+  public subdomainId: string;
+}
+
 export class VerifyDeploymentSubdomainDto {
   @IsString()
   public domainId: string;

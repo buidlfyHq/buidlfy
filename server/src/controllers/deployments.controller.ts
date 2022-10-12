@@ -1,4 +1,4 @@
-import { CreateDeploymentSubdomainDto, VerifyDeploymentSubdomainDto } from '@/dtos/deployments.dto';
+import { CreateDeploymentSubdomainDto, UpdateDeploymentSubdomainDto, VerifyDeploymentSubdomainDto } from '@/dtos/deployments.dto';
 import { DeployAppDto, DeploymentResponseDto } from '@/dtos/deployments.dto';
 import DeploymentService from '@/services/deployments.service';
 import { NextFunction, Request, Response } from 'express';
@@ -32,6 +32,22 @@ class DeploymentsController {
       }: IFetchDeploymentResponse = deploymentResponse.data.deployment;
       const { domain } = await this.domainService.generateSitename(siteName, projectId, deploymentLink);
       res.status(200).json({ data: { success: true, domain }, message: 'Subdomain created!' });
+    } catch (error) {
+      Logger.error(`Error found in ${__filename} - createDeploymentDomain - ${error.message}`);
+      next(error);
+    }
+  };
+
+  public updateDeploymentSubdomain = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { subdomainId, deploymentId }: UpdateDeploymentSubdomainDto = req.body;
+      const deploymentResponse = await this.deploymentService.getDeployment(deploymentId);
+      const {
+        project: { _id: projectId },
+        sitePreview: deploymentLink,
+      }: IFetchDeploymentResponse = deploymentResponse.data.deployment;
+      const response = await this.domainService.updateSubdomainLink(subdomainId, projectId, deploymentLink);
+      res.status(200).json({ data: { success: true, domain: response.data.domain }, message: 'Subdomain update!' });
     } catch (error) {
       Logger.error(`Error found in ${__filename} - createDeploymentDomain - ${error.message}`);
       next(error);

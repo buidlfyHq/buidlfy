@@ -2,7 +2,7 @@ import { Router } from 'express';
 import DeploymentsController from '@/controllers/deployments.controller';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@/middlewares/validation.middleware';
-import { DeployAppDto, CreateDeploymentSubdomainDto, VerifyDeploymentSubdomainDto } from '@/dtos/deployments.dto';
+import { DeployAppDto, CreateDeploymentSubdomainDto, VerifyDeploymentSubdomainDto, UpdateDeploymentSubdomainDto } from '@/dtos/deployments.dto';
 
 class DeploymentsRoute implements Routes {
   public path = '/deployment';
@@ -19,6 +19,11 @@ class DeploymentsRoute implements Routes {
       `${this.path}/create-subdomain`,
       validationMiddleware(CreateDeploymentSubdomainDto, 'body'),
       this.deploymentController.createDeploymentSubdomain,
+    );
+    this.router.patch(
+      `${this.path}/update-subdomain`,
+      validationMiddleware(UpdateDeploymentSubdomainDto, 'body'),
+      this.deploymentController.updateDeploymentSubdomain,
     );
     this.router.patch(
       `${this.path}/verify-subdomain`,
