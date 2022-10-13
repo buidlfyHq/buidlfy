@@ -13,6 +13,8 @@ import MintedTemplateModal from "components/modals/minted-template";
 import MintingProgressModal from "components/modals/minting-progress";
 import PublishSiteModal from "components/modals/publish-site";
 import SitePublishedModal from "components/modals/site-published-modal";
+import CompleteListing from "components/modals/complete-listing";
+import TemplateListing from "components/modals/template-listing";
 
 interface IRenderModal {
   generatedConfig?: string;
@@ -45,9 +47,13 @@ const RenderModal: FC<IRenderModal> = ({ generatedConfig }) => {
     case "minting-progress":
       return <MintingProgressModal />;
     case "publish-process":
-      return <PublishSiteModal generatedConfig={generatedConfig} />;
+      return <PublishSiteModal />;
     case "publish-done":
-      return <SitePublishedModal />;
+      return <SitePublishedModal generatedConfig={generatedConfig} />;
+    case "complete-listing":
+      return <CompleteListing />;
+    case "listing-review":
+      return <TemplateListing />;
     default:
       return <></>;
   }

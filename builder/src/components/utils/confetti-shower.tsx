@@ -1,9 +1,7 @@
 import Confetti from "react-confetti";
 
 const ConfettiShower = () => {
-  let height = window.screen.height;
-  let width = window.screen.width;
-
+  const { height, width } = window.screen;
   return (
     <Confetti
       width={width}

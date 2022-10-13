@@ -17,7 +17,6 @@ const SelectWallet: FC = () => {
   }, [currentAccount]);
 
   return (
-    <main className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[8px]">
       <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[464px] my-20 mx-28 rounded-[8px] py-7 px-8 bg-white">
         <div className="w-full">
           <div className="flex items-center justify-between">
@@ -46,7 +45,6 @@ const SelectWallet: FC = () => {
           </div>
         </div>
       </Dialog.Panel>
-    </main>
   );
 };
 

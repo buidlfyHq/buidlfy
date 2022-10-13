@@ -924,16 +924,17 @@
   display: flex;
 }
 
-.bordered-button {
+.bordered-button{
   padding: 20px 60px;
   border: none;
   outline: none;
   position: relative;
   z-index: 1;
-  border-radius: 22px;
+  border-radius: 10px;
   background: linear-gradient(to right, #68AEFF 0%, #9768FB 79.17%);
   cursor: pointer;
 }
+
 .bordered-button::before {
   content: "";
   position: absolute;
@@ -941,14 +942,48 @@
   right: 1px;
   top: 1px;
   bottom: 1px;
-  border-radius: 21px;
+  border-radius: 9px;
   background-color: white;
   z-index: -1;
   transition: 200ms
 }
+
 .bordered-button::after {
   content: attr(data);
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 14px;
+  background: linear-gradient(to right, #68AEFF 0%, #9768FB 79.17%);
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: 200ms
+}
+
+.button-singleTemp{
+  padding: 20px 60px;
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 1;
+  border-radius: 8px;
+  background: linear-gradient(to right, #68AEFF 0%, #9768FB 79.17%);
+  cursor: pointer;
+}
+.button-singleTemp::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 1px;
+  bottom: 1px;
+  border-radius: 7px;
+  background-color: white;
+  z-index: -1;
+  transition: 200ms
+}
+.button-singleTemp::after {
+  content: attr(data);
+  font-weight: 500;
+  font-size: 14px;
   background: linear-gradient(to right, #68AEFF 0%, #9768FB 79.17%);
   -webkit-background-clip: text;
   color: transparent;
@@ -970,4 +1005,8 @@
 
 .border-bottom-divider{
   border: 1px solid #DFDFE0;
+}
+
+.border-top-divider-publish{
+  border-top: 1px solid rgba(0, 0, 0, 0.07);;
 }
