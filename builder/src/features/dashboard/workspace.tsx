@@ -20,8 +20,8 @@ import {
   IContractElementSelector,
 } from "redux/contract/contract.interfaces";
 import DefaultBuilder from "./deafult-builder";
-import "styles/components.css";
 import DefaultSettings from "./default-settings";
+import "styles/components.css";
 
 interface IWorkspaceComponent {
   setOpenSetting: (open: boolean) => void;
@@ -272,7 +272,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   return (
     <main
-      style={{ width: "-webkit-fill-available" }}
+      style={{
+        width: "-webkit-fill-available",
+      }}
       className="main-div h-full "
     >
       {workspaceElements?.length > 0 ? (

@@ -5,7 +5,7 @@ import { SITE_SIZE_VARIABLE } from "config/constant";
 import ReactTooltip from "react-tooltip";
 import upload from "assets/upload-img.svg";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import Spinner from "components/utils/spinner";
+import Spinner from "components/utils/assets/spinner";
 import "styles/components.css";
 
 interface IDefaultSettings {
@@ -68,6 +68,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       backgroundColor="#262338"
       arrowColor="#262338"
       scrollHide={true}
+      delayShow={200}
     />
   );
 

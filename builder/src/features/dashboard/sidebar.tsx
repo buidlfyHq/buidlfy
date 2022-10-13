@@ -10,6 +10,7 @@ interface ISidebar {
   isNavHidden: boolean;
   hideSidebar: () => void;
   hideSettingSidebar: () => void;
+  hideNavbar: boolean;
 }
 
 const Sidebar: FC<ISidebar> = ({
@@ -18,14 +19,19 @@ const Sidebar: FC<ISidebar> = ({
   isNavHidden,
   hideSidebar,
   hideSettingSidebar,
+  hideNavbar,
 }) => {
   const ref = useRef(null);
 
   return (
     <main
       ref={ref}
-      className={`sidebar fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] w-[320px] z-[1] ${
-        isNavHidden ? "hidden" : ""
+      className={`fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] z-[1] ${
+        !hideNavbar
+          ? isNavHidden
+            ? "hidden"
+            : "sidebar animate__animated animate__slideInLeft"
+          : "newbar animate__animated animate__slideOutLeft"
       }`}
     >
       {/* It will be used for future */}
@@ -85,6 +91,7 @@ const Sidebar: FC<ISidebar> = ({
           hideSidebar={hideSidebar}
           isContainerSelected={isContainerSelected}
           hideSettingSidebar={hideSettingSidebar}
+          hideNavbar={hideNavbar}
         />
       ) : null}
       {sideElement === SidebarEnum.TEMPLATES ? <Template /> : null}

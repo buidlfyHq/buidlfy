@@ -31,7 +31,7 @@ const Dashboard: FC = () => {
   });
   const [sideElement, setSideElement] = useState<string>("");
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
-
+  const [hideNavbar, setHideNavbar] = useState<boolean>(false);
   useEffect(() => {
     // checks for stored configs
     let saveItems = localStorage.getItem("items");
@@ -42,10 +42,13 @@ const Dashboard: FC = () => {
   }, []); // eslint-disable-line
 
   const showSidebar = () => {
+    setHideNavbar(false);
     setIsNavHidden(false);
     setOpenSetting(false);
   };
+
   const hideSidebar = () => {
+    setHideNavbar(true);
     setIsNavHidden(true);
     setOpenSetting(true);
   };
@@ -74,6 +77,7 @@ const Dashboard: FC = () => {
             isNavHidden={isNavHidden}
             hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
+            hideNavbar={hideNavbar}
           />
 
           <section className="flex-1">
@@ -109,7 +113,7 @@ const Dashboard: FC = () => {
               {/* Right Sidebar Settings */}
             </aside>
           </section>
-          <div className="rounded-[8px] py-2 overflow-y-scroll fixed top-0 right-0 bottom-0">
+          <div className="setting-sidebar rounded-[8px] py-2 overflow-y-scroll fixed top-0 right-0 bottom-0">
             {openSetting ? (
               <Settings
                 setOpenSetting={setOpenSetting}

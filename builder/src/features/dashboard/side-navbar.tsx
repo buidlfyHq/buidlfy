@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import elements from "assets/elements.png";
-import templates from "assets/templates.png";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import logo from "assets/buidlfy.png";
+import TemplateSvg from "components/utils/assets/template-svg";
+import ElementSvg from "components/utils/assets/elements-svg";
 import "styles/components.css";
 
 interface ISideNavbar {
@@ -35,12 +35,21 @@ const SideNavbar: FC<ISideNavbar> = ({
             handleSidebar(SidebarEnum.TEMPLATES);
             hideSettingSidebar();
           }}
-          className="cursor-pointer"
+          className="cursor-pointer icon-div"
         >
-          <div className="side-icon px-3.5 py-4 rounded-full mt-3">
-            <img src={templates} alt="Templates" />
-          </div>
+          <TemplateSvg />
           <h3 className="side-text mt-1">Templates</h3>
+        </div>
+        <div
+          onClick={() => {
+            showSidebar();
+            handleSidebar(SidebarEnum.ELEMENTS);
+            hideSettingSidebar();
+          }}
+          className="mt-8 icon-div cursor-pointer"
+        >
+          <ElementSvg />
+          <h3 className="side-text mt-1">Elements</h3>
         </div>
         {/* <div className="mt-8 cursor-pointer">
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
@@ -48,19 +57,6 @@ const SideNavbar: FC<ISideNavbar> = ({
           </div>
           <h3 className="side-text mt-1">Pages</h3>
         </div> */}
-        <div
-          onClick={() => {
-            showSidebar();
-            handleSidebar(SidebarEnum.ELEMENTS);
-            hideSettingSidebar();
-          }}
-          className="mt-8 cursor-pointer"
-        >
-          <div className="side-icon px-3.5 py-4 rounded-full mt-5">
-            <img src={elements} alt="Elements" />
-          </div>
-          <h3 className="side-text mt-1">Elements</h3>
-        </div>
         {/* <div className="mt-8 cursor-pointer">
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={media} />

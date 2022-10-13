@@ -1,6 +1,5 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import Dashboard from "pages/dashboard";
 
 const App: FC = () => {

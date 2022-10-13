@@ -10,7 +10,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IMAGE_SIZE_VARIABLE } from "config/constant";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
 import { IRootState } from "redux/root-state.interface";
-import Spinner from "components/utils/spinner";
+import Spinner from "components/utils/assets/spinner";
 import ReactTooltip from "react-tooltip";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -94,6 +94,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
       backgroundColor="#262338"
       arrowColor="#262338"
       scrollHide={true}
+      delayShow={200}
     />
   );
 
@@ -101,7 +102,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
     <>
       {tooltip}
       <div
-        className={`relative w-[220px] h-[155px] mx-1 my-2 cursor-pointer ${
+        className={`relative w-[220px] h-[155px] rounded-[0.5rem] mx-1 my-2 cursor-pointer ${
           imageData?.uploadedImageData ? "image-overlay" : "default-upload"
         } `}
       >
