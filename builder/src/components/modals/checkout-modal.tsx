@@ -6,7 +6,7 @@ import makeBlockie from "ethereum-blockies-base64";
 import { buyTemplate } from "redux/template/template.actions";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { truncateString } from "utils/truncateString";
+import { truncateString } from "utils/truncate-string";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 const CheckoutModal: FC = () => {
