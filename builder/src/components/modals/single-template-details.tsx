@@ -1,12 +1,11 @@
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
+import { Tag } from "components/utils/tag-component";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import EyeImg from "assets/icons/eye.png";
-import TempexImg from "assets/icons/tempex.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
-import { Tag } from "components/utils/tag-component";
 
 interface ISingleTemplateDetails {
   list: boolean;
@@ -14,6 +13,9 @@ interface ISingleTemplateDetails {
 
 const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
   const dispatch = useDispatch();
+  const selectedTemplate = useSelector(
+    (state: any) => state.template.selectedTemplate
+  );
 
   const handleSubmit = () => {
     list
@@ -25,7 +27,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
     <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
       <div className="flex items-center justify-between">
         <div className="text-[22px] font-[500] text-[#14142B]">
-          Cryptin Next Generation Web Template
+          {selectedTemplate.name}
         </div>
         <button className="button-singleTemp flex items-center py-2.5 px-6 cursor-pointer">
           <img src={EyeImg} alt="icon" width={18} height={18} />
@@ -34,7 +36,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
       </div>
       <div className="mt-5">
         <img
-          src={TempexImg}
+          src={selectedTemplate.image}
           className="w-full max-h-[509px] h-auto rounded-[28px]"
           alt="icon"
           height={669}
@@ -50,24 +52,30 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
               </div>
             </div>
             <div className="mt-8 text-[#4E4B66] opacity-70 text-[13px] max-w-[400px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Elementum felis, sed ullamcorper tempus faucibus in imperdiet
-              semper justo mauris sed.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Elementum
+              felis, sed ullamcorper tempus faucibus in imperdiet semper justo
+              mauris sed.
             </div>
           </div>
           <div>
             {!list ? (
               <div className="flex items-center justify-between w-full mt-8 text-center bg-[#E6EAF4] rounded-[8px] py-4 px-4 cursor-pointer">
-                <div className="text-[18px] font-[600] text-[#14142B]">120.00 USDT</div>
-                <div className="text-[14px] font-[600] text-[#14142B] opacity-70">~$1209.00</div>
+                <div className="text-[18px] font-[600] text-[#14142B]">
+                  120.00 USDT
+                </div>
+                <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
+                  ~$1209.00
+                </div>
               </div>
-            ) : <div className="mt-16">{" "}</div>}
+            ) : (
+              <div className="mt-16"> </div>
+            )}
             <button
               onClick={handleSubmit}
               className="w-full flex justify-center gap-10 items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
             >
               <div className="text-[14px]">
-                {!list ? 'Connect Wallet to Buy' : 'List on Buidlfy'}
+                {!list ? "Connect Wallet to Buy" : "List on Buidlfy"}
               </div>
               <VscArrowRight className="ml-2 text-[22px]" />
             </button>
@@ -81,8 +89,8 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
         </div>
       </div>
       <div className="flex gap-3 mt-7">
-        <Tag name={'Web3'} />
-        <Tag name={'Crypto'} />
+        <Tag name={"Web3"} />
+        <Tag name={"Crypto"} />
       </div>
     </Dialog.Panel>
   );

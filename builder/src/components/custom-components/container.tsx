@@ -46,8 +46,7 @@ interface IContainer {
   setSideElement: (sideElement: string) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
-  showSidebar?: () => void;
-  hideSidebar?: () => void;
+  setHideNavbar: (hideNavbar: boolean) => void;
   hideSettingSidebar?: () => void;
   padding?: {
     paddingLeft?: number;
@@ -71,8 +70,7 @@ const Container: FC<IContainer> = ({
   setOpenTab,
   setIsContainerSelected,
   setSideElement,
-  showSidebar,
-  hideSidebar,
+  setHideNavbar,
   padding,
 }) => {
   const dispatch = useDispatch();
@@ -223,15 +221,17 @@ const Container: FC<IContainer> = ({
 
   const onComponentAddClick = (i: string) => {
     setIsContainerSelected(true);
-    showSidebar();
+    setHideNavbar(false);
     handleSidebar(SidebarEnum.ELEMENTS);
     dispatch(setSelectedElement(i));
     setOpenSetting(false);
   };
+
   const onComponentDeleteClick = (i: string) => {
     handleDelete();
     dispatch(setSelectedElement(i));
   };
+
   const onComponentClick = (itemName: string, i: string) => {
     if (contractElementSelector === null) {
       dispatch(setSelectedElement(i));
@@ -258,7 +258,7 @@ const Container: FC<IContainer> = ({
     setIsContainerSelected(false);
     dispatch(setSelectedElement(i));
     setOpenSetting(true);
-    hideSidebar();
+    setHideNavbar(true);
   };
 
   return (

@@ -8,6 +8,6 @@ export interface IRootState {
   workspace: IWorkspaceState;
   contract: IContractState;
   modal: IModalState;
-  web3: IWeb3State
+  web3: IWeb3State;
   template: ITemplateState;
 }

@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
-import { uploadFileToWeb3Storage } from "utils/web3storage";
+import { uploadFileToWeb3Storage } from "config/web3storage";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -46,7 +46,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
             <span className="purple-label">browse</span>
             <input
               onChange={onChangeImage}
-              className="upload-input"
+              className="hidden"
               // It is important in next branch
               // className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
               type="file"

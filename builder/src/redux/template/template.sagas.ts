@@ -1,14 +1,14 @@
-import { ethers } from "ethers";
 import { call, all, put, takeLatest, select } from "redux-saga/effects";
 import { addNotification } from "redux/notification/notification.reducers";
+import { toggleModalType } from "redux/modal/modal.reducers";
 import {
   buyTemplate,
   allTemplatesFetched,
   ownedTemplatesFetched,
   templateMinted,
+  startMintTemplateLoader,
 } from "./template.reducers";
 import {
-  createListingService,
   getListedTemplatesService,
   getOwnedTemplatesService,
   initiateTransactionService,
@@ -19,7 +19,7 @@ import { NotificationType } from "redux/notification/notification.interfaces";
 import { IRootState } from "redux/root-state.interface";
 
 function* buySelectedTemplate({ payload }) {
-  const { listingId, buyoutPricePerToken } = payload.payload;
+  const { listingId, buyoutPricePerToken } = payload;
   // ADD: start buy-template loader
   // Check for approval if yes, then don't call approve otherwise call approve
   const transactionRes = yield call(
@@ -79,28 +79,12 @@ function* getOwnedTemplates(): any {
 
 function* mintSelectedTemplate({ payload }) {
   // ADD: start mint-template loader
-  console.log(payload); // REMOVE after implementing feature
-
+  yield put(startMintTemplateLoader());
   const mintRes = yield call(mintTemplateService, payload);
   if (!mintRes.error) {
     const tokenId = parseInt(mintRes.receipt.logs[1].topics[1].toString());
-    // TODO: move this to minted reducer
-    const listingRes = yield call(
-      createListingService,
-      tokenId,
-      ethers.utils.parseEther("5")
-    );
-    if (!listingRes.error) {
-      yield put(templateMinted(listingRes.receipt));
-    } else {
-      yield put(
-        addNotification({
-          message: listingRes.errorMessage,
-          timestamp: new Date(),
-          type: NotificationType.Error,
-        })
-      );
-    }
+    yield put(templateMinted(tokenId));
+    yield put(toggleModalType("minted-complete"));
   } else {
     yield put(
       addNotification({

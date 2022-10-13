@@ -669,9 +669,6 @@
   align-items: center;
   justify-content: center;
 }
-.upload-input {
-  display: none;
-}
 .contract-list {
   width: 69px;
   height: 44px;

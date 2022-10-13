@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ISelectedTemplate, ITemplateState } from "./template.interfaces";
 
-const initialState = {
+const initialState: ITemplateState = {
   buyTemplateHash: "",
   buyTemplateLoading: false,
-  mintTemplateHash: "",
+  mintTokenId: 0,
   mintTemplateLoading: false,
   templateList: [],
   ownedTemplateList: [],
+  selectedTemplate: null,
 };
 
 const templateSlice = createSlice({
@@ -23,9 +25,15 @@ const templateSlice = createSlice({
     ownedTemplatesFetched(state, action) {
       state.ownedTemplateList = action.payload;
     },
-    templateMinted(state, action: { payload: string }) {
-      state.mintTemplateHash = action.payload;
+    templateMinted(state, action: { payload: number }) {
+      state.mintTokenId = action.payload;
       state.mintTemplateLoading = false;
+    },
+    startMintTemplateLoader(state) {
+      state.mintTemplateLoading = true;
+    },
+    setSelectedTemplate(state, action: { payload: ISelectedTemplate }) {
+      state.selectedTemplate = action.payload;
     },
   },
 });
@@ -35,5 +43,7 @@ export const {
   allTemplatesFetched,
   ownedTemplatesFetched,
   templateMinted,
+  startMintTemplateLoader,
+  setSelectedTemplate,
 } = templateSlice.actions;
 export default templateSlice.reducer;

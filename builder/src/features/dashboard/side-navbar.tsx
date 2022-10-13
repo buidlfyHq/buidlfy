@@ -1,42 +1,33 @@
 import React, { FC } from "react";
-import { SidebarEnum } from "redux/workspace/workspace.interfaces";
-import elements from "assets/icons/elements.png";
-import templates from "assets/icons/templates.png";
-import logo from "assets/icons/buidlfy.png";
-import "styles/components.css";
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { SidebarEnum } from "redux/workspace/workspace.interfaces";
+import logo from "assets/icons/buidlfy.png";
+import elements from "assets/icons/elements.png";
+import templates from "assets/icons/templates.png";
+import "styles/components.css";
 
 interface ISideNavbar {
-  className: string;
   setSideElement: (sideElement: string) => void;
-  showSidebar: () => void;
-  hideSettingSidebar: () => void;
+  setHideNavbar: (hideNavbar: boolean) => void;
 }
 
-const SideNavbar: FC<ISideNavbar> = ({
-  className,
-  setSideElement,
-  showSidebar,
-  hideSettingSidebar,
-}) => {
-  const dispatch = useDispatch()
+const SideNavbar: FC<ISideNavbar> = ({ setSideElement, setHideNavbar }) => {
+  const dispatch = useDispatch();
 
   const handleSidebar = (selectedSidebarElements: string) => {
     setSideElement(selectedSidebarElements);
   };
 
   return (
-    <main
-      className={`w-[80px] sidenav z-[100] fixed top-0 bottom-0 left-0 ${className}`}
-    >
+    <main className="w-[80px] sidenav z-[100] fixed top-0 bottom-0 left-0">
       {/* Components */}
       <img src={logo} className="w-[2.4rem] mx-[1.3rem] my-[0.65rem]" />
       <div className="side-border px-4 pt-[1rem]">
         <div
           onClick={() => {
-            dispatch(toggleModal(true))
-            dispatch(toggleModalType('template'))
+            dispatch(toggleModal(true));
+            dispatch(toggleModalType("template"));
           }}
           className="cursor-pointer"
         >
@@ -47,11 +38,10 @@ const SideNavbar: FC<ISideNavbar> = ({
         </div>
         <div
           onClick={() => {
-            showSidebar();
             handleSidebar(SidebarEnum.ELEMENTS);
-            hideSettingSidebar();
+            setHideNavbar(false);
           }}
-          className="mt-8 cursor-pointer"
+          className="cursor-pointer"
         >
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={elements} alt="Elements" />

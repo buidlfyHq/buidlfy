@@ -28,12 +28,9 @@ interface IWorkspaceComponent {
   setDrag: (drag: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   workspaceBackgroundColor: string;
-  hideSidebar?: () => void;
-  showSidebar?: () => void;
-  showSettingSidebar?: () => void;
-  isNavHidden?: boolean;
+  hideNavbar?: boolean;
+  setHideNavbar?: (hideNavbar?: boolean) => void;
   openSetting?: boolean;
-  setIsNavHidden?: (isNavHidden?: boolean) => void;
   setSideElement?: (sideElement?: string) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
@@ -47,9 +44,8 @@ const Workspace: FC<IWorkspaceComponent> = ({
   setDrag,
   setIsContainerSelected,
   workspaceBackgroundColor,
-  hideSidebar,
-  showSidebar,
-  isNavHidden,
+  hideNavbar,
+  setHideNavbar,
   openSetting,
   setSideElement,
   dragContainer,
@@ -79,7 +75,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       ?.getBoundingClientRect().width;
 
     setFullViewWidth((fullViewWidth) => fullView);
-  }, [isNavHidden, openSetting]);
+  }, [hideNavbar, openSetting]);
 
   const onLayoutChange = (layout: Layout[]) => {
     if (layout.length === 0) setIsContainerSelected(false);
@@ -178,10 +174,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const onComponentClick = (itemName: string, i: string) => {
     setIsContainerSelected(true);
-    hideSidebar();
+    setOpenSetting(true);
     // checks if the selector is active
     if (contractElementSelector === null) {
-      setOpenSetting(true);
       dispatch(setSelectedElement(i));
       setOpenTab(1);
     } else {
@@ -213,7 +208,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       )
     ) {
       setIsContainerSelected(false);
-      hideSidebar();
+      setHideNavbar(true);
     }
     if (
       e.target.id === "full-view" ||
@@ -254,8 +249,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
             setSideElement={setSideElement}
             dragContainer={dragContainer}
             setDragContainer={setDragContainer}
-            showSidebar={showSidebar}
-            hideSidebar={hideSidebar}
+            setHideNavbar={setHideNavbar}
             hideSettingSidebar={hideSettingSidebar}
           />
         </div>

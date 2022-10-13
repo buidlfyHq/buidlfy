@@ -2,7 +2,7 @@ import { BigNumber } from "ethers";
 import templateActionTypes from "./template.types";
 
 export const buyTemplate = (payload: {
-  listingId: string;
+  listingId: BigNumber;
   buyoutPricePerToken: BigNumber;
 }) => ({
   type: templateActionTypes.BUY_TEMPLATE,
