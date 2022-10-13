@@ -18,10 +18,11 @@ import {
   startListTemplateLoader,
 } from "./minted.reducers";
 import mintedActionTypes from "./minted.types";
+import { IRootState } from "redux/root-state.interface";
 
 function* createListingTemplate() {
   const selectedTemplate = yield select(
-    (state: any) => state.template.selectedTemplate
+    (state: IRootState) => state.template.selectedTemplate
   );
   yield put(startListTemplateLoader());
 
@@ -79,7 +80,7 @@ function* getListedTemplates(): any {
 
 function* getOwnedReviewTemplates(): any {
   const currentAccount = yield select(
-    (state: any) => state.web3.currentAccount
+    (state: IRootState) => state.web3.currentAccount
   );
   const fetchedTemplates = yield call(
     getOwnedReviewTemplatesService,
@@ -102,7 +103,7 @@ function* getOwnedReviewTemplates(): any {
 
 function* getOwnedListedTemplates(): any {
   const currentAccount = yield select(
-    (state: any) => state.web3.currentAccount
+    (state: IRootState) => state.web3.currentAccount
   );
   const fetchedTemplates = yield call(
     getOwnedListedTemplatesService,

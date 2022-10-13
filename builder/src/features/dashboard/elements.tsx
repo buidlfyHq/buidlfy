@@ -22,10 +22,10 @@ interface IElements {
 const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
+  const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const selectedElement: IWorkspaceElement = useSelector(
+  const selectedElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 

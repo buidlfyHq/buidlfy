@@ -4,6 +4,7 @@ import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplate } from "redux/template/template.reducers";
+import { IRootState } from "redux/root-state.interface";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 
 const TEMPLATE_CATEGORIES = [
@@ -18,7 +19,7 @@ const TEMPLATE_CATEGORIES = [
 
 const SelectTemplateModal: FC = () => {
   const dispatch = useDispatch();
-  const templateList = useSelector((state: any) => state.minted.templateList);
+  const templateList = useSelector((state: IRootState) => state.minted.templateList);
 
   const handleSelectTemplate = (template: ISelectedTemplate) => {
     dispatch(setSelectedTemplate(template));

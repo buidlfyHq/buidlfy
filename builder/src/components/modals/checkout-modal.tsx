@@ -4,15 +4,18 @@ import { Dialog } from "@headlessui/react";
 import makeBlockie from "ethereum-blockies-base64";
 import { buyTemplate } from "redux/template/template.actions";
 import { truncateString } from "utils/truncateString";
+import { IRootState } from "redux/root-state.interface";
 
 const CheckoutModal: FC = () => {
   const dispatch = useDispatch();
-  const currentAccount = useSelector((state: any) => state.web3.currentAccount);
+  const currentAccount = useSelector(
+    (state: IRootState) => state.web3.currentAccount
+  );
   const currentAccountBalance = useSelector(
-    (state: any) => state.web3.currentAccountBalance
+    (state: IRootState) => state.web3.currentAccountBalance
   );
   const selectedTemplate = useSelector(
-    (state: any) => state.template.selectedTemplate
+    (state: IRootState) => state.template.selectedTemplate
   );
 
   return (
@@ -54,7 +57,7 @@ const CheckoutModal: FC = () => {
                   </div>
                 </div>
                 <div className="text-[#14142B] opacity-70 text-[12px]">
-                  {parseFloat(currentAccountBalance).toFixed(2)} USDT
+                  {parseFloat(currentAccountBalance.toString()).toFixed(2)} USDT
                 </div>
               </div>
             </div>

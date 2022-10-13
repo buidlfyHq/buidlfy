@@ -1,4 +1,5 @@
 import { call, all, put, takeLatest, select } from "redux-saga/effects";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { addNotification } from "redux/notification/notification.reducers";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import {
@@ -12,12 +13,12 @@ import {
   mintTemplateService,
 } from "./template.services";
 import templateActionTypes from "./template.types";
+import { IRootState } from "redux/root-state.interface";
 import { NotificationType } from "redux/notification/notification.interfaces";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 
 function* buySelectedTemplate() {
   const selectedTemplate = yield select(
-    (state: any) => state.template.selectedTemplate
+    (state: IRootState) => state.template.selectedTemplate
   );
   yield put(startBuyTemplateLoader());
   // Check for approval if yes, then don't call approve otherwise call approve

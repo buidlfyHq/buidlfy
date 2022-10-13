@@ -9,6 +9,7 @@ import {
 } from "./web3.reducers";
 import { connectWalletService, getTokenBalanceService } from "./web3.services";
 import web3ActionTypes from "./web3.types";
+import { IRootState } from "redux/root-state.interface";
 import { NotificationType } from "redux/notification/notification.interfaces";
 
 function* connectWalletGen(): any {
@@ -33,7 +34,7 @@ function* connectWalletGen(): any {
 
 function* fetchWalletBalanceGen(): any {
   const currentAccount = yield select(
-    (state: any) => state.web3.currentAccount
+    (state: IRootState) => state.web3.currentAccount
   );
   const balanceRes = yield call(getTokenBalanceService, currentAccount);
   if (!balanceRes.error) {

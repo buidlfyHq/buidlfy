@@ -16,10 +16,10 @@ import MintUploadImg from "assets/icons/mint-form-img.png";
 
 const MintTemplateForm: FC = () => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
+  const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const currentAccount = useSelector((state: any) => state.web3.currentAccount);
+  const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
 
   const [file, setFile] = useState<string>("");
   const [name, setName] = useState<string>("");

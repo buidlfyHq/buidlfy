@@ -30,7 +30,7 @@ const ContractModal: FC<IContractModal> = ({
   setNewContractList,
 }) => {
   const dispatch = useDispatch();
-  const contractDetails: IContractDetails = useSelector(
+  const contractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
   );
 

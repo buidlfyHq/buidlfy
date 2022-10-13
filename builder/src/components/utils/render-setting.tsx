@@ -19,6 +19,7 @@ export enum ReplaceValue {
   DECREMENT = "decrement",
   CHANGE = "change",
 }
+
 export enum ReplaceSpacingValue {
   LEFT = "left",
   RIGHT = "right",
@@ -33,6 +34,7 @@ export enum ReplaceSpacingValue {
   DECREMENTTOP = "decrementTop",
   DECREMENTBOTTOM = "decrementBottom",
 }
+
 export enum ReplaceStyle {
   BOLD = "bold",
   ITALIC = "italic",
@@ -58,7 +60,7 @@ export enum ReplaceStyle {
 
 const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const dispatch = useDispatch();
-  const selectedElement: IWorkspaceElement = useSelector(
+  const selectedElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 

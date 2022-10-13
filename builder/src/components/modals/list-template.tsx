@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { listTemplate } from "redux/minted/minted.actions";
 import { toggleModal } from "redux/modal/modal.reducers";
+import { IRootState } from "redux/root-state.interface";
 import IconImg from "assets/icons/icon-crypto.png";
 
 const ListTemplate: FC = () => {
   const dispatch = useDispatch();
   const selectedTemplate = useSelector(
-    (state: any) => state.template.selectedTemplate
+    (state: IRootState) => state.template.selectedTemplate
   );
 
   const handleListTemplate = () => {
