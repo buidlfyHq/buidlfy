@@ -10,17 +10,23 @@ import {
 import { mintTemplate } from "redux/template/template.actions";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import InfoCircleImg from "assets/icons/info-circle.png";
 import MintUploadImg from "assets/icons/mint-form-img.png";
+
+// REMOVE: default image link when the bug is fixed
+const DEFAULT_IMAGE_LINK =
+  "https://bafkreie5ovwq53lwzfye6y4fbqt5zappoq2y7jn443r3bofpvlkxhjh5jy.ipfs.dweb.link/";
 
 const MintTemplateForm: FC = () => {
   const dispatch = useDispatch();
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
+  const currentAccount = useSelector(
+    (state: IRootState) => state.web3.currentAccount
+  );
 
+  // BUG: setFile state not able to persist
   const [file, setFile] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -36,6 +42,7 @@ const MintTemplateForm: FC = () => {
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
+          // BUG: setFile state not able to persist
           setFile(cid);
         });
         reader.readAsDataURL(e.target.files[0]);
@@ -45,8 +52,9 @@ const MintTemplateForm: FC = () => {
 
   const handleSaveTemplate = async () => {
     if (workspaceElements?.length > 0) {
+      // REMOVE: default image link when the bug is fixed
       let newTemplate = {
-        image: file,
+        image: DEFAULT_IMAGE_LINK,
         name,
         category,
         description,
