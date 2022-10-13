@@ -1,13 +1,12 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Dialog } from "@headlessui/react";
-import HourGlassImg from "assets/icons/hourglass.png";
+import LottieComponent from "components/utils/lottie";
+import Hourglass from "assets/lottie/hourglass.json";
 
 const MintingProgressModal: FC = () => {
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[582px] my-20 sm:mx-28 mx-14 rounded-[4px] py-16 px-10 bg-white">
-      <div>
-        <img src={HourGlassImg} alt="icon" width={54} height={54} />
-      </div>
+      <LottieComponent lottie={Hourglass} width={75} height={75} />
       <div className="font-[500] text-[20px] text-[#14142B] mt-5">
         Mint in process
       </div>
