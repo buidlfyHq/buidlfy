@@ -331,6 +331,10 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   background: #e9edfd;
   border-radius: 5px;
 }
+.align-div:hover {
+  background: #b7c1ec;
+  border-radius: 5px;
+}
 .margin-text {
   font-style: normal;
   font-weight: 500;
@@ -925,7 +929,7 @@ height: 40px;
   border-radius: 28px;
   padding: 10px 20px;
   color: white;
-  transition: 2s !important;
+  transition: all 2s ease !important;
 }
 .add-btn:hover {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),

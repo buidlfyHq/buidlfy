@@ -275,7 +275,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       style={{
         width: "-webkit-fill-available",
       }}
-      className="main-div h-full "
+      className="main-div h-full"
     >
       {workspaceElements?.length > 0 ? (
         <section onClick={handleCheckIsContainer} className="z-100">
@@ -310,6 +310,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
             setSideElement={setSideElement}
           />
           <DefaultSettings
+            setOpenSetting={setOpenSetting}
+            setIsContainerSelected={setIsContainerSelected}
+            hideSidebar={hideSidebar}
             workspaceBackgroundColor={workspaceBackgroundColor}
             setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
             head={head}

@@ -83,6 +83,9 @@ const Dashboard: FC = () => {
           <section className="flex-1">
             {/* Navbar */}
             <Navbar
+              setOpenSetting={setOpenSetting}
+              setIsContainerSelected={setIsContainerSelected}
+              hideSidebar={hideSidebar}
               workspaceBackgroundColor={workspaceBackgroundColor}
               setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
               head={head}
@@ -122,6 +125,9 @@ const Dashboard: FC = () => {
               />
             ) : (
               <DefaultSettings
+                setOpenSetting={setOpenSetting}
+                setIsContainerSelected={setIsContainerSelected}
+                hideSidebar={hideSidebar}
                 workspaceBackgroundColor={workspaceBackgroundColor}
                 setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
                 head={head}
