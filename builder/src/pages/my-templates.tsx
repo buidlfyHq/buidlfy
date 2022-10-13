@@ -8,10 +8,16 @@ import SearchForm from "features/my-templates/search-form";
 import RenderTemplateList from "components/utils/render-template-list";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
 
+export enum TabType {
+  ALL = "all",
+  REVIEW = "review",
+  LISTED = "listed",
+}
+
 const MyTemplates: FC = () => {
   const navigate = useNavigate();
   const currentAccount = useSelector((state: any) => state.web3.currentAccount);
-  const [tab, setTab] = useState<number>(1);
+  const [tab, setTab] = useState<string>("all");
 
   useEffect(() => {
     if (!currentAccount) {
@@ -55,28 +61,27 @@ const MyTemplates: FC = () => {
       <section>
         <section className="py-0 px-36">
           <div className="flex justify-center mt-6 text-black font-[600] text-[15px] gap-8">
-            {/* Make separate util */}
             <button
               className={`py-3 cursor-pointer px-7 outline-none ${
-                tab === 1 ? "border-b-4 border-purple-500" : null
+                tab === TabType.ALL ? "border-b-4 border-purple-500" : null
               }`}
-              onClick={() => setTab(1)}
+              onClick={() => setTab(TabType.ALL)}
             >
               All Templates
             </button>
             <button
               className={`py-3 cursor-pointer px-7 outline-none ${
-                tab === 2 ? "border-b-4 border-purple-500" : null
+                tab === TabType.REVIEW ? "border-b-4 border-purple-500" : null
               }`}
-              onClick={() => setTab(2)}
+              onClick={() => setTab(TabType.REVIEW)}
             >
               In Review
             </button>
             <button
               className={`py-3 cursor-pointer px-7 outline-none ${
-                tab === 3 ? "border-b-4 border-purple-500" : null
+                tab === TabType.LISTED ? "border-b-4 border-purple-500" : null
               }`}
-              onClick={() => setTab(3)}
+              onClick={() => setTab(TabType.LISTED)}
             >
               Listed Templates
             </button>

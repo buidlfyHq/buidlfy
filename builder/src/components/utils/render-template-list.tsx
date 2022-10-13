@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { TabType } from "pages/my-templates";
 import { filterTemplates } from "utils/filter-templates";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
@@ -9,7 +10,7 @@ import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import TemplateCard from "features/my-templates/template-card";
 
 interface IRenderTemplateList {
-  tab: number;
+  tab: string;
 }
 
 const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
@@ -31,7 +32,7 @@ const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
   };
 
   switch (tab) {
-    case 1:
+    case TabType.ALL:
       return (
         <>
           {ownedTemplateList &&
@@ -60,7 +61,7 @@ const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
             })}
         </>
       );
-    case 2:
+    case TabType.REVIEW:
       return (
         <>
           {ownedReviewTemplateList &&
@@ -71,7 +72,7 @@ const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
             ))}
         </>
       );
-    case 3:
+    case TabType.LISTED:
       return (
         <>
           {ownedListedTemplateList &&
