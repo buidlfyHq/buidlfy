@@ -4,10 +4,8 @@ import { ISelectedTemplate, ITemplateState } from "./template.interfaces";
 const initialState: ITemplateState = {
   buyTemplateHash: "",
   buyTemplateLoading: false,
-  mintTokenId: 0,
+  mintTokenId: 0, // UPDATE: [{id: string, tokenId: number}]
   mintTemplateLoading: false,
-  templateList: [],
-  ownedTemplateList: [],
   selectedTemplate: null,
 };
 
@@ -19,15 +17,12 @@ const templateSlice = createSlice({
       state.buyTemplateHash = action.payload;
       state.buyTemplateLoading = false;
     },
-    allTemplatesFetched(state, action) {
-      state.templateList = action.payload;
-    },
-    ownedTemplatesFetched(state, action) {
-      state.ownedTemplateList = action.payload;
-    },
     templateMinted(state, action: { payload: number }) {
       state.mintTokenId = action.payload;
       state.mintTemplateLoading = false;
+    },
+    startBuyTemplateLoader(state) {
+      state.buyTemplateLoading = true;
     },
     startMintTemplateLoader(state) {
       state.mintTemplateLoading = true;
@@ -40,9 +35,8 @@ const templateSlice = createSlice({
 
 export const {
   buyTemplate,
-  allTemplatesFetched,
-  ownedTemplatesFetched,
   templateMinted,
+  startBuyTemplateLoader,
   startMintTemplateLoader,
   setSelectedTemplate,
 } = templateSlice.actions;

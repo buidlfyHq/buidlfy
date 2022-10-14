@@ -6,16 +6,16 @@ export interface ITemplateState {
   buyTemplateLoading: boolean;
   mintTokenId: number;
   mintTemplateLoading: boolean;
-  templateList: []; // ADD: suitable type
-  ownedTemplateList: []; // ADD: suitable type
   selectedTemplate: ISelectedTemplate;
 }
 
 export interface ISelectedTemplate {
-  id: string;
+  id?: string;
+  token_id?: string;
   name: string;
   value: IWorkspaceElement[];
   image: string;
   listing_listingId: BigNumber;
   listing_buyoutPricePerToken: BigNumber;
+  listing_tokenId?: string;
 }
