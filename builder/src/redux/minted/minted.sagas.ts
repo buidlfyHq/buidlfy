@@ -45,7 +45,10 @@ function* createTemplateListing() {
 }
 
 function* getOwnedTemplates(): any {
-  const fetchedTemplates = yield call(getOwnedTemplatesService);
+  const currentAccount = yield select(
+    (state: IRootState) => state.web3.currentAccount
+  );
+  const fetchedTemplates = yield call(getOwnedTemplatesService, currentAccount);
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.templates.length !== 0) {
       yield put(ownedTemplatesFetched(fetchedTemplates.templates));

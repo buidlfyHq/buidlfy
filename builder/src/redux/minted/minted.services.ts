@@ -76,11 +76,13 @@ export const formatList = async (listings) => {
   return templates;
 };
 
-export const getOwnedTemplatesService = async (): Promise<any> => {
+export const getOwnedTemplatesService = async (
+  address: string
+): Promise<any> => {
   try {
     const allTemplates = await (
       await fetch(
-        "https://deep-index.moralis.io/api/v2/0xd6c72729EbCC987b171eCF074993ce3C4e34b9f0/nft?chain=goerli&format=decimal&token_addresses=0xa69374d7371df89192f05c7b61a945f834bf2593",
+        `https://deep-index.moralis.io/api/v2/${address}/nft?chain=goerli&format=decimal&token_addresses=0xa69374d7371df89192f05c7b61a945f834bf2593`,
         {
           method: "GET",
           headers: {
@@ -91,7 +93,6 @@ export const getOwnedTemplatesService = async (): Promise<any> => {
       )
     ).json();
 
-    // filtering out templates without images
     let templates = (
       await Promise.all(
         allTemplates.result.map(async (template: any) => {
@@ -123,6 +124,7 @@ export const getOwnedTemplatesService = async (): Promise<any> => {
 // available for buying
 export const getListedTemplatesService = async () => {
   // Removed: isAccepted from query
+  // ADD: isAccepted when reviewing is functional
   try {
     const query = gql`
       {
@@ -209,7 +211,6 @@ export const getOwnedReviewTemplatesService = async (address: string) => {
 };
 
 export const getOwnedListedTemplatesService = async (address: string) => {
-  // Removed: isAccepted from query
   try {
     const query = gql`
       {

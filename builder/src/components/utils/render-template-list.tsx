@@ -1,12 +1,9 @@
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { TabType } from "pages/my-templates";
 import { filterTemplates } from "utils/filter-templates";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import TemplateCard from "features/my-templates/template-card";
 
 interface IRenderTemplateList {
@@ -14,8 +11,6 @@ interface IRenderTemplateList {
 }
 
 const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const ownedTemplateList = useSelector(
     (state: IRootState) => state.minted.ownedTemplateList
   );
@@ -25,11 +20,6 @@ const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
   const ownedListedTemplateList = useSelector(
     (state: IRootState) => state.minted.ownedListedTemplateList
   );
-
-  const openTemplate = (config: IWorkspaceElement[]) => {
-    if (config) dispatch(updateWorkspaceElementsArray(config));
-    return navigate("/");
-  };
 
   switch (tab) {
     case TabType.ALL:
@@ -47,10 +37,7 @@ const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
                 )[0] !== undefined;
 
               return (
-                <div
-                  key={temp.token_id}
-                  onClick={() => openTemplate(temp.value)}
-                >
+                <div key={temp.token_id}>
                   <TemplateCard
                     temp={temp}
                     badge={filterTemplates(inReview, listed).badge}
