@@ -14,14 +14,14 @@ const mintedSlice = createSlice({
   name: "minted",
   initialState,
   reducers: {
-    listTemplate(state, action: { payload: string }) {
+    templateListed(state, action: { payload: string }) {
       state.listTemplateHash = action.payload;
       state.listTemplateLoading = false;
     },
     startListTemplateLoader(state) {
       state.listTemplateLoading = true;
     },
-    fetchOwnedTemplates(state, action) {
+    ownedTemplatesFetched(state, action) {
       state.ownedTemplateList = action.payload;
     },
     allTemplatesFetched(state, action) {
@@ -37,9 +37,9 @@ const mintedSlice = createSlice({
 });
 
 export const {
-  listTemplate,
+  templateListed,
   startListTemplateLoader,
-  fetchOwnedTemplates,
+  ownedTemplatesFetched,
   allTemplatesFetched,
   ownedReviewTemplatesFetched,
   ownedListedTemplatesFetched,

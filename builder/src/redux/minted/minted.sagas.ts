@@ -11,8 +11,8 @@ import {
 } from "./minted.services";
 import {
   allTemplatesFetched,
-  fetchOwnedTemplates,
-  listTemplate,
+  ownedTemplatesFetched,
+  templateListed,
   ownedListedTemplatesFetched,
   ownedReviewTemplatesFetched,
   startListTemplateLoader,
@@ -20,7 +20,7 @@ import {
 import mintedActionTypes from "./minted.types";
 import { IRootState } from "redux/root-state.interface";
 
-function* createListingTemplate() {
+function* createTemplateListing() {
   const selectedTemplate = yield select(
     (state: IRootState) => state.template.selectedTemplate
   );
@@ -32,7 +32,7 @@ function* createListingTemplate() {
     ethers.utils.parseEther("5")
   );
   if (!listingRes.error) {
-    yield put(listTemplate(listingRes.receipt));
+    yield put(templateListed(listingRes.receipt));
   } else {
     yield put(
       addNotification({
@@ -48,7 +48,7 @@ function* getOwnedTemplates(): any {
   const fetchedTemplates = yield call(getOwnedTemplatesService);
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.templates.length !== 0) {
-      yield put(fetchOwnedTemplates(fetchedTemplates.templates));
+      yield put(ownedTemplatesFetched(fetchedTemplates.templates));
     }
   } else {
     yield put(
@@ -125,7 +125,7 @@ function* getOwnedListedTemplates(): any {
 }
 
 function* listTemplateSaga() {
-  yield takeLatest(mintedActionTypes.LIST_TEMPLATE, createListingTemplate);
+  yield takeLatest(mintedActionTypes.LIST_TEMPLATE, createTemplateListing);
 }
 
 function* fetchOwnedTemplatesSaga() {
