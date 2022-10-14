@@ -20,12 +20,18 @@ interface INavbar {
     title: string;
     logo: string | ArrayBuffer;
   };
+  hideSidebar?: () => void;
+  setIsContainerSelected: (isContainerSelected?: boolean) => void;
+  setOpenSetting: (open: boolean) => void;
 }
 
 const Navbar: FC<INavbar> = ({
   workspaceBackgroundColor,
   head,
   setWorkspaceBackgroundColor,
+  hideSidebar,
+  setIsContainerSelected,
+  setOpenSetting
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -141,8 +147,14 @@ const Navbar: FC<INavbar> = ({
     setIsOpen(true);
   };
 
+  const handleCloseSidebar = () => {
+    setIsContainerSelected(false)
+    hideSidebar()
+    setOpenSetting(false);
+  }
+
   return (
-    <main className="fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20">
+    <main onClick={handleCloseSidebar} className="fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20">
       <div className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"></div>
       <div className="flex flex-row h-[60px]">
         <div className="flex flex-row items-center">

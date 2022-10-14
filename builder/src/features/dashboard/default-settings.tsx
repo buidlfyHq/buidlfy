@@ -16,6 +16,9 @@ interface IDefaultSettings {
     logo: string | ArrayBuffer;
   };
   setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
+  hideSidebar?: () => void;
+  setIsContainerSelected: (isContainerSelected?: boolean) => void;
+  setOpenSetting: (open: boolean) => void;
 }
 
 const DefaultSettings: FC<IDefaultSettings> = ({
@@ -23,6 +26,9 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   setWorkspaceBackgroundColor,
   head,
   setHead,
+  hideSidebar,
+  setIsContainerSelected,
+  setOpenSetting
 }) => {
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
   const [siteImage, setSiteImage] = useState<string>();
@@ -72,9 +78,15 @@ const DefaultSettings: FC<IDefaultSettings> = ({
     />
   );
 
+  const handleCloseSidebar = () => {
+    setIsContainerSelected(false)
+    hideSidebar()
+    setOpenSetting(false);
+  }
+
   // ADD: New site design in next branch
   return (
-    <main className="fixed right-0 top-[60px] w-[250px] setting-nav h-full  bg-white">
+    <main onClick={handleCloseSidebar} className="fixed right-0 top-[60px] w-[250px] setting-nav h-full">
       <div className="mx-3 my-2">
         <h3 className="mb-2 setting-text mt-4 ml-[0.8rem]">Site Settings</h3>
         <aside className="mb-1">
@@ -103,7 +115,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         <>
           {tooltip}
           <div
-            className={`relative w-[205px] rounded-[0.3rem] h-[155px] mr-1 ml-4 my-2 cursor-pointer ${
+            className={`relative w-[205px] rounded-[0.3rem] h-[155px] mr-1 ml-4 my-2 ${
               siteImage ? "image-overlay" : "default-upload"
             } `}
           >
@@ -111,7 +123,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
               <div>
                 <IoIosCloseCircleOutline
                   onClick={handleDeleteImage}
-                  className="text-white absolute right-1 top-1 text-[18px] "
+                  className="text-white absolute right-1 top-1 text-[18px] hover:scale-125 ease-linear duration-200 scale-100"
                 />
                 <div className="absolute flex justify-center items-center w-full h-full">
                   <Spinner />
@@ -133,7 +145,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
                   <>
                     <IoIosCloseCircleOutline
                       onClick={handleDeleteImage}
-                      className="text-white absolute right-1 top-1 text-[18px]"
+                      className="text-white absolute cursor-pointer right-1 bg-black rounded-[50%] hover:scale-125 ease-linear duration-200 scale-100 top-1 text-[18px]"
                     />
                     <img
                       className="w-[220px] h-[153px] object-fill"
@@ -145,7 +157,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
                       className="image-label cursor-pointer"
                     >
                       {imageInput}
-                      <span className="bg-white border absolute border-[#8268E5] py-2 px-10 bottom-[0.5rem] left-[1.5rem] rounded-[34px] text-[#8268E5] text-[12px]">
+                      <span className="bg-white hover:bg-[#8268E5] hover:text-white ease-linear duration-200 border absolute border-[#8268E5] py-2 px-10 bottom-[0.5rem] left-[1.5rem] rounded-[34px] text-[#8268E5] text-[12px]">
                         Change Image
                       </span>
                     </label>
@@ -164,7 +176,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
                       </h6>
                       <div className="flex justify-center mt-4">
                         {imageInput}
-                        <span className="bg-white border border-[#8268E5] py-2 px-7 rounded-[34px] text-[#8268E5] text-[12px]">
+                        <span className="bg-white hover:bg-[#8268E5] hover:text-white ease-linear duration-200 border border-[#8268E5] py-2 px-7 rounded-[34px] text-[#8268E5] text-[12px]">
                           Upload Image
                         </span>
                       </div>
