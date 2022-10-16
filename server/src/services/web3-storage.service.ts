@@ -15,7 +15,7 @@ class Web3StorageService {
       Logger.info('Uploading file to Web3 Storage');
       const cid = await this.web3StorageClient.put([file], { wrapWithDirectory: false });
       Logger.info(`Uploaded file cid: ${cid}`);
-      return `https://${cid}.ipfs.dweb.link/`;
+      return `https://${cid}.ipfs.w3s.link/`;
     } catch (error) {
       Logger.error(`Error found in ${__filename} - deployApp - ${error.message}`);
       throw error;

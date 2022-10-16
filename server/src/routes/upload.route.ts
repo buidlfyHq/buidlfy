@@ -1,20 +1,20 @@
 import { Router } from 'express';
-import DeploymentsController from '@/controllers/deployments.controller';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@/middlewares/validation.middleware';
 import { UploadDto } from '@/dtos/upload.dto';
+import UploadController from '@/controllers/upload.controller';
 
 class UploadRoute implements Routes {
   public path = '/upload';
   public router = Router();
-  public deploymentController = new DeploymentsController();
+  public uploadController = new UploadController();
 
   constructor() {
     this.initializeRoutes();
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}`, validationMiddleware(UploadDto, 'body'), this.deploymentController.startDeployment);
+    this.router.post(`${this.path}`, validationMiddleware(UploadDto, 'body'), this.uploadController.uploadFile);
   }
 }
 
