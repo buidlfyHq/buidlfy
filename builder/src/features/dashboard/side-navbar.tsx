@@ -66,6 +66,12 @@ const SideNavbar: FC<ISideNavbar> = ({
         </div> */}
         {/* <div className="mt-8 cursor-pointer">
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
+            <img src={pages} />
+          </div>
+          <h3 className="side-text mt-1">Pages</h3>
+        </div> */}
+        {/* <div className="mt-8 cursor-pointer">
+          <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={media} />
           </div>
           <h3 className="side-text mt-1">Media</h3>

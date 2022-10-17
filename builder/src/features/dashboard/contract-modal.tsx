@@ -6,9 +6,10 @@ import {
   updateContractAddress,
   updateContractList,
 } from "redux/contract/contract.reducers";
-import upload from "assets/icons/upload-img.png";
+import upload from "assets/upload-img.svg";
 import { IContract } from "redux/contract/contract.interfaces";
 import "styles/components.css";
+import { IRootState } from "redux/root-state.interface";
 
 interface IContractModal {
   isOpen: boolean;
