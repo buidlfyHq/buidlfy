@@ -15,10 +15,17 @@ export default interface IBgContainer {
   setInputValue: (inputValue: IInput[]) => void;
   outputValue: IOutput[];
   setOutputValue: (outputValue: IOutput[]) => void;
+  backgroundSize?: string;
   padding?: {
     paddingLeft?: number;
     paddingRight?: number;
     paddingTop?: number;
     paddingBottom?: number;
   };
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  }
 }

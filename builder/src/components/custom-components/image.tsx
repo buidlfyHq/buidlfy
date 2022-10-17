@@ -1,4 +1,8 @@
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
+import { IRootState } from "redux/root-state.interface";
+import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
+import DefaultImage from "components/utils/default-image";
 import "styles/components.css";
 
 interface IImageComponent {
@@ -27,6 +31,12 @@ const Image: FC<IImageComponent> = ({
   backgroundSize,
   isAuto,
 }) => {
+  const imageData: IUploadedImageData = useSelector((state: IRootState) =>
+    state.workspace.uploadedImagesData.find(
+      (image: IUploadedImageData) => image.settingItemId === i
+    )
+  );
+
   // Add ClientWidth and ClientHeight of Image when it changes its position
   // const ref = useRef<HTMLDivElement>();
 
@@ -47,14 +57,20 @@ const Image: FC<IImageComponent> = ({
   // }, [ref?.current?.clientHeight]);
   return (
     <>
-      {imgData ? (
+      {imageData?.uploadedImageData ? (
         <div className="flex w-full h-full">
           <div
             // ref={ref}
             id={i}
             className="flex w-full h-full"
             style={{
-              backgroundImage: `url(${imgData})`,
+              backgroundImage: `url(${imageData.uploadedImageData})`,
+              // It will be needed after image storage works
+              // backgroundImage: `${
+              //   imgData
+              //     ? `url(${imgData})`
+              //     : `url(${imageData.uploadedImageData})`
+              // }`,
               backgroundRepeat: "no-repeat",
               backgroundPosition: justifyContent,
               backgroundSize: `${
@@ -65,15 +81,7 @@ const Image: FC<IImageComponent> = ({
           />
         </div>
       ) : (
-        <div className="flex justify-center">
-          <div
-            id={i}
-            className="my-[1.8rem] upload-img px-3 text-[12px] whitespace-nowrap"
-          >
-            Click and upload file, or{" "}
-            <span className="ml-2 purple-label">browse</span>
-          </div>
-        </div>
+        <DefaultImage id={i} />
       )}
     </>
   );

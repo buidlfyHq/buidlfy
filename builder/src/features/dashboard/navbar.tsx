@@ -20,15 +20,25 @@ import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 interface INavbar {
-  className: string;
   workspaceBackgroundColor: string;
+  setWorkspaceBackgroundColor?: (workspaceBackgroundColor: string) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;
   };
+  hideSidebar?: () => void;
+  setIsContainerSelected: (isContainerSelected?: boolean) => void;
+  setOpenSetting: (open: boolean) => void;
 }
 
-const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
+const Navbar: FC<INavbar> = ({
+  workspaceBackgroundColor,
+  head,
+  setWorkspaceBackgroundColor,
+  hideSidebar,
+  setIsContainerSelected,
+  setOpenSetting,
+}) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
@@ -61,7 +71,20 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
       }
     }
   }, [contractDetails.abi]);
-
+  const getConfig = () => {
+    return {
+      head: {
+        title: head.title,
+        logo: head.logo,
+      },
+      background: workspaceBackgroundColor,
+      builder: workspaceElements,
+      contract: {
+        abi: abiJSON,
+        address: contractDetails.address,
+      },
+    };
+  };
   // find suitable type
   const onChangeImage = (e) => {
     if (e.target.files[0]) {
@@ -86,7 +109,7 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
   const handleSave = () => {
     // FIX: save full config to local storage
     if (workspaceElements?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(workspaceElements));
+      localStorage.setItem("items", JSON.stringify(getConfig()));
     }
   };
 
@@ -121,45 +144,33 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
     localStorage.removeItem("items");
     dispatch(updateWorkspaceElementsArray([]));
     dispatch(setSelectorToDefault());
+    setWorkspaceBackgroundColor("rgba(255, 255, 255, 1)");
   };
 
   const handlePublish = () => {
-    let config = {
-      head: {
-        title: head.title,
-        logo: head.logo,
-      },
-      background: workspaceBackgroundColor,
-      builder: workspaceElements,
-      contract: {
-        abi: abiJSON,
-        address: contractDetails.address,
-      },
-    };
-    let stringifiedConfig = JSON.stringify(config);
-
+    let stringifiedConfig = JSON.stringify(getConfig());
     setGeneratedConfig(base64_encode(stringifiedConfig));
-    dispatch(toggleModal(true))
-    dispatch(toggleModalType('publish-process'))
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("publish-process"));
   };
 
   const handleMintTemplateForm = () => {
-    dispatch(toggleModal(true))
-    dispatch(toggleModalType('mint-nft-form'))
-  } 
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("mint-nft-form"));
+  };
+  const handleCloseSidebar = () => {
+    setIsContainerSelected(false);
+    hideSidebar();
+    setOpenSetting(false);
+  };
 
   return (
     <main
-      className={
-        !className
-          ? `fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20`
-          : `h-[57px] w-full top-0 topnav flex flex-row justify-between items-center p-3 z-20`
-      }
+      onClick={handleCloseSidebar}
+      className="fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20"
     >
-      <div className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer">
-        {className && <AiOutlineDoubleRight />}
-      </div>
-      <div className="flex flex-row items-center h-[60px]">
+      <div className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"></div>
+      <div className="flex flex-row h-[60px]">
         <div className="flex flex-row items-center">
           <div
             onClick={handleClear}
@@ -196,13 +207,13 @@ const Navbar: FC<INavbar> = ({ className, workspaceBackgroundColor, head }) => {
           Preview
         </div> */}
         <div
-          className="bordered-button text-[14px] text-[#855FD8] font[500] py-2 px-6 cursor-pointer"
+          className="bordered-button text-[14px] text-[#855FD8] font[500] py-3 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
           onClick={handleMintTemplateForm}
         >
           Mint as NFT
         </div>
         <button
-          className="py-2 px-7 ml-3 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
+          className="py-2 px-7 ml-3 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap my-2 ml-3"
           onClick={handlePublish}
         >
           Publish

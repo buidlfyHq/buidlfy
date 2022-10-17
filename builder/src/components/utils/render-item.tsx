@@ -50,6 +50,7 @@ const RenderItem: FC<IRenderItem> = ({
           backgroundColor={item.style.backgroundColor}
           link={item.link}
           borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
           shadow={item.style.shadow}
           connectWallet={item.connectWallet}
           margin={item.style.margin}
@@ -86,6 +87,8 @@ const RenderItem: FC<IRenderItem> = ({
           color={item.style.color}
           margin={item.style.margin}
           padding={item.style.padding}
+          backgroundColor={item.style.backgroundColor}
+          borderColor={item.style.borderColor}
         />
       );
     case "Image":
@@ -127,6 +130,8 @@ const RenderItem: FC<IRenderItem> = ({
           hideSidebar={hideSidebar}
           hideSettingSidebar={hideSettingSidebar}
           padding={item.style.padding}
+          margin={item.style.margin}
+          backgroundSize={item.style.backgroundSize}
         />
       );
     default:

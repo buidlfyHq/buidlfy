@@ -14,13 +14,14 @@ export default interface ITexts {
   link: string;
   backgroundColor?: string;
   borderRadius?: number;
+  borderWidth?: number;
   shadow?: string;
   contractFunction?: any; // breaking while assigning a type, work in progress
   inputValue?: IInput[];
   setInputValue?: (inputValue: IInput[]) => void;
   outputValue?: IOutput[];
   setOutputValue?: (outputValue: IOutput[]) => void;
-  connectWallet?: string;
+  connectWallet?: boolean;
   margin?: {
     marginLeft?: number,
     marginRight?: number,

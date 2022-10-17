@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
+import SpaceInput from "components/utils/space-input";
 import { updateWorkspaceElementSubStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -13,20 +13,25 @@ interface IMarginComponent {
     marginTop?: number;
     marginBottom?: number;
   };
+  name?: string;
 }
 
-const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
+enum Margin {
+  MARGINLEFT = "marginLeft",
+  MARGINRIGHT = "marginRight",
+  MARGINTOP = "marginTop",
+  MARGINBOTTOM = "marginBottom",
+}
+
+const MarginComponent: FC<IMarginComponent> = ({ i, margin, name }) => {
   const dispatch = useDispatch();
 
-  const handleChange = (
-    property: string,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChange = (property: string, updatedMargin?: number) => {
     dispatch(
       updateWorkspaceElementSubStyle({
         settingItemId: i,
         propertyName: "margin",
-        propertyValue: +e.target.value,
+        propertyValue: updatedMargin,
         childPropertyName: property,
       })
     );
@@ -54,90 +59,67 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin }) => {
     );
   };
 
+  const marginData = {
+    container: {
+      text: ["L", "R"],
+      value: [margin?.marginLeft || 0, margin?.marginRight || 0],
+      handleChange: [
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINLEFT, updatedMargin),
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINRIGHT, updatedMargin),
+      ],
+      handleIncrement: [
+        () => incrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
+        () => incrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
+      ],
+      handleDecrement: [
+        () => decrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
+        () => decrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
+      ],
+    },
+    default: {
+      text: ["L", "R", "T", "B"],
+      value: [
+        margin?.marginLeft || 0,
+        margin?.marginRight || 0,
+        margin?.marginTop || 0,
+        margin?.marginBottom || 0,
+      ],
+      handleChange: [
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINLEFT, updatedMargin),
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINRIGHT, updatedMargin),
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINTOP, updatedMargin),
+        (updatedMargin: number) =>
+          handleChange(Margin.MARGINBOTTOM, updatedMargin),
+      ],
+      handleIncrement: [
+        () => incrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
+        () => incrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
+        () => incrementCounter(Margin.MARGINTOP, margin?.marginTop),
+        () => incrementCounter(Margin.MARGINBOTTOM, margin?.marginBottom),
+      ],
+      handleDecrement: [
+        () => decrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
+        () => decrementCounter(Margin.MARGINRIGHT, margin?.marginRight),
+        () => decrementCounter(Margin.MARGINTOP, margin?.marginTop),
+        () => decrementCounter(Margin.MARGINBOTTOM, margin?.marginBottom),
+      ],
+    },
+  };
+  const containerType = name === "Container" ? "container" : "default";
   return (
-    <>
-      <div className="flex items-center w-full px-3 py-4 text-gray-600">
-        <span className="px-1 text-left ">
-          <span className="margin-text">Margin</span>
-          <div className="flex mt-3">
-            <h6 className="mr-2 margin-subtext">L</h6>
-            <input
-              inputMode="numeric"
-              value={margin?.marginLeft}
-              placeholder="0"
-              className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
-              onChange={(e) => handleChange("marginLeft", e)}
-            />
-            <AiOutlineCaretUp
-              onClick={() => incrementCounter("marginLeft", margin?.marginLeft)}
-              className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
-            />
-            <AiOutlineCaretDown
-              onClick={() => decrementCounter("marginLeft", margin?.marginLeft)}
-              className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
-            />
-            <h6 className="ml-5 mr-2 margin-subtext">R</h6>
-            <input
-              inputMode="numeric"
-              value={margin?.marginRight}
-              placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
-              onChange={(e) => handleChange("marginRight", e)}
-            />
-            <AiOutlineCaretUp
-              onClick={() =>
-                incrementCounter("marginRight", margin?.marginRight)
-              }
-              className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
-            />
-            <AiOutlineCaretDown
-              onClick={() =>
-                decrementCounter("marginRight", margin?.marginRight)
-              }
-              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
-            />
-          </div>
-          <div className="flex mt-3">
-            <h6 className="mr-2 margin-subtext">T</h6>
-            <input
-              inputMode="numeric"
-              value={margin?.marginTop}
-              placeholder="0"
-              className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
-              onChange={(e) => handleChange("marginTop", e)}
-            />
-            <AiOutlineCaretUp
-              onClick={() => incrementCounter("marginTop", margin?.marginTop)}
-              className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
-            />
-            <AiOutlineCaretDown
-              onClick={() => decrementCounter("marginTop", margin?.marginTop)}
-              className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
-            />
-            <h6 className="ml-5 mr-2 margin-subtext">B</h6>
-            <input
-              inputMode="numeric"
-              value={margin?.marginBottom}
-              placeholder="0"
-              className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
-              onChange={(e) => handleChange("marginBottom", e)}
-            />
-            <AiOutlineCaretUp
-              onClick={() =>
-                incrementCounter("marginBottom", margin?.marginBottom)
-              }
-              className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
-            />
-            <AiOutlineCaretDown
-              onClick={() =>
-                decrementCounter("marginBottom", margin?.marginBottom)
-              }
-              className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
-            />
-          </div>
-        </span>
-      </div>
-    </>
+    <SpaceInput
+      heading="Margin"
+      text={marginData[containerType].text}
+      value={marginData[containerType].value}
+      handleChange={marginData[containerType].handleChange}
+      handleIncrement={marginData[containerType].handleIncrement}
+      handleDecrement={marginData[containerType].handleDecrement}
+    />
   );
 };
 export default MarginComponent;

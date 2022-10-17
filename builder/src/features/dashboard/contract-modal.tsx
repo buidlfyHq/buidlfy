@@ -4,10 +4,10 @@ import { Dialog } from "@headlessui/react";
 import {
   updateContractAbi,
   updateContractAddress,
+  updateContractList,
 } from "redux/contract/contract.reducers";
-import { IRootState } from "redux/root-state.interface";
-import { IContractDetails } from "redux/contract/contract.interfaces";
 import upload from "assets/icons/upload-img.png";
+import { IContract } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 interface IContractModal {
@@ -15,11 +15,6 @@ interface IContractModal {
   setIsOpen: (isOpen: boolean) => void;
   methodOpen: boolean;
   setMethodOpen: (methodOpen: boolean) => void;
-  setNewContractList: (newContractList: IContract[]) => void;
-}
-interface IContract {
-  name: string;
-  text: any; // type to be added
 }
 
 const ContractModal: FC<IContractModal> = ({
@@ -27,17 +22,14 @@ const ContractModal: FC<IContractModal> = ({
   setIsOpen,
   methodOpen,
   setMethodOpen,
-  setNewContractList,
 }) => {
   const dispatch = useDispatch();
-  const contractDetails: IContractDetails = useSelector(
-    (state: IRootState) => state.contract.contractDetails
-  );
 
   const [showUpload, setShowUpload] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer>("");
-
+  const [updateAbi, setUpdateAbi] = useState<string>();
+  const [updateAddress, setUpdateAddress] = useState<string>();
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -47,7 +39,8 @@ const ContractModal: FC<IContractModal> = ({
     let newContractList: Array<IContract> = [];
     let newContract: IContract = {
       name: inputValue,
-      text: JSON.stringify(contractDetails.abi),
+      text: JSON.stringify(updateAbi),
+      address: JSON.stringify(updateAddress),
     };
     // localStorage.setItem("items", JSON.stringify(items));
     const contractList = localStorage.getItem("contractList") || "";
@@ -58,7 +51,9 @@ const ContractModal: FC<IContractModal> = ({
     }
     newContractList.push(newContract);
     localStorage.setItem("contractList", JSON.stringify(newContractList));
-    setNewContractList(newContractList);
+    dispatch(updateContractList(newContractList));
+    dispatch(updateContractAbi(updateAbi));
+    dispatch(updateContractAddress(updateAddress));
   };
 
   const handleShow = () => setShowUpload(false);
@@ -68,7 +63,7 @@ const ContractModal: FC<IContractModal> = ({
     const filteredAbi = JSON.parse(abi).filter(
       (m: { type: string }) => m.type === "function"
     );
-    dispatch(updateContractAbi(JSON.stringify(filteredAbi)));
+    setUpdateAbi(JSON.stringify(filteredAbi));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +74,6 @@ const ContractModal: FC<IContractModal> = ({
       handleSetAbi(e.target.result.toString());
     };
   };
-
   return (
     <Dialog
       as="div"
@@ -97,7 +91,7 @@ const ContractModal: FC<IContractModal> = ({
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-10" />
 
         {/* Dialog Content */}
-        <section className="inline-block w-[340px] mr-[12rem] mt-[10rem] max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+        <section className="inline-block w-[345px] mr-[12rem] mt-[10rem] max-w-md py-6 px-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
           <Dialog.Title as="h3" className="modal-heading">
             Connect Contract
           </Dialog.Title>
@@ -111,7 +105,7 @@ const ContractModal: FC<IContractModal> = ({
             <input
               value={inputValue}
               onChange={handleInput}
-              className="modal-input pl-2 mt-1 mb-4"
+              className="modal-input pl-2 h-[2.5rem] mt-1 mb-4"
               placeholder="Please add a name"
             />
             <br /> <label className="modal-label mt-[3rem]">Abi Code</label>
@@ -137,9 +131,9 @@ const ContractModal: FC<IContractModal> = ({
                       type="file"
                       id="inputTag"
                     />
-                    <button className="contract-button mt-[0.75rem] px-5 py-1">
+                    <span className="contract-button mt-[0.75rem] px-5 py-1">
                       Browse
-                    </button>
+                    </span>
                     <br />
                   </div>
                   {files ? (
@@ -149,7 +143,7 @@ const ContractModal: FC<IContractModal> = ({
                 {/* {"uploaded file content -- " + files} */}
                 <span
                   onClick={() => handleShow()}
-                  className="modal-text mt-[0.5rem] cursor-pointer"
+                  className="modal-text mt-[0.5rem] cursor-pointer text-[#8268E5] hover:text-[#5C47AD]"
                 >
                   Add Code Manually
                 </span>
@@ -158,7 +152,7 @@ const ContractModal: FC<IContractModal> = ({
               <textarea
                 className="upload-modal-input p-2"
                 placeholder="Paste ABI here..."
-                value={contractDetails.abi}
+                value={updateAbi}
                 onChange={(e) => handleSetAbi(e.target.value)}
               />
             )}
@@ -166,17 +160,19 @@ const ContractModal: FC<IContractModal> = ({
             <label className="modal-label">Address</label>
             <br />
             <input
-              className="modal-input pl-2 mt-1"
+              className="modal-input pl-2 mt-1 h-[2.5rem]"
               placeholder="Paste Address here..."
-              value={contractDetails.address}
-              onChange={(e) => dispatch(updateContractAddress(e.target.value))}
+              value={updateAddress}
+              onChange={(e) => setUpdateAddress(e.target.value)}
             />
           </div>
 
           <div className="mt-4">
             <button
-              // type="button"
-              className="contract-button py-2 px-[7.5rem]"
+              disabled={!(updateAbi && updateAddress)}
+              className={`rounded-[44px] contract-button font-medium text-white text-[14px] py-2 px-[7.5rem] ${
+                updateAbi && updateAddress ? "" : "opacity-40"
+              }`}
               onClick={() => {
                 setIsOpen(false);
                 setMethodOpen(false);

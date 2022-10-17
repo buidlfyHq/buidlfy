@@ -16,7 +16,6 @@ import "styles/components.css";
 const Dashboard: FC = () => {
   const dispatch = useDispatch();
   const size = useWindowSize();
-  const [className, setClassName] = useState<string>(""); // for handling sidebar toggle
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
   const [openTab, setOpenTab] = useState<number>(1);
   const [drag, setDrag] = useState<boolean>(true);
@@ -33,20 +32,24 @@ const Dashboard: FC = () => {
   });
   const [sideElement, setSideElement] = useState<string>("");
   const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
-
+  const [hideNavbar, setHideNavbar] = useState<boolean>(false);
   useEffect(() => {
-    // checks for stored config
+    // checks for stored configs
     let saveItems = localStorage.getItem("items");
     if (saveItems) {
-      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems)));
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).builder));
+      setWorkspaceBackgroundColor(JSON.parse(saveItems).background);
     }
   }, []); // eslint-disable-line
 
   const showSidebar = () => {
+    setHideNavbar(false);
     setIsNavHidden(false);
     setOpenSetting(false);
   };
+
   const hideSidebar = () => {
+    setHideNavbar(true);
     setIsNavHidden(true);
     setOpenSetting(true);
   };
@@ -65,7 +68,6 @@ const Dashboard: FC = () => {
         <section className="flex flex-row w-full min-h-screen columns-3">
           {/* Sidebar */}
           <SideNavbar
-            className={className}
             setSideElement={setSideElement}
             showSidebar={showSidebar}
             hideSettingSidebar={hideSettingSidebar}
@@ -74,21 +76,19 @@ const Dashboard: FC = () => {
             isContainerSelected={isContainerSelected}
             sideElement={sideElement}
             isNavHidden={isNavHidden}
-            setIsNavHidden={setIsNavHidden}
-            showSidebar={showSidebar}
             hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
-            workspaceBackgroundColor={workspaceBackgroundColor}
-            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-            head={head}
-            setHead={setHead}
+            hideNavbar={hideNavbar}
           />
 
           <section className="flex-1">
             {/* Navbar */}
             <Navbar
-              className={className}
+              setOpenSetting={setOpenSetting}
+              setIsContainerSelected={setIsContainerSelected}
+              hideSidebar={hideSidebar}
               workspaceBackgroundColor={workspaceBackgroundColor}
+              setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
               head={head}
             />
 
@@ -110,10 +110,13 @@ const Dashboard: FC = () => {
                 setIsNavHidden={setIsNavHidden}
                 setSideElement={setSideElement}
                 hideSettingSidebar={undefined}
+                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+                head={head}
+                setHead={setHead}
               />
             </aside>
           </section>
-          <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
+          <div className="setting-sidebar rounded-[8px] py-2 overflow-y-scroll fixed top-0 right-0 bottom-0">
             {openSetting ? (
               <Settings
                 setOpenSetting={setOpenSetting}
@@ -122,6 +125,9 @@ const Dashboard: FC = () => {
               />
             ) : (
               <DefaultSettings
+                setOpenSetting={setOpenSetting}
+                setIsContainerSelected={setIsContainerSelected}
+                hideSidebar={hideSidebar}
                 workspaceBackgroundColor={workspaceBackgroundColor}
                 setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
                 head={head}

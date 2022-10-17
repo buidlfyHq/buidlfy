@@ -1,48 +1,49 @@
 import React, { FC } from "react";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
-import elements from "assets/icons/elements.png";
-import templates from "assets/icons/templates.png";
 import logo from "assets/icons/buidlfy.png";
-import "styles/components.css";
+import TemplateSvg from "components/utils/assets/template-svg";
+import ElementSvg from "components/utils/assets/elements-svg";
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import "styles/components.css";
 
 interface ISideNavbar {
-  className: string;
   setSideElement: (sideElement: string) => void;
   showSidebar: () => void;
   hideSettingSidebar: () => void;
 }
 
 const SideNavbar: FC<ISideNavbar> = ({
-  className,
   setSideElement,
   showSidebar,
   hideSettingSidebar,
 }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleSidebar = (selectedSidebarElements: string) => {
     setSideElement(selectedSidebarElements);
   };
 
   return (
-    <main
-      className={`w-[80px] sidenav z-[100] fixed top-0 bottom-0 left-0 ${className}`}
-    >
+    <main className="w-[80px] sidenav z-[1] fixed top-0 bottom-0 left-0">
       {/* Components */}
-      <img src={logo} className="w-[2.4rem] mx-[1.3rem] my-[0.65rem]" />
+      <img
+        src={logo}
+        className="w-[2.4rem] mx-[1.3rem] my-[0.65rem]"
+        alt="logo"
+      />
       <div className="side-border px-4 pt-[1rem]">
         <div
           onClick={() => {
-            dispatch(toggleModal(true))
-            dispatch(toggleModalType('template'))
+            dispatch(toggleModal(true));
+            dispatch(toggleModalType("template"));
+            showSidebar();
+            handleSidebar(SidebarEnum.TEMPLATES);
+            hideSettingSidebar();
           }}
-          className="cursor-pointer"
+          className="cursor-pointer icon-div"
         >
-          <div className="side-icon px-3.5 py-4 rounded-full mt-3">
-            <img src={templates} alt="Templates" />
-          </div>
+          <TemplateSvg />
           <h3 className="side-text mt-1">Templates</h3>
         </div>
         <div
@@ -51,11 +52,9 @@ const SideNavbar: FC<ISideNavbar> = ({
             handleSidebar(SidebarEnum.ELEMENTS);
             hideSettingSidebar();
           }}
-          className="mt-8 cursor-pointer"
+          className="mt-8 icon-div cursor-pointer"
         >
-          <div className="side-icon px-3.5 py-4 rounded-full mt-5">
-            <img src={elements} alt="Elements" />
-          </div>
+          <ElementSvg />
           <h3 className="side-text mt-1">Elements</h3>
         </div>
         {/* These are commented sidebar elements to be used in future */}
@@ -64,8 +63,8 @@ const SideNavbar: FC<ISideNavbar> = ({
             <img src={pages} />
           </div>
           <h3 className="side-text mt-1">Pages</h3>
-        </div> 
-        <div className="mt-8 cursor-pointer">
+        </div> */}
+        {/* <div className="mt-8 cursor-pointer">
           <div className="side-icon px-3.5 py-4 rounded-full mt-5">
             <img src={media} />
           </div>

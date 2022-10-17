@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getContainerList } from "utils/container-list";
 import {
+  IContract,
   IContractState,
   ISelectedPayload,
   ISelectorPayload,
@@ -12,16 +14,22 @@ const initialState: IContractState = {
   },
   contractElementSelector: null,
   contractElementSelected: {},
+  contractList: getContainerList(),
 };
 
 const contractSlice = createSlice({
   name: "contract",
   initialState,
   reducers: {
+    // to update contract list
+    updateContractList(state, action: { payload: IContract[] }) {
+      state.contractList = action.payload;
+    },
+
     // to update contract details
     updateContractAbi(state, action: { payload: string }) {
       state.contractDetails.abi = action.payload;
-    },
+    }, 
     updateContractAddress(state, action: { payload: string }) {
       state.contractDetails.address = action.payload;
     },
@@ -55,6 +63,7 @@ const contractSlice = createSlice({
 });
 
 export const {
+  updateContractList,
   updateContractAbi,
   updateContractAddress,
   updateSelector,

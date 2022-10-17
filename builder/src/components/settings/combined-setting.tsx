@@ -7,6 +7,7 @@ import {
 } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceStyle } from "components/utils/render-setting";
+import WarningText from "components/utils/setting-warning";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -16,6 +17,7 @@ interface ICombinedComponent {
   fontStyle: string;
   textDecoration: string;
   justifyContent: string;
+  color: string;
 }
 
 const CombinedComponent: FC<ICombinedComponent> = ({
@@ -24,6 +26,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   fontStyle,
   textDecoration,
   justifyContent,
+  color,
 }) => {
   const dispatch = useDispatch();
 
@@ -70,47 +73,73 @@ const CombinedComponent: FC<ICombinedComponent> = ({
     );
   };
 
+  const gradientCondition = color?.indexOf("gradient") !== -1;
+  const activeClassName = (property: string, propertyName: string) =>
+    property === propertyName ? "bg-[#CDD4F3]" : "";
+  const propertyData = [
+    {
+      text: "B",
+      className: `font-bold ml-[10px] combined-style ${activeClassName(
+        fontWeight,
+        ReplaceStyle.BOLD
+      )}`,
+      onclick: () => handleChange(ReplaceStyle.BOLD),
+    },
+    {
+      text: "i",
+      className: `italic combined-style ${activeClassName(
+        fontStyle,
+        ReplaceStyle.ITALIC
+      )}`,
+      onclick: () => handleChange(ReplaceStyle.ITALIC),
+    },
+    {
+      text: "U",
+      className: `underline combined-style ${activeClassName(
+        textDecoration,
+        ReplaceStyle.UNDERLINE
+      )} `,
+      onclick: () => handleChange(ReplaceStyle.UNDERLINE),
+    },
+    {
+      text: <AiOutlineAlignLeft className="text-[16px]" />,
+      className: `combined-style ${activeClassName(
+        justifyContent,
+        ReplaceStyle.LEFT
+      )}`,
+      onclick: () => handleAlignChange(ReplaceStyle.LEFT),
+    },
+    {
+      text: <AiOutlineAlignCenter className="text-[16px]" />,
+      className: `combined-style ${activeClassName(
+        justifyContent,
+        ReplaceStyle.CENTER
+      )}`,
+      onclick: () => handleAlignChange(ReplaceStyle.CENTER),
+    },
+    {
+      text: <AiOutlineAlignRight className="text-[16px]" />,
+      className: `combined-style ${activeClassName(
+        justifyContent,
+        ReplaceStyle.RIGHT
+      )}`,
+      onclick: () => handleAlignChange(ReplaceStyle.RIGHT),
+    },
+  ];
+
   return (
-    <div className="flex grey-div w-auto mx-2 mb-3 items-center mt-2 text-black">
-      <span
-        onClick={() => handleChange(ReplaceStyle.BOLD)}
-        className="flex items-center mx-[0.65rem] justify-center font-bold text-[16px] py-1 pl-1.5 font-regular text-black"
-      >
-        B
-      </span>
-      <span
-        onClick={() => handleChange(ReplaceStyle.ITALIC)}
-        className="flex items-center mx-[0.65rem] justify-center italic text-[16px] py-1 pr-1 font-regular text-black"
-      >
-        i
-      </span>
-      <span
-        onClick={() => handleChange(ReplaceStyle.UNDERLINE)}
-        className="flex items-center mx-[0.65rem] justify-center underline text-[16px] py-1 font-regular text-black"
-      >
-        U
-      </span>
-      <div className="flex">
-        <span
-          onClick={() => handleAlignChange("left")}
-          className="flex items-center mx-[0.65rem] justify-center text-[16px] py-1 font-regular"
-        >
-          <AiOutlineAlignLeft className="text-[16px]" />
-        </span>
-        <span
-          onClick={() => handleAlignChange("center")}
-          className="flex items-center mx-[0.65rem] justify-center text-[16px] py-1 font-regular text-black"
-        >
-          <AiOutlineAlignCenter className="text-[16px]" />
-        </span>
-        <span
-          onClick={() => handleAlignChange("right")}
-          className="flex items-center mx-[0.65rem] justify-center text-[16px] py-1 font-regular text-black"
-        >
-          <AiOutlineAlignRight className="text-[16px]" />
-        </span>
+    <>
+      <div className="flex grey-div w-auto mx-2 mb-3 items-center mt-2 text-black">
+        {propertyData.map((value) => (
+          <span onClick={value.onclick} className={value.className}>
+            {value.text}
+          </span>
+        ))}
       </div>
-    </div>
+      {gradientCondition ? (
+        <WarningText text="Sorry, You can't make underline gradient!" />
+      ) : null}
+    </>
   );
 };
 export default CombinedComponent;

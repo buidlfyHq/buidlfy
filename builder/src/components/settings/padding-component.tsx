@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementSubStyle } from "redux/workspace/workspace.reducers";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import SpaceInput from "components/utils/space-input";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -17,18 +16,22 @@ interface IPaddingComponent {
   name?: string;
 }
 
+enum Padding {
+  PADDINGLEFT = "paddingLeft",
+  PADDINGRIGHT = "paddingRight",
+  PADDINGTOP = "paddingTop",
+  PADDINGBOTTOM = "paddingBottom",
+}
+
 const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
   const dispatch = useDispatch();
 
-  const handleChange = (
-    property: string,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChange = (property: string, updatedPadding?: number) => {
     dispatch(
       updateWorkspaceElementSubStyle({
         settingItemId: i,
         propertyName: "padding",
-        propertyValue: +e.target.value,
+        propertyValue: updatedPadding,
         childPropertyName: property,
       })
     );
@@ -56,106 +59,70 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
     );
   };
 
-  const paddingFirstLayer = (
-    <div className="flex mt-3">
-      <h6 className="margin-subtext mr-2">L</h6>
-      <input
-        inputMode="numeric"
-        id="padding-left"
-        name="paddingLeft"
-        value={padding?.paddingLeft}
-        placeholder="0"
-        className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
-        onChange={(e) => handleChange("paddingLeft", e)}
-      />
-      <AiOutlineCaretUp
-        onClick={() => incrementCounter("paddingLeft", padding?.paddingLeft)}
-        className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
-      />
-      <AiOutlineCaretDown
-        onClick={() => decrementCounter("paddingLeft", padding?.paddingLeft)}
-        className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
-      />
-      <h6 className="margin-text ml-5 mr-2 margin-subtext">R</h6>
-      <input
-        inputMode="numeric"
-        id="padding-right"
-        name="paddingRight"
-        value={padding?.paddingRight}
-        placeholder="0"
-        className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
-        onChange={(e) => handleChange("paddingRight", e)}
-      />
-      <AiOutlineCaretUp
-        onClick={() => incrementCounter("paddingRight", padding?.paddingRight)}
-        className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
-      />
-      <AiOutlineCaretDown
-        onClick={() => decrementCounter("paddingRight", padding?.paddingRight)}
-        className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
-      />
-    </div>
-  );
+  const paddingData = {
+    container: {
+      text: ["L", "R"],
+      value: [padding?.paddingLeft, padding?.paddingRight],
+      handleChange: [
+        (updatedPadding: number) =>
+          handleChange(Padding.PADDINGLEFT, updatedPadding),
+        (updatedPadding: number) =>
+          handleChange(Padding.PADDINGRIGHT, updatedPadding),
+      ],
+      handleIncrement: [
+        () => incrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
+        () => incrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
+      ],
+      handleDecrement: [
+        () => decrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
+        () => decrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
+      ],
+    },
+    default: {
+      text: ["L", "R", "T", "B"],
+      value: [
+        padding?.paddingLeft || 0,
+        padding?.paddingRight || 0,
+        padding?.paddingTop || 0,
+        padding?.paddingBottom || 0,
+      ],
+      handleChange: [
+        (updatedPadding: number) =>
+          handleChange(Padding.PADDINGLEFT, updatedPadding),
+        (updatedPadding: number) =>
+          handleChange(Padding.PADDINGRIGHT, updatedPadding),
+        (updatedPadding: number) =>
+          handleChange(Padding.PADDINGTOP, updatedPadding),
+        (updatedPadding: number) =>
+          handleChange(Padding.PADDINGBOTTOM, updatedPadding),
+      ],
+      handleIncrement: [
+        () => incrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
+        () => incrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
+        () => incrementCounter(Padding.PADDINGTOP, padding?.paddingTop),
+        () => incrementCounter(Padding.PADDINGBOTTOM, padding?.paddingBottom),
+      ],
+      handleDecrement: [
+        () => decrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
+        () => decrementCounter(Padding.PADDINGRIGHT, padding?.paddingRight),
+        () => decrementCounter(Padding.PADDINGTOP, padding?.paddingTop),
+        () => decrementCounter(Padding.PADDINGBOTTOM, padding?.paddingBottom),
+      ],
+    },
+  };
 
-  const paddingSecondLayer = (
-    <div className="flex mt-3">
-      <h6 className="mr-2 margin-subtext">T</h6>
-      <input
-        inputMode="numeric"
-        id="padding-top"
-        name="paddingTop"
-        value={padding?.paddingTop}
-        placeholder="0"
-        className="margin-form pl-2 py-1.5 form-select appearance-none block w-[75px]"
-        onChange={(e) => handleChange("paddingTop", e)}
-      />
-      <AiOutlineCaretUp
-        onClick={() => incrementCounter("paddingTop", padding?.paddingTop)}
-        className="text-[10px] z-[100] absolute left-[6.2rem] text-black mt-[0.4rem]"
-      />
-      <AiOutlineCaretDown
-        onClick={() => decrementCounter("paddingTop", padding?.paddingTop)}
-        className="text-[10px] z-[100] absolute left-[6.2rem] mt-[1rem] text-black"
-      />
-      <h6 className="ml-5 mr-2 margin-subtext">B</h6>
-      <input
-        inputMode="numeric"
-        id="padding-bottom"
-        name="paddingBottom"
-        value={padding?.paddingBottom}
-        placeholder="0"
-        className="margin-form pl-2 py-0.5 form-select appearance-none block w-[75px]"
-        onChange={(e) => handleChange("paddingBottom", e)}
-      />
-      <AiOutlineCaretUp
-        onClick={() =>
-          incrementCounter("paddingBottom", padding?.paddingBottom)
-        }
-        className="text-[10px] z-[100] absolute left-[13.2rem] text-black mt-[0.4rem]"
-      />
-      <AiOutlineCaretDown
-        onClick={() =>
-          decrementCounter("paddingBottom", padding?.paddingBottom)
-        }
-        className="text-[10px] z-[100] absolute left-[13.2rem] mt-[1rem] text-black"
-      />
-    </div>
-  );
+  const containerType = name === "Container" ? "container" : "default";
+
   return (
     <>
-      <div className="flex items-center w-full px-3 py-4 text-gray-600">
-        <span className="px-1 text-left ">
-          <span className="margin-text">Padding</span>
-          {name == "Container" ? (
-            paddingFirstLayer
-          ) : (
-            <>
-              {paddingFirstLayer}
-              {paddingSecondLayer}
-            </>
-          )}
-        </span>
-      </div>
+      <SpaceInput
+        heading="Padding"
+        text={paddingData[containerType].text}
+        value={paddingData[containerType].value}
+        handleChange={paddingData[containerType].handleChange}
+        handleIncrement={paddingData[containerType].handleIncrement}
+        handleDecrement={paddingData[containerType].handleDecrement}
+      />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useRef, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdOutlineDeleteOutline, MdArrowBack } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import SettingComponent from "components/utils/render-setting";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
@@ -39,7 +39,7 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
             <div className="delete-div flex py-2 pl-3">
               <div
                 onClick={handleDelete}
-                className="flex delete-btn px-2 py-[0.1rem]"
+                className="flex delete-btn px-2 py-[0.1rem] cursor-pointer hover:bg-[#b7c1ec]"
               >
                 <span className="flex text-[12px]">
                   Remove

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchSelectedElement,
+  fetchUploadedImageData,
   mapElementsToWorkspace,
   mapElementStylesToWorkspace,
   mapElementSubStyleToWorkspace,
@@ -16,6 +17,7 @@ import {
 const initialState: IWorkspaceState = {
   workspaceElements: [],
   selectedElement: null,
+  uploadedImagesData: [],
 };
 
 const workspaceSlice = createSlice({
@@ -44,17 +46,14 @@ const workspaceSlice = createSlice({
     // to update the style of an element in workspace
     updateWorkspaceElementStyle(state, action: IAction) {
       if (!action.payload.settingItemId) return;
-
       const updatedElements = state.workspaceElements.map(
         (element: IWorkspaceElement) =>
           mapElementStylesToWorkspace(element, action.payload)
       );
-
       const updatedSelectedElement = fetchSelectedElement(
         updatedElements,
         action.payload.settingItemId
-      );
-
+      );      
       return {
         ...state,
         workspaceElements: updatedElements,
@@ -143,11 +142,21 @@ const workspaceSlice = createSlice({
         state.selectedElement.i
       );
 
+      
       return {
         ...state,
         workspaceElements: updatedContract,
         selectedElement: updatedSelectedElement,
       };
+    },
+
+    updateUploadedImageData(state: IWorkspaceState, action: { payload }) {
+      const { settingItemId, uploadedImageData } = action.payload;
+      const newUploadedImagesData = fetchUploadedImageData(settingItemId, uploadedImageData, state.uploadedImagesData)      
+      return {
+        ...state,
+       uploadedImagesData: newUploadedImagesData
+      }
     },
   },
 });
@@ -160,5 +169,6 @@ export const {
   updateWorkspaceElementsArray,
   setSelectedElement,
   saveContractConfig,
+  updateUploadedImageData
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;
