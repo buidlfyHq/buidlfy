@@ -1,62 +1,38 @@
+import { ethers } from "ethers";
 import { call, all, put, takeLatest, select } from "redux-saga/effects";
 import { addNotification } from "redux/notification/notification.reducers";
-import { toggleModalType } from "redux/modal/modal.reducers";
 import {
   buyTemplate,
-  templateMinted,
-  startMintTemplateLoader,
-  startBuyTemplateLoader,
   allTemplatesFetched,
+  ownedTemplatesFetched,
+  templateMinted,
 } from "./template.reducers";
 import {
+  createListingService,
+  getListedTemplatesService,
+  getOwnedTemplatesService,
   initiateTransactionService,
   mintTemplateService,
-  getListedTemplatesService,
 } from "./template.services";
 import templateActionTypes from "./template.types";
-import { IRootState } from "redux/root-state.interface";
 import { NotificationType } from "redux/notification/notification.interfaces";
-import { ISelectedTemplate } from "./template.interfaces";
-import { SelectedTemplateDto } from "./template.dto";
+import { IRootState } from "redux/root-state.interface";
 
-function* buySelectedTemplate() {
-  const selectedTemplate: ISelectedTemplate = yield select(
-    (state: IRootState) => state.template.selectedTemplate
-  );
-  const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
-
-  yield put(startBuyTemplateLoader());
+function* buySelectedTemplate({ payload }) {
+  const { listingId, buyoutPricePerToken } = payload.payload;
+  // ADD: start buy-template loader
   // Check for approval if yes, then don't call approve otherwise call approve
   const transactionRes = yield call(
     initiateTransactionService,
-    selectedTemplateDto.listingId,
-    selectedTemplateDto.buyoutPricePerToken
+    listingId,
+    buyoutPricePerToken
   );
   if (!transactionRes.error) {
     yield put(buyTemplate(transactionRes.receipt));
-    yield put(toggleModalType("final"));
   } else {
     yield put(
       addNotification({
         message: transactionRes.errorMessage,
-        timestamp: new Date(),
-        type: NotificationType.Error,
-      })
-    );
-  }
-}
-
-function* mintSelectedTemplate({ payload }) {
-  yield put(startMintTemplateLoader());
-  const mintRes = yield call(mintTemplateService, payload);
-  if (!mintRes.error) {
-    const tokenId = parseInt(mintRes.receipt.logs[1].topics[1].toString());
-    yield put(templateMinted(tokenId));
-    yield put(toggleModalType("minted-complete"));
-  } else {
-    yield put(
-      addNotification({
-        message: mintRes.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
       })
@@ -81,22 +57,85 @@ function* getListedTemplates(): any {
   }
 }
 
-function* buyTemplateSaga() {
-  yield takeLatest(templateActionTypes.BUY_TEMPLATE, buySelectedTemplate);
+function* getOwnedTemplates(): any {
+  const currentAccount = yield select(
+    (state: IRootState) => state.web3.currentAccount
+  );
+  const fetchedTemplates = yield call(getOwnedTemplatesService, currentAccount);
+  if (!fetchedTemplates.error) {
+    if (fetchedTemplates.listings.length !== 0) {
+      yield put(ownedTemplatesFetched(fetchedTemplates.listings));
+    }
+  } else {
+    yield put(
+      addNotification({
+        message: fetchedTemplates.errorMessage,
+        timestamp: new Date(),
+        type: NotificationType.Error,
+      })
+    );
+  }
 }
 
-function* mintTemplateSaga() {
-  yield takeLatest(templateActionTypes.MINT_TEMPLATE, mintSelectedTemplate);
+function* mintSelectedTemplate({ payload }) {
+  // ADD: start mint-template loader
+  console.log(payload); // REMOVE after implementing feature
+
+  const mintRes = yield call(mintTemplateService, payload);
+  if (!mintRes.error) {
+    const tokenId = parseInt(mintRes.receipt.logs[1].topics[1].toString());
+    // TODO: move this to minted reducer
+    const listingRes = yield call(
+      createListingService,
+      tokenId,
+      ethers.utils.parseEther("5")
+    );
+    if (!listingRes.error) {
+      yield put(templateMinted(listingRes.receipt));
+    } else {
+      yield put(
+        addNotification({
+          message: listingRes.errorMessage,
+          timestamp: new Date(),
+          type: NotificationType.Error,
+        })
+      );
+    }
+  } else {
+    yield put(
+      addNotification({
+        message: mintRes.errorMessage,
+        timestamp: new Date(),
+        type: NotificationType.Error,
+      })
+    );
+  }
+}
+
+function* buyTemplateSaga() {
+  yield takeLatest(templateActionTypes.BUY_TEMPLATE, buySelectedTemplate);
 }
 
 function* fetchTemplatesSaga() {
   yield takeLatest(templateActionTypes.FETCH_TEMPLATES, getListedTemplates);
 }
 
+function* fetchOwnedTemplatesSaga() {
+  yield takeLatest(
+    templateActionTypes.FETCH_OWNED_TEMPLATES,
+    getOwnedTemplates
+  );
+}
+
+function* mintTemplateSaga() {
+  yield takeLatest(templateActionTypes.MINT_TEMPLATE, mintSelectedTemplate);
+}
+
 export function* templateSagas() {
   yield all([
     call(buyTemplateSaga),
-    call(mintTemplateSaga),
     call(fetchTemplatesSaga),
+    call(fetchOwnedTemplatesSaga),
+    call(mintTemplateSaga),
   ]);
 }

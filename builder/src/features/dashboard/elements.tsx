@@ -5,6 +5,8 @@ import { components } from "config/component";
 import { containerCheck } from "utils/container-check";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineClose } from "react-icons/md";
+import defaultImage from "assets/default-image.svg";
+import container from "assets/image-container.svg";
 import ReactTooltip from "react-tooltip";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
@@ -16,16 +18,23 @@ import "styles/components.css";
 
 interface IElements {
   isContainerSelected: boolean;
-  setHideNavbar: (hideNavbar: boolean) => void;
+  hideSidebar: () => void;
+  hideSettingSidebar: () => void;
+  hideNavbar: boolean;
 }
 
-const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
+const Elements: FC<IElements> = ({
+  isContainerSelected,
+  hideSidebar,
+  hideSettingSidebar,
+  hideNavbar,
+}) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
-  const workspaceElements = useSelector(
+  const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const selectedElement = useSelector(
+  const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
@@ -84,7 +93,6 @@ const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
       dispatch(updateWorkspaceElementsArray([...workspaceElements, newC]));
     }
   };
-
   const checkY = (items: IWorkspaceElement[]) => {
     if (items.length === 0) return 0;
     else {
@@ -120,6 +128,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
         backgroundColor="#262338"
         arrowColor="#262338"
         scrollHide={true}
+        delayShow={200}
       />
       {/* Fix: Add all style to common tailwind  */}
       <div className="element-div">
@@ -140,7 +149,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
         <div className="px-10 py-3">
           <div data-tip="Click here to add the heading">
             <h1
-              className="font-normal text-2xl mb-4 cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-2xl mb-4 cursor-pointer hover:text-[#5A4471]"
               onClick={() => onClickFunction("Heading 1")}
             >
               Add Heading 1
@@ -149,7 +158,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
           <div data-tip="Click here to add the heading">
             <h2
               onClick={() => onClickFunction("Heading 2")}
-              className="font-normal text-xl mb-4 cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-xl mb-4 cursor-pointer hover:text-[#5A4471]"
             >
               Add Heading 2
             </h2>
@@ -157,7 +166,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
           <div data-tip="Click here to add the heading">
             <h3
               onClick={() => onClickFunction("Heading 3")}
-              className="font-normal text-lg mb-4 cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-lg mb-4 cursor-pointer hover:text-[#5A4471]"
             >
               Add Heading 3
             </h3>
@@ -165,7 +174,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
           <div data-tip="Click here to add the paragraph">
             <div
               onClick={() => onClickFunction("Text")}
-              className="font-normal text-[13px] text-four w-[200px] cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-[13px] text-four w-[200px] cursor-pointer hover:text-[#5A4471]"
             >
               I am a paragrah. Click here to add your own text and edit me. It's
               easy & simple.
@@ -191,38 +200,47 @@ const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
           className="px-4 py-4 cursor-pointer"
         >
           <div data-tip="Click here to add the image upload">
-            <div className="pt-2 image-container">
-              <span className="element-text ml-[1rem] my-[0.7rem] text-black">
-                File Upload
-              </span>
-              <div className="mx-4 element-upload">
-                <span className="image-label text-[10px]">
-                  Drag and drop a file, or{" "}
-                  <span className="purple-label">browse</span>
-                </span>
-              </div>
-              <div className="flex justify-center">
-                <button className="mx-2 mt-4 upload-btn">Upload</button>
-              </div>
+            <div className="relative image-container">
+              <img className="w-[20rem]" src={container} alt="container" />
+              <img
+                className="absolute w-[2.6rem] bottom-[5rem] left-[6.5rem]"
+                src={defaultImage}
+                alt="default"
+              />
+              <h6 className="absolute bottom-[3rem] left-[5.5rem] text-[#666BD3] text-[16px]">
+                Add Image
+              </h6>
             </div>
           </div>
         </div>
       </div>
     </>
   );
-
   return (
     <>
       {/* Components */}
-      <div className="element-heading-div pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem]">
-        <h3 className="element-heading">Add Elements</h3>
-        <MdOutlineClose
-          onClick={() => setHideNavbar(true)}
-          className="text-[16px] cursor-pointer"
-        />
+
+      <div
+        className={`fixed pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem] left-[5rem] flex w-[320px] h-[60px] ${
+          !hideNavbar
+            ? "element-heading-div animate__animated animate__slideInLeft"
+            : "element-hide-div animate__animated animate__slideOutLeft"
+        }`}
+      >
+        <h3 className="element-heading mt-[2.5px]">Add Elements</h3>
+        <div className="close-btn">
+          <MdOutlineClose
+            onClick={() => {
+              hideSidebar();
+              hideSettingSidebar();
+            }}
+            className="text-[16px]"
+          />
+        </div>
       </div>
+
       {!isContainerSelected ? (
-        <>
+        <div className="mt-[6rem]">
           <div className="element-div">
             <div className="px-4 py-4">
               <div data-tip="Click here to add the container">
@@ -241,9 +259,9 @@ const Elements: FC<IElements> = ({ isContainerSelected, setHideNavbar }) => {
             </div>
           </div>
           {elementsList}
-        </>
+        </div>
       ) : (
-        elementsList
+        <div className="mt-[6rem]">{elementsList}</div>
       )}
     </>
   );

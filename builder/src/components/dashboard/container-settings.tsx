@@ -9,6 +9,8 @@ import ShadowComponent from "components/settings/shadow-component";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import PaddingComponent from "components/settings/padding-component";
+import MarginComponent from "components/settings/margin-component";
+import BackgroundSizeComponent from "components/settings/background-size-component";
 
 const ContainerSettings: FC = () => {
   const selectedElement: IWorkspaceElement = useSelector(
@@ -24,6 +26,7 @@ const ContainerSettings: FC = () => {
       </h3>
       <UploadComponent i={selectedElement.i} />
       <BgColorComponent
+        name={selectedElement.name}
         i={selectedElement.i}
         elementBackgroundColor={selectedElement.style.backgroundColor}
       />
@@ -31,13 +34,23 @@ const ContainerSettings: FC = () => {
         i={selectedElement.i}
         color={selectedElement.style.color}
       />
+      <BackgroundSizeComponent
+        i={selectedElement.i}
+        backgroundSize={selectedElement.style?.backgroundSize}
+      />
       <BorderRadiusComponent
         i={selectedElement.i}
         borderRadius={selectedElement.style.borderRadius}
+        borderColor={selectedElement.style.color}
       />
       <BorderComponent
         i={selectedElement.i}
         borderWidth={selectedElement.style.borderWidth}
+      />
+      <MarginComponent
+        i={selectedElement.i}
+        margin={selectedElement.style.margin}
+        name={selectedElement.name}
       />
       <PaddingComponent
         i={selectedElement.i}

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceValue } from "components/utils/render-setting";
+import NumberInput from "components/utils/number-input";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -14,8 +14,7 @@ interface IFontSizeComponent {
 const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
   const dispatch = useDispatch();
 
-  // FIX: find suitable type
-  const handleFontSize = (e, action: ReplaceValue) => {
+  const handleFontSize = (action: ReplaceValue, updatedFontSize?: number) => {
     if (action === ReplaceValue.INCREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
@@ -37,46 +36,22 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
         updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: "fontSize",
-          propertyValue: +e.target.value,
+          propertyValue: updatedFontSize,
         })
       );
     }
   };
 
-  const options = [
-    8, 9, 10, 11, 12, 14, 15, 18, 24, 30, 36, 48, 60, 72, 96,
-  ].map((number) => (
-    <option key={number} value={number}>
-      {number}
-    </option>
-  ));
-
   return (
-    <div className="flex text-gray-600 w-full py-4 mx-2">
-      <span className="text-left ">
-        <div className="flex">
-          <div className="flex">
-            <span className="font-text">Font Size:</span>
-            <select
-              onChange={(e) => handleFontSize(e, ReplaceValue.CHANGE)}
-              className="form-select font-div appearance-none block py-1.5 pl-[10.2rem] text-sm font-normal text-gray-700"
-              aria-label="Default select example"
-            >
-              <option value={fontSize}>{fontSize}</option>
-              {options}
-            </select>
-            <AiOutlineCaretUp
-              onClick={(e) => handleFontSize(e, ReplaceValue.INCREMENT)}
-              className="text-[10px] absolute left-[13.2rem] text-black mt-[0.3rem]"
-            />
-            <AiOutlineCaretDown
-              onClick={(e) => handleFontSize(e, ReplaceValue.DECREMENT)}
-              className="text-[10px] absolute left-[13.2rem] mt-[0.9rem] text-black"
-            />
-          </div>
-        </div>
-      </span>
-    </div>
+    <NumberInput
+      text="Font Size"
+      value={fontSize}
+      handleChange={(updatedFontSize: number) =>
+        handleFontSize(ReplaceValue.CHANGE, updatedFontSize)
+      }
+      handleIncrement={() => handleFontSize(ReplaceValue.INCREMENT)}
+      handleDecrement={() => handleFontSize(ReplaceValue.DECREMENT)}
+    />
   );
 };
 export default FontSizeComponent;

@@ -15,6 +15,7 @@ import {
 import RenderItem from "components/utils/render-item";
 import { IRootState } from "redux/root-state.interface";
 import {
+  IUploadedImageData,
   IWorkspaceElement,
   SidebarEnum,
 } from "redux/workspace/workspace.interfaces";
@@ -46,13 +47,21 @@ interface IContainer {
   setSideElement: (sideElement: string) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
-  setHideNavbar: (hideNavbar: boolean) => void;
+  showSidebar?: () => void;
+  hideSidebar?: () => void;
   hideSettingSidebar?: () => void;
+  backgroundSize?: string;
   padding?: {
     paddingLeft?: number;
     paddingRight?: number;
     paddingTop?: number;
     paddingBottom?: number;
+  };
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
   };
 }
 
@@ -70,8 +79,11 @@ const Container: FC<IContainer> = ({
   setOpenTab,
   setIsContainerSelected,
   setSideElement,
-  setHideNavbar,
+  showSidebar,
+  hideSidebar,
   padding,
+  margin,
+  backgroundSize,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -82,6 +94,11 @@ const Container: FC<IContainer> = ({
   );
   const contractElementSelected: IContractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
+  );
+  const imageData: IUploadedImageData = useSelector((state: IRootState) =>
+    state.workspace.uploadedImagesData.find(
+      (image: IUploadedImageData) => image.settingItemId === item.i
+    )
   );
   const handleDelete = () => {
     dispatch(
@@ -96,7 +113,12 @@ const Container: FC<IContainer> = ({
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
-  let finalPadding = padding.paddingLeft + padding.paddingRight;
+
+  let finalSpacing =
+    margin.marginLeft +
+    margin.marginRight +
+    padding.paddingLeft +
+    padding.paddingRight;
 
   const elementHoverStyles = contractElementSelector
     ? "border border-[transparent] border-hover"
@@ -221,7 +243,7 @@ const Container: FC<IContainer> = ({
 
   const onComponentAddClick = (i: string) => {
     setIsContainerSelected(true);
-    setHideNavbar(false);
+    showSidebar();
     handleSidebar(SidebarEnum.ELEMENTS);
     dispatch(setSelectedElement(i));
     setOpenSetting(false);
@@ -258,23 +280,17 @@ const Container: FC<IContainer> = ({
     setIsContainerSelected(false);
     dispatch(setSelectedElement(i));
     setOpenSetting(true);
-    setHideNavbar(true);
+    hideSidebar();
   };
-
   return (
     <>
       <section
         id={item.i}
         style={{
-          paddingLeft: `${padding.paddingLeft}px`,
-          paddingRight: `${padding.paddingRight}px`,
-          borderRadius: `${borderRadius}px`,
-          borderWidth: borderWidth,
-          borderStyle: "solid",
-          borderColor: color,
-          borderImage: color,
+          paddingLeft: `${margin.marginLeft}px`,
+          paddingRight: `${margin.marginRight}px`,
         }}
-        className="h-fit w-full cursor-pointer container-drag overflow-hidden btn-border"
+        className="h-fit w-full cursor-pointer container-drag overflow-hidden"
       >
         <GridLayout
           layout={children}
@@ -284,24 +300,29 @@ const Container: FC<IContainer> = ({
               ? 50 - (borderWidth ? borderWidth * 2 : 0) / children?.length
               : 50
           }
-          width={containerW - (finalPadding + borderWidth * 2) || 200}
+          width={containerW - (finalSpacing + borderWidth * 2) || 1000}
           isBounded={true}
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           compactType={null}
-          className="h-fit"
+          className="h-fit btn-border"
           style={{
             background: backgroundColor,
-            backgroundImage: `url(${imgData})`,
-            backgroundSize: "contain",
+            backgroundImage: `url(${imageData?.uploadedImageData})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
+            backgroundSize: backgroundSize,
+            border: `${borderWidth}px solid ${color}`,
+            borderRadius: `${borderRadius}px`,
+            borderImage: color,
             boxShadow: shadow,
+            paddingLeft: `${padding.paddingLeft}px`,
+            paddingRight: `${padding.paddingRight}px`,
           }}
         >
           {!children?.length ? (
             <div
-              className="w-full h-full py-10 default-container"
+              className="w-full h-full py-10 default-container "
               key={"DefaultElement"}
               data-grid={{
                 x: 0,
@@ -345,13 +366,14 @@ const Container: FC<IContainer> = ({
           )}
         </GridLayout>
         <div className="flex">
-          <span
+          <div
             id="drag"
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(true)}
+            className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
           >
-            <img className="" src={dragImg} alt="drag" />
-          </span>
+            <img className="w-[13px] h-[13px]" src={dragImg} alt="drag" />
+          </div>
           <div
             onMouseOut={() => setDrag(true)}
             onMouseOver={() => setDrag(false)}
@@ -359,7 +381,7 @@ const Container: FC<IContainer> = ({
             id="add-img"
             onClick={() => onComponentAddClick(item.i)}
           >
-            <img className="w-[11px] h-[11px]" src={add} />
+            <img className="w-[11px] h-[11px]" src={add} alt="add" />
           </div>
           {children?.length ? (
             <div
@@ -369,7 +391,7 @@ const Container: FC<IContainer> = ({
               id="edit-img"
               onClick={() => onComponentEditClick(item.i)}
             >
-              <img className="w-[13px] h-[13px]" src={edit} />
+              <img className="w-[13px] h-[13px]" src={edit} alt="edit" />
             </div>
           ) : (
             <div
@@ -379,7 +401,11 @@ const Container: FC<IContainer> = ({
               id="delete-img"
               onClick={() => onComponentDeleteClick(item.i)}
             >
-              <img className="w-[13px] h-[13px]" src={deleteContainer} />
+              <img
+                className="w-[13px] h-[13px]"
+                src={deleteContainer}
+                alt="delete"
+              />
             </div>
           )}
         </div>

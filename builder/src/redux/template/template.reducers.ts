@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ISelectedTemplate, ITemplateState } from "./template.interfaces";
 
-const initialState: ITemplateState = {
-  buyTemplateReceipt: "",
+const initialState = {
+  buyTemplateHash: "",
   buyTemplateLoading: false,
-  mintTokenId: 0, // UPDATE: [{id: string, tokenId: number}]
+  mintTemplateHash: "",
   mintTemplateLoading: false,
-  selectedTemplate: null,
   templateList: [],
+  ownedTemplateList: [],
 };
 
 const templateSlice = createSlice({
@@ -15,34 +14,26 @@ const templateSlice = createSlice({
   initialState,
   reducers: {
     buyTemplate(state, action: { payload: string }) {
-      state.buyTemplateReceipt = action.payload;
+      state.buyTemplateHash = action.payload;
       state.buyTemplateLoading = false;
-    },
-    templateMinted(state, action: { payload: number }) {
-      state.mintTokenId = action.payload;
-      state.mintTemplateLoading = false;
-    },
-    startBuyTemplateLoader(state) {
-      state.buyTemplateLoading = true;
-    },
-    startMintTemplateLoader(state) {
-      state.mintTemplateLoading = true;
-    },
-    setSelectedTemplate(state, action: { payload: ISelectedTemplate }) {
-      state.selectedTemplate = action.payload;
     },
     allTemplatesFetched(state, action) {
       state.templateList = action.payload;
+    },
+    ownedTemplatesFetched(state, action) {
+      state.ownedTemplateList = action.payload;
+    },
+    templateMinted(state, action: { payload: string }) {
+      state.mintTemplateHash = action.payload;
+      state.mintTemplateLoading = false;
     },
   },
 });
 
 export const {
   buyTemplate,
-  templateMinted,
-  startBuyTemplateLoader,
-  startMintTemplateLoader,
-  setSelectedTemplate,
   allTemplatesFetched,
+  ownedTemplatesFetched,
+  templateMinted,
 } = templateSlice.actions;
 export default templateSlice.reducer;

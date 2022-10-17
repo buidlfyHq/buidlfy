@@ -31,15 +31,36 @@ const Dashboard: FC = () => {
     logo: "",
   });
   const [sideElement, setSideElement] = useState<string>("");
-  const [hideNavbar, setHideNavbar] = useState<boolean>(true);
-
+  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
+  const [hideNavbar, setHideNavbar] = useState<boolean>(false);
   useEffect(() => {
-    // checks for stored config
+    // checks for stored configs
     let saveItems = localStorage.getItem("items");
     if (saveItems) {
-      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems)));
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).builder));
+      setWorkspaceBackgroundColor(JSON.parse(saveItems).background);
     }
   }, []); // eslint-disable-line
+
+  const showSidebar = () => {
+    setHideNavbar(false);
+    setIsNavHidden(false);
+    setOpenSetting(false);
+  };
+
+  const hideSidebar = () => {
+    setHideNavbar(true);
+    setIsNavHidden(true);
+    setOpenSetting(true);
+  };
+  const showSettingSidebar = () => {
+    // setIsNavHidden(true);
+    setOpenSetting(true);
+  };
+  const hideSettingSidebar = () => {
+    // setIsNavHidden(false);
+    setOpenSetting(false);
+  };
 
   return (
     <main>
@@ -48,23 +69,26 @@ const Dashboard: FC = () => {
           {/* Sidebar */}
           <SideNavbar
             setSideElement={setSideElement}
-            setHideNavbar={setHideNavbar}
+            showSidebar={showSidebar}
+            hideSettingSidebar={hideSettingSidebar}
           />
           <Sidebar
             isContainerSelected={isContainerSelected}
             sideElement={sideElement}
+            isNavHidden={isNavHidden}
+            hideSidebar={hideSidebar}
+            hideSettingSidebar={hideSettingSidebar}
             hideNavbar={hideNavbar}
-            setHideNavbar={setHideNavbar}
-            workspaceBackgroundColor={workspaceBackgroundColor}
-            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-            head={head}
-            setHead={setHead}
           />
 
           <section className="flex-1">
             {/* Navbar */}
             <Navbar
+              setOpenSetting={setOpenSetting}
+              setIsContainerSelected={setIsContainerSelected}
+              hideSidebar={hideSidebar}
               workspaceBackgroundColor={workspaceBackgroundColor}
+              setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
               head={head}
             />
 
@@ -78,15 +102,21 @@ const Dashboard: FC = () => {
                 setDrag={setDrag}
                 workspaceBackgroundColor={workspaceBackgroundColor}
                 setIsContainerSelected={setIsContainerSelected}
-                hideNavbar={hideNavbar}
+                hideSidebar={hideSidebar}
+                showSettingSidebar={showSettingSidebar}
+                showSidebar={showSidebar}
+                isNavHidden={isNavHidden}
                 openSetting={openSetting}
-                setHideNavbar={setHideNavbar}
+                setIsNavHidden={setIsNavHidden}
                 setSideElement={setSideElement}
                 hideSettingSidebar={undefined}
+                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+                head={head}
+                setHead={setHead}
               />
             </aside>
           </section>
-          <div className="rounded-[8px] py-2 cursor-pointer overflow-y-scroll fixed top-0 right-0 bottom-0">
+          <div className="setting-sidebar rounded-[8px] py-2 overflow-y-scroll fixed top-0 right-0 bottom-0">
             {openSetting ? (
               <Settings
                 setOpenSetting={setOpenSetting}
@@ -95,6 +125,9 @@ const Dashboard: FC = () => {
               />
             ) : (
               <DefaultSettings
+                setOpenSetting={setOpenSetting}
+                setIsContainerSelected={setIsContainerSelected}
+                hideSidebar={hideSidebar}
                 workspaceBackgroundColor={workspaceBackgroundColor}
                 setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
                 head={head}

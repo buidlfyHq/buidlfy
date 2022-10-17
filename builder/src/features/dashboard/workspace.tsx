@@ -19,6 +19,8 @@ import {
   IContractElementSelected,
   IContractElementSelector,
 } from "redux/contract/contract.interfaces";
+import DefaultBuilder from "./deafult-builder";
+import DefaultSettings from "./default-settings";
 import "styles/components.css";
 
 interface IWorkspaceComponent {
@@ -28,13 +30,22 @@ interface IWorkspaceComponent {
   setDrag: (drag: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   workspaceBackgroundColor: string;
-  hideNavbar?: boolean;
-  setHideNavbar?: (hideNavbar?: boolean) => void;
+  hideSidebar?: () => void;
+  showSidebar?: () => void;
+  showSettingSidebar?: () => void;
+  isNavHidden?: boolean;
   openSetting?: boolean;
+  setIsNavHidden?: (isNavHidden?: boolean) => void;
   setSideElement?: (sideElement?: string) => void;
   dragContainer?: boolean;
   setDragContainer?: (dragContainer?: boolean) => void;
   hideSettingSidebar?: () => void;
+  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
+  head: {
+    title: string;
+    logo: string | ArrayBuffer;
+  };
+  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
 }
 
 const Workspace: FC<IWorkspaceComponent> = ({
@@ -44,25 +55,28 @@ const Workspace: FC<IWorkspaceComponent> = ({
   setDrag,
   setIsContainerSelected,
   workspaceBackgroundColor,
-  hideNavbar,
-  setHideNavbar,
+  hideSidebar,
+  showSidebar,
+  isNavHidden,
   openSetting,
   setSideElement,
   dragContainer,
   setDragContainer,
   hideSettingSidebar,
+  setWorkspaceBackgroundColor,
+  head,
+  setHead,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements = useSelector(
+  const workspaceElements: IWorkspaceElement[] = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const contractElementSelector = useSelector(
+  const contractElementSelector: IContractElementSelector = useSelector(
     (state: IRootState) => state.contract.contractElementSelector
   );
-  const contractElementSelected = useSelector(
+  const contractElementSelected: IContractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
   );
-
   const elementHoverStyles = contractElementSelector
     ? "border border-[transparent] border-hover"
     : "border border-[transparent] hover:border-slate-300 hover:border-dashed";
@@ -75,7 +89,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       ?.getBoundingClientRect().width;
 
     setFullViewWidth((fullViewWidth) => fullView);
-  }, [hideNavbar, openSetting]);
+  }, [isNavHidden, openSetting]);
 
   const onLayoutChange = (layout: Layout[]) => {
     if (layout.length === 0) setIsContainerSelected(false);
@@ -105,7 +119,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
       ? dispatch(updateWorkspaceElementsArray(newItemsArr))
       : dispatch(updateWorkspaceElementsArray(workspaceElements));
   };
-
   // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {
     const searchExistingValue = Object.keys(contractElementSelected).filter(
@@ -174,9 +187,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const onComponentClick = (itemName: string, i: string) => {
     setIsContainerSelected(true);
-    setOpenSetting(true);
+    hideSidebar();
     // checks if the selector is active
     if (contractElementSelector === null) {
+      setOpenSetting(true);
       dispatch(setSelectedElement(i));
       setOpenTab(1);
     } else {
@@ -208,7 +222,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       )
     ) {
       setIsContainerSelected(false);
-      setHideNavbar(true);
+      hideSidebar();
     }
     if (
       e.target.id === "full-view" ||
@@ -219,7 +233,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
       setOpenSetting(false);
     }
   };
-
   const renderItemFunction = workspaceElements
     ?.filter((i) => i.style?.deleteComponent === false)
     .map((item: IWorkspaceElement) => {
@@ -249,7 +262,8 @@ const Workspace: FC<IWorkspaceComponent> = ({
             setSideElement={setSideElement}
             dragContainer={dragContainer}
             setDragContainer={setDragContainer}
-            setHideNavbar={setHideNavbar}
+            showSidebar={showSidebar}
+            hideSidebar={hideSidebar}
             hideSettingSidebar={hideSettingSidebar}
           />
         </div>
@@ -258,34 +272,54 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   return (
     <main
-      style={{ width: "-webkit-fill-available" }}
-      className="main-div h-full "
+      style={{
+        width: "-webkit-fill-available",
+      }}
+      className="main-div h-full"
     >
-      <section onClick={handleCheckIsContainer} className="z-100">
-        <section
-          id="full-view"
-          style={{
-            width: "-webkit-fill-available",
-            background: workspaceBackgroundColor,
-          }}
-          className="mt-[90px] z-[100] bg-white ml-[120px] mb-[20px] min-h-[87vh] shadow-2xl mr-[290px]"
-        >
-          <GridLayout
-            layout={workspaceElements}
-            cols={6}
-            rowHeight={50}
-            width={fullViewWidth || 1200}
-            resizeHandles={["se"]}
-            isDraggable={drag}
-            onLayoutChange={onLayoutChange}
-            compactType={null}
-            margin={[0, 0]}
-            className="h-fit overflow-hidden"
+      {workspaceElements?.length > 0 ? (
+        <section onClick={handleCheckIsContainer} className="z-100">
+          <section
+            id="full-view"
+            style={{
+              width: "-webkit-fill-available",
+              background: workspaceBackgroundColor,
+            }}
+            className="mt-[90px] z-[100] ml-[120px] mb-[20px] min-h-[87vh] main-grid mr-[290px]"
           >
-            {renderItemFunction}
-          </GridLayout>
+            <GridLayout
+              layout={workspaceElements}
+              cols={6}
+              rowHeight={50}
+              width={fullViewWidth || 1200}
+              resizeHandles={["se"]}
+              isDraggable={drag}
+              onLayoutChange={onLayoutChange}
+              compactType={null}
+              margin={[0, 0]}
+              className="h-fit overflow-hidden"
+            >
+              {renderItemFunction}
+            </GridLayout>
+          </section>
         </section>
-      </section>
+      ) : (
+        <>
+          <DefaultBuilder
+            showSidebar={showSidebar}
+            setSideElement={setSideElement}
+          />
+          <DefaultSettings
+            setOpenSetting={setOpenSetting}
+            setIsContainerSelected={setIsContainerSelected}
+            hideSidebar={hideSidebar}
+            workspaceBackgroundColor={workspaceBackgroundColor}
+            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+            head={head}
+            setHead={setHead}
+          />
+        </>
+      )}
     </main>
   );
 };

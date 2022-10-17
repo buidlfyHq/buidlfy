@@ -13,6 +13,7 @@ import ConnectSwitchComponent from "components/settings/connect-switch-component
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
+import BorderComponent from "components/settings/border-component";
 import { IRootState } from "redux/root-state.interface";
 import {
   ISettings,
@@ -41,12 +42,11 @@ const ButtonSettings: FC<ISettings> = ({
       dispatch(setSelectorToDefault());
     }
   };
-
   return (
     <>
       <span className="flex tab mb-[0.5rem]">
         <span
-          className={`w-[8rem] pb-[0.8rem] ${
+          className={`w-[8rem] pb-[0.8rem] cursor-pointer ${
             openTab === 1 ? "tab-active" : "tab-heading"
           }`}
           onClick={(e) => handleToggleTab(e, 1)}
@@ -54,7 +54,7 @@ const ButtonSettings: FC<ISettings> = ({
           Setting
         </span>
         <span
-          className={`w-[8rem] pb-[0.8rem] ${
+          className={`w-[8rem] pb-[0.8rem] cursor-pointer ${
             openTab === 2 ? "tab-active" : "tab-heading"
           }`}
           onClick={(e) => handleToggleTab(e, 2)}
@@ -74,6 +74,7 @@ const ButtonSettings: FC<ISettings> = ({
           fontStyle={selectedElement.style.fontStyle}
           textDecoration={selectedElement.style.textDecoration}
           justifyContent={selectedElement.style.justifyContent}
+          color={selectedElement.style.color}
         />
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
           <textarea
@@ -83,22 +84,27 @@ const ButtonSettings: FC<ISettings> = ({
             placeholder="Please write your text here..."
           />
         </div>
-        <div className="flex items-center mt-4 mx-2  w-[13.5rem] text-black">
+        <ConnectSwitchComponent
+          i={selectedElement.i}
+          connectWallet={selectedElement.connectWallet}
+        />
+        <div
+          className={`flex items-center mb-2 mx-2 w-[13.5rem] text-black rounded-[6px] ${
+            selectedElement.connectWallet ? "disable-text" : ""
+          }`}
+        >
           <div className="link-div px-1 py-1">
             <IoMdLink className="text-[18px]" />
           </div>
           <input
             value={selectedElement.link}
             onChange={(e) => handleSettingChange(e, "link")}
-            className="changeText pl-[2.5rem] py-[0.4rem] input-text"
+            className={`changeText pl-[2.5rem] py-[0.4rem] rounded-[6px]`}
             type="text"
+            disabled={selectedElement.connectWallet}
             placeholder="Link"
           />
         </div>
-        <ConnectSwitchComponent
-          i={selectedElement.i}
-          connectWallet={selectedElement.connectWallet}
-        />
         <FontSizeComponent
           i={selectedElement.i}
           fontSize={selectedElement.style.fontSize}
@@ -106,6 +112,11 @@ const ButtonSettings: FC<ISettings> = ({
         <BorderRadiusComponent
           i={selectedElement.i}
           borderRadius={selectedElement.style.borderRadius}
+          borderColor={selectedElement.style.borderColor}
+        />
+        <BorderComponent
+          i={selectedElement.i}
+          borderWidth={selectedElement.style.borderWidth}
         />
         <ColorComponent
           i={selectedElement.i}

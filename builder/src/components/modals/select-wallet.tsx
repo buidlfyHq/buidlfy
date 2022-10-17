@@ -4,12 +4,11 @@ import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import { connectWallet } from "redux/web3/web3.actions";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import { IRootState } from "redux/root-state.interface";
 import MetamaskImg from "assets/icons/Metamask-icon.png";
 
 const SelectWallet: FC = () => {
   const dispatch = useDispatch();
-  const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
+  const currentAccount = useSelector((state: any) => state.web3.currentAccount);
 
   useEffect(() => {
     if (currentAccount) {

@@ -1,39 +1,40 @@
 import React, { FC, useRef } from "react";
+import Template from "features/dashboard/templates";
 import Elements from "features/dashboard/elements";
-import DefaultSettings from "features/dashboard/default-settings";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface ISidebar {
   isContainerSelected: boolean;
   sideElement: string;
+  isNavHidden: boolean;
+  hideSidebar: () => void;
+  hideSettingSidebar: () => void;
   hideNavbar: boolean;
-  setHideNavbar: (hideNavbar: boolean) => void;
-  workspaceBackgroundColor: string;
-  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
-  head: {
-    title: string;
-    logo: string | ArrayBuffer;
-  };
-  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
 }
 
 const Sidebar: FC<ISidebar> = ({
   isContainerSelected,
   sideElement,
+  isNavHidden,
+  hideSidebar,
+  hideSettingSidebar,
   hideNavbar,
-  setHideNavbar,
-  workspaceBackgroundColor,
-  setWorkspaceBackgroundColor,
-  head,
-  setHead,
 }) => {
+  const ref = useRef(null);
+
   return (
     <main
-      className={`sidebar ease-in-out duration-200 transition fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] w-[320px]  z-100 ${
-        hideNavbar ? "hidden" : ""
+      ref={ref}
+      className={`fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] z-[1] ${
+        !hideNavbar
+          ? isNavHidden
+            ? "hidden"
+            : "sidebar animate__animated animate__slideInLeft"
+          : "newbar animate__animated animate__slideOutLeft"
       }`}
     >
+      {/* It will be used for future */}
       {/* user name */}
       {/* It will be used for a later code */}
       {/* <section className="flex flex-row justify-between items-center h-[60px]">
@@ -87,18 +88,22 @@ const Sidebar: FC<ISidebar> = ({
       {/* Components */}
       {sideElement === SidebarEnum.ELEMENTS ? (
         <Elements
+          hideSidebar={hideSidebar}
           isContainerSelected={isContainerSelected}
-          setHideNavbar={setHideNavbar}
+          hideSettingSidebar={hideSettingSidebar}
+          hideNavbar={hideNavbar}
         />
       ) : null}
-      {sideElement === SidebarEnum.STYLES ? (
+      {sideElement === SidebarEnum.TEMPLATES ? <Template /> : null}
+      {/* It will be used for future */}
+      {/* {sideElement === SidebarEnum.STYLES ? (
         <DefaultSettings
           workspaceBackgroundColor={workspaceBackgroundColor}
           setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           head={head}
           setHead={setHead}
         />
-      ) : null}
+      ) : null} */}
     </main>
   );
 };

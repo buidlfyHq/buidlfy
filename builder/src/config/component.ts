@@ -44,14 +44,11 @@ export const components = [
     h: 2,
     // minH: 2,
     style: {
-      padding: {
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0
-      },
-      backgroundColor: "rgba(255, 255, 255, 1)",
+      ...defaultPaddingStyles,
+      ...defaultMarginStyles,
+      backgroundColor: "rgba(255, 255, 255, 0)",
       color: "rgba(0, 0, 0, 1)",
+      backgroundSize: "contain",
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
     },
@@ -193,8 +190,8 @@ export const components = [
       color: "rgba(255,255,255,100)",
       borderColor: "rgba(106, 88, 231, 100)",
       ...defaultDeleteStyles,
-      ...defaultBorderStyles,
       borderRadius: 2,
+      borderWidth: 0,
       ...defaultMarginStyles,
       padding: {
         paddingLeft: 48,
@@ -203,7 +200,7 @@ export const components = [
         paddingBottom: 10,
       },
     },
-    connectWallet: "off",
+    connectWallet: false,
     contract: {},
   },
   {
@@ -275,8 +272,9 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
       borderRadius: 5,
-      ...defaultColorStyles,
-      color: "rgba(222,222,222,100)",
+      borderColor: "rgba(222,222,222,100)",
+      color: "rgba(0,0,0,100)",
+      backgroundColor: "rgba(255, 255, 255, 0)",
       margin: {
         marginLeft: 24,
         marginRight: 24,
@@ -293,8 +291,8 @@ export const components = [
   },
   {
     name: "Image",
-    h: 2,
-    minH: 1,
+    h: 3,
+    minH: 3,
     style: {
       width: 80,
       height: 60,

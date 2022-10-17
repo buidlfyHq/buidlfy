@@ -10,7 +10,7 @@ module.exports = {
         },
       },
       animation: {
-        loading: 'loading 3s linear infinite',
+        loading: 'loading 2s linear infinite',
       },
     },
   },

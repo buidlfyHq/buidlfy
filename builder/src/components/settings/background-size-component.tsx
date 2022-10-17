@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
+import { ReplaceStyle } from "components/utils/render-setting";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -36,20 +37,26 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
           Background Size
           <div className="flex px-3 mt-3">
             <span
-              onClick={() => handleChange("contain")}
-              className="align-div flex items-center justify-center shadow text-[12px] p-2 mr-2 my-2 font-regular text-black"
+              onClick={() => handleChange(ReplaceStyle.CONTAIN)}
+              className={`align-div cursor-pointer flex items-center justify-center shadow text-[12px] p-2 mr-2 my-2 font-regular text-black ${
+                backgroundSize === ReplaceStyle.CONTAIN ? "bg-[#b7c1ec]" : ""
+              }`}
             >
               Contain
             </span>
             <span
-              onClick={() => handleChange("cover")}
-              className="align-div flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black"
+              onClick={() => handleChange(ReplaceStyle.COVER)}
+              className={`align-div cursor-pointer flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black  ${
+                backgroundSize === ReplaceStyle.COVER ? "bg-[#b7c1ec]" : ""
+              }`}
             >
               Cover
             </span>
             <span
-              onClick={() => handleChange("auto")}
-              className="align-div flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black"
+              onClick={() => handleChange(ReplaceStyle.AUTO)}
+              className={`align-div cursor-pointer flex items-center justify-center shadow text-[12px] p-2 mx-2 my-2 font-regular text-black  ${
+                backgroundSize === ReplaceStyle.AUTO ? "bg-[#b7c1ec]" : ""
+              }`}
             >
               Auto
             </span>
