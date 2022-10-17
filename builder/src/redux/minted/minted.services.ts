@@ -8,22 +8,24 @@ import {
   getSigner,
   TOKENS_COUNT_ON_MINT,
 } from "redux/web3/web3.utils";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { getCurrentTime } from "./minted.utils";
+import { formatList } from "redux/template/template.services";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 export const createListingService = async (
-  tokenId: number,
+  tokenId: string,
   buyoutPricePerToken: BigNumber
 ): Promise<any> => {
   try {
     const signer = getSigner();
     const marketplaceContract = getMarketplaceContract(signer);
+    const token_id = parseInt(tokenId);
     // Check for approval if yes, then don't call approve otherwise call approve
     await approveERC1155Token(signer);
     const tx = await marketplaceContract.createListing(
       [
         addresses.spheronErc1155,
-        tokenId,
+        token_id,
         getCurrentTime(),
         getCurrentTime(),
         TOKENS_COUNT_ON_MINT,
@@ -46,40 +48,13 @@ export const createListingService = async (
   }
 };
 
-export const formatList = async (listings) => {
-  let templates = (
-    await Promise.all(
-      listings.map(async (template: any) => {
-        if (
-          template.listing_assetContract.toLowerCase() ===
-          addresses.spheronErc1155.toLowerCase()
-        ) {
-          try {
-            if (template.token.uri) {
-              const templateObj: IWorkspaceElement = await (
-                await fetch(template.token.uri)
-              ).json();
-
-              return { ...template, ...templateObj };
-            } else {
-              return { ...template };
-            }
-          } catch (error) {
-            console.error("error: ", error);
-          }
-        }
-      })
-    )
-  ).filter((template: any) => template !== undefined);
-
-  return templates;
-};
-
-export const getOwnedTemplatesService = async (): Promise<any> => {
+export const getOwnedTemplatesService = async (
+  address: string
+): Promise<any> => {
   try {
     const allTemplates = await (
       await fetch(
-        "https://deep-index.moralis.io/api/v2/0xd6c72729EbCC987b171eCF074993ce3C4e34b9f0/nft?chain=goerli&format=decimal&token_addresses=0xa69374d7371df89192f05c7b61a945f834bf2593",
+        `https://deep-index.moralis.io/api/v2/${address}/nft?chain=goerli&format=decimal&token_addresses=0xa69374d7371df89192f05c7b61a945f834bf2593`,
         {
           method: "GET",
           headers: {
@@ -90,7 +65,6 @@ export const getOwnedTemplatesService = async (): Promise<any> => {
       )
     ).json();
 
-    // filtering out templates without images
     let templates = (
       await Promise.all(
         allTemplates.result.map(async (template: any) => {
@@ -116,51 +90,6 @@ export const getOwnedTemplatesService = async (): Promise<any> => {
     // eslint-disable-next-line no-console
     console.log("Error in getOwnedTemplatesService --> ", error);
     return { error: true, errorMessage: (error as Error).message, receipt: "" };
-  }
-};
-
-// available for buying
-export const getListedTemplatesService = async () => {
-  // Removed: isAccepted from query
-  try {
-    const query = gql`
-      {
-        listings {
-          id
-          token {
-            id
-            contract
-            identifier
-            uri
-          }
-          lister
-          listing_listingId
-          listing_tokenOwner
-          listing_assetContract
-          listing_tokenId
-          listing_startTime
-          listing_endTime
-          listing_quantity
-          listing_currency
-          listing_buyoutPricePerToken
-          listing_tokenType
-          listing_listingType
-          isAccepted
-        }
-      }
-    `;
-
-    const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
-    const listings = await formatList(res.listings);
-    return { error: false, errorMessage: "", listings };
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("Error in fetching --> ", error);
-    return {
-      error: true,
-      errorMessage: (error as Error).message,
-      listings: null,
-    };
   }
 };
 
@@ -208,7 +137,6 @@ export const getOwnedReviewTemplatesService = async (address: string) => {
 };
 
 export const getOwnedListedTemplatesService = async (address: string) => {
-  // Removed: isAccepted from query
   try {
     const query = gql`
       {

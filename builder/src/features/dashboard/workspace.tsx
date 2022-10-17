@@ -53,13 +53,13 @@ const Workspace: FC<IWorkspaceComponent> = ({
   hideSettingSidebar,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
+  const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const contractElementSelector: IContractElementSelector = useSelector(
+  const contractElementSelector = useSelector(
     (state: IRootState) => state.contract.contractElementSelector
   );
-  const contractElementSelected: IContractElementSelected = useSelector(
+  const contractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
   );
 

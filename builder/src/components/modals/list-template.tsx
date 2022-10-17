@@ -1,24 +1,20 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
-import { CgClose } from "react-icons/cg";
 import { listTemplate } from "redux/minted/minted.actions";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
-import { ISelectedTemplate } from "redux/template/template.interfaces";
+import { CgClose } from "react-icons/cg";
 import IconImg from "assets/icons/icon-crypto.png";
 
 const ListTemplate: FC = () => {
   const dispatch = useDispatch();
-  const selectedTemplate: ISelectedTemplate = useSelector(
+  const selectedTemplate = useSelector(
     (state: IRootState) => state.template.selectedTemplate
   );
 
   const handleListTemplate = () => {
-    // WON'T WORK
-    // UPDATE: integrate selectedTemplate id
     dispatch(listTemplate());
-    // dispatch(toggleModalType('complete-listing'))
   };
 
   return (
@@ -40,7 +36,6 @@ const ListTemplate: FC = () => {
               Crypto
             </div>
           </div>
-          {/* Not Using */}
           <div className="mt-4 mb-8 h-44 flex items-center bg-[#F8F8FD] rounded-[7px]">
             <img
               src={selectedTemplate.image}
@@ -73,7 +68,6 @@ const ListTemplate: FC = () => {
                 ETH 25
               </div>
             </div>
-            {/* here */}
             <div className="flex items-center justify-between mt-3">
               <div className="text-[#8E8E93] text-[14px]">
                 Platform Fee (5%)

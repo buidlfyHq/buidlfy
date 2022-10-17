@@ -1,6 +1,6 @@
 import React, { useRef, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdOutlineDeleteOutline, MdArrowBack } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import SettingComponent from "components/utils/render-setting";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
@@ -13,7 +13,7 @@ import "styles/components.css";
 const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
   const ref = useRef(null);
   const dispatch = useDispatch();
-  const selectedElement: IWorkspaceElement = useSelector(
+  const selectedElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 

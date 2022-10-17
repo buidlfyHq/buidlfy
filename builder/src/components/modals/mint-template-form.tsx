@@ -8,19 +8,25 @@ import {
   uploadTemplateToWeb3Storage,
 } from "config/web3storage";
 import { mintTemplate } from "redux/template/template.actions";
-import { toggleModalType } from "redux/modal/modal.reducers";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import InfoCircleImg from "assets/icons/info-circle.png";
 import MintUploadImg from "assets/icons/mint-form-img.png";
 
+// REMOVE: default image link when the bug is fixed
+const DEFAULT_IMAGE_LINK =
+  "https://bafkreie5ovwq53lwzfye6y4fbqt5zappoq2y7jn443r3bofpvlkxhjh5jy.ipfs.dweb.link/";
+
 const MintTemplateForm: FC = () => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
+  const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const currentAccount = useSelector((state: any) => state.web3.currentAccount);
+  const currentAccount = useSelector(
+    (state: IRootState) => state.web3.currentAccount
+  );
 
+  // BUG: setImage state not able to persist
   const [image, setImage] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -36,6 +42,7 @@ const MintTemplateForm: FC = () => {
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
+          // BUG: setImage state not able to persist
           setImage(cid);
         });
         reader.readAsDataURL(e.target.files[0]);
@@ -45,8 +52,9 @@ const MintTemplateForm: FC = () => {
 
   const handleSaveTemplate = async () => {
     if (workspaceElements?.length > 0) {
+      // REMOVE: default image link when the bug is fixed
       let newTemplate = {
-        image,
+        image: DEFAULT_IMAGE_LINK,
         name,
         category,
         description,
@@ -149,15 +157,18 @@ const MintTemplateForm: FC = () => {
         </div>
       </div>
       <div className="flex items-center justify-end mt-8">
-        <div className="bg-[#E8E6EE] cursor-pointer text-[#7B7B7B] font-[500] text-[14px] py-3 px-10 rounded-[8px]">
+        <button
+          className="bg-[#E8E6EE] cursor-pointer text-[#7B7B7B] font-[500] text-[14px] py-3 px-10 rounded-[8px]"
+          onClick={() => dispatch(toggleModal(false))}
+        >
           Cancel
-        </div>
-        <div
+        </button>
+        <button
           onClick={handleSaveTemplate}
           className="connect-wallet-button cursor-pointer text-white font-[500] text-[14px] py-3 px-12 rounded-[8px] ml-3"
         >
           Mint
-        </div>
+        </button>
       </div>
     </Dialog.Panel>
   );

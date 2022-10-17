@@ -4,13 +4,11 @@ import { addNotification } from "redux/notification/notification.reducers";
 import { NotificationType } from "redux/notification/notification.interfaces";
 import {
   createListingService,
-  getListedTemplatesService,
   getOwnedListedTemplatesService,
   getOwnedReviewTemplatesService,
   getOwnedTemplatesService,
 } from "./minted.services";
 import {
-  allTemplatesFetched,
   ownedTemplatesFetched,
   templateListed,
   ownedListedTemplatesFetched,
@@ -19,15 +17,19 @@ import {
 } from "./minted.reducers";
 import mintedActionTypes from "./minted.types";
 import { IRootState } from "redux/root-state.interface";
+import { ISelectedTemplate } from "redux/template/template.interfaces";
+import { SelectedTemplateDto } from "redux/template/template.dto";
 
 function* createTemplateListing() {
-  // UPDATE: filter token id of the selectedTemplate
-  const tokenId = yield select((state: IRootState) => state.template.mintTokenId);
+  const selectedTemplate: ISelectedTemplate = yield select(
+    (state: IRootState) => state.template.selectedTemplate
+  );
+  const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
   yield put(startListTemplateLoader());
 
   const listingRes = yield call(
     createListingService,
-    tokenId,
+    selectedTemplateDto.tokenId,
     ethers.utils.parseEther("5")
   );
   if (!listingRes.error) {
@@ -44,7 +46,10 @@ function* createTemplateListing() {
 }
 
 function* getOwnedTemplates(): any {
-  const fetchedTemplates = yield call(getOwnedTemplatesService);
+  const currentAccount: string = yield select(
+    (state: IRootState) => state.web3.currentAccount
+  );
+  const fetchedTemplates = yield call(getOwnedTemplatesService, currentAccount);
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.templates.length !== 0) {
       yield put(ownedTemplatesFetched(fetchedTemplates.templates));
@@ -60,25 +65,8 @@ function* getOwnedTemplates(): any {
   }
 }
 
-function* getListedTemplates(): any {
-  const fetchedTemplates = yield call(getListedTemplatesService);
-  if (!fetchedTemplates.error) {
-    if (fetchedTemplates.listings.length !== 0) {
-      yield put(allTemplatesFetched(fetchedTemplates.listings));
-    }
-  } else {
-    yield put(
-      addNotification({
-        message: fetchedTemplates.errorMessage,
-        timestamp: new Date(),
-        type: NotificationType.Error,
-      })
-    );
-  }
-}
-
 function* getOwnedReviewTemplates(): any {
-  const currentAccount = yield select(
+  const currentAccount: string = yield select(
     (state: IRootState) => state.web3.currentAccount
   );
   const fetchedTemplates = yield call(
@@ -101,7 +89,7 @@ function* getOwnedReviewTemplates(): any {
 }
 
 function* getOwnedListedTemplates(): any {
-  const currentAccount = yield select(
+  const currentAccount: string = yield select(
     (state: IRootState) => state.web3.currentAccount
   );
   const fetchedTemplates = yield call(
@@ -131,10 +119,6 @@ function* fetchOwnedTemplatesSaga() {
   yield takeLatest(mintedActionTypes.FETCH_OWNED_TEMPLATES, getOwnedTemplates);
 }
 
-function* fetchTemplatesSaga() {
-  yield takeLatest(mintedActionTypes.FETCH_TEMPLATES, getListedTemplates);
-}
-
 function* fetchOwnedReviewTemplatesSaga() {
   yield takeLatest(
     mintedActionTypes.FETCH_OWNED_REVIEW_TEMPLATES,
@@ -153,7 +137,6 @@ export function* mintedSagas() {
   yield all([
     call(listTemplateSaga),
     call(fetchOwnedTemplatesSaga),
-    call(fetchTemplatesSaga),
     call(fetchOwnedReviewTemplatesSaga),
     call(fetchOwnedListedTemplatesSaga),
   ]);

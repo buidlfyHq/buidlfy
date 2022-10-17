@@ -2,11 +2,12 @@ import { BigNumber } from "ethers";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 export interface ITemplateState {
-  buyTemplateHash: string;
+  buyTemplateReceipt: string;
   buyTemplateLoading: boolean;
   mintTokenId: number;
   mintTemplateLoading: boolean;
   selectedTemplate: ISelectedTemplate;
+  templateList: [];
 }
 
 export interface ISelectedTemplate {

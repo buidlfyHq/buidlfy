@@ -5,7 +5,6 @@ const initialState: IMintedState = {
   listTemplateHash: "",
   listTemplateLoading: false,
   ownedTemplateList: [],
-  templateList: [],
   ownedReviewTemplateList: [],
   ownedListedTemplateList: [],
 };
@@ -24,9 +23,6 @@ const mintedSlice = createSlice({
     ownedTemplatesFetched(state, action) {
       state.ownedTemplateList = action.payload;
     },
-    allTemplatesFetched(state, action) {
-      state.templateList = action.payload;
-    },
     ownedReviewTemplatesFetched(state, action) {
       state.ownedReviewTemplateList = action.payload;
     },
@@ -40,7 +36,6 @@ export const {
   templateListed,
   startListTemplateLoader,
   ownedTemplatesFetched,
-  allTemplatesFetched,
   ownedReviewTemplatesFetched,
   ownedListedTemplatesFetched,
 } = mintedSlice.actions;

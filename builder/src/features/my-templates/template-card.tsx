@@ -1,8 +1,11 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplate } from "redux/template/template.reducers";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 interface ITemplateCard {
   temp: ISelectedTemplate;
@@ -12,11 +15,17 @@ interface ITemplateCard {
 
 const TemplateCard: FC<ITemplateCard> = ({ temp, badge, list }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleListOnBuidlfy = (template: ISelectedTemplate) => {
     dispatch(setSelectedTemplate(template));
     dispatch(toggleModal(true));
     dispatch(toggleModalType("list-single"));
+  };
+
+  const openTemplate = (config: IWorkspaceElement[]) => {
+    if (config) dispatch(updateWorkspaceElementsArray(config));
+    return navigate("/");
   };
 
   return (
@@ -37,6 +46,12 @@ const TemplateCard: FC<ITemplateCard> = ({ temp, badge, list }) => {
               List on Buidlfy
             </div>
           )}
+          <div
+            className="py-2 px-10 mt-4 rounded-[8px] bg-white text-[#7743E7]"
+            onClick={() => openTemplate(temp.value)}
+          >
+            Use Template
+          </div>
         </div>
         <img
           src={temp.image}

@@ -24,13 +24,13 @@ interface INavbar {
 
 const Navbar: FC<INavbar> = ({ workspaceBackgroundColor, head }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
+  const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const contractDetails: IContractDetails = useSelector(
+  const contractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
   );
-  const currentAccount = useSelector((state: any) => state.web3.currentAccount);
+  const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
 
   const [abiJSON, setAbiJSON] = useState<
     {

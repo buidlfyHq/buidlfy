@@ -4,6 +4,7 @@ import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { Tag } from "components/utils/tag-component";
 import { toggleModalType } from "redux/modal/modal.reducers";
+import { IRootState } from "redux/root-state.interface";
 import EyeImg from "assets/icons/eye.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
 
@@ -14,7 +15,7 @@ interface ISingleTemplateDetails {
 const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
   const dispatch = useDispatch();
   const selectedTemplate = useSelector(
-    (state: any) => state.template.selectedTemplate
+    (state: IRootState) => state.template.selectedTemplate
   );
 
   const handleSubmit = () => {
