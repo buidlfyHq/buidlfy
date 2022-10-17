@@ -1050,6 +1050,9 @@ height: 40px;
   justify-content: center;
   align-items: center;
 }
+/* .tool {
+  transition: 0.5s !important;
+} */
 
 .add-btn {
   background: linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
