@@ -7,6 +7,7 @@ const initialState: ITemplateState = {
   mintTokenId: 0, // UPDATE: [{id: string, tokenId: number}]
   mintTemplateLoading: false,
   selectedTemplate: null,
+  templateList: [],
 };
 
 const templateSlice = createSlice({
@@ -30,6 +31,9 @@ const templateSlice = createSlice({
     setSelectedTemplate(state, action: { payload: ISelectedTemplate }) {
       state.selectedTemplate = action.payload;
     },
+    allTemplatesFetched(state, action) {
+      state.templateList = action.payload;
+    },
   },
 });
 
@@ -39,5 +43,6 @@ export const {
   startBuyTemplateLoader,
   startMintTemplateLoader,
   setSelectedTemplate,
+  allTemplatesFetched,
 } = templateSlice.actions;
 export default templateSlice.reducer;

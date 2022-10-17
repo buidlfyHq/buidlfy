@@ -1,14 +1,25 @@
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
-import { toggleModal } from "redux/modal/modal.reducers";
 import LottieComponent from "components/utils/lottie";
-import CongratulationsImg from "assets/icons/congratulations.png";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { toggleModal } from "redux/modal/modal.reducers";
+import { IRootState } from "redux/root-state.interface";
 import ConfettiLottie from "assets/lottie/confetti.json";
+import CongratulationsImg from "assets/icons/congratulations.png";
 import { ReactComponent as FeatherIcon } from "assets/svgAsIcons/feather.svg";
 
 const FinalModal: FC = () => {
   const dispatch = useDispatch();
+  const selectedTemplate = useSelector(
+    (state: IRootState) => state.template.selectedTemplate
+  );
+
+  const handleClick = () => {
+    dispatch(updateWorkspaceElementsArray(selectedTemplate.value));
+    dispatch(toggleModal(false))
+  };
+
   return (
     <Dialog.Panel
       id="#confetti"
@@ -33,7 +44,7 @@ const FinalModal: FC = () => {
         button given below to start using the template
       </div>
       <button
-        onClick={() => dispatch(toggleModal(false))}
+        onClick={handleClick}
         className="flex items-center text-white px-12 py-5 text-[20px] font-[600] connect-wallet-button rounded-[60px] mt-10 cursor-pointer"
       >
         Start Creating Now

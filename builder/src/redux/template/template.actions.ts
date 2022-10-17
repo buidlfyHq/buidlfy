@@ -8,3 +8,7 @@ export const mintTemplate = (payload: string) => ({
   type: templateActionTypes.MINT_TEMPLATE,
   payload,
 });
+
+export const fetchTemplates = () => ({
+  type: templateActionTypes.FETCH_TEMPLATES,
+});

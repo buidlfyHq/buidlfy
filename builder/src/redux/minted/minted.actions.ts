@@ -8,10 +8,6 @@ export const fetchOwnedTemplates = () => ({
   type: mintedActionTypes.FETCH_OWNED_TEMPLATES,
 });
 
-export const fetchTemplates = () => ({
-  type: mintedActionTypes.FETCH_TEMPLATES,
-});
-
 export const fetchOwnedReviewTemplates = () => ({
   type: mintedActionTypes.FETCH_OWNED_REVIEW_TEMPLATES,
 });

@@ -7,6 +7,7 @@ export interface ITemplateState {
   mintTokenId: number;
   mintTemplateLoading: boolean;
   selectedTemplate: ISelectedTemplate;
+  templateList: [];
 }
 
 export interface ISelectedTemplate {

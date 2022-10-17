@@ -1,4 +1,6 @@
 import { BigNumber } from "ethers";
+import request, { gql } from "graphql-request";
+import config from "config";
 import {
   addresses,
   approveERC20Token,
@@ -6,6 +8,7 @@ import {
   getMarketplaceContract,
   getSigner,
 } from "redux/web3/web3.utils";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 export const initiateTransactionService = async (
   listingId: BigNumber,
@@ -51,5 +54,80 @@ export const mintTemplateService = async (uri: string) => {
     // eslint-disable-next-line no-console
     console.log("Error in mintTemplateService --> ", error);
     return { error: true, errorMessage: (error as Error).message, receipt: "" };
+  }
+};
+
+export const formatList = async (listings) => {
+  let templates = (
+    await Promise.all(
+      listings.map(async (template: any) => {
+        if (
+          template.listing_assetContract.toLowerCase() ===
+          addresses.spheronErc1155.toLowerCase()
+        ) {
+          try {
+            if (template.token.uri) {
+              const templateObj: IWorkspaceElement = await (
+                await fetch(template.token.uri)
+              ).json();
+
+              return { ...template, ...templateObj };
+            } else {
+              return { ...template };
+            }
+          } catch (error) {
+            console.error("error: ", error);
+          }
+        }
+      })
+    )
+  ).filter((template: any) => template !== undefined);
+
+  return templates;
+};
+
+// available for buying
+export const getListedTemplatesService = async () => {
+  // Removed: isAccepted from query
+  // ADD: isAccepted when reviewing is functional
+  try {
+    const query = gql`
+      {
+        listings {
+          id
+          token {
+            id
+            contract
+            identifier
+            uri
+          }
+          lister
+          listing_listingId
+          listing_tokenOwner
+          listing_assetContract
+          listing_tokenId
+          listing_startTime
+          listing_endTime
+          listing_quantity
+          listing_currency
+          listing_buyoutPricePerToken
+          listing_tokenType
+          listing_listingType
+          isAccepted
+        }
+      }
+    `;
+
+    const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
+    const listings = await formatList(res.listings);
+    return { error: false, errorMessage: "", listings };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Error in fetching --> ", error);
+    return {
+      error: true,
+      errorMessage: (error as Error).message,
+      listings: null,
+    };
   }
 };
