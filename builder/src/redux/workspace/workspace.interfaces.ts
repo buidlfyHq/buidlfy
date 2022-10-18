@@ -7,6 +7,7 @@ export interface IWorkspaceState {
   workspaceElements: IWorkspaceElement[];
   selectedElement: IWorkspaceElement;
   uploadedImagesData: IUploadedImageData[];
+  publishConfig: string;
 }
 
 export interface IWorkspaceElement {

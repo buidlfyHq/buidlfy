@@ -8,7 +8,10 @@ import { Link } from "react-router-dom";
 import TemplateModal from "./template-modal";
 import { uploadFileToWeb3Storage } from "config/web3storage";
 import { connectWallet } from "redux/web3/web3.actions";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import {
+  updateWorkspaceElementsArray,
+  updatePublishConfig,
+} from "redux/workspace/workspace.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
@@ -71,6 +74,7 @@ const Navbar: FC<INavbar> = ({
       }
     }
   }, [contractDetails.abi]);
+
   const getConfig = () => {
     return {
       head: {
@@ -150,6 +154,7 @@ const Navbar: FC<INavbar> = ({
   const handlePublish = () => {
     let stringifiedConfig = JSON.stringify(getConfig());
     setGeneratedConfig(base64_encode(stringifiedConfig));
+    dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-process"));
   };
@@ -158,6 +163,7 @@ const Navbar: FC<INavbar> = ({
     dispatch(toggleModal(true));
     dispatch(toggleModalType("mint-nft-form"));
   };
+
   const handleCloseSidebar = () => {
     setIsContainerSelected(false);
     hideSidebar();

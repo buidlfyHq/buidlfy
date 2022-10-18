@@ -1,14 +1,26 @@
 import { BigNumber } from "ethers";
 import request, { gql } from "graphql-request";
 import config from "config";
+import ShortUniqueId from "short-unique-id";
+import { uniqueNamesGenerator, Config, adjectives, colors } from 'unique-names-generator';
 
-export const initiatePublishService = async (clientTopic: string, configDetails: string) => {
+const uid = new ShortUniqueId();
+
+const customConfig: Config = {
+  dictionaries: [adjectives, colors],
+  separator: '-',
+  length: 2,
+};
+
+const shortName: string = uniqueNamesGenerator(customConfig); 
+
+export const initiatePublishService = async ( configDetails: string) => {
   try {
     const myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
 const raw = JSON.stringify({
-  "clientTopic": clientTopic,
+  "clientTopic": uid(),
   "config": configDetails
 });
 
@@ -32,10 +44,9 @@ export const getPublishDetailsService = async (deploymentId: string, siteName: s
       try {
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        
         const raw = JSON.stringify({
           "deploymentId": deploymentId,
-          "siteName": siteName
+          "siteName": shortName
         });
         
         const requestOptions:RequestInit = {

@@ -5,10 +5,9 @@ import {
 import publishActionTypes from "./workspace.types";
 
 function* initatePublish({ payload }) {
-  const {clientTopic, configDetails} = payload.payload
+  const { configDetails} = payload.payload
   const transactionRes = yield call(
       initiatePublishService,
-      clientTopic,
       configDetails
   );
   if (!transactionRes.error) {

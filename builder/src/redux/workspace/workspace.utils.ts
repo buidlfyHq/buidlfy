@@ -269,3 +269,4 @@ export const fetchUploadedImageData = (
   newUploadedImagesData.push({ settingItemId, uploadedImageData });
   return newUploadedImagesData;
 };
+
