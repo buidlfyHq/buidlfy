@@ -2,16 +2,14 @@ import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import makeBlockie from "ethereum-blockies-base64";
 import { encode as base64_encode } from "base-64";
-import { Dialog, Menu } from "@headlessui/react";
+import { Menu } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import TemplateModal from "./template-modal";
-import { uploadFileToWeb3Storage } from "config/web3storage";
 import { connectWallet } from "redux/web3/web3.actions";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
-import { ITemplate } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface INavbar {
@@ -54,10 +52,7 @@ const Navbar: FC<INavbar> = ({
       type: string;
     }[]
   >([]); // work in progress
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [generatedConfig, setGeneratedConfig] = useState<string>("");
-  const [inputValue, setInputValue] = useState<string>("");
-  const [file, setFile] = useState<string>("");
 
   useEffect(() => {
     if (contractDetails.abi) {

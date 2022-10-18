@@ -6,16 +6,15 @@ import SingleTemplateDetails from "components/modals/single-template-details";
 import FinalModal from "components/modals/final-modal";
 import ListTemplate from "components/modals/list-template";
 import SelectWallet from "components/modals/select-wallet";
-import { IRootState } from "redux/root-state.interface";
 import CheckoutModal from "components/modals/checkout-modal";
-import MintTemplateModal from "components/modals/mint-template-form";
+import MintTemplateForm from "components/modals/mint-template-form";
 import MintedTemplateModal from "components/modals/minted-template";
 import MintingProgressModal from "components/modals/minting-progress";
-import PublishingProcessModal from "components/modals/publish-process";
 import PublishSiteModal from "components/modals/publish-site";
 import SitePublishedModal from "components/modals/site-published-modal";
 import CompleteListing from "components/modals/complete-listing";
 import TemplateListing from "components/modals/template-listing";
+import { IRootState } from "redux/root-state.interface";
 
 interface IRenderModal{
   generatedConfig?: string
@@ -42,7 +41,7 @@ const RenderModal: FC<IRenderModal> = ({generatedConfig}) => {
     case "checkout": 
       return <CheckoutModal />
     case "mint-nft-form": 
-      return <MintTemplateModal />
+      return <MintTemplateForm />
     case "minted-complete":
       return <MintedTemplateModal />
     case "minting-progress": 
