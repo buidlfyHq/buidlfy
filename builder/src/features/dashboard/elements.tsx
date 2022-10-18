@@ -227,12 +227,9 @@ const Elements: FC<IElements> = ({
         }`}
       >
         <h3 className="element-heading mt-[2.5px]">Add Elements</h3>
-        <div className="close-btn">
-          <MdOutlineClose
-            onClick={() => setHideNavbar(true)}
-            className="text-[16px]"
-          />
-        </div>
+        <button className="close-btn" onClick={() => setHideNavbar(true)}>
+          <MdOutlineClose className="text-[16px]" />
+        </button>
       </div>
 
       {!isContainerSelected ? (

@@ -31,7 +31,7 @@ const Dashboard: FC = () => {
     logo: "",
   });
   const [sideElement, setSideElement] = useState<string>("");
-  const [hideNavbar, setHideNavbar] = useState<boolean>(false);
+  const [hideNavbar, setHideNavbar] = useState<boolean>(true);
 
   useEffect(() => {
     // checks for stored configs
