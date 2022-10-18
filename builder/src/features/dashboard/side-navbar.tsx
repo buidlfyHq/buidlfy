@@ -1,23 +1,18 @@
-import React, { FC } from "react";
-import { SidebarEnum } from "redux/workspace/workspace.interfaces";
-import logo from "assets/icons/buidlfy.png";
-import TemplateSvg from "components/utils/assets/template-svg";
-import ElementSvg from "components/utils/assets/elements-svg";
+import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { SidebarEnum } from "redux/workspace/workspace.interfaces";
+import logo from "assets/icons/buidlfy.png";
+import ElementSvg from "components/utils/assets/elements-svg";
+import TemplateSvg from "components/utils/assets/template-svg";
 import "styles/components.css";
 
 interface ISideNavbar {
   setSideElement: (sideElement: string) => void;
-  showSidebar: () => void;
-  hideSettingSidebar: () => void;
+  setHideNavbar: (hideNavbar: boolean) => void;
 }
 
-const SideNavbar: FC<ISideNavbar> = ({
-  setSideElement,
-  showSidebar,
-  hideSettingSidebar,
-}) => {
+const SideNavbar: FC<ISideNavbar> = ({ setSideElement, setHideNavbar }) => {
   const dispatch = useDispatch();
 
   const handleSidebar = (selectedSidebarElements: string) => {
@@ -37,9 +32,6 @@ const SideNavbar: FC<ISideNavbar> = ({
           onClick={() => {
             dispatch(toggleModal(true));
             dispatch(toggleModalType("template"));
-            showSidebar();
-            handleSidebar(SidebarEnum.TEMPLATES);
-            hideSettingSidebar();
           }}
           className="cursor-pointer icon-div"
         >
@@ -48,9 +40,8 @@ const SideNavbar: FC<ISideNavbar> = ({
         </div>
         <div
           onClick={() => {
-            showSidebar();
             handleSidebar(SidebarEnum.ELEMENTS);
-            hideSettingSidebar();
+            setHideNavbar(false);
           }}
           className="mt-8 icon-div cursor-pointer"
         >

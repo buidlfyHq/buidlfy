@@ -2,9 +2,9 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
+import ListTemplates from "components/utils/list-templates";
 import { toggleModal } from "redux/modal/modal.reducers";
-import {ReactComponent as SearchIcon} from 'assets/svgAsIcons/search-icon.svg'
-import SelectTemplateTemplates from "components/utils/select-template-templates";
+import { ReactComponent as SearchIcon } from "assets/svgAsIcons/search-icon.svg";
 
 const TEMPLATE_CATEGORIES = [
   "ALL",
@@ -18,11 +18,15 @@ const TEMPLATE_CATEGORIES = [
 
 const SelectTemplateModal: FC = () => {
   const dispatch = useDispatch();
+
   return (
     <Dialog.Panel className="flex flex-col items-center w-full max-w-[1400px] mx-28 my-20 rounded-[24px] bg-white">
       <div className="flex flex-col items-center w-full px-12 pt-12">
         <div className="flex items-start justify-end w-full">
-          <CgClose onClick={() => dispatch(toggleModal(false))} className="text-[24px] cursor-pointer" />
+          <CgClose
+            onClick={() => dispatch(toggleModal(false))}
+            className="text-[24px] cursor-pointer"
+          />
         </div>
         <div className="text-center w-[412px]">
           <div className="text-[#14142B] font-[600] text-[28px] leading-[44px]">
@@ -76,7 +80,7 @@ const SelectTemplateModal: FC = () => {
       </div>
       <hr className="bg-hr h-[2px] w-full mt-6" />
       <div className="w-full bg-lower-template">
-        <SelectTemplateTemplates />
+        <ListTemplates />
       </div>
     </Dialog.Panel>
   );

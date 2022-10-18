@@ -12,9 +12,9 @@ import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { useSelector } from "react-redux";
 import { IRootState } from "redux/root-state.interface";
 import { IContract } from "redux/contract/contract.interfaces";
-import ContractList from "components/utils/contract-list";
-import ContractView from "components/utils/contract-view";
-import ContractHistory from "components/utils/contract-history";
+import ContractList from "components/utils/contract/contract-list";
+import ContractView from "components/utils/contract/contract-view";
+import ContractHistory from "components/utils/contract/contract-history";
 import "styles/components.css";
 import "styles/dashboard.css";
 
