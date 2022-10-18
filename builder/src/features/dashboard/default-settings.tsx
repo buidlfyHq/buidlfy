@@ -16,7 +16,7 @@ interface IDefaultSettings {
     logo: string | ArrayBuffer;
   };
   setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
-  hideSidebar?: () => void;
+  setHideNavbar?: (hideNavbar?: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   setOpenSetting: (open: boolean) => void;
 }
@@ -26,9 +26,9 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   setWorkspaceBackgroundColor,
   head,
   setHead,
-  hideSidebar,
+  setHideNavbar,
   setIsContainerSelected,
-  setOpenSetting
+  setOpenSetting,
 }) => {
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
   const [siteImage, setSiteImage] = useState<string>();
@@ -79,14 +79,17 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   );
 
   const handleCloseSidebar = () => {
-    setIsContainerSelected(false)
-    hideSidebar()
+    setIsContainerSelected(false);
+    setHideNavbar(true);
     setOpenSetting(false);
-  }
+  };
 
   // ADD: New site design in next branch
   return (
-    <main onClick={handleCloseSidebar} className="fixed right-0 top-[60px] w-[250px] setting-nav h-full">
+    <main
+      onClick={handleCloseSidebar}
+      className="fixed right-0 top-[60px] w-[250px] setting-nav h-full"
+    >
       <div className="mx-3 my-2">
         <h3 className="mb-2 setting-text mt-4 ml-[0.8rem]">Site Settings</h3>
         <aside className="mb-1">

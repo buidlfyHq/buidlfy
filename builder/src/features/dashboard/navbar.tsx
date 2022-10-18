@@ -19,7 +19,7 @@ interface INavbar {
     title: string;
     logo: string | ArrayBuffer;
   };
-  hideSidebar?: () => void;
+  setHideNavbar: (hideNavbar: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   setOpenSetting: (open: boolean) => void;
 }
@@ -28,7 +28,7 @@ const Navbar: FC<INavbar> = ({
   workspaceBackgroundColor,
   head,
   setWorkspaceBackgroundColor,
-  hideSidebar,
+  setHideNavbar,
   setIsContainerSelected,
   setOpenSetting,
 }) => {
@@ -64,11 +64,10 @@ const Navbar: FC<INavbar> = ({
     }
   }, [contractDetails.abi]);
 
-
   const handleCloseSidebar = () => {
     setIsContainerSelected(false);
-    hideSidebar();
     setOpenSetting(false);
+    setHideNavbar(true);
   };
 
   const handleSave = () => {

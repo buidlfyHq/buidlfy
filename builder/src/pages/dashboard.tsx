@@ -31,8 +31,8 @@ const Dashboard: FC = () => {
     logo: "",
   });
   const [sideElement, setSideElement] = useState<string>("");
-  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
   const [hideNavbar, setHideNavbar] = useState<boolean>(false);
+
   useEffect(() => {
     // checks for stored configs
     let saveItems = localStorage.getItem("items");
@@ -42,26 +42,6 @@ const Dashboard: FC = () => {
     }
   }, []); // eslint-disable-line
 
-  const showSidebar = () => {
-    setHideNavbar(false);
-    setIsNavHidden(false);
-    setOpenSetting(false);
-  };
-
-  const hideSidebar = () => {
-    setHideNavbar(true);
-    setIsNavHidden(true);
-    setOpenSetting(true);
-  };
-  const showSettingSidebar = () => {
-    // setIsNavHidden(true);
-    setOpenSetting(true);
-  };
-  const hideSettingSidebar = () => {
-    // setIsNavHidden(false);
-    setOpenSetting(false);
-  };
-
   return (
     <main>
       {size.width > 1024 ? (
@@ -69,27 +49,24 @@ const Dashboard: FC = () => {
           {/* Sidebar */}
           <SideNavbar
             setSideElement={setSideElement}
-            showSidebar={showSidebar}
-            hideSettingSidebar={hideSettingSidebar}
+            setHideNavbar={setHideNavbar}
           />
           <Sidebar
             isContainerSelected={isContainerSelected}
             sideElement={sideElement}
-            isNavHidden={isNavHidden}
-            hideSidebar={hideSidebar}
-            hideSettingSidebar={hideSettingSidebar}
             hideNavbar={hideNavbar}
+            setHideNavbar={setHideNavbar}
           />
 
           <section className="flex-1">
             {/* Navbar */}
             <Navbar
-              setOpenSetting={setOpenSetting}
-              setIsContainerSelected={setIsContainerSelected}
-              hideSidebar={hideSidebar}
               workspaceBackgroundColor={workspaceBackgroundColor}
               setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
               head={head}
+              setHideNavbar={setHideNavbar}
+              setIsContainerSelected={setIsContainerSelected}
+              setOpenSetting={setOpenSetting}
             />
 
             {/* Main section */}
@@ -100,17 +77,13 @@ const Dashboard: FC = () => {
                 setOpenTab={setOpenTab}
                 drag={drag}
                 setDrag={setDrag}
-                workspaceBackgroundColor={workspaceBackgroundColor}
                 setIsContainerSelected={setIsContainerSelected}
-                hideSidebar={hideSidebar}
-                showSettingSidebar={showSettingSidebar}
-                showSidebar={showSidebar}
-                isNavHidden={isNavHidden}
+                workspaceBackgroundColor={workspaceBackgroundColor}
+                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
+                setHideNavbar={setHideNavbar}
                 openSetting={openSetting}
-                setIsNavHidden={setIsNavHidden}
                 setSideElement={setSideElement}
                 hideSettingSidebar={undefined}
-                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
                 head={head}
                 setHead={setHead}
               />
@@ -125,13 +98,13 @@ const Dashboard: FC = () => {
               />
             ) : (
               <DefaultSettings
-                setOpenSetting={setOpenSetting}
-                setIsContainerSelected={setIsContainerSelected}
-                hideSidebar={hideSidebar}
                 workspaceBackgroundColor={workspaceBackgroundColor}
                 setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
                 head={head}
                 setHead={setHead}
+                setHideNavbar={setHideNavbar}
+                setIsContainerSelected={setIsContainerSelected}
+                setOpenSetting={setOpenSetting}
               />
             )}
           </div>

@@ -1,5 +1,4 @@
-import React, { FC, useRef } from "react";
-import Template from "features/dashboard/templates";
+import { FC, useRef } from "react";
 import Elements from "features/dashboard/elements";
 import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
@@ -7,19 +6,15 @@ import "styles/components.css";
 interface ISidebar {
   isContainerSelected: boolean;
   sideElement: string;
-  isNavHidden: boolean;
-  hideSidebar: () => void;
-  hideSettingSidebar: () => void;
   hideNavbar: boolean;
+  setHideNavbar: (hideNavbar: boolean) => void;
 }
 
 const Sidebar: FC<ISidebar> = ({
   isContainerSelected,
   sideElement,
-  isNavHidden,
-  hideSidebar,
-  hideSettingSidebar,
   hideNavbar,
+  setHideNavbar,
 }) => {
   const ref = useRef(null);
 
@@ -27,11 +22,9 @@ const Sidebar: FC<ISidebar> = ({
     <main
       ref={ref}
       className={`fixed left-[80px] overflow-scroll shadow-xl bottom-0 top-[60px] z-[1] ${
-        !hideNavbar
-          ? isNavHidden
-            ? "hidden"
-            : "sidebar animate__animated animate__slideInLeft"
-          : "newbar animate__animated animate__slideOutLeft"
+        hideNavbar
+          ? "hidden newbar animate__animated animate__slideOutLeft"
+          : "sidebar animate__animated animate__slideInLeft"
       }`}
     >
       {/* It will be used for future */}
@@ -88,13 +81,11 @@ const Sidebar: FC<ISidebar> = ({
       {/* Components */}
       {sideElement === SidebarEnum.ELEMENTS ? (
         <Elements
-          hideSidebar={hideSidebar}
           isContainerSelected={isContainerSelected}
-          hideSettingSidebar={hideSettingSidebar}
           hideNavbar={hideNavbar}
+          setHideNavbar={setHideNavbar}
         />
       ) : null}
-      {sideElement === SidebarEnum.TEMPLATES ? <Template /> : null}
       {/* It will be used for future */}
       {/* {sideElement === SidebarEnum.STYLES ? (
         <DefaultSettings
