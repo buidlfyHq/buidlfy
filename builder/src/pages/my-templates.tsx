@@ -26,7 +26,7 @@ const MyTemplates: FC = () => {
   }, []);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-y-auto">
       {/* nav */}
       <section className="flex justify-between px-36 py-6 h-[77px] border-bottom-divider sticky-top">
         <div className="font-[700] text-black text-[20px]">Buidlfy</div>

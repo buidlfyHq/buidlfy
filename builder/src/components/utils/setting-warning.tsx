@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import "styles/components.css";
 
@@ -18,4 +18,5 @@ const WarningText: FC<IWarningText> = ({ text }) => {
     </div>
   );
 };
+
 export default WarningText;

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import ButtonSettings from "components/dashboard/button-settings";
@@ -7,10 +7,7 @@ import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
 import GeneralSettings from "components/dashboard/general-settings";
 import { IRootState } from "redux/root-state.interface";
-import {
-  ISettings,
-  IWorkspaceElement,
-} from "redux/workspace/workspace.interfaces";
+import { ISettings } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -58,7 +55,7 @@ export enum ReplaceStyle {
 
 const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const dispatch = useDispatch();
-  const selectedElement: IWorkspaceElement = useSelector(
+  const selectedElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 

@@ -4,6 +4,7 @@ import { IContract } from "redux/contract/contract.interfaces";
 interface IContractHistory {
   newContractList: IContract[];
 }
+
 const ContractHistory: FC<IContractHistory> = ({ newContractList }) => {
   return (
     <>

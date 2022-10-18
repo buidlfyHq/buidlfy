@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import Container from "components/custom-components/container";
 import Button from "components/custom-components/button";
 import Text from "components/custom-components/text";

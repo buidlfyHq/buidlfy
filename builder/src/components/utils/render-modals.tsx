@@ -8,7 +8,7 @@ import ListTemplate from "components/modals/list-template";
 import SelectWallet from "components/modals/select-wallet";
 import CheckoutModal from "components/modals/checkout-modal";
 import MintTemplateForm from "components/modals/mint-template-form";
-import MintedTemplateModal from "components/modals/minted-template";
+import MintedTemplate from "components/modals/minted-template";
 import MintingProgressModal from "components/modals/minting-progress";
 import PublishSiteModal from "components/modals/publish-site";
 import SitePublishedModal from "components/modals/site-published-modal";
@@ -16,11 +16,11 @@ import CompleteListing from "components/modals/complete-listing";
 import TemplateListing from "components/modals/template-listing";
 import { IRootState } from "redux/root-state.interface";
 
-interface IRenderModal{
-  generatedConfig?: string
+interface IRenderModal {
+  generatedConfig?: string;
 }
 
-const RenderModal: FC<IRenderModal> = ({generatedConfig}) => {
+const RenderModal: FC<IRenderModal> = ({ generatedConfig }) => {
   const modalType = useSelector((state: IRootState) => state.modal.modalType);
 
   switch (modalType) {
@@ -35,25 +35,25 @@ const RenderModal: FC<IRenderModal> = ({generatedConfig}) => {
     case "final":
       return <FinalModal />;
     case "list-template-for-sale":
-      return <ListTemplate />
+      return <ListTemplate />;
     case "select-wallet":
-      return <SelectWallet />
-    case "checkout": 
-      return <CheckoutModal />
-    case "mint-nft-form": 
-      return <MintTemplateForm />
+      return <SelectWallet />;
+    case "checkout":
+      return <CheckoutModal />;
+    case "mint-nft-form":
+      return <MintTemplateForm />;
     case "minted-complete":
-      return <MintedTemplateModal />
-    case "minting-progress": 
-      return <MintingProgressModal />
+      return <MintedTemplate />;
+    case "minting-progress":
+      return <MintingProgressModal />;
     case "publish-process":
-      return <PublishSiteModal />
+      return <PublishSiteModal />;
     case "publish-done":
-      return <SitePublishedModal generatedConfig={generatedConfig} />
+      return <SitePublishedModal generatedConfig={generatedConfig} />;
     case "complete-listing":
-      return <CompleteListing />
+      return <CompleteListing />;
     case "listing-review":
-      return <TemplateListing />
+      return <TemplateListing />;
     default:
       return <></>;
   }
