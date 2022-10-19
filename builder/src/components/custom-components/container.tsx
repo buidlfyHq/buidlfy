@@ -15,6 +15,7 @@ import {
 import RenderItem from "components/utils/render-item";
 import { IRootState } from "redux/root-state.interface";
 import {
+  IUploadedImageData,
   IWorkspaceElement,
   SidebarEnum,
 } from "redux/workspace/workspace.interfaces";
@@ -49,6 +50,7 @@ interface IContainer {
   showSidebar?: () => void;
   hideSidebar?: () => void;
   hideSettingSidebar?: () => void;
+  backgroundSize?: string;
   padding?: {
     paddingLeft?: number;
     paddingRight?: number;
@@ -81,6 +83,7 @@ const Container: FC<IContainer> = ({
   hideSidebar,
   padding,
   margin,
+  backgroundSize,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -91,6 +94,11 @@ const Container: FC<IContainer> = ({
   );
   const contractElementSelected: IContractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
+  );
+  const imageData: IUploadedImageData = useSelector((state: IRootState) =>
+    state.workspace.uploadedImagesData.find(
+      (image: IUploadedImageData) => image.settingItemId === item.i
+    )
   );
   const handleDelete = () => {
     dispatch(
@@ -274,7 +282,6 @@ const Container: FC<IContainer> = ({
     setOpenSetting(true);
     hideSidebar();
   };
-
   return (
     <>
       <section
@@ -283,7 +290,7 @@ const Container: FC<IContainer> = ({
           paddingLeft: `${margin.marginLeft}px`,
           paddingRight: `${margin.marginRight}px`,
         }}
-        className="h-fit w-full cursor-pointer container-drag overflow-hidden btn-border"
+        className="h-fit w-full cursor-pointer container-drag overflow-hidden"
       >
         <GridLayout
           layout={children}
@@ -298,13 +305,13 @@ const Container: FC<IContainer> = ({
           onLayoutChange={onLayoutChange}
           margin={[0, 0]}
           compactType={null}
-          className="h-fit"
+          className="h-fit btn-border"
           style={{
             background: backgroundColor,
-            backgroundImage: `url(${imgData})`,
-            backgroundSize: "contain",
+            backgroundImage: `url(${imageData?.uploadedImageData})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
+            backgroundSize: backgroundSize,
             border: `${borderWidth}px solid ${color}`,
             borderRadius: `${borderRadius}px`,
             borderImage: color,

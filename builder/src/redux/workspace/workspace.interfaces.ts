@@ -151,6 +151,7 @@ export interface IText {
   value: string;
   link: string;
   borderRadius?: number;
+  borderWidth?: number;
   backgroundColor?: string;
   shadow?: string;
   connectWallet?: boolean;

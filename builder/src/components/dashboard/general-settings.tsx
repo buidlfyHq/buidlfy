@@ -32,6 +32,7 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
         fontStyle={selectedElement.style.fontStyle}
         textDecoration={selectedElement.style.textDecoration}
         justifyContent={selectedElement.style.justifyContent}
+        color={selectedElement.style.color}
       />
       <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
         {/* <RiText className="text-[18px] mr-3" /> */}
@@ -59,12 +60,18 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
         i={selectedElement.i}
         fontSize={selectedElement.style.fontSize}
       />
-      <ColorComponent i={selectedElement.i} color={selectedElement.style.color} />
+      <ColorComponent
+        i={selectedElement.i}
+        color={selectedElement.style.color}
+      />
       <BgColorComponent
         i={selectedElement.i}
         elementBackgroundColor={selectedElement.style.backgroundColor}
       />
-      <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
+      <MarginComponent
+        i={selectedElement.i}
+        margin={selectedElement.style.margin}
+      />
       <PaddingComponent
         i={selectedElement.i}
         padding={selectedElement.style.padding}

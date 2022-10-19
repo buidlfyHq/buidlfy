@@ -10,7 +10,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IMAGE_SIZE_VARIABLE } from "config/constant";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
 import { IRootState } from "redux/root-state.interface";
-import Spinner from "components/utils/spinner";
+import Spinner from "components/utils/assets/spinner";
 import ReactTooltip from "react-tooltip";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -94,6 +94,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
       backgroundColor="#262338"
       arrowColor="#262338"
       scrollHide={true}
+      delayShow={200}
     />
   );
 
@@ -101,7 +102,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
     <>
       {tooltip}
       <div
-        className={`relative w-[220px] h-[155px] mx-1 my-2 cursor-pointer ${
+        className={`relative w-[220px] h-[155px] rounded-[0.5rem] mx-1 my-2 ${
           imageData?.uploadedImageData ? "image-overlay" : "default-upload"
         } `}
       >
@@ -109,7 +110,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
           <div>
             <IoIosCloseCircleOutline
               onClick={handleDeleteImage}
-              className="text-white absolute right-1 top-1 text-[18px] "
+              className="text-white absolute right-1 top-1 text-[18px] hover:scale-125 ease-linear duration-200 scale-100 cursor-pointer"
             />
             <div className="absolute flex justify-center items-center w-full h-full">
               <Spinner />
@@ -120,6 +121,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
             <img
               className="w-[220px] h-[153px] object-fill absolute z-[-1]"
               src={imageData?.uploadedImageData}
+              alt="default"
             />
           </div>
         ) : (
@@ -128,18 +130,19 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
               <>
                 <IoIosCloseCircleOutline
                   onClick={handleDeleteImage}
-                  className="text-white absolute right-1 top-1 text-[18px]"
+                  className="text-white cursor-pointer bg-black rounded-[50%] hover:scale-125 ease-linear duration-200 scale-100 absolute right-1 top-1 text-[18px]"
                 />
                 <img
-                  className="w-[220px] h-[153px] object-fill"
+                  className="w-[220px] h-[153px] object-fill rounded-[0.5rem]"
                   src={imageData?.uploadedImageData}
+                  alt="default"
                 />
                 <label
                   htmlFor="inputTag"
                   className="image-label cursor-pointer"
                 >
                   {imageInput}
-                  <span className="bg-white border absolute border-[#8268E5] py-2 px-10 bottom-[0.5rem] left-[2rem] rounded-[34px] text-[#8268E5] text-[12px]">
+                  <span className="bg-white hover:bg-[#8268E5] hover:text-white ease-linear duration-200 border absolute border-[#8268E5] py-2 px-10 bottom-[0.5rem] left-[2rem] rounded-[34px] text-[#8268E5] text-[12px]">
                     Change Image
                   </span>
                 </label>
@@ -155,7 +158,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
                   </h6>
                   <div className="flex justify-center mt-4">
                     {imageInput}
-                    <span className="bg-white border border-[#8268E5] py-2 px-7 rounded-[34px] text-[#8268E5] text-[12px]">
+                    <span className="bg-white hover:bg-[#8268E5] hover:text-white ease-linear duration-200 border border-[#8268E5] py-2 px-7 rounded-[34px] text-[#8268E5] text-[12px]">
                       Upload Image
                     </span>
                   </div>
@@ -167,7 +170,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
       </div>
       {sizeExceeded ? (
         <h3 className="text-red-500 text-sm ml-2 mb-2">
-          Please upload file below 5 mb
+          Please upload the file with a size of less than 5 Mb
         </h3>
       ) : null}
     </>

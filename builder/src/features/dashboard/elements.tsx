@@ -20,12 +20,14 @@ interface IElements {
   isContainerSelected: boolean;
   hideSidebar: () => void;
   hideSettingSidebar: () => void;
+  hideNavbar: boolean;
 }
 
 const Elements: FC<IElements> = ({
   isContainerSelected,
   hideSidebar,
   hideSettingSidebar,
+  hideNavbar,
 }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
@@ -126,6 +128,7 @@ const Elements: FC<IElements> = ({
         backgroundColor="#262338"
         arrowColor="#262338"
         scrollHide={true}
+        delayShow={200}
       />
       {/* Fix: Add all style to common tailwind  */}
       <div className="element-div">
@@ -146,7 +149,7 @@ const Elements: FC<IElements> = ({
         <div className="py-3 px-10">
           <div data-tip="Click here to add the heading">
             <h1
-              className="font-normal text-2xl mb-4 cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-2xl mb-4 cursor-pointer hover:text-[#5A4471]"
               onClick={() => onClickFunction("Heading 1")}
             >
               Add Heading 1
@@ -155,7 +158,7 @@ const Elements: FC<IElements> = ({
           <div data-tip="Click here to add the heading">
             <h2
               onClick={() => onClickFunction("Heading 2")}
-              className="font-normal text-xl mb-4 cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-xl mb-4 cursor-pointer hover:text-[#5A4471]"
             >
               Add Heading 2
             </h2>
@@ -163,7 +166,7 @@ const Elements: FC<IElements> = ({
           <div data-tip="Click here to add the heading">
             <h3
               onClick={() => onClickFunction("Heading 3")}
-              className="font-normal text-lg mb-4 cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-lg mb-4 cursor-pointer hover:text-[#5A4471]"
             >
               Add Heading 3
             </h3>
@@ -171,7 +174,7 @@ const Elements: FC<IElements> = ({
           <div data-tip="Click here to add the paragraph">
             <div
               onClick={() => onClickFunction("Text")}
-              className="font-normal text-[13px] text-four w-[200px] cursor-pointer hover:text-[#5A4471]"
+              className="heading-element font-normal text-[13px] text-four w-[200px] cursor-pointer hover:text-[#5A4471]"
             >
               I am a paragrah. Click here to add your own text and edit me. It's
               easy & simple.
@@ -198,10 +201,11 @@ const Elements: FC<IElements> = ({
         >
           <div data-tip="Click here to add the image upload">
             <div className="relative image-container">
-              <img className="w-[20rem]" src={container} />
+              <img className="w-[20rem]" src={container} alt="container" />
               <img
                 className="absolute w-[2.6rem] bottom-[5rem] left-[6.5rem]"
                 src={defaultImage}
+                alt="default"
               />
               <h6 className="absolute bottom-[3rem] left-[5.5rem] text-[#666BD3] text-[16px]">
                 Add Image
@@ -215,9 +219,16 @@ const Elements: FC<IElements> = ({
   return (
     <>
       {/* Components */}
-      <div className="element-heading-div pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem] fixed left-[5rem]">
+
+      <div
+        className={`fixed pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem] left-[5rem] flex w-[320px] h-[60px] ${
+          !hideNavbar
+            ? "element-heading-div animate__animated animate__slideInLeft"
+            : "element-hide-div animate__animated animate__slideOutLeft"
+        }`}
+      >
         <h3 className="element-heading mt-[2.5px]">Add Elements</h3>
-        <div className="close-btn ml-[10rem]">
+        <div className="close-btn">
           <MdOutlineClose
             onClick={() => {
               hideSidebar();
@@ -227,6 +238,7 @@ const Elements: FC<IElements> = ({
           />
         </div>
       </div>
+
       {!isContainerSelected ? (
         <div className="mt-[6rem]">
           <div className="element-div">

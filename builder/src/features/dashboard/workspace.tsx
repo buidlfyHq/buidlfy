@@ -20,8 +20,8 @@ import {
   IContractElementSelector,
 } from "redux/contract/contract.interfaces";
 import DefaultBuilder from "./deafult-builder";
-import "styles/components.css";
 import DefaultSettings from "./default-settings";
+import "styles/components.css";
 
 interface IWorkspaceComponent {
   setOpenSetting: (open: boolean) => void;
@@ -77,7 +77,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
   const contractElementSelected: IContractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
   );
-
   const elementHoverStyles = contractElementSelector
     ? "border border-[transparent] border-hover"
     : "border border-[transparent] hover:border-slate-300 hover:border-dashed";
@@ -273,8 +272,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   return (
     <main
-      style={{ width: "-webkit-fill-available" }}
-      className="main-div h-full "
+      style={{
+        width: "-webkit-fill-available",
+      }}
+      className="main-div h-full"
     >
       {workspaceElements?.length > 0 ? (
         <section onClick={handleCheckIsContainer} className="z-100">
@@ -309,6 +310,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
             setSideElement={setSideElement}
           />
           <DefaultSettings
+            setOpenSetting={setOpenSetting}
+            setIsContainerSelected={setIsContainerSelected}
+            hideSidebar={hideSidebar}
             workspaceBackgroundColor={workspaceBackgroundColor}
             setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
             head={head}

@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AiOutlineDoubleRight } from "react-icons/ai";
 import { encode as base64_encode } from "base-64";
 import { Dialog } from "@headlessui/react";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
@@ -15,20 +14,24 @@ import { IContractDetails } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 
 interface INavbar {
-  className: string;
   workspaceBackgroundColor: string;
   setWorkspaceBackgroundColor?: (workspaceBackgroundColor: string) => void;
   head: {
     title: string;
     logo: string | ArrayBuffer;
   };
+  hideSidebar?: () => void;
+  setIsContainerSelected: (isContainerSelected?: boolean) => void;
+  setOpenSetting: (open: boolean) => void;
 }
 
 const Navbar: FC<INavbar> = ({
-  className,
   workspaceBackgroundColor,
   head,
   setWorkspaceBackgroundColor,
+  hideSidebar,
+  setIsContainerSelected,
+  setOpenSetting
 }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector(
@@ -144,17 +147,15 @@ const Navbar: FC<INavbar> = ({
     setIsOpen(true);
   };
 
+  const handleCloseSidebar = () => {
+    setIsContainerSelected(false)
+    hideSidebar()
+    setOpenSetting(false);
+  }
+
   return (
-    <main
-      className={
-        !className
-          ? `fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20`
-          : `h-[57px] w-full top-0 topnav flex flex-row justify-between items-center p-3 z-20`
-      }
-    >
-      <div className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer">
-        {className && <AiOutlineDoubleRight />}
-      </div>
+    <main onClick={handleCloseSidebar} className="fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20">
+      <div className="p-2 text-slate-600 text-[18px] hover:bg-slate-100 hover:rounded-md cursor-pointer"></div>
       <div className="flex flex-row h-[60px]">
         <div className="flex flex-row items-center">
           <div

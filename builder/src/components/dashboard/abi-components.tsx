@@ -6,7 +6,7 @@ import {
   setSelectorToDefault,
   updateSelector,
 } from "redux/contract/contract.reducers";
-import Spinner from "components/utils/spinner";
+import Spinner from "components/utils/assets/spinner";
 import { IRootState } from "redux/root-state.interface";
 import { IShowComponent } from "redux/workspace/workspace.interfaces";
 import {

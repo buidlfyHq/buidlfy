@@ -48,9 +48,11 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
     }
   };
 
+  const borderGradientCondition = borderColor?.indexOf("gradient") !== -1;
   return (
     <>
       <NumberInput
+        disableInput={borderGradientCondition}
         text="Border Radius"
         value={borderRadius}
         handleChange={(updatedBorderRadius: number) =>
@@ -59,7 +61,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({
         handleIncrement={() => handleRadius(ReplaceValue.INCREMENT)}
         handleDecrement={() => handleRadius(ReplaceValue.DECREMENT)}
       />
-      {borderColor?.slice(0, 15) === "linear-gradient" ? (
+      {borderGradientCondition ? (
         <WarningText text="Sorry, Border gradient and border radius cannot be use together!" />
       ) : null}
     </>

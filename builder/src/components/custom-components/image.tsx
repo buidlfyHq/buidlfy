@@ -55,7 +55,6 @@ const Image: FC<IImageComponent> = ({
   //     setDynamicHeight(ref.current.clientHeight);
   //   }
   // }, [ref?.current?.clientHeight]);
-
   return (
     <>
       {imageData?.uploadedImageData ? (
@@ -66,6 +65,12 @@ const Image: FC<IImageComponent> = ({
             className="flex w-full h-full"
             style={{
               backgroundImage: `url(${imageData.uploadedImageData})`,
+              // It will be needed after image storage works
+              // backgroundImage: `${
+              //   imgData
+              //     ? `url(${imgData})`
+              //     : `url(${imageData.uploadedImageData})`
+              // }`,
               backgroundRepeat: "no-repeat",
               backgroundPosition: justifyContent,
               backgroundSize: `${

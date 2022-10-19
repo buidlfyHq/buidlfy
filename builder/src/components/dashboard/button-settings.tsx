@@ -13,6 +13,7 @@ import ConnectSwitchComponent from "components/settings/connect-switch-component
 import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
+import BorderComponent from "components/settings/border-component";
 import { IRootState } from "redux/root-state.interface";
 import {
   ISettings,
@@ -73,6 +74,7 @@ const ButtonSettings: FC<ISettings> = ({
           fontStyle={selectedElement.style.fontStyle}
           textDecoration={selectedElement.style.textDecoration}
           justifyContent={selectedElement.style.justifyContent}
+          color={selectedElement.style.color}
         />
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
           <textarea
@@ -111,6 +113,10 @@ const ButtonSettings: FC<ISettings> = ({
           i={selectedElement.i}
           borderRadius={selectedElement.style.borderRadius}
           borderColor={selectedElement.style.borderColor}
+        />
+        <BorderComponent
+          i={selectedElement.i}
+          borderWidth={selectedElement.style.borderWidth}
         />
         <ColorComponent
           i={selectedElement.i}
