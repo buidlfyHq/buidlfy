@@ -35,7 +35,13 @@ class DeploymentService {
         protocol: 'ipfs-filecoin',
         createDefaultWebhook: false,
         provider: 'GITHUB',
-        branch: 'feat/deployment-api',
+        branch: 'dev',
+        gitProviderPreferences: {
+          prComments: false,
+          commitComments: false,
+          buildStatus: false,
+          githubDeployment: false,
+        },
       };
       const response = await axios.post(`${SPHERON_API_HOST}${DEPLOYMENT_ENDPOINT}`, deploymentPayload, { headers: spheronAuthHeaders });
       const deploymentResponse: ISpheronDeploymentResponse = response.data;
