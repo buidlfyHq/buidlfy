@@ -39,12 +39,12 @@ class DomainService {
     const payload = {
       link,
     };
-    return axios.put(`${SPHERON_API_HOST}/v1/project/${projectId}/domains/${subdomainId}`, payload, { headers: spheronAuthHeaders });
+    return axios.patch(`${SPHERON_API_HOST}/v1/project/${projectId}/domains/${subdomainId}`, payload, { headers: spheronAuthHeaders });
   }
 
   public async verifySubdomain(subdomainId: string, projectId: string): Promise<AxiosResponse> {
     const payload = {};
-    return axios.put(`${SPHERON_API_HOST}/v1/project/${projectId}/domains/${subdomainId}/verify`, payload, { headers: spheronAuthHeaders });
+    return axios.patch(`${SPHERON_API_HOST}/v1/project/${projectId}/domains/${subdomainId}/verify`, payload, { headers: spheronAuthHeaders });
   }
 
   public async getDomain(projectId: string, domain: string): Promise<AxiosResponse> {
