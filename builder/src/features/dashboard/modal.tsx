@@ -4,22 +4,18 @@ import { Dialog } from "@headlessui/react";
 import {
   updateContractAbi,
   updateContractAddress,
+  updateContractList,
 } from "redux/contract/contract.reducers";
 import upload from "assets/upload-img.svg";
-import { IRootState } from "redux/root-state.interface";
-import { IContractDetails } from "redux/contract/contract.interfaces";
+import { IContract } from "redux/contract/contract.interfaces";
 import "styles/components.css";
+import { IRootState } from "redux/root-state.interface";
 
 interface IModal {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   methodOpen: boolean;
   setMethodOpen: (methodOpen: boolean) => void;
-  setNewContractList: (newContractList: IContract[]) => void;
-}
-interface IContract {
-  name: string;
-  text: any; // type to be added
 }
 
 const Modal: FC<IModal> = ({
@@ -27,17 +23,14 @@ const Modal: FC<IModal> = ({
   setIsOpen,
   methodOpen,
   setMethodOpen,
-  setNewContractList,
 }) => {
   const dispatch = useDispatch();
-  const contractDetails: IContractDetails = useSelector(
-    (state: IRootState) => state.contract.contractDetails
-  );
 
   const [showUpload, setShowUpload] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer>("");
-
+  const [updateAbi, setUpdateAbi] = useState<string>();
+  const [updateAddress, setUpdateAddress] = useState<string>();
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -47,7 +40,8 @@ const Modal: FC<IModal> = ({
     let newContractList: Array<IContract> = [];
     let newContract: IContract = {
       name: inputValue,
-      text: JSON.stringify(contractDetails.abi),
+      text: JSON.stringify(updateAbi),
+      address: JSON.stringify(updateAddress),
     };
     // localStorage.setItem("items", JSON.stringify(items));
     const contractList = localStorage.getItem("contractList") || "";
@@ -58,7 +52,9 @@ const Modal: FC<IModal> = ({
     }
     newContractList.push(newContract);
     localStorage.setItem("contractList", JSON.stringify(newContractList));
-    setNewContractList(newContractList);
+    dispatch(updateContractList(newContractList));
+    dispatch(updateContractAbi(updateAbi));
+    dispatch(updateContractAddress(updateAddress));
   };
 
   const handleShow = () => setShowUpload(false);
@@ -68,7 +64,7 @@ const Modal: FC<IModal> = ({
     const filteredAbi = JSON.parse(abi).filter(
       (m: { type: string }) => m.type === "function"
     );
-    dispatch(updateContractAbi(JSON.stringify(filteredAbi)));
+    setUpdateAbi(JSON.stringify(filteredAbi));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +75,6 @@ const Modal: FC<IModal> = ({
       handleSetAbi(e.target.result.toString());
     };
   };
-
   return (
     <Dialog
       as="div"
@@ -137,9 +132,9 @@ const Modal: FC<IModal> = ({
                       type="file"
                       id="inputTag"
                     />
-                    <button className="contract-button mt-[0.75rem] px-5 py-1">
+                    <span className="contract-button mt-[0.75rem] px-5 py-1">
                       Browse
-                    </button>
+                    </span>
                     <br />
                   </div>
                   {files ? (
@@ -158,7 +153,7 @@ const Modal: FC<IModal> = ({
               <textarea
                 className="upload-modal-input p-2"
                 placeholder="Paste ABI here..."
-                value={contractDetails.abi}
+                value={updateAbi}
                 onChange={(e) => handleSetAbi(e.target.value)}
               />
             )}
@@ -168,15 +163,17 @@ const Modal: FC<IModal> = ({
             <input
               className="modal-input pl-2 mt-1 h-[2.5rem]"
               placeholder="Paste Address here..."
-              value={contractDetails.address}
-              onChange={(e) => dispatch(updateContractAddress(e.target.value))}
+              value={updateAddress}
+              onChange={(e) => setUpdateAddress(e.target.value)}
             />
           </div>
 
           <div className="mt-4">
             <button
-              // type="button"
-              className="contract-button py-2 px-[7.5rem]"
+              disabled={!(updateAbi && updateAddress)}
+              className={`rounded-[44px] contract-button font-medium text-white text-[14px] py-2 px-[7.5rem] ${
+                updateAbi && updateAddress ? "" : "opacity-40"
+              }`}
               onClick={() => {
                 setIsOpen(false);
                 setMethodOpen(false);

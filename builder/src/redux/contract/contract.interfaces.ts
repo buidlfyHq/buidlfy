@@ -2,6 +2,7 @@ export interface IContractState {
   contractDetails: IContractDetails;
   contractElementSelector: IContractElementSelector;
   contractElementSelected: IContractElementSelected;
+  contractList: IContract[];
 }
 
 export interface IContractDetails {
@@ -38,4 +39,10 @@ export interface ISelectedPayload {
   element?: IElement;
   index?: number;
   id?: string;
+}
+
+export interface IContract {
+  name: string;
+  text; // type to be added
+  address: string;
 }

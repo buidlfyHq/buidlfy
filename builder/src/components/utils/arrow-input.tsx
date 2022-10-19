@@ -6,6 +6,7 @@ interface IArrowInput {
   handleChange: (e: number) => void;
   handleIncrement: () => void;
   handleDecrement: () => void;
+  disableInput?: boolean;
 }
 
 const ArrowInput: FC<IArrowInput> = ({
@@ -13,6 +14,7 @@ const ArrowInput: FC<IArrowInput> = ({
   handleChange,
   handleIncrement,
   handleDecrement,
+  disableInput,
 }) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const replaceValue = +e.target.value.replace(/[^0-9]/g, "");
@@ -24,16 +26,23 @@ const ArrowInput: FC<IArrowInput> = ({
       <input
         value={value}
         placeholder="0"
-        className="margin-form pl-2 py-1.5 relative form-select appearance-none block w-[75px]"
+        disabled={disableInput}
+        className={`margin-form pl-2 py-1.5 relative form-select appearance-none block w-[75px] ${
+          disableInput ? "opacity-40" : ""
+        }`}
         onChange={(e) => handleInputChange(e)}
       />
       <AiOutlineCaretUp
         onClick={handleIncrement}
-        className="text-[10px] arrow absolute mr-[0.5rem] mt-[0.3rem] cursor-pointer"
+        className={`text-[10px] arrow absolute mr-[0.5rem] mt-[0.3rem] cursor-pointer ${
+          disableInput ? "pointer-events-none opacity-40" : ""
+        }`}
       />
       <AiOutlineCaretDown
         onClick={handleDecrement}
-        className="text-[10px] arrow absolute mr-[0.5rem] mt-[0.9rem] cursor-pointer"
+        className={`text-[10px] arrow absolute mr-[0.5rem] mt-[0.9rem] cursor-pointer ${
+          disableInput ? "pointer-events-none opacity-40" : ""
+        }`}
       />
     </div>
   );

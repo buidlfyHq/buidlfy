@@ -19,6 +19,7 @@ const Button: FC<IText> = ({
   margin,
   padding,
   borderColor,
+  borderWidth,
 }) => (
   <section
     style={{ justifyContent: justifyContent }}
@@ -29,7 +30,7 @@ const Button: FC<IText> = ({
       style={{
         fontWeight: bold,
         fontStyle: italic,
-        border: `1px solid ${borderColor}`,
+        border: `${borderWidth}px solid ${borderColor}`,
         borderImage: borderColor,
         display: "flex",
         justifyContent: "center",

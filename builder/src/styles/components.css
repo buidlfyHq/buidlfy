@@ -278,24 +278,28 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   border-right: 2px solid;
   border-bottom: 2px solid;
 }
-
-.side-icon {
-  background: linear-gradient(
-    195.4deg,
-    rgba(134, 190, 255, 0.2) 10.8%,
-    rgba(205, 76, 250, 0.2) 163.89%
-  );
+.icon-div {
+  transition: 2s;
 }
+.icon-div:hover .side-icon{
+  background: linear-gradient(195.4deg, rgba(208, 230, 255, 0.28) 10.8%, rgba(222, 130, 255, 0.28) 163.89%);
+}
+.icon-div:hover .side-text{
+  color: #100F11;
+}
+.icon-div:hover .element-svg{
+  stroke: #6560E6;
+}
+.side-icon {
+  background: rgba(164, 179, 255, 0.1);
+}
+
 .side-text {
-  /* font-family: 'Roboto'; */
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  /* identical to box height */
-
   text-align: center;
-
   color: #504f82;
 }
 .element-div {
@@ -311,6 +315,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   display: flex;
   align-items: center;
   align-content: center;
+  width: 285px;
 }
 .setting-text {
   /* font-family: Roboto; */
@@ -324,6 +329,10 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 }
 .align-div {
   background: #e9edfd;
+  border-radius: 5px;
+}
+.align-div:hover {
+  background: #b7c1ec;
   border-radius: 5px;
 }
 .margin-text {
@@ -366,17 +375,39 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   right: -0.4px;
 } */
 
+.newbar {
+  background: #fdfdff;
+  z-index: 1 !important;
+  border-right: 0.75px solid rgba(72, 72, 135, 0.1);
+  -webkit-animation-name: slideOut !important;
+  animation-name: slideOut !important;
+  animation-duration: 0.3s;
+}
+.newbar::-webkit-scrollbar {
+  width: 0 !important;
+}
+/*
+.animate__fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+} */
 .sidebar {
   background: #fdfdff;
-  z-index: 5 !important;
+  z-index: 1 !important;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
+  -webkit-animation-name: slidein !important;
+  animation-name: slidein !important;
+  animation-duration: 0.3s;
+  /* transition: 0.8s ease; */
 }
+
 .sidebar::-webkit-scrollbar {
   width: 0 !important;
 }
 
 .sidenav {
   background: #ffffff;
+  z-index: 2 !important;
   border-right: 0.75px solid rgba(72, 72, 135, 0.1);
 }
 .setting-nav {
@@ -502,8 +533,12 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   /* identical to box height, or 171% */
 
   /* White */
-
+cursor: pointer;
   color: #ffffff;
+}
+.contract-button:hover {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+  linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
 }
 .delete-btn {
   background: rgba(104, 146, 255, 0.29);
@@ -534,8 +569,8 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   font-weight: 400;
   font-size: 13px;
   line-height: 15px;
-
   color: #ffffff;
+  transition: 0.2s;
 }
 .btn-div:hover {
   background: #503dcf;
@@ -554,6 +589,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   height: 65px;
   display: flex;
   justify-content: center;
+  transition: 0.2s;
 }
 .element-container:hover {
   background: rgba(106, 88, 231, 0.1);
@@ -567,6 +603,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   padding: 12px 12px;
   border: 1px solid #14142b;
   border-radius: 8px;
+  transition: 0.2s;
 }
 .input-container:hover {
   background: #ffffff;
@@ -574,11 +611,20 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   border-radius: 8px;
 }
 .element-heading-div {
-  display: flex;
-  height: 60px;
-  z-index: 88888 !important;
+  z-index: 2 !important;
   backdrop-filter: saturate(180%) blur(15px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-animation-name: slideinHeading !important;
+  animation-name: slideinHeading !important;
+  animation-duration: 0.3s;
+}
+.element-hide-div {
+  z-index: 2 !important;
+  backdrop-filter: saturate(180%) blur(15px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-animation-name: slideOutHeading !important;
+  animation-name: slideOutHeading !important;
+  animation-duration: 0.3s;
 }
 
 .element-heading {
@@ -588,6 +634,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   line-height: 19px;
   color: #000000;
   flex-grow: 1;
+  min-width: 120px;
 }
 
 .element-input-text {
@@ -604,9 +651,15 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   width: 245px;
   height: 100px;
 }
+.image-container {
+  transition: 2s;
+}
 .image-container:hover {
   border-radius: 5px;
   background-color: rgb(106, 88, 231,0.2);
+}
+.heading-element {
+transition: 0.3s;
 }
 .element-upload {
   background: #faf8ff;
@@ -642,7 +695,10 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   color: rgba(19, 27, 66, 0.502378);
 }
 .main-div {
-  background: #f9f9fa;
+  background-color: #fafaff;
+  background-image: radial-gradient(#E0E0EA 1px, transparent 0);
+  background-size: 20px 20px;
+  /* background-position: -19px -19px; */
 }
 .main-section {
   background: linear-gradient(
@@ -651,7 +707,8 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
       rgba(0, 0, 0, 0) 99.87%
     ),
     #ffffff;
-}
+    outline: 1px solid #f0effc;
+  }
 .font-div {
   background: #e9edfd;
   box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04),
@@ -710,13 +767,13 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   display: none;
 }
 .contract-list {
-  width: 65px;
-  height: 44px;
-  background: #F0EAFC;
-  border-radius: 2px;
+  background: #F3F2F3;
+  border-radius: 8px;
+  width: 210px;
+height: 40px;
 }
 .contract-list:hover {
-  background: #E1DAF0;
+  background: rgba(92, 111, 230, 0.25);
 }
 .contract-name {
   font-style: normal;
@@ -848,7 +905,9 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
       rgba(255, 255, 255, 0.2)
     ),
     #ffffff;
-  outline: 1px solid rgba(93, 70, 228, 0.16);
+    outline: 1px solid rgb(241 239 248) !important;
+
+  /* outline: 1px solid rgba(93, 70, 228, 0.16); */
 }
 
 .feather-div {
@@ -870,6 +929,7 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
   border-radius: 28px;
   padding: 10px 20px;
   color: white;
+  transition: all 2s ease !important;
 }
 .add-btn:hover {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
@@ -933,6 +993,8 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 .close-btn {
   background: rgba(93, 56, 244, 0.05);
   border-radius: 24px;
+  min-width: 1.6rem;
+  min-height: 1.6rem;
   width: 1.6rem;
   height: 1.6rem;
   display: flex;
@@ -964,4 +1026,83 @@ box-shadow: inset -1px 0px 1px rgba(255, 255, 255, 0.04), inset 0px 0px 6px rgba
 .image-overlay {
   background: rgba(0, 0, 0, 0.6);
   border: 1px dashed #87898E;
+}
+.contract-disable-button {
+  background: #acacac;
+  border-radius: 44px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  /* identical to box height, or 171% */
+
+  /* White */
+
+  color: #523f3f;
+}
+
+#elements:hover {
+  stroke: #6560E6;
+}
+/* .tool {
+  transition: 0.5s !important;
+} */
+
+.setting-sidebar {
+  transition: 5s !important;
+}
+
+@keyframes slidein {
+  0% {
+    opacity:0;
+    width: 100px;
+  }
+  1% {
+    opacity:1;
+  }
+  100% {
+    opacity:1;
+    width: 320px;
+  }
+}
+@keyframes slideinHeading {
+  0% {
+    opacity:0;
+    width: 100px;
+  }
+  1% {
+    opacity:1;
+  }
+  100% {
+    opacity:1;
+    width: 320px;
+  }
+}
+@keyframes slideOut {
+  0% {
+    opacity:0;
+    width: 320px;
+  }
+  1% {
+    opacity:1;
+  }
+  100% {
+    opacity:1;
+    width: 0px;
+  }
+}
+@keyframes slideOutHeading {
+  0% {
+    opacity:0;
+    width: 320px;
+  }
+  1% {
+    opacity:1;
+    visibility: hidden;
+  }
+  100% {
+    opacity:1;
+    width: 0px;
+    visibility: hidden;
+  }
 }
