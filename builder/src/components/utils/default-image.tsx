@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import defaultImage from "assets/default-image.svg";
 import add from "assets/add-image.svg";
 import "styles/components.css";

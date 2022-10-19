@@ -1,6 +1,7 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GridLayout, { Layout } from "react-grid-layout";
+import { IoIosAddCircleOutline } from "react-icons/io";
 import {
   setSelectedElement,
   updateWorkspaceElementsArray,
@@ -27,7 +28,6 @@ import add from "assets/icons/add.png";
 import edit from "assets/icons/edit.png";
 import deleteContainer from "assets/icons/delete.png";
 import dragImg from "assets/icons/drag.png";
-import { IoIosAddCircleOutline } from "react-icons/io";
 import "styles/components.css";
 
 interface IContainer {
@@ -35,7 +35,6 @@ interface IContainer {
   children: IWorkspaceElement[];
   backgroundColor: string;
   color: string;
-  imgData; // updating soon
   borderRadius: number;
   borderWidth: number;
   shadow: string;
@@ -45,10 +44,7 @@ interface IContainer {
   setIsContainerSelected: (isContainerSelected: boolean) => void;
   setValue?: (value: string) => void;
   setSideElement: (sideElement: string) => void;
-  dragContainer?: boolean;
-  setDragContainer?: (dragContainer?: boolean) => void;
-  showSidebar?: () => void;
-  hideSidebar?: () => void;
+  setHideNavbar: (hideNavbar: boolean) => void;
   hideSettingSidebar?: () => void;
   backgroundSize?: string;
   padding?: {
@@ -70,7 +66,6 @@ const Container: FC<IContainer> = ({
   children,
   backgroundColor,
   color,
-  imgData,
   borderRadius,
   borderWidth,
   shadow,
@@ -79,27 +74,27 @@ const Container: FC<IContainer> = ({
   setOpenTab,
   setIsContainerSelected,
   setSideElement,
-  showSidebar,
-  hideSidebar,
+  setHideNavbar,
+  backgroundSize,
   padding,
   margin,
-  backgroundSize,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
+  const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const contractElementSelector: IContractElementSelector = useSelector(
+  const contractElementSelector = useSelector(
     (state: IRootState) => state.contract.contractElementSelector
   );
-  const contractElementSelected: IContractElementSelected = useSelector(
+  const contractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
   );
-  const imageData: IUploadedImageData = useSelector((state: IRootState) =>
+  const imageData = useSelector((state: IRootState) =>
     state.workspace.uploadedImagesData.find(
       (image: IUploadedImageData) => image.settingItemId === item.i
     )
   );
+
   const handleDelete = () => {
     dispatch(
       updateWorkspaceElementStyle({
@@ -243,7 +238,7 @@ const Container: FC<IContainer> = ({
 
   const onComponentAddClick = (i: string) => {
     setIsContainerSelected(true);
-    showSidebar();
+    setHideNavbar(false);
     handleSidebar(SidebarEnum.ELEMENTS);
     dispatch(setSelectedElement(i));
     setOpenSetting(false);
@@ -280,8 +275,9 @@ const Container: FC<IContainer> = ({
     setIsContainerSelected(false);
     dispatch(setSelectedElement(i));
     setOpenSetting(true);
-    hideSidebar();
+    setHideNavbar(true);
   };
+
   return (
     <>
       <section

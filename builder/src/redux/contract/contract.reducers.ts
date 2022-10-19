@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getContainerList } from "utils/container-list";
+import { getContainerList } from "./contract.utils";
 import {
   IContract,
   IContractState,

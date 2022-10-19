@@ -1,11 +1,8 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Dialog } from "@headlessui/react";
 import HourGlassImg from "assets/icons/hourglass.png";
-import { useDispatch } from "react-redux";
-import { toggleModalType } from "redux/modal/modal.reducers";
 
 const PublishingProcessModal : FC = () => {
-  const dispatch = useDispatch()
   return (
       <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[582px] my-20 sm:mx-28 mx-14 rounded-[4px] py-16 px-10 bg-white">
           <div>

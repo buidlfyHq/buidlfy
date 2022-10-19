@@ -1,4 +1,6 @@
 import { call, put, all, takeLatest, select } from "redux-saga/effects";
+import { fetchWalletBalance } from "./web3.actions";
+import { fetchOwnedListedTemplates, fetchOwnedReviewTemplates, fetchOwnedTemplates } from "redux/minted/minted.actions";
 import { addNotification } from "redux/notification/notification.reducers";
 import {
   toggleConnectWalletLoading,
@@ -7,14 +9,17 @@ import {
 } from "./web3.reducers";
 import { connectWalletService, getTokenBalanceService } from "./web3.services";
 import web3ActionTypes from "./web3.types";
+import { IRootState } from "redux/root-state.interface";
 import { NotificationType } from "redux/notification/notification.interfaces";
 
 function* connectWalletGen(): any {
   const walletRes = yield call(connectWalletService);
   if (!walletRes.error) {
-    yield put(
-      walletConnected(walletRes.address)
-    );
+    yield put(walletConnected(walletRes.address));
+    yield put(fetchWalletBalance());
+    yield put(fetchOwnedTemplates());
+    yield put(fetchOwnedReviewTemplates());
+    yield put(fetchOwnedListedTemplates());
   } else {
     yield put(toggleConnectWalletLoading(false));
     yield put(
@@ -29,7 +34,7 @@ function* connectWalletGen(): any {
 
 function* fetchWalletBalanceGen(): any {
   const currentAccount = yield select(
-    (state: any) => state.web3.currentAccount
+    (state: IRootState) => state.web3.currentAccount
   );
   const balanceRes = yield call(getTokenBalanceService, currentAccount);
   if (!balanceRes.error) {

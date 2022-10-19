@@ -1,9 +1,8 @@
 import publishActionTypes from "./workspace.types";
 
 export const initiatePublish = (payload: {
-    clientTopic: string,
     configDetails: string
-}) => ({
+}) => ({    
     type: publishActionTypes.INITIATE_PUBLISH,
     payload
 });

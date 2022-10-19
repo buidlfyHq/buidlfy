@@ -38,7 +38,7 @@ export const uploadFileToWeb3Storage = async (
 ): Promise<string> => {
   const file: File = createFileFromContent(dataUri);
   // show the root cid as soon as it's ready
-  const onRootCidReady = (cid) => {
+  const onRootCidReady = (cid: string) => {
     console.log("uploading files with cid:", cid);
   };
 
@@ -46,7 +46,7 @@ export const uploadFileToWeb3Storage = async (
   const totalSize = file.size;
   let uploaded = 0;
 
-  const onStoredChunk = (size) => {
+  const onStoredChunk = (size: number) => {
     uploaded += size;
     const pct = 100 * (uploaded / totalSize);
     console.log(`Uploading... ${pct.toFixed(2)}% complete`);
@@ -57,6 +57,21 @@ export const uploadFileToWeb3Storage = async (
     wrapWithDirectory: false,
     onRootCidReady,
     onStoredChunk,
+  });
+  return `https://${cid}.ipfs.dweb.link/`;
+};
+
+export const uploadTemplateToWeb3Storage = async (
+  data: string
+): Promise<string> => {
+  const onRootCidReady = (cid: string) => {
+    console.log("uploading files with cid:", cid);
+  };
+
+  const client = makeStorageClient();
+  const cid = await client.put([new File([Buffer.from(data)], "")], {
+    wrapWithDirectory: false,
+    onRootCidReady,
   });
   return `https://${cid}.ipfs.dweb.link/`;
 };

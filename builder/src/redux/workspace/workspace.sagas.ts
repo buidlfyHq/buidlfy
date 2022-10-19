@@ -1,52 +1,68 @@
 import { call, all, put, takeLatest } from "redux-saga/effects";
+import { updateDomainName } from "./workspace.reducers";
 import {
     initiatePublishService,getPublishDetailsService,verifyPublishService
 } from "./workspace.services";
 import publishActionTypes from "./workspace.types";
 
 function* initatePublish({ payload }) {
-  const { configDetails} = payload.payload
+
+  const { configDetails } = payload
+  console.log(configDetails,"configDetails");
+
   const transactionRes = yield call(
       initiatePublishService,
       configDetails
   );
+  console.log(transactionRes,"transactionRes");
   if (!transactionRes.error) {
-      console.log("error")
+    const deploymentId = JSON.parse(transactionRes.responseText).data.deploymentId
+    yield put({type: publishActionTypes.PUBLISH_DETAILS, payload: deploymentId })  
+    console.log("complete")
   } else {
     yield put(
-      console.log("complete")
+      console.log("error")
     );
   }
 }
 
 function* getPublishDetails({ payload }) {
-    const {deploymentId, siteName} = payload.payload
+  console.log(payload,"payload-deploymentId");
+  
     const transactionRes = yield call(
         getPublishDetailsService,
-        deploymentId,
-        siteName
+        payload,
     );
-    if (!transactionRes.error) {
-        console.log("error")
+  
+  if (!transactionRes.error) {
+    const domainId = JSON.parse(transactionRes.responseText).data.domain._id;
+    const projectId = JSON.parse(transactionRes.responseText).data.domain.projectId;
+    const domainName = JSON.parse(transactionRes.responseText).data.domain.name;
+    yield put(updateDomainName(domainName));
+    yield put({ type: publishActionTypes.VERIFY_PUBLISH, payload: { domainId: domainId, projectId: projectId } }) 
+    
+      console.log("complete")
     } else {
       yield put(
-        console.log("complete")
+        console.log("error")
       );
     }
 }
 
 function* verifyPublish({ payload }) {
-    const {domainId, projectId} = payload.payload
+  const { domainId, projectId } = payload
+  
     const transactionRes = yield call(
         verifyPublishService,
         domainId,
         projectId
     );
-    if (!transactionRes.error) {
-        console.log("error")
-    } else {
+  if (!transactionRes.error) {
+    console.log(transactionRes,"transactionRes-verify");
+    console.log("complete")
+  } else {
       yield put(
-        console.log("complete")
+        console.log("error")
       );
     }
 }

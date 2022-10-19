@@ -5,12 +5,15 @@ export interface IConfig {
   template: {
     TEMPLATE_GRAPHQL_URL: string;
   };
+  backendApi: {
+    BACKEND_API: string;
+  },
   initiatePublish: {
     INITIATE_PUBLISH: string;
-  },
+  };
   getPublish: {
     GET_PUBLISH: string;
-  },
+  };
   verifyPublish: {
     VERIFY_PUBLISH: string;
   }
@@ -27,14 +30,17 @@ const development: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
   },
+  backendApi: {
+    BACKEND_API:  "http://localhost:8080/",
+  },
   initiatePublish: {
-    INITIATE_PUBLISH: "http://localhost:8080/deployment/create"
+    INITIATE_PUBLISH: "http://localhost:8080/deployment/create",
   },
   getPublish: {
-    GET_PUBLISH: "http://localhost:8080/deployment/create-subdomain"
+    GET_PUBLISH: "http://localhost:8080/deployment/create-subdomain",
   },
   verifyPublish: {
-    VERIFY_PUBLISH: "http://localhost:8080/deployment/verify-subdomain"
+    VERIFY_PUBLISH: "http://localhost:8080/deployment/verify-subdomain",
   }
 };
 
@@ -47,14 +53,17 @@ const production: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
   },
+  backendApi: {
+    BACKEND_API: "http://localhost:8080/",
+  },
   initiatePublish: {
-    INITIATE_PUBLISH: "http://localhost:8080/deployment/create"
+    INITIATE_PUBLISH: "http://localhost:8080/deployment/create",
   },
   getPublish: {
-    GET_PUBLISH: "http://localhost:8080/deployment/create-subdomain"
+    GET_PUBLISH: "http://localhost:8080/deployment/create-subdomain",
   },
   verifyPublish: {
-    VERIFY_PUBLISH: "http://localhost:8080/deployment/verify-subdomain"
+    VERIFY_PUBLISH: "http://localhost:8080/deployment/verify-subdomain",
   }
 };
 
@@ -67,14 +76,17 @@ const local: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
   },
+  backendApi: {
+    BACKEND_API: "http://localhost:8080/",
+  },
   initiatePublish: {
-    INITIATE_PUBLISH: "http://localhost:8080/deployment/create"
+    INITIATE_PUBLISH: "http://localhost:8080/deployment/create",
   },
   getPublish: {
-    GET_PUBLISH: "http://localhost:8080/deployment/create-subdomain"
+    GET_PUBLISH: "http://localhost:8080/deployment/create-subdomain",
   },
   verifyPublish: {
-    VERIFY_PUBLISH: "http://localhost:8080/deployment/verify-subdomain"
+    VERIFY_PUBLISH: "http://localhost:8080/deployment/verify-subdomain",
   }
 };
 

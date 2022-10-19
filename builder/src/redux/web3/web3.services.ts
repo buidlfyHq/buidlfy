@@ -13,6 +13,7 @@ export const connectWalletService = async () => {
     }
 
     const provider = new ethers.providers.Web3Provider(ethereum);
+    await provider.send('eth_requestAccounts', []); // requesting access to accounts
     const signer = provider.getSigner();
     const address = await signer.getAddress();
 

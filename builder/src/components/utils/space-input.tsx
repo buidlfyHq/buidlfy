@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import ArrowInput from "./arrow-input";
 
 interface ISpaceInput {
@@ -9,6 +9,7 @@ interface ISpaceInput {
   handleIncrement: (() => void)[];
   handleDecrement: (() => void)[];
 }
+
 const SpaceInput: FC<ISpaceInput> = ({
   heading,
   text,

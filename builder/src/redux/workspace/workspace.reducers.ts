@@ -19,6 +19,7 @@ const initialState: IWorkspaceState = {
   selectedElement: null,
   uploadedImagesData: [],
   publishConfig: null,
+  domainName: null
 };
 
 const workspaceSlice = createSlice({
@@ -157,7 +158,12 @@ const workspaceSlice = createSlice({
         publishConfig: action.payload
       }
     },
-
+    updateDomainName(state: IWorkspaceState, action: { payload: string }) {
+      return {
+        ...state,
+        domainName: action.payload
+      }
+    },
     updateUploadedImageData(state: IWorkspaceState, action: { payload }) {
       const { settingItemId, uploadedImageData } = action.payload;
       const newUploadedImagesData = fetchUploadedImageData(settingItemId, uploadedImageData, state.uploadedImagesData)      
@@ -167,6 +173,7 @@ const workspaceSlice = createSlice({
       }
     },
   },
+ 
 });
 
 export const {
@@ -178,6 +185,7 @@ export const {
   setSelectedElement,
   saveContractConfig,
   updateUploadedImageData,
-  updatePublishConfig
+  updatePublishConfig,
+  updateDomainName
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;

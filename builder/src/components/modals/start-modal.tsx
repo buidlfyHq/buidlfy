@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
@@ -7,6 +7,7 @@ import { ReactComponent as TemplateIcon } from "assets/modalIcons/templateIcon.s
 
 const StartModal: FC = () => {
   const dispatch = useDispatch();
+
   return (
     <Dialog.Panel className="rounded-[24px] py-16 px-20 bg-white rounded flex flex-row justify-start items-center gap-16">
       <div className="flex flex-col items-center w-[300px] h-[280px] relative">

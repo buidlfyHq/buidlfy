@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import ArrowInput from "./arrow-input";
 
 interface INumberInput {
@@ -9,6 +9,7 @@ interface INumberInput {
   handleDecrement: () => void;
   disableInput?: boolean;
 }
+
 const NumberInput: FC<INumberInput> = ({
   text,
   value,
