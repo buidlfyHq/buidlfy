@@ -1,10 +1,12 @@
 import React, { FC, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import HourGlassImg from "assets/icons/hourglass.png";
 import TickImg from "assets/colored.png";
 import { CgClose } from "react-icons/cg";
+import { IRootState } from "redux/root-state.interface";
+import { initiatePublish } from "redux/publish/publish.action";
 
 const processes = [
   {
@@ -27,11 +29,22 @@ const processes = [
 
 const PublishSiteModal: FC = () => {
   const dispatch = useDispatch();
-
+  // const publishConfig = useSelector(
+  //   (state: IRootState) => state.publish.publishConfig
+  // );
+  // const domainName = useSelector(
+  //   (state: IRootState) => state.publish.domainName
+  // );
+  // console.log(domainName, "domainName");
+  // useEffect(() => {
+  //   dispatch(initiatePublish({ configDetails: publishConfig }));
+  //   console.log("initiatePublish");
+  //   dispatch(toggleModalType("publish-done"));
+  // }, []);
   useEffect(() => {
     setTimeout(() => {
       dispatch(toggleModalType("publish-done"));
-    }, 3000);
+    }, 10000);
   }, []);
 
   return (

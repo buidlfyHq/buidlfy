@@ -1,10 +1,8 @@
-import { BigNumber } from "ethers";
-import request, { gql } from "graphql-request";
 import config from "config";
 import ShortUniqueId from "short-unique-id";
 import { uniqueNamesGenerator, Config, adjectives, colors } from 'unique-names-generator';
 
-const uid = new ShortUniqueId();
+const uid = new ShortUniqueId({ length: 12 });
 
 const customConfig: Config = {
   dictionaries: [adjectives, colors],

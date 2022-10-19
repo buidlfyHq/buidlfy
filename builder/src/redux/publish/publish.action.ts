@@ -1,4 +1,4 @@
-import publishActionTypes from "./workspace.types";
+import publishActionTypes from "./publish.types";
 
 export const initiatePublish = (payload: {
     configDetails: string

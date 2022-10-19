@@ -6,10 +6,8 @@ import { Menu } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import TemplateModal from "./template-modal";
 import { connectWallet } from "redux/web3/web3.actions";
-import {
-  updateWorkspaceElementsArray,
-  updatePublishConfig,
-} from "redux/workspace/workspace.reducers";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { updatePublishConfig } from "redux/publish/publish.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";

@@ -1,9 +1,9 @@
 import { call, all, put, takeLatest } from "redux-saga/effects";
-import { updateDomainName } from "./workspace.reducers";
+import { updateDomainName } from "./publish.reducers";
 import {
     initiatePublishService,getPublishDetailsService,verifyPublishService
-} from "./workspace.services";
-import publishActionTypes from "./workspace.types";
+} from "./publish.services";
+import publishActionTypes from "./publish.types";
 
 function* initatePublish({ payload }) {
 
@@ -79,7 +79,7 @@ function* verifyPublishSaga() {
     yield takeLatest(publishActionTypes.VERIFY_PUBLISH, verifyPublish);
 }
 
-export function* workspaceSagas() {
+export function* publishSagas() {
   yield all([
       call(initiatePublishSaga),
       call(getPublishDetailsSaga),
