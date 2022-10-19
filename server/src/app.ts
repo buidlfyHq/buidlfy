@@ -26,6 +26,7 @@ class App {
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;
 
+    this.configureLimit();
     this.initializeMiddlewares();
     this.initializeSocket();
     this.initializeRoutes(routes);
@@ -44,6 +45,18 @@ class App {
 
   public getServer() {
     return this.app;
+  }
+
+  private configureLimit() {
+    this.app.post(
+      '/upload',
+      (req, res, next) => {
+        next();
+      },
+      express.json({
+        limit: '5mb',
+      }),
+    );
   }
 
   private initializeMiddlewares() {

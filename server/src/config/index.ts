@@ -20,4 +20,5 @@ export const {
   CLOUDFLARE_EMAIL,
   CDN_CNAME,
   CLOUDFLARE_ZONE_ID,
+  WEB3_STORAGE_ACCESS_TOKEN,
 } = process.env;
