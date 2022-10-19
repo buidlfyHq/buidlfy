@@ -89,7 +89,6 @@ const RenderItem: FC<IRenderItem> = ({
       return (
         <Image
           i={item.i}
-          imgData={item.imgData}
           justifyContent={item.style.justifyContent}
           width={item.style.width}
           height={item.style.height}

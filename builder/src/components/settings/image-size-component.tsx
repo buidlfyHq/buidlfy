@@ -15,7 +15,6 @@ interface ISizeComponent {
 const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
   const dispatch = useDispatch();
 
-  // Derive best type of e
   const handleChange = (
     action: ReplaceStyle,
     updatedWidth?: number,
