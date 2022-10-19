@@ -7,16 +7,7 @@ export interface IConfig {
   };
   backendApi: {
     BACKEND_API: string;
-  },
-  initiatePublish: {
-    INITIATE_PUBLISH: string;
   };
-  getPublish: {
-    GET_PUBLISH: string;
-  };
-  verifyPublish: {
-    VERIFY_PUBLISH: string;
-  }
 }
 
 const NODE_ENV: string = process.env.REACT_APP_STAGE || "local";
@@ -33,15 +24,6 @@ const development: IConfig = {
   backendApi: {
     BACKEND_API:  "http://localhost:8080/",
   },
-  initiatePublish: {
-    INITIATE_PUBLISH: "http://localhost:8080/deployment/create",
-  },
-  getPublish: {
-    GET_PUBLISH: "http://localhost:8080/deployment/create-subdomain",
-  },
-  verifyPublish: {
-    VERIFY_PUBLISH: "http://localhost:8080/deployment/verify-subdomain",
-  }
 };
 
 const production: IConfig = {
@@ -56,15 +38,6 @@ const production: IConfig = {
   backendApi: {
     BACKEND_API: "http://localhost:8080/",
   },
-  initiatePublish: {
-    INITIATE_PUBLISH: "http://localhost:8080/deployment/create",
-  },
-  getPublish: {
-    GET_PUBLISH: "http://localhost:8080/deployment/create-subdomain",
-  },
-  verifyPublish: {
-    VERIFY_PUBLISH: "http://localhost:8080/deployment/verify-subdomain",
-  }
 };
 
 const local: IConfig = {
@@ -79,15 +52,6 @@ const local: IConfig = {
   backendApi: {
     BACKEND_API: "http://localhost:8080/",
   },
-  initiatePublish: {
-    INITIATE_PUBLISH: "http://localhost:8080/deployment/create",
-  },
-  getPublish: {
-    GET_PUBLISH: "http://localhost:8080/deployment/create-subdomain",
-  },
-  verifyPublish: {
-    VERIFY_PUBLISH: "http://localhost:8080/deployment/verify-subdomain",
-  }
 };
 
 const config: {
