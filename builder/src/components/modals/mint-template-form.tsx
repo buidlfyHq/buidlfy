@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
@@ -12,20 +12,12 @@ import { IRootState } from "redux/root-state.interface";
 import InfoCircleImg from "assets/icons/info-circle.png";
 import MintUploadImg from "assets/icons/mint-form-img.png";
 
-// REMOVE: default image link when the bug is fixed
-const DEFAULT_IMAGE_LINK =
-  "https://bafkreie5ovwq53lwzfye6y4fbqt5zappoq2y7jn443r3bofpvlkxhjh5jy.ipfs.dweb.link/";
-
 const MintTemplateForm: FC = () => {
   const dispatch = useDispatch();
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const currentAccount = useSelector(
-    (state: IRootState) => state.web3.currentAccount
-  );
 
-  // BUG: setImage state not able to persist
   const [image, setImage] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -41,7 +33,6 @@ const MintTemplateForm: FC = () => {
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           const cid = await uploadFileToWeb3Storage(reader.result as string);
-          // BUG: setImage state not able to persist
           setImage(cid);
         });
         reader.readAsDataURL(e.target.files[0]);
@@ -50,15 +41,15 @@ const MintTemplateForm: FC = () => {
   };
 
   const handleSaveTemplate = async () => {
-    // REMOVE: default image link when the bug is fixed
     let newTemplate = {
-      image: DEFAULT_IMAGE_LINK,
+      image,
       name,
       category,
       description,
       value: workspaceElements,
     };
 
+    console.log("NewTemplate ->", newTemplate);
     console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
     const templateCID = await uploadTemplateToWeb3Storage(
       JSON.stringify(newTemplate)
@@ -86,7 +77,6 @@ const MintTemplateForm: FC = () => {
       <div className="my-8 mint-upload-img">
         <div className="w-full h-[300px] upload-img-mint cursor-pointer">
           <label
-            htmlFor="inputTag"
             className="flex flex-col items-center justify-center h-full text-[12px] text-[#130F1C]"
           >
             <img src={MintUploadImg} alt="icon" width={50} height={50} />

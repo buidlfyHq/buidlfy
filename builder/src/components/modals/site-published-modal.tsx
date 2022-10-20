@@ -14,12 +14,12 @@ const SitePublishedModal: FC<ISitePublishedModal> = ({ generatedConfig }) => {
   const dispatch = useDispatch();
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[580px] my-20 mx-28 rounded-[4px]  bg-white">
-      <div className="flex items-start justify-end w-full pr-4 pt-4">
-        <CgClose
-          onClick={() => dispatch(toggleModal(false))}
-          className="text-[24px] cursor-pointer text-[#14142B]"
-        />
-      </div>
+      <button
+        className="flex items-start justify-end w-full pr-4 pt-4"
+        onClick={() => dispatch(toggleModal(false))}
+      >
+        <CgClose className="text-[24px] cursor-pointer text-[#14142B]" />
+      </button>
       <div className="flex flex-col justify-center items-center py-16 px-10">
         <div>
           <img src={CongratulationsImg} alt="img_temp" width={50} height={50} />
@@ -46,14 +46,9 @@ const SitePublishedModal: FC<ISitePublishedModal> = ({ generatedConfig }) => {
             height={8}
           />
         </div>
-        <div
-          onClick={() => {
-            navigator.clipboard.writeText(generatedConfig);
-          }}
-          className="connect-wallet-button text-white px-16 py-3 text-[14px] font-[600] rounded-[8px] mt-6 cursor-pointer"
-        >
+        <button className="connect-wallet-button text-white px-16 py-3 text-[14px] font-[600] rounded-[8px] mt-6 cursor-pointer">
           Visit Site
-        </div>
+        </button>
       </div>
     </Dialog.Panel>
   );

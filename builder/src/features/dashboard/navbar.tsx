@@ -4,7 +4,6 @@ import makeBlockie from "ethereum-blockies-base64";
 import { encode as base64_encode } from "base-64";
 import { Menu } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import TemplateModal from "./template-modal";
 import { connectWallet } from "redux/web3/web3.actions";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
@@ -196,8 +195,6 @@ const Navbar: FC<INavbar> = ({
             Connect Wallet
           </button>
         )}
-
-        <TemplateModal generatedConfig={generatedConfig} />
       </div>
     </main>
   );
