@@ -1,9 +1,9 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import Spinner from "components/utils/assets/spinner";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { toggleModal } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import Approve1 from "assets/approve-1.png";
 import Approve2 from "assets/approve-2.png";

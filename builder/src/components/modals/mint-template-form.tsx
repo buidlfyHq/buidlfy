@@ -50,28 +50,22 @@ const MintTemplateForm: FC = () => {
   };
 
   const handleSaveTemplate = async () => {
-    if (workspaceElements?.length > 0) {
-      // REMOVE: default image link when the bug is fixed
-      let newTemplate = {
-        image: DEFAULT_IMAGE_LINK,
-        name,
-        category,
-        description,
-        value: workspaceElements,
-      };
+    // REMOVE: default image link when the bug is fixed
+    let newTemplate = {
+      image: DEFAULT_IMAGE_LINK,
+      name,
+      category,
+      description,
+      value: workspaceElements,
+    };
 
-      if (!currentAccount) {
-        console.log("Open connect wallet modal"); // Keep log until this feature is implemented
-        // await connectWallet();
-      }
-      console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
-      const templateCID = await uploadTemplateToWeb3Storage(
-        JSON.stringify(newTemplate)
-      );
-      console.log("templateCID: ", templateCID);
-      dispatch(mintTemplate(templateCID));
-      dispatch(toggleModalType("minting-progress"));
-    }
+    console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
+    const templateCID = await uploadTemplateToWeb3Storage(
+      JSON.stringify(newTemplate)
+    );
+    console.log("templateCID: ", templateCID);
+    dispatch(mintTemplate(templateCID));
+    dispatch(toggleModalType("minting-progress"));
   };
 
   return (
@@ -161,12 +155,21 @@ const MintTemplateForm: FC = () => {
         >
           Cancel
         </button>
-        <button
-          onClick={handleSaveTemplate}
-          className="connect-wallet-button cursor-pointer text-white font-[500] text-[14px] py-3 px-12 rounded-[8px] ml-3"
-        >
-          Mint
-        </button>
+        {workspaceElements?.length > 0 && name && category && description ? (
+          <button
+            onClick={handleSaveTemplate}
+            className="connect-wallet-button cursor-pointer text-white font-[500] text-[14px] py-3 px-12 rounded-[8px] ml-3"
+          >
+            Mint
+          </button>
+        ) : (
+          <button
+            disabled
+            className="connect-wallet-button cursor-not-allowed text-white font-[500] text-[14px] py-3 px-12 rounded-[8px] ml-3 opacity-50"
+          >
+            Mint
+          </button>
+        )}
       </div>
     </Dialog.Panel>
   );
