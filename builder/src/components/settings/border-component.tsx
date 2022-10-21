@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceValue } from "components/utils/render-setting";
-import NumberInput from "components/utils/number-input";
+import NumberInput from "components/utils/input/number-input";
 import "styles/components.css";
 import "styles/dashboard.css";
 

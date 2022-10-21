@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { encode as base64_encode } from "base-64";
-import TemplateModal from "./template-modal";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
@@ -35,6 +34,9 @@ const Navbar: FC<INavbar> = ({
   );
   const contractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
+  );
+  const currentAccount = useSelector(
+    (state: IRootState) => state.web3.currentAccount
   );
 
   const [abiJSON, setAbiJSON] = useState<
@@ -141,12 +143,16 @@ const Navbar: FC<INavbar> = ({
           </span>
           Preview
         </div> */}
-        <div
-          className="bordered-button text-[14px] font[500] py-3 px-5 my-2 ml-3 text-[14px] rounded-[10px] cursor-pointer whitespace-nowrap"
-          onClick={handleMintTemplateForm}
-        >
-          <span className="gradient-text font-[500]">Mint as NFT</span>
-        </div>
+
+        {/* Show only after the site is published */}
+        {currentAccount && (
+          <div
+            className="bordered-button text-[14px] font[500] py-3 px-5 my-2 ml-3 text-[14px] rounded-[10px] cursor-pointer whitespace-nowrap"
+            onClick={handleMintTemplateForm}
+          >
+            <span className="gradient-text font-[500]">Mint as NFT</span>
+          </div>
+        )}
         <button
           className="py-2 px-7 ml-3 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap my-2 ml-3"
           onClick={handlePublish}
@@ -155,7 +161,6 @@ const Navbar: FC<INavbar> = ({
         </button>
 
         <NavMenu />
-        <TemplateModal generatedConfig={generatedConfig} />
       </div>
     </main>
   );

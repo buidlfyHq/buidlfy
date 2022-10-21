@@ -6,11 +6,31 @@ import {
   approveERC1155Token,
   getMarketplaceContract,
   getSigner,
+  isApprovedForAll,
   TOKENS_COUNT_ON_MINT,
 } from "redux/web3/web3.utils";
 import { getCurrentTime } from "./minted.utils";
 import { formatList } from "redux/template/template.services";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+
+export const approveListingService = async (address: string): Promise<any> => {
+  try {
+    const signer = getSigner();
+    const isApproved = await isApprovedForAll(signer, address);
+    if (!isApproved) {
+      await approveERC1155Token(signer);
+    }
+
+    return { error: false, errorMessage: "" };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log("Error in approveListingService --> ", error);
+    return {
+      error: true,
+      errorMessage: (error as Error).message,
+    };
+  }
+};
 
 export const createListingService = async (
   tokenId: string,
@@ -20,16 +40,15 @@ export const createListingService = async (
     const signer = getSigner();
     const marketplaceContract = getMarketplaceContract(signer);
     const token_id = parseInt(tokenId);
-    // Check for approval if yes, then don't call approve otherwise call approve
-    await approveERC1155Token(signer);
+    const defaultId = parseInt(config.network.DEFAULT_NETWORK.id);
     const tx = await marketplaceContract.createListing(
       [
-        addresses.spheronErc1155,
+        addresses[defaultId].spheronErc1155,
         token_id,
         getCurrentTime(),
         getCurrentTime(),
         TOKENS_COUNT_ON_MINT,
-        addresses.usdc,
+        addresses[defaultId].usdc,
         buyoutPricePerToken,
         buyoutPricePerToken,
         0, // Always should be 0 cause Direct Listing
@@ -54,7 +73,7 @@ export const getOwnedTemplatesService = async (
   try {
     const allTemplates = await (
       await fetch(
-        `https://deep-index.moralis.io/api/v2/${address}/nft?chain=goerli&format=decimal&token_addresses=0xa69374d7371df89192f05c7b61a945f834bf2593`,
+        `https://deep-index.moralis.io/api/v2/${address}/nft?chain=${config.network.DEFAULT_NETWORK.name}&format=decimal&token_addresses=0xa69374d7371df89192f05c7b61a945f834bf2593`,
         {
           method: "GET",
           headers: {

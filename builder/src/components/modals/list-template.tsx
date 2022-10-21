@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { listTemplate } from "redux/minted/minted.actions";
-import { toggleModal } from "redux/modal/modal.reducers";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { CgClose } from "react-icons/cg";
 import IconImg from "assets/icons/icon-crypto.png";
@@ -15,6 +15,7 @@ const ListTemplate: FC = () => {
 
   const handleListTemplate = () => {
     dispatch(listTemplate());
+    dispatch(toggleModalType("complete-listing"));
   };
 
   return (

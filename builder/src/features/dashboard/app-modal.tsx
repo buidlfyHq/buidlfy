@@ -5,11 +5,7 @@ import RenderModal from "components/utils/render-modals";
 import { IRootState } from "redux/root-state.interface";
 import { toggleModal } from "redux/modal/modal.reducers";
 
-interface ITemplateModal{
-  generatedConfig?: string
-}
-
-const TemplateModal: FC<ITemplateModal> = ({generatedConfig}) => {
+const AppModal: FC = () => {
   const dispatch = useDispatch();
   const modalShow = useSelector((state: IRootState) => state.modal.modalShow);
 
@@ -19,14 +15,17 @@ const TemplateModal: FC<ITemplateModal> = ({generatedConfig}) => {
 
   return (
     <Dialog className="relative z-50" open={modalShow} onClose={handleClose}>
-      <div className="fixed inset-0 bg-black/40 backdrop-blur-[2px]" aria-hidden="true" />
+      <div
+        className="fixed inset-0 bg-black/40 backdrop-blur-[2px]"
+        aria-hidden="true"
+      />
       <div className="fixed inset-0 overflow-y-auto">
         <div className="flex items-center justify-center min-h-full">
-          <RenderModal generatedConfig={generatedConfig} />
+          <RenderModal />
         </div>
       </div>
     </Dialog>
   );
 };
 
-export default TemplateModal;
+export default AppModal;

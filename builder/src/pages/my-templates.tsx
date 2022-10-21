@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BiChevronDown } from "react-icons/bi";
 import makeBlockie from "ethereum-blockies-base64";
-import TemplateModal from "features/dashboard/template-modal";
 import SearchForm from "features/my-templates/search-form";
 import RenderTemplateList from "components/utils/render-template-list";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
@@ -104,7 +103,6 @@ const MyTemplates: FC = () => {
           <div className="grid grid-cols-3 gap-10 px-40 pb-12 pt-7">
             <RenderTemplateList tab={tab} />
           </div>
-          <TemplateModal />
         </section>
       </section>
     </main>

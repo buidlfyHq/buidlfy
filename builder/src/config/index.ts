@@ -5,6 +5,12 @@ export interface IConfig {
   template: {
     TEMPLATE_GRAPHQL_URL: string;
   };
+  network: {
+    DEFAULT_NETWORK: {
+      id: string;
+      name: string;
+    };
+  };
 }
 
 const NODE_ENV: string = process.env.REACT_APP_STAGE || "local";
@@ -18,6 +24,9 @@ const development: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
   },
+  network: {
+    DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
+  },
 };
 
 const production: IConfig = {
@@ -29,6 +38,9 @@ const production: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
   },
+  network: {
+    DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
+  },
 };
 
 const local: IConfig = {
@@ -39,6 +51,9 @@ const local: IConfig = {
   template: {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
+  },
+  network: {
+    DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
   },
 };
 
