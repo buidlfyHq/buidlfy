@@ -1,17 +1,17 @@
 import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IoIosCloseCircleOutline } from "react-icons/io";
+import ReactTooltip from "react-tooltip";
+import { uploadFileToWeb3Storage } from "config/web3storage";
+import { IMAGE_SIZE_VARIABLE } from "config/constant";
+import Spinner from "components/utils/assets/spinner";
 import {
   updateWorkspaceElement,
   updateUploadedImageData,
 } from "redux/workspace/workspace.reducers";
-import { uploadFileToWeb3Storage } from "config/web3storage";
-import upload from "assets/upload-img.svg";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { IMAGE_SIZE_VARIABLE } from "config/constant";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
 import { IRootState } from "redux/root-state.interface";
-import Spinner from "components/utils/assets/spinner";
-import ReactTooltip from "react-tooltip";
+import upload from "assets/upload-img.svg";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -87,6 +87,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
   );
   const tooltip = (
     <ReactTooltip
+      id="upload"
       className="tool"
       place="left"
       type="dark"
@@ -149,7 +150,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
               </>
             ) : (
               <label htmlFor="inputTag" className="image-label cursor-pointer">
-                <div data-tip="Click here to upload image">
+                <div data-tip="Click here to upload image" data-for="upload">
                   <div className="flex justify-center mt-2">
                     <img src={upload} alt="upload" className="w-[3.5rem]" />
                   </div>

@@ -10,6 +10,8 @@ import {
 } from "redux/web3/web3.utils";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
+const DEFAULT_ID = parseInt(config.network.DEFAULT_NETWORK.id);
+
 export const initiateTransactionService = async (
   listingId: BigNumber,
   buyoutPricePerToken: BigNumber
@@ -24,7 +26,7 @@ export const initiateTransactionService = async (
       listingId,
       address,
       1,
-      addresses.usdc,
+      addresses[DEFAULT_ID].usdc,
       buyoutPricePerToken,
       {
         gasLimit: 3000000,
@@ -63,7 +65,7 @@ export const formatList = async (listings) => {
       listings.map(async (template: any) => {
         if (
           template.listing_assetContract.toLowerCase() ===
-          addresses.spheronErc1155.toLowerCase()
+          addresses[DEFAULT_ID].spheronErc1155.toLowerCase()
         ) {
           try {
             if (template.token.uri) {

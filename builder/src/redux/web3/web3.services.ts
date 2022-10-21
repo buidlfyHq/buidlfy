@@ -1,3 +1,4 @@
+import config from "config";
 import { ethers } from "ethers";
 
 export const connectWalletService = async () => {
@@ -13,7 +14,7 @@ export const connectWalletService = async () => {
     }
 
     const provider = new ethers.providers.Web3Provider(ethereum);
-    await provider.send('eth_requestAccounts', []); // requesting access to accounts
+    await provider.send("eth_requestAccounts", []); // requesting access to accounts
     const signer = provider.getSigner();
     const address = await signer.getAddress();
 
@@ -26,6 +27,34 @@ export const connectWalletService = async () => {
       errorMessage: (error as Error).message,
       address: "",
     };
+  }
+};
+
+export const changeNetworkService = async () => {
+  try {
+    await (window as any).ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: config.network.DEFAULT_NETWORK.id }],
+    });
+    return { error: false, errorMessage: "" };
+  } catch (switchError) {
+    // This error code indicates that the chain has not been added to MetaMask.
+    if (switchError.code === 4902) {
+      try {
+        await (window as any).ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [config.network.DEFAULT_NETWORK],
+        });
+        return { error: false, errorMessage: "" };
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log("Error in changeNetworkService --> ", error);
+        return { error: true, errorMessage: (error as Error).message };
+      }
+    }
+    // eslint-disable-next-line no-console
+    console.log("Error in changeNetworkService --> ", switchError);
+    return { error: true, errorMessage: (switchError as Error).message };
   }
 };
 

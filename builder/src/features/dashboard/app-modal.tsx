@@ -5,11 +5,7 @@ import RenderModal from "components/utils/render-modals";
 import { IRootState } from "redux/root-state.interface";
 import { toggleModal } from "redux/modal/modal.reducers";
 
-interface ITemplateModal {
-  generatedConfig?: string;
-}
-
-const TemplateModal: FC<ITemplateModal> = ({ generatedConfig }) => {
+const AppModal: FC = () => {
   const dispatch = useDispatch();
   const modalShow = useSelector((state: IRootState) => state.modal.modalShow);
 
@@ -32,4 +28,4 @@ const TemplateModal: FC<ITemplateModal> = ({ generatedConfig }) => {
   );
 };
 
-export default TemplateModal;
+export default AppModal;

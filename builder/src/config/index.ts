@@ -8,6 +8,12 @@ export interface IConfig {
   backendApi: {
     BACKEND_API: string;
   };
+  network: {
+    DEFAULT_NETWORK: {
+      id: string;
+      name: string;
+    };
+  };
 }
 
 const NODE_ENV: string = process.env.REACT_APP_STAGE || "local";
@@ -22,7 +28,10 @@ const development: IConfig = {
       "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
   },
   backendApi: {
-    BACKEND_API:  "http://localhost:8080/",
+    BACKEND_API: "http://localhost:8080/",
+  },
+  network: {
+    DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
   },
 };
 
@@ -38,6 +47,9 @@ const production: IConfig = {
   backendApi: {
     BACKEND_API: "http://localhost:8080/",
   },
+  network: {
+    DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
+  },
 };
 
 const local: IConfig = {
@@ -51,6 +63,9 @@ const local: IConfig = {
   },
   backendApi: {
     BACKEND_API: "http://localhost:8080/",
+  },
+  network: {
+    DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
   },
 };
 

@@ -120,6 +120,7 @@ const Elements: FC<IElements> = ({
   const elementsList = (
     <>
       <ReactTooltip
+        id="elements"
         className="tool"
         place="right"
         type="dark"
@@ -133,7 +134,7 @@ const Elements: FC<IElements> = ({
       <div className="element-div">
         <div className="px-[4.1rem] py-4">
           <div className="flex">
-            <div data-tip="Click here to add the button">
+            <div data-tip="Click here to add the button" data-for="elements">
               <button
                 onClick={() => onClickFunction("Button")}
                 className="cursor-pointer element-btn btn-div"
@@ -146,7 +147,7 @@ const Elements: FC<IElements> = ({
       </div>
       <div className="element-div">
         <div className="px-10 py-3">
-          <div data-tip="Click here to add the heading">
+          <div data-tip="Click here to add the heading" data-for="elements">
             <h1
               className="heading-element font-normal text-2xl mb-4 cursor-pointer hover:text-[#5A4471]"
               onClick={() => onClickFunction("Heading 1")}
@@ -154,7 +155,7 @@ const Elements: FC<IElements> = ({
               Add Heading 1
             </h1>
           </div>
-          <div data-tip="Click here to add the heading">
+          <div data-tip="Click here to add the heading" data-for="elements">
             <h2
               onClick={() => onClickFunction("Heading 2")}
               className="heading-element font-normal text-xl mb-4 cursor-pointer hover:text-[#5A4471]"
@@ -162,7 +163,7 @@ const Elements: FC<IElements> = ({
               Add Heading 2
             </h2>
           </div>
-          <div data-tip="Click here to add the heading">
+          <div data-tip="Click here to add the heading" data-for="elements">
             <h3
               onClick={() => onClickFunction("Heading 3")}
               className="heading-element font-normal text-lg mb-4 cursor-pointer hover:text-[#5A4471]"
@@ -170,7 +171,7 @@ const Elements: FC<IElements> = ({
               Add Heading 3
             </h3>
           </div>
-          <div data-tip="Click here to add the paragraph">
+          <div data-tip="Click here to add the paragraph" data-for="elements">
             <div
               onClick={() => onClickFunction("Text")}
               className="heading-element font-normal text-[13px] text-four w-[200px] cursor-pointer hover:text-[#5A4471]"
@@ -183,7 +184,7 @@ const Elements: FC<IElements> = ({
       </div>
       <div className="element-div">
         <div className="px-[1.75rem] py-4">
-          <div data-tip="Click here to add the input">
+          <div data-tip="Click here to add the input" data-for="elements">
             <div
               className="cursor-pointer input-container"
               onClick={() => onClickFunction("Input")}
@@ -198,7 +199,7 @@ const Elements: FC<IElements> = ({
           onClick={() => onClickFunction("Image")}
           className="px-4 py-4 cursor-pointer"
         >
-          <div data-tip="Click here to add the image upload">
+          <div data-tip="Click here to add the image upload" data-for="elements">
             <div className="relative image-container">
               <img className="w-[20rem]" src={container} alt="container" />
               <img
@@ -236,7 +237,7 @@ const Elements: FC<IElements> = ({
         <div className="mt-[6rem]">
           <div className="element-div">
             <div className="px-4 py-4">
-              <div data-tip="Click here to add the container">
+              <div data-tip="Click here to add the container" data-for="elements">
                 <div className="flex">
                   <div
                     className="cursor-pointer element-container"
