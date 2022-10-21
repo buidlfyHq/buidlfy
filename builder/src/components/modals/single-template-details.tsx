@@ -7,6 +7,7 @@ import { toggleModalType } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import EyeImg from "assets/icons/eye.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
+import USDTIcon from "assets/icons/usdt.png";
 
 interface ISingleTemplateDetails {
   list: boolean;
@@ -60,9 +61,12 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
           </div>
           <div>
             {!list ? (
-              <div className="flex items-center justify-between w-full mt-8 text-center bg-[#E6EAF4] rounded-[8px] py-4 px-4 cursor-pointer">
-                <div className="text-[18px] font-[600] text-[#14142B]">
-                  120.00 USDT
+              <div className="flex items-center justify-between w-full mt-8 text-center bg-[#E6EAF4] rounded-[8px] py-4 px-4">
+                <div className="flex items-center gap-4">
+                  <img src={USDTIcon} alt="icon" height={20} width={20}/>
+                  <div className="text-[18px] font-[600] text-[#14142B]">
+                    120.00 USDT
+                  </div>
                 </div>
                 <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
                   ~$1209.00
