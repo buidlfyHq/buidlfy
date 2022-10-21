@@ -15,7 +15,6 @@ interface ISizeComponent {
 const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
   const dispatch = useDispatch();
 
-  // Derive best type of e
   const handleChange = (
     action: ReplaceStyle,
     updatedWidth?: number,
@@ -36,24 +35,6 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
           settingItemId: i,
           propertyName: "height",
           propertyValue: updatedHeight,
-          imageSizeProperty: false,
-        })
-      );
-    } else if (action === ReplaceStyle.INCREMENTWIDTH) {
-      dispatch(
-        updateWorkspaceImageElementStyle({
-          settingItemId: i,
-          propertyName: "width",
-          propertyValue: width + 1,
-          imageSizeProperty: false,
-        })
-      );
-    } else if (action === ReplaceStyle.INCREMENTHEIGHT) {
-      dispatch(
-        updateWorkspaceImageElementStyle({
-          settingItemId: i,
-          propertyName: "height",
-          propertyValue: height + 1,
           imageSizeProperty: false,
         })
       );
@@ -88,10 +69,6 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height }) => {
           handleChange(ReplaceStyle.WIDTH, updatedWidth),
         (updatedHeight: number) =>
           handleChange(ReplaceStyle.HEIGHT, undefined, updatedHeight),
-      ]}
-      handleIncrement={[
-        () => handleChange(ReplaceStyle.INCREMENTWIDTH),
-        () => handleChange(ReplaceStyle.INCREMENTHEIGHT),
       ]}
       handleDecrement={[
         () => handleChange(ReplaceStyle.DECREMENTWIDTH),

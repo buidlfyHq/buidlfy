@@ -6,7 +6,7 @@ interface ISpaceInput {
   text: string[];
   value: number[];
   handleChange: ((updatedSpace: number) => void)[];
-  handleIncrement: (() => void)[];
+  handleIncrement?: (() => void)[];
   handleDecrement: (() => void)[];
 }
 
@@ -30,7 +30,7 @@ const SpaceInput: FC<ISpaceInput> = ({
                 <ArrowInput
                   value={value[i]}
                   handleChange={handleChange[i]}
-                  handleIncrement={handleIncrement[i]}
+                  handleIncrement={handleIncrement && handleIncrement[i]}
                   handleDecrement={handleDecrement[i]}
                 />
               </div>
