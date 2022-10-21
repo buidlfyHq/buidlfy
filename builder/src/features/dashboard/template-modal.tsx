@@ -25,7 +25,7 @@ const TemplateModal: FC<ITemplateModal> = ({ generatedConfig }) => {
       />
       <div className="fixed inset-0 overflow-y-auto">
         <div className="flex items-center justify-center min-h-full">
-          <RenderModal generatedConfig={generatedConfig} />
+          <RenderModal />
         </div>
       </div>
     </Dialog>

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
 import UprightImg from "assets/icons/upright.png";
 import { CgClose } from "react-icons/cg";
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "redux/root-state.interface";
 
 interface ISitePublishedModal {
-  generatedConfig: string;
+  generatedConfig?: string;
 }
 
 const SitePublishedModal: FC<ISitePublishedModal> = ({ generatedConfig }) => {
@@ -19,12 +19,12 @@ const SitePublishedModal: FC<ISitePublishedModal> = ({ generatedConfig }) => {
   const domainLink = "https://" + domainName;
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[580px] my-20 mx-28 rounded-[4px]  bg-white">
-      <div className="flex items-start justify-end w-full pr-4 pt-4">
-        <CgClose
-          onClick={() => dispatch(toggleModal(false))}
-          className="text-[24px] cursor-pointer text-[#14142B]"
-        />
-      </div>
+      <button
+        className="flex items-start justify-end w-full pr-4 pt-4"
+        onClick={() => dispatch(toggleModal(false))}
+      >
+        <CgClose className="text-[24px] cursor-pointer text-[#14142B]" />
+      </button>
       <div className="flex flex-col justify-center items-center py-16 px-10">
         <div>
           <img src={CongratulationsImg} alt="img_temp" width={50} height={50} />

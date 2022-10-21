@@ -3,6 +3,7 @@ import { call, all, put, takeLatest, select } from "redux-saga/effects";
 import { addNotification } from "redux/notification/notification.reducers";
 import { NotificationType } from "redux/notification/notification.interfaces";
 import {
+  approveListingService,
   createListingService,
   getOwnedListedTemplatesService,
   getOwnedReviewTemplatesService,
@@ -14,30 +15,53 @@ import {
   ownedListedTemplatesFetched,
   ownedReviewTemplatesFetched,
   startListTemplateLoader,
+  startApproveListingLoader,
+  listingApproved,
 } from "./minted.reducers";
+import { toggleModalType } from "redux/modal/modal.reducers";
 import mintedActionTypes from "./minted.types";
 import { IRootState } from "redux/root-state.interface";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { SelectedTemplateDto } from "redux/template/template.dto";
 
 function* createTemplateListing() {
+  const currentAccount: string = yield select(
+    (state: IRootState) => state.web3.currentAccount
+  );
   const selectedTemplate: ISelectedTemplate = yield select(
     (state: IRootState) => state.template.selectedTemplate
   );
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
-  yield put(startListTemplateLoader());
 
-  const listingRes = yield call(
-    createListingService,
-    selectedTemplateDto.tokenId,
-    ethers.utils.parseEther("5")
-  );
-  if (!listingRes.error) {
-    yield put(templateListed(listingRes.receipt));
+  // ask for approval
+  yield put(startApproveListingLoader());
+  const approvalRes = yield call(approveListingService, currentAccount);
+
+  if (!approvalRes.error) {
+    yield put(listingApproved());
+    yield put(startListTemplateLoader());
+
+    const listingRes = yield call(
+      createListingService,
+      selectedTemplateDto.tokenId,
+      ethers.utils.parseEther("5")
+    );
+    if (!listingRes.error) {
+      yield put(templateListed(listingRes.receipt));
+      yield put(toggleModalType("listing-review"));
+    } else {
+      yield put(
+        addNotification({
+          message: listingRes.errorMessage,
+          timestamp: new Date(),
+          type: NotificationType.Error,
+        })
+      );
+    }
   } else {
     yield put(
       addNotification({
-        message: listingRes.errorMessage,
+        message: approvalRes.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
       })
