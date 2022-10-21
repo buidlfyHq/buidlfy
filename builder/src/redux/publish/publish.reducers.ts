@@ -7,7 +7,8 @@ const initialState: IPublishState = {
   deploymentId: null,
   transactionResponse: null,
   projectId: null,
-  currentStep: 0,
+  currentStep: 0, 
+  domainId: null,
 };
 
 const publishSlice = createSlice({
@@ -31,6 +32,12 @@ const publishSlice = createSlice({
       return {
         ...state,
         deploymentId: action.payload
+      }
+    },
+    updateDomainId(state: IPublishState, action: { payload: string }) {
+      return {
+        ...state,
+        domainId: action.payload
       }
     },
     updateProjectId(state: IPublishState, action: { payload: string }) {
@@ -62,5 +69,6 @@ export const {
   updateTransactionResponse,
   updateProjectId,
   updateCurrentStep,
+  updateDomainId
 } = publishSlice.actions;
 export default publishSlice.reducer;

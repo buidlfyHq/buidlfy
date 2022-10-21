@@ -120,12 +120,12 @@ export const verifyPublishService = async (
         console.error("Error in transaction --> ", error);
       }
       counter++;
-      if (counter === 20 || JSON.parse(responseText)?.data?.success) {
+      if (counter === 10 || JSON.parse(responseText)?.data?.success) {
         clearInterval(i);
         resolve({ error, errorMessage, responseText });
         return;
       }
-    }, 2000);
+    }, 5000);
     // return { error, errorMessage, responseText };
   });
 };

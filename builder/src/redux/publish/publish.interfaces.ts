@@ -5,5 +5,6 @@ export interface IPublishState {
   transactionResponse: string;
   projectId: string;
   currentStep: number;
+  domainId: string;
 }
 

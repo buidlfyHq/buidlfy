@@ -1,26 +1,28 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import HourGlassImg from "assets/icons/hourglass.png";
+// import HourGlassImg from "assets/icons/hourglass.png";
 import failed from "assets/icons/failed.svg";
-// import HourGlassImg from "assets/lottie/hourglass.json";
+import HourGlassImg from "assets/lottie/hourglass.json";
 import completed from "assets/icons/completed.svg";
 import { CgClose } from "react-icons/cg";
 import { IRootState } from "redux/root-state.interface";
 import {
   getPublishDetails,
   initiatePublish,
+  updatePublish,
 } from "redux/publish/publish.action";
 import { io } from "socket.io-client";
 import config from "config";
 import { updateCurrentStep } from "redux/publish/publish.reducers";
 import { processes } from "components/utils/process";
+import LottieComponent from "components/utils/lottie";
 
 const PublishSiteModal: FC = () => {
   const socket = io(config.backendApi.BACKEND_API);
   const dispatch = useDispatch();
-
+  const [failedDeployment, setFailedDeployment] = useState<boolean>();
   const publishConfig = useSelector(
     (state: IRootState) => state.publish.publishConfig
   );
@@ -30,28 +32,58 @@ const PublishSiteModal: FC = () => {
   const publishDeploymentId = useSelector(
     (state: IRootState) => state.publish.deploymentId
   );
+  const publishDomainId = useSelector(
+    (state: IRootState) => state.publish.domainId
+  );
   const transactionRes = useSelector(
     (state: IRootState) => state.publish.transactionResponse
   );
-  useEffect(() => {
-    dispatch(initiatePublish({ configDetails: publishConfig }));
-  }, [publishConfig]);
+  const publishSubDomain = localStorage.getItem("domain");
+
   const listener = (...args) => {
-    if (args[0].status === "Queus") {
+    console.log(publishConfig, "config");
+    if (args[0].status === "Queue") {
       dispatch(updateCurrentStep(2));
+      setFailedDeployment(false);
     }
     if (args[0].status === "Deploying") {
       dispatch(updateCurrentStep(3));
+      setFailedDeployment(false);
+    }
+    if (args[0].status === "Failed") {
+      setFailedDeployment(true);
+      dispatch(updateCurrentStep(4));
     }
     if (args[0].status === "Deployed" && publishDeploymentId) {
-      dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
+      setFailedDeployment(false);
+      if (publishSubDomain) {
+        console.log(publishDeploymentId, "publishDeploymentId");
+        console.log(publishSubDomain, "publishSubDomain");
+        dispatch(
+          updatePublish({
+            domainId: publishSubDomain,
+            deploymentId: publishDeploymentId,
+          })
+        );
+        dispatch(updateCurrentStep(6));
+      } else {
+        console.log(publishDeploymentId, "publishDeploymentId");
+        dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
+        dispatch(updateCurrentStep(5));
+      }
       dispatch(updateCurrentStep(4));
       socket.removeAllListeners(`deployment.${transactionRes}`);
     }
   };
+
+  useEffect(() => {
+    dispatch(initiatePublish({ configDetails: publishConfig }));
+  }, [publishConfig]);
+
   useEffect(() => {
     socket.on(`deployment.${transactionRes}`, listener);
-  }, [transactionRes, publishDeploymentId]);
+  }, [transactionRes, publishDeploymentId, publishSubDomain]);
+
   if (currentStep >= 6) {
     setTimeout(() => {
       dispatch(toggleModalType("publish-done"));
@@ -67,8 +99,8 @@ const PublishSiteModal: FC = () => {
         />
       </div>
       <div className="flex flex-col items-center justify-center py-8">
-        {/* <LottieComponent lottie={HourGlassImg} width={75} height={75} /> */}
-        <img src={HourGlassImg} alt="icon" width={54} height={54} />
+        <LottieComponent lottie={HourGlassImg} width={75} height={75} />
+        {/* <img src={HourGlassImg} alt="icon" width={54} height={54} /> */}
         <div className="font-[500] text-[20px] text-[#2C2D5E] mt-4">
           Site Publishing is in process
         </div>
@@ -86,25 +118,45 @@ const PublishSiteModal: FC = () => {
             lineDiv,
             stepNumber,
             completedLine,
+            failedText,
           } = process;
           return (
             <div className={`flex gap-5 ${className}`}>
               <div className="items-center">
-                {stepNumber <= currentStep ? (
+                {failedDeployment ? (
                   <>
-                    <img src={completed} alt="icon" width={24} height={24} />
-                    {completedLine}
+                    <img src={failed} alt="icon" width={24} height={24} />
+                    {lineDiv}
                   </>
                 ) : (
                   <>
-                    <img src={idleImage} alt="icon" width={24} height={24} />
-                    {lineDiv}
+                    {stepNumber <= currentStep ? (
+                      <>
+                        <img
+                          src={completed}
+                          alt="icon"
+                          width={24}
+                          height={24}
+                        />
+                        {completedLine}
+                      </>
+                    ) : (
+                      <>
+                        <img
+                          src={idleImage}
+                          alt="icon"
+                          width={24}
+                          height={24}
+                        />
+                        {lineDiv}
+                      </>
+                    )}
                   </>
                 )}
               </div>
 
               <div className="text-[#14142B] text-[14px] font-[600]">
-                {name}
+                {failedDeployment ? failedText : name}
               </div>
             </div>
           );

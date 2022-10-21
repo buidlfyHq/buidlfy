@@ -17,6 +17,7 @@ export const processes = [
     completedLine: (
       <div className="bg-[#9768FB] w-[2px] ml-[11.4px] h-[45px] my-[2px]"></div>
     ),
+    failedText: "Deployment Initiate",
   },
   {
     name: "Preparing Environment",
@@ -29,6 +30,7 @@ export const processes = [
     completedLine: (
       <div className="bg-[#9768FB] w-[2px] ml-[11.4px] h-[45px] my-[2px]"></div>
     ),
+    failedText: "Preparing Environment",
   },
   {
     name: "Start Publish",
@@ -41,6 +43,7 @@ export const processes = [
     completedLine: (
       <div className="bg-[#9768FB] w-[2px] ml-[11.4px] h-[45px] my-[2px]"></div>
     ),
+    failedText: "Start Publish",
   },
   {
     name: "Site Publish",
@@ -53,6 +56,7 @@ export const processes = [
     completedLine: (
       <div className="bg-[#9768FB] w-[2px] ml-[11.4px] h-[45px] my-[2px]"></div>
     ),
+    failedText: "Deployment Failed, Please try Again",
   },
   {
     name: "Assigning Subdomain",
@@ -65,6 +69,7 @@ export const processes = [
     completedLine: (
       <div className="bg-[#9768FB] w-[2px] ml-[11.4px] h-[45px] my-[2px]"></div>
     ),
+    failedText: "Assigning Subdomain",
   },
   {
     name: "Site is published",
@@ -73,5 +78,6 @@ export const processes = [
     stepNumber: 6,
     lineDiv: <></>,
     completedLine: <></>,
+    failedText: "Publish Failed, Please try Again",
   },
 ];

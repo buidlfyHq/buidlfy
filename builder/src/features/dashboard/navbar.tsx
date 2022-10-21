@@ -100,6 +100,7 @@ const Navbar: FC<INavbar> = ({
       },
     };
     let stringifiedConfig = JSON.stringify(config);
+    console.log(config, "stringconfig");
 
     setGeneratedConfig(base64_encode(stringifiedConfig));
     dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));

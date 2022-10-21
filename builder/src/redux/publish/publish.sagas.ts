@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { call, all, put, takeLatest } from "redux-saga/effects";
-import { updateCurrentStep, updateDeploymentId, updateDomainName, updateProjectId, updateTransactionResponse } from "./publish.reducers";
+import { updateCurrentStep, updateDeploymentId, updateDomainId, updateDomainName, updateProjectId, updateTransactionResponse } from "./publish.reducers";
 import {
   initiatePublishService,
   getPublishDetailsService,
   verifyPublishService,
+  updatePublishService,
 } from "./publish.services";
 import publishActionTypes from "./publish.types";
 import { io } from "socket.io-client";
@@ -37,15 +38,15 @@ function* getPublishDetails({ payload }) {
     const projectId = JSON.parse(transactionRes.responseText).data.domain
       .projectId;
     const domainName = JSON.parse(transactionRes.responseText).data.domain.name;
+    if (domainId) {
+      localStorage.setItem("domain", JSON.stringify(domainId));
+      localStorage.getItem("domain");
+    }
     yield put(updateDomainName(domainName));
     yield put(updateProjectId(projectId));
     yield put({
       type: publishActionTypes.VERIFY_PUBLISH,
       payload: { domainId: domainId, projectId: projectId },
-    });
-    yield put({
-      type: publishActionTypes.UPDATE_PUBLISH,
-      payload: { deploymentId: deploymentId, projectId: projectId },
     });
     yield put(updateCurrentStep(5));
     console.log("complete");
@@ -59,7 +60,6 @@ function* verifyPublish({ payload }) {
 
   const transactionRes = yield call(verifyPublishService, domainId, projectId);
   if (!transactionRes.error) {
-    const dataStatus = JSON.parse(transactionRes.responseText).data.success;
     console.log("complete");
     yield put(updateCurrentStep(6));
   } else {
@@ -69,13 +69,14 @@ function* verifyPublish({ payload }) {
 
 function* updatePublish({ payload }) {
   const { domainId, deploymentId } = payload;
-
+  console.log(payload,"payload");
   const transactionRes = yield call(
-    verifyPublishService,
+    updatePublishService,
     domainId,
     deploymentId
   );
   if (!transactionRes.error) {
+    console.log(transactionRes,"transactionRes");
     console.log("complete");
   } else {
     yield put(console.log("error"));
