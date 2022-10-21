@@ -15,7 +15,10 @@ const AppModal: FC = () => {
 
   return (
     <Dialog className="relative z-50" open={modalShow} onClose={handleClose}>
-      <div className="fixed inset-0 bg-black/40 backdrop-blur-[2px]" aria-hidden="true" />
+      <div
+        className="fixed inset-0 bg-black/40 backdrop-blur-[2px]"
+        aria-hidden="true"
+      />
       <div className="fixed inset-0 overflow-y-auto">
         <div className="flex items-center justify-center min-h-full">
           <RenderModal />
