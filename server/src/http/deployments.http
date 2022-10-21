@@ -1,0 +1,13 @@
+# baseURL
+@baseURL = http://localhost:3000
+
+
+###
+# Start Deployment
+POST {{ baseURL }}/
+Content-Type: application/json
+
+{
+    "name": "high lander",
+	"config": "eyFadkVDcksa3c32r3f2k3vr23"
+}

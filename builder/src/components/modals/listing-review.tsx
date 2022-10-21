@@ -1,15 +1,15 @@
 import React, { FC } from "react";
-import { Dialog } from "@headlessui/react";
-import HourGlassImg from "assets/icons/hourglass.png";
 import { useDispatch } from "react-redux";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import InfoCircleImg from "assets/icons/info-circle.png";
+import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
+import { toggleModal } from "redux/modal/modal.reducers";
+import HourGlassImg from "assets/icons/hourglass.png";
+import InfoCircleImg from "assets/icons/info-circle.png";
 
-const TemplateListing: FC = () => {
+const ListingReview: FC = () => {
   const dispatch = useDispatch();
   const handleClose = () => dispatch(toggleModal(false));
-  
+
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[527px] my-20 sm:mx-28 mx-14 rounded-[24px] bg-white py-5 px-6">
       <div className="flex items-start justify-end w-full ">
@@ -43,4 +43,4 @@ const TemplateListing: FC = () => {
   );
 };
 
-export default TemplateListing;
+export default ListingReview;
