@@ -1,12 +1,12 @@
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import { FC, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
 import DefaultImage from "components/utils/default-image";
 import "styles/components.css";
 
 interface IImageComponent {
-  imgData: string | ArrayBuffer;
   justifyContent: string;
   margin?: {
     marginLeft?: number;
@@ -23,7 +23,6 @@ interface IImageComponent {
 
 const Image: FC<IImageComponent> = ({
   i,
-  imgData,
   justifyContent,
   margin,
   width,
@@ -31,36 +30,48 @@ const Image: FC<IImageComponent> = ({
   backgroundSize,
   isAuto,
 }) => {
+  const dispatch = useDispatch();
+  const ref = useRef<HTMLDivElement>();
   const imageData: IUploadedImageData = useSelector((state: IRootState) =>
     state.workspace.uploadedImagesData.find(
       (image: IUploadedImageData) => image.settingItemId === i
     )
   );
 
-  // Add ClientWidth and ClientHeight of Image when it changes its position
-  // const ref = useRef<HTMLDivElement>();
+  useEffect(() => {
+    if (ref.current?.clientWidth) {
+      console.log(ref.current.clientWidth, "cw");
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: "width",
+          propertyValue: ref.current.clientWidth,
+          imageSizeProperty: false,
+        })
+      );
+    }
+  }, [ref.current?.clientWidth]);
 
-  // useEffect(() => {
-  //   if (ref?.current?.clientWidth) {
-  //     console.log(ref.current.clientWidth, "cw");
-  //     setDynamicWidth(ref.current.clientWidth);
-  //   }
-  //   if (ref?.current?.clientHeight) {
-  //     setDynamicHeight(ref.current.clientHeight);
-  //   }
-  // }, [ref?.current?.clientWidth, ref?.current?.clientHeight]);
-  // useEffect(() => {
-  //   if (ref?.current?.clientHeight) {
-  //     console.log(ref.current.clientHeight, "ch");
-  //     setDynamicHeight(ref.current.clientHeight);
-  //   }
-  // }, [ref?.current?.clientHeight]);
+  useEffect(() => {
+    if (ref.current?.clientHeight) {
+      console.log(ref.current.clientHeight, "ch");
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: "height",
+          propertyValue: ref.current.clientHeight,
+          imageSizeProperty: false,
+        })
+      );
+    }
+  }, [ref.current?.clientHeight]);
+
   return (
     <>
       {imageData?.uploadedImageData ? (
         <div className="flex w-full h-full">
           <div
-            // ref={ref}
+            ref={ref}
             id={i}
             className="flex w-full h-full"
             style={{

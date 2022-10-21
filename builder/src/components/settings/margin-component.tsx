@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import SpaceInput from "components/utils/space-input";
+import SpaceInput from "components/utils/input/space-input";
 import { updateWorkspaceElementSubStyle } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 import "styles/dashboard.css";
