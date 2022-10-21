@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
 import { ReplaceStyle } from "components/utils/render-setting";
-import SpaceInput from "components/utils/space-input";
+import SpaceInput from "components/utils/input/space-input";
 import "styles/dashboard.css";
 import "styles/components.css";
 

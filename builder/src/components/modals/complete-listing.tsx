@@ -1,21 +1,12 @@
-import { FC, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC } from "react";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
-import Spinner from "components/utils/assets/spinner";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import { IRootState } from "redux/root-state.interface";
-import Approve1 from "assets/approve-1.png";
-import Approve2 from "assets/approve-2.png";
+import ListingAccordion from "components/utils/listing-accordion";
+import { toggleModal } from "redux/modal/modal.reducers";
 
 const CompleteListing: FC = () => {
   const dispatch = useDispatch();
-  const approveListingLoading = useSelector(
-    (state: IRootState) => state.minted.approveListingLoading
-  );
-  const listTemplateLoading = useSelector(
-    (state: IRootState) => state.minted.listTemplateLoading
-  );
 
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[527px] min-w-[330px] my-20 sm:mx-28 mx-12 rounded-[15px] bg-white">
@@ -59,50 +50,17 @@ const CompleteListing: FC = () => {
           </div>
         </section>
 
-        {/* Approve */}
         <section className="w-full border-top-divider-publish">
-          <aside className="flex gap-5 py-5">
-            <div>
-              <img src={Approve1} alt="icon" width={35} height={35} />
-            </div>
-            <div className="flex flex-col items-start">
-              <div className="text-[#202525] font-[500] text-[14px]">
-                Approve Collection
-              </div>
-              <div className="text-[#14142B] opacity-50 text-[13px] mt-2.5">
-                You’ll be asked to approve this collection from your wallet. You
-                only need to approve each collection once.{" "}
-              </div>
-              {approveListingLoading && (
-                <div className="flex items-center gap-2 px-3.5 cursor-pointer py-3 bg-gray-200 text-[#14142B] mt-4 font-[500] text-[13px] rounded-[4px]">
-                  <Spinner />
-                  <span>waiting for approval...</span>
-                </div>
-              )}
-            </div>
-          </aside>
-
-          {/* Confirm */}
-          <aside className="flex gap-5 py-5">
-            <div>
-              <img src={Approve2} alt="icon" width={24} height={24} />
-            </div>
-            <div className="flex flex-col items-start">
-              <div className="text-[#202525] font-[500] text-[14px]">
-                Confirm Listing
-              </div>
-              <div className="text-[#14142B] opacity-50 text-[13px] mt-2.5">
-                You need to confirm that you want to list this template on
-                buidlfy.
-              </div>
-              {!approveListingLoading && listTemplateLoading && (
-                <div className="flex items-center gap-2 px-3.5 cursor-pointer py-5 bg-gray-200 text-[#14142B] mt-4 font-[500] text-[13px] rounded-[4px]">
-                  <Spinner />
-                  <span>confirming...</span>
-                </div>
-              )}
-            </div>
-          </aside>
+          <ListingAccordion
+            isApprove={true}
+            title="Approve Collection"
+            description="You’ll be asked to approve this collection from your wallet. You only need to approve each collection once."
+          />
+          <ListingAccordion
+            isApprove={false}
+            title="Confirm Listing"
+            description="You need to confirm that you want to list this template on buidlfy."
+          />
         </section>
       </section>
     </Dialog.Panel>
