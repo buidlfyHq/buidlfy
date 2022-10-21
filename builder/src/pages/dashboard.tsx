@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { useWindowSize } from "hooks/use-window-size";
 import Navbar from "features/dashboard/navbar";
 import Sidebar from "features/dashboard/sidebar";
@@ -8,7 +7,7 @@ import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
 import DefaultSettings from "features/dashboard/default-settings";
-import AppModal from "features/dashboard/app-modal";
+import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
@@ -115,9 +114,6 @@ const Dashboard: FC = () => {
           coming soon!
         </h1>
       )}
-
-      {/* Modal HOC for template */}
-      <AppModal />
     </main>
   );
 };
