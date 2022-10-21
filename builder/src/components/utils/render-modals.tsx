@@ -16,11 +16,7 @@ import CompleteListing from "components/modals/complete-listing";
 import ListingReview from "components/modals/listing-review";
 import { IRootState } from "redux/root-state.interface";
 
-interface IRenderModal {
-  generatedConfig?: string;
-}
-
-const RenderModal: FC<IRenderModal> = ({ generatedConfig }) => {
+const RenderModal: FC = () => {
   const modalType = useSelector((state: IRootState) => state.modal.modalType);
 
   switch (modalType) {
@@ -49,7 +45,7 @@ const RenderModal: FC<IRenderModal> = ({ generatedConfig }) => {
     case "publish-process":
       return <PublishSiteModal />;
     case "publish-done":
-      return <SitePublishedModal generatedConfig={generatedConfig} />;
+      return <SitePublishedModal />;
     case "complete-listing":
       return <CompleteListing />;
     case "listing-review":
