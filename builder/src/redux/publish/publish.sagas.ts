@@ -18,10 +18,10 @@ function* initiatePublish({ payload }) {
   const { configDetails } = payload;
   const transactionRes = yield call(initiatePublishService, configDetails);
   yield put(updateTransactionResponse(transactionRes.publishId));
-
+  console.log(transactionRes,"transactionRes-create");
   if (!transactionRes.error) {  
       const deploymentId = JSON.parse(transactionRes.responseText).data
-        .deploymentId;
+        .deploymentId;    
     yield put(updateDeploymentId(deploymentId));
     yield put(updateCurrentStep(1));
     console.log("complete");
