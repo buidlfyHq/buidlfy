@@ -54,24 +54,31 @@ const PublishSiteModal: FC = () => {
       setFailedDeployment(true);
       dispatch(updateCurrentStep(4));
     }
-    if (args[0].status === "Deployed" && publishDeploymentId) {
+    // if (
+    //   args[0].status === "Deployed" &&
+    //   publishDeploymentId &&
+    //   publishSubDomain
+    // ) {
+    //   setFailedDeployment(false);
+    //   dispatch(
+    //     updatePublish({
+    //       domainId: publishSubDomain,
+    //       deploymentId: publishDeploymentId,
+    //     })
+    //   );
+    //   dispatch(updateCurrentStep(6));
+    //   socket.removeAllListeners(`deployment.${transactionRes}`);
+    // }
+    if (
+      args[0].status === "Deployed" &&
+      publishDeploymentId
+      // &&
+      // !publishSubDomain
+    ) {
       setFailedDeployment(false);
-      // if (publishSubDomain) {
-      //   console.log(publishDeploymentId, "publishDeploymentId");
-      //   console.log(publishSubDomain, "publishSubDomain");
-      //   dispatch(
-      //     updatePublish({
-      //       domainId: publishSubDomain,
-      //       deploymentId: publishDeploymentId,
-      //     })
-      //   );
-      //   dispatch(updateCurrentStep(6));
-      // } else {
-      //   console.log(publishDeploymentId, "publishDeploymentId");
       dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
       dispatch(updateCurrentStep(5));
-      // }
-      dispatch(updateCurrentStep(4));
+      // dispatch(updateCurrentStep(4));
       socket.removeAllListeners(`deployment.${transactionRes}`);
     }
   };

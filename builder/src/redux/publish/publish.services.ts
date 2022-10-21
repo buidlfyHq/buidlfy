@@ -142,6 +142,7 @@ export const updatePublishService = async (
       subdomainId: domainId,
       deploymentId: deploymentId,
     });
+console.log(raw,"raw-update");
 
     const requestOptions: RequestInit = {
       method: "PATCH",

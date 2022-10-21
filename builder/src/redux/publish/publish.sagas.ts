@@ -39,7 +39,7 @@ function* getPublishDetails({ payload }) {
       .projectId;
     const domainName = JSON.parse(transactionRes.responseText).data.domain.name;
     if (domainId) {
-      localStorage.setItem("domain", JSON.stringify(domainId));
+      localStorage.setItem("domain", domainId);
       localStorage.getItem("domain");
     }
     yield put(updateDomainName(domainName));
