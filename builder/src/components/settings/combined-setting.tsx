@@ -130,8 +130,8 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   return (
     <>
       <div className="flex grey-div w-auto mx-2 mb-3 items-center mt-2 text-black">
-        {propertyData.map((value) => (
-          <span onClick={value.onclick} className={value.className}>
+        {propertyData.map((value, i) => (
+          <span key={i} onClick={value.onclick} className={value.className}>
             {value.text}
           </span>
         ))}

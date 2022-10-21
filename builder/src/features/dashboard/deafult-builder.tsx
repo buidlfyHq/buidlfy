@@ -19,6 +19,7 @@ const DefaultBuilder: FC<IDefaultBuilder> = ({
   return (
     <section className="z-100">
       <section
+        id="full-view"
         style={{
           width: "-webkit-fill-available",
         }}
