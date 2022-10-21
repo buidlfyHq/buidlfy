@@ -142,7 +142,7 @@ const MintTemplateForm: FC = () => {
         >
           Cancel
         </button>
-        {workspaceElements?.length > 0 && name && category && description ? (
+        {workspaceElements?.length > 0 && image && name && category && description ? (
           <button
             onClick={handleSaveTemplate}
             className="connect-wallet-button cursor-pointer text-white font-[500] text-[14px] py-3 px-12 rounded-[8px] ml-3"
