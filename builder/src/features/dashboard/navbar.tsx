@@ -147,12 +147,16 @@ const Navbar: FC<INavbar> = ({
           </span>
           Preview
         </div> */}
-        <div
-          className="bordered-button text-[14px] text-[#855FD8] font[500] py-3 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
-          onClick={handleMintTemplateForm}
-        >
-          Mint as NFT
-        </div>
+
+        {/* Show only after the site is published */}
+        {currentAccount && (
+          <div
+            className="bordered-button text-[14px] text-[#855FD8] font[500] py-3 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
+            onClick={handleMintTemplateForm}
+          >
+            Mint as NFT
+          </div>
+        )}
         <button
           className="py-2 px-7 ml-3 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap my-2 ml-3"
           onClick={handlePublish}
