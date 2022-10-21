@@ -1,11 +1,11 @@
 import React, { FC, useState } from "react";
-import BgColorComponent from "components/settings/bg-color-component";
+import ReactTooltip from "react-tooltip";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import { uploadFileToWeb3Storage } from "config/web3storage";
 import { SITE_SIZE_VARIABLE } from "config/constant";
-import ReactTooltip from "react-tooltip";
-import upload from "assets/upload-img.svg";
-import { IoIosCloseCircleOutline } from "react-icons/io";
 import Spinner from "components/utils/assets/spinner";
+import BgColorComponent from "components/settings/bg-color-component";
+import upload from "assets/upload-img.svg";
 import "styles/components.css";
 
 interface IDefaultSettings {
@@ -67,6 +67,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   );
   const tooltip = (
     <ReactTooltip
+      id="default"
       className="tool"
       place="left"
       type="dark"
@@ -170,7 +171,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
                     htmlFor="inputTag"
                     className="image-label cursor-pointer"
                   >
-                    <div data-tip="Click here to upload image">
+                    <div data-tip="Click here to upload image" data-for="default">
                       <div className="flex justify-center mt-2">
                         <img src={upload} alt="upload" className="w-[3.5rem]" />
                       </div>
