@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IMintedState } from "./minted.interfaces";
 
 const initialState: IMintedState = {
+  approveListingLoading: false,
   listTemplateHash: "",
   listTemplateLoading: false,
   ownedTemplateList: [],
@@ -13,6 +14,12 @@ const mintedSlice = createSlice({
   name: "minted",
   initialState,
   reducers: {
+    listingApproved(state) {
+      state.approveListingLoading = false;
+    },
+    startApproveListingLoader(state) {
+      state.approveListingLoading = true;
+    },
     templateListed(state, action: { payload: string }) {
       state.listTemplateHash = action.payload;
       state.listTemplateLoading = false;
@@ -33,6 +40,8 @@ const mintedSlice = createSlice({
 });
 
 export const {
+  listingApproved,
+  startApproveListingLoader,
   templateListed,
   startListTemplateLoader,
   ownedTemplatesFetched,

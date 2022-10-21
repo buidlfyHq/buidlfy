@@ -4,7 +4,6 @@ import makeBlockie from "ethereum-blockies-base64";
 import { encode as base64_encode } from "base-64";
 import { Menu } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import TemplateModal from "./template-modal";
 import { connectWallet } from "redux/web3/web3.actions";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { updatePublishConfig } from "redux/publish/publish.reducers";
@@ -149,12 +148,16 @@ const Navbar: FC<INavbar> = ({
           </span>
           Preview
         </div> */}
-        <div
-          className="bordered-button text-[14px] text-[#855FD8] font[500] py-3 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
-          onClick={handleMintTemplateForm}
-        >
-          Mint as NFT
-        </div>
+
+        {/* Show only after the site is published */}
+        {currentAccount && (
+          <div
+            className="bordered-button text-[14px] text-[#855FD8] font[500] py-3 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
+            onClick={handleMintTemplateForm}
+          >
+            Mint as NFT
+          </div>
+        )}
         <button
           className="py-2 px-7 ml-3 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap my-2 ml-3"
           onClick={handlePublish}
@@ -194,8 +197,6 @@ const Navbar: FC<INavbar> = ({
             Connect Wallet
           </button>
         )}
-
-        <TemplateModal generatedConfig={generatedConfig} />
       </div>
     </main>
   );

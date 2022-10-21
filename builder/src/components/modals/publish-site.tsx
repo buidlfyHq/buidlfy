@@ -2,9 +2,9 @@ import React, { FC, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import HourGlassImg from "assets/icons/hourglass.png";
-import failed from "assets/icons/failed.svg";
-// import HourGlassImg from "assets/lottie/hourglass.json";
+// import HourGlassImg from "assets/icons/hourglass.png";
+// import failed from "assets/icons/failed.svg";
+import HourGlassImg from "assets/lottie/hourglass.json";
 import completed from "assets/icons/completed.svg";
 import { CgClose } from "react-icons/cg";
 import { IRootState } from "redux/root-state.interface";
@@ -16,6 +16,7 @@ import { io } from "socket.io-client";
 import config from "config";
 import { updateCurrentStep } from "redux/publish/publish.reducers";
 import { processes } from "components/utils/process";
+import LottieComponent from "components/utils/lottie";
 
 const PublishSiteModal: FC = () => {
   const socket = io(config.backendApi.BACKEND_API);
@@ -67,8 +68,8 @@ const PublishSiteModal: FC = () => {
         />
       </div>
       <div className="flex flex-col items-center justify-center py-8">
-        {/* <LottieComponent lottie={HourGlassImg} width={75} height={75} /> */}
-        <img src={HourGlassImg} alt="icon" width={54} height={54} />
+        <LottieComponent lottie={HourGlassImg} width={75} height={75} />
+        {/* <img src={HourGlassImg} alt="icon" width={54} height={54} /> */}
         <div className="font-[500] text-[20px] text-[#2C2D5E] mt-4">
           Site Publishing is in process
         </div>
