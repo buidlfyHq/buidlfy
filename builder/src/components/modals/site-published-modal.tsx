@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Dialog } from "@headlessui/react";
 import UprightImg from "assets/icons/upright.png";
 import { CgClose } from "react-icons/cg";
@@ -6,11 +6,7 @@ import CongratulationsImg from "assets/icons/congratulations.png";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { useDispatch } from "react-redux";
 
-interface ISitePublishedModal {
-  generatedConfig: string;
-}
-
-const SitePublishedModal: FC<ISitePublishedModal> = ({ generatedConfig }) => {
+const SitePublishedModal: FC = () => {
   const dispatch = useDispatch();
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[580px] my-20 mx-28 rounded-[4px]  bg-white">
