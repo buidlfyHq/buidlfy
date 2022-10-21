@@ -75,9 +75,7 @@ const MintTemplateForm: FC = () => {
       </div>
       <div className="my-8 mint-upload-img">
         <div className="w-full h-[300px] upload-img-mint cursor-pointer">
-          <label
-            className="flex flex-col items-center justify-center h-full text-[12px] text-[#130F1C]"
-          >
+          <label className="flex flex-col items-center justify-center h-full text-[12px] text-[#130F1C]">
             <img src={MintUploadImg} alt="icon" width={50} height={50} />
             <div className="text-[13px] text-[#7A7B93] w-[240px] text-center mt-9">
               Upload a file or drag and drop PNG, JPG, GIF in 800*400
