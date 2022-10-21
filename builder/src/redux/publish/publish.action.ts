@@ -9,7 +9,6 @@ export const initiatePublish = (payload: {
 
 export const getPublishDetails = (payload: {
     deploymentId: string,
-    siteName: string
 }) => ({
     type: publishActionTypes.PUBLISH_DETAILS,
     payload
@@ -20,6 +19,14 @@ export const verifyPublish = (payload: {
     projectId: string
 }) => ({
     type: publishActionTypes.VERIFY_PUBLISH,
+    payload
+});
+
+export const updatePublish = (payload: {
+    domainId: string,
+    deploymentId: string
+}) => ({
+    type: publishActionTypes.UPDATE_PUBLISH,
     payload
 });
 

@@ -3,7 +3,6 @@ import { Dialog } from "@headlessui/react";
 import UprightImg from "assets/icons/upright.png";
 import { CgClose } from "react-icons/cg";
 import CongratulationsImg from "assets/icons/congratulations.png";
-import { initiatePublish } from "redux/publish/publish.action";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "redux/root-state.interface";
@@ -11,21 +10,13 @@ import { IRootState } from "redux/root-state.interface";
 interface ISitePublishedModal {
   generatedConfig: string;
 }
+
 const SitePublishedModal: FC<ISitePublishedModal> = ({ generatedConfig }) => {
-  const publishConfig = useSelector(
-    (state: IRootState) => state.publish.publishConfig
-  );
   const domainName = useSelector(
     (state: IRootState) => state.publish.domainName
   );
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(initiatePublish({ configDetails: publishConfig }));
-    console.log("initiatePublish");
-  }, []);
   const domainLink = "https://" + domainName;
-  console.log(domainName, "domainName");
-  console.log(domainLink, "domainLink");
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[580px] my-20 mx-28 rounded-[4px]  bg-white">
       <div className="flex items-start justify-end w-full pr-4 pt-4">
@@ -56,14 +47,13 @@ const SitePublishedModal: FC<ISitePublishedModal> = ({ generatedConfig }) => {
             height={8}
           />
         </div>
-        <div
-          onClick={() => {
-            navigator.clipboard.writeText(generatedConfig);
-          }}
+        <a
+          target="_blank"
+          href={domainLink}
           className="connect-wallet-button text-white px-16 py-3 text-[14px] font-[600] rounded-[8px] mt-6 cursor-pointer"
         >
           Visit Site
-        </div>
+        </a>
       </div>
     </Dialog.Panel>
   );

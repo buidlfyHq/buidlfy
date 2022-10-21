@@ -3,49 +3,60 @@ import { Dialog } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import HourGlassImg from "assets/icons/hourglass.png";
-import TickImg from "assets/colored.png";
+import failed from "assets/icons/failed.svg";
+// import HourGlassImg from "assets/lottie/hourglass.json";
+import completed from "assets/icons/completed.svg";
 import { CgClose } from "react-icons/cg";
 import { IRootState } from "redux/root-state.interface";
-import { initiatePublish } from "redux/publish/publish.action";
-
-const processes = [
-  {
-    name: "Preparing Queue",
-    className: "",
-  },
-  {
-    name: "Preparing Environment",
-    className: "mt-12",
-  },
-  {
-    name: "Preparing Queue",
-    className: "mt-12",
-  },
-  {
-    name: "Site is published",
-    className: "mt-12 mb-4",
-  },
-];
+import {
+  getPublishDetails,
+  initiatePublish,
+} from "redux/publish/publish.action";
+import { io } from "socket.io-client";
+import config from "config";
+import { updateCurrentStep } from "redux/publish/publish.reducers";
+import { processes } from "components/utils/process";
 
 const PublishSiteModal: FC = () => {
+  const socket = io(config.backendApi.BACKEND_API);
   const dispatch = useDispatch();
-  // const publishConfig = useSelector(
-  //   (state: IRootState) => state.publish.publishConfig
-  // );
-  // const domainName = useSelector(
-  //   (state: IRootState) => state.publish.domainName
-  // );
-  // console.log(domainName, "domainName");
-  // useEffect(() => {
-  //   dispatch(initiatePublish({ configDetails: publishConfig }));
-  //   console.log("initiatePublish");
-  //   dispatch(toggleModalType("publish-done"));
-  // }, []);
+
+  const publishConfig = useSelector(
+    (state: IRootState) => state.publish.publishConfig
+  );
+  const currentStep = useSelector(
+    (state: IRootState) => state.publish.currentStep
+  );
+  const publishDeploymentId = useSelector(
+    (state: IRootState) => state.publish.deploymentId
+  );
+  const transactionRes = useSelector(
+    (state: IRootState) => state.publish.transactionResponse
+  );
   useEffect(() => {
+    dispatch(initiatePublish({ configDetails: publishConfig }));
+  }, [publishConfig]);
+  const listener = (...args) => {
+    if (args[0].status === "Queus") {
+      dispatch(updateCurrentStep(2));
+    }
+    if (args[0].status === "Deploying") {
+      dispatch(updateCurrentStep(3));
+    }
+    if (args[0].status === "Deployed" && publishDeploymentId) {
+      dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
+      dispatch(updateCurrentStep(4));
+      socket.removeAllListeners(`deployment.${transactionRes}`);
+    }
+  };
+  useEffect(() => {
+    socket.on(`deployment.${transactionRes}`, listener);
+  }, [transactionRes, publishDeploymentId]);
+  if (currentStep >= 6) {
     setTimeout(() => {
       dispatch(toggleModalType("publish-done"));
-    }, 10000);
-  }, []);
+    }, 1000);
+  }
 
   return (
     <Dialog.Panel className="flex flex-col w-full max-w-md items-center mx-28 my-20 rounded-[24px] bg-white">
@@ -56,6 +67,7 @@ const PublishSiteModal: FC = () => {
         />
       </div>
       <div className="flex flex-col items-center justify-center py-8">
+        {/* <LottieComponent lottie={HourGlassImg} width={75} height={75} /> */}
         <img src={HourGlassImg} alt="icon" width={54} height={54} />
         <div className="font-[500] text-[20px] text-[#2C2D5E] mt-4">
           Site Publishing is in process
@@ -67,34 +79,36 @@ const PublishSiteModal: FC = () => {
       </div>
       <div className="w-full bg-lower-template border-top-divider-publish py-7 px-12">
         {processes.map((process) => {
-          const { name, className } = process;
+          const {
+            name,
+            className,
+            idleImage,
+            lineDiv,
+            stepNumber,
+            completedLine,
+          } = process;
           return (
-            <div className={`flex items-center gap-5 ${className}`}>
-              <div>
-                <img src={TickImg} alt="icon" width={24} height={24} />
+            <div className={`flex gap-5 ${className}`}>
+              <div className="items-center">
+                {stepNumber <= currentStep ? (
+                  <>
+                    <img src={completed} alt="icon" width={24} height={24} />
+                    {completedLine}
+                  </>
+                ) : (
+                  <>
+                    <img src={idleImage} alt="icon" width={24} height={24} />
+                    {lineDiv}
+                  </>
+                )}
               </div>
+
               <div className="text-[#14142B] text-[14px] font-[600]">
                 {name}
               </div>
             </div>
           );
         })}
-        {/* <div className="flex items-center gap-5">
-              <div><img src={TickImg} alt="icon" width={24} height={24} /></div>
-              <div className="text-[#14142B] text-[14px] font-[600]">Preparing Queue</div>
-            </div>
-            <div className="flex items-center gap-5 mt-12">
-              <div><img src={TickImg} alt="icon" width={24} height={24} /></div>
-              <div className="text-[#14142B] text-[14px] font-[600]">Preparing Environment</div>
-            </div>
-            <div className="flex items-center gap-5 mt-12">
-              <div><img src={TickImg} alt="icon" width={24} height={24} /></div>
-              <div className="text-[#14142B] text-[14px] font-[600]">Preparing Queue</div>
-            </div>
-            <div className="flex items-center gap-5 mt-12 mb-4">
-              <div><img src={TickImg} alt="icon" width={24} height={24} /></div>
-              <div className="text-[#14142B] text-[14px] font-[600]">Site is published</div>
-            </div> */}
       </div>
     </Dialog.Panel>
   );

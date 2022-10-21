@@ -31,6 +31,7 @@
     "redux-saga": "^1.2.1",
     "short-unique-id": "^4.4.4",
     "siwe": "^1.0.0",
+    "socket.io-client": "^4.5.3",
     "unique-names-generator": "^4.7.1",
     "web-vitals": "^0.2.4",
     "web3.storage": "^4.3.0"

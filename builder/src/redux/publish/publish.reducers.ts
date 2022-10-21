@@ -3,7 +3,11 @@ import { IPublishState } from "./publish.interfaces";
 
 const initialState: IPublishState = {
   publishConfig: null,
-  domainName: null
+  domainName: null,
+  deploymentId: null,
+  transactionResponse: null,
+  projectId: null,
+  currentStep: 0,
 };
 
 const publishSlice = createSlice({
@@ -23,12 +27,40 @@ const publishSlice = createSlice({
         domainName: action.payload
       }
     },
+    updateDeploymentId(state: IPublishState, action: { payload: string }) {
+      return {
+        ...state,
+        deploymentId: action.payload
+      }
+    },
+    updateProjectId(state: IPublishState, action: { payload: string }) {
+      return {
+        ...state,
+        projectId: action.payload
+      }
+    },
+    updateTransactionResponse(state: IPublishState, action: { payload: string }) {
+      return {
+        ...state,
+        transactionResponse: action.payload
+      }
+    },
+    updateCurrentStep(state: IPublishState, action: { payload: number }) {
+      return {
+        ...state,
+        currentStep: action.payload
+      }
+    },
   },
  
 });
 
 export const {
   updatePublishConfig,
-  updateDomainName
+  updateDomainName,
+  updateDeploymentId,
+  updateTransactionResponse,
+  updateProjectId,
+  updateCurrentStep,
 } = publishSlice.actions;
 export default publishSlice.reducer;
