@@ -49,7 +49,6 @@ const MintTemplateForm: FC = () => {
       value: workspaceElements,
     };
 
-    console.log("NewTemplate ->", newTemplate);
     console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
     const templateCID = await uploadTemplateToWeb3Storage(
       JSON.stringify(newTemplate)
