@@ -5,7 +5,7 @@ import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
-import NavMenu from "components/utils/nav-menu";
+import WalletMenu from "components/utils/wallet-menu";
 import "styles/components.css";
 
 interface INavbar {
@@ -160,7 +160,7 @@ const Navbar: FC<INavbar> = ({
           Publish
         </button>
 
-        <NavMenu />
+        <WalletMenu />
       </div>
     </main>
   );

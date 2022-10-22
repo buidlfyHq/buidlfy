@@ -1,22 +1,22 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "redux/root-state.interface";
-import makeBlockie from "ethereum-blockies-base64";
-import { Menu } from "@headlessui/react";
-import { truncateString } from "utils/truncate-string";
-import {BiChevronRight} from 'react-icons/bi'
-import MyTemplateIcon from 'assets/icons/template-nav.png'
-import HelpIcon from 'assets/icons/help-nav.png'
 import { Link } from "react-router-dom";
+import { Menu } from "@headlessui/react";
+import makeBlockie from "ethereum-blockies-base64";
+import { truncateString } from "utils/truncate-string";
 import { connectWallet } from "redux/web3/web3.actions";
+import { IRootState } from "redux/root-state.interface";
+import {BiChevronRight} from 'react-icons/bi'
+import HelpIcon from 'assets/icons/help-nav.png'
+import MyTemplateIcon from 'assets/icons/template-nav.png'
 
-const HelpChildren = [
+const HelpMenuItems = [
     {name: 'Learn Buidlfy'},
     {name: 'Start App Tour'},
     {name: 'Join Discord '}
 ]
   
-const menu = [
+const walletMenuItems = [
     {
         name: 'My Templates',
         icon: MyTemplateIcon,
@@ -31,11 +31,11 @@ const menu = [
         classParent: '',
         target: '',
         isChildren: true,
-        children: HelpChildren
+        children: HelpMenuItems
     },
 ]
 
-const NavMenu = () => {
+const WalletMenu = () => {
   const dispatch = useDispatch();
   const currentAccount = useSelector(
     (state: IRootState) => state.web3.currentAccount
@@ -44,9 +44,9 @@ const NavMenu = () => {
     <>
         {currentAccount ? (
           <Menu>
-            <Menu.Button className="flex justify-center items-center my-2 ml-3">
+            <Menu.Button className="flex items-center justify-center my-2 ml-3">
               <img
-                className="bg-black w-8 rounded-full"
+                className="w-8 bg-black rounded-full"
                 src={makeBlockie(currentAccount)}
                 alt="Blockie"
               />
@@ -62,12 +62,12 @@ const NavMenu = () => {
                     />
                     <div className="text-[#A5A5A5] text-[13px]">{truncateString(currentAccount)}</div>
                   </div>
-                  <button className="whitespace-nowrap button-navmenu text-[14px] duration-100 hover:text-[16px] my-2 py-2 px-auto w-full">
-                    <span className="gradient-text-navmenu font-[500]">Disconnect Wallet</span>
+                  <button className="whitespace-nowrap button-WalletMenu text-[14px] duration-100 hover:text-[16px] my-2 py-2 px-auto w-full">
+                    <span className="gradient-text-WalletMenu font-[500]">Disconnect Wallet</span>
                   </button>
                 </div>
               </div>
-              {menu.map(menuItem => {
+              {walletMenuItems.map(menuItem => {
                  const {name, classParent, icon, isChildren , children} = menuItem
                  return (
                     <Menu.Item as='div' className={classParent}>
@@ -130,4 +130,4 @@ const NavMenu = () => {
   );
 };
 
-export default NavMenu;
+export default WalletMenu;
