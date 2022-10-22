@@ -57,6 +57,12 @@ const DefaultSettings: FC<IDefaultSettings> = ({
     setHead({ ...head, logo: "" });
   };
 
+  const handleCloseSidebar = () => {
+    setIsContainerSelected(false);
+    setHideNavbar(true);
+    setOpenSetting(false);
+  };
+
   const imageInput = (
     <input
       onChange={onChangeLogo}
@@ -65,6 +71,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       id="inputTag"
     />
   );
+  
   const tooltip = (
     <ReactTooltip
       id="default"
@@ -78,12 +85,6 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       delayShow={200}
     />
   );
-
-  const handleCloseSidebar = () => {
-    setIsContainerSelected(false);
-    setHideNavbar(true);
-    setOpenSetting(false);
-  };
 
   // ADD: New site design in next branch
   return (
