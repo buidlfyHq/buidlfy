@@ -62,8 +62,8 @@ const WalletMenu = () => {
                     />
                     <div className="text-[#A5A5A5] text-[13px]">{truncateString(currentAccount)}</div>
                   </div>
-                  <button className="whitespace-nowrap button-WalletMenu text-[14px] duration-100 hover:text-[16px] my-2 py-2 px-auto w-full">
-                    <span className="gradient-text-WalletMenu font-[500]">Disconnect Wallet</span>
+                  <button className="whitespace-nowrap button-wallet-menu text-[14px] duration-100 hover:text-[16px] my-2 py-2 px-auto w-full">
+                    <span className="gradient-text-wallet-menu font-[500]">Disconnect Wallet</span>
                   </button>
                 </div>
               </div>

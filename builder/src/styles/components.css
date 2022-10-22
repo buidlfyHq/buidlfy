@@ -1223,7 +1223,7 @@ height: 40px;
   cursor: pointer;
 }
 
-.button-navmenu{
+.button-wallet-menu{
   padding: 8px 0;
   border: none;
   outline: none;
@@ -1234,7 +1234,7 @@ height: 40px;
   cursor: pointer;
 }
 
-.button-singleTemp::before, .button-navmenu::before {
+.button-singleTemp::before, .button-wallet-menu::before {
   content: "";
   position: absolute;
   left: 1px;
@@ -1247,7 +1247,7 @@ height: 40px;
   transition: 200ms
 }
 
-.button-singleTemp::after, .button-navmenu::after {
+.button-singleTemp::after, .button-wallet-menu::after {
   content: attr(data);
   font-weight: 500;
   font-size: 14px;
@@ -1263,7 +1263,7 @@ height: 40px;
   -webkit-text-fill-color: transparent;
 }
 
-.gradient-text-navmenu{
+.gradient-text-wallet-menu{
   background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
