@@ -1,10 +1,13 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState  } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import ListTemplates from "components/utils/list-templates";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { ReactComponent as SearchIcon } from "assets/svgAsIcons/search-icon.svg";
+import { useSelector } from "react-redux";
+import { IRootState } from "redux/root-state.interface";
+import Spinner from "components/utils/assets/spinner";
 
 const TEMPLATE_CATEGORIES = [
   "ALL",
@@ -17,7 +20,30 @@ const TEMPLATE_CATEGORIES = [
 ];
 
 const SelectTemplateModal: FC = () => {
+  console.log('modal')
+  const [list, setList] = useState([])
+  const [loading, setLoading] = useState<boolean>(false)
+  const [filteredArr, setFilteredArr] = useState([])
   const dispatch = useDispatch();
+  const templateList = useSelector(
+    (state: IRootState) => state.template.templateList
+  );
+
+  useEffect(() => {
+    setLoading(true)
+    console.log('effect')
+    setList([...templateList])
+    setFilteredArr([...templateList])
+    setLoading(false)
+  }, [])
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {value} = e.target
+    const filterArr = value === '' ? list : 
+      list.filter(item => 
+        item.name?.toLowerCase().replace(/\s+/g, '').includes(value.toLowerCase().replace(/\s+/g, '')))
+        setFilteredArr([...filterArr])
+  }
 
   return (
     <Dialog.Panel className="flex flex-col items-center w-full max-w-[1400px] mx-28 my-20 rounded-[24px] bg-white">
@@ -44,6 +70,7 @@ const SelectTemplateModal: FC = () => {
               id="simple-search"
               className="search outline-none rounded-[37px] block w-full py-4 px-8 h-[50px]"
               placeholder="Search by template name"
+              onChange={handleChange}
               required
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -80,7 +107,11 @@ const SelectTemplateModal: FC = () => {
       </div>
       <hr className="bg-hr h-[2px] w-full mt-6" />
       <div className="w-full bg-lower-template">
-        <ListTemplates />
+        {loading ? (
+          <div className="flex justify-center ">
+            <Spinner />
+          </div>
+        ) : filteredArr && <ListTemplates filteredArr={filteredArr} />}
       </div>
     </Dialog.Panel>
   );
