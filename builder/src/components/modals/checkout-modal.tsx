@@ -8,8 +8,6 @@ import { buyTemplate } from "redux/template/template.actions";
 import { SelectedTemplateDto } from "redux/template/template.dto";
 import { IRootState } from "redux/root-state.interface";
 
-const PLATFORM_FEE = "1.2 USDC";
-
 const CheckoutModal: FC = () => {
   const dispatch = useDispatch();
   const currentAccount = useSelector(
@@ -22,6 +20,9 @@ const CheckoutModal: FC = () => {
     (state: IRootState) => state.template.selectedTemplate
   );
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
+  const amount = parseFloat(
+    ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)
+  );
 
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[342px] my-20 mx-28 rounded-[15px] py-8 px-5 bg-white">
@@ -66,27 +67,19 @@ const CheckoutModal: FC = () => {
           <div className="flex items-center justify-between mt-5">
             <div className="text-[#8E8E93] text-[14px]">Amount</div>
             <div className="text-[#1C1C1E] text-[14px] font-[500]">
-              {ethers.utils.formatUnits(
-                selectedTemplateDto.buyoutPricePerToken
-              )}{" "}
-              USDC
+              {amount} USDC
             </div>
           </div>
           <div className="flex items-center justify-between mt-3">
             <div className="text-[#8E8E93] text-[14px]">Platform Fee (5%)</div>
             <div className="text-[#1C1C1E] text-[14px] font-[500]">
-              {PLATFORM_FEE}
+              {0.05 * amount} USDC
             </div>
           </div>
           <div className="flex items-center justify-between mt-3">
             <div className="text-[#1C1C1E] text-[14px] font-[500]">Total</div>
             <div className="text-[#34C759] text-[14px] font-[500]">
-              {parseFloat(
-                ethers.utils.formatUnits(
-                  selectedTemplateDto.buyoutPricePerToken
-                )
-              ) + parseFloat(PLATFORM_FEE)}{" "}
-              USDC
+              {amount + 0.05 * amount} USDC
             </div>
           </div>
           <div

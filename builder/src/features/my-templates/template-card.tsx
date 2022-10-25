@@ -8,12 +8,12 @@ import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 interface ITemplateCard {
-  temp: ISelectedTemplate;
+  template: ISelectedTemplate;
   badge: string;
   list?: boolean;
 }
 
-const TemplateCard: FC<ITemplateCard> = ({ temp, badge, list }) => {
+const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -41,30 +41,30 @@ const TemplateCard: FC<ITemplateCard> = ({ temp, badge, list }) => {
           {list && (
             <div
               className="py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white"
-              onClick={() => handleListOnBuidlfy(temp)}
+              onClick={() => handleListOnBuidlfy(template)}
             >
               List on Buidlfy
             </div>
           )}
           <div
             className="py-2 px-10 mt-4 rounded-[8px] bg-white text-[#7743E7]"
-            onClick={() => openTemplate(temp.value)}
+            onClick={() => openTemplate(template.value)}
           >
             Use Template
           </div>
         </div>
         <img
-          src={temp.image}
+          src={template.image}
           alt="img_temp"
           className="rounded-[16px] w-full"
         />
       </div>
       <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
         <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">
-          {temp.name}
+          {template.name}
         </div>
         <div className="text-[12px] text-[#14142B] py-2 px-4 bg-gray-100 font-[500] rounded-[4px]">
-          {temp?.category || "NA"}
+          {template?.category || "NA"}
         </div>
       </div>
     </div>

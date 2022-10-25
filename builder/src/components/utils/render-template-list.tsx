@@ -26,20 +26,22 @@ const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
       return (
         <>
           {ownedTemplateList &&
-            ownedTemplateList.map((temp: ISelectedTemplate) => {
+            ownedTemplateList.map((template: ISelectedTemplate) => {
               const inReview =
                 ownedReviewTemplateList.filter(
-                  (t: ISelectedTemplate) => t.listing_tokenId === temp.token_id
+                  (t: ISelectedTemplate) =>
+                    t.listing_tokenId === template.token_id
                 )[0] !== undefined;
               const listed =
                 ownedListedTemplateList.filter(
-                  (t: ISelectedTemplate) => t.listing_tokenId === temp.token_id
+                  (t: ISelectedTemplate) =>
+                    t.listing_tokenId === template.token_id
                 )[0] !== undefined;
 
               return (
-                <div key={temp.token_id}>
+                <div key={template.token_id}>
                   <TemplateCard
-                    temp={temp}
+                    template={template}
                     badge={filterTemplates(inReview, listed).badge}
                     list={filterTemplates(inReview, listed).list}
                   />
@@ -52,9 +54,9 @@ const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
       return (
         <>
           {ownedReviewTemplateList &&
-            ownedReviewTemplateList.map((temp: ISelectedTemplate) => (
-              <div key={temp.id}>
-                <TemplateCard temp={temp} badge="In Review" />
+            ownedReviewTemplateList.map((template: ISelectedTemplate) => (
+              <div key={template.id}>
+                <TemplateCard template={template} badge="In Review" />
               </div>
             ))}
         </>
@@ -63,9 +65,9 @@ const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
       return (
         <>
           {ownedListedTemplateList &&
-            ownedListedTemplateList.map((temp: ISelectedTemplate) => (
-              <div key={temp.id}>
-                <TemplateCard temp={temp} badge="Listed" />
+            ownedListedTemplateList.map((template: ISelectedTemplate) => (
+              <div key={template.id}>
+                <TemplateCard template={template} badge="Listed" />
               </div>
             ))}
         </>
