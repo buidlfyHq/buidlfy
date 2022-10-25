@@ -31,9 +31,6 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
     )
   );
 
-  const imageLink = useSelector(
-    (state: IRootState) => state?.upload?.uploadImage
-  );
   // FIX: find suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
