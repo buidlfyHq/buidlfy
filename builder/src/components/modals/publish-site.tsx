@@ -40,56 +40,63 @@ const PublishSiteModal: FC = () => {
   );
   const publishSubDomain = localStorage.getItem("domain");
 
-  const listener = (...args) => {
-    console.log(publishConfig, "config");
-    if (args[0].status === "Queued") {
-      dispatch(updateCurrentStep(2));
-      setFailedDeployment(false);
-    }
-    if (args[0].status === "Deploying") {
-      dispatch(updateCurrentStep(3));
-      setFailedDeployment(false);
-    }
-    if (args[0].status === "Failed") {
-      setFailedDeployment(true);
-      dispatch(updateCurrentStep(4));
-    }
-    // if (
-    //   args[0].status === "Deployed" &&
-    //   publishDeploymentId &&
-    //   publishSubDomain
-    // ) {
-    //   setFailedDeployment(false);
-    //   dispatch(
-    //     updatePublish({
-    //       domainId: publishSubDomain,
-    //       deploymentId: publishDeploymentId,
-    //     })
-    //   );
-    //   dispatch(updateCurrentStep(6));
-    //   socket.removeAllListeners(`deployment.${transactionRes}`);
-    // }
-    if (
-      args[0].status === "Deployed" &&
-      publishDeploymentId
-      // &&
-      // !publishSubDomain
-    ) {
-      setFailedDeployment(false);
-      dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
-      dispatch(updateCurrentStep(5));
-      // dispatch(updateCurrentStep(4));
-      socket.removeAllListeners(`deployment.${transactionRes}`);
-    }
-  };
-
   useEffect(() => {
-    socket.on(`deployment.${transactionRes}`, listener);
-  }, [transactionRes, publishDeploymentId, publishSubDomain]);
+    if (currentStep === 1) {
+      socket.on(`deployment.${transactionRes}`, (...args) => {
+        if (args[0].status === "Queued") {
+          dispatch(updateCurrentStep(2));
+          setFailedDeployment(false);
+        }
+        if (args[0].status === "Deploying") {
+          dispatch(updateCurrentStep(3));
+          setFailedDeployment(false);
+        }
+        if (args[0].status === "Failed") {
+          setFailedDeployment(true);
+          dispatch(updateCurrentStep(4));
+        }
+        if (
+          args[0].status === "Deployed" &&
+          publishDeploymentId &&
+          publishSubDomain
+        ) {
+          setFailedDeployment(false);
+          dispatch(
+            updatePublish({
+              domainId: publishSubDomain,
+              deploymentId: publishDeploymentId,
+            })
+          );
+          dispatch(updateCurrentStep(6));
+          socket.removeAllListeners(`deployment.${transactionRes}`);
+        }
+        if (
+          args[0].status === "Deployed" &&
+          publishDeploymentId &&
+          !publishSubDomain
+        ) {
+          setFailedDeployment(false);
+          dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
+          dispatch(updateCurrentStep(5));
+          // dispatch(updateCurrentStep(4));
+          socket.removeAllListeners(`deployment.${transactionRes}`);
+        }
+      });
+    }
+  }, [
+    transactionRes,
+    publishDeploymentId,
+    publishSubDomain,
+    dispatch,
+    publishConfig,
+    socket,
+    currentStep,
+  ]);
 
   if (currentStep >= 6) {
     setTimeout(() => {
       dispatch(toggleModalType("publish-done"));
+      dispatch(updateCurrentStep(0));
     }, 1000);
   }
 

@@ -18,7 +18,6 @@ function* initiatePublish({ payload }) {
   const { configDetails } = payload;
   const transactionRes = yield call(initiatePublishService, configDetails);
   yield put(updateTransactionResponse(transactionRes.publishId));
-  console.log(transactionRes,"transactionRes-create");
   if (!transactionRes.error) {  
       const deploymentId = JSON.parse(transactionRes.responseText).data
         .deploymentId;    
@@ -69,14 +68,12 @@ function* verifyPublish({ payload }) {
 
 function* updatePublish({ payload }) {
   const { domainId, deploymentId } = payload;
-  console.log(payload,"payload");
   const transactionRes = yield call(
     updatePublishService,
     domainId,
     deploymentId
   );
   if (!transactionRes.error) {
-    console.log(transactionRes,"transactionRes");
     console.log("complete");
   } else {
     yield put(console.log("error"));
