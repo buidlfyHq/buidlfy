@@ -10,6 +10,7 @@ import { SelectedTemplateDto } from "redux/template/template.dto";
 import { IRootState } from "redux/root-state.interface";
 import EyeImg from "assets/icons/eye.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
+import USDTIcon from "assets/icons/usdt.png";
 
 interface ISingleTemplateDetails {
   list: boolean;
@@ -63,11 +64,19 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
           <div>
             {!list ? (
               <div className="flex items-center justify-between w-full mt-8 text-center bg-[#E6EAF4] rounded-[8px] py-4 px-4 cursor-pointer">
-                <div className="text-[18px] font-[600] text-[#14142B]">
-                  {ethers.utils.formatUnits(
-                    selectedTemplateDto.buyoutPricePerToken
-                  )}{" "}
-                  USDC
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src={USDTIcon}
+                    alt="icon"
+                    width={24}
+                    height={24}
+                  />
+                  <div className="text-[18px] font-[600] text-[#14142B]">
+                    {ethers.utils.formatUnits(
+                      selectedTemplateDto.buyoutPricePerToken
+                    )}{" "}
+                    USDT
+                  </div>
                 </div>
                 <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
                   ~$
@@ -98,7 +107,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
         </div>
       </div>
       <div className="flex gap-3 mt-7">
-        <Tag name={selectedTemplateDto?.category || "NA"} />
+        {selectedTemplateDto?.category && <Tag name={selectedTemplateDto?.category} />}
       </div>
     </Dialog.Panel>
   );

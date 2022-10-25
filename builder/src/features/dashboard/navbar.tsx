@@ -1,16 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import { useDispatch, useSelector } from "react-redux";
-import makeBlockie from "ethereum-blockies-base64";
 import { encode as base64_encode } from "base-64";
 import ReactTooltip from "react-tooltip";
-import { Menu } from "@headlessui/react";
-import { Link } from "react-router-dom";
-import { connectWallet } from "redux/web3/web3.actions";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
+import WalletMenu from "components/utils/wallet-menu";
 import "styles/components.css";
 
 interface INavbar {
@@ -197,38 +194,7 @@ const Navbar: FC<INavbar> = ({
           Publish
         </button>
 
-        {currentAccount ? (
-          <Menu>
-            <Menu.Button className="flex justify-center items-center my-2 ml-3">
-              <img
-                className="bg-black w-8 h-8 rounded-full"
-                src={makeBlockie(currentAccount)}
-                alt="Blockie"
-              />
-            </Menu.Button>
-            <Menu.Items className="absolute h-full top-0 right-0 flex flex-col w-56 px-4 py-2 mt-16 shadow-lg mr-5 rounded-[8px] origin-top-right bg-white">
-              <Menu.Item>
-                {({ active }) => (
-                  <Link
-                    to="/my-templates"
-                    className={`${
-                      active && "bg-slate-100 rounded-[8px] cursor-pointer"
-                    } font-[500] px-4 py-2 font-[16px]`}
-                  >
-                    My Templates
-                  </Link>
-                )}
-              </Menu.Item>
-            </Menu.Items>
-          </Menu>
-        ) : (
-          <button
-            className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
-            onClick={() => dispatch(connectWallet())}
-          >
-            Connect Wallet
-          </button>
-        )}
+        <WalletMenu />
       </div>
     </main>
   );
