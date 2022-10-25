@@ -64,7 +64,7 @@ const TemplateCard: FC<ITemplateCard> = ({ temp, badge, list }) => {
           {temp.name}
         </div>
         <div className="text-[12px] text-[#14142B] py-2 px-4 bg-gray-100 font-[500] rounded-[4px]">
-          Crypto
+          {temp?.category || "NA"}
         </div>
       </div>
     </div>

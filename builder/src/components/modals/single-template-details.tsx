@@ -4,7 +4,9 @@ import { ethers } from "ethers";
 import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { Tag } from "components/utils/tag-component";
+import { truncateString } from "utils/truncate-string";
 import { toggleModalType } from "redux/modal/modal.reducers";
+import { SelectedTemplateDto } from "redux/template/template.dto";
 import { IRootState } from "redux/root-state.interface";
 import EyeImg from "assets/icons/eye.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
@@ -18,6 +20,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
   const selectedTemplate = useSelector(
     (state: IRootState) => state.template.selectedTemplate
   );
+  const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
 
   const handleSubmit = () => {
     list
@@ -29,7 +32,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
     <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
       <div className="flex items-center justify-between">
         <div className="text-[22px] font-[500] text-[#14142B]">
-          {selectedTemplate.name}
+          {selectedTemplateDto.name}
         </div>
         <button className="button-singleTemp flex items-center py-2.5 px-6 cursor-pointer">
           <img src={EyeImg} alt="icon" width={18} height={18} />
@@ -38,7 +41,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
       </div>
       <div className="mt-5">
         <img
-          src={selectedTemplate.image}
+          src={selectedTemplateDto.image}
           className="w-full max-h-[509px] h-auto rounded-[28px]"
           alt="icon"
           height={669}
@@ -50,13 +53,11 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
                 {" "}
               </div>
               <div className="ml-2 text-[14px] text-[#14142B] opacity-70">
-                0xBBB6...e96e
+                {truncateString(selectedTemplateDto.tokenOwner)}
               </div>
             </div>
             <div className="mt-8 text-[#4E4B66] opacity-70 text-[13px] max-w-[400px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Elementum
-              felis, sed ullamcorper tempus faucibus in imperdiet semper justo
-              mauris sed.
+              {selectedTemplateDto?.description}
             </div>
           </div>
           <div>
@@ -64,14 +65,14 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
               <div className="flex items-center justify-between w-full mt-8 text-center bg-[#E6EAF4] rounded-[8px] py-4 px-4 cursor-pointer">
                 <div className="text-[18px] font-[600] text-[#14142B]">
                   {ethers.utils.formatUnits(
-                    selectedTemplate.listing_buyoutPricePerToken
+                    selectedTemplateDto.buyoutPricePerToken
                   )}{" "}
                   USDC
                 </div>
                 <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
                   ~$
                   {ethers.utils.formatUnits(
-                    selectedTemplate.listing_buyoutPricePerToken
+                    selectedTemplateDto.buyoutPricePerToken
                   )}
                 </div>
               </div>
@@ -97,8 +98,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
         </div>
       </div>
       <div className="flex gap-3 mt-7">
-        <Tag name={"Web3"} />
-        <Tag name={"Crypto"} />
+        <Tag name={selectedTemplateDto?.category || "NA"} />
       </div>
     </Dialog.Panel>
   );

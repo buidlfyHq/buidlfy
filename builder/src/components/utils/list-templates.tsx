@@ -38,11 +38,12 @@ const ListTemplates = () => {
                   {temp.name}
                 </div>
                 <div className="text-[10px] text-[#14142B] py-2 px-3 bg-gray-100 rounded-[28px]">
-                  Crypto
+                  {temp?.category || "NA"}
                 </div>
               </div>
               <div className="text-[18px] font-[600] text-[#14142B] mt-2 px-2 pb-1">
-                {ethers.utils.formatUnits(temp.listing_buyoutPricePerToken)} USDC
+                {ethers.utils.formatUnits(temp.listing_buyoutPricePerToken)}{" "}
+                USDC
               </div>
             </div>
           );
