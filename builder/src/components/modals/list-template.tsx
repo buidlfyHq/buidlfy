@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { listTemplate } from "redux/minted/minted.actions";
@@ -12,9 +12,10 @@ const ListTemplate: FC = () => {
   const selectedTemplate = useSelector(
     (state: IRootState) => state.template.selectedTemplate
   );
+  const [amount, setAmount] = useState<string>("");
 
   const handleListTemplate = () => {
-    dispatch(listTemplate());
+    dispatch(listTemplate(amount));
     dispatch(toggleModalType("complete-listing"));
   };
 
@@ -59,6 +60,8 @@ const ListTemplate: FC = () => {
                 className="border border-[#C4C4C4] text-[#23314B] text-[13px] rounded-[8px] focus:ring-[#dee0e9] focus:border-[#dee0e9] block w-full pl-11 py-2.5"
                 placeholder="Amount"
                 required
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
               />
             </div>
           </form>

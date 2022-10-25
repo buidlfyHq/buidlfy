@@ -24,7 +24,7 @@ import { IRootState } from "redux/root-state.interface";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { SelectedTemplateDto } from "redux/template/template.dto";
 
-function* createTemplateListing() {
+function* createTemplateListing({ payload }) {
   const currentAccount: string = yield select(
     (state: IRootState) => state.web3.currentAccount
   );
@@ -44,7 +44,7 @@ function* createTemplateListing() {
     const listingRes = yield call(
       createListingService,
       selectedTemplateDto.tokenId,
-      ethers.utils.parseEther("5")
+      ethers.utils.parseEther(payload)
     );
     if (!listingRes.error) {
       yield put(templateListed(listingRes.receipt));

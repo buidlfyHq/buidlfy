@@ -1,4 +1,4 @@
-import React from "react";
+import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplate } from "redux/template/template.reducers";
@@ -42,7 +42,7 @@ const ListTemplates = () => {
                 </div>
               </div>
               <div className="text-[18px] font-[600] text-[#14142B] mt-2 px-2 pb-1">
-                $399.00
+                {ethers.utils.formatUnits(temp.listing_buyoutPricePerToken)} USDC
               </div>
             </div>
           );

@@ -1,5 +1,6 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ethers } from "ethers";
 import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { Tag } from "components/utils/tag-component";
@@ -62,10 +63,16 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
             {!list ? (
               <div className="flex items-center justify-between w-full mt-8 text-center bg-[#E6EAF4] rounded-[8px] py-4 px-4 cursor-pointer">
                 <div className="text-[18px] font-[600] text-[#14142B]">
-                  120.00 USDT
+                  {ethers.utils.formatUnits(
+                    selectedTemplate.listing_buyoutPricePerToken
+                  )}{" "}
+                  USDC
                 </div>
                 <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
-                  ~$1209.00
+                  ~$
+                  {ethers.utils.formatUnits(
+                    selectedTemplate.listing_buyoutPricePerToken
+                  )}
                 </div>
               </div>
             ) : (
