@@ -23,7 +23,7 @@ const StartModal: FC = () => {
         </div>
         <div
           onClick={() => dispatch(toggleModal(false))}
-          className="mt-10 rounded-[28px] bg-[#5D46E4] px-9 py-4 text-white text-[16px] text-center text-[600] cursor-pointer"
+          className="mt-10 rounded-[28px] hover:bg-[#5D46E4] bg-[#644cf5] duration-200 ease-linear px-9 py-4 text-white text-[16px] text-center text-[600] cursor-pointer"
         >
           Create from Scratch
         </div>
@@ -38,7 +38,7 @@ const StartModal: FC = () => {
         </div>
         <div
           onClick={() => dispatch(toggleModalType("template"))}
-          className="mt-10 rounded-[28px] bg-[#5D46E4] px-9 py-4 text-white text-[16px] text-center text-[600] cursor-pointer"
+          className="mt-10 rounded-[28px]  hover:bg-[#5D46E4] bg-[#644cf5] duration-200 ease-linear px-9 py-4 text-white text-[16px] text-center text-[600] cursor-pointer"
         >
           Start from a template
         </div>
