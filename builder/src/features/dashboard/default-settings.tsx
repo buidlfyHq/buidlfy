@@ -2,14 +2,13 @@ import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { uploadFileToWeb3Storage } from "config/web3storage";
 import { SITE_SIZE_VARIABLE } from "config/constant";
 import Spinner from "components/utils/assets/spinner";
 import BgColorComponent from "components/settings/bg-color-component";
 import upload from "assets/upload-img.svg";
-import "styles/components.css";
 import { uploadImage } from "redux/upload/upload.action";
 import { IRootState } from "redux/root-state.interface";
+import "styles/components.css";
 
 interface IDefaultSettings {
   workspaceBackgroundColor: string;

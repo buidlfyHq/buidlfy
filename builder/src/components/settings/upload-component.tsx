@@ -2,7 +2,6 @@ import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import ReactTooltip from "react-tooltip";
-import { uploadFileToWeb3Storage } from "config/web3storage";
 import { IMAGE_SIZE_VARIABLE } from "config/constant";
 import Spinner from "components/utils/assets/spinner";
 import {
