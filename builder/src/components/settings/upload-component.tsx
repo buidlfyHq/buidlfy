@@ -10,6 +10,7 @@ import {
   updateUploadedImageData,
 } from "redux/workspace/workspace.reducers";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
+import { uploadImage } from "redux/upload/upload.action";
 import { IRootState } from "redux/root-state.interface";
 import upload from "assets/upload-img.svg";
 import "styles/components.css";
@@ -30,6 +31,9 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
     )
   );
 
+  const imageLink = useSelector(
+    (state: IRootState) => state?.upload?.uploadImage
+  );
   // FIX: find suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
@@ -46,15 +50,8 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
               uploadedImageData: reader.result as string,
             })
           );
-          const cid = await uploadFileToWeb3Storage(reader.result as string);
+          dispatch(uploadImage({ data: reader.result as string, id: i }));
           setIsSpinner(false);
-          dispatch(
-            updateWorkspaceElement({
-              settingItemId: i,
-              propertyName: "imgData",
-              propertyValue: cid,
-            })
-          );
         });
         reader.readAsDataURL(e.target.files[0]);
       }

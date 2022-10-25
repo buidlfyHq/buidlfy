@@ -2,17 +2,12 @@ import React, { FC, useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-// import HourGlassImg from "assets/icons/hourglass.png";
 import failed from "assets/icons/failed.svg";
 import HourGlassImg from "assets/lottie/hourglass.json";
 import completed from "assets/icons/completed.svg";
 import { CgClose } from "react-icons/cg";
 import { IRootState } from "redux/root-state.interface";
-import {
-  getPublishDetails,
-  initiatePublish,
-  updatePublish,
-} from "redux/publish/publish.action";
+import { getPublishDetails, updatePublish } from "redux/publish/publish.action";
 import { io } from "socket.io-client";
 import config from "config";
 import { updateCurrentStep } from "redux/publish/publish.reducers";
@@ -31,9 +26,6 @@ const PublishSiteModal: FC = () => {
   );
   const publishDeploymentId = useSelector(
     (state: IRootState) => state.publish.deploymentId
-  );
-  const publishDomainId = useSelector(
-    (state: IRootState) => state.publish.domainId
   );
   const transactionRes = useSelector(
     (state: IRootState) => state.publish.transactionResponse
@@ -78,7 +70,6 @@ const PublishSiteModal: FC = () => {
           setFailedDeployment(false);
           dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
           dispatch(updateCurrentStep(5));
-          // dispatch(updateCurrentStep(4));
           socket.removeAllListeners(`deployment.${transactionRes}`);
         }
       });

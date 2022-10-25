@@ -5,6 +5,7 @@ import { IWeb3State } from "./web3/web3.interfaces";
 import { ITemplateState } from "./template/template.interfaces";
 import { IMintedState } from "./minted/minted.interfaces";
 import { IPublishState } from "./publish/publish.interfaces";
+import { IUploadState } from "./upload/upload.interfaces";
 
 export interface IRootState {
   workspace: IWorkspaceState;
@@ -14,4 +15,5 @@ export interface IRootState {
   template: ITemplateState;
   minted: IMintedState;
   publish: IPublishState;
+  upload: IUploadState;
 }

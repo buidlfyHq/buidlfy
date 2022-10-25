@@ -20,10 +20,6 @@ import {
   IWorkspaceElement,
   SidebarEnum,
 } from "redux/workspace/workspace.interfaces";
-import {
-  IContractElementSelected,
-  IContractElementSelector,
-} from "redux/contract/contract.interfaces";
 import add from "assets/icons/add.png";
 import edit from "assets/icons/edit.png";
 import deleteContainer from "assets/icons/delete.png";
