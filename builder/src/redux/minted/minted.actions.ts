@@ -1,7 +1,8 @@
 import mintedActionTypes from "./minted.types";
 
-export const listTemplate = () => ({
+export const listTemplate = (payload: string) => ({
   type: mintedActionTypes.LIST_TEMPLATE,
+  payload,
 });
 
 export const fetchOwnedTemplates = () => ({
