@@ -3,11 +3,11 @@ import ReactDOMServer from "react-dom/server";
 import { useDispatch, useSelector } from "react-redux";
 import { encode as base64_encode } from "base-64";
 import ReactTooltip from "react-tooltip";
+import WalletMenu from "features/dashboard/wallet-menu";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
-import WalletMenu from "components/utils/wallet-menu";
 import "styles/components.css";
 
 interface INavbar {
