@@ -37,7 +37,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   const [siteImage, setSiteImage] = useState<string>();
   const [isSpinner, setIsSpinner] = useState<boolean>(false);
   const imageLink = useSelector(
-    (state: IRootState) => state?.upload?.uploadImage
+    (state: IRootState) => state.upload.uploadImage
   );
   const onChangeLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
