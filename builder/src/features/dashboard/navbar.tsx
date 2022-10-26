@@ -42,8 +42,8 @@ const Navbar: FC<INavbar> = ({
   const currentAccount = useSelector(
     (state: IRootState) => state.web3.currentAccount
   );
-  const publishConfig = useSelector(
-    (state: IRootState) => state.publish.publishConfig
+  const isPublished = useSelector(
+    (state: IRootState) => state.publish.publishStatus
   );
   const [abiJSON, setAbiJSON] = useState<
     {
@@ -101,7 +101,6 @@ const Navbar: FC<INavbar> = ({
       },
     };
     let stringifiedConfig = JSON.stringify(config);
-    setGeneratedConfig(base64_encode(stringifiedConfig));
     dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-process"));
@@ -194,12 +193,29 @@ const Navbar: FC<INavbar> = ({
             Mint as NFT
           </button>
         )}
+        {/* {isPublished ? (
+          <>
+            <button
+              className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
+              onClick={handlePublish}
+            >
+              Re-Publish
+            </button>
+            <button
+              className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
+              onClick={handlePublish}
+            >
+              Publish New Site
+            </button>
+          </>
+        ) : ( */}
         <button
           className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
           onClick={handlePublish}
         >
           Publish
         </button>
+        {/* )} */}
 
         <WalletMenu />
       </div>

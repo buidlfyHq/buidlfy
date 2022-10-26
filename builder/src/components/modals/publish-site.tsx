@@ -10,7 +10,10 @@ import { IRootState } from "redux/root-state.interface";
 import { getPublishDetails, updatePublish } from "redux/publish/publish.action";
 import { io } from "socket.io-client";
 import config from "config";
-import { updateCurrentStep } from "redux/publish/publish.reducers";
+import {
+  updateCurrentStep,
+  updatePublishStatus,
+} from "redux/publish/publish.reducers";
 import { processes } from "components/utils/process";
 import LottieComponent from "components/utils/lottie";
 
@@ -29,6 +32,9 @@ const PublishSiteModal: FC = () => {
   );
   const transactionRes = useSelector(
     (state: IRootState) => state.publish.transactionResponse
+  );
+  const isPublished = useSelector(
+    (state: IRootState) => state.publish.publishStatus
   );
   const publishSubDomain = localStorage.getItem("domain");
 
@@ -51,8 +57,10 @@ const PublishSiteModal: FC = () => {
           args[0].status === "Deployed" &&
           publishDeploymentId &&
           publishSubDomain
+          // updatePublishStatus
         ) {
           setFailedDeployment(false);
+          // dispatch(updatePublishStatus(false));
           dispatch(
             updatePublish({
               domainId: publishSubDomain,
@@ -66,8 +74,10 @@ const PublishSiteModal: FC = () => {
           args[0].status === "Deployed" &&
           publishDeploymentId &&
           !publishSubDomain
+          // !updatePublishStatus
         ) {
           setFailedDeployment(false);
+          // dispatch(updatePublishStatus(true));
           dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
           dispatch(updateCurrentStep(5));
           socket.removeAllListeners(`deployment.${transactionRes}`);

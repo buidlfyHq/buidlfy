@@ -6,5 +6,6 @@ export interface IPublishState {
   projectId: string;
   currentStep: number;
   domainId: string;
+  publishStatus: boolean;
 }
 

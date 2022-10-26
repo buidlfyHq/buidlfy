@@ -2,22 +2,22 @@ import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
-import {
-  uploadFileToWeb3Storage,
-  uploadTemplateToWeb3Storage,
-} from "config/web3storage";
+import { uploadTemplateToWeb3Storage } from "config/web3storage";
 import { mintTemplate } from "redux/template/template.actions";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import InfoCircleImg from "assets/icons/info-circle.png";
 import MintUploadImg from "assets/icons/mint-form-img.png";
+import { uploadImage } from "redux/upload/upload.action";
 
 const MintTemplateForm: FC = () => {
   const dispatch = useDispatch();
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-
+  const imageLink = useSelector(
+    (state: IRootState) => state.upload.uploadImage
+  );
   const [image, setImage] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -32,8 +32,8 @@ const MintTemplateForm: FC = () => {
         // setSize(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
-          const cid = await uploadFileToWeb3Storage(reader.result as string);
-          setImage(cid);
+          dispatch(uploadImage({ data: reader.result as string }));
+          setImage(imageLink);
         });
         reader.readAsDataURL(e.target.files[0]);
       }
