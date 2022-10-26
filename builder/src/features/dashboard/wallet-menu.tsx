@@ -47,7 +47,7 @@ const WalletMenu = () => {
         <Menu>
           <Menu.Button className="flex items-center justify-center my-2 ml-3 active:opacity-70">
             <img
-              className="w-8 bg-black rounded-full"
+              className="w-8 bg-black rounded-full hover:shadow-lg"
               src={makeBlockie(currentAccount)}
               alt="Blockie"
             />

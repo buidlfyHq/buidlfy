@@ -29,12 +29,12 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
   };
 
   return (
-    <div className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box relative">
-      <div className="relative rounded-[16px] h-auto">
+    <div className="bg-white border border-[#E8EAED] rounded-[16px] p-2 shadow-template-box relative">
+      <div className="relative rounded-[16px] h-auto cursor-pointer">
         <div className="absolute right-0 flex justify-end my-2 mx-4 py-1 px-3 text-[#14142B] text-[10px] bg-[#FFE6B0] rounded-[5px]">
           {badge}
         </div>
-        <div className="absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600]">
+        <div className="absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600] opacity-0 duration-300 hover:opacity-100">
           {list ? (
             <div
               className="py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white"
