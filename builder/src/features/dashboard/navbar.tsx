@@ -177,7 +177,7 @@ const Navbar: FC<INavbar> = ({
         {/* ADD: handle case when the site is published */}
         {currentAccount && (
           <button
-            className="bordered-button text-[14px] text-[#855FD8] font[500] py-3 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap"
+            className="bordered-button py-3 px-5 my-2 ml-3 text-[14px] text-[#855FD8] font[500] rounded-[10px] whitespace-nowrap"
             onClick={handleMintTemplateForm}
             data-for="mint"
             data-html={true}
@@ -188,7 +188,7 @@ const Navbar: FC<INavbar> = ({
           </button>
         )}
         <button
-          className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap"
+          className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
           onClick={handlePublish}
         >
           Publish

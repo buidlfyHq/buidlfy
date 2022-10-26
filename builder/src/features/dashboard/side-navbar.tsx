@@ -24,7 +24,7 @@ const SideNavbar: FC<ISideNavbar> = ({ setSideElement, setHideNavbar }) => {
       {/* Components */}
       <img
         src={logo}
-        className="w-[2.4rem] mx-[1.3rem] my-[0.65rem]"
+        className="w-[2.4rem] mx-[1.3rem] my-[0.65rem] rounded-full hover:shadow-lg"
         alt="logo"
       />
       <div className="side-border px-4 pt-[1rem]">

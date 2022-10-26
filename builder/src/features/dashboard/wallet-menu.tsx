@@ -45,7 +45,7 @@ const WalletMenu = () => {
     <>
       {currentAccount ? (
         <Menu>
-          <Menu.Button className="flex items-center justify-center my-2 ml-3">
+          <Menu.Button className="flex items-center justify-center my-2 ml-3 active:opacity-70">
             <img
               className="w-8 bg-black rounded-full"
               src={makeBlockie(currentAccount)}
@@ -65,11 +65,6 @@ const WalletMenu = () => {
                     {truncateString(currentAccount)}
                   </div>
                 </div>
-                <button className="whitespace-nowrap button-wallet-menu text-[14px] duration-100 hover:text-[16px] my-2 py-2 px-auto w-full">
-                  <span className="gradient-text-wallet-menu font-[500]">
-                    Disconnect Wallet
-                  </span>
-                </button>
               </div>
             </div>
             {walletMenuItems.map((menuItem, i) => {
@@ -137,7 +132,7 @@ const WalletMenu = () => {
         </Menu>
       ) : (
         <button
-          className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
+          className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap add-btn"
           onClick={() => dispatch(connectWallet())}
         >
           Connect Wallet

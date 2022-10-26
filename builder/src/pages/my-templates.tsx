@@ -31,7 +31,7 @@ const MyTemplates: FC = () => {
       {/* nav */}
       <section className="flex justify-between px-36 py-6 h-[77px] border-bottom-divider sticky-top">
         <div className="flex justify-center items-center my-2">
-          <img src={logo} className="w-[2.4rem] mx-[1.3rem]" alt="logo" />
+          <img src={logo} className="w-[2.4rem] mx-[1.3rem] rounded-full hover:shadow-lg" alt="logo" />
         </div>
         <div className="flex items-center">
           <Link to="/" className="flex items-center px-10 py-3 bordered-button">
@@ -41,7 +41,7 @@ const MyTemplates: FC = () => {
           <div className="flex justify-center items-center my-2 ml-3">
             {currentAccount && (
               <img
-                className="bg-black w-8 h-8 rounded-full"
+                className="bg-black w-8 h-8 rounded-full hover:shadow-lg"
                 src={makeBlockie(currentAccount)}
                 alt="Blockie"
               />
