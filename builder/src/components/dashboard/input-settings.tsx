@@ -21,7 +21,7 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
 
   return (
     <>
-      <h3 className="ml-[0.7rem]">
+      <h3 className="ml-[0.5rem] mt-[1.5rem]">
         {selectedElement ? (
           <span className="setting-text">{selectedElement.name}</span>
         ) : null}

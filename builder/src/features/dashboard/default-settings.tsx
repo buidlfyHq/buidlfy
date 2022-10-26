@@ -1,11 +1,13 @@
 import React, { FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { uploadFileToWeb3Storage } from "config/web3storage";
 import { SITE_SIZE_VARIABLE } from "config/constant";
 import Spinner from "components/utils/assets/spinner";
 import BgColorComponent from "components/settings/bg-color-component";
 import upload from "assets/upload-img.svg";
+import { uploadImage } from "redux/upload/upload.action";
+import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
 
 interface IDefaultSettings {
@@ -30,9 +32,13 @@ const DefaultSettings: FC<IDefaultSettings> = ({
   setIsContainerSelected,
   setOpenSetting,
 }) => {
+  const dispatch = useDispatch();
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
   const [siteImage, setSiteImage] = useState<string>();
   const [isSpinner, setIsSpinner] = useState<boolean>(false);
+  const imageLink = useSelector(
+    (state: IRootState) => state.upload.uploadImage
+  );
   const onChangeLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > SITE_SIZE_VARIABLE) {
@@ -43,15 +49,14 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           setSiteImage(reader.result as string);
-          const cid = await uploadFileToWeb3Storage(reader.result as string);
+          dispatch(uploadImage({ data: reader.result as string }));
           setIsSpinner(false);
-          setHead({ ...head, logo: cid });
+          setHead({ ...head, logo: imageLink });
         });
         reader.readAsDataURL(e.target.files[0]);
       }
     }
   };
-
   const handleDeleteImage = () => {
     setSiteImage("");
     setHead({ ...head, logo: "" });
@@ -172,7 +177,10 @@ const DefaultSettings: FC<IDefaultSettings> = ({
                     htmlFor="inputTag"
                     className="image-label cursor-pointer"
                   >
-                    <div data-tip="Click here to upload image" data-for="default">
+                    <div
+                      data-tip="Click here to upload image"
+                      data-for="default"
+                    >
                       <div className="flex justify-center mt-2">
                         <img src={upload} alt="upload" className="w-[3.5rem]" />
                       </div>
