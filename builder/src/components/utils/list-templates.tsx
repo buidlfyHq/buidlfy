@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { ethers } from "ethers";
 import { useDispatch } from "react-redux";
 import { toggleModalType } from "redux/modal/modal.reducers";
@@ -7,7 +7,13 @@ import { ISelectedTemplate } from "redux/template/template.interfaces";
 import DefaultTemplateImg from 'assets/default-image-template.png'
 import NoTemplateImg from 'assets/no-temp-default.png'
 
-const ListTemplates = ({filteredArr}) => {
+interface IListTemplates{
+  filteredTemplateList: ISelectedTemplate[]
+}
+
+const ListTemplates : FC<IListTemplates> = ({
+  filteredTemplateList
+}) => {
   const dispatch = useDispatch();
 
   const handleSelectTemplate = (template: ISelectedTemplate) => {
@@ -16,9 +22,9 @@ const ListTemplates = ({filteredArr}) => {
   };
 
   return (
-    <div className={`${filteredArr.length> 0 ? 'grid gap-4 grid-cols-templateCustom' : 'flex justify-center'} px-10 pb-12 pt-7`}>
-      {filteredArr.length > 0 ? 
-        filteredArr.map((temp: ISelectedTemplate) => {
+    <div className={`${filteredTemplateList.length> 0 ? 'grid gap-4 grid-cols-templateCustom' : 'flex justify-center'} px-10 pb-12 pt-7`}>
+      {filteredTemplateList.length > 0 ? 
+        filteredTemplateList.map((temp: ISelectedTemplate) => {
           const {id, image = DefaultTemplateImg, name = 'Template'} = temp
           return (
             <div
@@ -37,9 +43,9 @@ const ListTemplates = ({filteredArr}) => {
                 <div className="text-[13px] text-[#14142B] opacity-80 ">
                   {name}
                 </div>
-                <div className="text-[10px] text-[#14142B] py-2 px-3 bg-gray-100 rounded-[28px]">
-                  {temp?.category || "NA"}
-                </div>
+                { temp?.category && <div className="text-[10px] text-[#14142B] py-2 px-3 bg-gray-100 rounded-[28px]">
+                  {temp?.category}
+                </div>}
               </div>
               <div className="text-[18px] font-[600] text-[#14142B] mt-2 px-2 pb-1">
                 {ethers.utils.formatUnits(temp.listing_buyoutPricePerToken)}{" "}

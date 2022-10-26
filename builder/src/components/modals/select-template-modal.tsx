@@ -7,20 +7,24 @@ import Spinner from "components/utils/assets/spinner";
 import { IRootState } from "redux/root-state.interface";
 import { ReactComponent as SearchIcon } from "assets/svgAsIcons/search-icon.svg";
 import { CgClose } from "react-icons/cg";
+import { ISelectedTemplate } from "redux/template/template.interfaces";
 
-const TEMPLATE_CATEGORIES = ["ALL"];
+// removed categories as of now
+// const templateCategories = ["ALL"];
 
 const SelectTemplateModal: FC = () => {
-  const [loading, setLoading] = useState<boolean>(false)
-  const [list, setList] = useState([])
-  const [filteredArr, setFilteredArr] = useState([])
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState<boolean>(false)
+  const [filteredTemplateList, setFilteredArr] = useState<ISelectedTemplate[]>([])
   const templateList = useSelector(
     (state: IRootState) => state.template.templateList
   );
-  const ownedListedTemplateList = useSelector(
-    (state: IRootState) => state.minted.ownedListedTemplateList
-  );
+
+  // removed as of now, commented for further use
+  // const ownedListedTemplateList = useSelector(
+  //   (state: IRootState) => state.minted.ownedListedTemplateList
+  // );
+
   // no active categories hence commented
   // const categoryList = useSelector(
   //   (state: IRootState) => state.template.templateList.map((temp: ISelectedTemplate) => temp?.category)
@@ -28,29 +32,29 @@ const SelectTemplateModal: FC = () => {
 
   useEffect(() => {
     setLoading(true)
-    setList([...templateList])
     setFilteredArr([...templateList])
     setLoading(false)
   }, [setFilteredArr])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = e.target
-    const filterArr = value === '' ? list : 
-      list.filter(item => 
+    const filterArr = value === '' ? templateList : 
+      templateList.filter((item: ISelectedTemplate) => 
         item.name?.toLowerCase().replace(/\s+/g, '').includes(value.toLowerCase().replace(/\s+/g, '')))
         setFilteredArr([...filterArr])
   }
 
-  const handleFilterTemplateByCategory = (category: string) => {
-    setFilteredArr([...list])
-    // no active categories hence commented, logic for handling templates by category
-    // const filterByCategory = list.filter((item: ISelectedTemplate) => item?.category === category)
-    // setFilteredArr([...filterByCategory])
-  }
+  // no active categories hence commented, logic for handling templates by category
+  // const handleFilterTemplateByCategory = (category: string) => {
+  //   setFilteredArr([...list])
+  //   const filterByCategory = list.filter((item: ISelectedTemplate) => item?.category === category)
+  //   setFilteredArr([...filterByCategory])
+  // }
 
-  const handleSelectOwnedListedTemplate = () => {
-    setFilteredArr([...ownedListedTemplateList])
-  }
+  // removed as of now, commented for further use
+  // const handleSelectOwnedListedTemplate = () => {
+  //   setFilteredArr([...ownedListedTemplateList])
+  // }
 
   return (
     <Dialog.Panel className="flex flex-col items-center w-full max-w-[1400px] mx-28 my-20 rounded-[24px] bg-white">
@@ -65,12 +69,12 @@ const SelectTemplateModal: FC = () => {
           <div className="text-[#14142B] font-[600] text-[28px] leading-[44px]">
             Select a template
           </div>
-          <div className="mt-3 text-[#4E4B66] text-[14px]">
+          {/* <div className="mt-3 text-[#4E4B66] text-[14px]">
             Select over 100 stunning templates to create a stunning wesite to
             fit your needs.
-          </div>
+          </div> */}
         </div>
-        <form className="flex items-center mt-5">
+        <form className="flex items-center mt-5 mb-3">
           <div className="relative w-full mx-3">
             <input
               type="text"
@@ -80,12 +84,12 @@ const SelectTemplateModal: FC = () => {
               onChange={handleChange}
               required
             />
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 my-3 pointer-events-none">
               <SearchIcon />
             </div>
           </div>
         </form>
-        <div className="flex gap-2 mt-9">
+        {/* <div className="flex gap-2 mt-9">
           <div
           onClick={handleSelectOwnedListedTemplate}
           className="text-[14px] font-bold relative px-4 py-2 hover:bg-[#ECEFFF] hover:rounded-[4px] whitespace-nowrap cursor-pointer"
@@ -95,15 +99,15 @@ const SelectTemplateModal: FC = () => {
               {""}
             </span>
           </div>
-          {/* Purchased logic to be implemented in future hence commented */}
-          {/* <div className="text-[14px] font-bold relative px-5 py-2 whitespace-nowrap cursor-pointer">
+          Purchased logic to be implemented in future hence commented
+          <div className="text-[14px] font-bold relative px-5 py-2 whitespace-nowrap cursor-pointer">
             PURCHASED
             <span className="absolute w-[6px] h-[6px] bg-[#85858B] opacity-60 rounded-[50%] right-[-5%] top-[45%]">
               {""}
             </span>
-          </div> */}
+          </div>
           <div className="flex ml-2">
-            {TEMPLATE_CATEGORIES.map((category, index) => {
+            {templateCategories.map((category, index) => {
               return (
                 <div
                   key={index}
@@ -116,7 +120,7 @@ const SelectTemplateModal: FC = () => {
               );
             })}
           </div>
-        </div>
+        </div> */}
       </div>
       <hr className="bg-hr h-[2px] w-full mt-6" />
       <div className="w-full bg-lower-template">
@@ -124,7 +128,7 @@ const SelectTemplateModal: FC = () => {
           <div className="flex justify-center ">
             <Spinner />
           </div>
-        ) : (filteredArr && <ListTemplates filteredArr={filteredArr} />)}
+        ) : (filteredTemplateList && <ListTemplates filteredTemplateList={filteredTemplateList} />)}
       </div>
     </Dialog.Panel>
   );
