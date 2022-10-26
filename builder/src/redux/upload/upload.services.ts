@@ -15,7 +15,7 @@ export const uploadImageService = async (data: string | ArrayBuffer) => {
       redirect: 'follow'
     };
     const response = await fetch(
-      config.backendApi.BACKEND_API + "upload",
+      config.server.SERVER + "upload",
       requestOptions
     );
     const responseText = await response.text();
