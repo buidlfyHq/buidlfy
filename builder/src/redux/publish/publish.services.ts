@@ -126,7 +126,6 @@ export const verifyPublishService = async (
         return;
       }
     }, 5000);
-    // return { error, errorMessage, responseText };
   });
 };
 
