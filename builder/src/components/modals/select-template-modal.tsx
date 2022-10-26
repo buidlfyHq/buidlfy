@@ -34,7 +34,7 @@ const SelectTemplateModal: FC = () => {
     setLoading(true)
     setFilteredTemplateList([...templateList])
     setLoading(false)
-  }, [filteredTemplateList])
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = e.target
