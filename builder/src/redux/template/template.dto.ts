@@ -26,6 +26,7 @@ export class SelectedTemplateDto {
     this.listingId = selectedTemplate.listing_listingId;
     this.buyoutPricePerToken = selectedTemplate.listing_buyoutPricePerToken;
     this.listingTokenId = selectedTemplate.listing_tokenId;
-    this.tokenOwner = selectedTemplate.listing_tokenOwner;
+    this.tokenOwner =
+      selectedTemplate.listing_tokenOwner || selectedTemplate.owner_of;
   }
 }

@@ -21,5 +21,6 @@ export interface ISelectedTemplate {
   listing_listingId: BigNumber;
   listing_buyoutPricePerToken: BigNumber;
   listing_tokenId?: string;
-  listing_tokenOwner: string;
+  listing_tokenOwner?: string;
+  owner_of?: string;
 }

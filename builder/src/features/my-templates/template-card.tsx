@@ -35,15 +35,16 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
           {badge}
         </div>
         <div className="absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600]">
-          <div className="py-2 px-10 rounded-[8px] bg-white text-[#7743E7]">
-            View Details
-          </div>
-          {list && (
+          {list ? (
             <div
               className="py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white"
               onClick={() => handleListOnBuidlfy(template)}
             >
               List on Buidlfy
+            </div>
+          ) : (
+            <div className="py-2 px-10 mt-4 rounded-[8px] connect-wallet-button text-white">
+              View Details
             </div>
           )}
           <div
@@ -57,6 +58,8 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
           src={template.image}
           alt="img_temp"
           className="rounded-[16px] w-full"
+          width={314}
+          height={200}
         />
       </div>
       <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
