@@ -20,6 +20,7 @@ function* uploadImage({ payload }) {
       })
     );
   } else {
+    // Log is required
     yield put(console.log("error"));
   }
 }
