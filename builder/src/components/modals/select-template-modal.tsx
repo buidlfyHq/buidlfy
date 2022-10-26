@@ -15,7 +15,7 @@ import { ISelectedTemplate } from "redux/template/template.interfaces";
 const SelectTemplateModal: FC = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false)
-  const [filteredTemplateList, setFilteredArr] = useState<ISelectedTemplate[]>([])
+  const [filteredTemplateList, setFilteredTemplateList] = useState<ISelectedTemplate[]>([])
   const templateList = useSelector(
     (state: IRootState) => state.template.templateList
   );
@@ -32,16 +32,16 @@ const SelectTemplateModal: FC = () => {
 
   useEffect(() => {
     setLoading(true)
-    setFilteredArr([...templateList])
+    setFilteredTemplateList([...templateList])
     setLoading(false)
-  }, [setFilteredArr])
+  }, [filteredTemplateList])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = e.target
     const filterArr = value === '' ? templateList : 
       templateList.filter((item: ISelectedTemplate) => 
         item.name?.toLowerCase().replace(/\s+/g, '').includes(value.toLowerCase().replace(/\s+/g, '')))
-        setFilteredArr([...filterArr])
+        setFilteredTemplateList([...filterArr])
   }
 
   // no active categories hence commented, logic for handling templates by category
