@@ -7,6 +7,7 @@ import modalReducers from "./modal/modal.reducers";
 import web3Reducer from "redux/web3/web3.reducers";
 import templateReducer from "redux/template/template.reducers";
 import mintedReducer from "redux/minted/minted.reducers";
+import publishReducer from "./publish/publish.reducers";
 
 let sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];
@@ -19,6 +20,7 @@ export const store = configureStore({
     web3: web3Reducer,
     template: templateReducer,
     minted: mintedReducer,
+    publish: publishReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(middleware),

@@ -159,6 +159,7 @@ const workspaceSlice = createSlice({
       }
     },
   },
+ 
 });
 
 export const {
@@ -169,6 +170,6 @@ export const {
   updateWorkspaceElementsArray,
   setSelectedElement,
   saveContractConfig,
-  updateUploadedImageData
+  updateUploadedImageData,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;

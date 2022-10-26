@@ -5,10 +5,12 @@ import { encode as base64_encode } from "base-64";
 import ReactTooltip from "react-tooltip";
 import WalletMenu from "features/dashboard/wallet-menu";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { updatePublishConfig } from "redux/publish/publish.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
+import { initiatePublish } from "redux/publish/publish.action";
 
 interface INavbar {
   workspaceBackgroundColor: string;
@@ -40,7 +42,9 @@ const Navbar: FC<INavbar> = ({
   const currentAccount = useSelector(
     (state: IRootState) => state.web3.currentAccount
   );
-
+  const publishConfig = useSelector(
+    (state: IRootState) => state.publish.publishConfig
+  );
   const [abiJSON, setAbiJSON] = useState<
     {
       inputs: { internalType: string; name: string; type: string }[];
@@ -97,10 +101,13 @@ const Navbar: FC<INavbar> = ({
       },
     };
     let stringifiedConfig = JSON.stringify(config);
-
     setGeneratedConfig(base64_encode(stringifiedConfig));
+    dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-process"));
+    dispatch(
+      initiatePublish({ configDetails: base64_encode(stringifiedConfig) })
+    );
   };
 
   const handleMintTemplateForm = () => {

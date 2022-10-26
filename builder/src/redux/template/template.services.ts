@@ -42,7 +42,7 @@ export const initiateTransactionService = async (
     // eslint-disable-next-line no-console
     console.error("Error in transaction --> ", error);
     return { error: true, errorMessage: (error as Error).message, receipt: "" };
-  }
+}
 };
 
 export const mintTemplateService = async (uri: string) => {

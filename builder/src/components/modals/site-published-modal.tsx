@@ -1,13 +1,22 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { Dialog } from "@headlessui/react";
 import UprightImg from "assets/icons/upright.png";
 import { CgClose } from "react-icons/cg";
 import CongratulationsImg from "assets/icons/congratulations.png";
 import { toggleModal } from "redux/modal/modal.reducers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "redux/root-state.interface";
 
-const SitePublishedModal: FC = () => {
+interface ISitePublishedModal {
+  generatedConfig?: string;
+}
+
+const SitePublishedModal: FC<ISitePublishedModal> = ({ generatedConfig }) => {
+  const domainName = useSelector(
+    (state: IRootState) => state.publish.domainName
+  );
   const dispatch = useDispatch();
+  const domainLink = "https://" + domainName;
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[580px] my-20 mx-28 rounded-[4px]  bg-white">
       <button
@@ -27,12 +36,8 @@ const SitePublishedModal: FC = () => {
           Please open the link given below to see your site
         </div>
         <div className="flex items-center py-2 mt-5 another-bg link-bg px-7">
-          <a
-            target="_blank"
-            href="www.app.buildfy.com/sitename"
-            className="outline-none"
-          >
-            www.app.buildfy.com/sitename
+          <a target="_blank" href={domainLink} className="outline-none">
+            {domainLink}
           </a>
           <img
             src={UprightImg}
@@ -42,9 +47,13 @@ const SitePublishedModal: FC = () => {
             height={8}
           />
         </div>
-        <button className="connect-wallet-button text-white px-16 py-3 text-[14px] font-[600] rounded-[8px] mt-6 cursor-pointer">
+        <a
+          target="_blank"
+          href={domainLink}
+          className="connect-wallet-button text-white px-16 py-3 text-[14px] font-[600] rounded-[8px] mt-6 cursor-pointer"
+        >
           Visit Site
-        </button>
+        </a>
       </div>
     </Dialog.Panel>
   );
