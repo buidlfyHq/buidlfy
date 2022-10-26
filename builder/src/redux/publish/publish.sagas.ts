@@ -54,8 +54,6 @@ function* verifyPublish({ payload }) {
 
   const transactionRes = yield call(verifyPublishService, domainId, projectId);
   if (!transactionRes.error) {
-    // Log is required
-    console.log("complete");
     yield put(updateCurrentStep(6));
   } else {
     // Log is required
@@ -72,7 +70,7 @@ function* updatePublish({ payload }) {
   );
   if (!transactionRes.error) {
     // Log is required
-    console.log("complete");
+    console.log("Update subdomain completed");
   } else {
     // Log is required
     yield put(console.log("error"));
