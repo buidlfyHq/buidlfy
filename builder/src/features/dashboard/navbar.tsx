@@ -42,9 +42,7 @@ const Navbar: FC<INavbar> = ({
   const currentAccount = useSelector(
     (state: IRootState) => state.web3.currentAccount
   );
-  const isPublished = useSelector(
-    (state: IRootState) => state.publish.publishStatus
-  );
+
   const [abiJSON, setAbiJSON] = useState<
     {
       inputs: { internalType: string; name: string; type: string }[];
@@ -54,7 +52,6 @@ const Navbar: FC<INavbar> = ({
       type: string;
     }[]
   >([]); // work in progress
-  const [generatedConfig, setGeneratedConfig] = useState<string>("");
 
   useEffect(() => {
     if (contractDetails.abi) {
@@ -193,30 +190,12 @@ const Navbar: FC<INavbar> = ({
             Mint as NFT
           </button>
         )}
-        {/* {isPublished ? (
-          <>
-            <button
-              className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
-              onClick={handlePublish}
-            >
-              Re-Publish
-            </button>
-            <button
-              className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
-              onClick={handlePublish}
-            >
-              Publish New Site
-            </button>
-          </>
-        ) : ( */}
         <button
           className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
           onClick={handlePublish}
         >
           Publish
         </button>
-        {/* )} */}
-
         <WalletMenu />
       </div>
     </main>
