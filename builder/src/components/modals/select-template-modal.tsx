@@ -1,24 +1,23 @@
-import React, { FC, useEffect, useState  } from "react";
-import { useDispatch , useSelector } from "react-redux";
+import { FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
+import { CgClose } from "react-icons/cg";
 import ListTemplates from "components/utils/list-templates";
 import { toggleModal } from "redux/modal/modal.reducers";
-import Spinner from "components/utils/assets/spinner";
 import { IRootState } from "redux/root-state.interface";
-import { ReactComponent as SearchIcon } from "assets/svgAsIcons/search-icon.svg";
-import { CgClose } from "react-icons/cg";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
+import { ReactComponent as SearchIcon } from "assets/svgAsIcons/search-icon.svg";
 
 // removed categories as of now
 // const templateCategories = ["ALL"];
 
 const SelectTemplateModal: FC = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState<boolean>(false)
-  const [filteredTemplateList, setFilteredTemplateList] = useState<ISelectedTemplate[]>([])
   const templateList = useSelector(
     (state: IRootState) => state.template.templateList
   );
+  const [filteredTemplateList, setFilteredTemplateList] =
+    useState<ISelectedTemplate[]>(templateList);
 
   // removed as of now, commented for further use
   // const ownedListedTemplateList = useSelector(
@@ -30,19 +29,19 @@ const SelectTemplateModal: FC = () => {
   //   (state: IRootState) => state.template.templateList.map((temp: ISelectedTemplate) => temp?.category)
   // );
 
-  useEffect(() => {
-    setLoading(true)
-    setFilteredTemplateList([...templateList])
-    setLoading(false)
-  }, [])
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {value} = e.target
-    const filterArr = value === '' ? templateList : 
-      templateList.filter((item: ISelectedTemplate) => 
-        item.name?.toLowerCase().replace(/\s+/g, '').includes(value.toLowerCase().replace(/\s+/g, '')))
-        setFilteredTemplateList([...filterArr])
-  }
+    const { value } = e.target;
+    const filterArr =
+      value === ""
+        ? templateList
+        : templateList.filter((item: ISelectedTemplate) =>
+            item.name
+              ?.toLowerCase()
+              .replace(/\s+/g, "")
+              .includes(value.toLowerCase().replace(/\s+/g, ""))
+          );
+    setFilteredTemplateList([...filterArr]);
+  };
 
   // no active categories hence commented, logic for handling templates by category
   // const handleFilterTemplateByCategory = (category: string) => {
@@ -70,7 +69,7 @@ const SelectTemplateModal: FC = () => {
             Select a template
           </div>
           {/* <div className="mt-3 text-[#4E4B66] text-[14px]">
-            Select over 100 stunning templates to create a stunning wesite to
+            Select over 100 stunning templates to create a stunning website to
             fit your needs.
           </div> */}
         </div>
@@ -124,11 +123,9 @@ const SelectTemplateModal: FC = () => {
       </div>
       <hr className="bg-hr h-[2px] w-full mt-6" />
       <div className="w-full bg-lower-template">
-        {loading ? (
-          <div className="flex justify-center ">
-            <Spinner />
-          </div>
-        ) : (filteredTemplateList && <ListTemplates filteredTemplateList={filteredTemplateList} />)}
+        {filteredTemplateList && (
+          <ListTemplates filteredTemplateList={filteredTemplateList} />
+        )}
       </div>
     </Dialog.Panel>
   );
