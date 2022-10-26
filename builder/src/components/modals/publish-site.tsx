@@ -15,7 +15,7 @@ import { processes } from "components/utils/process";
 import LottieComponent from "components/utils/lottie";
 
 const PublishSiteModal: FC = () => {
-  const socket = io(config.backendApi.BACKEND_API);
+  const socket = io(config.server.SERVER);
   const dispatch = useDispatch();
   const [failedDeployment, setFailedDeployment] = useState<boolean>();
   const publishConfig = useSelector(

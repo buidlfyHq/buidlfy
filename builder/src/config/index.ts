@@ -5,8 +5,8 @@ export interface IConfig {
   template: {
     TEMPLATE_GRAPHQL_URL: string;
   };
-  backendApi: {
-    BACKEND_API: string;
+  server: {
+    SERVER: string;
   };
   network: {
     DEFAULT_NETWORK: {
@@ -27,8 +27,8 @@ const development: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
   },
-  backendApi: {
-    BACKEND_API: "http://localhost:8080/",
+  server: {
+    SERVER: "http://localhost:8080/",
   },
   network: {
     DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
@@ -44,8 +44,8 @@ const production: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
   },
-  backendApi: {
-    BACKEND_API: "http://localhost:8080/",
+  server: {
+    SERVER: "http://localhost:8080/",
   },
   network: {
     DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
@@ -61,8 +61,8 @@ const local: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
   },
-  backendApi: {
-    BACKEND_API: "http://localhost:8080/",
+  server: {
+    SERVER: "http://localhost:8080/",
   },
   network: {
     DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
