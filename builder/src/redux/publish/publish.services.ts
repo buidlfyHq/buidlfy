@@ -32,7 +32,7 @@ export const initiatePublishService = async (configDetails: string) => {
       redirect: "follow",
     };
     const response = await fetch(
-      config.backendApi.BACKEND_API + "deployment/create",
+      config.server.SERVER + "deployment/create",
       requestOptions
     );
     const responseText = await response.text();
@@ -66,7 +66,7 @@ export const getPublishDetailsService = async (deploymentId: string) => {
     };
 
     const response = await fetch(
-      config.backendApi.BACKEND_API + "deployment/create-subdomain",
+      config.server.SERVER + "deployment/create-subdomain",
       requestOptions
     );
     const responseText = await response.text();
@@ -106,7 +106,7 @@ export const verifyPublishService = async (
           redirect: "follow",
         };
         const response = await fetch(
-          config.backendApi.BACKEND_API + "deployment/verify-subdomain",
+          config.server.SERVER + "deployment/verify-subdomain",
           requestOptions
         );
         responseText = await response.text();
@@ -126,7 +126,6 @@ export const verifyPublishService = async (
         return;
       }
     }, 5000);
-    // return { error, errorMessage, responseText };
   });
 };
 
@@ -150,7 +149,7 @@ export const updatePublishService = async (
     };
 
     const response = await fetch(
-      config.backendApi.BACKEND_API + "deployment/update-subdomain",
+      config.server.SERVER + "deployment/update-subdomain",
       requestOptions
     );
     const responseText = await response.text();

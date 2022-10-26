@@ -15,7 +15,7 @@ import { processes } from "components/utils/process";
 import LottieComponent from "components/utils/lottie";
 
 const PublishSiteModal: FC = () => {
-  const socket = io(config.backendApi.BACKEND_API);
+  const socket = io(config.server.SERVER);
   const dispatch = useDispatch();
   const [failedDeployment, setFailedDeployment] = useState<boolean>();
   const publishConfig = useSelector(
@@ -101,7 +101,6 @@ const PublishSiteModal: FC = () => {
       </div>
       <div className="flex flex-col items-center justify-center py-8">
         <LottieComponent lottie={HourGlassImg} width={75} height={75} />
-        {/* <img src={HourGlassImg} alt="icon" width={54} height={54} /> */}
         <div className="font-[500] text-[20px] text-[#2C2D5E] mt-4">
           Site Publishing is in process
         </div>

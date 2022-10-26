@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { call, all, put, takeLatest } from "redux-saga/effects";
 import { updateCurrentStep, updateDeploymentId, updateDomainId, updateDomainName, updateProjectId, updateTransactionResponse } from "./publish.reducers";
 import {
@@ -9,10 +7,7 @@ import {
   updatePublishService,
 } from "./publish.services";
 import publishActionTypes from "./publish.types";
-import { io } from "socket.io-client";
-import config from "config";
 
-const socket = io(config.backendApi.BACKEND_API);
 
 function* initiatePublish({ payload }) {
   const { configDetails } = payload;
@@ -23,8 +18,8 @@ function* initiatePublish({ payload }) {
         .deploymentId;    
     yield put(updateDeploymentId(deploymentId));
     yield put(updateCurrentStep(1));
-    console.log("complete");
   } else {
+    // Log is required
     yield put(console.log("error"));
   }
 }
@@ -48,8 +43,8 @@ function* getPublishDetails({ payload }) {
       payload: { domainId: domainId, projectId: projectId },
     });
     yield put(updateCurrentStep(5));
-    console.log("complete");
   } else {
+    // Log is required
     yield put(console.log("error"));
   }
 }
@@ -59,9 +54,9 @@ function* verifyPublish({ payload }) {
 
   const transactionRes = yield call(verifyPublishService, domainId, projectId);
   if (!transactionRes.error) {
-    console.log("complete");
     yield put(updateCurrentStep(6));
   } else {
+    // Log is required
     yield put(console.log("error"));
   }
 }
@@ -74,8 +69,10 @@ function* updatePublish({ payload }) {
     deploymentId
   );
   if (!transactionRes.error) {
-    console.log("complete");
+    // Log is required
+    console.log("Update subdomain completed");
   } else {
+    // Log is required
     yield put(console.log("error"));
   }
 }
