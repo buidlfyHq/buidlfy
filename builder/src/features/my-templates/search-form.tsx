@@ -13,7 +13,7 @@ const SearchForm: FC = () => {
         <input
           type="text"
           id="simple-search"
-          className="search rounded-full focus:ring-[#dee0e9] focus:border-[#dee0e9] block w-full pl-10 p-2.5 "
+          className="search rounded-[10px] focus:ring-[#dee0e9] focus:border-[#dee0e9] block w-full pl-10 p-2.5 bg-white"
           placeholder="Search"
           required
         />

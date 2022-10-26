@@ -290,21 +290,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
           </section>
         </section>
       ) : (
-        <>
-          <DefaultBuilder
-            setHideNavbar={setHideNavbar}
-            setSideElement={setSideElement}
-          />
-          <DefaultSettings
-            setOpenSetting={setOpenSetting}
-            setIsContainerSelected={setIsContainerSelected}
-            setHideNavbar={setHideNavbar}
-            workspaceBackgroundColor={workspaceBackgroundColor}
-            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-            head={head}
-            setHead={setHead}
-          />
-        </>
+        <DefaultBuilder
+          setHideNavbar={setHideNavbar}
+          setSideElement={setSideElement}
+        />
       )}
     </main>
   );
