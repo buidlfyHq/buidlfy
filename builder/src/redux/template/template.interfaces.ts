@@ -14,9 +14,13 @@ export interface ISelectedTemplate {
   id?: string;
   token_id?: string;
   name: string;
+  category: string;
+  description: string;
   value: IWorkspaceElement[];
   image: string;
   listing_listingId: BigNumber;
   listing_buyoutPricePerToken: BigNumber;
   listing_tokenId?: string;
+  listing_tokenOwner?: string;
+  owner_of?: string;
 }

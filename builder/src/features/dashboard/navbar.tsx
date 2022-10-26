@@ -1,10 +1,9 @@
 import { FC, useEffect, useState } from "react";
+import ReactDOMServer from "react-dom/server";
 import { useDispatch, useSelector } from "react-redux";
-import makeBlockie from "ethereum-blockies-base64";
 import { encode as base64_encode } from "base-64";
-import { Menu } from "@headlessui/react";
-import { Link } from "react-router-dom";
-import { connectWallet } from "redux/web3/web3.actions";
+import ReactTooltip from "react-tooltip";
+import WalletMenu from "features/dashboard/wallet-menu";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { updatePublishConfig } from "redux/publish/publish.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
@@ -116,6 +115,34 @@ const Navbar: FC<INavbar> = ({
     dispatch(toggleModalType("mint-nft-form"));
   };
 
+  const tooltip = (
+    <ReactTooltip
+      id="mint"
+      className="tool"
+      place="bottom"
+      type="light"
+      effect="solid"
+      backgroundColor="#ffffff"
+      arrowColor="#ffffff"
+      scrollHide={true}
+      delayShow={200}
+    />
+  );
+
+  const tooltipContent = (
+    <div>
+      <div className="mb-2">
+        Please publish the site before <br /> minting this template.
+      </div>
+      <button
+        className="w-full py-2 px-7 my-2 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
+        onClick={handlePublish}
+      >
+        Publish
+      </button>
+    </div>
+  );
+
   return (
     <main
       onClick={handleCloseSidebar}
@@ -154,54 +181,27 @@ const Navbar: FC<INavbar> = ({
           Preview
         </div> */}
 
-        {/* Show only after the site is published */}
+        {/* ADD: handle case when the site is published */}
         {currentAccount && (
-          <div
-            className="bordered-button text-[14px] text-[#855FD8] font[500] py-3 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
+          <button
+            className="bordered-button py-3 px-5 my-2 ml-3 text-[14px] text-[#855FD8] font[500] rounded-[10px] whitespace-nowrap"
             onClick={handleMintTemplateForm}
+            data-for="mint"
+            data-html={true}
+            data-tip={ReactDOMServer.renderToString(<>{tooltipContent}</>)}
           >
+            {tooltip}
             Mint as NFT
-          </div>
+          </button>
         )}
         <button
-          className="py-2 px-7 ml-3 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap my-2 ml-3"
+          className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
           onClick={handlePublish}
         >
           Publish
         </button>
 
-        {currentAccount ? (
-          <Menu>
-            <Menu.Button className="flex justify-center items-center my-2 ml-3">
-              <img
-                className="bg-black w-8 h-8 rounded-full"
-                src={makeBlockie(currentAccount)}
-                alt="Blockie"
-              />
-            </Menu.Button>
-            <Menu.Items className="absolute h-full top-0 right-0 flex flex-col w-56 px-4 py-2 mt-16 shadow-lg mr-5 rounded-[8px] origin-top-right bg-white">
-              <Menu.Item>
-                {({ active }) => (
-                  <Link
-                    to="/my-templates"
-                    className={`${
-                      active && "bg-slate-100 rounded-[8px] cursor-pointer"
-                    } font-[500] px-4 py-2 font-[16px]`}
-                  >
-                    My Templates
-                  </Link>
-                )}
-              </Menu.Item>
-            </Menu.Items>
-          </Menu>
-        ) : (
-          <button
-            className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
-            onClick={() => dispatch(connectWallet())}
-          >
-            Connect Wallet
-          </button>
-        )}
+        <WalletMenu />
       </div>
     </main>
   );
