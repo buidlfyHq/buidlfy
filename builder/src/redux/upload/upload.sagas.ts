@@ -19,7 +19,6 @@ function* uploadImage({ payload }) {
         propertyValue: uploadImageLink,
       })
     );
-    console.log("complete");
   } else {
     yield put(console.log("error"));
   }
