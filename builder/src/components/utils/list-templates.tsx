@@ -1,15 +1,20 @@
+import React, { FC } from "react";
 import { ethers } from "ethers";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplate } from "redux/template/template.reducers";
-import { IRootState } from "redux/root-state.interface";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
+import DefaultTemplateImg from 'assets/default-image-template.png'
+import NoTemplateImg from 'assets/no-temp-default.png'
 
-const ListTemplates = () => {
+interface IListTemplates{
+  filteredTemplateList: ISelectedTemplate[]
+}
+
+const ListTemplates : FC<IListTemplates> = ({
+  filteredTemplateList
+}) => {
   const dispatch = useDispatch();
-  const templateList = useSelector(
-    (state: IRootState) => state.template.templateList
-  );
 
   const handleSelectTemplate = (template: ISelectedTemplate) => {
     dispatch(setSelectedTemplate(template));
@@ -17,29 +22,30 @@ const ListTemplates = () => {
   };
 
   return (
-    <div className="grid grid-cols-3 gap-4 px-10 pb-12 pt-7">
-      {templateList &&
-        templateList.map((temp: ISelectedTemplate) => {
+    <div className={`${filteredTemplateList.length> 0 ? 'grid gap-4 grid-cols-templateCustom' : 'flex justify-center'} px-10 pb-12 pt-7`}>
+      {filteredTemplateList.length > 0 ? 
+        filteredTemplateList.map((temp: ISelectedTemplate) => {
+          const {id, image = DefaultTemplateImg, name = 'Template'} = temp
           return (
             <div
-              key={temp.id}
+              key={id}
               className="bg-white border border-[#E8EAED] rounded-[16px] p-2 cursor-pointer shadow-template-box"
               onClick={() => handleSelectTemplate(temp)}
             >
               <img
-                src={temp.image}
+                src={image}
                 alt="img_temp"
-                className="w-full rounded-[16px]"
-                width={314}
-                height={200}
+                className="w-full block rounded-[16px]"
+                // width={314}
+                // height={200}
               />
               <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
                 <div className="text-[13px] text-[#14142B] opacity-80 ">
-                  {temp.name}
+                  {name}
                 </div>
-                <div className="text-[10px] text-[#14142B] py-2 px-3 bg-gray-100 rounded-[28px]">
-                  {temp?.category || "NA"}
-                </div>
+                { temp?.category && <div className="text-[10px] text-[#14142B] py-2 px-3 bg-gray-100 rounded-[28px]">
+                  {temp?.category}
+                </div>}
               </div>
               <div className="text-[18px] font-[600] text-[#14142B] mt-2 px-2 pb-1">
                 {ethers.utils.formatUnits(temp.listing_buyoutPricePerToken)}{" "}
@@ -47,7 +53,23 @@ const ListTemplates = () => {
               </div>
             </div>
           );
-        })}
+        }) : (
+            <div className="flex flex-col items-center">
+              <img
+                src={NoTemplateImg}
+                alt="img_temp"
+                width={60}
+                height={60}
+                className="my-5"
+              />
+              <div className="text-[24px] text-center gradient-text-no-template font-[600] mt-2">
+                Sorry! No Templates!
+              </div>
+              <div className="text-[14px] text-center text-[#14142B] opacity-70 mt-2 px-2">
+                Sorry, you have no templates in this category! 
+              </div>
+            </div>
+        )}
     </div>
   );
 };
