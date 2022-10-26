@@ -1,10 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BiChevronDown } from "react-icons/bi";
+import { IoIosAddCircleOutline } from "react-icons/io";
 import makeBlockie from "ethereum-blockies-base64";
 import SearchForm from "features/my-templates/search-form";
 import RenderTemplateList from "components/utils/render-template-list";
+import logo from "assets/icons/buidlfy.png";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
 
 export enum TabType {
@@ -28,7 +30,9 @@ const MyTemplates: FC = () => {
     <main className="min-h-screen overflow-y-auto">
       {/* nav */}
       <section className="flex justify-between px-36 py-6 h-[77px] border-bottom-divider sticky-top">
-        <div className="font-[700] text-black text-[20px]">Buidlfy</div>
+        <div className="flex justify-center items-center my-2">
+          <img src={logo} className="w-[2.4rem] mx-[1.3rem]" alt="logo" />
+        </div>
         <div className="flex items-center">
           <Link to="/" className="flex items-center px-10 py-3 bordered-button">
             <ColorFeather className="mr-3" />
@@ -47,22 +51,23 @@ const MyTemplates: FC = () => {
       </section>
 
       {/* mid sec */}
-      <section className="flex flex-col items-center py-16 px-36">
-        <div className="font-[600] text-[28px] text-[#14142B]">
+      <section className="px-36 py-6">
+        <div className="flex items-center justify-center font-[600] text-[28px] text-[#14142B]">
           My Templates
-        </div>
-        <div className="max-w-[412px] text-[13px] text-[#14142A] opacity-60 text-center mt-4 ">
-          Create a beautiful website that meets your needs by choosing from over
-          100 beautiful templates.
+          <Link to="/">
+            <IoIosAddCircleOutline className="text-[24px] ml-2 mt-[4px]" />
+          </Link>
         </div>
       </section>
 
       <section>
         <section className="py-0 px-36">
-          <div className="flex justify-center mt-6 text-black font-[600] text-[15px] gap-8">
+          <div className="flex justify-center mt-4 text-black font-[600] text-[15px] gap-8">
             <button
               className={`py-3 cursor-pointer px-7 outline-none ${
-                tab === TabType.ALL ? "border-b-4 border-purple-500" : null
+                tab === TabType.ALL
+                  ? "border-b-4 border-purple-500 gradient-text"
+                  : null
               }`}
               onClick={() => setTab(TabType.ALL)}
             >
@@ -70,7 +75,9 @@ const MyTemplates: FC = () => {
             </button>
             <button
               className={`py-3 cursor-pointer px-7 outline-none ${
-                tab === TabType.REVIEW ? "border-b-4 border-purple-500" : null
+                tab === TabType.REVIEW
+                  ? "border-b-4 border-purple-500 gradient-text"
+                  : null
               }`}
               onClick={() => setTab(TabType.REVIEW)}
             >
@@ -78,7 +85,9 @@ const MyTemplates: FC = () => {
             </button>
             <button
               className={`py-3 cursor-pointer px-7 outline-none ${
-                tab === TabType.LISTED ? "border-b-4 border-purple-500" : null
+                tab === TabType.LISTED
+                  ? "border-b-4 border-purple-500 gradient-text"
+                  : null
               }`}
               onClick={() => setTab(TabType.LISTED)}
             >
