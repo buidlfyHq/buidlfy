@@ -12,7 +12,11 @@ import {
 } from "redux/workspace/workspace.reducers";
 import { updatePublishConfig } from "redux/publish/publish.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import { setSelectorToDefault } from "redux/contract/contract.reducers";
+import {
+  setSelectorToDefault,
+  updateContractAbi,
+  updateContractAddress,
+} from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
 
@@ -81,7 +85,8 @@ const Navbar: FC<INavbar> = ({
     dispatch(updateWorkspaceElementsArray([]));
     dispatch(setSelectorToDefault());
     dispatch(updateWorkspaceBackgroundColor("rgba(255, 255, 255, 1)"));
-    dispatch(setSiteHead({ title: "", logo: "" }));
+    dispatch(updateContractAbi(""));
+    dispatch(updateContractAddress(""));
   };
 
   const handlePublish = () => {
