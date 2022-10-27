@@ -1,18 +1,18 @@
-import React, { FC, useEffect, useState } from "react";
-import { Dialog } from "@headlessui/react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import failed from "assets/icons/failed.svg";
-import HourGlassImg from "assets/lottie/hourglass.json";
-import completed from "assets/icons/completed.svg";
+import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
-import { IRootState } from "redux/root-state.interface";
-import { getPublishDetails, updatePublish } from "redux/publish/publish.action";
 import { io } from "socket.io-client";
 import config from "config";
-import { updateCurrentStep } from "redux/publish/publish.reducers";
 import { processes } from "components/utils/process";
 import LottieComponent from "components/utils/lottie";
+import { getPublishDetails, updatePublish } from "redux/publish/publish.action";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { updateCurrentStep } from "redux/publish/publish.reducers";
+import { IRootState } from "redux/root-state.interface";
+import HourGlassImg from "assets/lottie/hourglass.json";
+import completed from "assets/icons/completed.svg";
+import failed from "assets/icons/failed.svg";
 
 const PublishSiteModal: FC = () => {
   const socket = io(config.server.SERVER);

@@ -7,7 +7,7 @@ const initialState: IPublishState = {
   deploymentId: null,
   transactionResponse: null,
   projectId: null,
-  currentStep: 0, 
+  currentStep: 0,
   domainId: null,
 };
 
@@ -15,51 +15,52 @@ const publishSlice = createSlice({
   name: "publish",
   initialState,
   reducers: {
-
     updatePublishConfig(state: IPublishState, action: { payload: string }) {
       return {
         ...state,
-        publishConfig: action.payload
-      }
+        publishConfig: action.payload,
+      };
     },
     updateDomainName(state: IPublishState, action: { payload: string }) {
       return {
         ...state,
-        domainName: action.payload
-      }
+        domainName: action.payload,
+      };
     },
     updateDeploymentId(state: IPublishState, action: { payload: string }) {
       return {
         ...state,
-        deploymentId: action.payload
-      }
+        deploymentId: action.payload,
+      };
     },
     updateDomainId(state: IPublishState, action: { payload: string }) {
       return {
         ...state,
-        domainId: action.payload
-      }
+        domainId: action.payload,
+      };
     },
     updateProjectId(state: IPublishState, action: { payload: string }) {
       return {
         ...state,
-        projectId: action.payload
-      }
+        projectId: action.payload,
+      };
     },
-    updateTransactionResponse(state: IPublishState, action: { payload: string }) {
+    updateTransactionResponse(
+      state: IPublishState,
+      action: { payload: string }
+    ) {
       return {
         ...state,
-        transactionResponse: action.payload
-      }
+        transactionResponse: action.payload,
+      };
     },
     updateCurrentStep(state: IPublishState, action: { payload: number }) {
       return {
         ...state,
-        currentStep: action.payload
-      }
+        currentStep: action.payload,
+      };
     },
   },
- 
 });
 
 export const {
@@ -69,6 +70,6 @@ export const {
   updateTransactionResponse,
   updateProjectId,
   updateCurrentStep,
-  updateDomainId
+  updateDomainId,
 } = publishSlice.actions;
 export default publishSlice.reducer;

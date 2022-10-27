@@ -1,22 +1,19 @@
-import React, { FC } from "react";
-import { Dialog } from "@headlessui/react";
-import UprightImg from "assets/icons/upright.png";
-import { CgClose } from "react-icons/cg";
-import CongratulationsImg from "assets/icons/congratulations.png";
-import { toggleModal } from "redux/modal/modal.reducers";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Dialog } from "@headlessui/react";
+import { CgClose } from "react-icons/cg";
+import { toggleModal } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
+import CongratulationsImg from "assets/icons/congratulations.png";
+import UprightImg from "assets/icons/upright.png";
 
-interface ISitePublishedModal {
-  generatedConfig?: string;
-}
-
-const SitePublishedModal: FC<ISitePublishedModal> = ({ generatedConfig }) => {
+const SitePublishedModal: FC = () => {
+  const dispatch = useDispatch();
   const domainName = useSelector(
     (state: IRootState) => state.publish.domainName
   );
-  const dispatch = useDispatch();
   const domainLink = "https://" + domainName;
+
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[580px] my-20 mx-28 rounded-[4px]  bg-white">
       <button
