@@ -12,6 +12,7 @@ import { IRootState } from "redux/root-state.interface";
 import ConfettiLottie from "assets/lottie/confetti.json";
 import CongratulationsImg from "assets/icons/congratulations.png";
 import { ReactComponent as FeatherIcon } from "assets/svgAsIcons/feather.svg";
+import { updateContractAbi, updateContractAddress } from "redux/contract/contract.reducers";
 
 const FinalModal: FC = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,8 @@ const FinalModal: FC = () => {
     dispatch(updateWorkspaceElementsArray(selectedTemplate.value));
     dispatch(updateWorkspaceBackgroundColor(selectedTemplate.backgroundColor));
     dispatch(setSiteHead(selectedTemplate.head));
+    dispatch(updateContractAbi(selectedTemplate.contract.abi));
+    dispatch(updateContractAddress(selectedTemplate.contract.address));
     dispatch(toggleModal(false));
   };
 
