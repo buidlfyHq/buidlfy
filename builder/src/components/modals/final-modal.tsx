@@ -2,7 +2,11 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import LottieComponent from "components/utils/lottie";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import {
+  setSiteHead,
+  updateWorkspaceBackgroundColor,
+  updateWorkspaceElementsArray,
+} from "redux/workspace/workspace.reducers";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import ConfettiLottie from "assets/lottie/confetti.json";
@@ -17,7 +21,9 @@ const FinalModal: FC = () => {
 
   const handleClick = () => {
     dispatch(updateWorkspaceElementsArray(selectedTemplate.value));
-    dispatch(toggleModal(false))
+    dispatch(updateWorkspaceBackgroundColor(selectedTemplate.backgroundColor));
+    dispatch(setSiteHead(selectedTemplate.head));
+    dispatch(toggleModal(false));
   };
 
   return (

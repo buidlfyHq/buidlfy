@@ -4,30 +4,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { encode as base64_encode } from "base-64";
 import ReactTooltip from "react-tooltip";
 import WalletMenu from "features/dashboard/wallet-menu";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import { initiatePublish } from "redux/publish/publish.action";
+import {
+  setSiteHead,
+  updateWorkspaceBackgroundColor,
+  updateWorkspaceElementsArray,
+} from "redux/workspace/workspace.reducers";
 import { updatePublishConfig } from "redux/publish/publish.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectorToDefault } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
-import { initiatePublish } from "redux/publish/publish.action";
 
 interface INavbar {
-  workspaceBackgroundColor: string;
-  setWorkspaceBackgroundColor?: (workspaceBackgroundColor: string) => void;
-  head: {
-    title: string;
-    logo: string | ArrayBuffer;
-  };
   setHideNavbar: (hideNavbar: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   setOpenSetting: (open: boolean) => void;
 }
 
 const Navbar: FC<INavbar> = ({
-  workspaceBackgroundColor,
-  head,
-  setWorkspaceBackgroundColor,
   setHideNavbar,
   setIsContainerSelected,
   setOpenSetting,
@@ -36,15 +31,17 @@ const Navbar: FC<INavbar> = ({
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
+  const workspaceBackgroundColor = useSelector(
+    (state: IRootState) => state.workspace.workspaceBackgroundColor
+  );
+  const head = useSelector((state: IRootState) => state.workspace.head);
   const contractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
   );
   const currentAccount = useSelector(
     (state: IRootState) => state.web3.currentAccount
   );
-  const publishConfig = useSelector(
-    (state: IRootState) => state.publish.publishConfig
-  );
+
   const [abiJSON, setAbiJSON] = useState<
     {
       inputs: { internalType: string; name: string; type: string }[];
@@ -53,8 +50,7 @@ const Navbar: FC<INavbar> = ({
       stateMutability: string;
       type: string;
     }[]
-  >([]); // work in progress
-  const [generatedConfig, setGeneratedConfig] = useState<string>("");
+  >([]);
 
   useEffect(() => {
     if (contractDetails.abi) {
@@ -84,7 +80,8 @@ const Navbar: FC<INavbar> = ({
     localStorage.removeItem("items");
     dispatch(updateWorkspaceElementsArray([]));
     dispatch(setSelectorToDefault());
-    setWorkspaceBackgroundColor("rgba(255, 255, 255, 1)");
+    dispatch(updateWorkspaceBackgroundColor("rgba(255, 255, 255, 1)"));
+    dispatch(setSiteHead({ title: "", logo: "" }));
   };
 
   const handlePublish = () => {
@@ -101,7 +98,6 @@ const Navbar: FC<INavbar> = ({
       },
     };
     let stringifiedConfig = JSON.stringify(config);
-    setGeneratedConfig(base64_encode(stringifiedConfig));
     dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-process"));
