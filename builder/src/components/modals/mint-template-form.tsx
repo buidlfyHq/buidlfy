@@ -9,6 +9,7 @@ import { IRootState } from "redux/root-state.interface";
 import InfoCircleImg from "assets/icons/info-circle.png";
 import MintUploadImg from "assets/icons/mint-form-img.png";
 import { uploadImage } from "redux/upload/upload.action";
+import { updateMintedImageData } from "redux/minted/minted.reducers";
 
 const MintTemplateForm: FC = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,9 @@ const MintTemplateForm: FC = () => {
   );
   const imageLink = useSelector(
     (state: IRootState) => state.upload.uploadImage
+  );
+  const mintedImage = useSelector(
+    (state: IRootState) => state.minted.mintedImageData
   );
   const workspaceBackgroundColor = useSelector(
     (state: IRootState) => state.workspace.workspaceBackgroundColor
@@ -51,7 +55,7 @@ const MintTemplateForm: FC = () => {
   }, [contractDetails.abi]);
 
   // find suitable type
-  const onChangeImage = (e) => {
+  const onChangeImage = async (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
         // setSize(true);
@@ -59,6 +63,7 @@ const MintTemplateForm: FC = () => {
         // setSize(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
+          dispatch(updateMintedImageData(reader.result as string));
           dispatch(uploadImage({ data: reader.result as string }));
           setImage(imageLink);
         });
@@ -112,12 +117,17 @@ const MintTemplateForm: FC = () => {
       <div className="my-8 mint-upload-img">
         <div className="w-full h-[300px] upload-img-mint cursor-pointer">
           <label className="flex flex-col items-center justify-center h-full text-[12px] text-[#130F1C]">
-            <img src={MintUploadImg} alt="icon" width={50} height={50} />
+            <img
+              src={`${mintedImage ? mintedImage : MintUploadImg}`}
+              alt="icon"
+              width={50}
+              height={50}
+            />
             <div className="text-[13px] text-[#7A7B93] w-[240px] text-center mt-9">
               Upload a file or drag and drop PNG, JPG, GIF in 800*400
               resolution.
             </div>
-            <span className="mt-5 text-[#651FFF] text-[12px]">
+            <span className="mt-5 text-[#651FFF] text-[12px] cursor-pointer">
               Add from your desktop
             </span>
             <input

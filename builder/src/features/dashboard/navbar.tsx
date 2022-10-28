@@ -1,16 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import ReactDOMServer from "react-dom/server";
 import { useDispatch, useSelector } from "react-redux";
-import { encode as base64_encode } from "base-64";
 import ReactTooltip from "react-tooltip";
 import WalletMenu from "features/dashboard/wallet-menu";
-import { initiatePublish } from "redux/publish/publish.action";
 import {
-  setSiteHead,
   updateWorkspaceBackgroundColor,
   updateWorkspaceElementsArray,
 } from "redux/workspace/workspace.reducers";
-import { updatePublishConfig } from "redux/publish/publish.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import {
   setSelectorToDefault,
@@ -35,36 +31,12 @@ const Navbar: FC<INavbar> = ({
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const workspaceBackgroundColor = useSelector(
-    (state: IRootState) => state.workspace.workspaceBackgroundColor
-  );
-  const head = useSelector((state: IRootState) => state.workspace.head);
-  const contractDetails = useSelector(
-    (state: IRootState) => state.contract.contractDetails
-  );
   const currentAccount = useSelector(
     (state: IRootState) => state.web3.currentAccount
   );
-
-  const [abiJSON, setAbiJSON] = useState<
-    {
-      inputs: { internalType: string; name: string; type: string }[];
-      name: string;
-      outputs: { internalType: string; name: string; type: string }[];
-      stateMutability: string;
-      type: string;
-    }[]
-  >([]);
-
-  useEffect(() => {
-    if (contractDetails.abi) {
-      try {
-        setAbiJSON(JSON.parse(contractDetails.abi));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }, [contractDetails.abi]);
+  const publishStatus = useSelector(
+    (state: IRootState) => state.publish.publishStatus
+  );
 
   const handleCloseSidebar = () => {
     setIsContainerSelected(false);
@@ -89,28 +61,15 @@ const Navbar: FC<INavbar> = ({
     dispatch(updateContractAddress(""));
   };
 
-  const handlePublish = () => {
-    let config = {
-      head: {
-        title: head.title,
-        logo: head.logo,
-      },
-      background: workspaceBackgroundColor,
-      builder: workspaceElements,
-      contract: {
-        abi: abiJSON,
-        address: contractDetails.address,
-      },
-    };
-    let stringifiedConfig = JSON.stringify(config);
-    dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
+  const handleConfirmPublish = () => {
     dispatch(toggleModal(true));
-    dispatch(toggleModalType("publish-process"));
-    dispatch(
-      initiatePublish({ configDetails: base64_encode(stringifiedConfig) })
-    );
+    dispatch(toggleModalType("publish-confirm"));
   };
-
+  const handleNewPublish = () => {
+    localStorage.removeItem("domain");
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("publish-confirm"));
+  };
   const handleMintTemplateForm = () => {
     dispatch(toggleModal(true));
     dispatch(toggleModalType("mint-nft-form"));
@@ -137,7 +96,7 @@ const Navbar: FC<INavbar> = ({
       </div>
       <button
         className="w-full py-2 px-7 my-2 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
-        onClick={handlePublish}
+        onClick={handleConfirmPublish}
       >
         Publish
       </button>
@@ -195,12 +154,44 @@ const Navbar: FC<INavbar> = ({
             Mint as NFT
           </button>
         )}
-        <button
-          className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
-          onClick={handlePublish}
-        >
-          Publish
-        </button>
+        {publishStatus ? (
+          <>
+            <button
+              disabled={!(workspaceElements?.length > 0)}
+              className={`py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap text-white px-[20px] py-[10px] rounded-[10px] ${
+                workspaceElements?.length > 0
+                  ? ""
+                  : "opacity-30 pointer-events-none"
+              }`}
+              onClick={handleConfirmPublish}
+            >
+              Re-Publish
+            </button>
+            <button
+              disabled={!(workspaceElements?.length > 0)}
+              className={`py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap text-white px-[20px] py-[10px] rounded-[10px] ${
+                workspaceElements?.length > 0
+                  ? ""
+                  : "opacity-30 pointer-events-none"
+              }`}
+              onClick={handleNewPublish}
+            >
+              New Publish
+            </button>
+          </>
+        ) : (
+          <button
+            disabled={!(workspaceElements?.length > 0)}
+            className={`py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap text-white px-[20px] py-[10px] rounded-[10px] ${
+              workspaceElements?.length > 0
+                ? ""
+                : "opacity-30 pointer-events-none"
+            }`}
+            onClick={handleConfirmPublish}
+          >
+            Publish
+          </button>
+        )}
         <WalletMenu />
       </div>
     </main>
