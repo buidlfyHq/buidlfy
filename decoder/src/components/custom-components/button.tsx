@@ -3,9 +3,9 @@ import { Dialog } from "@headlessui/react";
 import { ethers, Contract } from "ethers";
 import Web3Modal from "web3modal";
 import BuilderConfig from "config";
+import { providerOptions } from "config/provider-options";
 import { onLoad } from "hooks/on-load";
 import { onRequest } from "hooks/on-request";
-import { providerOptions } from "config/provider-options";
 import ITexts from "interfaces/texts";
 import { MARGIN_VARIABLE } from "config/constants";
 import "styles/components.css";
@@ -38,9 +38,10 @@ const Button: FC<ITexts> = ({
 }) => {
   const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
-  const [account, setAccount] = useState<string>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [transactionStatus, setTransactionStatus] = useState<string>("");
+  const [account, setAccount] = useState<string>(null);
+  const [library, setLibrary] = useState(null);
 
   useEffect(() => {
     if (config.contract.abi !== [] && config.contract.address !== "") {
@@ -66,9 +67,47 @@ const Button: FC<ITexts> = ({
       const provider = await web3Modal.connect();
       const library: any = new ethers.providers.Web3Provider(provider); // required
       const accounts: any = await library.listAccounts(); // required
+      setLibrary(library);
       if (accounts) setAccount(accounts[0]);
+      await switchNetwork();
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // switch to polygon testnet
+  const switchNetwork = async () => {
+    try {
+      await library.provider.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: `0x${Number(80001).toString(16)}` }],
+      });
+    } catch (switchError) {
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (switchError.code === 4902) {
+        try {
+          await library.provider.request({
+            method: "wallet_addEthereumChain",
+            params: [
+              {
+                chainId: `0x${Number(80001).toString(16)}`,
+                chainName: "Mumbai",
+                nativeCurrency: {
+                  name: "MATIC",
+                  symbol: "MATIC",
+                  decimals: 18,
+                },
+                rpcUrls: [
+                  "https://polygon-mumbai.g.alchemy.com/v2/i0JIYxK_EGtBX5aGG1apX4KuoH7j_7dq",
+                ],
+                blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+              },
+            ],
+          });
+        } catch (addError) {
+          throw addError;
+        }
+      }
     }
   };
 
