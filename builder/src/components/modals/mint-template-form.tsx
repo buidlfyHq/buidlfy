@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
@@ -18,10 +18,37 @@ const MintTemplateForm: FC = () => {
   const imageLink = useSelector(
     (state: IRootState) => state.upload.uploadImage
   );
+  const workspaceBackgroundColor = useSelector(
+    (state: IRootState) => state.workspace.workspaceBackgroundColor
+  );
+  const head = useSelector((state: IRootState) => state.workspace.head);
+  const contractDetails = useSelector(
+    (state: IRootState) => state.contract.contractDetails
+  );
+
   const [image, setImage] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [abiJSON, setAbiJSON] = useState<
+    {
+      inputs: { internalType: string; name: string; type: string }[];
+      name: string;
+      outputs: { internalType: string; name: string; type: string }[];
+      stateMutability: string;
+      type: string;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    if (contractDetails.abi) {
+      try {
+        setAbiJSON(JSON.parse(contractDetails.abi));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [contractDetails.abi]);
 
   // find suitable type
   const onChangeImage = (e) => {
@@ -47,6 +74,15 @@ const MintTemplateForm: FC = () => {
       category,
       description,
       value: workspaceElements,
+      backgroundColor: workspaceBackgroundColor,
+      head: {
+        title: head.title,
+        logo: head.logo,
+      },
+      contract: {
+        abi: abiJSON,
+        address: contractDetails.address,
+      },
     };
 
     console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));

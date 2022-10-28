@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
-import { MARGIN_VARIABLE } from "config/constants";
 
 const Text: FC<ITexts> = ({
   id,

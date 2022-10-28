@@ -10,6 +10,7 @@ import {
 } from "./workspace.utils";
 import {
   IAction,
+  IHead,
   IWorkspaceElement,
   IWorkspaceState,
 } from "./workspace.interfaces";
@@ -18,6 +19,11 @@ const initialState: IWorkspaceState = {
   workspaceElements: [],
   selectedElement: null,
   uploadedImagesData: [],
+  workspaceBackgroundColor: "rgba(255, 255, 255, 1)",
+  head: {
+    title: "",
+    logo: "",
+  },
 };
 
 const workspaceSlice = createSlice({
@@ -53,7 +59,7 @@ const workspaceSlice = createSlice({
       const updatedSelectedElement = fetchSelectedElement(
         updatedElements,
         action.payload.settingItemId
-      );      
+      );
       return {
         ...state,
         workspaceElements: updatedElements,
@@ -118,6 +124,21 @@ const workspaceSlice = createSlice({
       };
     },
 
+    // to update workspace background color
+    updateWorkspaceBackgroundColor(
+      state: IWorkspaceState,
+      action: { payload: string }
+    ) {
+      state.workspaceBackgroundColor = action.payload
+        ? action.payload
+        : "rgba(255, 255, 255, 1)";
+    },
+
+    setSiteHead(state: IWorkspaceState, action: { payload: IHead }) {
+      state.head.title = action.payload?.title;
+      state.head.logo = action.payload?.logo;
+    },
+
     // to set current selected element
     setSelectedElement(state: IWorkspaceState, action: { payload: string }) {
       return {
@@ -142,7 +163,6 @@ const workspaceSlice = createSlice({
         state.selectedElement.i
       );
 
-      
       return {
         ...state,
         workspaceElements: updatedContract,
@@ -152,14 +172,17 @@ const workspaceSlice = createSlice({
 
     updateUploadedImageData(state: IWorkspaceState, action: { payload }) {
       const { settingItemId, uploadedImageData } = action.payload;
-      const newUploadedImagesData = fetchUploadedImageData(settingItemId, uploadedImageData, state.uploadedImagesData)      
+      const newUploadedImagesData = fetchUploadedImageData(
+        settingItemId,
+        uploadedImageData,
+        state.uploadedImagesData
+      );
       return {
         ...state,
-       uploadedImagesData: newUploadedImagesData
-      }
+        uploadedImagesData: newUploadedImagesData,
+      };
     },
   },
- 
 });
 
 export const {
@@ -168,6 +191,8 @@ export const {
   updateWorkspaceElementSubStyle,
   updateWorkspaceImageElementStyle,
   updateWorkspaceElementsArray,
+  updateWorkspaceBackgroundColor,
+  setSiteHead,
   setSelectedElement,
   saveContractConfig,
   updateUploadedImageData,

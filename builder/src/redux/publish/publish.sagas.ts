@@ -1,5 +1,11 @@
 import { call, all, put, takeLatest } from "redux-saga/effects";
-import { updateCurrentStep, updateDeploymentId, updateDomainId, updateDomainName, updateProjectId, updateTransactionResponse } from "./publish.reducers";
+import {
+  updateCurrentStep,
+  updateDeploymentId,
+  updateDomainName,
+  updateProjectId,
+  updateTransactionResponse,
+} from "./publish.reducers";
 import {
   initiatePublishService,
   getPublishDetailsService,
@@ -8,14 +14,13 @@ import {
 } from "./publish.services";
 import publishActionTypes from "./publish.types";
 
-
 function* initiatePublish({ payload }) {
   const { configDetails } = payload;
   const transactionRes = yield call(initiatePublishService, configDetails);
   yield put(updateTransactionResponse(transactionRes.publishId));
-  if (!transactionRes.error) {  
-      const deploymentId = JSON.parse(transactionRes.responseText).data
-        .deploymentId;    
+  if (!transactionRes.error) {
+    const deploymentId = JSON.parse(transactionRes.responseText).data
+      .deploymentId;
     yield put(updateDeploymentId(deploymentId));
     yield put(updateCurrentStep(1));
   } else {

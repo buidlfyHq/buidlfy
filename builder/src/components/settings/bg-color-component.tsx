@@ -1,6 +1,9 @@
 import React, { useState, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
+import {
+  updateWorkspaceBackgroundColor,
+  updateWorkspaceElementStyle,
+} from "redux/workspace/workspace.reducers";
 import ColorPickerDropdown from "components/utils/color-picker";
 import "styles/components.css";
 import "styles/dashboard.css";
@@ -13,7 +16,6 @@ interface IBgColorComponent {
   name?: string;
   elementBackgroundColor?: string;
   workspaceBackgroundColor?: string;
-  setWorkspaceBackgroundColor?: (workspaceBackgroundColor: string) => void;
 }
 
 const BgColorComponent: FC<IBgColorComponent> = ({
@@ -21,7 +23,6 @@ const BgColorComponent: FC<IBgColorComponent> = ({
   name,
   elementBackgroundColor,
   workspaceBackgroundColor,
-  setWorkspaceBackgroundColor,
 }) => {
   const dispatch = useDispatch();
 
@@ -38,7 +39,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({
 
   const handleChange = (e: string) => {
     if (workspaceBackgroundColor) {
-      setWorkspaceBackgroundColor(e);
+      dispatch(updateWorkspaceBackgroundColor(e));
     } else {
       dispatch(
         updateWorkspaceElementStyle({

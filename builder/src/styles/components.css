@@ -976,6 +976,13 @@ height: 40px;
 
 .connect-wallet-button{
   background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
+  opacity: 85%;
+  transition: all 0.2s linear;
+}
+
+.connect-wallet-button:hover{
+  background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
+  opacity: 100%;
 }
 
 .mint-upload-img{
@@ -1272,6 +1279,12 @@ height: 40px;
 .gradient-text-bg{
   background-color: linear-gradient(132.56deg, rgba(87, 153, 235, 0.12) 5.63%, rgba(159, 116, 251, 0.12) 106.18%);;
   background: linear-gradient(to right, #68AEFF 0%, #9768FB 79.17%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-no-template{
+  background: linear-gradient(to right, #648CF4 0%, #3F28C9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

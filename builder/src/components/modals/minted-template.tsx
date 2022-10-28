@@ -20,14 +20,9 @@ const MintedTemplate: FC = () => {
         Congratulations, you have saved the template with us! Please check the
         template in the my template section.
       </div>
-      <Link to="/my-templates" onClick={handleClose}>
-        <button className="text-[#7742E7] text-[18px] font-[500] flex bordered-button mt-8 items-center py-4 px-9">
-          View My Templates
-        </button>
-      </Link>
       <button
         onClick={handleClose}
-        className="text-[#8268E5] text-[18px] font-[500] mt-5 cursor-pointer"
+        className="text-[#7742E7] text-[18px] font-[500] flex bordered-button mt-8 items-center py-4 px-9"
       >
         Okay
       </button>
