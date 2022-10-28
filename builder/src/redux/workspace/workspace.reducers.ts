@@ -129,12 +129,14 @@ const workspaceSlice = createSlice({
       state: IWorkspaceState,
       action: { payload: string }
     ) {
-      state.workspaceBackgroundColor = action.payload;
+      state.workspaceBackgroundColor = action.payload
+        ? action.payload
+        : "rgba(255, 255, 255, 1)";
     },
 
     setSiteHead(state: IWorkspaceState, action: { payload: IHead }) {
-      state.head.title = action.payload.title;
-      state.head.logo = action.payload.logo;
+      state.head.title = action.payload?.title;
+      state.head.logo = action.payload?.logo;
     },
 
     // to set current selected element

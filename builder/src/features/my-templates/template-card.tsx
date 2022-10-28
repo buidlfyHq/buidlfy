@@ -42,8 +42,8 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
       dispatch(updateWorkspaceElementsArray(config));
       dispatch(updateWorkspaceBackgroundColor(backgroundColor));
       dispatch(setSiteHead(head));
-      dispatch(updateContractAbi(contract.abi));
-      dispatch(updateContractAddress(contract.address));
+      dispatch(updateContractAbi(contract?.abi));
+      dispatch(updateContractAddress(contract?.address));
     }
     return navigate("/");
   };

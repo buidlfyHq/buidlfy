@@ -31,6 +31,8 @@ const DefaultSettings: FC<IDefaultSettings> = ({
     (state: IRootState) => state.upload.uploadImage
   );
 
+  console.log(workspaceBackgroundColor);
+
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
   const [siteImage, setSiteImage] = useState<string>();
   const [isSpinner, setIsSpinner] = useState<boolean>(false);
