@@ -103,6 +103,19 @@ const Navbar: FC<INavbar> = ({
     </div>
   );
 
+  const publishButton = (text: string, handleClick: () => void) => {
+    return (
+      <button
+        disabled={!(workspaceElements?.length > 0)}
+        className={`py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap text-white px-[20px] py-[10px] rounded-[10px] ${
+          workspaceElements?.length > 0 ? "" : "opacity-30 pointer-events-none"
+        }`}
+        onClick={handleClick}
+      >
+        {text}
+      </button>
+    );
+  };
   return (
     <main
       onClick={handleCloseSidebar}
@@ -154,44 +167,16 @@ const Navbar: FC<INavbar> = ({
             Mint as NFT
           </button>
         )}
+
         {publishStatus ? (
           <>
-            <button
-              disabled={!(workspaceElements?.length > 0)}
-              className={`py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap text-white px-[20px] py-[10px] rounded-[10px] ${
-                workspaceElements?.length > 0
-                  ? ""
-                  : "opacity-30 pointer-events-none"
-              }`}
-              onClick={handleConfirmPublish}
-            >
-              Re-Publish
-            </button>
-            <button
-              disabled={!(workspaceElements?.length > 0)}
-              className={`py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap text-white px-[20px] py-[10px] rounded-[10px] ${
-                workspaceElements?.length > 0
-                  ? ""
-                  : "opacity-30 pointer-events-none"
-              }`}
-              onClick={handleNewPublish}
-            >
-              New Publish
-            </button>
+            {publishButton("Re-Publish", handleConfirmPublish)}
+            {publishButton("New Publish", handleNewPublish)}
           </>
         ) : (
-          <button
-            disabled={!(workspaceElements?.length > 0)}
-            className={`py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap text-white px-[20px] py-[10px] rounded-[10px] ${
-              workspaceElements?.length > 0
-                ? ""
-                : "opacity-30 pointer-events-none"
-            }`}
-            onClick={handleConfirmPublish}
-          >
-            Publish
-          </button>
+          publishButton("Publish", handleConfirmPublish)
         )}
+
         <WalletMenu />
       </div>
     </main>

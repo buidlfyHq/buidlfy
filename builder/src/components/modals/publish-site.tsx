@@ -33,9 +33,6 @@ const PublishSiteModal: FC = () => {
   const transactionRes = useSelector(
     (state: IRootState) => state.publish.transactionResponse
   );
-  const publishStatus = useSelector(
-    (state: IRootState) => state.publish.publishStatus
-  );
   const publishSubDomain = localStorage.getItem("domain");
   useEffect(() => {
     if (currentStep === 1) {
