@@ -120,16 +120,25 @@ const MintTemplateForm: FC = () => {
             <img
               src={`${mintedImage ? mintedImage : MintUploadImg}`}
               alt="icon"
-              width={50}
+              width={`${mintedImage ? 200 : 50}`}
               height={50}
             />
-            <div className="text-[13px] text-[#7A7B93] w-[240px] text-center mt-9">
-              Upload a file or drag and drop PNG, JPG, GIF in 800*400
-              resolution.
-            </div>
-            <span className="mt-5 text-[#651FFF] text-[12px] cursor-pointer">
-              Add from your desktop
-            </span>
+            {!mintedImage ? (
+              <>
+                <div className="text-[13px] text-[#7A7B93] w-[240px] text-center mt-9">
+                  Upload a file or drag and drop PNG, JPG, GIF in 800*400
+                  resolution.
+                </div>
+                <span className="mt-5 text-[#651FFF] text-[12px] cursor-pointer">
+                  Add from your desktop
+                </span>
+              </>
+            ) : (
+              <span className="bg-white hover:bg-[#8268E5] hover:text-white ease-linear duration-200 border border-[#8268E5] py-2 px-10 bottom-[0.5rem] rounded-[34px] text-[#8268E5] text-[12px] cursor-pointer">
+                Change Image
+              </span>
+            )}
+
             <input
               onChange={onChangeImage}
               className="hidden block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"
