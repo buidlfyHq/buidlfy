@@ -2,12 +2,17 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import LottieComponent from "components/utils/lottie";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import {
+  setSiteHead,
+  updateWorkspaceBackgroundColor,
+  updateWorkspaceElementsArray,
+} from "redux/workspace/workspace.reducers";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import ConfettiLottie from "assets/lottie/confetti.json";
 import CongratulationsImg from "assets/icons/congratulations.png";
 import { ReactComponent as FeatherIcon } from "assets/svgAsIcons/feather.svg";
+import { updateContractAbi, updateContractAddress } from "redux/contract/contract.reducers";
 
 const FinalModal: FC = () => {
   const dispatch = useDispatch();
@@ -17,7 +22,11 @@ const FinalModal: FC = () => {
 
   const handleClick = () => {
     dispatch(updateWorkspaceElementsArray(selectedTemplate.value));
-    dispatch(toggleModal(false))
+    dispatch(updateWorkspaceBackgroundColor(selectedTemplate.backgroundColor));
+    dispatch(setSiteHead(selectedTemplate.head));
+    dispatch(updateContractAbi(selectedTemplate.contract.abi));
+    dispatch(updateContractAddress(selectedTemplate.contract.address));
+    dispatch(toggleModal(false));
   };
 
   return (

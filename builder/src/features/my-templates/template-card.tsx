@@ -1,11 +1,20 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import {
+  setSiteHead,
+  updateWorkspaceBackgroundColor,
+  updateWorkspaceElementsArray,
+} from "redux/workspace/workspace.reducers";
+import {
+  updateContractAbi,
+  updateContractAddress,
+} from "redux/contract/contract.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplate } from "redux/template/template.reducers";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { IHead, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { IContractDetails } from "redux/contract/contract.interfaces";
 
 interface ITemplateCard {
   template: ISelectedTemplate;
@@ -23,8 +32,19 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
     dispatch(toggleModalType("list-single"));
   };
 
-  const openTemplate = (config: IWorkspaceElement[]) => {
-    if (config) dispatch(updateWorkspaceElementsArray(config));
+  const openTemplate = (
+    config: IWorkspaceElement[],
+    backgroundColor: string,
+    head: IHead,
+    contract: IContractDetails
+  ) => {
+    if (config) {
+      dispatch(updateWorkspaceElementsArray(config));
+      dispatch(updateWorkspaceBackgroundColor(backgroundColor));
+      dispatch(setSiteHead(head));
+      dispatch(updateContractAbi(contract?.abi));
+      dispatch(updateContractAddress(contract?.address));
+    }
     return navigate("/");
   };
 
@@ -49,7 +69,14 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
           )}
           <div
             className="py-2 px-10 mt-4 rounded-[8px] bg-white text-[#7743E7]"
-            onClick={() => openTemplate(template.value)}
+            onClick={() =>
+              openTemplate(
+                template.value,
+                template.backgroundColor,
+                template.head,
+                template.contract
+              )
+            }
           >
             Use Template
           </div>
