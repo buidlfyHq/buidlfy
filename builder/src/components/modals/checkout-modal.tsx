@@ -5,7 +5,6 @@ import { Dialog } from "@headlessui/react";
 import makeBlockie from "ethereum-blockies-base64";
 import { truncateString } from "utils/truncate-string";
 import { buyTemplate } from "redux/template/template.actions";
-import { toggleModalType } from "redux/modal/modal.reducers";
 import { SelectedTemplateDto } from "redux/template/template.dto";
 import { IRootState } from "redux/root-state.interface";
 
