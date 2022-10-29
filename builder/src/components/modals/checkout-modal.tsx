@@ -64,6 +64,7 @@ const CheckoutModal: FC = () => {
               </div>
             </div>
           </div>
+
           <div className="flex items-center justify-between mt-5">
             <div className="text-[#8E8E93] text-[14px]">Amount</div>
             <div className="text-[#1C1C1E] text-[14px] font-[500]">

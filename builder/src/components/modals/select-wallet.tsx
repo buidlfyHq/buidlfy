@@ -1,20 +1,20 @@
-import React, { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
+import Spinner from "components/utils/assets/spinner";
 import { connectWallet } from "redux/web3/web3.actions";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { toggleModal } from "redux/modal/modal.reducers";
 import MetamaskImg from "assets/icons/Metamask-icon.png";
 
 const SelectWallet: FC = () => {
   const dispatch = useDispatch();
-  const currentAccount = useSelector((state: any) => state.web3.currentAccount);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (currentAccount) {
-      dispatch(toggleModalType("checkout"));
-    }
-  }, [currentAccount]);
+  const handleConnect = () => {
+    setLoading(true);
+    dispatch(connectWallet());
+  };
 
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[464px] my-20 mx-28 rounded-[8px] py-7 px-8 bg-white">
@@ -29,11 +29,12 @@ const SelectWallet: FC = () => {
           />
         </div>
         <div
-          onClick={() => dispatch(connectWallet())}
+          onClick={handleConnect}
           className="flex items-center justify-between bg-[#F8F8FD] rounded-[8px] hover:bg-gray-100 p-4 text-[18px] mt-4 cursor-pointer hover:border hover:border-[#5799EB]"
         >
           <div>Metamask</div>
-          <div className="p-1 bg-white rounded-[50%]">
+          <div className="p-1 rounded-[50%] flex">
+            {loading && <Spinner />}
             <img src={MetamaskImg} alt="img_temp" width={40} height={40} />
           </div>
         </div>

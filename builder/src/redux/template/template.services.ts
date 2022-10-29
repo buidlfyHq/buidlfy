@@ -10,7 +10,7 @@ import {
 } from "redux/web3/web3.utils";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
-const DEFAULT_ID = parseInt(config.network.DEFAULT_NETWORK.id);
+const DEFAULT_ID = parseInt(config.network.DEFAULT_NETWORK.chainId);
 
 export const initiateTransactionService = async (
   listingId: BigNumber,

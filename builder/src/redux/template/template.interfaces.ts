@@ -8,7 +8,7 @@ export interface ITemplateState {
   mintTokenId: number;
   mintTemplateLoading: boolean;
   selectedTemplate: ISelectedTemplate;
-  templateList: [];
+  templateList: ISelectedTemplate[];
 }
 
 export interface ISelectedTemplate {
@@ -27,4 +27,5 @@ export interface ISelectedTemplate {
   listing_tokenId?: string;
   listing_tokenOwner?: string;
   owner_of?: string;
+  isOwned?: boolean;
 }
