@@ -23,6 +23,7 @@ import mintedActionTypes from "./minted.types";
 import { IRootState } from "redux/root-state.interface";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { SelectedTemplateDto } from "redux/template/template.dto";
+import { filterAllTemplates } from "redux/template/template.reducers";
 
 function* createTemplateListing({ payload }) {
   const currentAccount: string = yield select(
@@ -77,6 +78,7 @@ function* getOwnedTemplates(): any {
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.templates.length !== 0) {
       yield put(ownedTemplatesFetched(fetchedTemplates.templates));
+      yield put(filterAllTemplates(fetchedTemplates.templates));
     }
   } else {
     yield put(

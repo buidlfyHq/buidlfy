@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { filterTemplates } from "./template.utils";
 import { ISelectedTemplate, ITemplateState } from "./template.interfaces";
 
 const initialState: ITemplateState = {
@@ -34,6 +35,12 @@ const templateSlice = createSlice({
     allTemplatesFetched(state, action) {
       state.templateList = action.payload;
     },
+    filterAllTemplates(state, action: any) {
+      const modifiedTemplateList = state.templateList.map((template) =>
+        filterTemplates(template, action.payload)
+      );
+      state.templateList = modifiedTemplateList;
+    },
   },
 });
 
@@ -44,5 +51,6 @@ export const {
   startMintTemplateLoader,
   setSelectedTemplate,
   allTemplatesFetched,
+  filterAllTemplates,
 } = templateSlice.actions;
 export default templateSlice.reducer;
