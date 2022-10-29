@@ -11,6 +11,7 @@ import { IRootState } from "redux/root-state.interface";
 import EyeImg from "assets/icons/eye.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
 import USDTIcon from "assets/icons/usdt.png";
+import {BiArrowBack} from 'react-icons/bi'
 
 interface ISingleTemplateDetails {
   list: boolean;
@@ -23,7 +24,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
   );
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
 
-  const handleSubmit = () => {
+  const handleListAndBuy = () => {
     list
       ? dispatch(toggleModalType("list-template-for-sale"))
       : dispatch(toggleModalType("select-wallet"));
@@ -31,6 +32,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
 
   return (
     <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
+      <BiArrowBack onClick={() => dispatch(toggleModalType('template'))} className="mb-2 text-[20px] duration-150 ease-linear scale-100 cursor-pointer hover:scale-125" />
       <div className="flex items-center justify-between">
         <div className="text-[22px] font-[500] text-[#14142B]">
           {selectedTemplateDto.name}
@@ -63,7 +65,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
           </div>
           <div>
             {!list ? (
-              <div className="flex items-center justify-between w-full mt-8 text-center bg-[#E6EAF4] rounded-[8px] py-4 px-4 cursor-pointer">
+              <div className="flex items-center justify-between w-full mt-8 text-center bg-[#E6EAF4] rounded-[8px] py-4 px-4">
                 <div className="flex items-center gap-2.5">
                   <img
                     src={USDTIcon}
@@ -72,10 +74,9 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
                     height={24}
                   />
                   <div className="text-[18px] font-[600] text-[#14142B]">
-                    {ethers.utils.formatUnits(
-                      selectedTemplateDto.buyoutPricePerToken
-                    )}{" "}
-                    USDT
+                    {ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken) !== '0.0' ? 
+                      (`${ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)} USDC`)
+                    : 'Free'}
                   </div>
                 </div>
                 <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
@@ -89,7 +90,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
               <div className="mt-16"> </div>
             )}
             <button
-              onClick={handleSubmit}
+              onClick={handleListAndBuy}
               className="w-full flex justify-center gap-10 items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
             >
               <div className="text-[14px]">

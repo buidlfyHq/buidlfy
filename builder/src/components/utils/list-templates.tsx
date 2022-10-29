@@ -26,6 +26,7 @@ const ListTemplates : FC<IListTemplates> = ({
       {filteredTemplateList.length > 0 ? 
         filteredTemplateList.map((temp: ISelectedTemplate) => {
           const {id, image = DefaultTemplateImg, name = 'Template'} = temp
+          const amount = ethers.utils.formatUnits(temp.listing_buyoutPricePerToken)
           return (
             <div
               key={id}
@@ -48,8 +49,14 @@ const ListTemplates : FC<IListTemplates> = ({
                 </div>}
               </div>
               <div className="text-[18px] font-[600] text-[#14142B] mt-2 px-2 pb-1">
-                {ethers.utils.formatUnits(temp.listing_buyoutPricePerToken)}{" "}
-                USDC
+                {amount !== '0.0' ? 
+                  (`${amount} USDT`) :
+                  (
+                    <span className="py-2 px-3.5 bg-gray-200 rounded-[8px] text-[14px] font-[500]">
+                      Free
+                    </span>
+                  )
+                }
               </div>
             </div>
           );
