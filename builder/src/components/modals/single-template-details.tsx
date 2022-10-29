@@ -1,11 +1,21 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { Tag } from "components/utils/tag-component";
 import { truncateString } from "utils/truncate-string";
-import { toggleModalType } from "redux/modal/modal.reducers";
+import {
+  setSiteHead,
+  updateWorkspaceBackgroundColor,
+  updateWorkspaceElementsArray,
+} from "redux/workspace/workspace.reducers";
+import {
+  updateContractAbi,
+  updateContractAddress,
+} from "redux/contract/contract.reducers";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { SelectedTemplateDto } from "redux/template/template.dto";
 import { IRootState } from "redux/root-state.interface";
 import EyeImg from "assets/icons/eye.png";
@@ -24,9 +34,26 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
 
   const handleSubmit = () => {
-    list
-      ? dispatch(toggleModalType("list-template-for-sale"))
-      : dispatch(toggleModalType("select-wallet"));
+    if (list) {
+      dispatch(toggleModalType("list-template-for-sale"));
+    } else {
+      if (selectedTemplateDto?.isOwned) {
+        if (selectedTemplateDto?.value) {
+          dispatch(updateWorkspaceElementsArray(selectedTemplateDto?.value));
+          dispatch(
+            updateWorkspaceBackgroundColor(selectedTemplateDto?.backgroundColor)
+          );
+          dispatch(setSiteHead(selectedTemplateDto?.head));
+          dispatch(updateContractAbi(selectedTemplateDto?.contract?.abi));
+          dispatch(
+            updateContractAddress(selectedTemplateDto?.contract?.address)
+          );
+          dispatch(toggleModal(false));
+        }
+      } else {
+        dispatch(toggleModalType("select-wallet"));
+      }
+    }
   };
 
   return (
@@ -64,26 +91,27 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
           <div>
             {!list ? (
               <div className="flex items-center justify-between w-full mt-8 text-center bg-[#E6EAF4] rounded-[8px] py-4 px-4 cursor-pointer">
-                <div className="flex items-center gap-2.5">
-                  <img
-                    src={USDTIcon}
-                    alt="icon"
-                    width={24}
-                    height={24}
-                  />
-                  <div className="text-[18px] font-[600] text-[#14142B]">
-                    {ethers.utils.formatUnits(
-                      selectedTemplateDto.buyoutPricePerToken
-                    )}{" "}
-                    USDT
-                  </div>
-                </div>
-                <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
-                  ~$
-                  {ethers.utils.formatUnits(
-                    selectedTemplateDto.buyoutPricePerToken
-                  )}
-                </div>
+                {selectedTemplateDto?.isOwned ? (
+                  <div>Template already purchased.</div>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-2.5">
+                      <img src={USDTIcon} alt="icon" width={24} height={24} />
+                      <div className="text-[18px] font-[600] text-[#14142B]">
+                        {ethers.utils.formatUnits(
+                          selectedTemplateDto.buyoutPricePerToken
+                        )}{" "}
+                        USDT
+                      </div>
+                    </div>
+                    <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
+                      ~$
+                      {ethers.utils.formatUnits(
+                        selectedTemplateDto.buyoutPricePerToken
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
             ) : (
               <div className="mt-16"> </div>
@@ -93,7 +121,11 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
               className="w-full flex justify-center gap-10 items-center mt-5 text-center text-[22px] text-white cursor-pointer rounded-[8px] font-[500] py-4 connect-wallet-button"
             >
               <div className="text-[14px]">
-                {!list ? "Connect Wallet to Buy" : "List on Buidlfy"}
+                {!list
+                  ? selectedTemplateDto?.isOwned
+                    ? "Use Template"
+                    : "Connect Wallet to Buy"
+                  : "List on Buidlfy"}
               </div>
               <VscArrowRight className="ml-2 text-[22px]" />
             </button>
@@ -107,7 +139,9 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
         </div>
       </div>
       <div className="flex gap-3 mt-7">
-        {selectedTemplateDto?.category && <Tag name={selectedTemplateDto?.category} />}
+        {selectedTemplateDto?.category && (
+          <Tag name={selectedTemplateDto?.category} />
+        )}
       </div>
     </Dialog.Panel>
   );

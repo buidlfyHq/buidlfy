@@ -4,7 +4,7 @@ import erc1155Abi from "assets/abis/ERC1155.json";
 import erc20Abi from "assets/abis/ERC20.json";
 import config from "config";
 
-const DEFAULT_ID = parseInt(config.network.DEFAULT_NETWORK.id);
+const DEFAULT_ID = parseInt(config.network.DEFAULT_NETWORK.chainId);
 
 export const networks = {
   5: {
@@ -13,7 +13,7 @@ export const networks = {
   },
   80001: {
     chainId: `0x${Number(80001).toString(16)}`,
-    chainName: "matic",
+    chainName: "mumbai",
     nativeCurrency: {
       name: "MATIC",
       symbol: "MATIC",

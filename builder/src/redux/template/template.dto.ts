@@ -18,6 +18,7 @@ export class SelectedTemplateDto {
   buyoutPricePerToken: BigNumber;
   listingTokenId?: string;
   tokenOwner: string;
+  isOwned?: boolean;
 
   constructor(selectedTemplate: ISelectedTemplate) {
     this.id = selectedTemplate.id;
@@ -35,5 +36,6 @@ export class SelectedTemplateDto {
     this.listingTokenId = selectedTemplate.listing_tokenId;
     this.tokenOwner =
       selectedTemplate.listing_tokenOwner || selectedTemplate.owner_of;
+    this.isOwned = selectedTemplate?.isOwned;
   }
 }
