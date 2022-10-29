@@ -14,6 +14,7 @@ import {
   updateContractAddress,
 } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
+import PublishButton from "components/utils/publish-button";
 import "styles/components.css";
 
 interface INavbar {
@@ -103,19 +104,6 @@ const Navbar: FC<INavbar> = ({
     </div>
   );
 
-  const publishButton = (text: string, handleClick: () => void) => {
-    return (
-      <button
-        disabled={!(workspaceElements?.length > 0)}
-        className={`py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap text-white px-[20px] py-[10px] rounded-[10px] ${
-          workspaceElements?.length > 0 ? "" : "opacity-30 pointer-events-none"
-        }`}
-        onClick={handleClick}
-      >
-        {text}
-      </button>
-    );
-  };
   return (
     <main
       onClick={handleCloseSidebar}
@@ -170,11 +158,14 @@ const Navbar: FC<INavbar> = ({
 
         {publishStatus ? (
           <>
-            {publishButton("Re-Publish", handleConfirmPublish)}
-            {publishButton("New Publish", handleNewPublish)}
+            <PublishButton
+              text="Re-Publish"
+              handleClick={handleConfirmPublish}
+            />
+            <PublishButton text="New Publish" handleClick={handleNewPublish} />
           </>
         ) : (
-          publishButton("Publish", handleConfirmPublish)
+          <PublishButton text="Publish" handleClick={handleConfirmPublish} />
         )}
 
         <WalletMenu />
