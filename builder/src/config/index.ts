@@ -10,8 +10,15 @@ export interface IConfig {
   };
   network: {
     DEFAULT_NETWORK: {
-      id: string;
-      name: string;
+      chainId: string;
+      chainName: string;
+      nativeCurrency: {
+        name: string;
+        symbol: string;
+        decimals: number;
+      };
+      rpcUrls: string[];
+      blockExplorerUrls: string[];
     };
   };
 }
@@ -31,7 +38,19 @@ const development: IConfig = {
     SERVER: "http://localhost:8080/",
   },
   network: {
-    DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
+    DEFAULT_NETWORK: {
+      chainId: `0x${Number(80001).toString(16)}`,
+      chainName: "mumbai",
+      nativeCurrency: {
+        name: "MATIC",
+        symbol: "MATIC",
+        decimals: 18,
+      },
+      rpcUrls: [
+        "https://polygon-mumbai.g.alchemy.com/v2/i0JIYxK_EGtBX5aGG1apX4KuoH7j_7dq",
+      ],
+      blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+    },
   },
 };
 
@@ -48,7 +67,19 @@ const production: IConfig = {
     SERVER: "http://localhost:8080/",
   },
   network: {
-    DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
+    DEFAULT_NETWORK: {
+      chainId: `0x${Number(80001).toString(16)}`,
+      chainName: "mumbai",
+      nativeCurrency: {
+        name: "MATIC",
+        symbol: "MATIC",
+        decimals: 18,
+      },
+      rpcUrls: [
+        "https://polygon-mumbai.g.alchemy.com/v2/i0JIYxK_EGtBX5aGG1apX4KuoH7j_7dq",
+      ],
+      blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+    },
   },
 };
 
@@ -65,7 +96,19 @@ const local: IConfig = {
     SERVER: "http://localhost:8080/",
   },
   network: {
-    DEFAULT_NETWORK: { id: `0x${Number(5).toString(16)}`, name: "goerli" },
+    DEFAULT_NETWORK: {
+      chainId: `0x${Number(80001).toString(16)}`,
+      chainName: "mumbai",
+      nativeCurrency: {
+        name: "MATIC",
+        symbol: "MATIC",
+        decimals: 18,
+      },
+      rpcUrls: [
+        "https://polygon-mumbai.g.alchemy.com/v2/i0JIYxK_EGtBX5aGG1apX4KuoH7j_7dq",
+      ],
+      blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+    },
   },
 };
 

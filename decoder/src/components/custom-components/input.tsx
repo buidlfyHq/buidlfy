@@ -63,7 +63,7 @@ const Input: FC<IInputComponent> = ({
           }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
             margin.marginLeft * MARGIN_VARIABLE
           }px`,
-          padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+          padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
         }}
         className="btn-border focus-visible:outline-none w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
         id={i}

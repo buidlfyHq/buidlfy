@@ -9,36 +9,32 @@ import upload from "assets/upload-img.svg";
 import { uploadImage } from "redux/upload/upload.action";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
+import { setSiteHead } from "redux/workspace/workspace.reducers";
 
 interface IDefaultSettings {
-  workspaceBackgroundColor: string;
-  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
-  head: {
-    title: string;
-    logo: string | ArrayBuffer;
-  };
-  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
   setHideNavbar?: (hideNavbar?: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   setOpenSetting: (open: boolean) => void;
 }
 
 const DefaultSettings: FC<IDefaultSettings> = ({
-  workspaceBackgroundColor,
-  setWorkspaceBackgroundColor,
-  head,
-  setHead,
   setHideNavbar,
   setIsContainerSelected,
   setOpenSetting,
 }) => {
   const dispatch = useDispatch();
-  const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
-  const [siteImage, setSiteImage] = useState<string>();
-  const [isSpinner, setIsSpinner] = useState<boolean>(false);
+  const workspaceBackgroundColor = useSelector(
+    (state: IRootState) => state.workspace.workspaceBackgroundColor
+  );
+  const head = useSelector((state: IRootState) => state.workspace.head);
   const imageLink = useSelector(
     (state: IRootState) => state.upload.uploadImage
   );
+
+  const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
+  const [siteImage, setSiteImage] = useState<string>();
+  const [isSpinner, setIsSpinner] = useState<boolean>(false);
+
   const onChangeLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > SITE_SIZE_VARIABLE) {
@@ -51,15 +47,16 @@ const DefaultSettings: FC<IDefaultSettings> = ({
           setSiteImage(reader.result as string);
           dispatch(uploadImage({ data: reader.result as string }));
           setIsSpinner(false);
-          setHead({ ...head, logo: imageLink });
+          dispatch(setSiteHead({ ...head, logo: imageLink }));
         });
         reader.readAsDataURL(e.target.files[0]);
       }
     }
   };
+
   const handleDeleteImage = () => {
     setSiteImage("");
-    setHead({ ...head, logo: "" });
+    dispatch(setSiteHead({ ...head, logo: "" }));
   };
 
   const handleCloseSidebar = () => {
@@ -76,7 +73,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       id="inputTag"
     />
   );
-  
+
   const tooltip = (
     <ReactTooltip
       id="default"
@@ -102,7 +99,6 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         <aside className="mb-1">
           <BgColorComponent
             workspaceBackgroundColor={workspaceBackgroundColor}
-            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           />
         </aside>
 
@@ -110,7 +106,9 @@ const DefaultSettings: FC<IDefaultSettings> = ({
           {/* <RiText className="text-[18px] mr-3" /> */}
           <textarea
             value={head.title}
-            onChange={(e) => setHead({ ...head, title: e.target.value })}
+            onChange={(e) =>
+              dispatch(setSiteHead({ ...head, title: e.target.value }))
+            }
             className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
             placeholder="Site Title..."
           />
