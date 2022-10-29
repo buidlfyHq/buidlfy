@@ -16,9 +16,6 @@ const CheckoutModal: FC = () => {
   const currentAccountBalance = useSelector(
     (state: IRootState) => state.web3.currentAccountBalance
   );
-  const templateList = useSelector(
-    (state: IRootState) => state.template.templateList
-  );
   const selectedTemplate = useSelector(
     (state: IRootState) => state.template.selectedTemplate
   );
