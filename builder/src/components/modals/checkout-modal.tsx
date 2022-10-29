@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { Dialog } from "@headlessui/react";
@@ -6,7 +6,6 @@ import makeBlockie from "ethereum-blockies-base64";
 import { truncateString } from "utils/truncate-string";
 import { buyTemplate } from "redux/template/template.actions";
 import { toggleModalType } from "redux/modal/modal.reducers";
-import { setSelectedTemplate } from "redux/template/template.reducers";
 import { SelectedTemplateDto } from "redux/template/template.dto";
 import { IRootState } from "redux/root-state.interface";
 
@@ -28,16 +27,6 @@ const CheckoutModal: FC = () => {
   const amount = parseFloat(
     ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)
   );
-
-  useEffect(() => {
-    const isOwned = templateList.filter(
-      (template) =>
-        template.listing_tokenId == selectedTemplateDto.listingTokenId
-    )[0];
-    if (isOwned) {
-      dispatch(setSelectedTemplate(isOwned));
-    }
-  }, [templateList]);
 
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[342px] my-20 mx-28 rounded-[15px] py-8 px-5 bg-white">
@@ -79,48 +68,31 @@ const CheckoutModal: FC = () => {
               </div>
             </div>
           </div>
-          {selectedTemplateDto?.isOwned ? (
-            <>
-              <div>Template already purchased.</div>
-              <div
-                onClick={() => dispatch(toggleModalType("single"))}
-                className="text-white cursor-pointer connect-wallet-button py-3 px-auto rounded-[7px] mt-8 text-center"
-              >
-                View Template
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="flex items-center justify-between mt-5">
-                <div className="text-[#8E8E93] text-[14px]">Amount</div>
-                <div className="text-[#1C1C1E] text-[14px] font-[500]">
-                  {amount} USDC
-                </div>
-              </div>
-              <div className="flex items-center justify-between mt-3">
-                <div className="text-[#8E8E93] text-[14px]">
-                  Platform Fee (5%)
-                </div>
-                <div className="text-[#1C1C1E] text-[14px] font-[500]">
-                  {0.05 * amount} USDC
-                </div>
-              </div>
-              <div className="flex items-center justify-between mt-3">
-                <div className="text-[#1C1C1E] text-[14px] font-[500]">
-                  Total
-                </div>
-                <div className="text-[#34C759] text-[14px] font-[500]">
-                  {amount + 0.05 * amount} USDC
-                </div>
-              </div>
-              <div
-                onClick={() => dispatch(buyTemplate())}
-                className="text-white cursor-pointer connect-wallet-button py-3 px-auto rounded-[7px] mt-8 text-center"
-              >
-                Buy Now
-              </div>
-            </>
-          )}
+
+          <div className="flex items-center justify-between mt-5">
+            <div className="text-[#8E8E93] text-[14px]">Amount</div>
+            <div className="text-[#1C1C1E] text-[14px] font-[500]">
+              {amount} USDC
+            </div>
+          </div>
+          <div className="flex items-center justify-between mt-3">
+            <div className="text-[#8E8E93] text-[14px]">Platform Fee (5%)</div>
+            <div className="text-[#1C1C1E] text-[14px] font-[500]">
+              {0.05 * amount} USDC
+            </div>
+          </div>
+          <div className="flex items-center justify-between mt-3">
+            <div className="text-[#1C1C1E] text-[14px] font-[500]">Total</div>
+            <div className="text-[#34C759] text-[14px] font-[500]">
+              {amount + 0.05 * amount} USDC
+            </div>
+          </div>
+          <div
+            onClick={() => dispatch(buyTemplate())}
+            className="text-white cursor-pointer connect-wallet-button py-3 px-auto rounded-[7px] mt-8 text-center"
+          >
+            Buy Now
+          </div>
         </div>
       </div>
     </Dialog.Panel>

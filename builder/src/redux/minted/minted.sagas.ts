@@ -74,11 +74,25 @@ function* getOwnedTemplates(): any {
   const currentAccount: string = yield select(
     (state: IRootState) => state.web3.currentAccount
   );
+  const modalType = yield select((state: IRootState) => state.modal.modalType);
+
   const fetchedTemplates = yield call(getOwnedTemplatesService, currentAccount);
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.templates.length !== 0) {
       yield put(ownedTemplatesFetched(fetchedTemplates.templates));
       yield put(filterAllTemplates(fetchedTemplates.templates));
+
+      if (modalType === "select-wallet") {
+        const selectedTemplate = yield select(
+          (state: IRootState) => state.template.selectedTemplate
+        );
+
+        if (selectedTemplate?.isOwned) {
+          yield put(toggleModalType("single"));
+        } else {
+          yield put(toggleModalType("checkout"));
+        }
+      }
     }
   } else {
     yield put(

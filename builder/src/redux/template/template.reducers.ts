@@ -39,7 +39,14 @@ const templateSlice = createSlice({
       const modifiedTemplateList = state.templateList.map((template) =>
         filterTemplates(template, action.payload)
       );
+
+      const isOwned = modifiedTemplateList.filter(
+        (template: ISelectedTemplate) =>
+          template.listing_tokenId == state.selectedTemplate?.listing_tokenId
+      )[0];
+
       state.templateList = modifiedTemplateList;
+      state.selectedTemplate = isOwned ? isOwned : state.selectedTemplate;
     },
   },
 });
