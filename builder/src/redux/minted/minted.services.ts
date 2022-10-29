@@ -40,7 +40,7 @@ export const createListingService = async (
     const signer = getSigner();
     const marketplaceContract = getMarketplaceContract(signer);
     const token_id = parseInt(tokenId);
-    const defaultId = parseInt(config.network.DEFAULT_NETWORK.id);
+    const defaultId = parseInt(config.network.DEFAULT_NETWORK.chainId);
     const tx = await marketplaceContract.createListing(
       [
         addresses[defaultId].spheronErc1155,
@@ -73,7 +73,7 @@ export const getOwnedTemplatesService = async (
   try {
     const allTemplates = await (
       await fetch(
-        `https://deep-index.moralis.io/api/v2/${address}/nft?chain=${config.network.DEFAULT_NETWORK.name}&format=decimal&token_addresses=0xa69374d7371df89192f05c7b61a945f834bf2593`,
+        `https://deep-index.moralis.io/api/v2/${address}/nft?chain=${config.network.DEFAULT_NETWORK.chainName}&format=decimal&token_addresses=0xa69374d7371df89192f05c7b61a945f834bf2593`,
         {
           method: "GET",
           headers: {

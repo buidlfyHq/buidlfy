@@ -34,7 +34,7 @@ export const changeNetworkService = async () => {
   try {
     await (window as any).ethereum.request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: config.network.DEFAULT_NETWORK.id }],
+      params: [{ chainId: config.network.DEFAULT_NETWORK.chainId }],
     });
     return { error: false, errorMessage: "" };
   } catch (switchError) {
