@@ -1,5 +1,6 @@
 import { BigNumber } from "ethers";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { IContractDetails } from "redux/contract/contract.interfaces";
+import { IHead, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 export interface ITemplateState {
   buyTemplateReceipt: string;
@@ -17,6 +18,9 @@ export interface ISelectedTemplate {
   category: string;
   description: string;
   value: IWorkspaceElement[];
+  backgroundColor: string;
+  head: IHead;
+  contract: IContractDetails;
   image: string;
   listing_listingId: BigNumber;
   listing_buyoutPricePerToken: BigNumber;
