@@ -30,7 +30,7 @@ const MyTemplates: FC = () => {
     <main className="min-h-screen overflow-y-auto">
       {/* nav */}
       <section className="flex justify-between px-36 py-6 h-[77px] border-bottom-divider sticky-top">
-        <div className="flex justify-center items-center my-2">
+        <div className="flex items-center justify-center my-2">
           <img src={logo} className="w-[2.4rem] mx-[1.3rem] rounded-full hover:shadow-lg" alt="logo" />
         </div>
         <div className="flex items-center">
@@ -38,10 +38,10 @@ const MyTemplates: FC = () => {
             <ColorFeather className="mr-3" />
             <div className="gradient-text">Builder</div>
           </Link>
-          <div className="flex justify-center items-center my-2 ml-3">
+          <div className="flex items-center justify-center my-2 ml-3">
             {currentAccount && (
               <img
-                className="bg-black w-8 h-8 rounded-full hover:shadow-lg"
+                className="w-8 h-8 bg-black rounded-full hover:shadow-lg"
                 src={makeBlockie(currentAccount)}
                 alt="Blockie"
               />
@@ -51,7 +51,7 @@ const MyTemplates: FC = () => {
       </section>
 
       {/* mid sec */}
-      <section className="px-36 py-6">
+      <section className="py-6 px-36">
         <div className="flex items-center justify-center font-[600] text-[28px] text-[#14142B]">
           My Templates
           <Link to="/">
@@ -96,7 +96,7 @@ const MyTemplates: FC = () => {
           </div>
         </section>
         <section className="w-full bg-lower-template">
-          <div className="flex items-center justify-center gap-5 pt-12 pb-4 px-36">
+          {/* <div className="flex items-center justify-center gap-5 pt-12 pb-4 px-36">
             <div>
               <SearchForm />
             </div>
@@ -108,7 +108,7 @@ const MyTemplates: FC = () => {
               All categories
               <BiChevronDown className="ml-2 text-[18px]" />
             </div>
-          </div>
+          </div> */}
           <div className="grid grid-cols-3 gap-10 px-40 pb-12 pt-7">
             <RenderTemplateList tab={tab} />
           </div>

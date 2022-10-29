@@ -4,7 +4,7 @@ import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import Spinner from "components/utils/assets/spinner";
 import { connectWallet } from "redux/web3/web3.actions";
-import { toggleModal } from "redux/modal/modal.reducers";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import MetamaskImg from "assets/icons/Metamask-icon.png";
 import { BiArrowBack } from "react-icons/bi";
 
