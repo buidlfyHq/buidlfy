@@ -9,7 +9,7 @@ const StartModal: FC = () => {
   const dispatch = useDispatch();
 
   return (
-    <Dialog.Panel className="rounded-[24px] py-16 px-20 bg-white rounded flex flex-row justify-start items-center gap-16">
+    <Dialog.Panel className="rounded-[24px] py-16 px-20 bg-white rounded-[24px] flex flex-row justify-start items-center gap-16">
       <div className="flex flex-col items-center w-[300px] h-[280px] relative">
         <span className="absolute right-[-13%] w-[1px] h-[260px] bg-gray-200">
           {" "}
@@ -23,7 +23,7 @@ const StartModal: FC = () => {
         </div>
         <div
           onClick={() => dispatch(toggleModal(false))}
-          className="mt-10 rounded-[28px] hover:bg-[#5D46E4] bg-[#644cf5] duration-200 ease-linear px-9 py-4 text-white text-[16px] text-center text-[600] cursor-pointer"
+          className="mt-10 rounded-[28px] connect-wallet-button px-9 py-4 text-white text-[16px] text-center font-[600] cursor-pointer"
         >
           Create from Scratch
         </div>
@@ -34,11 +34,11 @@ const StartModal: FC = () => {
           Start from a Template
         </div>
         <div className="mt-3 text-[15px] text-[#4E4B66] text-center">
-          Select over 100 stunning templates to create a stunning wesite
+          Select over with different templates to create a stunning wesite
         </div>
         <div
           onClick={() => dispatch(toggleModalType("template"))}
-          className="mt-10 rounded-[28px]  hover:bg-[#5D46E4] bg-[#644cf5] duration-200 ease-linear px-9 py-4 text-white text-[16px] text-center text-[600] cursor-pointer"
+          className="mt-10 rounded-[28px] connect-wallet-button px-9 py-4 text-white text-[16px] text-center font-[600] cursor-pointer"
         >
           Start from a template
         </div>
