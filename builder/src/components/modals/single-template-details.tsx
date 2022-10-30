@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { Dialog } from "@headlessui/react";
@@ -20,7 +19,7 @@ import { SelectedTemplateDto } from "redux/template/template.dto";
 import { IRootState } from "redux/root-state.interface";
 import EyeImg from "assets/icons/eye.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
-import USDTIcon from "assets/icons/usdt.png";
+import USDCIcon from "assets/icons/usdc.png";
 
 interface ISingleTemplateDetails {
   list: boolean;
@@ -96,12 +95,12 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
                 ) : (
                   <>
                     <div className="flex items-center gap-2.5">
-                      <img src={USDTIcon} alt="icon" width={24} height={24} />
+                      <img src={USDCIcon} alt="icon" width={24} height={24} />
                       <div className="text-[18px] font-[600] text-[#14142B]">
                         {ethers.utils.formatUnits(
                           selectedTemplateDto.buyoutPricePerToken
                         )}{" "}
-                        USDT
+                        USDC
                       </div>
                     </div>
                     <div className="text-[14px] font-[600] text-[#14142B] opacity-70">

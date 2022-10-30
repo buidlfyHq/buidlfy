@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import config from "config";
-import { addresses, getERC20Contract, getSigner } from "./web3.utils";
+import { getERC20Contract, getSigner } from "./web3.utils";
 
 export const connectWalletService = async () => {
   try {
@@ -62,11 +62,7 @@ export const changeNetworkService = async () => {
 export const getTokenBalanceService = async (walletAddress: string) => {
   try {
     const signer = getSigner();
-    const defaultId = parseInt(config.network.DEFAULT_NETWORK.chainId);
-    const erc20Contract = getERC20Contract(
-      addresses[defaultId].usdc,
-      signer
-    );
+    const erc20Contract = getERC20Contract(config.address.usdc, signer);
 
     const walletBalance = await erc20Contract.balanceOf(walletAddress);
     const balanceInEth = ethers.utils.formatEther(walletBalance);
