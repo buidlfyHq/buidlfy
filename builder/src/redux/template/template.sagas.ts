@@ -24,9 +24,8 @@ function* buySelectedTemplate() {
     (state: IRootState) => state.template.selectedTemplate
   );
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
-
   yield put(startBuyTemplateLoader());
-  // Check for approval if yes, then don't call approve otherwise call approve
+  
   const transactionRes = yield call(
     initiateTransactionService,
     selectedTemplateDto.listingId,
