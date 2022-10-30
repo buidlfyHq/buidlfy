@@ -15,6 +15,8 @@ const AppModal: FC = () => {
     dispatch(toggleModal(false));
   };
 
+  const confettiCondition =
+    modalType === "final" || modalType === "publish-done";
   return (
     <Dialog className="relative z-50" open={modalShow} onClose={handleClose}>
       <div
@@ -23,12 +25,10 @@ const AppModal: FC = () => {
       />
       <div
         className={`fixed inset-0 ${
-          modalType === "final" ? "" : "overflow-y-auto"
+          confettiCondition ? "" : "overflow-y-auto"
         }`}
       >
-        {modalType === "final" || modalType === "publish-done" ? (
-          <ConfettiShower />
-        ) : null}
+        {confettiCondition ? <ConfettiShower /> : null}
         <div className="flex items-center justify-center min-h-full">
           <RenderModal />
         </div>
