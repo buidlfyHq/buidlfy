@@ -9,7 +9,7 @@ import { ConfettiShower } from "components/utils/confetti-shower";
 const AppModal: FC = () => {
   const dispatch = useDispatch();
   const modalState = useSelector((state: IRootState) => state.modal);
-  const {modalShow, modalType} = modalState
+  const { modalShow, modalType } = modalState;
 
   const handleClose = () => {
     dispatch(toggleModal(false));
@@ -21,8 +21,14 @@ const AppModal: FC = () => {
         className="fixed inset-0 bg-black/40 backdrop-blur-[2px]"
         aria-hidden="true"
       />
-      <div className={`fixed inset-0 ${modalType === 'final' ? '' : 'overflow-y-auto'}`}>
-        {modalType === 'final' ? <ConfettiShower /> : null} 
+      <div
+        className={`fixed inset-0 ${
+          modalType === "final" ? "" : "overflow-y-auto"
+        }`}
+      >
+        {modalType === "final" || modalType === "publish-done" ? (
+          <ConfettiShower />
+        ) : null}
         <div className="flex items-center justify-center min-h-full">
           <RenderModal />
         </div>
