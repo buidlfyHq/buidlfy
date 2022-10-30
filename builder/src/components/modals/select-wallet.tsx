@@ -4,8 +4,9 @@ import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import Spinner from "components/utils/assets/spinner";
 import { connectWallet } from "redux/web3/web3.actions";
-import { toggleModal } from "redux/modal/modal.reducers";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import MetamaskImg from "assets/icons/Metamask-icon.png";
+import { BiArrowBack } from "react-icons/bi";
 
 const SelectWallet: FC = () => {
   const dispatch = useDispatch();
@@ -19,15 +20,17 @@ const SelectWallet: FC = () => {
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[464px] my-20 mx-28 rounded-[8px] py-7 px-8 bg-white">
       <div className="w-full">
+
         <div className="flex items-center justify-between">
-          <div className="text-[#14142B] font-[600] text-[22px] ">
-            Connect to a wallet
-          </div>
+         <BiArrowBack onClick={() => dispatch(toggleModalType('single'))} className="mb-2 text-[20px] duration-150 ease-linear scale-100 cursor-pointer hover:scale-125" />
           <CgClose
             className="text-[24px] cursor-pointer"
             onClick={() => dispatch(toggleModal(false))}
           />
         </div>
+          <div className="text-[#14142B] font-[600] text-[22px] ">
+            Connect to a wallet
+          </div>
         <div
           onClick={handleConnect}
           className="flex items-center justify-between bg-[#F8F8FD] rounded-[8px] hover:bg-gray-100 p-4 text-[18px] mt-4 cursor-pointer hover:border hover:border-[#5799EB]"

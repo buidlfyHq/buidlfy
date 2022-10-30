@@ -973,7 +973,6 @@ height: 40px;
   outline: none;
   border: none;
 }
-
 .connect-wallet-button{
   background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
   opacity: 85%;
@@ -984,7 +983,15 @@ height: 40px;
   background: linear-gradient(93.43deg, #468FE4 19.42%, #7742E7 63.9%);
   opacity: 100%;
 }
-
+.add-btn {
+  border-radius: 28px;
+  padding: 10px 20px;
+  color: white;
+}
+.add-btn:hover {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
+}
 .mint-upload-img{
   background: #FFFFFF;
   border: 2px dashed #7A7B93;
@@ -1011,9 +1018,7 @@ height: 40px;
   border: 2px dashed #ffffff;
   border-radius: 12px;
 }
-.connect-wallet-button {
-  background: linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
-}
+
 .container-div {
   width: 227px;
   height: 48px;
@@ -1061,17 +1066,7 @@ height: 40px;
   transition: 0.5s !important;
 } */
 
-.add-btn {
-  background: linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
-  border-radius: 28px;
-  padding: 10px 20px;
-  color: white;
-  transition: all 2s ease !important;
-}
-.add-btn:hover {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
-}
+
 .arrow {
   color: #475385;
 }

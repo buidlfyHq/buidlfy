@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
-import LottieComponent from "components/utils/lottie";
 import {
   setSiteHead,
   updateWorkspaceBackgroundColor,
@@ -9,7 +8,6 @@ import {
 } from "redux/workspace/workspace.reducers";
 import { toggleModal } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
-import ConfettiLottie from "assets/lottie/confetti.json";
 import CongratulationsImg from "assets/icons/congratulations.png";
 import { ReactComponent as FeatherIcon } from "assets/svgAsIcons/feather.svg";
 import { updateContractAbi, updateContractAddress } from "redux/contract/contract.reducers";
@@ -34,14 +32,6 @@ const FinalModal: FC = () => {
       id="#confetti"
       className="relative flex flex-col justify-center items-center w-full max-w-[1140px] my-20 mx-28 rounded-[24px] py-20 lg:py-36 lg:px-64 px-28 bg-white "
     >
-      {/* commented confetti-shower as confused which to use confetti or lottie */}
-      {/* <ConfettiShower /> */}
-      <LottieComponent
-        lottie={ConfettiLottie}
-        width={1200}
-        height={600}
-        className={"absolute w-full h-full"}
-      />
       <div>
         <img src={CongratulationsImg} alt="img_temp" width={50} height={60} />
       </div>
