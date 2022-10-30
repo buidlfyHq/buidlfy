@@ -2,15 +2,12 @@ import { BigNumber } from "ethers";
 import request, { gql } from "graphql-request";
 import config from "config";
 import {
-  addresses,
   approveERC20Token,
   getERC1155Contract,
   getMarketplaceContract,
   getSigner,
 } from "redux/web3/web3.utils";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
-
-const DEFAULT_ID = parseInt(config.network.DEFAULT_NETWORK.chainId);
 
 export const initiateTransactionService = async (
   listingId: BigNumber,
@@ -26,7 +23,7 @@ export const initiateTransactionService = async (
       listingId,
       address,
       1,
-      addresses[DEFAULT_ID].usdc,
+      config.address.usdc,
       buyoutPricePerToken,
       {
         gasLimit: 3000000,
@@ -65,7 +62,7 @@ export const formatList = async (listings) => {
       listings.map(async (template: any) => {
         if (
           template.listing_assetContract.toLowerCase() ===
-          addresses[DEFAULT_ID].spheronErc1155.toLowerCase()
+          config.address.spheronErc1155.toLowerCase()
         ) {
           try {
             if (template.token.uri) {
