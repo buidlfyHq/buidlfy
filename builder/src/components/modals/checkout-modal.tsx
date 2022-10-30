@@ -60,7 +60,7 @@ const CheckoutModal: FC = () => {
                 </div>
               </div>
               <div className="text-[#14142B] opacity-70 text-[12px]">
-                {parseFloat(currentAccountBalance.toString()).toFixed(2)} USDT
+                {parseFloat(currentAccountBalance.toString()).toFixed(2)} USDC
               </div>
             </div>
           </div>

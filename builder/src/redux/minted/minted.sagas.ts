@@ -81,17 +81,17 @@ function* getOwnedTemplates(): any {
     if (fetchedTemplates.templates.length !== 0) {
       yield put(ownedTemplatesFetched(fetchedTemplates.templates));
       yield put(filterAllTemplates(fetchedTemplates.templates));
+    }
 
-      if (modalType === "select-wallet") {
-        const selectedTemplate = yield select(
-          (state: IRootState) => state.template.selectedTemplate
-        );
+    if (modalType === "select-wallet") {
+      const selectedTemplate = yield select(
+        (state: IRootState) => state.template.selectedTemplate
+      );
 
-        if (selectedTemplate?.isOwned) {
-          yield put(toggleModalType("single"));
-        } else {
-          yield put(toggleModalType("checkout"));
-        }
+      if (selectedTemplate?.isOwned) {
+        yield put(toggleModalType("single"));
+      } else {
+        yield put(toggleModalType("checkout"));
       }
     }
   } else {
