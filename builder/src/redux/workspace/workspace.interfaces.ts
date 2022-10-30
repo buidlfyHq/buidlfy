@@ -1,6 +1,6 @@
 export interface IUploadedImageData {
-  settingItemId: string;
   uploadedImageData: string;
+  settingItemId: string;
 }
 
 export interface IWorkspaceState {
