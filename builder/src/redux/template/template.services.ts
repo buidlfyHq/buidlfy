@@ -1,4 +1,4 @@
-import { BigNumber } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import request, { gql } from "graphql-request";
 import config from "config";
 import {
@@ -16,9 +16,13 @@ export const initiateTransactionService = async (
   try {
     const signer = getSigner();
     const marketplaceContract = getMarketplaceContract(signer);
-    await approveERC20Token(buyoutPricePerToken, signer);
-    const address = await signer.getAddress();
 
+    // skip approval if template is free
+    if (parseFloat(ethers.utils.formatUnits(buyoutPricePerToken)) !== 0) {
+      await approveERC20Token(buyoutPricePerToken, signer);
+    }
+
+    const address = await signer.getAddress();
     const tx = await marketplaceContract.buy(
       listingId,
       address,
@@ -39,7 +43,7 @@ export const initiateTransactionService = async (
     // eslint-disable-next-line no-console
     console.error("Error in transaction --> ", error);
     return { error: true, errorMessage: (error as Error).message, receipt: "" };
-}
+  }
 };
 
 export const mintTemplateService = async (uri: string) => {
