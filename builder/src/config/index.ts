@@ -32,8 +32,8 @@ const NODE_ENV: string = process.env.REACT_APP_STAGE || "local";
 
 const development: IConfig = {
   address: {
-    spheronErc1155: "0xa69374D7371DF89192F05C7b61a945f834bF2593",
-    marketplace: "0x3b60689246D50eAeBA251cd6e12A3D0FfE206A00",
+    spheronErc1155: "0x994372Fd2733454863AC841cFc44092276f9c478",
+    marketplace: "0x90E9D03A1C20269891f5AFefA1B25B7AEc1C1648",
     usdt: "0x36fEe18b265FBf21A89AD63ea158F342a7C64abB",
   },
   web3: {
@@ -66,8 +66,8 @@ const development: IConfig = {
 
 const production: IConfig = {
   address: {
-    spheronErc1155: "0xa69374D7371DF89192F05C7b61a945f834bF2593",
-    marketplace: "0x3b60689246D50eAeBA251cd6e12A3D0FfE206A00",
+    spheronErc1155: "0x994372Fd2733454863AC841cFc44092276f9c478",
+    marketplace: "0x90E9D03A1C20269891f5AFefA1B25B7AEc1C1648",
     usdt: "0x36fEe18b265FBf21A89AD63ea158F342a7C64abB",
   },
   web3: {
@@ -100,8 +100,8 @@ const production: IConfig = {
 
 const local: IConfig = {
   address: {
-    spheronErc1155: "0xa69374D7371DF89192F05C7b61a945f834bF2593",
-    marketplace: "0x3b60689246D50eAeBA251cd6e12A3D0FfE206A00",
+    spheronErc1155: "0x994372Fd2733454863AC841cFc44092276f9c478",
+    marketplace: "0x90E9D03A1C20269891f5AFefA1B25B7AEc1C1648",
     usdt: "0x36fEe18b265FBf21A89AD63ea158F342a7C64abB",
   },
   web3: {
