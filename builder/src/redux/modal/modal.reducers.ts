@@ -13,7 +13,7 @@ const modalSlice = createSlice({
     toggleModal(state, action: { payload: boolean }) {
       state.modalShow = action.payload;
     },
-    toggleModalType(state, action: { payload: string }) {
+    toggleModalType(state, action: { payload: string }) {      
       state.modalType = action.payload;
     },
   },

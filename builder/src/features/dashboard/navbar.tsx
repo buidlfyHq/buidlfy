@@ -16,6 +16,7 @@ import {
 import { IRootState } from "redux/root-state.interface";
 import PublishButton from "components/utils/publish-button";
 import "styles/components.css";
+import PublishMenu from "./publish-menu";
 
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
@@ -156,7 +157,8 @@ const Navbar: FC<INavbar> = ({
           </button>
         )}
 
-        {publishStatus ? (
+        <PublishMenu />
+        {/* {publishStatus ? (
           <>
             <PublishButton
               text="Re-Publish"
@@ -166,7 +168,7 @@ const Navbar: FC<INavbar> = ({
           </>
         ) : (
           <PublishButton text="Publish" handleClick={handleNewPublish} />
-        )}
+        )} */}
 
         <WalletMenu />
       </div>

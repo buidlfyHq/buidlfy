@@ -5,7 +5,7 @@ import "styles/components.css";
 
 interface IPublishButton {
   text: string;
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 
 const PublishButton: FC<IPublishButton> = ({ text, handleClick }) => {
