@@ -134,7 +134,7 @@ const MintTemplateForm: FC = () => {
                 </span>
               </>
             ) : (
-              <span className="bg-white hover:bg-[#8268E5] hover:text-white ease-linear duration-200 border border-[#8268E5] py-2 px-10 bottom-[0.5rem] rounded-[34px] text-[#8268E5] text-[12px] cursor-pointer">
+              <span className="mt-4 bg-white hover:bg-[#8268E5] hover:text-white ease-linear duration-200 border border-[#8268E5] py-2 px-10 bottom-[0.5rem] rounded-[34px] text-[#8268E5] text-[12px] cursor-pointer">
                 Change Image
               </span>
             )}

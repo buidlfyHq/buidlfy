@@ -125,8 +125,8 @@ const PublishSiteModal: FC = () => {
               Site Publishing is in process
             </div>
             <div className="w-[300px] text-center text-[13px] text-[#2C2D5E] font-[300] opacity-60 mt-4">
-              Site publishing could take up some minutes. Please bear with us
-              once it is done.
+              Site publishing to the decentralized network could take up some
+              time. Please bear with us.
             </div>
           </div>
           <div className="w-full bg-lower-template border-top-divider-publish py-7 px-12">

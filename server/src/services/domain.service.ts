@@ -38,6 +38,7 @@ class DomainService {
   public async updateSubdomainLink(subdomainId: string, projectId: string, link: string): Promise<AxiosResponse> {
     const payload = {
       link,
+      deploymentEnvironments: [],
     };
     return axios.patch(`${SPHERON_API_HOST}/v1/project/${projectId}/domains/${subdomainId}`, payload, { headers: spheronAuthHeaders });
   }

@@ -8,6 +8,12 @@ import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 
 const PublishMenu = () => {
   const dispatch = useDispatch();
+  const publishStatus = useSelector(
+    (state: IRootState) => state.publish.publishStatus
+  );
+  const domainName = useSelector(
+    (state: IRootState) => state.publish.domainName
+  );
   const handleConfirmPublish = () => {
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-confirm"));
@@ -17,12 +23,6 @@ const PublishMenu = () => {
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-confirm"));
   };
-  const publishStatus = useSelector(
-    (state: IRootState) => state.publish.publishStatus
-  );
-  const domainName = useSelector(
-    (state: IRootState) => state.publish.domainName
-  );
   const domainLink = "https://" + domainName;
   const publishMenuItems = [
     {

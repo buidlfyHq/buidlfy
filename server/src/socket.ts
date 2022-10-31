@@ -1,7 +1,7 @@
-import { randomUUID } from 'crypto';
 import { Server } from 'http';
 import socketio, { Server as WebSocketServer, Socket as WebSocket } from 'socket.io';
 import { CORS_ADDRESS } from './config';
+import { v4 as uuidv4 } from 'uuid';
 
 class SocketServer {
   private socketServer: WebSocketServer;
@@ -21,7 +21,7 @@ class SocketServer {
 
     this.socketServer.on('connection', (socket: WebSocket) => {
       console.log('A session connected');
-      socket.emit('session', { id: randomUUID() });
+      socket.emit('session', { id: uuidv4() });
 
       //Whenever someone disconnects this piece of code executed
       socket.on('disconnect', () => {

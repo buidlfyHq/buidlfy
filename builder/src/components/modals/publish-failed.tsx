@@ -17,17 +17,17 @@ const PublishFailed: FC = () => {
           />
         </div>
         <h3 className="font-bold text-[20px] mt-[0.5rem]">
-          Site Publishing is failed!
+          Site Publishing failed!
         </h3>
         <h6 className="mt-2 text-[#14142B] text-[14px] font-normal">
-          Oh noo! Site Publishing is failed, please try again!
+          Oh noo! Failed to publish your site. Please try again!
         </h6>
         <div className="flex justify-center w-full mb-[1rem] mt-[1.5rem]">
           <button
             onClick={() => dispatch(toggleModal(false))}
             className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
           >
-            Try Again
+            Close
           </button>
         </div>
       </div>

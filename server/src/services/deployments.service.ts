@@ -3,7 +3,7 @@ import { DeployAppDto, DeploymentResponseDto } from '@/dtos/deployments.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { isEmpty, spheronAuthHeaders } from '@utils/util';
 import { DECODER_GIT_BRANCH, DECODER_GIT_URL, DEPLOYMENT_ENDPOINT, ORGANIZATION_ID, SPHERON_API_HOST } from '@/config';
-import { randomUUID } from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
 import { SocketClient } from '@/socket-client';
 import { socketServer } from '@/socket';
 import { DeploymentStatus, StreamType, ISpheronDeploymentResponse } from '@/interfaces/deployments.interface';
@@ -20,7 +20,7 @@ class DeploymentService {
         organizationId: ORGANIZATION_ID,
         gitUrl: DECODER_GIT_URL,
         repoName: 'buidlfy',
-        uniqueTopicId: randomUUID(),
+        uniqueTopicId: uuidv4(),
         configuration: {
           buildCommand: 'yarn build',
           installCommand: 'yarn install',

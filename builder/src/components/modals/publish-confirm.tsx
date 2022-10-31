@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dialog } from "@headlessui/react";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import { CgClose } from "react-icons/cg";
-import { updatePublishConfig } from "redux/publish/publish.reducers";
-import { initiatePublish } from "redux/publish/publish.action";
 import { encode as base64_encode } from "base-64";
+import { Dialog } from "@headlessui/react";
+import { CgClose } from "react-icons/cg";
+import { initiatePublish } from "redux/publish/publish.action";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { updatePublishConfig } from "redux/publish/publish.reducers";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
 
@@ -17,10 +17,11 @@ const PublishConfirmModal: FC = () => {
   const workspaceBackgroundColor = useSelector(
     (state: IRootState) => state.workspace.workspaceBackgroundColor
   );
+  const head = useSelector((state: IRootState) => state.workspace.head);
   const contractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
   );
-  const head = useSelector((state: IRootState) => state.workspace.head);
+
   const [abiJSON, setAbiJSON] = useState<
     {
       inputs: { internalType: string; name: string; type: string }[];
@@ -40,6 +41,7 @@ const PublishConfirmModal: FC = () => {
       }
     }
   }, [contractDetails.abi]);
+
   const handlePublish = () => {
     let config = {
       head: {
@@ -53,14 +55,19 @@ const PublishConfirmModal: FC = () => {
         address: contractDetails.address,
       },
     };
+
     let stringifiedConfig = JSON.stringify(config);
+
     dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
+    // will add config , done for testing purposes
+    localStorage.setItem('config', base64_encode(stringifiedConfig))
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-process"));
     dispatch(
       initiatePublish({ configDetails: base64_encode(stringifiedConfig) })
     );
   };
+
   return (
     <Dialog.Panel className="rounded-[24px] py-5 px-5 bg-white rounded flex flex-row justify-start items-center gap-6">
       <div className="flex flex-col items-center w-[350px] h-[140px] relative">
@@ -73,7 +80,7 @@ const PublishConfirmModal: FC = () => {
         <p className="mt-4 font-semibold">
           Are you sure you want to continue deploying?
         </p>
-        <div className="flex mt-8 justify-end w-full mr-2">
+        <div className="flex justify-end w-full mt-8 mr-2">
           <button
             className="bordered-button py-2 px-7 my-2 ml-3 text-[14px] text-[#855FD8] font[500] rounded-[10px] whitespace-nowrap"
             onClick={() => dispatch(toggleModal(false))}
