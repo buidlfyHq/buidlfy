@@ -49,6 +49,7 @@ const PublishSiteModal: FC = () => {
           setFailedDeployment(false);
         }
         if (args[0].status === "Failed") {
+          handleFailed();
           setFailedDeployment(true);
           dispatch(updateCurrentStep(4));
         }
