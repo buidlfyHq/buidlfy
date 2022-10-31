@@ -77,7 +77,7 @@ export const approveERC20Token = async (
   amount: string | BigNumber,
   signer: Signer
 ): Promise<any> => {
-  const erc20Contract = getERC20Contract(config.address.usdc, signer);
+  const erc20Contract = getERC20Contract(config.address.usdt, signer);
   const tx = await erc20Contract.approve(config.address.marketplace, amount);
 
   return await tx.wait();

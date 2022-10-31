@@ -69,7 +69,7 @@ const CheckoutModal: FC = () => {
                 </div>
               </div>
               <div className="text-[#14142B] opacity-70 text-[12px]">
-                {parseFloat(currentAccountBalance.toString()).toFixed(2)} USDC
+                {parseFloat(currentAccountBalance.toString()).toFixed(2)} USDT
               </div>
             </div>
           </div>
@@ -77,19 +77,19 @@ const CheckoutModal: FC = () => {
           <div className="flex items-center justify-between mt-5">
             <div className="text-[#8E8E93] text-[14px]">Amount</div>
             <div className="text-[#1C1C1E] text-[14px] font-[500]">
-              {amount !== 0 ? (`${amount} USDC`) : 'Free'} 
+              {amount !== 0 ? (`${amount} USDT`) : 'Free'} 
             </div>
           </div>
           <div className="flex items-center justify-between mt-3">
             <div className="text-[#8E8E93] text-[14px]">Platform Fee (5%)</div>
             <div className="text-[#1C1C1E] text-[14px] font-[500]">
-              {amount !== 0 ? (`${0.05 * amount} USDC`) : 'Free'} 
+              {amount !== 0 ? (`${0.05 * amount} USDT`) : 'Free'} 
             </div>
           </div>
           <div className="flex items-center justify-between mt-3">
             <div className="text-[#1C1C1E] text-[14px] font-[500]">Total</div>
             <div className="text-[#34C759] text-[14px] font-[500]">
-              {amount !== 0 ? (`${amount + 0.05 * amount} USDC`) : 'Free'} 
+              {amount !== 0 ? (`${amount + 0.05 * amount} USDT`) : 'Free'} 
             </div>
           </div>
           <div

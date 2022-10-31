@@ -46,7 +46,7 @@ export const createListingService = async (
         getCurrentTime(),
         getCurrentTime(),
         TOKENS_COUNT_ON_MINT,
-        config.address.usdc,
+        config.address.usdt,
         buyoutPricePerToken,
         buyoutPricePerToken,
         0, // Always should be 0 cause Direct Listing

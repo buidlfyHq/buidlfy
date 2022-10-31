@@ -10,6 +10,7 @@ import { getPublishDetails, updatePublish } from "redux/publish/publish.action";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import {
   updateCurrentStep,
+  updatePublishFailed,
   updatePublishStatus,
 } from "redux/publish/publish.reducers";
 import { IRootState } from "redux/root-state.interface";
@@ -50,6 +51,8 @@ const PublishSiteModal: FC = () => {
         }
         if (args[0].status === "Failed") {
           setFailedDeployment(true);
+          dispatch(updatePublishFailed(true));
+          dispatch(toggleModalType("publish-failed"));
           dispatch(updateCurrentStep(4));
         }
         if (
