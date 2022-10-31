@@ -55,6 +55,8 @@ const PublishConfirmModal: FC = () => {
     };
     let stringifiedConfig = JSON.stringify(config);
     dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
+    // will add config , done for testing purposes
+    localStorage.setItem('config', base64_encode(stringifiedConfig))
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-process"));
     dispatch(
@@ -73,7 +75,7 @@ const PublishConfirmModal: FC = () => {
         <p className="mt-4 font-semibold">
           Are you sure you want to continue deploying?
         </p>
-        <div className="flex mt-8 justify-end w-full mr-2">
+        <div className="flex justify-end w-full mt-8 mr-2">
           <button
             className="bordered-button py-2 px-7 my-2 ml-3 text-[14px] text-[#855FD8] font[500] rounded-[10px] whitespace-nowrap"
             onClick={() => dispatch(toggleModal(false))}

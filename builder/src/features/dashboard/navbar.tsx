@@ -1,7 +1,5 @@
 import { FC } from "react";
-import ReactDOMServer from "react-dom/server";
 import { useDispatch, useSelector } from "react-redux";
-import ReactTooltip from "react-tooltip";
 import WalletMenu from "features/dashboard/wallet-menu";
 import {
   updateWorkspaceBackgroundColor,
@@ -15,6 +13,7 @@ import {
 } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import PublishButton from "components/utils/publish-button";
+import MintNFT from "components/utils/mint-nft";
 import "styles/components.css";
 
 interface INavbar {
@@ -31,9 +30,6 @@ const Navbar: FC<INavbar> = ({
   const dispatch = useDispatch();
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
-  );
-  const currentAccount = useSelector(
-    (state: IRootState) => state.web3.currentAccount
   );
   const publishStatus = useSelector(
     (state: IRootState) => state.publish.publishStatus
@@ -71,38 +67,6 @@ const Navbar: FC<INavbar> = ({
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-confirm"));
   };
-  const handleMintTemplateForm = () => {
-    dispatch(toggleModal(true));
-    dispatch(toggleModalType("mint-nft-form"));
-  };
-
-  const tooltip = (
-    <ReactTooltip
-      id="mint"
-      className="tool"
-      place="bottom"
-      type="light"
-      effect="solid"
-      backgroundColor="#ffffff"
-      arrowColor="#ffffff"
-      scrollHide={true}
-      delayShow={200}
-    />
-  );
-
-  const tooltipContent = (
-    <div>
-      <div className="mb-2">
-        Please publish the site before <br /> minting this template.
-      </div>
-      <button
-        className="w-full py-2 px-7 my-2 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
-        onClick={handleConfirmPublish}
-      >
-        Publish
-      </button>
-    </div>
-  );
 
   return (
     <main
@@ -143,18 +107,7 @@ const Navbar: FC<INavbar> = ({
         </div> */}
 
         {/* ADD: handle case when the site is published */}
-        {currentAccount && (
-          <button
-            className="bordered-button py-3 px-5 my-2 ml-3 text-[14px] text-[#855FD8] font[500] rounded-[10px] whitespace-nowrap"
-            onClick={handleMintTemplateForm}
-            data-for="mint"
-            data-html={true}
-            data-tip={ReactDOMServer.renderToString(<>{tooltipContent}</>)}
-          >
-            {tooltip}
-            Mint as NFT
-          </button>
-        )}
+        <MintNFT />
 
         {publishStatus ? (
           <>
