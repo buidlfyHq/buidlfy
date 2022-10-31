@@ -27,12 +27,12 @@ const Dashboard: FC = () => {
   const [hideNavbar, setHideNavbar] = useState<boolean>(true);
 
   useEffect(() => {
-    // checks for stored configs
+    // load stored configs if available
     let saveItems = localStorage.getItem("items");
     if (saveItems) {
-      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).builder));
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
       dispatch(
-        updateWorkspaceBackgroundColor(JSON.parse(saveItems).background)
+        updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor)
       );
     }
   }, []); // eslint-disable-line

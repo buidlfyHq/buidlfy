@@ -31,6 +31,9 @@ const Navbar: FC<INavbar> = ({
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
+  const workspaceBackgroundColor = useSelector(
+    (state: IRootState) => state.workspace.workspaceBackgroundColor
+  );
   const publishStatus = useSelector(
     (state: IRootState) => state.publish.publishStatus
   );
@@ -42,9 +45,12 @@ const Navbar: FC<INavbar> = ({
   };
 
   const handleSave = () => {
-    // FIX: save full config to local storage
+    let templateConfig = {
+      value: workspaceElements,
+      backgroundColor: workspaceBackgroundColor,
+    };
     if (workspaceElements?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(workspaceElements));
+      localStorage.setItem("items", JSON.stringify(templateConfig));
     }
   };
 
