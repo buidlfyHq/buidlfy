@@ -7,7 +7,7 @@ import six from "assets/icons/waiting-6.svg";
 
 export const processes = [
   {
-    name: "Deployment Initiate",
+    name: "Initiate Deployment",
     className: "",
     idleImage: one,
     stepNumber: 1,
@@ -17,7 +17,7 @@ export const processes = [
     completedLine: (
       <div className="bg-[#9768FB] w-[2px] ml-[11.4px] h-[45px] my-[2px]"></div>
     ),
-    failedText: "Deployment Initiate",
+    failedText: "Initiate Deployment",
   },
   {
     name: "Preparing Environment",
@@ -33,7 +33,7 @@ export const processes = [
     failedText: "Preparing Environment",
   },
   {
-    name: "Start Publish",
+    name: "Publishing Site",
     className: "",
     idleImage: three,
     stepNumber: 3,
@@ -43,10 +43,10 @@ export const processes = [
     completedLine: (
       <div className="bg-[#9768FB] w-[2px] ml-[11.4px] h-[45px] my-[2px]"></div>
     ),
-    failedText: "Start Publish",
+    failedText: "Publishing Site",
   },
   {
-    name: "Site Publish",
+    name: "Site Published",
     className: "",
     idleImage: four,
     stepNumber: 4,
@@ -59,7 +59,7 @@ export const processes = [
     failedText: "Deployment Failed, Please try Again",
   },
   {
-    name: "Assigning Subdomain",
+    name: "Assigning Buidlfy Subdomain",
     className: "",
     idleImage: five,
     stepNumber: 5,
@@ -69,10 +69,10 @@ export const processes = [
     completedLine: (
       <div className="bg-[#9768FB] w-[2px] ml-[11.4px] h-[45px] my-[2px]"></div>
     ),
-    failedText: "Assigning Subdomain",
+    failedText: "Assigning Buidlfy Subdomain",
   },
   {
-    name: "Site is published",
+    name: "Verifying Site",
     className: "",
     idleImage: six,
     stepNumber: 6,

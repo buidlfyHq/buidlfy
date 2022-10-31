@@ -4,6 +4,7 @@ import {
   updateDeploymentId,
   updateDomainName,
   updateProjectId,
+  updatePublishFailed,
   updateTransactionResponse,
 } from "./publish.reducers";
 import {
@@ -19,12 +20,14 @@ function* initiatePublish({ payload }) {
   const transactionRes = yield call(initiatePublishService, configDetails);
   yield put(updateTransactionResponse(transactionRes.publishId));
   if (!transactionRes.error) {
+    yield put(updatePublishFailed(false));
     const deploymentId = JSON.parse(transactionRes.responseText).data
       .deploymentId;
     yield put(updateDeploymentId(deploymentId));
     yield put(updateCurrentStep(1));
   } else {
     // Log is required
+    yield put(updatePublishFailed(true));
     yield put(console.log("error"));
   }
 }
@@ -50,6 +53,7 @@ function* getPublishDetails({ payload }) {
     yield put(updateCurrentStep(5));
   } else {
     // Log is required
+    yield put(updatePublishFailed(true));
     yield put(console.log("error"));
   }
 }
@@ -62,6 +66,7 @@ function* verifyPublish({ payload }) {
     yield put(updateCurrentStep(6));
   } else {
     // Log is required
+    yield put(updatePublishFailed(true));
     yield put(console.log("error"));
   }
 }
@@ -78,6 +83,7 @@ function* updatePublish({ payload }) {
     console.log("Update subdomain completed");
   } else {
     // Log is required
+    yield put(updatePublishFailed(true));
     yield put(console.log("error"));
   }
 }

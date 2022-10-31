@@ -12,9 +12,9 @@ import {
   updateContractAddress,
 } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
-import PublishButton from "components/utils/publish-button";
 import MintNFT from "components/utils/mint-nft";
 import "styles/components.css";
+import PublishMenu from "./publish-menu";
 
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
@@ -115,18 +115,7 @@ const Navbar: FC<INavbar> = ({
         {/* ADD: handle case when the site is published */}
         <MintNFT />
 
-        {publishStatus ? (
-          <>
-            <PublishButton
-              text="Re-Publish"
-              handleClick={handleConfirmPublish}
-            />
-            <PublishButton text="New Publish" handleClick={handleNewPublish} />
-          </>
-        ) : (
-          <PublishButton text="Publish" handleClick={handleNewPublish} />
-        )}
-
+        <PublishMenu />
         <WalletMenu />
       </div>
     </main>

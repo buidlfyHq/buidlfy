@@ -15,6 +15,7 @@ import SitePublishedModal from "components/modals/site-published-modal";
 import CompleteListing from "components/modals/complete-listing";
 import ListingReview from "components/modals/listing-review";
 import PublishConfirmModal from "components/modals/publish-confirm";
+import PublishFailed from "components/modals/publish-failed";
 import { IRootState } from "redux/root-state.interface";
 
 const RenderModal: FC = () => {
@@ -53,6 +54,8 @@ const RenderModal: FC = () => {
       return <ListingReview />;
     case "publish-confirm":
       return <PublishConfirmModal />;
+    case "publish-failed":
+      return <PublishFailed />;
     default:
       return <></>;
   }
