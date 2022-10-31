@@ -111,9 +111,7 @@ const PublishSiteModal: FC = () => {
 
   return (
     <>
-      {publishFailed ? (
-        handleFailed()
-      ) : (
+      {!publishFailed ? (
         <Dialog.Panel className="flex flex-col w-full max-w-md items-center mx-28 my-20 rounded-[24px] bg-white">
           <div className="flex items-start justify-end w-full pr-4 pt-4">
             <CgClose
@@ -186,7 +184,7 @@ const PublishSiteModal: FC = () => {
             })}
           </div>
         </Dialog.Panel>
-      )}
+      ) : null}
     </>
   );
 };
