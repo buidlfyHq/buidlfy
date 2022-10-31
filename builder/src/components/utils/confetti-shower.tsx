@@ -6,7 +6,8 @@ const ConfettiShower = () => {
     <Confetti
       width={width}
       height={height}
-      numberOfPieces={300}
+      numberOfPieces={1500}
+      recycle={false}
       colors={[
         "#9B70FFD9",
         "#70BAFFE5",
