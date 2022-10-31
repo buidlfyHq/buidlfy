@@ -199,7 +199,10 @@ const Elements: FC<IElements> = ({
           onClick={() => onClickFunction("Image")}
           className="px-4 py-4 cursor-pointer"
         >
-          <div data-tip="Click here to add the image upload" data-for="elements">
+          <div
+            data-tip="Click here to add the image upload"
+            data-for="elements"
+          >
             <div className="relative image-container">
               <img className="w-[20rem]" src={container} alt="container" />
               <img
@@ -237,7 +240,10 @@ const Elements: FC<IElements> = ({
         <div className="mt-[6rem]">
           <div className="element-div">
             <div className="px-4 py-4">
-              <div data-tip="Click here to add the container" data-for="elements">
+              <div
+                data-tip="Click here to add the container"
+                data-for="elements"
+              >
                 <div className="flex">
                   <div
                     className="cursor-pointer element-container"

@@ -2,7 +2,6 @@ import { BigNumber } from "ethers";
 import request, { gql } from "graphql-request";
 import config from "config";
 import {
-  addresses,
   approveERC1155Token,
   getMarketplaceContract,
   getSigner,
@@ -40,15 +39,14 @@ export const createListingService = async (
     const signer = getSigner();
     const marketplaceContract = getMarketplaceContract(signer);
     const token_id = parseInt(tokenId);
-    const defaultId = parseInt(config.network.DEFAULT_NETWORK.chainId);
     const tx = await marketplaceContract.createListing(
       [
-        addresses[defaultId].spheronErc1155,
+        config.address.spheronErc1155,
         token_id,
         getCurrentTime(),
         getCurrentTime(),
         TOKENS_COUNT_ON_MINT,
-        addresses[defaultId].usdc,
+        config.address.usdc,
         buyoutPricePerToken,
         buyoutPricePerToken,
         0, // Always should be 0 cause Direct Listing

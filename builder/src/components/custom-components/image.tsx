@@ -32,7 +32,7 @@ const Image: FC<IImageComponent> = ({
 }) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
-  const imageData: IUploadedImageData = useSelector((state: IRootState) =>
+  const imageData = useSelector((state: IRootState) =>
     state.workspace.uploadedImagesData.find(
       (image: IUploadedImageData) => image.settingItemId === i
     )
@@ -65,6 +65,7 @@ const Image: FC<IImageComponent> = ({
       );
     }
   }, [ref.current?.clientHeight]);
+
   return (
     <>
       {imageData?.uploadedImageData ? (

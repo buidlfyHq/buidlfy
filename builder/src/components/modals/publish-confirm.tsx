@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dialog } from "@headlessui/react";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import { CgClose } from "react-icons/cg";
-import { updatePublishConfig } from "redux/publish/publish.reducers";
-import { initiatePublish } from "redux/publish/publish.action";
 import { encode as base64_encode } from "base-64";
+import { Dialog } from "@headlessui/react";
+import { CgClose } from "react-icons/cg";
+import { initiatePublish } from "redux/publish/publish.action";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { updatePublishConfig } from "redux/publish/publish.reducers";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
 
@@ -17,10 +17,11 @@ const PublishConfirmModal: FC = () => {
   const workspaceBackgroundColor = useSelector(
     (state: IRootState) => state.workspace.workspaceBackgroundColor
   );
+  const head = useSelector((state: IRootState) => state.workspace.head);
   const contractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
   );
-  const head = useSelector((state: IRootState) => state.workspace.head);
+
   const [abiJSON, setAbiJSON] = useState<
     {
       inputs: { internalType: string; name: string; type: string }[];
@@ -40,6 +41,7 @@ const PublishConfirmModal: FC = () => {
       }
     }
   }, [contractDetails.abi]);
+
   const handlePublish = () => {
     let config = {
       head: {
@@ -53,7 +55,9 @@ const PublishConfirmModal: FC = () => {
         address: contractDetails.address,
       },
     };
+
     let stringifiedConfig = JSON.stringify(config);
+
     dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-process"));
@@ -61,6 +65,7 @@ const PublishConfirmModal: FC = () => {
       initiatePublish({ configDetails: base64_encode(stringifiedConfig) })
     );
   };
+
   return (
     <Dialog.Panel className="rounded-[24px] py-5 px-5 bg-white rounded flex flex-row justify-start items-center gap-6">
       <div className="flex flex-col items-center w-[350px] h-[140px] relative">

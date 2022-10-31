@@ -1,4 +1,9 @@
 export interface IConfig {
+  address: {
+    spheronErc1155: string;
+    marketplace: string;
+    usdc: string;
+  };
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN: string;
   };
@@ -26,6 +31,11 @@ export interface IConfig {
 const NODE_ENV: string = process.env.REACT_APP_STAGE || "local";
 
 const development: IConfig = {
+  address: {
+    spheronErc1155: "0xa69374D7371DF89192F05C7b61a945f834bF2593",
+    marketplace: "0x3b60689246D50eAeBA251cd6e12A3D0FfE206A00",
+    usdc: "0x66BC3bA160eA851313A1c00bdA825AD87F5f4091",
+  },
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGQ0YzVmOEYzRkQxNGU2NjY5MmYxMTEzOGYwNjI1NmI3OGI2OTZDOTAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjAwMzM3NTQ5MjcsIm5hbWUiOiJJbWFnZSJ9.qnAvxlOygBO6RQCkaPb2JSMVUeO-JQk7sRkeJygqOGg",
@@ -55,6 +65,11 @@ const development: IConfig = {
 };
 
 const production: IConfig = {
+  address: {
+    spheronErc1155: "0xa69374D7371DF89192F05C7b61a945f834bF2593",
+    marketplace: "0x3b60689246D50eAeBA251cd6e12A3D0FfE206A00",
+    usdc: "0x66BC3bA160eA851313A1c00bdA825AD87F5f4091",
+  },
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGQ0YzVmOEYzRkQxNGU2NjY5MmYxMTEzOGYwNjI1NmI3OGI2OTZDOTAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjAwMzM3NTQ5MjcsIm5hbWUiOiJJbWFnZSJ9.qnAvxlOygBO6RQCkaPb2JSMVUeO-JQk7sRkeJygqOGg",
@@ -84,6 +99,11 @@ const production: IConfig = {
 };
 
 const local: IConfig = {
+  address: {
+    spheronErc1155: "0xa69374D7371DF89192F05C7b61a945f834bF2593",
+    marketplace: "0x3b60689246D50eAeBA251cd6e12A3D0FfE206A00",
+    usdc: "0x66BC3bA160eA851313A1c00bdA825AD87F5f4091",
+  },
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGQ0YzVmOEYzRkQxNGU2NjY5MmYxMTEzOGYwNjI1NmI3OGI2OTZDOTAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjAwMzM3NTQ5MjcsIm5hbWUiOiJJbWFnZSJ9.qnAvxlOygBO6RQCkaPb2JSMVUeO-JQk7sRkeJygqOGg",
