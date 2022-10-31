@@ -19,7 +19,7 @@ import { SelectedTemplateDto } from "redux/template/template.dto";
 import { IRootState } from "redux/root-state.interface";
 import EyeImg from "assets/icons/eye.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
-import USDCIcon from "assets/icons/usdc.png";
+import USDTIcon from "assets/icons/usdt.png";
 import {BiArrowBack} from 'react-icons/bi'
 
 interface ISingleTemplateDetails {
@@ -97,10 +97,10 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
                 ) : (
                   <>
                     <div className="flex items-center gap-2.5">
-                      <img src={USDCIcon} alt="icon" width={24} height={24} />
+                      <img src={USDTIcon} alt="icon" width={24} height={24} />
                       <div className="text-[18px] font-[600] text-[#14142B]">
                         {ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken) !== '0.0' ? 
-                          (`${ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)} USDC`)
+                          (`${ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)} USDT`)
                         : 'Free'}
                       </div>
                     </div>

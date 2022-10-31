@@ -2,7 +2,7 @@ export interface IConfig {
   address: {
     spheronErc1155: string;
     marketplace: string;
-    usdc: string;
+    usdt: string;
   };
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN: string;
@@ -34,7 +34,7 @@ const development: IConfig = {
   address: {
     spheronErc1155: "0xa69374D7371DF89192F05C7b61a945f834bF2593",
     marketplace: "0x3b60689246D50eAeBA251cd6e12A3D0FfE206A00",
-    usdc: "0x66BC3bA160eA851313A1c00bdA825AD87F5f4091",
+    usdt: "0x36fEe18b265FBf21A89AD63ea158F342a7C64abB",
   },
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN:
@@ -68,7 +68,7 @@ const production: IConfig = {
   address: {
     spheronErc1155: "0xa69374D7371DF89192F05C7b61a945f834bF2593",
     marketplace: "0x3b60689246D50eAeBA251cd6e12A3D0FfE206A00",
-    usdc: "0x66BC3bA160eA851313A1c00bdA825AD87F5f4091",
+    usdt: "0x36fEe18b265FBf21A89AD63ea158F342a7C64abB",
   },
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN:
@@ -102,7 +102,7 @@ const local: IConfig = {
   address: {
     spheronErc1155: "0xa69374D7371DF89192F05C7b61a945f834bF2593",
     marketplace: "0x3b60689246D50eAeBA251cd6e12A3D0FfE206A00",
-    usdc: "0x66BC3bA160eA851313A1c00bdA825AD87F5f4091",
+    usdt: "0x36fEe18b265FBf21A89AD63ea158F342a7C64abB",
   },
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN:

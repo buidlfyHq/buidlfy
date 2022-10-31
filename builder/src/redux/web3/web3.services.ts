@@ -62,7 +62,7 @@ export const changeNetworkService = async () => {
 export const getTokenBalanceService = async (walletAddress: string) => {
   try {
     const signer = getSigner();
-    const erc20Contract = getERC20Contract(config.address.usdc, signer);
+    const erc20Contract = getERC20Contract(config.address.usdt, signer);
 
     const walletBalance = await erc20Contract.balanceOf(walletAddress);
     const balanceInEth = ethers.utils.formatEther(walletBalance);
