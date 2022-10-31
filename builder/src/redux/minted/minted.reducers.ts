@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUploadedImageData } from "redux/workspace/workspace.utils";
 import { IMintedState } from "./minted.interfaces";
 
 const initialState: IMintedState = {
@@ -9,7 +8,7 @@ const initialState: IMintedState = {
   ownedTemplateList: [],
   ownedReviewTemplateList: [],
   ownedListedTemplateList: [],
-  mintedImageData: ""
+  mintedImageData: "",
 };
 
 const mintedSlice = createSlice({
@@ -39,10 +38,7 @@ const mintedSlice = createSlice({
       state.ownedListedTemplateList = action.payload;
     },
     updateMintedImageData(state, action: { payload }) {
-      return {
-        ...state,
-        mintedImageData: action.payload,
-      };
+      state.mintedImageData = action.payload;
     },
   },
 });
@@ -55,6 +51,6 @@ export const {
   ownedTemplatesFetched,
   ownedReviewTemplatesFetched,
   ownedListedTemplatesFetched,
-  updateMintedImageData
+  updateMintedImageData,
 } = mintedSlice.actions;
 export default mintedSlice.reducer;

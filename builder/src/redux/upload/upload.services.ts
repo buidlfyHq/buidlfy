@@ -4,15 +4,15 @@ export const uploadImageService = async (data: string | ArrayBuffer) => {
   try {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-  
+
     const raw = JSON.stringify({
-      "data": data
-    });  
+      data: data,
+    });
     const requestOptions: RequestInit = {
-      method: 'POST',
+      method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: 'follow'
+      redirect: "follow",
     };
     const response = await fetch(
       config.server.SERVER + "upload",
@@ -30,4 +30,3 @@ export const uploadImageService = async (data: string | ArrayBuffer) => {
     };
   }
 };
-

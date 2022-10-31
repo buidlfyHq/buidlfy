@@ -41,7 +41,6 @@ const Container: FC<IBgContainer> = ({
     <section
       id={item.i}
       style={{
-        background: backgroundColor,
         paddingLeft: `${margin?.marginLeft}px`,
         paddingRight: `${margin?.marginRight}px`,
       }}
