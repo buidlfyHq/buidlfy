@@ -1,33 +1,29 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import ReactDOMServer from "react-dom/server";
 import { useDispatch, useSelector } from "react-redux";
-import { encode as base64_encode } from "base-64";
 import ReactTooltip from "react-tooltip";
 import WalletMenu from "features/dashboard/wallet-menu";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { updatePublishConfig } from "redux/publish/publish.reducers";
+import {
+  updateWorkspaceBackgroundColor,
+  updateWorkspaceElementsArray,
+} from "redux/workspace/workspace.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import { setSelectorToDefault } from "redux/contract/contract.reducers";
+import {
+  setSelectorToDefault,
+  updateContractAbi,
+  updateContractAddress,
+} from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
+import PublishButton from "components/utils/publish-button";
 import "styles/components.css";
-import { initiatePublish } from "redux/publish/publish.action";
 
 interface INavbar {
-  workspaceBackgroundColor: string;
-  setWorkspaceBackgroundColor?: (workspaceBackgroundColor: string) => void;
-  head: {
-    title: string;
-    logo: string | ArrayBuffer;
-  };
   setHideNavbar: (hideNavbar: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   setOpenSetting: (open: boolean) => void;
 }
 
 const Navbar: FC<INavbar> = ({
-  workspaceBackgroundColor,
-  head,
-  setWorkspaceBackgroundColor,
   setHideNavbar,
   setIsContainerSelected,
   setOpenSetting,
@@ -36,35 +32,15 @@ const Navbar: FC<INavbar> = ({
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const contractDetails = useSelector(
-    (state: IRootState) => state.contract.contractDetails
+  const workspaceBackgroundColor = useSelector(
+    (state: IRootState) => state.workspace.workspaceBackgroundColor
   );
   const currentAccount = useSelector(
     (state: IRootState) => state.web3.currentAccount
   );
-  const publishConfig = useSelector(
-    (state: IRootState) => state.publish.publishConfig
+  const publishStatus = useSelector(
+    (state: IRootState) => state.publish.publishStatus
   );
-  const [abiJSON, setAbiJSON] = useState<
-    {
-      inputs: { internalType: string; name: string; type: string }[];
-      name: string;
-      outputs: { internalType: string; name: string; type: string }[];
-      stateMutability: string;
-      type: string;
-    }[]
-  >([]); // work in progress
-  const [generatedConfig, setGeneratedConfig] = useState<string>("");
-
-  useEffect(() => {
-    if (contractDetails.abi) {
-      try {
-        setAbiJSON(JSON.parse(contractDetails.abi));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }, [contractDetails.abi]);
 
   const handleCloseSidebar = () => {
     setIsContainerSelected(false);
@@ -73,9 +49,12 @@ const Navbar: FC<INavbar> = ({
   };
 
   const handleSave = () => {
-    // FIX: save full config to local storage
+    let templateConfig = {
+      value: workspaceElements,
+      backgroundColor: workspaceBackgroundColor,
+    };
     if (workspaceElements?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(workspaceElements));
+      localStorage.setItem("items", JSON.stringify(templateConfig));
     }
   };
 
@@ -84,32 +63,20 @@ const Navbar: FC<INavbar> = ({
     localStorage.removeItem("items");
     dispatch(updateWorkspaceElementsArray([]));
     dispatch(setSelectorToDefault());
-    setWorkspaceBackgroundColor("rgba(255, 255, 255, 1)");
+    dispatch(updateWorkspaceBackgroundColor("rgba(255, 255, 255, 1)"));
+    dispatch(updateContractAbi(""));
+    dispatch(updateContractAddress(""));
   };
 
-  const handlePublish = () => {
-    let config = {
-      head: {
-        title: head.title,
-        logo: head.logo,
-      },
-      background: workspaceBackgroundColor,
-      builder: workspaceElements,
-      contract: {
-        abi: abiJSON,
-        address: contractDetails.address,
-      },
-    };
-    let stringifiedConfig = JSON.stringify(config);
-    setGeneratedConfig(base64_encode(stringifiedConfig));
-    dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
+  const handleConfirmPublish = () => {
     dispatch(toggleModal(true));
-    dispatch(toggleModalType("publish-process"));
-    dispatch(
-      initiatePublish({ configDetails: base64_encode(stringifiedConfig) })
-    );
+    dispatch(toggleModalType("publish-confirm"));
   };
-
+  const handleNewPublish = () => {
+    localStorage.removeItem("domain");
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("publish-confirm"));
+  };
   const handleMintTemplateForm = () => {
     dispatch(toggleModal(true));
     dispatch(toggleModalType("mint-nft-form"));
@@ -136,7 +103,7 @@ const Navbar: FC<INavbar> = ({
       </div>
       <button
         className="w-full py-2 px-7 my-2 font-[500] text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap"
-        onClick={handlePublish}
+        onClick={handleConfirmPublish}
       >
         Publish
       </button>
@@ -194,12 +161,18 @@ const Navbar: FC<INavbar> = ({
             Mint as NFT
           </button>
         )}
-        <button
-          className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
-          onClick={handlePublish}
-        >
-          Publish
-        </button>
+
+        {publishStatus ? (
+          <>
+            <PublishButton
+              text="Re-Publish"
+              handleClick={handleConfirmPublish}
+            />
+            <PublishButton text="New Publish" handleClick={handleNewPublish} />
+          </>
+        ) : (
+          <PublishButton text="Publish" handleClick={handleNewPublish} />
+        )}
 
         <WalletMenu />
       </div>

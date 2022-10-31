@@ -1,6 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GridLayout, { Layout } from "react-grid-layout";
+import DefaultBuilder from "./deafult-builder";
+import RenderItem from "components/utils/render-item";
+import { containerCheck } from "utils/container-check";
 import {
   setSelectedElement,
   updateWorkspaceElementsArray,
@@ -11,12 +14,8 @@ import {
   createSelectedElement,
   updateSelectedElement,
 } from "redux/contract/contract.reducers";
-import RenderItem from "components/utils/render-item";
-import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
-import DefaultBuilder from "./deafult-builder";
-import DefaultSettings from "./default-settings";
 import "styles/components.css";
 
 interface IWorkspaceComponent {
@@ -25,18 +24,11 @@ interface IWorkspaceComponent {
   drag: boolean;
   setDrag: (drag: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
-  workspaceBackgroundColor: string;
-  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
   hideNavbar?: boolean;
   setHideNavbar?: (hideNavbar?: boolean) => void;
   openSetting?: boolean;
   setSideElement?: (sideElement?: string) => void;
   hideSettingSidebar?: () => void;
-  head: {
-    title: string;
-    logo: string | ArrayBuffer;
-  };
-  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
 }
 
 const Workspace: FC<IWorkspaceComponent> = ({
@@ -45,19 +37,18 @@ const Workspace: FC<IWorkspaceComponent> = ({
   drag,
   setDrag,
   setIsContainerSelected,
-  workspaceBackgroundColor,
-  setWorkspaceBackgroundColor,
   hideNavbar,
   setHideNavbar,
   openSetting,
   setSideElement,
   hideSettingSidebar,
-  head,
-  setHead,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
+  );
+  const workspaceBackgroundColor = useSelector(
+    (state: IRootState) => state.workspace.workspaceBackgroundColor
   );
   const contractElementSelector = useSelector(
     (state: IRootState) => state.contract.contractElementSelector

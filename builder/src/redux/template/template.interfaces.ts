@@ -1,5 +1,6 @@
 import { BigNumber } from "ethers";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { IContractDetails } from "redux/contract/contract.interfaces";
+import { IHead, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 export interface ITemplateState {
   buyTemplateReceipt: string;
@@ -7,7 +8,7 @@ export interface ITemplateState {
   mintTokenId: number;
   mintTemplateLoading: boolean;
   selectedTemplate: ISelectedTemplate;
-  templateList: [];
+  templateList: ISelectedTemplate[];
 }
 
 export interface ISelectedTemplate {
@@ -17,10 +18,14 @@ export interface ISelectedTemplate {
   category: string;
   description: string;
   value: IWorkspaceElement[];
+  backgroundColor: string;
+  head: IHead;
+  contract: IContractDetails;
   image: string;
   listing_listingId: BigNumber;
   listing_buyoutPricePerToken: BigNumber;
   listing_tokenId?: string;
   listing_tokenOwner?: string;
   owner_of?: string;
+  isOwned?: boolean;
 }

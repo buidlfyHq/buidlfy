@@ -10,11 +10,11 @@ import { BiChevronRight } from "react-icons/bi";
 import HelpIcon from "assets/icons/help-nav.png";
 import MyTemplateIcon from "assets/icons/template-nav.png";
 
-const HelpMenuItems = [
-  { name: "Learn Buidlfy" },
-  { name: "Start App Tour" },
-  { name: "Join Discord " },
-];
+// const HelpMenuItems = [
+//   { name: "Learn Buidlfy" },
+//   { name: "Start App Tour" },
+//   { name: "Join Discord" },
+// ];
 
 const walletMenuItems = [
   {
@@ -27,12 +27,12 @@ const walletMenuItems = [
     children: [],
   },
   {
-    name: "Help",
+    name: "Join Discord",
     icon: HelpIcon,
     classParent: "",
     target: "",
-    isChildren: true,
-    children: HelpMenuItems,
+    isChildren: false,
+    children: [],
   },
 ];
 

@@ -7,7 +7,10 @@ import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
 import DefaultSettings from "features/dashboard/default-settings";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
+import {
+  updateWorkspaceBackgroundColor,
+  updateWorkspaceElementsArray,
+} from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
@@ -20,24 +23,17 @@ const Dashboard: FC = () => {
   const [drag, setDrag] = useState<boolean>(true);
   const [isContainerSelected, setIsContainerSelected] =
     useState<boolean>(false);
-  const [workspaceBackgroundColor, setWorkspaceBackgroundColor] =
-    useState<string>("rgba(255, 255, 255, 1)");
-  const [head, setHead] = useState<{
-    title: string;
-    logo: string | ArrayBuffer;
-  }>({
-    title: "",
-    logo: "",
-  });
   const [sideElement, setSideElement] = useState<string>("");
   const [hideNavbar, setHideNavbar] = useState<boolean>(true);
 
   useEffect(() => {
-    // checks for stored configs
+    // load stored configs if available
     let saveItems = localStorage.getItem("items");
     if (saveItems) {
-      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).builder));
-      setWorkspaceBackgroundColor(JSON.parse(saveItems).background);
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
+      dispatch(
+        updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor)
+      );
     }
   }, []); // eslint-disable-line
 
@@ -60,9 +56,6 @@ const Dashboard: FC = () => {
           <section className="flex-1">
             {/* Navbar */}
             <Navbar
-              workspaceBackgroundColor={workspaceBackgroundColor}
-              setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-              head={head}
               setHideNavbar={setHideNavbar}
               setIsContainerSelected={setIsContainerSelected}
               setOpenSetting={setOpenSetting}
@@ -77,14 +70,10 @@ const Dashboard: FC = () => {
                 drag={drag}
                 setDrag={setDrag}
                 setIsContainerSelected={setIsContainerSelected}
-                workspaceBackgroundColor={workspaceBackgroundColor}
-                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
                 setHideNavbar={setHideNavbar}
                 openSetting={openSetting}
                 setSideElement={setSideElement}
                 hideSettingSidebar={undefined}
-                head={head}
-                setHead={setHead}
               />
             </aside>
           </section>
@@ -97,10 +86,6 @@ const Dashboard: FC = () => {
               />
             ) : (
               <DefaultSettings
-                workspaceBackgroundColor={workspaceBackgroundColor}
-                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-                head={head}
-                setHead={setHead}
                 setHideNavbar={setHideNavbar}
                 setIsContainerSelected={setIsContainerSelected}
                 setOpenSetting={setOpenSetting}

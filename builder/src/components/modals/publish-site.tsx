@@ -8,7 +8,10 @@ import { processes } from "components/utils/process";
 import LottieComponent from "components/utils/lottie";
 import { getPublishDetails, updatePublish } from "redux/publish/publish.action";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import { updateCurrentStep } from "redux/publish/publish.reducers";
+import {
+  updateCurrentStep,
+  updatePublishStatus,
+} from "redux/publish/publish.reducers";
 import { IRootState } from "redux/root-state.interface";
 import HourGlassImg from "assets/lottie/hourglass.json";
 import completed from "assets/icons/completed.svg";
@@ -31,7 +34,6 @@ const PublishSiteModal: FC = () => {
     (state: IRootState) => state.publish.transactionResponse
   );
   const publishSubDomain = localStorage.getItem("domain");
-
   useEffect(() => {
     if (currentStep === 1) {
       socket.on(`deployment.${transactionRes}`, (...args) => {
@@ -71,6 +73,7 @@ const PublishSiteModal: FC = () => {
           dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
           dispatch(updateCurrentStep(5));
           socket.removeAllListeners(`deployment.${transactionRes}`);
+          dispatch(updatePublishStatus(true));
         }
       });
     }

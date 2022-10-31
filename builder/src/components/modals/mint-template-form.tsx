@@ -1,30 +1,61 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
-import {
-  uploadFileToWeb3Storage,
-  uploadTemplateToWeb3Storage,
-} from "config/web3storage";
+import { uploadTemplateToWeb3Storage } from "config/web3storage";
 import { mintTemplate } from "redux/template/template.actions";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import InfoCircleImg from "assets/icons/info-circle.png";
 import MintUploadImg from "assets/icons/mint-form-img.png";
+import { uploadImage } from "redux/upload/upload.action";
+import { updateMintedImageData } from "redux/minted/minted.reducers";
 
 const MintTemplateForm: FC = () => {
   const dispatch = useDispatch();
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
+  const imageLink = useSelector(
+    (state: IRootState) => state.upload.uploadImage
+  );
+  const mintedImage = useSelector(
+    (state: IRootState) => state.minted.mintedImageData
+  );
+  const workspaceBackgroundColor = useSelector(
+    (state: IRootState) => state.workspace.workspaceBackgroundColor
+  );
+  const head = useSelector((state: IRootState) => state.workspace.head);
+  const contractDetails = useSelector(
+    (state: IRootState) => state.contract.contractDetails
+  );
 
   const [image, setImage] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [abiJSON, setAbiJSON] = useState<
+    {
+      inputs: { internalType: string; name: string; type: string }[];
+      name: string;
+      outputs: { internalType: string; name: string; type: string }[];
+      stateMutability: string;
+      type: string;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    if (contractDetails.abi) {
+      try {
+        setAbiJSON(JSON.parse(contractDetails.abi));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [contractDetails.abi]);
 
   // find suitable type
-  const onChangeImage = (e) => {
+  const onChangeImage = async (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > 5242880) {
         // setSize(true);
@@ -32,8 +63,9 @@ const MintTemplateForm: FC = () => {
         // setSize(false);
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
-          const cid = await uploadFileToWeb3Storage(reader.result as string);
-          setImage(cid);
+          dispatch(updateMintedImageData(reader.result as string));
+          dispatch(uploadImage({ data: reader.result as string }));
+          setImage(imageLink);
         });
         reader.readAsDataURL(e.target.files[0]);
       }
@@ -47,6 +79,15 @@ const MintTemplateForm: FC = () => {
       category,
       description,
       value: workspaceElements,
+      backgroundColor: workspaceBackgroundColor,
+      head: {
+        title: head.title,
+        logo: head.logo,
+      },
+      contract: {
+        abi: abiJSON,
+        address: contractDetails.address,
+      },
     };
 
     console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
@@ -76,14 +117,28 @@ const MintTemplateForm: FC = () => {
       <div className="my-8 mint-upload-img">
         <div className="w-full h-[300px] upload-img-mint cursor-pointer">
           <label className="flex flex-col items-center justify-center h-full text-[12px] text-[#130F1C]">
-            <img src={MintUploadImg} alt="icon" width={50} height={50} />
-            <div className="text-[13px] text-[#7A7B93] w-[240px] text-center mt-9">
-              Upload a file or drag and drop PNG, JPG, GIF in 800*400
-              resolution.
-            </div>
-            <span className="mt-5 text-[#651FFF] text-[12px]">
-              Add from your desktop
-            </span>
+            <img
+              src={`${mintedImage ? mintedImage : MintUploadImg}`}
+              alt="icon"
+              width={`${mintedImage ? 200 : 50}`}
+              height={50}
+            />
+            {!mintedImage ? (
+              <>
+                <div className="text-[13px] text-[#7A7B93] w-[240px] text-center mt-9">
+                  Upload a file or drag and drop PNG, JPG, GIF in 800*400
+                  resolution.
+                </div>
+                <span className="mt-5 text-[#651FFF] text-[12px] cursor-pointer">
+                  Add from your desktop
+                </span>
+              </>
+            ) : (
+              <span className="mt-4 bg-white hover:bg-[#8268E5] hover:text-white ease-linear duration-200 border border-[#8268E5] py-2 px-10 bottom-[0.5rem] rounded-[34px] text-[#8268E5] text-[12px] cursor-pointer">
+                Change Image
+              </span>
+            )}
+
             <input
               onChange={onChangeImage}
               className="hidden block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 file:cursor-pointer"

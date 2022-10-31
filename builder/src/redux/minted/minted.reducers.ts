@@ -8,6 +8,7 @@ const initialState: IMintedState = {
   ownedTemplateList: [],
   ownedReviewTemplateList: [],
   ownedListedTemplateList: [],
+  mintedImageData: "",
 };
 
 const mintedSlice = createSlice({
@@ -36,6 +37,9 @@ const mintedSlice = createSlice({
     ownedListedTemplatesFetched(state, action) {
       state.ownedListedTemplateList = action.payload;
     },
+    updateMintedImageData(state, action: { payload }) {
+      state.mintedImageData = action.payload;
+    },
   },
 });
 
@@ -47,5 +51,6 @@ export const {
   ownedTemplatesFetched,
   ownedReviewTemplatesFetched,
   ownedListedTemplatesFetched,
+  updateMintedImageData,
 } = mintedSlice.actions;
 export default mintedSlice.reducer;

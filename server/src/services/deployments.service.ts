@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { DeployAppDto, DeploymentResponseDto } from '@/dtos/deployments.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { isEmpty, spheronAuthHeaders } from '@utils/util';
-import { DECODER_GIT_URL, DEPLOYMENT_ENDPOINT, ORGANIZATION_ID, SPHERON_API_HOST } from '@/config';
+import { DECODER_GIT_BRANCH, DECODER_GIT_URL, DEPLOYMENT_ENDPOINT, ORGANIZATION_ID, SPHERON_API_HOST } from '@/config';
 import { v4 as uuidv4 } from 'uuid';
 import { SocketClient } from '@/socket-client';
 import { socketServer } from '@/socket';
@@ -35,7 +35,7 @@ class DeploymentService {
         protocol: 'ipfs-filecoin',
         createDefaultWebhook: false,
         provider: 'GITHUB',
-        branch: 'dev',
+        branch: DECODER_GIT_BRANCH,
         gitProviderPreferences: {
           prComments: false,
           commitComments: false,

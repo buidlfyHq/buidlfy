@@ -5,4 +5,5 @@ export interface IMintedState {
   ownedTemplateList: [];
   ownedReviewTemplateList: [];
   ownedListedTemplateList: [];
+  mintedImageData: string;
 }

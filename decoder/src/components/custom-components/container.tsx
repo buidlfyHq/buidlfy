@@ -32,18 +32,17 @@ const Container: FC<IBgContainer> = ({
   }, []);
 
   let finalSpacing =
-    margin.marginLeft +
-    margin.marginRight +
-    padding.paddingLeft +
-    padding.paddingRight;
+    margin?.marginLeft +
+    margin?.marginRight +
+    padding?.paddingLeft +
+    padding?.paddingRight;
 
   return (
     <section
       id={item.i}
       style={{
-        background: backgroundColor,
-        paddingLeft: `${margin.marginLeft}px`,
-        paddingRight: `${margin.marginRight}px`,
+        paddingLeft: `${margin?.marginLeft}px`,
+        paddingRight: `${margin?.marginRight}px`,
       }}
       className="w-full h-fit"
     >

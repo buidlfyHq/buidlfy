@@ -1,5 +1,6 @@
-import config from "config";
 import { ethers } from "ethers";
+import config from "config";
+import { getERC20Contract, getSigner } from "./web3.utils";
 
 export const connectWalletService = async () => {
   try {
@@ -34,7 +35,7 @@ export const changeNetworkService = async () => {
   try {
     await (window as any).ethereum.request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: config.network.DEFAULT_NETWORK.id }],
+      params: [{ chainId: config.network.DEFAULT_NETWORK.chainId }],
     });
     return { error: false, errorMessage: "" };
   } catch (switchError) {
@@ -60,10 +61,10 @@ export const changeNetworkService = async () => {
 
 export const getTokenBalanceService = async (walletAddress: string) => {
   try {
-    const provider = new ethers.providers.Web3Provider(
-      (window as any).ethereum
-    );
-    const walletBalance = await provider.getBalance(walletAddress);
+    const signer = getSigner();
+    const erc20Contract = getERC20Contract(config.address.usdc, signer);
+
+    const walletBalance = await erc20Contract.balanceOf(walletAddress);
     const balanceInEth = ethers.utils.formatEther(walletBalance);
 
     return { error: false, errorMessage: "", balance: balanceInEth };
