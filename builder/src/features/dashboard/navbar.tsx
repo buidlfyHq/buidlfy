@@ -165,7 +165,7 @@ const Navbar: FC<INavbar> = ({
             <PublishButton text="New Publish" handleClick={handleNewPublish} />
           </>
         ) : (
-          <PublishButton text="Publish" handleClick={handleConfirmPublish} />
+          <PublishButton text="Publish" handleClick={handleNewPublish} />
         )}
 
         <WalletMenu />
