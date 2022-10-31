@@ -14,7 +14,6 @@ import {
   updateContractAddress,
 } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
-import PublishButton from "components/utils/publish-button";
 import "styles/components.css";
 import PublishMenu from "./publish-menu";
 
@@ -158,18 +157,6 @@ const Navbar: FC<INavbar> = ({
         )}
 
         <PublishMenu />
-        {/* {publishStatus ? (
-          <>
-            <PublishButton
-              text="Re-Publish"
-              handleClick={handleConfirmPublish}
-            />
-            <PublishButton text="New Publish" handleClick={handleNewPublish} />
-          </>
-        ) : (
-          <PublishButton text="Publish" handleClick={handleNewPublish} />
-        )} */}
-
         <WalletMenu />
       </div>
     </main>
