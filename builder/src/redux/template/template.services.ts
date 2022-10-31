@@ -27,7 +27,7 @@ export const initiateTransactionService = async (
       listingId,
       address,
       1,
-      config.address.usdc,
+      config.address.usdt,
       buyoutPricePerToken,
       {
         gasLimit: 3000000,
