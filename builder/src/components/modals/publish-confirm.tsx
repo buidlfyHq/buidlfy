@@ -58,13 +58,12 @@ const PublishConfirmModal: FC = () => {
 
     let stringifiedConfig = JSON.stringify(config);
 
-    console.log(base64_encode(stringifiedConfig));
-    // dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
-    // dispatch(toggleModal(true));
-    // dispatch(toggleModalType("publish-process"));
-    // dispatch(
-    //   initiatePublish({ configDetails: base64_encode(stringifiedConfig) })
-    // );
+    dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("publish-process"));
+    dispatch(
+      initiatePublish({ configDetails: base64_encode(stringifiedConfig) })
+    );
   };
 
   return (
