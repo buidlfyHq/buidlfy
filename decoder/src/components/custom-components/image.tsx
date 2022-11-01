@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { MARGIN_VARIABLE } from "config/constants";
 import defaultImage from "assets/default-image.png";
 import "styles/components.css";
 
@@ -38,11 +37,7 @@ const Image: FC<IImageComponent> = ({
           backgroundSize: `${
             isAuto ? backgroundSize : `${width}px ${height}px`
           }`,
-          margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
-            margin.marginRight * MARGIN_VARIABLE
-          }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
-            margin.marginLeft * MARGIN_VARIABLE
-          }px`,
+          margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
         }}
       />
     </section>

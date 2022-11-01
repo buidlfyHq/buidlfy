@@ -7,7 +7,6 @@ import { providerOptions } from "config/provider-options";
 import { onLoad } from "hooks/on-load";
 import { onRequest } from "hooks/on-request";
 import ITexts from "interfaces/texts";
-import { MARGIN_VARIABLE } from "config/constants";
 import "styles/components.css";
 
 const web3Modal = new Web3Modal({
@@ -165,11 +164,7 @@ const Button: FC<ITexts> = ({
             fontSize: `${fontSize}px`,
             borderRadius: `${borderRadius}px`,
             background: backgroundColor,
-            margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
-              margin.marginRight * MARGIN_VARIABLE
-            }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
-              margin.marginLeft * MARGIN_VARIABLE
-            }px`,
+            margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
           className="btn btn-border rounded cursor-pointer whitespace-nowrap"
@@ -198,11 +193,7 @@ const Button: FC<ITexts> = ({
             borderRadius: `${borderRadius}px`,
             fontSize: `${fontSize}px`,
             background: backgroundColor,
-            margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
-              margin.marginRight * MARGIN_VARIABLE
-            }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
-              margin.marginLeft * MARGIN_VARIABLE
-            }px`,
+            margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
           className="btn btn-border rounded cursor-pointer whitespace-nowrap"
