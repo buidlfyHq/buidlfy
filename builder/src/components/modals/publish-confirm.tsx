@@ -7,9 +7,8 @@ import { initiatePublish } from "redux/publish/publish.action";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { updatePublishConfig } from "redux/publish/publish.reducers";
 import { IRootState } from "redux/root-state.interface";
-import "styles/components.css";
-import PublishingProcessModal from "./publish-process";
 import PublishSiteModal from "./publish-site";
+import "styles/components.css";
 
 const PublishConfirmModal: FC = () => {
   const dispatch = useDispatch();
