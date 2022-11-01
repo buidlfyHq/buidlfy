@@ -52,26 +52,21 @@ const Navbar: FC<INavbar> = ({
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(templateConfig));
     }
+    localStorage.setItem("publishStatus", publishStatus.toString());
   };
 
   const handleClear = () => {
     // FIX: remove full config from local storage
     localStorage.removeItem("items");
+    localStorage.removeItem("publishStatus");
+    localStorage.removeItem("deployment");
+    localStorage.removeItem("domain");
+    localStorage.removeItem("domainName");
     dispatch(updateWorkspaceElementsArray([]));
     dispatch(setSelectorToDefault());
     dispatch(updateWorkspaceBackgroundColor("rgba(255, 255, 255, 1)"));
     dispatch(updateContractAbi(""));
     dispatch(updateContractAddress(""));
-  };
-
-  const handleConfirmPublish = () => {
-    dispatch(toggleModal(true));
-    dispatch(toggleModalType("publish-confirm"));
-  };
-  const handleNewPublish = () => {
-    localStorage.removeItem("domain");
-    dispatch(toggleModal(true));
-    dispatch(toggleModalType("publish-confirm"));
   };
 
   return (

@@ -90,7 +90,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
             <span className="setting-text">Import Contract</span>
           </h3>
           <p className="contract-text ml-[0.5rem]">
-            Lorem ipsum dolor sit amet, sed do eiusmod
+            Integrate your Frontend with smart contracts.
           </p>
           <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
             <div

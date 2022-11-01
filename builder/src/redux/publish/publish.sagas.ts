@@ -24,6 +24,7 @@ function* initiatePublish({ payload }) {
     const deploymentId = JSON.parse(transactionRes.responseText).data
       .deploymentId;
     yield put(updateDeploymentId(deploymentId));
+    localStorage.setItem("deployment", deploymentId);
     yield put(updateCurrentStep(1));
   } else {
     // Log is required
@@ -45,6 +46,7 @@ function* getPublishDetails({ payload }) {
       localStorage.getItem("domain");
     }
     yield put(updateDomainName(domainName));
+    localStorage.setItem("domainName", domainName);
     yield put(updateProjectId(projectId));
     yield put({
       type: publishActionTypes.VERIFY_PUBLISH,
@@ -80,6 +82,9 @@ function* updatePublish({ payload }) {
   );
   if (!transactionRes.error) {
     // Log is required
+    yield put(updateCurrentStep(6));
+    const domainName = JSON.parse(transactionRes.responseText).data.domain.name;  
+    localStorage.setItem("domainName", domainName);    
     console.log("Update subdomain completed");
   } else {
     // Log is required
