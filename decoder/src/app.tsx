@@ -9,7 +9,7 @@ const App: FC = () => {
 
   return (
     <>
-      {/* set head - logo and title */}
+      {/* set site head - logo and title */}
       <Helmet>
         <title>{config.head?.title ? config.head.title : "Buidlfy"}</title>
         <link
