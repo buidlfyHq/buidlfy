@@ -8,22 +8,19 @@ import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 
 const PublishMenu = () => {
   const dispatch = useDispatch();
-  const publishStatus = useSelector(
-    (state: IRootState) => state.publish.publishStatus
-  );
-  const domainName = useSelector(
-    (state: IRootState) => state.publish.domainName
-  );
   const handleConfirmPublish = () => {
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-confirm"));
   };
   const handleNewPublish = () => {
     localStorage.removeItem("domain");
+    localStorage.removeItem("domainName");
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-confirm"));
   };
-  const domainLink = "https://" + domainName;
+  const newPublishStatus = localStorage.getItem("publishStatus");
+  const newDomainName = localStorage.getItem("domainName");
+
   const publishMenuItems = [
     {
       text: "Need to Re-Publish?",
@@ -47,25 +44,26 @@ const PublishMenu = () => {
   ];
   return (
     <>
-      {publishStatus ? (
+      {newPublishStatus ? (
         <Menu>
           <Menu.Button className="flex items-center justify-center my-2 ml-3 active:opacity-70">
             <PublishButton text="Publish" />
           </Menu.Button>
-          <Menu.Items className="absolute top-0 right-0 flex flex-col mt-16 shadow-menu mr-5 rounded-[14px] origin-top-right bg-white">
+          <Menu.Items className="absolute top-0 right-0 flex flex-col mt-16 shadow-menu mr-5 rounded-[14px] w-[17.8rem] origin-top-right bg-white">
             <div className="border border-l-0 border-t-0 border-r-0 border-b-0 border-[#F5F5F5]">
               <div className="px-3 py-3 font-[16px]">
                 <h5 className="text-[#14142B] text-[13px] opacity-50 ml-[0.5rem]">
                   Site is Published
                 </h5>
-                <div className="flex ml-[0.5rem] items-center gap-2 py-2">
+                <div className="flex ml-[0.5rem] items-center gap-2 py-2 w-[17rem]">
                   <img className="w-4 rounded-full" src={global} alt="link" />
                   <a
                     target="_blank"
-                    href={domainLink}
+                    rel="noopener noreferrer external"
+                    href={`https://${newDomainName}`}
                     className="text-[#6D6AFF] text-[11px] hover:text-[#5C59E5] cursor-pointer"
                   >
-                    {domainLink}
+                    {newDomainName}
                   </a>
                 </div>
               </div>

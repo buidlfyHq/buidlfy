@@ -37,6 +37,9 @@ const PublishSiteModal: FC = () => {
   const publishFailed = useSelector(
     (state: IRootState) => state.publish.publishFailed
   );
+  const publishStatus = useSelector(
+    (state: IRootState) => state.publish.publishStatus
+  );
   const publishSubDomain = localStorage.getItem("domain");
   useEffect(() => {
     if (currentStep === 1) {
@@ -61,13 +64,14 @@ const PublishSiteModal: FC = () => {
           publishSubDomain
         ) {
           setFailedDeployment(false);
+          localStorage.removeItem("domainName");
           dispatch(
             updatePublish({
               domainId: publishSubDomain,
               deploymentId: publishDeploymentId,
             })
           );
-          dispatch(updateCurrentStep(6));
+          dispatch(updateCurrentStep(4));
           socket.removeAllListeners(`deployment.${transactionRes}`);
         }
         if (
@@ -79,6 +83,7 @@ const PublishSiteModal: FC = () => {
           dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
           dispatch(updateCurrentStep(5));
           socket.removeAllListeners(`deployment.${transactionRes}`);
+          localStorage.setItem("publishStatus", publishStatus.toString());
           dispatch(updatePublishStatus(true));
         }
       });
