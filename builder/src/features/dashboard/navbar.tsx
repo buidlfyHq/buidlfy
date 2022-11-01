@@ -52,7 +52,9 @@ const Navbar: FC<INavbar> = ({
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(templateConfig));
     }
-    localStorage.setItem("publishStatus", publishStatus.toString());
+    if (publishStatus) {
+      localStorage.setItem("publishStatus", publishStatus.toString());
+    }
   };
 
   const handleClear = () => {
