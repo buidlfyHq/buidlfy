@@ -10,6 +10,7 @@ import { getPublishDetails, updatePublish } from "redux/publish/publish.action";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import {
   updateCurrentStep,
+  updatePublishFailed,
   updatePublishStatus,
 } from "redux/publish/publish.reducers";
 import { IRootState } from "redux/root-state.interface";
@@ -50,6 +51,8 @@ const PublishSiteModal: FC = () => {
         }
         if (args[0].status === "Failed") {
           setFailedDeployment(true);
+          dispatch(updatePublishFailed(true));
+          dispatch(toggleModalType("publish-failed"));
           dispatch(updateCurrentStep(4));
         }
         if (
@@ -108,9 +111,7 @@ const PublishSiteModal: FC = () => {
 
   return (
     <>
-      {publishFailed ? (
-        handleFailed()
-      ) : (
+      {!publishFailed ? (
         <Dialog.Panel className="flex flex-col w-full max-w-md items-center mx-28 my-20 rounded-[24px] bg-white">
           <div className="flex items-start justify-end w-full pr-4 pt-4">
             <CgClose
@@ -183,7 +184,7 @@ const PublishSiteModal: FC = () => {
             })}
           </div>
         </Dialog.Panel>
-      )}
+      ) : null}
     </>
   );
 };
