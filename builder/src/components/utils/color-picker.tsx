@@ -53,7 +53,7 @@ const ColorPickerDropdown: FC<IColorPicker> = ({
       {displayColorPicker ? (
         <Dialog
           as="div"
-          className={`absolute py-[15px] z-100 overflow-none bg-white shadow-lg ${
+          className={`fixed py-[15px] z-100 overflow-none bg-white shadow-lg ${
             isElement
               ? "top-[220px] right-[260px] bottom-[1px]"
               : "top-[150px] right-[20px] bottom-[70px]"

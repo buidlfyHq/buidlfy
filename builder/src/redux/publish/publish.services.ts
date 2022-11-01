@@ -147,7 +147,6 @@ export const updatePublishService = async (
       body: raw,
       redirect: "follow",
     };
-
     const response = await fetch(
       config.server.SERVER + "deployment/update-subdomain",
       requestOptions
