@@ -4,9 +4,7 @@ import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { Menu } from "@headlessui/react";
 
-interface IMintNFT {}
-
-const MintNFT: FC<IMintNFT> = ({}) => {
+const MintNFT: FC = () => {
   const dispatch = useDispatch();
   const currentAccount = useSelector(
     (state: IRootState) => state.web3.currentAccount
