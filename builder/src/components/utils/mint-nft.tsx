@@ -25,21 +25,21 @@ const MintNFT: FC = () => {
     dispatch(toggleModal(true));
     dispatch(toggleModalType("mint-nft-form"));
   };
-  const NewPublishStatus = localStorage.getItem("publishStatus");
+  const newPublishStatus = localStorage.getItem("publishStatus");
   return (
     <>
       {currentAccount && (
         <Menu as="div" className="relative">
           <Menu.Button
             as="div"
-            onClick={NewPublishStatus && handleMintTemplateForm}
+            onClick={newPublishStatus && handleMintTemplateForm}
             className={`${
-              NewPublishStatus ? "cursor-pointer" : "cursor-not-allowed"
+              newPublishStatus ? "cursor-pointer" : "cursor-not-allowed"
             } py-3 px-5 my-2 ml-3 text-[14px] font[500] button-singleTemp`}
           >
             <div className="gradient-text">Mint as NFT</div>
           </Menu.Button>
-          {!NewPublishStatus ? (
+          {!newPublishStatus ? (
             <Menu.Items className="py-6 px-4 absolute right-0 top-[4rem] bg-white w-[214px] shadow-menu rounded-[16px]">
               <Menu.Item
                 as="div"

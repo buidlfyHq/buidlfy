@@ -46,6 +46,10 @@ const PublishConfirmModal: FC = () => {
     }
   }, [contractDetails.abi]);
 
+  const handleProcessModal = () => {
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("publish-process"));
+  };
   const handlePublish = () => {
     localStorage.removeItem("deployment");
     let config = {
@@ -67,17 +71,20 @@ const PublishConfirmModal: FC = () => {
     localStorage.setItem("config", base64_encode(stringifiedConfig));
 
     if (currentStep === 0) {
-      dispatch(toggleModal(true));
-      dispatch(toggleModalType("publish-process"));
+      handleProcessModal();
       dispatch(
         initiatePublish({ configDetails: base64_encode(stringifiedConfig) })
       );
     } else {
-      dispatch(toggleModal(true));
-      dispatch(toggleModalType("publish-process"));
+      handleProcessModal();
     }
   };
 
+  useEffect(() => {
+    if (currentStep > 0) {
+      handleProcessModal();
+    }
+  }, [currentStep]);
   return (
     <>
       {currentStep === 0 ? (
@@ -108,9 +115,7 @@ const PublishConfirmModal: FC = () => {
             </div>
           </div>
         </Dialog.Panel>
-      ) : (
-        <PublishSiteModal />
-      )}
+      ) : null}
     </>
   );
 };

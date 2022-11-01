@@ -18,9 +18,8 @@ const PublishMenu = () => {
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-confirm"));
   };
-  const NewPublishStatus = localStorage.getItem("publishStatus");
+  const newPublishStatus = localStorage.getItem("publishStatus");
   const newDomainName = localStorage.getItem("domainName");
-  const domainLink = "https://" + newDomainName;
 
   const publishMenuItems = [
     {
@@ -45,7 +44,7 @@ const PublishMenu = () => {
   ];
   return (
     <>
-      {NewPublishStatus ? (
+      {newPublishStatus ? (
         <Menu>
           <Menu.Button className="flex items-center justify-center my-2 ml-3 active:opacity-70">
             <PublishButton text="Publish" />
@@ -60,10 +59,11 @@ const PublishMenu = () => {
                   <img className="w-4 rounded-full" src={global} alt="link" />
                   <a
                     target="_blank"
-                    href={domainLink}
+                    rel="noopener noreferrer external"
+                    href={`https://${newDomainName}`}
                     className="text-[#6D6AFF] text-[11px] hover:text-[#5C59E5] cursor-pointer"
                   >
-                    {domainLink}
+                    {newDomainName}
                   </a>
                 </div>
               </div>
