@@ -66,7 +66,7 @@ export const formatList = async (listings) => {
       listings.map(async (template: any) => {
         if (
           template.listing_assetContract.toLowerCase() ===
-          config.address.spheronErc1155.toLowerCase()
+          config.address.buidlfyErc1155.toLowerCase()
         ) {
           try {
             if (template.token.uri) {
