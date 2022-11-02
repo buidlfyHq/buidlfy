@@ -74,7 +74,7 @@ const MintTemplateForm: FC = () => {
 
   const handleSaveTemplate = async () => {
     let newTemplate = {
-      image,
+      image: imageLink,
       name,
       category,
       description,
@@ -89,7 +89,6 @@ const MintTemplateForm: FC = () => {
         address: contractDetails.address,
       },
     };
-
     console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
     const templateCID = await uploadTemplateToWeb3Storage(
       JSON.stringify(newTemplate)
@@ -198,7 +197,7 @@ const MintTemplateForm: FC = () => {
           Cancel
         </button>
         {workspaceElements?.length > 0 &&
-        image &&
+        imageLink &&
         name &&
         category &&
         description ? (
@@ -211,7 +210,7 @@ const MintTemplateForm: FC = () => {
         ) : (
           <button
             disabled
-            className="connect-wallet-button cursor-not-allowed text-white font-[500] text-[14px] py-3 px-12 rounded-[8px] ml-3 opacity-50"
+            className="connect-wallet-button pointer-events-none text-white font-[500] text-[14px] py-3 px-12 rounded-[8px] ml-3 opacity-50"
           >
             Mint
           </button>
