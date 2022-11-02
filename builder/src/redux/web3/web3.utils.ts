@@ -66,7 +66,7 @@ export const getERC20Contract = (
 
 export const getERC1155Contract = (signer: Signer): Contract => {
   const erc1155Contract = new Contract(
-    config.address.spheronErc1155,
+    config.address.buidlfyErc1155,
     abis.erc1155,
     signer
   );

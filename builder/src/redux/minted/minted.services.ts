@@ -41,7 +41,7 @@ export const createListingService = async (
     const token_id = parseInt(tokenId);
     const tx = await marketplaceContract.createListing(
       [
-        config.address.spheronErc1155,
+        config.address.buidlfyErc1155,
         token_id,
         getCurrentTime(),
         getCurrentTime(),
