@@ -22,6 +22,7 @@ export interface ISelectedTemplate {
   head: IHead;
   contract: IContractDetails;
   image: string;
+  publishedUrl: string;
   listing_listingId: BigNumber;
   listing_buyoutPricePerToken: BigNumber;
   listing_tokenId?: string;

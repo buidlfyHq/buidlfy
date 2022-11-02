@@ -12,6 +12,9 @@ const MintNFT: FC = () => {
   const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
+
+  const newPublishStatus = localStorage.getItem("publishStatus");
+
   const isNoElementinWorkspace = workspaceElements.every(
     (element) => element.style.deleteComponent === true
   );
@@ -25,7 +28,7 @@ const MintNFT: FC = () => {
     dispatch(toggleModal(true));
     dispatch(toggleModalType("mint-nft-form"));
   };
-  const newPublishStatus = localStorage.getItem("publishStatus");
+
   return (
     <>
       {currentAccount && (
