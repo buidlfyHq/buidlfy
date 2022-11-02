@@ -23,6 +23,10 @@ const Container: FC<IBgContainer> = ({
   backgroundSize,
 }) => {
   const [containerW, setContainerW] = useState(null);
+  const backgroundSolid =
+    backgroundColor.slice(0, 4) === "rgba" ? backgroundColor : null;
+  const backgroundLinearGradient =
+    backgroundColor.slice(0, 4) === "rgba" ? null : backgroundColor;
 
   useEffect(() => {
     const cw = document
@@ -62,8 +66,8 @@ const Container: FC<IBgContainer> = ({
           margin={[0, 0]}
           className="btn-border"
           style={{
-            background: backgroundColor,
-            backgroundImage: `url(${imgData})`,
+            backgroundColor: backgroundSolid,
+            backgroundImage: `url(${imgData}), ${backgroundLinearGradient}`,
             backgroundSize: backgroundSize,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",

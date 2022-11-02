@@ -7,7 +7,6 @@ import { initiatePublish } from "redux/publish/publish.action";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { updatePublishConfig } from "redux/publish/publish.reducers";
 import { IRootState } from "redux/root-state.interface";
-import PublishSiteModal from "./publish-site";
 import "styles/components.css";
 
 const PublishConfirmModal: FC = () => {
@@ -46,10 +45,17 @@ const PublishConfirmModal: FC = () => {
     }
   }, [contractDetails.abi]);
 
+  useEffect(() => {
+    if (currentStep > 0) {
+      handleProcessModal();
+    }
+  }, [currentStep]);
+
   const handleProcessModal = () => {
     dispatch(toggleModal(true));
     dispatch(toggleModalType("publish-process"));
   };
+
   const handlePublish = () => {
     localStorage.removeItem("deployment");
     let config = {
@@ -80,11 +86,6 @@ const PublishConfirmModal: FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (currentStep > 0) {
-      handleProcessModal();
-    }
-  }, [currentStep]);
   return (
     <>
       <Dialog.Panel className="rounded-[24px] py-5 px-5 bg-white rounded flex flex-row justify-start items-center gap-6">
