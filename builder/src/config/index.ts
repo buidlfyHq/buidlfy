@@ -1,6 +1,6 @@
 export interface IConfig {
   address: {
-    spheronErc1155: string;
+    buidlfyErc1155: string;
     marketplace: string;
     usdt: string;
   };
@@ -32,8 +32,8 @@ const NODE_ENV: string = process.env.REACT_APP_STAGE || "local";
 
 const development: IConfig = {
   address: {
-    spheronErc1155: "0x994372Fd2733454863AC841cFc44092276f9c478",
-    marketplace: "0x90E9D03A1C20269891f5AFefA1B25B7AEc1C1648",
+    buidlfyErc1155: "0x4F7B6744A17251148C3Eb1C91666c3b0707D3bE8",
+    marketplace: "0x6c9177882a082d7Ddd76B45385e427D12d24000d",
     usdt: "0x36fEe18b265FBf21A89AD63ea158F342a7C64abB",
   },
   web3: {
@@ -42,7 +42,7 @@ const development: IConfig = {
   },
   template: {
     TEMPLATE_GRAPHQL_URL:
-      "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
+      "https://api.thegraph.com/subgraphs/name/buidlfyhq/buidlfy-template-testnet",
   },
   server: {
     SERVER: "https://api.buidlfy.com/",
@@ -66,8 +66,8 @@ const development: IConfig = {
 
 const production: IConfig = {
   address: {
-    spheronErc1155: "0x994372Fd2733454863AC841cFc44092276f9c478",
-    marketplace: "0x90E9D03A1C20269891f5AFefA1B25B7AEc1C1648",
+    buidlfyErc1155: "0x4F7B6744A17251148C3Eb1C91666c3b0707D3bE8",
+    marketplace: "0x6c9177882a082d7Ddd76B45385e427D12d24000d",
     usdt: "0x36fEe18b265FBf21A89AD63ea158F342a7C64abB",
   },
   web3: {
@@ -76,7 +76,7 @@ const production: IConfig = {
   },
   template: {
     TEMPLATE_GRAPHQL_URL:
-      "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
+      "https://api.thegraph.com/subgraphs/name/buidlfyhq/buidlfy-template-testnet",
   },
   server: {
     SERVER: "https://api.buidlfy.com/",
@@ -100,8 +100,8 @@ const production: IConfig = {
 
 const local: IConfig = {
   address: {
-    spheronErc1155: "0x994372Fd2733454863AC841cFc44092276f9c478",
-    marketplace: "0x90E9D03A1C20269891f5AFefA1B25B7AEc1C1648",
+    buidlfyErc1155: "0x4F7B6744A17251148C3Eb1C91666c3b0707D3bE8",
+    marketplace: "0x6c9177882a082d7Ddd76B45385e427D12d24000d",
     usdt: "0x36fEe18b265FBf21A89AD63ea158F342a7C64abB",
   },
   web3: {
@@ -110,7 +110,7 @@ const local: IConfig = {
   },
   template: {
     TEMPLATE_GRAPHQL_URL:
-      "https://api.thegraph.com/subgraphs/name/man-jain/buid-reg",
+      "https://api.thegraph.com/subgraphs/name/buidlfyhq/buidlfy-template-testnet",
   },
   server: {
     SERVER: "https://api.buidlfy.com/",
