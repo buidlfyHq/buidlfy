@@ -1190,9 +1190,6 @@ height: 40px;
   background: linear-gradient(to right, #68AEFF 0%, #9768FB 79.17%);
   cursor: pointer;
 }
-/* .bordered-button:hover {
-  background: linear-gradient(99.78deg, rgba(104, 146, 255, 0.1) 32.62%, rgba(151, 104, 251, 0.1) 83.07%);
-} */
 .bordered-button::before {
   content: "";
   position: absolute;
