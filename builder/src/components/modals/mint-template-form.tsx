@@ -29,9 +29,7 @@ const MintTemplateForm: FC = () => {
   const contractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
   );
-  const domainName = useSelector(
-    (state: IRootState) => state.publish.domainName
-  );
+  const domainName = localStorage.getItem("domainName");
   
   const [image, setImage] = useState<string>("");
   const [name, setName] = useState<string>("");
