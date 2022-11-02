@@ -61,9 +61,9 @@ const PublishMenu = () => {
                     target="_blank"
                     rel="noopener noreferrer external"
                     href={`https://${newDomainName}`}
-                    className="text-[#6D6AFF] text-[11px] hover:text-[#5C59E5] cursor-pointer"
+                    className="gradient-text text-[11px] hover:text-[#5C59E5] cursor-pointer"
                   >
-                    {newDomainName}
+                    {'newDomainName'}
                   </a>
                 </div>
               </div>
@@ -81,7 +81,7 @@ const PublishMenu = () => {
                       className="bordered-button py-3 px-[1rem] min-w-[15.5rem] ml-[1.2rem] mt-[0.5rem] mb-[1rem] ml-3 text-[14px] text-[#855FD8] font[500] rounded-[10px] whitespace-nowrap"
                       onClick={handleClick}
                     >
-                      {buttonText}
+                      <span className="gradient-text">{buttonText}</span>
                     </button>
                   </>
                 </Menu.Item>
