@@ -29,6 +29,12 @@ const MintTemplateForm: FC = () => {
   const contractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
   );
+  const domainName = useSelector(
+    (state: IRootState) => state.publish.domainName
+  );
+
+  console.log(domainName);
+  
 
   const [image, setImage] = useState<string>("");
   const [name, setName] = useState<string>("");
@@ -88,6 +94,7 @@ const MintTemplateForm: FC = () => {
         abi: abiJSON,
         address: contractDetails.address,
       },
+      publishedUrl: domainName,
     };
 
     console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));

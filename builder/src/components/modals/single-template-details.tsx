@@ -20,7 +20,7 @@ import { IRootState } from "redux/root-state.interface";
 import EyeImg from "assets/icons/eye.png";
 import InfoCircleImg from "assets/icons/info-circle.png";
 import USDTIcon from "assets/icons/usdt.png";
-import {BiArrowBack} from 'react-icons/bi'
+import { BiArrowBack } from "react-icons/bi";
 
 interface ISingleTemplateDetails {
   list: boolean;
@@ -58,15 +58,24 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
 
   return (
     <Dialog.Panel className="w-full max-w-[1200px] my-20 mx-28 rounded-[24px] py-10 px-14 bg-white">
-      <BiArrowBack onClick={() => dispatch(toggleModalType('template'))} className="mb-2 text-[20px] duration-150 ease-linear scale-100 cursor-pointer hover:scale-125" />
+      <BiArrowBack
+        onClick={() => dispatch(toggleModalType("template"))}
+        className="mb-2 text-[20px] duration-150 ease-linear scale-100 cursor-pointer hover:scale-125"
+      />
       <div className="flex items-center justify-between">
         <div className="text-[22px] font-[500] text-[#14142B]">
           {selectedTemplateDto.name}
         </div>
-        <button className="button-singleTemp flex items-center py-2.5 px-6 cursor-pointer">
-          <img src={EyeImg} alt="icon" width={18} height={18} />
-          <div className="ml-2 gradient-text font-[500]">Preview</div>
-        </button>
+        {selectedTemplateDto.publishedUrl && (
+          <a
+            target="_blank"
+            href={`https://${selectedTemplateDto.publishedUrl}`}
+            className="button-singleTemp flex items-center py-2.5 px-6 cursor-pointer"
+          >
+            <img src={EyeImg} alt="icon" width={18} height={18} />
+            <div className="ml-2 gradient-text font-[500]">Preview</div>
+          </a>
+        )}
       </div>
       <div className="mt-5">
         <img
@@ -99,15 +108,23 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
                     <div className="flex items-center gap-2.5">
                       <img src={USDTIcon} alt="icon" width={24} height={24} />
                       <div className="text-[18px] font-[600] text-[#14142B]">
-                        {ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken) !== '0.0' ? 
-                          (`${ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)} USDT`)
-                        : 'Free'}
+                        {ethers.utils.formatUnits(
+                          selectedTemplateDto.buyoutPricePerToken
+                        ) !== "0.0"
+                          ? `${ethers.utils.formatUnits(
+                              selectedTemplateDto.buyoutPricePerToken
+                            )} USDT`
+                          : "Free"}
                       </div>
                     </div>
                     <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
-                      {ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken) !== '0.0' ? 
-                      (` ~$ ${ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)}`)
-                      : null}
+                      {ethers.utils.formatUnits(
+                        selectedTemplateDto.buyoutPricePerToken
+                      ) !== "0.0"
+                        ? ` ~$ ${ethers.utils.formatUnits(
+                            selectedTemplateDto.buyoutPricePerToken
+                          )}`
+                        : null}
                     </div>
                   </>
                 )}
