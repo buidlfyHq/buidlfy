@@ -32,10 +32,7 @@ const MintTemplateForm: FC = () => {
   const domainName = useSelector(
     (state: IRootState) => state.publish.domainName
   );
-
-  console.log(domainName);
   
-
   const [image, setImage] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
