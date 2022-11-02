@@ -327,10 +327,7 @@ const Container: FC<IContainer> = ({
               }}
             >
               <div className="container-div">
-                <span className="container-text">
-                  Add Elements
-                  <IoIosAddCircleOutline className="text-[18px] ml-1 mt-[2px]" />
-                </span>
+                <span className="container-text">Add Elements</span>
               </div>
             </div>
           ) : (
