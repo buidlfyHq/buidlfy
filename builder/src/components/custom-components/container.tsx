@@ -91,16 +91,6 @@ const Container: FC<IContainer> = ({
     )
   );
 
-  const handleDelete = () => {
-    dispatch(
-      updateWorkspaceElementStyle({
-        settingItemId: item.i,
-        propertyName: "deleteComponent",
-        propertyValue: true,
-      })
-    );
-  };
-
   let containerW = document
     ?.getElementById(`${item.i}`)
     ?.getBoundingClientRect().width;
@@ -114,6 +104,11 @@ const Container: FC<IContainer> = ({
   const elementHoverStyles = contractElementSelector
     ? "border border-[transparent] border-hover"
     : "border border-[transparent] hover:border-slate-300 hover:border-dashed ";
+
+  const backgroundSolid =
+    backgroundColor.slice(0, 4) === "rgba" ? backgroundColor : null;
+  const backgroundLinearGradient =
+    backgroundColor.slice(0, 4) === "rgba" ? null : backgroundColor;
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -232,6 +227,16 @@ const Container: FC<IContainer> = ({
     setSideElement(selectedSidebarElements);
   };
 
+  const handleDelete = () => {
+    dispatch(
+      updateWorkspaceElementStyle({
+        settingItemId: item.i,
+        propertyName: "deleteComponent",
+        propertyValue: true,
+      })
+    );
+  };
+
   const onComponentAddClick = (i: string) => {
     setIsContainerSelected(true);
     setHideNavbar(false);
@@ -299,8 +304,8 @@ const Container: FC<IContainer> = ({
           compactType={null}
           className="h-fit btn-border"
           style={{
-            background: backgroundColor,
-            backgroundImage: `url(${imageData?.uploadedImageData})`,
+            backgroundColor: backgroundSolid,
+            backgroundImage: `url(${imageData?.uploadedImageData}), ${backgroundLinearGradient}`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: backgroundSize,
@@ -327,10 +332,7 @@ const Container: FC<IContainer> = ({
               }}
             >
               <div className="container-div">
-                <span className="container-text">
-                  Add Elements
-                  <IoIosAddCircleOutline className="text-[18px] ml-1 mt-[2px]" />
-                </span>
+                <span className="container-text">Add Elements</span>
               </div>
             </div>
           ) : (

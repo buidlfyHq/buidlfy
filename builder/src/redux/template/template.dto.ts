@@ -14,6 +14,7 @@ export class SelectedTemplateDto {
   head: IHead;
   contract: IContractDetails;
   image: string;
+  publishedUrl: string;
   listingId: BigNumber;
   buyoutPricePerToken: BigNumber;
   listingTokenId?: string;
@@ -31,6 +32,7 @@ export class SelectedTemplateDto {
     this.head = selectedTemplate.head;
     this.contract = selectedTemplate.contract;
     this.image = selectedTemplate.image;
+    this.publishedUrl = selectedTemplate.publishedUrl;
     this.listingId = selectedTemplate.listing_listingId;
     this.buyoutPricePerToken = selectedTemplate.listing_buyoutPricePerToken;
     this.listingTokenId = selectedTemplate.listing_tokenId;
