@@ -63,7 +63,11 @@ const Text: FC<ITexts> = ({
       className="flex overflow-hidden items-center justify-center w-auto h-full"
     >
       {link ? (
-        <a target="_blank" className="cursor-pointer" href={link}>
+        <a
+          target="_blank"
+          href={link}
+          className="text-class cursor-pointer flex overflow-hidden items-center justify-center w-auto h-full"
+        >
           {textArea}
         </a>
       ) : (

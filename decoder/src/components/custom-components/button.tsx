@@ -7,6 +7,7 @@ import { providerOptions } from "config/provider-options";
 import { onLoad } from "hooks/on-load";
 import { onRequest } from "hooks/on-request";
 import ITexts from "interfaces/texts";
+import { gradientCheck } from "utils/gradient-check";
 import "styles/components.css";
 
 const web3Modal = new Web3Modal({
@@ -208,7 +209,23 @@ const Button: FC<ITexts> = ({
             }}
             className="text-class"
           >
-            {link.length > 0 ? <a href={link}>{value}</a> : <>{value}</>}
+            {link.length > 0 ? (
+              <a
+                href={link}
+                style={{
+                  background: gradientCheck(color, true),
+                  WebkitTextFillColor: gradientCheck(color, false),
+                  textDecoration: underline,
+                  textDecorationColor: color,
+                }}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {value}
+              </a>
+            ) : (
+              <>{value}</>
+            )}
           </span>
         </div>
       )}
