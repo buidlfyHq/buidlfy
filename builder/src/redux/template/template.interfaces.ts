@@ -30,4 +30,5 @@ export interface ISelectedTemplate {
   listing_tokenOwner?: string;
   owner_of?: string;
   isOwned?: boolean;
+  token_address?: string;
 }

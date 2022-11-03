@@ -9,6 +9,7 @@ export interface IConfig {
   };
   template: {
     TEMPLATE_GRAPHQL_URL: string;
+    MORALIS_X_API_KEY: string;
   };
   server: {
     SERVER: string;
@@ -43,6 +44,8 @@ const development: IConfig = {
   template: {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/buidlfyhq/buidlfy-template-testnet",
+    MORALIS_X_API_KEY:
+      "5DMoHq0Fw7LoMMqOBwodh1b5OugkJaJb4ORw6e02z9OQK9i975ywa2ufXhJPlWVD",
   },
   server: {
     SERVER: "https://api.buidlfy.com/",
@@ -77,6 +80,8 @@ const production: IConfig = {
   template: {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/buidlfyhq/buidlfy-template-testnet",
+    MORALIS_X_API_KEY:
+      "5DMoHq0Fw7LoMMqOBwodh1b5OugkJaJb4ORw6e02z9OQK9i975ywa2ufXhJPlWVD",
   },
   server: {
     SERVER: "https://api.buidlfy.com/",
@@ -111,6 +116,8 @@ const local: IConfig = {
   template: {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/buidlfyhq/buidlfy-template-testnet",
+    MORALIS_X_API_KEY:
+      "5DMoHq0Fw7LoMMqOBwodh1b5OugkJaJb4ORw6e02z9OQK9i975ywa2ufXhJPlWVD",
   },
   server: {
     SERVER: "https://api.buidlfy.com/",
