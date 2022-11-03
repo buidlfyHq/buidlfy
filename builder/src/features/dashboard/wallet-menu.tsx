@@ -25,14 +25,16 @@ const walletMenuItems = [
     target: "/my-templates",
     isChildren: false,
     children: [],
+    link: null
   },
   {
     name: "Join Discord",
     icon: HelpIcon,
     classParent: "",
-    target: "",
+    target: null,
     isChildren: false,
     children: [],
+    link: 'https://bit.ly/buidlfydiscord'
   },
 ];
 
@@ -68,26 +70,36 @@ const WalletMenu = () => {
               </div>
             </div>
             {walletMenuItems.map((menuItem, i) => {
-              const { name, classParent, icon, isChildren, children } =
-                menuItem;
+              const { name, target, classParent, icon, isChildren, children, link } = menuItem;
+              const MenuItem = (
+                <>
+                  <div className="flex items-center gap-4">
+                    <img src={icon} alt="icon" width={28} height={28} />
+                    <span>{name}</span>
+                  </div>
+                  <BiChevronRight />
+                </>
+              )
               return (
                 <Menu.Item key={i} as="div" className={classParent}>
                   {({ active }) => (
                     <>
                       {!isChildren ? (
-                        <Link
-                          to="/my-templates"
-                          className={`${
-                            active &&
-                            "bg-slate-100 rounded-[8px] cursor-pointer"
-                          } font-[500] text-[#14142B] opacity-70 px-5 py-3 font-[16px] flex items-center justify-between`}
-                        >
-                          <div className="flex items-center gap-4">
-                            <img src={icon} alt="icon" width={28} height={28} />
-                            <span>{name}</span>
-                          </div>
-                          <BiChevronRight />
-                        </Link>
+                        link ? (
+                          <a href={link} target="_blank" className="hover:bg-slate-100 hover:rounded-[8px] hover:cursor-pointer font-[500] text-[#14142B] opacity-70 px-5 py-3 font-[16px] flex items-center justify-between w-full">
+                            {MenuItem}
+                          </a>
+                        ) : (
+                          <Link
+                            to={target}
+                            className={`${
+                              active &&
+                              "bg-slate-100 rounded-[8px] cursor-pointer"
+                            } font-[500] text-[#14142B] opacity-70 px-5 py-3 font-[16px] flex items-center justify-between`}
+                          >
+                            {MenuItem}
+                          </Link>
+                        )
                       ) : (
                         <Menu as="div" className="relative">
                           <Menu.Button

@@ -1,12 +1,16 @@
 import { FC } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import ListingAccordion from "components/utils/listing-accordion";
 import { toggleModal } from "redux/modal/modal.reducers";
+import { IRootState } from "redux/root-state.interface";
 
 const CompleteListing: FC = () => {
   const dispatch = useDispatch();
+  const selectedTemplate = useSelector(
+    (state: IRootState) => state.template.selectedTemplate
+  );
 
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[527px] min-w-[330px] my-20 sm:mx-28 mx-12 rounded-[15px] bg-white">
@@ -24,15 +28,19 @@ const CompleteListing: FC = () => {
 
         <section className="flex w-full justify-between items-center text-[#14142B]  text-[14px] my-5">
           <div className="flex items-center gap-6">
-            <div className="h-[54px] w-[54px] flex items-center bg-[#9F74FB] rounded-[2px] p-4 text-[18px]">
-              {" "}
+            <div className="h-[54px] w-[54px] flex items-center">
+              <img
+                src={selectedTemplate.image}
+                className="w-full h-full rounded-[4px]"
+                alt="icon"
+              />
             </div>
             <div className="flex flex-col items-start">
               <div className="text-[#14142B] opacity-50 font-[500] tex-[12px] ">
-                Crypto
+                {selectedTemplate.category}
               </div>
               <div className="text-[#14142B] font-[600] text-[14px] whitespace-nowrap">
-                Cryptin Next Gen Template
+                {selectedTemplate.name}
               </div>
               <div className="text-[#14142B] opacity-50 font-[500] tex-[12px] ">
                 Quantity: 1
@@ -43,9 +51,8 @@ const CompleteListing: FC = () => {
             <div className="text-[#14142B] opacity-50 font-[500] text-[12px] ">
               Price
             </div>
-            <div className="text-[#14142B] font-[700] text-[14px]">123.00</div>
-            <div className="text-[#14142B] opacity-50 font-[500] text-[12px] ">
-              $1234767.00 USD
+            <div className="text-[#14142B] font-[700] text-[14px]">
+              {selectedTemplate.amount} USDT
             </div>
           </div>
         </section>
