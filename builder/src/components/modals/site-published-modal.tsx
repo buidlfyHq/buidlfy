@@ -1,10 +1,11 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
+import LottieComponent from "components/utils/lottie";
 import { toggleModal } from "redux/modal/modal.reducers";
-import CongratulationsImg from "assets/icons/congratulations.png";
 import UprightImg from "assets/icons/upright.png";
+import HourGlassImg from "assets/lottie/hourglass.json";
 
 const SitePublishedModal: FC = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const SitePublishedModal: FC = () => {
       </button>
       <div className="flex flex-col justify-center items-center py-16 px-10">
         <div>
-          <img src={CongratulationsImg} alt="img_temp" width={50} height={50} />
+          <LottieComponent lottie={HourGlassImg} width={75} height={75} />
         </div>
         <div className="font-[500] text-[20px] text-[#2C2D5E] mt-3">
           Site is published!

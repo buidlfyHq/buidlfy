@@ -23,6 +23,7 @@ export interface ISelectedTemplate {
   contract: IContractDetails;
   image: string;
   publishedUrl: string;
+  amount?: string;
   listing_listingId: BigNumber;
   listing_buyoutPricePerToken: BigNumber;
   listing_tokenId?: string;
