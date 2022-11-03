@@ -31,7 +31,7 @@ const Text: FC<ITexts> = ({
   useEffect(() => {
     handleOnChange();
   }, [outputValue]);
-
+  const gradientCondition = color?.indexOf("gradient") !== -1;
   const textArea = (
     <textarea
       readOnly
@@ -39,6 +39,7 @@ const Text: FC<ITexts> = ({
         fontWeight: bold,
         fontStyle: italic,
         textDecoration: underline,
+        textDecorationColor: `${gradientCondition ? "black" : color}`,
         background: color,
         WebkitTextFillColor: "transparent",
         display: "flex",
@@ -58,12 +59,18 @@ const Text: FC<ITexts> = ({
       style={{
         height: "-webkit-fill-available",
         background: backgroundColor,
+        textDecoration: underline,
+        textDecorationColor: color,
         margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
       }}
       className="flex overflow-hidden items-center justify-center w-auto h-full"
     >
       {link ? (
-        <a target="_blank" className="cursor-pointer" href={link}>
+        <a
+          target="_blank"
+          href={link}
+          className="text-class cursor-pointer flex overflow-hidden items-center justify-center w-auto h-full"
+        >
           {textArea}
         </a>
       ) : (

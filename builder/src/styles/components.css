@@ -1190,7 +1190,6 @@ height: 40px;
   background: linear-gradient(to right, #68AEFF 0%, #9768FB 79.17%);
   cursor: pointer;
 }
-
 .bordered-button::before {
   content: "";
   position: absolute;
