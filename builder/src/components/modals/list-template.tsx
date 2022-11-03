@@ -3,19 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { listTemplate } from "redux/minted/minted.actions";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
+import { setSelectedTemplateAmount } from "redux/template/template.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { CgClose } from "react-icons/cg";
-import IconImg from "assets/icons/icon-crypto.png";
+import USDT from "assets/icons/usdt.png"
 
 const ListTemplate: FC = () => {
   const dispatch = useDispatch();
   const selectedTemplate = useSelector(
     (state: IRootState) => state.template.selectedTemplate
   );
-  const [amount, setAmount] = useState<string>("");
 
   const handleListTemplate = () => {
-    dispatch(listTemplate(amount));
+    dispatch(listTemplate(selectedTemplate.amount));
     dispatch(toggleModalType("complete-listing"));
   };
 
@@ -35,7 +35,7 @@ const ListTemplate: FC = () => {
           <div className="flex items-center text-[#14142B] opacity-70 text-[14px] mt-1">
             <div>{selectedTemplate.name}</div>
             <div className="ml-2 py-[6px] px-3 bg-gray-100 text-[12px] font-[500] rounded-[4px] text-[#14142B]">
-              Crypto
+              {selectedTemplate.category}
             </div>
           </div>
           <div className="mt-4 mb-8 h-44 flex items-center bg-[#F8F8FD] rounded-[7px]">
@@ -52,16 +52,18 @@ const ListTemplate: FC = () => {
             </div>
             <div className="relative mt-2">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <img src={IconImg} alt="icon" width={24} height={24} />
+                <img src={USDT} alt="icon" width={24} height={24} />
               </div>
               <input
-                type="text"
+                type="number"
                 id="amount"
-                className="border border-[#C4C4C4] text-[#23314B] text-[13px] rounded-[8px] focus:ring-[#dee0e9] focus:border-[#dee0e9] block w-full pl-11 py-2.5"
+                className="no-arrow-input border border-[#C4C4C4] text-[#23314B] text-[13px] rounded-[8px] focus:ring-[#dee0e9] focus:border-[#dee0e9] block w-full pl-11 py-2.5"
                 placeholder="Amount"
                 required
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                value={selectedTemplate.amount}
+                onChange={(e) =>
+                  dispatch(setSelectedTemplateAmount(e.target.value.toString()))
+                }
               />
             </div>
           </form>
@@ -69,26 +71,30 @@ const ListTemplate: FC = () => {
             <div className="flex items-center justify-between">
               <div className="text-[#8E8E93] text-[14px]">Amount</div>
               <div className="text-[#1C1C1E] opacity-60 text-[14px] font-[500]">
-                ETH 25
+                {selectedTemplate.amount ? selectedTemplate.amount : "--"} USDT
               </div>
             </div>
             <div className="flex items-center justify-between mt-3">
               <div className="text-[#8E8E93] text-[14px]">
                 Platform Fee (5%)
               </div>
-              <div className="text-[#1C1C1E] opacity-60 text-[14px] font-[500]">
-                ETH 1.25
+              <div className="text-[#1C1C1E] opacity-60 text-[14px] fontx-[500]">
+                {selectedTemplate.amount
+                  ? (0.05 * parseFloat(selectedTemplate.amount)).toFixed(2)
+                  : "--"}{" "}
+                USDT
               </div>
             </div>
             <div className="flex items-center justify-between mt-3">
               <div className="text-[#1C1C1E] text-[14px] font-[500]">Total</div>
               <div className="text-[#1C1C1E] text-[16px] font-[700]">
-                ETH 26.25
-              </div>
-            </div>
-            <div className="flex items-center justify-end mt-3">
-              <div className="text-[#14142B] opacity-50 text-[14px] font-[500]">
-                ~$12,343.00 USD
+                {selectedTemplate.amount
+                  ? (
+                      parseFloat(selectedTemplate.amount) +
+                      0.05 * parseFloat(selectedTemplate.amount)
+                    ).toFixed(2)
+                  : "--"}{" "}
+                USDT
               </div>
             </div>
           </div>

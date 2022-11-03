@@ -18,7 +18,7 @@ import HourGlassImg from "assets/lottie/hourglass.json";
 import completed from "assets/icons/completed.svg";
 import failed from "assets/icons/failed.svg";
 
-const PublishSiteModal: FC = () => {
+const PublishProgress: FC = () => {
   const socket = io(config.server.SERVER);
   const dispatch = useDispatch();
   const [failedDeployment, setFailedDeployment] = useState<boolean>();
@@ -194,4 +194,4 @@ const PublishSiteModal: FC = () => {
   );
 };
 
-export default PublishSiteModal;
+export default PublishProgress;

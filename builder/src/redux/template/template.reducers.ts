@@ -32,6 +32,9 @@ const templateSlice = createSlice({
     setSelectedTemplate(state, action: { payload: ISelectedTemplate }) {
       state.selectedTemplate = action.payload;
     },
+    setSelectedTemplateAmount(state, action: { payload: string }) {
+      state.selectedTemplate.amount = action.payload;
+    },
     allTemplatesFetched(state, action) {
       state.templateList = action.payload;
     },
@@ -57,6 +60,7 @@ export const {
   startBuyTemplateLoader,
   startMintTemplateLoader,
   setSelectedTemplate,
+  setSelectedTemplateAmount,
   allTemplatesFetched,
   filterAllTemplates,
 } = templateSlice.actions;

@@ -2,8 +2,9 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
+import LottieComponent from "components/utils/lottie";
 import { toggleModal } from "redux/modal/modal.reducers";
-import HourGlassImg from "assets/icons/hourglass.png";
+import HourGlassImg from "assets/lottie/hourglass.json";
 import InfoCircleImg from "assets/icons/info-circle.png";
 
 const ListingReview: FC = () => {
@@ -17,7 +18,7 @@ const ListingReview: FC = () => {
       </div>
       <div className="flex flex-col justify-center items-center pt-3">
         <div>
-          <img src={HourGlassImg} alt="icon" width={54} height={54} />
+          <LottieComponent lottie={HourGlassImg} width={54} height={54} />
         </div>
         <div className="font-[600] text-[24px] text-[#14142B] mt-7">
           Template listing is currently in review...
