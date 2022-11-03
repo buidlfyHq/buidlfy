@@ -71,7 +71,7 @@ export const getOwnedTemplatesService = async (
   try {
     const allTemplates = await (
       await fetch(
-        `https://deep-index.moralis.io/api/v2/${address}/nft?chain=${config.network.DEFAULT_NETWORK.chainName}&format=decimal&token_addresses=0xa69374d7371df89192f05c7b61a945f834bf2593`,
+        `https://deep-index.moralis.io/api/v2/${address}/nft?chain=${config.network.DEFAULT_NETWORK.chainName}&format=decimal&token_addresses=${config.address.buidlfyErc1155}`,
         {
           method: "GET",
           headers: {
