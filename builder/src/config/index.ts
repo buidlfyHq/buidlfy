@@ -113,7 +113,7 @@ const local: IConfig = {
       "https://api.thegraph.com/subgraphs/name/buidlfyhq/buidlfy-template-testnet",
   },
   server: {
-    SERVER: "https://api.buidlfy.com/",
+    SERVER: "http://localhost:8080/",
   },
   network: {
     DEFAULT_NETWORK: {

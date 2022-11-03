@@ -29,7 +29,9 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
       (image: IUploadedImageData) => image.settingItemId === i
     )
   );
-
+  const imageLink = useSelector(
+    (state: IRootState) => state.upload.uploadImage
+  );
   // FIX: find suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
@@ -43,7 +45,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
           dispatch(
             updateUploadedImageData({
               settingItemId: i,
-              uploadedImageData: reader.result as string,
+              uploadedImageData: (reader.result as string) || imageLink,
             })
           );
           dispatch(uploadImage({ data: reader.result as string, id: i }));
