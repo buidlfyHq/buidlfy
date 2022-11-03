@@ -1,5 +1,5 @@
 import { call, all, put, takeLatest } from "redux-saga/effects";
-import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
+import { updateUploadedImageData, updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import { updateUploadImage } from "./upload.reducers";
 import { uploadImageService } from "./upload.services";
 import uploadActionTypes from "./upload.types";
@@ -15,6 +15,12 @@ function* uploadImage({ payload }) {
         settingItemId: id,
         propertyName: "imgData",
         propertyValue: uploadImageLink,
+      })
+    );
+    yield put(
+      updateUploadedImageData({
+        settingItemId: id,
+        uploadedImageData: uploadImageLink,
       })
     );
   } else {
