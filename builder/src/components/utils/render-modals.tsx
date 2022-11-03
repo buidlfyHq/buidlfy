@@ -10,7 +10,7 @@ import CheckoutModal from "components/modals/checkout-modal";
 import MintTemplateForm from "components/modals/mint-template-form";
 import MintedTemplate from "components/modals/minted-template";
 import MintingProgressModal from "components/modals/minting-progress";
-import PublishSiteModal from "components/modals/publish-site";
+import PublishProgress from "components/modals/publish-progress";
 import SitePublishedModal from "components/modals/site-published-modal";
 import CompleteListing from "components/modals/complete-listing";
 import ListingReview from "components/modals/listing-review";
@@ -45,7 +45,7 @@ const RenderModal: FC = () => {
     case "minting-progress":
       return <MintingProgressModal />;
     case "publish-process":
-      return <PublishSiteModal />;
+      return <PublishProgress />;
     case "publish-done":
       return <SitePublishedModal />;
     case "complete-listing":
