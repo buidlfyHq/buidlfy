@@ -54,9 +54,6 @@ const CompleteListing: FC = () => {
             <div className="text-[#14142B] font-[700] text-[14px]">
               {selectedTemplate.amount} USDT
             </div>
-            <div className="text-[#14142B] opacity-50 font-[500] text-[12px] ">
-              ${selectedTemplate.amount} USD
-            </div>
           </div>
         </section>
 
