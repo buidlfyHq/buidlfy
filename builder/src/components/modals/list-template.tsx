@@ -6,7 +6,7 @@ import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplateAmount } from "redux/template/template.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { CgClose } from "react-icons/cg";
-import IconImg from "assets/icons/icon-crypto.png";
+import USDT from "assets/icons/usdt.png"
 
 const ListTemplate: FC = () => {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const ListTemplate: FC = () => {
             </div>
             <div className="relative mt-2">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <img src={IconImg} alt="icon" width={24} height={24} />
+                <img src={USDT} alt="icon" width={24} height={24} />
               </div>
               <input
                 type="number"
