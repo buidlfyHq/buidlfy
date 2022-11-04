@@ -21,6 +21,7 @@ export class SelectedTemplateDto {
   listingTokenId?: string;
   tokenOwner: string;
   isOwned?: boolean;
+  tokenAddress?: string;
 
   constructor(selectedTemplate: ISelectedTemplate) {
     this.id = selectedTemplate.id;
@@ -41,5 +42,6 @@ export class SelectedTemplateDto {
     this.tokenOwner =
       selectedTemplate.listing_tokenOwner || selectedTemplate.owner_of;
     this.isOwned = selectedTemplate?.isOwned;
+    this.tokenAddress = selectedTemplate?.token_address;
   }
 }
