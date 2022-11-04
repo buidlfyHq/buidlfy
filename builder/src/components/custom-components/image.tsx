@@ -39,7 +39,6 @@ const Image: FC<IImageComponent> = ({
       (image: IUploadedImageData) => image.settingItemId === i
     )
   );
-
   useEffect(() => {
     if (ref.current?.clientWidth) {
       console.log(ref.current.clientWidth, "cw");
