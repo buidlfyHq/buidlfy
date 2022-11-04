@@ -64,7 +64,7 @@ const ListTemplates: FC<IListTemplates> = ({ filteredTemplateList }) => {
                 </div>
               </div>
               <div className="text-[18px] font-[600] text-[#14142B] mt-2 px-2 pb-1">
-                {parseFloat(amount) !== 0.0 ? (
+                {parseInt(amount) !== 0 ? (
                   `${amount} USDT`
                 ) : (
                   <span className="py-2 px-3.5 bg-gray-200 rounded-[8px] text-[14px] font-[500]">

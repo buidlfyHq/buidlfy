@@ -111,11 +111,11 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
                     <div className="flex items-center gap-2.5">
                       <img src={USDTIcon} alt="icon" width={24} height={24} />
                       <div className="text-[18px] font-[600] text-[#14142B]">
-                        {amount !== 0.0 ? `${amount} USDT` : "Free"}
+                        {amount !== 0 ? `${amount} USDT` : "Free"}
                       </div>
                     </div>
                     <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
-                      {amount !== 0.0 ? ` ~$ ${amount}` : null}
+                      {amount !== 0 ? ` ~$ ${amount}` : null}
                     </div>
                   </>
                 )}
