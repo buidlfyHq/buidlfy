@@ -33,7 +33,7 @@ const templateSlice = createSlice({
       state.selectedTemplate = action.payload;
     },
     setSelectedTemplateAmount(state, action: { payload: string }) {
-      state.selectedTemplate.amount = action.payload;
+      state.selectedTemplate.listAmount = action.payload;
     },
     allTemplatesFetched(state, action) {
       state.templateList = action.payload;

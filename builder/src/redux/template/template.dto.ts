@@ -15,7 +15,7 @@ export class SelectedTemplateDto {
   contract: IContractDetails;
   image: string;
   publishedUrl: string;
-  amount: string;
+  listAmount: string;
   listingId: BigNumber;
   buyoutPricePerToken: BigNumber;
   listingTokenId?: string;
@@ -35,13 +35,14 @@ export class SelectedTemplateDto {
     this.contract = selectedTemplate.contract;
     this.image = selectedTemplate.image;
     this.publishedUrl = selectedTemplate.publishedUrl;
-    this.amount = selectedTemplate.amount;
+    this.listAmount = selectedTemplate.listAmount;
     this.listingId = selectedTemplate.listing_listingId;
     this.buyoutPricePerToken = selectedTemplate.listing_buyoutPricePerToken;
     this.listingTokenId = selectedTemplate.listing_tokenId;
     this.tokenOwner =
       selectedTemplate.listing_tokenOwner || selectedTemplate.owner_of;
     this.isOwned = selectedTemplate?.isOwned;
-    this.tokenAddress = selectedTemplate?.token_address;
+    this.tokenAddress =
+      selectedTemplate?.token_address || selectedTemplate.listing_assetContract;
   }
 }
