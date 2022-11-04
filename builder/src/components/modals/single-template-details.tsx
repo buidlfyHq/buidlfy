@@ -32,7 +32,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
     (state: IRootState) => state.template.selectedTemplate
   );
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
-  const amount = parseFloat(
+  const amount = selectedTemplateDto.buyoutPricePerToken && parseFloat(
     ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)
   );
 
