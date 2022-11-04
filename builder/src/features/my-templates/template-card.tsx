@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -12,6 +12,7 @@ import {
 } from "redux/contract/contract.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplate } from "redux/template/template.reducers";
+import { SelectedTemplateDto } from "redux/template/template.dto";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { IHead, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
@@ -26,11 +27,19 @@ interface ITemplateCard {
 const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const selectedTemplateDto = new SelectedTemplateDto(template);
 
   const handleListOnBuidlfy = (template: ISelectedTemplate) => {
     dispatch(setSelectedTemplate(template));
     dispatch(toggleModal(true));
     dispatch(toggleModalType("list-single"));
+  };
+
+  const handleViewDetails = () => {
+    const modifiedTemplate = { ...template, isOwned: true };
+    dispatch(setSelectedTemplate(modifiedTemplate));
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("single"));
   };
 
   const openTemplate = (
@@ -57,25 +66,28 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
         </div>
         <div className="absolute flex flex-col items-center justify-center w-full h-full font-[13px] font-[600] opacity-0 duration-300 hover:opacity-100">
           {list ? (
-            <div
+            <button
               className="py-2 px-8 mt-4 rounded-[8px] connect-wallet-button text-white"
               onClick={() => handleListOnBuidlfy(template)}
             >
               List on Buidlfy
-            </div>
+            </button>
           ) : (
-            <div className="py-2 px-10 mt-4 rounded-[8px] connect-wallet-button text-white">
+            <button
+              className="py-2 px-10 mt-4 rounded-[8px] connect-wallet-button text-white"
+              onClick={handleViewDetails}
+            >
               View Details
-            </div>
+            </button>
           )}
           <div
             className="py-2 px-10 mt-4 rounded-[8px] bg-white text-[#7743E7]"
             onClick={() =>
               openTemplate(
-                template.value,
-                template.backgroundColor,
-                template.head,
-                template.contract
+                selectedTemplateDto.value,
+                selectedTemplateDto.backgroundColor,
+                selectedTemplateDto.head,
+                selectedTemplateDto.contract
               )
             }
           >
@@ -83,7 +95,7 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
           </div>
         </div>
         <img
-          src={template.image}
+          src={selectedTemplateDto.image}
           alt="img_temp"
           className="rounded-[16px] w-full"
           width={314}
@@ -94,17 +106,17 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
         <div className="flex items-center">
           <a
             target="_blank"
-            href={`https://mumbai.polygonscan.com/address/${template.token_address}`}
+            href={`https://mumbai.polygonscan.com/token/${selectedTemplateDto.tokenAddress}?a=${selectedTemplateDto.tokenId}`}
             className="mr-3 border rounded-full p-2"
           >
             <img src={Polygon} width={12} height={12} />
           </a>
           <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">
-            {template.name}
+            {selectedTemplateDto.name}
           </div>
         </div>
         <div className="text-[12px] text-[#14142B] py-2 px-4 bg-gray-100 font-[500] rounded-[4px]">
-          {template?.category || "NA"}
+          {selectedTemplateDto?.category || "NA"}
         </div>
       </div>
     </div>

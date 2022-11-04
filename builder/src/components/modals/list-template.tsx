@@ -15,7 +15,7 @@ const ListTemplate: FC = () => {
   );
 
   const handleListTemplate = () => {
-    dispatch(listTemplate(selectedTemplate.amount));
+    dispatch(listTemplate(selectedTemplate.listAmount));
     dispatch(toggleModalType("complete-listing"));
   };
 
@@ -60,7 +60,7 @@ const ListTemplate: FC = () => {
                 className="no-arrow-input border border-[#C4C4C4] text-[#23314B] text-[13px] rounded-[8px] focus:ring-[#dee0e9] focus:border-[#dee0e9] block w-full pl-11 py-2.5"
                 placeholder="Amount"
                 required
-                value={selectedTemplate.amount}
+                value={selectedTemplate.listAmount}
                 onChange={(e) =>
                   dispatch(setSelectedTemplateAmount(e.target.value.toString()))
                 }
@@ -71,7 +71,7 @@ const ListTemplate: FC = () => {
             <div className="flex items-center justify-between">
               <div className="text-[#8E8E93] text-[14px]">Amount</div>
               <div className="text-[#1C1C1E] opacity-60 text-[14px] font-[500]">
-                {selectedTemplate.amount ? selectedTemplate.amount : "--"} USDT
+                {selectedTemplate.listAmount ? selectedTemplate.listAmount : "--"} USDT
               </div>
             </div>
             <div className="flex items-center justify-between mt-3">
@@ -79,8 +79,8 @@ const ListTemplate: FC = () => {
                 Platform Fee (5%)
               </div>
               <div className="text-[#1C1C1E] opacity-60 text-[14px] fontx-[500]">
-                {selectedTemplate.amount
-                  ? (0.05 * parseFloat(selectedTemplate.amount)).toFixed(2)
+                {selectedTemplate.listAmount
+                  ? (0.05 * parseFloat(selectedTemplate.listAmount)).toFixed(2)
                   : "--"}{" "}
                 USDT
               </div>
@@ -88,10 +88,10 @@ const ListTemplate: FC = () => {
             <div className="flex items-center justify-between mt-3">
               <div className="text-[#1C1C1E] text-[14px] font-[500]">Total</div>
               <div className="text-[#1C1C1E] text-[16px] font-[700]">
-                {selectedTemplate.amount
+                {selectedTemplate.listAmount
                   ? (
-                      parseFloat(selectedTemplate.amount) +
-                      0.05 * parseFloat(selectedTemplate.amount)
+                      parseFloat(selectedTemplate.listAmount) +
+                      0.05 * parseFloat(selectedTemplate.listAmount)
                     ).toFixed(2)
                   : "--"}{" "}
                 USDT

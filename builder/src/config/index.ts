@@ -45,7 +45,7 @@ const development: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/buidlfyhq/buidlfy-template-testnet",
     MORALIS_X_API_KEY:
-      "5DMoHq0Fw7LoMMqOBwodh1b5OugkJaJb4ORw6e02z9OQK9i975ywa2ufXhJPlWVD",
+      "2ffY3sVNITHVIIDV5WTq0VeGdVe1CHs0m3oL7mjD4t2NKKKNyod2p50Kfvg7O4Xh",
   },
   server: {
     SERVER: "https://api.buidlfy.com/",
@@ -81,7 +81,7 @@ const production: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/buidlfyhq/buidlfy-template-testnet",
     MORALIS_X_API_KEY:
-      "5DMoHq0Fw7LoMMqOBwodh1b5OugkJaJb4ORw6e02z9OQK9i975ywa2ufXhJPlWVD",
+      "2ffY3sVNITHVIIDV5WTq0VeGdVe1CHs0m3oL7mjD4t2NKKKNyod2p50Kfvg7O4Xh",
   },
   server: {
     SERVER: "https://api.buidlfy.com/",
@@ -117,7 +117,7 @@ const local: IConfig = {
     TEMPLATE_GRAPHQL_URL:
       "https://api.thegraph.com/subgraphs/name/buidlfyhq/buidlfy-template-testnet",
     MORALIS_X_API_KEY:
-      "5DMoHq0Fw7LoMMqOBwodh1b5OugkJaJb4ORw6e02z9OQK9i975ywa2ufXhJPlWVD",
+      "2ffY3sVNITHVIIDV5WTq0VeGdVe1CHs0m3oL7mjD4t2NKKKNyod2p50Kfvg7O4Xh",
   },
   server: {
     SERVER: "https://api.buidlfy.com/",

@@ -52,7 +52,7 @@ const CompleteListing: FC = () => {
               Price
             </div>
             <div className="text-[#14142B] font-[700] text-[14px]">
-              {selectedTemplate.amount} USDT
+              {selectedTemplate.listAmount} USDT
             </div>
           </div>
         </section>
