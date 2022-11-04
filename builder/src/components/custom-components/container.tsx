@@ -55,6 +55,7 @@ interface IContainer {
     marginTop?: number;
     marginBottom?: number;
   };
+  imgData?: string | ArrayBuffer;
 }
 
 const Container: FC<IContainer> = ({
@@ -74,6 +75,7 @@ const Container: FC<IContainer> = ({
   backgroundSize,
   padding,
   margin,
+  imgData,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements = useSelector(
@@ -305,7 +307,12 @@ const Container: FC<IContainer> = ({
           className="h-fit btn-border"
           style={{
             backgroundColor: backgroundSolid,
-            backgroundImage: `url(${imageData?.uploadedImageData}), ${backgroundLinearGradient}`,
+            backgroundImage: `url(${
+              imageData?.uploadedImageData
+                ? imageData.uploadedImageData
+                : imgData
+            })`,
+            background: `${backgroundLinearGradient}`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: backgroundSize,

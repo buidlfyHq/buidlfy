@@ -1,9 +1,6 @@
 import { FC, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  updateUploadedImageData,
-  updateWorkspaceImageElementStyle,
-} from "redux/workspace/workspace.reducers";
+import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
 import DefaultImage from "components/utils/default-image";
