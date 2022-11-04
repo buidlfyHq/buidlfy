@@ -29,8 +29,10 @@ const ListTemplates: FC<IListTemplates> = ({ filteredTemplateList }) => {
     >
       {filteredTemplateList.length > 0 ? (
         filteredTemplateList.map((temp: ISelectedTemplate) => {
-          const {id, image = DefaultTemplateImg, name = 'Template'} = temp
-          const amount = ethers.utils.formatUnits(temp.listing_buyoutPricePerToken)
+          const { id, image = DefaultTemplateImg, name = "Template" } = temp;
+          const amount = ethers.utils.formatUnits(
+            temp.listing_buyoutPricePerToken
+          );
           return (
             <div
               key={id}
@@ -48,26 +50,27 @@ const ListTemplates: FC<IListTemplates> = ({ filteredTemplateList }) => {
                 <div className="text-[13px] text-[#14142B] opacity-80 ">
                   {name}
                 </div>
-                {temp?.category && (
-                  <div className="text-[10px] text-[#14142B] py-2 px-3 bg-gray-100 rounded-[28px]">
-                    {temp?.category}
-                  </div>
-                )}
-                {temp?.isOwned && (
-                  <div className="text-[10px] text-[#14142B] py-2 px-3 bg-green-300 rounded-[28px]">
-                    Purchased
-                  </div>
-                )}
+                <div className="flex">
+                  {temp?.category && (
+                    <div className="text-[10px] text-[#14142B] py-2 px-3 bg-gray-100 rounded-[28px]">
+                      {temp?.category}
+                    </div>
+                  )}
+                  {temp?.isOwned && (
+                    <div className="ml-2 text-[10px] text-[#14142B] py-2 px-3 bg-green-300 rounded-[28px]">
+                      Purchased
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="text-[18px] font-[600] text-[#14142B] mt-2 px-2 pb-1">
-                {amount !== '0.0' ? 
-                  (`${amount} USDT`) :
-                  (
-                    <span className="py-2 px-3.5 bg-gray-200 rounded-[8px] text-[14px] font-[500]">
-                      Free
-                    </span>
-                  )
-                }
+                {parseInt(amount) !== 0 ? (
+                  `${amount} USDT`
+                ) : (
+                  <span className="py-2 px-3.5 bg-gray-200 rounded-[8px] text-[14px] font-[500]">
+                    Free
+                  </span>
+                )}
               </div>
             </div>
           );

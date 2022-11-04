@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -15,6 +15,7 @@ import { setSelectedTemplate } from "redux/template/template.reducers";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { IHead, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { IContractDetails } from "redux/contract/contract.interfaces";
+import Polygon from "assets/icons/polygon.png";
 
 interface ITemplateCard {
   template: ISelectedTemplate;
@@ -90,8 +91,17 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
         />
       </div>
       <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
-        <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">
-          {template.name}
+        <div className="flex items-center">
+          <a
+            target="_blank"
+            href={`https://mumbai.polygonscan.com/address/${template.token_address}`}
+            className="mr-3 border rounded-full p-2"
+          >
+            <img src={Polygon} width={12} height={12} />
+          </a>
+          <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">
+            {template.name}
+          </div>
         </div>
         <div className="text-[12px] text-[#14142B] py-2 px-4 bg-gray-100 font-[500] rounded-[4px]">
           {template?.category || "NA"}

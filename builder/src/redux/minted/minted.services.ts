@@ -75,7 +75,7 @@ export const getOwnedTemplatesService = async (
         {
           method: "GET",
           headers: {
-            "X-API-Key": "test",
+            "X-API-Key": config.template.MORALIS_X_API_KEY,
             accept: "application/json",
           },
         }

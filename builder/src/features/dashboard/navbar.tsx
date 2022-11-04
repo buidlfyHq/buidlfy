@@ -48,9 +48,11 @@ const Navbar: FC<INavbar> = ({
       value: workspaceElements,
       backgroundColor: workspaceBackgroundColor,
     };
+
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(templateConfig));
     }
+
     if (publishStatus) {
       localStorage.setItem("publishStatus", publishStatus.toString());
     }

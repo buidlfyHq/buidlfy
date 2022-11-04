@@ -22,6 +22,7 @@ interface IImageComponent {
   backgroundSize?: string;
   i: string;
   isAuto?: boolean;
+  imgData?: string | ArrayBuffer;
 }
 
 const Image: FC<IImageComponent> = ({
@@ -32,6 +33,7 @@ const Image: FC<IImageComponent> = ({
   height,
   backgroundSize,
   isAuto,
+  imgData,
 }) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
@@ -73,14 +75,18 @@ const Image: FC<IImageComponent> = ({
 
   return (
     <>
-      {imageData?.uploadedImageData ? (
+      {imageData?.uploadedImageData || imgData ? (
         <div className="flex w-full h-full">
           <div
             ref={ref}
             id={i}
             className="flex w-full h-full"
             style={{
-              backgroundImage: `url(${imageData.uploadedImageData})`,
+              backgroundImage: `url(${
+                imageData?.uploadedImageData
+                  ? imageData.uploadedImageData
+                  : imgData
+              })`,
               backgroundRepeat: "no-repeat",
               backgroundPosition: justifyContent,
               backgroundSize: `${

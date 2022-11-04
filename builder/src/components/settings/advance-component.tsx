@@ -16,6 +16,7 @@ import { IContract } from "redux/contract/contract.interfaces";
 import ContractList from "components/utils/contract/contract-list";
 import ContractView from "components/utils/contract/contract-view";
 import ContractHistory from "components/utils/contract/contract-history";
+import ContractRemove from "components/utils/contract/contract-remove";
 import "styles/components.css";
 import "styles/dashboard.css";
 import ContractRemove from "components/utils/contract/contract-remove";
