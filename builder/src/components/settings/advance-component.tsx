@@ -19,7 +19,6 @@ import ContractHistory from "components/utils/contract/contract-history";
 import ContractRemove from "components/utils/contract/contract-remove";
 import "styles/components.css";
 import "styles/dashboard.css";
-import ContractRemove from "components/utils/contract/contract-remove";
 
 interface IAdvanceComponent {
   selectedElement: IWorkspaceElement;

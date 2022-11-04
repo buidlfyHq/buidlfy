@@ -63,7 +63,7 @@ const PublishMenu = () => {
                     href={`https://${newDomainName}`}
                     className="gradient-text text-[11px] hover:text-[#5C59E5] cursor-pointer"
                   >
-                    {'newDomainName'}
+                    {newDomainName}
                   </a>
                 </div>
               </div>
