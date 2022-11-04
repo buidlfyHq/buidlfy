@@ -7,6 +7,7 @@ import AbiComponents from "components/dashboard/abi-components";
 import {
   updateContractAbi,
   updateContractAddress,
+  updateContractList,
 } from "redux/contract/contract.reducers";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { useSelector } from "react-redux";
@@ -15,6 +16,7 @@ import { IContract } from "redux/contract/contract.interfaces";
 import ContractList from "components/utils/contract/contract-list";
 import ContractView from "components/utils/contract/contract-view";
 import ContractHistory from "components/utils/contract/contract-history";
+import ContractRemove from "components/utils/contract/contract-remove";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -67,6 +69,11 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     ? updatedNewContractList?.slice(0, 4)
     : updatedNewContractList;
 
+  const handleClearContract = () => {
+    localStorage.removeItem("contractList");
+    dispatch(updateContractList(null));
+    setIsViewMore(false);
+  };
   return (
     <>
       {selectedContractAbi && selectedContractAddress ? (
@@ -110,6 +117,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
             </div>
           </div>
           <ContractHistory newContractList={updatedNewContractList} />
+
           <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
             {paginatedContractList &&
               paginatedContractList.map((contract: IContract) => {
@@ -121,7 +129,10 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                   />
                 );
               })}
-            <ContractView isViewMore={isViewMore} handleShow={handleShow} />
+            <div className="flex items-center justify-end">
+              <ContractRemove handleClearContract={handleClearContract} />
+              <ContractView isViewMore={isViewMore} handleShow={handleShow} />
+            </div>
           </div>
         </>
       )}

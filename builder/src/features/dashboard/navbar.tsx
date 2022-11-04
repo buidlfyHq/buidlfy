@@ -48,9 +48,11 @@ const Navbar: FC<INavbar> = ({
       value: workspaceElements,
       backgroundColor: workspaceBackgroundColor,
     };
+
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(templateConfig));
     }
+
     if (publishStatus) {
       localStorage.setItem("publishStatus", publishStatus.toString());
     }
@@ -81,13 +83,13 @@ const Navbar: FC<INavbar> = ({
         <div className="flex flex-row items-center">
           <div
             onClick={handleClear}
-            className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
+            className="flex navbar-text items-center p-2 mx-3 my-2 cursor-pointer text-[13px] hover:text-slate-700 hover:rounded-md"
           >
             Clear
           </div>
           <div
             onClick={handleSave}
-            className="flex items-center p-2 mx-3 my-2 cursor-pointer text-slate-500 hover:bg-slate-100 hover:text-slate-700 hover:rounded-md"
+            className="flex navbar-text items-center p-2 mx-3 my-2 cursor-pointer text-[13px] hover:text-slate-700 hover:rounded-md"
           >
             Save
           </div>

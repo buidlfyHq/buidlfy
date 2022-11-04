@@ -1375,3 +1375,7 @@
 .shadow-menu {
   box-shadow: 0px 1px 28px rgba(0, 0, 0, 0.12);
 }
+
+.navbar-text {
+  color: rgba(16, 15, 17, 0.64);
+}
