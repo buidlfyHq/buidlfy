@@ -120,7 +120,7 @@ const local: IConfig = {
       "5DMoHq0Fw7LoMMqOBwodh1b5OugkJaJb4ORw6e02z9OQK9i975ywa2ufXhJPlWVD",
   },
   server: {
-    SERVER: "http://localhost:8080/",
+    SERVER: "https://api.buidlfy.com/",
   },
   network: {
     DEFAULT_NETWORK: {
