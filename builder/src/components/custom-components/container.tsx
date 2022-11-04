@@ -107,11 +107,6 @@ const Container: FC<IContainer> = ({
     ? "border border-[transparent] border-hover"
     : "border border-[transparent] hover:border-slate-300 hover:border-dashed ";
 
-  const backgroundSolid =
-    backgroundColor.slice(0, 4) === "rgba" ? backgroundColor : null;
-  const backgroundLinearGradient =
-    backgroundColor.slice(0, 4) === "rgba" ? null : backgroundColor;
-
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
@@ -306,13 +301,12 @@ const Container: FC<IContainer> = ({
           compactType={null}
           className="h-fit btn-border"
           style={{
-            backgroundColor: backgroundSolid,
             backgroundImage: `url(${
               imageData?.uploadedImageData
                 ? imageData.uploadedImageData
                 : imgData
             })`,
-            background: `${backgroundLinearGradient}`,
+            background: backgroundColor,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: backgroundSize,
