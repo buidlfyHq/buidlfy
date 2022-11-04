@@ -42,9 +42,6 @@ const Image: FC<IImageComponent> = ({
       (image: IUploadedImageData) => image.settingItemId === i
     )
   );
-  const imageLink = useSelector(
-    (state: IRootState) => state.upload.uploadImage
-  );
   useEffect(() => {
     if (ref.current?.clientWidth) {
       console.log(ref.current.clientWidth, "cw");
