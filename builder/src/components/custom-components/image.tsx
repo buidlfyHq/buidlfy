@@ -1,9 +1,6 @@
 import { FC, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  updateUploadedImageData,
-  updateWorkspaceImageElementStyle,
-} from "redux/workspace/workspace.reducers";
+import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
 import DefaultImage from "components/utils/default-image";
@@ -41,9 +38,6 @@ const Image: FC<IImageComponent> = ({
     state.workspace.uploadedImagesData.find(
       (image: IUploadedImageData) => image.settingItemId === i
     )
-  );
-  const imageLink = useSelector(
-    (state: IRootState) => state.upload.uploadImage
   );
   useEffect(() => {
     if (ref.current?.clientWidth) {
