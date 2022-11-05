@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GridLayout, { Layout } from "react-grid-layout";
-import { IoIosAddCircleOutline } from "react-icons/io";
 import {
   setSelectedElement,
   updateWorkspaceElementsArray,
@@ -301,12 +300,14 @@ const Container: FC<IContainer> = ({
           compactType={null}
           className="h-fit btn-border"
           style={{
-            backgroundImage: `url(${
-              imageData?.uploadedImageData
-                ? imageData.uploadedImageData
-                : imgData
-            })`,
-            background: backgroundColor,
+            backgroundColor:
+              backgroundColor.slice(0, 4) === "rgba" ? backgroundColor : null,
+            backgroundImage:
+              imageData?.uploadedImageData || imgData
+                ? `url(${imageData?.uploadedImageData || imgData})`
+                : backgroundColor.slice(0, 4) === "rgba"
+                ? null
+                : `${backgroundColor}`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: backgroundSize,
