@@ -122,6 +122,7 @@ const RenderItem: FC<IRenderItem> = ({
           padding={item.style.padding}
           margin={item.style.margin}
           backgroundSize={item.style.backgroundSize}
+          imgData={item.imgData}
         />
       );
     default:
