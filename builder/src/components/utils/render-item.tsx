@@ -119,9 +119,10 @@ const RenderItem: FC<IRenderItem> = ({
           setSideElement={setSideElement}
           setHideNavbar={setHideNavbar}
           hideSettingSidebar={hideSettingSidebar}
+          backgroundSize={item.style.backgroundSize}
           padding={item.style.padding}
           margin={item.style.margin}
-          backgroundSize={item.style.backgroundSize}
+          imgData={item.imgData}
         />
       );
     default:

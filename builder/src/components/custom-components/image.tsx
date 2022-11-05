@@ -41,7 +41,6 @@ const Image: FC<IImageComponent> = ({
   );
   useEffect(() => {
     if (ref.current?.clientWidth) {
-      console.log(ref.current.clientWidth, "cw");
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -55,7 +54,6 @@ const Image: FC<IImageComponent> = ({
 
   useEffect(() => {
     if (ref.current?.clientHeight) {
-      console.log(ref.current.clientHeight, "ch");
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
