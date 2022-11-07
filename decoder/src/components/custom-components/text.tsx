@@ -50,7 +50,7 @@ const Text: FC<ITexts> = ({
         padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
       value={isValue}
-      className="flex focus-visible:outline-[transparent] resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
+      className="flex text-area resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
     />
   );
   return (
