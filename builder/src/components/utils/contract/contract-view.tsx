@@ -12,7 +12,7 @@ const ContractView: FC<IContractView> = ({ handleShow, isViewMore }) => {
       {isViewMore ? (
         <span
           onClick={handleShow}
-          className="text-[#458CDE] cursor-pointer flex items-center justify-end text-[9px] text-right underline"
+          className="text-[#458CDE] ml-[2rem] cursor-pointer flex items-center justify-end text-[9px] text-right underline"
         >
           View More
           <FaChevronRight className="text-[7px] ml-[2px]" />

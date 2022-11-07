@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GridLayout, { Layout } from "react-grid-layout";
-import { IoIosAddCircleOutline } from "react-icons/io";
 import {
   setSelectedElement,
   updateWorkspaceElementsArray,
@@ -55,6 +54,7 @@ interface IContainer {
     marginTop?: number;
     marginBottom?: number;
   };
+  imgData?: string | ArrayBuffer;
 }
 
 const Container: FC<IContainer> = ({
@@ -74,6 +74,7 @@ const Container: FC<IContainer> = ({
   backgroundSize,
   padding,
   margin,
+  imgData,
 }) => {
   const dispatch = useDispatch();
   const workspaceElements = useSelector(
@@ -104,11 +105,6 @@ const Container: FC<IContainer> = ({
   const elementHoverStyles = contractElementSelector
     ? "border border-[transparent] border-hover"
     : "border border-[transparent] hover:border-slate-300 hover:border-dashed ";
-
-  const backgroundSolid =
-    backgroundColor.slice(0, 4) === "rgba" ? backgroundColor : null;
-  const backgroundLinearGradient =
-    backgroundColor.slice(0, 4) === "rgba" ? null : backgroundColor;
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -304,8 +300,14 @@ const Container: FC<IContainer> = ({
           compactType={null}
           className="h-fit btn-border"
           style={{
-            backgroundColor: backgroundSolid,
-            backgroundImage: `url(${imageData?.uploadedImageData}), ${backgroundLinearGradient}`,
+            backgroundColor:
+              backgroundColor.slice(0, 4) === "rgba" ? backgroundColor : null,
+            backgroundImage:
+              imageData?.uploadedImageData || imgData
+                ? `url(${imageData?.uploadedImageData || imgData})`
+                : backgroundColor.slice(0, 4) === "rgba"
+                ? null
+                : `${backgroundColor}`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: backgroundSize,

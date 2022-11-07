@@ -32,6 +32,9 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
     (state: IRootState) => state.template.selectedTemplate
   );
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
+  const amount = selectedTemplateDto.buyoutPricePerToken && parseFloat(
+    ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)
+  );
 
   const handleListAndBuy = () => {
     if (list) {
@@ -108,23 +111,11 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
                     <div className="flex items-center gap-2.5">
                       <img src={USDTIcon} alt="icon" width={24} height={24} />
                       <div className="text-[18px] font-[600] text-[#14142B]">
-                        {ethers.utils.formatUnits(
-                          selectedTemplateDto.buyoutPricePerToken
-                        ) !== "0.0"
-                          ? `${ethers.utils.formatUnits(
-                              selectedTemplateDto.buyoutPricePerToken
-                            )} USDT`
-                          : "Free"}
+                        {amount !== 0 ? `${amount} USDT` : "Free"}
                       </div>
                     </div>
                     <div className="text-[14px] font-[600] text-[#14142B] opacity-70">
-                      {ethers.utils.formatUnits(
-                        selectedTemplateDto.buyoutPricePerToken
-                      ) !== "0.0"
-                        ? ` ~$ ${ethers.utils.formatUnits(
-                            selectedTemplateDto.buyoutPricePerToken
-                          )}`
-                        : null}
+                      {amount !== 0 ? ` ~$ ${amount}` : null}
                     </div>
                   </>
                 )}

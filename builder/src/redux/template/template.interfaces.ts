@@ -23,10 +23,13 @@ export interface ISelectedTemplate {
   contract: IContractDetails;
   image: string;
   publishedUrl: string;
+  listAmount?: string;
   listing_listingId: BigNumber;
   listing_buyoutPricePerToken: BigNumber;
   listing_tokenId?: string;
   listing_tokenOwner?: string;
+  listing_assetContract?: string;
   owner_of?: string;
   isOwned?: boolean;
+  token_address?: string;
 }

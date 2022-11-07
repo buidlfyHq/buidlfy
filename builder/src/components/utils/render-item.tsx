@@ -95,6 +95,7 @@ const RenderItem: FC<IRenderItem> = ({
           backgroundSize={item.style.backgroundSize}
           isAuto={item.style.isAuto}
           margin={item.style.margin}
+          imgData={item.imgData}
         />
       );
     case "Divider":
@@ -118,9 +119,10 @@ const RenderItem: FC<IRenderItem> = ({
           setSideElement={setSideElement}
           setHideNavbar={setHideNavbar}
           hideSettingSidebar={hideSettingSidebar}
+          backgroundSize={item.style.backgroundSize}
           padding={item.style.padding}
           margin={item.style.margin}
-          backgroundSize={item.style.backgroundSize}
+          imgData={item.imgData}
         />
       );
     default:

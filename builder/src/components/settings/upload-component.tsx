@@ -29,7 +29,6 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
       (image: IUploadedImageData) => image.settingItemId === i
     )
   );
-
   // FIX: find suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {

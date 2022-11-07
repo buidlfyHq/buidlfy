@@ -19,6 +19,7 @@ interface IImageComponent {
   backgroundSize?: string;
   i: string;
   isAuto?: boolean;
+  imgData?: string | ArrayBuffer;
 }
 
 const Image: FC<IImageComponent> = ({
@@ -29,6 +30,7 @@ const Image: FC<IImageComponent> = ({
   height,
   backgroundSize,
   isAuto,
+  imgData,
 }) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
@@ -37,10 +39,8 @@ const Image: FC<IImageComponent> = ({
       (image: IUploadedImageData) => image.settingItemId === i
     )
   );
-
   useEffect(() => {
     if (ref.current?.clientWidth) {
-      console.log(ref.current.clientWidth, "cw");
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -54,7 +54,6 @@ const Image: FC<IImageComponent> = ({
 
   useEffect(() => {
     if (ref.current?.clientHeight) {
-      console.log(ref.current.clientHeight, "ch");
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -68,14 +67,18 @@ const Image: FC<IImageComponent> = ({
 
   return (
     <>
-      {imageData?.uploadedImageData ? (
+      {imageData?.uploadedImageData || imgData ? (
         <div className="flex w-full h-full">
           <div
             ref={ref}
             id={i}
             className="flex w-full h-full"
             style={{
-              backgroundImage: `url(${imageData.uploadedImageData})`,
+              backgroundImage: `url(${
+                imageData?.uploadedImageData
+                  ? imageData.uploadedImageData
+                  : imgData
+              })`,
               backgroundRepeat: "no-repeat",
               backgroundPosition: justifyContent,
               backgroundSize: `${
