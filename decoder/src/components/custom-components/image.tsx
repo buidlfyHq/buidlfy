@@ -15,6 +15,7 @@ interface IImageComponent {
   height?: number;
   backgroundSize?: string;
   isAuto?: boolean;
+  link: string;
 }
 
 const Image: FC<IImageComponent> = ({
@@ -25,21 +26,29 @@ const Image: FC<IImageComponent> = ({
   height,
   backgroundSize,
   isAuto,
+  link,
 }) => {
+  const imageDiv = (
+    <div
+      className="flex h-full w-full"
+      style={{
+        backgroundImage: `url(${imgData ? imgData : defaultImage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: justifyContent,
+        backgroundSize: `${isAuto ? backgroundSize : `${width}px ${height}px`}`,
+        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+      }}
+    />
+  );
   return (
     <section className="w-full h-full overflow-hidden">
-      <div
-        className="flex h-full w-full"
-        style={{
-          backgroundImage: `url(${imgData ? imgData : defaultImage})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: justifyContent,
-          backgroundSize: `${
-            isAuto ? backgroundSize : `${width}px ${height}px`
-          }`,
-          margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
-        }}
-      />
+      {link ? (
+        <a target="_blank" href={link} className="cursor-pointer">
+          {imageDiv}
+        </a>
+      ) : (
+        imageDiv
+      )}
     </section>
   );
 };

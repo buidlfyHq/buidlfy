@@ -20,6 +20,7 @@ interface IImageComponent {
   i: string;
   isAuto?: boolean;
   imgData?: string | ArrayBuffer;
+  link: string;
 }
 
 const Image: FC<IImageComponent> = ({
@@ -31,6 +32,7 @@ const Image: FC<IImageComponent> = ({
   backgroundSize,
   isAuto,
   imgData,
+  link,
 }) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
@@ -65,29 +67,38 @@ const Image: FC<IImageComponent> = ({
     }
   }, [ref.current?.clientHeight]);
 
+  const imageDiv = (
+    <div className="flex w-full h-full">
+      <div
+        ref={ref}
+        id={i}
+        className="flex w-full h-full"
+        style={{
+          backgroundImage: `url(${
+            imageData?.uploadedImageData ? imageData.uploadedImageData : imgData
+          })`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: justifyContent,
+          backgroundSize: `${
+            isAuto ? backgroundSize : `${width}px ${height}px`
+          }`,
+          margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
+        }}
+      />
+    </div>
+  );
   return (
     <>
       {imageData?.uploadedImageData || imgData ? (
-        <div className="flex w-full h-full">
-          <div
-            ref={ref}
-            id={i}
-            className="flex w-full h-full"
-            style={{
-              backgroundImage: `url(${
-                imageData?.uploadedImageData
-                  ? imageData.uploadedImageData
-                  : imgData
-              })`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: justifyContent,
-              backgroundSize: `${
-                isAuto ? backgroundSize : `${width}px ${height}px`
-              }`,
-              margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
-            }}
-          />
-        </div>
+        <>
+          {link?.length > 0 ? (
+            <a rel="noreferrer" target="_blank" href={link}>
+              {imageDiv}
+            </a>
+          ) : (
+            imageDiv
+          )}
+        </>
       ) : (
         <DefaultImage id={i} />
       )}
