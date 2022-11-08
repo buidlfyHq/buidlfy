@@ -90,15 +90,14 @@ const MintTemplateForm: FC = () => {
       },
       publishedUrl: domainName,
     };
-    console.log(newTemplate);
     
     console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
-    // const templateCID = await uploadTemplateToWeb3Storage(
-    //   JSON.stringify(newTemplate)
-    // );
-    // console.log("templateCID: ", templateCID);
-    // dispatch(mintTemplate(templateCID));
-    // dispatch(toggleModalType("minting-progress"));
+    const templateCID = await uploadTemplateToWeb3Storage(
+      JSON.stringify(newTemplate)
+    );
+    console.log("templateCID: ", templateCID);
+    dispatch(mintTemplate(templateCID));
+    dispatch(toggleModalType("minting-progress"));
   };
 
   return (
