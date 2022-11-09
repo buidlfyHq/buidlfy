@@ -5,7 +5,7 @@ import { toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplate } from "redux/template/template.reducers";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import DefaultTemplateImg from "assets/default-image-template.png";
-import NoTemplateImg from "assets/no-temp-default.png";
+import NoTemplateImg from "assets/no-template-default.png";
 
 interface IListTemplates {
   filteredTemplateList: ISelectedTemplate[];
@@ -42,9 +42,7 @@ const ListTemplates: FC<IListTemplates> = ({ filteredTemplateList }) => {
               <img
                 src={image}
                 alt="img_temp"
-                className="w-full block rounded-[16px]"
-                // width={314}
-                // height={200}
+                className="w-full bg-contain h-[16rem] block rounded-[16px]"
               />
               <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">
                 <div className="text-[13px] text-[#14142B] opacity-80 ">
@@ -80,7 +78,7 @@ const ListTemplates: FC<IListTemplates> = ({ filteredTemplateList }) => {
           <img
             src={NoTemplateImg}
             alt="img_temp"
-            width={60}
+            width={264}
             height={60}
             className="my-5"
           />

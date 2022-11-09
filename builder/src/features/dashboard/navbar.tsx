@@ -106,7 +106,7 @@ const Navbar: FC<INavbar> = ({
 
         <MintNFT />
         <PublishMenu />
-        <WalletMenu />
+        <WalletMenu isMyTemplatePage={false} />
       </div>
     </main>
   );
