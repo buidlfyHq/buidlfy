@@ -10,6 +10,7 @@ import InfoCircleImg from "assets/icons/info-circle.png";
 import MintUploadImg from "assets/icons/mint-form-img.png";
 import { uploadImage } from "redux/upload/upload.action";
 import { updateMintedImageData } from "redux/minted/minted.reducers";
+import { Categories } from "utils/categories";
 
 const MintTemplateForm: FC = () => {
   const dispatch = useDispatch();
@@ -30,8 +31,7 @@ const MintTemplateForm: FC = () => {
     (state: IRootState) => state.contract.contractDetails
   );
   const domainName = localStorage.getItem("domainName");
-  
-  const [image, setImage] = useState<string>("");
+
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -66,7 +66,6 @@ const MintTemplateForm: FC = () => {
         reader.addEventListener("load", async () => {
           dispatch(updateMintedImageData(reader.result as string));
           dispatch(uploadImage({ data: reader.result as string }));
-          setImage(imageLink);
         });
         reader.readAsDataURL(e.target.files[0]);
       }
@@ -91,6 +90,7 @@ const MintTemplateForm: FC = () => {
       },
       publishedUrl: domainName,
     };
+    
     console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
     const templateCID = await uploadTemplateToWeb3Storage(
       JSON.stringify(newTemplate)
@@ -163,13 +163,19 @@ const MintTemplateForm: FC = () => {
       </div>
       <div className="mt-8">
         <div className="text-[#23314B] text-[13px] font-[500]">Category</div>
-        <input
-          type="text"
-          className="py-4 px-5 text-[13px] text-[#23314B] border border-[#C4C4C4] h-[45px] rounded-[8px] outline-none mt-2 w-full"
-          placeholder="Select Category"
-          value={category}
+        <select
+          id="categories"
+          className="py-2 px-5 text-[13px] text-[#23314B] outline outline-[#D4D4D4] h-[45px] rounded-[8px] mt-2 w-full"
+          style={{ borderRight: "16px solid transparent" }}
           onChange={(e) => setCategory(e.target.value)}
-        />
+        >
+          <option value="" selected disabled hidden>Select a category</option>
+          {Categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="mt-8">
         <div className="text-[#23314B] text-[13px] font-[500]">

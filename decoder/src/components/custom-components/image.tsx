@@ -43,7 +43,12 @@ const Image: FC<IImageComponent> = ({
   return (
     <section className="w-full h-full overflow-hidden">
       {link ? (
-        <a target="_blank" href={link} className="cursor-pointer">
+        <a
+          style={{ textDecoration: "none" }}
+          target="_blank"
+          href={link}
+          className="cursor-pointer"
+        >
           {imageDiv}
         </a>
       ) : (

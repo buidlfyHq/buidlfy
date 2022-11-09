@@ -162,7 +162,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                       {/* {input.name} */}
                     </h6>
                     <div
-                      className="grid contract-input mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
+                      className="grid contract-input w-[13.5rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
                       onClick={() => handleInputSelector(selectedId)}
                     >
                       <div>
@@ -226,7 +226,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                 Input - Amount Payable
               </h6>
               <div
-                className="grid contract-input mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
+                className="grid contract-input w-[13.5rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
                 onClick={() => {
                   handleStateSelector(elementId);
                 }}
@@ -295,7 +295,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                     </h6>
                     <div
                       key={i}
-                      className="grid contract-input mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
+                      className="grid contract-input w-[13.5rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
                       onClick={() => handleOutputSelector(selectedId)}
                     >
                       <div>
