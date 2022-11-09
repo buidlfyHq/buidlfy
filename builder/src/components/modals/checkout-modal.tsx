@@ -4,10 +4,10 @@ import { ethers } from "ethers";
 import { Dialog } from "@headlessui/react";
 import makeBlockie from "ethereum-blockies-base64";
 import { truncateString } from "utils/truncate-string";
+import Spinner from "components/utils/assets/spinner";
 import { buyTemplate } from "redux/template/template.actions";
 import { SelectedTemplateDto } from "redux/template/template.dto";
 import { IRootState } from "redux/root-state.interface";
-import Spinner from "components/utils/assets/spinner";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import { BiArrowBack } from "react-icons/bi";
 
@@ -19,6 +19,9 @@ const CheckoutModal: FC = () => {
   const currentAccountBalance = useSelector(
     (state: IRootState) => state.web3.currentAccountBalance
   );
+  const buyTemplateLoading = useSelector(
+    (state: IRootState) => state.template.buyTemplateLoading
+  );
   const selectedTemplate = useSelector(
     (state: IRootState) => state.template.selectedTemplate
   );
@@ -27,7 +30,7 @@ const CheckoutModal: FC = () => {
     ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)
   );
 
-  
+
   const handleGoBack = () => {
     currentAccount ? dispatch(toggleModalType('single')) : dispatch(toggleModalType('select-wallet'))
   }
@@ -35,7 +38,7 @@ const CheckoutModal: FC = () => {
   return (
     <Dialog.Panel className="flex flex-col justify-center items-center w-full max-w-[342px] my-20 mx-28 rounded-[15px] py-8 px-5 bg-white">
       <div className="w-full">
-      <BiArrowBack onClick={handleGoBack} className="mb-2 text-[20px] duration-150 ease-linear scale-100 cursor-pointer hover:scale-125" />
+        <BiArrowBack onClick={handleGoBack} className="mb-2 text-[20px] duration-150 ease-linear scale-100 cursor-pointer hover:scale-125" />
         <div className="flex flex-col">
           <div className="text-[#1C1C1E] font-[600] text-[18px]">Checkout</div>
           <div className="text-[#4E4B66] opacity-70 text-[12px]">
@@ -77,26 +80,26 @@ const CheckoutModal: FC = () => {
           <div className="flex items-center justify-between mt-5">
             <div className="text-[#8E8E93] text-[14px]">Amount</div>
             <div className="text-[#1C1C1E] text-[14px] font-[500]">
-              {amount !== 0 ? (`${amount} USDT`) : 'Free'} 
+              {amount !== 0 ? (`${amount} USDT`) : 'Free'}
             </div>
           </div>
           <div className="flex items-center justify-between mt-3">
             <div className="text-[#8E8E93] text-[14px]">Platform Fee (5%)</div>
             <div className="text-[#1C1C1E] text-[14px] font-[500]">
-              {amount !== 0 ? (`${0.05 * amount} USDT`) : 'Free'} 
+              {amount !== 0 ? (`${0.05 * amount} USDT`) : 'Free'}
             </div>
           </div>
           <div className="flex items-center justify-between mt-3">
             <div className="text-[#1C1C1E] text-[14px] font-[500]">Total</div>
             <div className="text-[#34C759] text-[14px] font-[500]">
-              {amount !== 0 ? (`${amount + 0.05 * amount} USDT`) : 'Free'} 
+              {amount !== 0 ? (`${amount + 0.05 * amount} USDT`) : 'Free'}
             </div>
           </div>
           <div
             onClick={() => dispatch(buyTemplate())}
             className="text-white cursor-pointer connect-wallet-button py-3 px-auto rounded-[7px] mt-8 text-center"
           >
-            Buy Now
+            {buyTemplateLoading && <Spinner />} Buy Now
           </div>
         </div>
       </div>
