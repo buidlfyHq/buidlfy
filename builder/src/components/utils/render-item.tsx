@@ -96,6 +96,7 @@ const RenderItem: FC<IRenderItem> = ({
           isAuto={item.style.isAuto}
           margin={item.style.margin}
           imgData={item.imgData}
+          link={item.link}
         />
       );
     case "Divider":
