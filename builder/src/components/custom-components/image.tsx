@@ -92,7 +92,12 @@ const Image: FC<IImageComponent> = ({
       {imageData?.uploadedImageData || imgData ? (
         <>
           {link?.length > 0 ? (
-            <a rel="noreferrer" target="_blank" href={link}>
+            <a
+              style={{ textDecoration: "none" }}
+              rel="noreferrer"
+              target="_blank"
+              href={link}
+            >
               {imageDiv}
             </a>
           ) : (
