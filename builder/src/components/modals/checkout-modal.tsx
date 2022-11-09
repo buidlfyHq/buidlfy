@@ -4,10 +4,10 @@ import { ethers } from "ethers";
 import { Dialog } from "@headlessui/react";
 import makeBlockie from "ethereum-blockies-base64";
 import { truncateString } from "utils/truncate-string";
+import Spinner from "components/utils/assets/spinner";
 import { buyTemplate } from "redux/template/template.actions";
 import { SelectedTemplateDto } from "redux/template/template.dto";
 import { IRootState } from "redux/root-state.interface";
-import Spinner from "components/utils/assets/spinner";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import { BiArrowBack } from "react-icons/bi";
 
@@ -18,6 +18,9 @@ const CheckoutModal: FC = () => {
   );
   const currentAccountBalance = useSelector(
     (state: IRootState) => state.web3.currentAccountBalance
+  );
+  const buyTemplateLoading = useSelector(
+    (state: IRootState) => state.template.buyTemplateLoading
   );
   const selectedTemplate = useSelector(
     (state: IRootState) => state.template.selectedTemplate
@@ -104,7 +107,7 @@ const CheckoutModal: FC = () => {
             onClick={() => dispatch(buyTemplate())}
             className="text-white cursor-pointer connect-wallet-button py-3 px-auto rounded-[7px] mt-8 text-center"
           >
-            Buy Now
+            {buyTemplateLoading && <Spinner />} Buy Now
           </div>
         </div>
       </div>
