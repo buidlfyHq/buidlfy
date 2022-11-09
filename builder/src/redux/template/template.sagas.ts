@@ -7,6 +7,7 @@ import {
   startMintTemplateLoader,
   startBuyTemplateLoader,
   allTemplatesFetched,
+  startFetchTemplateLoader,
 } from "./template.reducers";
 import {
   initiateTransactionService,
@@ -25,7 +26,7 @@ function* buySelectedTemplate() {
   );
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
   yield put(startBuyTemplateLoader());
-  
+
   const transactionRes = yield call(
     initiateTransactionService,
     selectedTemplateDto.listingId,
@@ -64,6 +65,7 @@ function* mintSelectedTemplate({ payload }) {
 }
 
 function* getListedTemplates(): any {
+  yield put(startFetchTemplateLoader());
   const fetchedTemplates = yield call(getListedTemplatesService);
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.listings.length !== 0) {
