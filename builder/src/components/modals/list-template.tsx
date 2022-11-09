@@ -1,12 +1,12 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
+import { CgClose } from "react-icons/cg";
 import { listTemplate } from "redux/minted/minted.actions";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplateAmount } from "redux/template/template.reducers";
 import { IRootState } from "redux/root-state.interface";
-import { CgClose } from "react-icons/cg";
-import USDT from "assets/icons/usdt.png"
+import USDT from "assets/icons/usdt.png";
 
 const ListTemplate: FC = () => {
   const dispatch = useDispatch();
@@ -71,7 +71,10 @@ const ListTemplate: FC = () => {
             <div className="flex items-center justify-between">
               <div className="text-[#8E8E93] text-[14px]">Amount</div>
               <div className="text-[#1C1C1E] opacity-60 text-[14px] font-[500]">
-                {selectedTemplate.listAmount ? selectedTemplate.listAmount : "--"} USDT
+                {selectedTemplate.listAmount
+                  ? selectedTemplate.listAmount
+                  : "--"}{" "}
+                USDT
               </div>
             </div>
             <div className="flex items-center justify-between mt-3">
@@ -80,7 +83,7 @@ const ListTemplate: FC = () => {
               </div>
               <div className="text-[#1C1C1E] opacity-60 text-[14px] fontx-[500]">
                 {selectedTemplate.listAmount
-                  ? (0.05 * parseFloat(selectedTemplate.listAmount)).toFixed(2)
+                  ? 0.05 * parseFloat(selectedTemplate.listAmount)
                   : "--"}{" "}
                 USDT
               </div>
@@ -89,10 +92,8 @@ const ListTemplate: FC = () => {
               <div className="text-[#1C1C1E] text-[14px] font-[500]">Total</div>
               <div className="text-[#1C1C1E] text-[16px] font-[700]">
                 {selectedTemplate.listAmount
-                  ? (
-                      parseFloat(selectedTemplate.listAmount) +
-                      0.05 * parseFloat(selectedTemplate.listAmount)
-                    ).toFixed(2)
+                  ? parseFloat(selectedTemplate.listAmount) +
+                    0.05 * parseFloat(selectedTemplate.listAmount)
                   : "--"}{" "}
                 USDT
               </div>
