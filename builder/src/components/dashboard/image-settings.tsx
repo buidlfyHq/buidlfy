@@ -6,9 +6,13 @@ import MarginComponent from "components/settings/margin-component";
 import SizeComponent from "components/settings/image-size-component";
 import BackgroundSizeComponent from "components/settings/background-size-component";
 import { IRootState } from "redux/root-state.interface";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import {
+  ISettings,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
+import { IoMdLink } from "react-icons/io";
 
-const ImageSettings: FC = () => {
+const ImageSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
@@ -21,6 +25,18 @@ const ImageSettings: FC = () => {
         ) : null}
       </h3>
       <UploadComponent i={selectedElement.i} />
+      <div className="flex items-center mt-4 mx-1 mb-4 w-[13.8rem] text-black">
+        <div className="link-div px-1 py-1">
+          <IoMdLink className="text-[18px]" />
+        </div>
+        <input
+          value={selectedElement.link}
+          onChange={(e) => handleSettingChange(e, "link")}
+          className="changeText pl-[2.5rem] py-[0.4rem] input-text"
+          type="text"
+          placeholder="Link"
+        />
+      </div>
       <AlignComponent
         i={selectedElement.i}
         justifyContent={selectedElement.style.justifyContent}

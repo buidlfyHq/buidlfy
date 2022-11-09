@@ -84,7 +84,7 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
         />
       );
     case "Image":
-      return <ImageSettings />;
+      return <ImageSettings handleSettingChange={handleSettingChange} />;
 
     case "Container":
     case "Horizontal Container":
