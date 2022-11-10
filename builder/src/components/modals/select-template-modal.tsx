@@ -7,6 +7,7 @@ import { toggleModal } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { ReactComponent as SearchIcon } from "assets/svgAsIcons/search-icon.svg";
+import Spinner from "components/utils/assets/spinner";
 
 // removed categories as of now
 // const templateCategories = ["ALL"];
@@ -15,6 +16,9 @@ const SelectTemplateModal: FC = () => {
   const dispatch = useDispatch();
   const templateList = useSelector(
     (state: IRootState) => state.template.templateList
+  );
+  const fetchTemplateLoading = useSelector(
+    (state: IRootState) => state.template.fetchTemplateLoading
   );
   const [filteredTemplateList, setFilteredTemplateList] =
     useState<ISelectedTemplate[]>(templateList);
@@ -123,8 +127,16 @@ const SelectTemplateModal: FC = () => {
       </div>
       <hr className="bg-hr h-[2px] w-full mt-6" />
       <div className="w-full bg-lower-template">
-        {filteredTemplateList && (
-          <ListTemplates filteredTemplateList={filteredTemplateList} />
+        {fetchTemplateLoading ? (
+          <div className="flex justify-center my-20">
+            <Spinner />
+          </div>
+        ) : (
+          <>
+            {filteredTemplateList && (
+              <ListTemplates filteredTemplateList={filteredTemplateList} />
+            )}
+          </>
         )}
       </div>
     </Dialog.Panel>

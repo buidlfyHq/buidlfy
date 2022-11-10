@@ -7,6 +7,7 @@ import {
   getMarketplaceContract,
   getSigner,
 } from "redux/web3/web3.utils";
+import { inReviewQuery, listedQuery } from "./template.utils";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 export const initiateTransactionService = async (
@@ -55,7 +56,7 @@ export const mintTemplateService = async (uri: string) => {
     return { error: false, errorMessage: "", receipt };
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log("Error in mintTemplateService --> ", error);
+    console.error("Error in mintTemplateService --> ", error);
     return { error: true, errorMessage: (error as Error).message, receipt: "" };
   }
 };
@@ -91,36 +92,11 @@ export const formatList = async (listings) => {
 
 // available for buying
 export const getListedTemplatesService = async () => {
-  // Removed: isAccepted from query
-  // ADD: isAccepted when reviewing is functional
   try {
-    const query = gql`
-      {
-        listings {
-          id
-          token {
-            id
-            contract
-            identifier
-            uri
-          }
-          lister
-          listing_listingId
-          listing_tokenOwner
-          listing_assetContract
-          listing_tokenId
-          listing_startTime
-          listing_endTime
-          listing_quantity
-          listing_currency
-          listing_buyoutPricePerToken
-          listing_tokenType
-          listing_listingType
-          isAccepted
-        }
-      }
-    `;
-
+    const query =
+      process.env.REACT_APP_TEMPLATE_LIST_TYPE === "in-review"
+        ? inReviewQuery
+        : listedQuery;
     const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
     const listings = await formatList(res.listings);
     return { error: false, errorMessage: "", listings };

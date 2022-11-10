@@ -28,13 +28,18 @@ interface ISingleTemplateDetails {
 
 const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
   const dispatch = useDispatch();
+  const currentAccount = useSelector(
+    (state: IRootState) => state.web3.currentAccount
+  );
   const selectedTemplate = useSelector(
     (state: IRootState) => state.template.selectedTemplate
   );
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
-  const amount = selectedTemplateDto.buyoutPricePerToken && parseFloat(
-    ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)
-  );
+  const amount =
+    selectedTemplateDto.buyoutPricePerToken &&
+    parseFloat(
+      ethers.utils.formatUnits(selectedTemplateDto.buyoutPricePerToken)
+    );
 
   const handleListAndBuy = () => {
     if (list) {
@@ -54,7 +59,11 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
           dispatch(toggleModal(false));
         }
       } else {
-        dispatch(toggleModalType("select-wallet"));
+        if (currentAccount) {
+          dispatch(toggleModalType("checkout"));
+        } else {
+          dispatch(toggleModalType("select-wallet"));
+        }
       }
     }
   };

@@ -97,9 +97,7 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
         <img
           src={selectedTemplateDto.image}
           alt="img_temp"
-          className="rounded-[16px] w-full"
-          width={314}
-          height={200}
+          className="w-full bg-contain h-[15rem] block rounded-[16px]"
         />
       </div>
       <div className="flex justify-between items-center font-bold text-[#000000] mt-4 px-2">

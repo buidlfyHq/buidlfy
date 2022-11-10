@@ -9,6 +9,7 @@ export interface ITemplateState {
   mintTemplateLoading: boolean;
   selectedTemplate: ISelectedTemplate;
   templateList: ISelectedTemplate[];
+  fetchTemplateLoading: boolean;
 }
 
 export interface ISelectedTemplate {
