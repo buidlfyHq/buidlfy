@@ -1,18 +1,18 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { ethers } from "ethers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplate } from "redux/template/template.reducers";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import DefaultTemplateImg from "assets/default-image-template.png";
 import NoTemplateImg from "assets/no-template-default.png";
+import { IRootState } from "redux/root-state.interface";
 
-interface IListTemplates {
-  filteredTemplateList: ISelectedTemplate[];
-}
-
-const ListTemplates: FC<IListTemplates> = ({ filteredTemplateList }) => {
+const ListTemplates: FC = () => {
   const dispatch = useDispatch();
+  const filteredTemplateList = useSelector(
+    (state: IRootState) => state.template.filteredTemplateList
+  );
 
   const handleSelectTemplate = (template: ISelectedTemplate) => {
     dispatch(setSelectedTemplate(template));
