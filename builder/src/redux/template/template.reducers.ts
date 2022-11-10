@@ -9,6 +9,7 @@ const initialState: ITemplateState = {
   mintTemplateLoading: false,
   selectedTemplate: null,
   templateList: [],
+  fetchTemplateLoading: false,
 };
 
 const templateSlice = createSlice({
@@ -37,6 +38,10 @@ const templateSlice = createSlice({
     },
     allTemplatesFetched(state, action) {
       state.templateList = action.payload;
+      state.fetchTemplateLoading = false;
+    },
+    startFetchTemplateLoader(state) {
+      state.fetchTemplateLoading = true;
     },
     filterAllTemplates(state, action: any) {
       const modifiedTemplateList = state.templateList.map((template) =>
@@ -62,6 +67,7 @@ export const {
   setSelectedTemplate,
   setSelectedTemplateAmount,
   allTemplatesFetched,
+  startFetchTemplateLoader,
   filterAllTemplates,
 } = templateSlice.actions;
 export default templateSlice.reducer;

@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import config from "config";
 import { getERC20Contract, getSigner } from "./web3.utils";
 
@@ -64,7 +64,7 @@ export const getTokenBalanceService = async (walletAddress: string) => {
     const signer = getSigner();
     const erc20Contract = getERC20Contract(config.address.usdt, signer);
 
-    const walletBalance = await erc20Contract.balanceOf(walletAddress);
+    const walletBalance: BigNumber = await erc20Contract.balanceOf(walletAddress);
     const balanceInEth = ethers.utils.formatEther(walletBalance);
 
     return { error: false, errorMessage: "", balance: balanceInEth };
