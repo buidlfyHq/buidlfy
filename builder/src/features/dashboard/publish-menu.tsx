@@ -1,7 +1,5 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Menu } from "@headlessui/react";
-import { IRootState } from "redux/root-state.interface";
 import global from "assets/icons/global.svg";
 import PublishButton from "components/utils/publish-button";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
