@@ -1,9 +1,10 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import ListTemplates from "components/utils/list-templates";
 import { toggleModal } from "redux/modal/modal.reducers";
+import { setFilteredTemplateList } from "redux/template/template.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { ISelectedTemplate } from "redux/template/template.interfaces";
 import { ReactComponent as SearchIcon } from "assets/svgAsIcons/search-icon.svg";
@@ -20,8 +21,6 @@ const SelectTemplateModal: FC = () => {
   const fetchTemplateLoading = useSelector(
     (state: IRootState) => state.template.fetchTemplateLoading
   );
-  const [filteredTemplateList, setFilteredTemplateList] =
-    useState<ISelectedTemplate[]>(templateList);
 
   // removed as of now, commented for further use
   // const ownedListedTemplateList = useSelector(
@@ -44,7 +43,7 @@ const SelectTemplateModal: FC = () => {
               .replace(/\s+/g, "")
               .includes(value.toLowerCase().replace(/\s+/g, ""))
           );
-    setFilteredTemplateList([...filterArr]);
+    dispatch(setFilteredTemplateList([...filterArr]));
   };
 
   // no active categories hence commented, logic for handling templates by category
@@ -132,11 +131,7 @@ const SelectTemplateModal: FC = () => {
             <Spinner />
           </div>
         ) : (
-          <>
-            {filteredTemplateList && (
-              <ListTemplates filteredTemplateList={filteredTemplateList} />
-            )}
-          </>
+          <>{templateList && <ListTemplates />}</>
         )}
       </div>
     </Dialog.Panel>

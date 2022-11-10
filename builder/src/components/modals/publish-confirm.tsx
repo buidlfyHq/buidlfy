@@ -43,13 +43,13 @@ const PublishConfirmModal: FC = () => {
         console.log(error);
       }
     }
-  }, [contractDetails.abi]);
+  }, [contractDetails.abi]); // eslint-disable-line
 
   useEffect(() => {
     if (currentStep > 0) {
       handleProcessModal();
     }
-  }, [currentStep]);
+  }, [currentStep]); // eslint-disable-line
 
   const handleProcessModal = () => {
     dispatch(toggleModal(true));

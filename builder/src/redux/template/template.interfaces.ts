@@ -10,6 +10,7 @@ export interface ITemplateState {
   selectedTemplate: ISelectedTemplate;
   templateList: ISelectedTemplate[];
   fetchTemplateLoading: boolean;
+  filteredTemplateList: ISelectedTemplate[];
 }
 
 export interface ISelectedTemplate {

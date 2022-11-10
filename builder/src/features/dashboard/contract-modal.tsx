@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
 import {
   updateContractAbi,
@@ -9,7 +9,6 @@ import {
 import upload from "assets/upload-img.svg";
 import { IContract } from "redux/contract/contract.interfaces";
 import "styles/components.css";
-import { IRootState } from "redux/root-state.interface";
 
 interface IContractModal {
   isOpen: boolean;

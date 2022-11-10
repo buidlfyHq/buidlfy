@@ -52,7 +52,7 @@ const Image: FC<IImageComponent> = ({
         })
       );
     }
-  }, [ref.current?.clientWidth]);
+  }, [ref.current?.clientWidth]); // eslint-disable-line
 
   useEffect(() => {
     if (ref.current?.clientHeight) {
@@ -65,7 +65,7 @@ const Image: FC<IImageComponent> = ({
         })
       );
     }
-  }, [ref.current?.clientHeight]);
+  }, [ref.current?.clientHeight]); // eslint-disable-line
 
   const imageDiv = (
     <div className="flex w-full h-full">

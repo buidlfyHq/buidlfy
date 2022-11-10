@@ -45,7 +45,7 @@ const SelectWallet: FC = () => {
         </div>
         <div className="flex items-center mt-4">
           <div className="text-[16px] text-[#636A7E]">New to Ethereum?</div>
-          <a href="#" className="text-[16px] gradient-text ml-1">
+          <a href="#0" className="text-[16px] gradient-text ml-1">
             Learn more about wallets
           </a>
         </div>

@@ -1,10 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { BiChevronDown } from "react-icons/bi";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import makeBlockie from "ethereum-blockies-base64";
-import SearchForm from "features/my-templates/search-form";
 import RenderTemplateList from "components/utils/render-template-list";
 import logo from "assets/icons/buidlfy.png";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
@@ -27,7 +23,7 @@ const MyTemplates: FC = () => {
     if (!currentAccount) {
       return navigate("/");
     }
-  }, []);
+  }, []); // eslint-disable-line
 
   const tooltip = (
     <ReactTooltip

@@ -41,6 +41,7 @@ const PublishProgress: FC = () => {
     (state: IRootState) => state.publish.publishStatus
   );
   const publishSubDomain = localStorage.getItem("domain");
+
   useEffect(() => {
     if (currentStep === 1) {
       socket.on(`deployment.${transactionRes}`, (...args) => {
@@ -88,7 +89,7 @@ const PublishProgress: FC = () => {
         }
       });
     }
-  }, [
+  }, [ // eslint-disable-line
     transactionRes,
     publishDeploymentId,
     publishSubDomain,
@@ -98,21 +99,22 @@ const PublishProgress: FC = () => {
     currentStep,
   ]);
 
+  useEffect(() => {
+    if (publishFailed) {
+      handleFailed();
+    }
+  }, [publishFailed]); // eslint-disable-line
+
+  const handleFailed = () => {
+    dispatch(toggleModalType("publish-failed"));
+  };
+
   if (currentStep >= 6) {
     setTimeout(() => {
       dispatch(toggleModalType("publish-done"));
       dispatch(updateCurrentStep(0));
     }, 1000);
   }
-
-  const handleFailed = () => {
-    dispatch(toggleModalType("publish-failed"));
-  };
-  useEffect(() => {
-    if (publishFailed) {
-      handleFailed();
-    }
-  }, [publishFailed]);
 
   return (
     <>

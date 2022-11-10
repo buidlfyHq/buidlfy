@@ -8,6 +8,8 @@ import {
   startBuyTemplateLoader,
   allTemplatesFetched,
   startFetchTemplateLoader,
+  endFetchTemplateLoader,
+  setFilteredTemplateList,
 } from "./template.reducers";
 import {
   initiateTransactionService,
@@ -68,8 +70,10 @@ function* getListedTemplates(): any {
   yield put(startFetchTemplateLoader());
   const fetchedTemplates = yield call(getListedTemplatesService);
   if (!fetchedTemplates.error) {
+    yield put(endFetchTemplateLoader());
     if (fetchedTemplates.listings.length !== 0) {
       yield put(allTemplatesFetched(fetchedTemplates.listings));
+      yield put(setFilteredTemplateList(fetchedTemplates.listings));
     }
   } else {
     yield put(
