@@ -5,6 +5,7 @@ import {
   updateContractAbi,
   updateContractAddress,
   updateContractList,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 import upload from "assets/upload-img.svg";
 import { IContract } from "redux/contract/contract.interfaces";
@@ -28,6 +29,7 @@ const ContractModal: FC<IContractModal> = ({
 
   const [showUpload, setShowUpload] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string>("");
+  const [networkName, setNetworkName] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer>("");
   const [updateAbi, setUpdateAbi] = useState<string>();
   const [updateAddress, setUpdateAddress] = useState<string>();
@@ -42,7 +44,10 @@ const ContractModal: FC<IContractModal> = ({
       name: inputValue,
       text: JSON.stringify(updateAbi),
       address: JSON.stringify(updateAddress),
+      network: networkName,
     };
+    console.log(newContract, "newContract");
+
     // localStorage.setItem("items", JSON.stringify(items));
     const contractList = localStorage.getItem("contractList") || "";
     if (contractList !== "") {
@@ -55,6 +60,7 @@ const ContractModal: FC<IContractModal> = ({
     dispatch(updateContractList(newContractList));
     dispatch(updateContractAbi(updateAbi));
     dispatch(updateContractAddress(updateAddress));
+    dispatch(updateContractNetwork(networkName));
   };
 
   const handleShow = () => setShowUpload(false);
@@ -75,6 +81,41 @@ const ContractModal: FC<IContractModal> = ({
       handleSetAbi(e.target.result.toString());
     };
   };
+
+  const networkNames = [
+    {
+      id: 1,
+      name: "Ethereum Mainnet",
+    },
+    {
+      id: 137,
+      name: "Polygon Mainnet",
+    },
+    {
+      id: 56,
+      name: "Binance Smart Chain",
+    },
+    {
+      id: 42161,
+      name: "Arbitrum One",
+    },
+    {
+      id: 10,
+      name: "Optimism",
+    },
+    {
+      id: 80001,
+      name: "Mumbai Testnet",
+    },
+    {
+      id: 97,
+      name: "BSC Testnet",
+    },
+    {
+      id: 420,
+      name: "Optimism Goerli Testnet",
+    },
+  ];
   return (
     <Dialog
       as="div"
@@ -92,7 +133,7 @@ const ContractModal: FC<IContractModal> = ({
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-10" />
 
         {/* Dialog Content */}
-        <section className="inline-block w-[345px] mr-[12rem] mt-[10rem] max-w-md py-6 px-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+        <section className="inline-block w-[345px] mr-[12rem] mt-[6rem] max-w-md py-6 px-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
           <Dialog.Title as="h3" className="modal-heading">
             Connect Contract
           </Dialog.Title>
@@ -158,6 +199,18 @@ const ContractModal: FC<IContractModal> = ({
               />
             )}
             <br />
+            <label className="modal-label">Network Chain</label>
+            <br />
+            <select
+              className="modal-input pl-2 mt-1 h-[2.5rem] mb-[1rem]"
+              onChange={(e) => setNetworkName(e.target.value)}
+            >
+              <option selected>Select A Network</option>
+              {networkNames?.map((networkName) => (
+                <option value={networkName.id}>{networkName.name}</option>
+              ))}
+            </select>
+            <br />
             <label className="modal-label">Address</label>
             <br />
             <input
@@ -170,9 +223,9 @@ const ContractModal: FC<IContractModal> = ({
 
           <div className="mt-4">
             <button
-              disabled={!(updateAbi && updateAddress)}
+              disabled={!(updateAbi && updateAddress && networkName)}
               className={`rounded-[44px] contract-button font-medium text-white text-[14px] py-2 px-[7.5rem] ${
-                updateAbi && updateAddress ? "" : "opacity-40"
+                updateAbi && updateAddress && networkName ? "" : "opacity-40"
               }`}
               onClick={() => {
                 setIsOpen(false);
