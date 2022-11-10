@@ -55,7 +55,23 @@ const Button: FC<IText> = ({
         id={i}
         className="text-class"
       >
-        {link.length > 0 ? <a href={link}>{value}</a> : value}
+        {link.length > 0 ? (
+          <a
+            href={link}
+            style={{
+              background: gradientCheck(color, true),
+              WebkitTextFillColor: gradientCheck(color, false),
+              textDecoration: underline,
+              textDecorationColor: color,
+            }}
+            rel="noreferrer"
+            target="_blank"
+          >
+            {value}
+          </a>
+        ) : (
+          value
+        )}
       </span>
     </button>
   </section>

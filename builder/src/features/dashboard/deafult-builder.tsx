@@ -5,12 +5,12 @@ import { SidebarEnum } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 
 interface IDefaultBuilder {
-  showSidebar?: () => void;
+  setHideNavbar?: (hideNavbar?: boolean) => void;
   setSideElement?: (sideElement?: string) => void;
 }
 
 const DefaultBuilder: FC<IDefaultBuilder> = ({
-  showSidebar,
+  setHideNavbar,
   setSideElement,
 }) => {
   const handleSidebar = (selectedSidebarElements: string) => {
@@ -19,6 +19,7 @@ const DefaultBuilder: FC<IDefaultBuilder> = ({
   return (
     <section className="z-100">
       <section
+        id="full-view"
         style={{
           width: "-webkit-fill-available",
         }}
@@ -40,8 +41,8 @@ const DefaultBuilder: FC<IDefaultBuilder> = ({
             <div className="flex justify-center">
               <button
                 onClick={() => {
-                  showSidebar();
                   handleSidebar(SidebarEnum.ELEMENTS);
+                  setHideNavbar(false);
                 }}
                 className="flex add-btn mt-[1.5rem]"
               >

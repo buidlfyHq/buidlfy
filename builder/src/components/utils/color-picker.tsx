@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
-import ColorPicker from "react-best-gradient-color-picker";
+import { FC } from "react";
 import { Dialog } from "@headlessui/react";
+import ColorPicker from "react-best-gradient-color-picker";
+import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -14,6 +14,7 @@ interface IColorPicker {
   isElement?: boolean;
   hideGradient?: boolean;
 }
+
 const ColorPickerDropdown: FC<IColorPicker> = ({
   name,
   value,
@@ -24,11 +25,11 @@ const ColorPickerDropdown: FC<IColorPicker> = ({
   hideGradient,
 }) => {
   return (
-    <div
+    <main
       className="py-4 text-gray-600"
       style={{ width: "-webkit-fill-available" }}
     >
-      <div className="px-1 mx-2">
+      <section className="px-1 mx-2">
         <div className="flex">
           <div className="flex px-1 margin-text grow">{name}</div>
           <div
@@ -48,11 +49,11 @@ const ColorPickerDropdown: FC<IColorPicker> = ({
             )}
           </div>
         </div>
-      </div>
+      </section>
       {displayColorPicker ? (
         <Dialog
           as="div"
-          className={`absolute py-[15px] z-100 overflow-none bg-white shadow-lg ${
+          className={`fixed py-[15px] z-100 overflow-none bg-white shadow-lg ${
             isElement
               ? "top-[220px] right-[260px] bottom-[1px]"
               : "top-[150px] right-[20px] bottom-[70px]"
@@ -74,7 +75,7 @@ const ColorPickerDropdown: FC<IColorPicker> = ({
           </div>
         </Dialog>
       ) : null}
-    </div>
+    </main>
   );
 };
 

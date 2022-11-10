@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { setValue } from "hooks/set-value";
 import { IInput } from "interfaces/value";
-import { MARGIN_VARIABLE } from "config/constants";
 import "styles/components.css";
 
 interface IInputComponent {
@@ -58,12 +57,8 @@ const Input: FC<IInputComponent> = ({
           borderImage: borderColor,
           color: color,
           background: backgroundColor,
-          margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
-            margin.marginRight * MARGIN_VARIABLE
-          }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
-            margin.marginLeft * MARGIN_VARIABLE
-          }px`,
-          padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
+          margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+          padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
         }}
         className="btn-border focus-visible:outline-none w-full leading-tight px-3 py-2 text-gray-700 bg-white appearance-none input"
         id={i}

@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-config({ path: `.env.${process.env.NODE_ENV || 'development'}.local` });
+config();
 
 export const CREDENTIALS = process.env.CREDENTIALS === 'true';
 export const {
@@ -14,6 +14,7 @@ export const {
   SPHERON_TOKEN,
   ORGANIZATION_ID,
   DECODER_GIT_URL,
+  DECODER_GIT_BRANCH,
   CORS_ADDRESS,
   SITE_DOMAIN_NAME,
   CLOUDFLARE_KEY,

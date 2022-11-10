@@ -1,12 +1,12 @@
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import { FC, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
 import DefaultImage from "components/utils/default-image";
 import "styles/components.css";
 
 interface IImageComponent {
-  imgData: string | ArrayBuffer;
   justifyContent: string;
   margin?: {
     marginLeft?: number;
@@ -19,67 +19,91 @@ interface IImageComponent {
   backgroundSize?: string;
   i: string;
   isAuto?: boolean;
+  imgData?: string | ArrayBuffer;
+  link: string;
 }
 
 const Image: FC<IImageComponent> = ({
   i,
-  imgData,
   justifyContent,
   margin,
   width,
   height,
   backgroundSize,
   isAuto,
+  imgData,
+  link,
 }) => {
-  const imageData: IUploadedImageData = useSelector((state: IRootState) =>
+  const dispatch = useDispatch();
+  const ref = useRef<HTMLDivElement>();
+  const imageData = useSelector((state: IRootState) =>
     state.workspace.uploadedImagesData.find(
       (image: IUploadedImageData) => image.settingItemId === i
     )
   );
+  useEffect(() => {
+    if (ref.current?.clientWidth) {
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: "width",
+          propertyValue: ref.current.clientWidth,
+          imageSizeProperty: false,
+        })
+      );
+    }
+  }, [ref.current?.clientWidth]);
 
-  // Add ClientWidth and ClientHeight of Image when it changes its position
-  // const ref = useRef<HTMLDivElement>();
+  useEffect(() => {
+    if (ref.current?.clientHeight) {
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: "height",
+          propertyValue: ref.current.clientHeight,
+          imageSizeProperty: false,
+        })
+      );
+    }
+  }, [ref.current?.clientHeight]);
 
-  // useEffect(() => {
-  //   if (ref?.current?.clientWidth) {
-  //     console.log(ref.current.clientWidth, "cw");
-  //     setDynamicWidth(ref.current.clientWidth);
-  //   }
-  //   if (ref?.current?.clientHeight) {
-  //     setDynamicHeight(ref.current.clientHeight);
-  //   }
-  // }, [ref?.current?.clientWidth, ref?.current?.clientHeight]);
-  // useEffect(() => {
-  //   if (ref?.current?.clientHeight) {
-  //     console.log(ref.current.clientHeight, "ch");
-  //     setDynamicHeight(ref.current.clientHeight);
-  //   }
-  // }, [ref?.current?.clientHeight]);
+  const imageDiv = (
+    <div className="flex w-full h-full">
+      <div
+        ref={ref}
+        id={i}
+        className="flex w-full h-full"
+        style={{
+          backgroundImage: `url(${
+            imageData?.uploadedImageData ? imageData.uploadedImageData : imgData
+          })`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: justifyContent,
+          backgroundSize: `${
+            isAuto ? backgroundSize : `${width}px ${height}px`
+          }`,
+          margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
+        }}
+      />
+    </div>
+  );
   return (
     <>
-      {imageData?.uploadedImageData ? (
-        <div className="flex w-full h-full">
-          <div
-            // ref={ref}
-            id={i}
-            className="flex w-full h-full"
-            style={{
-              backgroundImage: `url(${imageData.uploadedImageData})`,
-              // It will be needed after image storage works
-              // backgroundImage: `${
-              //   imgData
-              //     ? `url(${imgData})`
-              //     : `url(${imageData.uploadedImageData})`
-              // }`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: justifyContent,
-              backgroundSize: `${
-                isAuto ? backgroundSize : `${width}px ${height}px`
-              }`,
-              margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
-            }}
-          />
-        </div>
+      {imageData?.uploadedImageData || imgData ? (
+        <>
+          {link?.length > 0 ? (
+            <a
+              style={{ textDecoration: "none" }}
+              rel="noreferrer"
+              target="_blank"
+              href={link}
+            >
+              {imageDiv}
+            </a>
+          ) : (
+            imageDiv
+          )}
+        </>
       ) : (
         <DefaultImage id={i} />
       )}

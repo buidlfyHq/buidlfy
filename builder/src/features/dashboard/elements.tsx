@@ -1,44 +1,42 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ShortUniqueId from "short-unique-id";
-import { components } from "config/component";
-import { containerCheck } from "utils/container-check";
+import ReactTooltip from "react-tooltip";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineClose } from "react-icons/md";
-import defaultImage from "assets/default-image.svg";
-import container from "assets/image-container.svg";
-import ReactTooltip from "react-tooltip";
+import { components } from "config/component";
+import { containerCheck } from "utils/container-check";
 import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
 import {
   IWorkspaceElement,
   ResizeHandles,
 } from "redux/workspace/workspace.interfaces";
+import defaultImage from "assets/default-image.svg";
+import container from "assets/image-container.svg";
 import "styles/components.css";
 
 interface IElements {
   isContainerSelected: boolean;
-  hideSidebar: () => void;
-  hideSettingSidebar: () => void;
   hideNavbar: boolean;
+  setHideNavbar: (hideNavbar: boolean) => void;
 }
 
 const Elements: FC<IElements> = ({
   isContainerSelected,
-  hideSidebar,
-  hideSettingSidebar,
   hideNavbar,
+  setHideNavbar,
 }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
+  const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const selectedElement: IWorkspaceElement = useSelector(
+  const selectedElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
 
-  const onClickFunction = (name) => {
+  const onClickFunction = (name: string) => {
     let c = components?.find((component) => component.name === name);
     if (isContainerSelected) {
       const availableHandles: ResizeHandles = ["se"];
@@ -93,6 +91,7 @@ const Elements: FC<IElements> = ({
       dispatch(updateWorkspaceElementsArray([...workspaceElements, newC]));
     }
   };
+
   const checkY = (items: IWorkspaceElement[]) => {
     if (items.length === 0) return 0;
     else {
@@ -121,6 +120,7 @@ const Elements: FC<IElements> = ({
   const elementsList = (
     <>
       <ReactTooltip
+        id="elements"
         className="tool"
         place="right"
         type="dark"
@@ -134,10 +134,10 @@ const Elements: FC<IElements> = ({
       <div className="element-div">
         <div className="px-[4.1rem] py-4">
           <div className="flex">
-            <div data-tip="Click here to add the button">
+            <div data-tip="Click here to add the button" data-for="elements">
               <button
                 onClick={() => onClickFunction("Button")}
-                className="element-btn cursor-pointer btn-div"
+                className="cursor-pointer element-btn btn-div"
               >
                 Button
               </button>
@@ -146,8 +146,8 @@ const Elements: FC<IElements> = ({
         </div>
       </div>
       <div className="element-div">
-        <div className="py-3 px-10">
-          <div data-tip="Click here to add the heading">
+        <div className="px-10 py-3">
+          <div data-tip="Click here to add the heading" data-for="elements">
             <h1
               className="heading-element font-normal text-2xl mb-4 cursor-pointer hover:text-[#5A4471]"
               onClick={() => onClickFunction("Heading 1")}
@@ -155,7 +155,7 @@ const Elements: FC<IElements> = ({
               Add Heading 1
             </h1>
           </div>
-          <div data-tip="Click here to add the heading">
+          <div data-tip="Click here to add the heading" data-for="elements">
             <h2
               onClick={() => onClickFunction("Heading 2")}
               className="heading-element font-normal text-xl mb-4 cursor-pointer hover:text-[#5A4471]"
@@ -163,7 +163,7 @@ const Elements: FC<IElements> = ({
               Add Heading 2
             </h2>
           </div>
-          <div data-tip="Click here to add the heading">
+          <div data-tip="Click here to add the heading" data-for="elements">
             <h3
               onClick={() => onClickFunction("Heading 3")}
               className="heading-element font-normal text-lg mb-4 cursor-pointer hover:text-[#5A4471]"
@@ -171,7 +171,7 @@ const Elements: FC<IElements> = ({
               Add Heading 3
             </h3>
           </div>
-          <div data-tip="Click here to add the paragraph">
+          <div data-tip="Click here to add the paragraph" data-for="elements">
             <div
               onClick={() => onClickFunction("Text")}
               className="heading-element font-normal text-[13px] text-four w-[200px] cursor-pointer hover:text-[#5A4471]"
@@ -184,9 +184,9 @@ const Elements: FC<IElements> = ({
       </div>
       <div className="element-div">
         <div className="px-[1.75rem] py-4">
-          <div data-tip="Click here to add the input">
+          <div data-tip="Click here to add the input" data-for="elements">
             <div
-              className="input-container cursor-pointer"
+              className="cursor-pointer input-container"
               onClick={() => onClickFunction("Input")}
             >
               <h1 className="element-input-text">Add Input</h1>
@@ -199,7 +199,10 @@ const Elements: FC<IElements> = ({
           onClick={() => onClickFunction("Image")}
           className="px-4 py-4 cursor-pointer"
         >
-          <div data-tip="Click here to add the image upload">
+          <div
+            data-tip="Click here to add the image upload"
+            data-for="elements"
+          >
             <div className="relative image-container">
               <img className="w-[20rem]" src={container} alt="container" />
               <img
@@ -216,37 +219,34 @@ const Elements: FC<IElements> = ({
       </div>
     </>
   );
+
   return (
     <>
       {/* Components */}
-
       <div
         className={`fixed pr-3 pl-[1.2rem] py-[1.5rem] mb-[2rem] left-[5rem] flex w-[320px] h-[60px] ${
-          !hideNavbar
-            ? "element-heading-div animate__animated animate__slideInLeft"
-            : "element-hide-div animate__animated animate__slideOutLeft"
+          hideNavbar
+            ? "element-hide-div animate__animated animate__slideOutLeft"
+            : "element-heading-div animate__animated animate__slideInLeft"
         }`}
       >
         <h3 className="element-heading mt-[2.5px]">Add Elements</h3>
-        <div className="close-btn">
-          <MdOutlineClose
-            onClick={() => {
-              hideSidebar();
-              hideSettingSidebar();
-            }}
-            className="text-[16px]"
-          />
-        </div>
+        <button className="close-btn" onClick={() => setHideNavbar(true)}>
+          <MdOutlineClose className="text-[16px]" />
+        </button>
       </div>
 
       {!isContainerSelected ? (
         <div className="mt-[6rem]">
           <div className="element-div">
             <div className="px-4 py-4">
-              <div data-tip="Click here to add the container">
+              <div
+                data-tip="Click here to add the container"
+                data-for="elements"
+              >
                 <div className="flex">
                   <div
-                    className="element-container cursor-pointer"
+                    className="cursor-pointer element-container"
                     onClick={() => onClickFunction("Container")}
                   >
                     <span className="element-text">

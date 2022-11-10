@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
-import { MARGIN_VARIABLE } from "config/constants";
 
 const Text: FC<ITexts> = ({
   id,
@@ -32,7 +31,7 @@ const Text: FC<ITexts> = ({
   useEffect(() => {
     handleOnChange();
   }, [outputValue]);
-
+  const gradientCondition = color?.indexOf("gradient") !== -1;
   const textArea = (
     <textarea
       readOnly
@@ -40,6 +39,7 @@ const Text: FC<ITexts> = ({
         fontWeight: bold,
         fontStyle: italic,
         textDecoration: underline,
+        textDecorationColor: `${gradientCondition ? "black" : color}`,
         background: color,
         WebkitTextFillColor: "transparent",
         display: "flex",
@@ -50,7 +50,7 @@ const Text: FC<ITexts> = ({
         padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
       value={isValue}
-      className="flex focus-visible:outline-[transparent] resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
+      className="flex text-area resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
     />
   );
   return (
@@ -59,12 +59,18 @@ const Text: FC<ITexts> = ({
       style={{
         height: "-webkit-fill-available",
         background: backgroundColor,
+        textDecoration: underline,
+        textDecorationColor: color,
         margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
       }}
       className="flex overflow-hidden items-center justify-center w-auto h-full"
     >
       {link ? (
-        <a target="_blank" className="cursor-pointer" href={link}>
+        <a
+          target="_blank"
+          href={link}
+          className="text-class cursor-pointer flex overflow-hidden items-center justify-center w-auto h-full"
+        >
           {textArea}
         </a>
       ) : (

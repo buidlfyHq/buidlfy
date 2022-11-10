@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import Container from "components/custom-components/container";
 import Button from "components/custom-components/button";
 import Text from "components/custom-components/text";
@@ -14,10 +14,7 @@ interface IRenderItem {
   setOpenTab?: (openTab: number) => void;
   setIsContainerSelected?: (isContainerSelected: boolean) => void;
   setSideElement?: (sideElement: string) => void;
-  dragContainer?: boolean;
-  setDragContainer?: (dragContainer?: boolean) => void;
-  showSidebar?: () => void;
-  hideSidebar?: () => void;
+  setHideNavbar?: (hideNavbar: boolean) => void;
   hideSettingSidebar?: () => void;
 }
 
@@ -28,10 +25,7 @@ const RenderItem: FC<IRenderItem> = ({
   setOpenTab,
   setIsContainerSelected,
   setSideElement,
-  dragContainer,
-  setDragContainer,
-  showSidebar,
-  hideSidebar,
+  setHideNavbar,
   hideSettingSidebar,
 }) => {
   switch (item.name) {
@@ -95,13 +89,14 @@ const RenderItem: FC<IRenderItem> = ({
       return (
         <Image
           i={item.i}
-          imgData={item.imgData}
           justifyContent={item.style.justifyContent}
           width={item.style.width}
           height={item.style.height}
           backgroundSize={item.style.backgroundSize}
           isAuto={item.style.isAuto}
           margin={item.style.margin}
+          imgData={item.imgData}
+          link={item.link}
         />
       );
     case "Divider":
@@ -115,7 +110,6 @@ const RenderItem: FC<IRenderItem> = ({
           children={item.children}
           backgroundColor={item.style.backgroundColor}
           color={item.style.color}
-          imgData={item.imgData}
           borderRadius={item.style.borderRadius}
           borderWidth={item.style.borderWidth}
           shadow={item.style.shadow}
@@ -124,14 +118,12 @@ const RenderItem: FC<IRenderItem> = ({
           setDrag={setDrag}
           setIsContainerSelected={setIsContainerSelected}
           setSideElement={setSideElement}
-          dragContainer={dragContainer}
-          setDragContainer={setDragContainer}
-          showSidebar={showSidebar}
-          hideSidebar={hideSidebar}
+          setHideNavbar={setHideNavbar}
           hideSettingSidebar={hideSettingSidebar}
+          backgroundSize={item.style.backgroundSize}
           padding={item.style.padding}
           margin={item.style.margin}
-          backgroundSize={item.style.backgroundSize}
+          imgData={item.imgData}
         />
       );
     default:

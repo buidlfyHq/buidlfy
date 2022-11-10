@@ -1,17 +1,17 @@
 import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IoIosCloseCircleOutline } from "react-icons/io";
+import ReactTooltip from "react-tooltip";
+import { IMAGE_SIZE_VARIABLE } from "config/constant";
+import Spinner from "components/utils/assets/spinner";
 import {
   updateWorkspaceElement,
   updateUploadedImageData,
 } from "redux/workspace/workspace.reducers";
-import { uploadFileToWeb3Storage } from "utils/web3storage";
-import upload from "assets/upload-img.svg";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { IMAGE_SIZE_VARIABLE } from "config/constant";
 import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
+import { uploadImage } from "redux/upload/upload.action";
 import { IRootState } from "redux/root-state.interface";
-import Spinner from "components/utils/assets/spinner";
-import ReactTooltip from "react-tooltip";
+import upload from "assets/upload-img.svg";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -29,7 +29,6 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
       (image: IUploadedImageData) => image.settingItemId === i
     )
   );
-
   // FIX: find suitable types for e
   const onChangeImage = async (e) => {
     if (e.target.files[0]) {
@@ -46,15 +45,8 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
               uploadedImageData: reader.result as string,
             })
           );
-          const cid = await uploadFileToWeb3Storage(reader.result as string);
+          dispatch(uploadImage({ data: reader.result as string, id: i }));
           setIsSpinner(false);
-          dispatch(
-            updateWorkspaceElement({
-              settingItemId: i,
-              propertyName: "imgData",
-              propertyValue: cid,
-            })
-          );
         });
         reader.readAsDataURL(e.target.files[0]);
       }
@@ -87,6 +79,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
   );
   const tooltip = (
     <ReactTooltip
+      id="upload"
       className="tool"
       place="left"
       type="dark"
@@ -149,7 +142,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
               </>
             ) : (
               <label htmlFor="inputTag" className="image-label cursor-pointer">
-                <div data-tip="Click here to upload image">
+                <div data-tip="Click here to upload image" data-for="upload">
                   <div className="flex justify-center mt-2">
                     <img src={upload} alt="upload" className="w-[3.5rem]" />
                   </div>

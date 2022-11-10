@@ -32,18 +32,17 @@ const Container: FC<IBgContainer> = ({
   }, []);
 
   let finalSpacing =
-    margin.marginLeft +
-    margin.marginRight +
-    padding.paddingLeft +
-    padding.paddingRight;
+    margin?.marginLeft +
+    margin?.marginRight +
+    padding?.paddingLeft +
+    padding?.paddingRight;
 
   return (
     <section
       id={item.i}
       style={{
-        background: backgroundColor,
-        paddingLeft: `${margin.marginLeft}px`,
-        paddingRight: `${margin.marginRight}px`,
+        paddingLeft: `${margin?.marginLeft}px`,
+        paddingRight: `${margin?.marginRight}px`,
       }}
       className="w-full h-fit"
     >
@@ -63,11 +62,16 @@ const Container: FC<IBgContainer> = ({
           margin={[0, 0]}
           className="btn-border"
           style={{
-            background: backgroundColor,
-            backgroundImage: `url(${imgData})`,
-            backgroundSize: backgroundSize,
+            backgroundColor:
+              backgroundColor.slice(0, 4) === "rgba" ? backgroundColor : null,
+            backgroundImage: imgData
+              ? `url(${imgData})`
+              : backgroundColor.slice(0, 4) === "rgba"
+              ? null
+              : `${backgroundColor}`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
+            backgroundSize: backgroundSize,
             border: `${borderWidth}px solid ${color}`,
             borderRadius: `${borderRadius}px`,
             borderImage: color,

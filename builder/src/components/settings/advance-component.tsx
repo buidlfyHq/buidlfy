@@ -1,20 +1,22 @@
 import React, { useState, FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { FaFileContract } from "react-icons/fa";
-import Modal from "features/dashboard/modal";
+import ContractModal from "features/dashboard/contract-modal";
 import AbiMethods from "components/dashboard/abi-methods";
 import AbiComponents from "components/dashboard/abi-components";
 import {
   updateContractAbi,
   updateContractAddress,
+  updateContractList,
 } from "redux/contract/contract.reducers";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { useSelector } from "react-redux";
 import { IRootState } from "redux/root-state.interface";
 import { IContract } from "redux/contract/contract.interfaces";
-import ContractList from "components/utils/contract-list";
-import ContractView from "components/utils/contract-view";
-import ContractHistory from "components/utils/contract-history";
+import ContractList from "components/utils/contract/contract-list";
+import ContractView from "components/utils/contract/contract-view";
+import ContractHistory from "components/utils/contract/contract-history";
+import ContractRemove from "components/utils/contract/contract-remove";
 import "styles/components.css";
 import "styles/dashboard.css";
 
@@ -67,6 +69,11 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     ? updatedNewContractList?.slice(0, 4)
     : updatedNewContractList;
 
+  const handleClearContract = () => {
+    localStorage.removeItem("contractList");
+    dispatch(updateContractList(null));
+    setIsViewMore(false);
+  };
   return (
     <>
       {selectedContractAbi && selectedContractAddress ? (
@@ -90,7 +97,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
             <span className="setting-text">Import Contract</span>
           </h3>
           <p className="contract-text ml-[0.5rem]">
-            Lorem ipsum dolor sit amet, sed do eiusmod
+            Integrate your Frontend with smart contracts.
           </p>
           <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
             <div
@@ -101,7 +108,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                 <FaFileContract />
               </span>
               Import Contract
-              <Modal
+              <ContractModal
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
                 methodOpen={methodOpen}
@@ -110,6 +117,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
             </div>
           </div>
           <ContractHistory newContractList={updatedNewContractList} />
+
           <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
             {paginatedContractList &&
               paginatedContractList.map((contract: IContract) => {
@@ -121,7 +129,10 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                   />
                 );
               })}
-            <ContractView isViewMore={isViewMore} handleShow={handleShow} />
+            <div className="flex items-center justify-end">
+              <ContractRemove handleClearContract={handleClearContract} />
+              <ContractView isViewMore={isViewMore} handleShow={handleShow} />
+            </div>
           </div>
         </>
       )}

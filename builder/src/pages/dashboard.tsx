@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
 import { useWindowSize } from "hooks/use-window-size";
 import Navbar from "features/dashboard/navbar";
 import Sidebar from "features/dashboard/sidebar";
@@ -8,6 +7,10 @@ import SideNavbar from "features/dashboard/side-navbar";
 import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
 import DefaultSettings from "features/dashboard/default-settings";
+import {
+  updateWorkspaceBackgroundColor,
+  updateWorkspaceElementsArray,
+} from "redux/workspace/workspace.reducers";
 import "styles/components.css";
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
@@ -20,75 +23,42 @@ const Dashboard: FC = () => {
   const [drag, setDrag] = useState<boolean>(true);
   const [isContainerSelected, setIsContainerSelected] =
     useState<boolean>(false);
-  const [workspaceBackgroundColor, setWorkspaceBackgroundColor] =
-    useState<string>("rgba(255, 255, 255, 1)");
-  const [head, setHead] = useState<{
-    title: string;
-    logo: string | ArrayBuffer;
-  }>({
-    title: "",
-    logo: "",
-  });
   const [sideElement, setSideElement] = useState<string>("");
-  const [isNavHidden, setIsNavHidden] = useState<boolean>(true);
-  const [hideNavbar, setHideNavbar] = useState<boolean>(false);
+  const [hideNavbar, setHideNavbar] = useState<boolean>(true);
+
   useEffect(() => {
-    // checks for stored configs
+    // load stored configs if available
     let saveItems = localStorage.getItem("items");
     if (saveItems) {
-      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).builder));
-      setWorkspaceBackgroundColor(JSON.parse(saveItems).background);
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
+      dispatch(
+        updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor)
+      );
     }
   }, []); // eslint-disable-line
-
-  const showSidebar = () => {
-    setHideNavbar(false);
-    setIsNavHidden(false);
-    setOpenSetting(false);
-  };
-
-  const hideSidebar = () => {
-    setHideNavbar(true);
-    setIsNavHidden(true);
-    setOpenSetting(true);
-  };
-  const showSettingSidebar = () => {
-    // setIsNavHidden(true);
-    setOpenSetting(true);
-  };
-  const hideSettingSidebar = () => {
-    // setIsNavHidden(false);
-    setOpenSetting(false);
-  };
 
   return (
     <main>
       {size.width > 1024 ? (
-        <section className="flex columns-3 flex-row w-full min-h-screen">
+        <section className="flex flex-row w-full min-h-screen columns-3">
           {/* Sidebar */}
           <SideNavbar
             setSideElement={setSideElement}
-            showSidebar={showSidebar}
-            hideSettingSidebar={hideSettingSidebar}
+            setHideNavbar={setHideNavbar}
           />
           <Sidebar
             isContainerSelected={isContainerSelected}
             sideElement={sideElement}
-            isNavHidden={isNavHidden}
-            hideSidebar={hideSidebar}
-            hideSettingSidebar={hideSettingSidebar}
             hideNavbar={hideNavbar}
+            setHideNavbar={setHideNavbar}
           />
 
           <section className="flex-1">
             {/* Navbar */}
             <Navbar
-              setOpenSetting={setOpenSetting}
+              setHideNavbar={setHideNavbar}
               setIsContainerSelected={setIsContainerSelected}
-              hideSidebar={hideSidebar}
-              workspaceBackgroundColor={workspaceBackgroundColor}
-              setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-              head={head}
+              setOpenSetting={setOpenSetting}
             />
 
             {/* Main section */}
@@ -99,21 +69,12 @@ const Dashboard: FC = () => {
                 setOpenTab={setOpenTab}
                 drag={drag}
                 setDrag={setDrag}
-                workspaceBackgroundColor={workspaceBackgroundColor}
                 setIsContainerSelected={setIsContainerSelected}
-                hideSidebar={hideSidebar}
-                showSettingSidebar={showSettingSidebar}
-                showSidebar={showSidebar}
-                isNavHidden={isNavHidden}
+                setHideNavbar={setHideNavbar}
                 openSetting={openSetting}
-                setIsNavHidden={setIsNavHidden}
                 setSideElement={setSideElement}
                 hideSettingSidebar={undefined}
-                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-                head={head}
-                setHead={setHead}
               />
-              {/* Right Sidebar Settings */}
             </aside>
           </section>
           <div className="setting-sidebar rounded-[8px] py-2 overflow-y-scroll fixed top-0 right-0 bottom-0">
@@ -125,13 +86,9 @@ const Dashboard: FC = () => {
               />
             ) : (
               <DefaultSettings
-                setOpenSetting={setOpenSetting}
+                setHideNavbar={setHideNavbar}
                 setIsContainerSelected={setIsContainerSelected}
-                hideSidebar={hideSidebar}
-                workspaceBackgroundColor={workspaceBackgroundColor}
-                setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-                head={head}
-                setHead={setHead}
+                setOpenSetting={setOpenSetting}
               />
             )}
           </div>

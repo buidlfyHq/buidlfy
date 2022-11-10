@@ -292,7 +292,8 @@ export const components = [
   {
     name: "Image",
     h: 3,
-    minH: 3,
+    minH: 1,
+    link: "",
     style: {
       width: 80,
       height: 60,

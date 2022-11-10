@@ -1,6 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GridLayout, { Layout } from "react-grid-layout";
+import DefaultBuilder from "./deafult-builder";
+import RenderItem from "components/utils/render-item";
+import { containerCheck } from "utils/container-check";
 import {
   setSelectedElement,
   updateWorkspaceElementsArray,
@@ -11,16 +14,8 @@ import {
   createSelectedElement,
   updateSelectedElement,
 } from "redux/contract/contract.reducers";
-import RenderItem from "components/utils/render-item";
-import { containerCheck } from "utils/container-check";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
-import {
-  IContractElementSelected,
-  IContractElementSelector,
-} from "redux/contract/contract.interfaces";
-import DefaultBuilder from "./deafult-builder";
-import DefaultSettings from "./default-settings";
 import "styles/components.css";
 
 interface IWorkspaceComponent {
@@ -29,23 +24,11 @@ interface IWorkspaceComponent {
   drag: boolean;
   setDrag: (drag: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
-  workspaceBackgroundColor: string;
-  hideSidebar?: () => void;
-  showSidebar?: () => void;
-  showSettingSidebar?: () => void;
-  isNavHidden?: boolean;
+  hideNavbar?: boolean;
+  setHideNavbar?: (hideNavbar?: boolean) => void;
   openSetting?: boolean;
-  setIsNavHidden?: (isNavHidden?: boolean) => void;
   setSideElement?: (sideElement?: string) => void;
-  dragContainer?: boolean;
-  setDragContainer?: (dragContainer?: boolean) => void;
   hideSettingSidebar?: () => void;
-  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
-  head: {
-    title: string;
-    logo: string | ArrayBuffer;
-  };
-  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
 }
 
 const Workspace: FC<IWorkspaceComponent> = ({
@@ -54,27 +37,23 @@ const Workspace: FC<IWorkspaceComponent> = ({
   drag,
   setDrag,
   setIsContainerSelected,
-  workspaceBackgroundColor,
-  hideSidebar,
-  showSidebar,
-  isNavHidden,
+  hideNavbar,
+  setHideNavbar,
   openSetting,
   setSideElement,
-  dragContainer,
-  setDragContainer,
   hideSettingSidebar,
-  setWorkspaceBackgroundColor,
-  head,
-  setHead,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
+  const workspaceElements = useSelector(
     (state: IRootState) => state.workspace.workspaceElements
   );
-  const contractElementSelector: IContractElementSelector = useSelector(
+  const workspaceBackgroundColor = useSelector(
+    (state: IRootState) => state.workspace.workspaceBackgroundColor
+  );
+  const contractElementSelector = useSelector(
     (state: IRootState) => state.contract.contractElementSelector
   );
-  const contractElementSelected: IContractElementSelected = useSelector(
+  const contractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
   );
   const elementHoverStyles = contractElementSelector
@@ -89,7 +68,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       ?.getBoundingClientRect().width;
 
     setFullViewWidth((fullViewWidth) => fullView);
-  }, [isNavHidden, openSetting]);
+  }, [hideNavbar, openSetting]);
 
   const onLayoutChange = (layout: Layout[]) => {
     if (layout.length === 0) setIsContainerSelected(false);
@@ -119,6 +98,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       ? dispatch(updateWorkspaceElementsArray(newItemsArr))
       : dispatch(updateWorkspaceElementsArray(workspaceElements));
   };
+
   // to update selected element config
   const updateElementConfig = (itemName: string, i: string) => {
     const searchExistingValue = Object.keys(contractElementSelected).filter(
@@ -187,10 +167,9 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const onComponentClick = (itemName: string, i: string) => {
     setIsContainerSelected(true);
-    hideSidebar();
+    setOpenSetting(true);
     // checks if the selector is active
     if (contractElementSelector === null) {
-      setOpenSetting(true);
       dispatch(setSelectedElement(i));
       setOpenTab(1);
     } else {
@@ -222,7 +201,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       )
     ) {
       setIsContainerSelected(false);
-      hideSidebar();
+      setHideNavbar(true);
     }
     if (
       e.target.id === "full-view" ||
@@ -233,6 +212,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       setOpenSetting(false);
     }
   };
+
   const renderItemFunction = workspaceElements
     ?.filter((i) => i.style?.deleteComponent === false)
     .map((item: IWorkspaceElement) => {
@@ -260,10 +240,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
             setOpenTab={setOpenTab}
             setIsContainerSelected={setIsContainerSelected}
             setSideElement={setSideElement}
-            dragContainer={dragContainer}
-            setDragContainer={setDragContainer}
-            showSidebar={showSidebar}
-            hideSidebar={hideSidebar}
+            setHideNavbar={setHideNavbar}
             hideSettingSidebar={hideSettingSidebar}
           />
         </div>
@@ -304,21 +281,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
           </section>
         </section>
       ) : (
-        <>
-          <DefaultBuilder
-            showSidebar={showSidebar}
-            setSideElement={setSideElement}
-          />
-          <DefaultSettings
-            setOpenSetting={setOpenSetting}
-            setIsContainerSelected={setIsContainerSelected}
-            hideSidebar={hideSidebar}
-            workspaceBackgroundColor={workspaceBackgroundColor}
-            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
-            head={head}
-            setHead={setHead}
-          />
-        </>
+        <DefaultBuilder
+          setHideNavbar={setHideNavbar}
+          setSideElement={setSideElement}
+        />
       )}
     </main>
   );

@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { MARGIN_VARIABLE } from "config/constants";
 import defaultImage from "assets/default-image.png";
 import "styles/components.css";
 
@@ -16,6 +15,7 @@ interface IImageComponent {
   height?: number;
   backgroundSize?: string;
   isAuto?: boolean;
+  link: string;
 }
 
 const Image: FC<IImageComponent> = ({
@@ -26,25 +26,34 @@ const Image: FC<IImageComponent> = ({
   height,
   backgroundSize,
   isAuto,
+  link,
 }) => {
+  const imageDiv = (
+    <div
+      className="flex h-full w-full"
+      style={{
+        backgroundImage: `url(${imgData ? imgData : defaultImage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: justifyContent,
+        backgroundSize: `${isAuto ? backgroundSize : `${width}px ${height}px`}`,
+        margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
+      }}
+    />
+  );
   return (
     <section className="w-full h-full overflow-hidden">
-      <div
-        className="flex h-full w-full"
-        style={{
-          backgroundImage: `url(${imgData ? imgData : defaultImage})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: justifyContent,
-          backgroundSize: `${
-            isAuto ? backgroundSize : `${width}px ${height}px`
-          }`,
-          margin: `${margin.marginTop * MARGIN_VARIABLE}px ${
-            margin.marginRight * MARGIN_VARIABLE
-          }px ${margin.marginBottom * MARGIN_VARIABLE}px ${
-            margin.marginLeft * MARGIN_VARIABLE
-          }px`,
-        }}
-      />
+      {link ? (
+        <a
+          style={{ textDecoration: "none" }}
+          target="_blank"
+          href={link}
+          className="cursor-pointer"
+        >
+          {imageDiv}
+        </a>
+      ) : (
+        imageDiv
+      )}
     </section>
   );
 };

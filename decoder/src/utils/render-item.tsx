@@ -170,6 +170,7 @@ const RenderItem: FC<IRenderItem> = ({
           backgroundSize={item.style.backgroundSize}
           isAuto={item.style.isAuto}
           margin={item.style.margin}
+          link={item.link}
         />
       );
     default:

@@ -1,38 +1,40 @@
 import React, { FC, useState } from "react";
-import BgColorComponent from "components/settings/bg-color-component";
-import { uploadFileToWeb3Storage } from "config/web3storage";
-import { SITE_SIZE_VARIABLE } from "config/constant";
+import { useDispatch, useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
-import upload from "assets/upload-img.svg";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { SITE_SIZE_VARIABLE } from "config/constant";
 import Spinner from "components/utils/assets/spinner";
+import BgColorComponent from "components/settings/bg-color-component";
+import upload from "assets/upload-img.svg";
+import { uploadImage } from "redux/upload/upload.action";
+import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
+import { setSiteHead } from "redux/workspace/workspace.reducers";
 
 interface IDefaultSettings {
-  workspaceBackgroundColor: string;
-  setWorkspaceBackgroundColor: (backgroundColor: string) => void;
-  head: {
-    title: string;
-    logo: string | ArrayBuffer;
-  };
-  setHead: (head: { title: string; logo: string | ArrayBuffer }) => void;
-  hideSidebar?: () => void;
+  setHideNavbar?: (hideNavbar?: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
   setOpenSetting: (open: boolean) => void;
 }
 
 const DefaultSettings: FC<IDefaultSettings> = ({
-  workspaceBackgroundColor,
-  setWorkspaceBackgroundColor,
-  head,
-  setHead,
-  hideSidebar,
+  setHideNavbar,
   setIsContainerSelected,
-  setOpenSetting
+  setOpenSetting,
 }) => {
+  const dispatch = useDispatch();
+  const workspaceBackgroundColor = useSelector(
+    (state: IRootState) => state.workspace.workspaceBackgroundColor
+  );
+  const head = useSelector((state: IRootState) => state.workspace.head);
+  const imageLink = useSelector(
+    (state: IRootState) => state.upload.uploadImage
+  );
+
   const [sizeExceeded, setSizeExceeded] = useState<boolean>(false);
   const [siteImage, setSiteImage] = useState<string>();
   const [isSpinner, setIsSpinner] = useState<boolean>(false);
+
   const onChangeLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size > SITE_SIZE_VARIABLE) {
@@ -43,9 +45,9 @@ const DefaultSettings: FC<IDefaultSettings> = ({
         const reader = new FileReader();
         reader.addEventListener("load", async () => {
           setSiteImage(reader.result as string);
-          const cid = await uploadFileToWeb3Storage(reader.result as string);
+          dispatch(uploadImage({ data: reader.result as string }));
           setIsSpinner(false);
-          setHead({ ...head, logo: cid });
+          dispatch(setSiteHead({ ...head, logo: imageLink }));
         });
         reader.readAsDataURL(e.target.files[0]);
       }
@@ -54,7 +56,13 @@ const DefaultSettings: FC<IDefaultSettings> = ({
 
   const handleDeleteImage = () => {
     setSiteImage("");
-    setHead({ ...head, logo: "" });
+    dispatch(setSiteHead({ ...head, logo: "" }));
+  };
+
+  const handleCloseSidebar = () => {
+    setIsContainerSelected(false);
+    setHideNavbar(true);
+    setOpenSetting(false);
   };
 
   const imageInput = (
@@ -65,8 +73,10 @@ const DefaultSettings: FC<IDefaultSettings> = ({
       id="inputTag"
     />
   );
+
   const tooltip = (
     <ReactTooltip
+      id="default"
       className="tool"
       place="left"
       type="dark"
@@ -78,21 +88,17 @@ const DefaultSettings: FC<IDefaultSettings> = ({
     />
   );
 
-  const handleCloseSidebar = () => {
-    setIsContainerSelected(false)
-    hideSidebar()
-    setOpenSetting(false);
-  }
-
   // ADD: New site design in next branch
   return (
-    <main onClick={handleCloseSidebar} className="fixed right-0 top-[60px] w-[250px] setting-nav h-full">
+    <main
+      onClick={handleCloseSidebar}
+      className="fixed right-0 top-[60px] w-[250px] setting-nav h-full"
+    >
       <div className="mx-3 my-2">
         <h3 className="mb-2 setting-text mt-4 ml-[0.8rem]">Site Settings</h3>
         <aside className="mb-1">
           <BgColorComponent
             workspaceBackgroundColor={workspaceBackgroundColor}
-            setWorkspaceBackgroundColor={setWorkspaceBackgroundColor}
           />
         </aside>
 
@@ -100,7 +106,9 @@ const DefaultSettings: FC<IDefaultSettings> = ({
           {/* <RiText className="text-[18px] mr-3" /> */}
           <textarea
             value={head.title}
-            onChange={(e) => setHead({ ...head, title: e.target.value })}
+            onChange={(e) =>
+              dispatch(setSiteHead({ ...head, title: e.target.value }))
+            }
             className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
             placeholder="Site Title..."
           />
@@ -167,7 +175,10 @@ const DefaultSettings: FC<IDefaultSettings> = ({
                     htmlFor="inputTag"
                     className="image-label cursor-pointer"
                   >
-                    <div data-tip="Click here to upload image">
+                    <div
+                      data-tip="Click here to upload image"
+                      data-for="default"
+                    >
                       <div className="flex justify-center mt-2">
                         <img src={upload} alt="upload" className="w-[3.5rem]" />
                       </div>
