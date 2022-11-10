@@ -81,6 +81,7 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
         {selectedTemplateDto.publishedUrl && (
           <a
             target="_blank"
+            rel="noreferrer"
             href={`https://${selectedTemplateDto.publishedUrl}`}
             className="button-singleTemp flex items-center py-2.5 px-6 cursor-pointer"
           >

@@ -104,10 +104,11 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
         <div className="flex items-center">
           <a
             target="_blank"
+            rel="noreferrer"
             href={`https://mumbai.polygonscan.com/token/${selectedTemplateDto.tokenAddress}?a=${selectedTemplateDto.tokenId}`}
             className="mr-3 border rounded-full p-2"
           >
-            <img src={Polygon} width={12} height={12} />
+            <img src={Polygon} alt="polygon" width={12} height={12} />
           </a>
           <div className="text-[14px] text-[#14142B] opacity-80 font-[600]">
             {selectedTemplateDto.name}

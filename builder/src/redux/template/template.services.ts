@@ -1,5 +1,5 @@
 import { BigNumber, ethers } from "ethers";
-import request, { gql } from "graphql-request";
+import request from "graphql-request";
 import config from "config";
 import {
   approveERC20Token,

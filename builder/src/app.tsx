@@ -11,7 +11,7 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(fetchTemplates());
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <>

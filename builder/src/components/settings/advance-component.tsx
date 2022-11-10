@@ -53,7 +53,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     } catch (error) {
       console.log(error, "error");
     }
-  }, []);
+  }, []); // eslint-disable-line
 
   const handleContractList = (abi: string, address: string) => {
     dispatch(updateContractAbi(JSON.parse(abi)));
@@ -74,6 +74,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     dispatch(updateContractList(null));
     setIsViewMore(false);
   };
+
   return (
     <>
       {selectedContractAbi && selectedContractAddress ? (

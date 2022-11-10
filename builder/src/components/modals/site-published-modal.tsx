@@ -31,6 +31,7 @@ const SitePublishedModal: FC = () => {
         <div className="flex items-center py-2 mt-5 another-bg link-bg px-7">
           <a
             target="_blank"
+            rel="noreferrer"
             href={`https://${newDomainName}`}
             className="outline-none"
           >
@@ -46,6 +47,7 @@ const SitePublishedModal: FC = () => {
         </div>
         <a
           target="_blank"
+          rel="noreferrer"
           href={`https://${newDomainName}`}
           className="connect-wallet-button text-white px-16 py-3 text-[14px] font-[600] rounded-[8px] mt-6 cursor-pointer"
         >

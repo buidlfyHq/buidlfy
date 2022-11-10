@@ -50,7 +50,7 @@ const templateSlice = createSlice({
 
       const isOwned = modifiedTemplateList.filter(
         (template: ISelectedTemplate) =>
-          template.listing_tokenId == state.selectedTemplate?.listing_tokenId
+          template.listing_tokenId === state.selectedTemplate?.listing_tokenId
       )[0];
 
       state.templateList = modifiedTemplateList;

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Menu } from "@headlessui/react";
@@ -25,7 +25,7 @@ const walletMenuItemsDashboard = [
     target: "/my-templates",
     isChildren: false,
     children: [],
-    link: null
+    link: null,
   },
   {
     name: "Join Discord",
@@ -34,7 +34,7 @@ const walletMenuItemsDashboard = [
     target: null,
     isChildren: false,
     children: [],
-    link: 'https://bit.ly/buidlfy-discord'
+    link: "https://bit.ly/buidlfy-discord",
   },
 ];
 
@@ -47,7 +47,7 @@ const walletMenuItemsMyTemplates = [
     target: "/",
     isChildren: false,
     children: [],
-    link: null
+    link: null,
   },
   {
     name: "Join Discord",
@@ -56,17 +56,15 @@ const walletMenuItemsMyTemplates = [
     target: null,
     isChildren: false,
     children: [],
-    link: 'https://bit.ly/buidlfy-discord'
+    link: "https://bit.ly/buidlfy-discord",
   },
 ];
 
-interface IWalletMenu{
+interface IWalletMenu {
   isMyTemplatePage: boolean;
 }
 
-const WalletMenu : FC<IWalletMenu> = ({
-  isMyTemplatePage
-}) => {
+const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
   const dispatch = useDispatch();
   const currentAccount = useSelector(
     (state: IRootState) => state.web3.currentAccount
@@ -75,7 +73,9 @@ const WalletMenu : FC<IWalletMenu> = ({
     <>
       {currentAccount ? (
         <Menu as="div" className="relative">
-          <Menu.Button className={`flex items-center justify-center my-3 ml-3 active:opacity-70`}>
+          <Menu.Button
+            className={`flex items-center justify-center my-3 ml-3 active:opacity-70`}
+          >
             <img
               className="w-8 bg-black rounded-full hover:shadow-lg"
               src={makeBlockie(currentAccount)}
@@ -97,8 +97,19 @@ const WalletMenu : FC<IWalletMenu> = ({
                 </div>
               </div>
             </div>
-            {( isMyTemplatePage ? walletMenuItemsMyTemplates : walletMenuItemsDashboard).map((menuItem, i) => {
-              const { name, target, classParent, icon, isChildren, children, link } = menuItem;
+            {(isMyTemplatePage
+              ? walletMenuItemsMyTemplates
+              : walletMenuItemsDashboard
+            ).map((menuItem, i) => {
+              const {
+                name,
+                target,
+                classParent,
+                icon,
+                isChildren,
+                children,
+                link,
+              } = menuItem;
               const MenuItem = (
                 <>
                   <div className="flex items-center gap-4">
@@ -107,14 +118,19 @@ const WalletMenu : FC<IWalletMenu> = ({
                   </div>
                   <BiChevronRight />
                 </>
-              )
+              );
               return (
                 <Menu.Item key={i} as="div" className={classParent}>
                   {({ active }) => (
                     <>
                       {!isChildren ? (
                         link ? (
-                          <a href={link} target="_blank" className="hover:bg-slate-100 hover:rounded-[8px] hover:cursor-pointer font-[500] text-[#14142B] opacity-70 px-5 py-3 font-[16px] flex items-center justify-between w-full">
+                          <a
+                            href={link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="hover:bg-slate-100 hover:rounded-[8px] hover:cursor-pointer font-[500] text-[#14142B] opacity-70 px-5 py-3 font-[16px] flex items-center justify-between w-full"
+                          >
                             {MenuItem}
                           </a>
                         ) : (

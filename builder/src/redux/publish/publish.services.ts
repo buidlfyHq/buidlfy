@@ -116,7 +116,6 @@ export const verifyPublishService = async (
         // eslint-disable-next-line no-console
         errorMessage = error.message;
         responseText = "";
-        error = true;
         console.error("Error in transaction --> ", error);
       }
       counter++;
