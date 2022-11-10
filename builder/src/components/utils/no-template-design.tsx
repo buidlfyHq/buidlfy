@@ -1,6 +1,7 @@
 import { FC } from "react";
-import NoTemplateImg from 'assets/no-temp-default.png'
+import NoTemplateImg from 'assets/no-template-default.png'
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather.svg";
+import { Link } from "react-router-dom";
 
 interface INoTemplateDesign{
     heading: string;
@@ -18,7 +19,7 @@ const NoTemplateDesign: FC<INoTemplateDesign> = ({
         <img
             src={NoTemplateImg}
             alt="img_temp"
-            width={60}
+            width={264}
             height={60}
             className="my-5"
         />
@@ -29,10 +30,12 @@ const NoTemplateDesign: FC<INoTemplateDesign> = ({
             {desc}
         </div>
         {buttonText && (
-            <div className="flex items-center gap-3 text-[14px] px-6 py-3 mt-6 connect-wallet-button font-[600] text-white rounded-[8px] cursor-pointer">
-                {buttonText}
-                <ColorFeather className="w-[18px]" />
-            </div>
+            <Link to='/'>
+                <div className="flex items-center gap-3 text-[14px] px-6 py-3 mt-6 connect-wallet-button font-[600] text-white rounded-[8px] cursor-pointer">
+                    {buttonText}
+                    <ColorFeather className="w-[18px]" />
+                </div>
+            </Link>
         )}
     </div>
   )

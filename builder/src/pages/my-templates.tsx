@@ -8,6 +8,9 @@ import SearchForm from "features/my-templates/search-form";
 import RenderTemplateList from "components/utils/render-template-list";
 import logo from "assets/icons/buidlfy.png";
 import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
+import { ReactComponent as AddIcon } from "assets/svgAsIcons/addTemp.svg";
+import WalletMenu from "features/dashboard/wallet-menu";
+import ReactTooltip from "react-tooltip";
 
 export enum TabType {
   ALL = "all",
@@ -26,43 +29,57 @@ const MyTemplates: FC = () => {
     }
   }, []);
 
+  const tooltip = (
+    <ReactTooltip
+      id="add"
+      className="tool"
+      place="right"
+      type="dark"
+      effect="solid"
+      backgroundColor="#262338"
+      arrowColor="#262338"
+      scrollHide={true}
+      delayShow={200}
+    />
+  );
+
   return (
     <main className="min-h-screen overflow-y-auto">
       {/* nav */}
-      <section className="flex justify-between px-36 py-6 h-[77px] border-bottom-divider sticky-top">
-        <div className="flex items-center justify-center my-2">
-          <img src={logo} className="w-[2.4rem] mx-[1.3rem] rounded-full hover:shadow-lg" alt="logo" />
+      <section className="flex justify-between px-36 items-center h-[66px] border-bottom-divider sticky-top">
+        <div>
+          <Link to="/">
+            <img src={logo} className="w-[2.4rem] rounded-full" alt="logo" />
+          </Link>
         </div>
         <div className="flex items-center">
-          <Link to="/" className="flex items-center px-10 py-3 bordered-button">
+          <Link to="/" className="flex items-center px-6 py-2 bordered-button">
             <ColorFeather className="mr-3" />
             <div className="gradient-text">Builder</div>
           </Link>
           <div className="flex items-center justify-center my-2 ml-3">
-            {currentAccount && (
-              <img
-                className="w-8 h-8 bg-black rounded-full hover:shadow-lg"
-                src={makeBlockie(currentAccount)}
-                alt="Blockie"
-              />
-            )}
+            <WalletMenu isMyTemplatePage={true} />
           </div>
         </div>
       </section>
 
       {/* mid sec */}
-      <section className="py-6 px-36">
-        <div className="flex items-center justify-center font-[600] text-[28px] text-[#14142B]">
+      <section className="py-10 px-36">
+        <div 
+        className="flex items-center justify-start font-[600] text-[20px] text-[#14142B]"
+        >
           My Templates
           <Link to="/">
-            <IoIosAddCircleOutline className="text-[24px] ml-2 mt-[4px]" />
+            <AddIcon data-tip="Create new template"
+        data-for="add" className="text-[24px] ml-2 mt-[4px]" />
+        {tooltip}
           </Link>
         </div>
       </section>
 
       <section>
         <section className="py-0 px-36">
-          <div className="flex justify-center mt-4 text-black font-[600] text-[15px] gap-8">
+          <div className="flex justify-start text-black font-[600] text-[15px] gap-8">
             <button
               className={`py-3 cursor-pointer px-7 outline-none ${
                 tab === TabType.ALL
@@ -95,7 +112,7 @@ const MyTemplates: FC = () => {
             </button>
           </div>
         </section>
-        <section className="w-full bg-lower-template">
+        <section className="w-full bg-lower-template border-bottom-divider">
           {/* <div className="flex items-center justify-center gap-5 pt-12 pb-4 px-36">
             <div>
               <SearchForm />
@@ -109,7 +126,7 @@ const MyTemplates: FC = () => {
               <BiChevronDown className="ml-2 text-[18px]" />
             </div>
           </div> */}
-          <div className="grid grid-cols-3 gap-10 px-40 pb-12 pt-7">
+          <div className="grid gap-10 grid-cols-myTemplateCustom px-40 pb-12 pt-7 h-[calc(100vh-14.5rem)]">
             <RenderTemplateList tab={tab} />
           </div>
         </section>

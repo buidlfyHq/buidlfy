@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Menu } from "@headlessui/react";
@@ -16,7 +16,7 @@ import MyTemplateIcon from "assets/icons/template-nav.png";
 //   { name: "Join Discord" },
 // ];
 
-const walletMenuItems = [
+const walletMenuItemsDashboard = [
   {
     name: "My Templates",
     icon: MyTemplateIcon,
@@ -34,11 +34,39 @@ const walletMenuItems = [
     target: null,
     isChildren: false,
     children: [],
-    link: 'https://bit.ly/buidlfydiscord'
+    link: 'https://bit.ly/buidlfy-discord'
   },
 ];
 
-const WalletMenu = () => {
+const walletMenuItemsMyTemplates = [
+  {
+    name: "Dashboard",
+    icon: MyTemplateIcon,
+    classParent:
+      "border border-l-0 border-t-0 border-r-0 border-b-1 border-[#F5F5F5]",
+    target: "/",
+    isChildren: false,
+    children: [],
+    link: null
+  },
+  {
+    name: "Join Discord",
+    icon: HelpIcon,
+    classParent: "",
+    target: null,
+    isChildren: false,
+    children: [],
+    link: 'https://bit.ly/buidlfy-discord'
+  },
+];
+
+interface IWalletMenu{
+  isMyTemplatePage: boolean;
+}
+
+const WalletMenu : FC<IWalletMenu> = ({
+  isMyTemplatePage
+}) => {
   const dispatch = useDispatch();
   const currentAccount = useSelector(
     (state: IRootState) => state.web3.currentAccount
@@ -46,8 +74,8 @@ const WalletMenu = () => {
   return (
     <>
       {currentAccount ? (
-        <Menu>
-          <Menu.Button className="flex items-center justify-center my-2 ml-3 active:opacity-70">
+        <Menu as="div" className="relative">
+          <Menu.Button className={`flex items-center justify-center my-3 ml-3 active:opacity-70`}>
             <img
               className="w-8 bg-black rounded-full hover:shadow-lg"
               src={makeBlockie(currentAccount)}
@@ -69,7 +97,7 @@ const WalletMenu = () => {
                 </div>
               </div>
             </div>
-            {walletMenuItems.map((menuItem, i) => {
+            {( isMyTemplatePage ? walletMenuItemsMyTemplates : walletMenuItemsDashboard).map((menuItem, i) => {
               const { name, target, classParent, icon, isChildren, children, link } = menuItem;
               const MenuItem = (
                 <>
