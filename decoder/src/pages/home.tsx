@@ -3,7 +3,9 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import BuilderConfig from "config";
 import RenderItem from "utils/render-item";
 import IWorkspace from "interfaces/workspace";
+import logo from "assets/spheron-logo.png";
 import { IInput, IOutput } from "interfaces/value";
+import "styles/components.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
@@ -11,7 +13,7 @@ const Home: FC = () => {
   const config = JSON.parse(BuilderConfig);
   const [inputValue, setInputValue] = useState<IInput[]>([]);
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
-  
+
   return (
     <main
       className="min-h-screen"
@@ -19,6 +21,9 @@ const Home: FC = () => {
         background: config.background,
       }}
     >
+      <div className="float-btn py-3 px-5 fixed bottom-[2rem] right-[2rem] rounded-[42px] bg-white">
+        <img className="w-[5.8rem] h-[1.5rem]" src={logo} />
+      </div>
       <ResponsiveGridLayout
         layouts={config.builder}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
