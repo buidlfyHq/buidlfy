@@ -35,7 +35,6 @@ const contractSlice = createSlice({
       state.contractDetails.address = action.payload;
     },
     updateContractNetwork(state, action: { payload: string }) {
-      console.log(action,"action");   
       state.contractDetails.network = action.payload;
     },
     // to update contract element selector

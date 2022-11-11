@@ -71,8 +71,6 @@ const PublishConfirmModal: FC = () => {
         network: contractDetails.network,
       },
     };
-    console.log(config, "config");
-
     let stringifiedConfig = JSON.stringify(config);
     dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
     // will add config , done for testing purposes

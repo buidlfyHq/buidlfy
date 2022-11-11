@@ -46,8 +46,6 @@ const ContractModal: FC<IContractModal> = ({
       address: JSON.stringify(updateAddress),
       network: networkName,
     };
-    console.log(newContract, "newContract");
-
     // localStorage.setItem("items", JSON.stringify(items));
     const contractList = localStorage.getItem("contractList") || "";
     if (contractList !== "") {
