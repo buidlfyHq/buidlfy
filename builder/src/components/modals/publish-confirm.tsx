@@ -68,8 +68,10 @@ const PublishConfirmModal: FC = () => {
       contract: {
         abi: abiJSON,
         address: contractDetails.address,
+        network: contractDetails.network,
       },
     };
+    console.log(config, "config");
 
     let stringifiedConfig = JSON.stringify(config);
     dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));

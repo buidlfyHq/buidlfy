@@ -11,6 +11,7 @@ import {
   setSelectorToDefault,
   updateContractAbi,
   updateContractAddress,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
@@ -48,6 +49,7 @@ const Navbar: FC<INavbar> = ({
       value: workspaceElements,
       backgroundColor: workspaceBackgroundColor,
     };
+    console.log(workspaceElements, "workspaceElements");
 
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(templateConfig));
@@ -70,6 +72,7 @@ const Navbar: FC<INavbar> = ({
     dispatch(updateWorkspaceBackgroundColor("rgba(255, 255, 255, 1)"));
     dispatch(updateContractAbi(""));
     dispatch(updateContractAddress(""));
+    dispatch(updateContractNetwork(""));
   };
 
   return (

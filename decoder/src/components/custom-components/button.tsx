@@ -80,7 +80,9 @@ const Button: FC<ITexts> = ({
     try {
       await library.provider.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: `0x${Number(80001).toString(16)}` }],
+        params: [
+          { chainId: `0x${Number(config.contract.network).toString(16)}` },
+        ],
       });
     } catch (switchError) {
       // This error code indicates that the chain has not been added to MetaMask.
@@ -89,19 +91,30 @@ const Button: FC<ITexts> = ({
           await library.provider.request({
             method: "wallet_addEthereumChain",
             params: [
-              {
-                chainId: `0x${Number(80001).toString(16)}`,
-                chainName: "Mumbai",
-                nativeCurrency: {
-                  name: "MATIC",
-                  symbol: "MATIC",
-                  decimals: 18,
-                },
-                rpcUrls: [
-                  "https://polygon-mumbai.g.alchemy.com/v2/i0JIYxK_EGtBX5aGG1apX4KuoH7j_7dq",
-                ],
-                blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
-              },
+              // {
+              //   chainId: `0x${Number(56).toString(16)}`,
+              //   chainName: "Smart Chain",
+              //   nativeCurrency: {
+              //     name: "BNB",
+              //     symbol: "BNB",
+              //     decimals: 18,
+              //   },
+              //   rpcUrls: ["https://bsc-dataseed.binance.org/"],
+              //   blockExplorerUrls: ["https://bscscan.com"],
+              // },
+              // {
+              //   chainId: `0x${Number(80001).toString(16)}`,
+              //   chainName: "Mumbai",
+              //   nativeCurrency: {
+              //     name: "MATIC",
+              //     symbol: "MATIC",
+              //     decimals: 18,
+              //   },
+              //   rpcUrls: [
+              //     "https://polygon-mumbai.g.alchemy.com/v2/i0JIYxK_EGtBX5aGG1apX4KuoH7j_7dq",
+              //   ],
+              //   blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+              // },
             ],
           });
         } catch (addError) {

@@ -8,6 +8,7 @@ import {
   updateContractAbi,
   updateContractAddress,
   updateContractList,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { useSelector } from "react-redux";
@@ -44,6 +45,9 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const selectedContractAddress: string = useSelector(
     (state: IRootState) => state.contract.contractDetails.address
   );
+  const selectedContractNetwork: string = useSelector(
+    (state: IRootState) => state.contract.contractDetails.network
+  );
   const updatedNewContractList: IContract[] = useSelector(
     (state: IRootState) => state.contract.contractList
   );
@@ -55,9 +59,14 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     }
   }, []);
 
-  const handleContractList = (abi: string, address: string) => {
+  const handleContractList = (
+    abi: string,
+    address: string,
+    network: string
+  ) => {
     dispatch(updateContractAbi(JSON.parse(abi)));
     dispatch(updateContractAddress(JSON.parse(address)));
+    dispatch(updateContractNetwork(JSON.parse(network)));
     setMethodOpen(false);
   };
 
@@ -76,7 +85,9 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   };
   return (
     <>
-      {selectedContractAbi && selectedContractAddress ? (
+      {selectedContractAbi &&
+      selectedContractAddress &&
+      selectedContractNetwork ? (
         <>
           <div className="flex justify-center mt-[3rem]" />
           <AbiMethods
@@ -121,11 +132,13 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
           <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
             {paginatedContractList &&
               paginatedContractList.map((contract: IContract) => {
-                const { text, address } = contract;
+                const { text, address, network } = contract;
                 return (
                   <ContractList
                     contract={contract}
-                    handleContractList={() => handleContractList(text, address)}
+                    handleContractList={() =>
+                      handleContractList(text, address, network)
+                    }
                   />
                 );
               })}

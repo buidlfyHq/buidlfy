@@ -96,10 +96,6 @@ const ContractModal: FC<IContractModal> = ({
       name: "Binance Smart Chain",
     },
     {
-      id: 42161,
-      name: "Arbitrum One",
-    },
-    {
       id: 10,
       name: "Optimism",
     },

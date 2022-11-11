@@ -87,10 +87,11 @@ const MintTemplateForm: FC = () => {
       contract: {
         abi: abiJSON,
         address: contractDetails.address,
+        network: contractDetails.network,
       },
       publishedUrl: domainName,
     };
-    
+
     console.log("JSON.stringify(newTemplate): ", JSON.stringify(newTemplate));
     const templateCID = await uploadTemplateToWeb3Storage(
       JSON.stringify(newTemplate)
@@ -169,7 +170,9 @@ const MintTemplateForm: FC = () => {
           style={{ borderRight: "16px solid transparent" }}
           onChange={(e) => setCategory(e.target.value)}
         >
-          <option value="" selected disabled hidden>Select a category</option>
+          <option value="" selected disabled hidden>
+            Select a category
+          </option>
           {Categories.map((category) => (
             <option key={category} value={category}>
               {category}
