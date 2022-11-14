@@ -60,6 +60,7 @@ const templateSlice = createSlice({
       )[0];
 
       state.templateList = modifiedTemplateList;
+      state.filteredTemplateList = modifiedTemplateList;
       state.selectedTemplate = isOwned ? isOwned : state.selectedTemplate;
     },
   },
