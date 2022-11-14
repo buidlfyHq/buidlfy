@@ -21,9 +21,17 @@ const Home: FC = () => {
         background: config.background,
       }}
     >
-      <div className="float-btn py-3 px-5 fixed bottom-[2rem] right-[2rem] rounded-[42px] bg-white">
-        <img className="w-[5.8rem] h-[1.5rem]" src={logo} />
-      </div>
+      <a
+        href="https://spheron.network/"
+        style={{ textDecoration: "none" }}
+        rel="noreferrer"
+        target="_blank"
+      >
+        <div className="float-btn py-3 px-5 fixed bottom-[2rem] right-[2rem] rounded-[42px] bg-white">
+          <img className="w-[5.8rem] h-[1.5rem]" src={logo} />
+        </div>
+      </a>
+
       <ResponsiveGridLayout
         layouts={config.builder}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
