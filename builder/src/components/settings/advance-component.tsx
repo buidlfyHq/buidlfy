@@ -56,8 +56,8 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   }, []); // eslint-disable-line
 
   const handleContractList = (abi: string, address: string) => {
-    dispatch(updateContractAbi(JSON.parse(abi)));
-    dispatch(updateContractAddress(JSON.parse(address)));
+    dispatch(updateContractAbi(abi));
+    dispatch(updateContractAddress(address));
     setMethodOpen(false);
   };
 

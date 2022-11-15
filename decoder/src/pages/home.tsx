@@ -11,7 +11,8 @@ const Home: FC = () => {
   const config = JSON.parse(BuilderConfig);
   const [inputValue, setInputValue] = useState<IInput[]>([]);
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
-  
+  console.log(config, "config");
+
   return (
     <main
       className="min-h-screen"

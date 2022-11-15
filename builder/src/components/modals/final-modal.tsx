@@ -10,7 +10,10 @@ import { toggleModal } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import CongratulationsImg from "assets/icons/congratulations.png";
 import { ReactComponent as FeatherIcon } from "assets/svgAsIcons/feather.svg";
-import { updateContractAbi, updateContractAddress } from "redux/contract/contract.reducers";
+import {
+  updateContractAbi,
+  updateContractAddress,
+} from "redux/contract/contract.reducers";
 
 const FinalModal: FC = () => {
   const dispatch = useDispatch();
