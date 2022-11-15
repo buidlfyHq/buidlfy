@@ -5,6 +5,7 @@ import ButtonSettings from "components/dashboard/button-settings";
 import ImageSettings from "components/dashboard/image-settings";
 import ContainerSettings from "components/dashboard/container-settings";
 import InputSettings from "components/dashboard/input-settings";
+import NftLayoutSettings from "components/dashboard/nft-layout-settings";
 import GeneralSettings from "components/dashboard/general-settings";
 import { IRootState } from "redux/root-state.interface";
 import { ISettings } from "redux/workspace/workspace.interfaces";
@@ -83,6 +84,7 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
           setOpenTab={setOpenTab}
         />
       );
+
     case "Image":
       return <ImageSettings handleSettingChange={handleSettingChange} />;
 
@@ -93,6 +95,18 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
 
     case "Input":
       return <InputSettings handleSettingChange={handleSettingChange} />;
+
+    case "NFT Card":
+      return (
+        <h3 className="mb-3 ml-8">
+          Component -
+          {selectedElement ? (
+            <span className="font-bold">{selectedElement.name}</span>
+          ) : null}
+        </h3>
+      );
+    case "NFT Layout":
+      return <NftLayoutSettings />;
 
     default:
       return <GeneralSettings handleSettingChange={handleSettingChange} />;

@@ -36,6 +36,8 @@ export interface IWorkspaceElement {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
+  wallet?: string;
+  slug?: string;
 }
 
 export interface IHead {

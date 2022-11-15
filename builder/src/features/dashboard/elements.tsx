@@ -75,7 +75,7 @@ const Elements: FC<IElements> = ({
         minH: 1,
         resizeHandles: containerCheck(c) ? containerHandles : availableHandles,
       };
-      if (c.name === "Vertical Container") {
+      if (c.name === "Vertical Container" || c.name === "NFT Card") {
         newC.w = 2;
       }
       if (
@@ -85,6 +85,14 @@ const Elements: FC<IElements> = ({
         let newChildren = c.children.map((child) => ({
           ...child,
           i: uid(),
+        }));
+        newC.children = newChildren;
+      }
+      if (c.name === "NFT Layout") {
+        let newChildren = c.children.map((child) => ({
+          ...child,
+          i: uid(),
+          resizeHandles: [],
         }));
         newC.children = newChildren;
       }

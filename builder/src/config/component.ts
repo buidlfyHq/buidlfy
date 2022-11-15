@@ -19,7 +19,7 @@ const defaultPaddingStyles = {
 const defaultColorStyles = {
   backgroundColor: "rgba(255, 255, 255, 0)",
   color: "rgba(0, 0, 0, 100)",
-}
+};
 
 const defaultFontStyles = {
   fontWeight: "normal",
@@ -112,7 +112,7 @@ export const components = [
   //         ...defaultPaddingStyles
   //       },
   //     },
-     
+
   //   ],
   // },
   // {
@@ -267,7 +267,7 @@ export const components = [
     name: "Input",
     h: 1,
     minH: 1,
-    placeholder: 'Placeholder',
+    placeholder: "Placeholder",
     style: {
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
@@ -285,8 +285,8 @@ export const components = [
         paddingLeft: 12,
         paddingRight: 12,
         paddingTop: 8,
-        paddingBottom: 8
-      }
+        paddingBottom: 8,
+      },
     },
   },
   {
@@ -311,5 +311,70 @@ export const components = [
   //     ...defaultDeleteStyles,
   //   },
   // },
-
+  // NFT Components
+  {
+    name: "NFT Card",
+    nft: true,
+    h: 8,
+    minH: 1,
+    style: {
+      ...defaultDeleteStyles,
+    },
+  },
+  {
+    name: "NFT Layout",
+    nft: true,
+    h: 8,
+    minH: 1,
+    style: {
+      ...defaultDeleteStyles,
+      ...defaultColorStyles,
+      ...defaultBorderStyles,
+    },
+    children: [
+      {
+        name: "NFT Card",
+        nft: true,
+        h: 8,
+        i: 11,
+        w: 2,
+        minH: 1,
+        x: 0,
+        y: 0,
+        style: {
+          ...defaultColorStyles,
+          ...defaultDeleteStyles,
+          backgroundColor: { r: "68", g: "64", b: "60" },
+        },
+      },
+      {
+        name: "NFT Card",
+        nft: true,
+        h: 8,
+        i: 12,
+        w: 2,
+        minH: 1,
+        x: 2,
+        y: 0,
+        style: {
+          ...defaultColorStyles,
+          ...defaultDeleteStyles,
+        },
+      },
+      {
+        name: "NFT Card",
+        nft: true,
+        h: 8,
+        i: 13,
+        w: 2,
+        minH: 1,
+        x: 4,
+        y: 0,
+        style: {
+          ...defaultColorStyles,
+          ...defaultDeleteStyles,
+        },
+      },
+    ],
+  },
 ];

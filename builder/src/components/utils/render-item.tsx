@@ -5,6 +5,7 @@ import Text from "components/custom-components/text";
 import Image from "components/custom-components/image";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
+import NftCard from "components/custom-components/nft-card";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 interface IRenderItem {
@@ -126,6 +127,8 @@ const RenderItem: FC<IRenderItem> = ({
           imgData={item.imgData}
         />
       );
+    case "NFT Card":
+      return <NftCard backgroundColor={item.style.backgroundColor} />;
     default:
       return <></>;
   }
