@@ -13,15 +13,11 @@ import "styles/components.css";
 interface IContractModal {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  methodOpen: boolean;
-  setMethodOpen: (methodOpen: boolean) => void;
 }
 
 const ContractModal: FC<IContractModal> = ({
   isOpen,
   setIsOpen,
-  methodOpen,
-  setMethodOpen,
 }) => {
   const dispatch = useDispatch();
 
@@ -30,6 +26,7 @@ const ContractModal: FC<IContractModal> = ({
   const [files, setFiles] = useState<string | ArrayBuffer>("");
   const [updateAbi, setUpdateAbi] = useState<string>();
   const [updateAddress, setUpdateAddress] = useState<string>();
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -74,6 +71,7 @@ const ContractModal: FC<IContractModal> = ({
       handleSetAbi(e.target.result.toString());
     };
   };
+
   return (
     <Dialog
       as="div"
@@ -175,7 +173,6 @@ const ContractModal: FC<IContractModal> = ({
               }`}
               onClick={() => {
                 setIsOpen(false);
-                setMethodOpen(false);
                 handleSaveContract();
               }}
             >
