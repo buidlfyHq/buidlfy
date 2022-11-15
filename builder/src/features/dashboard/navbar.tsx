@@ -36,7 +36,10 @@ const Navbar: FC<INavbar> = ({
   const publishStatus = useSelector(
     (state: IRootState) => state.publish.publishStatus
   );
-
+  const head = useSelector((state: IRootState) => state.workspace.head);
+  const contractDetails = useSelector(
+    (state: IRootState) => state.contract.contractDetails
+  );
   const handleCloseSidebar = () => {
     setIsContainerSelected(false);
     setOpenSetting(false);
@@ -47,8 +50,17 @@ const Navbar: FC<INavbar> = ({
     let templateConfig = {
       value: workspaceElements,
       backgroundColor: workspaceBackgroundColor,
+      head: {
+        title: head.title,
+        logo: head.logo,
+      },
+      contract: {
+        abi: contractDetails.abi,
+        address: contractDetails.address,
+      },
     };
     console.log(workspaceElements, "workspaceElements");
+    console.log(contractDetails.abi, "contractDetails.abi-save");
 
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(templateConfig));
