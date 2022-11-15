@@ -30,7 +30,7 @@ const Image: FC<IImageComponent> = ({
 }) => {
   const imageDiv = (
     <div
-      className="flex h-full w-full"
+      className="flex w-full h-full"
       style={{
         backgroundImage: `url(${imgData ? imgData : defaultImage})`,
         backgroundRepeat: "no-repeat",

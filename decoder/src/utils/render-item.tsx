@@ -5,6 +5,7 @@ import Text from "components/custom-components/text";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
+import NftCard from "components/custom-components/nft-card";
 import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
 
@@ -173,6 +174,16 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
         />
       );
+      case "NFT Card":
+          return (
+            <NftCard
+              image={item.image}
+              collection={item.collection}
+              title={item.title}
+              price={item.price}
+              highestBid={item.highestBid}
+            />
+          );
     default:
       return <></>;
   }
