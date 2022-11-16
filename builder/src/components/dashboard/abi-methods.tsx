@@ -45,11 +45,8 @@ const AbiMethods: FC<IAbiMethods> = ({
   >([]);
 
   useEffect(() => {
-    console.log(contractDetails.abi, "contractDetails-abi");
     if (contractDetails.abi) {
       const parsedAbi = JSON.parse(contractDetails.abi);
-      console.log(parsedAbi, "parsedAbi");
-
       try {
         setAbiJson(parsedAbi);
         let selectedElementIndex = parsedAbi.findIndex(

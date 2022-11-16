@@ -6,7 +6,7 @@ export interface IContractState {
 }
 
 export interface IContractDetails {
-  abi: string; // Better type to be deduced for abi
+  abi: string; 
   address: string;
 }
 

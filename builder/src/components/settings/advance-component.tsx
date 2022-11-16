@@ -19,6 +19,7 @@ import ContractHistory from "components/utils/contract/contract-history";
 import ContractRemove from "components/utils/contract/contract-remove";
 import "styles/components.css";
 import "styles/dashboard.css";
+import WarningText from "components/utils/setting-warning";
 
 interface IAdvanceComponent {
   selectedElement: IWorkspaceElement;
@@ -47,6 +48,9 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const updatedNewContractList: IContract[] = useSelector(
     (state: IRootState) => state.contract.contractList
   );
+  const workspaceElements = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
+  );
   useEffect(() => {
     try {
       setIsViewMore(!!(updatedNewContractList?.length >= 4));
@@ -55,9 +59,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     }
   }, []); // eslint-disable-line
 
+  const isWalletConnect = workspaceElements.findIndex(
+    (item) => item.connectWallet === true
+  );
   const handleContractList = (abi: string, address: string) => {
-    dispatch(updateContractAbi(abi));
-    dispatch(updateContractAddress(address));
+    dispatch(updateContractAbi(JSON.parse(abi)));
+    dispatch(updateContractAddress(JSON.parse(address)));
     setMethodOpen(false);
   };
 
@@ -74,7 +81,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     dispatch(updateContractList(null));
     setIsViewMore(false);
   };
-
+  let saveItems = localStorage.getItem("items");
   return (
     <>
       {selectedContractAbi && selectedContractAddress ? (
@@ -117,6 +124,13 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
               />
             </div>
           </div>
+          {selectedElement.connectWallet ? (
+            <WarningText text="Sorry! Connect wallet and contract binding cannot be for common button" />
+          ) : null}
+          {isWalletConnect < 0 ? (
+            <WarningText text="Please Add connect wallet button before importing Contract" />
+          ) : null}
+
           <ContractHistory newContractList={updatedNewContractList} />
 
           <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">

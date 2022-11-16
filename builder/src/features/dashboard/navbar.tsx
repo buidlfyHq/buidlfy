@@ -14,6 +14,7 @@ import {
 } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
+import { IContractElementSelected } from "redux/contract/contract.interfaces";
 
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
@@ -40,6 +41,7 @@ const Navbar: FC<INavbar> = ({
   const contractDetails = useSelector(
     (state: IRootState) => state.contract.contractDetails
   );
+
   const handleCloseSidebar = () => {
     setIsContainerSelected(false);
     setOpenSetting(false);
@@ -54,18 +56,17 @@ const Navbar: FC<INavbar> = ({
         title: head.title,
         logo: head.logo,
       },
-      contract: {
-        abi: contractDetails.abi,
-        address: contractDetails.address,
-      },
+      contract: null,
     };
-    console.log(workspaceElements, "workspaceElements");
-    console.log(contractDetails.abi, "contractDetails.abi-save");
-
+    if (contractDetails?.abi && contractDetails.address) {
+      templateConfig.contract = {
+        abi: JSON.parse(contractDetails?.abi),
+        address: contractDetails?.address,
+      };
+    }
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(templateConfig));
     }
-
     if (publishStatus) {
       localStorage.setItem("publishStatus", publishStatus.toString());
     }

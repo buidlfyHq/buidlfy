@@ -104,7 +104,6 @@ const Workspace: FC<IWorkspaceComponent> = ({
     const searchExistingValue = Object.keys(contractElementSelected).filter(
       (key) => key === contractElementSelector.name
     );
-
     if (
       !searchExistingValue.length ||
       !Object.keys(contractElementSelected).length
