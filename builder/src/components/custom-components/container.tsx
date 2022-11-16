@@ -205,18 +205,20 @@ const Container: FC<IContainer> = ({
 
   const handleMouseOver = (id: string) => {
     setDrag(false);
-    (
-      document.getElementById(id).parentNode.parentNode
-        .childNodes[1] as HTMLElement
-    ).style.visibility = "visible";
+    const dragHandle =
+      document.getElementById(id).parentNode.parentNode.childNodes[1];
+    if (dragHandle) {
+      (dragHandle as HTMLElement).style.visibility = "visible";
+    }
   };
 
   const handleMouseOut = (id: string) => {
     setDrag(true);
-    (
-      document.getElementById(id).parentNode.parentNode
-        .childNodes[1] as HTMLElement
-    ).style.visibility = "hidden";
+    const dragHandle =
+      document.getElementById(id).parentNode.parentNode.childNodes[1];
+    if (dragHandle) {
+      (dragHandle as HTMLElement).style.visibility = "hidden";
+    }
   };
 
   const handleSidebar = (selectedSidebarElements: string) => {

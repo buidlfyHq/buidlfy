@@ -98,10 +98,9 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
 
     case "NFT Card":
       return (
-        <h3 className="mb-3 ml-8">
-          Component -
+        <h3 className="ml-[0.5rem] mt-[1.5rem]">
           {selectedElement ? (
-            <span className="font-bold">{selectedElement.name}</span>
+            <span className="setting-text">{selectedElement.name}</span>
           ) : null}
         </h3>
       );

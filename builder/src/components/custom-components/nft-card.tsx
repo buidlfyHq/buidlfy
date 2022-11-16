@@ -1,10 +1,11 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
 interface INftCard {
+  i: string;
   backgroundColor: string;
 }
 
-const NftCard: FC<INftCard> = ({ backgroundColor }) => {
+const NftCard: FC<INftCard> = ({ i, backgroundColor }) => {
   return (
     <section
       className="flex items-center justify-center h-full p-2"
@@ -16,7 +17,7 @@ const NftCard: FC<INftCard> = ({ backgroundColor }) => {
           backgroundColor: backgroundColor,
           boxShadow: "0px 2px 7px rgba(0, 0, 0, 0.5)",
         }}
-        id="nft-card"
+        id={i}
       >
         {/* <div
           id="image-one"

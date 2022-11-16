@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GridLayout, { Layout } from "react-grid-layout";
 import DefaultBuilder from "./deafult-builder";
@@ -197,7 +197,11 @@ const Workspace: FC<IWorkspaceComponent> = ({
         e.target.id.slice(6) === "Container" ||
         e.target.parentNode.id.slice(6) === "Container" ||
         e.target.parentNode.parentNode.id.slice(6) === "Container" ||
-        e.target.parentNode.parentNode.parentNode.id.slice(6) === "Container"
+        e.target.parentNode.parentNode.parentNode.id.slice(6) === "Container" ||
+        e.target.id.slice(6) === "NFT Layout" ||
+        e.target.parentNode.id.slice(6) === "NFT Layout" ||
+        e.target.parentNode.parentNode.id.slice(6) === "NFT Layout" ||
+        e.target.parentNode.parentNode.parentNode.id.slice(6) === "NFT Layout"
       )
     ) {
       setIsContainerSelected(false);

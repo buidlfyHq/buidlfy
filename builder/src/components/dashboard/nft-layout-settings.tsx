@@ -23,40 +23,50 @@ const NftLayoutSettings: FC = () => {
 
   return (
     <>
-      <h3 className="mb-3 ml-8">
-        Component -
+      <h3 className="ml-[0.5rem] mt-[1.5rem]">
         {selectedElement ? (
-          <span className="font-bold">{selectedElement.name}</span>
+          <span className="setting-text">{selectedElement.name}</span>
         ) : null}
       </h3>
+
       <BgColorComponent
         i={selectedElement.i}
         elementBackgroundColor={selectedElement.style.backgroundColor}
       />
-      <section className="pl-4 text-left my-1 text-xl text-gray-500 font-regular font-normal not-italic">
-        Fetch NFTs Using
-        <button
-          className={`block my-4 px-6 py-1 shadow text-[18px] text-black border ${
-            selectedElement?.wallet === "wallet" ? "border-black" : ""
-          }`}
-          onClick={() =>
-            selectedElement?.wallet === "wallet"
-              ? handleClick("wallet", "")
-              : handleClick("wallet", "wallet")
-          }
-        >
-          Connect Wallet
-        </button>
-        OR
-        <div className="my-2 text-black">
-          <label htmlFor="wallet-address" className="text-sm">
-            Wallet Address
-          </label>
+      <section className="">
+        <span className="margin-text grow text-left px-3 mt-[0.5rem] mb-0">
+          Fetch NFTs
+        </span>
+        <div className="flex py-4">
+          <span className="margin-text grow text-left px-3 mt-[0.5rem] mb-0">
+            Connect Wallet
+          </span>
+          <div className="flex ml-2 justify-center mt-1">
+            <div
+              onClick={() =>
+                selectedElement?.wallet === "wallet"
+                  ? handleClick("wallet", "")
+                  : handleClick("wallet", "wallet")
+              }
+              className="form-check form-switch"
+            >
+              <input
+                className="form-check-input w-12 -ml-10 bg-blue rounded-full h-5 align-top cursor-pointer shadow-sm"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+                checked={selectedElement?.wallet === "wallet" ? true : false}
+                readOnly
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center mb-2 mx-2 w-[13.5rem] text-black rounded-[6px]">
           <input
-            className="changeText"
+            className={`changeText pl-[1rem] py-[0.4rem] rounded-[6px]`}
             type="text"
             name="wallet-address"
-            placeholder="address"
+            placeholder="Wallet Address"
             value={
               selectedElement?.wallet !== "wallet"
                 ? selectedElement?.wallet
@@ -65,16 +75,13 @@ const NftLayoutSettings: FC = () => {
             onChange={(e) => handleClick("wallet", e.target.value)}
           />
         </div>
-        OR
-        <div className="my-2 text-black">
-          <label htmlFor="collection-slug" className="text-sm">
-            Collection Slug
-          </label>
+
+        <div className="flex items-center mb-2 mx-2 w-[13.5rem] text-black rounded-[6px]">
           <input
-            className="changeText"
+            className={`changeText pl-[1rem] py-[0.4rem] rounded-[6px]`}
             type="text"
             name="collection-slug"
-            placeholder="slug"
+            placeholder="Collection Slug"
             value={selectedElement?.slug}
             onChange={(e) => handleClick("slug", e.target.value)}
           />

@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useWindowSize } from "hooks/use-window-size";
 import Navbar from "features/dashboard/navbar";

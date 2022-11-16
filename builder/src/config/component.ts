@@ -327,6 +327,8 @@ export const components = [
     h: 8,
     minH: 1,
     style: {
+      ...defaultPaddingStyles,
+      ...defaultMarginStyles,
       ...defaultDeleteStyles,
       ...defaultColorStyles,
       ...defaultBorderStyles,
@@ -344,7 +346,7 @@ export const components = [
         style: {
           ...defaultColorStyles,
           ...defaultDeleteStyles,
-          backgroundColor: { r: "68", g: "64", b: "60" },
+          backgroundColor: "rgba(68, 64, 60, 100)",
         },
       },
       {
@@ -359,6 +361,7 @@ export const components = [
         style: {
           ...defaultColorStyles,
           ...defaultDeleteStyles,
+          backgroundColor: "rgba(68, 64, 60, 100)",
         },
       },
       {
@@ -373,6 +376,7 @@ export const components = [
         style: {
           ...defaultColorStyles,
           ...defaultDeleteStyles,
+          backgroundColor: "rgba(68, 64, 60, 100)",
         },
       },
     ],

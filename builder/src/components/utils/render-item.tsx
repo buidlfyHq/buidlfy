@@ -105,6 +105,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Container":
     case "Horizontal Container":
     case "Vertical Container":
+    case "NFT Layout":
       return (
         <Container
           item={item}
@@ -128,7 +129,7 @@ const RenderItem: FC<IRenderItem> = ({
         />
       );
     case "NFT Card":
-      return <NftCard backgroundColor={item.style.backgroundColor} />;
+      return <NftCard i={item.i} backgroundColor={item.style.backgroundColor} />;
     default:
       return <></>;
   }

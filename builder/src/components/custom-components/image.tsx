@@ -41,6 +41,7 @@ const Image: FC<IImageComponent> = ({
       (image: IUploadedImageData) => image.settingItemId === i
     )
   );
+  
   useEffect(() => {
     if (ref.current?.clientWidth) {
       dispatch(
@@ -87,6 +88,7 @@ const Image: FC<IImageComponent> = ({
       />
     </div>
   );
+
   return (
     <>
       {imageData?.uploadedImageData || imgData ? (
