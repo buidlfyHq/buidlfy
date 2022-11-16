@@ -199,7 +199,7 @@ const Button: FC<ITexts> = ({
           }}
           className="btn btn-border rounded cursor-pointer whitespace-nowrap"
           onClick={() =>
-            contractFunction.methodName ? onResponse() : console.log("Clicked")
+            contractFunction.methodName ? onResponse() : console.log("No method attached to this button.")
           }
         >
           <span

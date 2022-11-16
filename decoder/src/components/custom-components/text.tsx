@@ -18,6 +18,12 @@ const Text: FC<ITexts> = ({
   padding,
 }) => {
   const [isValue, setIsValue] = useState<string>(value);
+  const gradientCondition = color?.indexOf("gradient") !== -1;
+
+  useEffect(() => {
+    handleOnChange();
+  }, [outputValue]);
+  
   const handleOnChange = () => {
     if (outputValue && outputValue.find((output) => output.id === id)) {
       const val = JSON.stringify(
@@ -28,10 +34,7 @@ const Text: FC<ITexts> = ({
       setIsValue(value);
     }
   };
-  useEffect(() => {
-    handleOnChange();
-  }, [outputValue]);
-  const gradientCondition = color?.indexOf("gradient") !== -1;
+
   const textArea = (
     <textarea
       readOnly
@@ -53,6 +56,7 @@ const Text: FC<ITexts> = ({
       className="flex text-area resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
     />
   );
+
   return (
     <section
       id="text-one"
