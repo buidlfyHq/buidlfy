@@ -13,6 +13,7 @@ import {
 import {
   updateContractAbi,
   updateContractAddress,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { SelectedTemplateDto } from "redux/template/template.dto";
@@ -59,6 +60,9 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
           );
           dispatch(
             updateContractAddress(selectedTemplateDto?.contract?.address)
+          );
+          dispatch(
+            updateContractNetwork(selectedTemplateDto?.contract?.network)
           );
           dispatch(toggleModal(false));
         }

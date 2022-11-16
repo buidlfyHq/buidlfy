@@ -11,6 +11,7 @@ import {
   setSelectorToDefault,
   updateContractAbi,
   updateContractAddress,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
@@ -58,12 +59,19 @@ const Navbar: FC<INavbar> = ({
       },
       contract: null,
     };
-    if (contractDetails?.abi && contractDetails.address) {
+    if (
+      contractDetails?.abi &&
+      contractDetails?.address &&
+      contractDetails?.network
+    ) {
       templateConfig.contract = {
         abi: JSON.parse(contractDetails?.abi),
         address: contractDetails?.address,
+        network: contractDetails?.network,
       };
     }
+    console.log(templateConfig, "JSON.stringify(templateConfig)");
+
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(templateConfig));
     }
@@ -84,6 +92,7 @@ const Navbar: FC<INavbar> = ({
     dispatch(updateWorkspaceBackgroundColor("rgba(255, 255, 255, 1)"));
     dispatch(updateContractAbi(""));
     dispatch(updateContractAddress(""));
+    dispatch(updateContractNetwork(""));
   };
 
   return (

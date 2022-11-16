@@ -87,6 +87,7 @@ const MintTemplateForm: FC = () => {
       contract: {
         abi: abiJSON,
         address: contractDetails.address,
+        network: contractDetails.network,
       },
       publishedUrl: domainName,
     };
