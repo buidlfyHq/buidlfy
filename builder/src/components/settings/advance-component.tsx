@@ -81,7 +81,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     dispatch(updateContractList(null));
     setIsViewMore(false);
   };
-  let saveItems = localStorage.getItem("items");
   return (
     <>
       {selectedContractAbi && selectedContractAddress ? (

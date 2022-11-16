@@ -42,8 +42,6 @@ export const onRequest = async (
     });
 
     let receipt: any; // to store response from contract
-    console.log(contract.functions, "contract.functions");
-
     // show transaction hash for non-payable and payable
     // show outputs for view and pure
     if (contractFunction.stateMutability === "nonpayable") {
