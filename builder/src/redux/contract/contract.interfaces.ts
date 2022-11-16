@@ -8,6 +8,7 @@ export interface IContractState {
 export interface IContractDetails {
   abi: string;
   address: string;
+  network: string;
 }
 
 export interface IContractElementSelector {
@@ -45,4 +46,5 @@ export interface IContract {
   name: string;
   text; // type to be added
   address: string;
+  network?: string;
 }

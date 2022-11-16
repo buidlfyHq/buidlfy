@@ -10,7 +10,11 @@ import { toggleModal } from "redux/modal/modal.reducers";
 import { IRootState } from "redux/root-state.interface";
 import CongratulationsImg from "assets/icons/congratulations.png";
 import { ReactComponent as FeatherIcon } from "assets/svgAsIcons/feather.svg";
-import { updateContractAbi, updateContractAddress } from "redux/contract/contract.reducers";
+import {
+  updateContractAbi,
+  updateContractAddress,
+  updateContractNetwork,
+} from "redux/contract/contract.reducers";
 
 const FinalModal: FC = () => {
   const dispatch = useDispatch();
@@ -24,6 +28,7 @@ const FinalModal: FC = () => {
     dispatch(setSiteHead(selectedTemplate.head));
     dispatch(updateContractAbi(selectedTemplate.contract.abi));
     dispatch(updateContractAddress(selectedTemplate.contract.address));
+    dispatch(updateContractNetwork(selectedTemplate.contract.network));
     dispatch(toggleModal(false));
   };
 
