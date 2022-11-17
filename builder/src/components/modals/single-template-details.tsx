@@ -53,7 +53,11 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
             updateWorkspaceBackgroundColor(selectedTemplateDto?.backgroundColor)
           );
           dispatch(setSiteHead(selectedTemplateDto?.head));
-          dispatch(updateContractAbi(selectedTemplateDto?.contract?.abi));
+          dispatch(
+            updateContractAbi(
+              JSON.stringify(selectedTemplateDto?.contract?.abi)
+            )
+          );
           dispatch(
             updateContractAddress(selectedTemplateDto?.contract?.address)
           );

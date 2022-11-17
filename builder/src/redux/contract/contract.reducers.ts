@@ -45,7 +45,7 @@ const contractSlice = createSlice({
       state.contractElementSelector = null;
     },
     // to update contract element selected
-    createSelectedElement(state, action: { payload: ISelectedPayload }) {
+    createSelectedElement(state, action: { payload: ISelectedPayload }) {  
       state.contractElementSelected[action.payload.name] = [
         action.payload.element,
       ];

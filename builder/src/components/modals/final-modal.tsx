@@ -26,7 +26,7 @@ const FinalModal: FC = () => {
     dispatch(updateWorkspaceElementsArray(selectedTemplate.value));
     dispatch(updateWorkspaceBackgroundColor(selectedTemplate.backgroundColor));
     dispatch(setSiteHead(selectedTemplate.head));
-    dispatch(updateContractAbi(selectedTemplate.contract.abi));
+    dispatch(updateContractAbi(JSON.stringify(selectedTemplate.contract.abi)));
     dispatch(updateContractAddress(selectedTemplate.contract.address));
     dispatch(updateContractNetwork(selectedTemplate.contract.network));
     dispatch(toggleModal(false));
