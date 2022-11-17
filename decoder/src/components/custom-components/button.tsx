@@ -66,7 +66,8 @@ const Button: FC<ITexts> = ({
   const connectWalletButton = async () => {
     try {
       const provider = await web3Modal.connect();
-      const library: any = new ethers.providers.Web3Provider(provider); // required
+      const library: any = new ethers.providers.Web3Provider(provider, "any"); // required
+
       const accounts: any = await library.listAccounts(); // required
       setLibrary(library);
       if (accounts) setAccount(accounts[0]);
