@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Dialog } from "@headlessui/react";
+import { updateOracle } from "redux/oracle/oracle.reducers";
 import "styles/components.css";
 
 interface IOracleModal {
@@ -8,10 +10,21 @@ interface IOracleModal {
 }
 
 const OracleModal: FC<IOracleModal> = ({ isOracleOpen, setIsOracleOpen }) => {
-  const [inputValue, setInputValue] = useState<string>("");
+  const dispatch = useDispatch();
+  const [oracleId, setOracleId] = useState<string>("");
+  const [outputType, setOutputType] = useState<string>("");
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+    setOracleId(e.target.value);
+  };
+
+  const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setOutputType(e.target.value);
+  };
+
+  const handleClick = () => {
+    dispatch(updateOracle({ id: oracleId, methodName: outputType }));
+    setIsOracleOpen(false);
   };
 
   return (
@@ -44,17 +57,27 @@ const OracleModal: FC<IOracleModal> = ({ isOracleOpen, setIsOracleOpen }) => {
             <input
               className="modal-input pl-2 h-[2.5rem] mt-1 mb-4"
               placeholder="Please add oracle id"
-              value={inputValue}
+              value={oracleId}
               onChange={handleInput}
             />
+            <label className="modal-label">Select Output Type</label>
+            <br />
+            <select
+              className="form-select cursor-pointer modal-input w-full h-[2.5rem] mt-1 block px-3 focus:outline-none focuse:border-none"
+              onChange={(e) => onSelect(e)}
+            >
+              <option value="getString">String</option>
+              <option value="getInt">Integer</option>
+              <option value="getBool">Boolean</option>
+            </select>
           </div>
 
           <button
-            disabled={!inputValue}
+            disabled={!oracleId}
             className={`mt-4 rounded-[44px] contract-button font-medium text-white text-[14px] py-2 px-[7.5rem] ${
-              inputValue ? "" : "opacity-40"
+              oracleId ? "" : "opacity-40"
             }`}
-            onClick={() => setIsOracleOpen(false)}
+            onClick={handleClick}
           >
             Connect
           </button>

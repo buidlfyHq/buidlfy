@@ -29,11 +29,19 @@ const Home: FC = () => {
   }, [contract]);
 
   const contractFunction = {
-    methodName: "getInt",
-    stateMutability: "view",
-    inputs: [{ id: "aYWtBz", send: false }],
-    outputs: [{ id: "FOkcPu" }, { id: "GNC9X9" }],
+    methodName: "getInt", // user selected output type from config
+    stateMutability: "view", // constant for oracle
+    inputs: [{ id: "iexec", send: false }], // fake input
+    outputs: [{ id: "FOkcPu" }], // user selected output from config
   };
+
+  // config: {
+  //   oracle: {
+  //     id: 0x22,
+  //     methodName: '',
+  //     outputId: ''
+  //   }
+  // }
 
   const onResponse = async () => {
     const res = await onRequest(
@@ -42,12 +50,12 @@ const Home: FC = () => {
       contract,
       [
         {
-          id: "aYWtBz",
+          id: "iexec",
           value:
             "0x5884cf2a2d1bf4f50ab2c3bfb6e0b7e9c9044507b3302254336bf4551008720b",
         },
       ],
-      [{ id: "FOkcPu", name: "", value: "BigNumber" }],
+      [],
       () => {},
       () => {}
     );
