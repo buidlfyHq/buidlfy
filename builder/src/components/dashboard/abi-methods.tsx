@@ -11,6 +11,7 @@ import { IContractDetails } from "redux/contract/contract.interfaces";
 import {
   updateContractAbi,
   updateContractAddress,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 
 interface IAbiMethods {
@@ -120,6 +121,7 @@ const AbiMethods: FC<IAbiMethods> = ({
     setIsOpen(false);
     dispatch(updateContractAbi(null));
     dispatch(updateContractAddress(null));
+    dispatch(updateContractNetwork(null));
   };
 
   return (

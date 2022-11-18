@@ -5,7 +5,7 @@ export const onLoad = (config: any) => {
     signer: providers.Provider | Signer,
     contract: Contract;
 
-  provider = new ethers.providers.Web3Provider(window.ethereum);
+  provider = new ethers.providers.Web3Provider(window.ethereum, "any");
   signer = provider.getSigner();
   contract = new ethers.Contract(
     config.contract.address,

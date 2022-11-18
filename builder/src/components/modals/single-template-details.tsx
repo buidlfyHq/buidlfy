@@ -13,6 +13,7 @@ import {
 import {
   updateContractAbi,
   updateContractAddress,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { SelectedTemplateDto } from "redux/template/template.dto";
@@ -52,9 +53,16 @@ const SingleTemplateDetails: FC<ISingleTemplateDetails> = ({ list }) => {
             updateWorkspaceBackgroundColor(selectedTemplateDto?.backgroundColor)
           );
           dispatch(setSiteHead(selectedTemplateDto?.head));
-          dispatch(updateContractAbi(selectedTemplateDto?.contract?.abi));
+          dispatch(
+            updateContractAbi(
+              JSON.stringify(selectedTemplateDto?.contract?.abi)
+            )
+          );
           dispatch(
             updateContractAddress(selectedTemplateDto?.contract?.address)
+          );
+          dispatch(
+            updateContractNetwork(selectedTemplateDto?.contract?.network)
           );
           dispatch(toggleModal(false));
         }

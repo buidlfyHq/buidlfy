@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
+import { ethers } from "ethers";
 
 const Text: FC<ITexts> = ({
   id,
@@ -20,10 +21,15 @@ const Text: FC<ITexts> = ({
   const [isValue, setIsValue] = useState<string>(value);
   const handleOnChange = () => {
     if (outputValue && outputValue.find((output) => output.id === id)) {
-      const val = JSON.stringify(
-        outputValue.find((output) => output.id === id).value
-      );
-      setIsValue(val);
+      const outputValueCondition = outputValue.find(
+        (output) => output.id === id
+      ).value;
+      const val = JSON.stringify(outputValueCondition);
+      if (outputValueCondition?._isBigNumber) {
+        setIsValue(ethers.BigNumber.from(JSON.parse(val)).toString());
+      } else {
+        setIsValue(val);
+      }
     } else {
       setIsValue(value);
     }

@@ -8,6 +8,7 @@ import {
   updateContractAbi,
   updateContractAddress,
   updateContractList,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { useSelector } from "react-redux";
@@ -19,6 +20,7 @@ import ContractHistory from "components/utils/contract/contract-history";
 import ContractRemove from "components/utils/contract/contract-remove";
 import "styles/components.css";
 import "styles/dashboard.css";
+import WarningText from "components/utils/setting-warning";
 
 interface IAdvanceComponent {
   selectedElement: IWorkspaceElement;
@@ -44,8 +46,14 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const selectedContractAddress: string = useSelector(
     (state: IRootState) => state.contract.contractDetails.address
   );
+  const selectedContractNetwork: string = useSelector(
+    (state: IRootState) => state.contract.contractDetails.network
+  );
   const updatedNewContractList: IContract[] = useSelector(
     (state: IRootState) => state.contract.contractList
+  );
+  const workspaceElements = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
   );
   useEffect(() => {
     try {
@@ -55,9 +63,17 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     }
   }, []); // eslint-disable-line
 
-  const handleContractList = (abi: string, address: string) => {
+  const isWalletConnect = workspaceElements.findIndex(
+    (item) => item.connectWallet === true
+  );
+  const handleContractList = (
+    abi: string,
+    address: string,
+    network: string
+  ) => {
     dispatch(updateContractAbi(JSON.parse(abi)));
     dispatch(updateContractAddress(JSON.parse(address)));
+    dispatch(updateContractNetwork(JSON.parse(network)));
     setMethodOpen(false);
   };
 
@@ -74,10 +90,11 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     dispatch(updateContractList(null));
     setIsViewMore(false);
   };
-
   return (
     <>
-      {selectedContractAbi && selectedContractAddress ? (
+      {selectedContractAbi &&
+      selectedContractAddress &&
+      selectedContractNetwork ? (
         <>
           <div className="flex justify-center mt-[3rem]" />
           <AbiMethods
@@ -117,16 +134,25 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
               />
             </div>
           </div>
+          {selectedElement.connectWallet ? (
+            <WarningText text="Sorry! Connect wallet and contract binding cannot be for common button" />
+          ) : null}
+          {isWalletConnect < 0 ? (
+            <WarningText text="Please Add connect wallet button before importing Contract" />
+          ) : null}
+
           <ContractHistory newContractList={updatedNewContractList} />
 
           <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
             {paginatedContractList &&
               paginatedContractList.map((contract: IContract) => {
-                const { text, address } = contract;
+                const { text, address, network } = contract;
                 return (
                   <ContractList
                     contract={contract}
-                    handleContractList={() => handleContractList(text, address)}
+                    handleContractList={() =>
+                      handleContractList(text, address, network)
+                    }
                   />
                 );
               })}
