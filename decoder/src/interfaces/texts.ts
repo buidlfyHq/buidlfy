@@ -1,4 +1,4 @@
-import IColor from "./color";
+import { IOracleConfig } from "./config";
 import { IInput, IOutput } from "./value";
 
 export default interface ITexts {
@@ -17,21 +17,22 @@ export default interface ITexts {
   borderWidth?: number;
   shadow?: string;
   contractFunction?: any; // breaking while assigning a type, work in progress
+  oracleFunction?: IOracleConfig;
   inputValue?: IInput[];
   setInputValue?: (inputValue: IInput[]) => void;
   outputValue?: IOutput[];
   setOutputValue?: (outputValue: IOutput[]) => void;
   connectWallet?: boolean;
   margin?: {
-    marginLeft?: number,
-    marginRight?: number,
-    marginTop?: number,
-    marginBottom?: number,
-  }
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
   padding?: {
-    paddingLeft?: number,
-    paddingRight?: number,
-    paddingTop?: number,
-    paddingBottom?: number,
-  }
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
 }

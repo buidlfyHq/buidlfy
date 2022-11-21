@@ -1,5 +1,18 @@
 export interface IOracleState {
-  id: string;
+  oracleConfig: IOracleConfig;
+  oracleElementSelector: IOracleElementSelector;
+}
+
+export interface IOracleConfig {
   methodName: string;
-  outputId: string;
+  stateMutability: string;
+  inputs: {
+    id: string;
+    send: boolean;
+  }[];
+  outputs: { id: string }[];
+}
+
+export interface IOracleElementSelector {
+  buttonId: string;
 }

@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { ethers } from "ethers";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
 
@@ -23,13 +24,14 @@ const Text: FC<ITexts> = ({
   useEffect(() => {
     handleOnChange();
   }, [outputValue]);
-  
+
   const handleOnChange = () => {
     if (outputValue && outputValue.find((output) => output.id === id)) {
-      const val = JSON.stringify(
-        outputValue.find((output) => output.id === id).value
-      );
-      setIsValue(val);
+      // const val = JSON.stringify(
+      //   outputValue.find((output) => output.id === id).value
+      // );
+      const val = outputValue.find((output) => output.id === id).value;
+      setIsValue(ethers.utils.formatUnits(val));
     } else {
       setIsValue(value);
     }

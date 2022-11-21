@@ -7,6 +7,7 @@ import {
   mapElementSubStyleToWorkspace,
   mapImageElementStylesToWorkspace,
   updateContractInElement,
+  updateOracleInElement,
 } from "./workspace.utils";
 import {
   IAction,
@@ -14,6 +15,7 @@ import {
   IWorkspaceElement,
   IWorkspaceState,
 } from "./workspace.interfaces";
+import { IOracleConfig } from "redux/oracle/oracle.interfaces";
 
 const initialState: IWorkspaceState = {
   workspaceElements: [],
@@ -170,6 +172,29 @@ const workspaceSlice = createSlice({
       };
     },
 
+    // to save oracle config
+    saveOracleConfig(
+      state: IWorkspaceState,
+      action: { payload: IOracleConfig }
+    ) {
+      const updatedOracle = updateOracleInElement(
+        state.workspaceElements,
+        state.selectedElement,
+        action.payload
+      );
+
+      const updatedSelectedElement = fetchSelectedElement(
+        updatedOracle,
+        state.selectedElement.i
+      );
+
+      return {
+        ...state,
+        workspaceElements: updatedOracle,
+        selectedElement: updatedSelectedElement,
+      };
+    },
+
     updateUploadedImageData(state: IWorkspaceState, action: { payload }) {
       const { settingItemId, uploadedImageData } = action.payload;
       const newUploadedImagesData = fetchUploadedImageData(
@@ -195,6 +220,7 @@ export const {
   setSiteHead,
   setSelectedElement,
   saveContractConfig,
+  saveOracleConfig,
   updateUploadedImageData,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;

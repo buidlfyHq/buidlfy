@@ -1,4 +1,5 @@
 import { IContractElementSelected } from "redux/contract/contract.interfaces";
+import { IOracleConfig } from "redux/oracle/oracle.interfaces";
 import {
   IElementDetail,
   IUploadedImageData,
@@ -81,7 +82,7 @@ export const mapElementSubStyleToWorkspace = (
   const { settingItemId, propertyName, propertyValue, childPropertyName } =
     payload;
   let selectedChild = findSelected(element, settingItemId);
-  
+
   if (element.i === settingItemId) {
     return {
       ...element,
@@ -250,6 +251,43 @@ export const updateContractInElement = (
   }
 };
 
+export const updateOracleInElement = (
+  workspaceElements: IWorkspaceElement[],
+  selectedElement: IWorkspaceElement,
+  payload: IOracleConfig
+) => {
+  // initialize contract
+  let updatedElement = {
+    ...selectedElement,
+    oracle: payload,
+  };
+
+  // search id in elements
+  const elementsIndex = workspaceElements.findIndex(
+    (element) => element.i === selectedElement.i
+  );
+
+  if (elementsIndex === -1) {
+    // search id in children
+    const updatedElements = workspaceElements.map((element) => {
+      const childIndex = element.children?.findIndex(
+        (child) => child.i === selectedElement.i
+      );
+      let newArray = [...element.children];
+      newArray[childIndex] = updatedElement;
+      return {
+        ...element,
+        children: newArray,
+      };
+    });
+    return updatedElements;
+  } else {
+    let newArray = [...workspaceElements];
+    newArray[elementsIndex] = updatedElement;
+    return newArray;
+  }
+};
+
 export const fetchUploadedImageData = (
   settingItemId: string,
   uploadedImageData: string,
@@ -269,4 +307,3 @@ export const fetchUploadedImageData = (
   newUploadedImagesData.push({ settingItemId, uploadedImageData });
   return newUploadedImagesData;
 };
-

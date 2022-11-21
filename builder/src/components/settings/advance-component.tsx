@@ -9,6 +9,7 @@ import ContractList from "components/utils/contract/contract-list";
 import ContractView from "components/utils/contract/contract-view";
 import ContractHistory from "components/utils/contract/contract-history";
 import ContractRemove from "components/utils/contract/contract-remove";
+import OracleComponents from "components/dashboard/oracle-components";
 import {
   updateContractAbi,
   updateContractAddress,
@@ -34,6 +35,9 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   );
   const updatedNewContractList: IContract[] = useSelector(
     (state: IRootState) => state.contract.contractList
+  );
+  const oracleId = useSelector(
+    (state: IRootState) => state.oracle.oracleConfig.inputs[0]?.id
   );
 
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
@@ -93,74 +97,83 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
         </>
       ) : (
         <>
-          <>
-            <div className="flex justify-center mt-[3rem]" />
-            <h3 className="ml-[0.5rem] mt-[2rem]">
-              <span className="setting-text">Import Contract</span>
-            </h3>
-            <p className="contract-text ml-[0.5rem]">
-              Integrate your Frontend with smart contracts.
-            </p>
-            <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
-              <div
-                onClick={() => setIsOpen(true)}
-                className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
-              >
-                <span className="mt-1 ml-4 mr-3">
-                  <FaFileContract />
-                </span>
-                Import Contract
-                <ContractModal
-                  isOpen={isOpen}
-                  setIsOpen={setIsOpen}
-                />
-              </div>
-            </div>
-            <ContractHistory newContractList={updatedNewContractList} />
+          {oracleId ? (
+            <>
+              <div className="flex justify-center mt-[3rem]" />
+              <OracleComponents selectedElement={selectedElement} />
+            </>
+          ) : (
+            <>
+              <>
+                <div className="flex justify-center mt-[3rem]" />
+                <h3 className="ml-[0.5rem] mt-[2rem]">
+                  <span className="setting-text">Import Contract</span>
+                </h3>
+                <p className="contract-text ml-[0.5rem]">
+                  Integrate your Frontend with smart contracts.
+                </p>
+                <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
+                  <div
+                    onClick={() => setIsOpen(true)}
+                    className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
+                  >
+                    <span className="mt-1 ml-4 mr-3">
+                      <FaFileContract />
+                    </span>
+                    Import Contract
+                    <ContractModal isOpen={isOpen} setIsOpen={setIsOpen} />
+                  </div>
+                </div>
+                <ContractHistory newContractList={updatedNewContractList} />
 
-            <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
-              {paginatedContractList &&
-                paginatedContractList.map((contract: IContract) => {
-                  const { text, address } = contract;
-                  return (
-                    <ContractList
-                      contract={contract}
-                      handleContractList={() =>
-                        handleContractList(text, address)
-                      }
+                <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
+                  {paginatedContractList &&
+                    paginatedContractList.map((contract: IContract) => {
+                      const { text, address } = contract;
+                      return (
+                        <ContractList
+                          contract={contract}
+                          handleContractList={() =>
+                            handleContractList(text, address)
+                          }
+                        />
+                      );
+                    })}
+                  <div className="flex items-center justify-end">
+                    <ContractRemove handleClearContract={handleClearContract} />
+                    <ContractView
+                      isViewMore={isViewMore}
+                      handleShow={handleShow}
                     />
-                  );
-                })}
-              <div className="flex items-center justify-end">
-                <ContractRemove handleClearContract={handleClearContract} />
-                <ContractView isViewMore={isViewMore} handleShow={handleShow} />
-              </div>
-            </div>
-          </>
-          <>
-            <div className="flex justify-center" />
-            <h3 className="ml-[0.5rem]">
-              <span className="setting-text">Import Oracle</span>
-            </h3>
-            <p className="contract-text ml-[0.5rem]">
-              Integrate your Frontend with oracles.
-            </p>
-            <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
-              <div
-                onClick={() => setIsOracleOpen(true)}
-                className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
-              >
-                <span className="mt-1 ml-4 mr-3">
-                  <FaFileContract />
-                </span>
-                Import Oracle
-                <OracleModal
-                  isOracleOpen={isOracleOpen}
-                  setIsOracleOpen={setIsOracleOpen}
-                />
-              </div>
-            </div>
-          </>
+                  </div>
+                </div>
+              </>
+              <>
+                <div className="flex justify-center" />
+                <h3 className="ml-[0.5rem]">
+                  <span className="setting-text">Import Oracle</span>
+                </h3>
+                <p className="contract-text ml-[0.5rem]">
+                  Integrate your Frontend with oracles.
+                </p>
+                <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
+                  <div
+                    onClick={() => setIsOracleOpen(true)}
+                    className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
+                  >
+                    <span className="mt-1 ml-4 mr-3">
+                      <FaFileContract />
+                    </span>
+                    Import Oracle
+                    <OracleModal
+                      isOracleOpen={isOracleOpen}
+                      setIsOracleOpen={setIsOracleOpen}
+                    />
+                  </div>
+                </div>
+              </>
+            </>
+          )}
         </>
       )}
       <br />
