@@ -100,7 +100,10 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
           {oracleId ? (
             <>
               <div className="flex justify-center mt-[3rem]" />
-              <OracleComponents selectedElement={selectedElement} />
+              <OracleComponents
+                selectedElement={selectedElement}
+                setIsOracleOpen={setIsOracleOpen}
+              />
             </>
           ) : (
             <>
@@ -112,7 +115,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                 <p className="contract-text ml-[0.5rem]">
                   Integrate your Frontend with smart contracts.
                 </p>
-                <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
+                <div className="flex items-center px-3 mt-5 text-black">
                   <div
                     onClick={() => setIsOpen(true)}
                     className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
@@ -149,9 +152,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                 </div>
               </>
               <>
-                <div className="flex justify-center" />
-                <h3 className="ml-[0.5rem]">
+                <div className="flex justify-center mt-[2rem]" />
+                <h3 className="ml-[0.5rem] flex items-center">
                   <span className="setting-text">Import Oracle</span>
+                  <span className="text-[10px] text-[#14142B] ml-2 py-1 px-3 bg-gray-200 font-bold rounded-[28px]">
+                    Powered by iExec
+                  </span>
                 </h3>
                 <p className="contract-text ml-[0.5rem]">
                   Integrate your Frontend with oracles.
