@@ -97,7 +97,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
         </>
       ) : (
         <>
-          {oracleId ? (
+          {selectedElement.oracle || oracleId ? (
             <>
               <div className="flex justify-center mt-[3rem]" />
               <OracleComponents

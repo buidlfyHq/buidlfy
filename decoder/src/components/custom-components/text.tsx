@@ -27,13 +27,12 @@ const Text: FC<ITexts> = ({
 
   const handleOnChange = () => {
     if (outputValue && outputValue.find((output) => output.id === id)) {
-      // const val = JSON.stringify(
-      //   outputValue.find((output) => output.id === id).value
-      // );
       const val = outputValue.find((output) => output.id === id).value;
-      setIsValue(ethers.utils.formatUnits(val));
-    } else {
-      setIsValue(value);
+      if (val?._isBigNumber) {
+        setIsValue(ethers.utils.formatUnits(val));
+      } else {
+        setIsValue(JSON.stringify(val));
+      }
     }
   };
 
