@@ -11,6 +11,7 @@ const initialState: IContractState = {
   contractDetails: {
     abi: "",
     address: "",
+    network: ""
   },
   contractElementSelector: null,
   contractElementSelected: {},
@@ -33,7 +34,9 @@ const contractSlice = createSlice({
     updateContractAddress(state, action: { payload: string }) {
       state.contractDetails.address = action.payload;
     },
-
+    updateContractNetwork(state, action: { payload: string }) {
+      state.contractDetails.network = action.payload;
+    },
     // to update contract element selector
     updateSelector(state, action: { payload: ISelectorPayload }) {
       state.contractElementSelector = action.payload;
@@ -42,7 +45,7 @@ const contractSlice = createSlice({
       state.contractElementSelector = null;
     },
     // to update contract element selected
-    createSelectedElement(state, action: { payload: ISelectedPayload }) {
+    createSelectedElement(state, action: { payload: ISelectedPayload }) {  
       state.contractElementSelected[action.payload.name] = [
         action.payload.element,
       ];
@@ -71,5 +74,6 @@ export const {
   createSelectedElement,
   addSelectedElement,
   updateSelectedElement,
+  updateContractNetwork
 } = contractSlice.actions;
 export default contractSlice.reducer;

@@ -8,10 +8,16 @@ import Workspace from "features/dashboard/workspace";
 import Settings from "features/dashboard/settings";
 import DefaultSettings from "features/dashboard/default-settings";
 import {
+  setSiteHead,
   updateWorkspaceBackgroundColor,
   updateWorkspaceElementsArray,
 } from "redux/workspace/workspace.reducers";
 import "styles/components.css";
+import {
+  updateContractAbi,
+  updateContractAddress,
+  updateContractNetwork,
+} from "redux/contract/contract.reducers";
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
@@ -32,8 +38,14 @@ const Dashboard: FC = () => {
     if (saveItems) {
       dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
       dispatch(
-        updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor)
+        updateWorkspaceBackgroundColor(JSON.parse(saveItems)?.backgroundColor)
       );
+      dispatch(setSiteHead(JSON.parse(saveItems)?.head));
+      dispatch(
+        updateContractAbi(JSON.stringify(JSON.parse(saveItems)?.contract?.abi))
+      );
+      dispatch(updateContractAddress(JSON.parse(saveItems)?.contract?.address));
+      dispatch(updateContractNetwork(JSON.parse(saveItems)?.contract?.network));
     }
   }, []); // eslint-disable-line
 

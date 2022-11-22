@@ -14,12 +14,14 @@ import {
   updateContractAbi,
   updateContractAddress,
   updateContractList,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { IContract } from "redux/contract/contract.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
+import WarningText from "components/utils/setting-warning";
 
 interface IAdvanceComponent {
   selectedElement: IWorkspaceElement;
@@ -27,14 +29,20 @@ interface IAdvanceComponent {
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const dispatch = useDispatch();
-  const selectedContractAbi: string = useSelector(
+  const workspaceElements = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
+  );
+  const selectedContractAbi = useSelector(
     (state: IRootState) => state.contract.contractDetails.abi
   );
-  const selectedContractAddress: string = useSelector(
+  const selectedContractAddress = useSelector(
     (state: IRootState) => state.contract.contractDetails.address
   );
-  const updatedNewContractList: IContract[] = useSelector(
+  const updatedNewContractList = useSelector(
     (state: IRootState) => state.contract.contractList
+  );
+  const selectedContractNetwork: string = useSelector(
+    (state: IRootState) => state.contract.contractDetails.network
   );
   const oracleId = useSelector(
     (state: IRootState) => state.oracle.oracleConfig.inputs[0]?.id
@@ -61,9 +69,17 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     }
   }, []); // eslint-disable-line
 
-  const handleContractList = (abi: string, address: string) => {
+  const isWalletConnect = workspaceElements.findIndex(
+    (item) => item.connectWallet === true
+  );
+  const handleContractList = (
+    abi: string,
+    address: string,
+    network: string
+  ) => {
     dispatch(updateContractAbi(JSON.parse(abi)));
     dispatch(updateContractAddress(JSON.parse(address)));
+    dispatch(updateContractNetwork(JSON.parse(network)));
   };
 
   const handleShow = () => {
@@ -82,7 +98,9 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
 
   return (
     <>
-      {selectedContractAbi && selectedContractAddress ? (
+      {selectedContractAbi &&
+      selectedContractAddress &&
+      selectedContractNetwork ? (
         <>
           <div className="flex justify-center mt-[3rem]" />
           <AbiMethods
@@ -115,7 +133,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                 <p className="contract-text ml-[0.5rem]">
                   Integrate your Frontend with smart contracts.
                 </p>
-                <div className="flex items-center px-3 mt-5 text-black">
+                <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
                   <div
                     onClick={() => setIsOpen(true)}
                     className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
@@ -127,17 +145,23 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                     <ContractModal isOpen={isOpen} setIsOpen={setIsOpen} />
                   </div>
                 </div>
+                {selectedElement.connectWallet ? (
+                  <WarningText text="Sorry! Connect wallet and Contract or Oracle binding cannot be for common button." />
+                ) : null}
+                {isWalletConnect < 0 ? (
+                  <WarningText text="Please Add connect wallet button before importing Contract or Oracle." />
+                ) : null}
                 <ContractHistory newContractList={updatedNewContractList} />
 
                 <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
                   {paginatedContractList &&
                     paginatedContractList.map((contract: IContract) => {
-                      const { text, address } = contract;
+                      const { text, address, network } = contract;
                       return (
                         <ContractList
                           contract={contract}
                           handleContractList={() =>
-                            handleContractList(text, address)
+                            handleContractList(text, address, network)
                           }
                         />
                       );

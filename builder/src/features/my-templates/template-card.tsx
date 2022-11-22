@@ -9,6 +9,7 @@ import {
 import {
   updateContractAbi,
   updateContractAddress,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 import { setSelectedTemplate } from "redux/template/template.reducers";
@@ -52,8 +53,9 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
       dispatch(updateWorkspaceElementsArray(config));
       dispatch(updateWorkspaceBackgroundColor(backgroundColor));
       dispatch(setSiteHead(head));
-      dispatch(updateContractAbi(contract?.abi));
+      dispatch(updateContractAbi(JSON.stringify(contract?.abi)));
       dispatch(updateContractAddress(contract?.address));
+      dispatch(updateContractNetwork(contract?.network));
     }
     return navigate("/");
   };

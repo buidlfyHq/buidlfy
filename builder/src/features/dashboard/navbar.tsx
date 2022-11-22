@@ -11,9 +11,11 @@ import {
   setSelectorToDefault,
   updateContractAbi,
   updateContractAddress,
+  updateContractNetwork,
 } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
+import { IContractElementSelected } from "redux/contract/contract.interfaces";
 
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
@@ -36,6 +38,10 @@ const Navbar: FC<INavbar> = ({
   const publishStatus = useSelector(
     (state: IRootState) => state.publish.publishStatus
   );
+  const head = useSelector((state: IRootState) => state.workspace.head);
+  const contractDetails = useSelector(
+    (state: IRootState) => state.contract.contractDetails
+  );
 
   const handleCloseSidebar = () => {
     setIsContainerSelected(false);
@@ -47,12 +53,28 @@ const Navbar: FC<INavbar> = ({
     let templateConfig = {
       value: workspaceElements,
       backgroundColor: workspaceBackgroundColor,
+      head: {
+        title: head.title,
+        logo: head.logo,
+      },
+      contract: null,
     };
+    if (
+      contractDetails?.abi &&
+      contractDetails?.address &&
+      contractDetails?.network
+    ) {
+      templateConfig.contract = {
+        abi: JSON.parse(contractDetails?.abi),
+        address: contractDetails?.address,
+        network: contractDetails?.network,
+      };
+    }
+    console.log(templateConfig, "JSON.stringify(templateConfig)");
 
     if (workspaceElements?.length > 0) {
       localStorage.setItem("items", JSON.stringify(templateConfig));
     }
-
     if (publishStatus) {
       localStorage.setItem("publishStatus", publishStatus.toString());
     }
@@ -70,6 +92,7 @@ const Navbar: FC<INavbar> = ({
     dispatch(updateWorkspaceBackgroundColor("rgba(255, 255, 255, 1)"));
     dispatch(updateContractAbi(""));
     dispatch(updateContractAddress(""));
+    dispatch(updateContractNetwork(""));
   };
 
   return (

@@ -4,6 +4,7 @@ import { ethers, Contract } from "ethers";
 import Web3Modal from "web3modal";
 import BuilderConfig, { OracleContractAddress } from "config";
 import { providerOptions } from "config/provider-options";
+import { networks } from "config/network";
 import { onLoad } from "hooks/on-load";
 import { onRequest } from "hooks/on-request";
 import { gradientCheck } from "utils/gradient-check";
@@ -95,7 +96,8 @@ const Button: FC<ITexts> = ({
   const connectWalletButton = async () => {
     try {
       const provider = await web3Modal.connect();
-      const library: any = new ethers.providers.Web3Provider(provider); // required
+      const library: any = new ethers.providers.Web3Provider(provider, "any"); // required
+
       const accounts: any = await library.listAccounts(); // required
       setLibrary(library);
       if (accounts) setAccount(accounts[0]);
@@ -104,35 +106,34 @@ const Button: FC<ITexts> = ({
       console.log(error);
     }
   };
-
   // switch to polygon testnet
   const switchNetwork = async () => {
+    const currentNetwork = networks[Number(config.contract.network)];
+    const addCurrentNetwork = {
+      chainId: `0x${Number(currentNetwork.chainId).toString(16)}`,
+      chainName: currentNetwork.chainName,
+      nativeCurrency: {
+        name: currentNetwork.nativeCurrency.name,
+        symbol: currentNetwork.nativeCurrency.symbol,
+        decimals: currentNetwork.nativeCurrency.decimals,
+      },
+      rpcUrls: currentNetwork.rpcUrls,
+      blockExplorerUrls: currentNetwork.blockExplorerUrls,
+    };
     try {
       await library.provider.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: `0x${Number(80001).toString(16)}` }],
+        params: [
+          { chainId: `0x${Number(currentNetwork.chainId).toString(16)}` },
+        ],
       });
     } catch (switchError) {
       // This error code indicates that the chain has not been added to MetaMask.
       if (switchError.code === 4902) {
         try {
-          await library.provider.request({
+          await library?.provider.request({
             method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: `0x${Number(80001).toString(16)}`,
-                chainName: "Mumbai",
-                nativeCurrency: {
-                  name: "MATIC",
-                  symbol: "MATIC",
-                  decimals: 18,
-                },
-                rpcUrls: [
-                  "https://polygon-mumbai.g.alchemy.com/v2/i0JIYxK_EGtBX5aGG1apX4KuoH7j_7dq",
-                ],
-                blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
-              },
-            ],
+            params: [addCurrentNetwork],
           });
         } catch (addError) {
           throw addError;
@@ -140,7 +141,9 @@ const Button: FC<ITexts> = ({
       }
     }
   };
-
+  useEffect(() => {
+    switchNetwork();
+  }, [account, library]);
   const refreshState = () => {
     setAccount(null);
   };

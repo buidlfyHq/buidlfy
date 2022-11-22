@@ -8,7 +8,10 @@ import {
 } from "redux/contract/contract.reducers";
 import Spinner from "components/utils/assets/spinner";
 import { IRootState } from "redux/root-state.interface";
-import { IShowComponent } from "redux/workspace/workspace.interfaces";
+import {
+  IShowComponent,
+  IWorkspaceElement,
+} from "redux/workspace/workspace.interfaces";
 import {
   IContractElementSelected,
   IContractElementSelector,
@@ -28,7 +31,9 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   const contractElementSelected: IContractElementSelected = useSelector(
     (state: IRootState) => state.contract.contractElementSelected
   );
-
+  const workspaceElements = useSelector(
+    (state: IRootState) => state.workspace.workspaceElements
+  );
   const [currentElement, setCurrentElement] = useState<{
     name: string;
     type: string;
@@ -146,6 +151,45 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
       )}
     </>
   );
+  const findElement = (id: string) => {
+    return workspaceElements.find(
+      (element: IWorkspaceElement) => element.i === id
+    );
+  };
+  const savedContractInput = workspaceElements
+    ?.map((key: IWorkspaceElement) => {
+      if (key.name === "Button") {
+        if (key?.contract && key?.contract?.inputs?.length > 0) {
+          return key?.contract?.inputs?.map((input) => (
+            <span className="flex">
+              <span className="flex-1">
+                {findElement(input.id).name} - {input.id}
+              </span>
+              <AiOutlineEdit className="mt-1.5 cursor-pointer" />
+            </span>
+          ));
+        }
+      }
+    })
+    .filter((item) => item !== undefined);
+
+  const savedContractOutput = workspaceElements
+    ?.map((key: IWorkspaceElement) => {
+      if (key.name === "Button") {
+        if (key?.contract && key?.contract?.outputs?.length > 0) {
+          return key?.contract?.outputs?.map((output) => (
+            <span className="flex">
+              <span className="flex-1">
+                {findElement(output.id).name} - {output.id}
+              </span>
+              <AiOutlineEdit className="mt-1.5 cursor-pointer" />
+            </span>
+          ));
+        }
+      }
+    })
+    .filter((item) => item !== undefined);
+
   // Create Common Input for all three inputs
   return (
     <main>
@@ -167,9 +211,15 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                     >
                       <div>
                         {!objects.length ? (
-                          <div className="cursor-pointer">
-                            {renderDefault(selectedId)}
-                          </div>
+                          <>
+                            {savedContractInput?.length > 0 ? (
+                              savedContractInput
+                            ) : (
+                              <div className="cursor-pointer">
+                                {renderDefault(selectedId)}
+                              </div>
+                            )}
+                          </>
                         ) : (
                           <>
                             {!filterObjects.length
@@ -220,6 +270,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
               }
             )}
 
+          {/* Add: Add SavedContract condition for stateMutability */}
           {showComponent.value?.stateMutability === "payable" && (
             <section className="mt-3">
               <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">
@@ -300,9 +351,15 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                     >
                       <div>
                         {objects.length === 0 ? (
-                          <span className="cursor-pointer">
-                            {renderDefault(selectedId)}
-                          </span>
+                          <>
+                            {savedContractOutput?.length > 0 ? (
+                              savedContractOutput
+                            ) : (
+                              <span className="cursor-pointer">
+                                {renderDefault(selectedId)}
+                              </span>
+                            )}
+                          </>
                         ) : (
                           <>
                             {filterObjects.length === 0

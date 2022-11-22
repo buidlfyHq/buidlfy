@@ -71,9 +71,9 @@ const PublishConfirmModal: FC = () => {
       contract: {
         abi: abiJSON,
         address: contractDetails.address,
+        network: contractDetails.network,
       },
     };
-
     let stringifiedConfig = JSON.stringify(config);
 
     // Keep this commented log. Helpful while testing. 
