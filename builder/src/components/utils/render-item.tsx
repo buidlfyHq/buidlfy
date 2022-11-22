@@ -33,7 +33,7 @@ const RenderItem: FC<IRenderItem> = ({
       return (
         <Button
           i={item.i}
-          bold={item.style.fontWeight}
+          fontWeight={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
           color={item.style.color}
@@ -49,6 +49,7 @@ const RenderItem: FC<IRenderItem> = ({
           connectWallet={item.connectWallet}
           margin={item.style.margin}
           padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
         />
       );
     case "Text":
@@ -58,7 +59,7 @@ const RenderItem: FC<IRenderItem> = ({
       return (
         <Text
           i={item.i}
-          bold={item.style.fontWeight}
+          fontWeight={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
           color={item.style.color}
@@ -69,6 +70,7 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           margin={item.style.margin}
           padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
         />
       );
     case "Input":

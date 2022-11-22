@@ -47,7 +47,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Button":
       return (
         <Button
-          bold={item.style.fontWeight}
+          fontWeight={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
           color={item.style.color}
@@ -68,67 +68,17 @@ const RenderItem: FC<IRenderItem> = ({
           connectWallet={item.connectWallet}
           margin={item.style.margin}
           padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
         />
       );
     case "Text":
-      return (
-        <Text
-          id={item.i}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          link={item.link}
-          backgroundColor={item.style.backgroundColor}
-          outputValue={outputValue}
-          margin={item.style.margin}
-          padding={item.style.padding}
-        />
-      );
     case "Heading 1":
-      return (
-        <Text
-          id={item.i}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          link={item.link}
-          backgroundColor={item.style.backgroundColor}
-          outputValue={outputValue}
-          margin={item.style.margin}
-          padding={item.style.padding}
-        />
-      );
     case "Heading 2":
-      return (
-        <Text
-          id={item.i}
-          bold={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          link={item.link}
-          backgroundColor={item.style.backgroundColor}
-          outputValue={outputValue}
-          margin={item.style.margin}
-          padding={item.style.padding}
-        />
-      );
     case "Heading 3":
       return (
         <Text
           id={item.i}
-          bold={item.style.fontWeight}
+          fontWeight={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
           color={item.style.color}
@@ -140,6 +90,7 @@ const RenderItem: FC<IRenderItem> = ({
           outputValue={outputValue}
           margin={item.style.margin}
           padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
         />
       );
     case "Input":

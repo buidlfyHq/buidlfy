@@ -52,7 +52,7 @@ export interface IStyle {
   color?: string;
   borderColor?: string;
   backgroundColor?: string;
-  fontWeight?: string;
+  fontWeight?: number;
   fontStyle?: string;
   textDecoration?: string;
   justifyContent?: string;
@@ -77,6 +77,7 @@ export interface IStyle {
   width?: number;
   height?: number;
   backgroundSize?: string;
+  fontFamily?: string;
 }
 
 export type ResizeHandles = Array<
@@ -148,7 +149,7 @@ export interface ITemplate {
 export interface IText {
   i?: string;
   setItems?: (items?: IWorkspaceElement[]) => void;
-  bold: string;
+  fontWeight: number;
   italic: string;
   underline: string;
   color?: string;
@@ -174,4 +175,5 @@ export interface IText {
     paddingTop?: number;
     paddingBottom?: number;
   };
+  fontFamily?: string;
 }

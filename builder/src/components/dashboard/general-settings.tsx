@@ -8,6 +8,8 @@ import MarginComponent from "components/settings/margin-component";
 import PaddingComponent from "components/settings/padding-component";
 import CombinedComponent from "components/settings/combined-setting";
 import { IRootState } from "redux/root-state.interface";
+import FontFamilyComponent from "components/settings/font-family-component";
+import FontWeightComponent from "components/settings/font-weight-component";
 import {
   ISettings,
   IWorkspaceElement,
@@ -28,7 +30,6 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
       </h3>
       <CombinedComponent
         i={selectedElement.i}
-        fontWeight={selectedElement.style.fontWeight}
         fontStyle={selectedElement.style.fontStyle}
         textDecoration={selectedElement.style.textDecoration}
         justifyContent={selectedElement.style.justifyContent}
@@ -55,7 +56,14 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
           placeholder="Link"
         />
       </div>
-
+      <FontFamilyComponent
+        i={selectedElement.i}
+        fontFamily={selectedElement.style.fontFamily}
+      />
+      <FontWeightComponent
+        i={selectedElement.i}
+        fontWeight={selectedElement.style.fontWeight}
+      />
       <FontSizeComponent
         i={selectedElement.i}
         fontSize={selectedElement.style.fontSize}

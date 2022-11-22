@@ -5,7 +5,7 @@ import "styles/components.css";
 
 const Button: FC<IText> = ({
   i,
-  bold,
+  fontWeight,
   italic,
   underline,
   color,
@@ -20,6 +20,7 @@ const Button: FC<IText> = ({
   padding,
   borderColor,
   borderWidth,
+  fontFamily,
 }) => (
   <section
     style={{ justifyContent: justifyContent }}
@@ -28,8 +29,9 @@ const Button: FC<IText> = ({
   >
     <button
       style={{
-        fontWeight: bold,
+        fontWeight: fontWeight,
         fontStyle: italic,
+        fontFamily: fontFamily,
         border: `${borderWidth}px solid ${borderColor}`,
         borderImage: borderColor,
         display: "flex",

@@ -17,7 +17,7 @@ const web3Modal = new Web3Modal({
 });
 
 const Button: FC<ITexts> = ({
-  bold,
+  fontWeight,
   italic,
   underline,
   color,
@@ -36,6 +36,7 @@ const Button: FC<ITexts> = ({
   padding,
   borderColor,
   borderWidth,
+  fontFamily,
 }) => {
   const config = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
@@ -158,7 +159,7 @@ const Button: FC<ITexts> = ({
       {connectWallet ? (
         <div
           style={{
-            fontWeight: bold,
+            fontWeight: fontWeight,
             fontStyle: italic,
             textDecoration: underline,
             border: `${borderWidth}px solid ${borderColor}`,
@@ -168,6 +169,7 @@ const Button: FC<ITexts> = ({
             fontSize: `${fontSize}px`,
             borderRadius: `${borderRadius}px`,
             background: backgroundColor,
+            fontFamily: fontFamily,
             margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
@@ -187,7 +189,7 @@ const Button: FC<ITexts> = ({
       ) : (
         <div
           style={{
-            fontWeight: bold,
+            fontWeight: fontWeight,
             fontStyle: italic,
             textDecoration: underline,
             border: `${borderWidth}px solid ${borderColor}`,
@@ -197,6 +199,7 @@ const Button: FC<ITexts> = ({
             borderRadius: `${borderRadius}px`,
             fontSize: `${fontSize}px`,
             background: backgroundColor,
+            fontFamily: fontFamily,
             margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}

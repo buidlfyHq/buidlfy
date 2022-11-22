@@ -13,7 +13,6 @@ import "styles/dashboard.css";
 
 interface ICombinedComponent {
   i: string;
-  fontWeight: string;
   fontStyle: string;
   textDecoration: string;
   justifyContent: string;
@@ -22,7 +21,6 @@ interface ICombinedComponent {
 
 const CombinedComponent: FC<ICombinedComponent> = ({
   i,
-  fontWeight,
   fontStyle,
   textDecoration,
   justifyContent,
@@ -31,16 +29,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
   const dispatch = useDispatch();
 
   const handleChange = (action: ReplaceStyle) => {
-    if (action === ReplaceStyle.BOLD) {
-      dispatch(
-        updateWorkspaceElementStyle({
-          settingItemId: i,
-          propertyName: "fontWeight",
-          propertyValue:
-            fontWeight === ReplaceStyle.BOLD ? "normal" : ReplaceStyle.BOLD,
-        })
-      );
-    } else if (action === ReplaceStyle.ITALIC) {
+    if (action === ReplaceStyle.ITALIC) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -78,16 +67,8 @@ const CombinedComponent: FC<ICombinedComponent> = ({
     property === propertyName ? "bg-[#CDD4F3]" : "";
   const propertyData = [
     {
-      text: "B",
-      className: `font-bold ml-[10px] combined-style ${activeClassName(
-        fontWeight,
-        ReplaceStyle.BOLD
-      )}`,
-      onclick: () => handleChange(ReplaceStyle.BOLD),
-    },
-    {
       text: "i",
-      className: `italic combined-style ${activeClassName(
+      className: `italic ml-[10px] combined-style ${activeClassName(
         fontStyle,
         ReplaceStyle.ITALIC
       )}`,
