@@ -1379,9 +1379,3 @@
 .navbar-text {
   color: rgba(16, 15, 17, 0.64);
 }
-
-/*style items (options):*/
-.select-items {
-  background-color: DodgerBlue !important;
-  height: 10rem !important;
-}
