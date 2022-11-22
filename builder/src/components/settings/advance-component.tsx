@@ -60,7 +60,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     };
   }>(null); // for abi method component
   const [isViewMore, setIsViewMore] = useState<boolean>(false);
-
+  
   useEffect(() => {
     try {
       setIsViewMore(!!(updatedNewContractList?.length >= 4));
@@ -120,6 +120,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
               <div className="flex justify-center mt-[3rem]" />
               <OracleComponents
                 selectedElement={selectedElement}
+                isOracleOpen={isOracleOpen}
                 setIsOracleOpen={setIsOracleOpen}
               />
             </>

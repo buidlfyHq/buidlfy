@@ -24,9 +24,6 @@ const PublishConfirmModal: FC = () => {
   const currentStep = useSelector(
     (state: IRootState) => state.publish.currentStep
   );
-  const oracleConfig = useSelector(
-    (state: IRootState) => state.oracle.oracleConfig
-  );
 
   const [abiJSON, setAbiJSON] = useState<
     {

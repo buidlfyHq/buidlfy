@@ -1,11 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AiOutlineClose, AiOutlineLeft } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import Spinner from "components/utils/assets/spinner";
 import {
   setOracleSelectorToDefault,
   setOracleToDefault,
-  updateOracle,
   updateOracleOutputId,
   updateOracleSelector,
 } from "redux/oracle/oracle.reducers";
@@ -15,11 +14,13 @@ import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 
 interface IOracleComponents {
   selectedElement: IWorkspaceElement;
+  isOracleOpen: boolean;
   setIsOracleOpen: (isOpen: boolean) => void;
 }
 
 const OracleComponents: FC<IOracleComponents> = ({
   selectedElement,
+  isOracleOpen,
   setIsOracleOpen,
 }) => {
   const dispatch = useDispatch();
@@ -36,6 +37,12 @@ const OracleComponents: FC<IOracleComponents> = ({
     setTimeout(() => setShow(false), 1000);
   }, [show]);
 
+  useEffect(() => {
+    if (isOracleOpen) {
+      setIsOracleOpen(false);
+    }
+  }, []); // eslint-disable-line
+
   const handleOutputSelector = () => {
     if (oracleElementSelector === null) {
       dispatch(updateOracleSelector({ buttonId: selectedElement.i }));
@@ -50,21 +57,9 @@ const OracleComponents: FC<IOracleComponents> = ({
     dispatch(setOracleToDefault());
   };
 
-  const handleBack = () => {
-    setIsOracleOpen(false);
-    dispatch(updateOracle({ id: "", methodName: "" }));
-  };
-
   return (
     <section className="mt-3">
-      <span
-        className="text-[#504F82] text-xs font-light flex items-center mt-[2.5rem] cursor-pointer hover:text-[#100F11]"
-        onClick={() => handleBack()}
-      >
-        <AiOutlineLeft className="text-[10px] mr-2" />
-        <span className="">Back</span>
-      </span>
-      <div className="setting-text mt-[1rem] ml-[0.25rem] px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
+      <div className="setting-text mt-[2.5rem] ml-[0.25rem] px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
         Select Output
       </div>
       {/* <h6 className="setting-text ml-[0.5rem] mt-[1rem]">Output</h6> */}
