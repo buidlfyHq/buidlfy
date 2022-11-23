@@ -23,7 +23,7 @@ const Text: FC<ITexts> = ({
 
   useEffect(() => {
     handleOnChange();
-  }, [outputValue]);
+  }, [outputValue]); // eslint-disable-line
 
   const handleOnChange = () => {
     if (outputValue && outputValue.find((output) => output.id === id)) {
@@ -73,6 +73,7 @@ const Text: FC<ITexts> = ({
       {link ? (
         <a
           target="_blank"
+          rel="noreferrer"
           href={link}
           className="text-class cursor-pointer flex overflow-hidden items-center justify-center w-auto h-full"
         >

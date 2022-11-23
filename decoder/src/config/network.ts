@@ -1,6 +1,6 @@
 export const networks = {
   56: {
-    chainId: 56,
+    chainId: `0x${Number(56).toString(16)}`,
     chainName: "Binance Smart Chain",
     nativeCurrency: {
       name: "BNB",
@@ -11,7 +11,7 @@ export const networks = {
     blockExplorerUrls: ["https://bscscan.com"],
   },
   80001: {
-    chainId: 80001,
+    chainId: `0x${Number(80001).toString(16)}`,
     chainName: "Mumbai",
     nativeCurrency: {
       name: "MATIC",
@@ -24,7 +24,7 @@ export const networks = {
     blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
   },
   1: {
-    chainId: 1,
+    chainId: `0x${Number(1).toString(16)}`,
     chainName: "ETH",
     nativeCurrency: {
       name: "Ether",
@@ -35,7 +35,7 @@ export const networks = {
     blockExplorerUrls: ["https://etherscan.io"],
   },
   420: {
-    chainId: 420,
+    chainId: `0x${Number(420).toString(16)}`,
     chainName: "Optimism Goerli Testnet",
     nativeCurrency: {
       name: "Görli Ether",
@@ -46,7 +46,7 @@ export const networks = {
     blockExplorerUrls: ["https://goerli-optimism.etherscan.io/"],
   },
   137: {
-    chainId: 137,
+    chainId: `0x${Number(137).toString(16)}`,
     chainName: "Polygon Mainnet",
     nativeCurrency: {
       name: "MATIC",
@@ -57,7 +57,7 @@ export const networks = {
     blockExplorerUrls: ["https://polygonscan.com"],
   },
   97: {
-    chainId: 97,
+    chainId: `0x${Number(97).toString(16)}`,
     chainName: "Binance Smart Chain Testnet",
     nativeCurrency: {
       name: "BSC",
@@ -68,7 +68,7 @@ export const networks = {
     blockExplorerUrls: ["https://testnet.bscscan.com"],
   },
   10: {
-    chainId: 10,
+    chainId: `0x${Number(10).toString(16)}`,
     chainName: "Optimism",
     nativeCurrency: {
       name: "Optimism",
@@ -79,7 +79,7 @@ export const networks = {
     blockExplorerUrls: ["https://optimistic.etherscan.io/"],
   },
   134: {
-    chainId: 134,
+    chainId: `0x${Number(134).toString(16)}`,
     chainName: "iExec Sidechain",
     nativeCurrency: {
       name: "xRLC",
