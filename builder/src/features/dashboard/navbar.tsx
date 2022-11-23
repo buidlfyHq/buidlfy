@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import WalletMenu from "features/dashboard/wallet-menu";
 import MintNFT from "features/dashboard/mint-nft";
@@ -15,7 +16,6 @@ import {
 } from "redux/contract/contract.reducers";
 import { IRootState } from "redux/root-state.interface";
 import "styles/components.css";
-import { IContractElementSelected } from "redux/contract/contract.interfaces";
 
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
@@ -126,7 +126,12 @@ const Navbar: FC<INavbar> = ({
             <MdRedo />
           </span>
         </div>*/}
-
+        <Link
+          to="/preview"
+          className="py-3 px-5 my-2 ml-3 text-[14px] font[500] button-singleTemp"
+        >
+          <div className="gradient-text">Preview</div>
+        </Link>
         <MintNFT />
         <PublishMenu />
         <WalletMenu isMyTemplatePage={false} />

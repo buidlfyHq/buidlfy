@@ -6,6 +6,7 @@ import Image from "components/custom-components/image";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import PreviewContainer from "components/custom-components/preview-container";
 
 interface IRenderItem {
   item: IWorkspaceElement;
@@ -16,6 +17,7 @@ interface IRenderItem {
   setSideElement?: (sideElement: string) => void;
   setHideNavbar?: (hideNavbar: boolean) => void;
   hideSettingSidebar?: () => void;
+  preview?: boolean;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -27,6 +29,7 @@ const RenderItem: FC<IRenderItem> = ({
   setSideElement,
   setHideNavbar,
   hideSettingSidebar,
+  preview,
 }) => {
   switch (item.name) {
     case "Button":
@@ -105,26 +108,44 @@ const RenderItem: FC<IRenderItem> = ({
     case "Horizontal Container":
     case "Vertical Container":
       return (
-        <Container
-          item={item}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          setOpenSetting={setOpenSetting}
-          setOpenTab={setOpenTab}
-          setDrag={setDrag}
-          setIsContainerSelected={setIsContainerSelected}
-          setSideElement={setSideElement}
-          setHideNavbar={setHideNavbar}
-          hideSettingSidebar={hideSettingSidebar}
-          backgroundSize={item.style.backgroundSize}
-          padding={item.style.padding}
-          margin={item.style.margin}
-          imgData={item.imgData}
-        />
+        <>
+          {preview ? (
+            <PreviewContainer
+              item={item}
+              children={item.children}
+              backgroundColor={item.style.backgroundColor}
+              color={item.style.color}
+              borderRadius={item.style.borderRadius}
+              borderWidth={item.style.borderWidth}
+              shadow={item.style.shadow}
+              backgroundSize={item.style.backgroundSize}
+              padding={item.style.padding}
+              margin={item.style.margin}
+              imgData={item.imgData}
+            />
+          ) : (
+            <Container
+              item={item}
+              children={item.children}
+              backgroundColor={item.style.backgroundColor}
+              color={item.style.color}
+              borderRadius={item.style.borderRadius}
+              borderWidth={item.style.borderWidth}
+              shadow={item.style.shadow}
+              setOpenSetting={setOpenSetting}
+              setOpenTab={setOpenTab}
+              setDrag={setDrag}
+              setIsContainerSelected={setIsContainerSelected}
+              setSideElement={setSideElement}
+              setHideNavbar={setHideNavbar}
+              hideSettingSidebar={hideSettingSidebar}
+              backgroundSize={item.style.backgroundSize}
+              padding={item.style.padding}
+              margin={item.style.margin}
+              imgData={item.imgData}
+            />
+          )}
+        </>
       );
     default:
       return <></>;
