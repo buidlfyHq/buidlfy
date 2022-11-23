@@ -1,9 +1,8 @@
-import NumberInput from "components/utils/input/number-input";
-import { ReplaceValue } from "components/utils/render-setting";
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import Select from "react-select";
+import { ReplaceValue } from "components/utils/render-setting";
+import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
 import { fontOptions } from "components/utils/font-option";
 import { fontStyles } from "components/utils/font-family-styles";
 import "styles/components.css";
