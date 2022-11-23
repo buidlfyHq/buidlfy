@@ -304,6 +304,15 @@ export const components = [
       ...defaultMarginStyles,
     },
   },
+  {
+    name: "Wall Of Love",
+    nft: true,
+    h: 8,
+    minH: 1,
+    style: {
+      ...defaultDeleteStyles,
+    },
+  },
   // {
   //   name: "Divider",
   //   h: 1,

@@ -1379,3 +1379,13 @@
 .navbar-text {
   color: rgba(16, 15, 17, 0.64);
 }
+
+.lenster-div {
+  padding-left: 120px;
+  padding-right:120px;
+  display: grid;
+  grid-template-columns: repeat(2, 25rem);
+  grid-gap:55px;
+  grid-template-rows: repeat(5,34rem);
+  /* grid-template-columns: 25rem; */
+}

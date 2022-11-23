@@ -90,7 +90,14 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
     case "Horizontal Container":
     case "Vertical Container":
       return <ContainerSettings />;
-
+    case "Wall Of Love":
+      return (
+        <h3 className="ml-[0.5rem] mt-[1.5rem]">
+          {selectedElement ? (
+            <span className="setting-text">{selectedElement.name}</span>
+          ) : null}
+        </h3>
+      );
     case "Input":
       return <InputSettings handleSettingChange={handleSettingChange} />;
 

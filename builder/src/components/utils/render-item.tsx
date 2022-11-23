@@ -6,6 +6,7 @@ import Image from "components/custom-components/image";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import LensterWidget from "components/custom-components/lenster-widget";
 
 interface IRenderItem {
   item: IWorkspaceElement;
@@ -104,6 +105,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Container":
     case "Horizontal Container":
     case "Vertical Container":
+    case "Lenster Layout":
       return (
         <Container
           item={item}
@@ -124,6 +126,13 @@ const RenderItem: FC<IRenderItem> = ({
           padding={item.style.padding}
           margin={item.style.margin}
           imgData={item.imgData}
+        />
+      );
+    case "Wall Of Love":
+      return (
+        <LensterWidget
+          i={item.i}
+          backgroundColor={item.style.backgroundColor}
         />
       );
     default:

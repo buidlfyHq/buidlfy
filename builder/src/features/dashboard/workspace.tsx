@@ -17,6 +17,7 @@ import {
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
+import useScript from "hooks/use-script";
 
 interface IWorkspaceComponent {
   setOpenSetting: (open: boolean) => void;
@@ -253,6 +254,10 @@ const Workspace: FC<IWorkspaceComponent> = ({
       }}
       className="main-div h-full"
     >
+      {/* <>
+        <span id="lens-embed" data-post-id="0xf5-0x17" />
+        {useScript("https://embed.withlens.app/script.js")}
+      </> */}
       {workspaceElements?.length > 0 ? (
         <section onClick={handleCheckIsContainer} className="z-100">
           <section

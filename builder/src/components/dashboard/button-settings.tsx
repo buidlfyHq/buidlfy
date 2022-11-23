@@ -20,6 +20,7 @@ import {
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import "styles/dashboard.css";
+import useScript from "hooks/use-script";
 
 const ButtonSettings: FC<ISettings> = ({
   handleSettingChange,
@@ -76,6 +77,7 @@ const ButtonSettings: FC<ISettings> = ({
           justifyContent={selectedElement.style.justifyContent}
           color={selectedElement.style.color}
         />
+
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
           <textarea
             value={selectedElement.value}
