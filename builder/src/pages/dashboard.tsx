@@ -18,6 +18,7 @@ import {
   updateContractAddress,
   updateContractNetwork,
 } from "redux/contract/contract.reducers";
+import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
@@ -47,6 +48,8 @@ const Dashboard: FC = () => {
       dispatch(updateContractAddress(JSON.parse(saveItems)?.contract?.address));
       dispatch(updateContractNetwork(JSON.parse(saveItems)?.contract?.network));
     }
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType("start"));
   }, []); // eslint-disable-line
 
   return (

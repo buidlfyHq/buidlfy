@@ -127,8 +127,11 @@ const Navbar: FC<INavbar> = ({
           </span>
         </div>*/}
         <Link
+          target="_blank"
+          rel="noreferrer"
           to="/preview"
           className="py-3 px-5 my-2 ml-3 text-[14px] font[500] button-singleTemp"
+          onClick={handleSave}
         >
           <div className="gradient-text">Preview</div>
         </Link>
