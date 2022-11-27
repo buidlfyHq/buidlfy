@@ -38,6 +38,8 @@ export interface IWorkspaceElement {
   placeholder?: string;
   wallet?: string;
   slug?: string;
+  limit?: number;
+  cardsPerRow?: number;
 }
 
 export interface IHead {

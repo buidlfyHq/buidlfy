@@ -1,0 +1,34 @@
+import { FC } from "react";
+import { useSelector } from "react-redux";
+import BgColorComponent from "components/settings/bg-color-component";
+import { IRootState } from "redux/root-state.interface";
+import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+
+const NftCardSettings: FC = () => {
+  const selectedElement: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
+  );
+  console.log(selectedElement)
+
+
+  return (
+    <>
+      <h3 className="ml-[0.5rem] mt-[1.5rem]">
+        {selectedElement ? (
+          <span className="setting-text">{selectedElement.name}</span>
+        ) : null}
+      </h3>
+
+      <BgColorComponent
+        i={selectedElement.i}
+        elementBackgroundColor={selectedElement.style.backgroundColor}
+      />
+      {/* <BackgroundSizeComponent
+        i={selectedElement.i}
+        backgroundSize={selectedElement.style?.backgroundSize}
+      /> */}
+    </>
+  );
+};
+
+export default NftCardSettings;

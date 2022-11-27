@@ -33,4 +33,6 @@ export default interface IWorkspace {
   title?: string;
   price?: string;
   highestBid?: string;
+  cardsPerRow?: number;
+  limit?: number;
 }

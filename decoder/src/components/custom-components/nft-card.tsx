@@ -23,7 +23,7 @@ const NftCard: FC<INftCard> = ({
       <div
         className="w-full h-full p-2 rounded-lg bg-stone-700"
         style={{
-          backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
+          // backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, ${backgroundColor.a})`,
           boxShadow: "0px 2px 7px rgba(0, 0, 0, 0.5)",
         }}
       >

@@ -319,6 +319,8 @@ export const components = [
     minH: 1,
     style: {
       ...defaultDeleteStyles,
+      ...defaultColorStyles,
+      backgroundSize: "contain",
     },
   },
   {
@@ -346,6 +348,7 @@ export const components = [
         style: {
           ...defaultColorStyles,
           ...defaultDeleteStyles,
+          backgroundSize: "contain",
           backgroundColor: "rgba(68, 64, 60, 100)",
         },
       },
@@ -361,6 +364,7 @@ export const components = [
         style: {
           ...defaultColorStyles,
           ...defaultDeleteStyles,
+          backgroundSize: "contain",
           backgroundColor: "rgba(68, 64, 60, 100)",
         },
       },
@@ -376,6 +380,7 @@ export const components = [
         style: {
           ...defaultColorStyles,
           ...defaultDeleteStyles,
+          backgroundSize: "contain",
           backgroundColor: "rgba(68, 64, 60, 100)",
         },
       },

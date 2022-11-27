@@ -11,6 +11,7 @@ import { IRootState } from "redux/root-state.interface";
 import { ISettings } from "redux/workspace/workspace.interfaces";
 import "styles/components.css";
 import "styles/dashboard.css";
+import NftCardSettings from "components/dashboard/nft-card-settings";
 
 export enum ReplaceValue {
   INCREMENT = "increment",
@@ -97,13 +98,8 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
       return <InputSettings handleSettingChange={handleSettingChange} />;
 
     case "NFT Card":
-      return (
-        <h3 className="ml-[0.5rem] mt-[1.5rem]">
-          {selectedElement ? (
-            <span className="setting-text">{selectedElement.name}</span>
-          ) : null}
-        </h3>
-      );
+      return <NftCardSettings />
+      
     case "NFT Layout":
       return <NftLayoutSettings />;
 

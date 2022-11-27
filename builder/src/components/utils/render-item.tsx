@@ -129,7 +129,16 @@ const RenderItem: FC<IRenderItem> = ({
         />
       );
     case "NFT Card":
-      return <NftCard i={item.i} backgroundColor={item.style.backgroundColor} />;
+      return (
+        <NftCard
+         i={item.i} 
+         backgroundColor={item.style.backgroundColor} 
+         isAuto={item.style.isAuto}
+         backgroundSize={item.style.backgroundSize}
+         imgData={item.imgData}
+         justifyContent={item.style.justifyContent}
+        />
+      )
     default:
       return <></>;
   }

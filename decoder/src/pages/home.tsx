@@ -27,6 +27,8 @@ const Home: FC = () => {
   const [nftCard, setNftCard] = useState<any>(null); // for creating a copy of NFT Card
   const [account, setAccount] = useState<string>(""); // for storing wallet address
   const [slug, setSlug] = useState<string>(""); // for storing collection slug
+  const [limit, setLimit] = useState<number>();
+  const [cardsPerRow, setCardsPerRow] = useState<number>();
 
   const connectWallet = async () => {
     try {
@@ -38,6 +40,8 @@ const Home: FC = () => {
       console.log(error);
     }
   };
+
+  console.log(testConfig)
 
   useEffect(() => {
     let nftY = null;
@@ -51,12 +55,15 @@ const Home: FC = () => {
             nftY = item.y;
             setNftCard(item);
           }
-          if (item.nft && item.y === nftY) {
-            nftCols++;
-          }
+          // if (item.nft && item.y === nftY) {
+          //   nftCols++;
+          // }
         });
         // remove the original NFT Layout
         setTestConfig(testConfig.filter((i: IWorkspace) => !i.nft));
+
+        setCardsPerRow(i?.cardsPerRow)
+        setLimit(i?.limit)
 
         if (i.slug) {
           setSlug(i.slug);
@@ -68,18 +75,22 @@ const Home: FC = () => {
       });
 
     setNftColumns(nftCols);
+    console.log(nftColumns)
   }, []);
 
   useEffect(() => {
+    console.log('in')
     if (nftCard && slug) {
+      console.log(1)
       fetch(
-        `https://testnets-api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=20&collection=${slug}&include_orders=false`,
+        `https://testnets-api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=${limit}&collection=${slug}&include_orders=false`,
         { method: "GET", headers: { Accept: "application/json" } }
       )
         .then((response) => response.json())
         .then(({ assets }) => {
+          console.log(assets)
           renderTokensForOwner(assets);
-        });
+        }).catch(err => console.log(err))
     } else if (nftCard && account) {
       fetch(
         `https://testnets-api.opensea.io/api/v1/assets?owner=${account}&order_direction=desc&offset=0&limit=20&include_orders=false`,
@@ -90,7 +101,7 @@ const Home: FC = () => {
           renderTokensForOwner(assets);
         });
     }
-  }, [nftCard, account]);
+  }, [account, nftCard]);
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
@@ -99,10 +110,12 @@ const Home: FC = () => {
 
   // render nfts from connected wallet using opensea api
   const renderTokensForOwner = (assets: any[]) => {
-    const colW = Math.ceil(6 / nftColumns);
+    const colW = 6 / +cardsPerRow;
+    console.log(colW, +cardsPerRow)
     let X = 0;
 
     let nCardsArr = assets.map((asset: any) => {
+      // console.log(asset)
       let modifiedX = X;
       X = X + colW;
       X = X + colW <= 6 ? X : 0;
@@ -113,7 +126,7 @@ const Home: FC = () => {
         x: modifiedX,
         y: nftPosition,
         w: colW,
-        image: asset.image_url,
+        image: asset.asset_contract.image_url,
         collection: asset.asset_contract.name,
         title: asset.name,
         price: asset.last_sale?.payment_token.eth_price,
@@ -130,7 +143,7 @@ const Home: FC = () => {
           ...item,
           y:
             y +
-            Math.ceil(nCardsArr.length / nftColumns) * nCardsArr[0].h -
+            (nCardsArr.length / +cardsPerRow) * nCardsArr[0].h -
             diff,
         };
       } else {
@@ -143,7 +156,7 @@ const Home: FC = () => {
 
     setTestConfig([...newItemsArr, ...nCardsArr]);
   };
-  
+
   return (
     <main
       className="min-h-screen"
@@ -162,7 +175,7 @@ const Home: FC = () => {
         margin={[0, 0]}
         className="overflow-hidden h-fit"
       >
-        {testConfig.builder.map((c: IWorkspace) => {
+        {testConfig.map((c: IWorkspace) => {
           const { x, y, w, h, minW, i } = c;
           return (
             <div key={i} data-grid={{ x, y, w, h, minW }}>

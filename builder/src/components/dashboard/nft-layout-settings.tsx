@@ -4,6 +4,8 @@ import BgColorComponent from "components/settings/bg-color-component";
 import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import SizeComponent from "components/settings/image-size-component";
+import BackgroundSizeComponent from "components/settings/background-size-component";
 
 const NftLayoutSettings: FC = () => {
   const dispatch = useDispatch();
@@ -21,6 +23,8 @@ const NftLayoutSettings: FC = () => {
     );
   };
 
+  console.log(selectedElement)
+
   return (
     <>
       <h3 className="ml-[0.5rem] mt-[1.5rem]">
@@ -33,6 +37,10 @@ const NftLayoutSettings: FC = () => {
         i={selectedElement.i}
         elementBackgroundColor={selectedElement.style.backgroundColor}
       />
+      <BackgroundSizeComponent
+        i={selectedElement.i}
+        backgroundSize={selectedElement.style?.backgroundSize}
+      />
       <section className="">
         <span className="margin-text grow text-left px-3 mt-[0.5rem] mb-0">
           Fetch NFTs
@@ -41,7 +49,7 @@ const NftLayoutSettings: FC = () => {
           <span className="margin-text grow text-left px-3 mt-[0.5rem] mb-0">
             Connect Wallet
           </span>
-          <div className="flex ml-2 justify-center mt-1">
+          <div className="flex justify-center mt-1 ml-2">
             <div
               onClick={() =>
                 selectedElement?.wallet === "wallet"
@@ -51,7 +59,7 @@ const NftLayoutSettings: FC = () => {
               className="form-check form-switch"
             >
               <input
-                className="form-check-input w-12 -ml-10 bg-blue rounded-full h-5 align-top cursor-pointer shadow-sm"
+                className="w-12 h-5 -ml-10 align-top rounded-full shadow-sm cursor-pointer form-check-input bg-blue"
                 type="checkbox"
                 role="switch"
                 id="flexSwitchCheckDefault"
@@ -84,6 +92,36 @@ const NftLayoutSettings: FC = () => {
             placeholder="Collection Slug"
             value={selectedElement?.slug}
             onChange={(e) => handleClick("slug", e.target.value)}
+          />
+        </div>
+
+        {/* <button
+          onClick={handleFetch}
+         className="px-4 py-2 w-full my-2 text-white bg-black/70 rounded-[4px]"
+        >
+          Fetch
+        </button> */}
+
+        <div className="flex flex-col items-start my-2 mx-2 w-[13.5rem] text-black rounded-[6px]">
+          <div>Limit</div>
+          <input
+            className={`changeText pl-[1rem] py-[0.4rem] rounded-[6px]`}
+            type="number"
+            name="limit"
+            placeholder="ex: 2"
+            value={selectedElement?.limit}
+            onChange={(e) => handleClick("limit", e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col items-start my-2 mx-2 w-[13.5rem] text-black rounded-[6px]">
+          <div>Cards per row</div>
+          <input
+            className={`changeText pl-[1rem] py-[0.4rem] rounded-[6px]`}
+            type="nummber"
+            name="cards-per-row"
+            placeholder="ex: 3"
+            value={selectedElement?.cardsPerRow}
+            onChange={(e) => handleClick("cardsPerRow", e.target.value)}
           />
         </div>
       </section>
