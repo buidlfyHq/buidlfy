@@ -27,17 +27,6 @@ const NftCard: FC<INftCard> = ({
           boxShadow: "0px 2px 7px rgba(0, 0, 0, 0.5)",
         }}
       >
-        {/* <div
-          id="image-one"
-          className="items-center justify-center w-auto h-[65%] rounded-lg"
-          style={{
-            backgroundImage: `url(${image ? image : defaultImage})`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            backgroundSize: "contain",
-            boxShadow: "0px 3px 8px rgba(0, 0, 0, 0.5)",
-          }}
-        /> */}
         <div className="w-auto h-[65%]">
           <img
             src={image}
