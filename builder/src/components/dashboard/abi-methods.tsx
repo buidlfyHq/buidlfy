@@ -13,7 +13,7 @@ import {
   IShowComponent,
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
-import { IContractDetails } from "redux/contract/contract.interfaces";
+import { IAbi, IContractDetails } from "redux/contract/contract.interfaces";
 
 interface IAbiMethods {
   setShowComponent: (showComponent: IShowComponent) => void;
@@ -36,15 +36,7 @@ const AbiMethods: FC<IAbiMethods> = ({
     (state: IRootState) => state.contract.contractDetails
   );
 
-  const [abiJson, setAbiJson] = useState<
-    {
-      inputs: { internalType: string; name: string; type: string }[];
-      name: string;
-      outputs: { internalType: string; name: string; type: string }[];
-      stateMutability: string;
-      type: string;
-    }[]
-  >([]);
+  const [abiJson, setAbiJson] = useState<IAbi[]>([]);
 
   useEffect(() => {
     if (contractDetails.abi) {
