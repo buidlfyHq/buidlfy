@@ -64,11 +64,7 @@ const ContractModal: FC<IContractModal> = ({
   const handleShow = () => setShowUpload(false);
 
   const handleSetAbi = (abi: string) => {
-    // keep type = function, remove other types
-    const filteredAbi = JSON.parse(abi).filter(
-      (m: { type: string }) => m.type === "function"
-    );
-    setUpdateAbi(JSON.stringify(filteredAbi));
+    setUpdateAbi(abi);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getContainerList } from "./contract.utils";
+import { filterContractAbi, getContainerList } from "./contract.utils";
 import {
   IContract,
   IContractState,
@@ -11,7 +11,7 @@ const initialState: IContractState = {
   contractDetails: {
     abi: "",
     address: "",
-    network: ""
+    network: "",
   },
   contractElementSelector: null,
   contractElementSelected: {},
@@ -26,11 +26,11 @@ const contractSlice = createSlice({
     updateContractList(state, action: { payload: IContract[] }) {
       state.contractList = action.payload;
     },
-
     // to update contract details
     updateContractAbi(state, action: { payload: string }) {
-      state.contractDetails.abi = action.payload;
-    }, 
+      const filterdContractAbi = filterContractAbi(action.payload);
+      state.contractDetails.abi = JSON.stringify(filterdContractAbi);
+    },
     updateContractAddress(state, action: { payload: string }) {
       state.contractDetails.address = action.payload;
     },
@@ -45,7 +45,7 @@ const contractSlice = createSlice({
       state.contractElementSelector = null;
     },
     // to update contract element selected
-    createSelectedElement(state, action: { payload: ISelectedPayload }) {  
+    createSelectedElement(state, action: { payload: ISelectedPayload }) {
       state.contractElementSelected[action.payload.name] = [
         action.payload.element,
       ];
@@ -74,6 +74,6 @@ export const {
   createSelectedElement,
   addSelectedElement,
   updateSelectedElement,
-  updateContractNetwork
+  updateContractNetwork,
 } = contractSlice.actions;
 export default contractSlice.reducer;
