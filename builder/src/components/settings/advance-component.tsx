@@ -1,27 +1,22 @@
-import { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { FaFileContract } from "react-icons/fa";
-import AbiMethods from "components/dashboard/abi-methods";
-import AbiComponents from "components/dashboard/abi-components";
-import ContractModal from "components/dashboard/contract-modal";
-import OracleModal from "components/dashboard/oracle-modal";
-import ContractList from "components/utils/contract/contract-list";
-import ContractView from "components/utils/contract/contract-view";
-import ContractHistory from "components/utils/contract/contract-history";
-import ContractRemove from "components/utils/contract/contract-remove";
-import OracleComponents from "components/dashboard/oracle-components";
-import {
-  updateContractAbi,
-  updateContractAddress,
-  updateContractList,
-  updateContractNetwork,
-} from "redux/contract/contract.reducers";
-import { IRootState } from "redux/root-state.interface";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
-import { IContract } from "redux/contract/contract.interfaces";
-import "styles/components.css";
-import "styles/dashboard.css";
-import WarningText from "components/utils/setting-warning";
+import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaFileContract } from 'react-icons/fa';
+import AbiMethods from 'components/dashboard/abi-methods';
+import AbiComponents from 'components/dashboard/abi-components';
+import ContractModal from 'components/dashboard/contract-modal';
+import OracleModal from 'components/dashboard/oracle-modal';
+import ContractList from 'components/utils/contract/contract-list';
+import ContractView from 'components/utils/contract/contract-view';
+import ContractHistory from 'components/utils/contract/contract-history';
+import ContractRemove from 'components/utils/contract/contract-remove';
+import OracleComponents from 'components/dashboard/oracle-components';
+import { updateContractAbi, updateContractAddress, updateContractList, updateContractNetwork } from 'redux/contract/contract.reducers';
+import { IRootState } from 'redux/root-state.interface';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import { IContract } from 'redux/contract/contract.interfaces';
+import 'styles/components.css';
+import 'styles/dashboard.css';
+import WarningText from 'components/utils/setting-warning';
 
 interface IAdvanceComponent {
   selectedElement: IWorkspaceElement;
@@ -29,24 +24,12 @@ interface IAdvanceComponent {
 
 const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const dispatch = useDispatch();
-  const workspaceElements = useSelector(
-    (state: IRootState) => state.workspace.workspaceElements
-  );
-  const selectedContractAbi = useSelector(
-    (state: IRootState) => state.contract.contractDetails.abi
-  );
-  const selectedContractAddress = useSelector(
-    (state: IRootState) => state.contract.contractDetails.address
-  );
-  const updatedNewContractList = useSelector(
-    (state: IRootState) => state.contract.contractList
-  );
-  const selectedContractNetwork: string = useSelector(
-    (state: IRootState) => state.contract.contractDetails.network
-  );
-  const oracleId = useSelector(
-    (state: IRootState) => state.oracle.oracleConfig.inputs[0]?.id
-  );
+  const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
+  const selectedContractAbi = useSelector((state: IRootState) => state.contract.contractDetails.abi);
+  const selectedContractAddress = useSelector((state: IRootState) => state.contract.contractDetails.address);
+  const updatedNewContractList = useSelector((state: IRootState) => state.contract.contractList);
+  const selectedContractNetwork: string = useSelector((state: IRootState) => state.contract.contractDetails.network);
+  const oracleId = useSelector((state: IRootState) => state.oracle.oracleConfig.inputs[0]?.id);
 
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
   const [isOracleOpen, setIsOracleOpen] = useState<boolean>(false); // for connect oracle modal
@@ -61,23 +44,17 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   }>(null); // for abi method component
   const [isViewMore, setIsViewMore] = useState<boolean>(false);
 
-  const isWalletConnect = workspaceElements.findIndex(
-    (item) => item.connectWallet === true
-  );
+  const isWalletConnect = workspaceElements.findIndex(item => item.connectWallet === true);
 
   useEffect(() => {
     try {
       setIsViewMore(!!(updatedNewContractList?.length >= 4));
     } catch (error) {
-      console.log(error, "error");
+      console.log(error, 'error');
     }
   }, []); // eslint-disable-line
 
-  const handleContractList = (
-    abi: string,
-    address: string,
-    network: string
-  ) => {
+  const handleContractList = (abi: string, address: string, network: string) => {
     dispatch(updateContractAbi(JSON.parse(abi)));
     dispatch(updateContractAddress(JSON.parse(address)));
     dispatch(updateContractNetwork(JSON.parse(network)));
@@ -87,21 +64,15 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     setIsViewMore(false);
   };
 
-  const paginatedContractList = isViewMore
-    ? updatedNewContractList?.slice(0, 4)
-    : updatedNewContractList;
+  const paginatedContractList = isViewMore ? updatedNewContractList?.slice(0, 4) : updatedNewContractList;
 
   const handleClearContract = () => {
-    localStorage.removeItem("contractList");
+    localStorage.removeItem('contractList');
     dispatch(updateContractList(null));
     setIsViewMore(false);
   };
 
-  const contractSection = (
-    title: string,
-    description: string,
-    contract?: boolean
-  ) => (
+  const contractSection = (title: string, description: string, contract?: boolean) => (
     <>
       <div className="flex justify-center mt-[1rem]" />
       <h3 className="ml-[0.5rem]">
@@ -120,10 +91,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
           {contract ? (
             <ContractModal isOpen={isOpen} setIsOpen={setIsOpen} />
           ) : (
-            <OracleModal
-              isOracleOpen={isOracleOpen}
-              setIsOracleOpen={setIsOracleOpen}
-            />
+            <OracleModal isOracleOpen={isOracleOpen} setIsOracleOpen={setIsOracleOpen} />
           )}
         </div>
       </div>
@@ -132,76 +100,42 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
 
   return (
     <>
-      {selectedContractAbi &&
-      selectedContractAddress &&
-      selectedContractNetwork ? (
+      {selectedContractAbi && selectedContractAddress && selectedContractNetwork ? (
         <>
           <div className="flex justify-center mt-[3rem]" />
-          <AbiMethods
-            setShowComponent={setShowComponent}
-            selectedElement={selectedElement}
-            setIsOpen={setIsOpen}
-          />
-          <AbiComponents
-            showComponent={showComponent}
-            elementId={selectedElement.i}
-          />
+          <AbiMethods setShowComponent={setShowComponent} selectedElement={selectedElement} setIsOpen={setIsOpen} />
+          <AbiComponents showComponent={showComponent} elementId={selectedElement.i} />
         </>
       ) : (
         <>
           {selectedElement.oracle || oracleId ? (
             <>
               <div className="flex justify-center mt-[3rem]" />
-              <OracleComponents
-                selectedElement={selectedElement}
-                isOracleOpen={isOracleOpen}
-                setIsOracleOpen={setIsOracleOpen}
-              />
+              <OracleComponents selectedElement={selectedElement} isOracleOpen={isOracleOpen} setIsOracleOpen={setIsOracleOpen} />
             </>
           ) : (
             <>
               <section className="mt-[5rem]">
-                {contractSection(
-                  "Import Contract",
-                  "Integrate your Frontend with smart contracts.",
-                  true
-                )}
+                {contractSection('Import Contract', 'Integrate your Frontend with smart contracts.', true)}
                 {selectedElement.connectWallet ? (
                   <WarningText text="Sorry! Connect wallet and Contract or Oracle binding cannot be for common button." />
                 ) : null}
-                {isWalletConnect < 0 ? (
-                  <WarningText text="Please Add connect wallet button before importing Contract or Oracle." />
-                ) : null}
+                {isWalletConnect < 0 ? <WarningText text="Please Add connect wallet button before importing Contract or Oracle." /> : null}
                 <ContractHistory newContractList={updatedNewContractList} />
 
                 <div className="grid grid-row-3 gap-4 mt-[1rem] mx-3">
                   {paginatedContractList &&
                     paginatedContractList.map((contract: IContract) => {
                       const { text, address, network } = contract;
-                      return (
-                        <ContractList
-                          contract={contract}
-                          handleContractList={() =>
-                            handleContractList(text, address, network)
-                          }
-                        />
-                      );
+                      return <ContractList contract={contract} handleContractList={() => handleContractList(text, address, network)} />;
                     })}
                   <div className="flex items-center justify-end">
                     <ContractRemove handleClearContract={handleClearContract} />
-                    <ContractView
-                      isViewMore={isViewMore}
-                      handleShow={handleShow}
-                    />
+                    <ContractView isViewMore={isViewMore} handleShow={handleShow} />
                   </div>
                 </div>
               </section>
-              <>
-                {contractSection(
-                  "Import Oracle",
-                  "Integrate your Frontend with oracles."
-                )}
-              </>
+              <>{contractSection('Import Oracle', 'Integrate your Frontend with oracles.')}</>
             </>
           )}
         </>

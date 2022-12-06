@@ -17,7 +17,8 @@ class DeploymentsController {
 
       res.status(200).json({ data: deploymentResponse.toJson(), message: 'created' });
     } catch (error) {
-      Logger.error(`Error found in ${__filename} - startDeployment - ${error.message}`);
+      Logger.error(`Error found in ${__filename} - startDeployment - `);
+      Logger.error(error);
       next(error);
     }
   };
@@ -33,7 +34,8 @@ class DeploymentsController {
       const { domain } = await this.domainService.generateSitename(siteName, projectId, deploymentLink);
       res.status(200).json({ data: { success: true, domain }, message: 'Subdomain created!' });
     } catch (error) {
-      Logger.error(`Error found in ${__filename} - createDeploymentDomain - ${error.message}`);
+      Logger.error(`Error found in ${__filename} - createDeploymentDomain - `);
+      Logger.error(error);
       next(error);
     }
   };
@@ -49,7 +51,8 @@ class DeploymentsController {
       const response = await this.domainService.updateSubdomainLink(subdomainId, projectId, deploymentLink);
       res.status(200).json({ data: { success: true, domain: response.data.domain }, message: 'Subdomain update!' });
     } catch (error) {
-      Logger.error(`Error found in ${__filename} - createDeploymentDomain - ${error.message}`);
+      Logger.error(`Error found in ${__filename} - createDeploymentDomain - `);
+      Logger.error(error);
       next(error);
     }
   };
@@ -64,7 +67,8 @@ class DeploymentsController {
       } = verifyResponse.data;
       res.status(200).json({ data: { success: domainVerified }, message: domainVerified ? 'Subdomain verified!' : 'Subdomain not verified' });
     } catch (error) {
-      Logger.error(`Error found in ${__filename} - verifyDeploymentDomain - ${error.message}`);
+      Logger.error(`Error found in ${__filename} - verifyDeploymentDomain - `);
+      Logger.error(error);
       next(error);
     }
   };

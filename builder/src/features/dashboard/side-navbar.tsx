@@ -1,11 +1,11 @@
-import { FC } from "react";
-import { useDispatch } from "react-redux";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import { SidebarEnum } from "redux/workspace/workspace.interfaces";
-import logo from "assets/icons/buidlfy.png";
-import ElementSvg from "components/utils/assets/elements-svg";
-import TemplateSvg from "components/utils/assets/template-svg";
-import "styles/components.css";
+import { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
+import { SidebarEnum } from 'redux/workspace/workspace.interfaces';
+import logo from 'assets/icons/buidlfy.png';
+import ElementSvg from 'components/utils/assets/elements-svg';
+import TemplateSvg from 'components/utils/assets/template-svg';
+import 'styles/components.css';
 
 interface ISideNavbar {
   setSideElement: (sideElement: string) => void;
@@ -22,16 +22,12 @@ const SideNavbar: FC<ISideNavbar> = ({ setSideElement, setHideNavbar }) => {
   return (
     <main className="w-[80px] sidenav z-[1] fixed top-0 bottom-0 left-0">
       {/* Components */}
-      <img
-        src={logo}
-        className="w-[2.4rem] mx-[1.3rem] my-[0.65rem] rounded-full hover:shadow-lg"
-        alt="logo"
-      />
+      <img src={logo} className="w-[2.4rem] mx-[1.3rem] my-[0.65rem] rounded-full hover:shadow-lg" alt="logo" />
       <div className="side-border px-4 pt-[1rem]">
         <div
           onClick={() => {
             dispatch(toggleModal(true));
-            dispatch(toggleModalType("template"));
+            dispatch(toggleModalType('template'));
           }}
           className="cursor-pointer icon-div"
         >

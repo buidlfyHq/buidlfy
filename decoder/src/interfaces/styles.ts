@@ -1,5 +1,3 @@
-import IColor from "./color";
-
 export default interface IStyles {
   color: string;
   borderColor?: string;
@@ -14,17 +12,17 @@ export default interface IStyles {
   borderWidth?: number;
   shadow?: string;
   margin?: {
-    marginLeft?: number,
-    marginRight?: number,
-    marginTop?: number,
-    marginBottom?: number,
-  }
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
   padding?: {
-    paddingLeft?: number,
-    paddingRight?: number,
-    paddingTop?: number,
-    paddingBottom?: number,
-  }
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
   width?: number;
   height?: number;
   backgroundSize?: string;

@@ -13,7 +13,8 @@ class UploadController {
 
       res.status(200).json({ data: uploadResponse, message: 'Uploaded Successfully!' });
     } catch (error) {
-      Logger.error(`Error found in ${__filename} - startDeployment - ${error.message}`);
+      Logger.error(`Error found in ${__filename} - uploadFile - `);
+      Logger.error(error);
       next(error);
     }
   };

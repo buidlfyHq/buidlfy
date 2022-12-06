@@ -1,26 +1,22 @@
-import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Dialog } from "@headlessui/react";
-import { CgClose } from "react-icons/cg";
-import ListTemplates from "components/utils/list-templates";
-import { toggleModal } from "redux/modal/modal.reducers";
-import { setFilteredTemplateList } from "redux/template/template.reducers";
-import { IRootState } from "redux/root-state.interface";
-import { ISelectedTemplate } from "redux/template/template.interfaces";
-import { ReactComponent as SearchIcon } from "assets/svgAsIcons/search-icon.svg";
-import Spinner from "components/utils/assets/spinner";
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dialog } from '@headlessui/react';
+import { CgClose } from 'react-icons/cg';
+import ListTemplates from 'components/utils/list-templates';
+import { toggleModal } from 'redux/modal/modal.reducers';
+import { setFilteredTemplateList } from 'redux/template/template.reducers';
+import { IRootState } from 'redux/root-state.interface';
+import { ISelectedTemplate } from 'redux/template/template.interfaces';
+import { ReactComponent as SearchIcon } from 'assets/svgAsIcons/search-icon.svg';
+import Spinner from 'components/utils/assets/spinner';
 
 // removed categories as of now
 // const templateCategories = ["ALL"];
 
 const SelectTemplateModal: FC = () => {
   const dispatch = useDispatch();
-  const templateList = useSelector(
-    (state: IRootState) => state.template.templateList
-  );
-  const fetchTemplateLoading = useSelector(
-    (state: IRootState) => state.template.fetchTemplateLoading
-  );
+  const templateList = useSelector((state: IRootState) => state.template.templateList);
+  const fetchTemplateLoading = useSelector((state: IRootState) => state.template.fetchTemplateLoading);
 
   // removed as of now, commented for further use
   // const ownedListedTemplateList = useSelector(
@@ -35,13 +31,10 @@ const SelectTemplateModal: FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const filterArr =
-      value === ""
+      value === ''
         ? templateList
         : templateList.filter((item: ISelectedTemplate) =>
-            item.name
-              ?.toLowerCase()
-              .replace(/\s+/g, "")
-              .includes(value.toLowerCase().replace(/\s+/g, ""))
+            item.name?.toLowerCase().replace(/\s+/g, '').includes(value.toLowerCase().replace(/\s+/g, '')),
           );
     dispatch(setFilteredTemplateList([...filterArr]));
   };
@@ -62,15 +55,10 @@ const SelectTemplateModal: FC = () => {
     <Dialog.Panel className="flex flex-col items-center w-full max-w-[1400px] mx-28 my-20 rounded-[24px] bg-white">
       <div className="flex flex-col items-center w-full px-12 pt-12">
         <div className="flex items-start justify-end w-full">
-          <CgClose
-            onClick={() => dispatch(toggleModal(false))}
-            className="text-[24px] cursor-pointer"
-          />
+          <CgClose onClick={() => dispatch(toggleModal(false))} className="text-[24px] cursor-pointer" />
         </div>
         <div className="text-center w-[412px]">
-          <div className="text-[#14142B] font-[600] text-[28px] leading-[44px]">
-            Select a template
-          </div>
+          <div className="text-[#14142B] font-[600] text-[28px] leading-[44px]">Select a template</div>
           {/* <div className="mt-3 text-[#4E4B66] text-[14px]">
             Select over 100 stunning templates to create a stunning website to
             fit your needs.
