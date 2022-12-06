@@ -60,7 +60,11 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     };
   }>(null); // for abi method component
   const [isViewMore, setIsViewMore] = useState<boolean>(false);
-  
+
+  const isWalletConnect = workspaceElements.findIndex(
+    (item) => item.connectWallet === true
+  );
+
   useEffect(() => {
     try {
       setIsViewMore(!!(updatedNewContractList?.length >= 4));
@@ -69,9 +73,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     }
   }, []); // eslint-disable-line
 
-  const isWalletConnect = workspaceElements.findIndex(
-    (item) => item.connectWallet === true
-  );
   const handleContractList = (
     abi: string,
     address: string,
@@ -95,6 +96,39 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     dispatch(updateContractList(null));
     setIsViewMore(false);
   };
+
+  const contractSection = (
+    title: string,
+    description: string,
+    contract?: boolean
+  ) => (
+    <>
+      <div className="flex justify-center mt-[1rem]" />
+      <h3 className="ml-[0.5rem]">
+        <span className="setting-text">{title}</span>
+      </h3>
+      <p className="contract-text ml-[0.5rem]">{description}</p>
+      <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
+        <div
+          onClick={() => (contract ? setIsOpen(true) : setIsOracleOpen(true))}
+          className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
+        >
+          <span className="mt-1 ml-4 mr-3">
+            <FaFileContract />
+          </span>
+          {title}
+          {contract ? (
+            <ContractModal isOpen={isOpen} setIsOpen={setIsOpen} />
+          ) : (
+            <OracleModal
+              isOracleOpen={isOracleOpen}
+              setIsOracleOpen={setIsOracleOpen}
+            />
+          )}
+        </div>
+      </div>
+    </>
+  );
 
   return (
     <>
@@ -126,26 +160,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
             </>
           ) : (
             <>
-              <>
-                <div className="flex justify-center mt-[3rem]" />
-                <h3 className="ml-[0.5rem] mt-[2rem]">
-                  <span className="setting-text">Import Contract</span>
-                </h3>
-                <p className="contract-text ml-[0.5rem]">
-                  Integrate your Frontend with smart contracts.
-                </p>
-                <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
-                  <div
-                    onClick={() => setIsOpen(true)}
-                    className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
-                  >
-                    <span className="mt-1 ml-4 mr-3">
-                      <FaFileContract />
-                    </span>
-                    Import Contract
-                    <ContractModal isOpen={isOpen} setIsOpen={setIsOpen} />
-                  </div>
-                </div>
+              <section className="mt-[5rem]">
+                {contractSection(
+                  "Import Contract",
+                  "Integrate your Frontend with smart contracts.",
+                  true
+                )}
                 {selectedElement.connectWallet ? (
                   <WarningText text="Sorry! Connect wallet and Contract or Oracle binding cannot be for common button." />
                 ) : null}
@@ -175,33 +195,12 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
                     />
                   </div>
                 </div>
-              </>
+              </section>
               <>
-                <div className="flex justify-center mt-[2rem]" />
-                <h3 className="ml-[0.5rem] flex items-center">
-                  <span className="setting-text">Import Oracle</span>
-                  <span className="text-[10px] text-[#14142B] ml-2 py-1 px-3 bg-gray-200 font-bold rounded-[28px]">
-                    Powered by iExec
-                  </span>
-                </h3>
-                <p className="contract-text ml-[0.5rem]">
-                  Integrate your Frontend with oracles.
-                </p>
-                <div className="flex items-center px-3 mt-5 mb-[2rem] text-black">
-                  <div
-                    onClick={() => setIsOracleOpen(true)}
-                    className="flex cursor-pointer contract-button w-full py-2.5 pl-6 pr-7 ml-2"
-                  >
-                    <span className="mt-1 ml-4 mr-3">
-                      <FaFileContract />
-                    </span>
-                    Import Oracle
-                    <OracleModal
-                      isOracleOpen={isOracleOpen}
-                      setIsOracleOpen={setIsOracleOpen}
-                    />
-                  </div>
-                </div>
+                {contractSection(
+                  "Import Oracle",
+                  "Integrate your Frontend with oracles."
+                )}
               </>
             </>
           )}

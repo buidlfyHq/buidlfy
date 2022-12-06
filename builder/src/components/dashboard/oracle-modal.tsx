@@ -48,6 +48,11 @@ const OracleModal: FC<IOracleModal> = ({ isOracleOpen, setIsOracleOpen }) => {
           <Dialog.Title as="h3" className="modal-heading">
             Connect Oracle
           </Dialog.Title>
+          <div className="text-center">
+            <span className="text-[10px] text-[#14142B] py-1 px-3 bg-gray-200 font-bold rounded-[28px]">
+              Powered by iExec
+            </span>
+          </div>
           <div className="mt-2">
             <p className="modal-subheading mb-5">
               Add oracle id to connect your oracle.
