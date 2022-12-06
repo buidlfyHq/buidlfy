@@ -65,7 +65,7 @@ const PublishConfirmModal: FC = () => {
     };
     let stringifiedConfig = JSON.stringify(config);
 
-    // Keep this commented log. Helpful while testing. 
+    // Keep this commented log. Helpful while testing.
     // console.log(base64_encode(stringifiedConfig));
 
     dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));

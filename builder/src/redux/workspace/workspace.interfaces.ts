@@ -1,4 +1,4 @@
-import { IOracleConfig } from "redux/oracle/oracle.interfaces";
+import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
 
 export interface IUploadedImageData {
   uploadedImageData: string;

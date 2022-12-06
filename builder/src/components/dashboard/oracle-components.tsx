@@ -1,16 +1,11 @@
-import { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AiOutlineClose } from "react-icons/ai";
-import Spinner from "components/utils/assets/spinner";
-import {
-  setOracleSelectorToDefault,
-  setOracleToDefault,
-  updateOracleOutputId,
-  updateOracleSelector,
-} from "redux/oracle/oracle.reducers";
-import { saveOracleConfig } from "redux/workspace/workspace.reducers";
-import { IRootState } from "redux/root-state.interface";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AiOutlineClose } from 'react-icons/ai';
+import Spinner from 'components/utils/assets/spinner';
+import { setOracleSelectorToDefault, setOracleToDefault, updateOracleOutputId, updateOracleSelector } from 'redux/oracle/oracle.reducers';
+import { saveOracleConfig } from 'redux/workspace/workspace.reducers';
+import { IRootState } from 'redux/root-state.interface';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
 interface IOracleComponents {
   selectedElement: IWorkspaceElement;
@@ -18,18 +13,10 @@ interface IOracleComponents {
   setIsOracleOpen: (isOpen: boolean) => void;
 }
 
-const OracleComponents: FC<IOracleComponents> = ({
-  selectedElement,
-  isOracleOpen,
-  setIsOracleOpen,
-}) => {
+const OracleComponents: FC<IOracleComponents> = ({ selectedElement, isOracleOpen, setIsOracleOpen }) => {
   const dispatch = useDispatch();
-  const oracleConfig = useSelector(
-    (state: IRootState) => state.oracle.oracleConfig
-  );
-  const oracleElementSelector = useSelector(
-    (state: IRootState) => state.oracle.oracleElementSelector
-  );
+  const oracleConfig = useSelector((state: IRootState) => state.oracle.oracleConfig);
+  const oracleElementSelector = useSelector((state: IRootState) => state.oracle.oracleElementSelector);
 
   const [show, setShow] = useState<boolean>(false);
 
@@ -76,15 +63,10 @@ const OracleComponents: FC<IOracleComponents> = ({
           <>
             {selectedElement?.oracle?.outputs[0] || oracleConfig.outputs[0] ? (
               <span className="flex">
-                <span
-                  className="cursor-pointer flex-1"
-                  onClick={handleOutputSelector}
-                >
-                  {selectedElement?.oracle?.outputs[0].id ||
-                    oracleConfig.outputs[0].id}{" "}
-                  - Connected
+                <span className="cursor-pointer flex-1" onClick={handleOutputSelector}>
+                  {selectedElement?.oracle?.outputs[0].id || oracleConfig.outputs[0].id} - Connected
                 </span>
-                <span onClick={() => dispatch(updateOracleOutputId(""))}>
+                <span onClick={() => dispatch(updateOracleOutputId(''))}>
                   <AiOutlineClose className="mt-1.5 cursor-pointer" />
                 </span>
               </span>
@@ -102,10 +84,7 @@ const OracleComponents: FC<IOracleComponents> = ({
           Saving
         </button>
       ) : (
-        <button
-          onClick={handleSave}
-          className="fixed right-3 bottom-5 flex contract-button py-3 px-[6rem]"
-        >
+        <button onClick={handleSave} className="fixed right-3 bottom-5 flex contract-button py-3 px-[6rem]">
           Save
         </button>
       )}

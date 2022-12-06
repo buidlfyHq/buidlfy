@@ -1,8 +1,8 @@
-import { FC, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Dialog } from "@headlessui/react";
-import { updateOracle } from "redux/oracle/oracle.reducers";
-import "styles/components.css";
+import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Dialog } from '@headlessui/react';
+import { updateOracle } from 'redux/oracle/oracle.reducers';
+import 'styles/components.css';
 
 interface IOracleModal {
   isOracleOpen: boolean;
@@ -11,8 +11,8 @@ interface IOracleModal {
 
 const OracleModal: FC<IOracleModal> = ({ isOracleOpen, setIsOracleOpen }) => {
   const dispatch = useDispatch();
-  const [oracleId, setOracleId] = useState<string>("");
-  const [outputType, setOutputType] = useState<string>("");
+  const [oracleId, setOracleId] = useState<string>('');
+  const [outputType, setOutputType] = useState<string>('');
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOracleId(e.target.value);
@@ -28,12 +28,7 @@ const OracleModal: FC<IOracleModal> = ({ isOracleOpen, setIsOracleOpen }) => {
   };
 
   return (
-    <Dialog
-      as="div"
-      className="fixed inset-0 z-20 overflow-y-auto"
-      open={isOracleOpen}
-      onClose={() => setIsOracleOpen(false)}
-    >
+    <Dialog as="div" className="fixed inset-0 z-20 overflow-y-auto" open={isOracleOpen} onClose={() => setIsOracleOpen(false)}>
       <div className="min-h-screen px-4 text-right">
         {/* This element is to trick the browser into centering the modal contents. */}
         <span className="inline-block h-screen align-middle" aria-hidden="true">
@@ -49,27 +44,18 @@ const OracleModal: FC<IOracleModal> = ({ isOracleOpen, setIsOracleOpen }) => {
             Connect Oracle
           </Dialog.Title>
           <div className="text-center">
-            <span className="text-[10px] text-[#14142B] py-1 px-3 bg-gray-200 font-bold rounded-[28px]">
-              Powered by iExec
-            </span>
+            <span className="text-[10px] text-[#14142B] py-1 px-3 bg-gray-200 font-bold rounded-[28px]">Powered by iExec</span>
           </div>
           <div className="mt-2">
-            <p className="modal-subheading mb-5">
-              Add oracle id to connect your oracle.
-            </p>
+            <p className="modal-subheading mb-5">Add oracle id to connect your oracle.</p>
             <label className="modal-label">Oracle ID</label>
             <br />
-            <input
-              className="modal-input pl-2 h-[2.5rem] mt-1 mb-4"
-              placeholder="Please add oracle id"
-              value={oracleId}
-              onChange={handleInput}
-            />
+            <input className="modal-input pl-2 h-[2.5rem] mt-1 mb-4" placeholder="Please add oracle id" value={oracleId} onChange={handleInput} />
             <label className="modal-label">Select Output Type</label>
             <br />
             <select
               className="form-select cursor-pointer modal-input w-full h-[2.5rem] mt-1 block px-3 focus:outline-none focuse:border-none"
-              onChange={(e) => onSelect(e)}
+              onChange={e => onSelect(e)}
             >
               <option value="getString">String</option>
               <option value="getInt">Integer</option>
@@ -79,9 +65,7 @@ const OracleModal: FC<IOracleModal> = ({ isOracleOpen, setIsOracleOpen }) => {
 
           <button
             disabled={!oracleId}
-            className={`mt-4 rounded-[44px] contract-button font-medium text-white text-[14px] py-2 px-[7.5rem] ${
-              oracleId ? "" : "opacity-40"
-            }`}
+            className={`mt-4 rounded-[44px] contract-button font-medium text-white text-[14px] py-2 px-[7.5rem] ${oracleId ? '' : 'opacity-40'}`}
             onClick={handleClick}
           >
             Connect
