@@ -1,9 +1,9 @@
-import React, { useState, FC } from "react";
-import { useDispatch } from "react-redux";
-import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import ColorPickerDropdown from "components/utils/color-picker";
-import "styles/components.css";
-import "styles/dashboard.css";
+import React, { useState, FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
+import ColorPickerDropdown from 'components/utils/color-picker';
+import 'styles/components.css';
+import 'styles/dashboard.css';
 
 interface IColorComponent {
   i: string;
@@ -19,14 +19,14 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, name }) => {
     dispatch(
       updateWorkspaceElementStyle({
         settingItemId: i,
-        propertyName: "color",
+        propertyName: 'color',
         propertyValue: e,
-      })
+      }),
     );
   };
 
   const isElement = !!i;
-  const hideGradient = name === "Input";
+  const hideGradient = name === 'Input';
   return (
     <ColorPickerDropdown
       name="Color"

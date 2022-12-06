@@ -1,15 +1,11 @@
-import React, { FC } from "react";
-import { useDispatch } from "react-redux";
-import {
-  AiOutlineAlignLeft,
-  AiOutlineAlignRight,
-  AiOutlineAlignCenter,
-} from "react-icons/ai";
-import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import { ReplaceStyle } from "components/utils/render-setting";
-import WarningText from "components/utils/setting-warning";
-import "styles/components.css";
-import "styles/dashboard.css";
+import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { AiOutlineAlignLeft, AiOutlineAlignRight, AiOutlineAlignCenter } from 'react-icons/ai';
+import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
+import { ReplaceStyle } from 'components/utils/render-setting';
+import WarningText from 'components/utils/setting-warning';
+import 'styles/components.css';
+import 'styles/dashboard.css';
 
 interface ICombinedComponent {
   i: string;
@@ -20,14 +16,7 @@ interface ICombinedComponent {
   color: string;
 }
 
-const CombinedComponent: FC<ICombinedComponent> = ({
-  i,
-  fontWeight,
-  fontStyle,
-  textDecoration,
-  justifyContent,
-  color,
-}) => {
+const CombinedComponent: FC<ICombinedComponent> = ({ i, fontWeight, fontStyle, textDecoration, justifyContent, color }) => {
   const dispatch = useDispatch();
 
   const handleChange = (action: ReplaceStyle) => {
@@ -35,30 +24,25 @@ const CombinedComponent: FC<ICombinedComponent> = ({
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "fontWeight",
-          propertyValue:
-            fontWeight === ReplaceStyle.BOLD ? "normal" : ReplaceStyle.BOLD,
-        })
+          propertyName: 'fontWeight',
+          propertyValue: fontWeight === ReplaceStyle.BOLD ? 'normal' : ReplaceStyle.BOLD,
+        }),
       );
     } else if (action === ReplaceStyle.ITALIC) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "fontStyle",
-          propertyValue:
-            fontStyle === ReplaceStyle.ITALIC ? "normal" : ReplaceStyle.ITALIC,
-        })
+          propertyName: 'fontStyle',
+          propertyValue: fontStyle === ReplaceStyle.ITALIC ? 'normal' : ReplaceStyle.ITALIC,
+        }),
       );
     } else if (action === ReplaceStyle.UNDERLINE) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "textDecoration",
-          propertyValue:
-            textDecoration === ReplaceStyle.UNDERLINE
-              ? "none"
-              : ReplaceStyle.UNDERLINE,
-        })
+          propertyName: 'textDecoration',
+          propertyValue: textDecoration === ReplaceStyle.UNDERLINE ? 'none' : ReplaceStyle.UNDERLINE,
+        }),
       );
     }
   };
@@ -67,62 +51,43 @@ const CombinedComponent: FC<ICombinedComponent> = ({
     dispatch(
       updateWorkspaceElementStyle({
         settingItemId: i,
-        propertyName: "justifyContent",
-        propertyValue: justifyContent === type ? "inherit" : type,
-      })
+        propertyName: 'justifyContent',
+        propertyValue: justifyContent === type ? 'inherit' : type,
+      }),
     );
   };
 
-  const gradientCondition = color?.indexOf("gradient") !== -1;
-  const activeClassName = (property: string, propertyName: string) =>
-    property === propertyName ? "bg-[#CDD4F3]" : "";
+  const gradientCondition = color?.indexOf('gradient') !== -1;
+  const activeClassName = (property: string, propertyName: string) => (property === propertyName ? 'bg-[#CDD4F3]' : '');
   const propertyData = [
     {
-      text: "B",
-      className: `font-bold ml-[10px] combined-style ${activeClassName(
-        fontWeight,
-        ReplaceStyle.BOLD
-      )}`,
+      text: 'B',
+      className: `font-bold ml-[10px] combined-style ${activeClassName(fontWeight, ReplaceStyle.BOLD)}`,
       onclick: () => handleChange(ReplaceStyle.BOLD),
     },
     {
-      text: "i",
-      className: `italic combined-style ${activeClassName(
-        fontStyle,
-        ReplaceStyle.ITALIC
-      )}`,
+      text: 'i',
+      className: `italic combined-style ${activeClassName(fontStyle, ReplaceStyle.ITALIC)}`,
       onclick: () => handleChange(ReplaceStyle.ITALIC),
     },
     {
-      text: "U",
-      className: `underline combined-style ${activeClassName(
-        textDecoration,
-        ReplaceStyle.UNDERLINE
-      )} `,
+      text: 'U',
+      className: `underline combined-style ${activeClassName(textDecoration, ReplaceStyle.UNDERLINE)} `,
       onclick: () => handleChange(ReplaceStyle.UNDERLINE),
     },
     {
       text: <AiOutlineAlignLeft className="text-[16px]" />,
-      className: `combined-style ${activeClassName(
-        justifyContent,
-        ReplaceStyle.LEFT
-      )}`,
+      className: `combined-style ${activeClassName(justifyContent, ReplaceStyle.LEFT)}`,
       onclick: () => handleAlignChange(ReplaceStyle.LEFT),
     },
     {
       text: <AiOutlineAlignCenter className="text-[16px]" />,
-      className: `combined-style ${activeClassName(
-        justifyContent,
-        ReplaceStyle.CENTER
-      )}`,
+      className: `combined-style ${activeClassName(justifyContent, ReplaceStyle.CENTER)}`,
       onclick: () => handleAlignChange(ReplaceStyle.CENTER),
     },
     {
       text: <AiOutlineAlignRight className="text-[16px]" />,
-      className: `combined-style ${activeClassName(
-        justifyContent,
-        ReplaceStyle.RIGHT
-      )}`,
+      className: `combined-style ${activeClassName(justifyContent, ReplaceStyle.RIGHT)}`,
       onclick: () => handleAlignChange(ReplaceStyle.RIGHT),
     },
   ];
@@ -136,9 +101,7 @@ const CombinedComponent: FC<ICombinedComponent> = ({
           </span>
         ))}
       </div>
-      {gradientCondition ? (
-        <WarningText text="Sorry, You can't make underline gradient!" />
-      ) : null}
+      {gradientCondition ? <WarningText text="Sorry, You can't make underline gradient!" /> : null}
     </>
   );
 };

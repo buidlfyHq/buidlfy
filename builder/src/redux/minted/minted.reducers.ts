@@ -1,18 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IMintedState } from "./minted.interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { IMintedState } from './minted.interfaces';
 
 const initialState: IMintedState = {
   approveListingLoading: false,
-  listTemplateHash: "",
+  listTemplateHash: '',
   listTemplateLoading: false,
   ownedTemplateList: [],
   ownedReviewTemplateList: [],
   ownedListedTemplateList: [],
-  mintedImageData: "",
+  mintedImageData: '',
 };
 
 const mintedSlice = createSlice({
-  name: "minted",
+  name: 'minted',
   initialState,
   reducers: {
     listingApproved(state) {

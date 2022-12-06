@@ -1,5 +1,5 @@
-import { FC } from "react";
-import ArrowInput from "./arrow-input";
+import { FC } from 'react';
+import ArrowInput from './arrow-input';
 
 interface INumberInput {
   text: string;
@@ -10,19 +10,10 @@ interface INumberInput {
   disableInput?: boolean;
 }
 
-const NumberInput: FC<INumberInput> = ({
-  text,
-  value,
-  handleChange,
-  handleIncrement,
-  handleDecrement,
-  disableInput,
-}) => {
+const NumberInput: FC<INumberInput> = ({ text, value, handleChange, handleIncrement, handleDecrement, disableInput }) => {
   return (
     <div className="flex px-1 py-4">
-      <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">
-        {text}
-      </div>
+      <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">{text}</div>
       <ArrowInput
         disableInput={disableInput}
         value={value}

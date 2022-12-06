@@ -10,8 +10,8 @@ export interface INotification {
 }
 
 export const enum NotificationType {
-  Error = "error",
-  Warning = "warning",
-  Success = "success",
-  Info = "info",
+  Error = 'error',
+  Warning = 'warning',
+  Success = 'success',
+  Info = 'info',
 }

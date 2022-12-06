@@ -1,16 +1,14 @@
-import { FC } from "react";
-import { useSelector } from "react-redux";
-import { IContract } from "redux/contract/contract.interfaces";
-import { IRootState } from "redux/root-state.interface";
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { IContract } from 'redux/contract/contract.interfaces';
+import { IRootState } from 'redux/root-state.interface';
 
 interface IContractRemove {
   handleClearContract: () => void;
 }
 
 const ContractRemove: FC<IContractRemove> = ({ handleClearContract }) => {
-  const updatedNewContractList: IContract[] = useSelector(
-    (state: IRootState) => state.contract.contractList
-  );
+  const updatedNewContractList: IContract[] = useSelector((state: IRootState) => state.contract.contractList);
 
   return (
     <>

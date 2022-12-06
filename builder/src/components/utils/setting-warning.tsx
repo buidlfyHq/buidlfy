@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { IoMdInformationCircleOutline } from "react-icons/io";
-import "styles/components.css";
+import { FC } from 'react';
+import { IoMdInformationCircleOutline } from 'react-icons/io';
+import 'styles/components.css';
 
 interface IWarningText {
   text: string;
