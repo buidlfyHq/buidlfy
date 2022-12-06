@@ -5,8 +5,42 @@ orbs:
   aws-ecs: circleci/aws-ecs@2.0.0
 
 jobs:
-  test:
+  server-checks:
     working_directory: ~/buidlfy/server
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout:
+          path: ~/buidlfy
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - dependencies-cache-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - dependencies-cache-
+
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo npm i -g node-gyp
+            npm i
+
+      - run:
+          name: Check Formatting Issue
+          command: npm run format
+
+      - run:
+          name: Check Lint Issue
+          command: npm run lint
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+  builder-checks:
+    working_directory: ~/buidlfy/builder
     docker:
       - image: circleci/node:14
     steps:
@@ -42,7 +76,7 @@ jobs:
 workflows:
   build-deploy:
     jobs:
-      - test
+      - server-checks
       - aws-ecr/build-and-push-image:
           region: "${AWS_REGION}"
           registry-id: AWS_REGISTRY_ID
@@ -56,7 +90,7 @@ workflows:
           tag: dev
           extra-build-args: --build-arg CODE_VERSION=${CIRCLE_SHA1:0:7}
           requires:
-            - test
+            - server-checks
           filters:
             branches:
               only: configure-circleci
