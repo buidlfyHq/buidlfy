@@ -6,11 +6,12 @@ orbs:
 
 jobs:
   test:
-    working_directory: ~/buidlfy/server
+    working_directory: ~/buidlfy
     docker:
       - image: circleci/node:14
     steps:
-      - checkout
+      - checkout:
+          path: ~/project
 
       # Download and cache dependencies
       - restore_cache:
