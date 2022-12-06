@@ -19,7 +19,7 @@ const defaultPaddingStyles = {
 const defaultColorStyles = {
   backgroundColor: "rgba(255, 255, 255, 0)",
   color: "rgba(0, 0, 0, 100)",
-}
+};
 
 const defaultFontStyles = {
   fontWeight: "normal",
@@ -112,7 +112,7 @@ export const components = [
   //         ...defaultPaddingStyles
   //       },
   //     },
-     
+
   //   ],
   // },
   // {
@@ -267,7 +267,7 @@ export const components = [
     name: "Input",
     h: 1,
     minH: 1,
-    placeholder: 'Placeholder',
+    placeholder: "Placeholder",
     style: {
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
@@ -285,8 +285,8 @@ export const components = [
         paddingLeft: 12,
         paddingRight: 12,
         paddingTop: 8,
-        paddingBottom: 8
-      }
+        paddingBottom: 8,
+      },
     },
   },
   {
@@ -299,6 +299,7 @@ export const components = [
       height: 60,
       backgroundSize: "contain",
       isAuto: true,
+      manualSizing: true,
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,
@@ -311,5 +312,4 @@ export const components = [
   //     ...defaultDeleteStyles,
   //   },
   // },
-
 ];

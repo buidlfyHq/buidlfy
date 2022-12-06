@@ -62,6 +62,7 @@ export interface IStyle {
   borderWidth?: number;
   shadow?: string;
   isAuto?: boolean;
+  manualSizing?: boolean;
   margin?: {
     marginLeft?: number;
     marginRight?: number;

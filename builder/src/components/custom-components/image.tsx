@@ -19,6 +19,7 @@ interface IImageComponent {
   backgroundSize?: string;
   i: string;
   isAuto?: boolean;
+  manualSizing?: boolean;
   imgData?: string | ArrayBuffer;
   link: string;
 }
@@ -31,6 +32,7 @@ const Image: FC<IImageComponent> = ({
   height,
   backgroundSize,
   isAuto,
+  manualSizing,
   imgData,
   link,
 }) => {
@@ -41,8 +43,9 @@ const Image: FC<IImageComponent> = ({
       (image: IUploadedImageData) => image.settingItemId === i
     )
   );
+
   useEffect(() => {
-    if (ref.current?.clientWidth) {
+    if (!manualSizing && ref.current?.clientWidth) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -55,7 +58,7 @@ const Image: FC<IImageComponent> = ({
   }, [ref.current?.clientWidth]); // eslint-disable-line
 
   useEffect(() => {
-    if (ref.current?.clientHeight) {
+    if (!manualSizing && ref.current?.clientHeight) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -87,6 +90,7 @@ const Image: FC<IImageComponent> = ({
       />
     </div>
   );
+
   return (
     <>
       {imageData?.uploadedImageData || imgData ? (
