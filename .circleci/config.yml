@@ -44,8 +44,8 @@ workflows:
     jobs:
       - test
       - aws-ecr/build-and-push-image:
-          region: "${AWS_REGION_DEV}"
-          registry-id: AWS_REGISTRY_ID_DEV
+          region: "${AWS_REGION}"
+          registry-id: AWS_REGISTRY_ID
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           create-repo: false
@@ -58,14 +58,14 @@ workflows:
             - test
           filters:
             branches:
-              only: main
+              only: configure-circle
       - aws-ecs/deploy-service-update:
           cluster-name: "buidlfy-api-dev"
           container-image-name-updates: "container=buidlfy-api-dev-api,tag=dev"
           family: "buidlfy-api-dev-api"
-          aws-region: AWS_DEFAULT_REGION_DEV
+          aws-region: AWS_DEFAULT_REGION
           requires:
             - aws-ecr-build-push-dev
           filters:
             branches:
-              only: main
+              only: configure-circle
