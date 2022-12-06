@@ -1,29 +1,16 @@
-import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import GridLayout, { Layout } from "react-grid-layout";
-import {
-  setSelectedElement,
-  updateWorkspaceElementsArray,
-  updateWorkspaceElementStyle,
-} from "redux/workspace/workspace.reducers";
-import {
-  setSelectorToDefault,
-  addSelectedElement,
-  createSelectedElement,
-  updateSelectedElement,
-} from "redux/contract/contract.reducers";
-import RenderItem from "components/utils/render-item";
-import { IRootState } from "redux/root-state.interface";
-import {
-  IUploadedImageData,
-  IWorkspaceElement,
-  SidebarEnum,
-} from "redux/workspace/workspace.interfaces";
-import add from "assets/icons/add.png";
-import edit from "assets/icons/edit.png";
-import deleteContainer from "assets/icons/delete.png";
-import dragImg from "assets/icons/drag.png";
-import "styles/components.css";
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import GridLayout, { Layout } from 'react-grid-layout';
+import { setSelectedElement, updateWorkspaceElementsArray, updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
+import { setSelectorToDefault, addSelectedElement, createSelectedElement, updateSelectedElement } from 'redux/contract/contract.reducers';
+import RenderItem from 'components/utils/render-item';
+import { IRootState } from 'redux/root-state.interface';
+import { IUploadedImageData, IWorkspaceElement, SidebarEnum } from 'redux/workspace/workspace.interfaces';
+import add from 'assets/icons/add.png';
+import edit from 'assets/icons/edit.png';
+import deleteContainer from 'assets/icons/delete.png';
+import dragImg from 'assets/icons/drag.png';
+import 'styles/components.css';
 
 interface IContainer {
   item: IWorkspaceElement;
@@ -77,41 +64,25 @@ const Container: FC<IContainer> = ({
   imgData,
 }) => {
   const dispatch = useDispatch();
-  const workspaceElements = useSelector(
-    (state: IRootState) => state.workspace.workspaceElements
-  );
-  const contractElementSelector = useSelector(
-    (state: IRootState) => state.contract.contractElementSelector
-  );
-  const contractElementSelected = useSelector(
-    (state: IRootState) => state.contract.contractElementSelected
-  );
+  const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
+  const contractElementSelector = useSelector((state: IRootState) => state.contract.contractElementSelector);
+  const contractElementSelected = useSelector((state: IRootState) => state.contract.contractElementSelected);
   const imageData = useSelector((state: IRootState) =>
-    state.workspace.uploadedImagesData.find(
-      (image: IUploadedImageData) => image.settingItemId === item.i
-    )
+    state.workspace.uploadedImagesData.find((image: IUploadedImageData) => image.settingItemId === item.i),
   );
 
-  let containerW = document
-    ?.getElementById(`${item.i}`)
-    ?.getBoundingClientRect().width;
+  let containerW = document?.getElementById(`${item.i}`)?.getBoundingClientRect().width;
 
-  let finalSpacing =
-    margin.marginLeft +
-    margin.marginRight +
-    padding.paddingLeft +
-    padding.paddingRight;
+  let finalSpacing = margin.marginLeft + margin.marginRight + padding.paddingLeft + padding.paddingRight;
 
   const elementHoverStyles = contractElementSelector
-    ? "border border-[transparent] border-hover"
-    : "border border-[transparent] hover:border-slate-300 hover:border-dashed ";
+    ? 'border border-[transparent] border-hover'
+    : 'border border-[transparent] hover:border-slate-300 hover:border-dashed ';
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
     let newItemsArr = layout.map((obj: IWorkspaceElement) => {
-      let selectedElement = children.filter(
-        (item: IWorkspaceElement) => item.i === obj.i
-      )[0];
+      let selectedElement = children.filter((item: IWorkspaceElement) => item.i === obj.i)[0];
       const { h, minW, x, y, w, i, minH } = obj;
       return (selectedElement = {
         ...selectedElement,
@@ -126,25 +97,19 @@ const Container: FC<IContainer> = ({
     });
 
     // check to see if container array has only default element or children
-    if (newItemsArr[0]?.i !== "DefaultElement" && newItemsArr.length) {
-      let maxY = Math.max(...newItemsArr.map((item) => item.y + item.h));
-      let el = newItemsArr?.filter((item) => item.y + item.h === maxY)[0];
+    if (newItemsArr[0]?.i !== 'DefaultElement' && newItemsArr.length) {
+      let maxY = Math.max(...newItemsArr.map(item => item.y + item.h));
+      let el = newItemsArr?.filter(item => item.y + item.h === maxY)[0];
       let maxH = el.h + el.y;
       let newModifiedContainer = {
         ...item,
         h: maxH,
         children: newItemsArr,
       };
-      let filterItems = workspaceElements.filter(
-        (element) => element.i !== item.i
-      );
-      dispatch(
-        updateWorkspaceElementsArray([...filterItems, newModifiedContainer])
-      );
+      let filterItems = workspaceElements.filter(element => element.i !== item.i);
+      dispatch(updateWorkspaceElementsArray([...filterItems, newModifiedContainer]));
     } else if (layout.length === 0) {
-      let removeContainerItems = workspaceElements.filter(
-        (element) => element.i !== item.i
-      );
+      let removeContainerItems = workspaceElements.filter(element => element.i !== item.i);
       dispatch(updateWorkspaceElementsArray(removeContainerItems));
     } else {
       dispatch(updateWorkspaceElementsArray(workspaceElements));
@@ -153,14 +118,9 @@ const Container: FC<IContainer> = ({
 
   const updateElementConfig = (itemName: string, i: string) => {
     // for updating selected element config
-    const searchExistingValue = Object.keys(contractElementSelected).filter(
-      (key) => key === contractElementSelector.name
-    );
+    const searchExistingValue = Object.keys(contractElementSelected).filter(key => key === contractElementSelector.name);
 
-    if (
-      !searchExistingValue.length ||
-      !Object.keys(contractElementSelected).length
-    ) {
+    if (!searchExistingValue.length || !Object.keys(contractElementSelected).length) {
       dispatch(
         createSelectedElement({
           name: contractElementSelector.name,
@@ -169,10 +129,10 @@ const Container: FC<IContainer> = ({
             name: itemName,
             id: i,
           },
-        })
+        }),
       );
     } else {
-      Object.keys(contractElementSelected).map((key) => {
+      Object.keys(contractElementSelected).map(key => {
         if (key === contractElementSelector.name) {
           contractElementSelected[key].map((obj, index: number) => {
             if (obj.buttonId === contractElementSelector.buttonId) {
@@ -181,7 +141,7 @@ const Container: FC<IContainer> = ({
                   name: key,
                   index,
                   id: i,
-                })
+                }),
               );
             } else {
               dispatch(
@@ -192,7 +152,7 @@ const Container: FC<IContainer> = ({
                     name: itemName,
                     id: i,
                   },
-                })
+                }),
               );
             }
             return obj;
@@ -205,18 +165,12 @@ const Container: FC<IContainer> = ({
 
   const handleMouseOver = (id: string) => {
     setDrag(false);
-    (
-      document.getElementById(id).parentNode.parentNode
-        .childNodes[1] as HTMLElement
-    ).style.visibility = "visible";
+    (document.getElementById(id).parentNode.parentNode.childNodes[1] as HTMLElement).style.visibility = 'visible';
   };
 
   const handleMouseOut = (id: string) => {
     setDrag(true);
-    (
-      document.getElementById(id).parentNode.parentNode
-        .childNodes[1] as HTMLElement
-    ).style.visibility = "hidden";
+    (document.getElementById(id).parentNode.parentNode.childNodes[1] as HTMLElement).style.visibility = 'hidden';
   };
 
   const handleSidebar = (selectedSidebarElements: string) => {
@@ -227,9 +181,9 @@ const Container: FC<IContainer> = ({
     dispatch(
       updateWorkspaceElementStyle({
         settingItemId: item.i,
-        propertyName: "deleteComponent",
+        propertyName: 'deleteComponent',
         propertyValue: true,
-      })
+      }),
     );
   };
 
@@ -253,14 +207,11 @@ const Container: FC<IContainer> = ({
       setOpenTab(1);
     } else {
       // Add validation for selection
-      if (contractElementSelector.type === "input" && itemName === "Input") {
+      if (contractElementSelector.type === 'input' && itemName === 'Input') {
         updateElementConfig(itemName, i);
       } else if (
-        contractElementSelector.type === "output" &&
-        (itemName === "Text" ||
-          itemName === "Heading 1" ||
-          itemName === "Heading 2" ||
-          itemName === "Heading 3")
+        contractElementSelector.type === 'output' &&
+        (itemName === 'Text' || itemName === 'Heading 1' || itemName === 'Heading 2' || itemName === 'Heading 3')
       ) {
         updateElementConfig(itemName, i);
       }
@@ -288,11 +239,7 @@ const Container: FC<IContainer> = ({
         <GridLayout
           layout={children}
           cols={6}
-          rowHeight={
-            children?.length
-              ? 50 - (borderWidth ? borderWidth * 2 : 0) / children?.length
-              : 50
-          }
+          rowHeight={children?.length ? 50 - (borderWidth ? borderWidth * 2 : 0) / children?.length : 50}
           width={containerW - (finalSpacing + borderWidth * 2) || 1000}
           isBounded={true}
           onLayoutChange={onLayoutChange}
@@ -300,16 +247,15 @@ const Container: FC<IContainer> = ({
           compactType={null}
           className="h-fit btn-border"
           style={{
-            backgroundColor:
-              backgroundColor.slice(0, 4) === "rgba" ? backgroundColor : null,
+            backgroundColor: backgroundColor.slice(0, 4) === 'rgba' ? backgroundColor : null,
             backgroundImage:
               imageData?.uploadedImageData || imgData
                 ? `url(${imageData?.uploadedImageData || imgData})`
-                : backgroundColor.slice(0, 4) === "rgba"
+                : backgroundColor.slice(0, 4) === 'rgba'
                 ? null
                 : `${backgroundColor}`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
             backgroundSize: backgroundSize,
             border: `${borderWidth}px solid ${color}`,
             borderRadius: `${borderRadius}px`,
@@ -322,7 +268,7 @@ const Container: FC<IContainer> = ({
           {!children?.length ? (
             <div
               className="w-full h-full py-10 default-container "
-              key={"DefaultElement"}
+              key={'DefaultElement'}
               data-grid={{
                 x: 0,
                 y: 0,
@@ -339,7 +285,7 @@ const Container: FC<IContainer> = ({
             </div>
           ) : (
             children
-              ?.filter((c) => c.style?.deleteComponent === false)
+              ?.filter(c => c.style?.deleteComponent === false)
               .map((item: IWorkspaceElement) => {
                 const { x, y, w, h, minW, i, resizeHandles } = item;
                 return (
@@ -351,11 +297,7 @@ const Container: FC<IContainer> = ({
                     onMouseOut={() => handleMouseOut(i)}
                     onClick={() => onComponentClick(item.name, i)}
                   >
-                    <RenderItem
-                      setSideElement={setSideElement}
-                      item={item}
-                      setDrag={setDrag}
-                    />
+                    <RenderItem setSideElement={setSideElement} item={item} setDrag={setDrag} />
                   </div>
                 );
               })
@@ -397,11 +339,7 @@ const Container: FC<IContainer> = ({
               id="delete-img"
               onClick={() => onComponentDeleteClick(item.i)}
             >
-              <img
-                className="w-[13px] h-[13px]"
-                src={deleteContainer}
-                alt="delete"
-              />
+              <img className="w-[13px] h-[13px]" src={deleteContainer} alt="delete" />
             </div>
           )}
         </div>

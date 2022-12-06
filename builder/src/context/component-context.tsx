@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 interface ComponentContext {
   newComp: string;
@@ -6,6 +6,6 @@ interface ComponentContext {
 }
 
 export const ComponentContext = createContext<ComponentContext>({
-  newComp: "",
+  newComp: '',
   setNewComp: () => [],
 });

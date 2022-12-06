@@ -6,7 +6,7 @@ export interface IContractState {
 }
 
 export interface IContractDetails {
-  abi: string; 
+  abi: string;
   address: string;
   network: string;
 }

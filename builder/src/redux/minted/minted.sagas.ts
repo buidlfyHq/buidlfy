@@ -1,14 +1,14 @@
-import { ethers } from "ethers";
-import { call, all, put, takeLatest, select } from "redux-saga/effects";
-import { addNotification } from "redux/notification/notification.reducers";
-import { NotificationType } from "redux/notification/notification.interfaces";
+import { ethers } from 'ethers';
+import { call, all, put, takeLatest, select } from 'redux-saga/effects';
+import { addNotification } from 'redux/notification/notification.reducers';
+import { NotificationType } from 'redux/notification/notification.interfaces';
 import {
   approveListingService,
   createListingService,
   getOwnedListedTemplatesService,
   getOwnedReviewTemplatesService,
   getOwnedTemplatesService,
-} from "./minted.services";
+} from './minted.services';
 import {
   ownedTemplatesFetched,
   templateListed,
@@ -17,21 +17,17 @@ import {
   startListTemplateLoader,
   startApproveListingLoader,
   listingApproved,
-} from "./minted.reducers";
-import { toggleModalType } from "redux/modal/modal.reducers";
-import mintedActionTypes from "./minted.types";
-import { IRootState } from "redux/root-state.interface";
-import { ISelectedTemplate } from "redux/template/template.interfaces";
-import { SelectedTemplateDto } from "redux/template/template.dto";
-import { filterAllTemplates } from "redux/template/template.reducers";
+} from './minted.reducers';
+import { toggleModalType } from 'redux/modal/modal.reducers';
+import mintedActionTypes from './minted.types';
+import { IRootState } from 'redux/root-state.interface';
+import { ISelectedTemplate } from 'redux/template/template.interfaces';
+import { SelectedTemplateDto } from 'redux/template/template.dto';
+import { filterAllTemplates } from 'redux/template/template.reducers';
 
 function* createTemplateListing({ payload }) {
-  const currentAccount: string = yield select(
-    (state: IRootState) => state.web3.currentAccount
-  );
-  const selectedTemplate: ISelectedTemplate = yield select(
-    (state: IRootState) => state.template.selectedTemplate
-  );
+  const currentAccount: string = yield select((state: IRootState) => state.web3.currentAccount);
+  const selectedTemplate: ISelectedTemplate = yield select((state: IRootState) => state.template.selectedTemplate);
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
 
   // ask for approval
@@ -42,21 +38,17 @@ function* createTemplateListing({ payload }) {
     yield put(listingApproved());
     yield put(startListTemplateLoader());
 
-    const listingRes = yield call(
-      createListingService,
-      selectedTemplateDto.tokenId,
-      ethers.utils.parseEther(payload)
-    );
+    const listingRes = yield call(createListingService, selectedTemplateDto.tokenId, ethers.utils.parseEther(payload));
     if (!listingRes.error) {
       yield put(templateListed(listingRes.receipt));
-      yield put(toggleModalType("listing-review"));
+      yield put(toggleModalType('listing-review'));
     } else {
       yield put(
         addNotification({
           message: listingRes.errorMessage,
           timestamp: new Date(),
           type: NotificationType.Error,
-        })
+        }),
       );
     }
   } else {
@@ -65,15 +57,13 @@ function* createTemplateListing({ payload }) {
         message: approvalRes.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
-      })
+      }),
     );
   }
 }
 
 function* getOwnedTemplates(): any {
-  const currentAccount: string = yield select(
-    (state: IRootState) => state.web3.currentAccount
-  );
+  const currentAccount: string = yield select((state: IRootState) => state.web3.currentAccount);
   const modalType = yield select((state: IRootState) => state.modal.modalType);
 
   const fetchedTemplates = yield call(getOwnedTemplatesService, currentAccount);
@@ -83,15 +73,13 @@ function* getOwnedTemplates(): any {
       yield put(filterAllTemplates(fetchedTemplates.templates));
     }
 
-    if (modalType === "select-wallet") {
-      const selectedTemplate = yield select(
-        (state: IRootState) => state.template.selectedTemplate
-      );
+    if (modalType === 'select-wallet') {
+      const selectedTemplate = yield select((state: IRootState) => state.template.selectedTemplate);
 
       if (selectedTemplate?.isOwned) {
-        yield put(toggleModalType("single"));
+        yield put(toggleModalType('single'));
       } else {
-        yield put(toggleModalType("checkout"));
+        yield put(toggleModalType('checkout'));
       }
     }
   } else {
@@ -100,19 +88,14 @@ function* getOwnedTemplates(): any {
         message: fetchedTemplates.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
-      })
+      }),
     );
   }
 }
 
 function* getOwnedReviewTemplates(): any {
-  const currentAccount: string = yield select(
-    (state: IRootState) => state.web3.currentAccount
-  );
-  const fetchedTemplates = yield call(
-    getOwnedReviewTemplatesService,
-    currentAccount
-  );
+  const currentAccount: string = yield select((state: IRootState) => state.web3.currentAccount);
+  const fetchedTemplates = yield call(getOwnedReviewTemplatesService, currentAccount);
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.listings.length !== 0) {
       yield put(ownedReviewTemplatesFetched(fetchedTemplates.listings));
@@ -123,19 +106,14 @@ function* getOwnedReviewTemplates(): any {
         message: fetchedTemplates.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
-      })
+      }),
     );
   }
 }
 
 function* getOwnedListedTemplates(): any {
-  const currentAccount: string = yield select(
-    (state: IRootState) => state.web3.currentAccount
-  );
-  const fetchedTemplates = yield call(
-    getOwnedListedTemplatesService,
-    currentAccount
-  );
+  const currentAccount: string = yield select((state: IRootState) => state.web3.currentAccount);
+  const fetchedTemplates = yield call(getOwnedListedTemplatesService, currentAccount);
   if (!fetchedTemplates.error) {
     if (fetchedTemplates.listings.length !== 0) {
       yield put(ownedListedTemplatesFetched(fetchedTemplates.listings));
@@ -146,7 +124,7 @@ function* getOwnedListedTemplates(): any {
         message: fetchedTemplates.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
-      })
+      }),
     );
   }
 }
@@ -160,24 +138,13 @@ function* fetchOwnedTemplatesSaga() {
 }
 
 function* fetchOwnedReviewTemplatesSaga() {
-  yield takeLatest(
-    mintedActionTypes.FETCH_OWNED_REVIEW_TEMPLATES,
-    getOwnedReviewTemplates
-  );
+  yield takeLatest(mintedActionTypes.FETCH_OWNED_REVIEW_TEMPLATES, getOwnedReviewTemplates);
 }
 
 function* fetchOwnedListedTemplatesSaga() {
-  yield takeLatest(
-    mintedActionTypes.FETCH_OWNED_LISTED_TEMPLATES,
-    getOwnedListedTemplates
-  );
+  yield takeLatest(mintedActionTypes.FETCH_OWNED_LISTED_TEMPLATES, getOwnedListedTemplates);
 }
 
 export function* mintedSagas() {
-  yield all([
-    call(listTemplateSaga),
-    call(fetchOwnedTemplatesSaga),
-    call(fetchOwnedReviewTemplatesSaga),
-    call(fetchOwnedListedTemplatesSaga),
-  ]);
+  yield all([call(listTemplateSaga), call(fetchOwnedTemplatesSaga), call(fetchOwnedReviewTemplatesSaga), call(fetchOwnedListedTemplatesSaga)]);
 }

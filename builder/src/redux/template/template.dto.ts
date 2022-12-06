@@ -1,7 +1,7 @@
-import { BigNumber } from "ethers";
-import { IContractDetails } from "redux/contract/contract.interfaces";
-import { IHead, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
-import { ISelectedTemplate } from "./template.interfaces";
+import { BigNumber } from 'ethers';
+import { IContractDetails } from 'redux/contract/contract.interfaces';
+import { IHead, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import { ISelectedTemplate } from './template.interfaces';
 
 export class SelectedTemplateDto {
   id?: string;
@@ -39,10 +39,8 @@ export class SelectedTemplateDto {
     this.listingId = selectedTemplate.listing_listingId;
     this.buyoutPricePerToken = selectedTemplate.listing_buyoutPricePerToken;
     this.listingTokenId = selectedTemplate.listing_tokenId;
-    this.tokenOwner =
-      selectedTemplate.listing_tokenOwner || selectedTemplate.owner_of;
+    this.tokenOwner = selectedTemplate.listing_tokenOwner || selectedTemplate.owner_of;
     this.isOwned = selectedTemplate?.isOwned;
-    this.tokenAddress =
-      selectedTemplate?.token_address || selectedTemplate.listing_assetContract;
+    this.tokenAddress = selectedTemplate?.token_address || selectedTemplate.listing_assetContract;
   }
 }
