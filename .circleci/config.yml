@@ -62,8 +62,8 @@ workflows:
               only: configure-circleci
       - aws-ecs/deploy-service-update:
           cluster-name: "buidlfy-api-dev"
-          container-image-name-updates: "container=buidlfy-api-dev-api,tag=dev"
-          family: "buidlfy-api-dev-api"
+          container-image-name-updates: "container=buidlfy-api-dev,tag=dev"
+          family: "buidlfy-api-dev"
           aws-region: AWS_DEFAULT_REGION
           requires:
             - aws-ecr-build-push-dev
