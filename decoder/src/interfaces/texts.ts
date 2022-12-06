@@ -1,4 +1,3 @@
-import IColor from "./color";
 import { IInput, IOutput } from "./value";
 
 export default interface ITexts {
@@ -23,15 +22,15 @@ export default interface ITexts {
   setOutputValue?: (outputValue: IOutput[]) => void;
   connectWallet?: boolean;
   margin?: {
-    marginLeft?: number,
-    marginRight?: number,
-    marginTop?: number,
-    marginBottom?: number,
-  }
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
   padding?: {
-    paddingLeft?: number,
-    paddingRight?: number,
-    paddingTop?: number,
-    paddingBottom?: number,
-  }
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
 }
