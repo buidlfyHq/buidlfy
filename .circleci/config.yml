@@ -11,7 +11,7 @@ jobs:
       - image: circleci/node:14
     steps:
       - checkout:
-          path: ~/project
+          path: ./server
 
       # Download and cache dependencies
       - restore_cache:
