@@ -59,6 +59,8 @@ const Navbar: FC<INavbar> = ({
       },
       contract: null,
     };
+    console.log(workspaceElements, "workspaceElements");
+
     if (
       contractDetails?.abi &&
       contractDetails?.address &&

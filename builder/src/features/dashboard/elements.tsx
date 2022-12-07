@@ -262,16 +262,16 @@ const Elements: FC<IElements> = ({
           <div className="element-div">
             <div className="px-4 py-4">
               <div
-                data-tip="Click here to add the Wall of Love"
+                data-tip="Click here to add the Lenster Card"
                 data-for="elements"
               >
                 <div className="flex">
                   <div
                     className="cursor-pointer element-container"
-                    onClick={() => onClickFunction("Wall Of Love")}
+                    onClick={() => onClickFunction("Lenster Card")}
                   >
                     <span className="element-text">
-                      Add Wall Of love
+                      Add Lenster Card
                       <IoIosAddCircleOutline className="text-[16px] ml-1" />
                     </span>
                   </div>

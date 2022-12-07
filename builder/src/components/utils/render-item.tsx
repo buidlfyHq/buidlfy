@@ -128,11 +128,12 @@ const RenderItem: FC<IRenderItem> = ({
           imgData={item.imgData}
         />
       );
-    case "Wall Of Love":
+    case "Lenster Card":
       return (
         <LensterWidget
           i={item.i}
           backgroundColor={item.style.backgroundColor}
+          setDrag={setDrag}
         />
       );
     default:

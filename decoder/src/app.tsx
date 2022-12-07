@@ -6,6 +6,7 @@ import Home from "./pages/home";
 
 const App: FC = () => {
   const config = JSON.parse(BuilderConfig);
+  console.log(config, "config");
 
   return (
     <>

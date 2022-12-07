@@ -3,6 +3,6 @@ export const containerCheck = (item: any) => {
   return (
     item?.name === "Container" ||
     item?.name === "Horizontal Container" ||
-    item?.name === "Vertical Container"
+    item?.name === "Vertical Container" 
   );
 };

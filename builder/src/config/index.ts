@@ -27,6 +27,9 @@ export interface IConfig {
       blockExplorerUrls: string[];
     };
   };
+  widget: {
+    LENS_GRAPHQL_URL: string;
+  }
 }
 
 const NODE_ENV: string = process.env.REACT_APP_STAGE || "local";
@@ -65,6 +68,9 @@ const development: IConfig = {
       blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
     },
   },
+  widget: {
+    LENS_GRAPHQL_URL: "https://api.lens.dev"
+  }
 };
 
 const production: IConfig = {
@@ -101,6 +107,9 @@ const production: IConfig = {
       blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
     },
   },
+  widget: {
+    LENS_GRAPHQL_URL: "https://api.lens.dev"
+  }
 };
 
 const local: IConfig = {
@@ -137,6 +146,9 @@ const local: IConfig = {
       blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
     },
   },
+  widget: {
+    LENS_GRAPHQL_URL: "https://api.lens.dev"
+  }
 };
 
 const config: {

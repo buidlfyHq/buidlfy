@@ -7,6 +7,7 @@ import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
 import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
+import LensterWidget from "components/custom-components/lenster-widget";
 
 interface IRenderItem {
   item: IWorkspace;
@@ -171,6 +172,16 @@ const RenderItem: FC<IRenderItem> = ({
           isAuto={item.style.isAuto}
           margin={item.style.margin}
           link={item.link}
+        />
+      );
+    case "Lenster Card":
+      return (
+        <LensterWidget
+          i={item.i}
+          backgroundColor={item.style.backgroundColor}
+          publicationId={item.publicationId}
+          profileId={item.profileId}
+          ownedBy={item.ownedBy}
         />
       );
     default:

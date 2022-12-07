@@ -6,6 +6,7 @@ import { ITemplateState } from "./template/template.interfaces";
 import { IMintedState } from "./minted/minted.interfaces";
 import { IPublishState } from "./publish/publish.interfaces";
 import { IUploadState } from "./upload/upload.interfaces";
+import { IWidgetState } from "./widget/widget.interfaces";
 
 export interface IRootState {
   workspace: IWorkspaceState;
@@ -16,4 +17,5 @@ export interface IRootState {
   minted: IMintedState;
   publish: IPublishState;
   upload: IUploadState;
+  widget: IWidgetState;
 }

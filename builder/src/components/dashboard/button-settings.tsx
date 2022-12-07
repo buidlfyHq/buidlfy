@@ -20,7 +20,6 @@ import {
   IWorkspaceElement,
 } from "redux/workspace/workspace.interfaces";
 import "styles/dashboard.css";
-import useScript from "hooks/use-script";
 
 const ButtonSettings: FC<ISettings> = ({
   handleSettingChange,
