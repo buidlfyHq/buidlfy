@@ -10,11 +10,9 @@ import 'styles/components.css';
 interface IContractModal {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  methodOpen: boolean;
-  setMethodOpen: (methodOpen: boolean) => void;
 }
 
-const ContractModal: FC<IContractModal> = ({ isOpen, setIsOpen, methodOpen, setMethodOpen }) => {
+const ContractModal: FC<IContractModal> = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch();
 
   const [showUpload, setShowUpload] = useState<boolean>(true);
@@ -23,6 +21,7 @@ const ContractModal: FC<IContractModal> = ({ isOpen, setIsOpen, methodOpen, setM
   const [files, setFiles] = useState<string | ArrayBuffer>('');
   const [updateAbi, setUpdateAbi] = useState<string>();
   const [updateAddress, setUpdateAddress] = useState<string>();
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -147,7 +146,6 @@ const ContractModal: FC<IContractModal> = ({ isOpen, setIsOpen, methodOpen, setM
               }`}
               onClick={() => {
                 setIsOpen(false);
-                setMethodOpen(false);
                 handleSaveContract();
               }}
             >

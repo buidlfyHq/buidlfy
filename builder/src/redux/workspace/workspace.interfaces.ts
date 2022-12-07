@@ -1,3 +1,5 @@
+import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
+
 export interface IUploadedImageData {
   uploadedImageData: string;
   settingItemId: string;
@@ -33,6 +35,7 @@ export interface IWorkspaceElement {
   static?: boolean;
   resizeHandles?: ResizeHandles | undefined;
   contract?: any;
+  oracle?: IOracleConfig;
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;

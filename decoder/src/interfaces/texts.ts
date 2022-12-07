@@ -1,3 +1,4 @@
+import { IOracleConfig } from "./config";
 import { IInput, IOutput } from "./value";
 
 export default interface ITexts {
@@ -16,6 +17,7 @@ export default interface ITexts {
   borderWidth?: number;
   shadow?: string;
   contractFunction?: any; // breaking while assigning a type, work in progress
+  oracleFunction?: IOracleConfig;
   inputValue?: IInput[];
   setInputValue?: (inputValue: IInput[]) => void;
   outputValue?: IOutput[];

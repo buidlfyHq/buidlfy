@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import GridLayout, { Layout } from 'react-grid-layout';
 import DefaultBuilder from './deafult-builder';
@@ -6,6 +6,7 @@ import RenderItem from 'components/utils/render-item';
 import { containerCheck } from 'utils/container-check';
 import { setSelectedElement, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { setSelectorToDefault, addSelectedElement, createSelectedElement, updateSelectedElement } from 'redux/contract/contract.reducers';
+import { setOracleSelectorToDefault, updateOracleOutputId } from 'redux/oracle/oracle.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
@@ -40,9 +41,11 @@ const Workspace: FC<IWorkspaceComponent> = ({
   const workspaceBackgroundColor = useSelector((state: IRootState) => state.workspace.workspaceBackgroundColor);
   const contractElementSelector = useSelector((state: IRootState) => state.contract.contractElementSelector);
   const contractElementSelected = useSelector((state: IRootState) => state.contract.contractElementSelected);
-  const elementHoverStyles = contractElementSelector
-    ? 'border border-[transparent] border-hover'
-    : 'border border-[transparent] hover:border-slate-300 hover:border-dashed';
+  const oracleElementSelector = useSelector((state: IRootState) => state.oracle.oracleElementSelector);
+  const elementHoverStyles =
+    contractElementSelector || oracleElementSelector
+      ? 'border border-[transparent] border-hover'
+      : 'border border-[transparent] hover:border-slate-300 hover:border-dashed';
 
   const [fullViewWidth, setFullViewWidth] = useState<number>(1200);
 
@@ -137,10 +140,11 @@ const Workspace: FC<IWorkspaceComponent> = ({
     setIsContainerSelected(true);
     setOpenSetting(true);
     // checks if the selector is active
-    if (contractElementSelector === null) {
+    if (contractElementSelector === null && oracleElementSelector === null) {
       dispatch(setSelectedElement(i));
       setOpenTab(1);
-    } else {
+    }
+    if (contractElementSelector !== null) {
       // checks selector type
       if (contractElementSelector.type === 'input' && itemName === 'Input') {
         updateElementConfig(itemName, i);
@@ -151,6 +155,12 @@ const Workspace: FC<IWorkspaceComponent> = ({
       ) {
         updateElementConfig(itemName, i);
         dispatch(setSelectorToDefault());
+      }
+    }
+    if (oracleElementSelector !== null) {
+      if (itemName === 'Text' || itemName === 'Heading 1' || itemName === 'Heading 2' || itemName === 'Heading 3') {
+        dispatch(updateOracleOutputId(i));
+        dispatch(setOracleSelectorToDefault());
       }
     }
   };

@@ -10,11 +10,10 @@ import { updateContractAbi, updateContractAddress, updateContractNetwork } from 
 interface IAbiMethods {
   setShowComponent: (showComponent: IShowComponent) => void;
   selectedElement: IWorkspaceElement;
-  setMethodOpen: (methodOpen: boolean) => void;
   setIsOpen: (isOpen: boolean) => void;
 }
 
-const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setMethodOpen, setIsOpen }) => {
+const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsOpen }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector((state: IRootState) => state.workspace.workspaceElements);
   const contractDetails: IContractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
@@ -94,7 +93,6 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setMet
   };
 
   const handleBack = () => {
-    setMethodOpen(true);
     setIsOpen(false);
     dispatch(updateContractAbi(null));
     dispatch(updateContractAddress(null));

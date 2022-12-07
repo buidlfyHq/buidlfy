@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import GridLayout, { Layout } from 'react-grid-layout';
+import RenderItem from 'components/utils/render-item';
 import { setSelectedElement, updateWorkspaceElementsArray, updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
 import { setSelectorToDefault, addSelectedElement, createSelectedElement, updateSelectedElement } from 'redux/contract/contract.reducers';
-import RenderItem from 'components/utils/render-item';
+import { setOracleSelectorToDefault, updateOracleOutputId } from 'redux/oracle/oracle.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { IUploadedImageData, IWorkspaceElement, SidebarEnum } from 'redux/workspace/workspace.interfaces';
 import add from 'assets/icons/add.png';
@@ -67,6 +68,7 @@ const Container: FC<IContainer> = ({
   const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
   const contractElementSelector = useSelector((state: IRootState) => state.contract.contractElementSelector);
   const contractElementSelected = useSelector((state: IRootState) => state.contract.contractElementSelected);
+  const oracleElementSelector = useSelector((state: IRootState) => state.oracle.oracleElementSelector);
   const imageData = useSelector((state: IRootState) =>
     state.workspace.uploadedImagesData.find((image: IUploadedImageData) => image.settingItemId === item.i),
   );
@@ -75,9 +77,10 @@ const Container: FC<IContainer> = ({
 
   let finalSpacing = margin.marginLeft + margin.marginRight + padding.paddingLeft + padding.paddingRight;
 
-  const elementHoverStyles = contractElementSelector
-    ? 'border border-[transparent] border-hover'
-    : 'border border-[transparent] hover:border-slate-300 hover:border-dashed ';
+  const elementHoverStyles =
+    contractElementSelector || oracleElementSelector
+      ? 'border border-[transparent] border-hover'
+      : 'border border-[transparent] hover:border-slate-300 hover:border-dashed ';
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[]) => {
@@ -201,11 +204,12 @@ const Container: FC<IContainer> = ({
   };
 
   const onComponentClick = (itemName: string, i: string) => {
-    if (contractElementSelector === null) {
+    if (contractElementSelector === null && oracleElementSelector === null) {
       dispatch(setSelectedElement(i));
       setOpenSetting(true);
       setOpenTab(1);
-    } else {
+    }
+    if (contractElementSelector !== null) {
       // Add validation for selection
       if (contractElementSelector.type === 'input' && itemName === 'Input') {
         updateElementConfig(itemName, i);
@@ -216,6 +220,12 @@ const Container: FC<IContainer> = ({
         updateElementConfig(itemName, i);
       }
       dispatch(setSelectorToDefault());
+    }
+    if (oracleElementSelector !== null) {
+      if (itemName === 'Text' || itemName === 'Heading 1' || itemName === 'Heading 2' || itemName === 'Heading 3') {
+        dispatch(updateOracleOutputId(i));
+        dispatch(setOracleSelectorToDefault());
+      }
     }
   };
 
