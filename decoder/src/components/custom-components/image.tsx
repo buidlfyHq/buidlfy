@@ -47,7 +47,8 @@ const Image: FC<IImageComponent> = ({
           style={{ textDecoration: "none" }}
           target="_blank"
           href={link}
-          className="cursor-pointer" rel="noreferrer"
+          className="cursor-pointer"
+          rel="noreferrer"
         >
           {imageDiv}
         </a>
