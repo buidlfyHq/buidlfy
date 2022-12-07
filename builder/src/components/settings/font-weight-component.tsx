@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { useDispatch } from "react-redux";
-import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import { ReplaceValue } from "components/utils/render-setting";
-import NumberInput from "components/utils/input/number-input";
-import "styles/components.css";
-import "styles/dashboard.css";
+import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
+import { ReplaceValue } from 'components/utils/render-setting';
+import NumberInput from 'components/utils/input/number-input';
+import 'styles/components.css';
+import 'styles/dashboard.css';
 
 interface IFontWeightComponent {
   i: string;
@@ -14,33 +14,30 @@ interface IFontWeightComponent {
 const FontWeightComponent: FC<IFontWeightComponent> = ({ i, fontWeight }) => {
   const dispatch = useDispatch();
 
-  const handleFontWeight = (
-    action: ReplaceValue,
-    updatedFontWeight?: number
-  ) => {
+  const handleFontWeight = (action: ReplaceValue, updatedFontWeight?: number) => {
     if (action === ReplaceValue.INCREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "fontWeight",
+          propertyName: 'fontWeight',
           propertyValue: fontWeight + 100,
-        })
+        }),
       );
     } else if (action === ReplaceValue.DECREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "fontWeight",
+          propertyName: 'fontWeight',
           propertyValue: fontWeight <= 100 ? 100 : fontWeight - 100,
-        })
+        }),
       );
     } else if (action === ReplaceValue.CHANGE) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "fontWeight",
+          propertyName: 'fontWeight',
           propertyValue: updatedFontWeight,
-        })
+        }),
       );
     }
   };
@@ -49,9 +46,7 @@ const FontWeightComponent: FC<IFontWeightComponent> = ({ i, fontWeight }) => {
     <NumberInput
       text="Font Weight"
       value={fontWeight}
-      handleChange={(updatedFontWeight: number) =>
-        handleFontWeight(ReplaceValue.CHANGE, updatedFontWeight)
-      }
+      handleChange={(updatedFontWeight: number) => handleFontWeight(ReplaceValue.CHANGE, updatedFontWeight)}
       handleIncrement={() => handleFontWeight(ReplaceValue.INCREMENT)}
       handleDecrement={() => handleFontWeight(ReplaceValue.DECREMENT)}
     />

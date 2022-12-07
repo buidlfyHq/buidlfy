@@ -18,7 +18,7 @@ const Text: FC<IText> = ({
   link,
   fontFamily,
 }) => {
-  const gradientCondition = color?.indexOf("gradient") !== -1;
+  const gradientCondition = color?.indexOf('gradient') !== -1;
   const textAreaContent = (
     <textarea
       readOnly

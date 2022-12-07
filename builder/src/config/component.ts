@@ -23,10 +23,10 @@ const defaultColorStyles = {
 
 const defaultFontStyles = {
   fontWeight: 400,
-  fontStyle: "normal",
+  fontStyle: 'normal',
   fontFamily: `"Inter", sans-serif`,
-  textDecoration: "none",
-  justifyContent: "center",
+  textDecoration: 'none',
+  justifyContent: 'center',
 };
 
 const defaultDeleteStyles = {
