@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchSelectedElement,
   fetchUploadedImageData,
@@ -7,41 +7,33 @@ import {
   mapElementSubStyleToWorkspace,
   mapImageElementStylesToWorkspace,
   updateContractInElement,
-} from "./workspace.utils";
-import {
-  IAction,
-  IHead,
-  IWorkspaceElement,
-  IWorkspaceState,
-} from "./workspace.interfaces";
+  updateOracleInElement,
+} from './workspace.utils';
+import { IAction, IHead, IWorkspaceElement, IWorkspaceState } from './workspace.interfaces';
+import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
 
 const initialState: IWorkspaceState = {
   workspaceElements: [],
   selectedElement: null,
   uploadedImagesData: [],
-  workspaceBackgroundColor: "rgba(255, 255, 255, 1)",
+  workspaceBackgroundColor: 'rgba(255, 255, 255, 1)',
   head: {
-    title: "",
-    logo: "",
+    title: '',
+    logo: '',
   },
 };
 
 const workspaceSlice = createSlice({
-  name: "workspace",
+  name: 'workspace',
   initialState,
   reducers: {
     // to update an element in workspace
     updateWorkspaceElement(state: IWorkspaceState, action: IAction) {
       if (!action.payload.settingItemId) return;
 
-      const updatedElements = state.workspaceElements.map((element) =>
-        mapElementsToWorkspace(element, action.payload)
-      );
+      const updatedElements = state.workspaceElements.map(element => mapElementsToWorkspace(element, action.payload));
 
-      const updatedSelectedElement = fetchSelectedElement(
-        updatedElements,
-        action.payload.settingItemId
-      );
+      const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
 
       return {
         ...state,
@@ -52,14 +44,8 @@ const workspaceSlice = createSlice({
     // to update the style of an element in workspace
     updateWorkspaceElementStyle(state, action: IAction) {      
       if (!action.payload.settingItemId) return;
-      const updatedElements = state.workspaceElements.map(
-        (element: IWorkspaceElement) =>
-          mapElementStylesToWorkspace(element, action.payload)
-      );
-      const updatedSelectedElement = fetchSelectedElement(
-        updatedElements,
-        action.payload.settingItemId
-      );
+      const updatedElements = state.workspaceElements.map((element: IWorkspaceElement) => mapElementStylesToWorkspace(element, action.payload));
+      const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
       return {
         ...state,
         workspaceElements: updatedElements,
@@ -70,15 +56,9 @@ const workspaceSlice = createSlice({
     updateWorkspaceElementSubStyle(state, action: IAction) {
       if (!action.payload.settingItemId) return;
 
-      const updatedElements = state.workspaceElements.map(
-        (element: IWorkspaceElement) =>
-          mapElementSubStyleToWorkspace(element, action.payload)
-      );
+      const updatedElements = state.workspaceElements.map((element: IWorkspaceElement) => mapElementSubStyleToWorkspace(element, action.payload));
 
-      const updatedSelectedElement = fetchSelectedElement(
-        updatedElements,
-        action.payload.settingItemId
-      );
+      const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
 
       return {
         ...state,
@@ -90,15 +70,9 @@ const workspaceSlice = createSlice({
     updateWorkspaceImageElementStyle(state, action: IAction) {
       if (!action.payload.settingItemId) return;
 
-      const updatedElements = state.workspaceElements.map(
-        (element: IWorkspaceElement) =>
-          mapImageElementStylesToWorkspace(element, action.payload)
-      );
+      const updatedElements = state.workspaceElements.map((element: IWorkspaceElement) => mapImageElementStylesToWorkspace(element, action.payload));
 
-      const updatedSelectedElement = fetchSelectedElement(
-        updatedElements,
-        action.payload.settingItemId
-      );
+      const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
 
       return {
         ...state,
@@ -108,14 +82,8 @@ const workspaceSlice = createSlice({
     },
 
     // to update the elements
-    updateWorkspaceElementsArray(
-      state,
-      action: { payload: IWorkspaceElement[] }
-    ) {
-      const updatedSelectedElement = fetchSelectedElement(
-        action.payload,
-        state.selectedElement?.i
-      );
+    updateWorkspaceElementsArray(state, action: { payload: IWorkspaceElement[] }) {
+      const updatedSelectedElement = fetchSelectedElement(action.payload, state.selectedElement?.i);
 
       return {
         ...state,
@@ -125,13 +93,8 @@ const workspaceSlice = createSlice({
     },
 
     // to update workspace background color
-    updateWorkspaceBackgroundColor(
-      state: IWorkspaceState,
-      action: { payload: string }
-    ) {
-      state.workspaceBackgroundColor = action.payload
-        ? action.payload
-        : "rgba(255, 255, 255, 1)";
+    updateWorkspaceBackgroundColor(state: IWorkspaceState, action: { payload: string }) {
+      state.workspaceBackgroundColor = action.payload ? action.payload : 'rgba(255, 255, 255, 1)';
     },
 
     setSiteHead(state: IWorkspaceState, action: { payload: IHead }) {
@@ -143,25 +106,15 @@ const workspaceSlice = createSlice({
     setSelectedElement(state: IWorkspaceState, action: { payload: string }) {
       return {
         ...state,
-        selectedElement: fetchSelectedElement(
-          state.workspaceElements,
-          action.payload
-        ),
+        selectedElement: fetchSelectedElement(state.workspaceElements, action.payload),
       };
     },
 
     // to save contract config
     saveContractConfig(state: IWorkspaceState, action: { payload }) {
-      const updatedContract = updateContractInElement(
-        state.workspaceElements,
-        state.selectedElement,
-        action.payload
-      );
+      const updatedContract = updateContractInElement(state.workspaceElements, state.selectedElement, action.payload);
 
-      const updatedSelectedElement = fetchSelectedElement(
-        updatedContract,
-        state.selectedElement.i
-      );
+      const updatedSelectedElement = fetchSelectedElement(updatedContract, state.selectedElement.i);
 
       return {
         ...state,
@@ -170,13 +123,22 @@ const workspaceSlice = createSlice({
       };
     },
 
+    // to save oracle config
+    saveOracleConfig(state: IWorkspaceState, action: { payload: IOracleConfig }) {
+      const updatedOracle = updateOracleInElement(state.workspaceElements, state.selectedElement, action.payload);
+
+      const updatedSelectedElement = fetchSelectedElement(updatedOracle, state.selectedElement.i);
+
+      return {
+        ...state,
+        workspaceElements: updatedOracle,
+        selectedElement: updatedSelectedElement,
+      };
+    },
+
     updateUploadedImageData(state: IWorkspaceState, action: { payload }) {
       const { settingItemId, uploadedImageData } = action.payload;
-      const newUploadedImagesData = fetchUploadedImageData(
-        settingItemId,
-        uploadedImageData,
-        state.uploadedImagesData
-      );
+      const newUploadedImagesData = fetchUploadedImageData(settingItemId, uploadedImageData, state.uploadedImagesData);
       return {
         ...state,
         uploadedImagesData: newUploadedImagesData,
@@ -195,6 +157,7 @@ export const {
   setSiteHead,
   setSelectedElement,
   saveContractConfig,
+  saveOracleConfig,
   updateUploadedImageData,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;

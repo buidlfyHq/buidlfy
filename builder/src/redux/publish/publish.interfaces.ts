@@ -9,4 +9,3 @@ export interface IPublishState {
   publishStatus: boolean;
   publishFailed: boolean;
 }
-

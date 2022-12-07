@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { gradientCheck } from "utils/gradient-check";
-import { IText } from "redux/workspace/workspace.interfaces";
-import "styles/components.css";
+import React, { FC } from 'react';
+import { gradientCheck } from 'utils/gradient-check';
+import { IText } from 'redux/workspace/workspace.interfaces';
+import 'styles/components.css';
 
 const Button: FC<IText> = ({
   i,
@@ -22,11 +22,7 @@ const Button: FC<IText> = ({
   borderWidth,
   fontFamily,
 }) => (
-  <section
-    style={{ justifyContent: justifyContent }}
-    id="button-one"
-    className="flex overflow-hidden items-center justify-center w-auto h-full"
-  >
+  <section style={{ justifyContent: justifyContent }} id="button-one" className="flex overflow-hidden items-center justify-center w-auto h-full">
     <button
       style={{
         fontWeight: fontWeight,
@@ -34,13 +30,13 @@ const Button: FC<IText> = ({
         fontFamily: fontFamily,
         border: `${borderWidth}px solid ${borderColor}`,
         borderImage: borderColor,
-        display: "flex",
-        justifyContent: "center",
+        display: 'flex',
+        justifyContent: 'center',
         borderRadius: `${borderRadius}px`,
         fontSize: `${fontSize}px`,
         background: backgroundColor,
         boxShadow: shadow,
-        alignItems: "center",
+        alignItems: 'center',
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
       }}

@@ -1,8 +1,8 @@
-import { call, all, put, takeLatest } from "redux-saga/effects";
-import { updateUploadedImageData, updateWorkspaceElement } from "redux/workspace/workspace.reducers";
-import { updateUploadImage } from "./upload.reducers";
-import { uploadImageService } from "./upload.services";
-import uploadActionTypes from "./upload.types";
+import { call, all, put, takeLatest } from 'redux-saga/effects';
+import { updateUploadedImageData, updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
+import { updateUploadImage } from './upload.reducers';
+import { uploadImageService } from './upload.services';
+import uploadActionTypes from './upload.types';
 
 function* uploadImage({ payload }) {
   const { data, id } = payload;
@@ -13,19 +13,19 @@ function* uploadImage({ payload }) {
     yield put(
       updateWorkspaceElement({
         settingItemId: id,
-        propertyName: "imgData",
+        propertyName: 'imgData',
         propertyValue: uploadImageLink,
-      })
+      }),
     );
     yield put(
       updateUploadedImageData({
         settingItemId: id,
         uploadedImageData: uploadImageLink,
-      })
+      }),
     );
   } else {
     // Log is required
-    yield put(console.log("error"));
+    yield put(console.log('error'));
   }
 }
 

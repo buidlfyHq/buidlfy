@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { gradientCheck } from "utils/gradient-check";
-import { IText } from "redux/workspace/workspace.interfaces";
-import "styles/components.css";
+import React, { FC } from 'react';
+import { gradientCheck } from 'utils/gradient-check';
+import { IText } from 'redux/workspace/workspace.interfaces';
+import 'styles/components.css';
 
 const Text: FC<IText> = ({
   i,
@@ -25,16 +25,16 @@ const Text: FC<IText> = ({
       id={i}
       value={value}
       style={{
-        height: "-webkit-fill-available",
+        height: '-webkit-fill-available',
         WebkitTextFillColor: gradientCheck(color, false),
         fontWeight: fontWeight,
         fontStyle: italic,
         background: gradientCheck(color, true),
-        display: "flex",
+        display: 'flex',
         justifyContent,
-        alignItems: "center",
+        alignItems: 'center',
         textDecoration: underline,
-        textDecorationColor: `${gradientCondition ? "black" : color}`,
+        textDecorationColor: `${gradientCondition ? 'black' : color}`,
         textAlign: `${justifyContent}` as CanvasTextAlign,
         fontSize: `${fontSize}px`,
         fontFamily: fontFamily,
@@ -48,7 +48,7 @@ const Text: FC<IText> = ({
     <section
       id="text-one"
       style={{
-        height: "-webkit-fill-available",
+        height: '-webkit-fill-available',
         textDecoration: underline,
         textDecorationColor: color,
         background: backgroundColor,

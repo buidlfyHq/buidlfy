@@ -1,4 +1,4 @@
-import mintedActionTypes from "./minted.types";
+import mintedActionTypes from './minted.types';
 
 export const listTemplate = (payload: string) => ({
   type: mintedActionTypes.LIST_TEMPLATE,

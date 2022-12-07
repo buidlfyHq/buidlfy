@@ -17,9 +17,9 @@ const defaultPaddingStyles = {
 };
 
 const defaultColorStyles = {
-  backgroundColor: "rgba(255, 255, 255, 0)",
-  color: "rgba(0, 0, 0, 100)",
-}
+  backgroundColor: 'rgba(255, 255, 255, 0)',
+  color: 'rgba(0, 0, 0, 100)',
+};
 
 const defaultFontStyles = {
   fontWeight: 400,
@@ -36,20 +36,20 @@ const defaultDeleteStyles = {
 const defaultBorderStyles = {
   borderRadius: 0,
   borderWidth: 0,
-  shadow: "none",
+  shadow: 'none',
 };
 
 export const components = [
   {
-    name: "Container",
+    name: 'Container',
     h: 2,
     // minH: 2,
     style: {
       ...defaultPaddingStyles,
       ...defaultMarginStyles,
-      backgroundColor: "rgba(255, 255, 255, 0)",
-      color: "rgba(0, 0, 0, 1)",
-      backgroundSize: "contain",
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      color: 'rgba(0, 0, 0, 1)',
+      backgroundSize: 'contain',
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
     },
@@ -113,7 +113,7 @@ export const components = [
   //         ...defaultPaddingStyles
   //       },
   //     },
-     
+
   //   ],
   // },
   // {
@@ -178,18 +178,18 @@ export const components = [
   //   ],
   // },
   {
-    name: "Button",
+    name: 'Button',
     h: 1,
     minH: 1,
-    value: "Add Button",
-    link: "",
+    value: 'Add Button',
+    link: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
       fontSize: 13,
-      backgroundColor: "rgba(106, 88, 231, 100)",
-      color: "rgba(255,255,255,100)",
-      borderColor: "rgba(106, 88, 231, 100)",
+      backgroundColor: 'rgba(106, 88, 231, 100)',
+      color: 'rgba(255,255,255,100)',
+      borderColor: 'rgba(106, 88, 231, 100)',
       ...defaultDeleteStyles,
       borderRadius: 2,
       borderWidth: 0,
@@ -205,11 +205,11 @@ export const components = [
     contract: {},
   },
   {
-    name: "Text",
+    name: 'Text',
     h: 1,
     minH: 1,
-    value: "Text",
-    link: "",
+    value: 'Text',
+    link: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -220,11 +220,11 @@ export const components = [
     },
   },
   {
-    name: "Heading 1",
+    name: 'Heading 1',
     h: 1,
     minH: 1,
-    value: "Heading 1",
-    link: "",
+    value: 'Heading 1',
+    link: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -235,11 +235,11 @@ export const components = [
     },
   },
   {
-    name: "Heading 2",
+    name: 'Heading 2',
     h: 1,
     minH: 1,
-    value: "Heading 2",
-    link: "",
+    value: 'Heading 2',
+    link: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -250,11 +250,11 @@ export const components = [
     },
   },
   {
-    name: "Heading 3",
+    name: 'Heading 3',
     h: 1,
     minH: 1,
-    value: "Heading 3",
-    link: "",
+    value: 'Heading 3',
+    link: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -265,7 +265,7 @@ export const components = [
     },
   },
   {
-    name: "Input",
+    name: 'Input',
     h: 1,
     minH: 1,
     placeholder: 'Placeholder',
@@ -273,9 +273,9 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
       borderRadius: 5,
-      borderColor: "rgba(222,222,222,100)",
-      color: "rgba(0,0,0,100)",
-      backgroundColor: "rgba(255, 255, 255, 0)",
+      borderColor: 'rgba(222,222,222,100)',
+      color: 'rgba(0,0,0,100)',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
       margin: {
         marginLeft: 24,
         marginRight: 24,
@@ -286,19 +286,19 @@ export const components = [
         paddingLeft: 12,
         paddingRight: 12,
         paddingTop: 8,
-        paddingBottom: 8
-      }
+        paddingBottom: 8,
+      },
     },
   },
   {
-    name: "Image",
+    name: 'Image',
     h: 3,
     minH: 1,
-    link: "",
+    link: '',
     style: {
       width: 80,
       height: 60,
-      backgroundSize: "contain",
+      backgroundSize: 'contain',
       isAuto: true,
       ...defaultDeleteStyles,
       ...defaultFontStyles,
@@ -312,5 +312,4 @@ export const components = [
   //     ...defaultDeleteStyles,
   //   },
   // },
-
 ];

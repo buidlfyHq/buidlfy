@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import { useDispatch } from "react-redux";
-import { updateWorkspaceElementSubStyle } from "redux/workspace/workspace.reducers";
-import SpaceInput from "components/utils/input/space-input";
-import "styles/components.css";
-import "styles/dashboard.css";
+import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateWorkspaceElementSubStyle } from 'redux/workspace/workspace.reducers';
+import SpaceInput from 'components/utils/input/space-input';
+import 'styles/components.css';
+import 'styles/dashboard.css';
 
 interface IPaddingComponent {
   i: string;
@@ -17,10 +17,10 @@ interface IPaddingComponent {
 }
 
 enum Padding {
-  PADDINGLEFT = "paddingLeft",
-  PADDINGRIGHT = "paddingRight",
-  PADDINGTOP = "paddingTop",
-  PADDINGBOTTOM = "paddingBottom",
+  PADDINGLEFT = 'paddingLeft',
+  PADDINGRIGHT = 'paddingRight',
+  PADDINGTOP = 'paddingTop',
+  PADDINGBOTTOM = 'paddingBottom',
 }
 
 const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
@@ -30,10 +30,10 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
     dispatch(
       updateWorkspaceElementSubStyle({
         settingItemId: i,
-        propertyName: "padding",
+        propertyName: 'padding',
         propertyValue: updatedPadding,
         childPropertyName: property,
-      })
+      }),
     );
   };
 
@@ -41,10 +41,10 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
     dispatch(
       updateWorkspaceElementSubStyle({
         settingItemId: i,
-        propertyName: "padding",
+        propertyName: 'padding',
         propertyValue: value + 1,
         childPropertyName: property,
-      })
+      }),
     );
   };
 
@@ -52,22 +52,20 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
     dispatch(
       updateWorkspaceElementSubStyle({
         settingItemId: i,
-        propertyName: "padding",
+        propertyName: 'padding',
         propertyValue: value - 1,
         childPropertyName: property,
-      })
+      }),
     );
   };
 
   const paddingData = {
     container: {
-      text: ["L", "R"],
+      text: ['L', 'R'],
       value: [padding?.paddingLeft, padding?.paddingRight],
       handleChange: [
-        (updatedPadding: number) =>
-          handleChange(Padding.PADDINGLEFT, updatedPadding),
-        (updatedPadding: number) =>
-          handleChange(Padding.PADDINGRIGHT, updatedPadding),
+        (updatedPadding: number) => handleChange(Padding.PADDINGLEFT, updatedPadding),
+        (updatedPadding: number) => handleChange(Padding.PADDINGRIGHT, updatedPadding),
       ],
       handleIncrement: [
         () => incrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
@@ -79,22 +77,13 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
       ],
     },
     default: {
-      text: ["L", "R", "T", "B"],
-      value: [
-        padding?.paddingLeft || 0,
-        padding?.paddingRight || 0,
-        padding?.paddingTop || 0,
-        padding?.paddingBottom || 0,
-      ],
+      text: ['L', 'R', 'T', 'B'],
+      value: [padding?.paddingLeft || 0, padding?.paddingRight || 0, padding?.paddingTop || 0, padding?.paddingBottom || 0],
       handleChange: [
-        (updatedPadding: number) =>
-          handleChange(Padding.PADDINGLEFT, updatedPadding),
-        (updatedPadding: number) =>
-          handleChange(Padding.PADDINGRIGHT, updatedPadding),
-        (updatedPadding: number) =>
-          handleChange(Padding.PADDINGTOP, updatedPadding),
-        (updatedPadding: number) =>
-          handleChange(Padding.PADDINGBOTTOM, updatedPadding),
+        (updatedPadding: number) => handleChange(Padding.PADDINGLEFT, updatedPadding),
+        (updatedPadding: number) => handleChange(Padding.PADDINGRIGHT, updatedPadding),
+        (updatedPadding: number) => handleChange(Padding.PADDINGTOP, updatedPadding),
+        (updatedPadding: number) => handleChange(Padding.PADDINGBOTTOM, updatedPadding),
       ],
       handleIncrement: [
         () => incrementCounter(Padding.PADDINGLEFT, padding?.paddingLeft),
@@ -111,7 +100,7 @@ const PaddingComponent: FC<IPaddingComponent> = ({ i, padding, name }) => {
     },
   };
 
-  const containerType = name === "Container" ? "container" : "default";
+  const containerType = name === 'Container' ? 'container' : 'default';
 
   return (
     <>
