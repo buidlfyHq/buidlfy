@@ -30,10 +30,10 @@ export default interface ITexts {
     marginBottom?: number;
   };
   padding?: {
-    paddingLeft?: number,
-    paddingRight?: number,
-    paddingTop?: number,
-    paddingBottom?: number,
-  }
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+  };
   fontFamily?: string;
 }

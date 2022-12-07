@@ -76,7 +76,7 @@ const Text: FC<ITexts> = ({
         <a
           target="_blank"
           href={link}
-          className="text-class cursor-pointer flex overflow-hidden items-center justify-center w-auto h-full"
+          className="text-class cursor-pointer flex overflow-hidden items-center justify-center w-auto h-full" rel="noreferrer"
         >
           {textArea}
         </a>
