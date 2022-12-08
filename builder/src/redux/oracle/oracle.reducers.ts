@@ -1,10 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IOracleElementSelector, IOracleState } from "./oracle.interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { IOracleElementSelector, IOracleState } from './oracle.interfaces';
 
 const initialState: IOracleState = {
   oracleConfig: {
-    methodName: "",
-    stateMutability: "view",
+    methodName: '',
+    stateMutability: 'view',
     inputs: [],
     outputs: [],
   },
@@ -12,13 +12,10 @@ const initialState: IOracleState = {
 };
 
 const oracleSlice = createSlice({
-  name: "oracle",
+  name: 'oracle',
   initialState,
   reducers: {
-    updateOracle(
-      state,
-      action: { payload: { id: string; methodName: string } }
-    ) {
+    updateOracle(state, action: { payload: { id: string; methodName: string } }) {
       state.oracleConfig.methodName = action.payload.methodName;
       state.oracleConfig.inputs = [{ id: action.payload.id, send: false }];
     },
@@ -26,7 +23,7 @@ const oracleSlice = createSlice({
       state.oracleConfig.outputs = [{ id: action.payload }];
     },
     setOracleToDefault(state) {
-      state.oracleConfig.methodName = "";
+      state.oracleConfig.methodName = '';
       state.oracleConfig.inputs = [];
       state.oracleConfig.outputs = [];
     },
@@ -39,11 +36,5 @@ const oracleSlice = createSlice({
   },
 });
 
-export const {
-  updateOracle,
-  updateOracleOutputId,
-  setOracleToDefault,
-  updateOracleSelector,
-  setOracleSelectorToDefault,
-} = oracleSlice.actions;
+export const { updateOracle, updateOracleOutputId, setOracleToDefault, updateOracleSelector, setOracleSelectorToDefault } = oracleSlice.actions;
 export default oracleSlice.reducer;

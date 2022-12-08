@@ -1,18 +1,15 @@
-import React, { FC, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
-import "styles/components.css";
-import "styles/dashboard.css";
+import React, { FC, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
+import 'styles/components.css';
+import 'styles/dashboard.css';
 
 interface IConnectSwitchComponent {
   i: string;
   connectWallet: boolean;
 }
 
-const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
-  i,
-  connectWallet,
-}) => {
+const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({ i, connectWallet }) => {
   const dispatch = useDispatch();
   const [connectToggle, setConnectToggle] = useState(connectWallet);
 
@@ -21,9 +18,9 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
     dispatch(
       updateWorkspaceElement({
         settingItemId: i,
-        propertyName: "connectWallet",
+        propertyName: 'connectWallet',
         propertyValue: connectWallet ? false : true,
-      })
+      }),
     );
   };
 
@@ -33,9 +30,7 @@ const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({
 
   return (
     <div className="flex py-4">
-      <span className="margin-text grow text-left px-3 mt-[0.5rem] mb-0">
-        Connect Wallet
-      </span>
+      <span className="margin-text grow text-left px-3 mt-[0.5rem] mb-0">Connect Wallet</span>
       <div className="flex ml-2 justify-center mt-1">
         <div onClick={handleOnChange} className="form-check form-switch">
           <input

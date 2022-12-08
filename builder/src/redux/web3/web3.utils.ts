@@ -1,8 +1,8 @@
-import { BigNumber, Contract, ethers, Signer } from "ethers";
-import marketplaceAbi from "assets/abis/Marketplace.json";
-import erc1155Abi from "assets/abis/ERC1155.json";
-import erc20Abi from "assets/abis/ERC20.json";
-import config from "config";
+import { BigNumber, Contract, ethers, Signer } from 'ethers';
+import marketplaceAbi from 'assets/abis/Marketplace.json';
+import erc1155Abi from 'assets/abis/ERC1155.json';
+import erc20Abi from 'assets/abis/ERC20.json';
+import config from 'config';
 
 // -------------For reference-------------
 //
@@ -43,40 +43,24 @@ export const abis = {
   marketplace: marketplaceAbi,
 };
 
-export const TOKENS_COUNT_ON_MINT = ethers.BigNumber.from(
-  "1000000000000000000"
-);
+export const TOKENS_COUNT_ON_MINT = ethers.BigNumber.from('1000000000000000000');
 
 export const getMarketplaceContract = (signer: Signer): Contract => {
-  const marketplaceContract = new Contract(
-    config.address.marketplace,
-    abis.marketplace,
-    signer
-  );
+  const marketplaceContract = new Contract(config.address.marketplace, abis.marketplace, signer);
   return marketplaceContract;
 };
 
-export const getERC20Contract = (
-  tokenAddress: string,
-  signer: Signer
-): Contract => {
+export const getERC20Contract = (tokenAddress: string, signer: Signer): Contract => {
   const erc20Contract = new Contract(tokenAddress, abis.erc20, signer);
   return erc20Contract;
 };
 
 export const getERC1155Contract = (signer: Signer): Contract => {
-  const erc1155Contract = new Contract(
-    config.address.buidlfyErc1155,
-    abis.erc1155,
-    signer
-  );
+  const erc1155Contract = new Contract(config.address.buidlfyErc1155, abis.erc1155, signer);
   return erc1155Contract;
 };
 
-export const approveERC20Token = async (
-  amount: string | BigNumber,
-  signer: Signer
-): Promise<any> => {
+export const approveERC20Token = async (amount: string | BigNumber, signer: Signer): Promise<any> => {
   const erc20Contract = getERC20Contract(config.address.usdt, signer);
   const tx = await erc20Contract.approve(config.address.marketplace, amount);
 
@@ -85,23 +69,14 @@ export const approveERC20Token = async (
 
 export const approveERC1155Token = async (signer: Signer): Promise<any> => {
   const erc1155Contract = getERC1155Contract(signer);
-  const tx = await erc1155Contract.setApprovalForAll(
-    config.address.marketplace,
-    true
-  );
+  const tx = await erc1155Contract.setApprovalForAll(config.address.marketplace, true);
 
   return await tx.wait();
 };
 
-export const isApprovedForAll = async (
-  signer: Signer,
-  userAddress: string
-): Promise<any> => {
+export const isApprovedForAll = async (signer: Signer, userAddress: string): Promise<any> => {
   const erc1155Contract = getERC1155Contract(signer);
-  const tx = await erc1155Contract.isApprovedForAll(
-    userAddress,
-    config.address.marketplace
-  );
+  const tx = await erc1155Contract.isApprovedForAll(userAddress, config.address.marketplace);
 
   return await tx;
 };
