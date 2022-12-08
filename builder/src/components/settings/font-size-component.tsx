@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { useDispatch } from "react-redux";
-import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import { ReplaceValue } from "components/utils/render-setting";
-import NumberInput from "components/utils/input/number-input";
-import "styles/components.css";
-import "styles/dashboard.css";
+import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
+import { ReplaceValue } from 'components/utils/render-setting';
+import NumberInput from 'components/utils/input/number-input';
+import 'styles/components.css';
+import 'styles/dashboard.css';
 
 interface IFontSizeComponent {
   i: string;
@@ -19,25 +19,25 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "fontSize",
+          propertyName: 'fontSize',
           propertyValue: fontSize + 1,
-        })
+        }),
       );
     } else if (action === ReplaceValue.DECREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "fontSize",
+          propertyName: 'fontSize',
           propertyValue: fontSize <= 1 ? 1 : fontSize - 1,
-        })
+        }),
       );
     } else if (action === ReplaceValue.CHANGE) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "fontSize",
+          propertyName: 'fontSize',
           propertyValue: updatedFontSize,
-        })
+        }),
       );
     }
   };
@@ -46,9 +46,7 @@ const FontSizeComponent: FC<IFontSizeComponent> = ({ i, fontSize }) => {
     <NumberInput
       text="Font Size"
       value={fontSize}
-      handleChange={(updatedFontSize: number) =>
-        handleFontSize(ReplaceValue.CHANGE, updatedFontSize)
-      }
+      handleChange={(updatedFontSize: number) => handleFontSize(ReplaceValue.CHANGE, updatedFontSize)}
       handleIncrement={() => handleFontSize(ReplaceValue.INCREMENT)}
       handleDecrement={() => handleFontSize(ReplaceValue.DECREMENT)}
     />

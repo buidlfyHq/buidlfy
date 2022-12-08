@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { filterTemplates } from "./template.utils";
-import { ISelectedTemplate, ITemplateState } from "./template.interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { filterTemplates } from './template.utils';
+import { ISelectedTemplate, ITemplateState } from './template.interfaces';
 
 const initialState: ITemplateState = {
-  buyTemplateReceipt: "",
+  buyTemplateReceipt: '',
   buyTemplateLoading: false,
   mintTokenId: 0, // UPDATE: [{id: string, tokenId: number}]
   mintTemplateLoading: false,
@@ -14,7 +14,7 @@ const initialState: ITemplateState = {
 };
 
 const templateSlice = createSlice({
-  name: "template",
+  name: 'template',
   initialState,
   reducers: {
     buyTemplate(state, action: { payload: string }) {
@@ -50,13 +50,10 @@ const templateSlice = createSlice({
       state.filteredTemplateList = action.payload;
     },
     filterAllTemplates(state, action: any) {
-      const modifiedTemplateList = state.templateList.map((template) =>
-        filterTemplates(template, action.payload)
-      );
+      const modifiedTemplateList = state.templateList.map(template => filterTemplates(template, action.payload));
 
       const isOwned = modifiedTemplateList.filter(
-        (template: ISelectedTemplate) =>
-          template.listing_tokenId === state.selectedTemplate?.listing_tokenId
+        (template: ISelectedTemplate) => template.listing_tokenId === state.selectedTemplate?.listing_tokenId,
       )[0];
 
       state.templateList = modifiedTemplateList;

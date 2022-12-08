@@ -1,6 +1,6 @@
-import { call, all, put, takeLatest, select } from "redux-saga/effects";
-import { addNotification } from "redux/notification/notification.reducers";
-import { toggleModalType } from "redux/modal/modal.reducers";
+import { call, all, put, takeLatest, select } from 'redux-saga/effects';
+import { addNotification } from 'redux/notification/notification.reducers';
+import { toggleModalType } from 'redux/modal/modal.reducers';
 import {
   buyTemplate,
   templateMinted,
@@ -10,40 +10,30 @@ import {
   startFetchTemplateLoader,
   endFetchTemplateLoader,
   setFilteredTemplateList,
-} from "./template.reducers";
-import {
-  initiateTransactionService,
-  mintTemplateService,
-  getListedTemplatesService,
-} from "./template.services";
-import templateActionTypes from "./template.types";
-import { IRootState } from "redux/root-state.interface";
-import { NotificationType } from "redux/notification/notification.interfaces";
-import { ISelectedTemplate } from "./template.interfaces";
-import { SelectedTemplateDto } from "./template.dto";
+} from './template.reducers';
+import { initiateTransactionService, mintTemplateService, getListedTemplatesService } from './template.services';
+import templateActionTypes from './template.types';
+import { IRootState } from 'redux/root-state.interface';
+import { NotificationType } from 'redux/notification/notification.interfaces';
+import { ISelectedTemplate } from './template.interfaces';
+import { SelectedTemplateDto } from './template.dto';
 
 function* buySelectedTemplate() {
-  const selectedTemplate: ISelectedTemplate = yield select(
-    (state: IRootState) => state.template.selectedTemplate
-  );
+  const selectedTemplate: ISelectedTemplate = yield select((state: IRootState) => state.template.selectedTemplate);
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
   yield put(startBuyTemplateLoader());
 
-  const transactionRes = yield call(
-    initiateTransactionService,
-    selectedTemplateDto.listingId,
-    selectedTemplateDto.buyoutPricePerToken
-  );
+  const transactionRes = yield call(initiateTransactionService, selectedTemplateDto.listingId, selectedTemplateDto.buyoutPricePerToken);
   if (!transactionRes.error) {
     yield put(buyTemplate(transactionRes.receipt));
-    yield put(toggleModalType("final"));
+    yield put(toggleModalType('final'));
   } else {
     yield put(
       addNotification({
         message: transactionRes.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
-      })
+      }),
     );
   }
 }
@@ -54,14 +44,14 @@ function* mintSelectedTemplate({ payload }) {
   if (!mintRes.error) {
     const tokenId = parseInt(mintRes.receipt.logs[1].topics[1].toString());
     yield put(templateMinted(tokenId));
-    yield put(toggleModalType("minted-complete"));
+    yield put(toggleModalType('minted-complete'));
   } else {
     yield put(
       addNotification({
         message: mintRes.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
-      })
+      }),
     );
   }
 }
@@ -81,7 +71,7 @@ function* getListedTemplates(): any {
         message: fetchedTemplates.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
-      })
+      }),
     );
   }
 }
@@ -99,9 +89,5 @@ function* fetchTemplatesSaga() {
 }
 
 export function* templateSagas() {
-  yield all([
-    call(buyTemplateSaga),
-    call(mintTemplateSaga),
-    call(fetchTemplatesSaga),
-  ]);
+  yield all([call(buyTemplateSaga), call(mintTemplateSaga), call(fetchTemplatesSaga)]);
 }

@@ -1,12 +1,12 @@
-import { FC } from "react";
-import Container from "components/custom-components/container";
-import Button from "components/custom-components/button";
-import Text from "components/custom-components/text";
-import Image from "components/custom-components/image";
-import Input from "components/custom-components/input";
-import Divider from "components/custom-components/divider";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
-import PreviewContainer from "components/custom-components/preview-container";
+import { FC } from 'react';
+import Container from 'components/custom-components/container';
+import Button from 'components/custom-components/button';
+import Text from 'components/custom-components/text';
+import Image from 'components/custom-components/image';
+import Input from 'components/custom-components/input';
+import Divider from 'components/custom-components/divider';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import PreviewContainer from 'components/custom-components/preview-container';
 
 interface IRenderItem {
   item: IWorkspaceElement;
@@ -32,7 +32,7 @@ const RenderItem: FC<IRenderItem> = ({
   preview,
 }) => {
   switch (item.name) {
-    case "Button":
+    case 'Button':
       return (
         <Button
           i={item.i}
@@ -54,10 +54,10 @@ const RenderItem: FC<IRenderItem> = ({
           padding={item.style.padding}
         />
       );
-    case "Text":
-    case "Heading 1":
-    case "Heading 2":
-    case "Heading 3":
+    case 'Text':
+    case 'Heading 1':
+    case 'Heading 2':
+    case 'Heading 3':
       return (
         <Text
           i={item.i}
@@ -74,7 +74,7 @@ const RenderItem: FC<IRenderItem> = ({
           padding={item.style.padding}
         />
       );
-    case "Input":
+    case 'Input':
       return (
         <Input
           i={item.i}
@@ -88,7 +88,7 @@ const RenderItem: FC<IRenderItem> = ({
           borderColor={item.style.borderColor}
         />
       );
-    case "Image":
+    case 'Image':
       return (
         <Image
           i={item.i}
@@ -102,11 +102,11 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
         />
       );
-    case "Divider":
+    case 'Divider':
       return <Divider />;
-    case "Container":
-    case "Horizontal Container":
-    case "Vertical Container":
+    case 'Container':
+    case 'Horizontal Container':
+    case 'Vertical Container':
       return (
         <>
           {preview ? (

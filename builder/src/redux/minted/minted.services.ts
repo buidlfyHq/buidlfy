@@ -1,16 +1,10 @@
-import { BigNumber } from "ethers";
-import request, { gql } from "graphql-request";
-import config from "config";
-import {
-  approveERC1155Token,
-  getMarketplaceContract,
-  getSigner,
-  isApprovedForAll,
-  TOKENS_COUNT_ON_MINT,
-} from "redux/web3/web3.utils";
-import { getCurrentTime } from "./minted.utils";
-import { formatList } from "redux/template/template.services";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { BigNumber } from 'ethers';
+import request, { gql } from 'graphql-request';
+import config from 'config';
+import { approveERC1155Token, getMarketplaceContract, getSigner, isApprovedForAll, TOKENS_COUNT_ON_MINT } from 'redux/web3/web3.utils';
+import { getCurrentTime } from './minted.utils';
+import { formatList } from 'redux/template/template.services';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
 export const approveListingService = async (address: string): Promise<any> => {
   try {
@@ -20,10 +14,10 @@ export const approveListingService = async (address: string): Promise<any> => {
       await approveERC1155Token(signer);
     }
 
-    return { error: false, errorMessage: "" };
+    return { error: false, errorMessage: '' };
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log("Error in approveListingService --> ", error);
+    console.log('Error in approveListingService --> ', error);
     return {
       error: true,
       errorMessage: (error as Error).message,
@@ -31,10 +25,7 @@ export const approveListingService = async (address: string): Promise<any> => {
   }
 };
 
-export const createListingService = async (
-  tokenId: string,
-  buyoutPricePerToken: BigNumber
-): Promise<any> => {
+export const createListingService = async (tokenId: string, buyoutPricePerToken: BigNumber): Promise<any> => {
   try {
     const signer = getSigner();
     const marketplaceContract = getMarketplaceContract(signer);
@@ -53,32 +44,30 @@ export const createListingService = async (
       ],
       {
         gasLimit: 3000000,
-      }
+      },
     );
-    console.log("tx: ", tx);
+    console.log('tx: ', tx);
     const receipt = await tx.wait();
-    return { error: false, errorMessage: "", receipt };
+    return { error: false, errorMessage: '', receipt };
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log("Error in createListingService --> ", error);
-    return { error: true, errorMessage: (error as Error).message, receipt: "" };
+    console.log('Error in createListingService --> ', error);
+    return { error: true, errorMessage: (error as Error).message, receipt: '' };
   }
 };
 
-export const getOwnedTemplatesService = async (
-  address: string
-): Promise<any> => {
+export const getOwnedTemplatesService = async (address: string): Promise<any> => {
   try {
     const allTemplates = await (
       await fetch(
         `https://deep-index.moralis.io/api/v2/${address}/nft?chain=${config.network.DEFAULT_NETWORK.chainName}&format=decimal&token_addresses=${config.address.buidlfyErc1155}`,
         {
-          method: "GET",
+          method: 'GET',
           headers: {
-            "X-API-Key": config.template.MORALIS_X_API_KEY,
-            accept: "application/json",
+            'X-API-Key': config.template.MORALIS_X_API_KEY,
+            accept: 'application/json',
           },
-        }
+        },
       )
     ).json();
 
@@ -87,26 +76,24 @@ export const getOwnedTemplatesService = async (
         allTemplates.result.map(async (template: any) => {
           try {
             if (template.token_uri) {
-              const templateObj: IWorkspaceElement = await (
-                await fetch(template.token_uri)
-              ).json();
+              const templateObj: IWorkspaceElement = await (await fetch(template.token_uri)).json();
 
               return { ...template, ...templateObj };
             } else {
               return { ...template };
             }
           } catch (error) {
-            console.error("error: ", error);
+            console.error('error: ', error);
           }
-        })
+        }),
       )
     ).filter((template: any) => template !== undefined);
 
-    return { error: false, errorMessage: "", templates };
+    return { error: false, errorMessage: '', templates };
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log("Error in getOwnedTemplatesService --> ", error);
-    return { error: true, errorMessage: (error as Error).message, receipt: "" };
+    console.log('Error in getOwnedTemplatesService --> ', error);
+    return { error: true, errorMessage: (error as Error).message, receipt: '' };
   }
 };
 
@@ -141,10 +128,10 @@ export const getOwnedReviewTemplatesService = async (address: string) => {
 
     const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
     const listings = await formatList(res.listings);
-    return { error: false, errorMessage: "", listings };
+    return { error: false, errorMessage: '', listings };
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error("Error in fetching --> ", error);
+    console.error('Error in fetching --> ', error);
     return {
       error: true,
       errorMessage: (error as Error).message,
@@ -184,10 +171,10 @@ export const getOwnedListedTemplatesService = async (address: string) => {
 
     const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
     const listings = await formatList(res.listings);
-    return { error: false, errorMessage: "", listings };
+    return { error: false, errorMessage: '', listings };
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error("Error in fetching --> ", error);
+    console.error('Error in fetching --> ', error);
     return {
       error: true,
       errorMessage: (error as Error).message,

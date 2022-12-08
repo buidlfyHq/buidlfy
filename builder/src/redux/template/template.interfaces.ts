@@ -1,6 +1,6 @@
-import { BigNumber } from "ethers";
-import { IContractDetails } from "redux/contract/contract.interfaces";
-import { IHead, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { BigNumber } from 'ethers';
+import { IContractDetails } from 'redux/contract/contract.interfaces';
+import { IHead, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
 export interface ITemplateState {
   buyTemplateReceipt: string;

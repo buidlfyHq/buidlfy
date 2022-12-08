@@ -1,19 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IModalState } from "./modal.interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { IModalState } from './modal.interfaces';
 
 const initialState: IModalState = {
   modalShow: false,
-  modalType: "",
+  modalType: '',
 };
 
 const modalSlice = createSlice({
-  name: "modal",
+  name: 'modal',
   initialState,
   reducers: {
     toggleModal(state, action: { payload: boolean }) {
       state.modalShow = action.payload;
     },
-    toggleModalType(state, action: { payload: string }) {      
+    toggleModalType(state, action: { payload: string }) {
       state.modalType = action.payload;
     },
   },

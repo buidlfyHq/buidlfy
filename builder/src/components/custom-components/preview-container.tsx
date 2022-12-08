@@ -1,7 +1,7 @@
-import { FC, useEffect, useState } from "react";
-import GridLayout from "react-grid-layout";
-import RenderItem from "components/utils/render-item";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import { FC, useEffect, useState } from 'react';
+import GridLayout from 'react-grid-layout';
+import RenderItem from 'components/utils/render-item';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
 interface IPreviewContainer {
   item: IWorkspaceElement;
@@ -43,17 +43,11 @@ const PreviewContainer: FC<IPreviewContainer> = ({
   const [containerW, setContainerW] = useState(null);
 
   useEffect(() => {
-    const cw = document
-      ?.getElementById(`${item.i}`)
-      ?.getBoundingClientRect().width;
+    const cw = document?.getElementById(`${item.i}`)?.getBoundingClientRect().width;
     if (cw) setContainerW(cw);
   }, []);
 
-  let finalSpacing =
-    margin?.marginLeft +
-    margin?.marginRight +
-    padding?.paddingLeft +
-    padding?.paddingRight;
+  let finalSpacing = margin?.marginLeft + margin?.marginRight + padding?.paddingLeft + padding?.paddingRight;
 
   return (
     <section
@@ -68,11 +62,7 @@ const PreviewContainer: FC<IPreviewContainer> = ({
         <GridLayout
           layout={children}
           cols={6}
-          rowHeight={
-            children?.length
-              ? 50 - (borderWidth ? borderWidth * 2 : 0) / children?.length
-              : 50
-          }
+          rowHeight={children?.length ? 50 - (borderWidth ? borderWidth * 2 : 0) / children?.length : 50}
           width={containerW - (finalSpacing + borderWidth * 2) || 1000}
           isDraggable={false}
           isResizable={false}
@@ -80,15 +70,10 @@ const PreviewContainer: FC<IPreviewContainer> = ({
           margin={[0, 0]}
           className="btn-border"
           style={{
-            backgroundColor:
-              backgroundColor.slice(0, 4) === "rgba" ? backgroundColor : null,
-            backgroundImage: imgData
-              ? `url(${imgData})`
-              : backgroundColor.slice(0, 4) === "rgba"
-              ? null
-              : `${backgroundColor}`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
+            backgroundColor: backgroundColor.slice(0, 4) === 'rgba' ? backgroundColor : null,
+            backgroundImage: imgData ? `url(${imgData})` : backgroundColor.slice(0, 4) === 'rgba' ? null : `${backgroundColor}`,
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
             backgroundSize: backgroundSize,
             border: `${borderWidth}px solid ${color}`,
             borderRadius: `${borderRadius}px`,
@@ -98,7 +83,7 @@ const PreviewContainer: FC<IPreviewContainer> = ({
             paddingRight: `${padding.paddingRight}px`,
           }}
         >
-          {children.map((c) => {
+          {children.map(c => {
             const { x, y, w, h, minW, i } = c;
             return (
               <div key={i} data-grid={{ x, y, w, h, minW }}>

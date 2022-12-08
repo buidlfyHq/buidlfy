@@ -1,34 +1,26 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Responsive, WidthProvider } from "react-grid-layout";
-import RenderItem from "components/utils/render-item";
-import { IRootState } from "redux/root-state.interface";
-import { useEffect } from "react";
-import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { updateContractAbi, updateContractAddress, updateContractNetwork } from "redux/contract/contract.reducers";
+import { useDispatch, useSelector } from 'react-redux';
+import { Responsive, WidthProvider } from 'react-grid-layout';
+import RenderItem from 'components/utils/render-item';
+import { IRootState } from 'redux/root-state.interface';
+import { useEffect } from 'react';
+import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
+import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Preview = () => {
   const dispatch = useDispatch();
-  const workspaceElements = useSelector(
-    (state: IRootState) => state.workspace.workspaceElements
-  );
-  const workspaceBackgroundColor = useSelector(
-    (state: IRootState) => state.workspace.workspaceBackgroundColor
-  );
+  const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
+  const workspaceBackgroundColor = useSelector((state: IRootState) => state.workspace.workspaceBackgroundColor);
 
   useEffect(() => {
     // load stored configs if available
-    let saveItems = localStorage.getItem("items");
+    let saveItems = localStorage.getItem('items');
     if (saveItems) {
       dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
-      dispatch(
-        updateWorkspaceBackgroundColor(JSON.parse(saveItems)?.backgroundColor)
-      );
+      dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems)?.backgroundColor));
       dispatch(setSiteHead(JSON.parse(saveItems)?.head));
-      dispatch(
-        updateContractAbi(JSON.stringify(JSON.parse(saveItems)?.contract?.abi))
-      );
+      dispatch(updateContractAbi(JSON.stringify(JSON.parse(saveItems)?.contract?.abi)));
       dispatch(updateContractAddress(JSON.parse(saveItems)?.contract?.address));
       dispatch(updateContractNetwork(JSON.parse(saveItems)?.contract?.network));
     }
@@ -52,7 +44,7 @@ const Preview = () => {
         margin={[0, 0]}
         className="h-fit overflow-hidden"
       >
-        {workspaceElements.map((c) => {
+        {workspaceElements.map(c => {
           const { x, y, w, h, minW, i } = c;
           return (
             <div key={i} data-grid={{ x, y, w, h, minW }}>
