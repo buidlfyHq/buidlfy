@@ -17,9 +17,6 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
   const dispatch = useDispatch();
 
   const handleChange = (action: string) => {
-    console.log(backgroundSize, "szie");
-    console.log(action, "action");
-    console.log("-----");
     dispatch(
       updateWorkspaceImageElementStyle({
         settingItemId: i,
