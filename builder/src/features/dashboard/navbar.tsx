@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import WalletMenu from 'features/dashboard/wallet-menu';
 import MintNFT from 'features/dashboard/mint-nft';
@@ -7,7 +8,6 @@ import { updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 're
 import { setSelectorToDefault, updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
-import { IContractElementSelected } from 'redux/contract/contract.interfaces';
 
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
@@ -102,7 +102,15 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
             <MdRedo />
           </span>
         </div>*/}
-
+        <Link
+          target="_blank"
+          rel="noreferrer"
+          to="/preview"
+          className="py-3 px-5 my-2 ml-3 text-[14px] font[500] button-singleTemp"
+          onClick={handleSave}
+        >
+          <div className="gradient-text">Preview</div>
+        </Link>
         <MintNFT />
         <PublishMenu />
         <WalletMenu isMyTemplatePage={false} />

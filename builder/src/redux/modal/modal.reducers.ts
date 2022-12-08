@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IModalState } from './modal.interfaces';
 
 const initialState: IModalState = {
-  modalShow: true,
-  modalType: 'start',
+  modalShow: false,
+  modalType: '',
 };
 
 const modalSlice = createSlice({
