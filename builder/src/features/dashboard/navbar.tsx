@@ -1,21 +1,13 @@
-import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import WalletMenu from "features/dashboard/wallet-menu";
-import MintNFT from "features/dashboard/mint-nft";
-import PublishMenu from "features/dashboard/publish-menu";
-import {
-  updateWorkspaceBackgroundColor,
-  updateWorkspaceElementsArray,
-} from "redux/workspace/workspace.reducers";
-import {
-  setSelectorToDefault,
-  updateContractAbi,
-  updateContractAddress,
-  updateContractNetwork,
-} from "redux/contract/contract.reducers";
-import { IRootState } from "redux/root-state.interface";
-import "styles/components.css";
-import { IContractElementSelected } from "redux/contract/contract.interfaces";
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import WalletMenu from 'features/dashboard/wallet-menu';
+import MintNFT from 'features/dashboard/mint-nft';
+import PublishMenu from 'features/dashboard/publish-menu';
+import { updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
+import { setSelectorToDefault, updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
+import { IRootState } from 'redux/root-state.interface';
+import 'styles/components.css';
 
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
@@ -23,25 +15,13 @@ interface INavbar {
   setOpenSetting: (open: boolean) => void;
 }
 
-const Navbar: FC<INavbar> = ({
-  setHideNavbar,
-  setIsContainerSelected,
-  setOpenSetting,
-}) => {
+const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSetting }) => {
   const dispatch = useDispatch();
-  const workspaceElements = useSelector(
-    (state: IRootState) => state.workspace.workspaceElements
-  );
-  const workspaceBackgroundColor = useSelector(
-    (state: IRootState) => state.workspace.workspaceBackgroundColor
-  );
-  const publishStatus = useSelector(
-    (state: IRootState) => state.publish.publishStatus
-  );
+  const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
+  const workspaceBackgroundColor = useSelector((state: IRootState) => state.workspace.workspaceBackgroundColor);
+  const publishStatus = useSelector((state: IRootState) => state.publish.publishStatus);
   const head = useSelector((state: IRootState) => state.workspace.head);
-  const contractDetails = useSelector(
-    (state: IRootState) => state.contract.contractDetails
-  );
+  const contractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
 
   const handleCloseSidebar = () => {
     setIsContainerSelected(false);
@@ -59,40 +39,36 @@ const Navbar: FC<INavbar> = ({
       },
       contract: null,
     };
-    if (
-      contractDetails?.abi &&
-      contractDetails?.address &&
-      contractDetails?.network
-    ) {
+    if (contractDetails?.abi && contractDetails?.address && contractDetails?.network) {
       templateConfig.contract = {
         abi: JSON.parse(contractDetails?.abi),
         address: contractDetails?.address,
         network: contractDetails?.network,
       };
     }
-    console.log(templateConfig, "JSON.stringify(templateConfig)");
+    console.log(templateConfig, 'JSON.stringify(templateConfig)');
 
     if (workspaceElements?.length > 0) {
-      localStorage.setItem("items", JSON.stringify(templateConfig));
+      localStorage.setItem('items', JSON.stringify(templateConfig));
     }
     if (publishStatus) {
-      localStorage.setItem("publishStatus", publishStatus.toString());
+      localStorage.setItem('publishStatus', publishStatus.toString());
     }
   };
 
   const handleClear = () => {
     // FIX: remove full config from local storage
-    localStorage.removeItem("items");
-    localStorage.removeItem("publishStatus");
-    localStorage.removeItem("deployment");
-    localStorage.removeItem("domain");
-    localStorage.removeItem("domainName");
+    localStorage.removeItem('items');
+    localStorage.removeItem('publishStatus');
+    localStorage.removeItem('deployment');
+    localStorage.removeItem('domain');
+    localStorage.removeItem('domainName');
     dispatch(updateWorkspaceElementsArray([]));
     dispatch(setSelectorToDefault());
-    dispatch(updateWorkspaceBackgroundColor("rgba(255, 255, 255, 1)"));
-    dispatch(updateContractAbi(""));
-    dispatch(updateContractAddress(""));
-    dispatch(updateContractNetwork(""));
+    dispatch(updateWorkspaceBackgroundColor('rgba(255, 255, 255, 1)'));
+    dispatch(updateContractAbi(''));
+    dispatch(updateContractAddress(''));
+    dispatch(updateContractNetwork(''));
   };
 
   return (
@@ -126,7 +102,15 @@ const Navbar: FC<INavbar> = ({
             <MdRedo />
           </span>
         </div>*/}
-
+        <Link
+          target="_blank"
+          rel="noreferrer"
+          to="/preview"
+          className="py-3 px-5 my-2 ml-3 text-[14px] font[500] button-singleTemp"
+          onClick={handleSave}
+        >
+          <div className="gradient-text">Preview</div>
+        </Link>
         <MintNFT />
         <PublishMenu />
         <WalletMenu isMyTemplatePage={false} />

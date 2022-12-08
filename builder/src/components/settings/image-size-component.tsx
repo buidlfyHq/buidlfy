@@ -1,10 +1,10 @@
-import { FC, useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateWorkspaceImageElementStyle } from "redux/workspace/workspace.reducers";
-import { ReplaceStyle } from "components/utils/render-setting";
-import SpaceInput from "components/utils/input/space-input";
-import "styles/dashboard.css";
-import "styles/components.css";
+import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateWorkspaceImageElementStyle } from 'redux/workspace/workspace.reducers';
+import { ReplaceStyle } from 'components/utils/render-setting';
+import SpaceInput from 'components/utils/input/space-input';
+import 'styles/dashboard.css';
+import 'styles/components.css';
 
 interface ISizeComponent {
   i: string;
@@ -13,69 +13,58 @@ interface ISizeComponent {
   manualSizing: boolean;
 }
 
-const SizeComponent: FC<ISizeComponent> = ({
-  i,
-  width,
-  height,
-  manualSizing,
-}) => {
+const SizeComponent: FC<ISizeComponent> = ({ i, width, height, manualSizing }) => {
   const dispatch = useDispatch();
-  const [manualToggle, setManualToggle] = useState<boolean>(
-    manualSizing === false ? false : true
-  );
+  const [manualToggle, setManualToggle] = useState<boolean>(manualSizing === false ? false : true);
 
   const handleSizing = () => {
     setManualToggle(!manualToggle);
     dispatch(
       updateWorkspaceImageElementStyle({
         settingItemId: i,
-        propertyName: "manualSizing",
+        propertyName: 'manualSizing',
         propertyValue: !manualToggle,
         imageSizeProperty: false,
-      })
+      }),
     );
   };
 
-  const handleChange = (
-    action: ReplaceStyle,
-    updatedWidth?: number,
-    updatedHeight?: number
-  ) => {
+  const handleChange = (action: ReplaceStyle, updatedWidth?: number, updatedHeight?: number) => {
     if (action === ReplaceStyle.WIDTH) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
-          propertyName: "width",
+          propertyName: 'width',
           propertyValue: updatedWidth,
           imageSizeProperty: false,
-        })
+        }),
       );
     } else if (action === ReplaceStyle.HEIGHT) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
-          propertyName: "height",
+          propertyName: 'height',
           propertyValue: updatedHeight,
           imageSizeProperty: false,
-        })
+        }),
       );
     } else if (action === ReplaceStyle.DECREMENTWIDTH) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
-          propertyName: "width",
+          propertyName: 'width',
           propertyValue: width - 1,
           imageSizeProperty: false,
-        })
+        }),
       );
     } else if (action === ReplaceStyle.DECREMENTHEIGHT) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
-          propertyName: "height",
+          propertyName: 'height',
           propertyValue: height - 1,
           imageSizeProperty: false,
-        })
+        }),
       );
     }
   };
@@ -83,9 +72,7 @@ const SizeComponent: FC<ISizeComponent> = ({
   return (
     <>
       <div className="flex py-1">
-        <span className="margin-text grow text-left px-3 mt-[0.5rem] mb-0">
-          Use Manual Sizing
-        </span>
+        <span className="margin-text grow text-left px-3 mt-[0.5rem] mb-0">Use Manual Sizing</span>
         <div className="flex ml-2 justify-center mt-1">
           <div onClick={handleSizing} className="form-check form-switch">
             <input
@@ -102,18 +89,13 @@ const SizeComponent: FC<ISizeComponent> = ({
       {manualToggle && (
         <SpaceInput
           heading="Sizing Options"
-          text={["W", "H"]}
+          text={['W', 'H']}
           value={[width, height]}
           handleChange={[
-            (updatedWidth: number) =>
-              handleChange(ReplaceStyle.WIDTH, updatedWidth),
-            (updatedHeight: number) =>
-              handleChange(ReplaceStyle.HEIGHT, undefined, updatedHeight),
+            (updatedWidth: number) => handleChange(ReplaceStyle.WIDTH, updatedWidth),
+            (updatedHeight: number) => handleChange(ReplaceStyle.HEIGHT, undefined, updatedHeight),
           ]}
-          handleDecrement={[
-            () => handleChange(ReplaceStyle.DECREMENTWIDTH),
-            () => handleChange(ReplaceStyle.DECREMENTHEIGHT),
-          ]}
+          handleDecrement={[() => handleChange(ReplaceStyle.DECREMENTWIDTH), () => handleChange(ReplaceStyle.DECREMENTHEIGHT)]}
         />
       )}
     </>

@@ -60,6 +60,7 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           backgroundColor={item.style.backgroundColor}
           contractFunction={item.contract}
+          oracleFunction={item.oracle}
           inputValue={inputValue}
           setInputValue={setInputValue}
           outputValue={outputValue}

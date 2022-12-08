@@ -1,3 +1,5 @@
+import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
+
 export interface IUploadedImageData {
   uploadedImageData: string;
   settingItemId: string;
@@ -33,6 +35,7 @@ export interface IWorkspaceElement {
   static?: boolean;
   resizeHandles?: ResizeHandles | undefined;
   contract?: any;
+  oracle?: IOracleConfig;
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
@@ -80,9 +83,7 @@ export interface IStyle {
   backgroundSize?: string;
 }
 
-export type ResizeHandles = Array<
-  "s" | "w" | "e" | "n" | "sw" | "nw" | "se" | "ne"
->;
+export type ResizeHandles = Array<'s' | 'w' | 'e' | 'n' | 'sw' | 'nw' | 'se' | 'ne'>;
 
 export interface IAction {
   payload: IElementDetail;
@@ -97,13 +98,13 @@ export interface IElementDetail {
 }
 
 export enum SidebarEnum {
-  PAGES = "pages",
-  TEMPLATES = "templates",
-  ELEMENTS = "elements",
-  MEDIA = "media",
-  STYLES = "styles",
-  HELP = "help",
-  SETTING = "setting",
+  PAGES = 'pages',
+  TEMPLATES = 'templates',
+  ELEMENTS = 'elements',
+  MEDIA = 'media',
+  STYLES = 'styles',
+  HELP = 'help',
+  SETTING = 'setting',
 }
 
 export interface IBackgroundContainer {
@@ -122,12 +123,7 @@ export interface ISettings {
   settingItemId?: string;
   openTab?: number;
   setOpenTab?: (openTab: number) => void;
-  handleSettingChange?: (
-    e:
-      | React.ChangeEvent<HTMLTextAreaElement>
-      | React.ChangeEvent<HTMLInputElement>,
-    propertyName: string
-  ) => void;
+  handleSettingChange?: (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>, propertyName: string) => void;
   setOpenSetting?: (openSetting?: boolean) => void;
 }
 
