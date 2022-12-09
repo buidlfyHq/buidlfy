@@ -8,6 +8,7 @@ import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { updatePublishConfig } from 'redux/publish/publish.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
+import { fontOptions } from 'components/utils/font-option';
 
 const PublishConfirmModal: FC = () => {
   const dispatch = useDispatch();
@@ -49,12 +50,21 @@ const PublishConfirmModal: FC = () => {
   };
 
   const handlePublish = () => {
+    const fontsList = [];
+    workspaceElements.forEach(workspaceElement => {
+      const elementFontFamily = workspaceElement?.style?.fontFamily;
+      const font = fontOptions.find(fontOption => fontOption.value === elementFontFamily);
+      if (!fontsList.includes(font.label)) {
+        fontsList.push(font.label);
+      }
+    });
     localStorage.removeItem('deployment');
     let config = {
       head: {
         title: head.title,
         logo: head.logo,
       },
+      fonts: fontsList,
       background: workspaceBackgroundColor,
       builder: workspaceElements,
       contract: {
@@ -64,6 +74,7 @@ const PublishConfirmModal: FC = () => {
       },
     };
     let stringifiedConfig = JSON.stringify(config);
+    console.log(config, 'config');
 
     // Keep this commented log. Helpful while testing.
     // console.log(base64_encode(stringifiedConfig));
