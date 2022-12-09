@@ -7,8 +7,8 @@ import { initiatePublish } from 'redux/publish/publish.action';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { updatePublishConfig } from 'redux/publish/publish.reducers';
 import { IRootState } from 'redux/root-state.interface';
-import 'styles/components.css';
 import { fontOptions } from 'components/utils/font-option';
+import 'styles/components.css';
 
 const PublishConfirmModal: FC = () => {
   const dispatch = useDispatch();
@@ -74,8 +74,6 @@ const PublishConfirmModal: FC = () => {
       },
     };
     let stringifiedConfig = JSON.stringify(config);
-    console.log(config, 'config');
-
     // Keep this commented log. Helpful while testing.
     // console.log(base64_encode(stringifiedConfig));
 
