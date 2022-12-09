@@ -1,4 +1,3 @@
-import IColor from "./color";
 import IWorkspace from "./workspace";
 import { IInput, IOutput } from "./value";
 
@@ -27,5 +26,5 @@ export default interface IBgContainer {
     marginRight?: number;
     marginTop?: number;
     marginBottom?: number;
-  }
+  };
 }

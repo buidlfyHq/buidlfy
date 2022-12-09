@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
+import { ethers } from "ethers";
 import ITexts from "interfaces/texts";
 import "styles/components.css";
-import { ethers } from "ethers";
 
 const Text: FC<ITexts> = ({
   id,
@@ -19,25 +19,23 @@ const Text: FC<ITexts> = ({
   padding,
 }) => {
   const [isValue, setIsValue] = useState<string>(value);
-  const handleOnChange = () => {
-    if (outputValue && outputValue.find((output) => output.id === id)) {
-      const outputValueCondition = outputValue.find(
-        (output) => output.id === id
-      ).value;
-      const val = JSON.stringify(outputValueCondition);
-      if (outputValueCondition?._isBigNumber) {
-        setIsValue(ethers.BigNumber.from(JSON.parse(val)).toString());
-      } else {
-        setIsValue(val);
-      }
-    } else {
-      setIsValue(value);
-    }
-  };
+  const gradientCondition = color?.indexOf("gradient") !== -1;
+
   useEffect(() => {
     handleOnChange();
-  }, [outputValue]);
-  const gradientCondition = color?.indexOf("gradient") !== -1;
+  }, [outputValue]); // eslint-disable-line
+
+  const handleOnChange = () => {
+    if (outputValue && outputValue.find((output) => output.id === id)) {
+      const val = outputValue.find((output) => output.id === id).value;
+      if (val?._isBigNumber) {
+        setIsValue(ethers.utils.formatUnits(val));
+      } else {
+        setIsValue(JSON.stringify(val));
+      }
+    }
+  };
+
   const textArea = (
     <textarea
       readOnly
@@ -59,6 +57,7 @@ const Text: FC<ITexts> = ({
       className="flex text-area resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
     />
   );
+
   return (
     <section
       id="text-one"
@@ -74,6 +73,7 @@ const Text: FC<ITexts> = ({
       {link ? (
         <a
           target="_blank"
+          rel="noreferrer"
           href={link}
           className="text-class cursor-pointer flex overflow-hidden items-center justify-center w-auto h-full"
         >

@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IWeb3State } from "./web3.interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { IWeb3State } from './web3.interfaces';
 
 const initialState: IWeb3State = {
-  currentAccount: "",
+  currentAccount: '',
   connectWalletLoading: false,
   currentAccountBalance: 0,
   walletBalanceLoading: false,
@@ -10,7 +10,7 @@ const initialState: IWeb3State = {
 };
 
 const web3Slice = createSlice({
-  name: "web3",
+  name: 'web3',
   initialState,
   reducers: {
     walletConnected(state, action: { payload: string }) {
@@ -28,9 +28,5 @@ const web3Slice = createSlice({
   },
 });
 
-export const {
-  walletConnected,
-  walletBalanceFetched,
-  toggleConnectWalletLoading,
-} = web3Slice.actions;
+export const { walletConnected, walletBalanceFetched, toggleConnectWalletLoading } = web3Slice.actions;
 export default web3Slice.reducer;

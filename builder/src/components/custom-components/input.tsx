@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import "styles/components.css";
+import React, { FC } from 'react';
+import 'styles/components.css';
 
 interface IInput {
   borderRadius: number;
@@ -23,25 +23,12 @@ interface IInput {
   i?: string;
 }
 
-const Input: FC<IInput> = ({
-  borderRadius,
-  shadow,
-  color,
-  placeholder,
-  margin,
-  padding,
-  i,
-  backgroundColor,
-  borderColor,
-}) => (
-  <section
-    className="flex items-center justify-center h-full overflow-hidden"
-    id="input-section"
-  >
+const Input: FC<IInput> = ({ borderRadius, shadow, color, placeholder, margin, padding, i, backgroundColor, borderColor }) => (
+  <section className="flex items-center justify-center h-full overflow-hidden" id="input-section">
     <input
       style={{
         borderRadius: `${borderRadius}px`,
-        borderWidth: "1pt",
+        borderWidth: '1pt',
         boxShadow: shadow,
         border: `1px solid ${borderColor}`,
         borderImage: borderColor,

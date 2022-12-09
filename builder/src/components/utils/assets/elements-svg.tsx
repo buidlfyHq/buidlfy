@@ -1,15 +1,9 @@
-import "styles/components.css";
+import 'styles/components.css';
 
 const ElementSvg = () => {
   return (
     <div className="side-icon w-[3.2rem] h-[3.2rem] flex items-center justify-center rounded-full mt-5">
-      <svg
-        width="20"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="20" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           className="element-svg"
           fillRule="evenodd"

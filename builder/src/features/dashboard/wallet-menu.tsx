@@ -1,14 +1,14 @@
-import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Menu } from "@headlessui/react";
-import makeBlockie from "ethereum-blockies-base64";
-import { truncateString } from "utils/truncate-string";
-import { connectWallet } from "redux/web3/web3.actions";
-import { IRootState } from "redux/root-state.interface";
-import { BiChevronRight } from "react-icons/bi";
-import HelpIcon from "assets/icons/help-nav.png";
-import MyTemplateIcon from "assets/icons/template-nav.png";
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Menu } from '@headlessui/react';
+import makeBlockie from 'ethereum-blockies-base64';
+import { truncateString } from 'utils/truncate-string';
+import { connectWallet } from 'redux/web3/web3.actions';
+import { IRootState } from 'redux/root-state.interface';
+import { BiChevronRight } from 'react-icons/bi';
+import HelpIcon from 'assets/icons/help-nav.png';
+import MyTemplateIcon from 'assets/icons/template-nav.png';
 
 // const HelpMenuItems = [
 //   { name: "Learn Buidlfy" },
@@ -18,45 +18,43 @@ import MyTemplateIcon from "assets/icons/template-nav.png";
 
 const walletMenuItemsDashboard = [
   {
-    name: "My Templates",
+    name: 'My Templates',
     icon: MyTemplateIcon,
-    classParent:
-      "border border-l-0 border-t-0 border-r-0 border-b-1 border-[#F5F5F5]",
-    target: "/my-templates",
+    classParent: 'border border-l-0 border-t-0 border-r-0 border-b-1 border-[#F5F5F5]',
+    target: '/my-templates',
     isChildren: false,
     children: [],
     link: null,
   },
   {
-    name: "Join Discord",
+    name: 'Join Discord',
     icon: HelpIcon,
-    classParent: "",
+    classParent: '',
     target: null,
     isChildren: false,
     children: [],
-    link: "https://bit.ly/buidlfy-discord",
+    link: 'https://bit.ly/buidlfy-discord',
   },
 ];
 
 const walletMenuItemsMyTemplates = [
   {
-    name: "Dashboard",
+    name: 'Dashboard',
     icon: MyTemplateIcon,
-    classParent:
-      "border border-l-0 border-t-0 border-r-0 border-b-1 border-[#F5F5F5]",
-    target: "/",
+    classParent: 'border border-l-0 border-t-0 border-r-0 border-b-1 border-[#F5F5F5]',
+    target: '/',
     isChildren: false,
     children: [],
     link: null,
   },
   {
-    name: "Join Discord",
+    name: 'Join Discord',
     icon: HelpIcon,
-    classParent: "",
+    classParent: '',
     target: null,
     isChildren: false,
     children: [],
-    link: "https://bit.ly/buidlfy-discord",
+    link: 'https://bit.ly/buidlfy-discord',
   },
 ];
 
@@ -66,50 +64,25 @@ interface IWalletMenu {
 
 const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
   const dispatch = useDispatch();
-  const currentAccount = useSelector(
-    (state: IRootState) => state.web3.currentAccount
-  );
+  const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
   return (
     <>
       {currentAccount ? (
         <Menu as="div" className="relative">
-          <Menu.Button
-            className={`flex items-center justify-center my-3 ml-3 active:opacity-70`}
-          >
-            <img
-              className="w-8 bg-black rounded-full hover:shadow-lg"
-              src={makeBlockie(currentAccount)}
-              alt="Blockie"
-            />
+          <Menu.Button className={`flex items-center justify-center my-3 ml-3 active:opacity-70`}>
+            <img className="w-8 bg-black rounded-full hover:shadow-lg" src={makeBlockie(currentAccount)} alt="Blockie" />
           </Menu.Button>
           <Menu.Items className="absolute top-0 right-0 flex flex-col w-60 mt-16 shadow-menu mr-5 rounded-[14px] origin-top-right bg-white">
             <div className="border border-l-0 border-t-0 border-r-0 border-b-1 border-[#F5F5F5]">
               <div className="px-5 py-3 font-[16px]">
                 <div className="flex items-center gap-4 py-2">
-                  <img
-                    className="w-8 rounded-full"
-                    src={makeBlockie(currentAccount)}
-                    alt="Blockie"
-                  />
-                  <div className="text-[#A5A5A5] text-[13px]">
-                    {truncateString(currentAccount)}
-                  </div>
+                  <img className="w-8 rounded-full" src={makeBlockie(currentAccount)} alt="Blockie" />
+                  <div className="text-[#A5A5A5] text-[13px]">{truncateString(currentAccount)}</div>
                 </div>
               </div>
             </div>
-            {(isMyTemplatePage
-              ? walletMenuItemsMyTemplates
-              : walletMenuItemsDashboard
-            ).map((menuItem, i) => {
-              const {
-                name,
-                target,
-                classParent,
-                icon,
-                isChildren,
-                children,
-                link,
-              } = menuItem;
+            {(isMyTemplatePage ? walletMenuItemsMyTemplates : walletMenuItemsDashboard).map((menuItem, i) => {
+              const { name, target, classParent, icon, isChildren, children, link } = menuItem;
               const MenuItem = (
                 <>
                   <div className="flex items-center gap-4">
@@ -137,8 +110,7 @@ const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
                           <Link
                             to={target}
                             className={`${
-                              active &&
-                              "bg-slate-100 rounded-[8px] cursor-pointer"
+                              active && 'bg-slate-100 rounded-[8px] cursor-pointer'
                             } font-[500] text-[#14142B] opacity-70 px-5 py-3 font-[16px] flex items-center justify-between`}
                           >
                             {MenuItem}
@@ -148,17 +120,11 @@ const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
                         <Menu as="div" className="relative">
                           <Menu.Button
                             className={`${
-                              active &&
-                              "bg-slate-100 rounded-[8px] cursor-pointer"
+                              active && 'bg-slate-100 rounded-[8px] cursor-pointer'
                             } font-[500] text-[#14142B] opacity-70 px-5 py-3 w-full font-[16px] flex items-center justify-between`}
                           >
                             <div className="flex items-center gap-4">
-                              <img
-                                src={icon}
-                                alt="icon"
-                                width={28}
-                                height={28}
-                              />
+                              <img src={icon} alt="icon" width={28} height={28} />
                               <span>{name}</span>
                             </div>
                             <BiChevronRight />
@@ -167,11 +133,7 @@ const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
                             {children.map((child, i) => {
                               const { name } = child;
                               return (
-                                <Menu.Item
-                                  key={i}
-                                  as="div"
-                                  className="text-[13px] cursor-pointer text-[#6E7191] hover:text-[#14142B]"
-                                >
+                                <Menu.Item key={i} as="div" className="text-[13px] cursor-pointer text-[#6E7191] hover:text-[#14142B]">
                                   {name}
                                 </Menu.Item>
                               );

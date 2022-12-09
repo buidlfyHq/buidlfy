@@ -1,17 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { filterContractAbi, getContainerList } from "./contract.utils";
-import {
-  IContract,
-  IContractState,
-  ISelectedPayload,
-  ISelectorPayload,
-} from "./contract.interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { filterContractAbi, getContainerList } from './contract.utils';
+import { IContract, IContractState, ISelectedPayload, ISelectorPayload } from './contract.interfaces';
 
 const initialState: IContractState = {
   contractDetails: {
-    abi: "",
-    address: "",
-    network: "",
+    abi: '',
+    address: '',
+    network: '',
   },
   contractElementSelector: null,
   contractElementSelected: {},
@@ -19,7 +14,7 @@ const initialState: IContractState = {
 };
 
 const contractSlice = createSlice({
-  name: "contract",
+  name: 'contract',
   initialState,
   reducers: {
     // to update contract list
@@ -46,16 +41,11 @@ const contractSlice = createSlice({
     },
     // to update contract element selected
     createSelectedElement(state, action: { payload: ISelectedPayload }) {
-      state.contractElementSelected[action.payload.name] = [
-        action.payload.element,
-      ];
+      state.contractElementSelected[action.payload.name] = [action.payload.element];
     },
     addSelectedElement(state, action: { payload: ISelectedPayload }) {
       let key = state.contractElementSelected[action.payload.name];
-      state.contractElementSelected[action.payload.name] = [
-        ...key,
-        action.payload.element,
-      ];
+      state.contractElementSelected[action.payload.name] = [...key, action.payload.element];
     },
     updateSelectedElement(state, action: { payload: ISelectedPayload }) {
       const { name, index, id } = action.payload;

@@ -1,15 +1,9 @@
-import "styles/components.css";
+import 'styles/components.css';
 
 const TemplateSvg = () => {
   return (
     <div className="side-icon w-[3.2rem] h-[3.2rem] flex items-center justify-center rounded-full mt-3">
-      <svg
-        width="20"
-        height="18"
-        viewBox="0 0 20 18"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           className="element-svg"
           d="M15.56 1.55457H3.44196C2.88967 1.55457 2.44196 2.00228 2.44196 2.55457V9.96658C2.44196 10.5189 2.88967 10.9666 3.44196 10.9666H11.7952C12.3475 10.9666 12.7952 10.5189 12.7952 9.96658V8.20178C12.7952 7.64949 13.2429 7.20178 13.7952 7.20178H15.56C16.1123 7.20178 16.56 6.75406 16.56 6.20178V2.55457C16.56 2.00228 16.1123 1.55457 15.56 1.55457Z"

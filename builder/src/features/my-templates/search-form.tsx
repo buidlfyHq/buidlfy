@@ -1,13 +1,11 @@
-import { FC } from "react";
-import { ReactComponent as SearchIcon } from "assets/svgAsIcons/search-icon.svg";
+import { FC } from 'react';
+import { ReactComponent as SearchIcon } from 'assets/svgAsIcons/search-icon.svg';
 
 const SearchForm: FC = () => {
   return (
     <form className="flex items-center">
       <div className="relative">
-        <div
-          className={`absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none`}
-        >
+        <div className={`absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none`}>
           <SearchIcon />
         </div>
         <input
