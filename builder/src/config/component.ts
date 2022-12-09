@@ -19,7 +19,7 @@ const defaultPaddingStyles = {
 const defaultColorStyles = {
   backgroundColor: "rgba(255, 255, 255, 0)",
   color: "rgba(0, 0, 0, 100)",
-}
+};
 
 const defaultFontStyles = {
   fontWeight: "normal",
@@ -112,7 +112,7 @@ export const components = [
   //         ...defaultPaddingStyles
   //       },
   //     },
-     
+
   //   ],
   // },
   // {
@@ -267,7 +267,7 @@ export const components = [
     name: "Input",
     h: 1,
     minH: 1,
-    placeholder: 'Placeholder',
+    placeholder: "Placeholder",
     style: {
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
@@ -285,8 +285,8 @@ export const components = [
         paddingLeft: 12,
         paddingRight: 12,
         paddingTop: 8,
-        paddingBottom: 8
-      }
+        paddingBottom: 8,
+      },
     },
   },
   {
@@ -309,16 +309,13 @@ export const components = [
     nft: true,
     h: 2,
     minH: 1,
-    publicationId: "",
-    profileId: "",
-    ownedBy: "",
+    postIds: [],
     style: {
       ...defaultDeleteStyles,
     },
   },
   {
     name: "Lenster Layout",
-    nft: true,
     h: 8,
     minH: 1,
     style: {
@@ -331,7 +328,6 @@ export const components = [
     children: [
       {
         name: "Lenster Card",
-        nft: true,
         h: 8,
         minH: 1,
         publicationId: "0x01-0x01",
@@ -341,8 +337,8 @@ export const components = [
           ...defaultDeleteStyles,
         },
       },
-    ]
-  }
+    ],
+  },
   // {
   //   name: "Divider",
   //   h: 1,
@@ -350,5 +346,4 @@ export const components = [
   //     ...defaultDeleteStyles,
   //   },
   // },
-
 ];

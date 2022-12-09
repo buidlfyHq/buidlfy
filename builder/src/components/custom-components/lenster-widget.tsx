@@ -15,104 +15,83 @@ interface ILensterWidget {
 }
 
 const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
-  const postId = useSelector(
-    (state: IRootState) => state.widget.publicationId.name
-  );
-  const profileId = useSelector((state: IRootState) => state.widget.profileId);
-  const ownedBy = useSelector((state: IRootState) => state.widget.ownedBy);
-  const profilePicture = useSelector(
-    (state: IRootState) => state.widget.profilePicture
-  );
-  const coverPicture = useSelector(
-    (state: IRootState) => state.widget.coverPicture
-  );
-  const handle = useSelector((state: IRootState) => state.widget.handle);
-  const name = useSelector((state: IRootState) => state.widget.name);
-  const createdAt = useSelector((state: IRootState) => state.widget.createdAt);
-  const postDescription = useSelector(
-    (state: IRootState) => state.widget.postDescription
-  );
-  const postMedia = useSelector((state: IRootState) => state.widget.postMedia);
+  const postIds = useSelector((state: IRootState) => state.widget.publications);
+  console.log(postIds, "postIds-widget");
+
   const inputValue = useSelector(
     (state: IRootState) => state.widget.inputValue
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(getPublication({ publicationId: postId }));
+    console.log("postIdsss", postIds);
+
+    // dispatch(getPublication(postId));
     dispatch(
       updateWorkspaceElement({
         settingItemId: i,
-        propertyName: "publicationId",
-        propertyValue: postId,
+        propertyName: "postIds",
+        propertyValue: postIds,
       })
     );
-    dispatch(
-      updateWorkspaceElement({
-        settingItemId: i,
-        propertyName: "profileId",
-        propertyValue: profileId,
-      })
-    );
-    dispatch(
-      updateWorkspaceElement({
-        settingItemId: i,
-        propertyName: "ownedBy",
-        propertyValue: ownedBy,
-      })
-    );
-  }, [dispatch, i, postId, profileId, ownedBy]);
-  console.log(postId, "postId");
-  console.log(profileId, "profileid");
-  console.log(ownedBy, "ownedby");
-  console.log(profilePicture, "profilepic");
-  console.log(coverPicture, "coverPic");
-  console.log(postMedia, "postMedia");
-  const updateProfilePicture =
-    "https://ipfs.io/ipfs/" + profilePicture?.slice(7);
-  console.log(updateProfilePicture, "updateprofile");
-  const updatePostMedia = "https://ipfs.io/ipfs/" + postMedia?.slice(7);
+  }, [dispatch, i, postIds]);
   return (
     <>
-      {postId && inputValue ? (
-        <div className="border py-4 px-6 border-gray-700 bg-gray-800 rounded-xl w-[25rem] m-2">
-          {/* <h2>POST ID - {postId}</h2>
-          <h2>PROFILE ID - {profileId}</h2> */}
-          {/* <h2>OWNED BY - {ownedBy}</h2> */}
-          <div className="flex">
-            <div className="flex grow">
-              <img
-                className="mt-1 mr-2 w-[2.4rem] h-[2.4rem] rounded-[2rem]"
-                src={updateProfilePicture}
-              />
-              <div className="grid grow">
-                <h2 className="font-semibold text-gray-100 hover:underline">
-                  {name}
-                </h2>
-                <h2 className="text-gray-500 text-sm block">{handle}</h2>
-              </div>
-              <a
-                href={`https://open.withlens.app/post/${postId}`}
-                target="_blank"
-                className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-blue-500"
-                rel="noreferrer"
-              >
-                <LensterIcon className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-          <div className="flex flex-wrap justify-start items-start flex-1 mt-2.5 w-full my-1">
-            <p className="text-gray-300 whitespace-pre-line  ">
-              {postDescription}
-            </p>
-          </div>
-          {postMedia ? <img src={updatePostMedia} /> : null}
+      {postIds && postIds.length > 0 ? (
+        <>
+          <div className="grid grid-cols-3 gap-1">
+            {postIds.map((postId) => {
+              const updateProfilePicture =
+                "https://ipfs.io/ipfs/" + postId.profilePicture?.slice(7);
+              console.log(updateProfilePicture, "updateprofile");
+              const updatePostMedia =
+                "https://ipfs.io/ipfs/" + postId?.postMedia?.slice(7);
+              return (
+                <>
+                  {postId.name && inputValue ? (
+                    <div className="border py-4 px-6 border-gray-700 bg-gray-800 rounded-xl w-[21rem] m-2">
+                      <div className="flex">
+                        <div className="flex grow">
+                          <img
+                            className="mt-1 mr-2 w-[2.4rem] h-[2.4rem] rounded-[2rem]"
+                            src={updateProfilePicture}
+                          />
+                          <div className="grid grow">
+                            <h2 className="font-semibold text-gray-100 hover:underline">
+                              {postId.profileName}
+                            </h2>
+                            <h2 className="text-gray-500 text-sm block">
+                              {postId.handle}
+                            </h2>
+                          </div>
+                          <a
+                            href={`https://open.withlens.app/post/${postId.name}`}
+                            target="_blank"
+                            className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-blue-500"
+                            rel="noreferrer"
+                          >
+                            <LensterIcon className="w-5 h-5" />
+                          </a>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap justify-start items-start flex-1 mt-2.5 w-full my-1">
+                        <p className="text-gray-300 whitespace-pre-line  ">
+                          {postId.postDescription}
+                        </p>
+                      </div>
+                      {postId.postMedia ? <img src={updatePostMedia} /> : null}
 
-          <h2 className="mt-2 text-sm text-gray-500 hover:underline">
-            {createdAt}
-          </h2>
+                      <h2 className="mt-2 text-sm text-gray-500 hover:underline">
+                        {postId.createdAt}
+                      </h2>
 
-          {/* <img src={coverPicture} /> */}
-        </div>
+                      {/* <img src={coverPicture} /> */}
+                    </div>
+                  ) : null}
+                </>
+              );
+            })}
+          </div>
+        </>
       ) : (
         <>
           <div

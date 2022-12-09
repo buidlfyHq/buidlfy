@@ -62,24 +62,36 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const selectedElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
-  const [newValue, setNewValue] = useState<string>("");
-  const [addInput, setAddInput] = useState<number>(1);
-  const handleNewValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  // const [newValue, setNewValue] = useState<string>("");
+  const [addInputs, setAddInputs] = useState<Array<any>>([]);
+  const handleNewValue = (e: ChangeEvent<HTMLTextAreaElement>, key: number) => {
     if (e.target.value.length > 0) {
-      setNewValue(e.target.value);
+      // addInputs.map((addInput) => {
+      // setNewValue(e.target.value);
+      console.log(e.target.value, "newValue");
+      console.log(addInputs[key].id, "addInputs[key].id");
+
       dispatch(
-        getPublication({ publicationId: { id: addInput, name: `${newValue}` } })
+        getPublication({
+          id: addInputs[key].id,
+          name: e.target.value,
+        })
       );
+
+      const newAddInputs = [...addInputs];
+      newAddInputs[key].value = e.target.value;
+
+      setAddInputs(newAddInputs);
+      // });
       console.log(e.target.value, "value");
       dispatch(updateInputValue(true));
     } else {
       dispatch(updateInputValue(false));
-      setNewValue("");
+      // setNewValue("");
     }
   };
   const uid = new ShortUniqueId();
-  const inputId = uid();
-  console.log(newValue, "newValue");
+  // console.log(newValue, "newValue");
 
   const handleSettingChange = (
     e:
@@ -97,8 +109,16 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   };
 
   const handleAddInput = () => {
-    setAddInput(addInput + 1);
-    console.log(addInput, "addinout");
+    const inputId = uid();
+
+    setAddInputs([
+      ...addInputs,
+      {
+        id: inputId,
+        value: "",
+      },
+    ]);
+    console.log(addInputs, "addinout");
   };
 
   switch (selectedElement.name) {
@@ -126,15 +146,14 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
             ) : null}
           </h3>
           <div className="items-center mx-2 mt-1 w-[13.5rem] text-black">
-            {Array.from(Array(addInput), (e, i) => {
-              console.log(inputId, "inputId");
-
+            {addInputs.map((addInput, i) => {
+              console.log(addInput, "inputId");
               return (
                 <textarea
                   key={i}
-                  id={inputId}
-                  value={newValue}
-                  onChange={(e) => handleNewValue(e)}
+                  id={addInput.id}
+                  value={addInput.value}
+                  onChange={(e) => handleNewValue(e, i)}
                   className="changeText input-text h-[2.2rem] pl-[0.5rem] pt-[0.45rem]"
                   placeholder="Please write your text here..."
                 />

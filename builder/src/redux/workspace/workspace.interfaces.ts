@@ -90,7 +90,7 @@ export interface IAction {
 export interface IElementDetail {
   settingItemId: string;
   propertyName: string;
-  propertyValue: string | number | boolean;
+  propertyValue: string | number | boolean | Array<any>;
   childPropertyName?: string;
   imageSizeProperty?: boolean;
 }

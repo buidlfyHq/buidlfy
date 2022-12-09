@@ -179,9 +179,7 @@ const RenderItem: FC<IRenderItem> = ({
         <LensterWidget
           i={item.i}
           backgroundColor={item.style.backgroundColor}
-          publicationId={item.publicationId}
-          profileId={item.profileId}
-          ownedBy={item.ownedBy}
+          postIds={item.postIds}
         />
       );
     default:

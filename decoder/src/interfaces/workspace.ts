@@ -25,7 +25,5 @@ export default interface IWorkspace {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
-  publicationId?: string;
-  profileId?: string;
-  ownedBy?: string;
+  postIds?: [];
 }

@@ -44,11 +44,11 @@ const Button: FC<ITexts> = ({
   const [account, setAccount] = useState<string>(null);
   const [library, setLibrary] = useState(null);
 
-  useEffect(() => {
-    if (config.contract.abi !== [] && config.contract.address !== "") {
-      setContract(onLoad(config));
-    }
-  }, []); // eslint-disable-line
+  // useEffect(() => {
+  //   if (config.contract.abi !== [] && config.contract.address !== "") {
+  //     setContract(onLoad(config));
+  //   }
+  // }, []); // eslint-disable-line
 
   const onResponse = async () => {
     const res = await onRequest(

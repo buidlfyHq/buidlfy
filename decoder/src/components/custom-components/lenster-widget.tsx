@@ -2,21 +2,16 @@ import { FC, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { IRootState } from "redux/root-state.interface";
 // import { getPublication } from "redux/widget/widget.actions";
+import LensterIcon from "utils/assets/lenster-svg";
 import "styles/components.css";
 
 interface ILensterWidget {
   i: string;
   backgroundColor: string;
-  publicationId: string;
-  profileId: string;
-  ownedBy: string;
+  postIds: Array<any>;
 }
 
-const LensterWidget: FC<ILensterWidget> = ({
-  publicationId,
-  profileId,
-  ownedBy,
-}) => {
+const LensterWidget: FC<ILensterWidget> = ({ postIds }) => {
   // const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(getPublication({ publicationId: "0x013cee-0x0b41" }));
@@ -27,12 +22,61 @@ const LensterWidget: FC<ILensterWidget> = ({
   // console.log(postId, "postId");
   // console.log(profileId, "profileid");
   // console.log(ownedBy, "ownedby");
+  console.log(postIds, "postIds");
 
   return (
-    <div className="">
-      <h2>POST ID - {publicationId}</h2>
-      <h2>PROFILE ID - {profileId}</h2>
-      <h2>OWNED BY - {ownedBy}</h2>
+    <div className="grid grid-cols-3 gap-4 ml-[1.7rem]">
+      {postIds.map((postId) => {
+        const updateProfilePicture =
+          "https://ipfs.io/ipfs/" + postId.profilePicture?.slice(7);
+        console.log(updateProfilePicture, "updateprofile");
+        const updatePostMedia =
+          "https://ipfs.io/ipfs/" + postId?.postMedia?.slice(7);
+        return (
+          <>
+            {postId.name ? (
+              <div className="border py-4 px-6 border-gray-700 bg-gray-800 rounded-xl w-[28rem] m-2">
+                <div className="flex">
+                  <div className="flex grow">
+                    <img
+                      className="mt-1 mr-2 w-[2.4rem] h-[2.4rem] rounded-[2rem]"
+                      src={updateProfilePicture}
+                    />
+                    <div className="grid grow">
+                      <h2 className="font-semibold text-gray-100 hover:underline">
+                        {postId.profileName}
+                      </h2>
+                      <h2 className="text-gray-500 text-sm block">
+                        {postId.handle}
+                      </h2>
+                    </div>
+                    <a
+                      href={`https://open.withlens.app/post/${postId.name}`}
+                      target="_blank"
+                      className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-blue-500"
+                      rel="noreferrer"
+                    >
+                      <LensterIcon className="w-5 h-5" />
+                    </a>
+                  </div>
+                </div>
+                <div className="flex flex-wrap justify-start items-start flex-1 mt-2.5 w-full my-1">
+                  <p className="text-gray-300 whitespace-pre-line  ">
+                    {postId.postDescription}
+                  </p>
+                </div>
+                {postId.postMedia ? <img src={updatePostMedia} /> : null}
+
+                <h2 className="mt-2 text-sm text-gray-500 hover:underline">
+                  {postId.createdAt}
+                </h2>
+
+                {/* <img src={coverPicture} /> */}
+              </div>
+            ) : null}
+          </>
+        );
+      })}
     </div>
   );
 };
