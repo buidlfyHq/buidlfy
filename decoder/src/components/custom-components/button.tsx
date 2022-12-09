@@ -1,9 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { ethers, Contract } from "ethers";
-import Web3Modal from "web3modal";
 import BuilderConfig, { OracleContractAddress } from "config";
-import { providerOptions } from "config/provider-options";
 import { networks } from "config/network";
 import { onLoad } from "hooks/on-load";
 import { onRequest } from "hooks/on-request";
@@ -11,11 +9,6 @@ import { gradientCheck } from "utils/gradient-check";
 import ITexts from "interfaces/texts";
 import OracleAbi from "assets/abis/Oracle.json";
 import "styles/components.css";
-
-const web3Modal = new Web3Modal({
-  cacheProvider: true, // optional
-  providerOptions, // required
-});
 
 const Button: FC<ITexts> = ({
   bold,
@@ -45,7 +38,6 @@ const Button: FC<ITexts> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [transactionStatus, setTransactionStatus] = useState<string>("");
   const [account, setAccount] = useState<string>(null);
-  const [library, setLibrary] = useState(null);
 
   useEffect(() => {
     if (config.contract.abi[0] && config.contract.address !== "") {
@@ -62,8 +54,69 @@ const Button: FC<ITexts> = ({
     }
   }, []); // eslint-disable-line
 
+  const connectWalletButton = async () => {
+    try {
+      const { ethereum } = window as any;
+
+      if (!ethereum) {
+        return {
+          error: true,
+          errorMessage: "MetaMask not installed, please install!",
+          account: "",
+        };
+      }
+
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      await provider.send("eth_requestAccounts", []); // requesting access to accounts
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+      setAccount(address);
+      await switchNetwork();
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error("Error in connectWalletService --> ", error);
+    }
+  };
+
+  const switchNetwork = async (networkId?: number) => {
+    // NOTE: polygon mumbai testnet by default
+    const currentNetwork =
+      networks[Number(config.contract.network) || networkId || 80001];
+
+    try {
+      await (window as any).ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [
+          { chainId: `0x${Number(currentNetwork.chainId).toString(16)}` },
+        ],
+      });
+    } catch (switchError) {
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (switchError.code === 4902) {
+        try {
+          await (window as any).ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [currentNetwork],
+          });
+          return { error: false, errorMessage: "" };
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.log("Error in changeNetworkService --> ", error);
+        }
+      }
+      // eslint-disable-next-line no-console
+      console.log("Error in changeNetworkService --> ", switchError);
+    }
+  };
+
+  const disconnect = () => {
+    setAccount(null);
+  };
+
   const onResponse = async () => {
     if (oracleFunction) {
+      await switchNetwork(134);
+
       const res = await onRequest(
         oracleFunction.methodName,
         oracleFunction,
@@ -91,66 +144,6 @@ const Button: FC<ITexts> = ({
       );
       setOutputValue(res ? res[0] : []);
     }
-  };
-
-  const connectWalletButton = async () => {
-    try {
-      const provider = await web3Modal.connect();
-      const library: any = new ethers.providers.Web3Provider(provider, "any"); // required
-
-      const accounts: any = await library.listAccounts(); // required
-      setLibrary(library);
-      if (accounts) setAccount(accounts[0]);
-      await switchNetwork();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // switch to polygon testnet
-  const switchNetwork = async () => {
-    const currentNetwork = networks[Number(config.contract.network)];
-    const addCurrentNetwork = {
-      chainId: `0x${Number(currentNetwork.chainId).toString(16)}`,
-      chainName: currentNetwork.chainName,
-      nativeCurrency: {
-        name: currentNetwork.nativeCurrency.name,
-        symbol: currentNetwork.nativeCurrency.symbol,
-        decimals: currentNetwork.nativeCurrency.decimals,
-      },
-      rpcUrls: currentNetwork.rpcUrls,
-      blockExplorerUrls: currentNetwork.blockExplorerUrls,
-    };
-    try {
-      await library.provider.request({
-        method: "wallet_switchEthereumChain",
-        params: [
-          { chainId: `0x${Number(currentNetwork.chainId).toString(16)}` },
-        ],
-      });
-    } catch (switchError) {
-      // This error code indicates that the chain has not been added to MetaMask.
-      if (switchError.code === 4902) {
-        try {
-          await library?.provider.request({
-            method: "wallet_addEthereumChain",
-            params: [addCurrentNetwork],
-          });
-        } catch (addError) {
-          throw addError;
-        }
-      }
-    }
-  };
-  useEffect(() => {
-    switchNetwork();
-  }, [account, library]);
-  const refreshState = () => {
-    setAccount(null);
-  };
-
-  const disconnect = async () => {
-    await web3Modal.clearCachedProvider();
-    refreshState();
   };
 
   return (
