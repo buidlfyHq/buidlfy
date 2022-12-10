@@ -17,7 +17,7 @@ const App: FC = () => {
           href={config.head?.logo ? config.head.logo : DefaultLogo}
           sizes="16x16"
         />
-        {config.fonts.map((font: string) => (
+        {config?.fonts?.map((font: string) => (
           <link
             id={font}
             rel="stylesheet"
