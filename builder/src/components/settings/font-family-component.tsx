@@ -15,19 +15,8 @@ interface IFontFamilyComponent {
 
 const FontFamilyComponent: FC<IFontFamilyComponent> = ({ i, fontFamily }) => {
   const dispatch = useDispatch();
-  const handleFontFamily = (action: ReplaceValue, value: string, label: string) => {
+  const handleFontFamily = (action: ReplaceValue, value: string) => {
     if (action === ReplaceValue.CHANGE) {
-      let head = document.getElementsByTagName('head')[0];
-      let link = document.createElement('link');
-      link.id = label;
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href =
-        'http://fonts.googleapis.com/css?family=' +
-        label +
-        ':wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap';
-      link.media = 'all';
-      head.appendChild(link);
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
@@ -38,8 +27,8 @@ const FontFamilyComponent: FC<IFontFamilyComponent> = ({ i, fontFamily }) => {
     }
   };
 
-  const onChange = (option: { value: string; label: string }) => {
-    handleFontFamily(ReplaceValue.CHANGE, option.value, option.label);
+  const onChange = (option: { value: string }) => {
+    handleFontFamily(ReplaceValue.CHANGE, option.value);
   };
 
   return (
