@@ -129,7 +129,7 @@ workflows:
             - server-checks
           filters:
             branches:
-              only: configure-circleci
+              only: main
       - aws-ecs/deploy-service-update:
           cluster-name: "buidlfy-api-dev"
           container-image-name-updates: "container=buidlfy-api-dev,tag=dev"
@@ -139,4 +139,4 @@ workflows:
             - aws-ecr-build-push-dev
           filters:
             branches:
-              only: configure-circleci
+              only: main
