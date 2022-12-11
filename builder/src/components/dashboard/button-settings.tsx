@@ -15,6 +15,8 @@ import PaddingComponent from 'components/settings/padding-component';
 import CombinedComponent from 'components/settings/combined-setting';
 import BorderComponent from 'components/settings/border-component';
 import { IRootState } from 'redux/root-state.interface';
+import FontFamilyComponent from 'components/settings/font-family-component';
+import FontWeightComponent from 'components/settings/font-weight-component';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/dashboard.css';
 
@@ -44,7 +46,6 @@ const ButtonSettings: FC<ISettings> = ({ handleSettingChange, openTab, setOpenTa
         <h3 className="ml-[0.5rem] mt-[4.5rem]">{selectedElement ? <span className="setting-text ">{selectedElement.name}</span> : null}</h3>
         <CombinedComponent
           i={selectedElement.i}
-          fontWeight={selectedElement.style.fontWeight}
           fontStyle={selectedElement.style.fontStyle}
           textDecoration={selectedElement.style.textDecoration}
           justifyContent={selectedElement.style.justifyContent}
@@ -72,6 +73,8 @@ const ButtonSettings: FC<ISettings> = ({ handleSettingChange, openTab, setOpenTa
             placeholder="Link"
           />
         </div>
+        <FontFamilyComponent i={selectedElement.i} fontFamily={selectedElement.style.fontFamily} />
+        <FontWeightComponent i={selectedElement.i} fontWeight={selectedElement.style.fontWeight} />
         <FontSizeComponent i={selectedElement.i} fontSize={selectedElement.style.fontSize} />
         <BorderRadiusComponent
           i={selectedElement.i}

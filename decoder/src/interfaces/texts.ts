@@ -3,7 +3,7 @@ import { IInput, IOutput } from "./value";
 
 export default interface ITexts {
   id?: string;
-  bold: string;
+  fontWeight?: number;
   italic: string;
   underline: string;
   color: string;
@@ -35,4 +35,5 @@ export default interface ITexts {
     paddingTop?: number;
     paddingBottom?: number;
   };
+  fontFamily?: string;
 }

@@ -22,8 +22,9 @@ const defaultColorStyles = {
 };
 
 const defaultFontStyles = {
-  fontWeight: 'normal',
+  fontWeight: 400,
   fontStyle: 'normal',
+  fontFamily: `"Inter", sans-serif`,
   textDecoration: 'none',
   justifyContent: 'center',
 };

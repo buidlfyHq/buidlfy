@@ -5,7 +5,7 @@ import 'styles/components.css';
 
 const Button: FC<IText> = ({
   i,
-  bold,
+  fontWeight,
   italic,
   underline,
   color,
@@ -20,12 +20,14 @@ const Button: FC<IText> = ({
   padding,
   borderColor,
   borderWidth,
+  fontFamily,
 }) => (
   <section style={{ justifyContent: justifyContent }} id="button-one" className="flex overflow-hidden items-center justify-center w-auto h-full">
     <button
       style={{
-        fontWeight: bold,
+        fontWeight: fontWeight,
         fontStyle: italic,
+        fontFamily: fontFamily,
         border: `${borderWidth}px solid ${borderColor}`,
         borderImage: borderColor,
         display: 'flex',

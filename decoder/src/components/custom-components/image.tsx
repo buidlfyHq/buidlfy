@@ -50,6 +50,7 @@ const Image: FC<IImageComponent> = ({
           rel="noreferrer"
           href={link}
           className="cursor-pointer"
+          rel="noreferrer"
         >
           {imageDiv}
         </a>

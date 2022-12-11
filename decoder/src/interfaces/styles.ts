@@ -2,7 +2,7 @@ export default interface IStyles {
   color: string;
   borderColor?: string;
   backgroundColor?: string;
-  fontWeight?: string;
+  fontWeight?: number;
   fontStyle?: string;
   textDecoration?: string;
   justifyContent?: string;
@@ -27,4 +27,5 @@ export default interface IStyles {
   height?: number;
   backgroundSize?: string;
   isAuto?: boolean;
+  fontFamily?: string;
 }

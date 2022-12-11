@@ -5,7 +5,7 @@ import "styles/components.css";
 
 const Text: FC<ITexts> = ({
   id,
-  bold,
+  fontWeight,
   italic,
   underline,
   color,
@@ -17,6 +17,7 @@ const Text: FC<ITexts> = ({
   backgroundColor,
   margin,
   padding,
+  fontFamily,
 }) => {
   const [isValue, setIsValue] = useState<string>(value);
   const gradientCondition = color?.indexOf("gradient") !== -1;
@@ -40,7 +41,7 @@ const Text: FC<ITexts> = ({
     <textarea
       readOnly
       style={{
-        fontWeight: bold,
+        fontWeight: fontWeight,
         fontStyle: italic,
         textDecoration: underline,
         textDecorationColor: `${gradientCondition ? "black" : color}`,
@@ -51,6 +52,7 @@ const Text: FC<ITexts> = ({
         alignItems: "center",
         textAlign: `${justifyContent}` as CanvasTextAlign,
         fontSize: `${fontSize}px`,
+        fontFamily: fontFamily,
         padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
       value={isValue}
@@ -76,6 +78,7 @@ const Text: FC<ITexts> = ({
           rel="noreferrer"
           href={link}
           className="text-class cursor-pointer flex overflow-hidden items-center justify-center w-auto h-full"
+          rel="noreferrer"
         >
           {textArea}
         </a>

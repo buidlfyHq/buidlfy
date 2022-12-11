@@ -3,7 +3,21 @@ import { gradientCheck } from 'utils/gradient-check';
 import { IText } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
 
-const Text: FC<IText> = ({ i, bold, italic, underline, color, justifyContent, fontSize, value, backgroundColor, margin, padding, link }) => {
+const Text: FC<IText> = ({
+  i,
+  fontWeight,
+  italic,
+  underline,
+  color,
+  justifyContent,
+  fontSize,
+  value,
+  backgroundColor,
+  margin,
+  padding,
+  link,
+  fontFamily,
+}) => {
   const gradientCondition = color?.indexOf('gradient') !== -1;
   const textAreaContent = (
     <textarea
@@ -13,7 +27,7 @@ const Text: FC<IText> = ({ i, bold, italic, underline, color, justifyContent, fo
       style={{
         height: '-webkit-fill-available',
         WebkitTextFillColor: gradientCheck(color, false),
-        fontWeight: bold,
+        fontWeight: fontWeight,
         fontStyle: italic,
         background: gradientCheck(color, true),
         display: 'flex',
@@ -23,11 +37,13 @@ const Text: FC<IText> = ({ i, bold, italic, underline, color, justifyContent, fo
         textDecorationColor: `${gradientCondition ? 'black' : color}`,
         textAlign: `${justifyContent}` as CanvasTextAlign,
         fontSize: `${fontSize}px`,
+        fontFamily: fontFamily,
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
       }}
       className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
     />
   );
+
   return (
     <section
       id="text-one"
