@@ -42,18 +42,28 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
             {postIds.map((postId) => {
               const updateProfilePicture =
                 "https://ipfs.io/ipfs/" + postId.profilePicture?.slice(7);
+              console.log(
+                postId.profilePicture?.includes("ipfs://"),
+                "postId.profilePicture?.slice(7)"
+              );
+
               console.log(updateProfilePicture, "updateprofile");
               const updatePostMedia =
                 "https://ipfs.io/ipfs/" + postId?.postMedia?.slice(7);
+
               return (
                 <>
                   {postId.name && inputValue ? (
-                    <div className="border py-4 px-6 border-gray-700 bg-gray-800 rounded-xl w-[21rem] m-2">
+                    <div className="border h-fit py-4 px-6 border-gray-700 bg-gray-800 rounded-xl w-[21rem] m-2">
                       <div className="flex">
                         <div className="flex grow">
                           <img
                             className="mt-1 mr-2 w-[2.4rem] h-[2.4rem] rounded-[2rem]"
-                            src={updateProfilePicture}
+                            src={`${
+                              postId.profilePicture?.includes("ipfs://")
+                                ? updateProfilePicture
+                                : postId.postMedia
+                            }`}
                           />
                           <div className="grid grow">
                             <h2 className="font-semibold text-gray-100 hover:underline">
@@ -78,7 +88,15 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
                           {postId.postDescription}
                         </p>
                       </div>
-                      {postId.postMedia ? <img src={updatePostMedia} /> : null}
+                      {postId?.postMedia ? (
+                        <img
+                          src={`${
+                            postId.postMedia?.includes("ipfs://")
+                              ? updatePostMedia
+                              : postId.postMedia
+                          }`}
+                        />
+                      ) : null}
 
                       <h2 className="mt-2 text-sm text-gray-500 hover:underline">
                         {postId.createdAt}
