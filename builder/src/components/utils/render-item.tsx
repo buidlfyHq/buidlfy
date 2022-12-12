@@ -1,12 +1,13 @@
-import { FC } from "react";
-import Container from "components/custom-components/container";
-import Button from "components/custom-components/button";
-import Text from "components/custom-components/text";
-import Image from "components/custom-components/image";
-import Input from "components/custom-components/input";
-import Divider from "components/custom-components/divider";
-import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
-import LensterWidget from "components/custom-components/lenster-widget";
+import { FC } from 'react';
+import Container from 'components/custom-components/container';
+import Button from 'components/custom-components/button';
+import Text from 'components/custom-components/text';
+import Image from 'components/custom-components/image';
+import Input from 'components/custom-components/input';
+import Divider from 'components/custom-components/divider';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import PreviewContainer from 'components/custom-components/preview-container';
+import LensterWidget from 'components/custom-components/lenster-widget';
 
 interface IRenderItem {
   item: IWorkspaceElement;
@@ -17,6 +18,7 @@ interface IRenderItem {
   setSideElement?: (sideElement: string) => void;
   setHideNavbar?: (hideNavbar: boolean) => void;
   hideSettingSidebar?: () => void;
+  preview?: boolean;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -28,13 +30,14 @@ const RenderItem: FC<IRenderItem> = ({
   setSideElement,
   setHideNavbar,
   hideSettingSidebar,
+  preview,
 }) => {
   switch (item.name) {
-    case "Button":
+    case 'Button':
       return (
         <Button
           i={item.i}
-          bold={item.style.fontWeight}
+          fontWeight={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
           color={item.style.color}
@@ -50,16 +53,17 @@ const RenderItem: FC<IRenderItem> = ({
           connectWallet={item.connectWallet}
           margin={item.style.margin}
           padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
         />
       );
-    case "Text":
-    case "Heading 1":
-    case "Heading 2":
-    case "Heading 3":
+    case 'Text':
+    case 'Heading 1':
+    case 'Heading 2':
+    case 'Heading 3':
       return (
         <Text
           i={item.i}
-          bold={item.style.fontWeight}
+          fontWeight={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
           color={item.style.color}
@@ -70,9 +74,10 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
           margin={item.style.margin}
           padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
         />
       );
-    case "Input":
+    case 'Input':
       return (
         <Input
           i={item.i}
@@ -86,7 +91,7 @@ const RenderItem: FC<IRenderItem> = ({
           borderColor={item.style.borderColor}
         />
       );
-    case "Image":
+    case 'Image':
       return (
         <Image
           i={item.i}
@@ -100,42 +105,54 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
         />
       );
-    case "Divider":
+    case 'Divider':
       return <Divider />;
-    case "Container":
-    case "Horizontal Container":
-    case "Vertical Container":
-    case "Lenster Layout":
+    case 'Container':
+    case 'Horizontal Container':
+    case 'Vertical Container':
+    case 'Lenster Layout':
       return (
-        <Container
-          item={item}
-          children={item.children}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          setOpenSetting={setOpenSetting}
-          setOpenTab={setOpenTab}
-          setDrag={setDrag}
-          setIsContainerSelected={setIsContainerSelected}
-          setSideElement={setSideElement}
-          setHideNavbar={setHideNavbar}
-          hideSettingSidebar={hideSettingSidebar}
-          backgroundSize={item.style.backgroundSize}
-          padding={item.style.padding}
-          margin={item.style.margin}
-          imgData={item.imgData}
-        />
+        <>
+          {preview ? (
+            <PreviewContainer
+              item={item}
+              children={item.children}
+              backgroundColor={item.style.backgroundColor}
+              color={item.style.color}
+              borderRadius={item.style.borderRadius}
+              borderWidth={item.style.borderWidth}
+              shadow={item.style.shadow}
+              backgroundSize={item.style.backgroundSize}
+              padding={item.style.padding}
+              margin={item.style.margin}
+              imgData={item.imgData}
+            />
+          ) : (
+            <Container
+              item={item}
+              children={item.children}
+              backgroundColor={item.style.backgroundColor}
+              color={item.style.color}
+              borderRadius={item.style.borderRadius}
+              borderWidth={item.style.borderWidth}
+              shadow={item.style.shadow}
+              setOpenSetting={setOpenSetting}
+              setOpenTab={setOpenTab}
+              setDrag={setDrag}
+              setIsContainerSelected={setIsContainerSelected}
+              setSideElement={setSideElement}
+              setHideNavbar={setHideNavbar}
+              hideSettingSidebar={hideSettingSidebar}
+              backgroundSize={item.style.backgroundSize}
+              padding={item.style.padding}
+              margin={item.style.margin}
+              imgData={item.imgData}
+            />
+          )}
+        </>
       );
-    case "Lenster Card":
-      return (
-        <LensterWidget
-          i={item.i}
-          backgroundColor={item.style.backgroundColor}
-          setDrag={setDrag}
-        />
-      );
+    case 'Lenster Card':
+      return <LensterWidget i={item.i} backgroundColor={item.style.backgroundColor} setDrag={setDrag} />;
     default:
       return <></>;
   }

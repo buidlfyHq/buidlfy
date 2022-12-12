@@ -6,7 +6,7 @@ export interface IContractState {
 }
 
 export interface IContractDetails {
-  abi: string; 
+  abi: string;
   address: string;
   network: string;
 }
@@ -47,4 +47,12 @@ export interface IContract {
   text; // type to be added
   address: string;
   network?: string;
+}
+
+export interface IAbi {
+  inputs: { internalType: string; name: string; type: string }[];
+  name: string;
+  outputs: { internalType: string; name: string; type: string }[];
+  stateMutability: string;
+  type: string;
 }

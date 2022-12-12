@@ -1,5 +1,5 @@
-import { FC } from "react";
-import ArrowInput from "./arrow-input";
+import { FC } from 'react';
+import ArrowInput from './arrow-input';
 
 interface ISpaceInput {
   heading: string;
@@ -10,14 +10,7 @@ interface ISpaceInput {
   handleDecrement: (() => void)[];
 }
 
-const SpaceInput: FC<ISpaceInput> = ({
-  heading,
-  text,
-  value,
-  handleChange,
-  handleIncrement,
-  handleDecrement,
-}) => {
+const SpaceInput: FC<ISpaceInput> = ({ heading, text, value, handleChange, handleIncrement, handleDecrement }) => {
   return (
     <div className="flex items-center w-full px-3 py-4 text-gray-600">
       <span className="px-1 text-left">

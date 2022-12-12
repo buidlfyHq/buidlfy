@@ -1,4 +1,4 @@
-import templateActionTypes from "./template.types";
+import templateActionTypes from './template.types';
 
 export const buyTemplate = () => ({
   type: templateActionTypes.BUY_TEMPLATE,

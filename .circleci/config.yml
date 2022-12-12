@@ -1,0 +1,142 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@8.1.2
+  aws-ecs: circleci/aws-ecs@2.0.0
+
+jobs:
+  server-checks:
+    working_directory: ~/buidlfy/server
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout:
+          path: ~/buidlfy
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - dependencies-cache-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - dependencies-cache-
+
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo npm i -g node-gyp
+            npm i
+
+      - run:
+          name: Check Formatting Issue
+          command: npm run format
+
+      - run:
+          name: Check Lint Issue
+          command: npm run lint
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+  builder-checks:
+    working_directory: ~/buidlfy/builder
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout:
+          path: ~/buidlfy
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - dependencies-cache-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - dependencies-cache-
+
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo npm i -g node-gyp
+            npm i
+
+      - run:
+          name: Check Formatting Issue
+          command: npm run format
+
+      - run:
+          name: Check Lint Issue
+          command: npm run lint
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+  decoder-checks:
+    working_directory: ~/buidlfy/decoder
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout:
+          path: ~/buidlfy
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - dependencies-cache-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - dependencies-cache-
+
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo npm i -g node-gyp
+            npm i
+
+      - run:
+          name: Check Formatting Issue
+          command: npm run format
+
+      - run:
+          name: Check Lint Issue
+          command: npm run lint
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+workflows:
+  build-deploy:
+    jobs:
+      - server-checks
+      - builder-checks
+      - decoder-checks
+      - aws-ecr/build-and-push-image:
+          region: "${AWS_REGION}"
+          registry-id: AWS_REGISTRY_ID
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: false
+          dockerfile: Dockerfile
+          path: server
+          name: aws-ecr-build-push-dev
+          repo: buidlfy-api
+          tag: dev
+          extra-build-args: --build-arg CODE_VERSION=${CIRCLE_SHA1:0:7}
+          requires:
+            - server-checks
+          filters:
+            branches:
+              only: main
+      - aws-ecs/deploy-service-update:
+          cluster-name: "buidlfy-api-dev"
+          container-image-name-updates: "container=buidlfy-api-dev,tag=dev"
+          family: "buidlfy-api-dev"
+          aws-region: AWS_DEFAULT_REGION
+          requires:
+            - aws-ecr-build-push-dev
+          filters:
+            branches:
+              only: main

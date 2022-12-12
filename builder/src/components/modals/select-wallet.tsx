@@ -1,12 +1,12 @@
-import { FC, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Dialog } from "@headlessui/react";
-import { CgClose } from "react-icons/cg";
-import { BiArrowBack } from "react-icons/bi";
-import Spinner from "components/utils/assets/spinner";
-import { connectWallet } from "redux/web3/web3.actions";
-import { toggleModal, toggleModalType } from "redux/modal/modal.reducers";
-import MetamaskImg from "assets/icons/Metamask-icon.png";
+import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Dialog } from '@headlessui/react';
+import { CgClose } from 'react-icons/cg';
+import { BiArrowBack } from 'react-icons/bi';
+import Spinner from 'components/utils/assets/spinner';
+import { connectWallet } from 'redux/web3/web3.actions';
+import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
+import MetamaskImg from 'assets/icons/Metamask-icon.png';
 
 const SelectWallet: FC = () => {
   const dispatch = useDispatch();
@@ -22,17 +22,12 @@ const SelectWallet: FC = () => {
       <div className="w-full">
         <div className="flex items-center justify-between">
           <BiArrowBack
-            onClick={() => dispatch(toggleModalType("single"))}
+            onClick={() => dispatch(toggleModalType('single'))}
             className="mb-2 text-[20px] duration-150 ease-linear scale-100 cursor-pointer hover:scale-125"
           />
-          <CgClose
-            className="text-[24px] cursor-pointer"
-            onClick={() => dispatch(toggleModal(false))}
-          />
+          <CgClose className="text-[24px] cursor-pointer" onClick={() => dispatch(toggleModal(false))} />
         </div>
-        <div className="text-[#14142B] font-[600] text-[22px] ">
-          Connect to a wallet
-        </div>
+        <div className="text-[#14142B] font-[600] text-[22px] ">Connect to a wallet</div>
         <div
           onClick={handleConnect}
           className="flex items-center justify-between bg-[#F8F8FD] rounded-[8px] hover:bg-gray-100 p-4 text-[18px] mt-4 cursor-pointer hover:border hover:border-[#5799EB]"

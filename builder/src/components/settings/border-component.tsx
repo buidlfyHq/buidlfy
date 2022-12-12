@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { useDispatch } from "react-redux";
-import { updateWorkspaceElementStyle } from "redux/workspace/workspace.reducers";
-import { ReplaceValue } from "components/utils/render-setting";
-import NumberInput from "components/utils/input/number-input";
-import "styles/components.css";
-import "styles/dashboard.css";
+import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
+import { ReplaceValue } from 'components/utils/render-setting';
+import NumberInput from 'components/utils/input/number-input';
+import 'styles/components.css';
+import 'styles/dashboard.css';
 
 interface IBorderComponent {
   i: string;
@@ -19,25 +19,25 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "borderWidth",
+          propertyName: 'borderWidth',
           propertyValue: borderWidth + 1,
-        })
+        }),
       );
     } else if (action === ReplaceValue.DECREMENT) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "borderWidth",
+          propertyName: 'borderWidth',
           propertyValue: borderWidth <= 0 ? 0 : borderWidth - 1,
-        })
+        }),
       );
     } else if (action === ReplaceValue.CHANGE) {
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
-          propertyName: "borderWidth",
+          propertyName: 'borderWidth',
           propertyValue: updatedBorderWidth,
-        })
+        }),
       );
     }
   };
@@ -46,9 +46,7 @@ const BorderComponent: FC<IBorderComponent> = ({ i, borderWidth }) => {
     <NumberInput
       text="Border Width"
       value={borderWidth}
-      handleChange={(updatedBorderWidth: number) =>
-        handleWidth(ReplaceValue.CHANGE, updatedBorderWidth)
-      }
+      handleChange={(updatedBorderWidth: number) => handleWidth(ReplaceValue.CHANGE, updatedBorderWidth)}
       handleIncrement={() => handleWidth(ReplaceValue.INCREMENT)}
       handleDecrement={() => handleWidth(ReplaceValue.DECREMENT)}
     />

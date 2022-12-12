@@ -13,8 +13,8 @@ export const onRequest = async (
   contract: Contract,
   inputValue: IInput[],
   outputValue: IOutput[],
-  setIsOpen,
-  setTransactionStatus
+  setIsOpen: (isOpen: boolean) => void,
+  setTransactionStatus: (transactionStatus: string) => void
 ) => {
   // contract functions with inputs
   if (contractFunction.inputs.length) {

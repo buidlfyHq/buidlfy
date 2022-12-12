@@ -40,12 +40,14 @@ const Image: FC<IImageComponent> = ({
       }}
     />
   );
+
   return (
     <section className="w-full h-full overflow-hidden">
       {link ? (
         <a
           style={{ textDecoration: "none" }}
           target="_blank"
+          rel="noreferrer"
           href={link}
           className="cursor-pointer"
         >

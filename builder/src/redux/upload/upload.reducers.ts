@@ -1,12 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IUploadState } from "./upload.interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { IUploadState } from './upload.interfaces';
 
 const initialState: IUploadState = {
   uploadImage: null,
 };
 
 const uploadSlice = createSlice({
-  name: "upload",
+  name: 'upload',
   initialState,
   reducers: {
     updateUploadImage(state: IUploadState, action: { payload: string }) {

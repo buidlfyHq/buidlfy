@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import { useDispatch } from "react-redux";
-import SpaceInput from "components/utils/input/space-input";
-import { updateWorkspaceElementSubStyle } from "redux/workspace/workspace.reducers";
-import "styles/components.css";
-import "styles/dashboard.css";
+import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import SpaceInput from 'components/utils/input/space-input';
+import { updateWorkspaceElementSubStyle } from 'redux/workspace/workspace.reducers';
+import 'styles/components.css';
+import 'styles/dashboard.css';
 
 interface IMarginComponent {
   i: string;
@@ -17,10 +17,10 @@ interface IMarginComponent {
 }
 
 enum Margin {
-  MARGINLEFT = "marginLeft",
-  MARGINRIGHT = "marginRight",
-  MARGINTOP = "marginTop",
-  MARGINBOTTOM = "marginBottom",
+  MARGINLEFT = 'marginLeft',
+  MARGINRIGHT = 'marginRight',
+  MARGINTOP = 'marginTop',
+  MARGINBOTTOM = 'marginBottom',
 }
 
 const MarginComponent: FC<IMarginComponent> = ({ i, margin, name }) => {
@@ -30,10 +30,10 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin, name }) => {
     dispatch(
       updateWorkspaceElementSubStyle({
         settingItemId: i,
-        propertyName: "margin",
+        propertyName: 'margin',
         propertyValue: updatedMargin,
         childPropertyName: property,
-      })
+      }),
     );
   };
 
@@ -41,10 +41,10 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin, name }) => {
     dispatch(
       updateWorkspaceElementSubStyle({
         settingItemId: i,
-        propertyName: "margin",
+        propertyName: 'margin',
         propertyValue: value + 1,
         childPropertyName: property,
-      })
+      }),
     );
   };
 
@@ -52,22 +52,20 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin, name }) => {
     dispatch(
       updateWorkspaceElementSubStyle({
         settingItemId: i,
-        propertyName: "margin",
+        propertyName: 'margin',
         propertyValue: value - 1,
         childPropertyName: property,
-      })
+      }),
     );
   };
 
   const marginData = {
     container: {
-      text: ["L", "R"],
+      text: ['L', 'R'],
       value: [margin?.marginLeft || 0, margin?.marginRight || 0],
       handleChange: [
-        (updatedMargin: number) =>
-          handleChange(Margin.MARGINLEFT, updatedMargin),
-        (updatedMargin: number) =>
-          handleChange(Margin.MARGINRIGHT, updatedMargin),
+        (updatedMargin: number) => handleChange(Margin.MARGINLEFT, updatedMargin),
+        (updatedMargin: number) => handleChange(Margin.MARGINRIGHT, updatedMargin),
       ],
       handleIncrement: [
         () => incrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
@@ -79,22 +77,13 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin, name }) => {
       ],
     },
     default: {
-      text: ["L", "R", "T", "B"],
-      value: [
-        margin?.marginLeft || 0,
-        margin?.marginRight || 0,
-        margin?.marginTop || 0,
-        margin?.marginBottom || 0,
-      ],
+      text: ['L', 'R', 'T', 'B'],
+      value: [margin?.marginLeft || 0, margin?.marginRight || 0, margin?.marginTop || 0, margin?.marginBottom || 0],
       handleChange: [
-        (updatedMargin: number) =>
-          handleChange(Margin.MARGINLEFT, updatedMargin),
-        (updatedMargin: number) =>
-          handleChange(Margin.MARGINRIGHT, updatedMargin),
-        (updatedMargin: number) =>
-          handleChange(Margin.MARGINTOP, updatedMargin),
-        (updatedMargin: number) =>
-          handleChange(Margin.MARGINBOTTOM, updatedMargin),
+        (updatedMargin: number) => handleChange(Margin.MARGINLEFT, updatedMargin),
+        (updatedMargin: number) => handleChange(Margin.MARGINRIGHT, updatedMargin),
+        (updatedMargin: number) => handleChange(Margin.MARGINTOP, updatedMargin),
+        (updatedMargin: number) => handleChange(Margin.MARGINBOTTOM, updatedMargin),
       ],
       handleIncrement: [
         () => incrementCounter(Margin.MARGINLEFT, margin?.marginLeft),
@@ -110,7 +99,7 @@ const MarginComponent: FC<IMarginComponent> = ({ i, margin, name }) => {
       ],
     },
   };
-  const containerType = name === "Container" ? "container" : "default";
+  const containerType = name === 'Container' ? 'container' : 'default';
   return (
     <SpaceInput
       heading="Margin"

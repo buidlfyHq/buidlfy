@@ -19,7 +19,7 @@
 .btn-border {
   border-image-slice: 1 !important;
 }
-.text-class{
+.text-class {
   background-clip: text;
   -webkit-background-clip: text !important;
 }

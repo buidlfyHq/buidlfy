@@ -1,11 +1,11 @@
-import React, { FC } from "react";
-import { gradientCheck } from "utils/gradient-check";
-import { IText } from "redux/workspace/workspace.interfaces";
-import "styles/components.css";
+import React, { FC } from 'react';
+import { gradientCheck } from 'utils/gradient-check';
+import { IText } from 'redux/workspace/workspace.interfaces';
+import 'styles/components.css';
 
 const Text: FC<IText> = ({
   i,
-  bold,
+  fontWeight,
   italic,
   underline,
   color,
@@ -16,36 +16,39 @@ const Text: FC<IText> = ({
   margin,
   padding,
   link,
+  fontFamily,
 }) => {
-  const gradientCondition = color?.indexOf("gradient") !== -1;
+  const gradientCondition = color?.indexOf('gradient') !== -1;
   const textAreaContent = (
     <textarea
       readOnly
       id={i}
       value={value}
       style={{
-        height: "-webkit-fill-available",
+        height: '-webkit-fill-available',
         WebkitTextFillColor: gradientCheck(color, false),
-        fontWeight: bold,
+        fontWeight: fontWeight,
         fontStyle: italic,
         background: gradientCheck(color, true),
-        display: "flex",
+        display: 'flex',
         justifyContent,
-        alignItems: "center",
+        alignItems: 'center',
         textDecoration: underline,
-        textDecorationColor: `${gradientCondition ? "black" : color}`,
+        textDecorationColor: `${gradientCondition ? 'black' : color}`,
         textAlign: `${justifyContent}` as CanvasTextAlign,
         fontSize: `${fontSize}px`,
+        fontFamily: fontFamily,
         padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
       }}
       className={`text-class w-full outline-none text-center overflow-hidden cursor-pointer h-full resize-none`}
     />
   );
+
   return (
     <section
       id="text-one"
       style={{
-        height: "-webkit-fill-available",
+        height: '-webkit-fill-available',
         textDecoration: underline,
         textDecorationColor: color,
         background: backgroundColor,

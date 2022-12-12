@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .combined-style {
-    @apply flex items-center justify-center text-[16px] py-0.5 w-[22px] h-[25px] rounded-[4px] mr-[13px] my-1 text-black hover:bg-[#CDD4F3] cursor-pointer;
+  @apply flex items-center justify-center text-[16px] py-0.5 w-[28px] h-[25px] rounded-[4px] mr-[13px] my-1 text-black hover:bg-[#CDD4F3] cursor-pointer;
 }
