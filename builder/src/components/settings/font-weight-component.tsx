@@ -20,7 +20,7 @@ const FontWeightComponent: FC<IFontWeightComponent> = ({ i, fontWeight }) => {
         updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: 'fontWeight',
-          propertyValue: fontWeight + 100,
+          propertyValue: fontWeight >= 900 ? 900 : fontWeight + 100,
         }),
       );
     } else if (action === ReplaceValue.DECREMENT) {
