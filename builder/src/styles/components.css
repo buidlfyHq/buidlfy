@@ -1380,11 +1380,14 @@
 }
 
 .lenster-div {
-  padding-left: 120px;
-  padding-right:120px;
-  display: grid;
-  grid-template-columns: repeat(2, 25rem);
-  grid-gap:55px;
-  grid-template-rows: repeat(5,34rem);
-  /* grid-template-columns: 25rem; */
+    column-gap: 1.5rem !important;
+    columns: 3;
+    /* -webkit-column-break-inside: avoid; */
+}
+.lenster-card {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
 }

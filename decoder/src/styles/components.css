@@ -96,3 +96,16 @@
 .text-area {
   outline: none;
 }
+
+.lenster-div {
+  column-gap: 1.5rem !important;
+  columns: 3;
+  /* -webkit-column-break-inside: avoid; */
+}
+.lenster-card {
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+display: inline-block;
+vertical-align: middle;
+}

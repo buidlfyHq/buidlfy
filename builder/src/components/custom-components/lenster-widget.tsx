@@ -1,12 +1,10 @@
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "redux/root-state.interface";
-import deleteContainer from "assets/icons/delete.png";
-import { getPublication } from "redux/widget/widget.actions";
-import edit from "assets/icons/edit.png";
 import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
-import "styles/components.css";
 import LensterIcon from "components/utils/assets/lenster-svg";
+import edit from "assets/icons/edit.png";
+import "styles/components.css";
 
 interface ILensterWidget {
   i: string;
@@ -38,7 +36,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
     <>
       {postIds && postIds.length > 0 ? (
         <>
-          <div className="grid grid-cols-3 gap-1">
+          <div className="lenster-div">
             {postIds.map((postId) => {
               const updateProfilePicture =
                 "https://ipfs.io/ipfs/" + postId.profilePicture?.slice(7);
@@ -54,7 +52,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
               return (
                 <>
                   {postId.name && inputValue ? (
-                    <div className="border h-fit py-4 px-6 border-gray-700 bg-gray-800 rounded-xl w-[21rem] m-2">
+                    <div className="border lenster-card h-fit py-4 px-6 border-gray-700 bg-gray-800 rounded-xl w-[21rem] m-2">
                       <div className="flex">
                         <div className="flex grow">
                           <img

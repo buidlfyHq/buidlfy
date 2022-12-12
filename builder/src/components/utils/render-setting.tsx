@@ -62,15 +62,9 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const selectedElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
-  // const [newValue, setNewValue] = useState<string>("");
   const [addInputs, setAddInputs] = useState<Array<any>>([]);
   const handleNewValue = (e: ChangeEvent<HTMLTextAreaElement>, key: number) => {
     if (e.target.value.length > 0) {
-      // addInputs.map((addInput) => {
-      // setNewValue(e.target.value);
-      console.log(e.target.value, "newValue");
-      console.log(addInputs[key].id, "addInputs[key].id");
-
       dispatch(
         getPublication({
           id: addInputs[key].id,
@@ -80,18 +74,13 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
 
       const newAddInputs = [...addInputs];
       newAddInputs[key].value = e.target.value;
-
       setAddInputs(newAddInputs);
-      // });
-      console.log(e.target.value, "value");
       dispatch(updateInputValue(true));
     } else {
       dispatch(updateInputValue(false));
-      // setNewValue("");
     }
   };
   const uid = new ShortUniqueId();
-  // console.log(newValue, "newValue");
 
   const handleSettingChange = (
     e:
@@ -168,7 +157,6 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
             <IoMdAdd className="text-[7px] ml-[2px]" />
             Add Input
           </span>
-          {/* {newValue ? <h2>{newValue}</h2> : null} */}
         </>
       );
     case "Lenster Layout":
