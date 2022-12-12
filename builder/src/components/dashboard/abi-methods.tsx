@@ -1,11 +1,12 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineLeft } from 'react-icons/ai';
+import WarningText from 'components/utils/setting-warning';
 import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
+import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { IShowComponent, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
-import { IContractDetails } from 'redux/contract/contract.interfaces';
-import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
+import { IAbi, IContractDetails } from 'redux/contract/contract.interfaces';
 
 interface IAbiMethods {
   setShowComponent: (showComponent: IShowComponent) => void;
@@ -18,15 +19,7 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsO
   const workspaceElements: IWorkspaceElement[] = useSelector((state: IRootState) => state.workspace.workspaceElements);
   const contractDetails: IContractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
 
-  const [abiJson, setAbiJson] = useState<
-    {
-      inputs: { internalType: string; name: string; type: string }[];
-      name: string;
-      outputs: { internalType: string; name: string; type: string }[];
-      stateMutability: string;
-      type: string;
-    }[]
-  >([]);
+  const [abiJson, setAbiJson] = useState<IAbi[]>([]);
 
   useEffect(() => {
     if (contractDetails.abi) {
@@ -44,7 +37,7 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsO
           setShowComponent(null);
         }
       } catch (error) {
-        console.log('error');
+        console.error('error');
       }
     }
   }, [contractDetails.abi, selectedElement]); // eslint-disable-line
@@ -113,6 +106,9 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsO
           <div className="mt-[1rem]">
             <div className="setting-text ml-[0.25rem] px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
               Select Method
+            </div>
+            <div className="mt-2 mb-4">
+              <WarningText text="Methods with inputs & outputs of types other than string, bool, address, int & uint are not supported." />
             </div>
             <div className="px-2">
               <div className="mb-3">

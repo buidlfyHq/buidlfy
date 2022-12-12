@@ -48,3 +48,11 @@ export interface IContract {
   address: string;
   network?: string;
 }
+
+export interface IAbi {
+  inputs: { internalType: string; name: string; type: string }[];
+  name: string;
+  outputs: { internalType: string; name: string; type: string }[];
+  stateMutability: string;
+  type: string;
+}
