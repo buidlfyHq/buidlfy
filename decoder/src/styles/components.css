@@ -103,9 +103,9 @@
   /* -webkit-column-break-inside: avoid; */
 }
 .lenster-card {
-box-sizing: border-box;
--moz-box-sizing: border-box;
--webkit-box-sizing: border-box;
-display: inline-block;
-vertical-align: middle;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
 }

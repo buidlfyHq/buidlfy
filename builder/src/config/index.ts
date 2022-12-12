@@ -29,7 +29,7 @@ export interface IConfig {
   };
   widget: {
     LENS_GRAPHQL_URL: string;
-  }
+  };
 }
 
 const NODE_ENV: string = process.env.REACT_APP_STAGE || 'local';
@@ -65,8 +65,8 @@ const development: IConfig = {
     },
   },
   widget: {
-    LENS_GRAPHQL_URL: "https://api.lens.dev"
-  }
+    LENS_GRAPHQL_URL: 'https://api.lens.dev',
+  },
 };
 
 const production: IConfig = {
@@ -100,8 +100,8 @@ const production: IConfig = {
     },
   },
   widget: {
-    LENS_GRAPHQL_URL: "https://api.lens.dev"
-  }
+    LENS_GRAPHQL_URL: 'https://api.lens.dev',
+  },
 };
 
 const local: IConfig = {
@@ -135,8 +135,8 @@ const local: IConfig = {
     },
   },
   widget: {
-    LENS_GRAPHQL_URL: "https://api.lens.dev"
-  }
+    LENS_GRAPHQL_URL: 'https://api.lens.dev',
+  },
 };
 
 const config: {

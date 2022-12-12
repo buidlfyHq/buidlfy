@@ -205,15 +205,9 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
           {elementsList}
           <div className="element-div">
             <div className="px-4 py-4">
-              <div
-                data-tip="Click here to add the Lenster Card"
-                data-for="elements"
-              >
+              <div data-tip="Click here to add the Lenster Card" data-for="elements">
                 <div className="flex">
-                  <div
-                    className="cursor-pointer element-container"
-                    onClick={() => onClickFunction("Lenster Card")}
-                  >
+                  <div className="cursor-pointer element-container" onClick={() => onClickFunction('Lenster Card')}>
                     <span className="element-text">
                       Add Lenster Card
                       <IoIosAddCircleOutline className="text-[16px] ml-1" />

@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IPublications, IWidgetState } from "./widget.interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { IPublications, IWidgetState } from './widget.interfaces';
 
 const initialState: IWidgetState = {
   publications: [],
@@ -7,164 +7,104 @@ const initialState: IWidgetState = {
 };
 
 const widgetSlice = createSlice({
-  name: "widget",
+  name: 'widget',
   initialState,
   reducers: {
-    updatePublications(
-      state: IWidgetState,
-      action: { payload: IPublications }
-    ) {
-      console.log(action, "action");
-      console.log("state", state);
-      console.log("state.publications", state.publications);
+    updatePublications(state: IWidgetState, action: { payload: IPublications }) {
+      console.log(action, 'action');
+      console.log('state', state);
+      console.log('state.publications', state.publications);
       return {
         ...state,
         publications: [...state.publications, action.payload],
       };
     },
-    updateProfileId(
-      state: IWidgetState,
-      action: { payload: { value: string; publicationId: string } }
-    ) {
+    updateProfileId(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
-      console.log("publicationIdddd", publicationId);
+      console.log('publicationIdddd', publicationId);
 
-      const publicationIndex = state.publications.findIndex(
-        (pub) => pub.name === publicationId
-      );
-      console.log("publicationIndex", publicationIndex);
+      const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
+      console.log('publicationIndex', publicationIndex);
       const newPublications = [...state.publications];
-      console.log("newPublications", newPublications);
+      console.log('newPublications', newPublications);
       const value = action.payload.value;
-      console.log("value", value);
+      console.log('value', value);
       newPublications[publicationIndex].profileId = value;
-      console.log("newPublications-profileId", JSON.stringify(newPublications));
+      console.log('newPublications-profileId', JSON.stringify(newPublications));
       state.publications = newPublications;
     },
-    updateOwnedBy(
-      state: IWidgetState,
-      action: { payload: { value: string; publicationId: string } }
-    ) {
+    updateOwnedBy(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
-      const publicationIndex = state.publications.findIndex(
-        (pub) => pub.name === publicationId
-      );
+      const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
       const value = action.payload.value;
-      console.log(value, "value-owned");
+      console.log(value, 'value-owned');
 
       newPublications[publicationIndex].ownedBy = value;
-      console.log("newPublications-ownedBy", JSON.stringify(newPublications));
+      console.log('newPublications-ownedBy', JSON.stringify(newPublications));
       state.publications = newPublications;
     },
-    updateProfilePicture(
-      state: IWidgetState,
-      action: { payload: { value: string; publicationId: string } }
-    ) {
+    updateProfilePicture(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
-      const publicationIndex = state.publications.findIndex(
-        (pub) => pub.name === publicationId
-      );
+      const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
       const value = action.payload.value;
       newPublications[publicationIndex].profilePicture = value;
-      console.log(
-        "newPublications-profilePicture",
-        JSON.stringify(newPublications)
-      );
+      console.log('newPublications-profilePicture', JSON.stringify(newPublications));
       state.publications = newPublications;
     },
-    updateCoverPicture(
-      state: IWidgetState,
-      action: { payload: { value: string; publicationId: string } }
-    ) {
+    updateCoverPicture(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
-      const publicationIndex = state.publications.findIndex(
-        (pub) => pub.name === publicationId
-      );
+      const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
       const value = action.payload.value;
       newPublications[publicationIndex].coverPicture = value;
-      console.log(
-        "newPublications-coverPicture",
-        JSON.stringify(newPublications)
-      );
+      console.log('newPublications-coverPicture', JSON.stringify(newPublications));
       state.publications = newPublications;
     },
-    updateHandle(
-      state: IWidgetState,
-      action: { payload: { value: string; publicationId: string } }
-    ) {
+    updateHandle(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
-      const publicationIndex = state.publications.findIndex(
-        (pub) => pub.name === publicationId
-      );
+      const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
       const value = action.payload.value;
       newPublications[publicationIndex].handle = value;
-      console.log("newPublications-handle", JSON.stringify(newPublications));
+      console.log('newPublications-handle', JSON.stringify(newPublications));
       state.publications = newPublications;
     },
-    updateName(
-      state: IWidgetState,
-      action: { payload: { value: string; publicationId: string } }
-    ) {
+    updateName(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
-      const publicationIndex = state.publications.findIndex(
-        (pub) => pub.name === publicationId
-      );
+      const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
       const value = action.payload.value;
       newPublications[publicationIndex].profileName = value;
-      console.log(
-        "newPublications-profilename",
-        JSON.stringify(newPublications)
-      );
+      console.log('newPublications-profilename', JSON.stringify(newPublications));
       state.publications = newPublications;
     },
-    updateCreatedAt(
-      state: IWidgetState,
-      action: { payload: { value: string; publicationId: string } }
-    ) {
+    updateCreatedAt(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
-      const publicationIndex = state.publications.findIndex(
-        (pub) => pub.name === publicationId
-      );
+      const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
       const value = action.payload.value;
       newPublications[publicationIndex].createdAt = value;
-      console.log("newPublications-createdat", JSON.stringify(newPublications));
+      console.log('newPublications-createdat', JSON.stringify(newPublications));
       state.publications = newPublications;
     },
-    updatePostDescription(
-      state: IWidgetState,
-      action: { payload: { value: string; publicationId: string } }
-    ) {
+    updatePostDescription(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
-      const publicationIndex = state.publications.findIndex(
-        (pub) => pub.name === publicationId
-      );
+      const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
       const value = action.payload.value;
       newPublications[publicationIndex].postDescription = value;
-      console.log(
-        "newPublications-postDescription",
-        JSON.stringify(newPublications)
-      );
+      console.log('newPublications-postDescription', JSON.stringify(newPublications));
       state.publications = newPublications;
     },
-    updatePostMedia(
-      state: IWidgetState,
-      action: { payload: { value: string; publicationId: string } }
-    ) {
+    updatePostMedia(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
-      const publicationIndex = state.publications.findIndex(
-        (pub) => pub.name === publicationId
-      );
+      const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
       const value = action.payload.value;
       newPublications[publicationIndex].postMedia = value;
-      console.log("newPublications-postMedia", JSON.stringify(newPublications));
+      console.log('newPublications-postMedia', JSON.stringify(newPublications));
       state.publications = newPublications;
     },
     updateInputValue(state: IWidgetState, action: { payload: boolean }) {

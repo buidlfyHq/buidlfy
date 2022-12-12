@@ -1,10 +1,10 @@
-import { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "redux/root-state.interface";
-import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
-import LensterIcon from "components/utils/assets/lenster-svg";
-import edit from "assets/icons/edit.png";
-import "styles/components.css";
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootState } from 'redux/root-state.interface';
+import { updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
+import LensterIcon from 'components/utils/assets/lenster-svg';
+import edit from 'assets/icons/edit.png';
+import 'styles/components.css';
 
 interface ILensterWidget {
   i: string;
@@ -14,22 +14,20 @@ interface ILensterWidget {
 
 const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
   const postIds = useSelector((state: IRootState) => state.widget.publications);
-  console.log(postIds, "postIds-widget");
+  console.log(postIds, 'postIds-widget');
 
-  const inputValue = useSelector(
-    (state: IRootState) => state.widget.inputValue
-  );
+  const inputValue = useSelector((state: IRootState) => state.widget.inputValue);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("postIdsss", postIds);
+    console.log('postIdsss', postIds);
 
     // dispatch(getPublication(postId));
     dispatch(
       updateWorkspaceElement({
         settingItemId: i,
-        propertyName: "postIds",
+        propertyName: 'postIds',
         propertyValue: postIds,
-      })
+      }),
     );
   }, [dispatch, i, postIds]);
   return (
@@ -37,17 +35,12 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
       {postIds && postIds.length > 0 ? (
         <>
           <div className="lenster-div">
-            {postIds.map((postId) => {
-              const updateProfilePicture =
-                "https://ipfs.io/ipfs/" + postId.profilePicture?.slice(7);
-              console.log(
-                postId.profilePicture?.includes("ipfs://"),
-                "postId.profilePicture?.slice(7)"
-              );
+            {postIds.map(postId => {
+              const updateProfilePicture = 'https://ipfs.io/ipfs/' + postId.profilePicture?.slice(7);
+              console.log(postId.profilePicture?.includes('ipfs://'), 'postId.profilePicture?.slice(7)');
 
-              console.log(updateProfilePicture, "updateprofile");
-              const updatePostMedia =
-                "https://ipfs.io/ipfs/" + postId?.postMedia?.slice(7);
+              console.log(updateProfilePicture, 'updateprofile');
+              const updatePostMedia = 'https://ipfs.io/ipfs/' + postId?.postMedia?.slice(7);
 
               return (
                 <>
@@ -57,19 +50,11 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
                         <div className="flex grow">
                           <img
                             className="mt-1 mr-2 w-[2.4rem] h-[2.4rem] rounded-[2rem]"
-                            src={`${
-                              postId.profilePicture?.includes("ipfs://")
-                                ? updateProfilePicture
-                                : postId.postMedia
-                            }`}
+                            src={`${postId.profilePicture?.includes('ipfs://') ? updateProfilePicture : postId.postMedia}`}
                           />
                           <div className="grid grow">
-                            <h2 className="font-semibold text-gray-100 hover:underline">
-                              {postId.profileName}
-                            </h2>
-                            <h2 className="text-gray-500 text-sm block">
-                              {postId.handle}
-                            </h2>
+                            <h2 className="font-semibold text-gray-100 hover:underline">{postId.profileName}</h2>
+                            <h2 className="text-gray-500 text-sm block">{postId.handle}</h2>
                           </div>
                           <a
                             href={`https://open.withlens.app/post/${postId.name}`}
@@ -82,23 +67,11 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
                         </div>
                       </div>
                       <div className="flex flex-wrap justify-start items-start flex-1 mt-2.5 w-full my-1">
-                        <p className="text-gray-300 whitespace-pre-line  ">
-                          {postId.postDescription}
-                        </p>
+                        <p className="text-gray-300 whitespace-pre-line  ">{postId.postDescription}</p>
                       </div>
-                      {postId?.postMedia ? (
-                        <img
-                          src={`${
-                            postId.postMedia?.includes("ipfs://")
-                              ? updatePostMedia
-                              : postId.postMedia
-                          }`}
-                        />
-                      ) : null}
+                      {postId?.postMedia ? <img src={`${postId.postMedia?.includes('ipfs://') ? updatePostMedia : postId.postMedia}`} /> : null}
 
-                      <h2 className="mt-2 text-sm text-gray-500 hover:underline">
-                        {postId.createdAt}
-                      </h2>
+                      <h2 className="mt-2 text-sm text-gray-500 hover:underline">{postId.createdAt}</h2>
 
                       {/* <img src={coverPicture} /> */}
                     </div>
@@ -112,7 +85,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
         <>
           <div
             className="w-full h-full py-10 default-container "
-            key={"DefaultElement"}
+            key={'DefaultElement'}
             data-grid={{
               x: 0,
               y: 0,
@@ -123,11 +96,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
               resizeHandles: [],
             }}
           >
-            <div
-              className="container-div"
-              onMouseOut={() => setDrag(true)}
-              onMouseOver={() => setDrag(false)}
-            >
+            <div className="container-div" onMouseOut={() => setDrag(true)} onMouseOver={() => setDrag(false)}>
               <span className="container-text">Add Lenster Posts</span>
             </div>
             <div className="flex absolute top-[0.5rem] right-[0.6rem]">
@@ -150,5 +119,5 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
 export default LensterWidget;
 
 function onComponentEditClick(i: string): void {
-  throw new Error("Function not implemented.");
+  throw new Error('Function not implemented.');
 }
