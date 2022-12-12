@@ -12,8 +12,6 @@ const Home: FC = () => {
   const [inputValue, setInputValue] = useState<IInput[]>([]);
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
 
-  console.log(config);
-
   return (
     <main
       className="min-h-screen"
