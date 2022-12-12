@@ -87,9 +87,7 @@ const Button: FC<ITexts> = ({
     try {
       await (window as any).ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [
-          { chainId: `0x${Number(currentNetwork.chainId).toString(16)}` },
-        ],
+        params: [{ chainId: currentNetwork.chainId }],
       });
     } catch (switchError) {
       // This error code indicates that the chain has not been added to MetaMask.
