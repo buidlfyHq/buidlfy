@@ -57,7 +57,9 @@ const OracleModal: FC<IOracleModal> = ({ isOracleOpen, setIsOracleOpen }) => {
               className="form-select cursor-pointer modal-input w-full h-[2.5rem] mt-1 block px-3 focus:outline-none focuse:border-none"
               onChange={onSelect}
             >
-              <option value="" disabled selected hidden>--</option>
+              <option value="" disabled selected hidden>
+                --
+              </option>
               <option value="getString">String</option>
               <option value="getInt">Integer</option>
               <option value="getBool">Boolean</option>
