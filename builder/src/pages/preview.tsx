@@ -18,11 +18,13 @@ const Preview = () => {
     let saveItems = localStorage.getItem('items');
     if (saveItems) {
       dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
-      dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems)?.backgroundColor));
-      dispatch(setSiteHead(JSON.parse(saveItems)?.head));
-      dispatch(updateContractAbi(JSON.stringify(JSON.parse(saveItems)?.contract?.abi)));
-      dispatch(updateContractAddress(JSON.parse(saveItems)?.contract?.address));
-      dispatch(updateContractNetwork(JSON.parse(saveItems)?.contract?.network));
+      dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor));
+      dispatch(setSiteHead(JSON.parse(saveItems).head));
+      if (JSON.parse(saveItems).contract) {
+        dispatch(updateContractAbi(JSON.stringify(JSON.parse(saveItems).contract?.abi)));
+        dispatch(updateContractAddress(JSON.parse(saveItems).contract?.address));
+        dispatch(updateContractNetwork(JSON.parse(saveItems).contract?.network));
+      }
     }
   }, []); // eslint-disable-line
 
