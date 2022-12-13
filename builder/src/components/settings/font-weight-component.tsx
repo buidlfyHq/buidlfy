@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
 import { ReplaceValue } from 'components/utils/render-setting';
 import NumberInput from 'components/utils/input/number-input';
+import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
 import 'styles/components.css';
 import 'styles/dashboard.css';
 
@@ -20,7 +20,7 @@ const FontWeightComponent: FC<IFontWeightComponent> = ({ i, fontWeight }) => {
         updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: 'fontWeight',
-          propertyValue: fontWeight + 100,
+          propertyValue: fontWeight >= 900 ? 900 : fontWeight + 100,
         }),
       );
     } else if (action === ReplaceValue.DECREMENT) {

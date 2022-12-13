@@ -54,8 +54,8 @@ const PublishConfirmModal: FC = () => {
     workspaceElements.forEach(workspaceElement => {
       const elementFontFamily = workspaceElement?.style?.fontFamily;
       const font = fontOptions.find(fontOption => fontOption.value === elementFontFamily);
-      if (!fontsList.includes(font.label)) {
-        fontsList.push(font.label);
+      if (!fontsList.includes(font?.label)) {
+        fontsList.push(font?.label);
       }
     });
     localStorage.removeItem('deployment');
