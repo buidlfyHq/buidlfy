@@ -1,10 +1,10 @@
-import React, { FC, useState } from 'react';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { ReplaceValue } from 'components/utils/render-setting';
-import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
 import { fontOptions } from 'components/utils/font-option';
 import { fontStyles } from 'components/utils/font-family-styles';
+import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
 import 'styles/components.css';
 import 'styles/dashboard.css';
 
