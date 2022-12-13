@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import "styles/components.css";
+import React, { FC } from 'react';
+import 'styles/components.css';
 
 const Divider: FC = () => (
   <div id="Divider" className="relative flex items-center p-3">

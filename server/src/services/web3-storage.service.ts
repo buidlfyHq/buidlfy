@@ -17,7 +17,8 @@ class Web3StorageService {
       Logger.info(`Uploaded file cid: ${cid}`);
       return `https://${cid}.ipfs.w3s.link/`;
     } catch (error) {
-      Logger.error(`Error found in ${__filename} - deployApp - ${error.message}`);
+      Logger.error(`Error found in ${__filename} - uploadFileToWeb3Storage - `);
+      Logger.error(error);
       throw error;
     }
   }

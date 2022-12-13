@@ -1,5 +1,5 @@
-import { FC } from "react";
-import Lottie from "react-lottie";
+import { FC } from 'react';
+import Lottie from 'react-lottie';
 
 interface ILottieComponent {
   lottie: any;
@@ -8,18 +8,13 @@ interface ILottieComponent {
   className?: string;
 }
 
-const LottieComponent: FC<ILottieComponent> = ({
-  lottie,
-  width,
-  height,
-  className,
-}) => {
+const LottieComponent: FC<ILottieComponent> = ({ lottie, width, height, className }) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
     animationData: lottie,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
 

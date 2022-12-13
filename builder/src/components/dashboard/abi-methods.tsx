@@ -1,59 +1,32 @@
-import React, { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AiOutlineLeft } from "react-icons/ai";
-import { updateWorkspaceElementsArray } from "redux/workspace/workspace.reducers";
-import { IRootState } from "redux/root-state.interface";
-import {
-  IShowComponent,
-  IWorkspaceElement,
-} from "redux/workspace/workspace.interfaces";
-import { IContractDetails } from "redux/contract/contract.interfaces";
-import {
-  updateContractAbi,
-  updateContractAddress,
-  updateContractNetwork,
-} from "redux/contract/contract.reducers";
+import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AiOutlineLeft } from 'react-icons/ai';
+import WarningText from 'components/utils/setting-warning';
+import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
+import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
+import { IRootState } from 'redux/root-state.interface';
+import { IShowComponent, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import { IAbi, IContractDetails } from 'redux/contract/contract.interfaces';
 
 interface IAbiMethods {
   setShowComponent: (showComponent: IShowComponent) => void;
   selectedElement: IWorkspaceElement;
-  setMethodOpen: (methodOpen: boolean) => void;
   setIsOpen: (isOpen: boolean) => void;
 }
 
-const AbiMethods: FC<IAbiMethods> = ({
-  setShowComponent,
-  selectedElement,
-  setMethodOpen,
-  setIsOpen,
-}) => {
+const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsOpen }) => {
   const dispatch = useDispatch();
-  const workspaceElements: IWorkspaceElement[] = useSelector(
-    (state: IRootState) => state.workspace.workspaceElements
-  );
-  const contractDetails: IContractDetails = useSelector(
-    (state: IRootState) => state.contract.contractDetails
-  );
+  const workspaceElements: IWorkspaceElement[] = useSelector((state: IRootState) => state.workspace.workspaceElements);
+  const contractDetails: IContractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
 
-  const [abiJson, setAbiJson] = useState<
-    {
-      inputs: { internalType: string; name: string; type: string }[];
-      name: string;
-      outputs: { internalType: string; name: string; type: string }[];
-      stateMutability: string;
-      type: string;
-    }[]
-  >([]);
+  const [abiJson, setAbiJson] = useState<IAbi[]>([]);
 
   useEffect(() => {
     if (contractDetails.abi) {
       const parsedAbi = JSON.parse(contractDetails.abi);
       try {
         setAbiJson(parsedAbi);
-        let selectedElementIndex = parsedAbi.findIndex(
-          (method: { name: string }) =>
-            method.name === selectedElement.contract.methodName
-        );
+        let selectedElementIndex = parsedAbi.findIndex((method: { name: string }) => method.name === selectedElement.contract.methodName);
 
         if (selectedElementIndex !== -1) {
           setShowComponent({
@@ -64,7 +37,7 @@ const AbiMethods: FC<IAbiMethods> = ({
           setShowComponent(null);
         }
       } catch (error) {
-        console.log("error");
+        console.error('error');
       }
     }
   }, [contractDetails.abi, selectedElement]); // eslint-disable-line
@@ -88,16 +61,12 @@ const AbiMethods: FC<IAbiMethods> = ({
       };
 
       // search id in items
-      const elementsIndex = workspaceElements.findIndex(
-        (item) => item.i === selectedElement.i
-      );
+      const elementsIndex = workspaceElements.findIndex(item => item.i === selectedElement.i);
 
       if (elementsIndex === -1) {
         // search id in children
-        const updatedItems = workspaceElements.map((item) => {
-          const childIndex = item.children?.findIndex(
-            (child) => child.i === selectedElement.i
-          );
+        const updatedItems = workspaceElements.map(item => {
+          const childIndex = item.children?.findIndex(child => child.i === selectedElement.i);
           let newArray = [...item.children];
           newArray[childIndex] = updatedItem;
           return {
@@ -117,7 +86,6 @@ const AbiMethods: FC<IAbiMethods> = ({
   };
 
   const handleBack = () => {
-    setMethodOpen(true);
     setIsOpen(false);
     dispatch(updateContractAbi(null));
     dispatch(updateContractAddress(null));
@@ -139,31 +107,24 @@ const AbiMethods: FC<IAbiMethods> = ({
             <div className="setting-text ml-[0.25rem] px-1 my-1 text-xl not-italic font-normal text-left text-gray-500 font-regular">
               Select Method
             </div>
+            <div className="mt-2 mb-4">
+              <WarningText text="Methods with inputs & outputs of types other than string, bool, address, int & uint are not supported." />
+            </div>
             <div className="px-2">
               <div className="mb-3">
                 <select
                   id="select"
                   className="form-select cursor-pointer contract-input mt-2 block w-[13.5rem] px-3 py-1.5 focus:outline-none focuse:border-none"
                   aria-label="Default select example"
-                  onChange={(e) => onSelect(e)}
+                  onChange={e => onSelect(e)}
                 >
-                  <option
-                    value=""
-                    selected={!selectedElement.contract.methodName}
-                    hidden
-                  >
+                  <option value="" selected={!selectedElement.contract.methodName} hidden>
                     Select a Method
                   </option>
                   {contractDetails.abi &&
                     abiJson.map((method: { name: string }, i: number) => (
                       <>
-                        <option
-                          value={i}
-                          key={i}
-                          selected={
-                            selectedElement.contract.methodName === method.name
-                          }
-                        >
+                        <option value={i} key={i} selected={selectedElement.contract.methodName === method.name}>
                           {method.name}
                         </option>
                       </>

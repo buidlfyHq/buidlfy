@@ -1,24 +1,12 @@
-import { call, put, all, takeLatest, select } from "redux-saga/effects";
-import { fetchWalletBalance } from "./web3.actions";
-import {
-  fetchOwnedListedTemplates,
-  fetchOwnedReviewTemplates,
-  fetchOwnedTemplates,
-} from "redux/minted/minted.actions";
-import { addNotification } from "redux/notification/notification.reducers";
-import {
-  toggleConnectWalletLoading,
-  walletBalanceFetched,
-  walletConnected,
-} from "./web3.reducers";
-import {
-  changeNetworkService,
-  connectWalletService,
-  getTokenBalanceService,
-} from "./web3.services";
-import web3ActionTypes from "./web3.types";
-import { IRootState } from "redux/root-state.interface";
-import { NotificationType } from "redux/notification/notification.interfaces";
+import { call, put, all, takeLatest, select } from 'redux-saga/effects';
+import { fetchWalletBalance } from './web3.actions';
+import { fetchOwnedListedTemplates, fetchOwnedReviewTemplates, fetchOwnedTemplates } from 'redux/minted/minted.actions';
+import { addNotification } from 'redux/notification/notification.reducers';
+import { toggleConnectWalletLoading, walletBalanceFetched, walletConnected } from './web3.reducers';
+import { changeNetworkService, connectWalletService, getTokenBalanceService } from './web3.services';
+import web3ActionTypes from './web3.types';
+import { IRootState } from 'redux/root-state.interface';
+import { NotificationType } from 'redux/notification/notification.interfaces';
 
 function* connectWalletGen(): any {
   const walletRes = yield call(connectWalletService);
@@ -38,7 +26,7 @@ function* connectWalletGen(): any {
           message: networkRes.errorMessage,
           timestamp: new Date(),
           type: NotificationType.Error,
-        })
+        }),
       );
     }
   } else {
@@ -48,15 +36,13 @@ function* connectWalletGen(): any {
         message: walletRes.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
-      })
+      }),
     );
   }
 }
 
 function* fetchWalletBalanceGen(): any {
-  const currentAccount = yield select(
-    (state: IRootState) => state.web3.currentAccount
-  );
+  const currentAccount = yield select((state: IRootState) => state.web3.currentAccount);
   const balanceRes = yield call(getTokenBalanceService, currentAccount);
   if (!balanceRes.error) {
     yield put(walletBalanceFetched(balanceRes.balance));
@@ -66,7 +52,7 @@ function* fetchWalletBalanceGen(): any {
         message: balanceRes.errorMessage,
         timestamp: new Date(),
         type: NotificationType.Error,
-      })
+      }),
     );
   }
 }
