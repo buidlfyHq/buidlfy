@@ -181,7 +181,10 @@ const RenderItem: FC<IRenderItem> = ({
               collection={item.collection}
               title={item.title}
               price={item.price}
+              href={item.href}
               highestBid={item.highestBid}
+              backgroundColor={item.style.backgroundColor}
+              backgroundSize={item.style.backgroundSize}
             />
           );
     default:

@@ -3,6 +3,7 @@ import {
   fetchSelectedElement,
   fetchUploadedImageData,
   mapElementsToWorkspace,
+  mapElementStylesToNFTLayoutWorkspace,
   mapElementStylesToWorkspace,
   mapElementSubStyleToWorkspace,
   mapImageElementStylesToWorkspace,
@@ -182,6 +183,23 @@ const workspaceSlice = createSlice({
         uploadedImagesData: newUploadedImagesData,
       };
     },
+
+    updateWorkspaceNFTLayoutElements(state: IWorkspaceState, action: {payload}) {
+      if (!action.payload.settingItemId) return;
+      const updatedElements = state.workspaceElements.map(
+        (element: IWorkspaceElement) =>
+          mapElementStylesToNFTLayoutWorkspace(element, state.workspaceElements, action.payload)
+      );
+      const updatedSelectedElement = fetchSelectedElement(
+        updatedElements,
+        action.payload.settingItemId
+      );
+      return {
+        ...state,
+        workspaceElements: updatedElements,
+        selectedElement: updatedSelectedElement,
+      };
+    }
   },
 });
 
@@ -196,5 +214,6 @@ export const {
   setSelectedElement,
   saveContractConfig,
   updateUploadedImageData,
+  updateWorkspaceNFTLayoutElements
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;

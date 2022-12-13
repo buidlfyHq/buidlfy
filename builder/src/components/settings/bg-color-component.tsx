@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   updateWorkspaceBackgroundColor,
   updateWorkspaceElementStyle,
+  updateWorkspaceNFTLayoutElements,
 } from "redux/workspace/workspace.reducers";
 import ColorPickerDropdown from "components/utils/color-picker";
 import "styles/components.css";
 import "styles/dashboard.css";
-import { IUploadedImageData } from "redux/workspace/workspace.interfaces";
+import { IUploadedImageData, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import { IRootState } from "redux/root-state.interface";
 import WarningText from "components/utils/setting-warning";
 
@@ -25,7 +26,9 @@ const BgColorComponent: FC<IBgColorComponent> = ({
   workspaceBackgroundColor,
 }) => {
   const dispatch = useDispatch();
-
+  const selectedElement: IWorkspaceElement = useSelector(
+    (state: IRootState) => state.workspace.selectedElement
+  );
   const imageData: IUploadedImageData = useSelector((state: IRootState) =>
     state.workspace.uploadedImagesData.find(
       (image: IUploadedImageData) => image.settingItemId === i
@@ -36,18 +39,25 @@ const BgColorComponent: FC<IBgColorComponent> = ({
     : elementBackgroundColor;
 
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
-
   const handleChange = (e: string) => {
     if (workspaceBackgroundColor) {
       dispatch(updateWorkspaceBackgroundColor(e));
     } else {
+      selectedElement.name === 'NFT Card' || selectedElement.name === 'NFT Layout' ? 
+      dispatch(
+        updateWorkspaceNFTLayoutElements({
+          settingItemId: i,
+          propertyName: "backgroundColor",
+          propertyValue: e,
+        })
+      ) : 
       dispatch(
         updateWorkspaceElementStyle({
           settingItemId: i,
           propertyName: "backgroundColor",
           propertyValue: e,
         })
-      );
+      )
     }
   };
 

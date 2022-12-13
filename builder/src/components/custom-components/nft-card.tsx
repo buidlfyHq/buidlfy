@@ -36,7 +36,7 @@ const NftCard: FC<INftCard> = ({
       id="nft-card"
     >
       <section
-        className="w-full h-full p-2 rounded-lg bg-stone-700"
+        className="w-full h-full p-3 rounded-lg bg-stone-700"
         style={{
           backgroundColor: backgroundColor,
           boxShadow: "0px 2px 7px rgba(0, 0, 0, 0.5)",
@@ -55,13 +55,13 @@ const NftCard: FC<INftCard> = ({
         /> */}
         <div
         id={i}
-        className="flex w-full h-[65%] rounded-lg h-full bg-white/100"
+        className="flex w-full h-[80%] rounded-lg h-full bg-white/100"
         style={{
           backgroundImage: `url(${
             imageData?.uploadedImageData ? imageData.uploadedImageData : DefaultImage
           })`,
           backgroundRepeat: "no-repeat",
-          backgroundPosition: justifyContent,
+          backgroundPosition: 'center',
           backgroundSize: selectedElement?.style?.backgroundSize
         }}
         />
@@ -74,7 +74,7 @@ const NftCard: FC<INftCard> = ({
         >
           Your NFT will appear here
         </div> */}
-        <div className="text-center p-2 h-[20%]" id="nft-card-details">
+        <div className="flex flex-col justify-center items-start p-2 h-[20%]" id="nft-card-details">
           <div className="text-sm text-white/80" id="nft-card-collection">
             Collection
           </div>
@@ -82,7 +82,7 @@ const NftCard: FC<INftCard> = ({
             Name
           </div>
         </div>
-        <div
+        {/* <div
           className="flex justify-around items-center text-center p-2 rounded-lg h-[15%] bg-white/10"
           style={{
             // backgroundColor: `rgba(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b}, 0)`,
@@ -106,7 +106,7 @@ const NftCard: FC<INftCard> = ({
               -- : --
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
     </section>
   );

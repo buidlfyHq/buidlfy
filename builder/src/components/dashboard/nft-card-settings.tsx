@@ -3,13 +3,12 @@ import { useSelector } from "react-redux";
 import BgColorComponent from "components/settings/bg-color-component";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
+import ColorComponent from "components/settings/color-component";
 
 const NftCardSettings: FC = () => {
   const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
-  console.log(selectedElement)
-
 
   return (
     <>
@@ -23,10 +22,11 @@ const NftCardSettings: FC = () => {
         i={selectedElement.i}
         elementBackgroundColor={selectedElement.style.backgroundColor}
       />
-      {/* <BackgroundSizeComponent
+
+      <ColorComponent
         i={selectedElement.i}
-        backgroundSize={selectedElement.style?.backgroundSize}
-      /> */}
+        color={selectedElement.style.color}
+      />
     </>
   );
 };

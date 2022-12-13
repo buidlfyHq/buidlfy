@@ -1,19 +1,35 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
+import { useState } from 'react'
+import { Listbox } from '@headlessui/react'
 import { useDispatch, useSelector } from "react-redux";
 import BgColorComponent from "components/settings/bg-color-component";
-import { updateWorkspaceElement } from "redux/workspace/workspace.reducers";
+import { setSelectedElement, updateWorkspaceElement } from "redux/workspace/workspace.reducers";
 import { IRootState } from "redux/root-state.interface";
 import { IWorkspaceElement } from "redux/workspace/workspace.interfaces";
-import SizeComponent from "components/settings/image-size-component";
 import BackgroundSizeComponent from "components/settings/background-size-component";
+import MarginComponent from "components/settings/margin-component";
+
+// to be used in future for various nft fetching methods
+// const criterias = [
+//   { id: 1, name: 'Connect Wallet', unavailable: true },
+//   { id: 2, name: 'Wallet Address', unavailable: false },
+//   { id: 3, name: 'Collection Slug', unavailable: false }
+// ]
+
+const people = [
+  { id: 1, name: 'Opensea', label: 'Collection Name : ', placeholder: 'astarprince', unavailable: true },
+  { id: 2, name: 'Rarible', label: 'Collection Address :', placeholder: '0x3....da91', unavailable: false },
+]
 
 const NftLayoutSettings: FC = () => {
   const dispatch = useDispatch();
   const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
+  const [selectedPerson, setSelectedPerson] = useState(people[0])
 
   const handleClick = (propertyName: string, propertyValue: string) => {
+    // console.log('handleCLick')
     dispatch(
       updateWorkspaceElement({
         settingItemId: selectedElement.i,
@@ -22,8 +38,6 @@ const NftLayoutSettings: FC = () => {
       })
     );
   };
-
-  console.log(selectedElement)
 
   return (
     <>
@@ -37,15 +51,45 @@ const NftLayoutSettings: FC = () => {
         i={selectedElement.i}
         elementBackgroundColor={selectedElement.style.backgroundColor}
       />
+
       <BackgroundSizeComponent
         i={selectedElement.i}
         backgroundSize={selectedElement.style?.backgroundSize}
       />
+
+      <MarginComponent
+        i={selectedElement.i}
+        margin={selectedElement.style.margin}
+      />
+
       <section className="">
-        <span className="margin-text grow text-left px-3 mt-[0.5rem] mb-0">
-          Fetch NFTs
-        </span>
-        <div className="flex py-4">
+        <div className=" text-left px-3 mt-[0.5rem] mb-0">
+          Fetch NFTs using:
+        </div>
+        
+        <Listbox value={selectedPerson} onChange={setSelectedPerson}>
+          <Listbox.Button className='relative px-3 py-1 mb-2 mx-2 w-[13.5rem] rounded-[6px] border'>{selectedPerson.name}</Listbox.Button>
+          <Listbox.Options onClick={(e) => handleClick("source", e.target.outerText)} 
+            className='absolute mt-3 bg-white border my-2 mx-2 w-[13.5rem] rounded-[6px] shadow-lg'
+          >
+            {people.map((person) => (
+              <Listbox.Option key={person.id} value={person} as={Fragment}>
+                {({ active }) => (
+                  <li
+                    className={`${
+                      active ? 'bg-blue-500 text-white py-1 cursor-pointer px-3 rounded-md' : 'bg-white text-black py-1 cursor-pointer px-3 rounded-md'
+                    }`}
+                  >
+                    {person.name}
+                  </li>
+                )}
+              </Listbox.Option>
+            ))}
+          </Listbox.Options>
+        </Listbox>
+   
+        {/* code will be used later */}
+        {/* <div className="flex py-4">
           <span className="margin-text grow text-left px-3 mt-[0.5rem] mb-0">
             Connect Wallet
           </span>
@@ -82,28 +126,22 @@ const NftLayoutSettings: FC = () => {
             }
             onChange={(e) => handleClick("wallet", e.target.value)}
           />
-        </div>
+        </div> */}
 
-        <div className="flex items-center mb-2 mx-2 w-[13.5rem] text-black rounded-[6px]">
+        <div className="flex flex-col items-start mb-2 mx-2 w-[13.5rem] text-black rounded-[6px]">
+          <div>{selectedPerson.label}</div>
           <input
             className={`changeText pl-[1rem] py-[0.4rem] rounded-[6px]`}
             type="text"
             name="collection-slug"
-            placeholder="Collection Slug"
+            placeholder={selectedPerson.placeholder}
             value={selectedElement?.slug}
             onChange={(e) => handleClick("slug", e.target.value)}
           />
         </div>
 
-        {/* <button
-          onClick={handleFetch}
-         className="px-4 py-2 w-full my-2 text-white bg-black/70 rounded-[4px]"
-        >
-          Fetch
-        </button> */}
-
         <div className="flex flex-col items-start my-2 mx-2 w-[13.5rem] text-black rounded-[6px]">
-          <div>Limit</div>
+          <div>Limit :</div>
           <input
             className={`changeText pl-[1rem] py-[0.4rem] rounded-[6px]`}
             type="number"
@@ -114,7 +152,7 @@ const NftLayoutSettings: FC = () => {
           />
         </div>
         <div className="flex flex-col items-start my-2 mx-2 w-[13.5rem] text-black rounded-[6px]">
-          <div>Cards per row</div>
+          <div>Cards per row :</div>
           <input
             className={`changeText pl-[1rem] py-[0.4rem] rounded-[6px]`}
             type="nummber"

@@ -42,13 +42,51 @@ export const mapElementsToWorkspace = (
   return element;
 };
 
+export const mapElementStylesToNFTLayoutWorkspace = (
+  element: IWorkspaceElement,
+  workspaceElements: IWorkspaceElement[],
+  payload: IElementDetail
+) => {
+  const { settingItemId, propertyName, propertyValue } = payload;
+  let selectedChild = findSelected(element, settingItemId);
+  let nftlayout = workspaceElements.filter((item: IWorkspaceElement) => item.name === "NFT Layout")
+  if(element.i === settingItemId){
+    return{
+      ...element,
+      style: {
+        ...element["style"],
+        [propertyName]: propertyValue,
+      },
+    }
+  } else if(selectedChild?.i === settingItemId){
+    let newNFTLayoutArr = nftlayout.map((item: IWorkspaceElement) => {
+      return {
+        ...item,
+        children: item.children.map((child: IWorkspaceElement) => {
+          let newChild = {
+            ...child,
+            style: {
+              ...child["style"],
+              [propertyName]: propertyValue,
+            },
+          }
+          return newChild
+        })
+      }
+    })
+    for(let i=0; i<newNFTLayoutArr.length; i++){
+      return newNFTLayoutArr[i]
+    }
+  }
+  return element;
+};
+
 export const mapElementStylesToWorkspace = (
   element: IWorkspaceElement,
   payload: IElementDetail
 ) => {
   const { settingItemId, propertyName, propertyValue } = payload;
   let selectedChild = findSelected(element, settingItemId);
-
   if (element.i === settingItemId) {
     return {
       ...element,
@@ -121,7 +159,33 @@ export const mapImageElementStylesToWorkspace = (
     payload;
   let selectedChild = findSelected(element, settingItemId);
 
+  console.log(element.name, element.i, settingItemId)
+
+  // to change children as well as parent components image size
+  if(element.name === 'NFT Layout' && element.i === settingItemId) {
+    console.log('image nfts?')
+    let newNFTLayoutChildrenArr = element.children.map((childAsNFTCard : IWorkspaceElement) => {
+      let newChildAsNFTCard = {
+        ...childAsNFTCard,
+        style: {
+          ...childAsNFTCard["style"],
+        [propertyName]: propertyValue,
+        }
+      }
+      return newChildAsNFTCard
+    })
+    return {
+      ...element,
+      style: {
+        ...element["style"],
+        [propertyName]: propertyValue,
+      },
+      children: newNFTLayoutChildrenArr
+    }
+  }
+
   if (element.i === settingItemId) {
+    console.log('okay!!')
     return {
       ...element,
       style: {
@@ -131,6 +195,7 @@ export const mapImageElementStylesToWorkspace = (
       },
     };
   } else if (selectedChild?.i === settingItemId) {
+    console.log('helu')
     let child = {
       ...selectedChild,
       style: {

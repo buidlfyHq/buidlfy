@@ -33,7 +33,7 @@ const BackgroundSizeComponent: FC<IBackgroundSizeComponent> = ({
         className="flex pt-4 mb-0"
         style={{ width: "-webkit-fill-available" }}
       >
-        <span className="margin-text text-left px-3">
+        <span className="px-3 text-left margin-text">
           Background Size
           <div className="flex px-3 mt-3">
             <span
