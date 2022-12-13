@@ -107,7 +107,7 @@ const MyTemplates: FC = () => {
               <BiChevronDown className="ml-2 text-[18px]" />
             </div>
           </div> */}
-          <div className="grid gap-10 grid-cols-myTemplateCustom px-40 pb-12 pt-7 h-[calc(100vh-14.5rem)]">
+          <div className="grid gap-10 grid-cols-myTemplateCustom px-40 pb-12 pt-7 h-full">
             <RenderTemplateList tab={tab} />
           </div>
         </section>
