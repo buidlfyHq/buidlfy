@@ -1,8 +1,6 @@
-import { FC, useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { IRootState } from "redux/root-state.interface";
-// import { getPublication } from "redux/widget/widget.actions";
+import { FC } from "react";
 import LensterIcon from "utils/assets/lenster-svg";
+import lenster from "assets/lenster-default.svg";
 import "styles/components.css";
 
 interface ILensterWidget {
@@ -12,24 +10,11 @@ interface ILensterWidget {
 }
 
 const LensterWidget: FC<ILensterWidget> = ({ postIds }) => {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getPublication({ publicationId: "0x013cee-0x0b41" }));
-  // }, []);
-  // const profileId = useSelector((state: IRootState) => state.widget.profileId);
-  // const postId = useSelector((state: IRootState) => state.widget.publicationId);
-  // const ownedBy = useSelector((state: IRootState) => state.widget.ownedBy);
-  // console.log(postId, "postId");
-  // console.log(profileId, "profileid");
-  // console.log(ownedBy, "ownedby");
-  console.log(postIds, "postIds");
-
   return (
     <div className="lenster-div ml-[1.7rem]">
       {postIds.map((postId) => {
         const updateProfilePicture =
           "https://ipfs.io/ipfs/" + postId.profilePicture?.slice(7);
-        console.log(updateProfilePicture, "updateprofile");
         const updatePostMedia =
           "https://ipfs.io/ipfs/" + postId?.postMedia?.slice(7);
         return (
@@ -41,9 +26,13 @@ const LensterWidget: FC<ILensterWidget> = ({ postIds }) => {
                     <img
                       className="mt-1 mr-2 w-[2.4rem] h-[2.4rem] rounded-[2rem]"
                       src={`${
-                        postId.profilePicture?.includes("ipfs://")
-                          ? updateProfilePicture
-                          : postId.postMedia
+                        postId.profilePicture
+                          ? `${
+                              postId.profilePicture?.includes("ipfs://")
+                                ? updateProfilePicture
+                                : postId.postMedia
+                            }`
+                          : lenster
                       }`}
                     />
                     <div className="grid grow">

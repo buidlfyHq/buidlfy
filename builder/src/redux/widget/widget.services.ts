@@ -6,8 +6,6 @@ export const getPublicationService = async (publicationId: string) => {
   try {
     const res = await request(config.widget.LENS_GRAPHQL_URL, getPublicationsQuery, { publicationId });
     const publication = res?.publication;
-    console.log(res, 'res');
-
     return { error: false, errorMessage: '', publication };
   } catch (error) {
     // eslint-disable-next-line no-console
