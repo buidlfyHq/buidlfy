@@ -48,7 +48,7 @@ export class DeploymentResponseDto implements IDeploymentResponse {
     this.topic = spheronResponse.topic;
     this.status = DeploymentStatus.QUEUED;
     this.createdAt = Date.now().toString();
-    this.protocol = spheronResponse.body.protocol;
+    this.protocol = spheronResponse.deployment.protocol;
     this.error = !spheronResponse.success;
     this.message = spheronResponse.message;
   }

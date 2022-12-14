@@ -15,7 +15,7 @@ export interface ISpheronDeploymentResponse {
   topic: string;
   deploymentId: string;
   projectId: string;
-  body: {
+  deployment: {
     deploymentId: string;
     githubUrl: string;
     folderName: string;
