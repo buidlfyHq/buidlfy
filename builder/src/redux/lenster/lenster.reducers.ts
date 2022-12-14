@@ -1,29 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IPublications, IWidgetState } from './widget.interfaces';
+import { IPublications, ILensterState } from './lenster.interfaces';
 
-const initialState: IWidgetState = {
+const initialState: ILensterState = {
   publications: [],
   inputValue: false,
 };
 
-const widgetSlice = createSlice({
-  name: 'widget',
+const lensterSlice = createSlice({
+  name: 'lenster',
   initialState,
   reducers: {
-    updatePublications(state: IWidgetState, action: { payload: IPublications }) {
+    updatePublications(state: ILensterState, action: { payload: IPublications }) {
       return {
         ...state,
         publications: [...state.publications, action.payload],
       };
     },
-    removePublication(state: IWidgetState, action: { payload: { publicationId: string } }) {
+    removePublication(state: ILensterState, action: { payload: { publicationId: string } }) {
       const publicationId = action.payload.publicationId;
       const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
       newPublications.splice(publicationIndex, 1);
       state.publications = newPublications;
     },
-    updateProfileId(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
+    updateProfileId(state: ILensterState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
       const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
@@ -31,7 +31,7 @@ const widgetSlice = createSlice({
       newPublications[publicationIndex].profileId = value;
       state.publications = newPublications;
     },
-    updateOwnedBy(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
+    updateOwnedBy(state: ILensterState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
       const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
@@ -39,7 +39,7 @@ const widgetSlice = createSlice({
       newPublications[publicationIndex].ownedBy = value;
       state.publications = newPublications;
     },
-    updateProfilePicture(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
+    updateProfilePicture(state: ILensterState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
       const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
@@ -47,7 +47,7 @@ const widgetSlice = createSlice({
       newPublications[publicationIndex].profilePicture = value;
       state.publications = newPublications;
     },
-    updateCoverPicture(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
+    updateCoverPicture(state: ILensterState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
       const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
@@ -55,7 +55,7 @@ const widgetSlice = createSlice({
       newPublications[publicationIndex].coverPicture = value;
       state.publications = newPublications;
     },
-    updateHandle(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
+    updateHandle(state: ILensterState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
       const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
@@ -63,7 +63,7 @@ const widgetSlice = createSlice({
       newPublications[publicationIndex].handle = value;
       state.publications = newPublications;
     },
-    updateName(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
+    updateName(state: ILensterState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
       const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
@@ -71,7 +71,7 @@ const widgetSlice = createSlice({
       newPublications[publicationIndex].profileName = value;
       state.publications = newPublications;
     },
-    updateCreatedAt(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
+    updateCreatedAt(state: ILensterState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
       const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
@@ -79,7 +79,7 @@ const widgetSlice = createSlice({
       newPublications[publicationIndex].createdAt = value;
       state.publications = newPublications;
     },
-    updatePostDescription(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
+    updatePostDescription(state: ILensterState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
       const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
@@ -87,7 +87,7 @@ const widgetSlice = createSlice({
       newPublications[publicationIndex].postDescription = value;
       state.publications = newPublications;
     },
-    updatePostMedia(state: IWidgetState, action: { payload: { value: string; publicationId: string } }) {
+    updatePostMedia(state: ILensterState, action: { payload: { value: string; publicationId: string } }) {
       const publicationId = action.payload.publicationId;
       const publicationIndex = state.publications.findIndex(pub => pub.name === publicationId);
       const newPublications = [...state.publications];
@@ -95,7 +95,7 @@ const widgetSlice = createSlice({
       newPublications[publicationIndex].postMedia = value;
       state.publications = newPublications;
     },
-    updateInputValue(state: IWidgetState, action: { payload: boolean }) {
+    updateInputValue(state: ILensterState, action: { payload: boolean }) {
       return {
         ...state,
         inputValue: action.payload,
@@ -117,5 +117,5 @@ export const {
   updatePostDescription,
   updatePostMedia,
   updateInputValue,
-} = widgetSlice.actions;
-export default widgetSlice.reducer;
+} = lensterSlice.actions;
+export default lensterSlice.reducer;

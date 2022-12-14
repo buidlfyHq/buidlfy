@@ -10,9 +10,9 @@ import {
   updateProfileId,
   updateProfilePicture,
   updatePublications,
-} from './widget.reducers';
-import { getPublicationService } from './widget.services';
-import widgetActionTypes from './widget.types';
+} from './lenster.reducers';
+import { getPublicationService } from './lenster.services';
+import lensterActionTypes from './lenster.types';
 
 function* getPublication({ payload }) {
   const publication = payload;
@@ -92,9 +92,9 @@ function* getPublication({ payload }) {
 }
 
 function* fetchPublicationSaga() {
-  yield takeEvery(widgetActionTypes.FETCH_PUBLICATION, getPublication);
+  yield takeEvery(lensterActionTypes.FETCH_PUBLICATION, getPublication);
 }
 
-export function* widgetSagas() {
+export function* lensterSagas() {
   yield all([call(fetchPublicationSaga)]);
 }

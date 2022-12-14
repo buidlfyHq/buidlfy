@@ -6,7 +6,7 @@ import { ITemplateState } from './template/template.interfaces';
 import { IMintedState } from './minted/minted.interfaces';
 import { IPublishState } from './publish/publish.interfaces';
 import { IUploadState } from './upload/upload.interfaces';
-import { IWidgetState } from './widget/widget.interfaces';
+import { ILensterState } from './lenster/lenster.interfaces';
 import { IOracleState } from './oracle/oracle.interfaces';
 
 export interface IRootState {
@@ -18,6 +18,6 @@ export interface IRootState {
   minted: IMintedState;
   publish: IPublishState;
   upload: IUploadState;
-  widget: IWidgetState;
+  lenster: ILensterState;
   oracle: IOracleState;
 }

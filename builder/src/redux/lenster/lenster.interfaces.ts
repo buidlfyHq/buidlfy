@@ -1,8 +1,4 @@
-import { BigNumber } from 'ethers';
-import { IContractDetails } from 'redux/contract/contract.interfaces';
-import { IHead, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
-
-export interface IWidgetState {
+export interface ILensterState {
   publications: Array<IPublications>;
   inputValue?: boolean;
 }

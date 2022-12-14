@@ -27,7 +27,7 @@ export interface IConfig {
       blockExplorerUrls: string[];
     };
   };
-  widget: {
+  lenster: {
     LENS_GRAPHQL_URL: string;
   };
 }
@@ -64,7 +64,7 @@ const development: IConfig = {
       blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
     },
   },
-  widget: {
+  lenster: {
     LENS_GRAPHQL_URL: 'https://api.lens.dev',
   },
 };
@@ -99,7 +99,7 @@ const production: IConfig = {
       blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
     },
   },
-  widget: {
+  lenster: {
     LENS_GRAPHQL_URL: 'https://api.lens.dev',
   },
 };
@@ -134,7 +134,7 @@ const local: IConfig = {
       blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
     },
   },
-  widget: {
+  lenster: {
     LENS_GRAPHQL_URL: 'https://api.lens.dev',
   },
 };

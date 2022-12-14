@@ -14,8 +14,8 @@ interface ILensterWidget {
 }
 
 const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
-  const postIds = useSelector((state: IRootState) => state.widget.publications);
-  const inputValue = useSelector((state: IRootState) => state.widget.inputValue);
+  const postIds = useSelector((state: IRootState) => state.lenster.publications);
+  const inputValue = useSelector((state: IRootState) => state.lenster.inputValue);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(

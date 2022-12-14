@@ -1,10 +1,10 @@
 import request from 'graphql-request';
 import config from 'config';
-import { getPublicationsQuery } from './widget.utils';
+import { getPublicationsQuery } from './lenster.utils';
 
 export const getPublicationService = async (publicationId: string) => {
   try {
-    const res = await request(config.widget.LENS_GRAPHQL_URL, getPublicationsQuery, { publicationId });
+    const res = await request(config.lenster.LENS_GRAPHQL_URL, getPublicationsQuery, { publicationId });
     const publication = res?.publication;
     return { error: false, errorMessage: '', publication };
   } catch (error) {
