@@ -307,7 +307,6 @@ export const components = [
   },
   {
     name: 'Lenster Card',
-    nft: true,
     h: 2,
     minH: 1,
     postIds: [],
