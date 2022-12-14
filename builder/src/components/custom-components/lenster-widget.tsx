@@ -66,10 +66,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
                         <p className="text-gray-300 whitespace-pre-line  ">{postId.postDescription}</p>
                       </div>
                       {postId?.postMedia ? <img src={`${postId.postMedia?.includes('ipfs://') ? updatePostMedia : postId.postMedia}`} /> : null}
-
                       <h2 className="mt-2 text-sm text-gray-500 hover:underline">{postId.createdAt}</h2>
-
-                      {/* <img src={coverPicture} /> */}
                     </div>
                   ) : null}
                 </>

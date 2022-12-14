@@ -71,8 +71,6 @@ const LensterWidget: FC<ILensterWidget> = ({ postIds }) => {
                 <h2 className="mt-2 text-sm text-gray-500 hover:underline">
                   {postId.createdAt}
                 </h2>
-
-                {/* <img src={coverPicture} /> */}
               </div>
             ) : null}
           </>

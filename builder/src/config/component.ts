@@ -315,31 +315,6 @@ export const components = [
       ...defaultDeleteStyles,
     },
   },
-  {
-    name: 'Lenster Layout',
-    h: 8,
-    minH: 1,
-    style: {
-      ...defaultPaddingStyles,
-      ...defaultMarginStyles,
-      ...defaultDeleteStyles,
-      ...defaultColorStyles,
-      ...defaultBorderStyles,
-    },
-    children: [
-      {
-        name: 'Lenster Card',
-        h: 8,
-        minH: 1,
-        publicationId: '0x01-0x01',
-        profileId: '0x01',
-        ownedBy: '0xD020E01C0c90Ab005A01482d34B808874345FD82',
-        style: {
-          ...defaultDeleteStyles,
-        },
-      },
-    ],
-  },
   // {
   //   name: "Divider",
   //   h: 1,

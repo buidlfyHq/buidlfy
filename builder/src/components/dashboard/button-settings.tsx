@@ -51,7 +51,6 @@ const ButtonSettings: FC<ISettings> = ({ handleSettingChange, openTab, setOpenTa
           justifyContent={selectedElement.style.justifyContent}
           color={selectedElement.style.color}
         />
-
         <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
           <textarea
             value={selectedElement.value}

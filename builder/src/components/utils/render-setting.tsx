@@ -80,7 +80,6 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
       return <LensterSettings />;
     case 'Input':
       return <InputSettings handleSettingChange={handleSettingChange} />;
-
     default:
       return <GeneralSettings handleSettingChange={handleSettingChange} />;
   }

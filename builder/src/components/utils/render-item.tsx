@@ -110,7 +110,6 @@ const RenderItem: FC<IRenderItem> = ({
     case 'Container':
     case 'Horizontal Container':
     case 'Vertical Container':
-    case 'Lenster Layout':
       return (
         <>
           {preview ? (

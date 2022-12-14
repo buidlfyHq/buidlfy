@@ -8,6 +8,7 @@ import ShortUniqueId from 'short-unique-id';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import WarningText from 'components/utils/setting-warning';
 import { IoMdAdd } from 'react-icons/io';
+import 'styles/components.css';
 
 const LensterSettings: FC = () => {
   const dispatch = useDispatch();
@@ -56,7 +57,6 @@ const LensterSettings: FC = () => {
     ]);
   };
   const handleRemoveInput = (value: string, index: number) => {
-    // const newInput = addInputs.splice(index, 1);
     const newInputs = [...addInputs];
     newInputs.splice(index, 1);
     setAddInputs(newInputs);
