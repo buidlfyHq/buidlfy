@@ -26,6 +26,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
       }),
     );
   }, [dispatch, i, postIds]);
+
   return (
     <>
       {postIds && postIds.length > 0 ? (

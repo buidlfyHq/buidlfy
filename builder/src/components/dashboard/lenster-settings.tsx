@@ -13,8 +13,9 @@ import 'styles/components.css';
 const LensterSettings: FC = () => {
   const dispatch = useDispatch();
   const postIds = useSelector((state: IRootState) => state.lenster.publications);
-  const [addInputs, setAddInputs] = useState<Array<any>>([]);
+  const [addInputs, setAddInputs] = useState<Array<any>>([]); // Derive better type for array
   const [isDuplicate, setIsDuplicate] = useState<Boolean>(false);
+
   useEffect(() => {
     const newAddInputs = [];
     postIds.map((postId, key) => {
@@ -22,6 +23,7 @@ const LensterSettings: FC = () => {
     });
     setAddInputs(newAddInputs);
   }, []);
+
   const handleNewValue = (e: ChangeEvent<HTMLInputElement>, key: number) => {
     if (e.target.value.length > 0) {
       const duplicateInput = postIds.filter(postId => postId.name === e.target.value);
@@ -62,6 +64,7 @@ const LensterSettings: FC = () => {
     setAddInputs(newInputs);
     dispatch(removePublication({ publicationId: value }));
   };
+
   return (
     <>
       <h3 className="ml-[0.5rem] mt-[1.5rem]">{selectedElement ? <span className="setting-text">{selectedElement.name}</span> : null}</h3>
@@ -75,7 +78,7 @@ const LensterSettings: FC = () => {
                 value={addInput.value}
                 onChange={e => handleNewValue(e, i)}
                 className="changeText input-text mt-[0.7rem] h-[2.2rem] pl-[0.5rem]"
-                placeholder="Please write your text here..."
+                placeholder="Add Post Id"
               />
               <span
                 onClick={() => handleRemoveInput(addInput.value, i)}

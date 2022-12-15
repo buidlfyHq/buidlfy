@@ -3,10 +3,24 @@ import LensterIcon from "utils/assets/lenster-svg";
 import lenster from "assets/lenster-default.svg";
 import "styles/components.css";
 
+interface IPublications {
+  id: number;
+  name: string;
+  profileId?: string;
+  ownedBy?: string;
+  profilePicture?: string;
+  coverPicture?: string;
+  handle?: string;
+  profileName?: string;
+  createdAt?: string;
+  postDescription?: string;
+  postMedia?: string;
+}
+
 interface ILensterWidget {
   i: string;
   backgroundColor: string;
-  postIds: Array<any>;
+  postIds: Array<IPublications>;
 }
 
 const LensterWidget: FC<ILensterWidget> = ({ postIds }) => {
