@@ -32,7 +32,7 @@ const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, 
   );
 
   useEffect(() => {
-    if (!manualSizing && ref.current?.clientWidth) {
+    if (manualSizing === false && ref.current?.clientWidth) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -45,7 +45,7 @@ const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, 
   }, [ref.current?.clientWidth]); // eslint-disable-line
 
   useEffect(() => {
-    if (!manualSizing && ref.current?.clientHeight) {
+    if (manualSizing === false && ref.current?.clientHeight) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
