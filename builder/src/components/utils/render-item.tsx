@@ -7,6 +7,10 @@ import Input from 'components/custom-components/input';
 import Divider from 'components/custom-components/divider';
 import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import PreviewContainer from 'components/custom-components/preview-container';
+import List from 'components/custom-components/list';
+import Checkbox from 'components/custom-components/checkbox';
+import Dropdown from 'components/custom-components/dropdown';
+import Badge from 'components/custom-components/badge';
 
 interface IRenderItem {
   item: IWorkspaceElement;
@@ -31,6 +35,8 @@ const RenderItem: FC<IRenderItem> = ({
   hideSettingSidebar,
   preview,
 }) => {
+  console.log(item.value, 'value');
+
   switch (item.name) {
     case 'Button':
       return (
@@ -105,7 +111,59 @@ const RenderItem: FC<IRenderItem> = ({
         />
       );
     case 'Divider':
-      return <Divider />;
+      return (
+        <Divider
+          margin={item.style.margin}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          borderColor={item.style.borderColor}
+        />
+      );
+    case 'List':
+      return <List />;
+    case 'Dropdown':
+      return <Dropdown />;
+    case 'Checkbox':
+      return (
+        <Checkbox
+          i={item.i}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+        />
+      );
+    case 'Badge':
+      return (
+        <Badge
+          i={item.i}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          borderColor={item.style.borderColor}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          connectWallet={item.connectWallet}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+        />
+      );
     case 'Container':
     case 'Horizontal Container':
     case 'Vertical Container':

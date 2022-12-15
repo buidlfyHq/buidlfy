@@ -305,11 +305,76 @@ export const components = [
       ...defaultMarginStyles,
     },
   },
-  // {
-  //   name: "Divider",
-  //   h: 1,
-  //   style: {
-  //     ...defaultDeleteStyles,
-  //   },
-  // },
+  {
+    name: 'List',
+    h: 2,
+    minH: 1,
+    style: {
+      ...defaultDeleteStyles,
+    },
+  },
+  {
+    name: 'Dropdown',
+    h: 2,
+    minH: 1,
+    style: {
+      ...defaultDeleteStyles,
+    },
+  },
+  {
+    name: 'Divider',
+    h: 1,
+    minH: 1,
+    style: {
+      ...defaultDeleteStyles,
+      margin: {
+        marginTop: 24,
+        marginRight: 20,
+        marginBottom: 24,
+        marginLeft: 20,
+      },
+      borderRadius: 0,
+      borderWidth: 1,
+      borderColor: 'rgba(239, 239, 240, 100)',
+    },
+  },
+  {
+    name: 'Badge',
+    h: 1,
+    minH: 1,
+    value: 'Badge',
+    link: '',
+    style: {
+      ...defaultColorStyles,
+      ...defaultFontStyles,
+      fontSize: 13,
+      backgroundColor: 'rgba(106, 88, 231, 100)',
+      color: 'rgba(255,255,255,100)',
+      borderColor: 'rgba(106, 88, 231, 100)',
+      ...defaultDeleteStyles,
+      borderRadius: 20,
+      borderWidth: 0,
+      ...defaultMarginStyles,
+      padding: {
+        paddingLeft: 24,
+        paddingRight: 24,
+        paddingTop: 4,
+        paddingBottom: 4,
+      },
+    },
+  },
+  {
+    name: 'Checkbox',
+    h: 1,
+    minH: 1,
+    value: 'Default Text',
+    style: {
+      ...defaultDeleteStyles,
+      ...defaultFontStyles,
+      ...defaultColorStyles,
+      ...defaultMarginStyles,
+      ...defaultPaddingStyles,
+      fontSize: 13,
+    },
+  },
 ];

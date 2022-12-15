@@ -6,6 +6,11 @@ import ImageSettings from 'components/dashboard/image-settings';
 import ContainerSettings from 'components/dashboard/container-settings';
 import InputSettings from 'components/dashboard/input-settings';
 import GeneralSettings from 'components/dashboard/general-settings';
+import DividerSettings from 'components/dashboard/divider-settings';
+import ListSettings from 'components/dashboard/list-settings';
+import DropdownSettings from 'components/dashboard/dropdown-settings';
+import BadgeSettings from 'components/dashboard/badge-settings';
+import CheckboxSettings from 'components/dashboard/checkbox-settings';
 import { IRootState } from 'redux/root-state.interface';
 import { ISettings } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
@@ -58,6 +63,8 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const selectedElement = useSelector((state: IRootState) => state.workspace.selectedElement);
 
   const handleSettingChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>, propertyName: string) => {
+    console.log(e.target.value, 'value');
+
     dispatch(
       updateWorkspaceElement({
         settingItemId: selectedElement.i,
@@ -72,15 +79,22 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
       return <ButtonSettings handleSettingChange={handleSettingChange} openTab={openTab} setOpenTab={setOpenTab} />;
     case 'Image':
       return <ImageSettings handleSettingChange={handleSettingChange} />;
-
     case 'Container':
     case 'Horizontal Container':
     case 'Vertical Container':
       return <ContainerSettings />;
-
     case 'Input':
       return <InputSettings handleSettingChange={handleSettingChange} />;
-
+    case 'Divider':
+      return <DividerSettings />;
+    case 'List':
+      return <ListSettings handleSettingChange={handleSettingChange} />;
+    case 'Dropdown':
+      return <DropdownSettings handleSettingChange={handleSettingChange} />;
+    case 'Badge':
+      return <BadgeSettings handleSettingChange={handleSettingChange} />;
+    case 'Checkbox':
+      return <CheckboxSettings handleSettingChange={handleSettingChange} />;
     default:
       return <GeneralSettings handleSettingChange={handleSettingChange} />;
   }

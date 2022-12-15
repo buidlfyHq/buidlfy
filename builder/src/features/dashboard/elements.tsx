@@ -169,6 +169,36 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
           </div>
         </div>
       </div>
+      <div className="element-div">
+        <div onClick={() => onClickFunction('List')} className="px-4 py-4 cursor-pointer">
+          <div data-tip="Click here to add the List" data-for="elements"></div>
+          <h2>Add List</h2>
+        </div>
+      </div>
+      <div className="element-div">
+        <div onClick={() => onClickFunction('Divider')} className="px-4 py-4 cursor-pointer">
+          <div data-tip="Click here to add the Divider" data-for="elements"></div>
+          <h2>Add Divider</h2>
+        </div>
+      </div>
+      <div className="element-div">
+        <div onClick={() => onClickFunction('Dropdown')} className="px-4 py-4 cursor-pointer">
+          <div data-tip="Click here to add the Input Dropdown" data-for="elements"></div>
+          <h2>Add Dropdown</h2>
+        </div>
+      </div>
+      <div className="element-div">
+        <div onClick={() => onClickFunction('Checkbox')} className="px-4 py-4 cursor-pointer">
+          <div data-tip="Click here to add the Checkbox" data-for="elements"></div>
+          <h2>Add Checkbox</h2>
+        </div>
+      </div>
+      <div className="element-div">
+        <div onClick={() => onClickFunction('Badge')} className="px-4 py-4 cursor-pointer">
+          <div data-tip="Click here to add the Badge" data-for="elements"></div>
+          <h2>Add Badge</h2>
+        </div>
+      </div>
     </>
   );
 
