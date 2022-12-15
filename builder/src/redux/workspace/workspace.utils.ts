@@ -218,13 +218,16 @@ export const updateOracleInElement = (workspaceElements: IWorkspaceElement[], se
   if (elementsIndex === -1) {
     // search id in children
     const updatedElements = workspaceElements.map(element => {
-      const childIndex = element.children?.findIndex(child => child.i === selectedElement.i);
-      let newArray = [...element.children];
-      newArray[childIndex] = updatedElement;
-      return {
-        ...element,
-        children: newArray,
-      };
+      const childIndex = element?.children?.findIndex(child => child.i === selectedElement.i);
+      if (childIndex) {
+        let newArray = [...element.children];
+        newArray[childIndex] = updatedElement;
+        return {
+          ...element,
+          children: newArray,
+        };
+      }
+      return element;
     });
     return updatedElements;
   } else {
