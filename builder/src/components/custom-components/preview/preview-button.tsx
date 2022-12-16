@@ -209,7 +209,7 @@ const PreviewButton: FC<IText> = ({
           }}
           className="btn btn-border rounded cursor-pointer whitespace-nowrap"
           onClick={() =>
-            contractFunction.methodName || oracleFunction.methodName ? onResponse() : console.log('No method attached to this button.')
+            contractFunction?.methodName || oracleFunction?.methodName ? onResponse() : console.log('No method attached to this button.')
           }
         >
           <span

@@ -44,7 +44,7 @@ const PreviewInput: FC<IInputComponent> = ({
     const requiredValue = inputArray.filter((input: IInput) => input.id === i)[0];
     return requiredValue ? requiredValue.value : '';
   };
-  
+
   return (
     <section className="h-full flex justify-center overflow-hidden items-center">
       <input

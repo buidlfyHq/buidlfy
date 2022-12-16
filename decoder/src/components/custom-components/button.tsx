@@ -226,7 +226,7 @@ const Button: FC<ITexts> = ({
           }}
           className="btn btn-border rounded cursor-pointer whitespace-nowrap"
           onClick={() =>
-            contractFunction.methodName || oracleFunction.methodName
+            contractFunction?.methodName || oracleFunction?.methodName
               ? onResponse()
               : console.log("No method attached to this button.")
           }
