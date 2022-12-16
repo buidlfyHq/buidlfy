@@ -14,7 +14,6 @@ class DeploymentsController {
     try {
       const deploymentData: DeployAppDto = req.body;
       const deploymentResponse: DeploymentResponseDto = await this.deploymentService.deployApp(deploymentData);
-
       res.status(200).json({ data: deploymentResponse.toJson(), message: 'created' });
     } catch (error) {
       Logger.error(`Error found in ${__filename} - startDeployment - `);
