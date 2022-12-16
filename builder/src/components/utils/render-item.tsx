@@ -5,8 +5,11 @@ import Text from 'components/custom-components/text';
 import Image from 'components/custom-components/image';
 import Input from 'components/custom-components/input';
 import Divider from 'components/custom-components/divider';
-import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
-import PreviewContainer from 'components/custom-components/preview-container';
+import PreviewContainer from 'components/custom-components/preview/preview-container';
+import PreviewButton from 'components/custom-components/preview/preview-button';
+import { IInput, IOutput, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import PreviewText from 'components/custom-components/preview/preview-text';
+import PreviewInput from 'components/custom-components/preview/preview-input';
 
 interface IRenderItem {
   item: IWorkspaceElement;
@@ -18,6 +21,10 @@ interface IRenderItem {
   setHideNavbar?: (hideNavbar: boolean) => void;
   hideSettingSidebar?: () => void;
   preview?: boolean;
+  inputValue?: IInput[];
+  setInputValue?: (inputValue: IInput[]) => void;
+  outputValue?: IOutput[];
+  setOutputValue?: (outputValue: IOutput[]) => void;
 }
 
 const RenderItem: FC<IRenderItem> = ({
@@ -30,65 +37,139 @@ const RenderItem: FC<IRenderItem> = ({
   setHideNavbar,
   hideSettingSidebar,
   preview,
+  inputValue,
+  setInputValue,
+  outputValue,
+  setOutputValue,
 }) => {
   switch (item.name) {
     case 'Button':
       return (
-        <Button
-          i={item.i}
-          fontWeight={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          borderColor={item.style.borderColor}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          connectWallet={item.connectWallet}
-          margin={item.style.margin}
-          padding={item.style.padding}
-          fontFamily={item.style.fontFamily}
-        />
+        <>
+          {preview ? (
+            <PreviewButton
+              i={item.i}
+              fontWeight={item.style.fontWeight}
+              italic={item.style.fontStyle}
+              underline={item.style.textDecoration}
+              color={item.style.color}
+              borderColor={item.style.borderColor}
+              justifyContent={item.style.justifyContent}
+              fontSize={item.style.fontSize}
+              value={item.value}
+              backgroundColor={item.style.backgroundColor}
+              contractFunction={item.contract}
+              oracleFunction={item.oracle}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              outputValue={outputValue}
+              setOutputValue={setOutputValue}
+              link={item.link}
+              borderRadius={item.style.borderRadius}
+              borderWidth={item.style.borderWidth}
+              shadow={item.style.shadow}
+              connectWallet={item.connectWallet}
+              margin={item.style.margin}
+              padding={item.style.padding}
+              fontFamily={item.style.fontFamily}
+            />
+          ) : (
+            <Button
+              i={item.i}
+              fontWeight={item.style.fontWeight}
+              italic={item.style.fontStyle}
+              underline={item.style.textDecoration}
+              color={item.style.color}
+              borderColor={item.style.borderColor}
+              justifyContent={item.style.justifyContent}
+              fontSize={item.style.fontSize}
+              value={item.value}
+              backgroundColor={item.style.backgroundColor}
+              link={item.link}
+              borderRadius={item.style.borderRadius}
+              borderWidth={item.style.borderWidth}
+              shadow={item.style.shadow}
+              connectWallet={item.connectWallet}
+              margin={item.style.margin}
+              padding={item.style.padding}
+              fontFamily={item.style.fontFamily}
+            />
+          )}
+        </>
       );
     case 'Text':
     case 'Heading 1':
     case 'Heading 2':
     case 'Heading 3':
       return (
-        <Text
-          i={item.i}
-          fontWeight={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          margin={item.style.margin}
-          padding={item.style.padding}
-          fontFamily={item.style.fontFamily}
-        />
+        <>
+          {preview ? (
+            <PreviewText
+              i={item.i}
+              fontWeight={item.style.fontWeight}
+              italic={item.style.fontStyle}
+              underline={item.style.textDecoration}
+              color={item.style.color}
+              justifyContent={item.style.justifyContent}
+              fontSize={item.style.fontSize}
+              value={item.value}
+              link={item.link}
+              outputValue={outputValue}
+              backgroundColor={item.style.backgroundColor}
+              margin={item.style.margin}
+              padding={item.style.padding}
+              fontFamily={item.style.fontFamily}
+            />
+          ) : (
+            <Text
+              i={item.i}
+              fontWeight={item.style.fontWeight}
+              italic={item.style.fontStyle}
+              underline={item.style.textDecoration}
+              color={item.style.color}
+              justifyContent={item.style.justifyContent}
+              fontSize={item.style.fontSize}
+              value={item.value}
+              backgroundColor={item.style.backgroundColor}
+              link={item.link}
+              margin={item.style.margin}
+              padding={item.style.padding}
+              fontFamily={item.style.fontFamily}
+            />
+          )}
+        </>
       );
     case 'Input':
       return (
-        <Input
-          i={item.i}
-          placeholder={item.placeholder}
-          borderRadius={item.style.borderRadius}
-          shadow={item.style.shadow}
-          color={item.style.color}
-          margin={item.style.margin}
-          padding={item.style.padding}
-          backgroundColor={item.style.backgroundColor}
-          borderColor={item.style.borderColor}
-        />
+        <>
+          {preview ? (
+            <PreviewInput
+              i={item.i}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              borderRadius={item.style.borderRadius}
+              shadow={item.style.shadow}
+              color={item.style.color}
+              margin={item.style.margin}
+              padding={item.style.padding}
+              placeholder={item.placeholder}
+              backgroundColor={item.style.backgroundColor}
+              borderColor={item.style.borderColor}
+            />
+          ) : (
+            <Input
+              i={item.i}
+              placeholder={item.placeholder}
+              borderRadius={item.style.borderRadius}
+              shadow={item.style.shadow}
+              color={item.style.color}
+              margin={item.style.margin}
+              padding={item.style.padding}
+              backgroundColor={item.style.backgroundColor}
+              borderColor={item.style.borderColor}
+            />
+          )}
+        </>
       );
     case 'Image':
       return (
