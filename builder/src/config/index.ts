@@ -3,6 +3,7 @@ export interface IConfig {
     buidlfyErc1155: string;
     marketplace: string;
     usdt: string;
+    oracle: string;
   };
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN: string;
@@ -36,6 +37,7 @@ const development: IConfig = {
     buidlfyErc1155: '0x4F7B6744A17251148C3Eb1C91666c3b0707D3bE8',
     marketplace: '0x6c9177882a082d7Ddd76B45385e427D12d24000d',
     usdt: '0x36fEe18b265FBf21A89AD63ea158F342a7C64abB',
+    oracle: '0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E',
   },
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN:
@@ -68,6 +70,7 @@ const production: IConfig = {
     buidlfyErc1155: '0x4F7B6744A17251148C3Eb1C91666c3b0707D3bE8',
     marketplace: '0x6c9177882a082d7Ddd76B45385e427D12d24000d',
     usdt: '0x36fEe18b265FBf21A89AD63ea158F342a7C64abB',
+    oracle: '0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E',
   },
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN:
@@ -100,6 +103,7 @@ const local: IConfig = {
     buidlfyErc1155: '0x4F7B6744A17251148C3Eb1C91666c3b0707D3bE8',
     marketplace: '0x6c9177882a082d7Ddd76B45385e427D12d24000d',
     usdt: '0x36fEe18b265FBf21A89AD63ea158F342a7C64abB',
+    oracle: '0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E',
   },
   web3: {
     WEB3_STORAGE_ACCESS_TOKEN:

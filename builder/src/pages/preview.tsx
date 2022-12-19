@@ -2,9 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import RenderItem from 'components/utils/render-item';
 import { IRootState } from 'redux/root-state.interface';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
+import { IInput, IOutput } from 'redux/workspace/workspace.interfaces';
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
@@ -12,6 +13,9 @@ const Preview = () => {
   const dispatch = useDispatch();
   const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
   const workspaceBackgroundColor = useSelector((state: IRootState) => state.workspace.workspaceBackgroundColor);
+
+  const [inputValue, setInputValue] = useState<IInput[]>([]);
+  const [outputValue, setOutputValue] = useState<IOutput[]>([]);
 
   useEffect(() => {
     // load stored configs if available
@@ -49,8 +53,15 @@ const Preview = () => {
         {workspaceElements.map(c => {
           const { x, y, w, h, minW, i } = c;
           return (
-            <div key={i} data-grid={{ x, y, w, h, minW }}>
-              <RenderItem item={c} preview />
+            <div key={i} data-grid={{ x, y, w, h, minW }} className="cursor-default">
+              <RenderItem
+                item={c}
+                preview
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                outputValue={outputValue}
+                setOutputValue={setOutputValue}
+              />
             </div>
           );
         })}
