@@ -65,6 +65,7 @@ export interface IStyle {
   borderWidth?: number;
   shadow?: string;
   isAuto?: boolean;
+  manualSizing?: boolean;
   margin?: {
     marginLeft?: number;
     marginRight?: number;
@@ -157,6 +158,12 @@ export interface IText {
   borderRadius?: number;
   borderWidth?: number;
   backgroundColor?: string;
+  contractFunction?: any; // required
+  oracleFunction?: IOracleConfig;
+  inputValue?: IInput[];
+  setInputValue?: (inputValue: IInput[]) => void;
+  outputValue?: IOutput[];
+  setOutputValue?: (outputValue: IOutput[]) => void;
   shadow?: string;
   connectWallet?: boolean;
   margin?: {
@@ -172,4 +179,15 @@ export interface IText {
     paddingBottom?: number;
   };
   fontFamily?: string;
+}
+
+export interface IInput {
+  id: string;
+  value: string;
+}
+
+export interface IOutput {
+  id: string;
+  name: string;
+  value: any; // can be string or array
 }

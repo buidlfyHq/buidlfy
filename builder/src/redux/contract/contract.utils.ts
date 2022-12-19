@@ -18,7 +18,8 @@ const filteredTypes = (methodParam: { type: string }) => {
       methodParam.type === 'bool' ||
       methodParam.type === 'address' ||
       methodParam.type.slice(0, 4) === 'uint' ||
-      methodParam.type.slice(0, 3) === 'int') &&
+      methodParam.type.slice(0, 3) === 'int' ||
+      methodParam.type.slice(0, 5) === 'bytes') &&
     methodParam.type.slice(-2) !== '[]'
   ) {
   } else {

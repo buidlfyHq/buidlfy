@@ -24,7 +24,7 @@ const defaultColorStyles = {
 const defaultFontStyles = {
   fontWeight: 400,
   fontStyle: 'normal',
-  fontFamily: `"Inter", sans-serif`,
+  fontFamily: `'Inter', sans-serif`,
   textDecoration: 'none',
   justifyContent: 'center',
 };
@@ -300,6 +300,7 @@ export const components = [
       height: 60,
       backgroundSize: 'contain',
       isAuto: true,
+      manualSizing: true,
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,
