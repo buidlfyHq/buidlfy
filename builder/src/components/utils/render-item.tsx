@@ -99,6 +99,7 @@ const RenderItem: FC<IRenderItem> = ({
           height={item.style.height}
           backgroundSize={item.style.backgroundSize}
           isAuto={item.style.isAuto}
+          manualSizing={item.style.manualSizing}
           margin={item.style.margin}
           imgData={item.imgData}
           link={item.link}

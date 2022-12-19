@@ -300,6 +300,7 @@ export const components = [
       height: 60,
       backgroundSize: 'contain',
       isAuto: true,
+      manualSizing: true,
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,

@@ -19,18 +19,20 @@ interface IImageComponent {
   backgroundSize?: string;
   i: string;
   isAuto?: boolean;
+  manualSizing?: boolean;
   imgData?: string | ArrayBuffer;
   link: string;
 }
 
-const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, backgroundSize, isAuto, imgData, link }) => {
+const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, backgroundSize, isAuto, manualSizing, imgData, link }) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
   const imageData = useSelector((state: IRootState) =>
     state.workspace.uploadedImagesData.find((image: IUploadedImageData) => image.settingItemId === i),
   );
+
   useEffect(() => {
-    if (ref.current?.clientWidth) {
+    if (manualSizing === false && ref.current?.clientWidth) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -43,7 +45,7 @@ const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, 
   }, [ref.current?.clientWidth]); // eslint-disable-line
 
   useEffect(() => {
-    if (ref.current?.clientHeight) {
+    if (manualSizing === false && ref.current?.clientHeight) {
       dispatch(
         updateWorkspaceImageElementStyle({
           settingItemId: i,
@@ -71,6 +73,7 @@ const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, 
       />
     </div>
   );
+
   return (
     <>
       {imageData?.uploadedImageData || imgData ? (
