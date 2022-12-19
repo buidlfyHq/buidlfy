@@ -1,4 +1,4 @@
-import { call, all, takeLatest, put, takeEvery } from 'redux-saga/effects';
+import { call, all, put, takeEvery } from 'redux-saga/effects';
 import { updatePublications } from './lenster.reducers';
 import { getPublicationService } from './lenster.services';
 import lensterActionTypes from './lenster.types';
