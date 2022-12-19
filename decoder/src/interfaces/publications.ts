@@ -1,10 +1,5 @@
-export interface ILensterState {
-  publications: Array<IPublication>;
-  inputValue?: boolean;
-}
-
 export interface IPublication {
-  id: string;
+  id: number;
   name: string;
   profileId?: string;
   ownedBy?: string;
