@@ -39,6 +39,13 @@ export interface IWorkspaceElement {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
+  listValue?: IListValue[];
+}
+
+export interface IListValue {
+  id: string;
+  value: string;
+  link?: string;
 }
 
 export interface IHead {
@@ -81,6 +88,7 @@ export interface IStyle {
   height?: number;
   backgroundSize?: string;
   fontFamily?: string;
+  listType?: string;
 }
 
 export type ResizeHandles = Array<'s' | 'w' | 'e' | 'n' | 'sw' | 'nw' | 'se' | 'ne'>;
@@ -172,4 +180,6 @@ export interface IText {
     paddingBottom?: number;
   };
   fontFamily?: string;
+  listType?: string;
+  listValue?: IListValue[];
 }

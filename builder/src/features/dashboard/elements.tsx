@@ -10,6 +10,9 @@ import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers
 import { IRootState } from 'redux/root-state.interface';
 import { IWorkspaceElement, ResizeHandles } from 'redux/workspace/workspace.interfaces';
 import defaultImage from 'assets/default-image.svg';
+import { BsCheck2 } from 'react-icons/bs';
+import badge from 'assets/badge.svg';
+import dropdown from 'assets/dropdown.svg';
 import container from 'assets/image-container.svg';
 import 'styles/components.css';
 
@@ -176,27 +179,46 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         </div>
       </div>
       <div className="element-div">
-        <div onClick={() => onClickFunction('Divider')} className="px-4 py-4 cursor-pointer">
-          <div data-tip="Click here to add the Divider" data-for="elements"></div>
-          <h2>Add Divider</h2>
+        <div data-tip="Click here to add the Divider" data-for="elements">
+          <div onClick={() => onClickFunction('Divider')} className="px-4 py-4 cursor-pointer">
+            <div className="w-[15rem] h-[0.1px] bg-[gray]"></div>
+          </div>
         </div>
       </div>
       <div className="element-div">
-        <div onClick={() => onClickFunction('Dropdown')} className="px-4 py-4 cursor-pointer">
-          <div data-tip="Click here to add the Input Dropdown" data-for="elements"></div>
-          <h2>Add Dropdown</h2>
+        <div onClick={() => onClickFunction('Dropdown')} className="px-4 py-1 cursor-pointer">
+          <div data-tip="Click here to add the Input Dropdown" data-for="elements">
+            <img className="mt-2" src={dropdown} />
+          </div>
         </div>
       </div>
       <div className="element-div">
-        <div onClick={() => onClickFunction('Checkbox')} className="px-4 py-4 cursor-pointer">
-          <div data-tip="Click here to add the Checkbox" data-for="elements"></div>
-          <h2>Add Checkbox</h2>
+        <div onClick={() => onClickFunction('Checkbox')} className="px-10 py-3 cursor-pointer">
+          <div data-tip="Click here to add the Checkbox" data-for="elements">
+            <div className="flex items-center">
+              <span className="h-4 w-4 bg-[#FFFFFF] border-[#D0D5DD] border-[1px] rounded-[4px]"></span>
+              <h2 className="text-[#344054] text-[14px] ml-2">Add Checkbox</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="h-4 w-4 bg-[#F9F5FF] border-[#7F56D9] border-[1px] rounded-[4px]">
+                <BsCheck2 className="text-[#7F56D9] text-[14px] flex justify-center items-center" />
+              </span>
+              <h2 className="text-[#344054] text-[14px] ml-2">Add Checkbox</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="h-4 w-4 bg-[#F9F5FF] border-[#7F56D9] border-[1px] rounded-[4px] checkbox-element">
+                <BsCheck2 className="text-[#7F56D9] text-[14px] flex justify-center items-center" />
+              </span>
+              <h2 className="text-[#344054] text-[14px] ml-2">Add Checkbox</h2>
+            </div>
+          </div>
         </div>
       </div>
       <div className="element-div">
-        <div onClick={() => onClickFunction('Badge')} className="px-4 py-4 cursor-pointer">
-          <div data-tip="Click here to add the Badge" data-for="elements"></div>
-          <h2>Add Badge</h2>
+        <div onClick={() => onClickFunction('Badge')} className="px-10 py-3 cursor-pointer">
+          <div data-tip="Click here to add the Badge" data-for="elements">
+            <img src={badge} />
+          </div>
         </div>
       </div>
     </>

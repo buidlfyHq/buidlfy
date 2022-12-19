@@ -63,8 +63,6 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const selectedElement = useSelector((state: IRootState) => state.workspace.selectedElement);
 
   const handleSettingChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>, propertyName: string) => {
-    console.log(e.target.value, 'value');
-
     dispatch(
       updateWorkspaceElement({
         settingItemId: selectedElement.i,

@@ -120,9 +120,47 @@ const RenderItem: FC<IRenderItem> = ({
         />
       );
     case 'List':
-      return <List />;
+      return (
+        <List
+          i={item.i}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+          listType={item.style.listType}
+          listValue={item.listValue}
+        />
+      );
     case 'Dropdown':
-      return <Dropdown />;
+      return (
+        <Dropdown
+          i={item.i}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          borderColor={item.style.borderColor}
+        />
+      );
     case 'Checkbox':
       return (
         <Checkbox
