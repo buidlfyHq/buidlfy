@@ -1,3 +1,4 @@
+import { IPublication } from 'redux/lenster/lenster.interfaces';
 import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
 
 export interface IUploadedImageData {
@@ -39,6 +40,7 @@ export interface IWorkspaceElement {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
+  posts?: IPublication[];
 }
 
 export interface IHead {
