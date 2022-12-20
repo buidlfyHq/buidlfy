@@ -10,12 +10,16 @@ import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 // import { IoMdAdd, IoMdLink } from 'react-icons/io';
 // import 'styles/components.css';
 
-// interface IListOptionsComponent {
-//   handleSettingChange?: any;
-//   i: string;
-// }
-const ListOptionsComponent: FC = () => {
-  return <div>hy</div>;
+interface IListOptionsComponent {
+  handleSettingChange?: any;
+  i: string;
+}
+const ListOptionsComponent: FC<IListOptionsComponent> = ({}) => {
+  return (
+    <div className="px-1 py-4">
+      <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">Manage Options</div>
+    </div>
+  );
   //   const dispatch = useDispatch();
   //   const postIds = useSelector((state: IRootState) => state.lenster.publications);
   //   const [addInputs, setAddInputs] = useState<Array<any>>([]); // Derive better type for array

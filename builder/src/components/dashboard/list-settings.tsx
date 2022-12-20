@@ -4,6 +4,7 @@ import CombinedComponent from 'components/settings/combined-setting';
 import FontFamilyComponent from 'components/settings/font-family-component';
 import FontSizeComponent from 'components/settings/font-size-component';
 import FontWeightComponent from 'components/settings/font-weight-component';
+import ListOptionsComponent from 'components/settings/list-options-component';
 import ListTypeComponent from 'components/settings/list-type';
 import MarginComponent from 'components/settings/margin-component';
 import PaddingComponent from 'components/settings/padding-component';
@@ -47,7 +48,7 @@ const ListSettings: FC<ISettings> = ({ handleSettingChange }) => {
           placeholder="Link"
         />
       </div> */}
-      {/* <ListOptionsComponent i={selectedElement.i} handleSettingChange={handleSettingChange} /> */}
+      <ListOptionsComponent i={selectedElement.i} handleSettingChange={handleSettingChange} />
       <ListTypeComponent i={selectedElement.i} listType={selectedElement.style.listType} />
       <FontFamilyComponent i={selectedElement.i} fontFamily={selectedElement.style.fontFamily} />
       <FontWeightComponent i={selectedElement.i} fontWeight={selectedElement.style.fontWeight} />
