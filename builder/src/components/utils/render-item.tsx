@@ -11,7 +11,7 @@ import { IInput, IOutput, IWorkspaceElement } from 'redux/workspace/workspace.in
 import PreviewText from 'components/custom-components/preview/preview-text';
 import PreviewInput from 'components/custom-components/preview/preview-input';
 import LensterWidget from 'components/custom-components/lenster-widget';
-import PreviewLenster from 'components/custom-components/preview/preview-lenster';
+import PreviewLensterWidget from 'components/custom-components/preview/preview-lenster-widget';
 
 interface IRenderItem {
   item: IWorkspaceElement;
@@ -235,13 +235,7 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case 'Lenster Card':
       return (
-        <>
-          {preview ? (
-            <PreviewLenster i={item.i} backgroundColor={item.style.backgroundColor} posts={item.posts} />
-          ) : (
-            <LensterWidget i={item.i} backgroundColor={item.style.backgroundColor} setDrag={setDrag} />
-          )}
-        </>
+        <>{preview ? <PreviewLensterWidget preview={preview} i={item.i} posts={item.posts} /> : <LensterWidget i={item.i} setDrag={setDrag} />}</>
       );
     default:
       return <></>;

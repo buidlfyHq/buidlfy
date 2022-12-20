@@ -8,7 +8,6 @@ import 'styles/components.css';
 
 interface ILensterWidget {
   i: string;
-  backgroundColor: string;
   setDrag: (drag: boolean) => void;
 }
 

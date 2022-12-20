@@ -11,14 +11,20 @@ interface ILensterPost {
   post: IPublication;
   updateProfilePicture: string;
   updatePostMedia: string;
+  preview?: boolean;
 }
 
-const LensterPost: FC<ILensterPost> = ({ i, post, updateProfilePicture, updatePostMedia }) => {
+const LensterPost: FC<ILensterPost> = ({ i, post, updateProfilePicture, updatePostMedia, preview }) => {
   const inputValue = useSelector((state: IRootState) => state.lenster.inputValue);
   return (
     <>
-      {post.name && inputValue ? (
-        <div id={i} className="border lenster-card h-fit py-4 px-6 border-gray-700 bg-gray-800 rounded-xl w-[21rem] mx-2 my-[0.7rem]">
+      {(!preview && post.name && inputValue) || (preview && post.name) ? (
+        <div
+          id={i}
+          className={`border lenster-card py-4 px-6 border-gray-700 bg-gray-800 rounded-xl ${
+            preview ? 'w-[28rem] m-2' : 'h-fit  w-[21rem] mx-2 my-[0.7rem]'
+          }`}
+        >
           <div className="flex">
             <div className="flex grow">
               <img
@@ -40,7 +46,7 @@ const LensterPost: FC<ILensterPost> = ({ i, post, updateProfilePicture, updatePo
             </div>
           </div>
           <div className="flex flex-wrap justify-start items-start flex-1 mt-2.5 w-full my-1">
-            <p className="text-gray-300 whitespace-pre-line  ">{post.postDescription}</p>
+            <p className="text-gray-300 whitespace-pre-line">{post.postDescription}</p>
           </div>
           {post?.postMedia ? <img src={`${post.postMedia?.includes('ipfs://') ? updatePostMedia : post.postMedia}`} /> : null}
           <h2 className="mt-2 text-sm text-gray-500 hover:underline">{post.createdAt}</h2>
