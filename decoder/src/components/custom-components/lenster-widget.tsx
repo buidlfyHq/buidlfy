@@ -6,20 +6,20 @@ import "styles/components.css";
 interface ILensterWidget {
   i: string;
   backgroundColor: string;
-  postIds: Array<IPublication>;
+  posts: IPublication[];
 }
 
-const LensterWidget: FC<ILensterWidget> = ({ postIds }) => {
+const LensterWidget: FC<ILensterWidget> = ({ posts }) => {
   return (
     <div className="lenster-div ml-[1.7rem]">
-      {postIds.map((postId) => {
+      {posts.map((post) => {
         const updateProfilePicture =
-          "https://ipfs.io/ipfs/" + postId.profilePicture?.slice(7);
+          "https://ipfs.io/ipfs/" + post.profilePicture?.slice(7);
         const updatePostMedia =
-          "https://ipfs.io/ipfs/" + postId?.postMedia?.slice(7);
+          "https://ipfs.io/ipfs/" + post?.postMedia?.slice(7);
         return (
           <LensterPost
-            postId={postId}
+            post={post}
             updateProfilePicture={updateProfilePicture}
             updatePostMedia={updatePostMedia}
           />

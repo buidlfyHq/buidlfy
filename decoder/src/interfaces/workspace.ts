@@ -1,4 +1,5 @@
 import { IOracleConfig } from "./config";
+import { IPublication } from "./publications";
 import Styles from "./styles";
 
 export default interface IWorkspace {
@@ -27,5 +28,5 @@ export default interface IWorkspace {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
-  postIds?: [];
+  posts?: IPublication[];
 }

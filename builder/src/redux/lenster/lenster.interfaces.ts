@@ -1,5 +1,5 @@
 export interface ILensterState {
-  publications: Array<IPublication>;
+  publications: IPublication[];
   inputValue?: boolean;
 }
 

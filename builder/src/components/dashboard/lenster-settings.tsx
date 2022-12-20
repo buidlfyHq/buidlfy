@@ -12,21 +12,21 @@ import 'styles/components.css';
 
 const LensterSettings: FC = () => {
   const dispatch = useDispatch();
-  const postIds = useSelector((state: IRootState) => state.lenster.publications);
+  const posts = useSelector((state: IRootState) => state.lenster.publications);
   const [addInputs, setAddInputs] = useState<Array<any>>([]); // Derive better type for array
   const [isDuplicate, setIsDuplicate] = useState<Boolean>(false);
 
   useEffect(() => {
     const newAddInputs = [];
-    postIds.map((postId, key) => {
-      newAddInputs.push({ id: postId.id, value: postId.name });
+    posts.map((post, key) => {
+      newAddInputs.push({ id: post.id, value: post.name });
     });
     setAddInputs(newAddInputs);
   }, []);
 
   const handleNewValue = (e: ChangeEvent<HTMLInputElement>, key: number) => {
     if (e.target.value.length > 0) {
-      const duplicateInput = postIds.filter(postId => postId.name === e.target.value);
+      const duplicateInput = posts.filter(post => post.name === e.target.value);
       if (duplicateInput?.length > 0) {
         setIsDuplicate(true);
       } else {

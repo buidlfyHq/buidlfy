@@ -310,7 +310,7 @@ export const components = [
     name: 'Lenster Card',
     h: 2,
     minH: 1,
-    postIds: [],
+    posts: [],
     style: {
       ...defaultDeleteStyles,
     },

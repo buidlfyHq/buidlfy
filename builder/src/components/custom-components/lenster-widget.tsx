@@ -19,7 +19,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
     dispatch(
       updateWorkspaceElement({
         settingItemId: i,
-        propertyName: 'postIds',
+        propertyName: 'posts',
         propertyValue: posts,
       }),
     );

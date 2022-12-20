@@ -131,7 +131,7 @@ const RenderItem: FC<IRenderItem> = ({
         <LensterWidget
           i={item.i}
           backgroundColor={item.style.backgroundColor}
-          postIds={item.postIds}
+          posts={item.posts}
         />
       );
     default:
