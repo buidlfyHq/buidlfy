@@ -16,6 +16,8 @@ interface ILensterPost {
 
 const LensterPost: FC<ILensterPost> = ({ i, post, updateProfilePicture, updatePostMedia, preview }) => {
   const inputValue = useSelector((state: IRootState) => state.lenster.inputValue);
+  console.log(inputValue, 'iv');
+
   return (
     <>
       {(!preview && post.name && inputValue) || (preview && post.name) ? (

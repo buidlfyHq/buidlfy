@@ -4,6 +4,7 @@ export interface ILensterState {
 }
 
 export interface IPublication {
+  i?: string;
   id: string;
   name: string;
   profileId?: string;
