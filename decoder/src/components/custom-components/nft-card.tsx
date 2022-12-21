@@ -9,6 +9,7 @@ interface INftCard {
   highestBid: string;
   href?: string;
   backgroundColor?: string;
+  color?: string;
   backgroundSize?: string;
 }
 
@@ -18,8 +19,10 @@ const NftCard: FC<INftCard> = ({
   title,
   href,
   backgroundColor,
+  color,
   backgroundSize
 }) => {
+  const gradientCondition = color?.indexOf("gradient") !== -1;
   return (
     <a href={href} target='_blank'>
     <div className="flex items-center justify-center h-full p-2">
@@ -53,7 +56,14 @@ const NftCard: FC<INftCard> = ({
               }}
             />
           </div>
-          <div className="flex flex-col justify-center items-start p-2 h-[20%]">
+          <div 
+          style={{
+            // textDecorationColor: `${gradientCondition ? "black" : color}`,
+            // background: color,
+            // WebkitTextFillColor: "transparent",
+          }}
+            className="flex flex-col justify-center items-start p-2 h-[20%]"
+          >
             <div className="text-sm text-white/80">{collection}</div>
             <div className="text-xl font-bold text-white">{title}</div>
           </div>

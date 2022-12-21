@@ -1,5 +1,7 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
+
+import { gradientCheck } from "utils/gradient-check";
 import { IRootState } from "redux/root-state.interface";
 import { IUploadedImageData, IWorkspaceElement } from "redux/workspace/workspace.interfaces";
 import DefaultImage from 'assets/nft-card-img.png'
@@ -7,6 +9,7 @@ import DefaultImage from 'assets/nft-card-img.png'
 interface INftCard {
   i: string;
   backgroundColor: string;
+  color: string;
   imgData?: string | ArrayBuffer;
   justifyContent: string;
   backgroundSize?: string;
@@ -16,12 +19,12 @@ interface INftCard {
 const NftCard: FC<INftCard> = ({
   i,
   backgroundColor, 
+  color,
   imgData,
   justifyContent,
   backgroundSize,
   isAuto
 }) => {
-  console.log(imgData)
   const selectedElement: IWorkspaceElement = useSelector(
     (state: IRootState) => state.workspace.selectedElement
   );
@@ -30,6 +33,7 @@ const NftCard: FC<INftCard> = ({
     (image: IUploadedImageData) => image.settingItemId === i
   )
 );
+const gradientCondition = color?.indexOf("gradient") !== -1;
   return (
     <section
       className="flex items-center justify-center h-full p-2"
@@ -74,13 +78,31 @@ const NftCard: FC<INftCard> = ({
         >
           Your NFT will appear here
         </div> */}
-        <div className="flex flex-col justify-center items-start p-2 h-[20%]" id="nft-card-details">
-          <div className="text-sm text-white/80" id="nft-card-collection">
-            Collection
+        <div className="flex items-end justify-between p-2 h-[20%]">
+          <div
+            style={{  
+              WebkitTextFillColor: gradientCheck(color, false),
+              textDecorationColor: `${gradientCondition ? "black" : color}`,
+            }}
+            className="flex flex-col items-start justify-center" 
+            id="nft-card-details"
+          >
+            <div className="text-sm text-white/80" id="nft-card-collection">
+              Collection
+            </div>
+            <div className="text-xl font-bold text-white" id="nft-card-name">
+              Name
+            </div>
           </div>
-          <div className="text-xl font-bold text-white" id="nft-card-name">
-            Name
-          </div>
+          <button 
+            style={{  
+              backgroundColor: color,
+              color: backgroundColor,
+            }}
+           className="py-2 px-4 rounded-[8px]"
+          >
+              View Details
+          </button>
         </div>
         {/* <div
           className="flex justify-around items-center text-center p-2 rounded-lg h-[15%] bg-white/10"

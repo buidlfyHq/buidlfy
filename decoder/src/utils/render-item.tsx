@@ -184,6 +184,7 @@ const RenderItem: FC<IRenderItem> = ({
               href={item.href}
               highestBid={item.highestBid}
               backgroundColor={item.style.backgroundColor}
+              color={item.style.color}
               backgroundSize={item.style.backgroundSize}
             />
           );

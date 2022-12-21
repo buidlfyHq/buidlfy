@@ -72,7 +72,7 @@ const Home: FC = () => {
         setSource(i?.source)
         setLayoutW(i?.w)
         setLayoutX(i?.x)
-
+        
         if (i.slug) {
           setSlug(i.slug);
         } else if (i.wallet) {
@@ -136,7 +136,7 @@ const Home: FC = () => {
 
     let nCardsArr = assets.map((asset: any) => {
       let modifiedX = X;
-      X = X + colW < layoutW ? X + colW : layoutX;
+      X = X + colW <= layoutW && X + colW < 6 ? X + colW : layoutX;
 
       let nftDetails = source === 'Opensea' ? {
         image: asset.asset_contract.image_url,
@@ -153,7 +153,7 @@ const Home: FC = () => {
         highestBid: asset.top_bid,
         href: `https://rarible.com/token/${asset.id.substr(9)}`,
       }
-      
+
       return {
         ...nftCard,
         i: asset.id,
@@ -168,10 +168,6 @@ const Home: FC = () => {
     let newItemsArr = testConfig.map((item: IWorkspace) => { 
       const { y } = item;
       if (y >= nCardsArr[0].y) {
-        const diff = y - nftPosition;
-        console.log(y, diff, y +
-          (nCardsArr.length / +cardsPerRow) * nCardsArr[0].h -
-          diff)
         return {
           ...item,
           y:
