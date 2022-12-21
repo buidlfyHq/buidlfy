@@ -12,6 +12,7 @@ import { IWorkspaceElement, ResizeHandles } from 'redux/workspace/workspace.inte
 import defaultImage from 'assets/default-image.svg';
 import { BsCheck2 } from 'react-icons/bs';
 import badge from 'assets/badge.svg';
+import status from 'assets/status-badge.svg';
 import dropdown from 'assets/dropdown.svg';
 import container from 'assets/image-container.svg';
 import 'styles/components.css';
@@ -215,9 +216,38 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         </div>
       </div>
       <div className="element-div">
+        <div onClick={() => onClickFunction('Radio')} className="px-10 py-3 cursor-pointer">
+          <div data-tip="Click here to add the Radio Button" data-for="elements">
+            <div className="flex items-center">
+              <span className="h-4 w-4 bg-[#FFFFFF] border-[#D0D5DD] border-[1px] rounded-[20px]"></span>
+              <h2 className="text-[#344054] text-[14px] ml-2">Add Radio Button</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="h-4 w-4 bg-[#F9F5FF] border-[#7F56D9] border-[1px] rounded-[20px]">
+                <span className="bg-[#7F56D9] text-[14px] flex justify-center items-center w-[10px] m-[2px] h-[10px] rounded-[20px]" />
+              </span>
+              <h2 className="text-[#344054] text-[14px] ml-2">Add Radio Button</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="h-4 w-4 bg-[#F9F5FF] border-[#7F56D9] border-[1px] rounded-[20px] checkbox-element">
+                <span className="bg-[#7F56D9] text-[14px] flex justify-center items-center w-[10px] m-[2px] h-[10px] rounded-[20px]" />
+              </span>
+              <h2 className="text-[#344054] text-[14px] ml-2">Add Radio Button</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="element-div">
         <div onClick={() => onClickFunction('Badge')} className="px-10 py-3 cursor-pointer">
           <div data-tip="Click here to add the Badge" data-for="elements">
             <img src={badge} />
+          </div>
+        </div>
+      </div>
+      <div className="element-div">
+        <div onClick={() => onClickFunction('Status')} className="px-10 py-3 cursor-pointer">
+          <div data-tip="Click here to add the Status Badge" data-for="elements">
+            <img src={status} />
           </div>
         </div>
       </div>
