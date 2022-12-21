@@ -7,6 +7,7 @@ import CombinedComponent from 'components/settings/combined-setting';
 import FontFamilyComponent from 'components/settings/font-family-component';
 import FontSizeComponent from 'components/settings/font-size-component';
 import FontWeightComponent from 'components/settings/font-weight-component';
+import ListOptionsComponent from 'components/settings/list-options-component';
 import MarginComponent from 'components/settings/margin-component';
 import PaddingComponent from 'components/settings/padding-component';
 import ShadowComponent from 'components/settings/shadow-component';
@@ -31,7 +32,6 @@ const DropdownSettings: FC<ISettings> = ({ handleSettingChange }) => {
         color={selectedElement.style.color}
       />
       <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
-        {/* <RiText className="text-[18px] mr-3" /> */}
         <textarea
           value={selectedElement.value}
           onChange={e => handleSettingChange(e, 'value')}
@@ -51,6 +51,7 @@ const DropdownSettings: FC<ISettings> = ({ handleSettingChange }) => {
           placeholder="Link"
         />
       </div>
+      <ListOptionsComponent i={selectedElement.i} />
       <FontFamilyComponent i={selectedElement.i} fontFamily={selectedElement.style.fontFamily} />
       <FontWeightComponent i={selectedElement.i} fontWeight={selectedElement.style.fontWeight} />
       <FontSizeComponent i={selectedElement.i} fontSize={selectedElement.style.fontSize} />

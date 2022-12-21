@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropright } from 'react-icons/io';
-import { IText } from 'redux/workspace/workspace.interfaces';
+import { useSelector } from 'react-redux';
+import { IRootState } from 'redux/root-state.interface';
+import { IList, IText } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
 import { gradientCheck } from 'utils/gradient-check';
 
@@ -24,6 +26,8 @@ const Dropdown: FC<IText> = ({
   shadow,
 }) => {
   const gradientCondition = color?.indexOf('gradient') !== -1;
+  const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
+
   return (
     <div
       key={i}
@@ -116,13 +120,23 @@ const Dropdown: FC<IText> = ({
             borderRadius: `${borderRadius}px`,
           }}
         >
-          <h6 style={{ color: 'black' }}>{value}</h6>
-          <h6 className="mt-4" style={{ color: 'black' }}>
-            {value}
-          </h6>
-          <h6 className="mt-4" style={{ color: 'black' }}>
-            {value}
-          </h6>
+          {lists?.map(list => {
+            return (
+              <>
+                {list.link ? (
+                  <a target="_blank" href={list.link}>
+                    <h6 key={list.id} className="mt-4" style={{ color: 'black' }}>
+                      {list.value}
+                    </h6>
+                  </a>
+                ) : (
+                  <h6 key={list.id} className="mt-4" style={{ color: 'black' }}>
+                    {list.value}
+                  </h6>
+                )}
+              </>
+            );
+          })}
         </div>
       </div>
     </div>

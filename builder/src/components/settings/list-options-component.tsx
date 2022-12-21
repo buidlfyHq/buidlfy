@@ -1,4 +1,12 @@
+import { Dialog } from '@headlessui/react';
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import { BsLink45Deg } from 'react-icons/bs';
+import { IoMdAdd, IoMdLink } from 'react-icons/io';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootState } from 'redux/root-state.interface';
+import { IList, IListValue } from 'redux/workspace/workspace.interfaces';
+import { updateListValue } from 'redux/workspace/workspace.reducers';
+import ShortUniqueId from 'short-unique-id';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { IRootState } from 'redux/root-state.interface';
 // import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
@@ -15,10 +23,110 @@ interface IListOptionsComponent {
   i: string;
 }
 const ListOptionsComponent: FC<IListOptionsComponent> = ({}) => {
+  const [isLinkVisible, setIsLinkVisible] = useState<Array<any>>([]);
+  const [listText, setListText] = useState<string>('');
+  const [listLink, setListLink] = useState<string>('');
+  const [listDivs, setListDivs] = useState<Array<any>>([]);
+  const dispatch = useDispatch();
+  const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
+    console.log(e, 'e');
+    const newLists = [...lists];
+    console.log(newLists, 'newLists');
+    const findListIndex = newLists.findIndex(newList => key === newList.id);
+    console.log(newLists[findListIndex], 'findListIndex');
+    console.log(e.target.value, 'e.target');
+
+    newLists[findListIndex] = { ...newLists[findListIndex], value: e.target.value };
+    console.log(newLists, 'newLists-after');
+
+    dispatch(updateListValue(newLists));
+    // setListText(e.target.value);
+    console.log(listText, 'listText');
+  };
+  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
+    console.log(e, 'e');
+    const newLists = [...lists];
+    console.log(newLists, 'newLists');
+    const findListIndex = newLists.findIndex(newList => key === newList.id);
+    console.log(newLists[findListIndex], 'findListIndex');
+    console.log(e.target.value, 'e.target');
+
+    newLists[findListIndex] = { ...newLists[findListIndex], link: e.target.value };
+    console.log(newLists, 'newLists-after');
+
+    dispatch(updateListValue(newLists));
+    // setListText(e.target.value);
+    console.log(listText, 'listText');
+  };
+
+  const handleLink = (i: number) => {
+    const linkVisible = [...isLinkVisible];
+    linkVisible[i] = true;
+    setIsLinkVisible(linkVisible);
+  };
+
+  const handleListDiv = () => {
+    const uid = new ShortUniqueId();
+    const listId = uid();
+    const newLists = [
+      ...lists,
+      {
+        id: listId,
+        value: listText,
+        link: listLink,
+      },
+    ];
+    // setListDivs(newLists);
+    dispatch(updateListValue(newLists));
+    console.log(listDivs, 'listDiv');
+  };
+
+  useEffect(() => {
+    // dispatch(updateListValue(listDivs));
+  }, [listDivs]);
   return (
-    <div className="px-1 py-4">
-      <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">Manage Options</div>
-    </div>
+    <>
+      <div className="px-1 py-4">
+        <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">Manage Options</div>
+        {lists.map((list, i) => {
+          return (
+            <div key={i}>
+              <div className="flex items-center mt-4 mx-2 w-[13.5rem] text-black">
+                <input
+                  id={list.id}
+                  value={list.value}
+                  onChange={e => handleTextChange(e, list.id)}
+                  className="changeText pl-[10px] py-[0.4rem] input-text"
+                  type="text"
+                  placeholder="Add Text"
+                />
+                <div onClick={() => handleLink(i)} className="list-link-div px-[0.35rem] py-[0.38rem] ml-2 cursor-pointer">
+                  <BsLink45Deg className="text-[20px] text-[#6A58E7]" />
+                </div>
+              </div>
+              {isLinkVisible[i] ? (
+                <div key={i} className="flex items-center mt-4 mx-2 w-[13.5rem] text-black">
+                  <input
+                    id={list.id}
+                    value={list.link}
+                    onChange={e => handleLinkChange(e, list.id)}
+                    className="changeText pl-[10px] py-[0.4rem] input-text"
+                    type="text"
+                    placeholder="Add Link"
+                  />
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+
+        <button onClick={handleListDiv} className="add-list flex justify-center items-center pl-[10px] py-[0.6rem] mt-4 mx-2 w-[13.5rem]">
+          Add More <IoMdAdd />
+        </button>
+      </div>
+    </>
   );
   //   const dispatch = useDispatch();
   //   const postIds = useSelector((state: IRootState) => state.lenster.publications);

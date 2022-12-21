@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
-import { IText } from 'redux/workspace/workspace.interfaces';
+import { useSelector } from 'react-redux';
+import { IRootState } from 'redux/root-state.interface';
+import { IList, IListValue, IText } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
 import { gradientCheck } from 'utils/gradient-check';
 
@@ -21,6 +23,8 @@ const List: FC<IText> = ({
   listValue,
 }) => {
   const gradientCondition = color?.indexOf('gradient') !== -1;
+  const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
+
   return (
     <section key={i}>
       <span
@@ -50,9 +54,19 @@ const List: FC<IText> = ({
             padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
           }}
         >
-          <li key={i}>{value}</li>
-          <li key={i}>{value}</li>
-          <li key={i}>{value}</li>
+          {lists?.map(list => {
+            return (
+              <>
+                {list.link ? (
+                  <a target="_blank" href={list.link}>
+                    <li key={list.id}>{list.value}</li>
+                  </a>
+                ) : (
+                  <li key={list.id}>{list.value}</li>
+                )}
+              </>
+            );
+          })}
         </ul>
       </span>
     </section>

@@ -11,6 +11,7 @@ export interface IWorkspaceState {
   uploadedImagesData: IUploadedImageData[];
   workspaceBackgroundColor: string;
   head: IHead;
+  listValue: IList[];
 }
 
 export interface IWorkspaceElement {
@@ -182,4 +183,10 @@ export interface IText {
   fontFamily?: string;
   listType?: string;
   listValue?: IListValue[];
+}
+
+export interface IList {
+  id: string;
+  value: string;
+  link: string;
 }

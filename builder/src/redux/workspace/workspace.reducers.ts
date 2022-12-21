@@ -9,8 +9,11 @@ import {
   updateContractInElement,
   updateOracleInElement,
 } from './workspace.utils';
-import { IAction, IHead, IWorkspaceElement, IWorkspaceState } from './workspace.interfaces';
+import { IAction, IHead, IList, IWorkspaceElement, IWorkspaceState } from './workspace.interfaces';
 import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
+import ShortUniqueId from 'short-unique-id';
+
+const uid = new ShortUniqueId();
 
 const initialState: IWorkspaceState = {
   workspaceElements: [],
@@ -21,8 +24,24 @@ const initialState: IWorkspaceState = {
     title: '',
     logo: '',
   },
+  listValue: [
+    {
+      id: uid(),
+      value: 'Item 1',
+      link: '',
+    },
+    {
+      id: uid(),
+      value: 'Item 2',
+      link: '',
+    },
+    {
+      id: uid(),
+      value: 'Item 3',
+      link: '',
+    },
+  ],
 };
-
 const workspaceSlice = createSlice({
   name: 'workspace',
   initialState,
@@ -144,6 +163,15 @@ const workspaceSlice = createSlice({
         uploadedImagesData: newUploadedImagesData,
       };
     },
+
+    updateListValue(state: IWorkspaceState, action: { payload: IList[] }) {
+      console.log(action, 'action');
+
+      return {
+        ...state,
+        listValue: action.payload,
+      };
+    },
   },
 });
 
@@ -159,5 +187,6 @@ export const {
   saveContractConfig,
   saveOracleConfig,
   updateUploadedImageData,
+  updateListValue,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;

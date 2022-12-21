@@ -48,7 +48,7 @@ const ListSettings: FC<ISettings> = ({ handleSettingChange }) => {
           placeholder="Link"
         />
       </div> */}
-      <ListOptionsComponent i={selectedElement.i} handleSettingChange={handleSettingChange} />
+      <ListOptionsComponent i={selectedElement.i} />
       <ListTypeComponent i={selectedElement.i} listType={selectedElement.style.listType} />
       <FontFamilyComponent i={selectedElement.i} fontFamily={selectedElement.style.fontFamily} />
       <FontWeightComponent i={selectedElement.i} fontWeight={selectedElement.style.fontWeight} />
