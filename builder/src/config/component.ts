@@ -306,6 +306,15 @@ export const components = [
       ...defaultMarginStyles,
     },
   },
+  {
+    name: 'Lenster Card',
+    h: 2,
+    minH: 1,
+    posts: [],
+    style: {
+      ...defaultDeleteStyles,
+    },
+  },
   // {
   //   name: "Divider",
   //   h: 1,
