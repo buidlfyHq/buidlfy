@@ -40,13 +40,7 @@ export interface IWorkspaceElement {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
-  listValue?: IListValue[];
-}
-
-export interface IListValue {
-  id: string;
-  value: string;
-  link?: string;
+  listValue?: IList[];
 }
 
 export interface IHead {
@@ -101,7 +95,7 @@ export interface IAction {
 export interface IElementDetail {
   settingItemId: string;
   propertyName: string;
-  propertyValue: string | number | boolean;
+  propertyValue: string | number | boolean | Array<any>;
   childPropertyName?: string;
   imageSizeProperty?: boolean;
 }
@@ -182,7 +176,7 @@ export interface IText {
   };
   fontFamily?: string;
   listType?: string;
-  listValue?: IListValue[];
+  listValue?: IList[];
 }
 
 export interface IList {

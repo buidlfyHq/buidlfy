@@ -312,7 +312,7 @@ export const components = [
     minH: 1,
     value: 'List',
     link: '',
-    listValue: [],
+    listOptions: [],
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -329,6 +329,7 @@ export const components = [
     minH: 1,
     value: 'Dropdown',
     link: '',
+    listOptions: [],
     style: {
       // ...defaultColorStyles,
       ...defaultFontStyles,
@@ -410,8 +411,8 @@ export const components = [
       borderWidth: 0,
       ...defaultMarginStyles,
       padding: {
-        paddingLeft: 24,
-        paddingRight: 24,
+        paddingLeft: 14,
+        paddingRight: 14,
         paddingTop: 4,
         paddingBottom: 4,
       },

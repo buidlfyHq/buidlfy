@@ -30,7 +30,7 @@ const RadioButton: FC<IText> = ({
       }}
       className="flex items-center"
     >
-      <input type="checkbox" />
+      <input type="radio" />
       <span
         id={i}
         style={{

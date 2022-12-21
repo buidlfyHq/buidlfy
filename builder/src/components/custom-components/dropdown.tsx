@@ -109,17 +109,7 @@ const Dropdown: FC<IText> = ({
           <IoMdArrowDropright style={{ color: borderColor }} className="flex items-center text-[18px] ml-[5rem] icon-left" />
           <IoMdArrowDropdown style={{ color: borderColor }} className=" items-center text-[18px] ml-[5rem] icon-down" />
         </button>
-        <div
-          key={i}
-          className="absolute dropdown-content mt-2 text-left pl-[20px] pr-[118px] pt-[10px] pb-[10px]"
-          style={{
-            background: backgroundColor,
-            boxShadow: shadow,
-            border: `${borderWidth}px solid ${borderColor}`,
-            borderImage: borderColor,
-            borderRadius: `${borderRadius}px`,
-          }}
-        >
+        <div key={i} className="absolute dropdown-content mt-2 text-left pl-[20px] pr-[118px] pt-[10px] pb-[10px] w-[13rem]">
           {lists?.map(list => {
             return (
               <>

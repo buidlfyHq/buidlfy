@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
-import { IList, IListValue, IText } from 'redux/workspace/workspace.interfaces';
+import { IList, IText } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
 import { gradientCheck } from 'utils/gradient-check';
 
@@ -29,14 +29,14 @@ const List: FC<IText> = ({
     <section key={i}>
       <span
         style={{
-          height: '-webkit-fill-available',
+          // height: '-webkit-fill-available',
           textDecoration: underline,
           textDecorationColor: color,
           background: backgroundColor,
           justifyContent: `${justifyContent}` as CanvasTextAlign,
           margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
         }}
-        className="flex overflow-hidden"
+        className="flex overflow-hidden items-center"
         key={i}
       >
         <ul

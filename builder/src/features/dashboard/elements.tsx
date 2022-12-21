@@ -174,9 +174,20 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         </div>
       </div>
       <div className="element-div">
-        <div onClick={() => onClickFunction('List')} className="px-4 py-4 cursor-pointer">
+        <div onClick={() => onClickFunction('List')} className="px-10 py-3 cursor-pointer">
           <div data-tip="Click here to add the List" data-for="elements"></div>
-          <h2>Add List</h2>
+          <div className="flex items-center">
+            <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
+            <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Item 1</h2>
+          </div>
+          <div className="flex items-center mt-3">
+            <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
+            <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Item 2</h2>
+          </div>
+          <div className="flex items-center mt-3">
+            <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
+            <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Item 3</h2>
+          </div>
         </div>
       </div>
       <div className="element-div">
@@ -198,19 +209,19 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
           <div data-tip="Click here to add the Checkbox" data-for="elements">
             <div className="flex items-center">
               <span className="h-4 w-4 bg-[#FFFFFF] border-[#D0D5DD] border-[1px] rounded-[4px]"></span>
-              <h2 className="text-[#344054] text-[14px] ml-2">Add Checkbox</h2>
+              <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Add Checkbox</h2>
             </div>
             <div className="flex items-center mt-3">
               <span className="h-4 w-4 bg-[#F9F5FF] border-[#7F56D9] border-[1px] rounded-[4px]">
                 <BsCheck2 className="text-[#7F56D9] text-[14px] flex justify-center items-center" />
               </span>
-              <h2 className="text-[#344054] text-[14px] ml-2">Add Checkbox</h2>
+              <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Add Checkbox</h2>
             </div>
             <div className="flex items-center mt-3">
               <span className="h-4 w-4 bg-[#F9F5FF] border-[#7F56D9] border-[1px] rounded-[4px] checkbox-element">
                 <BsCheck2 className="text-[#7F56D9] text-[14px] flex justify-center items-center" />
               </span>
-              <h2 className="text-[#344054] text-[14px] ml-2">Add Checkbox</h2>
+              <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Add Checkbox</h2>
             </div>
           </div>
         </div>
@@ -220,19 +231,19 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
           <div data-tip="Click here to add the Radio Button" data-for="elements">
             <div className="flex items-center">
               <span className="h-4 w-4 bg-[#FFFFFF] border-[#D0D5DD] border-[1px] rounded-[20px]"></span>
-              <h2 className="text-[#344054] text-[14px] ml-2">Add Radio Button</h2>
+              <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Add Radio Button</h2>
             </div>
             <div className="flex items-center mt-3">
               <span className="h-4 w-4 bg-[#F9F5FF] border-[#7F56D9] border-[1px] rounded-[20px]">
                 <span className="bg-[#7F56D9] text-[14px] flex justify-center items-center w-[10px] m-[2px] h-[10px] rounded-[20px]" />
               </span>
-              <h2 className="text-[#344054] text-[14px] ml-2">Add Radio Button</h2>
+              <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Add Radio Button</h2>
             </div>
             <div className="flex items-center mt-3">
               <span className="h-4 w-4 bg-[#F9F5FF] border-[#7F56D9] border-[1px] rounded-[20px] checkbox-element">
                 <span className="bg-[#7F56D9] text-[14px] flex justify-center items-center w-[10px] m-[2px] h-[10px] rounded-[20px]" />
               </span>
-              <h2 className="text-[#344054] text-[14px] ml-2">Add Radio Button</h2>
+              <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Add Radio Button</h2>
             </div>
           </div>
         </div>

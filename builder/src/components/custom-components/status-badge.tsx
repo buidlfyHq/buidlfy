@@ -43,6 +43,7 @@ const StatusBadge: FC<IText> = ({
       id={i}
       className="btn-border cursor-pointer btn whitespace-nowrap"
     >
+      <span className="w-[6px] h-[6px] rounded-[10px] mr-2" style={{ background: color }}></span>
       <span
         style={{
           background: gradientCheck(color, true),
