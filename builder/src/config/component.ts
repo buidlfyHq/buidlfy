@@ -306,6 +306,16 @@ export const components = [
       ...defaultMarginStyles,
     },
   },
+  {
+    name: 'Spacer',
+    h: 1,
+    minH: 1,
+    style: {
+      ...defaultColorStyles,
+      ...defaultDeleteStyles,
+      ...defaultMarginStyles,
+    },
+  },
   // {
   //   name: "Divider",
   //   h: 1,

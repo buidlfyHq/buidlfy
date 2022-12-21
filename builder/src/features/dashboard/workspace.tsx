@@ -240,7 +240,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
               resizeHandles={['se']}
               isDraggable={drag}
               onLayoutChange={onLayoutChange}
-              compactType={null}
+              compactType="vertical"
               margin={[0, 0]}
               className="h-fit overflow-hidden"
             >

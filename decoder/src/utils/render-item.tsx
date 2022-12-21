@@ -7,6 +7,7 @@ import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
 import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
+import Spacer from "components/custom-components/spacer";
 
 interface IRenderItem {
   item: IWorkspace;
@@ -123,6 +124,15 @@ const RenderItem: FC<IRenderItem> = ({
           isAuto={item.style.isAuto}
           margin={item.style.margin}
           link={item.link}
+        />
+      );
+
+    case "Spacer":
+      return (
+        <Spacer
+          i={item.i}
+          backgroundColor={item.style.backgroundColor}
+          margin={item.style.margin}
         />
       );
     default:
