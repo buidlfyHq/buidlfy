@@ -7,8 +7,6 @@ import 'styles/components.css';
 
 const LensterSettings: FC = () => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
-  console.log(selectedElement, 'selectedElement');
-
   return (
     <section id={selectedElement.i}>
       <h3 className="ml-[0.5rem] mt-[1.5rem]">{selectedElement ? <span className="setting-text">{selectedElement.name}</span> : null}</h3>

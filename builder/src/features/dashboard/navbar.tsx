@@ -39,8 +39,6 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
       },
       contract: null,
     };
-    console.log(workspaceElements, 'workspaceElements');
-
     if (contractDetails?.abi && contractDetails?.address && contractDetails?.network) {
       templateConfig.contract = {
         abi: JSON.parse(contractDetails?.abi),

@@ -33,8 +33,6 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
         propertyValue: filterPost,
       }),
     );
-    console.log(i, 'i');
-    console.log(addInputs, 'addInput');
   }, [dispatch, i, posts]);
 
   const handleNewValue = (e: ChangeEvent<HTMLInputElement>, key: number) => {
