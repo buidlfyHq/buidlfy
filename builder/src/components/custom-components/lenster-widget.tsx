@@ -13,9 +13,6 @@ interface ILensterWidget {
 
 const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
   const posts = useSelector((state: IRootState) => state.lenster.publications.filter(publication => publication.i === i));
-  console.log(posts, 'posts');
-  console.log(i, 'i');
-
   return (
     <>
       {posts && posts.length > 0 ? (
