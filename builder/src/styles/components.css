@@ -724,12 +724,12 @@
   border-radius: 4px;
 }
 .list-link-div {
-  background: #FFFFFF;
+  background: #ffffff;
   /* Gray/300 */
-  
-  border: 1px solid #D0D5DD;
+
+  border: 1px solid #d0d5dd;
   /* Shadow/xs */
-  
+
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
   border-radius: 8px;
 }
@@ -1371,22 +1371,21 @@
 } */
 
 .add-list {
-  background: #F7F8FF;
-/* Gray / 300 */
+  background: #f7f8ff;
+  /* Gray / 300 */
 
-border: 1px solid #D0D5DD;
-/* Shadow / xs */
+  border: 1px solid #d0d5dd;
+  /* Shadow / xs */
 
-box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
-border-radius: 4px;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 20px;
-/* identical to box height, or 143% */
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
 
-
-color: #6A58E7;
+  color: #6a58e7;
 }
 .lenster-div {
   columns: 3;
