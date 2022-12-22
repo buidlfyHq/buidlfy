@@ -83,7 +83,7 @@ const PreviewButton: FC<IText> = ({
   const switchNetwork = async (networkId?: number) => {
     // NOTE: polygon mumbai testnet by default
     const currentNetwork = networks[Number(contractDetails.network) || networkId || 80001];
-
+    
     try {
       await (window as any).ethereum.request({
         method: 'wallet_switchEthereumChain',
@@ -100,11 +100,11 @@ const PreviewButton: FC<IText> = ({
           return { error: false, errorMessage: '' };
         } catch (error) {
           // eslint-disable-next-line no-console
-          console.log('Error in changeNetworkService --> ', error);
+          console.error('Error in changeNetworkService --> ', error);
         }
       }
       // eslint-disable-next-line no-console
-      console.log('Error in changeNetworkService --> ', switchError);
+      console.error('Error in changeNetworkService --> ', switchError);
     }
   };
 
@@ -132,6 +132,7 @@ const PreviewButton: FC<IText> = ({
       );
       setOutputValue(res ? res[0] : []);
     } else {
+      await switchNetwork();
       const res = await onRequest(contractFunction.methodName, contractFunction, contract, inputValue, outputValue, setIsOpen, setTransactionStatus);
       setOutputValue(res ? res[0] : []);
     }

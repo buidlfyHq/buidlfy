@@ -23,8 +23,12 @@ const contractSlice = createSlice({
     },
     // to update contract details
     updateContractAbi(state, action: { payload: string }) {
-      const filterdContractAbi = filterContractAbi(action.payload);
-      state.contractDetails.abi = JSON.stringify(filterdContractAbi);
+      if (action.payload) {
+        const filterdContractAbi = filterContractAbi(action.payload);
+        state.contractDetails.abi = JSON.stringify(filterdContractAbi);
+      } else {
+        state.contractDetails.abi = action.payload;
+      }
     },
     updateContractAddress(state, action: { payload: string }) {
       state.contractDetails.address = action.payload;

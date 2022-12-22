@@ -48,6 +48,24 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height, manualSizing }) =
           imageSizeProperty: false,
         }),
       );
+    } else if (action === ReplaceStyle.INCREMENTWIDTH) {
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: 'width',
+          propertyValue: width - 1,
+          imageSizeProperty: false,
+        }),
+      );
+    } else if (action === ReplaceStyle.INCREMENTHEIGHT) {
+      dispatch(
+        updateWorkspaceImageElementStyle({
+          settingItemId: i,
+          propertyName: 'height',
+          propertyValue: height - 1,
+          imageSizeProperty: false,
+        }),
+      );
     } else if (action === ReplaceStyle.DECREMENTWIDTH) {
       dispatch(
         updateWorkspaceImageElementStyle({
@@ -95,6 +113,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height, manualSizing }) =
             (updatedWidth: number) => handleChange(ReplaceStyle.WIDTH, updatedWidth),
             (updatedHeight: number) => handleChange(ReplaceStyle.HEIGHT, undefined, updatedHeight),
           ]}
+          handleIncrement={[() => handleChange(ReplaceStyle.INCREMENTWIDTH), () => handleChange(ReplaceStyle.INCREMENTHEIGHT)]}
           handleDecrement={[() => handleChange(ReplaceStyle.DECREMENTWIDTH), () => handleChange(ReplaceStyle.DECREMENTHEIGHT)]}
         />
       )}
