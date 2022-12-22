@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropright } from 'react-icons/io';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
 import { IList, IText } from 'redux/workspace/workspace.interfaces';
+import { updateListValue } from 'redux/workspace/workspace.reducers';
+import ShortUniqueId from 'short-unique-id';
 import 'styles/components.css';
 import { gradientCheck } from 'utils/gradient-check';
 
@@ -26,11 +28,34 @@ const Dropdown: FC<IText> = ({
   shadow,
 }) => {
   const gradientCondition = color?.indexOf('gradient') !== -1;
+  const dispatch = useDispatch();
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
-
+  const selectedList = lists.filter(list => list.i === i);
+  useEffect(() => {
+    console.log(lists, 'lists');
+    console.log(lists.length, 'list.length');
+    // console.log(Array.from(Array(3 - lists.length).keys()), 'array');
+    if (selectedList.length <= 3) {
+      {
+        Array.from(Array(3 - selectedList?.length).keys()).map(list => {
+          const uid = new ShortUniqueId();
+          const listId = uid();
+          const newLists = [
+            ...lists,
+            {
+              i: i,
+              id: uid(),
+              value: 'Default Item',
+              link: '',
+            },
+          ];
+          dispatch(updateListValue(newLists));
+        });
+      }
+    }
+  }, [lists]);
   return (
-    <div
-      key={i}
+    <section
       style={{
         height: '-webkit-fill-available',
         textDecoration: underline,
@@ -41,7 +66,7 @@ const Dropdown: FC<IText> = ({
       }}
       className="flex overflow-hidden"
     >
-      <div
+      <span
         key={i}
         style={{
           WebkitTextFillColor: gradientCheck(color, false),
@@ -109,8 +134,8 @@ const Dropdown: FC<IText> = ({
           <IoMdArrowDropright style={{ color: borderColor }} className="flex items-center text-[18px] ml-[5rem] icon-left" />
           <IoMdArrowDropdown style={{ color: borderColor }} className=" items-center text-[18px] ml-[5rem] icon-down" />
         </button>
-        <div key={i} className="absolute dropdown-content mt-2 text-left pl-[20px] pr-[118px] pt-[10px] pb-[10px] w-[13rem]">
-          {lists?.map(list => {
+        <span key={i} className="absolute dropdown-content mt-2 text-left pl-[20px] pr-[98px] pt-[10px] pb-[10px] w-[13rem]">
+          {selectedList?.map(list => {
             return (
               <>
                 {list.link ? (
@@ -127,9 +152,9 @@ const Dropdown: FC<IText> = ({
               </>
             );
           })}
-        </div>
-      </div>
-    </div>
+        </span>
+      </span>
+    </section>
   );
 };
 
