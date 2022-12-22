@@ -17,7 +17,6 @@ import Checkbox from 'components/custom-components/checkbox';
 import Dropdown from 'components/custom-components/dropdown';
 import Badge from 'components/custom-components/badge';
 import RadioButton from 'components/custom-components/radio';
-import StatusBadge from 'components/custom-components/status-badge';
 
 interface IRenderItem {
   item: IWorkspaceElement;
@@ -50,8 +49,6 @@ const RenderItem: FC<IRenderItem> = ({
   outputValue,
   setOutputValue,
 }) => {
-  console.log(item.value, 'value');
-
   switch (item.name) {
     case 'Button':
       return (
@@ -287,32 +284,11 @@ const RenderItem: FC<IRenderItem> = ({
         />
       );
     case 'Badge':
+    case 'Status':
       return (
         <Badge
           i={item.i}
-          fontWeight={item.style.fontWeight}
-          italic={item.style.fontStyle}
-          underline={item.style.textDecoration}
-          color={item.style.color}
-          borderColor={item.style.borderColor}
-          justifyContent={item.style.justifyContent}
-          fontSize={item.style.fontSize}
-          value={item.value}
-          backgroundColor={item.style.backgroundColor}
-          link={item.link}
-          borderRadius={item.style.borderRadius}
-          borderWidth={item.style.borderWidth}
-          shadow={item.style.shadow}
-          connectWallet={item.connectWallet}
-          margin={item.style.margin}
-          padding={item.style.padding}
-          fontFamily={item.style.fontFamily}
-        />
-      );
-    case 'Status':
-      return (
-        <StatusBadge
-          i={item.i}
+          name={item.name}
           fontWeight={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}

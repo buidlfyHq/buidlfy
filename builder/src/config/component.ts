@@ -412,8 +412,8 @@ export const components = [
       borderWidth: 0,
       ...defaultMarginStyles,
       padding: {
-        paddingLeft: 14,
-        paddingRight: 14,
+        paddingLeft: 18,
+        paddingRight: 18,
         paddingTop: 4,
         paddingBottom: 4,
       },

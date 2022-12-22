@@ -5,6 +5,7 @@ import 'styles/components.css';
 
 const Badge: FC<IText> = ({
   i,
+  name,
   fontWeight,
   italic,
   underline,
@@ -43,6 +44,7 @@ const Badge: FC<IText> = ({
       id={i}
       className="btn-border cursor-pointer btn whitespace-nowrap"
     >
+      {name === 'Status' ? <span className="w-[6px] h-[6px] rounded-[10px] mr-2" style={{ background: color }}></span> : null}
       <span
         style={{
           background: gradientCheck(color, true),
