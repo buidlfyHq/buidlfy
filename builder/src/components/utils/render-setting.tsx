@@ -6,6 +6,7 @@ import ImageSettings from 'components/dashboard/image-settings';
 import ContainerSettings from 'components/dashboard/container-settings';
 import InputSettings from 'components/dashboard/input-settings';
 import GeneralSettings from 'components/dashboard/general-settings';
+import LensterSettings from 'components/dashboard/lenster-settings';
 import { IRootState } from 'redux/root-state.interface';
 import { ISettings } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
@@ -56,7 +57,6 @@ export enum ReplaceStyle {
 const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const dispatch = useDispatch();
   const selectedElement = useSelector((state: IRootState) => state.workspace.selectedElement);
-
   const handleSettingChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>, propertyName: string) => {
     dispatch(
       updateWorkspaceElement({
@@ -72,15 +72,14 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
       return <ButtonSettings handleSettingChange={handleSettingChange} openTab={openTab} setOpenTab={setOpenTab} />;
     case 'Image':
       return <ImageSettings handleSettingChange={handleSettingChange} />;
-
     case 'Container':
     case 'Horizontal Container':
     case 'Vertical Container':
       return <ContainerSettings />;
-
+    case 'Lenster Card':
+      return <LensterSettings />;
     case 'Input':
       return <InputSettings handleSettingChange={handleSettingChange} />;
-
     default:
       return <GeneralSettings handleSettingChange={handleSettingChange} />;
   }

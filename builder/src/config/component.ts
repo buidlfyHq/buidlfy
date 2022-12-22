@@ -300,9 +300,19 @@ export const components = [
       height: 60,
       backgroundSize: 'contain',
       isAuto: true,
+      manualSizing: true,
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,
+    },
+  },
+  {
+    name: 'Lenster Card',
+    h: 2,
+    minH: 1,
+    posts: [],
+    style: {
+      ...defaultDeleteStyles,
     },
   },
   // {

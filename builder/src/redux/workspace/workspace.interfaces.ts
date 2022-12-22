@@ -1,3 +1,4 @@
+import { IPublication } from 'redux/lenster/lenster.interfaces';
 import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
 
 export interface IUploadedImageData {
@@ -39,6 +40,7 @@ export interface IWorkspaceElement {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
+  posts?: IPublication[];
 }
 
 export interface IHead {
@@ -65,6 +67,7 @@ export interface IStyle {
   borderWidth?: number;
   shadow?: string;
   isAuto?: boolean;
+  manualSizing?: boolean;
   margin?: {
     marginLeft?: number;
     marginRight?: number;
@@ -92,7 +95,7 @@ export interface IAction {
 export interface IElementDetail {
   settingItemId: string;
   propertyName: string;
-  propertyValue: string | number | boolean;
+  propertyValue: string | number | boolean | Array<any>;
   childPropertyName?: string;
   imageSizeProperty?: boolean;
 }
@@ -157,6 +160,12 @@ export interface IText {
   borderRadius?: number;
   borderWidth?: number;
   backgroundColor?: string;
+  contractFunction?: any; // required
+  oracleFunction?: IOracleConfig;
+  inputValue?: IInput[];
+  setInputValue?: (inputValue: IInput[]) => void;
+  outputValue?: IOutput[];
+  setOutputValue?: (outputValue: IOutput[]) => void;
   shadow?: string;
   connectWallet?: boolean;
   margin?: {
@@ -172,4 +181,15 @@ export interface IText {
     paddingBottom?: number;
   };
   fontFamily?: string;
+}
+
+export interface IInput {
+  id: string;
+  value: string;
+}
+
+export interface IOutput {
+  id: string;
+  name: string;
+  value: any; // can be string or array
 }

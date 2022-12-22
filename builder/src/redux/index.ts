@@ -9,6 +9,7 @@ import templateReducer from 'redux/template/template.reducers';
 import mintedReducer from 'redux/minted/minted.reducers';
 import publishReducer from './publish/publish.reducers';
 import uploadReducer from './upload/upload.reducers';
+import lensterReducer from './lenster/lenster.reducers';
 import oracleReducer from './oracle/oracle.reducers';
 
 let sagaMiddleware = createSagaMiddleware();
@@ -24,6 +25,7 @@ export const store = configureStore({
     minted: mintedReducer,
     publish: publishReducer,
     upload: uploadReducer,
+    lenster: lensterReducer,
     oracle: oracleReducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(middleware),

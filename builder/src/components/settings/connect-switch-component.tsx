@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
 import 'styles/components.css';
@@ -11,7 +11,7 @@ interface IConnectSwitchComponent {
 
 const ConnectSwitchComponent: FC<IConnectSwitchComponent> = ({ i, connectWallet }) => {
   const dispatch = useDispatch();
-  const [connectToggle, setConnectToggle] = useState(connectWallet);
+  const [connectToggle, setConnectToggle] = useState<boolean>(connectWallet);
 
   const handleOnChange = () => {
     setConnectToggle(!connectToggle);
