@@ -180,6 +180,7 @@ export interface IText {
 }
 
 export interface IList {
+  i?: string;
   id: string;
   value: string;
   link: string;

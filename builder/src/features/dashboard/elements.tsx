@@ -175,18 +175,19 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
       </div>
       <div className="element-div">
         <div onClick={() => onClickFunction('List')} className="px-10 py-3 cursor-pointer">
-          <div data-tip="Click here to add the List" data-for="elements"></div>
-          <div className="flex items-center">
-            <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
-            <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Item 1</h2>
-          </div>
-          <div className="flex items-center mt-3">
-            <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
-            <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Item 2</h2>
-          </div>
-          <div className="flex items-center mt-3">
-            <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
-            <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Item 3</h2>
+          <div data-tip="Click here to add the List" data-for="elements">
+            <div className="flex items-center">
+              <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
+              <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Item 1</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
+              <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Item 2</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
+              <h2 className="text-[#344054] text-[14px] ml-2 heading-element hover:text-[#5A4471]">Item 3</h2>
+            </div>
           </div>
         </div>
       </div>
