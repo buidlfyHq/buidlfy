@@ -5,7 +5,7 @@ import { IoIosCloseCircleOutline, IoMdAdd } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
 import { IList } from 'redux/workspace/workspace.interfaces';
-import { updateListValue, updateWorkspaceElement, updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
+import { updateListValue, updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
 import ShortUniqueId from 'short-unique-id';
 
 interface IListOptionsComponent {
@@ -14,7 +14,6 @@ interface IListOptionsComponent {
 }
 const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
   const [isLinkVisible, setIsLinkVisible] = useState<Array<any>>([]);
-  const [isTextInputVisible, setIsTextInputVisible] = useState<Array<any>>([]);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const dispatch = useDispatch();
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
@@ -31,10 +30,7 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
     dispatch(updateListValue(newLists));
   };
 
-  const handleRemoveText = (i: number, key: string) => {
-    // const textInputVisible = [...isTextInputVisible];
-    // textInputVisible[i] = false;
-    // setIsTextInputVisible(textInputVisible);
+  const handleRemoveText = (key: string) => {
     const newLists = [...lists];
     const findListIndex = newLists.findIndex(newList => key === newList.id);
     newLists.splice(findListIndex, 1);
@@ -83,70 +79,123 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
     );
   }, [i, lists]);
 
-  //   useEffect(() => {
-  //     if (lists.length <= 2) {
-  //       {
-  //         Array.from(Array(3 - lists.length).keys()).map(list => {
-  //           handleListDiv();
-  //         });
-  //       }
-  //     }
-  //   }, []);
-  return (
-    <>
-      <div className="px-1 py-4">
-        <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">Manage Options</div>
-        {lists
-          .filter(list => list.i === i)
-          .slice(0, 3)
-          .map((list, i) => {
-            return (
-              <div key={i}>
-                <div className="flex items-center mt-4 mx-2 w-[13.5rem] text-black">
+  enum List {
+    DIALOG = 'dialog',
+    LIST = 'list',
+  }
+
+  const settingList = () => {
+    <div className="px-1 py-4">
+      <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">Manage Options</div>
+      {lists
+        .filter(list => list.i === i)
+        .slice(0, 3)
+        .map((list, i) => {
+          return (
+            <div key={i}>
+              <div className="flex items-center mt-4 mx-2 w-[13.5rem] text-black">
+                <input
+                  id={list.id}
+                  value={list.value}
+                  onChange={e => handleTextChange(e, list.id)}
+                  className="changeText pl-[10px] py-[0.4rem] input-text"
+                  type="text"
+                  placeholder="Add Text"
+                />
+                <IoIosCloseCircleOutline
+                  onClick={() => handleRemoveText(list.id)}
+                  className="text-[15px] text-[#98A2B3] absolute right-[3.8rem] cursor-pointer"
+                />
+                <div onClick={() => handleLink(i)} className="list-link-div px-[0.35rem] py-[0.38rem] ml-2 cursor-pointer hover:bg-[#F9FAFB]">
+                  <BsLink45Deg className="text-[20px] text-[#98A2B3]" />
+                </div>
+              </div>
+
+              {isLinkVisible[i] ? (
+                <div key={i} className="flex items-center mt-4 mx-2 w-[13.5rem] text-black">
                   <input
                     id={list.id}
-                    value={list.value}
-                    onChange={e => handleTextChange(e, list.id)}
+                    value={list.link}
+                    onChange={e => handleLinkChange(e, list.id)}
                     className="changeText pl-[10px] py-[0.4rem] input-text"
                     type="text"
-                    placeholder="Add Text"
+                    placeholder="Add Link"
                   />
                   <IoIosCloseCircleOutline
-                    onClick={() => handleRemoveText(i, list.id)}
-                    className="text-[15px] text-[#98A2B3] absolute right-[3.8rem] cursor-pointer"
+                    onClick={() => handleRemoveLink(i, list.id)}
+                    className="text-[15px] text-[#98A2B3] absolute right-[1.2rem] cursor-pointer"
                   />
-                  <div onClick={() => handleLink(i)} className="list-link-div px-[0.35rem] py-[0.38rem] ml-2 cursor-pointer hover:bg-[#F9FAFB]">
-                    <BsLink45Deg className="text-[20px] text-[#98A2B3]" />
-                  </div>
                 </div>
+              ) : null}
+            </div>
+          );
+        })}
 
-                {isLinkVisible[i] ? (
-                  <div key={i} className="flex items-center mt-4 mx-2 w-[13.5rem] text-black">
-                    <input
-                      id={list.id}
-                      value={list.link}
-                      onChange={e => handleLinkChange(e, list.id)}
-                      className="changeText pl-[10px] py-[0.4rem] input-text"
-                      type="text"
-                      placeholder="Add Link"
-                    />
-                    <IoIosCloseCircleOutline
-                      onClick={() => handleRemoveLink(i, list.id)}
-                      className="text-[15px] text-[#98A2B3] absolute right-[1.2rem] cursor-pointer"
-                    />
-                  </div>
-                ) : null}
+      <button
+        onClick={handleListDiv}
+        className="add-list flex justify-center items-center pl-[10px] py-[0.6rem] mt-4 mx-2 w-[13.5rem] hover:bg-[#F6F5FF]"
+      >
+        Add More <IoMdAdd />
+      </button>
+    </div>;
+  };
+
+  const modalList = () => {
+    <div className="px-1 py-4">
+      <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">Manage Options</div>
+      {lists
+        .filter(list => list.i === i)
+        .map((list, i) => {
+          return (
+            <div key={i}>
+              <div className="flex items-center mt-4 mx-2 w-[14.5rem] text-black">
+                <input
+                  id={list.id}
+                  value={list.value}
+                  onChange={e => handleTextChange(e, list.id)}
+                  className="changeText pl-[10px] py-[0.4rem] input-text"
+                  type="text"
+                  placeholder="Add Text"
+                />
+                <IoIosCloseCircleOutline
+                  onClick={() => handleRemoveText(list.id)}
+                  className="text-[15px] text-[#98A2B3] absolute right-[4.7rem] cursor-pointer"
+                />
+                <div onClick={() => handleLink(i)} className="list-link-div px-[0.35rem] py-[0.38rem] ml-2 cursor-pointer hover:bg-[#F9FAFB]">
+                  <BsLink45Deg className="text-[20px] text-[#98A2B3]" />
+                </div>
               </div>
-            );
-          })}
 
-        <button
-          onClick={handleListDiv}
-          className="add-list flex justify-center items-center pl-[10px] py-[0.6rem] mt-4 mx-2 w-[13.5rem] hover:bg-[#F6F5FF]"
-        >
-          Add More <IoMdAdd />
-        </button>
-      </div>
+              {isLinkVisible[i] ? (
+                <div key={i} className="flex items-center mt-4 mx-2 w-[14.5rem] text-black">
+                  <input
+                    id={list.id}
+                    value={list.link}
+                    onChange={e => handleLinkChange(e, list.id)}
+                    className="changeText pl-[10px] py-[0.4rem] input-text"
+                    type="text"
+                    placeholder="Add Link"
+                  />
+                  <IoIosCloseCircleOutline
+                    onClick={() => handleRemoveLink(i, list.id)}
+                    className="text-[15px] text-[#98A2B3] absolute right-[2rem] cursor-pointer"
+                  />
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+      <button
+        onClick={handleListDiv}
+        className="add-list flex justify-center items-center pl-[10px] py-[0.6rem] mt-4 mx-2 w-[14.5rem] hover:bg-[#F6F5FF]"
+      >
+        Add More <IoMdAdd />
+      </button>
+    </div>;
+  };
+  return (
+    <>
+      {settingList()}
       {isModalVisible ? (
         <Dialog
           as="div"
@@ -154,60 +203,11 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
           open={isModalVisible}
           onClose={() => setIsModalVisible(false)}
         >
-          <div className="px-4 text-right ">
-            <div onClick={() => setIsModalVisible(false)} />
-            <div className="px-1 py-4">
-              <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">Manage Options</div>
-              {lists
-                .filter(list => list.i === i)
-                .map((list, i) => {
-                  return (
-                    <div key={i}>
-                      <div className="flex items-center mt-4 mx-2 w-[14.5rem] text-black">
-                        <input
-                          id={list.id}
-                          value={list.value}
-                          onChange={e => handleTextChange(e, list.id)}
-                          className="changeText pl-[10px] py-[0.4rem] input-text"
-                          type="text"
-                          placeholder="Add Text"
-                        />
-                        <IoIosCloseCircleOutline
-                          onClick={() => handleRemoveText(i, list.id)}
-                          className="text-[15px] text-[#98A2B3] absolute right-[4.7rem] cursor-pointer"
-                        />
-                        <div onClick={() => handleLink(i)} className="list-link-div px-[0.35rem] py-[0.38rem] ml-2 cursor-pointer hover:bg-[#F9FAFB]">
-                          <BsLink45Deg className="text-[20px] text-[#98A2B3]" />
-                        </div>
-                      </div>
-
-                      {isLinkVisible[i] ? (
-                        <div key={i} className="flex items-center mt-4 mx-2 w-[14.5rem] text-black">
-                          <input
-                            id={list.id}
-                            value={list.link}
-                            onChange={e => handleLinkChange(e, list.id)}
-                            className="changeText pl-[10px] py-[0.4rem] input-text"
-                            type="text"
-                            placeholder="Add Link"
-                          />
-                          <IoIosCloseCircleOutline
-                            onClick={() => handleRemoveLink(i, list.id)}
-                            className="text-[15px] text-[#98A2B3] absolute right-[2rem] cursor-pointer"
-                          />
-                        </div>
-                      ) : null}
-                    </div>
-                  );
-                })}
-
-              <button
-                onClick={handleListDiv}
-                className="add-list flex justify-center items-center pl-[10px] py-[0.6rem] mt-4 mx-2 w-[14.5rem] hover:bg-[#F6F5FF]"
-              >
-                Add More <IoMdAdd />
-              </button>
-            </div>
+          <div className="px-4 text-right">
+            <>
+              <div onClick={() => setIsModalVisible(false)} />
+              {modalList()}
+            </>
           </div>
         </Dialog>
       ) : null}

@@ -18,10 +18,6 @@ const Checkbox: FC<IText> = ({
   fontFamily,
 }) => {
   const gradientCondition = color?.indexOf('gradient') !== -1;
-  console.log(value, 'value');
-  console.log(justifyContent, 'justifyContent');
-  console.log(margin, 'margin');
-
   return (
     <section
       id={i}

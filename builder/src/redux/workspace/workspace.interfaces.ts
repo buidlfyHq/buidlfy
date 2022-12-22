@@ -150,6 +150,7 @@ export interface ITemplate {
 
 export interface IText {
   i?: string;
+  name?: string;
   setItems?: (items?: IWorkspaceElement[]) => void;
   fontWeight: number;
   italic: string;

@@ -24,23 +24,7 @@ const initialState: IWorkspaceState = {
     title: '',
     logo: '',
   },
-  listValue: [
-    // {
-    //   id: uid(),
-    //   value: 'Item 1',
-    //   link: '',
-    // },
-    // {
-    //   id: uid(),
-    //   value: 'Item 2',
-    //   link: '',
-    // },
-    // {
-    //   id: uid(),
-    //   value: 'Item 3',
-    //   link: '',
-    // },
-  ],
+  listValue: [],
 };
 const workspaceSlice = createSlice({
   name: 'workspace',
@@ -165,7 +149,6 @@ const workspaceSlice = createSlice({
     },
 
     updateListValue(state: IWorkspaceState, action: { payload: IList[] }) {
-      console.log(action, 'action');
       return {
         ...state,
         listValue: action.payload,
