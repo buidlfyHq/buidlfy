@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC } from "react";
 
 interface ISpacer {
   i: string;
@@ -16,7 +16,7 @@ const Spacer: FC<ISpacer> = ({ i, backgroundColor, margin }) => (
     <div
       id={i}
       style={{
-        height: '-webkit-fill-available',
+        height: "-webkit-fill-available",
         background: backgroundColor,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}

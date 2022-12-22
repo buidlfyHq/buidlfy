@@ -5,13 +5,12 @@ import ButtonSettings from 'components/dashboard/button-settings';
 import ImageSettings from 'components/dashboard/image-settings';
 import ContainerSettings from 'components/dashboard/container-settings';
 import InputSettings from 'components/dashboard/input-settings';
-
+import SpacerSettings from 'components/dashboard/spacer-settings';
 import GeneralSettings from 'components/dashboard/general-settings';
 import { IRootState } from 'redux/root-state.interface';
 import { ISettings } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
 import 'styles/dashboard.css';
-import SpacerSettings from 'components/dashboard/spacer-settings';
 
 export enum ReplaceValue {
   INCREMENT = 'increment',
