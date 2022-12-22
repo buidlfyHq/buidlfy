@@ -83,7 +83,7 @@ const PreviewButton: FC<IText> = ({
   const switchNetwork = async (networkId?: number) => {
     // NOTE: polygon mumbai testnet by default
     const currentNetwork = networks[Number(contractDetails.network) || networkId || 80001];
-    
+
     try {
       await (window as any).ethereum.request({
         method: 'wallet_switchEthereumChain',
