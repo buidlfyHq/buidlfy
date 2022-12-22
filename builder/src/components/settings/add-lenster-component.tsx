@@ -16,7 +16,7 @@ interface IAddLensterComponent {
 const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state: IRootState) => state.lenster.publications);
-  
+
   const [addInputs, setAddInputs] = useState<Array<any>>([]); // Derive better type for array
   const [isDuplicate, setIsDuplicate] = useState<Boolean>(false);
 
