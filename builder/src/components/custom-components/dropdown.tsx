@@ -34,7 +34,7 @@ const Dropdown: FC<IText> = ({
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
   const selectedList = lists.filter(list => list.i === i);
   const listFilter = listOptions.filter(list => list.i === i);
-  const previewFilter = preview ?  listFilter : selectedList;
+  const previewFilter = preview ? listFilter : selectedList;
   useEffect(() => {
     if (selectedList.length <= 3) {
       {
