@@ -45,7 +45,7 @@ const PreviewContainer: FC<IPreviewContainer> = ({
   useEffect(() => {
     const cw = document?.getElementById(`${item.i}`)?.getBoundingClientRect().width;
     if (cw) setContainerW(cw);
-  }, []);
+  }, []); // eslint-disable-line
 
   let finalSpacing = margin?.marginLeft + margin?.marginRight + padding?.paddingLeft + padding?.paddingRight;
 

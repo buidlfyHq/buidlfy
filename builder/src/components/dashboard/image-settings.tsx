@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import AlignComponent from 'components/settings/align-component';
 import UploadComponent from 'components/settings/upload-component';
@@ -29,7 +29,12 @@ const ImageSettings: FC<ISettings> = ({ handleSettingChange }) => {
         />
       </div>
       <AlignComponent i={selectedElement.i} justifyContent={selectedElement.style.justifyContent} />
-      <SizeComponent i={selectedElement.i} width={selectedElement.style?.width} height={selectedElement.style?.height} />
+      <SizeComponent
+        i={selectedElement.i}
+        width={selectedElement.style?.width}
+        height={selectedElement.style?.height}
+        manualSizing={selectedElement.style?.manualSizing}
+      />
       <BackgroundSizeComponent i={selectedElement.i} backgroundSize={selectedElement.style?.backgroundSize} />
       <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
     </>

@@ -11,6 +11,7 @@ import ListSettings from 'components/dashboard/list-settings';
 import DropdownSettings from 'components/dashboard/dropdown-settings';
 import BadgeSettings from 'components/dashboard/badge-settings';
 import CheckboxSettings from 'components/dashboard/checkbox-settings';
+import LensterSettings from 'components/dashboard/lenster-settings';
 import { IRootState } from 'redux/root-state.interface';
 import { ISettings } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
@@ -61,7 +62,6 @@ export enum ReplaceStyle {
 const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
   const dispatch = useDispatch();
   const selectedElement = useSelector((state: IRootState) => state.workspace.selectedElement);
-
   const handleSettingChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>, propertyName: string) => {
     dispatch(
       updateWorkspaceElement({
@@ -81,8 +81,6 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
     case 'Horizontal Container':
     case 'Vertical Container':
       return <ContainerSettings />;
-    case 'Input':
-      return <InputSettings handleSettingChange={handleSettingChange} />;
     case 'Divider':
       return <DividerSettings />;
     case 'List':
@@ -93,6 +91,10 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
       return <BadgeSettings handleSettingChange={handleSettingChange} />;
     case 'Checkbox':
       return <CheckboxSettings handleSettingChange={handleSettingChange} />;
+    case 'Lenster Card':
+      return <LensterSettings />;
+    case 'Input':
+      return <InputSettings handleSettingChange={handleSettingChange} />;
     default:
       return <GeneralSettings handleSettingChange={handleSettingChange} />;
   }

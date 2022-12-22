@@ -301,6 +301,7 @@ export const components = [
       height: 60,
       backgroundSize: 'contain',
       isAuto: true,
+      manualSizing: true,
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,
@@ -447,4 +448,20 @@ export const components = [
       fontSize: 13,
     },
   },
+  {
+    name: 'Lenster Card',
+    h: 2,
+    minH: 1,
+    posts: [],
+    style: {
+      ...defaultDeleteStyles,
+    },
+  },
+  // {
+  //   name: "Divider",
+  //   h: 1,
+  //   style: {
+  //     ...defaultDeleteStyles,
+  //   },
+  // },
 ];

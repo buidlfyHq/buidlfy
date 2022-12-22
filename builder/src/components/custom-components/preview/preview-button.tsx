@@ -1,16 +1,18 @@
-import { FC, useState, useEffect } from "react";
-import { Dialog } from "@headlessui/react";
-import { ethers, Contract } from "ethers";
-import BuilderConfig, { OracleContractAddress } from "config";
-import { networks } from "config/network";
-import { onLoad } from "hooks/on-load";
-import { onRequest } from "hooks/on-request";
-import { gradientCheck } from "utils/gradient-check";
-import ITexts from "interfaces/texts";
-import OracleAbi from "assets/abis/Oracle.json";
-import "styles/components.css";
+import { FC, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Dialog } from '@headlessui/react';
+import { ethers, Contract } from 'ethers';
+import config from 'config';
+import { networks } from 'config/network';
+import { onLoad } from 'hooks/on-load';
+import { onRequest } from 'hooks/on-request';
+import { gradientCheck } from 'utils/gradient-check';
+import { IRootState } from 'redux/root-state.interface';
+import { IText } from 'redux/workspace/workspace.interfaces';
+import OracleAbi from 'assets/abis/Oracle.json';
+import 'styles/components.css';
 
-const Button: FC<ITexts> = ({
+const PreviewButton: FC<IText> = ({
   fontWeight,
   italic,
   underline,
@@ -33,23 +35,22 @@ const Button: FC<ITexts> = ({
   borderWidth,
   fontFamily,
 }) => {
-  const config = JSON.parse(BuilderConfig);
+  const contractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
+  // const configuration = JSON.parse(BuilderConfig);
   const [contract, setContract] = useState<Contract>();
   const [oracleContract, setOracleContract] = useState<Contract>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [transactionStatus, setTransactionStatus] = useState<string>("");
+  const [transactionStatus, setTransactionStatus] = useState<string>('');
   const [account, setAccount] = useState<string>(null);
 
   useEffect(() => {
-    if (config.contract.abi[0] && config.contract.address !== "") {
-      setContract(onLoad(config));
+    if (JSON.parse(JSON.stringify(contractDetails.abi))[0] && contractDetails.address !== '') {
+      setContract(onLoad(contractDetails));
     }
-    if (config.oracle !== null) {
+    if (oracleFunction && oracleFunction !== null) {
       const modifiedConfig = {
-        contract: {
-          address: OracleContractAddress,
-          abi: OracleAbi,
-        },
+        address: config.address.oracle,
+        abi: JSON.stringify(OracleAbi),
       };
       setOracleContract(onLoad(modifiedConfig));
     }
@@ -62,31 +63,30 @@ const Button: FC<ITexts> = ({
       if (!ethereum) {
         return {
           error: true,
-          errorMessage: "MetaMask not installed, please install!",
-          account: "",
+          errorMessage: 'MetaMask not installed, please install!',
+          account: '',
         };
       }
 
       const provider = new ethers.providers.Web3Provider(ethereum);
-      await provider.send("eth_requestAccounts", []); // requesting access to accounts
+      await provider.send('eth_requestAccounts', []); // requesting access to accounts
       const signer = provider.getSigner();
       const address = await signer.getAddress();
       setAccount(address);
       await switchNetwork();
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error("Error in connectWalletService --> ", error);
+      console.error('Error in connectWalletService --> ', error);
     }
   };
 
   const switchNetwork = async (networkId?: number) => {
     // NOTE: polygon mumbai testnet by default
-    const currentNetwork =
-      networks[Number(config.contract.network) || networkId || 80001];
+    const currentNetwork = networks[Number(contractDetails.network) || networkId || 80001];
 
     try {
       await (window as any).ethereum.request({
-        method: "wallet_switchEthereumChain",
+        method: 'wallet_switchEthereumChain',
         params: [{ chainId: currentNetwork.chainId }],
       });
     } catch (switchError) {
@@ -94,17 +94,17 @@ const Button: FC<ITexts> = ({
       if (switchError.code === 4902) {
         try {
           await (window as any).ethereum.request({
-            method: "wallet_addEthereumChain",
+            method: 'wallet_addEthereumChain',
             params: [currentNetwork],
           });
-          return { error: false, errorMessage: "" };
+          return { error: false, errorMessage: '' };
         } catch (error) {
           // eslint-disable-next-line no-console
-          console.log("Error in changeNetworkService --> ", error);
+          console.log('Error in changeNetworkService --> ', error);
         }
       }
       // eslint-disable-next-line no-console
-      console.log("Error in changeNetworkService --> ", switchError);
+      console.log('Error in changeNetworkService --> ', switchError);
     }
   };
 
@@ -128,37 +128,22 @@ const Button: FC<ITexts> = ({
         ],
         [],
         () => {},
-        () => {}
+        () => {},
       );
       setOutputValue(res ? res[0] : []);
     } else {
-      const res = await onRequest(
-        contractFunction.methodName,
-        contractFunction,
-        contract,
-        inputValue,
-        outputValue,
-        setIsOpen,
-        setTransactionStatus
-      );
+      const res = await onRequest(contractFunction.methodName, contractFunction, contract, inputValue, outputValue, setIsOpen, setTransactionStatus);
       setOutputValue(res ? res[0] : []);
     }
   };
 
   return (
-    <main
-      style={{ justifyContent: justifyContent }}
-      className="flex items-center justify-center w-auto h-full"
-    >
-      <Dialog
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        className="relative z-50"
-      >
+    <main style={{ justifyContent: justifyContent }} className="flex items-center justify-center w-auto h-full">
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
         <div className="fixed flex items-center justify-center p-4 top-4 right-4">
           <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
             <Dialog.Title>
-              {transactionStatus === "" ? (
+              {transactionStatus === '' ? (
                 <div className="flex items-center">
                   <div className="lds-ring">
                     <div></div>
@@ -166,9 +151,7 @@ const Button: FC<ITexts> = ({
                     <div></div>
                     <div></div>
                   </div>
-                  <div className="mr-5 text-white">
-                    Transaction In Process...
-                  </div>
+                  <div className="mr-5 text-white">Transaction In Process...</div>
                 </div>
               ) : (
                 <div className="text-white break-all">{transactionStatus}</div>
@@ -185,8 +168,8 @@ const Button: FC<ITexts> = ({
             textDecoration: underline,
             border: `${borderWidth}px solid ${borderColor}`,
             borderImage: borderColor,
-            display: "flex",
-            justifyContent: "center",
+            display: 'flex',
+            justifyContent: 'center',
             fontSize: `${fontSize}px`,
             borderRadius: `${borderRadius}px`,
             background: backgroundColor,
@@ -200,11 +183,11 @@ const Button: FC<ITexts> = ({
           <span
             style={{
               background: color,
-              WebkitTextFillColor: "transparent",
+              WebkitTextFillColor: 'transparent',
             }}
             className="text-class"
           >
-            {!account ? value : "Disconnect"}
+            {!account ? value : 'Disconnect'}
           </span>
         </div>
       ) : (
@@ -215,8 +198,8 @@ const Button: FC<ITexts> = ({
             textDecoration: underline,
             border: `${borderWidth}px solid ${borderColor}`,
             borderImage: borderColor,
-            display: "flex",
-            justifyContent: "center",
+            display: 'flex',
+            justifyContent: 'center',
             borderRadius: `${borderRadius}px`,
             fontSize: `${fontSize}px`,
             background: backgroundColor,
@@ -226,15 +209,13 @@ const Button: FC<ITexts> = ({
           }}
           className="btn btn-border rounded cursor-pointer whitespace-nowrap"
           onClick={() =>
-            contractFunction?.methodName || oracleFunction?.methodName
-              ? onResponse()
-              : console.log("No method attached to this button.")
+            contractFunction?.methodName || oracleFunction?.methodName ? onResponse() : console.log('No method attached to this button.')
           }
         >
           <span
             style={{
               background: color,
-              WebkitTextFillColor: "transparent",
+              WebkitTextFillColor: 'transparent',
             }}
             className="text-class"
           >
@@ -262,4 +243,4 @@ const Button: FC<ITexts> = ({
   );
 };
 
-export default Button;
+export default PreviewButton;

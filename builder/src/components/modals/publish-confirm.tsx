@@ -73,17 +73,18 @@ const PublishConfirmModal: FC = () => {
         network: contractDetails.network,
       },
     };
-    let stringifiedConfig = JSON.stringify(config);
+    const stringifiedConfig = JSON.stringify(config);
+    const encodedConfig = base64_encode(encodeURIComponent(stringifiedConfig));
     // Keep this commented log. Helpful while testing.
-    // console.log(base64_encode(stringifiedConfig));
+    // console.log(encodedConfig);
 
-    dispatch(updatePublishConfig(base64_encode(stringifiedConfig)));
+    dispatch(updatePublishConfig(encodedConfig));
     // will add config , done for testing purposes
-    localStorage.setItem('config', base64_encode(stringifiedConfig));
+    localStorage.setItem('config', encodedConfig);
 
     if (currentStep === 0) {
       handleProcessModal();
-      dispatch(initiatePublish({ configDetails: base64_encode(stringifiedConfig) }));
+      dispatch(initiatePublish({ configDetails: encodedConfig }));
     } else {
       handleProcessModal();
     }
