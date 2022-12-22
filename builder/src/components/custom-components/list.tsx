@@ -41,7 +41,7 @@ const List: FC<IText> = ({
               ...lists,
               {
                 i: i,
-                id: listId(),
+                id: listId,
                 value: 'Default Item',
                 link: '',
               },
