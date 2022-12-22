@@ -41,7 +41,7 @@ export interface IWorkspaceElement {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
-  listValue?: IList[];
+  listOptions?: IList[];
   posts?: IPublication[];
 }
 
@@ -185,7 +185,8 @@ export interface IText {
   };
   fontFamily?: string;
   listType?: string;
-  listValue?: IList[];
+  listOptions?: IList[];
+  preview?: boolean;
 }
 
 export interface IList {

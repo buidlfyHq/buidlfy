@@ -89,7 +89,11 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
       return <DropdownSettings handleSettingChange={handleSettingChange} />;
     case 'Badge':
       return <BadgeSettings handleSettingChange={handleSettingChange} />;
+    case 'Status':
+      return <BadgeSettings handleSettingChange={handleSettingChange} />;
     case 'Checkbox':
+      return <CheckboxSettings handleSettingChange={handleSettingChange} />;
+    case 'Radio':
       return <CheckboxSettings handleSettingChange={handleSettingChange} />;
     case 'Lenster Card':
       return <LensterSettings />;

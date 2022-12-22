@@ -22,5 +22,4 @@ const Divider: FC<IDivider> = ({ borderColor, borderRadius, borderWidth, margin 
     }}
   />
 );
-
 export default Divider;

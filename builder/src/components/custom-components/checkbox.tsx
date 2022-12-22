@@ -20,24 +20,25 @@ const Checkbox: FC<IText> = ({
   const gradientCondition = color?.indexOf('gradient') !== -1;
   console.log(value, 'value');
   console.log(justifyContent, 'justifyContent');
+  console.log(margin, 'margin');
 
   return (
     <section
-      key={i}
+      id={i}
       style={{
         textDecoration: underline,
         textDecorationColor: color,
         background: backgroundColor,
         justifyContent: `${justifyContent}` as CanvasTextAlign,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
+        padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
       }}
-      className="flex items-center"
+      className="flex items-center h-full"
     >
       <input type="checkbox" />
       <span
         id={i}
         style={{
-          height: '-webkit-fill-available',
           WebkitTextFillColor: gradientCheck(color, false),
           fontWeight: fontWeight,
           fontStyle: italic,
@@ -47,9 +48,8 @@ const Checkbox: FC<IText> = ({
           textDecorationColor: `${gradientCondition ? 'black' : color}`,
           fontSize: `${fontSize}px`,
           fontFamily: fontFamily,
-          padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
         }}
-        className={`text-class outline-none ml-[0.5rem] overflow-hidden cursor-pointer resize-none`}
+        className={`text-class outline-none ml-[0.5rem] overflow-hidden cursor-pointer resize-none h-full items-center`}
       >
         {value}
       </span>

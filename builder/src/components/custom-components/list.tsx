@@ -22,40 +22,46 @@ const List: FC<IText> = ({
   link,
   fontFamily,
   listType,
-  listValue,
+  listOptions,
+  preview,
 }) => {
   const gradientCondition = color?.indexOf('gradient') !== -1;
   const dispatch = useDispatch();
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
   const selectedList = lists.filter(list => list.i === i);
+  const previewFilter = preview ? listOptions : selectedList;
   useEffect(() => {
-    console.log(lists, 'lists');
-    console.log(lists.length, 'list.length');
-    // console.log(Array.from(Array(3 - lists.length).keys()), 'array');
-    if (selectedList.length <= 3) {
-      {
-        Array.from(Array(3 - selectedList?.length).keys()).map(list => {
-          const uid = new ShortUniqueId();
-          const listId = uid();
-          const newLists = [
-            ...lists,
-            {
-              i: i,
-              id: uid(),
-              value: 'Default Item',
-              link: '',
-            },
-          ];
-          dispatch(updateListValue(newLists));
-        });
+    if (!preview) {
+      if (selectedList.length <= 3) {
+        {
+          Array.from(Array(3 - selectedList?.length).keys()).map(list => {
+            const uid = new ShortUniqueId();
+            const listId = uid();
+            const newLists = [
+              ...lists,
+              {
+                i: i,
+                id: listId(),
+                value: 'Default Item',
+                link: '',
+              },
+            ];
+            dispatch(updateListValue(newLists));
+          });
+        }
       }
     }
   }, [lists]);
   return (
-    <section key={i}>
+    <section
+      id={i}
+      style={{
+        height: '100%',
+      }}
+    >
       <span
         style={{
-          // height: '-webkit-fill-available',
+          height: '100%',
           textDecoration: underline,
           textDecorationColor: color,
           background: backgroundColor,
@@ -63,10 +69,10 @@ const List: FC<IText> = ({
           margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
         }}
         className="flex overflow-hidden items-center"
-        key={i}
+        id={i}
       >
         <ul
-          key={i}
+          id={i}
           style={{
             WebkitTextFillColor: gradientCheck(color, false),
             fontWeight: fontWeight,
@@ -79,8 +85,9 @@ const List: FC<IText> = ({
             listStyleType: listType,
             padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
           }}
+          className="text-class"
         >
-          {selectedList?.map(list => {
+          {previewFilter?.map(list => {
             return (
               <>
                 {list.link ? (

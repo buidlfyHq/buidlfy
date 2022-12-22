@@ -222,7 +222,8 @@ const RenderItem: FC<IRenderItem> = ({
           padding={item.style.padding}
           fontFamily={item.style.fontFamily}
           listType={item.style.listType}
-          listValue={item.listValue}
+          listOptions={item.listOptions}
+          preview={preview}
         />
       );
     case 'Dropdown':
@@ -245,6 +246,8 @@ const RenderItem: FC<IRenderItem> = ({
           borderWidth={item.style.borderWidth}
           shadow={item.style.shadow}
           borderColor={item.style.borderColor}
+          listOptions={item.listOptions}
+          preview={preview}
         />
       );
     case 'Checkbox':

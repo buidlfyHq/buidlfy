@@ -5,8 +5,8 @@ import { IRootState } from 'redux/root-state.interface';
 import { IList, IText } from 'redux/workspace/workspace.interfaces';
 import { updateListValue } from 'redux/workspace/workspace.reducers';
 import ShortUniqueId from 'short-unique-id';
-import 'styles/components.css';
 import { gradientCheck } from 'utils/gradient-check';
+import 'styles/components.css';
 
 const Dropdown: FC<IText> = ({
   i,
@@ -26,15 +26,15 @@ const Dropdown: FC<IText> = ({
   borderColor,
   borderRadius,
   shadow,
+  preview,
+  listOptions,
 }) => {
   const gradientCondition = color?.indexOf('gradient') !== -1;
   const dispatch = useDispatch();
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
   const selectedList = lists.filter(list => list.i === i);
+  const previewFilter = preview ? listOptions : selectedList;
   useEffect(() => {
-    console.log(lists, 'lists');
-    console.log(lists.length, 'list.length');
-    // console.log(Array.from(Array(3 - lists.length).keys()), 'array');
     if (selectedList.length <= 3) {
       {
         Array.from(Array(3 - selectedList?.length).keys()).map(list => {
@@ -44,7 +44,7 @@ const Dropdown: FC<IText> = ({
             ...lists,
             {
               i: i,
-              id: uid(),
+              id: listId,
               value: 'Default Item',
               link: '',
             },
@@ -56,28 +56,25 @@ const Dropdown: FC<IText> = ({
   }, [lists]);
   return (
     <section
+      id={i}
       style={{
         height: '-webkit-fill-available',
         textDecoration: underline,
-        // textDecorationColor: color,
-        // background: backgroundColor,
         justifyContent: `${justifyContent}` as CanvasTextAlign,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}
       className="flex overflow-hidden"
     >
       <span
-        key={i}
+        id={i}
         style={{
           WebkitTextFillColor: gradientCheck(color, false),
           fontWeight: fontWeight,
           fontStyle: italic,
-          // background: gradientCheck(color, true),
           textDecoration: underline,
           textDecorationColor: `${gradientCondition ? 'black' : color}`,
           fontSize: `${fontSize}px`,
           fontFamily: fontFamily,
-          // listStyleType: 'disc',
           color: 'black',
           padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
         }}
@@ -97,7 +94,6 @@ const Dropdown: FC<IText> = ({
             background: backgroundColor,
             boxShadow: shadow,
             alignItems: 'left',
-            margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
             padding: `${padding?.paddingTop}px ${padding?.paddingRight}px ${padding?.paddingBottom}px ${padding?.paddingLeft}px`,
           }}
           id={i}
@@ -134,18 +130,27 @@ const Dropdown: FC<IText> = ({
           <IoMdArrowDropright style={{ color: borderColor }} className="flex items-center text-[18px] ml-[5rem] icon-left" />
           <IoMdArrowDropdown style={{ color: borderColor }} className=" items-center text-[18px] ml-[5rem] icon-down" />
         </button>
-        <span key={i} className="absolute dropdown-content mt-2 text-left pl-[20px] pr-[98px] pt-[10px] pb-[10px] w-[13rem]">
-          {selectedList?.map(list => {
+        <span
+          style={{
+            background: gradientCheck(color, true),
+            WebkitTextFillColor: gradientCheck(color, false),
+            textDecoration: underline,
+            textDecorationColor: color,
+          }}
+          id={i}
+          className="text-class absolute dropdown-content mt-2 text-left pl-[20px] pt-[10px] pb-[10px] w-[13rem]"
+        >
+          {previewFilter?.map(list => {
             return (
               <>
                 {list.link ? (
                   <a target="_blank" href={list.link}>
-                    <h6 key={list.id} className="mt-4" style={{ color: 'black' }}>
+                    <h6 key={list.id} className="mt-4">
                       {list.value}
                     </h6>
                   </a>
                 ) : (
-                  <h6 key={list.id} className="mt-4" style={{ color: 'black' }}>
+                  <h6 key={list.id} className="mt-4">
                     {list.value}
                   </h6>
                 )}
