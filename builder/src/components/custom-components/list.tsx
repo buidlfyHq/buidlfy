@@ -4,8 +4,8 @@ import { IRootState } from 'redux/root-state.interface';
 import { IList, IText } from 'redux/workspace/workspace.interfaces';
 import { updateListValue } from 'redux/workspace/workspace.reducers';
 import ShortUniqueId from 'short-unique-id';
-import 'styles/components.css';
 import { gradientCheck } from 'utils/gradient-check';
+import 'styles/components.css';
 
 const List: FC<IText> = ({
   i,
@@ -15,11 +15,9 @@ const List: FC<IText> = ({
   color,
   justifyContent,
   fontSize,
-  value,
   backgroundColor,
   margin,
   padding,
-  link,
   fontFamily,
   listType,
   listOptions,
@@ -29,7 +27,8 @@ const List: FC<IText> = ({
   const dispatch = useDispatch();
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
   const selectedList = lists.filter(list => list.i === i);
-  const previewFilter = preview ? listOptions : selectedList;
+  const listFilter = listOptions.filter(list => list.i === i);
+  const previewFilter = preview ? listFilter : selectedList;
   useEffect(() => {
     if (!preview) {
       if (selectedList.length <= 3) {
