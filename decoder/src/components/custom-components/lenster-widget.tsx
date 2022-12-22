@@ -1,6 +1,7 @@
 import { FC } from "react";
 import LensterPost from "utils/lenster-post";
 import { IPublication } from "interfaces/publications";
+import logo from "assets/buidl.png";
 import "styles/components.css";
 
 interface ILensterWidget {
@@ -25,6 +26,9 @@ const LensterWidget: FC<ILensterWidget> = ({ posts }) => {
           />
         );
       })}
+      <span className="flex absolute right-[1rem] bottom-[1rem]">
+        Powered By <img className="w-[1.5rem] h-auto mx-2" src={logo} /> Buidlfy
+      </span>
     </div>
   );
 };

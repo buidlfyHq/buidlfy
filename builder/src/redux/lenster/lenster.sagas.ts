@@ -8,7 +8,7 @@ function* getPublication({ payload }) {
   const fetchedPublication = yield call(getPublicationService, publication.name);
   if (!fetchedPublication.error) {
     try {
-      yield put(updatePublications({ id: publication.id, fetchedPublication: fetchedPublication?.publication }));
+      yield put(updatePublications({ id: publication.id, fetchedPublication: fetchedPublication?.publication, i: publication.i }));
     } catch (error) {
       console.log('error', error);
     }

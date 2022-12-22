@@ -1,9 +1,9 @@
-import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
-import { updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
 import edit from 'assets/icons/edit.png';
 import LensterPost from 'components/utils/lenster-post';
+import logo from 'assets/icons/buidlfy.png';
 import 'styles/components.css';
 
 interface ILensterWidget {
@@ -12,18 +12,7 @@ interface ILensterWidget {
 }
 
 const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
-  const posts = useSelector((state: IRootState) => state.lenster.publications);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(
-      updateWorkspaceElement({
-        settingItemId: i,
-        propertyName: 'posts',
-        propertyValue: posts,
-      }),
-    );
-  }, [dispatch, i, posts]);
-
+  const posts = useSelector((state: IRootState) => state.lenster.publications.filter(publication => publication.i === i));
   return (
     <>
       {posts && posts.length > 0 ? (
@@ -34,6 +23,9 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
               const updatePostMedia = 'https://ipfs.io/ipfs/' + post?.postMedia?.slice(7);
               return <LensterPost i={i} post={post} updateProfilePicture={updateProfilePicture} updatePostMedia={updatePostMedia} />;
             })}
+            <span className="flex absolute right-[1rem] bottom-[1rem]">
+              Powered By <img className="w-[1.5rem] h-auto mx-2" src={logo} /> Buidlfy
+            </span>
           </div>
         </>
       ) : (

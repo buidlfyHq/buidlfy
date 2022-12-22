@@ -10,8 +10,9 @@ const lensterSlice = createSlice({
   name: 'lenster',
   initialState,
   reducers: {
-    updatePublications(state: ILensterState, action: { payload: { id: string; fetchedPublication: any } }) {
+    updatePublications(state: ILensterState, action: { payload: { id: string; fetchedPublication: any; i: string } }) {
       const fetchedPublication = action.payload.fetchedPublication;
+      const i = action.payload.i;
       const id = action.payload.id;
       const publicationId = fetchedPublication.id;
       const newPublications = [...state.publications];
@@ -25,6 +26,7 @@ const lensterSlice = createSlice({
       const postDescription = fetchedPublication?.metadata?.content;
       const postMedia = fetchedPublication?.metadata?.media[0]?.original?.url;
       const newPublication: IPublication = {
+        i,
         id,
         name: publicationId,
         profileId,
