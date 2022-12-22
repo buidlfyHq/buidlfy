@@ -53,7 +53,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height, manualSizing }) =
         updateWorkspaceImageElementStyle({
           settingItemId: i,
           propertyName: 'width',
-          propertyValue: width - 1,
+          propertyValue: width + 1,
           imageSizeProperty: false,
         }),
       );
@@ -62,7 +62,7 @@ const SizeComponent: FC<ISizeComponent> = ({ i, width, height, manualSizing }) =
         updateWorkspaceImageElementStyle({
           settingItemId: i,
           propertyName: 'height',
-          propertyValue: height - 1,
+          propertyValue: height + 1,
           imageSizeProperty: false,
         }),
       );
