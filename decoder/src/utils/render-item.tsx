@@ -219,6 +219,7 @@ const RenderItem: FC<IRenderItem> = ({
     case "Status":
       return (
         <Badge
+          name={item.name}
           fontWeight={item.style.fontWeight}
           italic={item.style.fontStyle}
           underline={item.style.textDecoration}
