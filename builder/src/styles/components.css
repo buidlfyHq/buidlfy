@@ -673,7 +673,6 @@
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
-  line-height: 16px;
   color: rgba(19, 27, 66, 0.502378);
 }
 .disable-text {
@@ -1322,4 +1321,16 @@
 
 .navbar-text {
   color: rgba(16, 15, 17, 0.64);
+}
+
+.lenster-div {
+  columns: 3;
+  gap: 0.7rem;
+}
+.lenster-card {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
 }

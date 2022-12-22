@@ -5,9 +5,10 @@ import Text from "components/custom-components/text";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
+import Spacer from "components/custom-components/spacer";
+import LensterWidget from "components/custom-components/lenster-widget";
 import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
-import Spacer from "components/custom-components/spacer";
 
 interface IRenderItem {
   item: IWorkspace;
@@ -126,13 +127,20 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
         />
       );
-
     case "Spacer":
       return (
         <Spacer
           i={item.i}
           backgroundColor={item.style.backgroundColor}
           margin={item.style.margin}
+        />
+      );
+    case "Lenster Card":
+      return (
+        <LensterWidget
+          i={item.i}
+          backgroundColor={item.style.backgroundColor}
+          posts={item.posts}
         />
       );
     default:

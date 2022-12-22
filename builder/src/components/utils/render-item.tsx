@@ -6,10 +6,12 @@ import Image from 'components/custom-components/image';
 import Input from 'components/custom-components/input';
 import Spacer from 'components/custom-components/spacer';
 import Divider from 'components/custom-components/divider';
+import LensterWidget from 'components/custom-components/lenster-widget';
 import PreviewContainer from 'components/custom-components/preview/preview-container';
 import PreviewButton from 'components/custom-components/preview/preview-button';
 import PreviewText from 'components/custom-components/preview/preview-text';
 import PreviewInput from 'components/custom-components/preview/preview-input';
+import PreviewLensterWidget from 'components/custom-components/preview/preview-lenster-widget';
 import { IInput, IOutput, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
 interface IRenderItem {
@@ -233,6 +235,10 @@ const RenderItem: FC<IRenderItem> = ({
             />
           )}
         </>
+      );
+    case 'Lenster Card':
+      return (
+        <>{preview ? <PreviewLensterWidget preview={preview} i={item.i} posts={item.posts} /> : <LensterWidget i={item.i} setDrag={setDrag} />}</>
       );
     default:
       return <></>;
