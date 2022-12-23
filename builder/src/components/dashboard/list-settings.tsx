@@ -9,13 +9,12 @@ import ListTypeComponent from 'components/settings/list-type';
 import MarginComponent from 'components/settings/margin-component';
 import PaddingComponent from 'components/settings/padding-component';
 import React, { FC } from 'react';
-import { IoMdLink } from 'react-icons/io';
 import { useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
-import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
 
-const ListSettings: FC<ISettings> = ({ handleSettingChange }) => {
+const ListSettings: FC = () => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
 
   return (
@@ -28,26 +27,6 @@ const ListSettings: FC<ISettings> = ({ handleSettingChange }) => {
         justifyContent={selectedElement.style.justifyContent}
         color={selectedElement.style.color}
       />
-      {/* <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
-        <textarea
-          value={selectedElement.value}
-          onChange={e => handleSettingChange(e, 'value')}
-          className="changeText input-text h-[6rem] pl-[0.5rem] pt-[0.5rem]"
-          placeholder="Please write your text here..."
-        />
-      </div>
-      <div className="flex items-center mt-4 mx-2  w-[13.5rem] text-black">
-        <div className="link-div px-1 py-1">
-          <IoMdLink className="text-[18px]" />
-        </div>
-        <input
-          value={selectedElement.link}
-          onChange={e => handleSettingChange(e, 'link')}
-          className="changeText pl-[2.5rem] py-[0.4rem] input-text"
-          type="text"
-          placeholder="Link"
-        />
-      </div> */}
       <ListOptionsComponent i={selectedElement.i} />
       <ListTypeComponent i={selectedElement.i} listType={selectedElement.style.listType} />
       <FontFamilyComponent i={selectedElement.i} fontFamily={selectedElement.style.fontFamily} />

@@ -655,6 +655,12 @@
 .heading-element {
   transition: 0.3s;
 }
+.list-element {
+  transition: 0.3s;
+}
+.list-element:hover {
+  color: #5A4471;
+}
 .element-upload {
   background: #faf8ff;
   border: 1px dashed #6a58e7;

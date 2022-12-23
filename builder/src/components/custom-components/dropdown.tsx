@@ -64,7 +64,7 @@ const Dropdown: FC<IText> = ({
         justifyContent: `${justifyContent}` as CanvasTextAlign,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}
-      className="flex overflow-hidden"
+      className="flex"
     >
       <span
         id={i}
