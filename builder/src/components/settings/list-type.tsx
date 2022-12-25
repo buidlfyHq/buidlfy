@@ -2,12 +2,11 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { ReplaceValue } from 'components/utils/render-setting';
-import { fontOptions } from 'components/utils/font-option';
+import { listOptions } from 'components/utils/list-option';
 import { fontStyles } from 'components/utils/font-family-styles';
 import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
 import 'styles/components.css';
 import 'styles/dashboard.css';
-import { listOptions } from 'components/utils/list-option';
 
 interface IListTypeComponent {
   i: string;

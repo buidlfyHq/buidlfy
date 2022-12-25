@@ -5,3 +5,15 @@
 .combined-style {
   @apply flex items-center justify-center text-[16px] py-0.5 w-[28px] h-[25px] rounded-[4px] mr-[13px] my-1 text-black hover:bg-[#CDD4F3] cursor-pointer;
 }
+
+.element-style {
+  @apply text-[#344054] text-[14px] ml-2 text-[#344054] text-[14px] ml-2 hover:text-[#5A4471];
+}
+
+.checkbox-style {
+  @apply h-4 w-4 border-[1px] rounded-[4px];
+}
+
+.radio-style {
+  @apply h-4 w-4 border-[1px] rounded-[20px];
+}

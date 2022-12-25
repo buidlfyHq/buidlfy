@@ -84,7 +84,7 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
     case 'Divider':
       return <DividerSettings />;
     case 'List':
-      return <ListSettings handleSettingChange={handleSettingChange} />;
+      return <ListSettings />;
     case 'Dropdown':
       return <DropdownSettings handleSettingChange={handleSettingChange} />;
     case 'Badge':

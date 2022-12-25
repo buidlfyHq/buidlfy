@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
 import { IList, IText } from 'redux/workspace/workspace.interfaces';
 import { updateListValue } from 'redux/workspace/workspace.reducers';
-import ShortUniqueId from 'short-unique-id';
+import { defaultList } from 'utils/default-list';
 import { gradientCheck } from 'utils/gradient-check';
 import 'styles/components.css';
 
@@ -36,25 +36,18 @@ const Dropdown: FC<IText> = ({
   const listFilter = listOptions.filter(list => list.i === i);
   const previewFilter = preview ? listFilter : selectedList;
   useEffect(() => {
-    if (selectedList.length <= 3) {
-      {
-        Array.from(Array(3 - selectedList?.length).keys()).map(list => {
-          const uid = new ShortUniqueId();
-          const listId = uid();
-          const newLists = [
-            ...lists,
-            {
-              i: i,
-              id: listId,
-              value: 'Default Item',
-              link: '',
-            },
-          ];
-          dispatch(updateListValue(newLists));
-        });
+    if (!preview) {
+      if (selectedList.length <= 3) {
+        {
+          Array.from(Array(3 - selectedList?.length).keys()).map(list => {
+            const newLists = defaultList(i, lists);
+            dispatch(updateListValue(newLists));
+          });
+        }
       }
     }
   }, [lists]);
+
   return (
     <section
       id={i}
@@ -64,7 +57,7 @@ const Dropdown: FC<IText> = ({
         justifyContent: `${justifyContent}` as CanvasTextAlign,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}
-      className="flex overflow-hidden"
+      className="flex"
     >
       <span
         id={i}

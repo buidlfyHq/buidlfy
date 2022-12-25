@@ -6,6 +6,7 @@ import { updateListValue } from 'redux/workspace/workspace.reducers';
 import ShortUniqueId from 'short-unique-id';
 import { gradientCheck } from 'utils/gradient-check';
 import 'styles/components.css';
+import { defaultList } from 'utils/default-list';
 
 const List: FC<IText> = ({
   i,
@@ -34,23 +35,14 @@ const List: FC<IText> = ({
       if (selectedList.length <= 3) {
         {
           Array.from(Array(3 - selectedList?.length).keys()).map(list => {
-            const uid = new ShortUniqueId();
-            const listId = uid();
-            const newLists = [
-              ...lists,
-              {
-                i: i,
-                id: listId,
-                value: 'Default Item',
-                link: '',
-              },
-            ];
+            const newLists = defaultList(i, lists);
             dispatch(updateListValue(newLists));
           });
         }
       }
     }
   }, [lists]);
+
   return (
     <section
       id={i}
