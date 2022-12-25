@@ -332,7 +332,6 @@ export const components = [
     link: '',
     listOptions: [],
     style: {
-      // ...defaultColorStyles,
       ...defaultFontStyles,
       fontSize: 14,
       ...defaultDeleteStyles,
