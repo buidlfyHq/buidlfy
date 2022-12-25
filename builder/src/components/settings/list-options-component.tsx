@@ -25,7 +25,7 @@ enum Function {
   REMOVELINK = 'removeLink',
 }
 const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
-  const [isLinkVisible, setIsLinkVisible] = useState<Array<any>>([]);
+  const [isLinkVisible, setIsLinkVisible] = useState<Array<any>>([]); // Derive better type for state
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const dispatch = useDispatch();
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
