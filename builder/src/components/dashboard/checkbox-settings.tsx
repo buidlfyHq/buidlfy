@@ -1,3 +1,7 @@
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { IRootState } from 'redux/root-state.interface';
+import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import BgColorComponent from 'components/settings/bg-color-component';
 import ColorComponent from 'components/settings/color-component';
 import CombinedComponent from 'components/settings/combined-setting';
@@ -6,10 +10,6 @@ import FontSizeComponent from 'components/settings/font-size-component';
 import FontWeightComponent from 'components/settings/font-weight-component';
 import MarginComponent from 'components/settings/margin-component';
 import PaddingComponent from 'components/settings/padding-component';
-import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { IRootState } from 'redux/root-state.interface';
-import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
 
 const CheckboxSettings: FC<ISettings> = ({ handleSettingChange }) => {

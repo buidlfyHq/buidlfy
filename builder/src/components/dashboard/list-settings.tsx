@@ -1,3 +1,7 @@
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { IRootState } from 'redux/root-state.interface';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import BgColorComponent from 'components/settings/bg-color-component';
 import ColorComponent from 'components/settings/color-component';
 import CombinedComponent from 'components/settings/combined-setting';
@@ -8,10 +12,6 @@ import ListOptionsComponent from 'components/settings/list-options-component';
 import ListTypeComponent from 'components/settings/list-type';
 import MarginComponent from 'components/settings/margin-component';
 import PaddingComponent from 'components/settings/padding-component';
-import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { IRootState } from 'redux/root-state.interface';
-import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
 
 const ListSettings: FC = () => {
