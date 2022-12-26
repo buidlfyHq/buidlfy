@@ -100,6 +100,7 @@
 .lenster-div {
   column-gap: 1.5rem !important;
   columns: 3;
+  overflow: hidden !important;
 }
 .lenster-card {
   box-sizing: border-box;

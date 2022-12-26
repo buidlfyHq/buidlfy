@@ -5,6 +5,7 @@ import { IRootState } from 'redux/root-state.interface';
 import edit from 'assets/icons/edit.png';
 import logo from 'assets/icons/buidlfy.png';
 import 'styles/components.css';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
 interface ILensterWidget {
   i: string;
@@ -13,6 +14,10 @@ interface ILensterWidget {
 
 const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
   const posts = useSelector((state: IRootState) => state.lenster.publications.filter(publication => publication.i === i));
+  const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
+  const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
+  console.log(workspaceElements, 'workspaceElements');
+
   return (
     <>
       {posts && posts.length > 0 ? (

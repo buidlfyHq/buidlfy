@@ -54,8 +54,16 @@ const lensterSlice = createSlice({
         inputValue: action.payload,
       };
     },
+    updatePublicationPost(state: ILensterState, action: { payload }) {
+      console.log(action, 'action');
+
+      return {
+        ...state,
+        publications: action.payload,
+      };
+    },
   },
 });
 
-export const { updatePublications, removePublication, updateInputValue } = lensterSlice.actions;
+export const { updatePublications, removePublication, updateInputValue, updatePublicationPost } = lensterSlice.actions;
 export default lensterSlice.reducer;
