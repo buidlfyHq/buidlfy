@@ -1,11 +1,11 @@
-import BorderColorComponent from 'components/settings/border-color-component';
-import BorderComponent from 'components/settings/border-component';
-import BorderRadiusComponent from 'components/settings/border-radius-component';
-import MarginComponent from 'components/settings/margin-component';
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
 import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import BorderColorComponent from 'components/settings/border-color-component';
+import BorderComponent from 'components/settings/border-component';
+import BorderRadiusComponent from 'components/settings/border-radius-component';
+import MarginComponent from 'components/settings/margin-component';
 import 'styles/components.css';
 
 const DividerSettings: FC = () => {
