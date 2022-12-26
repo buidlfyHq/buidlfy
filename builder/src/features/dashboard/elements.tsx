@@ -180,13 +180,14 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
           </div>
         </div>
       </div>
-      <div className="element-div">
+      {/* Add Dropdown when it is fully fixed */}
+      {/* <div className="element-div">
         <div onClick={() => onClickFunction('Dropdown')} className="px-4 py-1 cursor-pointer">
           <div data-tip="Click here to add the Input Dropdown" data-for="elements">
             <img className="mt-2" src={dropdown} />
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="element-div">
         <div onClick={() => onClickFunction('List')} className="px-10 py-3 cursor-pointer element-list">
           <div data-tip="Click here to add the List" data-for="elements">
