@@ -56,7 +56,7 @@ const PreviewText: FC<IText> = ({
         padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
       }}
       value={isValue}
-      className="flex text-area resize-none cursor-auto text-class overflow-hidden items-center justify-center h-full w-full"
+      className="text-area resize-none cursor-auto text-class overflow-hidden h-full w-full outline-none"
     />
   );
 

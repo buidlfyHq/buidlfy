@@ -46,7 +46,7 @@ const Preview = () => {
         rowHeight={50}
         isDraggable={false}
         isResizable={false}
-        compactType={null}
+        compactType="vertical"
         margin={[0, 0]}
         className="h-fit overflow-hidden"
       >
