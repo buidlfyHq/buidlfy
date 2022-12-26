@@ -448,6 +448,16 @@ export const components = [
     },
   },
   {
+    name: 'Spacer',
+    h: 1,
+    minH: 1,
+    style: {
+      ...defaultColorStyles,
+      ...defaultDeleteStyles,
+      ...defaultMarginStyles,
+    },
+  },
+  {
     name: 'Lenster Card',
     h: 2,
     minH: 1,

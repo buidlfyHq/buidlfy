@@ -112,7 +112,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         delayShow={200}
       />
       {/* Fix: Add all style to common tailwind  */}
-      <div className="element-div">
+      <section className="element-div">
         <div className="px-[4.1rem] py-4">
           <div className="flex">
             <div data-tip="Click here to add the button" data-for="elements">
@@ -122,8 +122,8 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
             </div>
           </div>
         </div>
-      </div>
-      <div className="element-div">
+      </section>
+      <section className="element-div">
         <div className="px-10 py-3">
           <div data-tip="Click here to add the heading" data-for="elements">
             <h1
@@ -152,8 +152,8 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
             </div>
           </div>
         </div>
-      </div>
-      <div className="element-div">
+      </section>
+      <section className="element-div">
         <div className="px-[1.75rem] py-4">
           <div data-tip="Click here to add the input" data-for="elements">
             <div className="cursor-pointer input-container" onClick={() => onClickFunction('Input')}>
@@ -161,8 +161,8 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
             </div>
           </div>
         </div>
-      </div>
-      <div className="element-div">
+      </section>
+      <section className="element-div">
         <div onClick={() => onClickFunction('Image')} className="px-4 py-4 cursor-pointer">
           <div data-tip="Click here to add the image upload" data-for="elements">
             <div className="relative image-container">
@@ -172,7 +172,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
             </div>
           </div>
         </div>
-      </div>
+      </section>
       <div className="element-div">
         <div data-tip="Click here to add the Divider" data-for="elements">
           <div onClick={() => onClickFunction('Divider')} className="px-4 py-4 cursor-pointer">
@@ -264,6 +264,17 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
           </div>
         </div>
       </div>
+      <section className="element-div">
+        <div className="px-[4.1rem] py-4">
+          <div className="flex">
+            <div data-tip="Click here to add the spacer" data-for="elements">
+              <button onClick={() => onClickFunction('Spacer')} className="cursor-pointer element-btn btn-div">
+                Spacer
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 

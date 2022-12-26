@@ -5,6 +5,7 @@ import ButtonSettings from 'components/dashboard/button-settings';
 import ImageSettings from 'components/dashboard/image-settings';
 import ContainerSettings from 'components/dashboard/container-settings';
 import InputSettings from 'components/dashboard/input-settings';
+import SpacerSettings from 'components/dashboard/spacer-settings';
 import GeneralSettings from 'components/dashboard/general-settings';
 import DividerSettings from 'components/dashboard/divider-settings';
 import ListSettings from 'components/dashboard/list-settings';
@@ -99,6 +100,10 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
       return <LensterSettings />;
     case 'Input':
       return <InputSettings handleSettingChange={handleSettingChange} />;
+
+    case 'Spacer':
+      return <SpacerSettings />;
+
     default:
       return <GeneralSettings handleSettingChange={handleSettingChange} />;
   }
