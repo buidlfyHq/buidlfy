@@ -27,6 +27,10 @@ export const networkNames = [
     id: 420,
     name: 'Optimism Goerli Testnet',
   },
+  {
+    id: 134,
+    name: 'iExec Sidechain',
+  },
 ];
 
 export const networks = {
