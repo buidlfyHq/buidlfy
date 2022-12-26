@@ -1,5 +1,5 @@
 import { FC } from "react";
-// import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
+import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
 import ITexts from "interfaces/texts";
 import { gradientCheck } from "utils/gradient-check";
 import "styles/components.css";
@@ -94,14 +94,14 @@ const Dropdown: FC<ITexts> = ({
               value
             )}
           </span>
-          {/* <IoMdArrowDropright
+          <IoMdArrowDropright
             style={{ color: borderColor }}
             className="flex items-center text-[18px] ml-[5rem] icon-left"
           />
           <IoMdArrowDropdown
             style={{ color: borderColor }}
             className=" items-center text-[18px] ml-[5rem] icon-down"
-          /> */}
+          />
         </button>
         <span
           style={{
