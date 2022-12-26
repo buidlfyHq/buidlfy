@@ -5,7 +5,7 @@ import { Dialog } from '@headlessui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 import { truncateString } from 'utils/truncate-string';
 import Spinner from 'components/utils/assets/spinner';
-import { buyTemplate } from 'redux/template/template.actions';
+import { buySelectedTemplateAsync } from 'redux/template/template.thunk-actions';
 import { SelectedTemplateDto } from 'redux/template/template.dto';
 import { IRootState } from 'redux/root-state.interface';
 import { toggleModalType } from 'redux/modal/modal.reducers';
@@ -63,7 +63,7 @@ const CheckoutModal: FC = () => {
             <div className="text-[#34C759] text-[14px] font-[500]">{amount !== 0 ? `${amount + 0.05 * amount} USDT` : 'Free'}</div>
           </div>
           <div
-            onClick={() => dispatch(buyTemplate())}
+            onClick={() => dispatch(buySelectedTemplateAsync())}
             className="text-white cursor-pointer connect-wallet-button py-3 px-auto rounded-[7px] mt-8 text-center"
           >
             {buyTemplateLoading && <Spinner />} Buy Now

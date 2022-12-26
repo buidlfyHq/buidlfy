@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dialog } from '@headlessui/react';
 import { CgClose } from 'react-icons/cg';
 import { uploadTemplateToWeb3Storage } from 'config/web3storage';
-import { mintTemplate } from 'redux/template/template.actions';
+import { mintTemplateAsync } from 'redux/template/template.thunk-actions';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import InfoCircleImg from 'assets/icons/info-circle.png';
@@ -84,7 +84,7 @@ const MintTemplateForm: FC = () => {
     console.log('JSON.stringify(newTemplate): ', JSON.stringify(newTemplate));
     const templateCID = await uploadTemplateToWeb3Storage(JSON.stringify(newTemplate));
     console.log('templateCID: ', templateCID);
-    dispatch(mintTemplate(templateCID));
+    dispatch(mintTemplateAsync(templateCID));
     dispatch(toggleModalType('minting-progress'));
   };
 

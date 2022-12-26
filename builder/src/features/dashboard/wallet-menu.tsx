@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import { Menu } from '@headlessui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 import { truncateString } from 'utils/truncate-string';
-import { connectWallet } from 'redux/web3/web3.actions';
+import { connectWalletAsync } from 'redux/web3/web3.thunk-actions';
 import { IRootState } from 'redux/root-state.interface';
 import { BiChevronRight } from 'react-icons/bi';
 import HelpIcon from 'assets/icons/help-nav.png';
 import MyTemplateIcon from 'assets/icons/template-nav.png';
+
 
 // const HelpMenuItems = [
 //   { name: "Learn Buidlfy" },
@@ -151,7 +152,7 @@ const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
       ) : (
         <button
           className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap add-btn"
-          onClick={() => dispatch(connectWallet())}
+          onClick={() => dispatch(connectWalletAsync())}
         >
           Connect Wallet
         </button>

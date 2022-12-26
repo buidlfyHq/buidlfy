@@ -4,7 +4,7 @@ import { Dialog } from '@headlessui/react';
 import { CgClose } from 'react-icons/cg';
 import { BiArrowBack } from 'react-icons/bi';
 import Spinner from 'components/utils/assets/spinner';
-import { connectWallet } from 'redux/web3/web3.actions';
+import { connectWalletAsync } from 'redux/web3/web3.thunk-actions';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import MetamaskImg from 'assets/icons/Metamask-icon.png';
 
@@ -14,7 +14,7 @@ const SelectWallet: FC = () => {
 
   const handleConnect = () => {
     setLoading(true);
-    dispatch(connectWallet());
+    dispatch(connectWalletAsync());
   };
 
   return (
