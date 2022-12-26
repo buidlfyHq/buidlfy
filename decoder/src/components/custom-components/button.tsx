@@ -132,6 +132,7 @@ const Button: FC<ITexts> = ({
       );
       setOutputValue(res ? res[0] : []);
     } else {
+      await switchNetwork();
       const res = await onRequest(
         contractFunction.methodName,
         contractFunction,

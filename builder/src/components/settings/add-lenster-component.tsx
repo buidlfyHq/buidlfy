@@ -1,13 +1,13 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from 'redux/root-state.interface';
-import { getPublication } from 'redux/lenster/lenster.actions';
-import { removePublication, updateInputValue } from 'redux/lenster/lenster.reducers';
 import ShortUniqueId from 'short-unique-id';
+import { IoMdAdd } from 'react-icons/io';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import WarningText from 'components/utils/setting-warning';
-import { IoMdAdd } from 'react-icons/io';
+import { getPublication } from 'redux/lenster/lenster.actions';
 import { updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
+import { removePublication, updateInputValue } from 'redux/lenster/lenster.reducers';
+import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
 
 interface IAddLensterComponent {
@@ -16,8 +16,11 @@ interface IAddLensterComponent {
 const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state: IRootState) => state.lenster.publications);
+
   const [addInputs, setAddInputs] = useState<Array<any>>([]); // Derive better type for array
   const [isDuplicate, setIsDuplicate] = useState<Boolean>(false);
+
+  const uid = new ShortUniqueId();
 
   useEffect(() => {
     const newAddInputs = [];
@@ -58,7 +61,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
       dispatch(updateInputValue(false));
     }
   };
-  const uid = new ShortUniqueId();
+
   const handleAddInput = () => {
     const inputId = uid();
     setAddInputs([
@@ -70,6 +73,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
       },
     ]);
   };
+
   const handleRemoveInput = (value: string, index: number) => {
     const newInputs = [...addInputs];
     newInputs.splice(index, 1);

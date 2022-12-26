@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
+import LensterPost from 'components/utils/lenster-post';
 import { IRootState } from 'redux/root-state.interface';
 import edit from 'assets/icons/edit.png';
-import LensterPost from 'components/utils/lenster-post';
 import logo from 'assets/icons/buidlfy.png';
 import 'styles/components.css';
 

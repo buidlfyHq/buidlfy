@@ -1,5 +1,5 @@
-import LensterPost from 'components/utils/lenster-post';
 import { FC } from 'react';
+import LensterPost from 'components/utils/lenster-post';
 import { IPublication } from 'redux/lenster/lenster.interfaces';
 import logo from 'assets/icons/buidlfy.png';
 import 'styles/components.css';
@@ -10,7 +10,7 @@ interface IPreviewLensterWidget {
   preview: boolean;
 }
 
-const PreviewLensterWidget: FC<IPreviewLensterWidget> = ({ posts, preview, i }) => {
+const PreviewLensterWidget: FC<IPreviewLensterWidget> = ({ i, posts, preview }) => {
   return (
     <div className="lenster-div ml-[1.7rem]">
       {posts.map(post => {

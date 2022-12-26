@@ -253,8 +253,8 @@ const Container: FC<IContainer> = ({
           width={containerW - (finalSpacing + borderWidth * 2) || 1000}
           isBounded={true}
           onLayoutChange={onLayoutChange}
+          compactType="vertical"
           margin={[0, 0]}
-          compactType={null}
           className="h-fit btn-border"
           style={{
             backgroundColor: backgroundColor.slice(0, 4) === 'rgba' ? backgroundColor : null,
