@@ -4,14 +4,15 @@ import Button from 'components/custom-components/button';
 import Text from 'components/custom-components/text';
 import Image from 'components/custom-components/image';
 import Input from 'components/custom-components/input';
+import Spacer from 'components/custom-components/spacer';
 import Divider from 'components/custom-components/divider';
+import LensterWidget from 'components/custom-components/lenster-widget';
 import PreviewContainer from 'components/custom-components/preview/preview-container';
 import PreviewButton from 'components/custom-components/preview/preview-button';
-import { IInput, IOutput, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import PreviewText from 'components/custom-components/preview/preview-text';
 import PreviewInput from 'components/custom-components/preview/preview-input';
-import LensterWidget from 'components/custom-components/lenster-widget';
 import PreviewLensterWidget from 'components/custom-components/preview/preview-lenster-widget';
+import { IInput, IOutput, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
 interface IRenderItem {
   item: IWorkspaceElement;
@@ -188,6 +189,8 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
         />
       );
+    case 'Spacer':
+      return <Spacer i={item.i} backgroundColor={item.style.backgroundColor} margin={item.style.margin} />;
     case 'Divider':
       return <Divider />;
     case 'Container':
