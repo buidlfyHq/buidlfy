@@ -95,23 +95,23 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
     }
   };
 
-  const Parent = () => {
-    let btncolor = 'red';
-    console.log(React, 'React?.Children');
+  // const Parent = () => {
+  //   let btncolor = 'red';
+  //   console.log(React, 'React?.Children');
 
-    return (
-      <div>
-        {React?.Children.map(this.props.children, child => {
-          return React.cloneElement(child, { btncolor }, null); //third parameter is null
-          // Because we are not adding any children
-        })}
-      </div>
-    );
-  };
+  //   return (
+  //     <div>
+  //       {React?.Children.map(this.props.children, child => {
+  //         return React.cloneElement(child, { btncolor }, null); //third parameter is null
+  //         // Because we are not adding any children
+  //       })}
+  //     </div>
+  //   );
+  // };
 
-  const Button = () => {
-    return <button style={{ color: this.props.btncolor }}>Hello from GFG</button>;
-  };
+  // const Button = () => {
+  //   return <button style={{ color: this.props.btncolor }}>Hello from GFG</button>;
+  // };
 
   const elementsList = (
     <>
@@ -199,12 +199,12 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
           </div>
         </div>
       </section>
-      <Parent>
+      {/* <Parent>
         <Button />
         <br />
         <br />
         <Button />
-      </Parent>
+      </Parent> */}
     </>
   );
 
