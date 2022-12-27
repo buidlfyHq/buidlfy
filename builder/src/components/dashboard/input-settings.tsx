@@ -9,8 +9,8 @@ import { IRootState } from 'redux/root-state.interface';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import BorderColorComponent from 'components/settings/border-color-component';
 import BgColorComponent from 'components/settings/bg-color-component';
-import 'styles/components.css';
 import DuplicateComponent from 'components/settings/duplicate-component';
+import 'styles/components.css';
 
 const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
@@ -20,7 +20,6 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <h3 className="ml-[0.5rem] mt-[1.5rem]">{selectedElement ? <span className="setting-text">{selectedElement.name}</span> : null}</h3>
 
       <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
-        {/* <RiText className="text-[18px] mr-3" /> */}
         <textarea
           value={selectedElement.placeholder}
           onChange={e => handleSettingChange(e, 'placeholder')}

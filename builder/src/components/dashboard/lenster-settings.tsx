@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import AddLensterComponent from 'components/settings/add-lenster-component';
+import DuplicateComponent from 'components/settings/duplicate-component';
 import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
-import DuplicateComponent from 'components/settings/duplicate-component';
 
 const LensterSettings: FC = () => {
   const selectedElement = useSelector((state: IRootState) => state.workspace.selectedElement);

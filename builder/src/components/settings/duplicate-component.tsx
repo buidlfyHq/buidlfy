@@ -1,9 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { BiCopy } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
 import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
-import { updateWorkspaceElement, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
+import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import ShortUniqueId from 'short-unique-id';
 import 'styles/components.css';
 import 'styles/dashboard.css';
@@ -15,17 +15,11 @@ const DuplicateComponent: FC = () => {
   const uid = new ShortUniqueId();
 
   const handleDuplicate = () => {
-    console.log(selectedElement, 'selectedElement');
     const newId = uid;
-    console.log(newId(), 'newId');
     const newSelectedElement = { ...selectedElement, i: newId() };
-    console.log(newSelectedElement, 'newSelectedElement');
-    console.log(workspaceElements, 'workspaceElements');
     const newWorkspaceElements = [...workspaceElements];
-    console.log(newWorkspaceElements, 'newWorkspaceElements');
     newWorkspaceElements.push(newSelectedElement);
     dispatch(updateWorkspaceElementsArray(newWorkspaceElements));
-    console.log(workspaceElements, 'workspaceElements');
   };
 
   return (

@@ -5,10 +5,10 @@ import UploadComponent from 'components/settings/upload-component';
 import MarginComponent from 'components/settings/margin-component';
 import SizeComponent from 'components/settings/image-size-component';
 import BackgroundSizeComponent from 'components/settings/background-size-component';
+import DuplicateComponent from 'components/settings/duplicate-component';
 import { IRootState } from 'redux/root-state.interface';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IoMdLink } from 'react-icons/io';
-import DuplicateComponent from 'components/settings/duplicate-component';
 
 const ImageSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);

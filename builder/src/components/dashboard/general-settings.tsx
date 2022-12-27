@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { IoMdLink } from 'react-icons/io';
 import ColorComponent from 'components/settings/color-component';
 import BgColorComponent from 'components/settings/bg-color-component';
@@ -10,9 +10,9 @@ import CombinedComponent from 'components/settings/combined-setting';
 import { IRootState } from 'redux/root-state.interface';
 import FontFamilyComponent from 'components/settings/font-family-component';
 import FontWeightComponent from 'components/settings/font-weight-component';
+import DuplicateComponent from 'components/settings/duplicate-component';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
-import DuplicateComponent from 'components/settings/duplicate-component';
 
 const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
@@ -27,7 +27,6 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
         color={selectedElement.style.color}
       />
       <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
-        {/* <RiText className="text-[18px] mr-3" /> */}
         <textarea
           value={selectedElement.value}
           onChange={e => handleSettingChange(e, 'value')}

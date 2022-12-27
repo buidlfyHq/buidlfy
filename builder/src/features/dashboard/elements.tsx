@@ -12,7 +12,6 @@ import { IWorkspaceElement, ResizeHandles } from 'redux/workspace/workspace.inte
 import defaultImage from 'assets/default-image.svg';
 import container from 'assets/image-container.svg';
 import 'styles/components.css';
-import React from 'react';
 
 interface IElements {
   isContainerSelected: boolean;
@@ -94,24 +93,6 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
       return Math.max(...arr) + 1;
     }
   };
-
-  // const Parent = () => {
-  //   let btncolor = 'red';
-  //   console.log(React, 'React?.Children');
-
-  //   return (
-  //     <div>
-  //       {React?.Children.map(this.props.children, child => {
-  //         return React.cloneElement(child, { btncolor }, null); //third parameter is null
-  //         // Because we are not adding any children
-  //       })}
-  //     </div>
-  //   );
-  // };
-
-  // const Button = () => {
-  //   return <button style={{ color: this.props.btncolor }}>Hello from GFG</button>;
-  // };
 
   const elementsList = (
     <>
@@ -199,12 +180,6 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
           </div>
         </div>
       </section>
-      {/* <Parent>
-        <Button />
-        <br />
-        <br />
-        <Button />
-      </Parent> */}
     </>
   );
 
