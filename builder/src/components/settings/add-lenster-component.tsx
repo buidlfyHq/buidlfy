@@ -16,9 +16,12 @@ interface IAddLensterComponent {
 const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state: IRootState) => state.lenster.publications);
-
+  const savedPosts = useSelector((state: IRootState) => state.workspace.workspaceElements.find(workspaceElement => workspaceElement.i === i)?.posts);
   const [addInputs, setAddInputs] = useState<Array<any>>([]); // Derive better type for array
   const [isDuplicate, setIsDuplicate] = useState<Boolean>(false);
+  console.log(posts, 'posts-add');
+  console.log(savedPosts, 'savedPosts');
+  console.log(addInputs, 'addInputs');
 
   const uid = new ShortUniqueId();
 
@@ -28,16 +31,57 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
     filterPost.map((post, key) => {
       newAddInputs.push({ i: i, id: post.id, value: post.name });
     });
+    // const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
+    // const allPosts = filterPost.concat(filterSavedPost);
+    // const result = allPosts.filter((item, i) => allPosts.indexOf(item) === i);
+
+    // console.log(result, 'result');
+
+    // filterSavedPost.map((post, key) => {
+    //   if (newAddInputs) {
+    //     newAddInputs.push({ i: i, id: post.id, value: post.name });
+    //   }
+    // });
     setAddInputs(newAddInputs);
-    dispatch(
-      updateWorkspaceElement({
-        settingItemId: i,
-        propertyName: 'posts',
-        propertyValue: filterPost,
-      }),
-    );
+    if (filterPost?.length > 0) {
+      dispatch(
+        updateWorkspaceElement({
+          settingItemId: i,
+          propertyName: 'posts',
+          propertyValue: filterPost,
+        }),
+      );
+    }
   }, [dispatch, i, posts]);
 
+  useEffect(() => {
+    const newAddInputs = [];
+    const filterPost = posts.filter(post => post.i === i);
+    // filterPost.map((post, key) => {
+    //   newAddInputs.push({ i: i, id: post.id, value: post.name });
+    // });
+    const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
+    const allPosts = filterPost.concat(filterSavedPost);
+    const result = allPosts.filter((item, i) => allPosts.indexOf(item) === i);
+
+    console.log(result, 'result');
+
+    filterSavedPost.map((post, key) => {
+      if (newAddInputs) {
+        newAddInputs.push({ i: i, id: post.id, value: post.name });
+      }
+    });
+    setAddInputs(newAddInputs);
+    // if (filterPost?.length > 0) {
+    // dispatch(
+    //   updateWorkspaceElement({
+    //     settingItemId: i,
+    //     propertyName: 'posts',
+    //     propertyValue: allPosts,
+    //   }),
+    // );
+    // }
+  }, []);
   const handleNewValue = (e: ChangeEvent<HTMLInputElement>, key: number) => {
     if (e.target.value.length > 0) {
       const duplicateInput = posts.filter(post => post.name === e.target.value);
@@ -77,6 +121,8 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   const handleRemoveInput = (value: string, index: number) => {
     const newInputs = [...addInputs];
     newInputs.splice(index, 1);
+    console.log(newInputs.splice(index, 1), 'newInputs.splice(index, 1)');
+    console.log(newInputs, 'newInputs');
     setAddInputs(newInputs);
     dispatch(removePublication({ publicationId: value }));
   };

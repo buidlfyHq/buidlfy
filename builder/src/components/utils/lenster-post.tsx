@@ -20,7 +20,7 @@ const LensterPost: FC<ILensterPost> = ({ i, post, updateProfilePicture, updatePo
 
   return (
     <>
-      {(!preview && post.name && inputValue) || (preview && post.name) ? (
+      {post.name ? (
         <div
           id={i}
           className={`border lenster-card py-4 px-6 border-gray-700 bg-gray-800 rounded-xl ${
