@@ -39,6 +39,7 @@ const Button: FC<ITexts> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [transactionStatus, setTransactionStatus] = useState<string>("");
   const [account, setAccount] = useState<string>(null);
+  const [networkSwitch, setNetworkSwitch] = useState<boolean>(false);
 
   useEffect(() => {
     if (config.contract.abi[0] && config.contract.address !== "") {
@@ -113,8 +114,13 @@ const Button: FC<ITexts> = ({
   };
 
   const onResponse = async () => {
+    const { ethereum } = window as any;
+    const provider = new ethers.providers.Web3Provider(ethereum, "any");
+    const { chainId } = await provider.getNetwork();
     if (oracleFunction) {
-      await switchNetwork(134);
+      if (chainId !== 134) {
+        setNetworkSwitch(true);
+      }
 
       const res = await onRequest(
         oracleFunction.methodName,
@@ -132,7 +138,9 @@ const Button: FC<ITexts> = ({
       );
       setOutputValue(res ? res[0] : []);
     } else {
-      await switchNetwork();
+      if (chainId !== Number(config.contract.network)) {
+        setNetworkSwitch(true);
+      }
       const res = await onRequest(
         contractFunction.methodName,
         contractFunction,
@@ -144,6 +152,15 @@ const Button: FC<ITexts> = ({
       );
       setOutputValue(res ? res[0] : []);
     }
+  };
+
+  const onSwitchNetwork = async () => {
+    if (oracleFunction) {
+      await switchNetwork(134);
+    } else {
+      await switchNetwork();
+    }
+    window.location.reload();
   };
 
   return (
@@ -176,6 +193,37 @@ const Button: FC<ITexts> = ({
               )}
             </Dialog.Title>
           </Dialog.Panel>
+        </div>
+      </Dialog>
+      <Dialog
+        className="relative z-50"
+        open={networkSwitch}
+        onClose={() => setNetworkSwitch(false)}
+      >
+        <div
+          className="fixed inset-0 bg-black/40 backdrop-blur-[2px]"
+          aria-hidden="true"
+        />
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-full">
+            <Dialog.Panel className="rounded-[24px] py-8 px-8 bg-white rounded-[24px]">
+              <div className="mt-2">
+                <p className="text-md text-gray-500">
+                  You need to switch netowrk to execute this transaction.
+                </p>
+              </div>
+
+              <div className="mt-4">
+                <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={onSwitchNetwork}
+                >
+                  Switch Network
+                </button>
+              </div>
+            </Dialog.Panel>
+          </div>
         </div>
       </Dialog>
       {connectWallet ? (
