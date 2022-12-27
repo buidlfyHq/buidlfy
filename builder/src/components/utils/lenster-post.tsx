@@ -24,7 +24,7 @@ const LensterPost: FC<ILensterPost> = ({ i, post, updateProfilePicture, updatePo
         <div
           id={i}
           className={`border lenster-card py-4 px-6 border-gray-700 bg-gray-800 rounded-xl ${
-            preview ? 'w-[28rem] m-2' : 'h-fit  w-[21rem] mx-2 my-[0.7rem]'
+            preview ? 'w-[28rem] mx-[0.5rem] my-[1.3rem]' : 'h-fit  w-[21rem] mx-2 my-[0.7rem]'
           }`}
         >
           <div className="flex">

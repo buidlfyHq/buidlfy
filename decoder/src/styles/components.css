@@ -98,7 +98,7 @@
 }
 
 .lenster-div {
-  column-gap: 1.5rem !important;
+  /* column-gap: 1.5rem !important; */
   columns: 3;
   overflow: hidden !important;
 }

@@ -119,12 +119,12 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   };
 
   const handleRemoveInput = (value: string, index: number) => {
+    dispatch(removePublication({ publicationId: value }));
     const newInputs = [...addInputs];
     newInputs.splice(index, 1);
     console.log(newInputs.splice(index, 1), 'newInputs.splice(index, 1)');
     console.log(newInputs, 'newInputs');
     setAddInputs(newInputs);
-    dispatch(removePublication({ publicationId: value }));
   };
 
   return (
