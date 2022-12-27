@@ -31,6 +31,13 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
     filterPost.map((post, key) => {
       newAddInputs.push({ i: i, id: post.id, value: post.name });
     });
+    // dispatch(
+    //   updateWorkspaceElement({
+    //     settingItemId: i,
+    //     propertyName: 'posts',
+    //     propertyValue: filterPost,
+    //   }),
+    // );
     // const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
     // const allPosts = filterPost.concat(filterSavedPost);
     // const result = allPosts.filter((item, i) => allPosts.indexOf(item) === i);
@@ -56,15 +63,15 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
 
   useEffect(() => {
     const newAddInputs = [];
-    const filterPost = posts.filter(post => post.i === i);
+    // const filterPost = posts.filter(post => post.i === i);
     // filterPost.map((post, key) => {
     //   newAddInputs.push({ i: i, id: post.id, value: post.name });
     // });
     const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
-    const allPosts = filterPost.concat(filterSavedPost);
-    const result = allPosts.filter((item, i) => allPosts.indexOf(item) === i);
+    // const allPosts = filterPost.concat(filterSavedPost);
+    // const result = allPosts.filter((item, i) => allPosts.indexOf(item) === i);
 
-    console.log(result, 'result');
+    // console.log(result, 'result');
 
     filterSavedPost.map((post, key) => {
       if (newAddInputs) {
