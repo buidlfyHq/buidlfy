@@ -60,6 +60,7 @@ const templateSlice = createSlice({
     builder.addCase(fetchListedTemplatesAsync.fulfilled, (state, action) => {
       state.fetchTemplateLoading = false;
       state.templateList = action.payload;
+      templateSlice.caseReducers.filterAllTemplates(state, action);
     });
   },
 });

@@ -2,6 +2,7 @@ import { BigNumber, ethers } from 'ethers';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import config from 'config';
 import { getERC20Contract, getSigner } from './web3.utils';
+import { fetchOwnedListedTemplatesAsync, fetchOwnedReviewTemplatesAsync, fetchOwnedTemplatesAsync } from 'redux/minted/minted.thunk-actions';
 
 export const connectWalletAsync = createAsyncThunk('web3/connectWallet', async (_, { dispatch, rejectWithValue }) => {
   try {
@@ -17,25 +18,26 @@ export const connectWalletAsync = createAsyncThunk('web3/connectWallet', async (
     const signer = provider.getSigner();
     const address = await signer.getAddress();
 
-    // yield put(fetchOwnedTemplates());
-    // yield put(fetchOwnedReviewTemplates());
-    // yield put(fetchOwnedListedTemplates());
-
     await changeNetworkAsync();
     await dispatch(fetchTokenBalanceAsync(address));
 
     return address;
   } catch (error) {
-    // eslint-disable-next-line no-console
-    // yield put(
-    //   addNotification({
-    //     message: walletRes.errorMessage,
-    //     timestamp: new Date(),
-    //     type: NotificationType.Error,
-    //   }),
-    // );
     console.error('Error in connectWalletAsync --> ', error);
     return rejectWithValue(error);
+  }
+});
+
+export const fetchWalletDetailsAsync = createAsyncThunk('web3/fetchWalletDetails', async (_, { dispatch }) => {
+  try {
+    await dispatch(connectWalletAsync());
+    await dispatch(fetchOwnedTemplatesAsync());
+    await dispatch(fetchOwnedReviewTemplatesAsync());
+    await dispatch(fetchOwnedListedTemplatesAsync());
+    return;
+  } catch (error) {
+    console.error('Error in fetchWalletDetailsAsync --> ', error);
+    return;
   }
 });
 
@@ -60,13 +62,6 @@ export const changeNetworkAsync = async () => {
     }
     // eslint-disable-next-line no-console
     console.error('Error in changeNetworkAsync --> ', switchError);
-    // yield put(
-    //   addNotification({
-    //     message: networkRes.errorMessage,
-    //     timestamp: new Date(),
-    //     type: NotificationType.Error,
-    //   }),
-    // );
   }
 };
 

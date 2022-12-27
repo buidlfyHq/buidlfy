@@ -2,8 +2,8 @@ export interface IMintedState {
   approveListingLoading: boolean;
   listTemplateHash: string;
   listTemplateLoading: boolean;
-  ownedTemplateList: [];
-  ownedReviewTemplateList: [];
-  ownedListedTemplateList: [];
+  ownedTemplateList: any[];
+  ownedReviewTemplateList: any[];
+  ownedListedTemplateList: any[];
   mintedImageData: string;
 }
