@@ -10,6 +10,7 @@ import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfac
 import BorderColorComponent from 'components/settings/border-color-component';
 import BgColorComponent from 'components/settings/bg-color-component';
 import 'styles/components.css';
+import DuplicateComponent from 'components/settings/duplicate-component';
 
 const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
@@ -39,6 +40,7 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <BorderColorComponent i={selectedElement.i} borderColor={selectedElement.style.borderColor} />
       <BgColorComponent i={selectedElement.i} elementBackgroundColor={selectedElement.style.backgroundColor} />
       <ShadowComponent i={selectedElement.i} shadow={selectedElement.style.shadow} />
+      <DuplicateComponent />
     </>
   );
 };

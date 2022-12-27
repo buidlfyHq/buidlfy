@@ -8,6 +8,7 @@ import BackgroundSizeComponent from 'components/settings/background-size-compone
 import { IRootState } from 'redux/root-state.interface';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IoMdLink } from 'react-icons/io';
+import DuplicateComponent from 'components/settings/duplicate-component';
 
 const ImageSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
@@ -37,6 +38,7 @@ const ImageSettings: FC<ISettings> = ({ handleSettingChange }) => {
       />
       <BackgroundSizeComponent i={selectedElement.i} backgroundSize={selectedElement.style?.backgroundSize} />
       <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
+      <DuplicateComponent />
     </>
   );
 };

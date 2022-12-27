@@ -19,6 +19,7 @@ import FontFamilyComponent from 'components/settings/font-family-component';
 import FontWeightComponent from 'components/settings/font-weight-component';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/dashboard.css';
+import DuplicateComponent from 'components/settings/duplicate-component';
 
 const ButtonSettings: FC<ISettings> = ({ handleSettingChange, openTab, setOpenTab }) => {
   const dispatch = useDispatch();
@@ -88,6 +89,7 @@ const ButtonSettings: FC<ISettings> = ({ handleSettingChange, openTab, setOpenTa
         <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
         <PaddingComponent i={selectedElement.i} padding={selectedElement.style.padding} />
         <ShadowComponent i={selectedElement.i} shadow={selectedElement.style.shadow} />
+        <DuplicateComponent />
       </span>
       <div className={openTab === 2 ? 'block' : 'hidden'} id="link-two">
         <AdvanceComponent selectedElement={selectedElement} />

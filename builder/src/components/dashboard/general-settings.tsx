@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IoMdLink } from 'react-icons/io';
 import ColorComponent from 'components/settings/color-component';
 import BgColorComponent from 'components/settings/bg-color-component';
@@ -12,15 +12,10 @@ import FontFamilyComponent from 'components/settings/font-family-component';
 import FontWeightComponent from 'components/settings/font-weight-component';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
+import DuplicateComponent from 'components/settings/duplicate-component';
 
 const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
-
-  const handleDuplicate = () => {
-    console.log(selectedElement, 'selectedElement');
-    const newSelectedElement = { ...selectedElement };
-    console.log(newSelectedElement, 'newSelectedElement');
-  };
   return (
     <>
       <h3 className="ml-[0.5rem] mt-[1.5rem]">{selectedElement ? <span className="setting-text">{selectedElement.name}</span> : null}</h3>
@@ -31,7 +26,6 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
         justifyContent={selectedElement.style.justifyContent}
         color={selectedElement.style.color}
       />
-      <h2 onClick={handleDuplicate}>Duplicate</h2>
       <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
         {/* <RiText className="text-[18px] mr-3" /> */}
         <textarea
@@ -60,6 +54,7 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <BgColorComponent i={selectedElement.i} elementBackgroundColor={selectedElement.style.backgroundColor} />
       <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
       <PaddingComponent i={selectedElement.i} padding={selectedElement.style.padding} />
+      <DuplicateComponent />
     </>
   );
 };
