@@ -28,9 +28,9 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   useEffect(() => {
     const newAddInputs = [];
     const filterPost = posts.filter(post => post.i === i);
-    filterPost.map((post, key) => {
-      newAddInputs.push({ i: i, id: post.id, value: post.name });
-    });
+    // filterPost.map((post, key) => {
+    //   newAddInputs.push({ i: i, id: post.id, value: post.name });
+    // });
     // dispatch(
     //   updateWorkspaceElement({
     //     settingItemId: i,
@@ -49,7 +49,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
     //     newAddInputs.push({ i: i, id: post.id, value: post.name });
     //   }
     // });
-    setAddInputs(newAddInputs);
+    // setAddInputs(newAddInputs);
     if (filterPost?.length > 0) {
       dispatch(
         updateWorkspaceElement({
@@ -59,7 +59,16 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
         }),
       );
     }
-  }, [dispatch, i, posts]);
+    if (addInputs?.length === 0) {
+      dispatch(
+        updateWorkspaceElement({
+          settingItemId: i,
+          propertyName: 'posts',
+          propertyValue: [],
+        }),
+      );
+    }
+  }, [dispatch, i, posts, addInputs?.length]);
 
   useEffect(() => {
     const newAddInputs = [];
@@ -74,8 +83,16 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
     // console.log(result, 'result');
 
     filterSavedPost.map((post, key) => {
+      const duplicateInput = addInputs.filter(addInput => addInput.value === post.name);
       if (newAddInputs) {
         newAddInputs.push({ i: i, id: post.id, value: post.name });
+        dispatch(
+          getPublication({
+            i: i,
+            id: post.id,
+            name: post.name,
+          }),
+        );
       }
     });
     setAddInputs(newAddInputs);
