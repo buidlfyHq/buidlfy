@@ -5,9 +5,9 @@ import SettingComponent from 'components/utils/render-setting';
 import { updateWorkspaceElementsArray, updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
-import 'styles/components.css';
 import { BiCopy } from 'react-icons/bi';
 import ShortUniqueId from 'short-unique-id';
+import 'styles/components.css';
 
 const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
   const ref = useRef(null);
@@ -28,20 +28,25 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
   };
 
   const handleDuplicate = () => {
-    // const newId = uid;
+    const elementId = uid();
     const newWorkspaceElements = [...workspaceElements];
     if (selectedElement.name === 'Container') {
-      const newSelectedContainer = { ...selectedElement, i: uid(), children: { ...selectedElement.children[0], i: uid() } };
-      console.log(newSelectedContainer, 'newSelectedContainer');
-      console.log(selectedElement, 'selectedElement');
-      console.log(newWorkspaceElements, 'newWorkspaceElements-before');
+      const newChildren = selectedElement?.children?.map(key => {
+        return {
+          ...key,
+          i: uid(),
+        };
+      });
+      const newSelectedContainer = {
+        ...selectedElement,
+        i: elementId,
+        children: newChildren,
+      }; // Need seperate id for children then element
       newWorkspaceElements.push(newSelectedContainer);
-      console.log(newWorkspaceElements, 'newWorkspaceElements-after');
     } else {
-      const newSelectedElement = { ...selectedElement, i: uid() };
+      const newSelectedElement = { ...selectedElement, i: elementId };
       newWorkspaceElements.push(newSelectedElement);
     }
-    // const newSelectedElement = { ...selectedElement, i: newId() };
     dispatch(updateWorkspaceElementsArray(newWorkspaceElements));
   };
 

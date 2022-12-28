@@ -11,7 +11,6 @@ import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import PaddingComponent from 'components/settings/padding-component';
 import MarginComponent from 'components/settings/margin-component';
 import BackgroundSizeComponent from 'components/settings/background-size-component';
-import DuplicateComponent from 'components/settings/duplicate-component';
 
 const ContainerSettings: FC = () => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);

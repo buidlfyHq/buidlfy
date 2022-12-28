@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import BgColorComponent from 'components/settings/bg-color-component';
 import MarginComponent from 'components/settings/margin-component';
-import DuplicateComponent from 'components/settings/duplicate-component';
 import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
 

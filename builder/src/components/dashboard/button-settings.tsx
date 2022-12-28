@@ -17,7 +17,6 @@ import CombinedComponent from 'components/settings/combined-setting';
 import BorderComponent from 'components/settings/border-component';
 import FontFamilyComponent from 'components/settings/font-family-component';
 import FontWeightComponent from 'components/settings/font-weight-component';
-import DuplicateComponent from 'components/settings/duplicate-component';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/dashboard.css';
 
