@@ -28,9 +28,9 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   useEffect(() => {
     const newAddInputs = [];
     const filterPost = posts.filter(post => post.i === i);
-    // filterPost.map((post, key) => {
-    //   newAddInputs.push({ i: i, id: post.id, value: post.name });
-    // });
+    filterPost.map((post, key) => {
+      newAddInputs.push({ i: i, id: post.id, value: post.name });
+    });
     // dispatch(
     //   updateWorkspaceElement({
     //     settingItemId: i,
@@ -49,7 +49,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
     //     newAddInputs.push({ i: i, id: post.id, value: post.name });
     //   }
     // });
-    // setAddInputs(newAddInputs);
+    setAddInputs(newAddInputs);
     if (filterPost?.length > 0) {
       dispatch(
         updateWorkspaceElement({
@@ -68,7 +68,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
         }),
       );
     }
-  }, [dispatch, i, posts, addInputs?.length]);
+  }, [dispatch, i, posts]);
 
   useEffect(() => {
     const newAddInputs = [];
@@ -83,9 +83,28 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
     // console.log(result, 'result');
 
     filterSavedPost.map((post, key) => {
-      const duplicateInput = addInputs.filter(addInput => addInput.value === post.name);
+      // const duplicateInput = addInputs.filter(addInput => addInput.value === post.name);
+      // const duplicateInput = posts.filter(post => post.name === );
+      // console.log(duplicateInput, 'duplicateInput');
+      const duplicateInput = newAddInputs.some(newAddInput => newAddInput.name !== post.name);
+      const duplicatePosts = newAddInputs.map(newAddInput => newAddInput.length === savedPosts.length);
+      const duplicateInputs = newAddInputs.map(newAddInput => newAddInput.id === post.id);
+      // const duplicateSavedPosts = posts.filter(post => post.id === );
+      console.log(duplicateInputs, 'duplicateInputs');
+
       if (newAddInputs) {
+        console.log(newAddInputs, 'newAddInputs');
+        console.log(
+          newAddInputs.some(newAddInput => newAddInput.name !== post.name),
+          'newAddFilter',
+        );
+        console.log(
+          newAddInputs.map(newAddInput => newAddInput.length === posts.length),
+          'postfiltger',
+        );
+
         newAddInputs.push({ i: i, id: post.id, value: post.name });
+        // if (duplicateInputs.length < 0) {
         dispatch(
           getPublication({
             i: i,
@@ -93,6 +112,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
             name: post.name,
           }),
         );
+        // }
       }
     });
     setAddInputs(newAddInputs);
