@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ethers } from 'ethers';
 import config from 'config';
 import { approveERC20Token, getERC1155Contract, getMarketplaceContract, getSigner } from 'redux/web3/web3.utils';
-import { filterAllTemplates } from './template.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { ISelectedTemplate } from './template.interfaces';
 import { SelectedTemplateDto } from './template.dto';

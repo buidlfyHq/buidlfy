@@ -8,7 +8,7 @@ import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import InfoCircleImg from 'assets/icons/info-circle.png';
 import MintUploadImg from 'assets/icons/mint-form-img.png';
-import { uploadImage } from 'redux/upload/upload.action';
+import { uploadImageAsync } from 'redux/upload/upload.thunk-actions';
 import { updateMintedImageData } from 'redux/minted/minted.reducers';
 import { Categories } from 'utils/categories';
 
@@ -55,7 +55,7 @@ const MintTemplateForm: FC = () => {
         const reader = new FileReader();
         reader.addEventListener('load', async () => {
           dispatch(updateMintedImageData(reader.result as string));
-          dispatch(uploadImage({ data: reader.result as string }));
+          dispatch(uploadImageAsync({ data: reader.result as string }));
         });
         reader.readAsDataURL(e.target.files[0]);
       }
