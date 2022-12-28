@@ -156,51 +156,63 @@ const PreviewButton: FC<IText> = ({
     window.location.reload();
   };
 
-  return (
-    <main style={{ justifyContent: justifyContent }} className="flex items-center justify-center w-auto h-full">
-      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
-        <div className="fixed flex items-center justify-center p-4 top-4 right-4">
-          <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
-            <Dialog.Title>
-              {transactionStatus === '' ? (
-                <div className="flex items-center">
-                  <div className="lds-ring">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
-                  <div className="mr-5 text-white">Transaction In Process...</div>
+  const TransactionStatusDialog = () => (
+    <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
+      <div className="fixed flex items-center justify-center p-4 top-4 right-4">
+        <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
+          <Dialog.Title>
+            {transactionStatus === '' ? (
+              <div className="flex items-center">
+                <div className="lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
                 </div>
-              ) : (
-                <div className="text-white break-all">{transactionStatus}</div>
-              )}
-            </Dialog.Title>
-          </Dialog.Panel>
-        </div>
-      </Dialog>
-      <Dialog className="relative z-50" open={networkSwitch} onClose={() => setNetworkSwitch(false)}>
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-[2px]" aria-hidden="true" />
-        <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-full">
-            <Dialog.Panel className="rounded-[24px] py-8 px-8 bg-white rounded-[24px]">
-              <div className="mt-2">
-                <p className="text-md text-gray-500">You need to switch netowrk to execute this transaction.</p>
+                <div className="mr-5 text-white">Transaction In Process...</div>
               </div>
+            ) : (
+              <div className="text-white break-all">{transactionStatus}</div>
+            )}
+          </Dialog.Title>
+        </Dialog.Panel>
+      </div>
+    </Dialog>
+  );
 
-              <div className="mt-4">
+  const SwitchNetworkDialog = () => (
+    <Dialog className="relative z-50" open={networkSwitch} onClose={() => setNetworkSwitch(false)}>
+      <div className="fixed inset-0 bg-black/40 backdrop-blur-[2px]" aria-hidden="true" />
+      <div className="fixed inset-0 overflow-y-auto">
+        <div className="flex items-center justify-center min-h-full">
+          <Dialog.Panel className="rounded-[24px] py-5 px-5 bg-white rounded flex flex-row justify-start items-center gap-6">
+            <div className="flex flex-col items-center w-[450px] h-[130px] relative">
+              <p className="mt-4 font-semibold">You need to switch netowrk to execute this transaction.</p>
+              <div className="flex justify-end w-full mt-8 mr-2">
                 <button
-                  type="button"
-                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  className="bordered-button py-2 px-7 my-2 ml-3 text-[14px] text-[#855FD8] font[500] rounded-[10px] whitespace-nowrap"
+                  onClick={() => setNetworkSwitch(false)}
+                >
+                  Cancel
+                </button>
+                <button
                   onClick={onSwitchNetwork}
+                  className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
                 >
                   Switch Network
                 </button>
               </div>
-            </Dialog.Panel>
-          </div>
+            </div>
+          </Dialog.Panel>
         </div>
-      </Dialog>
+      </div>
+    </Dialog>
+  );
+
+  return (
+    <main style={{ justifyContent: justifyContent }} className="flex items-center justify-center w-auto h-full">
+      {TransactionStatusDialog()}
+      {SwitchNetworkDialog()}
       {connectWallet ? (
         <div
           style={{
