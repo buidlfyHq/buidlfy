@@ -130,8 +130,8 @@ export const mapImageElementStylesToWorkspace = (element: IWorkspaceElement, pay
 export const fetchSelectedElement = (workspaceElements: IWorkspaceElement[], payload: string) => {
   const searchSelectedElement = workspaceElements?.find(element => element.i === payload);
 
-  const searchSelectedChild = workspaceElements?.map(element => element?.children?.find((child: IWorkspaceElement) => child?.i === payload));
-  const getSelectedChild = searchSelectedChild?.filter(child => child)[0];
+  const searchSelectedChild = workspaceElements?.map(element => element.children?.find((child: IWorkspaceElement) => child.i === payload));
+  const getSelectedChild = searchSelectedChild.filter(child => child)[0];
 
   return searchSelectedElement || getSelectedChild;
 };
