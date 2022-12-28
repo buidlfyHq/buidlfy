@@ -16,7 +16,7 @@ const DuplicateComponent: FC = () => {
 
   const handleDuplicate = () => {
     const newId = uid;
-    const newSelectedElement = { ...selectedElement, i: newId() };
+    const newSelectedElement = { ...selectedElement, i: newId(), children: { i: newId() } };
     const newWorkspaceElements = [...workspaceElements];
     newWorkspaceElements.push(newSelectedElement);
     dispatch(updateWorkspaceElementsArray(newWorkspaceElements));

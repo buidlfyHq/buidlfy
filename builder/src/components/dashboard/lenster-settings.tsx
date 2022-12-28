@@ -12,7 +12,6 @@ const LensterSettings: FC = () => {
     <section id={selectedElement.i}>
       <h3 className="ml-[0.5rem] mt-[1.5rem]">{selectedElement ? <span className="setting-text">{selectedElement.name}</span> : null}</h3>
       <AddLensterComponent i={selectedElement.i} />
-      <DuplicateComponent />
     </section>
   );
 };

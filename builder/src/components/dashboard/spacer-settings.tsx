@@ -14,7 +14,6 @@ const SpacerSettings: FC = () => {
       <h3 className="ml-[0.5rem] mt-[1.5rem]">{selectedElement ? <span className="setting-text">{selectedElement.name}</span> : null}</h3>
       <BgColorComponent i={selectedElement.i} elementBackgroundColor={selectedElement.style.backgroundColor} />
       <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
-      <DuplicateComponent />
     </>
   );
 };

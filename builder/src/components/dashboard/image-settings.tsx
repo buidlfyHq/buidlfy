@@ -38,7 +38,6 @@ const ImageSettings: FC<ISettings> = ({ handleSettingChange }) => {
       />
       <BackgroundSizeComponent i={selectedElement.i} backgroundSize={selectedElement.style?.backgroundSize} />
       <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
-      <DuplicateComponent />
     </>
   );
 };

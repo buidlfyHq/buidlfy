@@ -39,7 +39,6 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <BorderColorComponent i={selectedElement.i} borderColor={selectedElement.style.borderColor} />
       <BgColorComponent i={selectedElement.i} elementBackgroundColor={selectedElement.style.backgroundColor} />
       <ShadowComponent i={selectedElement.i} shadow={selectedElement.style.shadow} />
-      <DuplicateComponent />
     </>
   );
 };

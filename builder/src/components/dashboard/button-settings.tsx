@@ -89,7 +89,6 @@ const ButtonSettings: FC<ISettings> = ({ handleSettingChange, openTab, setOpenTa
         <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
         <PaddingComponent i={selectedElement.i} padding={selectedElement.style.padding} />
         <ShadowComponent i={selectedElement.i} shadow={selectedElement.style.shadow} />
-        <DuplicateComponent />
       </span>
       <div className={openTab === 2 ? 'block' : 'hidden'} id="link-two">
         <AdvanceComponent selectedElement={selectedElement} />

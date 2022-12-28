@@ -53,7 +53,6 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <BgColorComponent i={selectedElement.i} elementBackgroundColor={selectedElement.style.backgroundColor} />
       <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
       <PaddingComponent i={selectedElement.i} padding={selectedElement.style.padding} />
-      <DuplicateComponent />
     </>
   );
 };

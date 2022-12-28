@@ -28,7 +28,6 @@ const ContainerSettings: FC = () => {
       <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} name={selectedElement.name} />
       <PaddingComponent i={selectedElement.i} padding={selectedElement.style.padding} name={selectedElement.name} />
       <ShadowComponent i={selectedElement.i} shadow={selectedElement.style.shadow} />
-      <DuplicateComponent />
     </>
   );
 };
