@@ -24,10 +24,9 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   console.log(addInputs, 'addInputs');
 
   const uid = new ShortUniqueId();
-
   useEffect(() => {
     const newAddInputs = [];
-    const filterPost = posts.filter(post => post.i === i);
+    const filterPost = savedPosts.filter(post => post.i === i);
     filterPost.map((post, key) => {
       newAddInputs.push({ i: i, id: post.id, value: post.name });
     });
@@ -50,82 +49,141 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
     //   }
     // });
     setAddInputs(newAddInputs);
-    if (filterPost?.length > 0) {
-      dispatch(
-        updateWorkspaceElement({
-          settingItemId: i,
-          propertyName: 'posts',
-          propertyValue: filterPost,
-        }),
-      );
-    }
-    if (addInputs?.length === 0) {
-      dispatch(
-        updateWorkspaceElement({
-          settingItemId: i,
-          propertyName: 'posts',
-          propertyValue: [],
-        }),
-      );
-    }
-  }, [dispatch, i, posts]);
-
+    // if (filterPost?.length > 0) {
+    //   dispatch(
+    //     updateWorkspaceElement({
+    //       settingItemId: i,
+    //       propertyName: 'posts',
+    //       propertyValue: filterPost,
+    //     }),
+    //   );
+    // }
+    // if (addInputs?.length === 0) {
+    //   dispatch(
+    //     updateWorkspaceElement({
+    //       settingItemId: i,
+    //       propertyName: 'posts',
+    //       propertyValue: [],
+    //     }),
+    //   );
+    // }
+  }, [savedPosts, i]);
   useEffect(() => {
     const newAddInputs = [];
-    // const filterPost = posts.filter(post => post.i === i);
+    const filterPost = posts.filter(post => post.i === i);
     // filterPost.map((post, key) => {
     //   newAddInputs.push({ i: i, id: post.id, value: post.name });
     // });
-    const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
+    // dispatch(
+    //   updateWorkspaceElement({
+    //     settingItemId: i,
+    //     propertyName: 'posts',
+    //     propertyValue: filterPost,
+    //   }),
+    // );
+    // const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
     // const allPosts = filterPost.concat(filterSavedPost);
     // const result = allPosts.filter((item, i) => allPosts.indexOf(item) === i);
 
     // console.log(result, 'result');
 
-    filterSavedPost.map((post, key) => {
-      // const duplicateInput = addInputs.filter(addInput => addInput.value === post.name);
-      // const duplicateInput = posts.filter(post => post.name === );
-      // console.log(duplicateInput, 'duplicateInput');
-      const duplicateInput = newAddInputs.some(newAddInput => newAddInput.name !== post.name);
-      const duplicatePosts = newAddInputs.map(newAddInput => newAddInput.length === savedPosts.length);
-      const duplicateInputs = newAddInputs.map(newAddInput => newAddInput.id === post.id);
-      // const duplicateSavedPosts = posts.filter(post => post.id === );
-      console.log(duplicateInputs, 'duplicateInputs');
-
-      if (newAddInputs) {
-        console.log(newAddInputs, 'newAddInputs');
-        console.log(
-          newAddInputs.some(newAddInput => newAddInput.name !== post.name),
-          'newAddFilter',
-        );
-        console.log(
-          newAddInputs.map(newAddInput => newAddInput.length === posts.length),
-          'postfiltger',
-        );
-
-        newAddInputs.push({ i: i, id: post.id, value: post.name });
-        // if (duplicateInputs.length < 0) {
-        dispatch(
-          getPublication({
-            i: i,
-            id: post.id,
-            name: post.name,
-          }),
-        );
-        // }
-      }
-    });
-    setAddInputs(newAddInputs);
+    // filterSavedPost.map((post, key) => {
+    //   if (newAddInputs) {
+    //     newAddInputs.push({ i: i, id: post.id, value: post.name });
+    //   }
+    // });
+    // setAddInputs(newAddInputs);
     // if (filterPost?.length > 0) {
+    dispatch(
+      updateWorkspaceElement({
+        settingItemId: i,
+        propertyName: 'posts',
+        propertyValue: filterPost,
+      }),
+    );
+    // }
+    // if (addInputs?.length === 0) {
     // dispatch(
     //   updateWorkspaceElement({
     //     settingItemId: i,
     //     propertyName: 'posts',
-    //     propertyValue: allPosts,
+    //     propertyValue: [],
     //   }),
     // );
     // }
+  }, [dispatch, i, posts]);
+  useEffect(() => {
+    const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
+    // .filter((item, i) => savedPosts.findIndex(post => post.id === item.id) === i);
+
+    filterSavedPost.map((post, key) => {
+      const index = addInputs.findIndex(addInput => post.name === addInput.value);
+
+      dispatch(
+        getPublication({
+          i: i,
+          id: post.id,
+          name: post.name,
+        }),
+      );
+    });
   }, []);
+  // useEffect(() => {
+  //   const newAddInputs = [];
+  //   // const filterPost = posts.filter(post => post.i === i);
+  //   // filterPost.map((post, key) => {
+  //   //   newAddInputs.push({ i: i, id: post.id, value: post.name });
+  //   // });
+  //   const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
+  //   // const allPosts = filterPost.concat(filterSavedPost);
+  //   // const result = allPosts.filter((item, i) => allPosts.indexOf(item) === i);
+
+  //   // console.log(result, 'result');
+
+  //   filterSavedPost.map((post, key) => {
+  //     // const duplicateInput = addInputs.filter(addInput => addInput.value === post.name);
+  //     // const duplicateInput = posts.filter(post => post.name === );
+  //     // console.log(duplicateInput, 'duplicateInput');
+  //     const duplicateInput = newAddInputs.some(newAddInput => newAddInput.name !== post.name);
+  //     const duplicatePosts = newAddInputs.map(newAddInput => newAddInput.length === savedPosts.length);
+  //     const duplicateInputs = newAddInputs.map(newAddInput => newAddInput.id === post.id);
+  //     // const duplicateSavedPosts = posts.filter(post => post.id === );
+  //     console.log(duplicateInputs, 'duplicateInputs');
+
+  //     if (newAddInputs) {
+  //       console.log(newAddInputs, 'newAddInputs');
+  //       console.log(
+  //         newAddInputs.some(newAddInput => newAddInput.name !== post.name),
+  //         'newAddFilter',
+  //       );
+  //       console.log(
+  //         newAddInputs.map(newAddInput => newAddInput.length === posts.length),
+  //         'postfiltger',
+  //       );
+
+  //       newAddInputs.push({ i: i, id: post.id, value: post.name });
+  //       // if (duplicateInputs.length < 0) {
+  //       dispatch(
+  //         getPublication({
+  //           i: i,
+  //           id: post.id,
+  //           name: post.name,
+  //         }),
+  //       );
+  //       // }
+  //     }
+  //   });
+  //   setAddInputs(newAddInputs);
+  //   // if (filterPost?.length > 0) {
+  //   // dispatch(
+  //   //   updateWorkspaceElement({
+  //   //     settingItemId: i,
+  //   //     propertyName: 'posts',
+  //   //     propertyValue: allPosts,
+  //   //   }),
+  //   // );
+  //   // }
+  // }, []);
   const handleNewValue = (e: ChangeEvent<HTMLInputElement>, key: number) => {
     if (e.target.value.length > 0) {
       const duplicateInput = posts.filter(post => post.name === e.target.value);
@@ -176,6 +234,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
       <div className="items-center mx-2 mt-1 w-[13.5rem] text-black">
         {addInputs
           .filter(addInput => addInput.i === i)
+          .filter((item, i) => addInputs.findIndex(post => post.id === item.id) === i)
           .map((addInput, i) => {
             return (
               <div className="flex">
