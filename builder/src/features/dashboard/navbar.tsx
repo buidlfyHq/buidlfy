@@ -8,7 +8,6 @@ import { updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 're
 import { setSelectorToDefault, updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
-import { updatePublicationPost } from 'redux/lenster/lenster.reducers';
 
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
@@ -23,8 +22,6 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
   const publishStatus = useSelector((state: IRootState) => state.publish.publishStatus);
   const head = useSelector((state: IRootState) => state.workspace.head);
   const contractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
-  const posts = workspaceElements.filter(workspaceElement => workspaceElement.name === 'Lenster Card');
-  const post = posts?.map(post => post.posts);
 
   const handleCloseSidebar = () => {
     setIsContainerSelected(false);
@@ -42,10 +39,6 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
       },
       contract: null,
     };
-    console.log(workspaceElements, 'workspaceElements');
-    console.log(post, 'post');
-
-    // dispatch(updatePublicationPost(post))
     if (contractDetails?.abi && contractDetails?.address && contractDetails?.network) {
       templateConfig.contract = {
         abi: JSON.parse(contractDetails?.abi),

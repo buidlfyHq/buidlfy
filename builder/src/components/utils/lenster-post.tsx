@@ -1,6 +1,4 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { IRootState } from 'redux/root-state.interface';
 import LensterIcon from 'components/utils/assets/lenster-svg';
 import lenster from 'assets/lenster-default.svg';
 import { IPublication } from 'redux/lenster/lenster.interfaces';
@@ -15,9 +13,6 @@ interface ILensterPost {
 }
 
 const LensterPost: FC<ILensterPost> = ({ i, post, updateProfilePicture, updatePostMedia, preview }) => {
-  const inputValue = useSelector((state: IRootState) => state.lenster.inputValue);
-  console.log(inputValue, 'iv');
-
   return (
     <>
       {post.name ? (

@@ -1,11 +1,10 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import LensterPost from 'components/utils/lenster-post';
 import { IRootState } from 'redux/root-state.interface';
 import edit from 'assets/icons/edit.png';
 import logo from 'assets/icons/buidlfy.png';
 import 'styles/components.css';
-import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
 interface ILensterWidget {
   i: string;
@@ -13,19 +12,9 @@ interface ILensterWidget {
 }
 
 const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
-  const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
   const posts = useSelector((state: IRootState) =>
     state.workspace.workspaceElements.find(workspaceElement => workspaceElement.i === i).posts.filter(publication => publication.i === i),
   );
-  // const posts = useSelector((state: IRootState) => state.lenster.publications.filter(publication => publication.i === i));
-  const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
-  console.log(workspaceElements, 'workspaceElements');
-  console.log(posts, 'post');
-  console.log(selectedElement, 'selectedElement');
-
-  // useEffect(() => {
-  //   console.log(posts, 'post');
-  // }, [posts]);
   return (
     <>
       {posts && posts.length > 0 ? (
@@ -34,7 +23,6 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
             {posts
               .filter((item, i) => posts.findIndex(post => post.id === item.id) === i)
               .map(post => {
-                console.log(post.handle, 'post');
                 const updateProfilePicture = 'https://ipfs.io/ipfs/' + post.profilePicture?.slice(7);
                 const updatePostMedia = 'https://ipfs.io/ipfs/' + post?.postMedia?.slice(7);
                 return <LensterPost i={i} post={post} updateProfilePicture={updateProfilePicture} updatePostMedia={updatePostMedia} />;
