@@ -6,7 +6,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import WarningText from 'components/utils/setting-warning';
 import { getPublication } from 'redux/lenster/lenster.actions';
 import { updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
-import { removePublication, updateInputValue } from 'redux/lenster/lenster.reducers';
+import { removePublication, updateInputValue, updateLoadingComponent } from 'redux/lenster/lenster.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
 
@@ -26,13 +26,25 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   useEffect(() => {
     const newAddInputs = [];
     filterSavedPost.map(post => {
+      const duplicatePost = addInputs.filter(addInput => addInput.value === addInput.value);
+      console.log(duplicatePost, 'duplicatePost');
+
       newAddInputs.push({ i: i, id: post.id, value: post.name });
     });
     setAddInputs(newAddInputs);
+    console.log('three');
+    console.log(newAddInputs, 'newAddInputs');
+    console.log(savedPosts, 'savedPosts');
+    console.log(addInputs, 'addinpuuts');
+
+    // dispatch(updateLoadingComponent(true));
   }, [savedPosts, i]);
 
   useEffect(() => {
     const filterPost = posts.filter(post => post.i === i);
+    // const duplicatePost = posts.some((item, index) => index !== posts.indexOf(item));
+    // console.log(duplicatePost, 'duplicatePost');
+
     dispatch(
       updateWorkspaceElement({
         settingItemId: i,
@@ -40,6 +52,10 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
         propertyValue: filterPost,
       }),
     );
+    console.log('two');
+    console.log(posts, 'posts');
+
+    dispatch(updateLoadingComponent(false));
   }, [dispatch, i, posts]);
 
   useEffect(() => {
@@ -52,6 +68,8 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
         }),
       );
     });
+    console.log('one');
+    dispatch(updateLoadingComponent(false));
   }, []);
 
   const handleNewValue = (e: ChangeEvent<HTMLInputElement>, key: number) => {

@@ -5,6 +5,7 @@ import { IRootState } from 'redux/root-state.interface';
 import edit from 'assets/icons/edit.png';
 import logo from 'assets/icons/buidlfy.png';
 import 'styles/components.css';
+import Spinner from 'components/utils/assets/spinner';
 
 interface ILensterWidget {
   i: string;
@@ -15,6 +16,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
   const posts = useSelector((state: IRootState) =>
     state.workspace.workspaceElements.find(workspaceElement => workspaceElement.i === i).posts.filter(publication => publication.i === i),
   );
+  const loadingComponent = useSelector((state: IRootState) => state.lenster.loadingComponent);
   return (
     <>
       {posts && posts.length > 0 ? (
@@ -46,19 +48,25 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
             resizeHandles: [],
           }}
         >
-          <div className="container-div" onMouseOut={() => setDrag(true)} onMouseOver={() => setDrag(false)}>
-            <span className="container-text">Add Lenster Posts</span>
-          </div>
-          <div className="flex absolute top-[0.5rem] right-[0.6rem]">
-            <div
-              onMouseOut={() => setDrag(true)}
-              onMouseOver={() => setDrag(false)}
-              className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
-              id="edit-img"
-            >
-              <img className="w-[13px] h-[13px]" src={edit} alt="edit" />
-            </div>
-          </div>
+          {loadingComponent ? (
+            <Spinner />
+          ) : (
+            <>
+              <div className="container-div" onMouseOut={() => setDrag(true)} onMouseOver={() => setDrag(false)}>
+                <span className="container-text">Add Lenster Posts</span>
+              </div>
+              <div className="flex absolute top-[0.5rem] right-[0.6rem]">
+                <div
+                  onMouseOut={() => setDrag(true)}
+                  onMouseOver={() => setDrag(false)}
+                  className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
+                  id="edit-img"
+                >
+                  <img className="w-[13px] h-[13px]" src={edit} alt="edit" />
+                </div>
+              </div>
+            </>
+          )}
         </div>
       )}
     </>

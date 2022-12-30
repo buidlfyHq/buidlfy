@@ -4,6 +4,7 @@ import { IPublication, ILensterState } from './lenster.interfaces';
 const initialState: ILensterState = {
   publications: [],
   inputValue: false,
+  loadingComponent: false,
 };
 
 const lensterSlice = createSlice({
@@ -54,8 +55,14 @@ const lensterSlice = createSlice({
         inputValue: action.payload,
       };
     },
+    updateLoadingComponent(state: ILensterState, action: { payload: boolean }) {
+      return {
+        ...state,
+        loadingComponent: action.payload,
+      };
+    },
   },
 });
 
-export const { updatePublications, removePublication, updateInputValue } = lensterSlice.actions;
+export const { updatePublications, removePublication, updateInputValue, updateLoadingComponent } = lensterSlice.actions;
 export default lensterSlice.reducer;
