@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import AddLensterComponent from 'components/settings/add-lenster-component';
 import { IRootState } from 'redux/root-state.interface';
+import AddLensterComponent from 'components/settings/add-lenster-component';
 import 'styles/components.css';
 
 const LensterSettings: FC = () => {

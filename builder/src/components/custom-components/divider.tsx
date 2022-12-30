@@ -1,10 +1,25 @@
 import React, { FC } from 'react';
 import 'styles/components.css';
 
-const Divider: FC = () => (
-  <div id="Divider" className="relative flex items-center p-3">
-    <div className="flex-grow border-t border-gray-300" />
-  </div>
+interface IDivider {
+  borderColor?: string;
+  borderRadius?: number;
+  borderWidth?: number;
+  margin?: {
+    marginLeft?: number;
+    marginRight?: number;
+    marginTop?: number;
+    marginBottom?: number;
+  };
+}
+const Divider: FC<IDivider> = ({ borderColor, borderRadius, borderWidth, margin }) => (
+  <hr
+    style={{
+      margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
+      borderRadius: `${borderRadius}px`,
+      borderColor: borderColor,
+      borderTopWidth: borderWidth,
+    }}
+  />
 );
-
 export default Divider;
