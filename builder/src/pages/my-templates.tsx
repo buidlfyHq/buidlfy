@@ -1,27 +1,27 @@
-import { FC, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import RenderTemplateList from "components/utils/render-template-list";
-import logo from "assets/icons/buidlfy.png";
-import { ReactComponent as ColorFeather } from "assets/svgAsIcons/feather-color.svg";
-import { ReactComponent as AddIcon } from "assets/svgAsIcons/addTemp.svg";
-import WalletMenu from "features/dashboard/wallet-menu";
-import ReactTooltip from "react-tooltip";
+import { FC, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import RenderTemplateList from 'components/utils/render-template-list';
+import logo from 'assets/icons/buidlfy.png';
+import { ReactComponent as ColorFeather } from 'assets/svgAsIcons/feather-color.svg';
+import { ReactComponent as AddIcon } from 'assets/svgAsIcons/addTemp.svg';
+import WalletMenu from 'features/dashboard/wallet-menu';
+import ReactTooltip from 'react-tooltip';
 
 export enum TabType {
-  ALL = "all",
-  REVIEW = "review",
-  LISTED = "listed",
+  ALL = 'all',
+  REVIEW = 'review',
+  LISTED = 'listed',
 }
 
 const MyTemplates: FC = () => {
   const navigate = useNavigate();
   const currentAccount = useSelector((state: any) => state.web3.currentAccount);
-  const [tab, setTab] = useState<string>("all");
+  const [tab, setTab] = useState<string>('all');
 
   useEffect(() => {
     if (!currentAccount) {
-      return navigate("/");
+      return navigate('/');
     }
   }, []); // eslint-disable-line
 
@@ -61,14 +61,11 @@ const MyTemplates: FC = () => {
 
       {/* mid sec */}
       <section className="py-10 px-36">
-        <div 
-        className="flex items-center justify-start font-[600] text-[20px] text-[#14142B]"
-        >
+        <div className="flex items-center justify-start font-[600] text-[20px] text-[#14142B]">
           My Templates
           <Link to="/">
-            <AddIcon data-tip="Create new template"
-        data-for="add" className="text-[24px] ml-2 mt-[4px]" />
-        {tooltip}
+            <AddIcon data-tip="Create new template" data-for="add" className="text-[24px] ml-2 mt-[4px]" />
+            {tooltip}
           </Link>
         </div>
       </section>
@@ -77,31 +74,19 @@ const MyTemplates: FC = () => {
         <section className="py-0 px-36">
           <div className="flex justify-start text-black font-[600] text-[15px] gap-8">
             <button
-              className={`py-3 cursor-pointer px-7 outline-none ${
-                tab === TabType.ALL
-                  ? "border-b-4 border-purple-500 gradient-text"
-                  : null
-              }`}
+              className={`py-3 cursor-pointer px-7 outline-none ${tab === TabType.ALL ? 'border-b-4 border-purple-500 gradient-text' : null}`}
               onClick={() => setTab(TabType.ALL)}
             >
               All Templates
             </button>
             <button
-              className={`py-3 cursor-pointer px-7 outline-none ${
-                tab === TabType.REVIEW
-                  ? "border-b-4 border-purple-500 gradient-text"
-                  : null
-              }`}
+              className={`py-3 cursor-pointer px-7 outline-none ${tab === TabType.REVIEW ? 'border-b-4 border-purple-500 gradient-text' : null}`}
               onClick={() => setTab(TabType.REVIEW)}
             >
               In Review
             </button>
             <button
-              className={`py-3 cursor-pointer px-7 outline-none ${
-                tab === TabType.LISTED
-                  ? "border-b-4 border-purple-500 gradient-text"
-                  : null
-              }`}
+              className={`py-3 cursor-pointer px-7 outline-none ${tab === TabType.LISTED ? 'border-b-4 border-purple-500 gradient-text' : null}`}
               onClick={() => setTab(TabType.LISTED)}
             >
               Listed Templates
@@ -122,7 +107,7 @@ const MyTemplates: FC = () => {
               <BiChevronDown className="ml-2 text-[18px]" />
             </div>
           </div> */}
-          <div className="grid gap-10 grid-cols-myTemplateCustom px-40 pb-12 pt-7 h-[calc(100vh-14.5rem)]">
+          <div className="grid gap-10 grid-cols-myTemplateCustom px-40 pb-12 pt-7 h-full">
             <RenderTemplateList tab={tab} />
           </div>
         </section>

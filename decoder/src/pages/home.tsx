@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState, useEffect } from "react";
+import { useWindowSize } from "hooks/use-window-size";
 import BuilderConfig from "config";
 import RenderItem from "utils/render-item";
 import IWorkspace from "interfaces/workspace";
@@ -17,6 +18,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid l
 
 const Home: FC = () => {
   const config = JSON.parse(BuilderConfig);
+  const size = useWindowSize();
   const [inputValue, setInputValue] = useState<IInput[]>([]);
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
   const [testConfig, setTestConfig] = useState(
@@ -41,8 +43,6 @@ const Home: FC = () => {
     }
   };
 
-  console.log(testConfig)
-
   useEffect(() => {
     let nftY = null;
     let nftCols = 0;
@@ -55,9 +55,6 @@ const Home: FC = () => {
             nftY = item.y;
             setNftCard(item);
           }
-          // if (item.nft && item.y === nftY) {
-          //   nftCols++;
-          // }
         });
         // remove the original NFT Layout
         setTestConfig(testConfig.filter((i: IWorkspace) => !i.nft));
@@ -75,20 +72,16 @@ const Home: FC = () => {
       });
 
     setNftColumns(nftCols);
-    console.log(nftColumns)
   }, []);
 
   useEffect(() => {
-    console.log('in')
     if (nftCard && slug) {
-      console.log(1)
       fetch(
         `https://testnets-api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=${limit}&collection=${slug}&include_orders=false`,
         { method: "GET", headers: { Accept: "application/json" } }
       )
         .then((response) => response.json())
         .then(({ assets }) => {
-          console.log(assets)
           renderTokensForOwner(assets);
         }).catch(err => console.log(err))
     } else if (nftCard && account) {
@@ -111,11 +104,9 @@ const Home: FC = () => {
   // render nfts from connected wallet using opensea api
   const renderTokensForOwner = (assets: any[]) => {
     const colW = 6 / +cardsPerRow;
-    console.log(colW, +cardsPerRow)
     let X = 0;
 
     let nCardsArr = assets.map((asset: any) => {
-      // console.log(asset)
       let modifiedX = X;
       X = X + colW;
       X = X + colW <= 6 ? X : 0;
@@ -158,39 +149,49 @@ const Home: FC = () => {
   };
 
   return (
-    <main
-      className="min-h-screen"
-      style={{
-        background: config.background,
-      }}
-    >
-      <ResponsiveGridLayout
-        layouts={{ lg: testConfig }}
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
-        rowHeight={50}
-        isDraggable={false}
-        isResizable={false}
-        compactType={null}
-        margin={[0, 0]}
-        className="overflow-hidden h-fit"
-      >
-        {testConfig.map((c: IWorkspace) => {
-          const { x, y, w, h, minW, i } = c;
-          return (
-            <div key={i} data-grid={{ x, y, w, h, minW }}>
-              <RenderItem
-                item={c}
-                inputValue={inputValue}
-                setInputValue={setInputValue}
-                outputValue={outputValue}
-                setOutputValue={setOutputValue}
-              />
-            </div>
-          );
-        })}
-      </ResponsiveGridLayout>
-    </main>
+    <>
+      {size.width > 1024 ? (
+        <main
+          className="min-h-screen"
+          style={{
+            background: config.background,
+          }}
+        >
+          <ResponsiveGridLayout
+            layouts={{ lg: testConfig }}
+            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+            cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
+            rowHeight={50}
+            isDraggable={false}
+            isResizable={false}
+            compactType={null}
+            margin={[0, 0]}
+            className="overflow-hidden h-fit"
+          >
+            {testConfig.map((c: IWorkspace) => {
+              const { x, y, w, h, minW, i } = c;
+              return (
+                <div key={i} data-grid={{ x, y, w, h, minW }}>
+                  <RenderItem
+                    item={c}
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
+                    outputValue={outputValue}
+                    setOutputValue={setOutputValue}
+                  />
+                </div>
+              );
+            })}
+          </ResponsiveGridLayout>
+        </main>
+      ) : (
+        <h1 className="items-center text-center justify-center flex h-[100vh]">
+          Use this on desktop for better experience <br /> Responsive view
+          coming soon!
+        </h1>
+      )}
+    </>
+    
   );
 };
 

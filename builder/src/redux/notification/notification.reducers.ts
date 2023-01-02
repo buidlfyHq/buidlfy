@@ -1,20 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { setNewArray } from "./notification.utils";
-import { INotification, INotificationState } from "./notification.interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { setNewArray } from './notification.utils';
+import { INotification, INotificationState } from './notification.interfaces';
 
 const initialState: INotificationState = {
   notificationArray: [],
 };
 
 const notificationSlice = createSlice({
-  name: "notification",
+  name: 'notification',
   initialState,
   reducers: {
     addNotification(state, action: { payload: INotification }) {
-      state.notificationArray = setNewArray(
-        state.notificationArray,
-        action.payload
-      );
+      state.notificationArray = setNewArray(state.notificationArray, action.payload);
     },
   },
 });

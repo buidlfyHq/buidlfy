@@ -1,19 +1,13 @@
-import React, { FC, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
-import { saveContractConfig } from "redux/workspace/workspace.reducers";
-import {
-  setSelectorToDefault,
-  updateSelector,
-} from "redux/contract/contract.reducers";
-import Spinner from "components/utils/assets/spinner";
-import { IRootState } from "redux/root-state.interface";
-import { IShowComponent } from "redux/workspace/workspace.interfaces";
-import {
-  IContractElementSelected,
-  IContractElementSelector,
-} from "redux/contract/contract.interfaces";
-import "styles/components.css";
+import React, { FC, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai';
+import { saveContractConfig } from 'redux/workspace/workspace.reducers';
+import { setSelectorToDefault, updateSelector } from 'redux/contract/contract.reducers';
+import Spinner from 'components/utils/assets/spinner';
+import { IRootState } from 'redux/root-state.interface';
+import { IShowComponent, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import { IContractElementSelected, IContractElementSelector } from 'redux/contract/contract.interfaces';
+import 'styles/components.css';
 
 interface IAbiComponents {
   showComponent: IShowComponent;
@@ -22,19 +16,15 @@ interface IAbiComponents {
 
 const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   const dispatch = useDispatch();
-  const contractElementSelector: IContractElementSelector = useSelector(
-    (state: IRootState) => state.contract.contractElementSelector
-  );
-  const contractElementSelected: IContractElementSelected = useSelector(
-    (state: IRootState) => state.contract.contractElementSelected
-  );
-
+  const contractElementSelector: IContractElementSelector = useSelector((state: IRootState) => state.contract.contractElementSelector);
+  const contractElementSelected: IContractElementSelected = useSelector((state: IRootState) => state.contract.contractElementSelected);
+  const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
   const [currentElement, setCurrentElement] = useState<{
     name: string;
     type: string;
   }>({
-    name: "",
-    type: "",
+    name: '',
+    type: '',
   });
   const [show, setShow] = useState<boolean>(true);
 
@@ -53,21 +43,21 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
       dispatch(
         updateSelector({
           methodName: showComponent.value.name,
-          type: "input",
+          type: 'input',
           name: selectedId,
           buttonId: elementId,
-        })
+        }),
       );
-      setCurrentElement({ name: selectedId, type: "input" });
+      setCurrentElement({ name: selectedId, type: 'input' });
     } else {
       dispatch(setSelectorToDefault());
     }
   };
 
   const inputObjects = (i: number) => {
-    const selectedId = "input" + i + showComponent.id;
+    const selectedId = 'input' + i + showComponent.id;
     const objects = Object.keys(contractElementSelected);
-    const filterObjects = objects.filter((key) => key === selectedId);
+    const filterObjects = objects.filter(key => key === selectedId);
     return {
       selectedId,
       objects,
@@ -80,14 +70,14 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
       dispatch(
         updateSelector({
           methodName: showComponent.value.name,
-          type: "input",
+          type: 'input',
           name: showComponent.value.name,
           buttonId: id,
-        })
+        }),
       );
       setCurrentElement({
         name: showComponent.value.name,
-        type: "send",
+        type: 'send',
       });
     } else {
       dispatch(setSelectorToDefault());
@@ -95,9 +85,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   };
 
   const stateObject = (key: string) => {
-    let filteredObject = contractElementSelected[key]?.filter(
-      (key: { buttonId: string }) => key.buttonId === elementId
-    );
+    let filteredObject = contractElementSelected[key]?.filter((key: { buttonId: string }) => key.buttonId === elementId);
     return filteredObject;
   };
 
@@ -106,21 +94,21 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
       dispatch(
         updateSelector({
           methodName: showComponent.value.name,
-          type: "output",
+          type: 'output',
           name: selectedId,
           buttonId: elementId,
-        })
+        }),
       );
-      setCurrentElement({ name: selectedId, type: "output" });
+      setCurrentElement({ name: selectedId, type: 'output' });
     } else {
       dispatch(setSelectorToDefault());
     }
   };
 
   const outputObjects = (i: number) => {
-    const selectedId = "output" + i + showComponent.id;
+    const selectedId = 'output' + i + showComponent.id;
     const objects = Object.keys(contractElementSelected);
-    const filterObjects = objects.filter((key) => key === selectedId);
+    const filterObjects = objects.filter(key => key === selectedId);
     return {
       selectedId,
       objects,
@@ -130,8 +118,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
 
   const renderDefault = (valueName: string) => (
     <>
-      {contractElementSelector &&
-      contractElementSelector?.name === valueName ? (
+      {contractElementSelector && contractElementSelector?.name === valueName ? (
         <span className="flex">
           <span className="flex-1">
             <Spinner />
@@ -146,97 +133,117 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
       )}
     </>
   );
+  const findElement = (id: string) => {
+    return workspaceElements.find((element: IWorkspaceElement) => element.i === id);
+  };
+  const savedContractInput = workspaceElements
+    ?.map((key: IWorkspaceElement) => {
+      if (key.name === 'Button') {
+        if (key?.contract && key?.contract?.inputs?.length > 0) {
+          return key?.contract?.inputs?.map(input => (
+            <span className="flex">
+              <span className="flex-1">
+                {findElement(input.id).name} - {input.id}
+              </span>
+              <AiOutlineEdit className="mt-1.5 cursor-pointer" />
+            </span>
+          ));
+        }
+      }
+    })
+    .filter(item => item !== undefined);
+
+  const savedContractOutput = workspaceElements
+    ?.map((key: IWorkspaceElement) => {
+      if (key.name === 'Button') {
+        if (key?.contract && key?.contract?.outputs?.length > 0) {
+          return key?.contract?.outputs?.map(output => (
+            <span className="flex">
+              <span className="flex-1">
+                {findElement(output.id).name} - {output.id}
+              </span>
+              <AiOutlineEdit className="mt-1.5 cursor-pointer" />
+            </span>
+          ));
+        }
+      }
+    })
+    .filter(item => item !== undefined);
+
   // Create Common Input for all three inputs
   return (
     <main>
       {showComponent ? (
         <>
           {showComponent.value?.inputs &&
-            showComponent.value?.inputs.map(
-              (input: { name: string }, i: number) => {
-                const { selectedId, objects, filterObjects } = inputObjects(i);
-                return (
-                  <section key={i} className="mt-3">
-                    <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">
-                      Input
-                      {/* {input.name} */}
-                    </h6>
-                    <div
-                      className="grid contract-input w-[13.5rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
-                      onClick={() => handleInputSelector(selectedId)}
-                    >
-                      <div>
-                        {!objects.length ? (
-                          <div className="cursor-pointer">
-                            {renderDefault(selectedId)}
-                          </div>
-                        ) : (
-                          <>
-                            {!filterObjects.length
-                              ? renderDefault(selectedId)
-                              : filterObjects.map((key) => {
-                                  let filteredObject = contractElementSelected[
-                                    key
-                                  ]?.filter(
-                                    (key: { buttonId: string }) =>
-                                      key.buttonId === elementId
-                                  );
-                                  return (
-                                    <div key={key}>
-                                      {filteredObject[0] ? (
-                                        <>
-                                          {contractElementSelector !== null &&
-                                          contractElementSelector.name ===
-                                            selectedId ? (
-                                            <span className="flex">
-                                              <span className="flex-1">
-                                                <Spinner />
-                                                Selecting
-                                              </span>
-                                              <AiOutlineClose className="mt-1.5 cursor-pointer" />
+            showComponent.value?.inputs.map((input: { name: string }, i: number) => {
+              const { selectedId, objects, filterObjects } = inputObjects(i);
+              return (
+                <section key={i} className="mt-3">
+                  <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">
+                    Input
+                    {/* {input.name} */}
+                  </h6>
+                  <div
+                    className="grid contract-input w-[13.5rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
+                    onClick={() => handleInputSelector(selectedId)}
+                  >
+                    <div>
+                      {!objects.length ? (
+                        <>{savedContractInput?.length > 0 ? savedContractInput : <div className="cursor-pointer">{renderDefault(selectedId)}</div>}</>
+                      ) : (
+                        <>
+                          {!filterObjects.length
+                            ? renderDefault(selectedId)
+                            : filterObjects.map(key => {
+                                let filteredObject = contractElementSelected[key]?.filter((key: { buttonId: string }) => key.buttonId === elementId);
+                                return (
+                                  <div key={key}>
+                                    {filteredObject[0] ? (
+                                      <>
+                                        {contractElementSelector !== null && contractElementSelector.name === selectedId ? (
+                                          <span className="flex">
+                                            <span className="flex-1">
+                                              <Spinner />
+                                              Selecting
                                             </span>
-                                          ) : (
-                                            <span className="flex">
-                                              <span className="flex-1">
-                                                {filteredObject[0].name} -{" "}
-                                                {filteredObject[0].id}
-                                              </span>
-                                              <AiOutlineEdit className="mt-1.5 cursor-pointer" />
+                                            <AiOutlineClose className="mt-1.5 cursor-pointer" />
+                                          </span>
+                                        ) : (
+                                          <span className="flex">
+                                            <span className="flex-1">
+                                              {filteredObject[0].name} - {filteredObject[0].id}
                                             </span>
-                                          )}
-                                        </>
-                                      ) : (
-                                        renderDefault(selectedId)
-                                      )}
-                                    </div>
-                                  );
-                                })}
-                          </>
-                        )}
-                      </div>
+                                            <AiOutlineEdit className="mt-1.5 cursor-pointer" />
+                                          </span>
+                                        )}
+                                      </>
+                                    ) : (
+                                      renderDefault(selectedId)
+                                    )}
+                                  </div>
+                                );
+                              })}
+                        </>
+                      )}
                     </div>
-                  </section>
-                );
-              }
-            )}
+                  </div>
+                </section>
+              );
+            })}
 
-          {showComponent.value?.stateMutability === "payable" && (
+          {/* Add: Add SavedContract condition for stateMutability */}
+          {showComponent.value?.stateMutability === 'payable' && (
             <section className="mt-3">
-              <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">
-                Input - Amount Payable
-              </h6>
+              <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">Input - Amount Payable</h6>
               <div
                 className="grid contract-input w-[13.5rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
                 onClick={() => {
                   handleStateSelector(elementId);
                 }}
               >
-                {!Object.keys(contractElementSelected).filter(
-                  (key: string) => key === showComponent.value.name
-                ).length ? (
-                  <span className="cursor-pointer">
-                    {renderDefault(showComponent.value.name)}
-                  </span>
+                {!Object.keys(contractElementSelected).filter((key: string) => key === showComponent.value.name).length ? (
+                  <span className="cursor-pointer">{renderDefault(showComponent.value.name)}</span>
                 ) : (
                   <>
                     {Object.keys(contractElementSelected)
@@ -248,9 +255,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                             <div key={key}>
                               {filteredObject[0] ? (
                                 <>
-                                  {contractElementSelector !== null &&
-                                  contractElementSelector.name ===
-                                    showComponent.value.name ? (
+                                  {contractElementSelector !== null && contractElementSelector.name === showComponent.value.name ? (
                                     <span className="flex">
                                       <span className="flex-1">
                                         <Spinner />
@@ -261,8 +266,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                                   ) : (
                                     <span className="flex">
                                       <span className="flex-1">
-                                        {filteredObject[0].name} -{" "}
-                                        {filteredObject[0].id}
+                                        {filteredObject[0].name} - {filteredObject[0].id}
                                       </span>
                                       <AiOutlineEdit className="mt-1.5 cursor-pointer" />
                                     </span>
@@ -284,74 +288,68 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
           )}
 
           {showComponent.value?.outputs &&
-            showComponent.value?.outputs.map(
-              (output: { name: string }, i: number) => {
-                const { selectedId, objects, filterObjects } = outputObjects(i);
-                return (
-                  <section key={i} className="mt-3">
-                    <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">
-                      Output
-                      {/* {output.name} */}
-                    </h6>
-                    <div
-                      key={i}
-                      className="grid contract-input w-[13.5rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
-                      onClick={() => handleOutputSelector(selectedId)}
-                    >
-                      <div>
-                        {objects.length === 0 ? (
-                          <span className="cursor-pointer">
-                            {renderDefault(selectedId)}
-                          </span>
-                        ) : (
-                          <>
-                            {filterObjects.length === 0
-                              ? renderDefault(selectedId)
-                              : filterObjects.map((key) => {
-                                  let filteredObject = contractElementSelected[
-                                    key
-                                  ]?.filter(
-                                    (key: { buttonId: string }) =>
-                                      key.buttonId === elementId
-                                  );
-                                  return (
-                                    <div key={key}>
-                                      {filteredObject[0] ? (
-                                        <>
-                                          {contractElementSelector !== null &&
-                                          contractElementSelector.name ===
-                                            selectedId ? (
-                                            <span className="flex">
-                                              <span className="flex-1">
-                                                <Spinner />
-                                                Selecting
-                                              </span>
-                                              <AiOutlineClose className="mt-1.5 cursor-pointer" />
+            showComponent.value?.outputs.map((output: { name: string }, i: number) => {
+              const { selectedId, objects, filterObjects } = outputObjects(i);
+              return (
+                <section key={i} className="mt-3">
+                  <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">
+                    Output
+                    {/* {output.name} */}
+                  </h6>
+                  <div
+                    key={i}
+                    className="grid contract-input w-[13.5rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
+                    onClick={() => handleOutputSelector(selectedId)}
+                  >
+                    <div>
+                      {objects.length === 0 ? (
+                        <>
+                          {savedContractOutput?.length > 0 ? (
+                            savedContractOutput
+                          ) : (
+                            <span className="cursor-pointer">{renderDefault(selectedId)}</span>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {filterObjects.length === 0
+                            ? renderDefault(selectedId)
+                            : filterObjects.map(key => {
+                                let filteredObject = contractElementSelected[key]?.filter((key: { buttonId: string }) => key.buttonId === elementId);
+                                return (
+                                  <div key={key}>
+                                    {filteredObject[0] ? (
+                                      <>
+                                        {contractElementSelector !== null && contractElementSelector.name === selectedId ? (
+                                          <span className="flex">
+                                            <span className="flex-1">
+                                              <Spinner />
+                                              Selecting
                                             </span>
-                                          ) : (
-                                            <span className="flex">
-                                              <span className="flex-1">
-                                                {filteredObject[0].name} -{" "}
-                                                {filteredObject[0].id}
-                                              </span>
-                                              <AiOutlineEdit className="mt-1.5 cursor-pointer" />
+                                            <AiOutlineClose className="mt-1.5 cursor-pointer" />
+                                          </span>
+                                        ) : (
+                                          <span className="flex">
+                                            <span className="flex-1">
+                                              {filteredObject[0].name} - {filteredObject[0].id}
                                             </span>
-                                          )}
-                                        </>
-                                      ) : (
-                                        renderDefault(selectedId)
-                                      )}
-                                    </div>
-                                  );
-                                })}
-                          </>
-                        )}
-                      </div>
+                                            <AiOutlineEdit className="mt-1.5 cursor-pointer" />
+                                          </span>
+                                        )}
+                                      </>
+                                    ) : (
+                                      renderDefault(selectedId)
+                                    )}
+                                  </div>
+                                );
+                              })}
+                        </>
+                      )}
                     </div>
-                  </section>
-                );
-              }
-            )}
+                  </div>
+                </section>
+              );
+            })}
 
           {show ? (
             <button className="fixed right-3 bottom-5 flex contract-button py-3 px-[4.8rem]">
@@ -359,10 +357,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
               Saving
             </button>
           ) : (
-            <button
-              onClick={handleSave}
-              className="fixed right-3 bottom-5 flex contract-button py-3 px-[6rem]"
-            >
+            <button onClick={handleSave} className="fixed right-3 bottom-5 flex contract-button py-3 px-[6rem]">
               Save
             </button>
           )}

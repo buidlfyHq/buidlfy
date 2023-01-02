@@ -1,3 +1,6 @@
+import { IPublication } from 'redux/lenster/lenster.interfaces';
+import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
+
 export interface IUploadedImageData {
   uploadedImageData: string;
   settingItemId: string;
@@ -9,6 +12,7 @@ export interface IWorkspaceState {
   uploadedImagesData: IUploadedImageData[];
   workspaceBackgroundColor: string;
   head: IHead;
+  listValue: IList[];
 }
 
 export interface IWorkspaceElement {
@@ -33,6 +37,7 @@ export interface IWorkspaceElement {
   static?: boolean;
   resizeHandles?: ResizeHandles | undefined;
   contract?: any;
+  oracle?: IOracleConfig;
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
@@ -40,6 +45,8 @@ export interface IWorkspaceElement {
   slug?: string;
   limit?: number;
   cardsPerRow?: number;
+  listOptions?: IList[];
+  posts?: IPublication[];
 }
 
 export interface IHead {
@@ -56,7 +63,7 @@ export interface IStyle {
   color?: string;
   borderColor?: string;
   backgroundColor?: string;
-  fontWeight?: string;
+  fontWeight?: number;
   fontStyle?: string;
   textDecoration?: string;
   justifyContent?: string;
@@ -66,6 +73,7 @@ export interface IStyle {
   borderWidth?: number;
   shadow?: string;
   isAuto?: boolean;
+  manualSizing?: boolean;
   margin?: {
     marginLeft?: number;
     marginRight?: number;
@@ -81,11 +89,11 @@ export interface IStyle {
   width?: number;
   height?: number;
   backgroundSize?: string;
+  fontFamily?: string;
+  listType?: string;
 }
 
-export type ResizeHandles = Array<
-  "s" | "w" | "e" | "n" | "sw" | "nw" | "se" | "ne"
->;
+export type ResizeHandles = Array<'s' | 'w' | 'e' | 'n' | 'sw' | 'nw' | 'se' | 'ne'>;
 
 export interface IAction {
   payload: IElementDetail;
@@ -94,19 +102,19 @@ export interface IAction {
 export interface IElementDetail {
   settingItemId: string;
   propertyName: string;
-  propertyValue: string | number | boolean;
+  propertyValue: string | number | boolean | Array<any>;
   childPropertyName?: string;
   imageSizeProperty?: boolean;
 }
 
 export enum SidebarEnum {
-  PAGES = "pages",
-  TEMPLATES = "templates",
-  ELEMENTS = "elements",
-  MEDIA = "media",
-  STYLES = "styles",
-  HELP = "help",
-  SETTING = "setting",
+  PAGES = 'pages',
+  TEMPLATES = 'templates',
+  ELEMENTS = 'elements',
+  MEDIA = 'media',
+  STYLES = 'styles',
+  HELP = 'help',
+  SETTING = 'setting',
 }
 
 export interface IBackgroundContainer {
@@ -125,12 +133,7 @@ export interface ISettings {
   settingItemId?: string;
   openTab?: number;
   setOpenTab?: (openTab: number) => void;
-  handleSettingChange?: (
-    e:
-      | React.ChangeEvent<HTMLTextAreaElement>
-      | React.ChangeEvent<HTMLInputElement>,
-    propertyName: string
-  ) => void;
+  handleSettingChange?: (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>, propertyName: string) => void;
   setOpenSetting?: (openSetting?: boolean) => void;
 }
 
@@ -151,8 +154,9 @@ export interface ITemplate {
 
 export interface IText {
   i?: string;
+  name?: string;
   setItems?: (items?: IWorkspaceElement[]) => void;
-  bold: string;
+  fontWeight: number;
   italic: string;
   underline: string;
   color?: string;
@@ -164,6 +168,12 @@ export interface IText {
   borderRadius?: number;
   borderWidth?: number;
   backgroundColor?: string;
+  contractFunction?: any; // required
+  oracleFunction?: IOracleConfig;
+  inputValue?: IInput[];
+  setInputValue?: (inputValue: IInput[]) => void;
+  outputValue?: IOutput[];
+  setOutputValue?: (outputValue: IOutput[]) => void;
   shadow?: string;
   connectWallet?: boolean;
   margin?: {
@@ -178,4 +188,26 @@ export interface IText {
     paddingTop?: number;
     paddingBottom?: number;
   };
+  fontFamily?: string;
+  listType?: string;
+  listOptions?: IList[];
+  preview?: boolean;
+}
+
+export interface IList {
+  i?: string;
+  id: string;
+  value: string;
+  link: string;
+}
+
+export interface IInput {
+  id: string;
+  value: string;
+}
+
+export interface IOutput {
+  id: string;
+  name: string;
+  value: any; // can be string or array
 }

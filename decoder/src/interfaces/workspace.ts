@@ -1,3 +1,6 @@
+import { IOracleConfig } from "./config";
+import { IList } from "./lists";
+import { IPublication } from "./publications";
 import Styles from "./styles";
 
 export default interface IWorkspace {
@@ -22,6 +25,7 @@ export default interface IWorkspace {
   static?: boolean;
   resizeHandles?: [];
   contract?: any; // breaking while assigning a type, work in progress
+  oracle?: IOracleConfig;
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
@@ -35,4 +39,6 @@ export default interface IWorkspace {
   highestBid?: string;
   cardsPerRow?: number;
   limit?: number;
+  posts?: IPublication[];
+  listOptions?: IList[];
 }

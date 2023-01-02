@@ -49,7 +49,8 @@ class DeploymentService {
       this.listenDeployment(deploymentData.clientTopic, deploymentDto.topic);
       return deploymentDto;
     } catch (error) {
-      Logger.error(`Error found in ${__filename} - deployApp - ${error.message}`);
+      Logger.error(`Error found in ${__filename} - deployApp - `);
+      Logger.error(error);
       throw error;
     }
   }
