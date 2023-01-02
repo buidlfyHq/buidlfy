@@ -4,14 +4,20 @@ import Button from 'components/custom-components/button';
 import Text from 'components/custom-components/text';
 import Image from 'components/custom-components/image';
 import Input from 'components/custom-components/input';
+import Spacer from 'components/custom-components/spacer';
 import Divider from 'components/custom-components/divider';
+import LensterWidget from 'components/custom-components/lenster-widget';
 import PreviewContainer from 'components/custom-components/preview/preview-container';
 import PreviewButton from 'components/custom-components/preview/preview-button';
-import { IInput, IOutput, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import PreviewText from 'components/custom-components/preview/preview-text';
 import PreviewInput from 'components/custom-components/preview/preview-input';
-import LensterWidget from 'components/custom-components/lenster-widget';
 import PreviewLensterWidget from 'components/custom-components/preview/preview-lenster-widget';
+import List from 'components/custom-components/list';
+import Checkbox from 'components/custom-components/checkbox';
+import Dropdown from 'components/custom-components/dropdown';
+import Badge from 'components/custom-components/badge';
+import RadioButton from 'components/custom-components/radio';
+import { IInput, IOutput, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
 interface IRenderItem {
   item: IWorkspaceElement;
@@ -188,8 +194,123 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
         />
       );
+    case 'Spacer':
+      return <Spacer i={item.i} backgroundColor={item.style.backgroundColor} margin={item.style.margin} />;
     case 'Divider':
-      return <Divider />;
+      return (
+        <Divider
+          margin={item.style.margin}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          borderColor={item.style.borderColor}
+        />
+      );
+    case 'List':
+      return (
+        <List
+          i={item.i}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+          listType={item.style.listType}
+          listOptions={item.listOptions}
+          preview={preview}
+        />
+      );
+    case 'Dropdown':
+      return (
+        <Dropdown
+          i={item.i}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          borderColor={item.style.borderColor}
+          listOptions={item.listOptions}
+          preview={preview}
+        />
+      );
+    case 'Checkbox':
+      return (
+        <Checkbox
+          i={item.i}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+        />
+      );
+    case 'Radio':
+      return (
+        <RadioButton
+          i={item.i}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+        />
+      );
+    case 'Badge':
+    case 'Status':
+      return (
+        <Badge
+          i={item.i}
+          name={item.name}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          borderColor={item.style.borderColor}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          connectWallet={item.connectWallet}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+        />
+      );
     case 'Container':
     case 'Horizontal Container':
     case 'Vertical Container':

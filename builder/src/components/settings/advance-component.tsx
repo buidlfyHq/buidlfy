@@ -33,6 +33,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false); // for connect contract modal
   const [isOracleOpen, setIsOracleOpen] = useState<boolean>(false); // for connect oracle modal
+  const [goBack, setGoBack] = useState<boolean>(false);
   const [showComponent, setShowComponent] = useState<{
     id: string;
     value: {
@@ -47,14 +48,16 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
   const isWalletConnect = workspaceElements.findIndex(item => item.connectWallet === true);
 
   useEffect(() => {
+    setGoBack(false);
     try {
       setIsViewMore(!!(updatedNewContractList?.length >= 4));
     } catch (error) {
-      console.log(error, 'error');
+      console.error('Error --->', error);
     }
   }, []); // eslint-disable-line
 
   const handleContractList = (abi: string, address: string, network: string) => {
+    setGoBack(false);
     dispatch(updateContractAbi(JSON.parse(abi)));
     dispatch(updateContractAddress(JSON.parse(address)));
     dispatch(updateContractNetwork(JSON.parse(network)));
@@ -100,10 +103,10 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
 
   return (
     <>
-      {selectedContractAbi && selectedContractAddress && selectedContractNetwork ? (
+      {selectedContractAbi && selectedContractAddress && selectedContractNetwork && !goBack ? (
         <>
           <div className="flex justify-center mt-[3rem]" />
-          <AbiMethods setShowComponent={setShowComponent} selectedElement={selectedElement} setIsOpen={setIsOpen} />
+          <AbiMethods setShowComponent={setShowComponent} selectedElement={selectedElement} setIsOpen={setIsOpen} setGoBack={setGoBack} />
           <AbiComponents showComponent={showComponent} elementId={selectedElement.i} />
         </>
       ) : (

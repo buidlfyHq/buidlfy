@@ -42,6 +42,7 @@ const PreviewButton: FC<IText> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [transactionStatus, setTransactionStatus] = useState<string>('');
   const [account, setAccount] = useState<string>(null);
+  const [networkSwitch, setNetworkSwitch] = useState<boolean>(false);
 
   useEffect(() => {
     if (JSON.parse(JSON.stringify(contractDetails.abi))[0] && contractDetails.address !== '') {
@@ -68,7 +69,7 @@ const PreviewButton: FC<IText> = ({
         };
       }
 
-      const provider = new ethers.providers.Web3Provider(ethereum);
+      const provider = new ethers.providers.Web3Provider(ethereum, 'any');
       await provider.send('eth_requestAccounts', []); // requesting access to accounts
       const signer = provider.getSigner();
       const address = await signer.getAddress();
@@ -100,11 +101,11 @@ const PreviewButton: FC<IText> = ({
           return { error: false, errorMessage: '' };
         } catch (error) {
           // eslint-disable-next-line no-console
-          console.log('Error in changeNetworkService --> ', error);
+          console.error('Error in changeNetworkService --> ', error);
         }
       }
       // eslint-disable-next-line no-console
-      console.log('Error in changeNetworkService --> ', switchError);
+      console.error('Error in changeNetworkService --> ', switchError);
     }
   };
 
@@ -113,8 +114,13 @@ const PreviewButton: FC<IText> = ({
   };
 
   const onResponse = async () => {
+    const { ethereum } = window as any;
+    const provider = new ethers.providers.Web3Provider(ethereum, 'any');
+    const { chainId } = await provider.getNetwork();
     if (oracleFunction) {
-      await switchNetwork(134);
+      if (chainId !== 134) {
+        setNetworkSwitch(true);
+      }
 
       const res = await onRequest(
         oracleFunction.methodName,
@@ -130,36 +136,83 @@ const PreviewButton: FC<IText> = ({
         () => {},
         () => {},
       );
+
       setOutputValue(res ? res[0] : []);
     } else {
+      if (chainId !== Number(contractDetails.network)) {
+        setNetworkSwitch(true);
+      }
       const res = await onRequest(contractFunction.methodName, contractFunction, contract, inputValue, outputValue, setIsOpen, setTransactionStatus);
       setOutputValue(res ? res[0] : []);
     }
   };
 
-  return (
-    <main style={{ justifyContent: justifyContent }} className="flex items-center justify-center w-auto h-full">
-      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
-        <div className="fixed flex items-center justify-center p-4 top-4 right-4">
-          <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
-            <Dialog.Title>
-              {transactionStatus === '' ? (
-                <div className="flex items-center">
-                  <div className="lds-ring">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
-                  <div className="mr-5 text-white">Transaction In Process...</div>
+  const onSwitchNetwork = async () => {
+    if (oracleFunction) {
+      await switchNetwork(134);
+    } else {
+      await switchNetwork();
+    }
+    window.location.reload();
+  };
+
+  const TransactionStatusDialog = () => (
+    <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
+      <div className="fixed flex items-center justify-center p-4 top-4 right-4">
+        <Dialog.Panel className="max-w-sm p-4 mx-auto rounded bg-slate-700">
+          <Dialog.Title>
+            {transactionStatus === '' ? (
+              <div className="flex items-center">
+                <div className="lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
                 </div>
-              ) : (
-                <div className="text-white break-all">{transactionStatus}</div>
-              )}
-            </Dialog.Title>
+                <div className="mr-5 text-white">Transaction In Process...</div>
+              </div>
+            ) : (
+              <div className="text-white break-all">{transactionStatus}</div>
+            )}
+          </Dialog.Title>
+        </Dialog.Panel>
+      </div>
+    </Dialog>
+  );
+
+  const SwitchNetworkDialog = () => (
+    <Dialog className="relative z-50" open={networkSwitch} onClose={() => setNetworkSwitch(false)}>
+      <div className="fixed inset-0 bg-black/40 backdrop-blur-[2px]" aria-hidden="true" />
+      <div className="fixed inset-0 overflow-y-auto">
+        <div className="flex items-center justify-center min-h-full">
+          <Dialog.Panel className="rounded-[24px] py-5 px-5 bg-white rounded flex flex-row justify-start items-center gap-6">
+            <div className="flex flex-col items-center w-[450px] h-[130px] relative">
+              <p className="mt-4 font-semibold">You need to switch netowrk to execute this transaction.</p>
+              <div className="flex justify-end w-full mt-8 mr-2">
+                <button
+                  className="bordered-button py-2 px-7 my-2 ml-3 text-[14px] text-[#855FD8] font[500] rounded-[10px] whitespace-nowrap"
+                  onClick={() => setNetworkSwitch(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={onSwitchNetwork}
+                  className="py-2 px-7 my-2 ml-3 font-[500] text-[14px] text-white rounded-[10px] connect-wallet-button whitespace-nowrap add-btn"
+                >
+                  Switch Network
+                </button>
+              </div>
+            </div>
           </Dialog.Panel>
         </div>
-      </Dialog>
+      </div>
+    </Dialog>
+  );
+
+  return (
+    <main style={{ justifyContent: justifyContent }} className="flex items-center justify-center w-auto h-full">
+      {TransactionStatusDialog()}
+      {SwitchNetworkDialog()}
       {connectWallet ? (
         <div
           style={{

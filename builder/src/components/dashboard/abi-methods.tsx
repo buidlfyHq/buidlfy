@@ -6,18 +6,19 @@ import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { IShowComponent, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
-import { IAbi, IContractDetails } from 'redux/contract/contract.interfaces';
+import { IAbi } from 'redux/contract/contract.interfaces';
 
 interface IAbiMethods {
   setShowComponent: (showComponent: IShowComponent) => void;
   selectedElement: IWorkspaceElement;
   setIsOpen: (isOpen: boolean) => void;
+  setGoBack: (goBack: boolean) => void;
 }
 
-const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsOpen }) => {
+const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsOpen, setGoBack }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector((state: IRootState) => state.workspace.workspaceElements);
-  const contractDetails: IContractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
+  const contractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
 
   const [abiJson, setAbiJson] = useState<IAbi[]>([]);
 
@@ -87,9 +88,7 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsO
 
   const handleBack = () => {
     setIsOpen(false);
-    dispatch(updateContractAbi(null));
-    dispatch(updateContractAddress(null));
-    dispatch(updateContractNetwork(null));
+    setGoBack(true);
   };
 
   return (

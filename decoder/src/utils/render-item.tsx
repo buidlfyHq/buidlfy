@@ -5,9 +5,15 @@ import Text from "components/custom-components/text";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
+import Spacer from "components/custom-components/spacer";
+import LensterWidget from "components/custom-components/lenster-widget";
 import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
-import LensterWidget from "components/custom-components/lenster-widget";
+import List from "components/custom-components/list";
+import Dropdown from "components/custom-components/dropdown";
+import Checkbox from "components/custom-components/checkbox";
+import RadioButton from "components/custom-components/radio";
+import Badge from "components/custom-components/badge";
 
 interface IRenderItem {
   item: IWorkspace;
@@ -111,8 +117,6 @@ const RenderItem: FC<IRenderItem> = ({
           borderColor={item.style.borderColor}
         />
       );
-    case "Divider":
-      return <Divider />;
     case "Image":
       return (
         <Image
@@ -124,6 +128,124 @@ const RenderItem: FC<IRenderItem> = ({
           isAuto={item.style.isAuto}
           margin={item.style.margin}
           link={item.link}
+        />
+      );
+    case "Divider":
+      return (
+        <Divider
+          margin={item.style.margin}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          borderColor={item.style.borderColor}
+        />
+      );
+    case "List":
+      return (
+        <List
+          i={item.i}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+          listType={item.style.listType}
+          listOptions={item.listOptions}
+        />
+      );
+    case "Dropdown":
+      return (
+        <Dropdown
+          i={item.i}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          borderColor={item.style.borderColor}
+          listOptions={item.listOptions}
+        />
+      );
+    case "Checkbox":
+      return (
+        <Checkbox
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+        />
+      );
+    case "Radio":
+      return (
+        <RadioButton
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+        />
+      );
+    case "Badge":
+    case "Status":
+      return (
+        <Badge
+          name={item.name}
+          fontWeight={item.style.fontWeight}
+          italic={item.style.fontStyle}
+          underline={item.style.textDecoration}
+          color={item.style.color}
+          borderColor={item.style.borderColor}
+          justifyContent={item.style.justifyContent}
+          fontSize={item.style.fontSize}
+          value={item.value}
+          backgroundColor={item.style.backgroundColor}
+          link={item.link}
+          borderRadius={item.style.borderRadius}
+          borderWidth={item.style.borderWidth}
+          shadow={item.style.shadow}
+          connectWallet={item.connectWallet}
+          margin={item.style.margin}
+          padding={item.style.padding}
+          fontFamily={item.style.fontFamily}
+        />
+      );
+    case "Spacer":
+      return (
+        <Spacer
+          i={item.i}
+          backgroundColor={item.style.backgroundColor}
+          margin={item.style.margin}
         />
       );
     case "Lenster Card":
