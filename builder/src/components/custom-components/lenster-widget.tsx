@@ -4,6 +4,7 @@ import LensterPost from 'components/utils/lenster-post';
 import { IRootState } from 'redux/root-state.interface';
 import edit from 'assets/icons/edit.png';
 import logo from 'assets/icons/buidlfy.png';
+import config from 'config';
 import 'styles/components.css';
 
 interface ILensterWidget {
@@ -25,9 +26,11 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
               const updatePostMedia = 'https://ipfs.io/ipfs/' + post?.postMedia?.slice(7);
               return <LensterPost i={i} post={post} updateProfilePicture={updateProfilePicture} updatePostMedia={updatePostMedia} />;
             })}
-            <span className="flex absolute right-[1rem] bottom-[1rem]">
-              Powered By <img className="w-[1.5rem] h-auto mx-2" src={logo} /> Buidlfy
-            </span>
+            <a href={config.site.SITE_URL} target="_blank">
+              <span className="flex absolute right-[1rem] bottom-[1rem]">
+                Powered By <img className="w-[1.5rem] h-auto mx-2" src={logo} /> Buidlfy
+              </span>
+            </a>
           </div>
         </>
       ) : (
