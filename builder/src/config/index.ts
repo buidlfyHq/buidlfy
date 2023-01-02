@@ -123,7 +123,7 @@ const local: IConfig = {
     MORALIS_X_API_KEY: '2ffY3sVNITHVIIDV5WTq0VeGdVe1CHs0m3oL7mjD4t2NKKKNyod2p50Kfvg7O4Xh',
   },
   server: {
-    SERVER: 'https://api.buidlfy.com/',
+    SERVER: 'http://localhost:8080/',
   },
   network: {
     DEFAULT_NETWORK: {
