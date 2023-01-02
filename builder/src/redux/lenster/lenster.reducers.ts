@@ -2,9 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ILensterState } from './lenster.interfaces';
 
 const initialState: ILensterState = {
-  publications: [],
   inputValue: false,
-  loadingComponent: false,
 };
 
 const lensterSlice = createSlice({

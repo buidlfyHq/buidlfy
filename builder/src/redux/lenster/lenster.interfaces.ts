@@ -1,7 +1,5 @@
 export interface ILensterState {
-  publications: IPublication[];
   inputValue?: boolean;
-  loadingComponent: boolean;
 }
 
 export interface IPublication {
