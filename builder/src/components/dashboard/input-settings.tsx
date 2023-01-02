@@ -19,7 +19,6 @@ const InputSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <h3 className="ml-[0.5rem] mt-[1.5rem]">{selectedElement ? <span className="setting-text">{selectedElement.name}</span> : null}</h3>
 
       <div className="flex items-center mx-2 mt-1 w-[13.5rem] text-black">
-        {/* <RiText className="text-[18px] mr-3" /> */}
         <textarea
           value={selectedElement.placeholder}
           onChange={e => handleSettingChange(e, 'placeholder')}
