@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import defaultImage from "assets/default-image.png";
 import "styles/components.css";
 
@@ -30,17 +30,6 @@ const Image: FC<IImageComponent> = ({
   link,
   manualSizing,
 }) => {
-  const ref = useRef<HTMLDivElement>();
-  useEffect(() => {
-    if (manualSizing === false && ref.current?.clientWidth) {
-    }
-  }, [ref.current?.clientWidth]); // eslint-disable-line
-
-  useEffect(() => {
-    if (manualSizing === false && ref.current?.clientHeight) {
-    }
-  }, [ref.current?.clientHeight]); // eslint-disable-line
-
   const imageDiv = (
     <div
       className="flex h-full w-full"

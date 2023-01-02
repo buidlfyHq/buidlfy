@@ -29,4 +29,5 @@ export default interface IStyles {
   isAuto?: boolean;
   fontFamily?: string;
   listType?: string;
+  manualSizing?: boolean;
 }

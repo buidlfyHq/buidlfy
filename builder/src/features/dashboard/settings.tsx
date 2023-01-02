@@ -26,10 +26,13 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
     );
     setOpenSetting(false);
   };
+  console.log(selectedElement, 'se');
 
   const handleDuplicate = () => {
     const elementId = uid();
     const newWorkspaceElements = [...workspaceElements];
+    console.log(workspaceElements, 'workspaceElements');
+
     if (selectedElement.name === 'Container') {
       const newChildren = selectedElement?.children?.map(key => {
         return {
