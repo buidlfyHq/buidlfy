@@ -8,6 +8,7 @@ import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfac
 import { BiCopy } from 'react-icons/bi';
 import ShortUniqueId from 'short-unique-id';
 import 'styles/components.css';
+import { containerCheck } from 'utils/container-check';
 
 const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
   const ref = useRef(null);
@@ -46,6 +47,12 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
         children: newChildren,
       }; // Need seperate id for children then element
       newWorkspaceElements.push(newSelectedContainer);
+    } else if (selectedElement.children) {
+      console.log('yes');
+      console.log(selectedElement, 'children');
+
+      // const newSelectedElement = { ...selectedElement, i: elementId };
+      // selectedElement?.children.push(newSelectedElement);
     } else {
       const newSelectedElement = { ...selectedElement, i: elementId };
       newWorkspaceElements.push(newSelectedElement);

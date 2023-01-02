@@ -16,7 +16,6 @@ interface IImageComponent {
   backgroundSize?: string;
   isAuto?: boolean;
   link: string;
-  manualSizing?: boolean;
 }
 
 const Image: FC<IImageComponent> = ({
@@ -28,7 +27,6 @@ const Image: FC<IImageComponent> = ({
   backgroundSize,
   isAuto,
   link,
-  manualSizing,
 }) => {
   const imageDiv = (
     <div
