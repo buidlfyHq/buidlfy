@@ -1,20 +1,26 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { IoMdLink } from 'react-icons/io';
-import ColorComponent from 'components/settings/color-component';
+import { useSelector } from 'react-redux';
+import { IRootState } from 'redux/root-state.interface';
+import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import BgColorComponent from 'components/settings/bg-color-component';
+import BorderColorComponent from 'components/settings/border-color-component';
+import BorderComponent from 'components/settings/border-component';
+import BorderRadiusComponent from 'components/settings/border-radius-component';
+import ColorComponent from 'components/settings/color-component';
+import CombinedComponent from 'components/settings/combined-setting';
+import FontFamilyComponent from 'components/settings/font-family-component';
 import FontSizeComponent from 'components/settings/font-size-component';
+import FontWeightComponent from 'components/settings/font-weight-component';
+import ListOptionsComponent from 'components/settings/list-options-component';
 import MarginComponent from 'components/settings/margin-component';
 import PaddingComponent from 'components/settings/padding-component';
-import CombinedComponent from 'components/settings/combined-setting';
-import { IRootState } from 'redux/root-state.interface';
-import FontFamilyComponent from 'components/settings/font-family-component';
-import FontWeightComponent from 'components/settings/font-weight-component';
-import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import ShadowComponent from 'components/settings/shadow-component';
 import 'styles/components.css';
 
-const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
+const DropdownSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
+
   return (
     <>
       <h3 className="ml-[0.5rem] mt-[1.5rem]">{selectedElement ? <span className="setting-text">{selectedElement.name}</span> : null}</h3>
@@ -45,15 +51,25 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
           placeholder="Link"
         />
       </div>
+      <ListOptionsComponent i={selectedElement.i} />
       <FontFamilyComponent i={selectedElement.i} fontFamily={selectedElement.style.fontFamily} />
       <FontWeightComponent i={selectedElement.i} fontWeight={selectedElement.style.fontWeight} />
       <FontSizeComponent i={selectedElement.i} fontSize={selectedElement.style.fontSize} />
+      <BorderRadiusComponent
+        i={selectedElement.i}
+        borderRadius={selectedElement.style.borderRadius}
+        borderColor={selectedElement.style.borderColor}
+      />
+      <BorderComponent i={selectedElement.i} borderWidth={selectedElement.style.borderWidth} />
       <ColorComponent i={selectedElement.i} color={selectedElement.style.color} />
+      <BorderColorComponent i={selectedElement.i} borderColor={selectedElement.style.borderColor} />
+
       <BgColorComponent i={selectedElement.i} elementBackgroundColor={selectedElement.style.backgroundColor} />
       <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
       <PaddingComponent i={selectedElement.i} padding={selectedElement.style.padding} />
+      <ShadowComponent i={selectedElement.i} shadow={selectedElement.style.shadow} />
     </>
   );
 };
 
-export default GeneralSettings;
+export default DropdownSettings;

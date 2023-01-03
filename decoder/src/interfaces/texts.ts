@@ -1,7 +1,10 @@
 import { IOracleConfig } from "./config";
+import { IList } from "./lists";
 import { IInput, IOutput } from "./value";
 
 export default interface ITexts {
+  i?: string;
+  name?: string;
   id?: string;
   fontWeight?: number;
   italic: string;
@@ -36,4 +39,6 @@ export default interface ITexts {
     paddingBottom?: number;
   };
   fontFamily?: string;
+  listType?: string;
+  listOptions?: IList[];
 }
