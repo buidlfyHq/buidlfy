@@ -2,6 +2,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
+import Session from 'express-session';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
@@ -68,6 +69,15 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
+    this.app.use(
+      Session({
+        name: 'siwe-quickstart',
+        secret: 'siwe-quickstart-secret',
+        resave: true,
+        saveUninitialized: true,
+        cookie: { secure: false, sameSite: true },
+      }),
+    );
   }
 
   public initializeSocket() {
