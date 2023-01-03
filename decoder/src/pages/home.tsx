@@ -6,13 +6,7 @@ import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import { ethers } from "ethers";
-import Web3Modal from "web3modal";
-import { providerOptions } from "config/provider-options";
-
-const web3Modal = new Web3Modal({
-  cacheProvider: true, // optional
-  providerOptions, // required
-});
+import { switchNetwork } from "utils/switchNetwork";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
@@ -34,12 +28,25 @@ const Home: FC = () => {
 
   const connectWallet = async () => {
     try {
-      const provider = await web3Modal.connect();
-      const library: any = new ethers.providers.Web3Provider(provider); // required
-      const accounts: any = await library.listAccounts(); // required
-      if (accounts) setAccount(accounts[0]);
+      const { ethereum } = window as any;
+
+      if (!ethereum) {
+        return {
+          error: true,
+          errorMessage: "MetaMask not installed, please install!",
+          account: "",
+        };
+      }
+
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      await provider.send("eth_requestAccounts", []); // requesting access to accounts
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+      setAccount(address);
+      await switchNetwork();
     } catch (error) {
-      console.log(error);
+      // eslint-disable-next-line no-console
+      console.error("Error in connectWalletService --> ", error);
     }
   };
 
