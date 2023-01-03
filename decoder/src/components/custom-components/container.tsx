@@ -29,7 +29,7 @@ const Container: FC<IBgContainer> = ({
       ?.getElementById(`${item.i}`)
       ?.getBoundingClientRect().width;
     if (cw) setContainerW(cw);
-  }, []);
+  }, []); // eslint-disable-line
 
   let finalSpacing =
     margin?.marginLeft +
@@ -58,7 +58,7 @@ const Container: FC<IBgContainer> = ({
           width={containerW - (finalSpacing + borderWidth * 2) || 1000}
           isDraggable={false}
           isResizable={false}
-          compactType={null}
+          compactType="vertical"
           margin={[0, 0]}
           className="btn-border"
           style={{

@@ -13,7 +13,8 @@ class UploadService {
       const uploadResponse = await this.web3StorageService.uploadFileToWeb3Storage(uploadData.data);
       return uploadResponse;
     } catch (error) {
-      Logger.error(`Error found in ${__filename} - deployApp - ${error.message}`);
+      Logger.error(`Error found in ${__filename} - uploadFile - `);
+      Logger.error(error);
       throw error;
     }
   }

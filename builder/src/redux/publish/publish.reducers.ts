@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IPublishState } from "./publish.interfaces";
+import { createSlice } from '@reduxjs/toolkit';
+import { IPublishState } from './publish.interfaces';
 
 const initialState: IPublishState = {
   publishConfig: null,
@@ -14,7 +14,7 @@ const initialState: IPublishState = {
 };
 
 const publishSlice = createSlice({
-  name: "publish",
+  name: 'publish',
   initialState,
   reducers: {
     updatePublishConfig(state: IPublishState, action: { payload: string }) {
@@ -47,10 +47,7 @@ const publishSlice = createSlice({
         projectId: action.payload,
       };
     },
-    updateTransactionResponse(
-      state: IPublishState,
-      action: { payload: string }
-    ) {
+    updateTransactionResponse(state: IPublishState, action: { payload: string }) {
       return {
         ...state,
         transactionResponse: action.payload,
@@ -65,15 +62,15 @@ const publishSlice = createSlice({
     updatePublishStatus(state: IPublishState, action: { payload: boolean }) {
       return {
         ...state,
-        publishStatus: action.payload
-      }
+        publishStatus: action.payload,
+      };
     },
     updatePublishFailed(state: IPublishState, action: { payload: boolean }) {
       return {
         ...state,
-        publishFailed: action.payload
-      }
-    },    
+        publishFailed: action.payload,
+      };
+    },
   },
 });
 
@@ -86,6 +83,6 @@ export const {
   updateCurrentStep,
   updateDomainId,
   updatePublishStatus,
-  updatePublishFailed
+  updatePublishFailed,
 } = publishSlice.actions;
 export default publishSlice.reducer;

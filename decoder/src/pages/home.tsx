@@ -1,22 +1,18 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState, useEffect } from "react";
+import { useWindowSize } from "hooks/use-window-size";
 import BuilderConfig from "config";
 import RenderItem from "utils/render-item";
 import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
 import { ethers } from "ethers";
-import Web3Modal from "web3modal";
-import { providerOptions } from "config/provider-options";
-
-const web3Modal = new Web3Modal({
-  cacheProvider: true, // optional
-  providerOptions, // required
-});
+import { switchNetwork } from "utils/switchNetwork";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Home: FC = () => {
   const config = JSON.parse(BuilderConfig);
+  const size = useWindowSize();
   const [inputValue, setInputValue] = useState<IInput[]>([]);
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
   const [testConfig, setTestConfig] = useState(
@@ -36,16 +32,27 @@ const Home: FC = () => {
 
   const connectWallet = async () => {
     try {
-      const provider = await web3Modal.connect();
-      const library: any = new ethers.providers.Web3Provider(provider); // required
-      const accounts: any = await library.listAccounts(); // required
-      if (accounts) setAccount(accounts[0]);
+      const { ethereum } = window as any;
+
+      if (!ethereum) {
+        return {
+          error: true,
+          errorMessage: "MetaMask not installed, please install!",
+          account: "",
+        };
+      }
+
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      await provider.send("eth_requestAccounts", []); // requesting access to accounts
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+      setAccount(address);
+      await switchNetwork();
     } catch (error) {
-      console.log(error);
+      // eslint-disable-next-line no-console
+      console.error("Error in connectWalletService --> ", error);
     }
   };
-
-  console.log(testConfig)
 
   useEffect(() => {
     let nftY = null;
@@ -85,7 +92,6 @@ const Home: FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log(nftCard)
     if (nftCard && source ) {
       switch(source) {
         case 'Opensea':
@@ -187,39 +193,49 @@ const Home: FC = () => {
   };
 
   return (
-    <main
-      className="min-h-screen"
-      style={{
-        background: config.background,
-      }}
-    >
-      <ResponsiveGridLayout
-        layouts={{ lg: testConfig }}
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
-        rowHeight={50}
-        isDraggable={false}
-        isResizable={false}
-        compactType={null}
-        margin={[0, 0]}
-        className="overflow-hidden h-fit"
-      >
-        {testConfig.map((c: IWorkspace) => {
-          const { x, y, w, h, minW, i } = c;
-          return (
-            <div key={i} data-grid={{ x, y, w, h, minW }}>
-              <RenderItem
-                item={c}
-                inputValue={inputValue}
-                setInputValue={setInputValue}
-                outputValue={outputValue}
-                setOutputValue={setOutputValue}
-              />
-            </div>
-          );
-        })}
-      </ResponsiveGridLayout>
-    </main>
+    <>
+      {size.width > 1024 ? (
+        <main
+          className="min-h-screen"
+          style={{
+            background: config.background,
+          }}
+        >
+          <ResponsiveGridLayout
+            layouts={{ lg: testConfig }}
+            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+            cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
+            rowHeight={50}
+            isDraggable={false}
+            isResizable={false}
+            compactType={null}
+            margin={[0, 0]}
+            className="overflow-hidden h-fit"
+          >
+            {testConfig.map((c: IWorkspace) => {
+              const { x, y, w, h, minW, i } = c;
+              return (
+                <div key={i} data-grid={{ x, y, w, h, minW }}>
+                  <RenderItem
+                    item={c}
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
+                    outputValue={outputValue}
+                    setOutputValue={setOutputValue}
+                  />
+                </div>
+              );
+            })}
+          </ResponsiveGridLayout>
+        </main>
+      ) : (
+        <h1 className="items-center text-center justify-center flex h-[100vh]">
+          Use this on desktop for better experience <br /> Responsive view
+          coming soon!
+        </h1>
+      )}
+    </>
+    
   );
 };
 
