@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import WalletMenu from 'features/dashboard/wallet-menu';
@@ -8,6 +8,8 @@ import { updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 're
 import { setSelectorToDefault, updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { updateSiteName } from 'redux/publish/publish.reducers';
 
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
@@ -22,7 +24,7 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
   const publishStatus = useSelector((state: IRootState) => state.publish.publishStatus);
   const head = useSelector((state: IRootState) => state.workspace.head);
   const contractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
-
+  const siteName = useSelector((state: IRootState) => state.publish.siteName);
   const handleCloseSidebar = () => {
     setIsContainerSelected(false);
     setOpenSetting(false);
@@ -71,13 +73,27 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
     dispatch(updateContractNetwork(''));
   };
 
+  const handleSiteName = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateSiteName(e.target.value));
+  };
   return (
     <main
       onClick={handleCloseSidebar}
       className="fixed left-[80px] right-0 h-[60px] top-0 topnav flex flex-row justify-between items-center p-3 bg-white z-20"
     >
       {/* FIX: find out a way to remove this div */}
-      <div />
+      <div className="w-[8rem]" />
+      <div className="flex flex-row items-center mt-[0.3rem]">
+        <input
+          id="textarea"
+          placeholder={siteName}
+          onChange={e => handleSiteName(e)}
+          className="outline-none placeholder-draft overflow-hidden w-[5rem] max-h-[2rem] flex items-center text-[#100F11] text-[16px] font-semibold text-center resize-none"
+        />
+        {/* Draft Post
+        </input> */}
+        <AiOutlineEdit className="ml-3 text-[#2E2E2E]" />
+      </div>
       <div className="flex flex-row h-[60px]">
         <div className="flex flex-row items-center">
           <div

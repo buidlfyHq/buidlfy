@@ -11,6 +11,7 @@ const initialState: IPublishState = {
   domainId: null,
   publishStatus: false,
   publishFailed: false,
+  siteName: 'Draft Post',
 };
 
 const publishSlice = createSlice({
@@ -71,6 +72,14 @@ const publishSlice = createSlice({
         publishFailed: action.payload,
       };
     },
+    updateSiteName(state: IPublishState, action: { payload: string }) {
+      console.log(action, 'action');
+
+      return {
+        ...state,
+        siteName: action.payload,
+      };
+    },
   },
 });
 
@@ -84,5 +93,6 @@ export const {
   updateDomainId,
   updatePublishStatus,
   updatePublishFailed,
+  updateSiteName,
 } = publishSlice.actions;
 export default publishSlice.reducer;

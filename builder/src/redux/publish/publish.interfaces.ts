@@ -8,4 +8,5 @@ export interface IPublishState {
   domainId: string;
   publishStatus: boolean;
   publishFailed: boolean;
+  siteName: string;
 }
