@@ -13,8 +13,6 @@ const Home: FC = () => {
   const size = useWindowSize();
   const [inputValue, setInputValue] = useState<IInput[]>([]);
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
-  console.log(config, "config");
-
   return (
     <>
       {size.width > 1024 ? (

@@ -41,6 +41,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         y,
         w: 6,
         minW: 1,
+        containerId: selectedElement.i,
         resizeHandles: availableHandles,
       };
       let updatedItem = {

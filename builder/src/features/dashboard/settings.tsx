@@ -8,7 +8,6 @@ import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfac
 import { BiCopy } from 'react-icons/bi';
 import ShortUniqueId from 'short-unique-id';
 import 'styles/components.css';
-import { containerCheck } from 'utils/container-check';
 
 const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
   const ref = useRef(null);
@@ -27,13 +26,9 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
     );
     setOpenSetting(false);
   };
-  console.log(selectedElement, 'se');
-
   const handleDuplicate = () => {
     const elementId = uid();
     const newWorkspaceElements = [...workspaceElements];
-    console.log(workspaceElements, 'workspaceElements');
-
     if (selectedElement.name === 'Container') {
       const newChildren = selectedElement?.children?.map(key => {
         return {
@@ -47,15 +42,20 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
         children: newChildren,
       }; // Need seperate id for children then element
       newWorkspaceElements.push(newSelectedContainer);
-    } else if (selectedElement.children) {
-      console.log('yes');
-      console.log(selectedElement, 'children');
-
-      // const newSelectedElement = { ...selectedElement, i: elementId };
-      // selectedElement?.children.push(newSelectedElement);
     } else {
-      const newSelectedElement = { ...selectedElement, i: elementId };
-      newWorkspaceElements.push(newSelectedElement);
+      if (selectedElement.containerId === '') {
+        const newSelectedElement = { ...selectedElement, i: elementId };
+        newWorkspaceElements.push(newSelectedElement);
+      } else {
+        let newC = {
+          ...selectedElement,
+          i: uid(),
+        };
+        const containerIndex = workspaceElements.findIndex(item => item.i === selectedElement?.containerId);
+        const newContainer = { ...workspaceElements[containerIndex] };
+        newContainer['children'] = [...newContainer.children, newC];
+        newWorkspaceElements[containerIndex] = newContainer;
+      }
     }
     dispatch(updateWorkspaceElementsArray(newWorkspaceElements));
   };
