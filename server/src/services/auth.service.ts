@@ -1,6 +1,3 @@
-import { hash, compare } from 'bcrypt';
-import { sign } from 'jsonwebtoken';
-import { SECRET_KEY } from '@config';
 import { HttpException } from '@exceptions/HttpException';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';

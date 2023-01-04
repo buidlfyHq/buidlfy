@@ -17,7 +17,7 @@ class AuthController {
         return;
       }
 
-      let message = new SiweMessage(req.body.message);
+      const message = new SiweMessage(req.body.message);
       const fields = await message.validate(req.body.signature);
       if (fields.nonce !== req.session.nonce) {
         console.log(req.session);
