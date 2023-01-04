@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC } from "react";
 import defaultImage from "assets/default-image.png";
 import "styles/components.css";
 
