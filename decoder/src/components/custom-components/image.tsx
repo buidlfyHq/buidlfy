@@ -16,6 +16,7 @@ interface IImageComponent {
   backgroundSize?: string;
   isAuto?: boolean;
   link: string;
+  borderRadius?: number;
 }
 
 const Image: FC<IImageComponent> = ({
@@ -27,6 +28,7 @@ const Image: FC<IImageComponent> = ({
   backgroundSize,
   isAuto,
   link,
+  borderRadius,
 }) => {
   const imageDiv = (
     <div
@@ -35,6 +37,7 @@ const Image: FC<IImageComponent> = ({
         backgroundImage: `url(${imgData ? imgData : defaultImage})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: justifyContent,
+        borderRadius: `${borderRadius}px`,
         backgroundSize: `${isAuto ? backgroundSize : `${width}px ${height}px`}`,
         margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
       }}
