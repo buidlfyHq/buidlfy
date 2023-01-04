@@ -2,11 +2,11 @@ import React, { useState, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateWorkspaceElementStyle, updateWorkspaceNFTLayoutElements } from 'redux/workspace/workspace.reducers';
 import ColorPickerDropdown from 'components/utils/color-picker';
-import 'styles/components.css';
-import 'styles/dashboard.css';
 import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
+import 'styles/components.css';
+import 'styles/dashboard.css';
 
 interface IColorComponent {
   i: string;

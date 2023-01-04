@@ -5,58 +5,29 @@ import RenderItem from "utils/render-item";
 import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
-import { ethers } from "ethers";
-import { switchNetwork } from "utils/switchNetwork";
+import { connectWalletButton } from "utils/connectWallet";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Home: FC = () => {
-  const config = JSON.parse(BuilderConfig);
+  const projectConfig = JSON.parse(BuilderConfig);
   const size = useWindowSize();
   const [inputValue, setInputValue] = useState<IInput[]>([]);
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
-  const [testConfig, setTestConfig] = useState(
-    JSON.parse(BuilderConfig).builder
-  );
+  const [workspaceConfig, setWorkspaceConfig] = useState(projectConfig.builder);
   const [nftPosition, setNftPosition] = useState<number>(3); // for storing NFT Layout's starting position
-  // const [nftColumns, setNftColumns] = useState<number>(3); // for storing number of columns in NFT Layout
   const [nftCard, setNftCard] = useState<any>(null); // for creating a copy of NFT Card
   const [account, setAccount] = useState<string>(""); // for storing wallet address
   const [slug, setSlug] = useState<string>(""); // for storing collection slug
   const [source, setSource] = useState<string>(""); // for api fetching source
-  const [limit, setLimit] = useState<number>();
-  const [cardsPerRow, setCardsPerRow] = useState<number>();
+  const [limit, setLimit] = useState<number>(); // size require for api fetch
+  const [cardsPerRow, setCardsPerRow] = useState<number>(); // cards in a row
   const [layoutW, setLayoutW] = useState<number>(); // layout's width
   const [layoutX, setLayoutX] = useState<number>(); // layout's width
-  // const [colW, setColW] = useState<number>()
-
-  const connectWallet = async () => {
-    try {
-      const { ethereum } = window as any;
-
-      if (!ethereum) {
-        return {
-          error: true,
-          errorMessage: "MetaMask not installed, please install!",
-          account: "",
-        };
-      }
-
-      const provider = new ethers.providers.Web3Provider(ethereum);
-      await provider.send("eth_requestAccounts", []); // requesting access to accounts
-      const signer = provider.getSigner();
-      const address = await signer.getAddress();
-      setAccount(address);
-      await switchNetwork();
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error("Error in connectWalletService --> ", error);
-    }
-  };
 
   useEffect(() => {
     let nftY = null;
-    testConfig
+    workspaceConfig
       .filter((i: IWorkspace) => i.nft && i.children)
       .map((i: IWorkspace) => {
         //  set nft layout starting position
@@ -66,14 +37,9 @@ const Home: FC = () => {
             nftY = item.y;
             setNftCard(item);
           }
-          // user bdefore to count no. of columns for nft card in layout
-          // if (item.nft && item.y === nftY) {
-          //   nftCols++;
-          // }
         });
         // remove the original NFT Layout
-        setTestConfig(testConfig.filter((i: IWorkspace) => !i.nft));
-
+        setWorkspaceConfig(workspaceConfig.filter((i: IWorkspace) => !i.nft));
         setCardsPerRow(i?.cardsPerRow);
         setLimit(i?.limit);
         setSource(i?.source);
@@ -85,7 +51,7 @@ const Home: FC = () => {
         } else if (i.wallet) {
           setAccount(i.wallet);
         } else {
-          if (!account) connectWallet();
+          if (!account) connectWalletButton(setAccount);
         }
       });
   }, []);
@@ -132,7 +98,7 @@ const Home: FC = () => {
 
   // to persist layout changes
   const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-    setTestConfig(testConfig);
+    setWorkspaceConfig(workspaceConfig);
   };
 
   // render nfts from connected wallet using opensea api
@@ -175,7 +141,7 @@ const Home: FC = () => {
     });
 
     // update position of other components
-    let newItemsArr = testConfig.map((item: IWorkspace) => {
+    let newItemsArr = workspaceConfig.map((item: IWorkspace) => {
       const { y } = item;
       if (y >= nCardsArr[0].y) {
         return {
@@ -193,7 +159,7 @@ const Home: FC = () => {
       }
     });
 
-    setTestConfig([...newItemsArr, ...nCardsArr]);
+    setWorkspaceConfig([...newItemsArr, ...nCardsArr]);
   };
 
   return (
@@ -202,11 +168,11 @@ const Home: FC = () => {
         <main
           className="min-h-screen"
           style={{
-            background: config.background,
+            background: projectConfig.background,
           }}
         >
           <ResponsiveGridLayout
-            layouts={{ lg: testConfig }}
+            layouts={{ lg: workspaceConfig }}
             breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
             cols={{ lg: 6, md: 6, sm: 6, xs: 4, xxs: 2 }}
             rowHeight={50}
@@ -216,7 +182,7 @@ const Home: FC = () => {
             margin={[0, 0]}
             className="overflow-hidden h-fit"
           >
-            {testConfig.map((c: IWorkspace) => {
+            {workspaceConfig.map((c: IWorkspace) => {
               const { x, y, w, h, minW, i } = c;
               return (
                 <div key={i} data-grid={{ x, y, w, h, minW }}>

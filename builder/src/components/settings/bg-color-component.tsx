@@ -2,11 +2,11 @@ import React, { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateWorkspaceBackgroundColor, updateWorkspaceElementStyle, updateWorkspaceNFTLayoutElements } from 'redux/workspace/workspace.reducers';
 import ColorPickerDropdown from 'components/utils/color-picker';
-import 'styles/components.css';
-import 'styles/dashboard.css';
 import { IUploadedImageData, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IRootState } from 'redux/root-state.interface';
 import WarningText from 'components/utils/setting-warning';
+import 'styles/components.css';
+import 'styles/dashboard.css';
 
 interface IBgColorComponent {
   i?: string;
