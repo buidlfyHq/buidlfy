@@ -66,8 +66,8 @@ const Home: FC = () => {
         // remove the original NFT Layout
         setTestConfig(testConfig.filter((i: IWorkspace) => !i.nft));
 
-        setCardsPerRow(i?.cardsPerRow)
-        setLimit(i?.limit)
+        setCardsPerRow(i?.cardsPerRow);
+        setLimit(i?.limit);
 
         if (i.slug) {
           setSlug(i.slug);
@@ -90,7 +90,8 @@ const Home: FC = () => {
         .then((response) => response.json())
         .then(({ assets }) => {
           renderTokensForOwner(assets);
-        }).catch(err => console.log(err))
+        })
+        .catch((err) => console.log(err));
     } else if (nftCard && account) {
       fetch(
         `https://testnets-api.opensea.io/api/v1/assets?owner=${account}&order_direction=desc&offset=0&limit=20&include_orders=false`,
@@ -139,10 +140,7 @@ const Home: FC = () => {
         const diff = y - nftPosition;
         return {
           ...item,
-          y:
-            y +
-            (nCardsArr.length / +cardsPerRow) * nCardsArr[0].h -
-            diff,
+          y: y + (nCardsArr.length / +cardsPerRow) * nCardsArr[0].h - diff,
         };
       } else {
         return {
@@ -198,7 +196,6 @@ const Home: FC = () => {
         </h1>
       )}
     </>
-    
   );
 };
 

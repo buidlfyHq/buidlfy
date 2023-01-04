@@ -131,16 +131,16 @@ const RenderItem: FC<IRenderItem> = ({
           link={item.link}
         />
       );
-      case "NFT Card":
-        return (
-          <NftCard
-            image={item.image}
-            collection={item.collection}
-            title={item.title}
-            price={item.price}
-            highestBid={item.highestBid}
-          />
-        );
+    case "NFT Card":
+      return (
+        <NftCard
+          image={item.image}
+          collection={item.collection}
+          title={item.title}
+          price={item.price}
+          highestBid={item.highestBid}
+        />
+      );
     case "Divider":
       return (
         <Divider

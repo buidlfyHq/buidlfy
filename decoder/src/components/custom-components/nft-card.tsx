@@ -1,5 +1,5 @@
 import { FC } from "react";
-import IColor from '../../interfaces/color'
+import IColor from "../../interfaces/color";
 
 interface INftCard {
   image: string;
@@ -16,7 +16,7 @@ const NftCard: FC<INftCard> = ({
   title,
   price,
   highestBid,
-  backgroundColor
+  backgroundColor,
 }) => {
   return (
     <div className="flex items-center justify-center h-full p-2">
