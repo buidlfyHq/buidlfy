@@ -23,7 +23,7 @@ const Home: FC = () => {
   const [nftCard, setNftCard] = useState<any>(null); // for creating a copy of NFT Card
   const [account, setAccount] = useState<string>(""); // for storing wallet address
   const [slug, setSlug] = useState<string>(""); // for storing collection slug
-  const [source, setSource] = useState<string>("") // for api fetching source
+  const [source, setSource] = useState<string>(""); // for api fetching source
   const [limit, setLimit] = useState<number>();
   const [cardsPerRow, setCardsPerRow] = useState<number>();
   const [layoutW, setLayoutW] = useState<number>(); // layout's width
@@ -74,12 +74,12 @@ const Home: FC = () => {
         // remove the original NFT Layout
         setTestConfig(testConfig.filter((i: IWorkspace) => !i.nft));
 
-        setCardsPerRow(i?.cardsPerRow)
-        setLimit(i?.limit)
-        setSource(i?.source)
-        setLayoutW(i?.w)
-        setLayoutX(i?.x)
-        
+        setCardsPerRow(i?.cardsPerRow);
+        setLimit(i?.limit);
+        setSource(i?.source);
+        setLayoutW(i?.w);
+        setLayoutX(i?.x);
+
         if (i.slug) {
           setSlug(i.slug);
         } else if (i.wallet) {
@@ -88,13 +88,12 @@ const Home: FC = () => {
           if (!account) connectWallet();
         }
       });
-
   }, []);
 
   useEffect(() => {
-    if (nftCard && source ) {
-      switch(source) {
-        case 'Opensea':
+    if (nftCard && source) {
+      switch (source) {
+        case "Opensea":
           fetch(
             `https://testnets-api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=${limit}&collection=${slug}&include_orders=false`,
             { method: "GET", headers: { Accept: "application/json" } }
@@ -103,18 +102,20 @@ const Home: FC = () => {
             .then(({ assets }) => {
               renderTokensForOwner(assets);
             });
-            break;
-        case 'Rarible' :
-          fetch(`https://api.rarible.org/v0.1/items/byCollection?collection=ETHEREUM%3A${slug}&size=${limit}`, 
-          {
-            method: 'GET',
-            redirect: 'follow'
-          })
-          .then(response => response.json())
-          .then(({items}) => {
-            renderTokensForOwner(items);
-          })
-          .catch(error => console.log('error', error));
+          break;
+        case "Rarible":
+          fetch(
+            `https://api.rarible.org/v0.1/items/byCollection?collection=ETHEREUM%3A${slug}&size=${limit}`,
+            {
+              method: "GET",
+              redirect: "follow",
+            }
+          )
+            .then((response) => response.json())
+            .then(({ items }) => {
+              renderTokensForOwner(items);
+            })
+            .catch((error) => console.log("error", error));
           break;
       }
     } else if (nftCard && account) {
@@ -144,21 +145,24 @@ const Home: FC = () => {
       let modifiedX = X;
       X = X + colW <= layoutW && X + colW < 6 ? X + colW : layoutX;
 
-      let nftDetails = source === 'Opensea' ? {
-        image: asset.asset_contract.image_url,
-        collection: asset.asset_contract.name,
-        title: asset.name,
-        price: asset.last_sale?.payment_token.eth_price,
-        highestBid: asset.top_bid,
-        href: ``,
-      } : {
-        image: asset.meta.content[0].url,
-        collection: asset.meta.name,
-        title: asset.meta.name,
-        price: asset.last_sale?.payment_token.eth_price,
-        highestBid: asset.top_bid,
-        href: `https://rarible.com/token/${asset.id.substr(9)}`,
-      }
+      let nftDetails =
+        source === "Opensea"
+          ? {
+              image: asset.asset_contract.image_url,
+              collection: asset.asset_contract.name,
+              title: asset.name,
+              price: asset.last_sale?.payment_token.eth_price,
+              highestBid: asset.top_bid,
+              href: ``,
+            }
+          : {
+              image: asset.meta.content[0].url,
+              collection: asset.meta.name,
+              title: asset.meta.name,
+              price: asset.last_sale?.payment_token.eth_price,
+              highestBid: asset.top_bid,
+              href: `https://rarible.com/token/${asset.id.substr(9)}`,
+            };
 
       return {
         ...nftCard,
@@ -166,12 +170,12 @@ const Home: FC = () => {
         x: modifiedX,
         y: nftPosition,
         w: colW,
-        ...nftDetails
+        ...nftDetails,
       };
     });
 
     // update position of other components
-    let newItemsArr = testConfig.map((item: IWorkspace) => { 
+    let newItemsArr = testConfig.map((item: IWorkspace) => {
       const { y } = item;
       if (y >= nCardsArr[0].y) {
         return {
@@ -235,7 +239,6 @@ const Home: FC = () => {
         </h1>
       )}
     </>
-    
   );
 };
 
