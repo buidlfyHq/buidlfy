@@ -1,6 +1,9 @@
 import { ErrorTypes, generateNonce, SiweMessage } from 'siwe';
+import AuthService from '@/services/auth.service';
 
-class UsersController {
+class AuthController {
+  public authService = new AuthService();
+
   public createNonce = async (req, res) => {
     req.session.nonce = generateNonce();
     res.setHeader('Content-Type', 'text/plain');
@@ -23,9 +26,12 @@ class UsersController {
         });
         return;
       }
+      const address: string = req.body.message.address;
+      const data = await this.authService.authenticate(address);
+
       req.session.siwe = fields;
       req.session.cookie.expires = new Date(fields.expirationTime);
-      req.session.save(() => res.status(200).end());
+      req.session.save(() => res.status(200).json({ data, message: 'authenticated' }));
     } catch (e) {
       req.session.siwe = null;
       req.session.nonce = null;
@@ -58,4 +64,4 @@ class UsersController {
   };
 }
 
-export default UsersController;
+export default AuthController;
