@@ -39,10 +39,6 @@ const defaultBorderStyles = {
   shadow: 'none',
 };
 
-const defaultContainerId = {
-  containerId: '',
-};
-
 export const components = [
   {
     name: 'Container',
@@ -187,6 +183,7 @@ export const components = [
     minH: 1,
     value: 'Add Button',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -208,7 +205,6 @@ export const components = [
     },
     connectWallet: false,
     contract: {},
-    ...defaultContainerId,
   },
   {
     name: 'Text',
@@ -216,6 +212,7 @@ export const components = [
     minH: 1,
     value: 'Text',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -224,7 +221,6 @@ export const components = [
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
     },
-    ...defaultContainerId,
   },
   {
     name: 'Heading 1',
@@ -232,6 +228,7 @@ export const components = [
     minH: 1,
     value: 'Heading 1',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -240,7 +237,6 @@ export const components = [
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
     },
-    ...defaultContainerId,
   },
   {
     name: 'Heading 2',
@@ -248,6 +244,7 @@ export const components = [
     minH: 1,
     value: 'Heading 2',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -256,7 +253,6 @@ export const components = [
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
     },
-    ...defaultContainerId,
   },
   {
     name: 'Heading 3',
@@ -264,6 +260,7 @@ export const components = [
     minH: 1,
     value: 'Heading 3',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -272,13 +269,13 @@ export const components = [
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
     },
-    ...defaultContainerId,
   },
   {
     name: 'Input',
     h: 1,
     minH: 1,
     placeholder: 'Placeholder',
+    containerId: '',
     style: {
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
@@ -299,13 +296,13 @@ export const components = [
         paddingBottom: 8,
       },
     },
-    ...defaultContainerId,
   },
   {
     name: 'Image',
     h: 3,
     minH: 1,
     link: '',
+    containerId: '',
     style: {
       width: 80,
       height: 60,
@@ -316,7 +313,6 @@ export const components = [
       ...defaultFontStyles,
       ...defaultMarginStyles,
     },
-    ...defaultContainerId,
   },
   {
     name: 'List',
@@ -325,6 +321,7 @@ export const components = [
     value: 'List',
     link: '',
     listOptions: [],
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -334,7 +331,6 @@ export const components = [
       ...defaultPaddingStyles,
       listType: 'disc',
     },
-    ...defaultContainerId,
   },
   {
     name: 'Dropdown',
@@ -343,6 +339,7 @@ export const components = [
     value: 'Dropdown',
     link: '',
     listOptions: [],
+    containerId: '',
     style: {
       ...defaultFontStyles,
       fontSize: 14,
@@ -361,12 +358,12 @@ export const components = [
       backgroundColor: 'rgba(255, 255, 255, 100)',
       color: 'rgba(16, 24, 40, 100)',
     },
-    ...defaultContainerId,
   },
   {
     name: 'Divider',
     h: 1,
     minH: 1,
+    containerId: '',
     style: {
       ...defaultDeleteStyles,
       margin: {
@@ -379,7 +376,6 @@ export const components = [
       borderWidth: 1,
       borderColor: 'rgba(239, 239, 240, 100)',
     },
-    ...defaultContainerId,
   },
   {
     name: 'Badge',
@@ -387,6 +383,7 @@ export const components = [
     minH: 1,
     value: 'Badge',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -406,7 +403,6 @@ export const components = [
       },
       shadow: 'none',
     },
-    ...defaultContainerId,
   },
   {
     name: 'Status',
@@ -414,6 +410,7 @@ export const components = [
     minH: 1,
     value: 'Badge',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -433,13 +430,13 @@ export const components = [
       },
       shadow: 'none',
     },
-    ...defaultContainerId,
   },
   {
     name: 'Checkbox',
     h: 1,
     minH: 1,
     value: 'Default Text',
+    containerId: '',
     style: {
       ...defaultDeleteStyles,
       ...defaultFontStyles,
@@ -448,13 +445,13 @@ export const components = [
       ...defaultPaddingStyles,
       fontSize: 13,
     },
-    ...defaultContainerId,
   },
   {
     name: 'Radio',
     h: 1,
     minH: 1,
     value: 'Default Text',
+    containerId: '',
     style: {
       ...defaultDeleteStyles,
       ...defaultFontStyles,
@@ -463,28 +460,27 @@ export const components = [
       ...defaultPaddingStyles,
       fontSize: 13,
     },
-    ...defaultContainerId,
   },
   {
     name: 'Spacer',
     h: 1,
     minH: 1,
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
     },
-    ...defaultContainerId,
   },
   {
     name: 'Lenster Card',
     h: 2,
     minH: 1,
+    containerId: '',
     posts: [],
     style: {
       ...defaultDeleteStyles,
     },
-    ...defaultContainerId,
   },
   // {
   //   name: "Divider",
