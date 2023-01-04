@@ -10,10 +10,8 @@ import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers
 import { IRootState } from 'redux/root-state.interface';
 import { IWorkspaceElement, ResizeHandles } from 'redux/workspace/workspace.interfaces';
 import defaultImage from 'assets/default-image.svg';
-import { BsCheck2 } from 'react-icons/bs';
 import badge from 'assets/badge.svg';
 import status from 'assets/status-badge.svg';
-import dropdown from 'assets/dropdown.svg';
 import container from 'assets/image-container.svg';
 import 'styles/components.css';
 
@@ -207,7 +205,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         </div>
       </div>
 
-      <div className="element-div">
+      {/* <div className="element-div">
         <div onClick={() => onClickFunction('Checkbox')} className="px-10 py-3 cursor-pointer element-list">
           <div data-tip="Click here to add the Checkbox" data-for="elements">
             <div className="flex items-center">
@@ -250,7 +248,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="element-div">
         <div onClick={() => onClickFunction('Badge')} className="px-10 py-3 cursor-pointer">
           <div data-tip="Click here to add the Badge" data-for="elements">
