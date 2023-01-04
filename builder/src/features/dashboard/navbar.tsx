@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import WalletMenu from 'features/dashboard/wallet-menu';
 import MintNFT from 'features/dashboard/mint-nft';
 import PublishMenu from 'features/dashboard/publish-menu';
+import { AiOutlineEdit } from 'react-icons/ai';
 import { updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { setSelectorToDefault, updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
+import { updateSiteName } from 'redux/publish/publish.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { updateSiteName } from 'redux/publish/publish.reducers';
 
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
@@ -41,8 +41,6 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
       },
       contract: null,
     };
-    console.log(workspaceElements, 'workspaceElements');
-
     if (contractDetails?.abi && contractDetails?.address && contractDetails?.network) {
       templateConfig.contract = {
         abi: JSON.parse(contractDetails?.abi),
@@ -90,8 +88,6 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
           onChange={e => handleSiteName(e)}
           className="outline-none placeholder-draft overflow-hidden w-[5rem] max-h-[2rem] flex items-center text-[#100F11] text-[16px] font-semibold text-center resize-none"
         />
-        {/* Draft Post
-        </input> */}
         <AiOutlineEdit className="ml-3 text-[#2E2E2E]" />
       </div>
       <div className="flex flex-row h-[60px]">

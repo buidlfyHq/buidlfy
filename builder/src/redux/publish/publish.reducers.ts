@@ -73,8 +73,6 @@ const publishSlice = createSlice({
       };
     },
     updateSiteName(state: IPublishState, action: { payload: string }) {
-      console.log(action, 'action');
-
       return {
         ...state,
         siteName: action.payload,
