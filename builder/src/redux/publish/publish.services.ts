@@ -41,14 +41,14 @@ export const initiatePublishService = async (configDetails: string) => {
   }
 };
 
-export const getPublishDetailsService = async (deploymentId: string) => {
+export const getPublishDetailsService = async (deploymentId: string, siteName: string) => {
   try {
     const myHeaders = new Headers();
     const shortName: string = uniqueNamesGenerator(customConfig);
     myHeaders.append('Content-Type', 'application/json');
     const raw = JSON.stringify({
       deploymentId: deploymentId,
-      siteName: shortName,
+      siteName: siteName === 'Draft Post' ? shortName : siteName,
     });
     const requestOptions: RequestInit = {
       method: 'PUT',

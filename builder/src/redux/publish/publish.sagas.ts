@@ -1,4 +1,5 @@
-import { call, all, put, takeLatest } from 'redux-saga/effects';
+import { call, all, put, takeLatest, select } from 'redux-saga/effects';
+import { IRootState } from 'redux/root-state.interface';
 import {
   updateCurrentStep,
   updateDeploymentId,
@@ -28,8 +29,9 @@ function* initiatePublish({ payload }) {
 }
 
 function* getPublishDetails({ payload }) {
+  const siteName = yield select((state: IRootState) => state.publish.siteName);
   const { deploymentId } = payload;
-  const transactionRes = yield call(getPublishDetailsService, deploymentId);
+  const transactionRes = yield call(getPublishDetailsService, deploymentId, siteName);
   if (!transactionRes.error) {
     const domainId = JSON.parse(transactionRes.responseText).data.domain._id;
     const projectId = JSON.parse(transactionRes.responseText).data.domain.projectId;
