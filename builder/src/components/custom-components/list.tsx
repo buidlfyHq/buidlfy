@@ -26,8 +26,15 @@ const List: FC<IText> = ({
 }) => {
   const gradientCondition = color?.indexOf('gradient') !== -1;
   const dispatch = useDispatch();
+  // const lists: IList[] = useSelector(
+  //   (state: IRootState) => state.workspace.workspaceElements.find(workspaceElement => workspaceElement.i === i).listOptions,
+  // );
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
   const selectedList = lists.filter(list => list.i === i);
+  const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
+  useEffect(() => {
+    console.log(workspaceElements, 'we');
+  }, []);
   const listFilter = listOptions.filter(list => list.i === i);
   const previewFilter = preview ? listFilter : selectedList;
   useEffect(() => {

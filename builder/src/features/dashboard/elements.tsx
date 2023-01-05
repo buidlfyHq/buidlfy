@@ -41,11 +41,15 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         minW: 1,
         resizeHandles: availableHandles,
       };
+      console.log(y, 'y');
+      console.log(c.h, 'c.h');
+
       let updatedItem = {
         ...selectedElement,
         h: y + c.h,
         children: [...selectedElement.children, newC],
       };
+
       const elementsIndex = workspaceElements.findIndex(item => item.i === selectedElement.i);
       let newArray = [...workspaceElements];
       newArray[elementsIndex] = updatedItem;
@@ -92,6 +96,8 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
     if (selectedElement.children.length === 0) return 0;
     else {
       let arr = selectedElement.children.map((item: IWorkspaceElement) => item.y);
+      console.log(Math.max(...arr), 'arr');
+
       return Math.max(...arr) + 1;
     }
   };
