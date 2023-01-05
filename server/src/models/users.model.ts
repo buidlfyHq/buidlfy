@@ -6,11 +6,22 @@ const userSchema: Schema = new Schema({
     required: true,
     unique: true,
   },
+  walletName: {
+    type: String,
+    required: true,
+  },
   handle: {
     type: String,
     unique: true,
   },
-  whitelisted: Boolean,
+  verified: {
+    type: Boolean,
+    default: false,
+  },
+  whitelisted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const userModel = model<Document>('User', userSchema);

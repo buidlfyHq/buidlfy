@@ -5,14 +5,13 @@ import { isEmpty } from '@utils/util';
 class AuthService {
   public users = userModel;
 
-  public async authenticate(address: string) {
+  public async authenticate(address: string, walletName: string) {
     if (isEmpty(address)) throw new HttpException(400, 'Address is empty');
-
+    
     const findUser = await this.users.findOne({ address });
-    // if (findUser) throw new HttpException(409, `This email ${address} already exists`);
     if (findUser) return findUser;
-    const createUserData = await this.users.create({ address: address });
 
+    const createUserData = await this.users.create({ address, walletName });
     return createUserData;
   }
 

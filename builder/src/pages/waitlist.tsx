@@ -4,9 +4,9 @@ import { SiweMessage } from 'siwe';
 const domain = window.location.host;
 const provider = new ethers.providers.Web3Provider((window as any).ethereum);
 const signer = provider.getSigner();
-const BACKEND_ADDR = 'http://localhost:8000/users';
+const BACKEND_ADDR = 'http://localhost:8000/';
 
-const Signin = () => {
+const Waitlist = () => {
   const createSiweMessage = async (address, statement) => {
     const res = await fetch(`${BACKEND_ADDR}/nonce`, {
       credentials: 'include',
@@ -28,15 +28,17 @@ const Signin = () => {
   };
 
   const signInWithEthereum = async () => {
-    const message = await createSiweMessage(await signer.getAddress(), 'Sign in with Ethereum to the app.');
+    const address = await signer.getAddress();
+    const message = await createSiweMessage(address, 'Sign in with Ethereum to the app.');
     const signature = await signer.signMessage(message);
+    const walletName = 'Metamask';
 
     const res = await fetch(`${BACKEND_ADDR}/verify`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ message, signature }),
+      body: JSON.stringify({ message, signature, address, walletName }),
       credentials: 'include',
     });
     console.log(await res.text());
@@ -64,4 +66,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Waitlist;

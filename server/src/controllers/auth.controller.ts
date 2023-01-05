@@ -9,7 +9,7 @@ class AuthController {
     res.setHeader('Content-Type', 'text/plain');
     res.status(200).send(req.session.nonce);
   };
-
+  
   public verifySignature = async (req, res) => {
     try {
       if (!req.body.message) {
@@ -26,12 +26,14 @@ class AuthController {
         });
         return;
       }
-      const address: string = req.body.message.address;
-      const data = await this.authService.authenticate(address);
+      console.log('User is authenticated!');
+      const address: string = req.body.address;
+      const walletName: string = req.body.walletName;
+      const data = await this.authService.authenticate(address, walletName);
 
       req.session.siwe = fields;
       req.session.cookie.expires = new Date(fields.expirationTime);
-      req.session.save(() => res.status(200).json({ data, message: 'authenticated' }));
+      req.session.save(() => res.status(200).json({ data, message: `You are authenticated and your address is: ${req.session.siwe.address}` }));
     } catch (e) {
       req.session.siwe = null;
       req.session.nonce = null;
