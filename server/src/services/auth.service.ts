@@ -7,7 +7,7 @@ class AuthService {
 
   public async authenticate(address: string, walletName: string) {
     if (isEmpty(address)) throw new HttpException(400, 'Address is empty');
-    
+
     const findUser = await this.users.findOne({ address });
     if (findUser) return findUser;
 

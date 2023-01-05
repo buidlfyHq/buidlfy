@@ -9,7 +9,7 @@ class AuthController {
     res.setHeader('Content-Type', 'text/plain');
     res.status(200).send(req.session.nonce);
   };
-  
+
   public verifySignature = async (req, res) => {
     try {
       if (!req.body.message) {
