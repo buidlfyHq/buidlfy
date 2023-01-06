@@ -33,7 +33,7 @@ const Waitlist = () => {
     const signature = await signer.signMessage(message);
     const walletName = 'Metamask';
 
-    const res = await fetch(`${BACKEND_ADDR}/verify`, {
+    const res = await fetch(`${BACKEND_ADDR}/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -51,6 +51,13 @@ const Waitlist = () => {
     console.log(await res.text());
   };
 
+  const signout = async () => {
+    const res = await fetch(`${BACKEND_ADDR}/signout`, {
+      credentials: 'include',
+    });
+    console.log(await res.text());
+  };
+
   return (
     <main className="w-screen h-screen m-10">
       <button className="block bg-blue-200 p-2 border border-black rounded mb-4" onClick={connectWallet}>
@@ -59,8 +66,11 @@ const Waitlist = () => {
       <button className="block bg-green-200 p-2 border border-black rounded mb-4" onClick={signInWithEthereum}>
         SIWE
       </button>
-      <button className="block bg-yellow-200 p-2 border border-black rounded" onClick={getInformation}>
+      <button className="block bg-yellow-200 p-2 border border-black rounded mb-4" onClick={getInformation}>
         Info
+      </button>
+      <button className="block bg-red-200 p-2 border border-black rounded" onClick={signout}>
+        Signout
       </button>
     </main>
   );

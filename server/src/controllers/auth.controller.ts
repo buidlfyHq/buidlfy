@@ -10,13 +10,14 @@ class AuthController {
     res.status(200).send(req.session.nonce);
   };
 
-  public verifySignature = async (req, res) => {
+  public signin = async (req, res) => {
     try {
       if (!req.body.message) {
-        res.status(422).json({ message: 'Expected prepareMessage object as body.' });
+        res.status(422).json({ message: 'Expected prepareMessage object as body' });
         return;
       }
 
+      // verify signature
       const message = new SiweMessage(req.body.message);
       const fields = await message.validate(req.body.signature);
       if (fields.nonce !== req.session.nonce) {
@@ -26,7 +27,7 @@ class AuthController {
         });
         return;
       }
-      console.log('User is authenticated!');
+      // signup or signin
       const address: string = req.body.address;
       const walletName: string = req.body.walletName;
       const data = await this.authService.authenticate(address, walletName);
@@ -57,12 +58,25 @@ class AuthController {
 
   public getInformation = (req, res) => {
     if (!req.session.siwe) {
-      res.status(401).json({ message: 'You have to first sign_in' });
+      res.status(401).json({ message: 'You have to first signin' });
       return;
     }
     console.log('User is authenticated!');
     res.setHeader('Content-Type', 'text/plain');
     res.send(`You are authenticated and your address is: ${req.session.siwe.address}`);
+  };
+
+  public signout = (req, res) => {
+    if (!req.session.siwe) {
+      res.status(401).json({ message: 'Already signed out' });
+      return;
+    }
+    req.session.destroy((err: Error) => {
+      if (err) {
+        console.error('Error in signout', err);
+      }
+    });
+    res.status(200).send('Signout successful');
   };
 }
 
