@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { ethers } from 'ethers';
 import { SiweMessage } from 'siwe';
 
 const domain = window.location.host;
 const provider = new ethers.providers.Web3Provider((window as any).ethereum);
 const signer = provider.getSigner();
-const BACKEND_ADDR = 'http://localhost:8000/';
+const BACKEND_ADDR = 'http://localhost:8000';
 
 const Waitlist = () => {
+  const [twitterHandle, setTwitterHandle] = useState('');
+
   const createSiweMessage = async (address, statement) => {
     const res = await fetch(`${BACKEND_ADDR}/nonce`, {
       credentials: 'include',
@@ -44,15 +47,20 @@ const Waitlist = () => {
     console.log(await res.text());
   };
 
-  const getInformation = async () => {
-    const res = await fetch(`${BACKEND_ADDR}/personal_information`, {
+  const signout = async () => {
+    const res = await fetch(`${BACKEND_ADDR}/signout`, {
       credentials: 'include',
     });
     console.log(await res.text());
   };
 
-  const signout = async () => {
-    const res = await fetch(`${BACKEND_ADDR}/signout`, {
+  const verify = async () => {
+    const res = await fetch(`${BACKEND_ADDR}/verify_tweet`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ twitterHandle }),
       credentials: 'include',
     });
     console.log(await res.text());
@@ -66,12 +74,21 @@ const Waitlist = () => {
       <button className="block bg-green-200 p-2 border border-black rounded mb-4" onClick={signInWithEthereum}>
         SIWE
       </button>
-      <button className="block bg-yellow-200 p-2 border border-black rounded mb-4" onClick={getInformation}>
-        Info
-      </button>
-      <button className="block bg-red-200 p-2 border border-black rounded" onClick={signout}>
+      <button className="block bg-red-200 p-2 border border-black rounded mb-4" onClick={signout}>
         Signout
       </button>
+      <div>
+        <input
+          className="border mb-2 px-2 py-1"
+          type="text"
+          placeholder="twitter handle"
+          value={twitterHandle}
+          onChange={e => setTwitterHandle(e.target.value)}
+        />
+        <button className="block bg-cyan-200 p-2 border border-black rounded" onClick={verify}>
+          Verify User
+        </button>
+      </div>
     </main>
   );
 };

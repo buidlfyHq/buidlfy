@@ -3,7 +3,7 @@ import AuthController from '@/controllers/auth.controller';
 import { Routes } from '@interfaces/routes.interface';
 
 class AuthRoute implements Routes {
-  public path = '/';
+  public path = '';
   public router = Router();
   public authController = new AuthController();
 
@@ -14,8 +14,8 @@ class AuthRoute implements Routes {
   private initializeRoutes() {
     this.router.get(`${this.path}/nonce`, this.authController.createNonce);
     this.router.post(`${this.path}/signin`, this.authController.signin);
-    this.router.get(`${this.path}/personal_information`, this.authController.getInformation);
     this.router.get(`${this.path}/signout`, this.authController.signout);
+    this.router.post(`${this.path}/verify_tweet`, this.authController.verifyTweet);
   }
 }
 

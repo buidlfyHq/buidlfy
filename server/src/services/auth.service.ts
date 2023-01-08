@@ -1,55 +1,62 @@
+import { UserV2 } from 'twitter-api-v2';
 import { HttpException } from '@exceptions/HttpException';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
+import { client } from '@/twitter';
+import Logger from '@/logger';
+import { BUIDLFY_TWITTER_ID, MAX_RESULTS, TWEET_TEXT } from '@/config';
+import { User } from '@/interfaces/users.interface';
 
 class AuthService {
   public users = userModel;
 
-  public async authenticate(address: string, walletName: string) {
+  public async authenticate(address: string, walletName: string): Promise<User> {
     if (isEmpty(address)) throw new HttpException(400, 'Address is empty');
-
-    const findUser = await this.users.findOne({ address });
-    if (findUser) return findUser;
-
-    const createUserData = await this.users.create({ address, walletName });
-    return createUserData;
+    try {
+      const findUser: User = await this.users.findOne({ address });
+      if (findUser) return findUser;
+      const createUserData: User = await this.users.create({ address, walletName });
+      return createUserData;
+    } catch (error) {
+      Logger.error(`Error found in ${__filename} - authenticate - `);
+      Logger.error(error);
+      throw error;
+    }
   }
 
-  // public async login(userData: CreateUserDto): Promise<{ cookie: string; findUser: User }> {
-  //   if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
+  public async verify(twitterHandle: string, address: string, data: UserV2): Promise<User | { errorMessage: string }> {
+    try {
+      // check if user is following Buidlfy
+      const followingList = await client.v2.following(data.id);
+      const isFollowing = followingList.data.filter(account => account.id === BUIDLFY_TWITTER_ID)[0] ? true : false;
+      if (!isFollowing) {
+        return { errorMessage: 'Follow buidlfy to get access' };
+      }
 
-  //   const findUser: User = await this.users.findOne({ email: userData.email });
-  //   if (!findUser) throw new HttpException(409, `This email ${userData.email} was not found`);
+      // check if user has shared the beta launch on twitter
+      const tweetList: any = await client.v2.userTimeline(data.id, { max_results: Number(MAX_RESULTS) });
+      const hasTweeted = tweetList._realData.data.filter((tweet: { text: string }) => tweet.text === TWEET_TEXT)[0] ? true : false;
+      if (!hasTweeted) {
+        return { errorMessage: 'Share the beta launch on twitter to get access' };
+      }
 
-  //   const isPasswordMatching: boolean = await compare(userData.password, findUser.password);
-  //   if (!isPasswordMatching) throw new HttpException(409, "Password is not matching");
-
-  //   const tokenData = this.createToken(findUser);
-  //   const cookie = this.createCookie(tokenData);
-
-  //   return { cookie, findUser };
-  // }
-
-  // public async logout(userData: User): Promise<User> {
-  //   if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
-
-  //   const findUser: User = await this.users.findOne({ email: userData.email, password: userData.password });
-  //   if (!findUser) throw new HttpException(409, `This email ${userData.email} was not found`);
-
-  //   return findUser;
-  // }
-
-  // public createToken(user: User): TokenData {
-  //   const dataStoredInToken: DataStoredInToken = { _id: user._id };
-  //   const secretKey: string = SECRET_KEY;
-  //   const expiresIn: number = 60 * 60;
-
-  //   return { expiresIn, token: sign(dataStoredInToken, secretKey, { expiresIn }) };
-  // }
-
-  // public createCookie(tokenData: TokenData): string {
-  //   return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn};`;
-  // }
+      const verified = isFollowing && hasTweeted ? true : false;
+      const verifiedUser: User = await this.users.findOneAndUpdate(
+        { address: address },
+        {
+          $set: {
+            handle: twitterHandle,
+            verified: verified,
+          },
+        },
+      );
+      return verifiedUser;
+    } catch (error) {
+      Logger.error(`Error found in ${__filename} - verify - `);
+      Logger.error(error);
+      throw error;
+    }
+  }
 }
 
 export default AuthService;

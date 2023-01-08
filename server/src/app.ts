@@ -17,6 +17,13 @@ import { logger, stream } from '@utils/logger';
 import { socketServer } from './socket';
 import { createServer, Server } from 'http';
 
+declare module 'express-session' {
+  export interface SessionData {
+    nonce: string;
+    siwe: { address: string };
+  }
+}
+
 class App {
   public app: express.Application;
   public server: Server;
