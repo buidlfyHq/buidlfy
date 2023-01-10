@@ -12,12 +12,9 @@ import 'styles/components.css';
 interface IAbiComponents {
   showComponent: IShowComponent;
   elementId: string;
-  inputValue: IInput[];
-  setInputValue;
-  i: string;
 }
 
-const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId, inputValue, setInputValue, i }) => {
+const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   const dispatch = useDispatch();
   const contractElementSelector: IContractElementSelector = useSelector((state: IRootState) => state.contract.contractElementSelector);
   const contractElementSelected: IContractElementSelected = useSelector((state: IRootState) => state.contract.contractElementSelected);

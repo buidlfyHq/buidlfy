@@ -44,8 +44,6 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     };
   }>(null); // for abi method component
   const [isViewMore, setIsViewMore] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<IInput[]>([]);
-
   const isWalletConnect = workspaceElements.findIndex(item => item.connectWallet === true);
 
   useEffect(() => {
@@ -108,13 +106,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
         <>
           <div className="flex justify-center mt-[3rem]" />
           <AbiMethods setShowComponent={setShowComponent} selectedElement={selectedElement} setIsOpen={setIsOpen} setGoBack={setGoBack} />
-          <AbiComponents
-            showComponent={showComponent}
-            elementId={selectedElement.i}
-            i={selectedElement.i}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-          />
+          <AbiComponents showComponent={showComponent} elementId={selectedElement.i} />
         </>
       ) : (
         <>
