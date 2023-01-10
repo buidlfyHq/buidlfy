@@ -158,11 +158,6 @@ export const updateContractInElement = (
   let updatedContract = {};
   if (filteredObject?.id) {
     let duplicate = selectedElement.contract.inputs?.find((e: { id: string }) => e.id === filteredObject.id);
-    console.log(selectedElement.contract.inputs, 'selectedElement.contract.inputs');
-    console.log(contractElementSelected, 'contractElementSelected-222');
-    console.log(currentElement, 'currentElement-222');
-    console.log(filteredObject, 'filteredObject');
-
     if (!duplicate) {
       if (currentElement.type === 'input') {
         updatedContract = {

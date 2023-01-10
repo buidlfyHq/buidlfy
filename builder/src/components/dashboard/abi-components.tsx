@@ -33,7 +33,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId, inputValu
     type: '',
   });
   const [show, setShow] = useState<boolean>(true);
-  // const [preInput, setPreInput] = useState<Array<any>>([]);
+  // Infer better type instead of any
   const [inputSelect, setInputSelect] = useState<Array<any>>([]);
   const [preInputValue, setPreInputValue] = useState<Array<any>>([]);
   const [getUsersAddress, setGetUserAddress] = useState<Array<any>>([]);
@@ -47,7 +47,6 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId, inputValu
     setShow(true);
     // filter last selected element
     dispatch(saveContractConfig({ contractElementSelected, currentElement }));
-    console.log(currentElement, 'currentelement');
   };
 
   const handleInputSelector = (selectedId: string, i) => {
@@ -183,49 +182,16 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId, inputValu
     .filter(item => item !== undefined);
 
   const handleInputSelect = (i, status) => {
-    // setInputSelect([...inputSelect, i, true, false]);
-    console.log(inputSelect, 'inputSelect');
     const newInputSelect = [...inputSelect];
     newInputSelect[i] = status;
     setInputSelect(newInputSelect);
-    console.log(newInputSelect, 'new-2');
-    console.log(newInputSelect[i], 'newInputSelect[i]');
-    console.log(i, 'i-2');
-
-    // const newPreInput = [...preInput];
-    // newPreInput[i] = false;
-    // setPreInput(newPreInput);
   };
 
   const handlePreInput = (i, status) => {
-    // setInputSelect([...inputSelect, i, true, false]);
     const userAddress = [...getUsersAddress];
     userAddress[i] = status;
     setGetUserAddress(userAddress);
-
-    // const newPreInput = [...preInput];
-    // newPreInput[i] = false;
-    // setPreInput(newPreInput);
   };
-  // const handlePreInput = i => {
-  //   // setPreInput([...preInput, i, true, false]);
-  //   const newPreInput = [...preInput];
-  //   newPreInput[i] = true;
-  //   setPreInput(newPreInput);
-  //   console.log(preInput[i], 'preInput');
-  //   const newInputSelect = [...inputSelect];
-  //   newInputSelect[i] = false;
-  //   setInputSelect(newInputSelect);
-  //   console.log(inputSelect[i], 'inputSelect');
-  // };
-
-  const getValue = (inputArray: IInput[]) => {
-    console.log(inputValue, 'iv');
-    const requiredValue = inputArray.filter((input: IInput) => input?.id === i)[0];
-    return requiredValue ? requiredValue.value : '';
-  };
-  console.log(showComponent?.value?.inputs[0]['name'], ' showComponent.value.name');
-
   const handlePreInputChange = (e: React.ChangeEvent<HTMLInputElement>, i: number, selectedId: string) => {
     const newPreInputValue = [...preInputValue];
     newPreInputValue[i] = e.target.value;
@@ -277,10 +243,6 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId, inputValu
           {showComponent.value?.inputs &&
             showComponent.value?.inputs.map((input: { name: string }, i: number) => {
               const { selectedId, objects, filterObjects } = inputObjects(i);
-              console.log(i, 'i');
-              console.log(inputSelect, 'is');
-              console.log(inputSelect[i], 'inputSelect[i]');
-
               return (
                 <section key={i} className="mt-3">
                   <h6 className="setting-text ml-[0.5rem] mt-[1.25rem]">

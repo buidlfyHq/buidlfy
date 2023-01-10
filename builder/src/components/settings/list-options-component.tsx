@@ -52,7 +52,6 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
       const linkVisible = [...isLinkVisible];
       linkVisible[i] = true;
       setIsLinkVisible(linkVisible);
-      console.log(isLinkVisible, 'islink');
     }
   };
 

@@ -54,7 +54,6 @@ const Button: FC<ITexts> = ({
       };
       setOracleContract(onLoad(modifiedConfig));
     }
-    console.log(account, "account");
   }, []); // eslint-disable-line
 
   const connectWalletButton = async () => {
@@ -74,8 +73,6 @@ const Button: FC<ITexts> = ({
       const signer = provider.getSigner();
       const address = await signer.getAddress();
       setAccount(address);
-      console.log(address, "address");
-
       await switchNetwork();
     } catch (error) {
       // eslint-disable-next-line no-console

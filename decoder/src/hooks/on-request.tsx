@@ -19,14 +19,6 @@ export const onRequest = async (
 ) => {
   // contract functions with inputs
   if (contractFunction.inputs.length) {
-    console.log(
-      method,
-      contractFunction,
-      contract,
-      inputValue,
-      outputValue,
-      "function"
-    );
     const config = JSON.parse(BuilderConfig);
 
     // push all the required input values to args
