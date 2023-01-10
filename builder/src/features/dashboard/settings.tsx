@@ -26,7 +26,6 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
     );
     setOpenSetting(false);
   };
-
   const handleDuplicate = () => {
     const elementId = uid();
     const newWorkspaceElements = [...workspaceElements];
@@ -44,8 +43,19 @@ const Settings: FC<ISettings> = ({ openTab, setOpenTab, setOpenSetting }) => {
       }; // Need seperate id for children then element
       newWorkspaceElements.push(newSelectedContainer);
     } else {
-      const newSelectedElement = { ...selectedElement, i: elementId };
-      newWorkspaceElements.push(newSelectedElement);
+      if (selectedElement.containerId === '') {
+        const newSelectedElement = { ...selectedElement, i: elementId };
+        newWorkspaceElements.push(newSelectedElement);
+      } else {
+        let newC = {
+          ...selectedElement,
+          i: uid(),
+        };
+        const containerIndex = workspaceElements.findIndex(item => item.i === selectedElement?.containerId);
+        const newContainer = { ...workspaceElements[containerIndex] };
+        newContainer['children'] = [...newContainer.children, newC];
+        newWorkspaceElements[containerIndex] = newContainer;
+      }
     }
     dispatch(updateWorkspaceElementsArray(newWorkspaceElements));
   };
