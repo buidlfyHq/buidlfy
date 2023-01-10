@@ -1,6 +1,4 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { IRootState } from 'redux/root-state.interface';
 import LensterIcon from 'components/utils/assets/lenster-svg';
 import lenster from 'assets/lenster-default.svg';
 import { IPublication } from 'redux/lenster/lenster.interfaces';
@@ -15,16 +13,13 @@ interface ILensterPost {
 }
 
 const LensterPost: FC<ILensterPost> = ({ i, post, updateProfilePicture, updatePostMedia, preview }) => {
-  const inputValue = useSelector((state: IRootState) => state.lenster.inputValue);
-  console.log(inputValue, 'iv');
-
   return (
     <>
-      {(!preview && post.name && inputValue) || (preview && post.name) ? (
+      {post.name ? (
         <div
           id={i}
           className={`border lenster-card py-4 px-6 border-gray-700 bg-gray-800 rounded-xl ${
-            preview ? 'w-[28rem] m-2' : 'h-fit  w-[21rem] mx-2 my-[0.7rem]'
+            preview ? 'w-[28rem] mx-[0.5rem] my-[1.3rem]' : 'h-fit  w-[21rem] mx-2 my-[0.7rem]'
           }`}
         >
           <div className="flex">
