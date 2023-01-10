@@ -20,7 +20,6 @@ export const onRequest = async (
   // contract functions with inputs
   if (contractFunction.inputs.length) {
     const config = JSON.parse(BuilderConfig);
-
     // push all the required input values to args
     const args = [];
     let amount: string;
@@ -43,12 +42,17 @@ export const onRequest = async (
       );
       return input;
     });
-
+    const userAddress = await contract.signer.getAddress();
+    // Infer better type for input
     contractFunction.inputs.map((input: any) => {
       if (input?.value) {
         args.push({ name: input.name, value: input.value });
       }
+      if (input?.userAddress) {
+        args.push({ name: input.name, value: userAddress });
+      }
     });
+
     const newArgs = [];
     config.contract.abi
       .find((m) => m.name === method)

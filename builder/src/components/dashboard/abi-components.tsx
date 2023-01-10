@@ -34,7 +34,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   const [inputSelect, setInputSelect] = useState<Array<any>>([]);
   const [preInputValue, setPreInputValue] = useState<Array<any>>([]);
   const [getUsersAddress, setGetUserAddress] = useState<Array<any>>([]);
-  const [isChecked, setIsChecked] = useState<Array<any>>([]);
+  const [isChecked, setIsChecked] = useState<Array<boolean>>([]);
 
   useEffect(() => {
     setTimeout(() => setShow(false), 1000);
@@ -212,8 +212,8 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   };
   const handleOnChange = (selectedId, i) => {
     const checked = [...isChecked];
-    checked[i] = !checked[i];
-    setIsChecked(checked[i]);
+    checked[i] = checked[i] ? !checked[i] : true;
+    setIsChecked(checked);
     dispatch(
       updateSelector({
         methodName: showComponent.value.name,
