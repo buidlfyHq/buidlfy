@@ -12,7 +12,7 @@ import ContractRemove from 'components/utils/contract/contract-remove';
 import OracleComponents from 'components/dashboard/oracle-components';
 import { updateContractAbi, updateContractAddress, updateContractList, updateContractNetwork } from 'redux/contract/contract.reducers';
 import { IRootState } from 'redux/root-state.interface';
-import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import { IInput, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IContract } from 'redux/contract/contract.interfaces';
 import 'styles/components.css';
 import 'styles/dashboard.css';
@@ -44,6 +44,7 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     };
   }>(null); // for abi method component
   const [isViewMore, setIsViewMore] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<IInput[]>([]);
 
   const isWalletConnect = workspaceElements.findIndex(item => item.connectWallet === true);
 
@@ -107,7 +108,13 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
         <>
           <div className="flex justify-center mt-[3rem]" />
           <AbiMethods setShowComponent={setShowComponent} selectedElement={selectedElement} setIsOpen={setIsOpen} setGoBack={setGoBack} />
-          <AbiComponents showComponent={showComponent} elementId={selectedElement.i} />
+          <AbiComponents
+            showComponent={showComponent}
+            elementId={selectedElement.i}
+            i={selectedElement.i}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+          />
         </>
       ) : (
         <>

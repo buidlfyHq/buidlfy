@@ -116,6 +116,7 @@ const workspaceSlice = createSlice({
     // to save contract config
     saveContractConfig(state: IWorkspaceState, action: { payload }) {
       const updatedContract = updateContractInElement(state.workspaceElements, state.selectedElement, action.payload);
+      console.log(action.payload, 'ap');
 
       const updatedSelectedElement = fetchSelectedElement(updatedContract, state.selectedElement.i);
 

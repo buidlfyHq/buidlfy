@@ -48,6 +48,8 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
         network: contractDetails?.network,
       };
     }
+    console.log(templateConfig.contract, 'contract');
+
     if (workspaceElements?.length > 0) {
       localStorage.setItem('items', JSON.stringify(templateConfig));
     }

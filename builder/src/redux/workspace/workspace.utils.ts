@@ -144,6 +144,9 @@ export const updateContractInElement = (
     currentElement: {
       name: string;
       type: string;
+      inputName?: string;
+      inputValue?: string;
+      getUserAddress?: boolean;
     };
   },
 ) => {
@@ -153,28 +156,45 @@ export const updateContractInElement = (
   const filteredObject = contractElementSelected[currentElement.name]?.filter((key: { buttonId: string }) => key.buttonId === selectedElement.i)[0];
 
   let updatedContract = {};
+  if (filteredObject?.id) {
+    let duplicate = selectedElement.contract.inputs?.find((e: { id: string }) => e.id === filteredObject.id);
+    console.log(selectedElement.contract.inputs, 'selectedElement.contract.inputs');
+    console.log(contractElementSelected, 'contractElementSelected-222');
+    console.log(currentElement, 'currentElement-222');
+    console.log(filteredObject, 'filteredObject');
 
-  let duplicate = selectedElement.contract.inputs?.find((e: { id: string }) => e.id === filteredObject.id);
-
-  if (!duplicate) {
-    if (currentElement.type === 'input') {
-      updatedContract = {
-        ...selectedElement.contract,
-        inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, send: false }],
-      };
-    } else if (currentElement.type === 'send') {
-      updatedContract = {
-        ...selectedElement.contract,
-        inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, send: true }],
-      };
-    } else if (currentElement.type === 'output') {
-      updatedContract = {
-        ...selectedElement.contract,
-        outputs: [...selectedElement.contract.outputs, { id: filteredObject.id }],
-      };
+    if (!duplicate) {
+      if (currentElement.type === 'input') {
+        updatedContract = {
+          ...selectedElement.contract,
+          inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, name: currentElement.inputName, send: false }],
+        };
+      } else if (currentElement.type === 'send') {
+        updatedContract = {
+          ...selectedElement.contract,
+          inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, send: true }],
+        };
+      } else if (currentElement.type === 'output') {
+        updatedContract = {
+          ...selectedElement.contract,
+          outputs: [...selectedElement.contract.outputs, { id: filteredObject.id }],
+        };
+      }
+    } else {
+      updatedContract = { ...selectedElement.contract };
     }
   } else {
-    updatedContract = { ...selectedElement.contract };
+    if (currentElement.type === 'preInput') {
+      updatedContract = {
+        ...selectedElement.contract,
+        inputs: [...selectedElement.contract.inputs, { name: currentElement.inputName, value: currentElement.inputValue, send: false }],
+      };
+    } else if (currentElement.type === 'userAddress') {
+      updatedContract = {
+        ...selectedElement.contract,
+        inputs: [...selectedElement.contract.inputs, { name: currentElement.inputName, userAddress: currentElement.getUserAddress, send: false }],
+      };
+    }
   }
 
   let updatedItem = {

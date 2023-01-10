@@ -38,6 +38,8 @@ const contractSlice = createSlice({
     },
     // to update contract element selector
     updateSelector(state, action: { payload: ISelectorPayload }) {
+      console.log(action.payload, 'payload');
+
       state.contractElementSelector = action.payload;
     },
     setSelectorToDefault(state) {

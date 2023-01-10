@@ -3,7 +3,9 @@ interface IValue {
   value: string;
 }
 
-export const setValue = (state: object[], stateFunctionId: string, stateFunctionValue: string) => {
+export const setValue = (state: object[], stateFunctionId: string | number, stateFunctionValue: string) => {
+  console.log(state, stateFunctionId, stateFunctionValue, 'stateFunctionValue');
+
   const searchExistingValue = state?.filter((stateObject: IValue) => stateObject.id === stateFunctionId);
   if (state) {
     if (!searchExistingValue?.length || !state?.length) {
