@@ -1,12 +1,14 @@
 import { FC, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import RenderTemplateList from 'components/utils/render-template-list';
-import logo from 'assets/icons/buidlfy.png';
-import { ReactComponent as ColorFeather } from 'assets/svgAsIcons/feather-color.svg';
-import { ReactComponent as AddIcon } from 'assets/svgAsIcons/addTemp.svg';
-import WalletMenu from 'features/dashboard/wallet-menu';
 import ReactTooltip from 'react-tooltip';
+import config from 'config';
+import WalletMenu from 'features/dashboard/wallet-menu';
+import RenderTemplateList from 'components/utils/render-template-list';
+import { signout } from 'utils/signout';
+import logo from 'assets/icons/buidlfy.png';
+import { ReactComponent as ColorFeather } from 'assets/svg-as-icons/feather-color.svg';
+import { ReactComponent as AddIcon } from 'assets/svg-as-icons/addTemp.svg';
 
 export enum TabType {
   ALL = 'all',
@@ -20,8 +22,32 @@ const MyTemplates: FC = () => {
   const [tab, setTab] = useState<string>('all');
 
   useEffect(() => {
-    if (!currentAccount) {
-      return navigate('/');
+    const session: any = JSON.parse(localStorage.getItem('session'));
+    if (session) {
+      const currentData = new Date();
+      const expiryDate = new Date(session.cookie?.expires);
+      // signout if sesssion is expired
+      if (currentData >= expiryDate) {
+        signout();
+        navigate('/');
+      }
+      // check if user is authorised
+      fetch(`${config.server.SERVER}/is_authenticated`, {
+        credentials: 'include',
+      })
+        .then(res => res.text())
+        .then(res => {
+          if (!JSON.parse(res).whitelisted) {
+            navigate('/');
+          } else {
+            if (!currentAccount) {
+              return navigate('/dashboard');
+            }
+          }
+        })
+        .catch(() => navigate('/'));
+    } else {
+      navigate('/');
     }
   }, []); // eslint-disable-line
 
@@ -44,12 +70,12 @@ const MyTemplates: FC = () => {
       {/* nav */}
       <section className="flex justify-between px-36 items-center h-[66px] border-bottom-divider sticky-top">
         <div>
-          <Link to="/">
+          <Link to="/dashboard">
             <img src={logo} className="w-[2.4rem] rounded-full" alt="logo" />
           </Link>
         </div>
         <div className="flex items-center">
-          <Link to="/" className="flex items-center px-6 py-2 bordered-button">
+          <Link to="/dashboard" className="flex items-center px-6 py-2 bordered-button">
             <ColorFeather className="mr-3" />
             <div className="gradient-text">Builder</div>
           </Link>
@@ -63,7 +89,7 @@ const MyTemplates: FC = () => {
       <section className="py-10 px-36">
         <div className="flex items-center justify-start font-[600] text-[20px] text-[#14142B]">
           My Templates
-          <Link to="/">
+          <Link to="/dashboard">
             <AddIcon data-tip="Create new template" data-for="add" className="text-[24px] ml-2 mt-[4px]" />
             {tooltip}
           </Link>

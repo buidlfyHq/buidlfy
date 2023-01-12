@@ -7,6 +7,22 @@ import Logger from '@/logger';
 class AuthController {
   public authService = new AuthService();
 
+  public isAuthenticated = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      if (!req.session.siwe) {
+        res.status(401).json({ message: 'Already signed out' });
+        return;
+      }
+      const data = await this.authService.getUser(req.session.siwe.address);
+      res.setHeader('Content-Type', 'text/plain');
+      res.status(200).send(data);
+    } catch (error) {
+      Logger.error(`Error found in ${__filename} - isAuthenticated - `);
+      Logger.error(error);
+      next(error);
+    }
+  };
+
   public createNonce = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       req.session.nonce = generateNonce();
@@ -36,8 +52,10 @@ class AuthController {
       const { address, walletName } = req.body;
       const data = await this.authService.authenticate(address, walletName);
       req.session.siwe = fields;
-      req.session.cookie.expires = new Date(fields.expirationTime);
-      req.session.save(() => res.status(200).json({ data, message: `You are authenticated and your address is: ${req.session.siwe.address}` }));
+      req.session.cookie.expires = new Date(Date.now() + 7200000);
+      req.session.save(() =>
+        res.status(200).json({ data, session: req.session, message: `You are authenticated and your address is: ${req.session.siwe.address}` }),
+      );
     } catch (error) {
       req.session.siwe = null;
       req.session.nonce = null;

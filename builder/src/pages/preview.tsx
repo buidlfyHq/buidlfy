@@ -1,15 +1,19 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Responsive, WidthProvider } from 'react-grid-layout';
+import config from 'config';
 import RenderItem from 'components/utils/render-item';
-import { IRootState } from 'redux/root-state.interface';
-import { useEffect, useState } from 'react';
+import { signout } from 'utils/signout';
 import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
+import { IRootState } from 'redux/root-state.interface';
 import { IInput, IOutput } from 'redux/workspace/workspace.interfaces';
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
 const Preview = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
   const workspaceBackgroundColor = useSelector((state: IRootState) => state.workspace.workspaceBackgroundColor);
@@ -18,17 +22,41 @@ const Preview = () => {
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
 
   useEffect(() => {
-    // load stored configs if available
-    let saveItems = localStorage.getItem('items');
-    if (saveItems) {
-      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
-      dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor));
-      dispatch(setSiteHead(JSON.parse(saveItems).head));
-      if (JSON.parse(saveItems).contract) {
-        dispatch(updateContractAbi(JSON.stringify(JSON.parse(saveItems).contract?.abi)));
-        dispatch(updateContractAddress(JSON.parse(saveItems).contract?.address));
-        dispatch(updateContractNetwork(JSON.parse(saveItems).contract?.network));
+    const session: any = JSON.parse(localStorage.getItem('session'));
+    if (session) {
+      const currentData = new Date();
+      const expiryDate = new Date(session.cookie?.expires);
+      // signout if sesssion is expired
+      if (currentData >= expiryDate) {
+        signout();
+        navigate('/');
       }
+      // check if user is authorised
+      fetch(`${config.server.SERVER}/is_authenticated`, {
+        credentials: 'include',
+      })
+        .then(res => res.text())
+        .then(res => {
+          if (!JSON.parse(res).whitelisted) {
+            navigate('/');
+          } else {
+            // load stored configs if available
+            let saveItems = localStorage.getItem('items');
+            if (saveItems) {
+              dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
+              dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor));
+              dispatch(setSiteHead(JSON.parse(saveItems).head));
+              if (JSON.parse(saveItems).contract) {
+                dispatch(updateContractAbi(JSON.stringify(JSON.parse(saveItems).contract?.abi)));
+                dispatch(updateContractAddress(JSON.parse(saveItems).contract?.address));
+                dispatch(updateContractNetwork(JSON.parse(saveItems).contract?.network));
+              }
+            }
+          }
+        })
+        .catch(() => navigate('/'));
+    } else {
+      navigate('/');
     }
   }, []); // eslint-disable-line
 
