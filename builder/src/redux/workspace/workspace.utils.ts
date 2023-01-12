@@ -153,23 +153,25 @@ export const updateContractInElement = (
   const { contractElementSelected, currentElement } = payload;
 
   // filter last selected element
-  const filteredObject = contractElementSelected[currentElement.name]?.filter((key: { buttonId: string }) => key.buttonId === selectedElement.i)[0];
+  // const filteredObject = contractElementSelected[currentElement?.name]?.filter((key: { buttonId: string }) => key.buttonId === selectedElement.i)[0];
+  const filteredObject = contractElementSelected[currentElement?.name]?.filter((key: { buttonId: string }) => key.buttonId === selectedElement.i)[0];
+  console.log(contractElementSelected[currentElement?.type], 'contractElementSelected[currentElement?.name]');
 
   let updatedContract = {};
   if (filteredObject?.id) {
     let duplicate = selectedElement.contract.inputs?.find((e: { id: string }) => e.id === filteredObject.id);
     if (!duplicate) {
-      if (currentElement.type === 'input') {
+      if (currentElement?.type === 'input') {
         updatedContract = {
           ...selectedElement.contract,
           inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, name: currentElement.inputName, send: false }],
         };
-      } else if (currentElement.type === 'send') {
+      } else if (currentElement?.type === 'send') {
         updatedContract = {
           ...selectedElement.contract,
           inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, send: true }],
         };
-      } else if (currentElement.type === 'output') {
+      } else if (currentElement?.type === 'output') {
         updatedContract = {
           ...selectedElement.contract,
           outputs: [...selectedElement.contract.outputs, { id: filteredObject.id }],
@@ -179,12 +181,12 @@ export const updateContractInElement = (
       updatedContract = { ...selectedElement.contract };
     }
   } else {
-    if (currentElement.type === 'preInput') {
+    if (currentElement?.type === 'preInput') {
       updatedContract = {
         ...selectedElement.contract,
         inputs: [...selectedElement.contract.inputs, { name: currentElement.inputName, value: currentElement.inputValue, send: false }],
       };
-    } else if (currentElement.type === 'userAddress') {
+    } else if (currentElement?.type === 'userAddress') {
       updatedContract = {
         ...selectedElement.contract,
         inputs: [...selectedElement.contract.inputs, { name: currentElement.inputName, userAddress: currentElement.getUserAddress, send: false }],
