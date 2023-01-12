@@ -86,7 +86,7 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
           id="textarea"
           placeholder={siteName}
           onChange={e => handleSiteName(e)}
-          className="outline-none placeholder-draft overflow-hidden w-[5rem] max-h-[2rem] flex items-center text-[#100F11] text-[16px] font-semibold text-center resize-none"
+          className="outline-none placeholder-draft overflow-hidden w-[5rem] max-h-[2rem] flex text-[#100F11] text-[16px] font-semibold text-center resize-none"
         />
         <AiOutlineEdit className="ml-3 text-[#2E2E2E]" />
       </div>
