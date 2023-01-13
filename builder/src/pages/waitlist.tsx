@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Home from 'features/waitlist/home';
 import VerifyTwitter from 'features/waitlist/verify-twitter';
 import Whitelist from 'features/waitlist/whitelist';
 import { signout } from 'utils/signout';
+import { loadWallet } from 'redux/web3/web3.actions';
 import 'styles/waitlist.css';
 
 const Waitlist = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [step, setStep] = useState<number>(1);
 
   useEffect(() => {
@@ -20,6 +23,8 @@ const Waitlist = () => {
         signout();
         setStep(1);
       }
+
+      dispatch(loadWallet(session.data?.address));
 
       // navigate based on user status
       if (session.data?.whitelisted) {
@@ -51,29 +56,3 @@ const Waitlist = () => {
 };
 
 export default Waitlist;
-
-{
-  /* <main className="w-screen h-screen m-10">
-  <button className="block bg-blue-200 p-2 border border-black rounded mb-4" onClick={connectWallet}>
-    Connect Wallet
-  </button>
-  <button className="block bg-green-200 p-2 border border-black rounded mb-4" onClick={signInWithEthereum}>
-    SIWE
-  </button>
-  <button className="block bg-red-200 p-2 border border-black rounded mb-4" onClick={signout}>
-    Signout
-  </button>
-  <div>
-    <input
-      className="border mb-2 px-2 py-1"
-      type="text"
-      placeholder="twitter handle"
-      value={twitterHandle}
-      onChange={e => setTwitterHandle(e.target.value)}
-    />
-    <button className="block bg-cyan-200 p-2 border border-black rounded" onClick={verify}>
-      Verify User
-    </button>
-  </div>
-</main>; */
-}

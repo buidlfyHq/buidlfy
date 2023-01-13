@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { SiweMessage } from 'siwe';
 import config from 'config';
+import Navbar from './navbar';
 import JoinDiscord from './join-discord';
 import { connectWallet } from 'redux/web3/web3.actions';
 import { getSigner } from 'redux/web3/web3.utils';
 import { IRootState } from 'redux/root-state.interface';
-import Logo from 'assets/icons/buidlfy.png';
 import Avatar from 'assets/waitlist-icons/avatar.svg';
 import Click from 'assets/waitlist-icons/click.svg';
 import Paint from 'assets/waitlist-icons/paint.svg';
@@ -73,10 +73,7 @@ const Home = ({ setStep }) => {
   return (
     <main className="bg-black text-white">
       <section className="hero">
-        <div className="flex items-center">
-          <img src={Logo} className="w-[2.4rem] ml-8 mr-4 my-6 rounded-full hover:shadow-lg" alt="logo" />
-          <span className="text-lg font-bold">Buidlfy</span>
-        </div>
+        <Navbar />
         <section className="flex justify-center items-center mt-20 mb-24">
           <div className="text-center w-full">
             <h1 className="text-5xl font-bold">

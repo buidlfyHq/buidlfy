@@ -13,6 +13,7 @@ import { signout } from 'utils/signout';
 import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
+import { loadWallet } from 'redux/web3/web3.actions';
 import 'styles/components.css';
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
@@ -48,7 +49,11 @@ const Dashboard: FC = () => {
             navigate('/');
           } else {
             // load stored configs if available
-            let saveItems = localStorage.getItem('items');
+            const session: any = JSON.parse(localStorage.getItem('session'));
+            if (session) {
+              dispatch(loadWallet(session.data?.address));
+            }
+            const saveItems = localStorage.getItem('items');
             if (saveItems) {
               dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
               dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor));

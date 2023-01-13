@@ -41,6 +41,27 @@ function* connectWalletGen(): any {
   }
 }
 
+function* loadWalletGen({ payload }): any {
+  yield put(walletConnected(payload));
+  // check network
+  const networkRes = yield call(changeNetworkService);
+
+  if (!networkRes.error) {
+    yield put(fetchWalletBalance());
+    yield put(fetchOwnedTemplates());
+    yield put(fetchOwnedReviewTemplates());
+    yield put(fetchOwnedListedTemplates());
+  } else {
+    yield put(
+      addNotification({
+        message: networkRes.errorMessage,
+        timestamp: new Date(),
+        type: NotificationType.Error,
+      }),
+    );
+  }
+}
+
 function* fetchWalletBalanceGen(): any {
   const currentAccount = yield select((state: IRootState) => state.web3.currentAccount);
   const balanceRes = yield call(getTokenBalanceService, currentAccount);
@@ -61,10 +82,14 @@ function* connectWalletSaga() {
   yield takeLatest(web3ActionTypes.CONNECT_WALLET, connectWalletGen);
 }
 
+function* loadWalletSaga() {
+  yield takeLatest(web3ActionTypes.LOAD_WALLET, loadWalletGen);
+}
+
 function* fetchWalletBalanceSaga() {
   yield takeLatest(web3ActionTypes.FETCH_WALLET_BALANCE, fetchWalletBalanceGen);
 }
 
 export function* web3Sagas() {
-  yield all([call(connectWalletSaga), call(fetchWalletBalanceSaga)]);
+  yield all([call(connectWalletSaga), call(loadWalletSaga), call(fetchWalletBalanceSaga)]);
 }
