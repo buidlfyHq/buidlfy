@@ -9,31 +9,38 @@ const Whitelist = ({ setStep }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // check if user is authorised
-    fetch(`${config.server.SERVER}/user_status`, {
-      credentials: 'include',
-    })
-      .then(res => res.text())
-      .then(res => {
-        if (JSON.parse(res).whitelisted) {
-          const session: any = JSON.parse(localStorage.getItem('session'));
-          const updatedSessionData = { ...session.data, whitelisted: true };
-          const updatedSession = { ...session, data: updatedSessionData };
-          const stringifyUpdatedSession = JSON.stringify(updatedSession);
-          localStorage.setItem('session', stringifyUpdatedSession);
-          navigate('/dashboard');
-        } else if (JSON.parse(res).verified) {
-          const session: any = JSON.parse(localStorage.getItem('session'));
-          const updatedSessionData = { ...session.data, whitelisted: false, verified: true };
-          const updatedSession = { ...session, data: updatedSessionData };
-          const stringifyUpdatedSession = JSON.stringify(updatedSession);
-          localStorage.setItem('session', stringifyUpdatedSession);
-          setStep(3);
-        } else {
-          setStep(1);
-        }
+    const session: any = JSON.parse(localStorage.getItem('session'));
+    if (session) {
+      // check if user is authorised
+      fetch(`${config.server.SERVER}/user_status`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${session.nonce}`,
+        },
+        credentials: 'include',
       })
-      .catch(() => setStep(1));
+        .then(res => res.text())
+        .then(res => {
+          if (JSON.parse(res).whitelisted) {
+            const updatedSessionData = { ...session.data, whitelisted: true };
+            const updatedSession = { ...session, data: updatedSessionData };
+            const stringifyUpdatedSession = JSON.stringify(updatedSession);
+            localStorage.setItem('session', stringifyUpdatedSession);
+            navigate('/dashboard');
+          } else if (JSON.parse(res).verified) {
+            const updatedSessionData = { ...session.data, whitelisted: false, verified: true };
+            const updatedSession = { ...session, data: updatedSessionData };
+            const stringifyUpdatedSession = JSON.stringify(updatedSession);
+            localStorage.setItem('session', stringifyUpdatedSession);
+            setStep(3);
+          } else {
+            setStep(1);
+          }
+        })
+        .catch(() => setStep(1));
+    } else {
+      setStep(1);
+    }
   }, []); // eslint-disable-line
 
   return (

@@ -1,12 +1,14 @@
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu } from '@headlessui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 import { truncateString } from 'utils/truncate-string';
+import { signout } from 'utils/signout';
 import { connectWallet } from 'redux/web3/web3.actions';
 import { IRootState } from 'redux/root-state.interface';
 import { BiChevronRight } from 'react-icons/bi';
+import { FaSignOutAlt } from 'react-icons/fa';
 import HelpIcon from 'assets/icons/help-nav.png';
 import MyTemplateIcon from 'assets/icons/template-nav.png';
 
@@ -63,12 +65,19 @@ interface IWalletMenu {
 }
 
 const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
+
+  const handleSignout = () => {
+    signout();
+    navigate('/');
+  };
+
   return (
     <>
       {currentAccount ? (
-        <Menu as="div" className="relative">
+        <Menu as="div" className="relative z-10">
           <Menu.Button className={`flex items-center justify-center my-3 ml-3 active:opacity-70`}>
             <img className="w-8 bg-black rounded-full hover:shadow-lg" src={makeBlockie(currentAccount)} alt="Blockie" />
           </Menu.Button>
@@ -146,6 +155,18 @@ const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
                 </Menu.Item>
               );
             })}
+            <Menu.Button
+              className="font-[500] text-[#14142B] opacity-70 px-5 py-3 w-full font-[16px] flex items-center justify-between border border-t-1 border-[#F5F5F5] hover:bg-slate-100 hover:rounded-[8px] hover:cursor-pointer"
+              onClick={handleSignout}
+            >
+              <div className="flex items-center gap-4">
+                <span className="bg-blue-100/30 rounded-full p-2">
+                  <FaSignOutAlt className="text-violet-500/60 w-[12px] h-[12px]" />
+                </span>
+                <span>Signout</span>
+              </div>
+              <BiChevronRight />
+            </Menu.Button>
           </Menu.Items>
         </Menu>
       ) : (

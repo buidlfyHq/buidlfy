@@ -34,6 +34,10 @@ const Preview = () => {
       }
       // check if user is authorised
       fetch(`${config.server.SERVER}/user_status`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${session.nonce}`,
+        },
         credentials: 'include',
       })
         .then(res => res.text())
