@@ -10,7 +10,7 @@ const Whitelist = ({ setStep }) => {
 
   useEffect(() => {
     // check if user is authorised
-    fetch(`${config.server.SERVER}/is_authenticated`, {
+    fetch(`${config.server.SERVER}/user_status`, {
       credentials: 'include',
     })
       .then(res => res.text())

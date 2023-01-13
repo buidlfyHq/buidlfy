@@ -16,22 +16,32 @@ const VerifyTwitter = ({ setStep }) => {
   };
 
   const verify = async () => {
-    const res = await fetch(`${config.server.SERVER}/verify_tweet`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ twitterHandle }),
-      credentials: 'include',
-    });
-    const response = JSON.parse(await res.text());
-    if (response.data?.verified) {
-      const session: any = JSON.parse(localStorage.getItem('session'));
-      const updatedSessionData = { ...session.data, verified: true };
-      const updatedSession = { ...session, data: updatedSessionData };
-      const stringifyUpdatedSession = JSON.stringify(updatedSession);
-      localStorage.setItem('session', stringifyUpdatedSession);
-      setStep(3);
+    const session: any = JSON.parse(localStorage.getItem('session'));
+    if (session) {
+      const res = await fetch(`${config.server.SERVER}/verify_tweet`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.nonce}`,
+        },
+        body: JSON.stringify({ twitterHandle }),
+        credentials: 'include',
+      });
+      if (res.ok === false) {
+        console.error(res.statusText);
+        setStep(1);
+      } else {
+        const response = JSON.parse(await res.text());
+        if (response.data?.verified) {
+          const updatedSessionData = { ...session.data, verified: true };
+          const updatedSession = { ...session, data: updatedSessionData };
+          const stringifyUpdatedSession = JSON.stringify(updatedSession);
+          localStorage.setItem('session', stringifyUpdatedSession);
+          setStep(3);
+        }
+      }
+    } else {
+      setStep(1);
     }
   };
 

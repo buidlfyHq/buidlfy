@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import AuthController from '@/controllers/auth.controller';
 import { Routes } from '@interfaces/routes.interface';
+import isAuthenticated from '@/middlewares/authorization.middleware';
 
 class AuthRoute implements Routes {
   public path = '';
@@ -12,11 +13,11 @@ class AuthRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}/is_authenticated`, this.authController.isAuthenticated);
+    this.router.get(`${this.path}/user_status`, isAuthenticated(), this.authController.userStatus);
     this.router.get(`${this.path}/nonce`, this.authController.createNonce);
     this.router.post(`${this.path}/signin`, this.authController.signin);
     this.router.get(`${this.path}/signout`, this.authController.signout);
-    this.router.post(`${this.path}/verify_tweet`, this.authController.verifyTweet);
+    this.router.post(`${this.path}/verify_tweet`, isAuthenticated(), this.authController.verifyTweet);
   }
 }
 

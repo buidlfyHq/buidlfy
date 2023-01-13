@@ -7,7 +7,7 @@ import Logger from '@/logger';
 class AuthController {
   public authService = new AuthService();
 
-  public isAuthenticated = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public userStatus = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       if (!req.session.siwe) {
         res.status(401).json({ message: 'Already signed out' });

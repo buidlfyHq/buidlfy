@@ -33,12 +33,13 @@ const Preview = () => {
         navigate('/');
       }
       // check if user is authorised
-      fetch(`${config.server.SERVER}/is_authenticated`, {
+      fetch(`${config.server.SERVER}/user_status`, {
         credentials: 'include',
       })
         .then(res => res.text())
         .then(res => {
           if (!JSON.parse(res).whitelisted) {
+            signout();
             navigate('/');
           } else {
             // load stored configs if available
@@ -59,8 +60,12 @@ const Preview = () => {
             }
           }
         })
-        .catch(() => navigate('/'));
+        .catch(() => {
+          signout();
+          navigate('/');
+        });
     } else {
+      signout();
       navigate('/');
     }
   }, []); // eslint-disable-line
