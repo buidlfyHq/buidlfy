@@ -141,7 +141,7 @@ const VerifyTwitter = ({ setStep }) => {
                   {errorMesssage && (
                     <div className="my-2">
                       <p className="text-sm text-white/70 mb-4 bg-red-900 rounded-lg py-1 px-2 flex items-center text-red-400">
-                        <AiFillCloseCircle className='mr-2' />
+                        <AiFillCloseCircle className="mr-2" />
                         {errorMesssage}
                       </p>
                     </div>
