@@ -15,11 +15,13 @@
 
 # misc
 /builder/.DS_Store
+/builder/.env
 /builder/.env.local
 /builder/.env.development.local
 /builder/.env.test.local
 /builder/.env.production.local
 /decoder/.DS_Store
+/decoder/.env
 /decoder/.env.local
 /decoder/.env.local
 /decoder/.env.development.local
