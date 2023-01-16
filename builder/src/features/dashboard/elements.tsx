@@ -13,7 +13,6 @@ import defaultImage from 'assets/default-image.svg';
 import { BsCheck2 } from 'react-icons/bs';
 import badge from 'assets/badge.svg';
 import status from 'assets/status-badge.svg';
-import dropdown from 'assets/dropdown.svg';
 import container from 'assets/image-container.svg';
 import 'styles/components.css';
 
@@ -41,6 +40,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         y,
         w: 6,
         minW: 1,
+        containerId: selectedElement.i,
         resizeHandles: availableHandles,
       };
       let updatedItem = {

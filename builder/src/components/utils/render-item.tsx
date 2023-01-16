@@ -193,6 +193,7 @@ const RenderItem: FC<IRenderItem> = ({
           margin={item.style.margin}
           imgData={item.imgData}
           link={item.link}
+          preview={preview}
         />
       );
     case 'Spacer':
