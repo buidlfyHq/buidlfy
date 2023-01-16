@@ -24,10 +24,8 @@ const MyTemplates: FC = () => {
   useEffect(() => {
     const session: any = JSON.parse(localStorage.getItem('session'));
     if (session) {
-      const currentData = new Date();
-      const expiryDate = new Date(session.cookie?.expires);
       // signout if sesssion is expired
-      if (currentData >= expiryDate) {
+      if (new Date(session.cookie?.expires) < new Date()) {
         signout();
         navigate('/');
       }

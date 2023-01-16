@@ -2,10 +2,13 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import config from 'config';
 import Navbar from './navbar';
+import { signout } from 'utils/signout';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 const VerifyTwitter = ({ setStep }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [twitterHandle, setTwitterHandle] = useState<string>('');
+  const [errorMesssage, setErrorMesssage] = useState<string>('');
 
   const closeModal = () => {
     setIsOpen(false);
@@ -18,6 +21,12 @@ const VerifyTwitter = ({ setStep }) => {
   const verify = async () => {
     const session: any = JSON.parse(localStorage.getItem('session'));
     if (session) {
+      // signout if sesssion is expired
+      if (new Date(session.cookie?.expires) < new Date()) {
+        signout();
+        setStep(1);
+      }
+
       const res = await fetch(`${config.server.SERVER}/verify_tweet`, {
         method: 'POST',
         headers: {
@@ -28,8 +37,12 @@ const VerifyTwitter = ({ setStep }) => {
         credentials: 'include',
       });
       if (res.ok === false) {
+        if (res.status === 400) {
+          const response = JSON.parse(await res.text());
+          console.error(response.message);
+          setErrorMesssage(response.message);
+        }
         console.error(res.statusText);
-        setStep(1);
       } else {
         const response = JSON.parse(await res.text());
         if (response.data?.verified) {
@@ -70,7 +83,7 @@ const VerifyTwitter = ({ setStep }) => {
                   className="connect-wallet mb-16 px-6 py-2 rounded-lg mr-4"
                   target="_blank"
                   rel="noreferrer"
-                  href={`https://twitter.com/intent/tweet?hashtags=${process.env.REACT_APP_TWITTER_HASHTAGS}&text=${process.env.REACT_APP_TWITTER_TEXT}&via=${process.env.REACT_APP_TWITTER_VIA}`}
+                  href={`https://twitter.com/intent/tweet?text=${process.env.REACT_APP_TWITTER_TEXT}`}
                   data-size="large"
                 >
                   Share & Follow
@@ -125,6 +138,14 @@ const VerifyTwitter = ({ setStep }) => {
                       onChange={e => setTwitterHandle(e.target.value)}
                     />
                   </div>
+                  {errorMesssage && (
+                    <div className="my-2">
+                      <p className="text-sm text-white/70 mb-4 bg-red-900 rounded-lg py-1 px-2 flex items-center text-red-400">
+                        <AiFillCloseCircle className='mr-2' />
+                        {errorMesssage}
+                      </p>
+                    </div>
+                  )}
                   <div className="mt-4 text-right">
                     <button
                       className="inline-flex justify-center rounded-md border border-transparent bg-white/10 px-4 py-2 text-sm text-white font-medium mr-4"
