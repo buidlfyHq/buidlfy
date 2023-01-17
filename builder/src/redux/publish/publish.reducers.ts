@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IPublishState } from './publish.interfaces';
+import { fetchPublishDetailsAsync, initiatePublishAsync, updatePublishAsync, verifyPublishAsync } from './publish.thunk-actions';
 
 const initialState: IPublishState = {
   publishConfig: null,
@@ -18,71 +19,50 @@ const publishSlice = createSlice({
   initialState,
   reducers: {
     updatePublishConfig(state: IPublishState, action: { payload: string }) {
-      return {
-        ...state,
-        publishConfig: action.payload,
-      };
-    },
-    updateDomainName(state: IPublishState, action: { payload: string }) {
-      return {
-        ...state,
-        domainName: action.payload,
-      };
-    },
-    updateDeploymentId(state: IPublishState, action: { payload: string }) {
-      return {
-        ...state,
-        deploymentId: action.payload,
-      };
-    },
-    updateDomainId(state: IPublishState, action: { payload: string }) {
-      return {
-        ...state,
-        domainId: action.payload,
-      };
-    },
-    updateProjectId(state: IPublishState, action: { payload: string }) {
-      return {
-        ...state,
-        projectId: action.payload,
-      };
-    },
-    updateTransactionResponse(state: IPublishState, action: { payload: string }) {
-      return {
-        ...state,
-        transactionResponse: action.payload,
-      };
+      state.publishConfig = action.payload;
     },
     updateCurrentStep(state: IPublishState, action: { payload: number }) {
-      return {
-        ...state,
-        currentStep: action.payload,
-      };
+      state.currentStep = action.payload;
     },
     updatePublishStatus(state: IPublishState, action: { payload: boolean }) {
-      return {
-        ...state,
-        publishStatus: action.payload,
-      };
+      state.publishStatus = action.payload;
     },
     updatePublishFailed(state: IPublishState, action: { payload: boolean }) {
-      return {
-        ...state,
-        publishFailed: action.payload,
-      };
+      state.publishFailed = action.payload;
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(initiatePublishAsync.fulfilled, (state, action) => {
+      state.transactionResponse = action.payload.publishId;
+      state.publishFailed = action.payload.publishFailed;
+      state.deploymentId = action.payload.deploymentId;
+      state.currentStep = action.payload.currentStep;
+    });
+    builder.addCase(initiatePublishAsync.rejected, state => {
+      state.publishFailed = true;
+    });
+    builder.addCase(fetchPublishDetailsAsync.fulfilled, (state, action) => {
+      state.domainName = action.payload.domainName;
+      state.projectId = action.payload.projectId;
+      state.currentStep = action.payload.currentStep;
+    });
+    builder.addCase(fetchPublishDetailsAsync.rejected, state => {
+      state.publishFailed = true;
+    });
+    builder.addCase(verifyPublishAsync.fulfilled, (state, action) => {
+      state.currentStep = action.payload.currentStep;
+    });
+    builder.addCase(verifyPublishAsync.rejected, state => {
+      state.publishFailed = true;
+    });
+    builder.addCase(updatePublishAsync.fulfilled, (state, action) => {
+      state.currentStep = action.payload.currentStep;
+    });
+    builder.addCase(updatePublishAsync.rejected, state => {
+      state.publishFailed = true;
+    });
   },
 });
 
-export const {
-  updatePublishConfig,
-  updateDomainName,
-  updateDeploymentId,
-  updateTransactionResponse,
-  updateProjectId,
-  updateCurrentStep,
-  updateDomainId,
-  updatePublishStatus,
-  updatePublishFailed,
-} = publishSlice.actions;
+export const { updatePublishConfig, updateCurrentStep, updatePublishStatus, updatePublishFailed } = publishSlice.actions;
 export default publishSlice.reducer;

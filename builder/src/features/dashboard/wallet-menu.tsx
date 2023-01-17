@@ -5,7 +5,7 @@ import { Menu } from '@headlessui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 import { truncateString } from 'utils/truncate-string';
 import { signout } from 'utils/signout';
-import { connectWallet } from 'redux/web3/web3.actions';
+import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
 import { IRootState } from 'redux/root-state.interface';
 import { BiChevronRight } from 'react-icons/bi';
 import { FaSignOutAlt } from 'react-icons/fa';
@@ -172,7 +172,7 @@ const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
       ) : (
         <button
           className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap add-btn"
-          onClick={() => dispatch(connectWallet())}
+          onClick={() => dispatch(fetchWalletDetailsAsync())}
         >
           Connect Wallet
         </button>
