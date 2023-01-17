@@ -47,6 +47,7 @@ export interface IWorkspaceElement {
   cardsPerRow?: number;
   listOptions?: IList[];
   posts?: IPublication[];
+  containerId?: string;
 }
 
 export interface IHead {

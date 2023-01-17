@@ -185,7 +185,13 @@ const Home: FC = () => {
             {workspaceConfig.map((c: IWorkspace) => {
               const { x, y, w, h, minW, i } = c;
               return (
-                <div key={i} data-grid={{ x, y, w, h, minW }}>
+                <div
+                  key={i}
+                  data-grid={{ x, y, w, h, minW }}
+                  className={`${
+                    c?.name === "Lenster Card" ? "overflow-hidden" : ""
+                  }`}
+                >
                   <RenderItem
                     item={c}
                     inputValue={inputValue}
