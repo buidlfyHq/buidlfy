@@ -58,7 +58,7 @@ const RenderModal: FC = () => {
     case 'publish-failed':
       return <PublishFailed />;
     case 'verify-modal':
-      return <VerifyModal />
+      return <VerifyModal />;
     default:
       return <></>;
   }
