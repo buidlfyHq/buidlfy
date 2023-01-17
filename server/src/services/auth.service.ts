@@ -62,15 +62,19 @@ class AuthService {
         return { errorMessage: 'Share the beta launch on twitter to get access' };
       }
 
-      await this.users.findOneAndUpdate(
-        { address: address },
-        {
-          $set: {
-            handle: twitterHandle,
-            verified: verified,
+      try {
+        await this.users.findOneAndUpdate(
+          { address: address },
+          {
+            $set: {
+              handle: twitterHandle,
+              verified: verified,
+            },
           },
-        },
-      );
+        );
+      } catch (error) {
+        return { errorMessage: 'Twitter handle already exists' };
+      }
       const verifiedUser: User = await this.users.findOne({ address });
       return verifiedUser;
     } catch (error) {

@@ -1,10 +1,11 @@
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import makeBlockie from 'ethereum-blockies-base64';
 import { truncateString } from 'utils/truncate-string';
 import { IRootState } from 'redux/root-state.interface';
 import Logo from 'assets/icons/buidlfy.png';
 
-const Navbar = () => {
+const Navbar: FC = () => {
   const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
 
   return (

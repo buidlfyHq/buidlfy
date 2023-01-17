@@ -11,9 +11,6 @@ import {
 } from './workspace.utils';
 import { IAction, IHead, IList, IWorkspaceElement, IWorkspaceState } from './workspace.interfaces';
 import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
-import ShortUniqueId from 'short-unique-id';
-
-const uid = new ShortUniqueId();
 
 const initialState: IWorkspaceState = {
   workspaceElements: [],

@@ -1,56 +1,18 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import config from 'config';
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Navbar from './navbar';
-import { signout } from 'utils/signout';
+import { isWhitelistedAsync } from 'redux/user/user.thunk-actions';
 import Confetti from 'assets/waitlist-icons/confetti.svg';
 import Discord from 'assets/waitlist-icons/discord.svg';
 import DiscordVector from 'assets/waitlist-icons/discord-vector.svg';
 import SocialDiscord from 'assets/waitlist-icons/social-discord.svg';
 import SocialTwitter from 'assets/waitlist-icons/social-twitter.svg';
 
-const Whitelist = ({ setStep }) => {
-  const navigate = useNavigate();
+const Whitelist: FC = () => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const session: any = JSON.parse(localStorage.getItem('session'));
-    if (session) {
-      // signout if sesssion is expired
-      if (new Date(session.cookie?.expires) < new Date()) {
-        signout();
-        setStep(1);
-      }
-
-      // check if user is authorised
-      fetch(`${config.server.SERVER}/user-status`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${session.nonce}`,
-        },
-        credentials: 'include',
-      })
-        .then(res => res.text())
-        .then(res => {
-          if (JSON.parse(res).whitelisted) {
-            const updatedSessionData = { ...session.data, whitelisted: true };
-            const updatedSession = { ...session, data: updatedSessionData };
-            const stringifyUpdatedSession = JSON.stringify(updatedSession);
-            localStorage.setItem('session', stringifyUpdatedSession);
-            navigate('/dashboard');
-          } else if (JSON.parse(res).verified) {
-            const updatedSessionData = { ...session.data, whitelisted: false, verified: true };
-            const updatedSession = { ...session, data: updatedSessionData };
-            const stringifyUpdatedSession = JSON.stringify(updatedSession);
-            localStorage.setItem('session', stringifyUpdatedSession);
-            setStep(3);
-          } else {
-            setStep(1);
-          }
-        })
-        .catch(() => setStep(1));
-    } else {
-      setStep(1);
-    }
+    dispatch(isWhitelistedAsync());
   }, []); // eslint-disable-line
 
   return (

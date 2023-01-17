@@ -1,7 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import config from 'config';
 import { useWindowSize } from 'hooks/use-window-size';
 import Navbar from 'features/dashboard/navbar';
 import Sidebar from 'features/dashboard/sidebar';
@@ -9,17 +7,14 @@ import SideNavbar from 'features/dashboard/side-navbar';
 import Workspace from 'features/dashboard/workspace';
 import Settings from 'features/dashboard/settings';
 import DefaultSettings from 'features/dashboard/default-settings';
-import { signout } from 'utils/signout';
 import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
-import { loadWallet } from 'redux/web3/web3.actions';
 import 'styles/components.css';
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
 const Dashboard: FC = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const size = useWindowSize();
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle
@@ -30,55 +25,19 @@ const Dashboard: FC = () => {
   const [hideNavbar, setHideNavbar] = useState<boolean>(true);
 
   useEffect(() => {
-    const session: any = JSON.parse(localStorage.getItem('session'));
-    if (session) {
-      // signout if sesssion is expired
-      if (new Date(session?.cookie?.expires) < new Date()) {
-        signout();
-        navigate('/');
+    const saveItems = localStorage.getItem('items');
+    if (saveItems) {
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
+      dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor));
+      dispatch(setSiteHead(JSON.parse(saveItems).head));
+      if (JSON.parse(saveItems).contract) {
+        dispatch(updateContractAbi(JSON.stringify(JSON.parse(saveItems).contract?.abi)));
+        dispatch(updateContractAddress(JSON.parse(saveItems).contract?.address));
+        dispatch(updateContractNetwork(JSON.parse(saveItems).contract?.network));
       }
-      // check if user is authorised
-      fetch(`${config.server.SERVER}/user-status`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${session.nonce}`,
-        },
-        credentials: 'include',
-      })
-        .then(res => res.text())
-        .then(res => {
-          if (!JSON.parse(res).whitelisted) {
-            signout();
-            navigate('/');
-          } else {
-            // load stored configs if available
-            const session: any = JSON.parse(localStorage.getItem('session'));
-            if (session) {
-              dispatch(loadWallet(session.data?.address));
-            }
-            const saveItems = localStorage.getItem('items');
-            if (saveItems) {
-              dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
-              dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor));
-              dispatch(setSiteHead(JSON.parse(saveItems).head));
-              if (JSON.parse(saveItems).contract) {
-                dispatch(updateContractAbi(JSON.stringify(JSON.parse(saveItems).contract?.abi)));
-                dispatch(updateContractAddress(JSON.parse(saveItems).contract?.address));
-                dispatch(updateContractNetwork(JSON.parse(saveItems).contract?.network));
-              }
-            }
-            dispatch(toggleModal(true));
-            dispatch(toggleModalType('start'));
-          }
-        })
-        .catch(() => {
-          signout();
-          navigate('/');
-        });
-    } else {
-      signout();
-      navigate('/');
     }
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType('start'));
   }, []); // eslint-disable-line
 
   return (

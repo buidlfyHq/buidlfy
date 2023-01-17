@@ -2,10 +2,8 @@ import { FC, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
-import config from 'config';
 import WalletMenu from 'features/dashboard/wallet-menu';
 import RenderTemplateList from 'components/utils/render-template-list';
-import { signout } from 'utils/signout';
 import logo from 'assets/icons/buidlfy.png';
 import { ReactComponent as ColorFeather } from 'assets/svg-as-icons/feather-color.svg';
 import { ReactComponent as AddIcon } from 'assets/svg-as-icons/addTemp.svg';
@@ -22,39 +20,8 @@ const MyTemplates: FC = () => {
   const [tab, setTab] = useState<string>('all');
 
   useEffect(() => {
-    const session: any = JSON.parse(localStorage.getItem('session'));
-    if (session) {
-      // signout if sesssion is expired
-      if (new Date(session.cookie?.expires) < new Date()) {
-        signout();
-        navigate('/');
-      }
-      // check if user is authorised
-      fetch(`${config.server.SERVER}/user-status`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${session.nonce}`,
-        },
-        credentials: 'include',
-      })
-        .then(res => res.text())
-        .then(res => {
-          if (!JSON.parse(res).whitelisted) {
-            signout();
-            navigate('/');
-          } else {
-            if (!currentAccount) {
-              return navigate('/dashboard');
-            }
-          }
-        })
-        .catch(() => {
-          signout();
-          navigate('/');
-        });
-    } else {
-      signout();
-      navigate('/');
+    if (!currentAccount) {
+      return navigate('/dashboard');
     }
   }, []); // eslint-disable-line
 
