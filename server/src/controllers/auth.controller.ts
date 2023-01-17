@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
-import { ErrorTypes, generateNonce, SiweMessage } from 'siwe';
-import AuthService from '@/services/auth.service';
-import { client } from '@/twitter';
+import { ErrorTypes, generateNonce } from 'siwe';
+import AuthService from '@services/auth.service';
+import TwitterService from '@/services/twitter.service';
 import Logger from '@/logger';
+import { User } from '@/interfaces/users.interface';
 
 class AuthController {
   public authService = new AuthService();
+  public twitterService = new TwitterService();
 
   public userStatus = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -13,7 +15,7 @@ class AuthController {
         res.status(401).json({ message: 'Already signed out' });
         return;
       }
-      const data = await this.authService.getUser(req.session.siwe.address);
+      const data: User = await this.authService.getUser(req.session.siwe.address);
       res.setHeader('Content-Type', 'text/plain');
       res.status(200).send(data);
     } catch (error) {
@@ -41,9 +43,7 @@ class AuthController {
         res.status(422).json({ message: 'Expected prepareMessage object as body' });
         return;
       }
-      // verify signature
-      const message = new SiweMessage(req.body.message);
-      const fields = await message.validate(req.body.signature);
+      const fields = await this.authService.verifySignature(req.body.message, req.body.signature);
       if (fields.nonce !== req.session.nonce) {
         res.status(422).json({ message: `Invalid nonce.` });
         return;
@@ -105,12 +105,12 @@ class AuthController {
     }
     try {
       const { twitterHandle } = req.body;
-      const { data } = await client.v2.userByUsername(twitterHandle);
-      if (!data) {
+      const user = await this.twitterService.getUserData(twitterHandle);
+      if (!user) {
         res.status(400).json({ message: 'Invalid user handle' });
         return;
       }
-      const verifiedUser = await this.authService.verify(twitterHandle, req.session.siwe.address, data);
+      const verifiedUser = await this.authService.verify(twitterHandle, req.session.siwe.address, user);
       if ('errorMessage' in verifiedUser) {
         res.status(400).json({ message: verifiedUser.errorMessage });
         return;

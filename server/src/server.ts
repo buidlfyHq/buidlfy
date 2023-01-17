@@ -1,9 +1,9 @@
 import App from '@/app';
 import validateEnv from '@utils/validateEnv';
 import DeploymentsRoute from '@routes/deployments.route';
-import HealthRoute from '@/routes/health.route';
-import UploadRoute from '@/routes/upload.route';
-import AuthRoute from '@/routes/auth.route';
+import HealthRoute from '@routes/health.route';
+import UploadRoute from '@routes/upload.route';
+import AuthRoute from '@routes/auth.route';
 
 validateEnv();
 

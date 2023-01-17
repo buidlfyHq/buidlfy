@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import AuthController from '@/controllers/auth.controller';
+import AuthController from '@controllers/auth.controller';
+import isAuthenticated from '@middlewares/authorization.middleware';
+import validationMiddleware from '@/middlewares/validation.middleware';
 import { Routes } from '@interfaces/routes.interface';
-import isAuthenticated from '@/middlewares/authorization.middleware';
+import { SigninDto, VerifyTwitterDto } from '@/dtos/auth.dto';
 
 class AuthRoute implements Routes {
   public path = '';
@@ -13,11 +15,16 @@ class AuthRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}/user_status`, isAuthenticated(), this.authController.userStatus);
+    this.router.get(`${this.path}/user-status`, isAuthenticated(), this.authController.userStatus);
     this.router.get(`${this.path}/nonce`, this.authController.createNonce);
-    this.router.post(`${this.path}/signin`, this.authController.signin);
-    this.router.get(`${this.path}/signout`, this.authController.signout);
-    this.router.post(`${this.path}/verify_tweet`, isAuthenticated(), this.authController.verifyTweet);
+    this.router.post(`${this.path}/signin`, validationMiddleware(SigninDto, 'body'), this.authController.signin);
+    this.router.get(`${this.path}/signout`, isAuthenticated(), this.authController.signout);
+    this.router.patch(
+      `${this.path}/verify-tweet`,
+      isAuthenticated(),
+      validationMiddleware(VerifyTwitterDto, 'body'),
+      this.authController.verifyTweet,
+    );
   }
 }
 
