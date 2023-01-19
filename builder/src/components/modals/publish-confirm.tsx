@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { encode as base64_encode } from 'base-64';
 import { Dialog } from '@headlessui/react';
 import { CgClose } from 'react-icons/cg';
-import { initiatePublish } from 'redux/publish/publish.action';
+import { initiatePublishAsync } from 'redux/publish/publish.thunk-actions';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { updatePublishConfig } from 'redux/publish/publish.reducers';
 import { IRootState } from 'redux/root-state.interface';
@@ -84,7 +84,7 @@ const PublishConfirmModal: FC = () => {
 
     if (currentStep === 0) {
       handleProcessModal();
-      dispatch(initiatePublish({ configDetails: encodedConfig }));
+      dispatch(initiatePublishAsync({ configDetails: encodedConfig }));
     } else {
       handleProcessModal();
     }

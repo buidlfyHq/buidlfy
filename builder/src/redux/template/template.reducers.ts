@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { filterTemplates } from './template.utils';
 import { ISelectedTemplate, ITemplateState } from './template.interfaces';
+import { buySelectedTemplateAsync, fetchListedTemplatesAsync, mintTemplateAsync } from './template.thunk-actions';
 
 const initialState: ITemplateState = {
   buyTemplateReceipt: '',
@@ -17,34 +18,11 @@ const templateSlice = createSlice({
   name: 'template',
   initialState,
   reducers: {
-    buyTemplate(state, action: { payload: string }) {
-      state.buyTemplateReceipt = action.payload;
-      state.buyTemplateLoading = false;
-    },
-    templateMinted(state, action: { payload: number }) {
-      state.mintTokenId = action.payload;
-      state.mintTemplateLoading = false;
-    },
-    startBuyTemplateLoader(state) {
-      state.buyTemplateLoading = true;
-    },
-    startMintTemplateLoader(state) {
-      state.mintTemplateLoading = true;
-    },
     setSelectedTemplate(state, action: { payload: ISelectedTemplate }) {
       state.selectedTemplate = action.payload;
     },
     setSelectedTemplateAmount(state, action: { payload: string }) {
       state.selectedTemplate.listAmount = action.payload;
-    },
-    allTemplatesFetched(state, action) {
-      state.templateList = action.payload;
-    },
-    startFetchTemplateLoader(state) {
-      state.fetchTemplateLoading = true;
-    },
-    endFetchTemplateLoader(state) {
-      state.fetchTemplateLoading = false;
     },
     setFilteredTemplateList(state, action) {
       state.filteredTemplateList = action.payload;
@@ -61,19 +39,31 @@ const templateSlice = createSlice({
       state.selectedTemplate = isOwned ? isOwned : state.selectedTemplate;
     },
   },
+  extraReducers: builder => {
+    builder.addCase(buySelectedTemplateAsync.pending, state => {
+      state.buyTemplateLoading = true;
+    });
+    builder.addCase(buySelectedTemplateAsync.fulfilled, (state, action) => {
+      state.buyTemplateReceipt = action.payload;
+      state.buyTemplateLoading = false;
+    });
+    builder.addCase(mintTemplateAsync.pending, state => {
+      state.mintTemplateLoading = true;
+    });
+    builder.addCase(mintTemplateAsync.fulfilled, (state, action) => {
+      state.mintTemplateLoading = false;
+      state.mintTokenId = action.payload;
+    });
+    builder.addCase(fetchListedTemplatesAsync.pending, state => {
+      state.fetchTemplateLoading = true;
+    });
+    builder.addCase(fetchListedTemplatesAsync.fulfilled, (state, action) => {
+      state.fetchTemplateLoading = false;
+      state.templateList = action.payload;
+      templateSlice.caseReducers.filterAllTemplates(state, action);
+    });
+  },
 });
 
-export const {
-  buyTemplate,
-  templateMinted,
-  startBuyTemplateLoader,
-  startMintTemplateLoader,
-  setSelectedTemplate,
-  setSelectedTemplateAmount,
-  allTemplatesFetched,
-  startFetchTemplateLoader,
-  endFetchTemplateLoader,
-  setFilteredTemplateList,
-  filterAllTemplates,
-} = templateSlice.actions;
+export const { setSelectedTemplate, setSelectedTemplateAmount, setFilteredTemplateList, filterAllTemplates } = templateSlice.actions;
 export default templateSlice.reducer;
