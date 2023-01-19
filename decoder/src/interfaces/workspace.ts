@@ -1,4 +1,5 @@
 import { IOracleConfig } from "./config";
+import { IList } from "./lists";
 import { IPublication } from "./publications";
 import Styles from "./styles";
 
@@ -29,4 +30,5 @@ export default interface IWorkspace {
   connectWallet?: boolean;
   placeholder?: string;
   posts?: IPublication[];
+  listOptions?: IList[];
 }
