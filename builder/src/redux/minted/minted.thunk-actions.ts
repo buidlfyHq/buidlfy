@@ -22,7 +22,6 @@ export const approveListingAsync = createAsyncThunk('minted/approveListing', asy
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log('Error in approveListingService --> ', error);
-    return;
   }
 });
 
@@ -61,7 +60,6 @@ export const createListingAsync = createAsyncThunk('minted/createListing', async
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error in createListingService --> ', error);
-    return '';
   }
 });
 
@@ -118,7 +116,6 @@ export const fetchOwnedTemplatesAsync = createAsyncThunk('minted/fetchOwnedTempl
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error in fetchOwnedTemplatesAsync --> ', error);
-    return;
   }
 });
 
@@ -163,7 +160,6 @@ export const fetchOwnedReviewTemplatesAsync = createAsyncThunk('minted/fetchOwne
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error in fetchOwnedReviewTemplatesAsync --> ', error);
-    return;
   }
 });
 
@@ -204,10 +200,8 @@ export const fetchOwnedListedTemplatesAsync = createAsyncThunk('minted/fetchOwne
     if (listings.length !== 0) {
       return listings;
     }
-    return [];
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error in fetchOwnedListedTemplatesAsync --> ', error);
-    return;
   }
 });

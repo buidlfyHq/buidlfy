@@ -15,7 +15,7 @@ const initialState: IMintedState = {
   ownedTemplateList: [],
   ownedReviewTemplateList: [],
   ownedListedTemplateList: [],
-  mintedImageData: '',
+  mintedImageData: '', // template banner
 };
 
 const mintedSlice = createSlice({
