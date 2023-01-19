@@ -12,7 +12,7 @@ interface ILensterWidget {
 
 const LensterWidget: FC<ILensterWidget> = ({ posts }) => {
   return (
-    <div className="lenster-div ml-[1.7rem]">
+    <div className="lenster-div ml-[2.6rem] mr-[2rem] mt-[1.3rem]">
       {posts.map((post) => {
         const updateProfilePicture =
           "https://ipfs.io/ipfs/" + post.profilePicture?.slice(7);

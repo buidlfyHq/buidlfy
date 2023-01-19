@@ -43,6 +43,7 @@ export interface IWorkspaceElement {
   placeholder?: string;
   listOptions?: IList[];
   posts?: IPublication[];
+  containerId?: string;
 }
 
 export interface IHead {
