@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ethers } from 'ethers';
 import config from 'config';
+import { toggleModalType } from 'redux/modal/modal.reducers';
 import { approveERC20Token, getERC1155Contract, getMarketplaceContract, getSigner } from 'redux/web3/web3.utils';
 import { IRootState } from 'redux/root-state.interface';
 import { ISelectedTemplate } from './template.interfaces';
@@ -49,14 +50,14 @@ export const buySelectedTemplateAsync = createAsyncThunk('template/buySelectedTe
   }
 });
 
-export const mintTemplateAsync = createAsyncThunk('template/mintTemplate', async (uri: string) => {
+export const mintTemplateAsync = createAsyncThunk('template/mintTemplate', async (uri: string, { dispatch }) => {
   try {
     const signer = getSigner();
     const erc1155Contract = getERC1155Contract(signer);
     const tx = await erc1155Contract.mint(uri);
     const receipt = await tx.wait();
     const tokenId = parseInt(receipt.logs[1].topics[1].toString());
-    // yield put(toggleModalType('minted-complete'));
+    dispatch(toggleModalType('minted-complete'));
     return tokenId;
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -66,7 +67,7 @@ export const mintTemplateAsync = createAsyncThunk('template/mintTemplate', async
 });
 
 // available for buying
-export const fetchListedTemplatesAsync = createAsyncThunk('template/fetchListedTemplates', async (_, { dispatch }) => {
+export const fetchListedTemplatesAsync = createAsyncThunk('template/fetchListedTemplates', async () => {
   try {
     const query = process.env.REACT_APP_TEMPLATE_LIST_TYPE === 'in-review' ? inReviewQuery : listedQuery;
     const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);

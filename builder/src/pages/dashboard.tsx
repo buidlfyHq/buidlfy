@@ -25,8 +25,7 @@ const Dashboard: FC = () => {
   const [hideNavbar, setHideNavbar] = useState<boolean>(true);
 
   useEffect(() => {
-    // load stored configs if available
-    let saveItems = localStorage.getItem('items');
+    const saveItems = localStorage.getItem('items');
     if (saveItems) {
       dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
       dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor));

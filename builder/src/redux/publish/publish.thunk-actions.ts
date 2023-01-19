@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import ShortUniqueId from 'short-unique-id';
 import config from 'config';
 import { adjectives, colors, Config, uniqueNamesGenerator } from 'unique-names-generator';
+import { ISession } from 'redux/user/user.interfaces';
 
 const uid = new ShortUniqueId({ length: 12 });
 
@@ -14,8 +15,10 @@ const customConfig: Config = {
 export const initiatePublishAsync = createAsyncThunk('publish/initiatePublish', async (payload: { configDetails: string }, { rejectWithValue }) => {
   const { configDetails } = payload;
   try {
+    const session: ISession = JSON.parse(localStorage.getItem('session'));
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', `Bearer ${session?.nonce}`);
     const publishId: string = uid();
     const raw = JSON.stringify({
       clientTopic: publishId,
@@ -46,9 +49,11 @@ export const fetchPublishDetailsAsync = createAsyncThunk(
   async (payload: { deploymentId: string }, { dispatch, rejectWithValue }) => {
     const { deploymentId } = payload;
     try {
+      const session: ISession = JSON.parse(localStorage.getItem('session'));
       const myHeaders = new Headers();
       const shortName: string = uniqueNamesGenerator(customConfig);
       myHeaders.append('Content-Type', 'application/json');
+      myHeaders.append('Authorization', `Bearer ${session?.nonce}`);
       const raw = JSON.stringify({
         deploymentId: deploymentId,
         siteName: shortName,
@@ -89,6 +94,7 @@ export const verifyPublishAsync = createAsyncThunk(
   async (payload: { domainId: string; projectId: string }, { rejectWithValue }) => {
     const { domainId, projectId } = payload;
     try {
+      const session: ISession = JSON.parse(localStorage.getItem('session'));
       await new Promise((resolve: any) => {
         let counter = 0;
         let errorMessage: string;
@@ -99,6 +105,7 @@ export const verifyPublishAsync = createAsyncThunk(
           try {
             const myHeaders = new Headers();
             myHeaders.append('Content-Type', 'application/json');
+            myHeaders.append('Authorization', `Bearer ${session?.nonce}`);
 
             const raw = JSON.stringify({
               domainId,
@@ -144,8 +151,10 @@ export const updatePublishAsync = createAsyncThunk(
   async (payload: { domainId: string; deploymentId: string }, { rejectWithValue }) => {
     const { domainId, deploymentId } = payload;
     try {
+      const session: ISession = JSON.parse(localStorage.getItem('session'));
       const myHeaders = new Headers();
       myHeaders.append('Content-Type', 'application/json');
+      myHeaders.append('Authorization', `Bearer ${session?.nonce}`);
 
       const raw = JSON.stringify({
         subdomainId: domainId,

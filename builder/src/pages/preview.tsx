@@ -1,15 +1,15 @@
+import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import RenderItem from 'components/utils/render-item';
-import { IRootState } from 'redux/root-state.interface';
-import { useEffect, useState } from 'react';
 import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
+import { IRootState } from 'redux/root-state.interface';
 import { IInput, IOutput } from 'redux/workspace/workspace.interfaces';
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
-const Preview = () => {
+const Preview: FC = () => {
   const dispatch = useDispatch();
   const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
   const workspaceBackgroundColor = useSelector((state: IRootState) => state.workspace.workspaceBackgroundColor);
@@ -18,7 +18,6 @@ const Preview = () => {
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
 
   useEffect(() => {
-    // load stored configs if available
     let saveItems = localStorage.getItem('items');
     if (saveItems) {
       dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
