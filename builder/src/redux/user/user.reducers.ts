@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signInWithEthereumAsync, verifyTwitterAsync } from './user.thunk-actions';
+import { signInWithEthereumAsync, subscribeNewsletterAsync, verifyTwitterAsync } from './user.thunk-actions';
 import { IUserState } from './user.interfaces';
 
 const initialState: IUserState = {
@@ -48,6 +48,9 @@ const userSlice = createSlice({
     builder.addCase(verifyTwitterAsync.rejected, (state, action: { payload }) => {
       state.verifying = false;
       state.verificationError = action.payload;
+    });
+    builder.addCase(subscribeNewsletterAsync.fulfilled, (state, action) => {
+      state.data.email = action.payload;
     });
   },
 });

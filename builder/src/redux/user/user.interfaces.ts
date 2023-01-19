@@ -28,6 +28,7 @@ export interface IUserData {
   handle: string;
   verified: boolean;
   whitelisted: boolean;
+  email?: string;
 }
 
 export interface ISiwe {

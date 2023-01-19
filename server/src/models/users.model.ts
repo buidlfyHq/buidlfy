@@ -23,6 +23,10 @@ const userSchema: Schema = new Schema({
     type: Boolean,
     default: false,
   },
+  email: {
+    type: String,
+    unique: true,
+  },
 });
 
 const userModel = model<User & Document>('User', userSchema);

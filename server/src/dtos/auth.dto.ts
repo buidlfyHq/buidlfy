@@ -18,3 +18,8 @@ export class VerifyTwitterDto {
   @IsString()
   public twitterHandle: string;
 }
+
+export class SubscribeNewsletterDto {
+  @IsString()
+  public email: string;
+}

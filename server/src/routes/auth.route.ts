@@ -3,7 +3,7 @@ import AuthController from '@controllers/auth.controller';
 import isAuthenticated from '@middlewares/authorization.middleware';
 import validationMiddleware from '@/middlewares/validation.middleware';
 import { Routes } from '@interfaces/routes.interface';
-import { SigninDto, VerifyTwitterDto } from '@/dtos/auth.dto';
+import { SigninDto, SubscribeNewsletterDto, VerifyTwitterDto } from '@/dtos/auth.dto';
 
 class AuthRoute implements Routes {
   public path = '';
@@ -24,6 +24,12 @@ class AuthRoute implements Routes {
       isAuthenticated(),
       validationMiddleware(VerifyTwitterDto, 'body'),
       this.authController.verifyTweet,
+    );
+    this.router.patch(
+      `${this.path}/subscribe-newsletter`,
+      isAuthenticated(),
+      validationMiddleware(SubscribeNewsletterDto, 'body'),
+      this.authController.subscribeNewsletter,
     );
   }
 }

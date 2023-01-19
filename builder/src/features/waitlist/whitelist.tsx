@@ -1,7 +1,7 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Navbar from './navbar';
-import { isWhitelistedAsync } from 'redux/user/user.thunk-actions';
+import { isWhitelistedAsync, subscribeNewsletterAsync } from 'redux/user/user.thunk-actions';
 import Confetti from 'assets/waitlist-icons/confetti.svg';
 import Discord from 'assets/waitlist-icons/discord.svg';
 import DiscordVector from 'assets/waitlist-icons/discord-vector.svg';
@@ -10,6 +10,7 @@ import SocialTwitter from 'assets/waitlist-icons/social-twitter.svg';
 
 const Whitelist: FC = () => {
   const dispatch = useDispatch();
+  const [email, setEmail] = useState<string>('');
 
   useEffect(() => {
     dispatch(isWhitelistedAsync());
@@ -63,8 +64,12 @@ const Whitelist: FC = () => {
             type="email"
             placeholder="Enter your email"
             className="bg-white/20 px-4 py-2 w-64 rounded-lg border border-[#655B7C] outline-none mr-4"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
-          <button className="connect-wallet text-lg px-6 py-2 rounded-lg">Subscribe</button>
+          <button className="connect-wallet text-lg px-6 py-2 rounded-lg" onClick={() => dispatch(subscribeNewsletterAsync(email))}>
+            Subscribe
+          </button>
         </div>
       </section>
       <footer className="flex justify-between mx-20 pt-8 pb-12 border-t border-white/20">

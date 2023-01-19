@@ -94,6 +94,48 @@ export const verifyTwitterAsync = createAsyncThunk('user/verifyTitter', async (t
   }
 });
 
+export const subscribeNewsletterAsync = createAsyncThunk('user/subscribeNewsletter', async (email: string, { dispatch }) => {
+  try {
+    const session: ISession = JSON.parse(localStorage.getItem('session'));
+    if (session) {
+      // signout if sesssion is expired
+      if (new Date(session.cookie?.expires) < new Date()) {
+        await dispatch(signoutAsync());
+        dispatch(toggleModal(false));
+      }
+
+      const res = await fetch(`${config.server.SERVER}/subscribe-newsletter`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.nonce}`,
+        },
+        body: JSON.stringify({ email }),
+        credentials: 'include',
+      });
+
+      if (res.ok === false) {
+        console.error(res.statusText);
+      } else {
+        const response = JSON.parse(await res.text());
+        const email: string = response.data?.email;
+        if (email) {
+          const updatedSessionData = { ...session.data, email };
+          const updatedSession = { ...session, data: updatedSessionData };
+          const stringifyUpdatedSession = JSON.stringify(updatedSession);
+          localStorage.setItem('session', stringifyUpdatedSession);
+          return email;
+        }
+      }
+    } else {
+      await dispatch(signoutAsync());
+    }
+  } catch (error) {
+    await dispatch(signoutAsync());
+    console.error('Error in subscribeNewsletterAsync --> ', error);
+  }
+});
+
 export const isWhitelistedAsync = createAsyncThunk('user/isWhitelisted', async (_, { dispatch }) => {
   try {
     const session: ISession = JSON.parse(localStorage.getItem('session'));

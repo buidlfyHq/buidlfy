@@ -83,6 +83,26 @@ class AuthService {
       throw error;
     }
   }
+
+  public async subscribe(address: string, email: string) {
+    try {
+      await this.users.findOneAndUpdate(
+        { address: address },
+        {
+          $set: {
+            email: email,
+          },
+        },
+      );
+
+      const user: User = await this.users.findOne({ address });
+      return user;
+    } catch (error) {
+      Logger.error(`Error found in ${__filename} - subscribe - `);
+      Logger.error(error);
+      throw error;
+    }
+  }
 }
 
 export default AuthService;
