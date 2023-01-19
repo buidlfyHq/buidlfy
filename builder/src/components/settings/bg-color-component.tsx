@@ -1,10 +1,11 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateWorkspaceBackgroundColor, updateWorkspaceElementStyle, updateWorkspaceNFTLayoutElements } from 'redux/workspace/workspace.reducers';
 import ColorPickerDropdown from 'components/utils/color-picker';
 import { IUploadedImageData, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IRootState } from 'redux/root-state.interface';
 import WarningText from 'components/utils/setting-warning';
+import { INftCardThemes } from 'config/nft-layout-values';
 import 'styles/components.css';
 import 'styles/dashboard.css';
 
@@ -13,15 +14,27 @@ interface IBgColorComponent {
   name?: string;
   elementBackgroundColor?: string;
   workspaceBackgroundColor?: string;
+  cardTheme?: INftCardThemes;
 }
 
-const BgColorComponent: FC<IBgColorComponent> = ({ i, name, elementBackgroundColor, workspaceBackgroundColor }) => {
+const BgColorComponent: FC<IBgColorComponent> = ({ i, name, elementBackgroundColor, workspaceBackgroundColor, cardTheme }) => {
   const dispatch = useDispatch();
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
   const imageData: IUploadedImageData = useSelector((state: IRootState) =>
     state.workspace.uploadedImagesData.find((image: IUploadedImageData) => image.settingItemId === i),
   );
-  const color = workspaceBackgroundColor ? workspaceBackgroundColor : elementBackgroundColor;
+  useEffect(() => {
+    cardTheme &&
+      dispatch(
+        updateWorkspaceNFTLayoutElements({
+          settingItemId: i,
+          propertyName: 'backgroundColor',
+          propertyValue: cardTheme?.colors?.primary,
+        }),
+      );
+  }, [cardTheme]);
+
+  let color = workspaceBackgroundColor ? workspaceBackgroundColor : elementBackgroundColor;
 
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const handleChange = (e: string) => {
@@ -60,10 +73,16 @@ const BgColorComponent: FC<IBgColorComponent> = ({ i, name, elementBackgroundCol
   );
   return (
     <>
-      {name === 'Container' ? (
-        <>{!imageData?.uploadedImageData ? colorDropdown : <WarningText text="Background Image and background Color cannot be use together!" />}</>
-      ) : (
-        colorDropdown
+      {!cardTheme && (
+        <>
+          {name === 'Container' ? (
+            <>
+              {!imageData?.uploadedImageData ? colorDropdown : <WarningText text="Background Image and background Color cannot be use together!" />}
+            </>
+          ) : (
+            colorDropdown
+          )}
+        </>
       )}
     </>
   );

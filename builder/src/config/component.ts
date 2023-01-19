@@ -528,7 +528,7 @@ export const components = [
           ...defaultColorStyles,
           ...defaultDeleteStyles,
           backgroundSize: 'cover',
-          backgroundColor: 'rgba(68, 64, 60, 100)',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
         },
       },
       {
@@ -544,7 +544,7 @@ export const components = [
           ...defaultColorStyles,
           ...defaultDeleteStyles,
           backgroundSize: 'cover',
-          backgroundColor: 'rgba(68, 64, 60, 100)',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
         },
       },
       {
@@ -560,7 +560,7 @@ export const components = [
           ...defaultColorStyles,
           ...defaultDeleteStyles,
           backgroundSize: 'cover',
-          backgroundColor: 'rgba(68, 64, 60, 100)',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
         },
       },
     ],

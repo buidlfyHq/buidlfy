@@ -47,6 +47,10 @@
 .changeText:focus {
   outline: 1px solid rgb(207, 203, 203);
 }
+.nft-theme-input {
+  border: 1px solid #dcdfff;
+  box-shadow: 0px 0px 0px 4px rgba(107, 113, 166, 0.07);
+}
 .deleteIcon {
   margin-top: 12px;
   padding: 3px;

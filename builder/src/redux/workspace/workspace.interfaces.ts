@@ -1,3 +1,4 @@
+import { IApiSource, INftCardThemes } from 'config/nft-layout-values';
 import { IPublication } from 'redux/lenster/lenster.interfaces';
 import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
 
@@ -41,6 +42,7 @@ export interface IWorkspaceElement {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
+  source?: IApiSource;
   wallet?: string;
   slug?: string;
   limit?: number;
@@ -48,6 +50,7 @@ export interface IWorkspaceElement {
   listOptions?: IList[];
   posts?: IPublication[];
   containerId?: string;
+  theme?: INftCardThemes;
 }
 
 export interface IHead {
@@ -103,7 +106,7 @@ export interface IAction {
 export interface IElementDetail {
   settingItemId: string;
   propertyName: string;
-  propertyValue: string | number | boolean | Array<any>;
+  propertyValue: string | number | boolean | Array<any> | IApiSource | INftCardThemes;
   childPropertyName?: string;
   imageSizeProperty?: boolean;
 }
@@ -112,6 +115,7 @@ export enum SidebarEnum {
   PAGES = 'pages',
   TEMPLATES = 'templates',
   ELEMENTS = 'elements',
+  PLUGINS = 'plugins',
   MEDIA = 'media',
   STYLES = 'styles',
   HELP = 'help',

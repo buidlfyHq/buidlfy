@@ -1,6 +1,7 @@
 import { FC, useRef } from 'react';
 import Elements from 'features/dashboard/elements';
 import { SidebarEnum } from 'redux/workspace/workspace.interfaces';
+import Plugins from './plugins';
 import 'styles/components.css';
 
 interface ISidebar {
@@ -74,6 +75,8 @@ const Sidebar: FC<ISidebar> = ({ isContainerSelected, sideElement, hideNavbar, s
       {/* Components */}
       {sideElement === SidebarEnum.ELEMENTS ? (
         <Elements isContainerSelected={isContainerSelected} hideNavbar={hideNavbar} setHideNavbar={setHideNavbar} />
+      ) : sideElement === SidebarEnum.PLUGINS ? (
+        <Plugins hideNavbar={hideNavbar} setHideNavbar={setHideNavbar} />
       ) : null}
       {/* It will be used for future */}
       {/* {sideElement === SidebarEnum.STYLES ? (
