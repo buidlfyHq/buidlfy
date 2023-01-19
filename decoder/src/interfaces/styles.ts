@@ -28,4 +28,5 @@ export default interface IStyles {
   backgroundSize?: string;
   isAuto?: boolean;
   fontFamily?: string;
+  listType?: string;
 }

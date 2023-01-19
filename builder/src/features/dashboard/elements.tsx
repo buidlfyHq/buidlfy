@@ -10,6 +10,9 @@ import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers
 import { IRootState } from 'redux/root-state.interface';
 import { IWorkspaceElement, ResizeHandles } from 'redux/workspace/workspace.interfaces';
 import defaultImage from 'assets/default-image.svg';
+import { BsCheck2 } from 'react-icons/bs';
+import badge from 'assets/badge.svg';
+import status from 'assets/status-badge.svg';
 import container from 'assets/image-container.svg';
 import 'styles/components.css';
 
@@ -37,6 +40,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         y,
         w: 6,
         minW: 1,
+        containerId: selectedElement.i,
         resizeHandles: availableHandles,
       };
       let updatedItem = {
@@ -169,6 +173,98 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
           </div>
         </div>
       </section>
+      <div className="element-div">
+        <div data-tip="Click here to add the Divider" data-for="elements">
+          <div onClick={() => onClickFunction('Divider')} className="px-4 py-4 cursor-pointer">
+            <div className="w-[15rem] h-[0.1px] bg-[gray]"></div>
+          </div>
+        </div>
+      </div>
+      {/* Add Dropdown when it is fully fixed */}
+      {/* <div className="element-div">
+        <div onClick={() => onClickFunction('Dropdown')} className="px-4 py-1 cursor-pointer">
+          <div data-tip="Click here to add the Input Dropdown" data-for="elements">
+            <img className="mt-2" src={dropdown} />
+          </div>
+        </div>
+      </div> */}
+      <div className="element-div">
+        <div onClick={() => onClickFunction('List')} className="px-10 py-3 cursor-pointer element-list">
+          <div data-tip="Click here to add the List" data-for="elements">
+            <div className="flex items-center">
+              <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
+              <h2 className="element-style list-element">Item 1</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
+              <h2 className="element-style list-element">Item 2</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="bg-[#344054] text-[14px] flex justify-center items-center w-[5px] h-[5px] rounded-[20px]" />
+              <h2 className="element-style list-element">Item 3</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="element-div">
+        <div onClick={() => onClickFunction('Checkbox')} className="px-10 py-3 cursor-pointer element-list">
+          <div data-tip="Click here to add the Checkbox" data-for="elements">
+            <div className="flex items-center">
+              <span className="checkbox-style border-[#D0D5DD] bg-[#FFFFFF]"></span>
+              <h2 className="element-style list-element">Add Checkbox</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="checkbox-style bg-[#F9F5FF] border-[#7F56D9]">
+                <BsCheck2 className="text-[#7F56D9] text-[14px] flex justify-center items-center" />
+              </span>
+              <h2 className="element-style list-element">Add Checkbox</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="checkbox-style checkbox-element bg-[#F9F5FF] border-[#7F56D9]">
+                <BsCheck2 className="text-[#7F56D9] text-[14px] flex justify-center items-center" />
+              </span>
+              <h2 className="element-style list-element">Add Checkbox</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="element-div">
+        <div onClick={() => onClickFunction('Radio')} className="px-10 py-3 cursor-pointer element-list">
+          <div data-tip="Click here to add the Radio Button" data-for="elements">
+            <div className="flex items-center">
+              <span className="radio-style bg-[#FFFFFF] border-[#D0D5DD]"></span>
+              <h2 className="element-style list-element">Add Radio Button</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="radio-style bg-[#F9F5FF] border-[#7F56D9]">
+                <span className="bg-[#7F56D9] text-[14px] flex justify-center items-center w-[10px] m-[2px] h-[10px] rounded-[20px]" />
+              </span>
+              <h2 className="element-style list-element">Add Radio Button</h2>
+            </div>
+            <div className="flex items-center mt-3">
+              <span className="radio-style checkbox-element bg-[#F9F5FF] border-[#7F56D9]">
+                <span className="bg-[#7F56D9] text-[14px] flex justify-center items-center w-[10px] m-[2px] h-[10px] rounded-[20px]" />
+              </span>
+              <h2 className="element-style list-element">Add Radio Button</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="element-div">
+        <div onClick={() => onClickFunction('Badge')} className="px-10 py-3 cursor-pointer">
+          <div data-tip="Click here to add the Badge" data-for="elements">
+            <img src={badge} />
+          </div>
+        </div>
+      </div>
+      <div className="element-div">
+        <div onClick={() => onClickFunction('Status')} className="px-10 py-3 cursor-pointer">
+          <div data-tip="Click here to add the Status Badge" data-for="elements">
+            <img src={status} />
+          </div>
+        </div>
+      </div>
       <section className="element-div">
         <div className="px-[4.1rem] py-4">
           <div className="flex">

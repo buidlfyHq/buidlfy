@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { IRootState } from 'redux/root-state.interface';
 import { IoMdLink } from 'react-icons/io';
 import { setSelectorToDefault } from 'redux/contract/contract.reducers';
 import ColorComponent from 'components/settings/color-component';
@@ -14,7 +15,6 @@ import MarginComponent from 'components/settings/margin-component';
 import PaddingComponent from 'components/settings/padding-component';
 import CombinedComponent from 'components/settings/combined-setting';
 import BorderComponent from 'components/settings/border-component';
-import { IRootState } from 'redux/root-state.interface';
 import FontFamilyComponent from 'components/settings/font-family-component';
 import FontWeightComponent from 'components/settings/font-weight-component';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';

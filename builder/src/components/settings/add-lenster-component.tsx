@@ -6,7 +6,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import WarningText from 'components/utils/setting-warning';
 import { fetchPublicationAsync } from 'redux/lenster/lenster.thunk-actions';
 import { updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
-import { removePublication, updateInputValue } from 'redux/lenster/lenster.reducers';
+import { updateInputValue } from 'redux/lenster/lenster.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
 
@@ -15,33 +15,26 @@ interface IAddLensterComponent {
 }
 const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   const dispatch = useDispatch();
-  const posts = useSelector((state: IRootState) => state.lenster.publications);
-
+  const savedPosts = useSelector((state: IRootState) => state.workspace.workspaceElements.find(workspaceElement => workspaceElement.i === i)?.posts);
   const [addInputs, setAddInputs] = useState<Array<any>>([]); // Derive better type for array
   const [isDuplicate, setIsDuplicate] = useState<Boolean>(false);
 
   const uid = new ShortUniqueId();
+  const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
 
   useEffect(() => {
     const newAddInputs = [];
-    const filterPost = posts.filter(post => post.i === i);
-    filterPost.map(post => {
+    filterSavedPost.map(post => {
+      const duplicatePost = addInputs.filter(addInput => addInput.value === addInput.value);
       newAddInputs.push({ i: i, id: post.id, value: post.name });
       return post;
     });
     setAddInputs(newAddInputs);
-    dispatch(
-      updateWorkspaceElement({
-        settingItemId: i,
-        propertyName: 'posts',
-        propertyValue: filterPost,
-      }),
-    );
-  }, [dispatch, i, posts]);
+  }, [savedPosts, i]);
 
   const handleNewValue = (e: ChangeEvent<HTMLInputElement>, key: number) => {
     if (e.target.value.length > 0) {
-      const duplicateInput = posts.filter(post => post.name === e.target.value);
+      const duplicateInput = savedPosts.filter(post => post.name === e.target.value);
       if (duplicateInput?.length > 0) {
         setIsDuplicate(true);
       } else {
@@ -79,7 +72,16 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
     const newInputs = [...addInputs];
     newInputs.splice(index, 1);
     setAddInputs(newInputs);
-    dispatch(removePublication({ publicationId: value }));
+    const publicationIndex = savedPosts.findIndex(pub => pub.name === value);
+    const newPublications = [...savedPosts];
+    newPublications.splice(publicationIndex, 1);
+    dispatch(
+      updateWorkspaceElement({
+        settingItemId: i,
+        propertyName: 'posts',
+        propertyValue: newPublications,
+      }),
+    );
   };
 
   return (
@@ -87,6 +89,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
       <div className="items-center mx-2 mt-1 w-[13.5rem] text-black">
         {addInputs
           .filter(addInput => addInput.i === i)
+          .filter((item, i) => addInputs.findIndex(post => post.id === item.id) === i)
           .map((addInput, i) => {
             return (
               <div className="flex">
