@@ -27,13 +27,6 @@ export const connectWalletAsync = createAsyncThunk('web3/connectWallet', async (
     return address;
   } catch (error) {
     // eslint-disable-next-line no-console
-    // yield put(
-    //   addNotification({
-    //     message: walletRes.errorMessage,
-    //     timestamp: new Date(),
-    //     type: NotificationType.Error,
-    //   }),
-    // );
     console.error('Error in connectWalletAsync --> ', error);
     return rejectWithValue(error);
   }
@@ -60,13 +53,6 @@ export const changeNetworkAsync = async () => {
     }
     // eslint-disable-next-line no-console
     console.error('Error in changeNetworkAsync --> ', switchError);
-    // yield put(
-    //   addNotification({
-    //     message: networkRes.errorMessage,
-    //     timestamp: new Date(),
-    //     type: NotificationType.Error,
-    //   }),
-    // );
   }
 };
 
@@ -82,6 +68,5 @@ export const fetchTokenBalanceAsync = createAsyncThunk('web3/fetchTokenBalance',
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error in fetchTokenBalanceAsync --> ', error);
-    return 0;
   }
 });

@@ -46,7 +46,6 @@ export const buySelectedTemplateAsync = createAsyncThunk('web3/buySelectedTempla
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error in transaction --> ', error);
-    return '';
   }
 });
 
@@ -62,7 +61,6 @@ export const mintTemplateAsync = createAsyncThunk('web3/mintTemplate', async (ur
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error in mintTemplateAsync --> ', error);
-    return 0;
   }
 });
 
@@ -77,7 +75,6 @@ export const fetchListedTemplatesAsync = createAsyncThunk('web3/fetchListedTempl
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error in fetchListedTemplatesAsync --> ', error);
-    return null;
   }
 });
 
