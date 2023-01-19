@@ -6,7 +6,7 @@ import { IMAGE_SIZE_VARIABLE } from 'config/constant';
 import Spinner from 'components/utils/assets/spinner';
 import { updateWorkspaceElement, updateUploadedImageData } from 'redux/workspace/workspace.reducers';
 import { IUploadedImageData } from 'redux/workspace/workspace.interfaces';
-import { uploadImage } from 'redux/upload/upload.action';
+import { uploadImageAsync } from 'redux/upload/upload.thunk-actions';
 import { IRootState } from 'redux/root-state.interface';
 import upload from 'assets/upload-img.svg';
 import 'styles/components.css';
@@ -40,7 +40,7 @@ const UploadComponent: FC<IUploadComponent> = ({ i }) => {
               uploadedImageData: reader.result as string,
             }),
           );
-          dispatch(uploadImage({ data: reader.result as string, id: i }));
+          dispatch(uploadImageAsync({ data: reader.result as string, id: i }));
           setIsSpinner(false);
         });
         reader.readAsDataURL(e.target.files[0]);
