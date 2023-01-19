@@ -12,6 +12,7 @@ export interface IWorkspaceState {
   uploadedImagesData: IUploadedImageData[];
   workspaceBackgroundColor: string;
   head: IHead;
+  listValue: IList[];
 }
 
 export interface IWorkspaceElement {
@@ -40,7 +41,9 @@ export interface IWorkspaceElement {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
+  listOptions?: IList[];
   posts?: IPublication[];
+  containerId?: string;
 }
 
 export interface IHead {
@@ -84,6 +87,7 @@ export interface IStyle {
   height?: number;
   backgroundSize?: string;
   fontFamily?: string;
+  listType?: string;
 }
 
 export type ResizeHandles = Array<'s' | 'w' | 'e' | 'n' | 'sw' | 'nw' | 'se' | 'ne'>;
@@ -147,6 +151,7 @@ export interface ITemplate {
 
 export interface IText {
   i?: string;
+  name?: string;
   setItems?: (items?: IWorkspaceElement[]) => void;
   fontWeight: number;
   italic: string;
@@ -181,6 +186,16 @@ export interface IText {
     paddingBottom?: number;
   };
   fontFamily?: string;
+  listType?: string;
+  listOptions?: IList[];
+  preview?: boolean;
+}
+
+export interface IList {
+  i?: string;
+  id: string;
+  value: string;
+  link: string;
 }
 
 export interface IInput {

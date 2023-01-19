@@ -8,9 +8,10 @@ import 'styles/dashboard.css';
 interface IBorderColorComponent {
   i: string;
   borderColor: string;
+  name?: string;
 }
 
-const BorderColorComponent: FC<IBorderColorComponent> = ({ i, borderColor }) => {
+const BorderColorComponent: FC<IBorderColorComponent> = ({ i, borderColor, name }) => {
   const dispatch = useDispatch();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const handleChange = (e: string) => {
@@ -24,6 +25,7 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({ i, borderColor }) => 
   };
 
   const isElement = !!i;
+  const hideGradient = name === 'Divider';
 
   return (
     <ColorPickerDropdown
@@ -33,6 +35,7 @@ const BorderColorComponent: FC<IBorderColorComponent> = ({ i, borderColor }) => 
       displayColorPicker={displayColorPicker}
       setDisplayColorPicker={setDisplayColorPicker}
       isElement={isElement}
+      hideGradient={hideGradient}
     />
   );
 };

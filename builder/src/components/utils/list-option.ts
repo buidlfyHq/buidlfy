@@ -1,0 +1,16 @@
+export const listOptions = [
+  { value: `disc`, label: `Disc` },
+  { value: `square`, label: `Square` },
+  { value: `circle`, label: `Circle` },
+  { value: `disclosure-open`, label: `Discloure Open` },
+  { value: `disclosure-closed`, label: `Discloure Closed` },
+  { value: `decimal`, label: `Decimal` },
+  { value: `lower-roman`, label: `Lower Roman` },
+  { value: `upper-roman`, label: `Upper Roman` },
+  { value: `lower-greek`, label: `Lower Greek` },
+  { value: `lower-latin`, label: `Lower Latin` },
+  { value: `upper-latin`, label: `Upper Latin` },
+  { value: `lower-alpha`, label: `Lower Alpha` },
+  { value: `upper-alpha`, label: `Upper Alpha` },
+  { value: `none`, label: `none` },
+];
