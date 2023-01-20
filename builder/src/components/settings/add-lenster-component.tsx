@@ -40,7 +40,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
       } else {
         dispatch(
           fetchPublicationAsync({
-            i: i,
+            i,
             id: addInputs[key].id,
             name: e.target.value,
           }),
