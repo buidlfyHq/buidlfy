@@ -4,7 +4,7 @@ import { SiweMessage } from 'siwe';
 import config from 'config';
 import Navbar from './navbar';
 import JoinDiscord from './join-discord';
-import { connectWallet } from 'redux/web3/web3.actions';
+import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
 import { getSigner } from 'redux/web3/web3.utils';
 import { IRootState } from 'redux/root-state.interface';
 import Avatar from 'assets/waitlist-icons/avatar.svg';
@@ -93,7 +93,7 @@ const Home = ({ setStep }) => {
                 Sign In With Ethereum
               </button>
             ) : (
-              <button className="connect-wallet text-lg px-8 py-2 rounded-lg" onClick={() => dispatch(connectWallet())}>
+              <button className="connect-wallet text-lg px-8 py-2 rounded-lg" onClick={() => dispatch(fetchWalletDetailsAsync(''))}>
                 Connect Wallet
               </button>
             )}

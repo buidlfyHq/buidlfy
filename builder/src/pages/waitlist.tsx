@@ -5,7 +5,7 @@ import Home from 'features/waitlist/home';
 import VerifyTwitter from 'features/waitlist/verify-twitter';
 import Whitelist from 'features/waitlist/whitelist';
 import { signout } from 'utils/signout';
-import { loadWallet } from 'redux/web3/web3.actions';
+import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions'
 import 'styles/waitlist.css';
 
 const Waitlist = () => {
@@ -24,7 +24,7 @@ const Waitlist = () => {
         setStep(1);
       }
 
-      dispatch(loadWallet(session.data?.address));
+      dispatch(fetchWalletDetailsAsync(session.data?.address));
 
       // navigate based on user status
       if (session.data?.whitelisted) {
