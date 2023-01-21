@@ -52,16 +52,16 @@ class AuthService {
   public async verify(twitterHandle: string, address: string, user: UserV2): Promise<User | { errorMessage: string }> {
     try {
       const isFollowing = await this.twitterService.isFollowing(user.id);
-      const hasTweeted = await this.twitterService.hasTweeted(user.id);
-      const verified = isFollowing && hasTweeted;
-
       if (!isFollowing) {
         return { errorMessage: 'Follow buidlfy to get access' };
       }
+
+      const hasTweeted = await this.twitterService.hasTweeted(user.id);
       if (!hasTweeted) {
         return { errorMessage: 'Share the beta launch on twitter to get access' };
       }
 
+      const verified = isFollowing && hasTweeted;
       try {
         await this.users.findOneAndUpdate(
           { address: address },
