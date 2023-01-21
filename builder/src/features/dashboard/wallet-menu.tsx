@@ -172,7 +172,7 @@ const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
       ) : (
         <button
           className="py-2 px-5 my-2 ml-3 text-[14px] text-white rounded-[10px] cursor-pointer connect-wallet-button whitespace-nowrap add-btn"
-          onClick={() => dispatch(fetchWalletDetailsAsync())}
+          onClick={() => dispatch(fetchWalletDetailsAsync(''))}
         >
           Connect Wallet
         </button>

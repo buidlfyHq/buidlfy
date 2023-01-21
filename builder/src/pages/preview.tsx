@@ -7,7 +7,7 @@ import RenderItem from 'components/utils/render-item';
 import { signout } from 'utils/signout';
 import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
-import { loadWallet } from 'redux/web3/web3.actions';
+import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
 import { IRootState } from 'redux/root-state.interface';
 import { IInput, IOutput } from 'redux/workspace/workspace.interfaces';
 
@@ -47,7 +47,7 @@ const Preview = () => {
             // load stored configs if available
             const session: any = JSON.parse(localStorage.getItem('session'));
             if (session) {
-              dispatch(loadWallet(session.data?.address));
+              dispatch(fetchWalletDetailsAsync(session.data?.address));
             }
             let saveItems = localStorage.getItem('items');
             if (saveItems) {
