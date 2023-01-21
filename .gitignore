@@ -23,7 +23,6 @@
 /decoder/.DS_Store
 /decoder/.env
 /decoder/.env.local
-/decoder/.env.local
 /decoder/.env.development.local
 /decoder/.env.test.local
 /decoder/.env.production.local
