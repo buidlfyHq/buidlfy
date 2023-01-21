@@ -22,9 +22,10 @@ interface IImageComponent {
   manualSizing?: boolean;
   imgData?: string | ArrayBuffer;
   link: string;
+  preview?: boolean;
 }
 
-const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, backgroundSize, isAuto, manualSizing, imgData, link }) => {
+const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, backgroundSize, isAuto, manualSizing, imgData, link, preview }) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
   const imageData = useSelector((state: IRootState) =>
@@ -32,28 +33,32 @@ const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, 
   );
 
   useEffect(() => {
-    if (manualSizing === false && ref.current?.clientWidth) {
-      dispatch(
-        updateWorkspaceImageElementStyle({
-          settingItemId: i,
-          propertyName: 'width',
-          propertyValue: ref.current.clientWidth,
-          imageSizeProperty: false,
-        }),
-      );
+    if (!preview) {
+      if (manualSizing === false && ref.current?.clientWidth) {
+        dispatch(
+          updateWorkspaceImageElementStyle({
+            settingItemId: i,
+            propertyName: 'width',
+            propertyValue: ref.current.clientWidth,
+            imageSizeProperty: false,
+          }),
+        );
+      }
     }
   }, [ref.current?.clientWidth]); // eslint-disable-line
 
   useEffect(() => {
-    if (manualSizing === false && ref.current?.clientHeight) {
-      dispatch(
-        updateWorkspaceImageElementStyle({
-          settingItemId: i,
-          propertyName: 'height',
-          propertyValue: ref.current.clientHeight,
-          imageSizeProperty: false,
-        }),
-      );
+    if (!preview) {
+      if (manualSizing === false && ref.current?.clientHeight) {
+        dispatch(
+          updateWorkspaceImageElementStyle({
+            settingItemId: i,
+            propertyName: 'height',
+            propertyValue: ref.current.clientHeight,
+            imageSizeProperty: false,
+          }),
+        );
+      }
     }
   }, [ref.current?.clientHeight]); // eslint-disable-line
 

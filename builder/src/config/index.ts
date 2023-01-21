@@ -31,6 +31,9 @@ export interface IConfig {
   lenster: {
     LENS_GRAPHQL_URL: string;
   };
+  site: {
+    SITE_URL: string;
+  };
 }
 
 const NODE_ENV: string = process.env.REACT_APP_STAGE || 'local';
@@ -69,6 +72,9 @@ const development: IConfig = {
   lenster: {
     LENS_GRAPHQL_URL: 'https://api.lens.dev',
   },
+  site: {
+    SITE_URL: 'https://buidlfy.com/',
+  },
 };
 
 const production: IConfig = {
@@ -105,6 +111,9 @@ const production: IConfig = {
   lenster: {
     LENS_GRAPHQL_URL: 'https://api.lens.dev',
   },
+  site: {
+    SITE_URL: 'https://buidlfy.com/',
+  },
 };
 
 const local: IConfig = {
@@ -140,6 +149,9 @@ const local: IConfig = {
   },
   lenster: {
     LENS_GRAPHQL_URL: 'https://api.lens.dev',
+  },
+  site: {
+    SITE_URL: 'https://buidlfy.com/',
   },
 };
 

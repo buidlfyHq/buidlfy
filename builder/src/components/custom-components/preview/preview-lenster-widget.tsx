@@ -12,7 +12,7 @@ interface IPreviewLensterWidget {
 
 const PreviewLensterWidget: FC<IPreviewLensterWidget> = ({ i, posts, preview }) => {
   return (
-    <div className="lenster-div ml-[1.7rem]">
+    <div className="lenster-div ml-[2.6rem] mr-[2rem] mt-[1.3rem]">
       {posts.map(post => {
         const updateProfilePicture = 'https://ipfs.io/ipfs/' + post.profilePicture?.slice(7);
         const updatePostMedia = 'https://ipfs.io/ipfs/' + post?.postMedia?.slice(7);
