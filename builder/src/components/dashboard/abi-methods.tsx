@@ -7,19 +7,20 @@ import { updateContractAbi, updateContractAddress, updateContractNetwork } from 
 import { IRootState } from 'redux/root-state.interface';
 import { IShowComponent, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IAbi } from 'redux/contract/contract.interfaces';
+import { Listbox } from '@headlessui/react';
 
 interface IAbiMethods {
   setShowComponent: (showComponent: IShowComponent) => void;
+  showComponent?: IShowComponent;
   selectedElement: IWorkspaceElement;
   setIsOpen: (isOpen: boolean) => void;
   setGoBack: (goBack: boolean) => void;
 }
 
-const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsOpen, setGoBack }) => {
+const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsOpen, setGoBack, showComponent }) => {
   const dispatch = useDispatch();
   const workspaceElements: IWorkspaceElement[] = useSelector((state: IRootState) => state.workspace.workspaceElements);
   const contractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
-
   const [abiJson, setAbiJson] = useState<IAbi[]>([]);
 
   useEffect(() => {
@@ -43,19 +44,19 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsO
     }
   }, [contractDetails.abi, selectedElement]); // eslint-disable-line
 
-  const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value) {
+  const onSelect = updatedValue => {
+    if (updatedValue) {
       setShowComponent({
-        id: e.target.value,
-        value: abiJson[e.target.value],
+        id: updatedValue,
+        value: abiJson[updatedValue],
       });
 
       // initialize contract
       let updatedItem = {
         ...selectedElement,
         contract: {
-          methodName: abiJson[e.target.value].name,
-          stateMutability: abiJson[e.target.value].stateMutability,
+          methodName: abiJson[updatedValue].name,
+          stateMutability: abiJson[updatedValue].stateMutability,
           inputs: [],
           outputs: [],
         },
@@ -111,24 +112,37 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsO
             </div>
             <div className="px-2">
               <div className="mb-3">
-                <select
-                  id="select"
-                  className="form-select cursor-pointer contract-input mt-2 block w-[13.5rem] px-3 py-1.5 focus:outline-none focuse:border-none"
-                  aria-label="Default select example"
-                  onChange={e => onSelect(e)}
+                <Listbox
+                  // id="select"
+                  // className="form-select cursor-pointer contract-input mt-2 block w-[13.5rem] px-3 py-1.5 focus:outline-none focuse:border-none"
+                  // aria-label="Default select example"
+                  onChange={onSelect}
+                  value={showComponent?.id}
                 >
-                  <option value="" selected={!selectedElement.contract.methodName} hidden>
-                    Select a Method
-                  </option>
-                  {contractDetails.abi &&
-                    abiJson.map((method: { name: string }, i: number) => (
-                      <>
-                        <option value={i} key={i} selected={selectedElement.contract.methodName === method.name}>
-                          {method.name}
-                        </option>
-                      </>
-                    ))}
-                </select>
+                  <Listbox.Button
+                    value=""
+                    className="changeText text-left pl-[0.6rem] py-[0.4rem] input-text"
+                    // selected={!selectedElement.contract.methodName}
+                    // hidden
+                  >
+                    {showComponent?.value.name ? showComponent?.value.name : <>Select A Method</>}
+                  </Listbox.Button>
+                  <Listbox.Options className="listbox-options h-[10rem] absolute mt-[1rem] z-100 bg-white w-[13.5rem] rounded-[8px] border border-solid border-[#F2F4F7] overflow-scroll">
+                    {contractDetails.abi &&
+                      abiJson.map((method: { name: string }, i: number) => (
+                        <>
+                          <Listbox.Option
+                            value={i}
+                            key={i}
+                            className="py-[0.5rem] pr-2 pl-[1rem] cursor-pointer hover:bg-[#FAFAFF]"
+                            // selected={selectedElement.contract.methodName === method.name}
+                          >
+                            {method.name}
+                          </Listbox.Option>
+                        </>
+                      ))}
+                  </Listbox.Options>
+                </Listbox>
               </div>
             </div>
           </div>

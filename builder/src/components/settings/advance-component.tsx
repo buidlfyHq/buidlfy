@@ -105,7 +105,13 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
       {selectedContractAbi && selectedContractAddress && selectedContractNetwork && !goBack ? (
         <>
           <div className="flex justify-center mt-[3rem]" />
-          <AbiMethods setShowComponent={setShowComponent} selectedElement={selectedElement} setIsOpen={setIsOpen} setGoBack={setGoBack} />
+          <AbiMethods
+            setShowComponent={setShowComponent}
+            selectedElement={selectedElement}
+            setIsOpen={setIsOpen}
+            setGoBack={setGoBack}
+            showComponent={showComponent}
+          />
           <AbiComponents showComponent={showComponent} elementId={selectedElement.i} />
         </>
       ) : (

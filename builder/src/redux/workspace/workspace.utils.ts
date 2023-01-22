@@ -151,12 +151,8 @@ export const updateContractInElement = (
   },
 ) => {
   const { contractElementSelected, currentElement } = payload;
-
   // filter last selected element
-  // const filteredObject = contractElementSelected[currentElement?.name]?.filter((key: { buttonId: string }) => key.buttonId === selectedElement.i)[0];
   const filteredObject = contractElementSelected[currentElement?.name]?.filter((key: { buttonId: string }) => key.buttonId === selectedElement.i)[0];
-  console.log(contractElementSelected[currentElement?.type], 'contractElementSelected[currentElement?.name]');
-
   let updatedContract = {};
   if (filteredObject?.id) {
     let duplicate = selectedElement.contract.inputs?.find((e: { id: string }) => e.id === filteredObject.id);
@@ -201,7 +197,6 @@ export const updateContractInElement = (
 
   // search id in items
   const elementsIndex = workspaceElements.findIndex(item => item.i === selectedElement.i);
-
   if (elementsIndex === -1) {
     // search id in children
     const updatedItems = workspaceElements.map(item => {
