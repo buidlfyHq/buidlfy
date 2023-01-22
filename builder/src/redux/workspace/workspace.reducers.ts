@@ -124,11 +124,6 @@ const workspaceSlice = createSlice({
         const updatedSelectedElement = fetchSelectedElement(updatedContract, state.selectedElement.i);
         state.workspaceElements = updatedContract;
         state.selectedElement = updatedSelectedElement;
-        // return {
-        //   ...state,
-        //   workspaceElements: updatedContract,
-        //   selectedElement: updatedSelectedElement,
-        // };
       });
     },
 

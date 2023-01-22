@@ -20,6 +20,10 @@ enum Method {
   SELECT_INPUT = 'selectInput',
   PRE_INPUT = 'preInput',
   USER_ADDRESS = 'userAddress',
+  SHOW_INPUT = 'showInput',
+  SHOW_OUTPUT = 'showOutput',
+  SHOW_INPUT_CONTENT = 'showInputContent',
+  SHOW_OUTPUT_CONTENT = 'showOutputContent',
 }
 
 const methodOptions = [
@@ -59,10 +63,8 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
 
   const setCurrentElement = element => {
     const newCurrentElements = [...currentElements];
-    // if (elementIndex === -1) {
     newCurrentElements.push(element);
     setCurrentElements(newCurrentElements);
-    // }
   };
   const updateCurrentElement = element => {
     const elementIndex = currentElements.findIndex(currentElement => currentElement?.inputName === element.inputName);
@@ -73,7 +75,6 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
     }
     newCurrentElements.push(element);
     setCurrentElements(newCurrentElements);
-    // }
   };
 
   const handleSave = () => {
@@ -300,9 +301,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                     return (
                       <>
                         <div onClick={() => handleInputContent(i)} className="flex items-center justify-center mt-[1.25rem]">
-                          <h6 className="text-[#344054] font-medium text-xs cursor-pointer ml-4 flex grow">
-                            <> Input - {input?.name}</>
-                          </h6>
+                          <h6 className="text-[#344054] font-medium text-xs cursor-pointer ml-4 flex grow">Input - {input?.name}</h6>
                           {showInputContent[i] ? (
                             <IoMdArrowDropdown className="items-center text-[18px] mr-2 text-[#344054]" />
                           ) : (
@@ -483,10 +482,16 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
               </section>
             )}
             {showComponent.value?.outputs?.length > 0 ? (
-              <div className="grey-border mx-2 mt-5">
-                <h2 className="ml-1 text-[#100F11] font-medium text-sm cursor-pointer my-2" onClick={handleShowOutput}>
+              <div className="grey-border mx-2 mt-5 flex items-center">
+                <h2 className="ml-1 text-[#100F11] font-medium text-sm cursor-pointer my-2 flex grow" onClick={handleShowOutput}>
                   Add Output
                 </h2>
+
+                {showOutput ? (
+                  <IoMdArrowDropdown className=" items-center text-[18px]" />
+                ) : (
+                  <IoMdArrowDropright className="flex items-center text-[18px]" />
+                )}
               </div>
             ) : null}
             {showOutput ? (
@@ -496,9 +501,14 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                     const { selectedId, objects, filterObjects } = outputObjects(i);
                     return (
                       <section key={i} className="mt-3">
-                        <h6 onClick={() => handleOutputContent(i)} className="text-[#344054] font-medium text-xs cursor-pointer ml-4 mt-[1.25rem]">
-                          Output - {output?.name}
-                        </h6>
+                        <div onClick={() => handleOutputContent(i)} className="flex items-center justify-center mt-[1.25rem]">
+                          <h6 className="text-[#344054] font-medium text-xs cursor-pointer ml-4 flex grow">Output - {output?.name}</h6>
+                          {showOutputContent[i] ? (
+                            <IoMdArrowDropdown className="items-center text-[18px] mr-2 text-[#344054]" />
+                          ) : (
+                            <IoMdArrowDropright className="flex items-center text-[18px] mr-2 text-[#344054]" />
+                          )}
+                        </div>
                         <div className="grey-border mx-2 mt-5">
                           {showOutputContent[i] ? (
                             <div

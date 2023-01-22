@@ -112,31 +112,15 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsO
             </div>
             <div className="px-2">
               <div className="mb-3">
-                <Listbox
-                  // id="select"
-                  // className="form-select cursor-pointer contract-input mt-2 block w-[13.5rem] px-3 py-1.5 focus:outline-none focuse:border-none"
-                  // aria-label="Default select example"
-                  onChange={onSelect}
-                  value={showComponent?.id}
-                >
-                  <Listbox.Button
-                    value=""
-                    className="changeText text-left pl-[0.6rem] py-[0.4rem] input-text"
-                    // selected={!selectedElement.contract.methodName}
-                    // hidden
-                  >
+                <Listbox onChange={onSelect} value={showComponent?.id}>
+                  <Listbox.Button value="" className="changeText text-left pl-[0.6rem] py-[0.4rem] input-text">
                     {showComponent?.value.name ? showComponent?.value.name : <>Select A Method</>}
                   </Listbox.Button>
                   <Listbox.Options className="listbox-options h-[10rem] absolute mt-[1rem] z-100 bg-white w-[13.5rem] rounded-[8px] border border-solid border-[#F2F4F7] overflow-scroll">
                     {contractDetails.abi &&
                       abiJson.map((method: { name: string }, i: number) => (
                         <>
-                          <Listbox.Option
-                            value={i}
-                            key={i}
-                            className="py-[0.5rem] pr-2 pl-[1rem] cursor-pointer hover:bg-[#FAFAFF]"
-                            // selected={selectedElement.contract.methodName === method.name}
-                          >
+                          <Listbox.Option value={i} key={i} className="py-[0.5rem] pr-2 pl-[1rem] cursor-pointer hover:bg-[#FAFAFF]">
                             {method.name}
                           </Listbox.Option>
                         </>
