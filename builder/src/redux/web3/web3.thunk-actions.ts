@@ -1,17 +1,15 @@
 import { BigNumber, ethers } from 'ethers';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import config from 'config';
 import { getERC20Contract, getSigner } from './web3.utils';
 
-export const connectWalletService = async () => {
+export const connectWalletAsync = createAsyncThunk('web3/connectWallet', async (_, { dispatch, rejectWithValue }) => {
   try {
     const { ethereum } = window as any;
 
     if (!ethereum) {
-      return {
-        error: true,
-        errorMessage: 'MetaMask not installed, please install!',
-        account: '',
-      };
+      console.error('MetaMask not installed, please install!');
+      return '';
     }
 
     const provider = new ethers.providers.Web3Provider(ethereum);
@@ -19,25 +17,27 @@ export const connectWalletService = async () => {
     const signer = provider.getSigner();
     const address = await signer.getAddress();
 
-    return { error: false, errorMessage: '', address };
+    // yield put(fetchOwnedTemplates());
+    // yield put(fetchOwnedReviewTemplates());
+    // yield put(fetchOwnedListedTemplates());
+
+    await changeNetworkAsync();
+    await dispatch(fetchTokenBalanceAsync(address));
+
+    return address;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error in connectWalletService --> ', error);
-    return {
-      error: true,
-      errorMessage: (error as Error).message,
-      address: '',
-    };
+    console.error('Error in connectWalletAsync --> ', error);
+    return rejectWithValue(error);
   }
-};
+});
 
-export const changeNetworkService = async () => {
+export const changeNetworkAsync = async () => {
   try {
     await (window as any).ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: config.network.DEFAULT_NETWORK.chainId }],
     });
-    return { error: false, errorMessage: '' };
   } catch (switchError) {
     // This error code indicates that the chain has not been added to MetaMask.
     if (switchError.code === 4902) {
@@ -46,20 +46,17 @@ export const changeNetworkService = async () => {
           method: 'wallet_addEthereumChain',
           params: [config.network.DEFAULT_NETWORK],
         });
-        return { error: false, errorMessage: '' };
       } catch (error) {
         // eslint-disable-next-line no-console
-        console.log('Error in changeNetworkService --> ', error);
-        return { error: true, errorMessage: (error as Error).message };
+        console.error('Error in changeNetworkAsync --> ', error);
       }
     }
     // eslint-disable-next-line no-console
-    console.log('Error in changeNetworkService --> ', switchError);
-    return { error: true, errorMessage: (switchError as Error).message };
+    console.error('Error in changeNetworkAsync --> ', switchError);
   }
 };
 
-export const getTokenBalanceService = async (walletAddress: string) => {
+export const fetchTokenBalanceAsync = createAsyncThunk('web3/fetchTokenBalance', async (walletAddress: string) => {
   try {
     const signer = getSigner();
     const erc20Contract = getERC20Contract(config.address.usdt, signer);
@@ -67,10 +64,9 @@ export const getTokenBalanceService = async (walletAddress: string) => {
     const walletBalance: BigNumber = await erc20Contract.balanceOf(walletAddress);
     const balanceInEth = ethers.utils.formatEther(walletBalance);
 
-    return { error: false, errorMessage: '', balance: balanceInEth };
+    return parseFloat(balanceInEth);
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log('Error in getTokenBalanceService --> ', error);
-    return { error: true, errorMessage: (error as Error).message, balance: 0 };
+    console.error('Error in fetchTokenBalanceAsync --> ', error);
   }
-};
+});

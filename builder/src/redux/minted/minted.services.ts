@@ -3,7 +3,7 @@ import request, { gql } from 'graphql-request';
 import config from 'config';
 import { approveERC1155Token, getMarketplaceContract, getSigner, isApprovedForAll, TOKENS_COUNT_ON_MINT } from 'redux/web3/web3.utils';
 import { getCurrentTime } from './minted.utils';
-import { formatList } from 'redux/template/template.services';
+import { formatList } from 'redux/template/template.thunk-actions';
 import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
 export const approveListingService = async (address: string): Promise<any> => {
