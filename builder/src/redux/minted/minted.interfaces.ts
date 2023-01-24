@@ -7,5 +7,5 @@ export interface IMintedState {
   ownedTemplateList: ISelectedTemplate[];
   ownedReviewTemplateList: ISelectedTemplate[];
   ownedListedTemplateList: ISelectedTemplate[];
-  mintedImageData: string;
+  templateBannerImage: string;
 }
