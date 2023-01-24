@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ethers } from 'ethers';
 import config from 'config';
 import { approveERC20Token, getERC1155Contract, getMarketplaceContract, getSigner } from 'redux/web3/web3.utils';
-import { filterAllTemplates } from './template.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { ISelectedTemplate } from './template.interfaces';
 import { SelectedTemplateDto } from './template.dto';
@@ -10,7 +9,7 @@ import { inReviewQuery, listedQuery } from './template.utils';
 import request from 'graphql-request';
 import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 
-export const buySelectedTemplateAsync = createAsyncThunk('web3/buySelectedTemplate', async (_, { getState }) => {
+export const buySelectedTemplateAsync = createAsyncThunk('template/buySelectedTemplate', async (_, { getState }) => {
   const state = getState() as IRootState;
   const selectedTemplate: ISelectedTemplate = state.template.selectedTemplate;
   const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
@@ -49,7 +48,7 @@ export const buySelectedTemplateAsync = createAsyncThunk('web3/buySelectedTempla
   }
 });
 
-export const mintTemplateAsync = createAsyncThunk('web3/mintTemplate', async (uri: string) => {
+export const mintTemplateAsync = createAsyncThunk('template/mintTemplate', async (uri: string) => {
   try {
     const signer = getSigner();
     const erc1155Contract = getERC1155Contract(signer);
@@ -65,12 +64,11 @@ export const mintTemplateAsync = createAsyncThunk('web3/mintTemplate', async (ur
 });
 
 // available for buying
-export const fetchListedTemplatesAsync = createAsyncThunk('web3/fetchListedTemplates', async (_, { dispatch }) => {
+export const fetchListedTemplatesAsync = createAsyncThunk('template/fetchListedTemplates', async (_, { dispatch }) => {
   try {
     const query = process.env.REACT_APP_TEMPLATE_LIST_TYPE === 'in-review' ? inReviewQuery : listedQuery;
     const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
     const listings = await formatList(res.listings);
-    dispatch(filterAllTemplates(listings));
     return listings;
   } catch (error) {
     // eslint-disable-next-line no-console

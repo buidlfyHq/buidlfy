@@ -1,35 +1,43 @@
-import { BigNumber } from 'ethers';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import request, { gql } from 'graphql-request';
+import { ethers } from 'ethers';
 import config from 'config';
-import { approveERC1155Token, getMarketplaceContract, getSigner, isApprovedForAll, TOKENS_COUNT_ON_MINT } from 'redux/web3/web3.utils';
-import { getCurrentTime } from './minted.utils';
 import { formatList } from 'redux/template/template.thunk-actions';
+import { filterAllTemplates } from 'redux/template/template.reducers';
+import { getCurrentTime } from './minted.utils';
+import { approveERC1155Token, getMarketplaceContract, getSigner, isApprovedForAll, TOKENS_COUNT_ON_MINT } from 'redux/web3/web3.utils';
+import { IRootState } from 'redux/root-state.interface';
+import { ISelectedTemplate } from 'redux/template/template.interfaces';
 import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import { SelectedTemplateDto } from 'redux/template/template.dto';
 
-export const approveListingService = async (address: string): Promise<any> => {
+export const approveListingAsync = createAsyncThunk('minted/approveListing', async (address: string) => {
   try {
     const signer = getSigner();
     const isApproved = await isApprovedForAll(signer, address);
     if (!isApproved) {
       await approveERC1155Token(signer);
     }
-
-    return { error: false, errorMessage: '' };
+    return;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log('Error in approveListingService --> ', error);
-    return {
-      error: true,
-      errorMessage: (error as Error).message,
-    };
   }
-};
+});
 
-export const createListingService = async (tokenId: string, buyoutPricePerToken: BigNumber): Promise<any> => {
+export const createListingAsync = createAsyncThunk('minted/createListing', async (amount: string, { dispatch, getState }) => {
+  const state = getState() as IRootState;
+  const currentAccount = state.web3.currentAccount;
+  const selectedTemplate: ISelectedTemplate = state.template.selectedTemplate;
+  const selectedTemplateDto = new SelectedTemplateDto(selectedTemplate);
+  const buyoutPricePerToken = ethers.utils.parseEther(amount);
+
+  await dispatch(approveListingAsync(currentAccount));
+
   try {
     const signer = getSigner();
     const marketplaceContract = getMarketplaceContract(signer);
-    const token_id = parseInt(tokenId);
+    const token_id = parseInt(selectedTemplateDto.tokenId);
     const tx = await marketplaceContract.createListing(
       [
         config.address.buidlfyErc1155,
@@ -48,19 +56,22 @@ export const createListingService = async (tokenId: string, buyoutPricePerToken:
     );
     console.log('tx: ', tx);
     const receipt = await tx.wait();
-    return { error: false, errorMessage: '', receipt };
+    return receipt;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log('Error in createListingService --> ', error);
-    return { error: true, errorMessage: (error as Error).message, receipt: '' };
+    console.error('Error in createListingService --> ', error);
   }
-};
+});
 
-export const getOwnedTemplatesService = async (address: string): Promise<any> => {
+export const fetchOwnedTemplatesAsync = createAsyncThunk('minted/fetchOwnedTemplates', async (_, { dispatch, getState }) => {
+  const state = getState() as IRootState;
+  const currentAccount = state.web3.currentAccount;
+  const modalType = state.modal.modalType;
+
   try {
     const allTemplates = await (
       await fetch(
-        `https://deep-index.moralis.io/api/v2/${address}/nft?chain=${config.network.DEFAULT_NETWORK.chainName}&format=decimal&token_addresses=${config.address.buidlfyErc1155}`,
+        `https://deep-index.moralis.io/api/v2/${currentAccount}/nft?chain=${config.network.DEFAULT_NETWORK.chainName}&format=decimal&token_addresses=${config.address.buidlfyErc1155}`,
         {
           method: 'GET',
           headers: {
@@ -89,19 +100,33 @@ export const getOwnedTemplatesService = async (address: string): Promise<any> =>
       )
     ).filter((template: any) => template !== undefined);
 
-    return { error: false, errorMessage: '', templates };
+    dispatch(filterAllTemplates(templates));
+
+    if (modalType === 'select-wallet') {
+      const selectedTemplate = state.template.selectedTemplate;
+      if (selectedTemplate?.isOwned) {
+        // yield put(toggleModalType('single'));
+      } else {
+        // yield put(toggleModalType('checkout'));ß
+      }
+    }
+
+    // yield put(ownedTemplatesFetched(fetchedTemplates.templates));
+    return templates;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log('Error in getOwnedTemplatesService --> ', error);
-    return { error: true, errorMessage: (error as Error).message, receipt: '' };
+    console.error('Error in fetchOwnedTemplatesAsync --> ', error);
   }
-};
+});
 
-export const getOwnedReviewTemplatesService = async (address: string) => {
+export const fetchOwnedReviewTemplatesAsync = createAsyncThunk('minted/fetchOwnedReviewTemplates', async (_, { getState }) => {
+  const state = getState() as IRootState;
+  const currentAccount = state.web3.currentAccount;
+
   try {
     const query = gql`
       {
-        listings(where: { listing_tokenOwner: "${address.toLowerCase()}", isAccepted: false }) {
+        listings(where: { listing_tokenOwner: "${currentAccount.toLowerCase()}", isAccepted: false }) {
           id
           token {
             id
@@ -128,23 +153,24 @@ export const getOwnedReviewTemplatesService = async (address: string) => {
 
     const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
     const listings = await formatList(res.listings);
-    return { error: false, errorMessage: '', listings };
+    if (listings.length !== 0) {
+      return listings;
+    }
+    return [];
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error in fetching --> ', error);
-    return {
-      error: true,
-      errorMessage: (error as Error).message,
-      listings: null,
-    };
+    console.error('Error in fetchOwnedReviewTemplatesAsync --> ', error);
   }
-};
+});
 
-export const getOwnedListedTemplatesService = async (address: string) => {
+export const fetchOwnedListedTemplatesAsync = createAsyncThunk('minted/fetchOwnedListedTemplates', async (_, { getState }) => {
+  const state = getState() as IRootState;
+  const currentAccount = state.web3.currentAccount;
+
   try {
     const query = gql`
       {
-        listings(where: { listing_tokenOwner: "${address.toLowerCase()}", isAccepted: true }) {
+        listings(where: { listing_tokenOwner: "${currentAccount.toLowerCase()}", isAccepted: true }) {
           id
           token {
             id
@@ -171,14 +197,11 @@ export const getOwnedListedTemplatesService = async (address: string) => {
 
     const res = await request(config.template.TEMPLATE_GRAPHQL_URL, query);
     const listings = await formatList(res.listings);
-    return { error: false, errorMessage: '', listings };
+    if (listings.length !== 0) {
+      return listings;
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error in fetching --> ', error);
-    return {
-      error: true,
-      errorMessage: (error as Error).message,
-      listings: null,
-    };
+    console.error('Error in fetchOwnedListedTemplatesAsync --> ', error);
   }
-};
+});
