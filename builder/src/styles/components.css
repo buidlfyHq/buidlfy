@@ -1438,7 +1438,7 @@
   position: relative;
 }
 .mytooltip .mytext:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 40%;
   left: 100%;
