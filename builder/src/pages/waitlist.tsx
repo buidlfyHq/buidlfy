@@ -5,13 +5,12 @@ import { SiweMessage } from 'siwe';
 const domain = window.location.host;
 const provider = new ethers.providers.Web3Provider((window as any).ethereum);
 const signer = provider.getSigner();
-const BACKEND_ADDR = 'http://localhost:8000';
 
 const Waitlist = () => {
   const [twitterHandle, setTwitterHandle] = useState('');
 
-  const createSiweMessage = async (address, statement) => {
-    const res = await fetch(`${BACKEND_ADDR}/nonce`, {
+  const createSiweMessage = async (address: string, statement: string) => {
+    const res = await fetch(`${process.env.BACKEND_ADDR}/nonce`, {
       credentials: 'include',
     });
     const message = new SiweMessage({
@@ -36,7 +35,7 @@ const Waitlist = () => {
     const signature = await signer.signMessage(message);
     const walletName = 'Metamask';
 
-    const res = await fetch(`${BACKEND_ADDR}/signin`, {
+    const res = await fetch(`${process.env.BACKEND_ADDR}/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -48,14 +47,14 @@ const Waitlist = () => {
   };
 
   const signout = async () => {
-    const res = await fetch(`${BACKEND_ADDR}/signout`, {
+    const res = await fetch(`${process.env.BACKEND_ADDR}/signout`, {
       credentials: 'include',
     });
     console.log(await res.text());
   };
 
   const verify = async () => {
-    const res = await fetch(`${BACKEND_ADDR}/verify_tweet`, {
+    const res = await fetch(`${process.env.BACKEND_ADDR}/verify_tweet`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
