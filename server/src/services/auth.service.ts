@@ -53,7 +53,7 @@ class AuthService {
       }
 
       const verified = isFollowing && hasTweeted ? true : false;
-      await this.users.findOneAndUpdate(
+      const verifiedUser: User = await this.users.findOneAndUpdate(
         { address: address },
         {
           $set: {
@@ -62,7 +62,6 @@ class AuthService {
           },
         },
       );
-      const verifiedUser: User = await this.users.findOne({ address });
       return verifiedUser;
     } catch (error) {
       Logger.error(`Error found in ${__filename} - verify - `);

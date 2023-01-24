@@ -24,6 +24,7 @@ const App: FC = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/my-templates" element={<MyTemplates />} />
           <Route path="/preview" element={<Preview />} />
+          <Route path="/waitlist" element={<Waitlist />} />
         </Routes>
       </Router>
 

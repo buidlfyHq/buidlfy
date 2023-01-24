@@ -9,14 +9,14 @@ import { IRootState } from 'redux/root-state.interface';
 import InfoCircleImg from 'assets/icons/info-circle.png';
 import MintUploadImg from 'assets/icons/mint-form-img.png';
 import { uploadImageAsync } from 'redux/upload/upload.thunk-actions';
-import { updateMintedImageData } from 'redux/minted/minted.reducers';
+import { updateTemplateBannerImage } from 'redux/minted/minted.reducers';
 import { Categories } from 'utils/categories';
 
 const MintTemplateForm: FC = () => {
   const dispatch = useDispatch();
   const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
   const imageLink = useSelector((state: IRootState) => state.upload.uploadImage);
-  const mintedImage = useSelector((state: IRootState) => state.minted.mintedImageData);
+  const templateBannerImage = useSelector((state: IRootState) => state.minted.templateBannerImage);
   const workspaceBackgroundColor = useSelector((state: IRootState) => state.workspace.workspaceBackgroundColor);
   const head = useSelector((state: IRootState) => state.workspace.head);
   const contractDetails = useSelector((state: IRootState) => state.contract.contractDetails);
@@ -54,7 +54,7 @@ const MintTemplateForm: FC = () => {
         // setSize(false);
         const reader = new FileReader();
         reader.addEventListener('load', async () => {
-          dispatch(updateMintedImageData(reader.result as string));
+          dispatch(updateTemplateBannerImage(reader.result as string));
           dispatch(uploadImageAsync({ data: reader.result as string }));
         });
         reader.readAsDataURL(e.target.files[0]);
@@ -100,8 +100,13 @@ const MintTemplateForm: FC = () => {
       <div className="my-8 mint-upload-img">
         <div className="w-full h-[300px] upload-img-mint cursor-pointer">
           <label className="flex flex-col items-center justify-center h-full text-[12px] text-[#130F1C]">
-            <img src={`${mintedImage ? mintedImage : MintUploadImg}`} alt="icon" width={`${mintedImage ? 200 : 50}`} height={50} />
-            {!mintedImage ? (
+            <img
+              src={`${templateBannerImage ? templateBannerImage : MintUploadImg}`}
+              alt="icon"
+              width={`${templateBannerImage ? 200 : 50}`}
+              height={50}
+            />
+            {!templateBannerImage ? (
               <>
                 <div className="text-[13px] text-[#7A7B93] w-[240px] text-center mt-9">
                   Upload a file or drag and drop PNG, JPG, GIF in 800*400 resolution.

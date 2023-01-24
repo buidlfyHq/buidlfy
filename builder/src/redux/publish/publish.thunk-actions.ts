@@ -29,7 +29,7 @@ export const initiatePublishAsync = createAsyncThunk('publish/initiatePublish', 
       redirect: 'follow',
     };
 
-    const response = await fetch(config.server.SERVER + 'deployment/create', requestOptions);
+    const response = await fetch(`${config.server.SERVER}deployment/create`, requestOptions);
     const responseText = await response.text();
     const deploymentId = JSON.parse(responseText).data.deploymentId;
     localStorage.setItem('deployment', deploymentId);
@@ -67,14 +67,10 @@ export const fetchPublishDetailsAsync = createAsyncThunk(
       const domainName = JSON.parse(responseText).data.domain.name;
       if (domainId) {
         localStorage.setItem('domain', domainId);
-        localStorage.getItem('domain');
       }
       localStorage.setItem('domainName', domainName);
 
-      // yield put({
-      //   type: publishActionTypes.VERIFY_PUBLISH,
-      //   payload: { domainId: domainId, projectId: projectId },
-      // });
+      dispatch(verifyPublishAsync({ domainId, projectId }));
       return { domainName, projectId, currentStep: 5 };
     } catch (error) {
       // eslint-disable-next-line no-console
