@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineLeft } from 'react-icons/ai';
 import WarningText from 'components/utils/setting-warning';
 import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
-import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { IShowComponent, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IAbi } from 'redux/contract/contract.interfaces';
 import { Listbox } from '@headlessui/react';
+import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';
 
 interface IAbiMethods {
   setShowComponent: (showComponent: IShowComponent) => void;
@@ -113,14 +113,22 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsO
             <div className="px-2">
               <div className="mb-3">
                 <Listbox onChange={onSelect} value={showComponent?.id}>
-                  <Listbox.Button value="" className="changeText text-left pl-[0.6rem] py-[0.4rem] input-text">
-                    {showComponent?.value.name ? showComponent?.value.name : <>Select A Method</>}
+                  <Listbox.Button value="" className="changeText text-left pl-[0.6rem] py-[0.4rem] input-text flex">
+                    <span className="flex grow"> {showComponent?.value.name ? showComponent?.value.name : <>Select A Method</>}</span>
+                    <span className="pr-4">
+                      <MdOutlineKeyboardArrowUp className="text-[10px] text-[#475385] mt-[0.15rem] absolute" />
+                      <MdOutlineKeyboardArrowDown className="text-[10px] text-[#475385] absolute mt-[0.7rem]" />
+                    </span>
                   </Listbox.Button>
                   <Listbox.Options className="listbox-options h-[10rem] absolute mt-[1rem] z-100 bg-white w-[13.5rem] rounded-[8px] border border-solid border-[#F2F4F7] overflow-scroll">
                     {contractDetails.abi &&
                       abiJson.map((method: { name: string }, i: number) => (
                         <>
-                          <Listbox.Option value={i} key={i} className="py-[0.5rem] pr-2 pl-[1rem] cursor-pointer hover:bg-[#FAFAFF]">
+                          <Listbox.Option
+                            value={i}
+                            key={i}
+                            className="py-[0.5rem] pr-2 pl-[1rem] text-[11px] font-medium cursor-pointer hover:bg-[#FAFAFF]"
+                          >
                             {method.name}
                           </Listbox.Option>
                         </>

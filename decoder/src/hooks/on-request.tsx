@@ -23,7 +23,6 @@ export const onRequest = async (
     // push all the required input values to args
     const args = [];
     let amount: string;
-
     // mapping: contractFunction: {methodName, stateMutability, inputs, outputs}
     // inputs: ['input00', 'input01'] ---> [{id: 'xyz'}, {id: 'abc'}]
     // same goes with output
@@ -59,7 +58,11 @@ export const onRequest = async (
       .inputs.map((input) => {
         args.map((arg) => {
           if (input.name === arg.name) {
-            newArgs.push(arg.value);
+            if (input.type === "tuple") {
+              newArgs.push(JSON.parse(arg.value));
+            } else {
+              newArgs.push(arg.value);
+            }
           }
         });
       });
