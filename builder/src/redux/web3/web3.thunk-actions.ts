@@ -28,6 +28,7 @@ export const connectWalletAsync = createAsyncThunk('web3/connectWallet', async (
 
     return address;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error in connectWalletAsync --> ', error);
     return rejectWithValue(error);
   }
@@ -42,7 +43,6 @@ export const fetchWalletDetailsAsync = createAsyncThunk('web3/fetchWalletDetails
     return;
   } catch (error) {
     console.error('Error in fetchWalletDetailsAsync --> ', error);
-    return;
   }
 });
 
@@ -82,6 +82,5 @@ export const fetchTokenBalanceAsync = createAsyncThunk('web3/fetchTokenBalance',
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error in fetchTokenBalanceAsync --> ', error);
-    return 0;
   }
 });
