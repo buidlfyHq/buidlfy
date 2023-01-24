@@ -29,7 +29,7 @@ const VerifyTwitter = ({ setStep }) => {
         setStep(1);
       }
 
-      const res = await fetch(`${config.server.SERVER}/verify_tweet`, {
+      const res = await fetch(`${config.server.SERVER}/verify-tweet`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -38,7 +38,7 @@ const Dashboard: FC = () => {
         navigate('/');
       }
       // check if user is authorised
-      fetch(`${config.server.SERVER}/user_status`, {
+      fetch(`${config.server.SERVER}/user-status`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${session.nonce}`,
