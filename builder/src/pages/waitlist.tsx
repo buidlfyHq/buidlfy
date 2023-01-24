@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ethers } from 'ethers';
 import { SiweMessage } from 'siwe';
+import config from 'config';
 
 const domain = window.location.host;
 const provider = new ethers.providers.Web3Provider((window as any).ethereum);
@@ -10,7 +11,7 @@ const Waitlist = () => {
   const [twitterHandle, setTwitterHandle] = useState('');
 
   const createSiweMessage = async (address: string, statement: string) => {
-    const res = await fetch(`${process.env.BACKEND_ADDR}/nonce`, {
+    const res = await fetch(`${config.server.SERVER}/nonce`, {
       credentials: 'include',
     });
     const message = new SiweMessage({
@@ -35,7 +36,7 @@ const Waitlist = () => {
     const signature = await signer.signMessage(message);
     const walletName = 'Metamask';
 
-    const res = await fetch(`${process.env.BACKEND_ADDR}/signin`, {
+    const res = await fetch(`${config.server.SERVER}/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,14 +48,14 @@ const Waitlist = () => {
   };
 
   const signout = async () => {
-    const res = await fetch(`${process.env.BACKEND_ADDR}/signout`, {
+    const res = await fetch(`${config.server.SERVER}/signout`, {
       credentials: 'include',
     });
     console.log(await res.text());
   };
 
   const verify = async () => {
-    const res = await fetch(`${process.env.BACKEND_ADDR}/verify_tweet`, {
+    const res = await fetch(`${config.server.SERVER}/verify_tweet`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
