@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Dashboard from 'pages/dashboard';
 import MyTemplates from 'pages/my-templates';
@@ -19,7 +19,9 @@ const App: FC = () => {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Navigate to="/waitlist" />} />
+          <Route path="/waitlist" element={<Waitlist />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/my-templates" element={<MyTemplates />} />
           <Route path="/preview" element={<Preview />} />
           <Route path="/waitlist" element={<Waitlist />} />

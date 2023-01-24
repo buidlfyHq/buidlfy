@@ -10,6 +10,18 @@ import { User } from '@/interfaces/users.interface';
 class AuthService {
   public users = userModel;
 
+  public async getUser(address: string): Promise<User> {
+    if (isEmpty(address)) throw new HttpException(400, 'Address is empty');
+    try {
+      const findUser: User = await this.users.findOne({ address });
+      if (findUser) return findUser;
+    } catch (error) {
+      Logger.error(`Error found in ${__filename} - getUser - `);
+      Logger.error(error);
+      throw error;
+    }
+  }
+
   public async authenticate(address: string, walletName: string): Promise<User> {
     if (isEmpty(address)) throw new HttpException(400, 'Address is empty');
     try {

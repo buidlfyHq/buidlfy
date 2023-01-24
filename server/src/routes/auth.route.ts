@@ -12,6 +12,7 @@ class AuthRoute implements Routes {
   }
 
   private initializeRoutes() {
+    this.router.get(`${this.path}/is_authenticated`, this.authController.isAuthenticated);
     this.router.get(`${this.path}/nonce`, this.authController.createNonce);
     this.router.post(`${this.path}/signin`, this.authController.signin);
     this.router.get(`${this.path}/signout`, this.authController.signout);

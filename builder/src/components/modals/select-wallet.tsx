@@ -14,7 +14,7 @@ const SelectWallet: FC = () => {
 
   const handleConnect = () => {
     setLoading(true);
-    dispatch(fetchWalletDetailsAsync());
+    dispatch(fetchWalletDetailsAsync(''));
   };
 
   return (
