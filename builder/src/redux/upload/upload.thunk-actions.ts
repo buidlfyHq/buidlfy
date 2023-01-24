@@ -20,7 +20,7 @@ export const uploadImageAsync = createAsyncThunk('upload/uploadImage', async (pa
       redirect: 'follow',
     };
 
-    const response = await fetch(config.server.SERVER + 'upload', requestOptions);
+    const response = await fetch(`${config.server.SERVER}upload`, requestOptions);
     const responseText = await response.text();
     const uploadImageLink = JSON.parse(responseText).data;
 
@@ -43,6 +43,5 @@ export const uploadImageAsync = createAsyncThunk('upload/uploadImage', async (pa
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error in uploadImageAsync --> ', error);
-    return '';
   }
 });

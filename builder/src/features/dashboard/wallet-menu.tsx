@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu } from '@headlessui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 import { truncateString } from 'utils/truncate-string';
@@ -65,6 +65,7 @@ interface IWalletMenu {
 }
 
 const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
 

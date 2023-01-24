@@ -1,5 +1,7 @@
 import { FC, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import config from 'config';
 import { useWindowSize } from 'hooks/use-window-size';
 import Navbar from 'features/dashboard/navbar';
 import Sidebar from 'features/dashboard/sidebar';
@@ -7,14 +9,17 @@ import SideNavbar from 'features/dashboard/side-navbar';
 import Workspace from 'features/dashboard/workspace';
 import Settings from 'features/dashboard/settings';
 import DefaultSettings from 'features/dashboard/default-settings';
+import { signout } from 'utils/signout';
 import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
+import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
 import 'styles/components.css';
 
 // const CAMPAIGN_CONTRACT_ADDRESS = "0x73ba4B6A58C67C70281C17aC23893b7BD4c8897E";
 
 const Dashboard: FC = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const size = useWindowSize();
   const [openSetting, setOpenSetting] = useState<boolean>(false); // for handling settings toggle

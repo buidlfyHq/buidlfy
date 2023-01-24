@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Responsive, WidthProvider } from 'react-grid-layout';
+import config from 'config';
 import RenderItem from 'components/utils/render-item';
 import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';

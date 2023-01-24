@@ -15,15 +15,15 @@ const initialState: IMintedState = {
   ownedTemplateList: [],
   ownedReviewTemplateList: [],
   ownedListedTemplateList: [],
-  mintedImageData: '',
+  templateBannerImage: '',
 };
 
 const mintedSlice = createSlice({
   name: 'minted',
   initialState,
   reducers: {
-    updateMintedImageData(state, action: { payload }) {
-      state.mintedImageData = action.payload;
+    updateTemplateBannerImage(state, action: { payload }) {
+      state.templateBannerImage = action.payload;
     },
   },
   extraReducers: builder => {
@@ -52,5 +52,5 @@ const mintedSlice = createSlice({
   },
 });
 
-export const { updateMintedImageData } = mintedSlice.actions;
+export const { updateTemplateBannerImage } = mintedSlice.actions;
 export default mintedSlice.reducer;
