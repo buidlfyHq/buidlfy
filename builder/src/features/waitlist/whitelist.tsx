@@ -3,37 +3,53 @@ import { useNavigate } from 'react-router-dom';
 import config from 'config';
 import Navbar from './navbar';
 import JoinDiscord from './join-discord';
+import { signout } from 'utils/signout';
 import Confetti from 'assets/waitlist-icons/confetti.svg';
+import Discord from 'assets/waitlist-icons/discord.svg';
+import DiscordVector from 'assets/waitlist-icons/discord-vector.svg';
 
 const Whitelist = ({ setStep }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // check if user is authorised
-    fetch(`${config.server.SERVER}/is_authenticated`, {
-      credentials: 'include',
-    })
-      .then(res => res.text())
-      .then(res => {
-        if (JSON.parse(res).whitelisted) {
-          const session: any = JSON.parse(localStorage.getItem('session'));
-          const updatedSessionData = { ...session.data, whitelisted: true };
-          const updatedSession = { ...session, data: updatedSessionData };
-          const stringifyUpdatedSession = JSON.stringify(updatedSession);
-          localStorage.setItem('session', stringifyUpdatedSession);
-          navigate('/dashboard');
-        } else if (JSON.parse(res).verified) {
-          const session: any = JSON.parse(localStorage.getItem('session'));
-          const updatedSessionData = { ...session.data, whitelisted: false, verified: true };
-          const updatedSession = { ...session, data: updatedSessionData };
-          const stringifyUpdatedSession = JSON.stringify(updatedSession);
-          localStorage.setItem('session', stringifyUpdatedSession);
-          setStep(3);
-        } else {
-          setStep(1);
-        }
+    const session: any = JSON.parse(localStorage.getItem('session'));
+    if (session) {
+      // signout if sesssion is expired
+      if (new Date(session.cookie?.expires) < new Date()) {
+        signout();
+        setStep(1);
+      }
+
+      // check if user is authorised
+      fetch(`${config.server.SERVER}/user_status`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${session.nonce}`,
+        },
+        credentials: 'include',
       })
-      .catch(() => setStep(1));
+        .then(res => res.text())
+        .then(res => {
+          if (JSON.parse(res).whitelisted) {
+            const updatedSessionData = { ...session.data, whitelisted: true };
+            const updatedSession = { ...session, data: updatedSessionData };
+            const stringifyUpdatedSession = JSON.stringify(updatedSession);
+            localStorage.setItem('session', stringifyUpdatedSession);
+            navigate('/dashboard');
+          } else if (JSON.parse(res).verified) {
+            const updatedSessionData = { ...session.data, whitelisted: false, verified: true };
+            const updatedSession = { ...session, data: updatedSessionData };
+            const stringifyUpdatedSession = JSON.stringify(updatedSession);
+            localStorage.setItem('session', stringifyUpdatedSession);
+            setStep(3);
+          } else {
+            setStep(1);
+          }
+        })
+        .catch(() => setStep(1));
+    } else {
+      setStep(1);
+    }
   }, []); // eslint-disable-line
 
   return (
@@ -51,20 +67,25 @@ const Whitelist = ({ setStep }) => {
             <p className="text-lg opacity-70 mb-20">our news letter to get latest update about us.</p>
             <aside className="bg-white/10 p-10 flex rounded-xl">
               <div className="text-left">
-                <h4 className="text-2xl font-semibold mb-4">Join our newsletter</h4>
+                <h4 className="text-2xl font-semibold mb-4 flex items-center">
+                  <img src={Discord} alt="discord" className="w-12 mr-3" />
+                  Join Our Discord Channel
+                </h4>
                 <p className="text-lg opacity-70">
-                  Stay up to date on the latest updates, get special member discounts
+                  Join our growing Discord community and send us questions or
                   <br />
-                  and lots of inspiration. Do subscribe.
+                  feedback! We love to hear from our users.
                 </p>
               </div>
-              <div className="ml-10">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="bg-white/20 mb-16 px-4 py-2 rounded-lg border border-[#655B7C] outline-none mr-4"
-                />
-                <button className="connect-wallet mb-16 px-6 py-2 rounded-lg">Subscribe</button>
+              <div className="ml-28">
+                <a
+                  href="https://bit.ly/buidlfy-discord"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="connect-wallet px-6 py-2 rounded-lg flex items-center"
+                >
+                  Join Discord <img src={DiscordVector} alt="discord" className="w-6 ml-3" />
+                </a>
               </div>
             </aside>
           </div>

@@ -2,10 +2,15 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import config from 'config';
 import Navbar from './navbar';
+import { signout } from 'utils/signout';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import BuidlfyShare from 'assets/waitlist-icons/buidlfy-share.svg';
+import TwitterVector from 'assets/waitlist-icons/twitter-vector.svg';
 
 const VerifyTwitter = ({ setStep }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [twitterHandle, setTwitterHandle] = useState<string>('');
+  const [errorMesssage, setErrorMesssage] = useState<string>('');
 
   const closeModal = () => {
     setIsOpen(false);
@@ -16,22 +21,42 @@ const VerifyTwitter = ({ setStep }) => {
   };
 
   const verify = async () => {
-    const res = await fetch(`${config.server.SERVER}/verify_tweet`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ twitterHandle }),
-      credentials: 'include',
-    });
-    const response = JSON.parse(await res.text());
-    if (response.data?.verified) {
-      const session: any = JSON.parse(localStorage.getItem('session'));
-      const updatedSessionData = { ...session.data, verified: true };
-      const updatedSession = { ...session, data: updatedSessionData };
-      const stringifyUpdatedSession = JSON.stringify(updatedSession);
-      localStorage.setItem('session', stringifyUpdatedSession);
-      setStep(3);
+    const session: any = JSON.parse(localStorage.getItem('session'));
+    if (session) {
+      // signout if sesssion is expired
+      if (new Date(session.cookie?.expires) < new Date()) {
+        signout();
+        setStep(1);
+      }
+
+      const res = await fetch(`${config.server.SERVER}/verify_tweet`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.nonce}`,
+        },
+        body: JSON.stringify({ twitterHandle }),
+        credentials: 'include',
+      });
+      if (res.ok === false) {
+        if (res.status === 400) {
+          const response = JSON.parse(await res.text());
+          console.error(response.message);
+          setErrorMesssage(response.message);
+        }
+        console.error(res.statusText);
+      } else {
+        const response = JSON.parse(await res.text());
+        if (response.data?.verified) {
+          const updatedSessionData = { ...session.data, verified: true };
+          const updatedSession = { ...session, data: updatedSessionData };
+          const stringifyUpdatedSession = JSON.stringify(updatedSession);
+          localStorage.setItem('session', stringifyUpdatedSession);
+          setStep(3);
+        }
+      }
+    } else {
+      setStep(1);
     }
   };
 
@@ -47,6 +72,7 @@ const VerifyTwitter = ({ setStep }) => {
             <p className="text-lg opacity-70">We have got many subscriptions. We can only whitelist first few serious sign ups,</p>
             <p className="text-lg opacity-70 mb-12">so please share it on twitter and we'll let you in.</p>
             <aside className="bg-black/20 p-10 flex rounded-xl">
+              <img src={BuidlfyShare} alt="twitter" className="w-28 mr-6" />
               <div className="text-left">
                 <h4 className="text-2xl font-semibold mb-4">Share the Beta launch on Twitter</h4>
                 <p className="text-lg opacity-70">
@@ -55,15 +81,15 @@ const VerifyTwitter = ({ setStep }) => {
                   upgraded Beta Access Pass!
                 </p>
               </div>
-              <div className="ml-10">
+              <div className="ml-10 flex items-center">
                 <a
-                  className="connect-wallet mb-16 px-6 py-2 rounded-lg mr-4"
+                  className="connect-wallet mb-16 px-6 py-2 rounded-lg mr-4 flex items-center"
                   target="_blank"
                   rel="noreferrer"
-                  href={`https://twitter.com/intent/tweet?hashtags=${process.env.REACT_APP_TWITTER_HASHTAGS}&text=${process.env.REACT_APP_TWITTER_TEXT}&via=${process.env.REACT_APP_TWITTER_VIA}`}
+                  href={`https://twitter.com/intent/tweet?text=${process.env.REACT_APP_TWITTER_TEXT}`}
                   data-size="large"
                 >
-                  Share & Follow
+                  Share & Follow <img src={TwitterVector} alt="twitter" className="w-6 ml-3" />
                 </a>
                 <button className="bg-white/20 mb-16 px-6 py-2 rounded-lg" onClick={openModal}>
                   Verify Tweet
@@ -115,6 +141,14 @@ const VerifyTwitter = ({ setStep }) => {
                       onChange={e => setTwitterHandle(e.target.value)}
                     />
                   </div>
+                  {errorMesssage && (
+                    <div className="my-2">
+                      <p className="text-sm text-white/70 mb-4 bg-red-900 rounded-lg py-1 px-2 flex items-center text-red-400">
+                        <AiFillCloseCircle className="mr-2" />
+                        {errorMesssage}
+                      </p>
+                    </div>
+                  )}
                   <div className="mt-4 text-right">
                     <button
                       className="inline-flex justify-center rounded-md border border-transparent bg-white/10 px-4 py-2 text-sm text-white font-medium mr-4"
