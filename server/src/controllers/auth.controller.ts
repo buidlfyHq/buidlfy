@@ -90,7 +90,7 @@ class AuthController {
           throw error;
         }
       });
-      res.status(200).send('Signout successful');
+      res.status(200);
     } catch (error) {
       Logger.error(`Error found in ${__filename} - signout - `);
       Logger.error(error);
