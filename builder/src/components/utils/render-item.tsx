@@ -359,7 +359,13 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case 'Lenster Card':
       return (
-        <>{preview ? <PreviewLensterWidget preview={preview} i={item.i} posts={item.posts} /> : <LensterWidget i={item.i} setDrag={setDrag} />}</>
+        <>
+          {preview ? (
+            <PreviewLensterWidget preview={preview} i={item.i} posts={item.posts} />
+          ) : (
+            <LensterWidget i={item.i} item={item} setDrag={setDrag} />
+          )}
+        </>
       );
 
     // need to understand if preview has a role in NFT Card ?

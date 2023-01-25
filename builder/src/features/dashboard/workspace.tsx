@@ -12,7 +12,7 @@ import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
 
 interface IWorkspaceComponent {
-  setOpenSetting: (open: boolean) => void;
+  setOpenSetting: (openSetting: boolean) => void;
   setOpenTab: (openTab?: number) => void;
   drag: boolean;
   setDrag: (drag: boolean) => void;
@@ -48,10 +48,8 @@ const Workspace: FC<IWorkspaceComponent> = ({
       : 'border border-[transparent] hover:border-slate-300 hover:border-dashed';
 
   const [fullViewWidth, setFullViewWidth] = useState<number>(1200);
-
   useEffect(() => {
     let fullView = document?.getElementById('full-view')?.getBoundingClientRect().width;
-
     setFullViewWidth(fullViewWidth => fullView);
   }, [hideNavbar, openSetting]);
 
