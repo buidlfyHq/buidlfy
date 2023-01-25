@@ -6,7 +6,7 @@ import { SITE_SIZE_VARIABLE } from 'config/constant';
 import Spinner from 'components/utils/assets/spinner';
 import BgColorComponent from 'components/settings/bg-color-component';
 import upload from 'assets/upload-img.svg';
-import { uploadImage } from 'redux/upload/upload.action';
+import { uploadImageAsync } from 'redux/upload/upload.thunk-actions';
 import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
 import { setSiteHead } from 'redux/workspace/workspace.reducers';
@@ -37,7 +37,7 @@ const DefaultSettings: FC<IDefaultSettings> = ({ setHideNavbar, setIsContainerSe
         const reader = new FileReader();
         reader.addEventListener('load', async () => {
           setSiteImage(reader.result as string);
-          dispatch(uploadImage({ data: reader.result as string }));
+          dispatch(uploadImageAsync({ data: reader.result as string }));
           setIsSpinner(false);
           dispatch(setSiteHead({ ...head, logo: imageLink }));
         });
