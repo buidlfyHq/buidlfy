@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Navbar from './navbar';
 import { signInWithEthereumAsync } from 'redux/user/user.thunk-actions';
 import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
-import { IRootState } from 'redux/root-state.interface';
 import Avatar from 'assets/waitlist-icons/avatar.svg';
 import Click from 'assets/waitlist-icons/click.svg';
 import Paint from 'assets/waitlist-icons/paint.svg';
@@ -26,14 +25,10 @@ const USE_CASES = [
 
 const Home: FC = () => {
   const dispatch = useDispatch();
-  const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
 
-  const handleClick = () => {
-    if (currentAccount) {
-      dispatch(signInWithEthereumAsync());
-    } else {
-      dispatch(fetchWalletDetailsAsync(''));
-    }
+  const handleClick = async () => {
+    await dispatch(fetchWalletDetailsAsync(''));
+    dispatch(signInWithEthereumAsync());
   };
 
   return (
@@ -55,7 +50,7 @@ const Home: FC = () => {
             </div>
             <img src={Divider} alt="avatar" className="my-8 mx-auto" />
             <button className="connect-wallet text-lg px-8 py-2 rounded-lg" onClick={handleClick}>
-              {currentAccount ? 'Sign In With Ethereum' : 'Connect Wallet'}
+              Sign In With Ethereum
             </button>
           </div>
         </section>
