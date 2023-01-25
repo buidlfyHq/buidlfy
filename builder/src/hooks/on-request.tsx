@@ -80,13 +80,13 @@ export const onRequest = async (
       console.log(receipt);
     } else if (contractFunction.stateMutability === 'payable') {
       // query contract functions --- magic code
-      const res = await contract.functions[method](...args, {
+      const res = await contract.functions[method](...newArgs, {
         value: ethers.utils.parseEther(amount),
       }); // passing an array as a function parameter
       receipt = await res.wait();
       console.log(receipt);
     } else if (contractFunction.stateMutability === 'view' || contractFunction.stateMutability === 'pure') {
-      const res = await contract.functions[method](...args); // passing an array as a function parameter
+      const res = await contract.functions[method](...newArgs); // passing an array as a function parameter
       receipt = res.wait ? await res.wait() : res;
       console.log(receipt);
     }
