@@ -1,52 +1,24 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import Home from 'features/waitlist/home';
 import VerifyTwitter from 'features/waitlist/verify-twitter';
 import Whitelist from 'features/waitlist/whitelist';
-import { signout } from 'utils/signout';
-import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
+import { IRootState } from 'redux/root-state.interface';
 import 'styles/waitlist.css';
 
-const Waitlist = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [step, setStep] = useState<number>(1);
-
-  useEffect(() => {
-    const session: any = JSON.parse(localStorage.getItem('session'));
-    if (session) {
-      // signout if sesssion is expired
-      if (new Date(session.cookie?.expires) < new Date()) {
-        signout();
-        setStep(1);
-      }
-
-      dispatch(fetchWalletDetailsAsync(session.data?.address));
-
-      // navigate based on user status
-      if (session.data?.whitelisted) {
-        navigate('/dashboard');
-      } else if (session.data?.verified) {
-        setStep(3);
-      } else {
-        setStep(2);
-      }
-    } else {
-      setStep(1);
-    }
-  }, []);
+const Waitlist: FC = () => {
+  const step = useSelector((state: IRootState) => state.user.step);
 
   const renderPage = () => {
     switch (step) {
       case 1:
-        return <Home setStep={setStep} />;
+        return <Home />;
       case 2:
-        return <VerifyTwitter setStep={setStep} />;
+        return <VerifyTwitter />;
       case 3:
-        return <Whitelist setStep={setStep} />;
+        return <Whitelist />;
       default:
-        return <Home setStep={setStep} />;
+        return <Home />;
     }
   };
 

@@ -122,6 +122,22 @@ class AuthController {
       next(error);
     }
   };
+
+  public subscribeNewsletter = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    if (!req.session.siwe) {
+      res.status(401).json({ message: 'You have to first signin' });
+      return;
+    }
+    try {
+      const { email } = req.body;
+      const user = await this.authService.subscribe(req.session.siwe.address, email);
+      res.status(200).json({ data: user, message: 'Subscription successful' });
+    } catch (error) {
+      Logger.error(`Error found in ${__filename} - subscribeNewsletter - `);
+      Logger.error(error);
+      next(error);
+    }
+  };
 }
 
 export default AuthController;

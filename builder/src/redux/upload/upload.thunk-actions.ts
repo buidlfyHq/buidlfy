@@ -1,12 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import config from 'config';
 import { updateUploadedImageData, updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
+import { ISession } from 'redux/user/user.interfaces';
 
 export const uploadImageAsync = createAsyncThunk('upload/uploadImage', async (payload: { data: string | ArrayBuffer; id?: string }, { dispatch }) => {
   const { data, id } = payload;
   try {
+    const session: ISession = JSON.parse(localStorage.getItem('session'));
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', `Bearer ${session?.nonce}`);
     const raw = JSON.stringify({
       data: data,
     });

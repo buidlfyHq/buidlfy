@@ -62,19 +62,43 @@ class AuthService {
       }
 
       const verified = isFollowing && hasTweeted;
-      await this.users.findOneAndUpdate(
-        { address: address },
-        {
-          $set: {
-            handle: twitterHandle,
-            verified: verified,
+      try {
+        await this.users.findOneAndUpdate(
+          { address: address },
+          {
+            $set: {
+              handle: twitterHandle,
+              verified: verified,
+            },
           },
-        },
-      );
+        );
+      } catch (error) {
+        return { errorMessage: 'Twitter handle already exists' };
+      }
       const verifiedUser: User = await this.users.findOne({ address });
       return verifiedUser;
     } catch (error) {
       Logger.error(`Error found in ${__filename} - verify - `);
+      Logger.error(error);
+      throw error;
+    }
+  }
+
+  public async subscribe(address: string, email: string) {
+    try {
+      await this.users.findOneAndUpdate(
+        { address: address },
+        {
+          $set: {
+            email: email,
+          },
+        },
+      );
+
+      const user: User = await this.users.findOne({ address });
+      return user;
+    } catch (error) {
+      Logger.error(`Error found in ${__filename} - subscribe - `);
       Logger.error(error);
       throw error;
     }

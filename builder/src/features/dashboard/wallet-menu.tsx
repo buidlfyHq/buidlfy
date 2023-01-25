@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Menu } from '@headlessui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 import { truncateString } from 'utils/truncate-string';
-import { signout } from 'utils/signout';
+import { signoutAsync } from 'redux/user/user.thunk-actions';
 import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
 import { IRootState } from 'redux/root-state.interface';
 import { BiChevronRight } from 'react-icons/bi';
@@ -68,11 +68,6 @@ const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
-
-  const handleSignout = () => {
-    signout();
-    navigate('/');
-  };
 
   return (
     <>
@@ -157,7 +152,7 @@ const WalletMenu: FC<IWalletMenu> = ({ isMyTemplatePage }) => {
             })}
             <Menu.Button
               className="font-[500] text-[#14142B] opacity-70 px-5 py-3 w-full font-[16px] flex items-center justify-between border border-t-1 border-[#F5F5F5] hover:bg-slate-100 hover:rounded-[8px] hover:cursor-pointer"
-              onClick={handleSignout}
+              onClick={() => dispatch(signoutAsync())}
             >
               <div className="flex items-center gap-4">
                 <span className="bg-blue-100/30 rounded-full p-2">

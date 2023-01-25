@@ -1,11 +1,8 @@
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { SiweMessage } from 'siwe';
-import config from 'config';
 import Navbar from './navbar';
-import JoinDiscord from './join-discord';
+import { signInWithEthereumAsync } from 'redux/user/user.thunk-actions';
 import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
-import { getSigner } from 'redux/web3/web3.utils';
 import { IRootState } from 'redux/root-state.interface';
 import Avatar from 'assets/waitlist-icons/avatar.svg';
 import Click from 'assets/waitlist-icons/click.svg';
@@ -16,57 +13,26 @@ import Plus from 'assets/waitlist-icons/plus.svg';
 import Computer from 'assets/waitlist-icons/computer.svg';
 import Divider from 'assets/waitlist-icons/divider.svg';
 import MoonDivider from 'assets/waitlist-icons/moon-divider.svg';
+import Discord from 'assets/waitlist-icons/discord.svg';
+import SocialDiscord from 'assets/waitlist-icons/social-discord.svg';
+import SocialTwitter from 'assets/waitlist-icons/social-twitter.svg';
 import 'styles/waitlist.css';
 
-const Home = ({ setStep }) => {
-  const navigate = useNavigate();
+const USE_CASES = [
+  ['NFT', 'Portfolio', 'Landing Page'],
+  ['NFT Mint Page', 'NFT gallery', 'Wall of love', 'Decentralised App'],
+  ['Lenster', 'Smart Contract Integration', 'dApps', 'iExec'],
+];
+
+const Home: FC = () => {
   const dispatch = useDispatch();
   const currentAccount = useSelector((state: IRootState) => state.web3.currentAccount);
 
-  const createSiweMessage = async (address: string, statement: string) => {
-    const res = await fetch(`${config.server.SERVER}/nonce`, {
-      credentials: 'include',
-    });
-    const domain = window.location.host;
-    const message = new SiweMessage({
-      domain,
-      address,
-      statement,
-      uri: origin,
-      version: '1',
-      chainId: 1,
-      nonce: await res.text(),
-    });
-    return message.prepareMessage();
-  };
-
-  const signInWithEthereum = async () => {
-    const signer = getSigner();
-    const address = await signer.getAddress();
-    const message = await createSiweMessage(address, 'Sign in with Ethereum to the app.');
-    const signature = await signer.signMessage(message);
-    const walletName = 'Metamask';
-
-    const res = await fetch(`${config.server.SERVER}/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ message, signature, address, walletName }),
-      credentials: 'include',
-    });
-
-    const response = JSON.parse(await res.text());
-    const sessionRes = { ...response.session, data: response.data };
-    const stringifySession = JSON.stringify(sessionRes);
-    localStorage.setItem('session', stringifySession);
-
-    if (response.data.whitelisted) {
-      navigate('/dashboard');
-    } else if (response.data.verified) {
-      setStep(3);
+  const handleClick = () => {
+    if (currentAccount) {
+      dispatch(signInWithEthereumAsync());
     } else {
-      setStep(2);
+      dispatch(fetchWalletDetailsAsync(''));
     }
   };
 
@@ -88,15 +54,9 @@ const Home = ({ setStep }) => {
               <img src={Avatar} alt="avatar" className="mx-auto" />
             </div>
             <img src={Divider} alt="avatar" className="my-8 mx-auto" />
-            {currentAccount ? (
-              <button className="connect-wallet text-lg px-8 py-2 rounded-lg" onClick={signInWithEthereum}>
-                Sign In With Ethereum
-              </button>
-            ) : (
-              <button className="connect-wallet text-lg px-8 py-2 rounded-lg" onClick={() => dispatch(fetchWalletDetailsAsync(''))}>
-                Connect Wallet
-              </button>
-            )}
+            <button className="connect-wallet text-lg px-8 py-2 rounded-lg" onClick={handleClick}>
+              {currentAccount ? 'Sign In With Ethereum' : 'Connect Wallet'}
+            </button>
           </div>
         </section>
         <section className="flex justify-center items-center">
@@ -110,21 +70,25 @@ const Home = ({ setStep }) => {
             </aside>
             <aside>
               <div className="mb-10">
-                <span className="feature-badge px-10 py-3 opacity-70 rounded-lg">NFT</span>
-                <span className="feature-badge-2 px-10 py-3 opacity-70 rounded-lg mx-4">Portfolio</span>
-                <span className="feature-badge px-10 py-3 opacity-70 rounded-lg">Landing Page</span>
+                {USE_CASES[0].map((useCase, i) => (
+                  <span key={i} className="feature-badge px-10 py-3 opacity-70 rounded-lg mx-2">
+                    {useCase}
+                  </span>
+                ))}
               </div>
               <div className="mb-10">
-                <span className="feature-badge px-10 py-3 opacity-70 rounded-lg">NFT Mint Page</span>
-                <span className="feature-badge px-10 py-3 opacity-70 rounded-lg mx-4">NFT gallery</span>
-                <span className="feature-badge px-10 py-3 opacity-70 rounded-lg mr-4">Wall of love</span>
-                <span className="feature-badge-2 px-10 py-3 opacity-70 rounded-lg">Decentralised App</span>
+                {USE_CASES[1].map((useCase, i) => (
+                  <span key={i} className="feature-badge px-10 py-3 opacity-70 rounded-lg mx-2">
+                    {useCase}
+                  </span>
+                ))}
               </div>
               <div className="mb-24">
-                <span className="feature-badge px-10 py-3 opacity-70 rounded-lg">Lenster</span>
-                <span className="feature-badge-2 px-10 py-3 opacity-70 rounded-lg mx-4">Smart Contract Integration</span>
-                <span className="feature-badge px-10 py-3 opacity-70 rounded-lg mr-4">dApps</span>
-                <span className="feature-badge px-10 py-3 opacity-70 rounded-lg">iExec</span>
+                {USE_CASES[2].map((useCase, i) => (
+                  <span key={i} className="feature-badge px-10 py-3 opacity-70 rounded-lg mx-2">
+                    {useCase}
+                  </span>
+                ))}
               </div>
             </aside>
           </div>
@@ -220,7 +184,30 @@ const Home = ({ setStep }) => {
           </div>
         </div>
       </section>
-      <JoinDiscord />
+      <section className="flex justify-center items-center pt-20 mb-32 section-gradient">
+        <div className="text-center">
+          <div className="mb-6">
+            <img src={Discord} alt="discord" className="mx-auto" />
+          </div>
+          <h2 className="text-4xl font-bold mb-8">Join our Discord community!</h2>
+          <p className="text-lg opacity-70">Join our growing Discord community and send us questions or</p>
+          <p className="text-lg opacity-70 mb-10">feedback! We love to hear from our users.</p>
+          <a href="https://bit.ly/buidlfy-discord" target="_blank" rel="noreferrer" className="connect-wallet text-lg px-10 py-3 rounded-lg">
+            Join Discord Server
+          </a>
+        </div>
+      </section>
+      <footer className="flex justify-between mx-20 pt-8 pb-12 border-t border-white/20">
+        <h6 className="text-[#98A2B3]">&copy; 2023 Buidlfy. All rights reserved.</h6>
+        <div className="flex">
+          <a href="https://twitter.com/BuidlfyHq" target="_blank" rel="noreferrer">
+            <img src={SocialTwitter} alt="twitter" className="mr-6" />
+          </a>
+          <a href="https://bit.ly/buidlfy-discord" target="_blank" rel="noreferrer">
+            <img src={SocialDiscord} alt="discord" />
+          </a>
+        </div>
+      </footer>
     </main>
   );
 };

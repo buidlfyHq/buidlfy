@@ -30,55 +30,19 @@ const Dashboard: FC = () => {
   const [hideNavbar, setHideNavbar] = useState<boolean>(true);
 
   useEffect(() => {
-    const session: any = JSON.parse(localStorage.getItem('session'));
-    if (session) {
-      // signout if sesssion is expired
-      if (new Date(session?.cookie?.expires) < new Date()) {
-        signout();
-        navigate('/');
+    const saveItems = localStorage.getItem('items');
+    if (saveItems) {
+      dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
+      dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor));
+      dispatch(setSiteHead(JSON.parse(saveItems).head));
+      if (JSON.parse(saveItems).contract) {
+        dispatch(updateContractAbi(JSON.stringify(JSON.parse(saveItems).contract?.abi)));
+        dispatch(updateContractAddress(JSON.parse(saveItems).contract?.address));
+        dispatch(updateContractNetwork(JSON.parse(saveItems).contract?.network));
       }
-      // check if user is authorised
-      fetch(`${config.server.SERVER}/user-status`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${session.nonce}`,
-        },
-        credentials: 'include',
-      })
-        .then(res => res.text())
-        .then(res => {
-          if (!JSON.parse(res).whitelisted) {
-            signout();
-            navigate('/');
-          } else {
-            // load stored configs if available
-            const session: any = JSON.parse(localStorage.getItem('session'));
-            if (session) {
-              dispatch(fetchWalletDetailsAsync(session.data?.address));
-            }
-            const saveItems = localStorage.getItem('items');
-            if (saveItems) {
-              dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
-              dispatch(updateWorkspaceBackgroundColor(JSON.parse(saveItems).backgroundColor));
-              dispatch(setSiteHead(JSON.parse(saveItems).head));
-              if (JSON.parse(saveItems).contract) {
-                dispatch(updateContractAbi(JSON.stringify(JSON.parse(saveItems).contract?.abi)));
-                dispatch(updateContractAddress(JSON.parse(saveItems).contract?.address));
-                dispatch(updateContractNetwork(JSON.parse(saveItems).contract?.network));
-              }
-            }
-            dispatch(toggleModal(true));
-            dispatch(toggleModalType('start'));
-          }
-        })
-        .catch(() => {
-          signout();
-          navigate('/');
-        });
-    } else {
-      signout();
-      navigate('/');
     }
+    dispatch(toggleModal(true));
+    dispatch(toggleModalType('start'));
   }, []); // eslint-disable-line
 
   return (
