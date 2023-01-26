@@ -5,6 +5,12 @@ import { IRootState } from 'redux/root-state.interface';
 import { IInput, IOutput } from 'redux/workspace/workspace.interfaces';
 import { decode as base64_decode } from 'base-64';
 
+interface IPayableInput {
+  name?: string;
+  value?: string;
+  send?: boolean;
+}
+
 export const onRequest = async (
   method: string,
   contractFunction: {
@@ -79,6 +85,7 @@ export const onRequest = async (
       receipt = await res.wait();
       console.log(receipt);
     } else if (contractFunction.stateMutability === 'payable') {
+      const payableInput: IPayableInput = contractFunction.inputs.find((input: IPayableInput) => input?.send === true);
       // query contract functions --- magic code
       const res = await contract.functions[method](...newArgs, {
         value: ethers.utils.parseEther(amount),
