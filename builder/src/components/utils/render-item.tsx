@@ -195,6 +195,7 @@ const RenderItem: FC<IRenderItem> = ({
           imgData={item.imgData}
           link={item.link}
           borderRadius={item.style.borderRadius}
+          preview={preview}
         />
       );
     case 'Spacer':

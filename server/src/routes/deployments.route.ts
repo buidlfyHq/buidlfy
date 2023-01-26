@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import DeploymentsController from '@/controllers/deployments.controller';
+import DeploymentsController from '@controllers/deployments.controller';
 import { Routes } from '@interfaces/routes.interface';
-import validationMiddleware from '@/middlewares/validation.middleware';
-import { DeployAppDto, CreateDeploymentSubdomainDto, VerifyDeploymentSubdomainDto, UpdateDeploymentSubdomainDto } from '@/dtos/deployments.dto';
+import isAuthenticated from '@middlewares/authorization.middleware';
+import validationMiddleware from '@middlewares/validation.middleware';
+import { DeployAppDto, CreateDeploymentSubdomainDto, VerifyDeploymentSubdomainDto, UpdateDeploymentSubdomainDto } from '@dtos/deployments.dto';
 
 class DeploymentsRoute implements Routes {
   public path = '/deployment';
@@ -14,19 +15,22 @@ class DeploymentsRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}/create`, validationMiddleware(DeployAppDto, 'body'), this.deploymentController.startDeployment);
+    this.router.post(`${this.path}/create`, isAuthenticated(), validationMiddleware(DeployAppDto, 'body'), this.deploymentController.startDeployment);
     this.router.put(
       `${this.path}/create-subdomain`,
+      isAuthenticated(),
       validationMiddleware(CreateDeploymentSubdomainDto, 'body'),
       this.deploymentController.createDeploymentSubdomain,
     );
     this.router.patch(
       `${this.path}/update-subdomain`,
+      isAuthenticated(),
       validationMiddleware(UpdateDeploymentSubdomainDto, 'body'),
       this.deploymentController.updateDeploymentSubdomain,
     );
     this.router.patch(
       `${this.path}/verify-subdomain`,
+      isAuthenticated(),
       validationMiddleware(VerifyDeploymentSubdomainDto, 'body'),
       this.deploymentController.verifyDeploymentSubdomain,
     );

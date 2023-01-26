@@ -18,7 +18,7 @@ const LensterPost: FC<ILensterPost> = ({
   return (
     <>
       {post.name ? (
-        <div className="border lenster-card py-4 px-6 border-gray-700 bg-gray-800 rounded-xl w-[28rem] m-2">
+        <div className="border lenster-card py-4 px-6 border-gray-700 bg-gray-800 rounded-xl w-[28rem] mx-[0.5rem] my-[1.3rem]">
           <div className="flex">
             <div className="flex grow">
               <img

@@ -5,7 +5,7 @@ import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArr
 import { toggleModal } from 'redux/modal/modal.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import CongratulationsImg from 'assets/icons/congratulations.png';
-import { ReactComponent as FeatherIcon } from 'assets/svgAsIcons/feather.svg';
+import { ReactComponent as FeatherIcon } from 'assets/svg-as-icons/feather.svg';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
 
 const FinalModal: FC = () => {
