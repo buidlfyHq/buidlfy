@@ -1,53 +1,21 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineClose, AiOutlineEdit } from 'react-icons/ai';
+import { IRootState } from 'redux/root-state.interface';
+import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai';
+import { IoMdArrowDropdown, IoMdArrowDropright } from 'react-icons/io';
 import { saveContractConfig } from 'redux/workspace/workspace.reducers';
 import { setSelectorToDefault, updateSelector } from 'redux/contract/contract.reducers';
 import Spinner from 'components/utils/assets/spinner';
-import { IRootState } from 'redux/root-state.interface';
 import { IShowComponent, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IContractElementSelected, IContractElementSelector } from 'redux/contract/contract.interfaces';
-import { IoMdArrowDropdown, IoMdArrowDropright } from 'react-icons/io';
-import { Listbox } from '@headlessui/react';
-import ReactTooltip from 'react-tooltip';
-import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';
+import ListBoxDropdown from 'components/utils/list-box';
+import { Method, methodOptions } from 'components/utils/method-options';
 import 'styles/components.css';
 
 interface IAbiComponents {
   showComponent: IShowComponent;
   elementId: string;
 }
-
-enum Method {
-  SELECT_INPUT = 'selectInput',
-  PRE_INPUT = 'preInput',
-  USER_ADDRESS = 'userAddress',
-  SHOW_INPUT = 'showInput',
-  SHOW_OUTPUT = 'showOutput',
-  SHOW_INPUT_CONTENT = 'showInputContent',
-  SHOW_OUTPUT_CONTENT = 'showOutputContent',
-}
-
-const methodOptions = [
-  {
-    id: 1,
-    name: 'Configure input from builder',
-    methodParameter: Method.SELECT_INPUT,
-    methodDescription: 'This option will allow user to choose the input from the builder which will be editable on the deployed site',
-  },
-  {
-    id: 2,
-    name: 'Configure Input as static value',
-    methodParameter: Method.PRE_INPUT,
-    methodDescription: 'This option will allow to put static value in the field which will be non-editable and hard coded in the final site',
-  },
-  {
-    id: 3,
-    name: 'Configure Input with user address',
-    methodParameter: Method.USER_ADDRESS,
-    methodDescription: 'This option will allow to get address of the connected wallet of the deployed site',
-  },
-];
 
 const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   const dispatch = useDispatch();
@@ -132,8 +100,6 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   };
 
   const handleStateSelector = (id: string) => {
-    console.log(id, 'id');
-
     if (contractElementSelector === null) {
       dispatch(
         updateSelector({
@@ -152,7 +118,6 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
     }
   };
   const handleStateInput = (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value, 'ewvalue');
     setPreInputStateValue(e.target.value);
     if (contractElementSelector === null) {
       if (preInputStateValue) {
@@ -162,7 +127,6 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
           type: 'preInputSend',
           value: e.target.value,
         });
-        console.log(preInputStateValue, 'psv');
       } else {
         setCurrentElement({
           id: id,
@@ -175,7 +139,6 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
       dispatch(setSelectorToDefault());
     }
   };
-  console.log(currentElements, 'ce');
 
   const stateObject = (key: string) => {
     let filteredObject = contractElementSelected[key]?.filter((key: { buttonId: string }) => key.buttonId === elementId);
@@ -325,7 +288,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
     setShowInputPayableContent(!showInputPayableContent);
   };
 
-  const handleShowInputMethod = (i: number, methodParameter: Method) => {
+  const handleShowInputMethod = (methodParameter: Method, i: number) => {
     const inputMethod = [...showInputMethod];
     inputMethod[i] = methodParameter;
     setShowInputMethod(inputMethod);
@@ -372,38 +335,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                           {showInputContent[i] ? (
                             <section key={i} className="mt-3">
                               <div>
-                                <Listbox onChange={setSelectedMethod} value={selectedMethod}>
-                                  <Listbox.Button
-                                    className="changeText flex text-left pl-[0.4rem] py-[0.7rem] w-[12.8rem] mx-2 px-2 h-[2.5rem] input-text"
-                                    value=""
-                                  >
-                                    <span className="text-[11px] font-medium flex grow">
-                                      {selectedMethod?.name ? selectedMethod.name : <>Select A Method</>}
-                                    </span>
-                                    <span className="pr-[0.3rem]">
-                                      <MdOutlineKeyboardArrowUp className="text-[10px] text-[#475385] absolute" />
-                                      <MdOutlineKeyboardArrowDown className="text-[10px] text-[#475385] absolute mt-[0.5rem]" />
-                                    </span>
-                                  </Listbox.Button>
-                                  <Listbox.Options className="listbox-options ml-2 h-[6.2rem] absolute mt-[0.7rem] z-100 bg-white w-[12.8rem] rounded-[8px] border border-solid border-[#F2F4F7]">
-                                    {methodOptions.map(methodOption => (
-                                      <>
-                                        <Listbox.Option
-                                          value={methodOption}
-                                          key={methodOption.id}
-                                          className="mytooltip py-[0.5rem] text-[11px] font-medium pr-2 pl-[0.5rem] cursor-pointer hover:bg-[#FAFAFF]"
-                                          onClick={() => handleShowInputMethod(i, methodOption.methodParameter)}
-                                        >
-                                          {methodOption.name}
-                                          <div className="mytext shadow-lg text-left">
-                                            <h5 className="text-[#344054] text-sm font-semibold text-left mx-4 my-3">{methodOption.name}</h5>
-                                            <p className="text-[#667085] text-xs font-normal text-left mx-4 my-3">{methodOption.methodDescription}</p>
-                                          </div>
-                                        </Listbox.Option>
-                                      </>
-                                    ))}
-                                  </Listbox.Options>
-                                </Listbox>
+                                <ListBoxDropdown handleShowInput={handleShowInputMethod} i={i} />
                                 {showInputMethod[i] === Method.SELECT_INPUT ? (
                                   <>
                                     <div
@@ -524,38 +456,7 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                     <div className={`mr-2 ml-1 mt-5 ${showInputPayableContent ? 'grey-border pb-4' : ''}`}>
                       {showInputPayableContent ? (
                         <>
-                          <Listbox onChange={setSelectedMethod} value={selectedMethod}>
-                            <Listbox.Button
-                              className="changeText flex text-left pl-[0.4rem] py-[0.7rem] w-[12.8rem] mx-2 px-2 h-[2.5rem] input-text"
-                              value=""
-                            >
-                              <span className="text-[11px] font-medium flex grow">
-                                {selectedMethod?.name ? selectedMethod.name : <>Select A Method</>}
-                              </span>
-                              <span className="pr-[0.3rem]">
-                                <MdOutlineKeyboardArrowUp className="text-[10px] text-[#475385] absolute" />
-                                <MdOutlineKeyboardArrowDown className="text-[10px] text-[#475385] absolute mt-[0.5rem]" />
-                              </span>
-                            </Listbox.Button>
-                            <Listbox.Options className="listbox-options ml-2 h-[6.2rem] absolute mt-[0.7rem] z-100 bg-white w-[12.8rem] rounded-[8px] border border-solid border-[#F2F4F7]">
-                              {methodOptions.map(methodOption => (
-                                <>
-                                  <Listbox.Option
-                                    value={methodOption}
-                                    key={methodOption.id}
-                                    className="mytooltip py-[0.5rem] text-[11px] font-medium pr-2 pl-[0.5rem] cursor-pointer hover:bg-[#FAFAFF]"
-                                    onClick={() => handleInputStateMethod(methodOption.methodParameter)}
-                                  >
-                                    {methodOption.name}
-                                    <div className="mytext shadow-lg text-left">
-                                      <h5 className="text-[#344054] text-sm font-semibold text-left mx-4 my-3">{methodOption.name}</h5>
-                                      <p className="text-[#667085] text-xs font-normal text-left mx-4 my-3">{methodOption.methodDescription}</p>
-                                    </div>
-                                  </Listbox.Option>
-                                </>
-                              ))}
-                            </Listbox.Options>
-                          </Listbox>
+                          <ListBoxDropdown handleShowInput={handleInputStateMethod} payableInput={true} />
                           {inputStateMethod === Method.SELECT_INPUT ? (
                             <div
                               className="grid contract-input w-[12.8rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"

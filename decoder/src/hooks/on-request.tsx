@@ -3,6 +3,12 @@ import { ethers, Contract } from "ethers";
 import { setValue } from "hooks/set-value";
 import { IInput, IOutput } from "interfaces/value";
 
+interface IPayableInput {
+  name?: string;
+  value?: string;
+  send?: boolean;
+}
+
 export const onRequest = async (
   method: string,
   contractFunction: {
@@ -57,7 +63,7 @@ export const onRequest = async (
       .find((m) => m.name === method)
       .inputs.map((input) => {
         args.map((arg) => {
-          if (input.name === arg.name) {
+          if (input.name === arg.name && !input.send) {
             if (input.type === "tuple") {
               newArgs.push(JSON.parse(arg.value));
             } else {
@@ -76,6 +82,10 @@ export const onRequest = async (
       receipt = await res.wait();
       console.log(receipt);
     } else if (contractFunction.stateMutability === "payable") {
+      const payableInput: IPayableInput = contractFunction.inputs.find(
+        (input: IPayableInput) => input?.send === true
+      );
+      amount = payableInput?.value;
       // query contract functions --- magic code
       const res = await contract.functions[method](...newArgs, {
         value: ethers.utils.parseEther(amount),
