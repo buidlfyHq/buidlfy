@@ -41,10 +41,6 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         minW: 1,
         resizeHandles: availableHandles,
       };
-      console.log(y, 'y');
-      console.log(c.h, 'c.h');
-      console.log(c, 'c');
-
       let updatedItem = {
         ...selectedElement,
         h: y + c.h,
@@ -96,11 +92,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
   const checkContainerY = (selectedElement: IWorkspaceElement) => {
     if (selectedElement.children.length === 0) return 0;
     else {
-      let arr = selectedElement.children.map((item: IWorkspaceElement) => item.y);
-      console.log(Math.max(...arr), 'arr');
-      console.log(arr, 'arrrrr');
-
-      return Math.max(...arr);
+      return selectedElement.h;
     }
   };
 
