@@ -1,0 +1,36 @@
+.hero {
+  background: linear-gradient(223.06deg, rgba(9, 171, 171, 0.2) 15.49%, rgba(76, 37, 149, 0.16) 38.6%),
+    linear-gradient(180deg, #2d1646 0%, rgba(14, 0, 15, 0.31) 100%);
+}
+
+.gradient-transparent {
+  background: linear-gradient(185.21deg, #ffffff 19.87%, rgba(255, 255, 255, 0.49) 95.82%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text !important;
+}
+
+.gradient {
+  background: linear-gradient(172.48deg, #a07dff 38.65%, rgba(255, 255, 255, 0.68) 88.96%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.connect-wallet {
+  background: linear-gradient(93.43deg, #468fe4 19.42%, #7742e7 63.9%);
+}
+
+.feature-badge {
+  background: linear-gradient(140.23deg, rgba(208, 109, 255, 0.2) 7.29%, rgba(0, 0, 0, 0) 48.6%), rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.feature-badge-2 {
+  background: linear-gradient(106.43deg, rgba(52, 133, 255, 0.116) 15.11%, rgba(0, 0, 0, 0) 60.13%), rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.section-gradient {
+  background: linear-gradient(180deg, #221331 0%, rgba(29, 15, 41, 0) 100%);
+}

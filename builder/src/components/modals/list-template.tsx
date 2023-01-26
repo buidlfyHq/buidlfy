@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dialog } from '@headlessui/react';
 import { CgClose } from 'react-icons/cg';
-import { listTemplate } from 'redux/minted/minted.actions';
+import { createListingAsync } from 'redux/minted/minted.thunk-actions';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { setSelectedTemplateAmount } from 'redux/template/template.reducers';
 import { IRootState } from 'redux/root-state.interface';
@@ -13,7 +13,7 @@ const ListTemplate: FC = () => {
   const selectedTemplate = useSelector((state: IRootState) => state.template.selectedTemplate);
 
   const handleListTemplate = () => {
-    dispatch(listTemplate(selectedTemplate.listAmount));
+    dispatch(createListingAsync(selectedTemplate.listAmount));
     dispatch(toggleModalType('complete-listing'));
   };
 
