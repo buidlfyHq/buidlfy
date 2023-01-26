@@ -75,6 +75,8 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   const [showOutputContent, setShowOutputContent] = useState<Array<any>>([]);
   const [showInputMethod, setShowInputMethod] = useState<Array<any>>([]);
   const [selectedMethod, setSelectedMethod] = useState(methodOptions[0]);
+  const [preInputStateValue, setPreInputStateValue] = useState<string>('');
+  const [inputStateMethod, setInputStateMethod] = useState<string>('');
 
   useEffect(() => {
     setTimeout(() => setShow(false), 1000);
@@ -130,6 +132,8 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
   };
 
   const handleStateSelector = (id: string) => {
+    console.log(id, 'id');
+
     if (contractElementSelector === null) {
       dispatch(
         updateSelector({
@@ -147,6 +151,31 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
       dispatch(setSelectorToDefault());
     }
   };
+  const handleStateInput = (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value, 'ewvalue');
+    setPreInputStateValue(e.target.value);
+    if (contractElementSelector === null) {
+      if (preInputStateValue) {
+        updateCurrentElement({
+          id: id,
+          name: showComponent.value.name,
+          type: 'preInputSend',
+          value: e.target.value,
+        });
+        console.log(preInputStateValue, 'psv');
+      } else {
+        setCurrentElement({
+          id: id,
+          name: showComponent.value.name,
+          type: 'preInputSend',
+          value: e.target.value,
+        });
+      }
+    } else {
+      dispatch(setSelectorToDefault());
+    }
+  };
+  console.log(currentElements, 'ce');
 
   const stateObject = (key: string) => {
     let filteredObject = contractElementSelected[key]?.filter((key: { buttonId: string }) => key.buttonId === elementId);
@@ -302,19 +331,9 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
     setShowInputMethod(inputMethod);
   };
 
-  const tooltip = (
-    <ReactTooltip
-      id="default"
-      className="tool"
-      place="left"
-      type="dark"
-      effect="solid"
-      backgroundColor="#262338"
-      arrowColor="#262338"
-      scrollHide={true}
-      delayShow={200}
-    />
-  );
+  const handleInputStateMethod = (methodParameter: Method) => {
+    setInputStateMethod(methodParameter);
+  };
 
   // Create Common Input for all three inputs
   return (
@@ -502,56 +521,101 @@ const AbiComponents: FC<IAbiComponents> = ({ showComponent, elementId }) => {
                         <IoMdArrowDropright className="flex items-center text-[18px] mr-2 text-[#344054]" />
                       )}
                     </div>
-                    <div className="grey-border mx-2 mt-5">
+                    <div className={`mr-2 ml-1 mt-5 ${showInputPayableContent ? 'grey-border pb-4' : ''}`}>
                       {showInputPayableContent ? (
-                        <div
-                          className="grid contract-input w-[12.8rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
-                          onClick={() => {
-                            handleStateSelector(elementId);
-                          }}
-                        >
-                          {!Object.keys(contractElementSelected).filter((key: string) => key === showComponent.value.name).length ? (
-                            <span className="cursor-pointer">{renderDefault(showComponent.value.name)}</span>
-                          ) : (
-                            <>
-                              {Object.keys(contractElementSelected)
-                                .filter((key: string) => key === showComponent.value.name)
-                                .map((key: string) => {
-                                  if (key === showComponent.value.name) {
-                                    let filteredObject = stateObject(key);
-                                    return (
-                                      <div key={key}>
-                                        {filteredObject[0] ? (
-                                          <>
-                                            {contractElementSelector !== null && contractElementSelector.name === showComponent.value.name ? (
-                                              <span className="flex">
-                                                <span className="flex-1">
-                                                  <Spinner />
-                                                  <span className="text-[11px]">Selecting</span>
-                                                </span>
-                                                <AiOutlineClose className="mt-1.5 cursor-pointer" />
-                                              </span>
+                        <>
+                          <Listbox onChange={setSelectedMethod} value={selectedMethod}>
+                            <Listbox.Button
+                              className="changeText flex text-left pl-[0.4rem] py-[0.7rem] w-[12.8rem] mx-2 px-2 h-[2.5rem] input-text"
+                              value=""
+                            >
+                              <span className="text-[11px] font-medium flex grow">
+                                {selectedMethod?.name ? selectedMethod.name : <>Select A Method</>}
+                              </span>
+                              <span className="pr-[0.3rem]">
+                                <MdOutlineKeyboardArrowUp className="text-[10px] text-[#475385] absolute" />
+                                <MdOutlineKeyboardArrowDown className="text-[10px] text-[#475385] absolute mt-[0.5rem]" />
+                              </span>
+                            </Listbox.Button>
+                            <Listbox.Options className="listbox-options ml-2 h-[6.2rem] absolute mt-[0.7rem] z-100 bg-white w-[12.8rem] rounded-[8px] border border-solid border-[#F2F4F7]">
+                              {methodOptions.map(methodOption => (
+                                <>
+                                  <Listbox.Option
+                                    value={methodOption}
+                                    key={methodOption.id}
+                                    className="mytooltip py-[0.5rem] text-[11px] font-medium pr-2 pl-[0.5rem] cursor-pointer hover:bg-[#FAFAFF]"
+                                    onClick={() => handleInputStateMethod(methodOption.methodParameter)}
+                                  >
+                                    {methodOption.name}
+                                    <div className="mytext shadow-lg text-left">
+                                      <h5 className="text-[#344054] text-sm font-semibold text-left mx-4 my-3">{methodOption.name}</h5>
+                                      <p className="text-[#667085] text-xs font-normal text-left mx-4 my-3">{methodOption.methodDescription}</p>
+                                    </div>
+                                  </Listbox.Option>
+                                </>
+                              ))}
+                            </Listbox.Options>
+                          </Listbox>
+                          {inputStateMethod === Method.SELECT_INPUT ? (
+                            <div
+                              className="grid contract-input w-[12.8rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem]"
+                              onClick={() => {
+                                handleStateSelector(elementId);
+                              }}
+                            >
+                              {!Object.keys(contractElementSelected).filter((key: string) => key === showComponent.value.name).length ? (
+                                <span className="cursor-pointer">{renderDefault(showComponent.value.name)}</span>
+                              ) : (
+                                <>
+                                  {Object.keys(contractElementSelected)
+                                    .filter((key: string) => key === showComponent.value.name)
+                                    .map((key: string) => {
+                                      if (key === showComponent.value.name) {
+                                        let filteredObject = stateObject(key);
+                                        return (
+                                          <div key={key}>
+                                            {filteredObject[0] ? (
+                                              <>
+                                                {contractElementSelector !== null && contractElementSelector.name === showComponent.value.name ? (
+                                                  <span className="flex">
+                                                    <span className="flex-1">
+                                                      <Spinner />
+                                                      <span className="text-[11px]">Selecting</span>
+                                                    </span>
+                                                    <AiOutlineClose className="mt-1.5 cursor-pointer" />
+                                                  </span>
+                                                ) : (
+                                                  <span className="flex">
+                                                    <span className="flex-1 text-[11px]">
+                                                      {filteredObject[0].name} - {filteredObject[0].id}
+                                                    </span>
+                                                    <AiOutlineEdit className="mt-1.5 cursor-pointer" />
+                                                  </span>
+                                                )}
+                                              </>
                                             ) : (
-                                              <span className="flex">
-                                                <span className="flex-1 text-[11px]">
-                                                  {filteredObject[0].name} - {filteredObject[0].id}
-                                                </span>
-                                                <AiOutlineEdit className="mt-1.5 cursor-pointer" />
-                                              </span>
+                                              renderDefault(showComponent.value.name)
                                             )}
-                                          </>
-                                        ) : (
-                                          renderDefault(showComponent.value.name)
-                                        )}
-                                      </div>
-                                    );
-                                  } else {
-                                    return renderDefault(showComponent.value.name);
-                                  }
-                                })}
-                            </>
-                          )}
-                        </div>
+                                          </div>
+                                        );
+                                      } else {
+                                        return renderDefault(showComponent.value.name);
+                                      }
+                                    })}
+                                </>
+                              )}
+                            </div>
+                          ) : null}
+                          {inputStateMethod === Method.PRE_INPUT ? (
+                            <input
+                              placeholder="Add Pre Input"
+                              className="grid contract-input w-[12.8rem] mb-2 mx-2 px-2 py-1.5 mt-4 h-[2.5rem] text-[11px]"
+                              type="number"
+                              value={preInputStateValue}
+                              onChange={e => handleStateInput(elementId, e)}
+                            />
+                          ) : null}
+                        </>
                       ) : null}
                     </div>
                   </section>

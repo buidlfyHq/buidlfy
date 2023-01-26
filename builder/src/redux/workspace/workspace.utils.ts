@@ -147,6 +147,7 @@ export const updateContractInElement = (
       inputName?: string;
       inputValue?: string;
       getUserAddress?: boolean;
+      value?: string;
     };
   },
 ) => {
@@ -165,7 +166,7 @@ export const updateContractInElement = (
       } else if (currentElement?.type === 'send') {
         updatedContract = {
           ...selectedElement.contract,
-          inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, send: true }],
+          inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, name: currentElement.inputName, send: true }],
         };
       } else if (currentElement?.type === 'output') {
         updatedContract = {
@@ -186,6 +187,11 @@ export const updateContractInElement = (
       updatedContract = {
         ...selectedElement.contract,
         inputs: [...selectedElement.contract.inputs, { name: currentElement.inputName, userAddress: currentElement.getUserAddress, send: false }],
+      };
+    } else if (currentElement?.type === 'preInputSend') {
+      updatedContract = {
+        ...selectedElement.contract,
+        inputs: [...selectedElement.contract.inputs, { name: currentElement.name, value: currentElement.value, send: true }],
       };
     }
   }
