@@ -11,8 +11,8 @@ import { IRootState } from 'redux/root-state.interface';
 import FontFamilyComponent from 'components/settings/font-family-component';
 import FontWeightComponent from 'components/settings/font-weight-component';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
-import 'styles/components.css';
 import BorderRadiusComponent from 'components/settings/border-radius-component';
+import 'styles/components.css';
 
 const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);

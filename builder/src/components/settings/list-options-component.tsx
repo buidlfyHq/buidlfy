@@ -36,13 +36,6 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
     if (type === Function.TEXTCHANGE) {
       newLists[findListIndex] = { ...newLists[findListIndex], value: e.target.value };
       dispatch(updateListValue(newLists));
-      // dispatch(
-      //   updateWorkspaceElement({
-      //     settingItemId: i,
-      //     propertyName: 'listOptions',
-      //     propertyValue: lists,
-      //   }),
-      // );
     } else if (type === Function.LINKCHANGE) {
       newLists[findListIndex] = { ...newLists[findListIndex], link: e.target.value };
       dispatch(updateListValue(newLists));
