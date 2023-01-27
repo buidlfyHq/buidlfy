@@ -183,6 +183,7 @@ export const components = [
     minH: 1,
     value: 'Add Button',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -211,6 +212,7 @@ export const components = [
     minH: 1,
     value: 'Text',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -218,6 +220,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -226,6 +229,7 @@ export const components = [
     minH: 1,
     value: 'Heading 1',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -233,6 +237,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -241,6 +246,7 @@ export const components = [
     minH: 1,
     value: 'Heading 2',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -248,6 +254,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -256,6 +263,7 @@ export const components = [
     minH: 1,
     value: 'Heading 3',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -263,6 +271,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -270,6 +279,7 @@ export const components = [
     h: 1,
     minH: 1,
     placeholder: 'Placeholder',
+    containerId: '',
     style: {
       ...defaultDeleteStyles,
       ...defaultBorderStyles,
@@ -296,6 +306,7 @@ export const components = [
     h: 3,
     minH: 1,
     link: '',
+    containerId: '',
     style: {
       width: 80,
       height: 60,
@@ -305,6 +316,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -314,6 +326,7 @@ export const components = [
     value: 'List',
     link: '',
     listOptions: [],
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -331,6 +344,7 @@ export const components = [
     value: 'Dropdown',
     link: '',
     listOptions: [],
+    containerId: '',
     style: {
       ...defaultFontStyles,
       fontSize: 14,
@@ -354,6 +368,7 @@ export const components = [
     name: 'Divider',
     h: 1,
     minH: 1,
+    containerId: '',
     style: {
       ...defaultDeleteStyles,
       margin: {
@@ -373,6 +388,7 @@ export const components = [
     minH: 1,
     value: 'Badge',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -399,6 +415,7 @@ export const components = [
     minH: 1,
     value: 'Badge',
     link: '',
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultFontStyles,
@@ -424,6 +441,7 @@ export const components = [
     h: 1,
     minH: 1,
     value: 'Default Text',
+    containerId: '',
     style: {
       ...defaultDeleteStyles,
       ...defaultFontStyles,
@@ -438,6 +456,7 @@ export const components = [
     h: 1,
     minH: 1,
     value: 'Default Text',
+    containerId: '',
     style: {
       ...defaultDeleteStyles,
       ...defaultFontStyles,
@@ -451,6 +470,7 @@ export const components = [
     name: 'Spacer',
     h: 1,
     minH: 1,
+    containerId: '',
     style: {
       ...defaultColorStyles,
       ...defaultDeleteStyles,
@@ -461,6 +481,7 @@ export const components = [
     name: 'Lenster Card',
     h: 2,
     minH: 1,
+    containerId: '',
     posts: [],
     style: {
       ...defaultDeleteStyles,

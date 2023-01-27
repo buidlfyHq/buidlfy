@@ -44,7 +44,7 @@ const BorderRadiusComponent: FC<IBorderRadiusComponent> = ({ i, borderRadius, bo
     }
   };
 
-  const borderGradientCondition = borderColor?.indexOf('gradient') !== -1;
+  const borderGradientCondition = borderColor ? borderColor?.indexOf('gradient') !== -1 : null;
   return (
     <>
       <NumberInput

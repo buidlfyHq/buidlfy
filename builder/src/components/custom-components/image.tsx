@@ -22,9 +22,24 @@ interface IImageComponent {
   manualSizing?: boolean;
   imgData?: string | ArrayBuffer;
   link: string;
+  borderRadius?: number;
+  preview?: boolean;
 }
 
-const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, backgroundSize, isAuto, manualSizing, imgData, link }) => {
+const Image: FC<IImageComponent> = ({
+  i,
+  justifyContent,
+  margin,
+  width,
+  height,
+  backgroundSize,
+  isAuto,
+  manualSizing,
+  imgData,
+  link,
+  borderRadius,
+  preview,
+}) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
   const imageData = useSelector((state: IRootState) =>
@@ -32,28 +47,32 @@ const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, 
   );
 
   useEffect(() => {
-    if (manualSizing === false && ref.current?.clientWidth) {
-      dispatch(
-        updateWorkspaceImageElementStyle({
-          settingItemId: i,
-          propertyName: 'width',
-          propertyValue: ref.current.clientWidth,
-          imageSizeProperty: false,
-        }),
-      );
+    if (!preview) {
+      if (manualSizing === false && ref.current?.clientWidth) {
+        dispatch(
+          updateWorkspaceImageElementStyle({
+            settingItemId: i,
+            propertyName: 'width',
+            propertyValue: ref.current.clientWidth,
+            imageSizeProperty: false,
+          }),
+        );
+      }
     }
   }, [ref.current?.clientWidth]); // eslint-disable-line
 
   useEffect(() => {
-    if (manualSizing === false && ref.current?.clientHeight) {
-      dispatch(
-        updateWorkspaceImageElementStyle({
-          settingItemId: i,
-          propertyName: 'height',
-          propertyValue: ref.current.clientHeight,
-          imageSizeProperty: false,
-        }),
-      );
+    if (!preview) {
+      if (manualSizing === false && ref.current?.clientHeight) {
+        dispatch(
+          updateWorkspaceImageElementStyle({
+            settingItemId: i,
+            propertyName: 'height',
+            propertyValue: ref.current.clientHeight,
+            imageSizeProperty: false,
+          }),
+        );
+      }
     }
   }, [ref.current?.clientHeight]); // eslint-disable-line
 
@@ -67,6 +86,7 @@ const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, 
           backgroundImage: `url(${imageData?.uploadedImageData ? imageData.uploadedImageData : imgData})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: justifyContent,
+          borderRadius: `${borderRadius}px`,
           backgroundSize: `${isAuto ? backgroundSize : `${width}px ${height}px`}`,
           margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
         }}
