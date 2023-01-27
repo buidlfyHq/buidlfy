@@ -220,6 +220,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -236,6 +237,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -252,6 +254,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -268,6 +271,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -312,6 +316,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,
+      borderRadius: 0,
     },
   },
   {

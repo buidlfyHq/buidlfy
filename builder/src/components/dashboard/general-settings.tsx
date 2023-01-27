@@ -11,6 +11,7 @@ import { IRootState } from 'redux/root-state.interface';
 import FontFamilyComponent from 'components/settings/font-family-component';
 import FontWeightComponent from 'components/settings/font-weight-component';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import BorderRadiusComponent from 'components/settings/border-radius-component';
 import 'styles/components.css';
 
 const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
@@ -50,6 +51,11 @@ const GeneralSettings: FC<ISettings> = ({ handleSettingChange }) => {
       <FontSizeComponent i={selectedElement.i} fontSize={selectedElement.style.fontSize} />
       <ColorComponent i={selectedElement.i} color={selectedElement.style.color} />
       <BgColorComponent i={selectedElement.i} elementBackgroundColor={selectedElement.style.backgroundColor} />
+      <BorderRadiusComponent
+        i={selectedElement.i}
+        borderRadius={selectedElement.style.borderRadius}
+        borderColor={selectedElement.style.borderColor}
+      />
       <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
       <PaddingComponent i={selectedElement.i} padding={selectedElement.style.padding} />
     </>
