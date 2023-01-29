@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { INftCard } from "interfaces/nftCard";
+import {INftCard} from 'interfaces/nft'
 
 const NftCard: FC<INftCard> = ({
   image,
