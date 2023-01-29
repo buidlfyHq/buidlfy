@@ -9,7 +9,7 @@ import { gradientCheck } from "utils/gradient-check";
 import ITexts from "interfaces/texts";
 import OracleAbi from "assets/abis/Oracle.json";
 import { switchNetwork } from "utils/switchNetwork";
-import {connectWalletButton} from 'utils/connect-wallet'
+import { connectWalletButton } from "utils/connect-wallet";
 import "styles/components.css";
 
 const Button: FC<ITexts> = ({
