@@ -8,6 +8,7 @@ import BackgroundSizeComponent from 'components/settings/background-size-compone
 import { IRootState } from 'redux/root-state.interface';
 import { ISettings, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IoMdLink } from 'react-icons/io';
+import BorderRadiusComponent from 'components/settings/border-radius-component';
 
 const ImageSettings: FC<ISettings> = ({ handleSettingChange }) => {
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
@@ -36,6 +37,11 @@ const ImageSettings: FC<ISettings> = ({ handleSettingChange }) => {
         manualSizing={selectedElement.style?.manualSizing}
       />
       <BackgroundSizeComponent i={selectedElement.i} backgroundSize={selectedElement.style?.backgroundSize} />
+      <BorderRadiusComponent
+        i={selectedElement.i}
+        borderRadius={selectedElement.style.borderRadius}
+        borderColor={selectedElement.style.borderColor}
+      />
       <MarginComponent i={selectedElement.i} margin={selectedElement.style.margin} />
     </>
   );

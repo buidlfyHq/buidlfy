@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUploadState } from './upload.interfaces';
+import { uploadImageAsync } from './upload.thunk-actions';
 
 const initialState: IUploadState = {
   uploadImage: null,
@@ -8,15 +9,12 @@ const initialState: IUploadState = {
 const uploadSlice = createSlice({
   name: 'upload',
   initialState,
-  reducers: {
-    updateUploadImage(state: IUploadState, action: { payload: string }) {
-      return {
-        ...state,
-        uploadImage: action.payload,
-      };
-    },
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(uploadImageAsync.fulfilled, (state, action) => {
+      state.uploadImage = action.payload;
+    });
   },
 });
 
-export const { updateUploadImage } = uploadSlice.actions;
 export default uploadSlice.reducer;

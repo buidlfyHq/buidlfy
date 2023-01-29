@@ -22,10 +22,24 @@ interface IImageComponent {
   manualSizing?: boolean;
   imgData?: string | ArrayBuffer;
   link: string;
+  borderRadius?: number;
   preview?: boolean;
 }
 
-const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, backgroundSize, isAuto, manualSizing, imgData, link, preview }) => {
+const Image: FC<IImageComponent> = ({
+  i,
+  justifyContent,
+  margin,
+  width,
+  height,
+  backgroundSize,
+  isAuto,
+  manualSizing,
+  imgData,
+  link,
+  borderRadius,
+  preview,
+}) => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>();
   const imageData = useSelector((state: IRootState) =>
@@ -72,6 +86,7 @@ const Image: FC<IImageComponent> = ({ i, justifyContent, margin, width, height, 
           backgroundImage: `url(${imageData?.uploadedImageData ? imageData.uploadedImageData : imgData})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: justifyContent,
+          borderRadius: `${borderRadius}px`,
           backgroundSize: `${isAuto ? backgroundSize : `${width}px ${height}px`}`,
           margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
         }}

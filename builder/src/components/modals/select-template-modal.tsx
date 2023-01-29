@@ -7,7 +7,7 @@ import { toggleModal } from 'redux/modal/modal.reducers';
 import { setFilteredTemplateList } from 'redux/template/template.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { ISelectedTemplate } from 'redux/template/template.interfaces';
-import { ReactComponent as SearchIcon } from 'assets/svgAsIcons/search-icon.svg';
+import { ReactComponent as SearchIcon } from 'assets/svg-as-icons/search-icon.svg';
 import Spinner from 'components/utils/assets/spinner';
 
 // removed categories as of now

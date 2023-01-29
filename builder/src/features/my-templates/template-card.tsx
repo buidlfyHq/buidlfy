@@ -44,7 +44,7 @@ const TemplateCard: FC<ITemplateCard> = ({ template, badge, list }) => {
       dispatch(updateContractAddress(contract?.address));
       dispatch(updateContractNetwork(contract?.network));
     }
-    return navigate('/');
+    return navigate('/dashboard');
   };
 
   return (

@@ -100,6 +100,7 @@ const RenderItem: FC<IRenderItem> = ({
           margin={item.style.margin}
           padding={item.style.padding}
           fontFamily={item.style.fontFamily}
+          borderRadius={item.style.borderRadius}
         />
       );
     case "Input":
@@ -129,6 +130,7 @@ const RenderItem: FC<IRenderItem> = ({
           isAuto={item.style.isAuto}
           margin={item.style.margin}
           link={item.link}
+          borderRadius={item.style.borderRadius}
         />
       );
     case "NFT Card":

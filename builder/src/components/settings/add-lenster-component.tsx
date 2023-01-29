@@ -4,7 +4,7 @@ import ShortUniqueId from 'short-unique-id';
 import { IoMdAdd } from 'react-icons/io';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import WarningText from 'components/utils/setting-warning';
-import { getPublication } from 'redux/lenster/lenster.actions';
+import { fetchPublicationAsync } from 'redux/lenster/lenster.thunk-actions';
 import { updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
 import { updateInputValue } from 'redux/lenster/lenster.reducers';
 import { IRootState } from 'redux/root-state.interface';
@@ -27,6 +27,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
     filterSavedPost.map(post => {
       const duplicatePost = addInputs.filter(addInput => addInput.value === addInput.value);
       newAddInputs.push({ i: i, id: post.id, value: post.name });
+      return post;
     });
     setAddInputs(newAddInputs);
   }, [savedPosts, i]);
@@ -38,8 +39,8 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
         setIsDuplicate(true);
       } else {
         dispatch(
-          getPublication({
-            i: i,
+          fetchPublicationAsync({
+            i,
             id: addInputs[key].id,
             name: e.target.value,
           }),
