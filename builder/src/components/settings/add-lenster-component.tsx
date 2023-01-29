@@ -7,6 +7,7 @@ import { getPublication } from 'redux/lenster/lenster.actions';
 import { updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
 import { updateInputValue } from 'redux/lenster/lenster.reducers';
 import { IRootState } from 'redux/root-state.interface';
+import LensterHelpModal from 'components/modals/lenster-help-modal';
 import InputCheckboxIcon from 'assets/icons/input-checkbox.png';
 import RightArrowIcon from 'assets/icons/right-arrow-icon.png';
 import PlusIcon from 'assets/icons/plus.png';
@@ -25,6 +26,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   const [addInputs, setAddInputs] = useState<Array<any>>([]); // Derive better type for array
   // check for duplicate post
   const [isDuplicate, setIsDuplicate] = useState<Boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
   //  filtering lenster posts for selected lenster widget
   const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
 
@@ -109,7 +111,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
           .map((addInput, i) => {
             const { id, value, verified, error } = addInput;
             return (
-              <div className="flex flex-col ">
+              <div className="flex flex-col" key={id}>
                 <div className="flex items-center justify-center gap-2 mt-2">
                   <input
                     key={i}
@@ -149,10 +151,18 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
       </div>
       <div
         onClick={handleAddInput}
-        className="flex items-center justify-center hover:text-white cursor-pointer gap-2 py-2 px-3.5 border border-[#D0D5DD] rounded-[8px] w-[13.5rem] m-2"
+        className="flex items-center justify-center cursor-pointer gap-2 py-2 px-3.5 border border-[#D0D5DD] rounded-[8px] w-[13.5rem] m-2"
       >
         <span className="gradient-text text-[14px] font-[600]">Add Input</span>
         <img src={PlusIcon} alt="icon" />
+      </div>
+      <div className="flex flex-col  gap-2 py-3.5 px-4 bg-[#F9FAFB] rounded-[8px] w-[13.5rem] mx-2 mt-5">
+        <div className="text-[14px] text-[#101828] font-[500]">Help Resources</div>
+        <div className="text-[14px] text-[#667085] mt-1">How to add lenster post id and to create your own wall of love</div>
+        <div onClick={() => setIsOpen(true)} className="text-[14px] cursor-pointer text-[#5E5CE8] mt-2 font-[600]">
+          Learn More
+        </div>
+        <LensterHelpModal isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </>
   );
