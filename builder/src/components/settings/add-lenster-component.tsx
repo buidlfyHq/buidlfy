@@ -26,7 +26,7 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   const [addInputs, setAddInputs] = useState<Array<any>>([]); // Derive better type for array
   // check for duplicate post
   const [isDuplicate, setIsDuplicate] = useState<Boolean>(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   //  filtering lenster posts for selected lenster widget
   const filterSavedPost = savedPosts.filter(savedPost => savedPost.i === i);
 

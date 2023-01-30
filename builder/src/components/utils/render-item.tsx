@@ -368,7 +368,6 @@ const RenderItem: FC<IRenderItem> = ({
         </>
       );
 
-    // need to understand if preview has a role in NFT Card ?
     case 'NFT Card':
       return (
         <NftCard
