@@ -29,6 +29,16 @@ export default interface IWorkspace {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
+  nft?: boolean;
+  wallet?: string;
+  slug?: string;
+  image?: any;
+  collection?: string;
+  title?: string;
+  price?: string;
+  highestBid?: string;
+  cardsPerRow?: number;
+  limit?: number;
   posts?: IPublication[];
   listOptions?: IList[];
 }

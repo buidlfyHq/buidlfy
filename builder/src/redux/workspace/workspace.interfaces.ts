@@ -41,6 +41,10 @@ export interface IWorkspaceElement {
   imgData?: string | ArrayBuffer;
   connectWallet?: boolean;
   placeholder?: string;
+  wallet?: string;
+  slug?: string;
+  limit?: number;
+  cardsPerRow?: number;
   listOptions?: IList[];
   posts?: IPublication[];
   containerId?: string;

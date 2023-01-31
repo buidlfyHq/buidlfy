@@ -130,6 +130,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const handleMouseOver = (id: string) => {
     (document.getElementById(id).childNodes[1] as HTMLElement).style.visibility = 'visible';
+    console.log(id);
   };
 
   const handleMouseOut = (id: string) => {
@@ -172,7 +173,11 @@ const Workspace: FC<IWorkspaceComponent> = ({
         e.target.id.slice(6) === 'Container' ||
         e.target.parentNode.id.slice(6) === 'Container' ||
         e.target.parentNode.parentNode.id.slice(6) === 'Container' ||
-        e.target.parentNode.parentNode.parentNode.id.slice(6) === 'Container'
+        e.target.parentNode.parentNode.parentNode.id.slice(6) === 'Container' ||
+        e.target.id.slice(6) === 'NFT Layout' ||
+        e.target.parentNode.id.slice(6) === 'NFT Layout' ||
+        e.target.parentNode.parentNode.id.slice(6) === 'NFT Layout' ||
+        e.target.parentNode.parentNode.parentNode.id.slice(6) === 'NFT Layout'
       )
     ) {
       setIsContainerSelected(false);

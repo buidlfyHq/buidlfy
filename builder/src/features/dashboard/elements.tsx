@@ -66,13 +66,21 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         minH: 1,
         resizeHandles: containerCheck(c) ? containerHandles : availableHandles,
       };
-      if (c.name === 'Vertical Container') {
+      if (c.name === 'Vertical Container' || c.name === 'NFT Card') {
         newC.w = 2;
       }
       if (c.name === 'Horizontal Container' || c.name === 'Vertical Container') {
         let newChildren = c.children.map(child => ({
           ...child,
           i: uid(),
+        }));
+        newC.children = newChildren;
+      }
+      if (c.name === 'NFT Layout') {
+        let newChildren = c.children.map(child => ({
+          ...child,
+          i: uid(),
+          resizeHandles: [],
         }));
         newC.children = newChildren;
       }
@@ -308,7 +316,24 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
               </div>
             </div>
           </div>
+
           {elementsList}
+
+          <div className="element-div">
+            <div className="px-4 py-4">
+              <div data-tip="Click here to add the NFT Layout" data-for="elements">
+                <div className="flex">
+                  <div className="cursor-pointer element-container" onClick={() => onClickFunction('NFT Layout')}>
+                    <span className="element-text">
+                      Add NFT Layout
+                      <IoIosAddCircleOutline className="text-[16px] ml-1" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="element-div">
             <div className="px-4 py-4">
               <div data-tip="Click here to add the Lenster Card" data-for="elements">

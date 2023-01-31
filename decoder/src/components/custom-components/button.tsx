@@ -9,6 +9,7 @@ import { gradientCheck } from "utils/gradient-check";
 import ITexts from "interfaces/texts";
 import OracleAbi from "assets/abis/Oracle.json";
 import "styles/components.css";
+import { switchNetwork } from "utils/switchNetwork";
 
 const Button: FC<ITexts> = ({
   fontWeight,
@@ -77,35 +78,6 @@ const Button: FC<ITexts> = ({
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error("Error in connectWalletService --> ", error);
-    }
-  };
-
-  const switchNetwork = async (networkId?: number) => {
-    // NOTE: polygon mumbai testnet by default
-    const currentNetwork =
-      networks[Number(config.contract.network) || networkId || 80001];
-
-    try {
-      await (window as any).ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: currentNetwork.chainId }],
-      });
-    } catch (switchError) {
-      // This error code indicates that the chain has not been added to MetaMask.
-      if (switchError.code === 4902) {
-        try {
-          await (window as any).ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [currentNetwork],
-          });
-          return { error: false, errorMessage: "" };
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.log("Error in changeNetworkService --> ", error);
-        }
-      }
-      // eslint-disable-next-line no-console
-      console.log("Error in changeNetworkService --> ", switchError);
     }
   };
 
