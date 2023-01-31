@@ -130,15 +130,13 @@ const AbiMethods: FC<IAbiMethods> = ({ setShowComponent, selectedElement, setIsO
                       <Listbox.Options className="listbox-options h-[10rem] absolute mt-[1rem] z-100 bg-white w-[13.5rem] rounded-[8px] border border-solid border-[#F2F4F7] overflow-scroll">
                         {contractDetails.abi &&
                           abiJson.map((method: { name: string }, i: number) => (
-                            <>
-                              <Listbox.Option
-                                value={i}
-                                key={i}
-                                className="py-[0.5rem] pr-2 pl-[1rem] text-[11px] font-medium cursor-pointer hover:bg-[#FAFAFF]"
-                              >
-                                {method.name}
-                              </Listbox.Option>
-                            </>
+                            <Listbox.Option
+                              value={i}
+                              key={i}
+                              className="py-[0.5rem] pr-2 pl-[1rem] text-[11px] font-medium cursor-pointer hover:bg-[#FAFAFF]"
+                            >
+                              {method.name}
+                            </Listbox.Option>
                           ))}
                       </Listbox.Options>
                     </>
