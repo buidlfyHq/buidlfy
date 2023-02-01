@@ -20,6 +20,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, item, setDrag }) => {
   const posts = useSelector((state: IRootState) =>
     state.workspace.workspaceElements.find(workspaceElement => workspaceElement.i === i).posts.filter(publication => publication.i === i),
   );
+  const handleOpenSettings = () => {};
   return (
     <>
       {posts && posts.length > 0 ? (

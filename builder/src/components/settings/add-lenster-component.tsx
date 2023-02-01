@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ShortUniqueId from 'short-unique-id';
 import { RiCloseFill } from 'react-icons/ri';
 import WarningText from 'components/utils/setting-warning';
-import { getPublication } from 'redux/lenster/lenster.actions';
+import { fetchPublicationAsync } from 'redux/lenster/lenster.thunk-actions';
 import { updateWorkspaceElement } from 'redux/workspace/workspace.reducers';
 import { updateInputValue } from 'redux/lenster/lenster.reducers';
 import { IRootState } from 'redux/root-state.interface';
@@ -55,8 +55,8 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
         setIsDuplicate(true);
       } else {
         dispatch(
-          getPublication({
-            i: i,
+          fetchPublicationAsync({
+            i,
             id: addInputs[key].id,
             name: addInputs[key].value,
           }),

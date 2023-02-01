@@ -100,6 +100,7 @@ const RenderItem: FC<IRenderItem> = ({
           margin={item.style.margin}
           padding={item.style.padding}
           fontFamily={item.style.fontFamily}
+          borderRadius={item.style.borderRadius}
         />
       );
     case "Input":
@@ -129,6 +130,49 @@ const RenderItem: FC<IRenderItem> = ({
           isAuto={item.style.isAuto}
           margin={item.style.margin}
           link={item.link}
+          borderRadius={item.style.borderRadius}
+        />
+      );
+    case "NFT Card":
+      return (
+        <NftCard
+          image={item.image}
+          collection={item.collection}
+          title={item.title}
+          price={item.price}
+          href={item.href}
+          highestBid={item.highestBid}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          backgroundSize={item.style.backgroundSize}
+        />
+      );
+    case "NFT Card":
+      return (
+        <NftCard
+          image={item.image}
+          collection={item.collection}
+          title={item.title}
+          price={item.price}
+          href={item.href}
+          highestBid={item.highestBid}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          backgroundSize={item.style.backgroundSize}
+        />
+      );
+    case "NFT Card":
+      return (
+        <NftCard
+          image={item.image}
+          collection={item.collection}
+          title={item.title}
+          price={item.price}
+          href={item.href}
+          highestBid={item.highestBid}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          backgroundSize={item.style.backgroundSize}
         />
       );
     case "NFT Card":

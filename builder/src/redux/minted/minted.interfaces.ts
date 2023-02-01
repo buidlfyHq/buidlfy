@@ -1,9 +1,11 @@
+import { ISelectedTemplate } from 'redux/template/template.interfaces';
+
 export interface IMintedState {
   approveListingLoading: boolean;
   listTemplateHash: string;
   listTemplateLoading: boolean;
-  ownedTemplateList: [];
-  ownedReviewTemplateList: [];
-  ownedListedTemplateList: [];
-  mintedImageData: string;
+  ownedTemplateList: ISelectedTemplate[];
+  ownedReviewTemplateList: ISelectedTemplate[];
+  ownedListedTemplateList: ISelectedTemplate[];
+  templateBannerImage: string;
 }

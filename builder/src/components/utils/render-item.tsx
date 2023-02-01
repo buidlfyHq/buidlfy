@@ -128,6 +128,7 @@ const RenderItem: FC<IRenderItem> = ({
               margin={item.style.margin}
               padding={item.style.padding}
               fontFamily={item.style.fontFamily}
+              borderRadius={item.style.borderRadius}
             />
           ) : (
             <Text
@@ -144,6 +145,7 @@ const RenderItem: FC<IRenderItem> = ({
               margin={item.style.margin}
               padding={item.style.padding}
               fontFamily={item.style.fontFamily}
+              borderRadius={item.style.borderRadius}
             />
           )}
         </>
@@ -193,6 +195,7 @@ const RenderItem: FC<IRenderItem> = ({
           margin={item.style.margin}
           imgData={item.imgData}
           link={item.link}
+          borderRadius={item.style.borderRadius}
           preview={preview}
         />
       );

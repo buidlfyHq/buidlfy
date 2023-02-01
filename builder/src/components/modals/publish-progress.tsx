@@ -6,7 +6,7 @@ import { io } from 'socket.io-client';
 import config from 'config';
 import { processes } from 'components/utils/process';
 import LottieComponent from 'components/utils/lottie';
-import { getPublishDetails, updatePublish } from 'redux/publish/publish.action';
+import { fetchPublishDetailsAsync, updatePublishAsync } from 'redux/publish/publish.thunk-actions';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { updateCurrentStep, updatePublishFailed, updatePublishStatus } from 'redux/publish/publish.reducers';
 import { IRootState } from 'redux/root-state.interface';
@@ -47,7 +47,7 @@ const PublishProgress: FC = () => {
           setFailedDeployment(false);
           localStorage.removeItem('domainName');
           dispatch(
-            updatePublish({
+            updatePublishAsync({
               domainId: publishSubDomain,
               deploymentId: publishDeploymentId,
             }),
@@ -57,7 +57,7 @@ const PublishProgress: FC = () => {
         }
         if (args[0].status === 'Deployed' && publishDeploymentId && !publishSubDomain) {
           setFailedDeployment(false);
-          dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
+          dispatch(fetchPublishDetailsAsync({ deploymentId: publishDeploymentId }));
           dispatch(updateCurrentStep(5));
           socket.removeAllListeners(`deployment.${transactionRes}`);
           localStorage.setItem('publishStatus', publishStatus.toString());
