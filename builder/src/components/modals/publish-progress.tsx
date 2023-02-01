@@ -13,6 +13,7 @@ import { IRootState } from 'redux/root-state.interface';
 import HourGlassImg from 'assets/lottie/hourglass.json';
 import completed from 'assets/icons/completed.svg';
 import failed from 'assets/icons/failed.svg';
+import spheron from 'assets/spheron-logo.svg';
 
 const PublishProgress: FC = () => {
   const socket = io(config.server.SERVER);
@@ -140,6 +141,10 @@ const PublishProgress: FC = () => {
                 </div>
               );
             })}
+          </div>
+          <div>
+            <img src={spheron} />
+            <span>Powered By Spheron</span>
           </div>
         </Dialog.Panel>
       ) : null}
