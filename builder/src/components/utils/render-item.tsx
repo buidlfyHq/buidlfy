@@ -371,21 +371,6 @@ const RenderItem: FC<IRenderItem> = ({
         </>
       );
 
-    // need to understand if preview has a role in NFT Card ?
-    case 'NFT Card':
-      return (
-        <NftCard
-          i={item.i}
-          backgroundColor={item.style.backgroundColor}
-          color={item.style.color}
-          isAuto={item.style.isAuto}
-          backgroundSize={item.style.backgroundSize}
-          imgData={item.imgData}
-          justifyContent={item.style.justifyContent}
-        />
-      );
-
-    // need to understand if preview has a role in NFT Card ?
     case 'NFT Card':
       return (
         <NftCard

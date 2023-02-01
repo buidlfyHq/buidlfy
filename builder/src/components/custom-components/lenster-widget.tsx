@@ -1,16 +1,14 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import LensterPost from 'components/utils/lenster-post';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IRootState } from 'redux/root-state.interface';
-import edit from 'assets/icons/edit.png';
+import config from 'config';
+import { MdAddCircleOutline } from 'react-icons/md';
 import logo from 'assets/icons/buidlfy.png';
 import LensterLogo from 'assets/lenster-logo.png';
-import config from 'config';
+import edit from 'assets/icons/edit.png';
 import 'styles/components.css';
-import { MdAddCircleOutline } from 'react-icons/md';
-import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
-import { useDispatch } from 'react-redux';
-import { setSelectedElement } from 'redux/workspace/workspace.reducers';
 
 interface ILensterWidget {
   i: string;
@@ -19,7 +17,6 @@ interface ILensterWidget {
 }
 
 const LensterWidget: FC<ILensterWidget> = ({ i, item, setDrag }) => {
-  const dispatch = useDispatch();
   const posts = useSelector((state: IRootState) =>
     state.workspace.workspaceElements.find(workspaceElement => workspaceElement.i === i).posts.filter(publication => publication.i === i),
   );
@@ -63,13 +60,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, item, setDrag }) => {
                 <div className="text-[#14142B] text-[22px] font-[800] mt-7">Add Lenster Posts in your website</div>
                 <div className="text-[#4E4B66] text-[15px] mt-2">Share your favourite links from all around the internet!</div>
                 <div className="flex justify-center">
-                  <button
-                    // onClick={() => {
-                    // onComponentClick(item.name, i);
-                    // }}
-                    onClick={handleOpenSettings}
-                    className="flex items-center add-btn mt-[1.5rem] px-8 py-3 z-[100]"
-                  >
+                  <button className="flex items-center add-btn mt-[1.5rem] px-8 py-3 z-[100]">
                     Add Posts
                     <MdAddCircleOutline className="text-[20px] ml-2" />
                   </button>
