@@ -1398,6 +1398,23 @@
 .icon-left {
   display: block;
 }
+.select-input:hover .icon-down {
+  display: block;
+}
+.select-input:hover .icon-left {
+  display: none;
+}
+.select-content {
+  display: block;
+  background: #ffffff;
+  /* Gray/100 */
+
+  border: 1px solid #f2f4f7;
+  /* Shadow/lg */
+
+  box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+  border-radius: 4px;
+}
 .checkbox-element {
   box-shadow: 0px 0px 0px 4px #f4ebff;
 }
@@ -1428,6 +1445,43 @@
   -webkit-box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
+}
+.grey-border {
+  border-bottom: 1px solid rgba(72, 72, 135, 0.1);
+}
+.listbox-options {
+  box-shadow: 0px 8px 16px -4px rgba(16, 24, 40, 0.04);
+}
+
+.mytooltip .mytext {
+  visibility: hidden;
+  width: 200px;
+  background-color: white;
+  color: black;
+  z-index: 1;
+  text-align: center;
+  border-radius: 8px;
+  padding: 5px 0;
+  position: fixed;
+  right: 15rem;
+  height: 150px;
+  margin-top: -75px;
+}
+.mytooltip {
+  position: relative;
+}
+.mytooltip .mytext:after {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 100%;
+  margin-left: 0px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent transparent transparent white;
+}
+.mytooltip:hover .mytext {
+  visibility: visible;
 }
 .lenster-input {
   background: #ffffff;

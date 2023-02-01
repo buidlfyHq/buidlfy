@@ -85,10 +85,16 @@ const workspaceSlice = createSlice({
 
     // to save contract config
     saveContractConfig(state: IWorkspaceState, action: { payload }) {
-      const updatedContract = updateContractInElement(state.workspaceElements, state.selectedElement, action.payload);
-      const updatedSelectedElement = fetchSelectedElement(updatedContract, state.selectedElement.i);
-      state.workspaceElements = updatedContract;
-      state.selectedElement = updatedSelectedElement;
+      const currentElements = action.payload.currentElements;
+      currentElements.map(currentElement => {
+        const updatedContract = updateContractInElement(state.workspaceElements, state.selectedElement, {
+          contractElementSelected: action.payload.contractElementSelected,
+          currentElement,
+        });
+        const updatedSelectedElement = fetchSelectedElement(updatedContract, state.selectedElement.i);
+        state.workspaceElements = updatedContract;
+        state.selectedElement = updatedSelectedElement;
+      });
     },
 
     // to save oracle config
