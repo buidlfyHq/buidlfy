@@ -141,10 +141,10 @@ const PublishProgress: FC = () => {
                 </div>
               );
             })}
-          </div>
-          <div>
-            <img src={spheron} />
-            <span>Powered By Spheron</span>
+            <div className="justify-center flex mt-5 items-center">
+              <img className="w-5 h-5" src={spheron} />
+              <span className="items-center text-[10px] ml-1">Powered By Spheron</span>
+            </div>
           </div>
         </Dialog.Panel>
       ) : null}
