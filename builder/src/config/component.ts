@@ -503,7 +503,7 @@ export const components = [
     style: {
       ...defaultDeleteStyles,
       ...defaultColorStyles,
-      backgroundSize: 'contain',
+      backgroundSize: 'cover',
     },
   },
   {
@@ -517,6 +517,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultColorStyles,
       ...defaultBorderStyles,
+      backgroundSize: 'cover',
     },
     children: [
       {
@@ -531,7 +532,7 @@ export const components = [
         style: {
           ...defaultColorStyles,
           ...defaultDeleteStyles,
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
           backgroundColor: 'rgba(68, 64, 60, 100)',
         },
       },
@@ -547,7 +548,7 @@ export const components = [
         style: {
           ...defaultColorStyles,
           ...defaultDeleteStyles,
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
           backgroundColor: 'rgba(68, 64, 60, 100)',
         },
       },
@@ -563,7 +564,7 @@ export const components = [
         style: {
           ...defaultColorStyles,
           ...defaultDeleteStyles,
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
           backgroundColor: 'rgba(68, 64, 60, 100)',
         },
       },

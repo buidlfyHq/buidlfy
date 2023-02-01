@@ -371,6 +371,7 @@ const RenderItem: FC<IRenderItem> = ({
         <NftCard
           i={item.i}
           backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
           isAuto={item.style.isAuto}
           backgroundSize={item.style.backgroundSize}
           imgData={item.imgData}

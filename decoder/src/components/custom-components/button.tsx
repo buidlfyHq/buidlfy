@@ -8,8 +8,9 @@ import { onRequest } from "hooks/on-request";
 import { gradientCheck } from "utils/gradient-check";
 import ITexts from "interfaces/texts";
 import OracleAbi from "assets/abis/Oracle.json";
-import "styles/components.css";
 import { switchNetwork } from "utils/switchNetwork";
+import { connectWalletButton } from "utils/connect-wallet";
+import "styles/components.css";
 
 const Button: FC<ITexts> = ({
   fontWeight,
@@ -56,30 +57,6 @@ const Button: FC<ITexts> = ({
       setOracleContract(onLoad(modifiedConfig));
     }
   }, []); // eslint-disable-line
-
-  const connectWalletButton = async () => {
-    try {
-      const { ethereum } = window as any;
-
-      if (!ethereum) {
-        return {
-          error: true,
-          errorMessage: "MetaMask not installed, please install!",
-          account: "",
-        };
-      }
-
-      const provider = new ethers.providers.Web3Provider(ethereum);
-      await provider.send("eth_requestAccounts", []); // requesting access to accounts
-      const signer = provider.getSigner();
-      const address = await signer.getAddress();
-      setAccount(address);
-      await switchNetwork();
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error("Error in connectWalletService --> ", error);
-    }
-  };
 
   const disconnect = () => {
     setAccount(null);
@@ -225,8 +202,10 @@ const Button: FC<ITexts> = ({
             margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
-          className="btn btn-border rounded cursor-pointer whitespace-nowrap"
-          onClick={!account ? connectWalletButton : disconnect}
+          className="rounded cursor-pointer btn btn-border whitespace-nowrap"
+          onClick={
+            !account ? () => connectWalletButton(setAccount) : disconnect
+          }
         >
           <span
             style={{
@@ -255,7 +234,7 @@ const Button: FC<ITexts> = ({
             margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
-          className="btn btn-border rounded cursor-pointer whitespace-nowrap"
+          className="rounded cursor-pointer btn btn-border whitespace-nowrap"
           onClick={() =>
             contractFunction?.methodName || oracleFunction?.methodName
               ? onResponse()

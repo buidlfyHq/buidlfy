@@ -32,6 +32,7 @@ export default interface IWorkspace {
   nft?: boolean;
   wallet?: string;
   slug?: string;
+  source?: string;
   image?: any;
   collection?: string;
   title?: string;
@@ -39,6 +40,7 @@ export default interface IWorkspace {
   highestBid?: string;
   cardsPerRow?: number;
   limit?: number;
+  href?: string;
   posts?: IPublication[];
   listOptions?: IList[];
 }

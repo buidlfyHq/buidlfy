@@ -96,6 +96,20 @@
 .text-area {
   outline: none;
 }
+/* card shadow-property */
+.nft-card-shadow:hover {
+  box-shadow: 4px 8px 20px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+/* hover effects on nft card */
+.nft-card .nft-card-img {
+  transition: transform 0.5s ease;
+}
+
+.nft-card-shadow:hover .nft-card-img {
+  transform: scale(1.1);
+}
 
 .lenster-div {
   columns: 3;

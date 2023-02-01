@@ -225,7 +225,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       style={{
         width: '-webkit-fill-available',
       }}
-      className="main-div h-full"
+      className="h-full main-div"
     >
       {workspaceElements?.length > 0 ? (
         <section onClick={handleCheckIsContainer} className="z-100">
@@ -247,7 +247,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
               onLayoutChange={onLayoutChange}
               compactType="vertical"
               margin={[0, 0]}
-              className="h-fit overflow-hidden"
+              className="overflow-hidden h-fit"
             >
               {renderItemFunction}
             </GridLayout>

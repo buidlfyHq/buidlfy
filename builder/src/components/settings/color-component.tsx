@@ -1,7 +1,10 @@
 import React, { useState, FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateWorkspaceElementStyle } from 'redux/workspace/workspace.reducers';
+import { updateWorkspaceElementStyle, updateWorkspaceNFTLayoutElements } from 'redux/workspace/workspace.reducers';
 import ColorPickerDropdown from 'components/utils/color-picker';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import { useSelector } from 'react-redux';
+import { IRootState } from 'redux/root-state.interface';
 import 'styles/components.css';
 import 'styles/dashboard.css';
 
@@ -13,16 +16,25 @@ interface IColorComponent {
 
 const ColorComponent: FC<IColorComponent> = ({ i, color, name }) => {
   const dispatch = useDispatch();
+  const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
   const handleChange = (e: string) => {
-    dispatch(
-      updateWorkspaceElementStyle({
-        settingItemId: i,
-        propertyName: 'color',
-        propertyValue: e,
-      }),
-    );
+    selectedElement.name === 'NFT Card' || selectedElement.name === 'NFT Layout'
+      ? dispatch(
+          updateWorkspaceNFTLayoutElements({
+            settingItemId: i,
+            propertyName: 'color',
+            propertyValue: e,
+          }),
+        )
+      : dispatch(
+          updateWorkspaceElementStyle({
+            settingItemId: i,
+            propertyName: 'color',
+            propertyValue: e,
+          }),
+        );
   };
 
   const isElement = !!i;
