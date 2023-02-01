@@ -32,10 +32,51 @@ export const mapElementsToWorkspace = (element: IWorkspaceElement, payload: IEle
   return element;
 };
 
+export const mapElementStylesToNFTLayoutWorkspace = (element: IWorkspaceElement, workspaceElements: IWorkspaceElement[], payload: IElementDetail) => {
+  const { settingItemId, propertyName, propertyValue } = payload;
+  let selectedChild = findSelected(element, settingItemId);
+  let nftlayout = workspaceElements.filter((item: IWorkspaceElement) => item.name === 'NFT Layout');
+  if (element.i === settingItemId) {
+    return {
+      ...element,
+      children: element.children.map((child: IWorkspaceElement) => {
+        let newChild = {
+          ...child,
+          style: {
+            ...child['style'],
+            [propertyName]: propertyValue,
+          },
+        };
+        return newChild;
+      }),
+    };
+    // can be removed as theme set
+  } else if (selectedChild?.i === settingItemId) {
+    let newNFTLayoutArr = nftlayout.map((item: IWorkspaceElement) => {
+      return {
+        ...item,
+        children: item.children.map((child: IWorkspaceElement) => {
+          let newChild = {
+            ...child,
+            style: {
+              ...child['style'],
+              [propertyName]: propertyValue,
+            },
+          };
+          return newChild;
+        }),
+      };
+    });
+    for (let i = 0; i < newNFTLayoutArr.length; i++) {
+      return newNFTLayoutArr[i];
+    }
+  }
+  return element;
+};
+
 export const mapElementStylesToWorkspace = (element: IWorkspaceElement, payload: IElementDetail) => {
   const { settingItemId, propertyName, propertyValue } = payload;
   let selectedChild = findSelected(element, settingItemId);
-
   if (element.i === settingItemId) {
     return {
       ...element,
@@ -99,6 +140,28 @@ export const mapElementSubStyleToWorkspace = (element: IWorkspaceElement, payloa
 export const mapImageElementStylesToWorkspace = (element: IWorkspaceElement, payload: IElementDetail) => {
   const { settingItemId, propertyName, propertyValue, imageSizeProperty } = payload;
   let selectedChild = findSelected(element, settingItemId);
+
+  // to change children as well as parent components image size
+  if (element.name === 'NFT Layout' && element.i === settingItemId) {
+    let newNFTLayoutChildrenArr = element.children.map((childAsNFTCard: IWorkspaceElement) => {
+      let newChildAsNFTCard = {
+        ...childAsNFTCard,
+        style: {
+          ...childAsNFTCard['style'],
+          [propertyName]: propertyValue,
+        },
+      };
+      return newChildAsNFTCard;
+    });
+    return {
+      ...element,
+      style: {
+        ...element['style'],
+        [propertyName]: propertyValue,
+      },
+      children: newNFTLayoutChildrenArr,
+    };
+  }
 
   if (element.i === settingItemId) {
     return {

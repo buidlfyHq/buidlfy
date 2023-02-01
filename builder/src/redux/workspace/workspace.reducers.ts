@@ -3,12 +3,13 @@ import {
   fetchSelectedElement,
   fetchUploadedImageData,
   mapElementsToWorkspace,
+  mapElementStylesToNFTLayoutWorkspace,
   mapElementStylesToWorkspace,
   mapElementSubStyleToWorkspace,
   mapImageElementStylesToWorkspace,
   updateContractInElement,
   updateOracleInElement,
-} from './workspace.utils';
+} from 'redux/workspace/workspace.utils';
 import { IAction, IHead, IList, IWorkspaceElement, IWorkspaceState } from './workspace.interfaces';
 import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
 
@@ -110,6 +111,19 @@ const workspaceSlice = createSlice({
       state.uploadedImagesData = newUploadedImagesData;
     },
 
+    updateWorkspaceNFTLayoutElements(state: IWorkspaceState, action: { payload }) {
+      if (!action.payload.settingItemId) return;
+      const updatedElements = state.workspaceElements.map((element: IWorkspaceElement) =>
+        mapElementStylesToNFTLayoutWorkspace(element, state.workspaceElements, action.payload),
+      );
+      const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
+      return {
+        ...state,
+        workspaceElements: updatedElements,
+        selectedElement: updatedSelectedElement,
+      };
+    },
+
     updateListValue(state: IWorkspaceState, action: { payload: IList[] }) {
       return {
         ...state,
@@ -131,6 +145,7 @@ export const {
   saveContractConfig,
   saveOracleConfig,
   updateUploadedImageData,
+  updateWorkspaceNFTLayoutElements,
   updateListValue,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;
