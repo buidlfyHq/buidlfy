@@ -128,6 +128,7 @@ const RenderItem: FC<IRenderItem> = ({
               margin={item.style.margin}
               padding={item.style.padding}
               fontFamily={item.style.fontFamily}
+              borderRadius={item.style.borderRadius}
             />
           ) : (
             <Text
@@ -144,6 +145,7 @@ const RenderItem: FC<IRenderItem> = ({
               margin={item.style.margin}
               padding={item.style.padding}
               fontFamily={item.style.fontFamily}
+              borderRadius={item.style.borderRadius}
             />
           )}
         </>
@@ -193,6 +195,7 @@ const RenderItem: FC<IRenderItem> = ({
           margin={item.style.margin}
           imgData={item.imgData}
           link={item.link}
+          borderRadius={item.style.borderRadius}
           preview={preview}
         />
       );
@@ -366,6 +369,20 @@ const RenderItem: FC<IRenderItem> = ({
             <LensterWidget i={item.i} item={item} setDrag={setDrag} />
           )}
         </>
+      );
+
+    // need to understand if preview has a role in NFT Card ?
+    case 'NFT Card':
+      return (
+        <NftCard
+          i={item.i}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          isAuto={item.style.isAuto}
+          backgroundSize={item.style.backgroundSize}
+          imgData={item.imgData}
+          justifyContent={item.style.justifyContent}
+        />
       );
 
     // need to understand if preview has a role in NFT Card ?
