@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-
 import { gradientCheck } from 'utils/gradient-check';
 import { IRootState } from 'redux/root-state.interface';
 import { IUploadedImageData, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
@@ -25,16 +24,17 @@ const NftCard: FC<INftCard> = ({ i, backgroundColor, color, imgData, justifyCont
   return (
     <section className="flex items-center justify-center h-full p-2" id="nft-card">
       <section
-        className="w-full h-full p-3 rounded-lg bg-stone-700"
+        className="w-full h-full p-3 rounded-lg"
         style={{
-          backgroundColor: backgroundColor,
+          backgroundColor: backgroundColor || 'white',
           boxShadow: '0px 2px 7px rgba(0, 0, 0, 0.5)',
         }}
         id={i}
       >
+        <div className="h-[10%]" />
         <div
           id={i}
-          className="flex w-full h-[80%] rounded-lg h-full bg-white/100"
+          className="flex w-full h-[70%] rounded-lg h-full bg-white/100"
           style={{
             backgroundImage: `url(${imageData?.uploadedImageData ? imageData.uploadedImageData : DefaultImage})`,
             backgroundRepeat: 'no-repeat',

@@ -301,6 +301,11 @@
   text-align: center;
   color: #504f82;
 }
+.element-div-text {
+  color: rgba(142, 139, 145, 0.85);
+  font-size: 12px;
+  font-weight: 600;
+}
 .element-div {
   background: linear-gradient(93.43deg, rgba(70, 143, 228, 0.06) 19.42%, rgba(119, 66, 231, 0.06) 63.9%);
   border-radius: 8px;

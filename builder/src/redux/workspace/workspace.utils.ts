@@ -39,11 +39,18 @@ export const mapElementStylesToNFTLayoutWorkspace = (element: IWorkspaceElement,
   if (element.i === settingItemId) {
     return {
       ...element,
-      style: {
-        ...element['style'],
-        [propertyName]: propertyValue,
-      },
+      children: element.children.map((child: IWorkspaceElement) => {
+        let newChild = {
+          ...child,
+          style: {
+            ...child['style'],
+            [propertyName]: propertyValue,
+          },
+        };
+        return newChild;
+      }),
     };
+    // can be removed as theme set
   } else if (selectedChild?.i === settingItemId) {
     let newNFTLayoutArr = nftlayout.map((item: IWorkspaceElement) => {
       return {

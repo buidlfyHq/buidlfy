@@ -5,7 +5,7 @@ import RenderItem from "utils/render-item";
 import IWorkspace from "interfaces/workspace";
 import { IInput, IOutput } from "interfaces/value";
 import { Layout, Layouts, Responsive, WidthProvider } from "react-grid-layout";
-import { connectWalletButton } from "utils/connect-wallet";
+import { connectWalletButton } from "utils/connectWallet";
 
 const ResponsiveGridLayout = WidthProvider(Responsive); // for responsive grid layout
 
