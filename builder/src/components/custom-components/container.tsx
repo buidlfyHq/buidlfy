@@ -22,7 +22,7 @@ interface IContainer {
   borderWidth: number;
   shadow: string;
   setDrag: (drag: boolean) => void;
-  setOpenSetting: (open: boolean) => void;
+  setOpenSetting: (openSetting: boolean) => void;
   setOpenTab: (openTab: number) => void;
   setIsContainerSelected: (isContainerSelected: boolean) => void;
   setValue?: (value: string) => void;

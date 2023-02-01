@@ -4,18 +4,26 @@ import LensterPost from 'components/utils/lenster-post';
 import { IRootState } from 'redux/root-state.interface';
 import edit from 'assets/icons/edit.png';
 import logo from 'assets/icons/buidlfy.png';
+import LensterLogo from 'assets/lenster-logo.png';
 import config from 'config';
 import 'styles/components.css';
+import { MdAddCircleOutline } from 'react-icons/md';
+import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import { useDispatch } from 'react-redux';
+import { setSelectedElement } from 'redux/workspace/workspace.reducers';
 
 interface ILensterWidget {
   i: string;
+  item: IWorkspaceElement;
   setDrag: (drag: boolean) => void;
 }
 
-const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
+const LensterWidget: FC<ILensterWidget> = ({ i, item, setDrag }) => {
+  const dispatch = useDispatch();
   const posts = useSelector((state: IRootState) =>
     state.workspace.workspaceElements.find(workspaceElement => workspaceElement.i === i).posts.filter(publication => publication.i === i),
   );
+  const handleOpenSettings = () => {};
   return (
     <>
       {posts && posts.length > 0 ? (
@@ -36,7 +44,8 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
       ) : (
         <div
           className="w-full h-full py-10 default-container "
-          key={'DefaultElement'}
+          key={i}
+          id={i + item.name}
           data-grid={{
             x: 0,
             y: 0,
@@ -48,8 +57,24 @@ const LensterWidget: FC<ILensterWidget> = ({ i, setDrag }) => {
           }}
         >
           <>
-            <div className="container-div" onMouseOut={() => setDrag(true)} onMouseOver={() => setDrag(false)}>
-              <span className="container-text">Add Lenster Posts</span>
+            <div className="container-div-lenster" onMouseOut={() => setDrag(true)} onMouseOver={() => setDrag(false)}>
+              <div className="flex flex-col items-center p-10">
+                <img src={LensterLogo} width={72} height={72} alt="lenster_logo" />
+                <div className="text-[#14142B] text-[22px] font-[800] mt-7">Add Lenster Posts in your website</div>
+                <div className="text-[#4E4B66] text-[15px] mt-2">Share your favourite links from all around the internet!</div>
+                <div className="flex justify-center">
+                  <button
+                    // onClick={() => {
+                    // onComponentClick(item.name, i);
+                    // }}
+                    onClick={handleOpenSettings}
+                    className="flex items-center add-btn mt-[1.5rem] px-8 py-3 z-[100]"
+                  >
+                    Add Posts
+                    <MdAddCircleOutline className="text-[20px] ml-2" />
+                  </button>
+                </div>
+              </div>
             </div>
             <div className="flex absolute top-[0.5rem] right-[0.6rem]">
               <div

@@ -2,13 +2,14 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ShortUniqueId from 'short-unique-id';
 import ReactTooltip from 'react-tooltip';
-import { IoIosAddCircleOutline } from 'react-icons/io';
 import { MdOutlineClose } from 'react-icons/md';
 import { components } from 'config/component';
 import { containerCheck } from 'utils/container-check';
 import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { IWorkspaceElement, ResizeHandles } from 'redux/workspace/workspace.interfaces';
+import NftLayoutPlugin from 'assets/sidebar-icon-svgs/nft-layout-plugin.png';
+import LensterWidgetPlugin from 'assets/sidebar-icon-svgs/lenster-widget-plugin.png';
 import 'styles/components.css';
 
 interface IPlugins {
@@ -17,8 +18,13 @@ interface IPlugins {
 }
 
 const pluginElementsArr = [
-  { name: 'NFT Layout', tooltip: 'Click here to add the NFT Layout', clickFn: 'NFT Layout', innerText: 'Add NFT Layout' },
-  { name: 'Wall of love - Lens Protocol', tooltip: 'Click here to add the Lenster Card', clickFn: 'Lenster Card', innerText: 'Add Wall of Love' },
+  { name: 'NFT Layout', tooltip: 'Click here to add the NFT Layout', clickFn: 'NFT Layout', image: NftLayoutPlugin },
+  {
+    name: 'Wall of love - Lens Protocol',
+    tooltip: 'Click here to add the Lenster Card',
+    clickFn: 'Lenster Card',
+    image: LensterWidgetPlugin,
+  },
 ];
 
 const Plugins: FC<IPlugins> = ({ hideNavbar, setHideNavbar }) => {
@@ -88,19 +94,16 @@ const Plugins: FC<IPlugins> = ({ hideNavbar, setHideNavbar }) => {
       />
       {/* Fix: Add all style to common tailwind  */}
       {pluginElementsArr.map(plugin => {
-        const { name, tooltip, clickFn, innerText } = plugin;
+        const { name, tooltip, clickFn, image } = plugin;
         return (
           <section key={name}>
             <div className="px-4 element-div-text">{name}</div>
-            <div className="element-div">
-              <div className="px-4 py-4">
+            <div className="plugin-div">
+              <div className="px-2 py-2.5">
                 <div data-tip={tooltip} data-for="elements">
-                  <div className="flex">
-                    <div className="cursor-pointer element-container" onClick={() => onClickFunction(clickFn)}>
-                      <span className="element-text">
-                        {innerText}
-                        <IoIosAddCircleOutline className="text-[16px] ml-1" />
-                      </span>
+                  <div className="flex justify-center it4ems-center">
+                    <div className="cursor-pointer plugin-container" onClick={() => onClickFunction(clickFn)}>
+                      <img src={image} alt="plugin_image" />
                     </div>
                   </div>
                 </div>

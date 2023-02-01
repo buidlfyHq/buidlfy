@@ -479,7 +479,7 @@ export const components = [
   },
   {
     name: 'Lenster Card',
-    h: 2,
+    h: 7,
     minH: 1,
     containerId: '',
     posts: [],
