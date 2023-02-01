@@ -130,6 +130,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
 
   const handleMouseOver = (id: string) => {
     (document.getElementById(id).childNodes[1] as HTMLElement).style.visibility = 'visible';
+    console.log(id);
   };
 
   const handleMouseOut = (id: string) => {
