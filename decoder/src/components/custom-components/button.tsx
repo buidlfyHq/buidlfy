@@ -8,7 +8,11 @@ import { onRequest } from "hooks/on-request";
 import { gradientCheck } from "utils/gradient-check";
 import ITexts from "interfaces/texts";
 import OracleAbi from "assets/abis/Oracle.json";
+import { switchNetwork } from "utils/switchNetwork";
+import { connectWalletButton } from "utils/connect-wallet";
 import "styles/components.css";
+import { switchNetwork } from "utils/switchNetwork";
+import { connectWalletButton } from "utils/connectWallet";
 
 const Button: FC<ITexts> = ({
   fontWeight,
@@ -55,59 +59,6 @@ const Button: FC<ITexts> = ({
       setOracleContract(onLoad(modifiedConfig));
     }
   }, []); // eslint-disable-line
-
-  const connectWalletButton = async () => {
-    try {
-      const { ethereum } = window as any;
-
-      if (!ethereum) {
-        return {
-          error: true,
-          errorMessage: "MetaMask not installed, please install!",
-          account: "",
-        };
-      }
-
-      const provider = new ethers.providers.Web3Provider(ethereum);
-      await provider.send("eth_requestAccounts", []); // requesting access to accounts
-      const signer = provider.getSigner();
-      const address = await signer.getAddress();
-      setAccount(address);
-      await switchNetwork();
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error("Error in connectWalletService --> ", error);
-    }
-  };
-
-  const switchNetwork = async (networkId?: number) => {
-    // NOTE: polygon mumbai testnet by default
-    const currentNetwork =
-      networks[Number(config.contract.network) || networkId || 80001];
-
-    try {
-      await (window as any).ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: currentNetwork.chainId }],
-      });
-    } catch (switchError) {
-      // This error code indicates that the chain has not been added to MetaMask.
-      if (switchError.code === 4902) {
-        try {
-          await (window as any).ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [currentNetwork],
-          });
-          return { error: false, errorMessage: "" };
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.log("Error in changeNetworkService --> ", error);
-        }
-      }
-      // eslint-disable-next-line no-console
-      console.log("Error in changeNetworkService --> ", switchError);
-    }
-  };
 
   const disconnect = () => {
     setAccount(null);
@@ -253,8 +204,10 @@ const Button: FC<ITexts> = ({
             margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
-          className="btn btn-border rounded cursor-pointer whitespace-nowrap"
-          onClick={!account ? connectWalletButton : disconnect}
+          className="rounded cursor-pointer btn btn-border whitespace-nowrap"
+          onClick={
+            !account ? () => connectWalletButton(setAccount) : disconnect
+          }
         >
           <span
             style={{
@@ -283,7 +236,7 @@ const Button: FC<ITexts> = ({
             margin: `${margin.marginTop}px ${margin.marginRight}px ${margin.marginBottom}px ${margin.marginLeft}px`,
             padding: `${padding.paddingTop}px ${padding.paddingRight}px ${padding.paddingBottom}px ${padding.paddingLeft}px`,
           }}
-          className="btn btn-border rounded cursor-pointer whitespace-nowrap"
+          className="rounded cursor-pointer btn btn-border whitespace-nowrap"
           onClick={() =>
             contractFunction?.methodName || oracleFunction?.methodName
               ? onResponse()

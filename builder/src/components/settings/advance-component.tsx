@@ -14,9 +14,9 @@ import { updateContractAbi, updateContractAddress, updateContractList, updateCon
 import { IRootState } from 'redux/root-state.interface';
 import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IContract } from 'redux/contract/contract.interfaces';
+import WarningText from 'components/utils/setting-warning';
 import 'styles/components.css';
 import 'styles/dashboard.css';
-import WarningText from 'components/utils/setting-warning';
 
 interface IAdvanceComponent {
   selectedElement: IWorkspaceElement;
@@ -44,7 +44,9 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     };
   }>(null); // for abi method component
   const [isViewMore, setIsViewMore] = useState<boolean>(false);
-
+  const [showInput, setShowInput] = useState<boolean>(false);
+  const [showOutput, setShowOutput] = useState<boolean>(false);
+  const [showInputPayable, setShowInputPayable] = useState<boolean>(false);
   const isWalletConnect = workspaceElements.findIndex(item => item.connectWallet === true);
 
   useEffect(() => {
@@ -56,6 +58,23 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
     }
   }, []); // eslint-disable-line
 
+  const handleShowInput = () => {
+    setShowInput(!showInput);
+  };
+
+  const handleShowOutput = () => {
+    setShowOutput(!showOutput);
+  };
+
+  const handleShowInputPayable = () => {
+    setShowInputPayable(!showInputPayable);
+  };
+
+  const resetToggle = () => {
+    setShowInput(false);
+    setShowOutput(false);
+    setShowInputPayable(false);
+  };
   const handleContractList = (abi: string, address: string, network: string) => {
     setGoBack(false);
     dispatch(updateContractAbi(JSON.parse(abi)));
@@ -106,8 +125,24 @@ const AdvanceComponent: FC<IAdvanceComponent> = ({ selectedElement }) => {
       {selectedContractAbi && selectedContractAddress && selectedContractNetwork && !goBack ? (
         <>
           <div className="flex justify-center mt-[3rem]" />
-          <AbiMethods setShowComponent={setShowComponent} selectedElement={selectedElement} setIsOpen={setIsOpen} setGoBack={setGoBack} />
-          <AbiComponents showComponent={showComponent} elementId={selectedElement.i} />
+          <AbiMethods
+            setShowComponent={setShowComponent}
+            selectedElement={selectedElement}
+            setIsOpen={setIsOpen}
+            setGoBack={setGoBack}
+            showComponent={showComponent}
+            resetToggle={resetToggle}
+          />
+          <AbiComponents
+            showComponent={showComponent}
+            elementId={selectedElement.i}
+            handleShowInput={handleShowInput}
+            handleShowOutput={handleShowOutput}
+            handleShowInputPayable={handleShowInputPayable}
+            showInput={showInput}
+            showOutput={showOutput}
+            showInputPayable={showInputPayable}
+          />
         </>
       ) : (
         <>

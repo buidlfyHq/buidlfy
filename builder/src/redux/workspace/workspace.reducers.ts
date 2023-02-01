@@ -3,12 +3,13 @@ import {
   fetchSelectedElement,
   fetchUploadedImageData,
   mapElementsToWorkspace,
+  mapElementStylesToNFTLayoutWorkspace,
   mapElementStylesToWorkspace,
   mapElementSubStyleToWorkspace,
   mapImageElementStylesToWorkspace,
   updateContractInElement,
   updateOracleInElement,
-} from './workspace.utils';
+} from 'redux/workspace/workspace.utils';
 import { IAction, IHead, IList, IWorkspaceElement, IWorkspaceState } from './workspace.interfaces';
 import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
 
@@ -84,10 +85,16 @@ const workspaceSlice = createSlice({
 
     // to save contract config
     saveContractConfig(state: IWorkspaceState, action: { payload }) {
-      const updatedContract = updateContractInElement(state.workspaceElements, state.selectedElement, action.payload);
-      const updatedSelectedElement = fetchSelectedElement(updatedContract, state.selectedElement.i);
-      state.workspaceElements = updatedContract;
-      state.selectedElement = updatedSelectedElement;
+      const currentElements = action.payload.currentElements;
+      currentElements.map(currentElement => {
+        const updatedContract = updateContractInElement(state.workspaceElements, state.selectedElement, {
+          contractElementSelected: action.payload.contractElementSelected,
+          currentElement,
+        });
+        const updatedSelectedElement = fetchSelectedElement(updatedContract, state.selectedElement.i);
+        state.workspaceElements = updatedContract;
+        state.selectedElement = updatedSelectedElement;
+      });
     },
 
     // to save oracle config
@@ -102,6 +109,19 @@ const workspaceSlice = createSlice({
       const { settingItemId, uploadedImageData } = action.payload;
       const newUploadedImagesData = fetchUploadedImageData(settingItemId, uploadedImageData, state.uploadedImagesData);
       state.uploadedImagesData = newUploadedImagesData;
+    },
+
+    updateWorkspaceNFTLayoutElements(state: IWorkspaceState, action: { payload }) {
+      if (!action.payload.settingItemId) return;
+      const updatedElements = state.workspaceElements.map((element: IWorkspaceElement) =>
+        mapElementStylesToNFTLayoutWorkspace(element, state.workspaceElements, action.payload),
+      );
+      const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
+      return {
+        ...state,
+        workspaceElements: updatedElements,
+        selectedElement: updatedSelectedElement,
+      };
     },
 
     updateListValue(state: IWorkspaceState, action: { payload: IList[] }) {
@@ -125,6 +145,7 @@ export const {
   saveContractConfig,
   saveOracleConfig,
   updateUploadedImageData,
+  updateWorkspaceNFTLayoutElements,
   updateListValue,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;
