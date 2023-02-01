@@ -8,8 +8,8 @@ import { containerCheck } from 'utils/container-check';
 import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import { IWorkspaceElement, ResizeHandles } from 'redux/workspace/workspace.interfaces';
-import NftLayoutPlugin from 'assets/sidebarIconSvgs/nft-layout-plugin.png';
-import LensterWidgetPlugin from 'assets/sidebarIconSvgs/lenster-widget-plugin.png';
+import NftLayoutPlugin from 'assets/sidebar-icon-svgs/nft-layout-plugin.png';
+import LensterWidgetPlugin from 'assets/sidebar-icon-svgs/lenster-widget-plugin.png';
 import 'styles/components.css';
 
 interface IPlugins {
