@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.node
+    env_file: ./server/.env
+    environment:
+      - DB_HOST=mongo
+    ports:
+      - 8000:8000
+    restart: 'unless-stopped'
+    depends_on:
+      - mongo
+  builder:
+    build:
+      context: ./builder
+      dockerfile: Dockerfile.builder
+    env_file: ./builder/.env
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+      
+volumes:
+   mongodb:
