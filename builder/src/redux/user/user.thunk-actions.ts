@@ -136,7 +136,7 @@ export const subscribeNewsletterAsync = createAsyncThunk('user/subscribeNewslett
   }
 });
 
-export const isWhitelistedAsync = createAsyncThunk('user/isWhitelisted', async (_, { dispatch }) => {
+export const isWhitelistedAsync = createAsyncThunk('user/isWhitelisted', async (route: string, { dispatch }) => {
   try {
     const session: ISession = JSON.parse(localStorage.getItem('session'));
     if (session) {
@@ -164,9 +164,11 @@ export const isWhitelistedAsync = createAsyncThunk('user/isWhitelisted', async (
               const stringifyUpdatedSession = JSON.stringify(updatedSession);
               localStorage.setItem('session', stringifyUpdatedSession);
             }
-            window.location.href = '/#/dashboard';
-            dispatch(toggleModal(true));
-            dispatch(toggleModalType('start'));
+            window.location.href = `/#/${route}`;
+            if (route === 'dashboard') {
+              dispatch(toggleModal(true));
+              dispatch(toggleModalType('start'));
+            }
           } else if (JSON.parse(res).verified) {
             if (!session.data.verified) {
               const updatedSessionData = { ...session.data, whitelisted: false, verified: true };

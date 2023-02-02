@@ -24,7 +24,7 @@ const Dashboard: FC = () => {
   const [hideNavbar, setHideNavbar] = useState<boolean>(true);
 
   useEffect(() => {
-    dispatch(isWhitelistedAsync());
+    dispatch(isWhitelistedAsync('dashboard'));
     const saveItems = localStorage.getItem('items');
     if (saveItems) {
       dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));

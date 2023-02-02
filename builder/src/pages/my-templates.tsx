@@ -22,7 +22,7 @@ const MyTemplates: FC = () => {
   const [tab, setTab] = useState<string>('all');
 
   useEffect(() => {
-    dispatch(isWhitelistedAsync());
+    dispatch(isWhitelistedAsync('my-templates'));
     if (!currentAccount) {
       return navigate('/dashboard');
     }
