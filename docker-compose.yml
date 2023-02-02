@@ -23,6 +23,7 @@ services:
     build:
       context: ./builder
       dockerfile: Dockerfile.builder
+    env_file: ./builder/.env
     ports:
       - 3000:3000
     depends_on:
