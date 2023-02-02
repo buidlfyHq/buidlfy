@@ -24,7 +24,7 @@ const RenderModal: FC = () => {
 
   switch (modalType) {
     case 'start':
-      return <PublishProgress />;
+      return <StartModal />;
     case 'template':
       return <SelectTemplateModal />;
     case 'single':
