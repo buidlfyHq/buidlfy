@@ -36,8 +36,6 @@ const Dashboard: FC = () => {
         dispatch(updateContractNetwork(JSON.parse(saveItems).contract?.network));
       }
     }
-    dispatch(toggleModal(true));
-    dispatch(toggleModalType('start'));
   }, []); // eslint-disable-line
 
   return (
