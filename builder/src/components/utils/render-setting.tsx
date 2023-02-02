@@ -5,8 +5,10 @@ import ButtonSettings from 'components/dashboard/button-settings';
 import ImageSettings from 'components/dashboard/image-settings';
 import ContainerSettings from 'components/dashboard/container-settings';
 import InputSettings from 'components/dashboard/input-settings';
-import SpacerSettings from 'components/dashboard/spacer-settings';
+import NftLayoutSettings from 'components/dashboard/nft-layout-settings';
 import GeneralSettings from 'components/dashboard/general-settings';
+import NftCardSettings from 'components/dashboard/nft-card-settings';
+import SpacerSettings from 'components/dashboard/spacer-settings';
 import DividerSettings from 'components/dashboard/divider-settings';
 import ListSettings from 'components/dashboard/list-settings';
 import DropdownSettings from 'components/dashboard/dropdown-settings';
@@ -100,10 +102,12 @@ const SettingComponent: FC<ISettings> = ({ openTab, setOpenTab }) => {
       return <LensterSettings />;
     case 'Input':
       return <InputSettings handleSettingChange={handleSettingChange} />;
-
+    case 'NFT Card':
+      return <NftCardSettings />;
+    case 'NFT Layout':
+      return <NftLayoutSettings />;
     case 'Spacer':
       return <SpacerSettings />;
-
     default:
       return <GeneralSettings handleSettingChange={handleSettingChange} />;
   }

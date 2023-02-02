@@ -17,3 +17,7 @@
 .radio-style {
   @apply h-4 w-4 border-[1px] rounded-[20px];
 }
+
+.list-arrow {
+  @apply absolute right-[1.3rem] text-[15px] text-[#98A2B3];
+}
