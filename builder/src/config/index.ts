@@ -34,6 +34,9 @@ export interface IConfig {
   site: {
     SITE_URL: string;
   };
+  spheron: {
+    SPHERON_URL: string;
+  };
 }
 
 const NODE_ENV: string = process.env.REACT_APP_STAGE || 'local';
@@ -75,6 +78,9 @@ const development: IConfig = {
   site: {
     SITE_URL: 'https://buidlfy.com/',
   },
+  spheron: {
+    SPHERON_URL: 'https://spheron.network/',
+  },
 };
 
 const production: IConfig = {
@@ -114,6 +120,9 @@ const production: IConfig = {
   site: {
     SITE_URL: 'https://buidlfy.com/',
   },
+  spheron: {
+    SPHERON_URL: 'https://spheron.network/',
+  },
 };
 
 const local: IConfig = {
@@ -152,6 +161,9 @@ const local: IConfig = {
   },
   site: {
     SITE_URL: 'https://buidlfy.com/',
+  },
+  spheron: {
+    SPHERON_URL: 'https://spheron.network/',
   },
 };
 

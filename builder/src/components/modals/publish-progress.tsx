@@ -141,10 +141,12 @@ const PublishProgress: FC = () => {
                 </div>
               );
             })}
-            <div className="justify-center flex mt-5 items-center">
-              <img className="w-5 h-5" src={spheron} />
-              <span className="items-center text-[10px] ml-1">Powered By Spheron</span>
-            </div>
+            <a href={config.spheron.SPHERON_URL} target="_blank">
+              <div className="justify-center flex mt-5 items-center">
+                <img className="w-5 h-5" src={spheron} />
+                <span className="items-center text-[10px] ml-1">Powered By Spheron</span>
+              </div>
+            </a>
           </div>
         </Dialog.Panel>
       ) : null}
