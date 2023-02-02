@@ -33,12 +33,13 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   useEffect(() => {
     const newAddInputs = [];
     filterSavedPost.map(post => {
-      const duplicatePost = addInputs.filter(addInput => addInput.value === addInput.value);
+      // const duplicatePost = addInputs.filter(addInput => addInput.value === addInput.value);
       const error = !post.profileId;
       newAddInputs.push({ i: i, id: post.id, value: post.name, verified: true, error });
+      return post;
     });
     setAddInputs(newAddInputs);
-  }, [savedPosts, i]);
+  }, [savedPosts, i]); // eslint-disable-line
 
   // handles change of text value in input fields
   const handleInputValueChange = (e, id: number) => {

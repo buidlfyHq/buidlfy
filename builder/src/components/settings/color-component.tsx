@@ -20,6 +20,10 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, name, cardTheme }) => {
   const dispatch = useDispatch();
   const selectedElement: IWorkspaceElement = useSelector((state: IRootState) => state.workspace.selectedElement);
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
+
+  const isElement = !!i;
+  const hideGradient = name === 'Input';
+
   useEffect(() => {
     cardTheme &&
       dispatch(
@@ -29,7 +33,8 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, name, cardTheme }) => {
           propertyValue: cardTheme?.colors?.secondary,
         }),
       );
-  }, [cardTheme]);
+  }, [cardTheme]); // eslint-disable-line
+
   const handleChange = (e: string) => {
     selectedElement.name === 'NFT Card' || selectedElement.name === 'NFT Layout'
       ? dispatch(
@@ -48,8 +53,6 @@ const ColorComponent: FC<IColorComponent> = ({ i, color, name, cardTheme }) => {
         );
   };
 
-  const isElement = !!i;
-  const hideGradient = name === 'Input';
   return (
     <>
       {!cardTheme && (

@@ -65,16 +65,7 @@ const PublishProgress: FC = () => {
         }
       });
     }
-  }, [
-    // eslint-disable-line
-    transactionRes,
-    publishDeploymentId,
-    publishSubDomain,
-    dispatch,
-    publishConfig,
-    socket,
-    currentStep,
-  ]);
+  }, [transactionRes, publishDeploymentId, publishSubDomain, dispatch, publishConfig, socket, currentStep]); // eslint-disable-line
 
   useEffect(() => {
     if (publishFailed) {

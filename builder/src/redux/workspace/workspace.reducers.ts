@@ -10,7 +10,7 @@ import {
   updateContractInElement,
   updateOracleInElement,
 } from 'redux/workspace/workspace.utils';
-import { IAction, IHead, IList, IWorkspaceElement, IWorkspaceState } from './workspace.interfaces';
+import { IAction, ICurrentElement, IHead, IList, IWorkspaceElement, IWorkspaceState } from './workspace.interfaces';
 import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
 
 const initialState: IWorkspaceState = {
@@ -86,7 +86,7 @@ const workspaceSlice = createSlice({
     // to save contract config
     saveContractConfig(state: IWorkspaceState, action: { payload }) {
       const currentElements = action.payload.currentElements;
-      currentElements.map(currentElement => {
+      currentElements.map((currentElement: ICurrentElement) => {
         const updatedContract = updateContractInElement(state.workspaceElements, state.selectedElement, {
           contractElementSelected: action.payload.contractElementSelected,
           currentElement,
@@ -94,6 +94,7 @@ const workspaceSlice = createSlice({
         const updatedSelectedElement = fetchSelectedElement(updatedContract, state.selectedElement.i);
         state.workspaceElements = updatedContract;
         state.selectedElement = updatedSelectedElement;
+        return currentElement;
       });
     },
 

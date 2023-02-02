@@ -261,14 +261,14 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
       <div className="element-div">
         <div onClick={() => onClickFunction('Badge')} className="px-10 py-3 cursor-pointer">
           <div data-tip="Click here to add the Badge" data-for="elements">
-            <img src={badge} />
+            <img src={badge} alt="Badge" />
           </div>
         </div>
       </div>
       <div className="element-div">
         <div onClick={() => onClickFunction('Status')} className="px-10 py-3 cursor-pointer">
           <div data-tip="Click here to add the Status Badge" data-for="elements">
-            <img src={status} />
+            <img src={status} alt="Status" />
           </div>
         </div>
       </div>

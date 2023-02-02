@@ -20,7 +20,7 @@ const LensterWidget: FC<ILensterWidget> = ({ i, item, setDrag }) => {
   const posts = useSelector((state: IRootState) =>
     state.workspace.workspaceElements.find(workspaceElement => workspaceElement.i === i).posts.filter(publication => publication.i === i),
   );
-  const handleOpenSettings = () => {};
+  
   return (
     <>
       {posts && posts.length > 0 ? (
@@ -31,9 +31,9 @@ const LensterWidget: FC<ILensterWidget> = ({ i, item, setDrag }) => {
               const updatePostMedia = 'https://ipfs.io/ipfs/' + post?.postMedia?.slice(7);
               return <LensterPost i={i} post={post} updateProfilePicture={updateProfilePicture} updatePostMedia={updatePostMedia} />;
             })}
-            <a href={config.site.SITE_URL} target="_blank">
+            <a href={config.site.SITE_URL} target="_blank" rel="noreferrer">
               <span className="flex absolute right-[1rem] bottom-[1rem]">
-                Powered By <img className="w-[1.5rem] h-auto mx-2" src={logo} /> Buidlfy
+                Powered By <img className="w-[1.5rem] h-auto mx-2" src={logo} alt="Buidlfy" /> Buidlfy
               </span>
             </a>
           </div>

@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Responsive, WidthProvider } from 'react-grid-layout';
-import config from 'config';
 import RenderItem from 'components/utils/render-item';
 import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
+import { isWhitelistedAsync } from 'redux/user/user.thunk-actions';
 import { IRootState } from 'redux/root-state.interface';
 import { IInput, IOutput } from 'redux/workspace/workspace.interfaces';
 
@@ -19,6 +19,7 @@ const Preview: FC = () => {
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
 
   useEffect(() => {
+    dispatch(isWhitelistedAsync());
     let saveItems = localStorage.getItem('items');
     if (saveItems) {
       dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));

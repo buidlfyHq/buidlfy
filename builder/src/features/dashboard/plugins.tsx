@@ -31,7 +31,6 @@ const Plugins: FC<IPlugins> = ({ hideNavbar, setHideNavbar }) => {
   const uid = new ShortUniqueId();
   const dispatch = useDispatch();
   const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
-  const selectedElement = useSelector((state: IRootState) => state.workspace.selectedElement);
 
   const onClickFunction = (name: string) => {
     let c = components?.find(component => component.name === name);
