@@ -4,7 +4,6 @@ import LensterPost from 'components/utils/lenster-post';
 import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IRootState } from 'redux/root-state.interface';
 import config from 'config';
-import { MdAddCircleOutline } from 'react-icons/md';
 import logo from 'assets/icons/buidlfy.png';
 import LensterLogo from 'assets/lenster-logo.png';
 import edit from 'assets/icons/edit.png';
@@ -20,7 +19,6 @@ const LensterWidget: FC<ILensterWidget> = ({ i, item, setDrag }) => {
   const posts = useSelector((state: IRootState) =>
     state.workspace.workspaceElements.find(workspaceElement => workspaceElement.i === i).posts.filter(publication => publication.i === i),
   );
-  const handleOpenSettings = () => {};
   return (
     <>
       {posts && posts.length > 0 ? (
@@ -59,11 +57,10 @@ const LensterWidget: FC<ILensterWidget> = ({ i, item, setDrag }) => {
                 <img src={LensterLogo} width={72} height={72} alt="lenster_logo" />
                 <div className="text-[#14142B] text-[22px] font-[800] mt-7">Add Lenster Posts in your website</div>
                 <div className="text-[#4E4B66] text-[15px] mt-2">Share your favourite links from all around the internet!</div>
-                <div className="flex justify-center">
-                  <button className="flex items-center add-btn mt-[1.5rem] px-8 py-3 z-[100]">
-                    Add Posts
-                    <MdAddCircleOutline className="text-[20px] ml-2" />
-                  </button>
+                <div className="flex items-center gap-2 text-[#4E4B66] text-[15px] mt-3">
+                  <span>Click on</span>
+                  <img className="w-[13px] h-[13px]" src={edit} alt="edit" />
+                  <span>icon to add you post and create your own Wall of Love</span>
                 </div>
               </div>
             </div>
