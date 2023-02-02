@@ -1,4 +1,24 @@
+version: '3'
+
 services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.node
+    env_file: ./server/.env
+    environment:
+      - DB_HOST=mongo
+    ports:
+      - 8000:8000
+    restart: 'unless-stopped'
+    depends_on:
+      - mongo
   builder:
     build:
       context: ./builder
@@ -7,26 +27,6 @@ services:
       - 3000:3000
     depends_on:
       - mongo
-  server:
-    build:
-      context: ./server
-      dockerfile: Dockerfile.node
-    environment:
-      - PORT = 8000
-      - DB_HOST = 127.0.0.1
-      - DB_PORT = 27017
-      - DB_DATABASE = buidlfy
-    ports:
-      - 8000:8000
-    restart: 'unless-stopped'
-    depends_on:
-      - mongo
-  mongo:
-    image: mongo:latest
-    ports:
-      - 27017:27017
-    volumes:
-      - mongodb:/data/db
-
+      
 volumes:
    mongodb:
