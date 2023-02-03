@@ -2,11 +2,11 @@ import React, { FC, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai';
-import { IoIosArrowDown, IoIosArrowForward, IoMdArrowDropdown, IoMdArrowDropright, IoMdCheckmarkCircle } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowForward, IoMdCheckmarkCircle } from 'react-icons/io';
 import { saveContractConfig } from 'redux/workspace/workspace.reducers';
 import { setSelectorToDefault, updateSelector } from 'redux/contract/contract.reducers';
 import Spinner from 'components/utils/assets/spinner';
-import { IShowComponent, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
+import { ICurrentElement, IShowComponent, IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import { IContractElementSelected, IContractElementSelector } from 'redux/contract/contract.interfaces';
 import ListBoxDropdown from 'components/utils/list-box';
 import { Method } from 'components/utils/method-options';
@@ -37,16 +37,7 @@ const AbiComponents: FC<IAbiComponents> = ({
   const contractElementSelector: IContractElementSelector = useSelector((state: IRootState) => state.contract.contractElementSelector);
   const contractElementSelected: IContractElementSelected = useSelector((state: IRootState) => state.contract.contractElementSelected);
   const workspaceElements = useSelector((state: IRootState) => state.workspace.workspaceElements);
-  const [currentElements, setCurrentElements] = useState<
-    Array<{
-      name: string;
-      type: string;
-      inputName?: string;
-      inputValue?: string;
-      getUserAddress?: boolean;
-      id?: string;
-    }>
-  >([]);
+  const [currentElements, setCurrentElements] = useState<Array<ICurrentElement>>([]);
   const [show, setShow] = useState<boolean>(true);
   // Infer better type instead of any
   const [preInputValue, setPreInputValue] = useState<Array<any>>([]);
@@ -273,6 +264,7 @@ const AbiComponents: FC<IAbiComponents> = ({
           ));
         }
       }
+      return null;
     })
     .filter(item => item !== undefined);
 
@@ -290,6 +282,7 @@ const AbiComponents: FC<IAbiComponents> = ({
           ));
         }
       }
+      return null;
     })
     .filter(item => item !== undefined);
 

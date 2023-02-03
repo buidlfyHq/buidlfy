@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import config from 'config';
 import { updateStep } from './user.reducers';
-import { toggleModal } from 'redux/modal/modal.reducers';
+import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
-import { createSiweMessage } from './user.utils';
 import { getSigner } from 'redux/web3/web3.utils';
+import { createSiweMessage } from './user.utils';
 import { ISession } from './user.interfaces';
 
 export const signInWithEthereumAsync = createAsyncThunk('user/signInWithEthereum', async (_, { dispatch, rejectWithValue }) => {
@@ -136,7 +136,7 @@ export const subscribeNewsletterAsync = createAsyncThunk('user/subscribeNewslett
   }
 });
 
-export const isWhitelistedAsync = createAsyncThunk('user/isWhitelisted', async (_, { dispatch }) => {
+export const isWhitelistedAsync = createAsyncThunk('user/isWhitelisted', async (route: string, { dispatch }) => {
   try {
     const session: ISession = JSON.parse(localStorage.getItem('session'));
     if (session) {
@@ -164,7 +164,11 @@ export const isWhitelistedAsync = createAsyncThunk('user/isWhitelisted', async (
               const stringifyUpdatedSession = JSON.stringify(updatedSession);
               localStorage.setItem('session', stringifyUpdatedSession);
             }
-            window.location.href = '/#/dashboard';
+            window.location.href = `/#/${route}`;
+            if (route === 'dashboard') {
+              dispatch(toggleModal(true));
+              dispatch(toggleModalType('start'));
+            }
           } else if (JSON.parse(res).verified) {
             if (!session.data.verified) {
               const updatedSessionData = { ...session.data, whitelisted: false, verified: true };

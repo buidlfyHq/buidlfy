@@ -13,7 +13,7 @@ const Whitelist: FC = () => {
   const [email, setEmail] = useState<string>('');
 
   useEffect(() => {
-    dispatch(isWhitelistedAsync());
+    dispatch(isWhitelistedAsync('dashboard'));
   }, []); // eslint-disable-line
 
   return (

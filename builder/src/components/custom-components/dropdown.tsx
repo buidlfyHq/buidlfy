@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropright } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
@@ -32,21 +32,22 @@ const Dropdown: FC<IText> = ({
   const gradientCondition = color?.indexOf('gradient') !== -1;
   const dispatch = useDispatch();
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
+
   const selectedList = lists.filter(list => list.i === i);
   const listFilter = listOptions.filter(list => list.i === i);
   const previewFilter = preview ? listFilter : selectedList;
+
   useEffect(() => {
     if (!preview) {
       if (selectedList.length <= 3) {
-        {
-          Array.from(Array(3 - selectedList?.length).keys()).map(list => {
-            const newLists = defaultList(i, lists);
-            dispatch(updateListValue(newLists));
-          });
-        }
+        Array.from(Array(3 - selectedList?.length).keys()).map(list => {
+          const newLists = defaultList(i, lists);
+          dispatch(updateListValue(newLists));
+          return list;
+        });
       }
     }
-  }, [lists]);
+  }, [lists]); // eslint-disable-line
 
   return (
     <section
@@ -138,7 +139,7 @@ const Dropdown: FC<IText> = ({
             return (
               <>
                 {list.link ? (
-                  <a target="_blank" href={list.link}>
+                  <a target="_blank" rel="noreferrer" href={list.link}>
                     <h6 key={list.id} className="mt-4">
                       {list.value}
                     </h6>

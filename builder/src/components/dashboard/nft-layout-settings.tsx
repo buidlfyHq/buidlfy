@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect } from 'react';
+import { FC, Fragment } from 'react';
 import { useState } from 'react';
 import ShortUniqueId from 'short-unique-id';
 import { Listbox } from '@headlessui/react';
