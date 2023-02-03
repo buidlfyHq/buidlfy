@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import WalletMenu from 'features/dashboard/wallet-menu';
 import RenderTemplateList from 'components/utils/render-template-list';
+import { isWhitelistedAsync } from 'redux/user/user.thunk-actions';
 import logo from 'assets/icons/buidlfy.png';
 import { ReactComponent as ColorFeather } from 'assets/svg-as-icons/feather-color.svg';
 import { ReactComponent as AddIcon } from 'assets/svg-as-icons/addTemp.svg';
@@ -16,10 +17,12 @@ export enum TabType {
 
 const MyTemplates: FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const currentAccount = useSelector((state: any) => state.web3.currentAccount);
   const [tab, setTab] = useState<string>('all');
 
   useEffect(() => {
+    dispatch(isWhitelistedAsync());
     if (!currentAccount) {
       return navigate('/dashboard');
     }

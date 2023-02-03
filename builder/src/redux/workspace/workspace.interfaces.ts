@@ -216,3 +216,12 @@ export interface IOutput {
   name: string;
   value: any; // can be string or array
 }
+
+export interface ICurrentElement {
+  name: string;
+  type: string;
+  inputName?: string;
+  inputValue?: string;
+  getUserAddress?: boolean;
+  id?: string;
+}

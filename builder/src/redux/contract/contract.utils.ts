@@ -46,6 +46,7 @@ export const filterContractAbi = (abi: string) => {
     if ((!filteredInputs.length || filteredInputs[0]) && (!filteredOutputs.length || filteredOutputs[0])) {
       return method;
     }
+    return null;
   });
 
   return filteredMethodTypes.filter(f => f);

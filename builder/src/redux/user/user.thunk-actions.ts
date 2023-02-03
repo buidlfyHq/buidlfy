@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import config from 'config';
 import { updateStep } from './user.reducers';
-import { toggleModal } from 'redux/modal/modal.reducers';
+import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
 import { createSiweMessage } from './user.utils';
 import { getSigner } from 'redux/web3/web3.utils';
@@ -165,6 +165,8 @@ export const isWhitelistedAsync = createAsyncThunk('user/isWhitelisted', async (
               localStorage.setItem('session', stringifyUpdatedSession);
             }
             window.location.href = '/#/dashboard';
+            dispatch(toggleModal(true));
+            dispatch(toggleModalType('start'));
           } else if (JSON.parse(res).verified) {
             if (!session.data.verified) {
               const updatedSessionData = { ...session.data, whitelisted: false, verified: true };

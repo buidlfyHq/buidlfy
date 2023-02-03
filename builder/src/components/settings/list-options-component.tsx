@@ -71,7 +71,7 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
         propertyValue: lists,
       }),
     );
-  }, [i, lists]);
+  }, [i, lists]); // eslint-disable-line
 
   const settingList = (type: List) => {
     const list = type === List.LIST ? lists.filter(list => list.i === i).slice(0, 3) : lists.filter(list => list.i === i);
