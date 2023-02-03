@@ -9,7 +9,6 @@ import Settings from 'features/dashboard/settings';
 import DefaultSettings from 'features/dashboard/default-settings';
 import { setSiteHead, updateWorkspaceBackgroundColor, updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers';
 import { updateContractAbi, updateContractAddress, updateContractNetwork } from 'redux/contract/contract.reducers';
-import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { isWhitelistedAsync } from 'redux/user/user.thunk-actions';
 import 'styles/components.css';
 

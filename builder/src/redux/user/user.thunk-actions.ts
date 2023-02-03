@@ -3,8 +3,8 @@ import config from 'config';
 import { updateStep } from './user.reducers';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { fetchWalletDetailsAsync } from 'redux/web3/web3.thunk-actions';
-import { createSiweMessage } from './user.utils';
 import { getSigner } from 'redux/web3/web3.utils';
+import { createSiweMessage } from './user.utils';
 import { ISession } from './user.interfaces';
 
 export const signInWithEthereumAsync = createAsyncThunk('user/signInWithEthereum', async (_, { dispatch, rejectWithValue }) => {
