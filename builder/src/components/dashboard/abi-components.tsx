@@ -264,7 +264,6 @@ const AbiComponents: FC<IAbiComponents> = ({
           ));
         }
       }
-      return null;
     })
     .filter(item => item !== undefined);
 
@@ -282,7 +281,6 @@ const AbiComponents: FC<IAbiComponents> = ({
           ));
         }
       }
-      return null;
     })
     .filter(item => item !== undefined);
 
