@@ -85,20 +85,21 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
   };
 
   // removes and input field
-  const handleRemoveInput = (value: string, index: number) => {
-    const newInputs = [...addInputs];
-    newInputs.splice(index, 1);
+  const handleRemoveInput = (value: string, id) => {
+    const newInputs = addInputs.filter(postField => postField.id !== id);
     setAddInputs(newInputs);
     const publicationIndex = savedPosts.findIndex(pub => pub.name === value);
-    const newPublications = [...savedPosts];
-    newPublications.splice(publicationIndex, 1);
-    dispatch(
-      updateWorkspaceElement({
-        settingItemId: i,
-        propertyName: 'posts',
-        propertyValue: newPublications,
-      }),
-    );
+    if (publicationIndex >= 0) {
+      const newPublications = [...savedPosts];
+      newPublications.splice(publicationIndex, 1);
+      dispatch(
+        updateWorkspaceElement({
+          settingItemId: i,
+          propertyName: 'posts',
+          propertyValue: newPublications,
+        }),
+      );
+    }
   };
 
   return (
@@ -126,16 +127,16 @@ const AddLensterComponent: FC<IAddLensterComponent> = ({ i }) => {
                       <img src={InputCheckboxIcon} alt="icon" width={14} height={14} />
                     </span>
                   )}
-                  {verified ? (
+                  {value.length > 0 && !verified ? (
+                    <span onClick={e => handleNewValue(e, i)} className="flex items-center justify-center p-3 cursor-pointer lenster-input">
+                      <img src={RightArrowIcon} alt="icon" width={14} height={14} />
+                    </span>
+                  ) : (
                     <span
-                      onClick={() => handleRemoveInput(addInput.value, i)}
+                      onClick={() => handleRemoveInput(addInput.value, id)}
                       className="flex items-center justify-center p-3 cursor-pointer lenster-input"
                     >
                       <RiCloseFill className="text-[14px]" />
-                    </span>
-                  ) : (
-                    <span onClick={e => handleNewValue(e, i)} className="flex items-center justify-center p-3 cursor-pointer lenster-input">
-                      <img src={RightArrowIcon} alt="icon" width={14} height={14} />
                     </span>
                   )}
                 </div>
