@@ -19,7 +19,7 @@ const Preview: FC = () => {
   const [outputValue, setOutputValue] = useState<IOutput[]>([]);
 
   useEffect(() => {
-    dispatch(isWhitelistedAsync());
+    dispatch(isWhitelistedAsync('preview'));
     let saveItems = localStorage.getItem('items');
     if (saveItems) {
       dispatch(updateWorkspaceElementsArray(JSON.parse(saveItems).value));
