@@ -114,7 +114,7 @@ WEB3_STORAGE_ACCESS_TOKEN = xxxx
 Refer the following documentation sections to generate missing credentials (xxxx):
 - Twitter Documentation: [Twitter API](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api)
 - Spheron Documentation: [Spheron API](https://docs.spheron.network/api/rest-api-references), [Spheron Organization](https://docs.spheron.network/organization/overview)
-- Cloudfare Documentation: [Cloudfare API](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/), [Cloudfare API Docs](https://cloudflare.github.io/node-cloudflare/)
+- Cloudflare Documentation: [Cloudflare API](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/), [Cloudflare API Docs](https://cloudflare.github.io/node-cloudflare/)
 - Web3 Storage Documentation: [Web3 Storage API](https://web3.storage/docs/how-tos/generate-api-token/)
 
 
