@@ -49,7 +49,7 @@ You can follow these steps to setup the server:
 You can access the server at: http://localhost:8000
 
 ### Builder
-You can follow these steps to setup the server:
+You can follow these steps to setup the builder:
 - Install Node 18.x either manually or using a tool like nvm (recommended)
 - Clone this repo: `https://github.com/buidlfyHq/buidlfy.git`
 - Go inside the `builder` directory
