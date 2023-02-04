@@ -21,14 +21,14 @@
 
 ## Local Setup
 ### With Docker
-Quickly set up Buidlfy through Docker by using the following commands.
-
-```
-git clone https://github.com/buidlfyHq/buidlfy.git
-cd buidlfy
-docker compose build --no-cache
-docker compose up -d
-```
+Quickly set up Buidlfy through Docker by using the following commands:
+- Clone this repo: `https://github.com/buidlfyHq/buidlfy.git`
+- Refer the [ENV section](#env) to create a .env file in the `server` and `builder` directory
+- Start all the services
+  ```
+  docker compose build --no-cache
+  docker compose up -d
+  ```
 
 ---
 
@@ -41,11 +41,11 @@ You can follow these steps to setup the server:
 - Clone this repo: `https://github.com/buidlfyHq/buidlfy.git`
 - Go inside the `server` directory
 - Run `npm i` to install dependencies
-
-#### Start the server
-```
-npm run dev
-```
+- Refer the [ENV section](#env) to create a .env file in the `server` directory
+- Start the server
+  ```
+  npm run dev
+  ```
 You can access the server at: http://localhost:8000
 
 ### Builder
@@ -54,12 +54,75 @@ You can follow these steps to setup the server:
 - Clone this repo: `https://github.com/buidlfyHq/buidlfy.git`
 - Go inside the `builder` directory
 - Run `npm i` to install dependencies
-
-#### Start the builder
-```
-npm run dev
-```
+- Refer the [ENV section](#env) to Create a .env file in the `builder` directory
+ 
+- Start the builder
+  ```
+  npm start
+  ```
 You can access the server at: http://localhost:3000
+
+<a name="env"></a>
+## ENV
+Create a .env file in the `server` and `builder` directories with the following configuration after cloning the Buidlfy repository:
+
+### Server
+```
+# PORT
+PORT = 8000
+
+# DATABASE
+# DB_HOST = 127.0.0.1
+DB_PORT = 27017
+DB_DATABASE = buidlfy
+
+#TWITTER
+BEARER_TOKEN = xxxx
+BUIDLFY_TWITTER_ID = 1565721219680600065
+TWEET_TEXT = Build dapps within minutes without writing a single piece of code using Buidlfy. Follow Buidlfy on Twitter @BuidlfyHQ
+MAX_RESULTS = 20
+
+# LOG
+LOG_FORMAT = dev
+LOG_DIR = ../logs
+
+# CORS
+ORIGIN = http://localhost:3000
+CREDENTIALS = true
+
+# BUIDLFY CREDENTIALS
+SPHERON_TOKEN = xxxx
+ORGANIZATION_ID = xxxx
+DECODER_GIT_URL = https://github.com/buidlfyHq/buidlfy.git
+DECODER_GIT_BRANCH = dev
+CORS_ADDRESS = *
+SITE_DOMAIN_NAME = buidlfy.app
+
+# SPHERON DETAILS
+SPHERON_API_HOST = https://api-v2.spheron.network
+DEPLOYMENT_ENDPOINT = /v1/deployment
+
+# CLOUDFLARE DETAILS
+CLOUDFLARE_KEY = xxxx
+CLOUDFLARE_EMAIL = xxxx
+CDN_CNAME = xxxx
+CLOUDFLARE_ZONE_ID = xxxx
+
+WEB3_STORAGE_ACCESS_TOKEN = xxxx
+```
+
+Refer the following documentation sections to generate missing credentials (xxxx):
+- Twitter Documentation: [Twitter API](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api)
+- Spheron Documentation: [Spheron API](https://docs.spheron.network/api/rest-api-references), [Spheron Organization](https://docs.spheron.network/organization/overview)
+- Cloudfare Documentation: [Cloudfare API](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/), [Cloudfare API Docs](https://cloudflare.github.io/node-cloudflare/)
+- Web3 Storage Documentation: [Web3 Storage API](https://web3.storage/docs/how-tos/generate-api-token/)
+
+
+### Builder
+```
+REACT_APP_TEMPLATE_LIST_TYPE="listed"
+REACT_APP_TWITTER_TEXT="Build dapps within minutes without writing a single piece of code using Buidlfy. Follow Buidlfy on Twitter @BuidlfyHQ"
+```
 
 ## Documentation
 For details on how to use Buidlfy, checkout our documentation.
