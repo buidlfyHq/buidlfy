@@ -33,7 +33,7 @@ Quickly set up Buidlfy through Docker by using the following commands:
 ---
 
 ### Without Docker
-You have to setup the server and the dev environment to run Buidlfy locally.
+You have to set up the server and the dev environment to run Buidlfy locally.
 
 ### Server
 You can follow these steps to setup the server:
