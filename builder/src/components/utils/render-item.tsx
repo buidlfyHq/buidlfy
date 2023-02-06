@@ -12,6 +12,7 @@ import PreviewButton from 'components/custom-components/preview/preview-button';
 import PreviewText from 'components/custom-components/preview/preview-text';
 import PreviewInput from 'components/custom-components/preview/preview-input';
 import PreviewLensterWidget from 'components/custom-components/preview/preview-lenster-widget';
+import NftCard from 'components/custom-components/nft-card';
 import List from 'components/custom-components/list';
 import Checkbox from 'components/custom-components/checkbox';
 import Dropdown from 'components/custom-components/dropdown';
@@ -127,6 +128,7 @@ const RenderItem: FC<IRenderItem> = ({
               margin={item.style.margin}
               padding={item.style.padding}
               fontFamily={item.style.fontFamily}
+              borderRadius={item.style.borderRadius}
             />
           ) : (
             <Text
@@ -143,6 +145,7 @@ const RenderItem: FC<IRenderItem> = ({
               margin={item.style.margin}
               padding={item.style.padding}
               fontFamily={item.style.fontFamily}
+              borderRadius={item.style.borderRadius}
             />
           )}
         </>
@@ -192,6 +195,7 @@ const RenderItem: FC<IRenderItem> = ({
           margin={item.style.margin}
           imgData={item.imgData}
           link={item.link}
+          borderRadius={item.style.borderRadius}
           preview={preview}
         />
       );
@@ -315,6 +319,7 @@ const RenderItem: FC<IRenderItem> = ({
     case 'Container':
     case 'Horizontal Container':
     case 'Vertical Container':
+    case 'NFT Layout':
       return (
         <>
           {preview ? (
@@ -357,7 +362,26 @@ const RenderItem: FC<IRenderItem> = ({
       );
     case 'Lenster Card':
       return (
-        <>{preview ? <PreviewLensterWidget preview={preview} i={item.i} posts={item.posts} /> : <LensterWidget i={item.i} setDrag={setDrag} />}</>
+        <>
+          {preview ? (
+            <PreviewLensterWidget preview={preview} i={item.i} posts={item.posts} />
+          ) : (
+            <LensterWidget i={item.i} item={item} setDrag={setDrag} />
+          )}
+        </>
+      );
+
+    case 'NFT Card':
+      return (
+        <NftCard
+          i={item.i}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          isAuto={item.style.isAuto}
+          backgroundSize={item.style.backgroundSize}
+          imgData={item.imgData}
+          justifyContent={item.style.justifyContent}
+        />
       );
     default:
       return <></>;

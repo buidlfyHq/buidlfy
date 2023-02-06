@@ -12,7 +12,7 @@ import 'styles/components.css';
 interface INavbar {
   setHideNavbar: (hideNavbar: boolean) => void;
   setIsContainerSelected: (isContainerSelected?: boolean) => void;
-  setOpenSetting: (open: boolean) => void;
+  setOpenSetting: (openSetting: boolean) => void;
 }
 
 const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSetting }) => {
@@ -39,6 +39,7 @@ const Navbar: FC<INavbar> = ({ setHideNavbar, setIsContainerSelected, setOpenSet
       },
       contract: null,
     };
+
     if (contractDetails?.abi && contractDetails?.address && contractDetails?.network) {
       templateConfig.contract = {
         abi: JSON.parse(contractDetails?.abi),

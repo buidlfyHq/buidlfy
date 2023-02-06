@@ -10,7 +10,6 @@ import { updateWorkspaceElementsArray } from 'redux/workspace/workspace.reducers
 import { IRootState } from 'redux/root-state.interface';
 import { IWorkspaceElement, ResizeHandles } from 'redux/workspace/workspace.interfaces';
 import defaultImage from 'assets/default-image.svg';
-import { BsCheck2 } from 'react-icons/bs';
 import badge from 'assets/badge.svg';
 import status from 'assets/status-badge.svg';
 import container from 'assets/image-container.svg';
@@ -48,6 +47,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         h: y + c.h,
         children: [...selectedElement.children, newC],
       };
+
       const elementsIndex = workspaceElements.findIndex(item => item.i === selectedElement.i);
       let newArray = [...workspaceElements];
       newArray[elementsIndex] = updatedItem;
@@ -66,13 +66,21 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         minH: 1,
         resizeHandles: containerCheck(c) ? containerHandles : availableHandles,
       };
-      if (c.name === 'Vertical Container') {
+      if (c.name === 'Vertical Container' || c.name === 'NFT Card') {
         newC.w = 2;
       }
       if (c.name === 'Horizontal Container' || c.name === 'Vertical Container') {
         let newChildren = c.children.map(child => ({
           ...child,
           i: uid(),
+        }));
+        newC.children = newChildren;
+      }
+      if (c.name === 'NFT Layout') {
+        let newChildren = c.children.map(child => ({
+          ...child,
+          i: uid(),
+          resizeHandles: [],
         }));
         newC.children = newChildren;
       }
@@ -93,8 +101,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
   const checkContainerY = (selectedElement: IWorkspaceElement) => {
     if (selectedElement.children.length === 0) return 0;
     else {
-      let arr = selectedElement.children.map((item: IWorkspaceElement) => item.y);
-      return Math.max(...arr) + 1;
+      return selectedElement.h;
     }
   };
 
@@ -207,7 +214,7 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
         </div>
       </div>
 
-      <div className="element-div">
+      {/* <div className="element-div">
         <div onClick={() => onClickFunction('Checkbox')} className="px-10 py-3 cursor-pointer element-list">
           <div data-tip="Click here to add the Checkbox" data-for="elements">
             <div className="flex items-center">
@@ -250,18 +257,18 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="element-div">
         <div onClick={() => onClickFunction('Badge')} className="px-10 py-3 cursor-pointer">
           <div data-tip="Click here to add the Badge" data-for="elements">
-            <img src={badge} />
+            <img src={badge} alt="Badge" />
           </div>
         </div>
       </div>
       <div className="element-div">
         <div onClick={() => onClickFunction('Status')} className="px-10 py-3 cursor-pointer">
           <div data-tip="Click here to add the Status Badge" data-for="elements">
-            <img src={status} />
+            <img src={status} alt="Status" />
           </div>
         </div>
       </div>
@@ -309,21 +316,8 @@ const Elements: FC<IElements> = ({ isContainerSelected, hideNavbar, setHideNavba
               </div>
             </div>
           </div>
+
           {elementsList}
-          <div className="element-div">
-            <div className="px-4 py-4">
-              <div data-tip="Click here to add the Lenster Card" data-for="elements">
-                <div className="flex">
-                  <div className="cursor-pointer element-container" onClick={() => onClickFunction('Lenster Card')}>
-                    <span className="element-text">
-                      Add Wall Of Love
-                      <IoIosAddCircleOutline className="text-[16px] ml-1" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       ) : (
         <div className="mt-[6rem]">{elementsList}</div>

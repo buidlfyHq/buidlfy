@@ -32,10 +32,51 @@ export const mapElementsToWorkspace = (element: IWorkspaceElement, payload: IEle
   return element;
 };
 
+export const mapElementStylesToNFTLayoutWorkspace = (element: IWorkspaceElement, workspaceElements: IWorkspaceElement[], payload: IElementDetail) => {
+  const { settingItemId, propertyName, propertyValue } = payload;
+  let selectedChild = findSelected(element, settingItemId);
+  let nftlayout = workspaceElements.filter((item: IWorkspaceElement) => item.name === 'NFT Layout');
+  if (element.i === settingItemId) {
+    return {
+      ...element,
+      children: element.children.map((child: IWorkspaceElement) => {
+        let newChild = {
+          ...child,
+          style: {
+            ...child['style'],
+            [propertyName]: propertyValue,
+          },
+        };
+        return newChild;
+      }),
+    };
+    // can be removed as theme set
+  } else if (selectedChild?.i === settingItemId) {
+    let newNFTLayoutArr = nftlayout.map((item: IWorkspaceElement) => {
+      return {
+        ...item,
+        children: item.children.map((child: IWorkspaceElement) => {
+          let newChild = {
+            ...child,
+            style: {
+              ...child['style'],
+              [propertyName]: propertyValue,
+            },
+          };
+          return newChild;
+        }),
+      };
+    });
+    for (let i = 0; i < newNFTLayoutArr.length; i++) {
+      return newNFTLayoutArr[i];
+    }
+  }
+  return element;
+};
+
 export const mapElementStylesToWorkspace = (element: IWorkspaceElement, payload: IElementDetail) => {
   const { settingItemId, propertyName, propertyValue } = payload;
   let selectedChild = findSelected(element, settingItemId);
-
   if (element.i === settingItemId) {
     return {
       ...element,
@@ -100,6 +141,28 @@ export const mapImageElementStylesToWorkspace = (element: IWorkspaceElement, pay
   const { settingItemId, propertyName, propertyValue, imageSizeProperty } = payload;
   let selectedChild = findSelected(element, settingItemId);
 
+  // to change children as well as parent components image size
+  if (element.name === 'NFT Layout' && element.i === settingItemId) {
+    let newNFTLayoutChildrenArr = element.children.map((childAsNFTCard: IWorkspaceElement) => {
+      let newChildAsNFTCard = {
+        ...childAsNFTCard,
+        style: {
+          ...childAsNFTCard['style'],
+          [propertyName]: propertyValue,
+        },
+      };
+      return newChildAsNFTCard;
+    });
+    return {
+      ...element,
+      style: {
+        ...element['style'],
+        [propertyName]: propertyValue,
+      },
+      children: newNFTLayoutChildrenArr,
+    };
+  }
+
   if (element.i === settingItemId) {
     return {
       ...element,
@@ -144,37 +207,56 @@ export const updateContractInElement = (
     currentElement: {
       name: string;
       type: string;
+      inputName?: string;
+      inputValue?: string;
+      getUserAddress?: boolean;
+      value?: string;
     };
   },
 ) => {
   const { contractElementSelected, currentElement } = payload;
-
   // filter last selected element
-  const filteredObject = contractElementSelected[currentElement.name]?.filter((key: { buttonId: string }) => key.buttonId === selectedElement.i)[0];
-
+  const filteredObject = contractElementSelected[currentElement?.name]?.filter((key: { buttonId: string }) => key.buttonId === selectedElement.i)[0];
   let updatedContract = {};
-
-  let duplicate = selectedElement.contract.inputs?.find((e: { id: string }) => e.id === filteredObject.id);
-
-  if (!duplicate) {
-    if (currentElement.type === 'input') {
-      updatedContract = {
-        ...selectedElement.contract,
-        inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, send: false }],
-      };
-    } else if (currentElement.type === 'send') {
-      updatedContract = {
-        ...selectedElement.contract,
-        inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, send: true }],
-      };
-    } else if (currentElement.type === 'output') {
-      updatedContract = {
-        ...selectedElement.contract,
-        outputs: [...selectedElement.contract.outputs, { id: filteredObject.id }],
-      };
+  if (filteredObject?.id) {
+    let duplicate = selectedElement.contract.inputs?.find((e: { id: string }) => e.id === filteredObject.id);
+    if (!duplicate) {
+      if (currentElement?.type === 'input') {
+        updatedContract = {
+          ...selectedElement.contract,
+          inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, name: currentElement.inputName, send: false }],
+        };
+      } else if (currentElement?.type === 'send') {
+        updatedContract = {
+          ...selectedElement.contract,
+          inputs: [...selectedElement.contract.inputs, { id: filteredObject.id, name: currentElement.inputName, send: true }],
+        };
+      } else if (currentElement?.type === 'output') {
+        updatedContract = {
+          ...selectedElement.contract,
+          outputs: [...selectedElement.contract.outputs, { id: filteredObject.id }],
+        };
+      }
+    } else {
+      updatedContract = { ...selectedElement.contract };
     }
   } else {
-    updatedContract = { ...selectedElement.contract };
+    if (currentElement?.type === 'preInput') {
+      updatedContract = {
+        ...selectedElement.contract,
+        inputs: [...selectedElement.contract.inputs, { name: currentElement.inputName, value: currentElement.inputValue, send: false }],
+      };
+    } else if (currentElement?.type === 'userAddress') {
+      updatedContract = {
+        ...selectedElement.contract,
+        inputs: [...selectedElement.contract.inputs, { name: currentElement.inputName, userAddress: currentElement.getUserAddress, send: false }],
+      };
+    } else if (currentElement?.type === 'preInputSend') {
+      updatedContract = {
+        ...selectedElement.contract,
+        inputs: [...selectedElement.contract.inputs, { name: currentElement.name, value: currentElement.value, send: true }],
+      };
+    }
   }
 
   let updatedItem = {
@@ -184,7 +266,6 @@ export const updateContractInElement = (
 
   // search id in items
   const elementsIndex = workspaceElements.findIndex(item => item.i === selectedElement.i);
-
   if (elementsIndex === -1) {
     // search id in children
     const updatedItems = workspaceElements.map(item => {

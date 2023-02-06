@@ -3,17 +3,15 @@ import {
   fetchSelectedElement,
   fetchUploadedImageData,
   mapElementsToWorkspace,
+  mapElementStylesToNFTLayoutWorkspace,
   mapElementStylesToWorkspace,
   mapElementSubStyleToWorkspace,
   mapImageElementStylesToWorkspace,
   updateContractInElement,
   updateOracleInElement,
-} from './workspace.utils';
-import { IAction, IHead, IList, IWorkspaceElement, IWorkspaceState } from './workspace.interfaces';
+} from 'redux/workspace/workspace.utils';
+import { IAction, ICurrentElement, IHead, IList, IWorkspaceElement, IWorkspaceState } from './workspace.interfaces';
 import { IOracleConfig } from 'redux/oracle/oracle.interfaces';
-import ShortUniqueId from 'short-unique-id';
-
-const uid = new ShortUniqueId();
 
 const initialState: IWorkspaceState = {
   workspaceElements: [],
@@ -33,66 +31,41 @@ const workspaceSlice = createSlice({
     // to update an element in workspace
     updateWorkspaceElement(state: IWorkspaceState, action: IAction) {
       if (!action.payload.settingItemId) return;
-
       const updatedElements = state.workspaceElements.map(element => mapElementsToWorkspace(element, action.payload));
-
       const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
-
-      return {
-        ...state,
-        workspaceElements: updatedElements,
-        selectedElement: updatedSelectedElement,
-      };
+      state.workspaceElements = updatedElements;
+      state.selectedElement = updatedSelectedElement;
     },
     // to update the style of an element in workspace
     updateWorkspaceElementStyle(state, action: IAction) {
       if (!action.payload.settingItemId) return;
       const updatedElements = state.workspaceElements.map((element: IWorkspaceElement) => mapElementStylesToWorkspace(element, action.payload));
       const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
-      return {
-        ...state,
-        workspaceElements: updatedElements,
-        selectedElement: updatedSelectedElement,
-      };
+      state.workspaceElements = updatedElements;
+      state.selectedElement = updatedSelectedElement;
     },
     // to update the sub style of an element in workspace
     updateWorkspaceElementSubStyle(state, action: IAction) {
       if (!action.payload.settingItemId) return;
-
       const updatedElements = state.workspaceElements.map((element: IWorkspaceElement) => mapElementSubStyleToWorkspace(element, action.payload));
-
       const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
-
-      return {
-        ...state,
-        workspaceElements: updatedElements,
-        selectedElement: updatedSelectedElement,
-      };
+      state.workspaceElements = updatedElements;
+      state.selectedElement = updatedSelectedElement;
     },
     // to update the style of an image element in workspace
     updateWorkspaceImageElementStyle(state, action: IAction) {
       if (!action.payload.settingItemId) return;
-
       const updatedElements = state.workspaceElements.map((element: IWorkspaceElement) => mapImageElementStylesToWorkspace(element, action.payload));
-
       const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
-
-      return {
-        ...state,
-        workspaceElements: updatedElements,
-        selectedElement: updatedSelectedElement,
-      };
+      state.workspaceElements = updatedElements;
+      state.selectedElement = updatedSelectedElement;
     },
 
     // to update the elements
     updateWorkspaceElementsArray(state, action: { payload: IWorkspaceElement[] }) {
       const updatedSelectedElement = fetchSelectedElement(action.payload, state.selectedElement?.i);
-
-      return {
-        ...state,
-        workspaceElements: action.payload,
-        selectedElement: updatedSelectedElement,
-      };
+      state.workspaceElements = action.payload;
+      state.selectedElement = updatedSelectedElement;
     },
 
     // to update workspace background color
@@ -107,44 +80,48 @@ const workspaceSlice = createSlice({
 
     // to set current selected element
     setSelectedElement(state: IWorkspaceState, action: { payload: string }) {
-      return {
-        ...state,
-        selectedElement: fetchSelectedElement(state.workspaceElements, action.payload),
-      };
+      state.selectedElement = fetchSelectedElement(state.workspaceElements, action.payload);
     },
 
     // to save contract config
     saveContractConfig(state: IWorkspaceState, action: { payload }) {
-      const updatedContract = updateContractInElement(state.workspaceElements, state.selectedElement, action.payload);
-
-      const updatedSelectedElement = fetchSelectedElement(updatedContract, state.selectedElement.i);
-
-      return {
-        ...state,
-        workspaceElements: updatedContract,
-        selectedElement: updatedSelectedElement,
-      };
+      const currentElements = action.payload.currentElements;
+      currentElements.map((currentElement: ICurrentElement) => {
+        const updatedContract = updateContractInElement(state.workspaceElements, state.selectedElement, {
+          contractElementSelected: action.payload.contractElementSelected,
+          currentElement,
+        });
+        const updatedSelectedElement = fetchSelectedElement(updatedContract, state.selectedElement.i);
+        state.workspaceElements = updatedContract;
+        state.selectedElement = updatedSelectedElement;
+        return currentElement;
+      });
     },
 
     // to save oracle config
     saveOracleConfig(state: IWorkspaceState, action: { payload: IOracleConfig }) {
       const updatedOracle = updateOracleInElement(state.workspaceElements, state.selectedElement, action.payload);
-
       const updatedSelectedElement = fetchSelectedElement(updatedOracle, state.selectedElement.i);
-
-      return {
-        ...state,
-        workspaceElements: updatedOracle,
-        selectedElement: updatedSelectedElement,
-      };
+      state.workspaceElements = updatedOracle;
+      state.selectedElement = updatedSelectedElement;
     },
 
     updateUploadedImageData(state: IWorkspaceState, action: { payload }) {
       const { settingItemId, uploadedImageData } = action.payload;
       const newUploadedImagesData = fetchUploadedImageData(settingItemId, uploadedImageData, state.uploadedImagesData);
+      state.uploadedImagesData = newUploadedImagesData;
+    },
+
+    updateWorkspaceNFTLayoutElements(state: IWorkspaceState, action: { payload }) {
+      if (!action.payload.settingItemId) return;
+      const updatedElements = state.workspaceElements.map((element: IWorkspaceElement) =>
+        mapElementStylesToNFTLayoutWorkspace(element, state.workspaceElements, action.payload),
+      );
+      const updatedSelectedElement = fetchSelectedElement(updatedElements, action.payload.settingItemId);
       return {
         ...state,
-        uploadedImagesData: newUploadedImagesData,
+        workspaceElements: updatedElements,
+        selectedElement: updatedSelectedElement,
       };
     },
 
@@ -169,6 +146,7 @@ export const {
   saveContractConfig,
   saveOracleConfig,
   updateUploadedImageData,
+  updateWorkspaceNFTLayoutElements,
   updateListValue,
 } = workspaceSlice.actions;
 export default workspaceSlice.reducer;

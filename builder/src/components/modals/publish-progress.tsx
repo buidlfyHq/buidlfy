@@ -6,13 +6,14 @@ import { io } from 'socket.io-client';
 import config from 'config';
 import { processes } from 'components/utils/process';
 import LottieComponent from 'components/utils/lottie';
-import { getPublishDetails, updatePublish } from 'redux/publish/publish.action';
+import { fetchPublishDetailsAsync, updatePublishAsync } from 'redux/publish/publish.thunk-actions';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
 import { updateCurrentStep, updatePublishFailed, updatePublishStatus } from 'redux/publish/publish.reducers';
 import { IRootState } from 'redux/root-state.interface';
 import HourGlassImg from 'assets/lottie/hourglass.json';
 import completed from 'assets/icons/completed.svg';
 import failed from 'assets/icons/failed.svg';
+import spheron from 'assets/spheron-logo.svg';
 
 const PublishProgress: FC = () => {
   const socket = io(config.server.SERVER);
@@ -47,7 +48,7 @@ const PublishProgress: FC = () => {
           setFailedDeployment(false);
           localStorage.removeItem('domainName');
           dispatch(
-            updatePublish({
+            updatePublishAsync({
               domainId: publishSubDomain,
               deploymentId: publishDeploymentId,
             }),
@@ -57,7 +58,7 @@ const PublishProgress: FC = () => {
         }
         if (args[0].status === 'Deployed' && publishDeploymentId && !publishSubDomain) {
           setFailedDeployment(false);
-          dispatch(getPublishDetails({ deploymentId: publishDeploymentId }));
+          dispatch(fetchPublishDetailsAsync({ deploymentId: publishDeploymentId }));
           dispatch(updateCurrentStep(5));
           socket.removeAllListeners(`deployment.${transactionRes}`);
           localStorage.setItem('publishStatus', publishStatus.toString());
@@ -65,16 +66,7 @@ const PublishProgress: FC = () => {
         }
       });
     }
-  }, [
-    // eslint-disable-line
-    transactionRes,
-    publishDeploymentId,
-    publishSubDomain,
-    dispatch,
-    publishConfig,
-    socket,
-    currentStep,
-  ]);
+  }, [transactionRes, publishDeploymentId, publishSubDomain, dispatch, publishConfig, socket, currentStep]); // eslint-disable-line
 
   useEffect(() => {
     if (publishFailed) {
@@ -140,6 +132,12 @@ const PublishProgress: FC = () => {
                 </div>
               );
             })}
+            <a href={config.spheron.SPHERON_URL} target="_blank">
+              <div className="justify-center flex mt-5 items-center">
+                <img className="w-5 h-5" src={spheron} />
+                <span className="items-center text-[10px] ml-1">Powered By Spheron</span>
+              </div>
+            </a>
           </div>
         </Dialog.Panel>
       ) : null}

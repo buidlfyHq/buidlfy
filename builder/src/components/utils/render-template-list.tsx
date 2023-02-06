@@ -22,8 +22,8 @@ const RenderTemplateList: FC<IRenderTemplateList> = ({ tab }) => {
         <>
           {ownedTemplateList.length > 0 ? (
             ownedTemplateList.map((template: ISelectedTemplate) => {
-              const inReview = ownedReviewTemplateList.filter((t: ISelectedTemplate) => t.listing_tokenId === template.token_id)[0] !== undefined;
-              const listed = ownedListedTemplateList.filter((t: ISelectedTemplate) => t.listing_tokenId === template.token_id)[0] !== undefined;
+              const inReview = ownedReviewTemplateList?.filter((t: ISelectedTemplate) => t.listing_tokenId === template.token_id)[0] !== undefined;
+              const listed = ownedListedTemplateList?.filter((t: ISelectedTemplate) => t.listing_tokenId === template.token_id)[0] !== undefined;
 
               return (
                 <div key={template.token_id}>

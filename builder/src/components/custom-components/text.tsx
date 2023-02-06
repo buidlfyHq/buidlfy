@@ -17,6 +17,7 @@ const Text: FC<IText> = ({
   padding,
   link,
   fontFamily,
+  borderRadius,
 }) => {
   const gradientCondition = color?.indexOf('gradient') !== -1;
   const textAreaContent = (
@@ -52,6 +53,7 @@ const Text: FC<IText> = ({
         textDecoration: underline,
         textDecorationColor: color,
         background: backgroundColor,
+        borderRadius: `${borderRadius}px`,
         margin: `${margin?.marginTop}px ${margin?.marginRight}px ${margin?.marginBottom}px ${margin?.marginLeft}px`,
       }}
       className="flex overflow-hidden items-center justify-center w-auto h-full"

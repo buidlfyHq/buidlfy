@@ -12,7 +12,7 @@ import { IWorkspaceElement } from 'redux/workspace/workspace.interfaces';
 import 'styles/components.css';
 
 interface IWorkspaceComponent {
-  setOpenSetting: (open: boolean) => void;
+  setOpenSetting: (openSetting: boolean) => void;
   setOpenTab: (openTab?: number) => void;
   drag: boolean;
   setDrag: (drag: boolean) => void;
@@ -48,10 +48,8 @@ const Workspace: FC<IWorkspaceComponent> = ({
       : 'border border-[transparent] hover:border-slate-300 hover:border-dashed';
 
   const [fullViewWidth, setFullViewWidth] = useState<number>(1200);
-
   useEffect(() => {
     let fullView = document?.getElementById('full-view')?.getBoundingClientRect().width;
-
     setFullViewWidth(fullViewWidth => fullView);
   }, [hideNavbar, openSetting]);
 
@@ -172,7 +170,11 @@ const Workspace: FC<IWorkspaceComponent> = ({
         e.target.id.slice(6) === 'Container' ||
         e.target.parentNode.id.slice(6) === 'Container' ||
         e.target.parentNode.parentNode.id.slice(6) === 'Container' ||
-        e.target.parentNode.parentNode.parentNode.id.slice(6) === 'Container'
+        e.target.parentNode.parentNode.parentNode.id.slice(6) === 'Container' ||
+        e.target.id.slice(6) === 'NFT Layout' ||
+        e.target.parentNode.id.slice(6) === 'NFT Layout' ||
+        e.target.parentNode.parentNode.id.slice(6) === 'NFT Layout' ||
+        e.target.parentNode.parentNode.parentNode.id.slice(6) === 'NFT Layout'
       )
     ) {
       setIsContainerSelected(false);
@@ -220,7 +222,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
       style={{
         width: '-webkit-fill-available',
       }}
-      className="main-div h-full"
+      className="h-full main-div"
     >
       {workspaceElements?.length > 0 ? (
         <section onClick={handleCheckIsContainer} className="z-100">
@@ -242,7 +244,7 @@ const Workspace: FC<IWorkspaceComponent> = ({
               onLayoutChange={onLayoutChange}
               compactType="vertical"
               margin={[0, 0]}
-              className="h-fit overflow-hidden"
+              className="overflow-hidden h-fit"
             >
               {renderItemFunction}
             </GridLayout>

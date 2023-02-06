@@ -5,6 +5,7 @@ import { SidebarEnum } from 'redux/workspace/workspace.interfaces';
 import logo from 'assets/icons/buidlfy.png';
 import ElementSvg from 'components/utils/assets/elements-svg';
 import TemplateSvg from 'components/utils/assets/template-svg';
+import PluginSvg from 'components/utils/assets/plugin-svg';
 import 'styles/components.css';
 
 interface ISideNavbar {
@@ -43,6 +44,16 @@ const SideNavbar: FC<ISideNavbar> = ({ setSideElement, setHideNavbar }) => {
         >
           <ElementSvg />
           <h3 className="side-text mt-1">Elements</h3>
+        </div>
+        <div
+          onClick={() => {
+            handleSidebar(SidebarEnum.PLUGINS);
+            setHideNavbar(false);
+          }}
+          className="mt-8 icon-div cursor-pointer"
+        >
+          <PluginSvg />
+          <h3 className="side-text mt-1">Plugins</h3>
         </div>
         {/* These are commented sidebar elements to be used in future */}
         {/* <div className="mt-8 cursor-pointer">

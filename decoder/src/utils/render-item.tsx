@@ -5,6 +5,7 @@ import Text from "components/custom-components/text";
 import Input from "components/custom-components/input";
 import Divider from "components/custom-components/divider";
 import Image from "components/custom-components/image";
+import NftCard from "components/custom-components/nft-card";
 import Spacer from "components/custom-components/spacer";
 import LensterWidget from "components/custom-components/lenster-widget";
 import IWorkspace from "interfaces/workspace";
@@ -99,6 +100,7 @@ const RenderItem: FC<IRenderItem> = ({
           margin={item.style.margin}
           padding={item.style.padding}
           fontFamily={item.style.fontFamily}
+          borderRadius={item.style.borderRadius}
         />
       );
     case "Input":
@@ -128,6 +130,63 @@ const RenderItem: FC<IRenderItem> = ({
           isAuto={item.style.isAuto}
           margin={item.style.margin}
           link={item.link}
+          borderRadius={item.style.borderRadius}
+        />
+      );
+    case "NFT Card":
+      return (
+        <NftCard
+          image={item.image}
+          collection={item.collection}
+          title={item.title}
+          price={item.price}
+          href={item.href}
+          highestBid={item.highestBid}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          backgroundSize={item.style.backgroundSize}
+        />
+      );
+    case "NFT Card":
+      return (
+        <NftCard
+          image={item.image}
+          collection={item.collection}
+          title={item.title}
+          price={item.price}
+          href={item.href}
+          highestBid={item.highestBid}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          backgroundSize={item.style.backgroundSize}
+        />
+      );
+    case "NFT Card":
+      return (
+        <NftCard
+          image={item.image}
+          collection={item.collection}
+          title={item.title}
+          price={item.price}
+          href={item.href}
+          highestBid={item.highestBid}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          backgroundSize={item.style.backgroundSize}
+        />
+      );
+    case "NFT Card":
+      return (
+        <NftCard
+          image={item.image}
+          collection={item.collection}
+          title={item.title}
+          price={item.price}
+          href={item.href}
+          highestBid={item.highestBid}
+          backgroundColor={item.style.backgroundColor}
+          color={item.style.color}
+          backgroundSize={item.style.backgroundSize}
         />
       );
     case "Divider":

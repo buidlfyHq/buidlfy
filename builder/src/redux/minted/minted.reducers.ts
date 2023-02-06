@@ -1,4 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {
+  approveListingAsync,
+  createListingAsync,
+  fetchOwnedListedTemplatesAsync,
+  fetchOwnedReviewTemplatesAsync,
+  fetchOwnedTemplatesAsync,
+} from './minted.thunk-actions';
 import { IMintedState } from './minted.interfaces';
 
 const initialState: IMintedState = {
@@ -8,49 +15,42 @@ const initialState: IMintedState = {
   ownedTemplateList: [],
   ownedReviewTemplateList: [],
   ownedListedTemplateList: [],
-  mintedImageData: '',
+  templateBannerImage: '',
 };
 
 const mintedSlice = createSlice({
   name: 'minted',
   initialState,
   reducers: {
-    listingApproved(state) {
-      state.approveListingLoading = false;
+    updateTemplateBannerImage(state, action: { payload }) {
+      state.templateBannerImage = action.payload;
     },
-    startApproveListingLoader(state) {
+  },
+  extraReducers: builder => {
+    builder.addCase(approveListingAsync.pending, state => {
       state.approveListingLoading = true;
-    },
-    templateListed(state, action: { payload: string }) {
-      state.listTemplateHash = action.payload;
-      state.listTemplateLoading = false;
-    },
-    startListTemplateLoader(state) {
+    });
+    builder.addCase(approveListingAsync.fulfilled, state => {
+      state.approveListingLoading = false;
+    });
+    builder.addCase(createListingAsync.pending, state => {
       state.listTemplateLoading = true;
-    },
-    ownedTemplatesFetched(state, action) {
+    });
+    builder.addCase(createListingAsync.fulfilled, (state, action) => {
+      state.listTemplateLoading = false;
+      state.listTemplateHash = action.payload;
+    });
+    builder.addCase(fetchOwnedTemplatesAsync.fulfilled, (state, action) => {
       state.ownedTemplateList = action.payload;
-    },
-    ownedReviewTemplatesFetched(state, action) {
+    });
+    builder.addCase(fetchOwnedReviewTemplatesAsync.fulfilled, (state, action) => {
       state.ownedReviewTemplateList = action.payload;
-    },
-    ownedListedTemplatesFetched(state, action) {
+    });
+    builder.addCase(fetchOwnedListedTemplatesAsync.fulfilled, (state, action) => {
       state.ownedListedTemplateList = action.payload;
-    },
-    updateMintedImageData(state, action: { payload }) {
-      state.mintedImageData = action.payload;
-    },
+    });
   },
 });
 
-export const {
-  listingApproved,
-  startApproveListingLoader,
-  templateListed,
-  startListTemplateLoader,
-  ownedTemplatesFetched,
-  ownedReviewTemplatesFetched,
-  ownedListedTemplatesFetched,
-  updateMintedImageData,
-} = mintedSlice.actions;
+export const { updateTemplateBannerImage } = mintedSlice.actions;
 export default mintedSlice.reducer;

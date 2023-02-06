@@ -30,7 +30,7 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
   const dispatch = useDispatch();
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
 
-  const handleFunction = (type: Function, e?: React.ChangeEvent<HTMLInputElement>, key?: string, i?: number) => {
+  const handleFunction = (type: Function, e?: React.ChangeEvent<HTMLInputElement>, key?: string, index?: number) => {
     const newLists = [...lists];
     const findListIndex = newLists.findIndex(newList => key === newList.id);
     if (type === Function.TEXTCHANGE) {
@@ -44,13 +44,13 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
       dispatch(updateListValue(newLists));
     } else if (type === Function.REMOVELINK) {
       const linkVisible = [...isLinkVisible];
-      linkVisible[i] = false;
+      linkVisible[index] = false;
       setIsLinkVisible(linkVisible);
       newLists[findListIndex] = { ...newLists[findListIndex], link: '' };
       dispatch(updateListValue(newLists));
     } else if (type === Function.ADDLINK) {
       const linkVisible = [...isLinkVisible];
-      linkVisible[i] = true;
+      linkVisible[index] = true;
       setIsLinkVisible(linkVisible);
     }
   };
@@ -71,16 +71,16 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
         propertyValue: lists,
       }),
     );
-  }, [i, lists]);
+  }, [i, lists]); // eslint-disable-line
 
   const settingList = (type: List) => {
     const list = type === List.LIST ? lists.filter(list => list.i === i).slice(0, 3) : lists.filter(list => list.i === i);
     return (
       <div className="px-1 py-4">
         <div className="ml-3 margin-text flex w-[135px] mt-[5px] items-center">Manage Options</div>
-        {list.map((list, i) => {
+        {list.map((list, index) => {
           return (
-            <div key={i}>
+            <div key={index}>
               <div className={`flex items-center mt-4 mx-2 text-black ${type === List.DIALOG ? 'w-[14.5rem]' : 'w-[13.5rem]'}`}>
                 <input
                   id={list.id}
@@ -95,14 +95,14 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
                   className={`text-[15px] text-[#98A2B3] absolute cursor-pointer ${type === List.DIALOG ? 'right-[4.7rem]' : 'right-[3.8rem]'}`}
                 />
                 <div
-                  onClick={() => handleFunction(Function.ADDLINK, undefined, undefined, i)}
+                  onClick={() => handleFunction(Function.ADDLINK, undefined, undefined, index)}
                   className="list-link-div px-[0.35rem] py-[0.38rem] ml-2 cursor-pointer hover:bg-[#F9FAFB]"
                 >
                   <BsLink45Deg className="text-[20px] text-[#98A2B3]" />
                 </div>
               </div>
-              {isLinkVisible[i] ? (
-                <div key={i} className={`flex items-center mt-4 mx-2 text-black ${type === List.DIALOG ? 'w-[14.5rem]' : 'w-[13.5rem]'}`}>
+              {isLinkVisible[index] ? (
+                <div key={index} className={`flex items-center mt-4 mx-2 text-black ${type === List.DIALOG ? 'w-[14.5rem]' : 'w-[13.5rem]'}`}>
                   <input
                     id={list.id}
                     value={list.link}
@@ -112,7 +112,7 @@ const ListOptionsComponent: FC<IListOptionsComponent> = ({ i }) => {
                     placeholder="Add Link"
                   />
                   <IoIosCloseCircleOutline
-                    onClick={() => handleFunction(Function.REMOVELINK, undefined, list.id, i)}
+                    onClick={() => handleFunction(Function.REMOVELINK, undefined, list.id, index)}
                     className={`text-[15px] text-[#98A2B3] absolute cursor-pointer ${type === List.DIALOG ? 'right-[2rem]' : 'right-[1.2rem]'}`}
                   />
                 </div>

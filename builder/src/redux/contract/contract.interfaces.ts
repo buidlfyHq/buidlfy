@@ -33,6 +33,9 @@ export interface ISelectorPayload {
   type: string;
   name: string;
   buttonId: string;
+  inputName?: string;
+  inputValue?: string;
+  getUserAddress?: boolean;
 }
 
 export interface ISelectedPayload {

@@ -22,7 +22,7 @@ interface IContainer {
   borderWidth: number;
   shadow: string;
   setDrag: (drag: boolean) => void;
-  setOpenSetting: (open: boolean) => void;
+  setOpenSetting: (openSetting: boolean) => void;
   setOpenTab: (openTab: number) => void;
   setIsContainerSelected: (isContainerSelected: boolean) => void;
   setValue?: (value: string) => void;
@@ -244,7 +244,7 @@ const Container: FC<IContainer> = ({
           paddingLeft: `${margin.marginLeft}px`,
           paddingRight: `${margin.marginRight}px`,
         }}
-        className="h-fit w-full cursor-pointer container-drag overflow-hidden"
+        className="w-full overflow-hidden cursor-pointer h-fit container-drag"
       >
         <GridLayout
           layout={children}
@@ -322,15 +322,17 @@ const Container: FC<IContainer> = ({
           >
             <img className="w-[13px] h-[13px]" src={dragImg} alt="drag" />
           </div>
-          <div
-            onMouseOut={() => setDrag(true)}
-            onMouseOver={() => setDrag(false)}
-            className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
-            id="add-img"
-            onClick={() => onComponentAddClick(item.i)}
-          >
-            <img className="w-[11px] h-[11px]" src={add} alt="add" />
-          </div>
+          {item.name !== 'NFT Layout' && (
+            <div
+              onMouseOut={() => setDrag(true)}
+              onMouseOver={() => setDrag(false)}
+              className="w-[30px] h-[30px] rounded-[25px] flex justify-center items-center content-center bg-white"
+              id="add-img"
+              onClick={() => onComponentAddClick(item.i)}
+            >
+              <img className="w-[11px] h-[11px]" src={add} alt="add" />
+            </div>
+          )}
           {children?.length ? (
             <div
               onMouseOut={() => setDrag(true)}

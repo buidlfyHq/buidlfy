@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dialog } from '@headlessui/react';
 import { toggleModal, toggleModalType } from 'redux/modal/modal.reducers';
-import { ReactComponent as ScratchIcon } from 'assets/modalIcons/scratchIcon.svg';
-import { ReactComponent as TemplateIcon } from 'assets/modalIcons/templateIcon.svg';
+import { ReactComponent as ScratchIcon } from 'assets/modal-icons/scratch-icon.svg';
+import { ReactComponent as TemplateIcon } from 'assets/modal-icons/template-icon.svg';
 
 const StartModal: FC = () => {
   const dispatch = useDispatch();

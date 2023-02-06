@@ -220,6 +220,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -236,6 +237,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -252,6 +254,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -268,6 +271,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultMarginStyles,
       ...defaultPaddingStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -312,6 +316,7 @@ export const components = [
       ...defaultDeleteStyles,
       ...defaultFontStyles,
       ...defaultMarginStyles,
+      borderRadius: 0,
     },
   },
   {
@@ -474,7 +479,7 @@ export const components = [
   },
   {
     name: 'Lenster Card',
-    h: 2,
+    h: 7,
     minH: 1,
     containerId: '',
     posts: [],
@@ -489,4 +494,80 @@ export const components = [
   //     ...defaultDeleteStyles,
   //   },
   // },
+  // NFT Components
+  {
+    name: 'NFT Card',
+    nft: true,
+    h: 8,
+    minH: 1,
+    style: {
+      ...defaultDeleteStyles,
+      ...defaultColorStyles,
+      backgroundSize: 'cover',
+    },
+  },
+  {
+    name: 'NFT Layout',
+    nft: true,
+    h: 8,
+    minH: 1,
+    style: {
+      ...defaultPaddingStyles,
+      ...defaultMarginStyles,
+      ...defaultDeleteStyles,
+      ...defaultColorStyles,
+      ...defaultBorderStyles,
+      backgroundSize: 'cover',
+    },
+    children: [
+      {
+        name: 'NFT Card',
+        nft: true,
+        h: 8,
+        i: 11,
+        w: 2,
+        minH: 1,
+        x: 0,
+        y: 0,
+        style: {
+          ...defaultColorStyles,
+          ...defaultDeleteStyles,
+          backgroundSize: 'cover',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
+      {
+        name: 'NFT Card',
+        nft: true,
+        h: 8,
+        i: 12,
+        w: 2,
+        minH: 1,
+        x: 2,
+        y: 0,
+        style: {
+          ...defaultColorStyles,
+          ...defaultDeleteStyles,
+          backgroundSize: 'cover',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
+      {
+        name: 'NFT Card',
+        nft: true,
+        h: 8,
+        i: 13,
+        w: 2,
+        minH: 1,
+        x: 4,
+        y: 0,
+        style: {
+          ...defaultColorStyles,
+          ...defaultDeleteStyles,
+          backgroundSize: 'cover',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
+    ],
+  },
 ];
