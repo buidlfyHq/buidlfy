@@ -10,7 +10,7 @@ services:
   server:
     build:
       context: ./server
-      dockerfile: Dockerfile.node
+      dockerfile: Dockerfile.dev
     env_file: ./server/.env
     environment:
       - DB_HOST=mongo
