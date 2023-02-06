@@ -14,6 +14,7 @@ const userSchema: Schema = new Schema({
   handle: {
     type: String,
     unique: true,
+    sparse: true,
   },
   verified: {
     type: Boolean,
@@ -26,6 +27,7 @@ const userSchema: Schema = new Schema({
   email: {
     type: String,
     unique: true,
+    sparse: true,
   },
 });
 
