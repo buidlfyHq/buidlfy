@@ -119,7 +119,7 @@ workflows:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           create-repo: false
-          dockerfile: Dockerfile
+          dockerfile: Dockerfile.node
           path: server
           name: aws-ecr-build-push-dev
           repo: buidlfy-api
