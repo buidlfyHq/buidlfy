@@ -15,7 +15,7 @@ export const signInWithEthereumAsync = createAsyncThunk('user/signInWithEthereum
     const signature = await signer.signMessage(message);
     const walletName = 'Metamask';
 
-    const res = await fetch(`${config.server.SERVER}/signin`, {
+    const res = await fetch(`${config.server.SERVER}signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ export const verifyTwitterAsync = createAsyncThunk('user/verifyTitter', async (t
         dispatch(toggleModal(false));
       }
 
-      const res = await fetch(`${config.server.SERVER}/verify-tweet`, {
+      const res = await fetch(`${config.server.SERVER}verify-tweet`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ export const subscribeNewsletterAsync = createAsyncThunk('user/subscribeNewslett
         dispatch(toggleModal(false));
       }
 
-      const res = await fetch(`${config.server.SERVER}/subscribe-newsletter`, {
+      const res = await fetch(`${config.server.SERVER}subscribe-newsletter`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ export const isWhitelistedAsync = createAsyncThunk('user/isWhitelisted', async (
       dispatch(fetchWalletDetailsAsync(session.data?.address));
 
       // check if user is authorised
-      fetch(`${config.server.SERVER}/user-status`, {
+      fetch(`${config.server.SERVER}user-status`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${session.nonce}`,
@@ -195,7 +195,7 @@ export const isWhitelistedAsync = createAsyncThunk('user/isWhitelisted', async (
 
 export const signoutAsync = createAsyncThunk('user/signout', async (_, { dispatch }) => {
   localStorage.removeItem('session');
-  await fetch(`${config.server.SERVER}/signout`, {
+  await fetch(`${config.server.SERVER}signout`, {
     credentials: 'include',
   });
   dispatch(updateStep(1));
