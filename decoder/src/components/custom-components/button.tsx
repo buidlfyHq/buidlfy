@@ -11,8 +11,6 @@ import OracleAbi from "assets/abis/Oracle.json";
 import { switchNetwork } from "utils/switchNetwork";
 import { connectWalletButton } from "utils/connect-wallet";
 import "styles/components.css";
-import { switchNetwork } from "utils/switchNetwork";
-import { connectWalletButton } from "utils/connectWallet";
 
 const Button: FC<ITexts> = ({
   fontWeight,
