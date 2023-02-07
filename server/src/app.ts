@@ -92,8 +92,8 @@ class App {
         name: 'siwe-quickstart',
         secret: 'siwe-quickstart-secret',
         resave: true,
-        saveUninitialized: true,
-        cookie: { secure: false, sameSite: true },
+        saveUninitialized: false,
+        cookie: { secure: false },
       }),
     );
   }

@@ -2,7 +2,7 @@ import { SiweMessage } from 'siwe';
 import config from 'config';
 
 export const createSiweMessage = async (address: string, statement: string) => {
-  const res = await fetch(`${config.server.SERVER}/nonce`, {
+  const res = await fetch(`${config.server.SERVER}nonce`, {
     credentials: 'include',
   });
 
