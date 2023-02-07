@@ -27,6 +27,7 @@ const LensterPost: FC<ILensterPost> = ({ i, post, updateProfilePicture, updatePo
               <img
                 className="mt-1 mr-2 w-[2.4rem] h-[2.4rem] rounded-[2rem]"
                 src={`${post.profilePicture ? `${post.profilePicture?.includes('ipfs://') ? updateProfilePicture : post.postMedia}` : lenster}`}
+                alt="Profile"
               />
               <div className="grid grow">
                 <h2 className="font-semibold text-gray-100 hover:underline">{post.profileName}</h2>
@@ -45,7 +46,7 @@ const LensterPost: FC<ILensterPost> = ({ i, post, updateProfilePicture, updatePo
           <div className="flex flex-wrap justify-start items-start flex-1 mt-2.5 w-full my-1">
             <p className="text-gray-300 whitespace-pre-line">{post.postDescription}</p>
           </div>
-          {post?.postMedia ? <img src={`${post.postMedia?.includes('ipfs://') ? updatePostMedia : post.postMedia}`} /> : null}
+          {post?.postMedia ? <img src={`${post.postMedia?.includes('ipfs://') ? updatePostMedia : post.postMedia}`} alt="Post" /> : null}
           <h2 className="mt-2 text-sm text-gray-500 hover:underline">{post.createdAt}</h2>
         </div>
       ) : null}

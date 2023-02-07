@@ -28,6 +28,7 @@ class AuthController {
   public createNonce = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       req.session.nonce = generateNonce();
+      req.session.save();
       res.setHeader('Content-Type', 'text/plain');
       res.status(200).send(req.session.nonce);
     } catch (error) {

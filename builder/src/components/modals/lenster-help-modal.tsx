@@ -53,7 +53,12 @@ const LensterHelpModal: FC<ILensterHelpModal> = ({ isOpen, setIsOpen }) => {
                   <div className="text-[#667085] text-[14px] mt-2 ml-1">{desc}</div>
                   <div className="flex items-center mt-2 gap-2">
                     <img src={LensterLogo} alt="lenster_icon" width={24} height={24} />
-                    <a href={`${link}${query}`} target="_blank" className="text-[#5C83E8] text-[14px] font-[600] ouline-none border-none">
+                    <a
+                      href={`${link}${query}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[#5C83E8] text-[14px] font-[600] ouline-none border-none"
+                    >
                       {link}
                       <span className="text-[#C656D9]">{query}</span>
                     </a>

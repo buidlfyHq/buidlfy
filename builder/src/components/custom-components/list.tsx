@@ -1,12 +1,11 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'redux/root-state.interface';
 import { IList, IText } from 'redux/workspace/workspace.interfaces';
 import { updateListValue } from 'redux/workspace/workspace.reducers';
-import ShortUniqueId from 'short-unique-id';
 import { gradientCheck } from 'utils/gradient-check';
-import 'styles/components.css';
 import { defaultList } from 'utils/default-list';
+import 'styles/components.css';
 
 const List: FC<IText> = ({
   i,
@@ -24,24 +23,25 @@ const List: FC<IText> = ({
   listOptions,
   preview,
 }) => {
-  const gradientCondition = color?.indexOf('gradient') !== -1;
   const dispatch = useDispatch();
   const lists: IList[] = useSelector((state: IRootState) => state.workspace.listValue);
+  const gradientCondition = color?.indexOf('gradient') !== -1;
+
   const selectedList = lists.filter(list => list.i === i);
   const listFilter = listOptions.filter(list => list.i === i);
   const previewFilter = preview ? listFilter : selectedList;
+
   useEffect(() => {
     if (!preview) {
       if (selectedList.length <= 3) {
-        {
-          Array.from(Array(3 - selectedList?.length).keys()).map(list => {
-            const newLists = defaultList(i, lists);
-            dispatch(updateListValue(newLists));
-          });
-        }
+        Array.from(Array(3 - selectedList?.length).keys()).map(list => {
+          const newLists = defaultList(i, lists);
+          dispatch(updateListValue(newLists));
+          return list;
+        });
       }
     }
-  }, [lists]);
+  }, [lists]); // eslint-disable-line
 
   return (
     <section
@@ -82,7 +82,7 @@ const List: FC<IText> = ({
             return (
               <>
                 {list.link ? (
-                  <a target="_blank" href={list.link}>
+                  <a target="_blank" rel="noreferrer" href={list.link}>
                     <li key={list.id}>{list.value}</li>
                   </a>
                 ) : (

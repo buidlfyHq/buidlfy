@@ -18,6 +18,7 @@ export const uploadImageAsync = createAsyncThunk('upload/uploadImage', async (pa
       headers: myHeaders,
       body: raw,
       redirect: 'follow',
+      credentials: 'include',
     };
 
     const response = await fetch(`${config.server.SERVER}upload`, requestOptions);

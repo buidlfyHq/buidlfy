@@ -23,6 +23,11 @@ const BgColorComponent: FC<IBgColorComponent> = ({ i, name, elementBackgroundCol
   const imageData: IUploadedImageData = useSelector((state: IRootState) =>
     state.workspace.uploadedImagesData.find((image: IUploadedImageData) => image.settingItemId === i),
   );
+
+  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  let color = workspaceBackgroundColor ? workspaceBackgroundColor : elementBackgroundColor;
+  const isElement = !!i;
+
   useEffect(() => {
     cardTheme &&
       dispatch(
@@ -32,11 +37,8 @@ const BgColorComponent: FC<IBgColorComponent> = ({ i, name, elementBackgroundCol
           propertyValue: cardTheme?.colors?.primary,
         }),
       );
-  }, [cardTheme]);
+  }, [cardTheme]); // eslint-disable-line
 
-  let color = workspaceBackgroundColor ? workspaceBackgroundColor : elementBackgroundColor;
-
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const handleChange = (e: string) => {
     if (workspaceBackgroundColor) {
       dispatch(updateWorkspaceBackgroundColor(e));
@@ -59,8 +61,6 @@ const BgColorComponent: FC<IBgColorComponent> = ({ i, name, elementBackgroundCol
     }
   };
 
-  const isElement = !!i;
-
   const colorDropdown = (
     <ColorPickerDropdown
       name="Background Color"
@@ -71,6 +71,7 @@ const BgColorComponent: FC<IBgColorComponent> = ({ i, name, elementBackgroundCol
       isElement={isElement}
     />
   );
+
   return (
     <>
       {!cardTheme && (

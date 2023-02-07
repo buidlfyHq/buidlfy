@@ -19,7 +19,7 @@ const PreviewLensterWidget: FC<IPreviewLensterWidget> = ({ i, posts, preview }) 
         return <LensterPost preview={preview} i={i} post={post} updateProfilePicture={updateProfilePicture} updatePostMedia={updatePostMedia} />;
       })}
       <span className="flex absolute right-[1rem] bottom-[1rem]">
-        Powered By <img className="w-[1.5rem] h-auto mx-2" src={logo} /> Buidlfy
+        Powered By <img className="w-[1.5rem] h-auto mx-2" src={logo} alt="Buidlfy" /> Buidlfy
       </span>
     </div>
   );

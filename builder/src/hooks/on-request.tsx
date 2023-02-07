@@ -1,15 +1,13 @@
 import { ethers, Contract } from 'ethers';
 import { setValue } from 'hooks/set-value';
-import { useSelector } from 'react-redux';
-import { IRootState } from 'redux/root-state.interface';
 import { IInput, IOutput } from 'redux/workspace/workspace.interfaces';
 import { decode as base64_decode } from 'base-64';
 
-interface IPayableInput {
-  name?: string;
-  value?: string;
-  send?: boolean;
-}
+// interface IPayableInput {
+//   name?: string;
+//   value?: string;
+//   send?: boolean;
+// }
 
 export const onRequest = async (
   method: string,
@@ -59,6 +57,7 @@ export const onRequest = async (
       if (input?.userAddress) {
         args.push({ name: input.name, value: userAddress });
       }
+      return input;
     });
 
     const newArgs = [];
@@ -73,7 +72,9 @@ export const onRequest = async (
               newArgs.push(arg.value);
             }
           }
+          return arg;
         });
+        return input;
       });
     let receipt: any; // to store response from contract
     // show transaction hash for non-payable and payable
@@ -85,7 +86,7 @@ export const onRequest = async (
       receipt = await res.wait();
       console.log(receipt);
     } else if (contractFunction.stateMutability === 'payable') {
-      const payableInput: IPayableInput = contractFunction.inputs.find((input: IPayableInput) => input?.send === true);
+      // const payableInput: IPayableInput = contractFunction.inputs.find((input: IPayableInput) => input?.send === true);
       // query contract functions --- magic code
       const res = await contract.functions[method](...newArgs, {
         value: ethers.utils.parseEther(amount),
