@@ -30,6 +30,7 @@ export const initiatePublishAsync = createAsyncThunk('publish/initiatePublish', 
       headers: myHeaders,
       body: raw,
       redirect: 'follow',
+      credentials: 'include',
     };
 
     const response = await fetch(`${config.server.SERVER}deployment/create`, requestOptions);
@@ -63,6 +64,7 @@ export const fetchPublishDetailsAsync = createAsyncThunk(
         headers: myHeaders,
         body: raw,
         redirect: 'follow',
+        credentials: 'include',
       };
 
       const response = await fetch(config.server.SERVER + 'deployment/create-subdomain', requestOptions);
@@ -113,6 +115,7 @@ export const verifyPublishAsync = createAsyncThunk(
               headers: myHeaders,
               body: raw,
               redirect: 'follow',
+              credentials: 'include',
             };
 
             const response = await fetch(config.server.SERVER + 'deployment/verify-subdomain', requestOptions);
@@ -162,6 +165,7 @@ export const updatePublishAsync = createAsyncThunk(
         headers: myHeaders,
         body: raw,
         redirect: 'follow',
+        credentials: 'include',
       };
 
       const response = await fetch(config.server.SERVER + 'deployment/update-subdomain', requestOptions);
