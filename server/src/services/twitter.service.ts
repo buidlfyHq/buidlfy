@@ -21,7 +21,7 @@ class TwitterService {
   public async isFollowing(id: string): Promise<boolean> {
     try {
       const followingList = await client.v2.following(id);
-      const following = !!followingList.data.filter(account => account.id === BUIDLFY_TWITTER_ID)[0];
+      const following = !!followingList.data?.filter(account => account.id === BUIDLFY_TWITTER_ID)[0];
       return following;
     } catch (error) {
       Logger.error(`Error found in ${__filename} - isFollowing - `);
@@ -33,7 +33,7 @@ class TwitterService {
   public async hasTweeted(id: string): Promise<boolean> {
     try {
       const tweetList: any = await client.v2.userTimeline(id, { max_results: Number(MAX_RESULTS) });
-      const tweeted = !!tweetList._realData.data.filter((tweet: { text: string }) => tweet.text === TWEET_TEXT)[0];
+      const tweeted = !!tweetList._realData.data?.filter((tweet: { text: string }) => tweet.text === TWEET_TEXT)[0];
       return tweeted;
     } catch (error) {
       Logger.error(`Error found in ${__filename} - hasTweeted - `);
