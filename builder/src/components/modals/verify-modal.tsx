@@ -17,7 +17,7 @@ const VerifyModal: FC = () => {
         Verify Tweet
       </Dialog.Title>
       <div className="mt-2">
-        <p className="text-sm text-white/70 mb-4">Please enter your twitter handle</p>
+        <p className="mb-4 text-sm text-white/70">Please enter your twitter handle</p>
       </div>
       <div className="w-full">
         <input
@@ -30,7 +30,7 @@ const VerifyModal: FC = () => {
       </div>
       {verificationError && (
         <div className="my-2">
-          <p className="text-sm text-white/70 mb-4 bg-red-900 rounded-lg py-1 px-2 flex items-center text-red-400">
+          <p className="flex items-center px-2 py-1 mb-4 text-sm text-red-400 bg-red-900 rounded-lg text-white/70">
             <AiFillCloseCircle className="mr-2" />
             {verificationError}
           </p>
@@ -38,13 +38,16 @@ const VerifyModal: FC = () => {
       )}
       <div className="mt-4 text-right">
         <button
-          className="inline-flex justify-center rounded-md border border-transparent bg-white/10 px-4 py-2 text-sm text-white font-medium mr-4"
+          className="inline-flex justify-center px-4 py-2 mr-4 text-sm font-medium text-white border border-transparent rounded-md bg-white/10"
           onClick={() => dispatch(toggleModal(false))}
         >
           Cancel
         </button>
         <button
-          className="connect-wallet inline-flex rounded-lg px-6 py-2 text-sm font-medium text-white"
+          disabled={twitterHandle.length === 0}
+          className={`inline-flex px-6 py-2 text-sm font-medium text-white rounded-lg connect-wallet ${
+            twitterHandle.length === 0 && 'cursor-not-allowed opacity-70'
+          }`}
           onClick={() => dispatch(verifyTwitterAsync(twitterHandle))}
         >
           Verify
